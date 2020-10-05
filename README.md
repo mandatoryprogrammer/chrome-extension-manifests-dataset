@@ -1,4 +1,4 @@
-# Chrome Extension `manifest.json` Dataset (>100K Chrome Extensions)
+# Chrome Extension `manifest.json` Dataset (>100K Extensions)
 
 This repository contains >100K [`manifest.json`](https://developer.chrome.com/extensions/manifest) files extracted from Chrome extensions from the [Chrome webstore](https://chrome.google.com/webstore/category/extensions). These extensions were enumerated by doing a recursive spidering and search result scraping of the Chrome store.
 
