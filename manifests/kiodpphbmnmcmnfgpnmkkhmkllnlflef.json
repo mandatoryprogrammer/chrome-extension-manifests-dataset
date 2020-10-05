@@ -1,0 +1,123 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "ZapInfo",
+  "short_name": "ZapInfo",
+  "version": "41.0.0",
+  "manifest_version": 2,
+  "description": "Web Clipboard that helps capture data & fill forms with 1-click",
+  "homepage_url": "http://www.zapinfo.io",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhtQqQkUVpwRQbRYqvDJaLc2FCSCiAFJTm3F2nEQ05+E+gQkk+Zo0hO9fyNQ2lBIetKutmoSGFaM9Gxa62cmWS2LRRY0+eBc1dvDKEvA23H/35eH7QpvbiHDgRhl4Ve+j0pwUIPOVqTHON7RIA+dv1GzQj0PkpalhO8rwz46ioi0LNePfUQhVA6/J/MVzQnqa7NuD1YM4vXnM1z6go+Mz0yBeyVd9MSW852EfesRG6hrjrtysfsHYBnGkWf+Kj7LNjESoU6uV08COmC55ymLdA710ukEh/JFrioZYYOww/YBo7qWATiApeP4uJ0YikzD0eFlBffKP/GGne1DT+mhJIQIDAQAB",
+  "icons": {
+    "16": "images/icon-16.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
+  },
+  "background": {
+    "scripts": [
+      "src/vendor/trackjs/t.js",
+      "src/vendor/underscore/underscore-min.js",
+      "src/vendor/jquery/dist/jquery.min.js",
+      "src/vendor/chrome-extension-message-relay/dist/message_relay.prod.js",
+      "src/vendor/xlsx/dist/xlsx.full.min.js",
+      "src/vendor/moment/min/moment-with-locales.min.js",
+      "src/vendor/s3-release-notes/src/s3-release-notes.js",
+      "src/vendor/compare-versions/index.js",
+      "src/vendor/jszip/dist/jszip.min.js",
+      "src/background/scripts/browserify/bundles/html-to-text.js",
+      "src/background/scripts/browserify/bundles/sanitize-html.js",
+      "src/background/scripts/browserify/bundles/vcards-js.js",
+      "src/background/scripts/browserify/bundles/fetch-retry.js",
+      "src/background/scripts/browserify/bundles/awesome-phonenumber.js",
+      "src/background/scripts/bg.main.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "images/icon-16.png",
+      "38": "images/icon-38.png"
+    },
+    "default_title": "ZapInfo",
+    "default_popup": "src/popup/popup.html?mode=popup"
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "js": [
+        "src/content/scripts/content.spoof_mobile.js"
+      ],
+      "all_frames": false,
+      "matches": [
+        "*://www.instagram.com/*/",
+        "*://www.instagram.com/direct/*"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "/src/*",
+    "/images/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://zapinfo.test/*",
+      "https://zapinfo-maps.test:9000/*",
+      "https://app.zapinfo.io/*",
+      "https://staging.zapinfo.io/*",
+      "https://my.zapinfo.io/*",
+      "https://my.staging.zapinfo.io/*",
+      "https://dashboard.zapinfo.io/*",
+      "https://dashboard.staging.zapinfo.io/*",
+      "https://www.google-analytics.com/*",
+      "https://maps.staging.zapinfo.io/*",
+      "https://maps.prod.zapinfo.io/*"
+    ]
+  },
+  "permissions": [
+    "storage",
+    "unlimitedStorage",
+    "clipboardRead",
+    "clipboardWrite",
+    "contextMenus",
+    "tabs",
+    "notifications",
+    "downloads",
+    "http://*/",
+    "https://*/"
+  ],
+  "content_security_policy": "script-src 'self' https://zapinfo-maps.test:9000 https://*.staging.zapinfo.io/ https://*.zapinfo.io/ https://zapinfo.test https://www.google-analytics.com https://cdn.trackjs.com; object-src 'self' https://zapinfo-maps.test:9000 https://zapinfo.test https://*.zapinfo.io https://*.staging.zapinfo.io",
+  "incognito": "spanning",
+  "commands": {
+    "extract-contact-list": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+T",
+        "mac": "Command+Shift+T"
+      },
+      "description": "Bulk capture contacts from a list"
+    },
+    "clip-on-current-tab": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Z",
+        "mac": "Command+Shift+Z"
+      },
+      "description": "Start a clip on the current tab"
+    },
+    "_execute_page_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+P",
+        "mac": "Command+Shift+P"
+      }
+    },
+    "open-clipboard-window": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+A",
+        "mac": "Command+Shift+A"
+      },
+      "description": "Open the clipboard as a new browser window"
+    },
+    "bulk-extract-linkedin": {
+      "description": "Bulk extract LinkedIn URLs from the page"
+    },
+    "open-quick-actions": {
+      "description": "Open the quick actions menu"
+    }
+  }
+}

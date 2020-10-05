@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "RFCRestyle",
+  "description": "Control the aesthetics and improve the navigability of HTML ietf.org RFC and Draft docs. Optional automatic redirects from TXT docs.",
+  "version": "3.0.0",
+  "offline_enabled": false,
+  "permissions": [
+    "storage",
+    "https://*.ietf.org/"
+  ],
+  "page_action": {
+    "default_title": "Click for options",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon16.png",
+      "24": "icon24.png",
+      "32": "icon32.png"
+    }
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.ietf.org/rfc/rfc*",
+        "https://www.ietf.org/id/draft-*",
+        "https://tools.ietf.org/rfc/rfc*",
+        "https://tools.ietf.org/html/rfc*",
+        "https://tools.ietf.org/id/draft-*",
+        "https://tools.ietf.org/html/draft-*"
+      ],
+      "js": [
+        "init.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.ietf.org/rfc/bcp-index.txt",
+        "https://www.ietf.org/download/rfc-index.txt"
+      ],
+      "js": [
+        "index.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://tools.ietf.org/html/bcp*"
+      ],
+      "js": [
+        "bcp.js"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Check Wallet",
+  "version": "0.2.8",
+  "description": "Check and verify wallets in page",
+  "author": "Noonic",
+  "web_accessible_resources": [
+    "i/default_icon128px.png",
+    "i/default_icon64px.png",
+    "i/default_icon48px.png",
+    "i/default_icon32px.png",
+    "i/default_icon16px.png",
+    "i/default_icon.png",
+    "i/rejected_icon.png",
+    "i/success_icon.png",
+    "i/attention.png",
+    "i/verified.png",
+    "vendors/browser-polyfill.js",
+    "vendors/jquery-3.2.1.min.js",
+    "vendors/jsrsasign-all-min.js",
+    "background.js",
+    "popup.html",
+    "popup.js"
+  ],
+  "default_locale": "en",
+  "browser_action": {
+    "default_icon": "i/default_icon.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "128": "i/default_icon128px.png",
+    "64": "i/default_icon64px.png",
+    "48": "i/default_icon48px.png",
+    "32": "i/default_icon32px.png",
+    "16": "i/default_icon16px.png"
+  },
+  "background": {
+    "scripts": [
+      "vendors/browser-polyfill.js",
+      "vendors/jquery-3.2.1.min.js",
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "vendors/browser-polyfill.js",
+        "vendors/jquery-3.2.1.min.js",
+        "vendors/jsrsasign-all-min.js",
+        "content_script.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "*://local.checkwallet.com/*",
+    "https://app.checkwallet.io/*",
+    "webRequest",
+    "tabs",
+    "notifications",
+    "*://api.etherscan.io/"
+  ]
+}

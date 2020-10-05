@@ -1,0 +1,63 @@
+{
+  "name": "Contact Burner - Disposable Email Manager",
+  "short_name": "Contact Burner",
+  "permissions": [
+    "clipboardWrite",
+    "cookies",
+    "contextMenus",
+    "*://*.contactburner.com/*",
+    "tabs",
+    "<all_urls>",
+    "storage",
+    "gcm",
+    "notifications",
+    "identity"
+  ],
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "2.0.1",
+  "version_name": "v2",
+  "description": "Generate disposable burner email addresses with a single click. Burn them any time. Emails are forwarded to your real account.",
+  "homepage_url": "https://www.contactburner.com",
+  "icons": {
+    "128": "icons/icon128.png",
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png"
+  },
+  "background": {
+    "page": "src/bg/background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/icon19_bw.png",
+      "38": "icons/icon38_bw.png"
+    },
+    "default_popup": "src/browser_action/browser_action.html",
+    "default_title": "Contact Burner"
+  },
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "css": [
+        "src/inject/inject.css"
+      ],
+      "js": [
+        "js/jquery/jquery.min.js",
+        "src/inject/inject.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "manifest_version": 2,
+  "web_accessible_resources": [
+    "images/*.png",
+    "js/*.js",
+    "src/inject/*.html",
+    "src/browser_action/*"
+  ]
+}

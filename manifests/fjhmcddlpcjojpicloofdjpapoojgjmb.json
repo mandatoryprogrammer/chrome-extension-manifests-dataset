@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "LDV Generator",
+  "version": "1.87",
+  "description": "Dalla pagina \"dettaglio della vendita\" di eBay.it e amazon.it crea un box in grado di inviare i dati al software LDV Generator",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://payments.ebay.it/ws/eBayISAPI.dll?ViewPaymentStatus&*",
+        "*://vod.ebay.it/vod/FetchOrderDetails*",
+        "*://k2b-bulk.ebay.it/ws/eBayISAPI.dll?EditSalesRecord&*",
+        "*://www.ebay.it/sh/ord/details*",
+        "*://sellercentral.amazon.it/hz/orders/details*",
+        "*://sellercentral.amazon.it/orders/details*",
+        "*://sellercentral.amazon.it/orders-v3/order*",
+        "*://sellercentral-europe.amazon.com/hz/orders/details*",
+        "*://sellercentral-europe.amazon.com/orders/details*",
+        "*://sellercentral-europe.amazon.com/orders-v3/order*",
+        "http://www.maipiusenza.com/LDV/test*",
+        "https://www.maipiusenza.com/Nadia*"
+      ],
+      "css": [
+        "ldv.css"
+      ],
+      "js": [
+        "contentscript.js",
+        "ldv.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "https://sellercentral.amazon.it/*",
+    "*://sellercentral-europe.amazon.com/*",
+    "tabs",
+    "webNavigation",
+    "storage",
+    "https://www.maipiusenza.com/LDV/API/*"
+  ],
+  "web_accessible_resources": [
+    "images/*.png",
+    "ldv.js"
+  ],
+  "icons": {
+    "48": "images/ico48.png",
+    "128": "images/ico64.png",
+    "64": "images/ico64.png"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "manifest_version": 2
+}

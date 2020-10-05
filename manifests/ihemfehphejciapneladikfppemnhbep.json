@@ -1,0 +1,43 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "LegisMe",
+  "description": "Chrome extension that integrates LegisMe for iOS and Android with Google Chrome",
+  "version": "0.0.8",
+  "icons": {
+    "128": "img/icon128.png"
+  },
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.nytimes.com/*",
+        "*://*.cnn.com/*",
+        "*://*.politico.com/*",
+        "*://*.washingtonpost.com/*",
+        "*://*.aplus.com/*",
+        "*://*.foxnews.com/*",
+        "*://*.economist.com/*"
+      ],
+      "js": [
+        "js/contentscript.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "browser_action": {
+    "default_title": "LegisMe"
+  },
+  "permissions": [
+    "tabs",
+    "background",
+    "activeTab",
+    "https://legisme.io/*"
+  ]
+}

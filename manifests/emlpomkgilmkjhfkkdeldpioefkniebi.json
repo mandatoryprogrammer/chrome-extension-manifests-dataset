@@ -1,0 +1,139 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "OfficeSuite UC™ for Chrome™",
+  "short_name": "BVN-OS-4GOOG",
+  "version": "3.6.2",
+  "description": "While in Chrome, click on any phone number, on any webpage or web application to instantly launch a call on your OfficeSuite® phone.",
+  "permissions": [
+    "background",
+    "notifications",
+    "tabs",
+    "identity",
+    "identity.email",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "browser_action": {
+    "default_icon": "webimages/icon128.png",
+    "default_popup": "web/user_info_popup.html"
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "jquery.min.js",
+      "sockjs.min.js",
+      "stomp.min.js",
+      "backgroundConstants.js",
+      "background.js",
+      "popupNotifier.js",
+      "dynamicsCrmConnector.js",
+      "commonUtils.js",
+      "callEventsMessageListener.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "jquery.min.js",
+        "libphonenumber.js",
+        "bvpnparser.js"
+      ],
+      "run_at": "document_end",
+      "css": [
+        "css/officeSuiteExtensionAlert.css",
+        "css/clickOptions.css"
+      ]
+    },
+    {
+      "css": [],
+      "js": [
+        "jquery.min.js",
+        "osInjector.js"
+      ],
+      "matches": [
+        "*://mail.google.com/*",
+        "*://outlook.office365.com/*",
+        "*://outlook.office.com/*",
+        "*://*.xrmlive.com/*",
+        "*://*.crm.dynamics.com/*"
+      ]
+    },
+    {
+      "css": [],
+      "js": [
+        "jquery.min.js",
+        "office365ContactSelector.js"
+      ],
+      "matches": [
+        "*://outlook.office365.com/*",
+        "*://outlook.office.com/*"
+      ]
+    },
+    {
+      "css": [],
+      "js": [
+        "jquery.min.js",
+        "myOS_auto_login.js"
+      ],
+      "matches": [
+        "https://myofficesuite.broadviewnet.com/Mobile/LoginMobile.aspx*"
+      ],
+      "all_frames": true
+    },
+    {
+      "css": [],
+      "js": [
+        "jquery.min.js",
+        "myOS_main.js"
+      ],
+      "matches": [
+        "https://myofficesuite.broadviewnet.com/HUD/HUDMain.aspx"
+      ],
+      "all_frames": true
+    },
+    {
+      "css": [
+        "css/teams-win.css"
+      ],
+      "js": [
+        "jquery.min.js",
+        "teamsParser.js"
+      ],
+      "matches": [
+        "https://teams.microsoft.com/*"
+      ],
+      "all_frames": false
+    },
+    {
+      "css": [],
+      "js": [
+        "jquery.min.js",
+        "googleContactsParser.js"
+      ],
+      "matches": [
+        "*://contacts.google.com/search/*?winCall=true"
+      ],
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "webimages/*",
+    "web/*"
+  ],
+  "oauth2": {
+    "client_id": "23332923228-ip9o788gdfh06kkd1ojf47l4us1ci8ii.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.google.com/m8/feeds/"
+    ]
+  },
+  "icons": {
+    "128": "webimages/icon128.png"
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyg750mAXzgV7xLk/6y7sdnYEgJ4grmLlpuECNjezuNMfOT8wpMeeJ/lPKxanO+qlHZyHSpUwozF7oCmBN1FhZwyMuN2Pj8VhK8QkzrfOVOqNWBXVcbzJPUuLJJJtYRTru9rCXXSyNpYnsFzdeMH5flmKza3oqbIhAJqWHpWsq1w+NSh/WEFQpm1ienhaPTqCAKMEA6BJ7UQlJUKIZ3yu88F+WXefGLr0ira6jlTAMt0mt+Osu6grU1+sv5x1lblvgWaP73KNQKfmI2iohUr1WCOSteNMO7ikX0RIwZDdibdFLJcBMyEA9VT/4U4zMwxuWQ6IDD23MKwI8lD1eOWWQQIDAQAB",
+  "manifest_version": 2
+}

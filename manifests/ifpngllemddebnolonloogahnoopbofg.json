@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "background": {
+    "page": "background.html"
+  },
+  "default_locale": "zh_CN",
+  "name": "__MSG_ua_name__",
+  "description": "__MSG_ua_description__",
+  "version": "2.1.56",
+  "offline_enabled": true,
+  "browser_action": {
+    "default_icon": {
+      "19": "img/icon19.png",
+      "38": "img/icon38.png"
+    },
+    "default_popup": "popup.html",
+    "default_title": "__MSG_ua_title__"
+  },
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "tabs",
+    "http://*/",
+    "https://*/",
+    "contextMenus",
+    "management",
+    "storage",
+    "unlimitedStorage"
+  ],
+  "content_scripts": [
+    {
+      "js": [
+        "js/content.min.js"
+      ],
+      "matches": [
+        "*://*/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": false,
+      "js": [
+        "js/contentScript.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

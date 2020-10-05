@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "NasTer extension",
+  "version": "1.0.72",
+  "manifest_version": 2,
+  "description": "Tesera Notifier extension by nastolkus",
+  "homepage_url": "http://nastolkus.com/naster/",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "page": "src/bg/background.html",
+    "persistent": true
+  },
+  "options_page": "src/options/options.html",
+  "browser_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "NasTer subscriptions",
+    "default_popup": "src/browser_action/browser_action.html"
+  },
+  "permissions": [
+    "http://tesera.ru/*",
+    "notifications",
+    "tabs"
+  ],
+  "web_accessible_resources": [
+    "icons/tes_on.png",
+    "icons/tes_off.png"
+  ],
+  "omnibox": {
+    "keyword": "nas"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://tesera.ru/*"
+      ],
+      "css": [
+        "src/inject/inject.css"
+      ]
+    },
+    {
+      "matches": [
+        "http://tesera.ru/*"
+      ],
+      "js": [
+        "js/utils.js",
+        "src/inject/inject.js",
+        "js/jquery-2.0.2.min.js"
+      ]
+    }
+  ]
+}

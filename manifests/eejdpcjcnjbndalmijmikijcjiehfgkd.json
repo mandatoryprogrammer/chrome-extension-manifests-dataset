@@ -1,0 +1,87 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "version": "1.2.2",
+  "manifest_version": 2,
+  "description": "__MSG_appDescription__",
+  "icons": {
+    "16": "images/moat_16.png",
+    "128": "images/moat_128.png"
+  },
+  "browser_action": {
+    "default_icon": "images/moat_128.png",
+    "default_popup": "popup.html"
+  },
+  "web_accessible_resources": [
+    "images/*.png",
+    "external/*.js",
+    "iframe.js",
+    "iframe.html",
+    "tagTree.js",
+    "tagTree.html",
+    "reload.html",
+    "reload.js"
+  ],
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "webNavigation",
+    "cookies",
+    "*://*.moat.com/*",
+    "http://*/*",
+    "https://*/*",
+    "storage"
+  ],
+  "default_locale": "en",
+  "background": {
+    "page": "background.html"
+  },
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'; frame-src 'self' *; child-src 'self' *",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "http://*.moat.com/*",
+        "http://*.moat.co/*",
+        "http://*.moatads.com/*",
+        "https://*.moat.com/*",
+        "https://*.moat.co/*",
+        "https://*.moatads.com/*"
+      ],
+      "js": [
+        "adparser.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "external/jquery-2.1.3.min.js",
+        "external/jquery-ui-1.11.4.min.js",
+        "external/velocity.min.js",
+        "external/velocity.ui.min.js",
+        "multipurpose.js",
+        "contentutils.js",
+        "eventHandler.js",
+        "createCSS.js",
+        "mouseevent.js",
+        "template.js",
+        "create.js",
+        "highlightChrome.js",
+        "page.js"
+      ],
+      "css": [
+        "extension.css"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

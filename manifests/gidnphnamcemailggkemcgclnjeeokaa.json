@@ -1,0 +1,76 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Tealium Tools",
+  "version": "1.14.4",
+  "description": "Enhance your Tealium implementations by evaluating your website data and tags through a variety of helpful tools.",
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "webNavigation",
+    "storage",
+    "cookies",
+    "notifications",
+    "clipboardWrite",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "page": "background.html"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "js/lib/handlebars-v4.12.0.js",
+        "js/content/contentBundle.min.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "js/inject/grabUtid.min.js",
+    "js/inject/grabUdo.min.js",
+    "js/inject/launchWebCompanion.min.js",
+    "js/inject/traceKillVisitorSession.min.js",
+    "js/inject/checkUtagEnv.min.js",
+    "js/inject/checkUtagVersion.min.js",
+    "js/inject/grabUtuiEmail.min.js",
+    "js/inject/grabDimensionId.min.js",
+    "js/inject/grabExperiments.min.js",
+    "js/inject/postNewDimension.min.js",
+    "js/inject/grabSwitcherInfo.min.js",
+    "css/contentStyles.css",
+    "css/font-awesome.min.css",
+    "fonts/OpenSans-Light.ttf",
+    "fonts/OpenSans-Regular.ttf",
+    "fonts/OpenSans-Semibold.ttf",
+    "fonts/OpenSans-Bold.ttf",
+    "fonts/glyphicons-halflings-regular.woff",
+    "fonts/glyphicons-halflings-regular.ttf",
+    "images/tealium-footer-logo.png"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "images/action_icon_19.png",
+      "38": "images/action_icon_38.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "images/manifest_icon_16.png",
+    "48": "images/manifest_icon_48.png",
+    "64": "images/manifest_icon_64.png",
+    "128": "images/manifest_icon_128.png"
+  },
+  "content_security_policy": "default-src * 'self' 'unsafe-inline' *; script-src-elem 'unsafe-inline' 'self' 'unsafe-eval' https://dl.dropboxusercontent.com/ https://solutions.tealium.net/ https://tealium-tools.s3.amazonaws.com/ ;script-src 'self' 'unsafe-eval' https://dl.dropboxusercontent.com/ https://solutions.tealium.net/ https://tealium-tools.s3.amazonaws.com/; object-src 'self' ; child-src * 'self' 'unsafe-inline' 'unsafe-eval'; connect-src *; style-src 'self' 'unsafe-inline'; img-src * 'unsafe-inline' 'self' *",
+  "externally_connectable": {
+    "matches": [
+      "*://*.optimizely.com/*"
+    ]
+  }
+}

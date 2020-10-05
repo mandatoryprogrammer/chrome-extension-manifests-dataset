@@ -1,0 +1,83 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Devolutions Web Login",
+  "short_name": "DWL",
+  "default_locale": "en_US",
+  "description": "__MSG_DWLDescription__",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAru5UDnxOma2l02Bay+ES9CKgvmDxjjSrRqhwOUWYU7ukocxQZ1TIZtJt1r931c37FKmTQfdss2N2c5rZi2pCUgItVKl4pT3C5aixNhzPkA4kQzAR+EYP9lSpeTCn0ShtwA71FQYK1xxa4v3MbOWaWOQ3wDwymJf74Mmtz0BFWwLUXmFrXn8Nk/m5F+2EPCY0okLf/gZfLnQoZUUtWaaFTQJlkoVWDGlZhjcJLTJKOmnGkDvp6z1+OR1+LUDY/iNm/2JdwOKB9GatGR9WwUIvQcgEslXalvZPB7xxCO/FHLBMNYPUNG1UQIXahQ3yE3ZBlRMv6ybO5lwnUfEGOQuHAQIDAQAB",
+  "version": "2020.3.1.5",
+  "browser_action": {
+    "default_popup": "popup/index.html",
+    "default_title": "Devolutions Web Login",
+    "default_icon": {
+      "19": "assets/img/DWLEnable19x19.png",
+      "38": "assets/img/DWLEnable38x38.png"
+    }
+  },
+  "icons": {
+    "16": "assets/img/DWLEnable16x16.png",
+    "48": "assets/img/DWLEnable48x48.png",
+    "128": "assets/img/DWLEnable128x128.png"
+  },
+  "background": {
+    "page": "background/background.html",
+    "persistent": true
+  },
+  "content_security_policy": "script-src 'self' 'wasm-eval'; object-src 'self'",
+  "permissions": [
+    "storage",
+    "tabs",
+    "contextMenus",
+    "nativeMessaging",
+    "unlimitedStorage",
+    "cookies",
+    "<all_urls>"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file://*/*"
+      ],
+      "js": [
+        "content-script/autofill.js",
+        "content-script/autofiller.js",
+        "content-script/save-dialog-notification.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "match_about_blank": true
+    }
+  ],
+  "web_accessible_resources": [
+    "webui/index.html",
+    "content-script/assets/*"
+  ],
+  "storage": {
+    "managed_schema": "schema.json"
+  },
+  "commands": {
+    "AutoFill": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Y",
+        "mac": "Command+Shift+Y"
+      },
+      "description": "__MSG_DWLAutofillCommandDescription__"
+    },
+    "Refresh": {
+      "suggested_key": {
+        "default": "Alt+L",
+        "mac": "Command+Shift+L"
+      },
+      "description": "Refresh"
+    },
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Z",
+        "mac": "Command+Shift+Z"
+      }
+    }
+  }
+}

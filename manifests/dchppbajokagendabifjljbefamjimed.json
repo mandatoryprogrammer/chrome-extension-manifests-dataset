@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "TweetDimmer",
+  "description": "Keeps unknown and unwanted media in tweets from being seen until you want to see them.",
+  "version": "0.50.10",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "https://localhost:10433/",
+    "http://localhost:8081/",
+    "https://filter-dot-tweetdimmer-dev.appspot.com/",
+    "https://subscriber-dot-tweetdimmer-dev.appspot.com/",
+    "https://*.tweetdimmer.com/",
+    "https://fonts.googleapis.com/",
+    "declarativeContent",
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "js/sha256.js",
+      "js/config.js",
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://tweetdeck.twitter.com/*",
+        "https://twitter.com/*"
+      ],
+      "css": [
+        "css/overlay.css"
+      ],
+      "js": [
+        "js/ready.js",
+        "js/config.js",
+        "js/dimmer.js",
+        "js/sha256.js",
+        "js/css.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "page_action": {
+    "default_title": "TweetDimmer",
+    "default_icon": {
+      "16": "img/tweetdimmer_icon_16.png",
+      "32": "img/tweetdimmer_icon_32.png",
+      "48": "img/tweetdimmer_icon_48.png",
+      "128": "img/tweetdimmer_icon_128.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "img/tweetdimmer_icon_16.png",
+    "32": "img/tweetdimmer_icon_32.png",
+    "48": "img/tweetdimmer_icon_48.png",
+    "128": "img/tweetdimmer_icon_128.png"
+  },
+  "web_accessible_resources": [
+    "css/overlay.css"
+  ],
+  "content_security_policy": "script-src 'self' https://www.gstatic.com 'unsafe-eval'; object-src 'self'",
+  "manifest_version": 2
+}

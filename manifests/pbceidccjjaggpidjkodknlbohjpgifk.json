@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "version": "1.0.11",
+  "manifest_version": 2,
+  "description": "__MSG_appDescription__",
+  "author": "Juno_okyo",
+  "homepage_url": "https://junookyo.blogspot.com/?utm_source=hq_mp3_downloader",
+  "icons": {
+    "16": "images/icon-16.png",
+    "128": "images/icon-128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "permissions": [
+    "activeTab",
+    "http://mp3.zing.vn/bai-hat/*",
+    "http://mp3.zing.vn/album/*",
+    "http://api.mp3.zing.vn/*",
+    "http://www.nhaccuatui.com/bai-hat/*",
+    "http://www.nhaccuatui.com/playlist/*",
+    "downloads"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://mp3.zing.vn/bai-hat/*",
+        "http://mp3.zing.vn/album/*",
+        "http://www.nhaccuatui.com/bai-hat/*",
+        "http://www.nhaccuatui.com/playlist/*"
+      ],
+      "css": [
+        "libs/toastr.min.css"
+      ],
+      "js": [
+        "libs/jquery.min.js",
+        "libs/toastr.min.js",
+        "scripts/contentscript.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "http://www.nhaccuatui.com/playlist/*"
+      ],
+      "js": [
+        "scripts/nhaccuatui.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "page_action": {
+    "default_icon": {
+      "19": "images/icon-19.png",
+      "38": "images/icon-38.png"
+    },
+    "default_title": "__MSG_appName__"
+  },
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'"
+}

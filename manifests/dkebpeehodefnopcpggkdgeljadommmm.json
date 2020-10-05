@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Mini JS Console",
+  "short_name": "Mini JS Console",
+  "version": "1.3.0",
+  "manifest_version": 2,
+  "offline_enabled": true,
+  "description": "Mini JS console that track console logs and detect JS errors/alerts and show them via Chrome notifications",
+  "homepage_url": "https://chrome.google.com/webstore/detail/log-notifications/dkebpeehodefnopcpggkdgeljadommmm?utm_source=plus",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "19": "icons/icon-19.png",
+    "38": "icons/icon-38.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "src/bg/background.js",
+      "src/lib/bower_components/sprintf/src/sprintf.js",
+      "src/lib/bower_components/underscore/underscore.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": "icons/icon-38.png",
+    "default_title": "Console Output",
+    "default_popup": "src/popup/popup.html"
+  },
+  "permissions": [
+    "notifications",
+    "tabs",
+    "storage",
+    "browsingData"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "src/content/content.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "src/inject/console.js",
+    "src/inject/evaluate.js",
+    "src/inject/styles.css"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

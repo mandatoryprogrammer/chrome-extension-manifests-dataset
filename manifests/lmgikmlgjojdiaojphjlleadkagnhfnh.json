@@ -1,0 +1,40 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Slack Blocker",
+  "short_name": "Slack Blocker",
+  "version": "1.0.1",
+  "manifest_version": 2,
+  "description": "A tool that helps you block people on Slack.",
+  "icons": {
+    "16": "icons/blocked16.png",
+    "48": "icons/blocked48.png",
+    "128": "icons/blocked128.png",
+    "256": "icons/blocked256.png"
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": "icons/blocked48.png",
+    "default_title": "Block users on Slack",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "storage",
+    "tabs"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.slack.com/*"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "js/inject.js"
+      ]
+    }
+  ]
+}

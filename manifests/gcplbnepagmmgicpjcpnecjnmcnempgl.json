@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "HipSocial",
+  "description": "HipSocial Chrome Extension",
+  "version": "1.4",
+  "content_security_policy": "frame-src https://my.500apps.com; style-src 'unsafe-inline';script-src 'self'  'unsafe-eval'; object-src 'self'",
+  "permissions": [
+    "activeTab",
+    "declarativeContent",
+    "storage",
+    "tabs",
+    "cookies",
+    "*://*.linkedin.com/*",
+    "*://*.twitter.com/*",
+    "contextMenus",
+    "https://my.500apps.com/a/*",
+    "identity",
+    "<all_urls>"
+  ],
+  "browser_action": {
+    "default_title": "HipSocial",
+    "default_icon": "/resources/hipsocialLogo.jpg"
+  },
+  "background": {
+    "scripts": [
+      "/js/listener.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://twitter.com/*",
+        "https://www.linkedin.com/*"
+      ],
+      "js": [
+        "/js/main.js",
+        "/js/user.js"
+      ],
+      "css": [
+        "/css/index.css"
+      ],
+      "run_at": "document_start",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    "/resources/popup.html"
+  ]
+}

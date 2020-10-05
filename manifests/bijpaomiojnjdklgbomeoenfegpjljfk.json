@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "SCIBASE.CO",
+  "description": "Import Your LinkedIn Profile to Your SciBase Profile",
+  "version": "0.68",
+  "content_security_policy": "default-src 'self'; script-src 'unsafe-eval';  object-src 'unsafe-eval'; connect-src *",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon.png"
+  },
+  "web_accessible_resources": [
+    "*.png"
+  ],
+  "permissions": [
+    "storage",
+    "tabs",
+    "webNavigation",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "background.js",
+      "eventPage.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "https://www.linkedin.com/*"
+      ],
+      "js": [
+        "lib/jquery-3.1.1.min.js",
+        "content.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_title": "SciBase Button",
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "manifest_version": 2
+}

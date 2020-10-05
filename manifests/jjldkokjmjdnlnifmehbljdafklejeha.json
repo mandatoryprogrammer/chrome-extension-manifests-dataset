@@ -1,0 +1,42 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Old Twitter Layout",
+  "description": "Brings back the old Twitter Layout",
+  "version": "1.0.6",
+  "short_name": "otl",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "icons": {
+    "16": "images/icon-16.png",
+    "128": "images/icon-128.png"
+  },
+  "background": {
+    "scripts": [
+      "scripts/background.js",
+      "scripts/storage.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.twitter.com/*"
+      ],
+      "js": [
+        "scripts/firefox-copyfix-wrapper.js",
+        "scripts/banner-removal-wrapper.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "scripts/firefox-copyfix.js",
+    "scripts/banner-removal.js"
+  ],
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "clipboardRead",
+    "clipboardWrite",
+    "https://twitter.com/*"
+  ]
+}

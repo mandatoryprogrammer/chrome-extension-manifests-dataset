@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "BestPrice Assistant",
+  "short_name": "BP Assistant",
+  "description": "Ο έξυπνος βοηθός στις ηλεκτρονικές σου αγορές, οπουδήποτε online, που θα σε βοηθήσει να κερδίσεις χρόνο και χρήμα!",
+  "version": "5.4.3",
+  "author": "George Papadakis <gp@bestprice.gr>",
+  "permissions": [
+    "contextMenus",
+    "storage"
+  ],
+  "manifest_version": 2,
+  "background": {
+    "scripts": [
+      "dist/background.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "ga/analytics.js",
+    "ga/analytics_debug.js"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "24": "assets/extension/browser-action/24.png",
+      "32": "assets/extension/browser-action/32.png"
+    },
+    "default_title": "BestPrice Assistant",
+    "default_popup": "html/popup.html"
+  },
+  "options_ui": {
+    "page": "html/options.html",
+    "open_in_tab": false
+  },
+  "content_security_policy": "script-src 'self'; img-src 'self' https://platform-lookaside.fbsbx.com https://www.google-analytics.com https://bbpcdn.pstatic.gr https://abpcdn.pstatic.gr https://orig-bpcdk.pstatic.gr https://k.pstatic.gr https://graph.facebook.com https://scontent.xx.fbcdn.net https://orig-bpcdn.pstatic.gr https://www.bestprice.gr https://* http://* data:; connect-src 'self' https://api.airtable.com https://sentry.io ws://pubsub.bestprice.gr wss://pubsub.bestprice.gr pubsub.bestprice.gr https://local.bestprice.gr https://www.bestprice.gr https://www.google-analytics.com http://www.google-analytics.com https://rpc.bestprice.gr; object-src 'self'",
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "dist/script.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+B",
+        "mac": "MacCtrl+Shift+B"
+      }
+    }
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://*.bestprice.gr/*"
+    ]
+  },
+  "icons": {
+    "48": "assets/extension/extension/icon48.png",
+    "128": "assets/extension/extension/icon128.png"
+  }
+}

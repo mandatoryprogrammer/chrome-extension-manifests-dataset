@@ -1,0 +1,68 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "author": "@cielavenir",
+  "name": "cTouch r5 (filesystem)",
+  "description": "You can browse smartphone websites. Configuration is saved to HTML5 filesystem.",
+  "version": "2.7.1.6127",
+  "manifest_version": 2,
+  "homepage_url": "https://github.com/cielavenir/ctouch/",
+  "background": {
+    "scripts": [
+      "ctouch_saveconfig.js",
+      "ctouch_bg.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "unlimitedStorage",
+    "<all_urls>"
+  ],
+  "options_page": "ctouch_option.html",
+  "browser_action": {
+    "default_icon": {
+      "128": "icon128.png",
+      "16": "icon16.png",
+      "32": "icon32.png",
+      "48": "icon48.png"
+    },
+    "default_title": "cTouch r5 (filesystem)",
+    "default_popup": "ctouch_popup.html"
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "ctouch_bootstrap.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "match_about_blank": true,
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "ctouch_css.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "match_about_blank": true,
+      "run_at": "document_end"
+    }
+  ],
+  "icons": {
+    "128": "icon128.png",
+    "16": "icon16.png",
+    "32": "icon32.png",
+    "48": "icon48.png"
+  },
+  "-ms-preload": {
+    "backgroundScript": "backgroundScriptsAPIBridge.js",
+    "contentScript": "contentScriptsAPIBridge.js"
+  }
+}

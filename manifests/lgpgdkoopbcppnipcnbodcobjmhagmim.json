@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "FreeAgent Transaction Explainer",
+  "description": "Specify rules to help consistently explain transactions in FreeAgent",
+  "author": "developers@gofreerange.com",
+  "version": "0.3",
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "icons": {
+    "16": "icon-16.png",
+    "48": "icon-48.png",
+    "128": "icon-128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.freeagent.com/bank_accounts/*/bank_account_entries/new?bank_transaction_id=*"
+      ],
+      "js": [
+        "jquery-2.1.1.min.js",
+        "jquery-ui-1.11.0.min.js",
+        "freeagent-transaction-explainer.js"
+      ]
+    }
+  ],
+  "page_action": {
+    "default_icon": {
+      "19": "icon-19.png",
+      "38": "icon-38.png"
+    }
+  },
+  "commands": {
+    "_execute_page_action": {
+      "suggested_key": {
+        "default": "Ctrl+E"
+      }
+    }
+  },
+  "permissions": [
+    "declarativeContent",
+    "storage",
+    "http://*/",
+    "https://*/"
+  ],
+  "options_page": "options.html"
+}

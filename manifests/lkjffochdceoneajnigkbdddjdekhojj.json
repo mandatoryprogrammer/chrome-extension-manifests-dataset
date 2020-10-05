@@ -1,0 +1,67 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_appName__",
+  "description": "__MSG_appDesc__",
+  "version": "1.6.6",
+  "default_locale": "en",
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "permissions": [
+    "<all_urls>",
+    "file://*/*",
+    "contextMenus",
+    "tabs",
+    "storage",
+    "background"
+  ],
+  "icons": {
+    "16": "images/16.png",
+    "32": "images/32.png",
+    "48": "images/48.png",
+    "128": "images/128.png"
+  },
+  "browser_action": {
+    "default_icon": "images/19.png",
+    "default_title": "Japanese dictionary Mazii",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/contents.js",
+        "js/common.js"
+      ],
+      "css": [
+        "css/contents.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "commands": {
+    "dbclick_enable": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+M"
+      },
+      "description": "Send event enable or disable fast translate by double click"
+    }
+  },
+  "content_security_policy": "script-src 'self' chrome://resources https://ssl.google-analytics.com https://www.google-analytics.com; connect-src https://inputtools.google.com https://translate.googleapis.com http://www.ispeech.org https://mazii.net https://api.mazii.net https://www.google.com ; object-src 'self'",
+  "web_accessible_resources": [
+    "data/kanjimini.json",
+    "_locales/*.json",
+    "favicon.ico",
+    "chrome-search://**"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.mazii.net/*"
+    ]
+  }
+}

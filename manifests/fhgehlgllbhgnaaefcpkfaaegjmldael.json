@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "WriteHer",
+  "version": "0.0.2",
+  "description": "A Chrome extension that shows a fake paywall after reading 10 articles in a row without a female author.",
+  "permissions": [
+    "tabs",
+    "notifications",
+    "bookmarks",
+    "activeTab",
+    "storage",
+    "http://*/",
+    "https://*/",
+    "https://www.gender-api.com/*",
+    "*://www.nytimes.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "jquery-3.2.1.min.js",
+        "content.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.nytimes.com/*"
+      ],
+      "js": [
+        "jquery-3.2.1.min.js",
+        "jquery-gender.min.js",
+        "main.js",
+        "content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "browser_action": {
+    "default_icon": "icon.png"
+  },
+  "background": {
+    "scripts": [
+      "jquery-3.2.1.min.js",
+      "jquery-gender.min.js",
+      "background.js"
+    ]
+  }
+}

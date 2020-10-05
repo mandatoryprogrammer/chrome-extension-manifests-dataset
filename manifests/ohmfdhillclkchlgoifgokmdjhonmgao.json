@@ -1,0 +1,57 @@
+{
+  "update_url": "http://clients2.google.com/service/update2/crx",
+  "name": "LitBlitz - Speed Up Your Literature Research.",
+  "description": "Collect & manage your notes for literature reviews, assignment research and more.",
+  "version": "0.131",
+  "manifest_version": 2,
+  "browser_action": {
+    "default_icon": "img/litblitz-16x16.png",
+    "default_popup": "html/popup.html"
+  },
+  "permissions": [
+    "contextMenus",
+    "tabs",
+    "http://*/",
+    "https://*/",
+    "http://127.0.0.1:8000/api/v1/note/",
+    "http://litblitz/api/v1/note/",
+    "https://accounts.litblitz.net/api/v1/note/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/bottom_bar.js",
+        "js/jquery-1.8.2.min.js",
+        "js/pdf.js",
+        "js/popup.js",
+        "js/iframe.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://127.0.0.1:8000/chrome/*",
+        "https://accounts.litblitz.net/chrome/*",
+        "http://litblitz/chrome/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "js/iframe.js",
+        "js/jquery-1.8.2.min.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/context.js",
+      "js/highlight.js"
+    ]
+  },
+  "icons": {
+    "16": "img/litblitz-16x16.png",
+    "48": "img/litblitz-48x48.png",
+    "128": "img/litblitz-128x128.png"
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "author": "EdCast",
+  "manifest_version": 2,
+  "name": "EdCast MyGuide Player",
+  "description": "EdCast MyGuide Player",
+  "version": "2020.6.30.1",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "css": [
+        "content_script/dom_selector/css/style.css"
+      ],
+      "js": [
+        "gm_client_iframe.js"
+      ],
+      "all_frames": true,
+      "match_about_blank": true
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "css": [
+        "content_script/worker/css/style.css"
+      ],
+      "js": [
+        "gm_client.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "common/detect_browser.js",
+      "config.js",
+      "common/lib/jquery/jquery.min.js",
+      "common/functions.util.contentscript.js",
+      "common/functions.util.common.js",
+      "common/functions.util.tracker.js",
+      "common/features.js",
+      "common/logger.js",
+      "common/models/api.js",
+      "common/models/organization.js",
+      "common/models/step.js",
+      "common/models/application.js",
+      "common/models/category.js",
+      "common/models/guide.js",
+      "common/models/user.js",
+      "common/storage.js",
+      "content_script/worker/js/http.web.js",
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "icons": {
+    "16": "common/img/gicon16.png",
+    "48": "common/img/gicon48.png",
+    "128": "common/img/gicon128.png"
+  },
+  "permissions": [
+    "storage",
+    "https://api-v3.guideme.io/",
+    "https://sso.myguide.org/",
+    "https://v3-analytics.guideme.io/",
+    "https://*.edcast.com/"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "40": "common/img/qu_icon.png"
+    },
+    "default_popup": "/browser_action/popup.html"
+  },
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "web_accessible_resources": [
+    "content_script/**/*.html",
+    "side_panel/**/*.html",
+    "side_panel/**/*.js",
+    "common/img/*",
+    "common/icons/*",
+    "data/api/*",
+    "data/assets/*"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'"
+}

@@ -1,0 +1,149 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "0.8.12",
+  "name": "Pullquote",
+  "short_name": "PQ",
+  "description": "Pullquote activates online reading.",
+  "manifest_version": 2,
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "homepage_url": "http://pullquote.com",
+  "browser_action": {
+    "default_icon": "img/icon16.png",
+    "default_title": "Pullquote",
+    "default_popup": "popup_help.html"
+  },
+  "background": {
+    "scripts": [
+      "js/jquery.min.js",
+      "js/tracer.js",
+      "js/background.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "img/close.png",
+    "img/boxquote-start.png",
+    "img/boxquote-end.png",
+    "img/options.png",
+    "img/icon-quoteit.png",
+    "img/loading-small.gif",
+    "img/icon-trash.png",
+    "img/icon-block.png",
+    "img/icon-ok.png",
+    "img/border-anim-v.gif",
+    "img/border-anim-h.gif",
+    "css/pullquote.css"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://pullquotes.com/*",
+      "*://pullquote.com/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*"
+      ],
+      "exclude_matches": [
+        "*://*/*.pdf",
+        "*://*.pullquotes.com/tweet*",
+        "*://*.pullquotes.com/file*",
+        "*://*.pullquotes.com/pq*",
+        "*://*.pullquote.com/tweet*",
+        "*://*.pullquote.com/file*",
+        "*://*.pullquote.com/pq*"
+      ],
+      "css": [
+        "css/pullquote.css"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "js/rangy.min.js",
+        "js/tracer.js",
+        "js/content.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "*://*/*.pdf",
+        "*://*.pullquotes.com/tweet*",
+        "*://*.pullquotes.com/file*",
+        "*://*.pullquotes.com/pq*",
+        "*://*.pullquote.com/tweet*",
+        "*://*.pullquote.com/file*",
+        "*://*.pullquote.com/pq*"
+      ],
+      "css": [
+        "css/pullquote.css"
+      ],
+      "js": [
+        "js/https_content.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.pullquotes.com/pq*",
+        "*://*.pullquote.com/pq*",
+        "*://*.qote.me/*",
+        "*://*.pllqt.it/*"
+      ],
+      "js": [
+        "js/quotebox.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.pullquotes.com/*",
+        "*://*.pullquote.com/*"
+      ],
+      "exclude_matches": [
+        "*://*/*feeds"
+      ],
+      "all_frames": true,
+      "js": [
+        "js/member.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.pullquotes.com/quote*",
+        "*://*.pullquote.com/quote*"
+      ],
+      "js": [
+        "js/quote.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.pullquotes.com/tweet*",
+        "*://*.pullquotes.com/file*",
+        "*://*.pullquote.com/tweet*",
+        "*://*.pullquote.com/file*"
+      ],
+      "js": [
+        "js/intent.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "notifications",
+    "clipboardWrite",
+    "contextMenus",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "options_page": "options.html"
+}

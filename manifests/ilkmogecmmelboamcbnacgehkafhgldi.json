@@ -1,0 +1,101 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "InboxBrain | All-in-one Gmail automation",
+  "short_name": "InboxBrain",
+  "description": "Increase sales productivity with InboxBrain’s suite of essential email automation tools.",
+  "version": "1.23",
+  "permissions": [
+    "activeTab",
+    "notifications",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "storage",
+    "identity",
+    "*://*.googleusercontent.com/proxy/*",
+    "*://mail.google.com/*",
+    "*://localhost/*",
+    "https://ajax.googleapis.com/",
+    "*://app.inboxbrain.com/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://mail.google.com/*",
+      "*://localhost/*",
+      "*://inboxbrain.com/*",
+      "*://app.inboxbrain.com/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "libs/jquery.min.js",
+        "libs/underscore.js",
+        "libs/sugar.js",
+        "libs/inboxsdk.js",
+        "core/constants.js",
+        "core/pubsub.js",
+        "core/popup.js",
+        "core/observer.js",
+        "core/bootstrap.js",
+        "features/alert.js",
+        "features/completion.js",
+        "features/compose_panel.js",
+        "features/compose.js",
+        "features/dashboard.js",
+        "features/followup.js",
+        "features/meeting.js",
+        "features/poll.js",
+        "features/sendlater.js",
+        "features/snippets.js",
+        "features/snooze.js",
+        "features/toast.js",
+        "features/toolbar_panel.js",
+        "features/tracking.js",
+        "features/undo.js",
+        "core/features.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://app.inboxbrain.com/*",
+        "*://*.inboxbrain.com/*",
+        "*://localhost/*"
+      ],
+      "js": [
+        "core/website.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "scripts": [
+      "libs/jquery.min.js",
+      "libs/underscore.js",
+      "libs/faye.js",
+      "core/pubsub.js",
+      "core/constants.js",
+      "core/daemon.js"
+    ],
+    "persistent": true
+  },
+  "web_accessible_resources": [
+    "libs/*.*",
+    "core/*.*",
+    "features/*.*",
+    "css/*.*",
+    "fonts/*.*",
+    "images/*.*",
+    "html/*.*"
+  ],
+  "icons": {
+    "16": "images/logo-icon-16.png",
+    "48": "images/logo-icon-48.png",
+    "128": "images/logo-icon-128.png"
+  },
+  "content_security_policy": "script-src 'self' https://app.inboxbrain.com; object-src 'self'"
+}

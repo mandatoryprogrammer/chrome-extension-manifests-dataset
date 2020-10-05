@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "author": "Aurélien Hervé",
+  "name": "Ginger BOOM",
+  "description": "Have GingerGM shout \"BOOOOM\" at your own games",
+  "version": "1.7.0",
+  "icons": {
+    "16": "assets/boom16.png",
+    "48": "assets/boom48.png",
+    "128": "assets/boom128.png",
+    "256": "assets/boom256.png"
+  },
+  "options_page": "src/options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "src/ga-config.js",
+        "src/ga.js",
+        "src/play.js",
+        "src/content.js"
+      ],
+      "css": [
+        "src/content.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.chess.com/*"
+      ],
+      "js": [
+        "src/play.js",
+        "src/chess-dot-com-content.js"
+      ],
+      "css": [
+        "src/content.css"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": "assets/boom256.png",
+    "default_popup": "popup.html",
+    "default_title": "BOOM !"
+  },
+  "permissions": [
+    "storage",
+    "activeTab"
+  ],
+  "web_accessible_resources": [
+    "assets/*"
+  ]
+}

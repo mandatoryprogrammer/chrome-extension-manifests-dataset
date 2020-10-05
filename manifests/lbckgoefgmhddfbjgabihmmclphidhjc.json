@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Trek Robot",
+  "version": "0.1.10",
+  "description": "Trek Robot for AotterTrek.",
+  "icons": {
+    "48": "./images/trek.png",
+    "128": "./images/trek_128.png"
+  },
+  "browser_action": {
+    "default_title": "aotter_ttb",
+    "default_icon": "images/trek-inactive.png"
+  },
+  "permissions": [
+    "<all_urls>",
+    "webRequest",
+    "webRequestBlocking",
+    "tabs",
+    "cookies"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "./dist/content_script.js"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "./dist/detector.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "./dist/background_script.js"
+    ]
+  },
+  "content_security_policy": "script-src 'self' http://127.0.0.1:8080; object-src 'self'",
+  "web_accessible_resources": [
+    "content.html",
+    "iframe.html",
+    "./dist/iframe.js"
+  ]
+}

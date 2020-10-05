@@ -1,0 +1,67 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "applications": {
+    "gecko": {
+      "id": "make-asagi-usable@nemalesshage"
+    }
+  },
+  "name": "アサギ実用化サポート",
+  "version": "0.8.3",
+  "description": "オンラインゲーム「対魔忍アサギ～決戦アリーナ～」のシーンをちょっと実用的にする非公式アドオンです",
+  "icons": {
+    "16": "data/icon16.png",
+    "32": "data/icon32.png",
+    "64": "data/icon64.png",
+    "128": "data/icon128.png"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "browser_action": {
+    "default_title": "",
+    "default_icon": "data/icon32.png",
+    "default_popup": "menu.html"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "web_accessible_resources": [
+    "hasc_injection.js",
+    "data/options.json"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://osapi.dmm.com/gadgets/ifr*"
+      ],
+      "all_frames": true,
+      "css": [
+        "hasc_tune.css"
+      ],
+      "js": [
+        "hasc_tune.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://pc-play.games.dmm.co.jp/play/taimanin-asagi*"
+      ],
+      "css": [
+        "frame_tune.css"
+      ],
+      "js": [
+        "frame_tune.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  }
+}

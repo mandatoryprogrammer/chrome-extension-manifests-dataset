@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "author": "8x8",
+  "manifest_version": 2,
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnG9wG5Xs32BzghpfhNjvZdetw/reNKfemRCNCNR89wydVMr3Geehe+hVA9mbS7hAQEC8tyJfHp1YofquhcIsyrysS4C4oxffR4N4TH1gr0IspQcYTvLd0VaTZIY02GxkM7kFi5aPbKqqUB9BKEbrAvATD6sguBBjm+OW4mS3mbryGChWzoJFUtBawYaH/Y7o3kFRxt8q/GEiKvkoln7ovEo6pb8ZniFBAzTkFHpyUNcgZXWv8PKaf7OWyBdcDZqM96piUHPEKPMVBqushgPDcNDEDj6NWXrd4BOHEzfK8VR0+/dyDETHV1GSOLybee1Evm44X+phI9WnhbGuMV3ZUwIDAQAB",
+  "name": "8x8 Work Meetings for Google Chrome",
+  "version": "2.9.2",
+  "description": "Easily schedule 8x8 Work Meetings in any calendaring application in a Google Chrome Browser.",
+  "icons": {
+    "128": "assets/images/logo128.png"
+  },
+  "background": {
+    "scripts": [
+      "scripts/analytics.js",
+      "scripts/sso.js",
+      "scripts/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "128": "assets/images/logo128.png"
+    },
+    "default_title": "8x8 Virtual Office Meetings",
+    "default_popup": "templates/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://calendar.google.com/calendar/*",
+        "*://outlook.office.com/*",
+        "*://outlook.office365.com/*",
+        "*://calendly.com/*"
+      ],
+      "js": [
+        "scripts/main.js"
+      ],
+      "css": [
+        "assets/css/meeting.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "assets/images/icon48.png",
+    "assets/css/meeting.css"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "permissions": [
+    "https://sso.8x8.com/*",
+    "https://www.google-analytics.com/*",
+    "https://google-meetings-plugin.8x8.com/*",
+    "https://calendar.google.com/*",
+    "https://outlook.office365.com/*",
+    "https://outlook.live.com/*",
+    "https://outlook.office.com/*",
+    "tabs",
+    "storage"
+  ]
+}

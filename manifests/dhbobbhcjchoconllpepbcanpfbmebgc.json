@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Marking Menu for Google Chrome™",
+  "version": "0.6",
+  "description": "Allows you to navigate with pen flicks/mouse gestures.  To use, hold the middle-mouse button, select an action, and release.",
+  "icons": {
+    "16": "common/icons/16.png",
+    "32": "common/icons/32.png",
+    "48": "common/icons/48.png",
+    "128": "common/icons/128.png"
+  },
+  "background": {
+    "scripts": [
+      "chrome/tabManager.js",
+      "chrome/main.js"
+    ],
+    "persistent": false
+  },
+  "options_page": "chrome/preferences.html",
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*/*"
+      ],
+      "js": [
+        "chrome/hostAPI.js",
+        "common/imageForAction.js",
+        "common/defaultSettings.js",
+        "common/markingMenu.js",
+        "common/domActions.js"
+      ],
+      "css": [
+        "common/markingMenu.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "common/images/highlight.png",
+    "common/images/background.png",
+    "common/images/com.appsforartists.pageDown.png",
+    "common/images/com.appsforartists.newTab.png",
+    "common/images/com.appsforartists.previousPage.png",
+    "common/images/com.appsforartists.previousTab.png",
+    "common/images/com.appsforartists.pageUp.png",
+    "common/images/com.appsforartists.nextTab.png",
+    "common/images/com.appsforartists.nextPage.png",
+    "common/images/com.appsforartists.closeTab.png"
+  ],
+  "permissions": [
+    "tabs"
+  ]
+}

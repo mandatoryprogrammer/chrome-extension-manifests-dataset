@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Site Blockr",
+  "description": "This extension hides links to, and all content from, the sites you want (alpha)",
+  "version": "1.0.1",
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "notifications"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "img/icon-on.png",
+      "38": "img/icon-38-on.png"
+    },
+    "default_title": "Site Blockr is running"
+  },
+  "background": {
+    "page": "background.html",
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "js/SiteBlockr.js"
+      ],
+      "css": [
+        "css/SiteBlockr.css"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "icons": {
+    "16": "img/icon.png",
+    "32": "img/icon-38.png",
+    "48": "img/icon-64.png"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "web_accessible_resources": [
+    "img/icon-64.png"
+  ],
+  "options_page": "options.html",
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+H"
+      }
+    }
+  }
+}

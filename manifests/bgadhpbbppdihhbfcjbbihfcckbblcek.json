@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Image Analyzer",
+  "description": "View all images on a page and expose image properties, EXIF data, and one-click download. Exposed via the right-click context menu.",
+  "version": "1.0.2",
+  "manifest_version": 2,
+  "background": {
+    "scripts": [
+      "scripts/jquery/jquery-2.1.4.min.js",
+      "scripts/pixastic/pixastic.core.js",
+      "scripts/pixastic/pixastic.actions.histogram.js",
+      "scripts/pixastic/pixastic.actions.colorhistogram.js",
+      "scripts/pixastic/pixastic.jquery.js",
+      "scripts/background.js"
+    ],
+    "persistent": true
+  },
+  "icons": {
+    "16": "images/icons/16.png",
+    "48": "images/icons/48.png",
+    "128": "images/icons/128.png"
+  },
+  "permissions": [
+    "tabs",
+    "http://*/",
+    "https://*/",
+    "activeTab",
+    "contextMenus"
+  ],
+  "content_scripts": [
+    {
+      "run_at": "document_idle",
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "css/inject.css"
+      ],
+      "js": [
+        "scripts/jquery/jquery-2.1.4.min.js",
+        "scripts/exif/exif.js",
+        "scripts/fraction/fraction.js",
+        "scripts/inject.js"
+      ],
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    "scripts/jquery/jquery-2.1.4.min.map"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

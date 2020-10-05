@@ -1,0 +1,70 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "description": "Seamlessly create and manage trade requests in CarOffer.",
+  "version": "2020.9.2",
+  "short_name": "CarOffer Trade Grade",
+  "name": "CarOffer Trade Grade",
+  "manifest_version": 2,
+  "homepage_url": "https://caroffer.pearlsolutions.com",
+  "icons": {
+    "16": "caroffer-16x16.png",
+    "32": "caroffer-32x32.png",
+    "48": "caroffer-48x48.png",
+    "128": "caroffer-128x128.png"
+  },
+  "browser_action": {
+    "default_title": "CarOffer Trade Grade"
+  },
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.vauto.com/*",
+        "https://*.vauto.com/*",
+        "https://dealer.adplotmanagement.com/*",
+        "http://dealer.adplotmanagement.com/*",
+        "https://inventory.dealersocket.com/*",
+        "http://inventory.dealersocket.com/*",
+        "http://max.firstlook.biz/*",
+        "https://max.firstlook.biz/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.pearlsolutions.com/*",
+        "*://*.caroffer.com/*",
+        "*://*.showroomxpress.com/*"
+      ],
+      "js": [
+        "extensionEnabled.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "content.js"
+  ],
+  "permissions": [
+    "http://*.vauto.com/*",
+    "https://*.vauto.com/*",
+    "https://dealer.adplotmanagement.com/*",
+    "https://inventory.dealersocket.com/*",
+    "http://dealer.adplotmanagement.com/*",
+    "http://inventory.dealersocket.com/*",
+    "http://max.firstlook.biz/",
+    "activeTab",
+    "tabs",
+    "webNavigation"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

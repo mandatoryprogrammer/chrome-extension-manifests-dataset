@@ -1,0 +1,155 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "eBee- an ebay shopping enhancer",
+  "short_name": "eBee",
+  "description": "Adding helpful features to the ebay shopping experience",
+  "version": "2.3",
+  "options_page": "options.html",
+  "background": {
+    "scripts": [
+      "js/jquery-2.2.3.js",
+      "js/desktopNotifications.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "img/ebee16.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "img/ebee16.png",
+    "48": "img/ebee48.png",
+    "128": "img/ebee128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "https://ajax.googleapis.com/",
+    "tabs",
+    "<all_urls>",
+    "http://www.ebay.com/*",
+    "http://www.ebay.fr/*",
+    "http://www.ebay.de/*",
+    "http://www.ebay.co.uk/*",
+    "http://api.fixer.io/*",
+    "notifications"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.ebay.com/sch/*",
+        "http://www.ebay.fr/sch/*",
+        "http://www.ebay.de/sch/*",
+        "http://www.ebay.co.uk/sch/*"
+      ],
+      "css": [
+        "css/ebaystyle.css"
+      ],
+      "js": [
+        "js/global.js",
+        "js/jquery-2.2.3.js",
+        "js/accounting.js",
+        "js/money.js",
+        "js/currencyConversion.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://www.ebay.com/sch/*"
+      ],
+      "css": [
+        "css/ebaystyle.css"
+      ],
+      "js": [
+        "js/global.js",
+        "js/jquery-2.2.3.js",
+        "js/searchPage.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://www.ebay.com/itm/*"
+      ],
+      "css": [
+        "css/ebaystyle.css"
+      ],
+      "js": [
+        "js/global.js",
+        "js/jquery-2.2.3.js",
+        "js/itemPage.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://server-eppebuy.rhcloud.com/fbsuccess?*"
+      ],
+      "js": [
+        "js/global.js",
+        "js/jquery-2.2.3.js",
+        "js/fblogin.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://www.ebay.com/usr/*"
+      ],
+      "css": [
+        "css/ebaystyle.css"
+      ],
+      "js": [
+        "js/global.js",
+        "js/jquery-2.2.3.js",
+        "js/sellerPage.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://www.ebay.com/myb/*"
+      ],
+      "css": [
+        "css/ebaystyle.css"
+      ],
+      "js": [
+        "js/global.js",
+        "js/jquery-2.2.3.js",
+        "js/leaveFeedback.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://server-eppebuy.rhcloud.com/success?*"
+      ],
+      "css": [
+        "css/ebaystyle.css"
+      ],
+      "js": [
+        "js/global.js",
+        "js/jquery-2.2.3.js",
+        "js/signin.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://server-eppebuy.rhcloud.com/updatetoken?*"
+      ],
+      "js": [
+        "js/global.js",
+        "js/jquery-2.2.3.js",
+        "js/sendToken.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "img/pos.png",
+    "img/neg.png",
+    "img/ebee16.png"
+  ]
+}

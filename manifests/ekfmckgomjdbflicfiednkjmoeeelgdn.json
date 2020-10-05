@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "LP Task Booster",
+  "version": "1.0.3",
+  "description": "Automatically opens necessary browser tabs from Boostability's Launchpad Specialist tab to complete Onsite Implementation tasks.",
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon19.png",
+      "48": "images/icon48.png"
+    },
+    "default_title": "",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "loginCredentials.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.launchpad.boostability.com/*"
+      ],
+      "js": [
+        "lpContent.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://docs.google.com/a/boostability.com/*"
+      ],
+      "js": [
+        "formContent.js"
+      ]
+    }
+  ],
+  "options_page": "options.html",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs"
+  ]
+}

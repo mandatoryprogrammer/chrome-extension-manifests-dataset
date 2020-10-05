@@ -1,0 +1,78 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "description": "__MSG_appDescription__",
+  "version": "0.0.7",
+  "short_name": "__MSG_appShortName__",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "icons": {
+    "16": "images/icon-16.png",
+    "48": "images/CloudIcon-48.png",
+    "128": "images/CloudIcon-128.png"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://stats.pusher.com;  object-src 'self'",
+  "externally_connectable": {
+    "matches": [
+      "*://*.txtsync.com/*",
+      "*://localhost/*"
+    ]
+  },
+  "background": {
+    "page": "background/index.html",
+    "resources": [
+      "background/runtime.js",
+      "background/polyfills.js",
+      "background/styles.js",
+      "background/main.js"
+    ],
+    "persistent": true
+  },
+  "web_accessible_resources": [
+    "content-script/assets/dynamics-inject.js",
+    "content-script/assets/fonts/fontawesome/*"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "16": "images/icon-16.png",
+      "48": "images/CloudIcon-48.png",
+      "128": "images/CloudIcon-128.png"
+    },
+    "default_title": "__MSG_browserActionTitle__",
+    "default_popup": "browser-action/index.html"
+  },
+  "content_scripts": [
+    {
+      "exclude_matches": [
+        "*://app.txtsync.com/*"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "styles/contentscript.css",
+        "content-script/styles.css",
+        "content-script/assets/fonts/fontawesome/fontawesomeloader.css"
+      ],
+      "js": [
+        "content-script/assets/jquery-3.1.0.min.js",
+        "content-script/assets/contentscript.js",
+        "content-script/runtime.js",
+        "content-script/polyfills.js",
+        "content-script/main.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "nativeMessaging",
+    "notifications",
+    "storage",
+    "tabs",
+    "<all_urls>"
+  ]
+}

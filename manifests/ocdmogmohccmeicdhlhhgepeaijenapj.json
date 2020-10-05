@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "version": "0.0.825",
+  "manifest_version": 2,
+  "description": "__MSG_appDescription__",
+  "icons": {
+    "16": "images/AdobeExperienceCloud.png",
+    "128": "images/AdobeExperienceCloud.png"
+  },
+  "minimum_chrome_version": "63.0.0",
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/AdobeExperienceCloud.png",
+      "38": "images/AdobeExperienceCloud.png"
+    },
+    "default_title": "__MSG_appName__"
+  },
+  "options_page": "options.html",
+  "omnibox": {
+    "keyword": "__MSG_appName__"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "scripts/api.js",
+        "scripts/pagescript.js",
+        "scripts/contentscript.js",
+        "scripts/auditorTestsScript.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "debugger",
+    "cookies",
+    "tabs",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking",
+    "storage",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "web_accessible_resources": [
+    "app.html"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://use.typekit.net; object-src 'self'"
+}

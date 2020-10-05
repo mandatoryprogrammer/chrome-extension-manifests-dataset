@@ -1,0 +1,69 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Beump",
+  "description": "Confirm meetings with personalized e-mails.",
+  "version": "0.2.3.13",
+  "default_locale": "en",
+  "icons": {
+    "16": "icons/logo_calendar_32.png",
+    "48": "icons/logo_calendar_96.png",
+    "128": "icons/logo_calendar_256.png"
+  },
+  "permissions": [
+    "alarms",
+    "contextMenus",
+    "identity",
+    "notifications",
+    "storage",
+    "background"
+  ],
+  "oauth2": {
+    "client_id": "1076581660905-malaoalv0q5l2ikgiu6428ra9j4obo3b.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/calendar.readonly",
+      "https://www.googleapis.com/auth/gmail.send",
+      "https://www.googleapis.com/auth/gmail.metadata"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://calendar.google.com https://ssl.google-analytics.com https://www.googleapis.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://calendar.google.com/*"
+      ],
+      "js": [
+        "lib/moment+langs.min.js",
+        "jquery.js",
+        "BeumpButton.js"
+      ],
+      "css": [
+        "buttonCSS.css"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "lib/jstz-1.0.4.min.js",
+      "lib/jquery.min.js",
+      "lib/moment+langs.min.js",
+      "constants.js",
+      "options.js",
+      "utils.js",
+      "feeds.js",
+      "scheduler.js",
+      "background.js",
+      "mailman.js",
+      "accountant.js"
+    ]
+  },
+  "options_page": "options.html",
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/logo_calendar_19.png",
+      "38": "icons/logo_calendar_38.png"
+    },
+    "default_title": "BEUMP",
+    "default_popup": "browser_action.html"
+  }
+}

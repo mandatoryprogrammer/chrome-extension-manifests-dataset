@@ -1,0 +1,81 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Click by Voice",
+  "version": "0.21.2",
+  "description": "This Chrome browser extension provides support for activating links and other HTML elements using voice commands.",
+  "short_name": "CbV",
+  "homepage_url": "https://github.com/mdbridge/click-by-voice",
+  "icons": {
+    "16": "images/icon_16.png",
+    "48": "images/icon_48.png",
+    "128": "images/icon_128.png"
+  },
+  "permissions": [
+    "clipboardRead",
+    "clipboardWrite",
+    "storage"
+  ],
+  "browser_action": {
+    "default_title": "Click by Voice",
+    "default_icon": {
+      "38": "images/icon_38.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Space"
+      },
+      "description": "Activate (e.g., click or focus) a hint"
+    },
+    "blur": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Comma"
+      },
+      "description": "Blur (remove keyboard focus from elements)"
+    },
+    "execute_command_from_clipboard": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Period"
+      },
+      "description": "Activate (e.g., click or focus) a hint specified by clipboard"
+    }
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file://*/*"
+      ],
+      "css": [
+        "show_hints.css"
+      ],
+      "js": [
+        "jquery-3.0.0.min.js",
+        "utilities.js",
+        "Dom_walk.js",
+        "activate.js",
+        "add_hint.js",
+        "find_hint.js",
+        "hints.js",
+        "content_script.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "jquery-3.0.0.min.js",
+      "defaults.js",
+      "background-utilities.js",
+      "background.js"
+    ]
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  }
+}

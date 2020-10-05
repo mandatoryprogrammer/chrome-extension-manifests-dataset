@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "WTVid Audio Description",
+  "description": "Audio Description for native videos.",
+  "version": "1.0",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/jquery-3.2.1.min.js",
+        "js/scenechangedetect.js",
+        "js/config.js",
+        "content/azure.js",
+        "content/main.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "content/azure.js",
+      "js/config.js",
+      "js/background.js"
+    ]
+  },
+  "commands": {
+    "toggle-ad": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+5",
+        "mac": "Command+Shift+5"
+      },
+      "description": "Toggle Audio Description on videos",
+      "global": true
+    }
+  },
+  "browser_action": {
+    "default_popup": "popup/index.html",
+    "default_icon": "popup/icon.png"
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs",
+    "http://*/",
+    "https://*/"
+  ],
+  "icons": {
+    "32": "icons/icon32.png",
+    "128": "icons/icon.png"
+  }
+}

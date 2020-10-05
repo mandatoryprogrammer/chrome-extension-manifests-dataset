@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Qantas Shopping Points-Prompter",
+  "version": "1.0.2",
+  "manifest_version": 2,
+  "description": "Browser extension for Qantas shopping",
+  "icons": {
+    "16": "assets/icons/default_16x16.png",
+    "24": "assets/icons/default_24x24.png",
+    "32": "assets/icons/default_32x32.png",
+    "128": "assets/icons/default_128x128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content/content.js"
+      ],
+      "all_frames": false,
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.google.com/*"
+      ],
+      "js": [
+        "content_google/content_google.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background/background.js",
+      "hotreload/hotreload.js"
+    ]
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "cookies",
+    "webRequest",
+    "<all_urls>"
+  ],
+  "options_ui": {
+    "page": "options/index.html"
+  },
+  "web_accessible_resources": [
+    "assets/icons/offer_available_32x32.png",
+    "assets/*.woff"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "16": "assets/icons/default_16x16.png",
+      "24": "assets/icons/default_24x24.png",
+      "32": "assets/icons/default_32x32.png",
+      "128": "assets/icons/default_128x128.png"
+    },
+    "default_title": "Qantas Shopping",
+    "default_popup": "popup/index.html"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "虎插 - 虎扑论坛助手插件",
+  "version": "0.4",
+  "description": "Customise your Hupu experience",
+  "icons": {
+    "30": "images/icon.png",
+    "128": "images/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "tabs",
+    "storage"
+  ],
+  "page_action": {
+    "default_icon": "images/icon.png",
+    "default_title": "Hupu Extension",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://bbs.hupu.com/*",
+        "https://bbs.hupu.com/*"
+      ],
+      "js": [
+        "lib/jquery-1.11.2.min.js",
+        "filter.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

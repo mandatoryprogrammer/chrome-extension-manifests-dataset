@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Lookup",
+  "description": "This extension helps you to lookup anything in Wikipedia , Dict.cc or Arch Linux Wiki without interrupting your browsing experience.",
+  "options_page": "options.html",
+  "version": "0.75.5.1",
+  "permissions": [
+    "tabs",
+    "storage",
+    "http://*/",
+    "https://*/"
+  ],
+  "icons": {
+    "128": "icons/logo128x128.png",
+    "256": "icons/logo256x256.png",
+    "512": "icons/logo512x512.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/logo512x512.png",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/",
+        "https://*/"
+      ],
+      "js": [
+        "content-script.js",
+        "query_functions.js",
+        "search_engines.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "icons/*",
+    "infobox.html"
+  ],
+  "background": {
+    "scripts": [
+      "event-page.js"
+    ],
+    "persistent": false
+  }
+}

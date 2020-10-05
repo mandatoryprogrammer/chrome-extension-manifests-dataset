@@ -1,0 +1,468 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "FantasyPros: Win your Fantasy League",
+  "short_name": "FantasyPros",
+  "description": "Get expert advice for your fantasy team from any website",
+  "version": "8.5.0",
+  "manifest_version": 2,
+  "icons": {
+    "48": "skin/FP-logo-square-48.png",
+    "128": "skin/FP-logo-square-128.png"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "browser_action": {
+    "default_icon": "skin/FP-logo-square-48.png",
+    "default_title": "FantasyPros"
+  },
+  "permissions": [
+    "tabs",
+    "contextMenus",
+    "http://*/*",
+    "https://*/*",
+    "storage"
+  ],
+  "background": {
+    "page": "content/background.html"
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "lib/jquery.min.js",
+        "content/pflib.js",
+        "content/player-card.js",
+        "content/contentscripts.js"
+      ],
+      "css": [
+        "content/extension_panel.css",
+        "content/team-icons.css",
+        "content/player-cards.css",
+        "content/player-cards-extension.css"
+      ]
+    },
+    {
+      "matches": [
+        "http://www.fleaflicker.com/nfl/leagues/*",
+        "https://www.fleaflicker.com/nfl/leagues/*",
+        "http://fleaflicker.com/nfl/leagues/*",
+        "https://fleaflicker.com/nfl/leagues/*",
+        "https://sports.yahoo.com/nfl/*",
+        "https://www.fantasyguru.com/*",
+        "https://www.nfl.com/*",
+        "http://football.razzball.com/*",
+        "https://dynastyleaguefootball.com/*",
+        "https://www.cbssports.com/nfl/*",
+        "http://*.footballguys.com/*",
+        "https://www.profootballfocus.com/*",
+        "http://www.fftoday.com/*",
+        "http://www.footballoutsiders.com/*",
+        "http://profootballtalk.nbcsports.com/*",
+        "http://www.rotoworld.com/*/nfl/*",
+        "http://www.rotoworld.com/*/football/*",
+        "http://www.profootballweekly.com/*",
+        "https://www.rotowire.com/football/*",
+        "http://thehuddle.com/*",
+        "http://www.espn.com/nfl/*",
+        "https://www.cbssports.com/fantasy/football/*",
+        "https://www.fantasysharks.com/*",
+        "http://www.brunoboys.net/*",
+        "http://www.idpguru.com/*",
+        "http://www.draftsharks.com/*",
+        "http://walterfootball.com/*",
+        "https://fantasyfootballcalculator.com/*",
+        "https://www.fantasyfootballnerd.com/*"
+      ],
+      "js": [
+        "content/autoparsenfl.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://football.fantasysports.yahoo.com/f1/*",
+        "https://football.fantasysports.yahoo.com/f1/*"
+      ],
+      "js": [
+        "content/players_ids_nfl.js",
+        "content/enhance_yahoo_nfl.js",
+        "content/autoparsenfl.js"
+      ],
+      "css": [
+        "content/fp_enhanced.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://fantasy.espn.com/football/team*",
+        "https://fantasy.espn.com/football/players/add*",
+        "https://fantasy.espn.com/football/boxscore*",
+        "https://fantasy.espn.com/football/rosterfix*",
+        "https://fantasy.espn.com/football/league*",
+        "https://fantasy.espn.com/football/league/settings*",
+        "https://fantasy.espn.com/football/tradereview*",
+        "http://games.espn.com/ffl/watchlist*",
+        "http://games.espn.com/ffl/tools/waiverorder*",
+        "http://games.espn.com/ffl/playertable/prebuilt/freeagency*"
+      ],
+      "js": [
+        "content/players_ids_nfl.js",
+        "content/enhance_espn_nfl.js"
+      ],
+      "css": [
+        "content/fp_enhanced.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.espn.com/fantasy/football/",
+        "https://www.espn.com/fantasy/baseball/",
+        "https://www.espn.com/fantasy/basketball/"
+      ],
+      "js": [
+        "content/import_espn_leagues.js"
+      ],
+      "css": [
+        "content/fp_enhanced.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://fantasy.espn.com/football/waitingroom*",
+        "https://fantasy.espn.com/baseball/waitingroom*",
+        "https://fantasy.espn.com/basketball/waitingroom*"
+      ],
+      "js": [
+        "content/mock_assistant_espn.js"
+      ],
+      "css": [
+        "content/fp_enhanced.css"
+      ]
+    },
+    {
+      "matches": [
+        "http://fantasy.nfl.com/league/*",
+        "https://fantasy.nfl.com/league/*"
+      ],
+      "js": [
+        "content/players_ids_nfl.js",
+        "content/enhance_ndc_nfl.js",
+        "content/autoparsenfl.js"
+      ],
+      "css": [
+        "content/fp_enhanced.css"
+      ]
+    },
+    {
+      "matches": [
+        "http://*.football.cbssports.com/*",
+        "https://*.football.cbssports.com/*"
+      ],
+      "js": [
+        "content/players_ids_nfl.js",
+        "content/enhance_cbs_nfl.js",
+        "content/autoparsenfl.js"
+      ],
+      "css": [
+        "content/fp_enhanced.css"
+      ]
+    },
+    {
+      "matches": [
+        "http://*.myfantasyleague.com/*",
+        "https://*.myfantasyleague.com/*"
+      ],
+      "js": [
+        "content/players_ids_nfl.js",
+        "content/enhance_mfl_nfl.js",
+        "content/autoparsenfl.js"
+      ],
+      "css": [
+        "content/fp_enhanced.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://sleeper.app/leagues/*"
+      ],
+      "js": [
+        "content/players_ids_nfl.js",
+        "content/enhance_sleeper_nfl.js",
+        "content/autoparsenfl.js"
+      ],
+      "css": [
+        "content/fp_enhanced.css"
+      ]
+    },
+    {
+      "matches": [
+        "http://localhost:8080/advice_nfl/submitLineupToSleeper.jsp*",
+        "http://*.fantasypros.com/advice_nfl/submitLineupToSleeper.jsp*",
+        "https://*.fantasypros.com/advice_nfl/submitLineupToSleeper.jsp*"
+      ],
+      "js": [
+        "content/submit_sleeper.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://baseball.fantasysports.yahoo.com/draftclient/b1*",
+        "https://baseball.fantasysports.yahoo.com/betadraftclient/b1*"
+      ],
+      "js": [
+        "lib/jquery-ui.min.js",
+        "lib/font-awesome.min.js",
+        "content/players_ids_mlb.js",
+        "content/enhance_yahoo_draft.js"
+      ],
+      "css": [
+        "lib/jquery-ui.min.css",
+        "content/fp_enhanced.css",
+        "content/side_assistant.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://football.fantasysports.yahoo.com/draftclient/f1*",
+        "https://football.fantasysports.yahoo.com/betadraftclient/f1*"
+      ],
+      "js": [
+        "lib/jquery-ui.min.js",
+        "lib/font-awesome.min.js",
+        "content/players_ids_nfl.js",
+        "content/enhance_yahoo_draft.js"
+      ],
+      "css": [
+        "lib/jquery-ui.min.css",
+        "content/fp_enhanced.css",
+        "content/side_assistant.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://basketball.fantasysports.yahoo.com/draftclient/nba*",
+        "https://basketball.fantasysports.yahoo.com/betadraftclient/nba*"
+      ],
+      "js": [
+        "lib/jquery-ui.min.js",
+        "lib/font-awesome.min.js",
+        "content/players_ids_nba.js",
+        "content/enhance_yahoo_draft.js"
+      ],
+      "css": [
+        "lib/jquery-ui.min.css",
+        "content/fp_enhanced.css",
+        "content/side_assistant.css"
+      ]
+    },
+    {
+      "matches": [
+        "http://fantasy.espn.com/baseball/draft*",
+        "https://fantasy.espn.com/baseball/draft*"
+      ],
+      "js": [
+        "lib/jquery-ui.min.js",
+        "lib/font-awesome.min.js",
+        "content/players_ids_mlb.js",
+        "content/enhance_espn_draft.js"
+      ],
+      "css": [
+        "lib/jquery-ui.min.css",
+        "content/fp_enhanced.css",
+        "content/side_assistant.css"
+      ]
+    },
+    {
+      "matches": [
+        "http://fantasy.espn.com/football/draft*",
+        "https://fantasy.espn.com/football/draft*"
+      ],
+      "js": [
+        "lib/jquery-ui.min.js",
+        "lib/font-awesome.min.js",
+        "content/players_ids_nfl.js",
+        "content/enhance_espn_draft.js"
+      ],
+      "css": [
+        "lib/jquery-ui.min.css",
+        "content/fp_enhanced.css",
+        "content/side_assistant.css"
+      ]
+    },
+    {
+      "matches": [
+        "http://fantasy.espn.com/basketball/draft*",
+        "https://fantasy.espn.com/basketball/draft*"
+      ],
+      "js": [
+        "lib/jquery-ui.min.js",
+        "lib/font-awesome.min.js",
+        "content/players_ids_nba.js",
+        "content/enhance_espn_draft.js"
+      ],
+      "css": [
+        "lib/jquery-ui.min.css",
+        "content/fp_enhanced.css",
+        "content/side_assistant.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://fantasy.nfl.com/draftcenter/draftclient*",
+        "https://fantasy.nfl.com/league/*/draftclient*",
+        "https://fantasy.nfl.com/draftclient*"
+      ],
+      "js": [
+        "lib/jquery-ui.min.js",
+        "lib/font-awesome.min.js",
+        "content/players_ids_nfl.js",
+        "content/enhance_ndc_draft.js"
+      ],
+      "css": [
+        "lib/jquery-ui.min.css",
+        "content/fp_enhanced.css",
+        "content/side_assistant.css"
+      ]
+    },
+    {
+      "matches": [
+        "http://baseball.fantasysports.yahoo.com/b1/*",
+        "https://baseball.fantasysports.yahoo.com/b1/*",
+        "http://fantasy.espn.com/baseball/*",
+        "http://*.baseball.cbssports.com/*",
+        "https://*.baseball.cbssports.com/*"
+      ],
+      "js": [
+        "content/autoparsemlb.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://localhost:3000/d/*",
+        "http://localhost:8080/d/*",
+        "http://*.fantasypros.com/d/*",
+        "https://*.fantasypros.com/d/*"
+      ],
+      "js": [
+        "content/extension_assistant.js"
+      ],
+      "css": [
+        "content/fp_enhanced.css"
+      ]
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "http://localhost:3000/d/*mockDraftEspn*",
+        "http://localhost:3000/d/*liveDraftEspn*",
+        "http://localhost:8080/d/*mockDraftEspn*",
+        "http://localhost:8080/d/*liveDraftEspn*",
+        "http://*.fantasypros.com/d/*mockDraftEspn*",
+        "http://*.fantasypros.com/d/*liveDraftEspn*",
+        "https://*.fantasypros.com/d/*mockDraftEspn*",
+        "https://*.fantasypros.com/d/*liveDraftEspn*",
+        "http://localhost:3000/d/*mockDraftYahoo*",
+        "http://localhost:3000/d/*liveDraftYahoo*",
+        "http://localhost:8080/d/*mockDraftYahoo*",
+        "http://localhost:8080/d/*liveDraftYahoo*",
+        "http://*.fantasypros.com/d/*mockDraftYahoo*",
+        "http://*.fantasypros.com/d/*liveDraftYahoo*",
+        "https://*.fantasypros.com/d/*mockDraftYahoo*",
+        "https://*.fantasypros.com/d/*liveDraftYahoo*",
+        "http://localhost:3000/d/*mockDraftNdc*",
+        "http://localhost:3000/d/*liveDraftNdc*",
+        "http://localhost:8080/d/*mockDraftNdc*",
+        "http://localhost:8080/d/*liveDraftNdc*",
+        "http://*.fantasypros.com/d/*mockDraftNdc*",
+        "http://*.fantasypros.com/d/*liveDraftNdc*",
+        "https://*.fantasypros.com/d/*mockDraftNdc*",
+        "https://*.fantasypros.com/d/*liveDraftNdc*",
+        "http://localhost:3000/d/side.jsp*",
+        "http://localhost:8080/d/side.jsp*",
+        "http://*.fantasypros.com/d/side.jsp*",
+        "https://*.fantasypros.com/d/side.jsp*"
+      ],
+      "js": [
+        "content/make_draft_pick.js"
+      ]
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "http://localhost:3000/d/side.jsp*",
+        "http://localhost:8080/d/side.jsp*",
+        "http://*.fantasypros.com/d/side.jsp*",
+        "https://*.fantasypros.com/d/side.jsp*"
+      ],
+      "js": [
+        "content/side_assistant.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "skin/FP-logo-rounded.png",
+    "skin/FP-logo-square-128.png",
+    "skin/FP-logo-square-48.png",
+    "skin/SSA-check-circle-o.png",
+    "skin/SSA-failure.png",
+    "skin/add-icon-disabled.svg",
+    "skin/add-icon.svg",
+    "skin/add.png",
+    "skin/add_hover.png",
+    "skin/angle-right.svg",
+    "skin/autopilot-plane.png",
+    "skin/back-arrow.png",
+    "skin/check-circle.png",
+    "skin/clipboard-icon.svg",
+    "skin/close.png",
+    "skin/dw-logo.svg",
+    "skin/loading-fp.gif",
+    "skin/loading.gif",
+    "skin/mlb_icon.png",
+    "skin/nba_icon.png",
+    "skin/nfl_icon.png",
+    "skin/premium-advice.png",
+    "skin/refresh.png",
+    "skin/settings.png",
+    "skin/star-blue.png",
+    "skin/star-gray.png",
+    "skin/star.png",
+    "skin/stargold.png",
+    "skin/starvoid.png",
+    "skin/toggle-off.png",
+    "skin/toggle-on.png",
+    "skin/trash-icon.svg",
+    "skin/trophy-orange.png",
+    "skin/user-icon.png",
+    "skin/vert_arrow-fp.png",
+    "content/pflib.js",
+    "content/popupCommunication-inject.js"
+  ],
+  "commands": {
+    "insert-nfl-player-icons": {
+      "suggested_key": {
+        "default": "Alt+N",
+        "windows": "Alt+N",
+        "mac": "Alt+N"
+      },
+      "description": "Insert NFL Player Icons"
+    },
+    "insssssss": {
+      "suggested_key": {
+        "default": "Alt+B",
+        "windows": "Alt+B",
+        "mac": "Alt+B"
+      },
+      "description": "Insert NBA Player Icons"
+    },
+    "insert-mlb-player-icons": {
+      "suggested_key": {
+        "default": "Alt+M",
+        "windows": "Alt+M",
+        "mac": "Alt+M"
+      },
+      "description": "Insert MLB Player Icons"
+    }
+  }
+}

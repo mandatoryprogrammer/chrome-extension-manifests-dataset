@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "AMZ Evaluator",
+  "description": "Amazon keyword and product evaluation tool.",
+  "version": "1.0.22",
+  "icons": {
+    "128": "icon-128.png"
+  },
+  "page_action": {
+    "default_icon": "icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.amazon.com/*",
+        "*://smile.amazon.com/*",
+        "*://www.amazon.co.uk/*",
+        "*://www.amazon.ca/*"
+      ],
+      "js": [
+        "js/vendor.js",
+        "js/content_script.js"
+      ]
+    }
+  ],
+  "background": {
+    "page": "background.html"
+  },
+  "permissions": [
+    "storage",
+    "*://www.amazon.com/*",
+    "*://smile.amazon.com/*",
+    "*://www.amazon.co.uk/*",
+    "*://www.amazon.ca/*",
+    "https://api.gumroad.com/"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "web_accessible_resources": [
+    "popup/*"
+  ],
+  "sandbox": {
+    "pages": [
+      "sandbox.html"
+    ]
+  },
+  "incognito": "split"
+}

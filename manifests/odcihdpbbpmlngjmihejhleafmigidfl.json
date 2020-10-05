@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Seguro contra Spoilers Previsul",
+  "version": "0.0.3",
+  "manifest_version": 2,
+  "description": "Esta extensão bloqueia os spoilers do Facebook",
+  "short_name": "Seguro contra Spoilers",
+  "homepage_url": "http://www.digitalsource.com.br",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "page": "src/bg/background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "Seguro contra Spoilers",
+    "default_popup": "src/browser_action/browser_action.html"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "http://site1393442785.hospedagemdesites.ws/previsul/",
+    "http://fonts.googleapis.com/",
+    "https://fonts.googleapis.com/",
+    "https://ajax.googleapis.com/",
+    "http://www.facebook.com/",
+    "https://www.facebook.com/",
+    "http://www.facebook.com.br/",
+    "https://www.facebook.com.br/"
+  ],
+  "web_accessible_resources": [
+    "img/bg-blocked.jpg",
+    "img/share-btn.png",
+    "img/desbloqueie-btn.png"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.facebook.com/*",
+        "https://www.facebook.com/*"
+      ],
+      "css": [
+        "src/inject/inject.css"
+      ]
+    },
+    {
+      "matches": [
+        "http://www.facebook.com/*",
+        "https://www.facebook.com/*"
+      ],
+      "js": [
+        "src/inject/jquery.min.js",
+        "src/inject/inject.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

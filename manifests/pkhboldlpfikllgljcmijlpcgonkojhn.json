@@ -1,0 +1,132 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "short_name": "Online.io",
+  "name": "Online.io - Cyber Security & Privacy",
+  "description": "Online.io Cybersecurity Swiss Knife Tool - Block Ads & Trackers, Free VPN, Unblock Websites, Malware Protection & Encrypt Traffic!",
+  "version": "1.0.1",
+  "browser_action": {
+    "default_popup": "index.html",
+    "default_title": "Online.io - Cyber Security & Privacy",
+    "default_icon": {
+      "16": "IO.png",
+      "48": "IO.png",
+      "96": "IO.png",
+      "128": "IO.png"
+    }
+  },
+  "options_ui": {
+    "page": "settings.html",
+    "open_in_tab": true
+  },
+  "permissions": [
+    "https://*.online.io/",
+    "activeTab",
+    "tabs",
+    "https://www.google.com.ua/_/chrome/*",
+    "cookies",
+    "<all_urls>",
+    "notifications",
+    "http://*/*",
+    "https://*/*",
+    "*://*/*",
+    "storage",
+    "bookmarks",
+    "webRequest",
+    "webRequestBlocking",
+    "webNavigation",
+    "privacy",
+    "contextMenus",
+    "unlimitedStorage"
+  ],
+  "icons": {
+    "16": "IO.png",
+    "48": "IO.png",
+    "96": "IO.png",
+    "128": "IO.png"
+  },
+  "web_accessible_resources": [
+    "settings.html",
+    "/web_accessible_resources/*"
+  ],
+  "background": {
+    "scripts": [
+      "background.js",
+      "js/console.js",
+      "lib/lz4/lz4-block-codec-any.js",
+      "lib/punycode.js",
+      "lib/publicsuffixlist/publicsuffixlist.js",
+      "js/vapi.js",
+      "js/vapi-common.js",
+      "js/vapi-background.js",
+      "js/vapi-webrequest.js",
+      "js/background.js",
+      "js/traffic.js",
+      "js/hntrie.js",
+      "js/strie.js",
+      "js/utils.js",
+      "js/uritools.js",
+      "js/lz4.js",
+      "js/cachestorage.js",
+      "js/assets.js",
+      "js/filtering-context.js",
+      "js/redirect-engine.js",
+      "js/dynamic-net-filtering.js",
+      "js/static-net-filtering.js",
+      "js/url-net-filtering.js",
+      "js/static-ext-filtering.js",
+      "js/cosmetic-filtering.js",
+      "js/scriptlet-filtering.js",
+      "js/html-filtering.js",
+      "js/hnswitches.js",
+      "js/ublock.js",
+      "js/messaging.js",
+      "js/storage.js",
+      "js/logger.js",
+      "js/pagestore.js",
+      "js/tab.js",
+      "js/text-encode.js",
+      "js/contextmenu.js",
+      "js/reverselookup.js",
+      "js/start.js",
+      "js/commands.js",
+      "correctEngine.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "guardian.min.js",
+        "content.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "/js/vapi.js",
+        "/js/vapi-client.js",
+        "/js/contentscript.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": false,
+      "js": [
+        "/js/scriptlets/subscriber.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

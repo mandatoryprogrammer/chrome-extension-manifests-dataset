@@ -1,0 +1,77 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon-19.png",
+      "38": "images/icon-38.png"
+    },
+    "default_title": "__MSG_extension_default_title__"
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "scripts/content/preload.js"
+      ],
+      "match_about_blank": true,
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "scripts/content/postload.js"
+      ],
+      "match_about_blank": true,
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "scripts/content/idle.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "default_locale": "en_US",
+  "description": "__MSG_extension_description__",
+  "icons": {
+    "128": "images/icon-128.png",
+    "19": "images/context_icon-19.png"
+  },
+  "manifest_version": 2,
+  "minimum_chrome_version": "33",
+  "name": "__MSG_extension_name__",
+  "options_page": "options.html",
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "bookmarks",
+    "http://*/*",
+    "https://*/*",
+    "storage",
+    "unlimitedStorage",
+    "contextMenus"
+  ],
+  "short_name": "__MSG_extension_short_name__",
+  "version": "1.0.2",
+  "web_accessible_resources": [
+    "images/*.png"
+  ]
+}

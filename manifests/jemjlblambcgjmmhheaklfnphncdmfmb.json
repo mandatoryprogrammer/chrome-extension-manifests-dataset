@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Zöff Remote",
+  "short-name": "zoff-remote",
+  "description": "This extension is for remotecontrolling a Zöff (http://zoff.no) channel.",
+  "version": "1.8",
+  "background": {
+    "scripts": [
+      "js/lib/jquery.min.js",
+      "js/lib/socket.io-1.2.0.js",
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "images/favicon.png",
+    "default_popup": "index.html",
+    "default_title": "Control a channel!"
+  },
+  "icons": {
+    "128": "images/icon-128.png",
+    "16": "images/icon-16.png",
+    "48": "images/icon-48.png"
+  },
+  "homepage_url": "http://zoff.no/",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://zoff.no/remote/*"
+      ],
+      "js": [
+        "js/inject.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "http://zoff.no/remote/*",
+    "background"
+  ],
+  "commands": {
+    "next_song": {
+      "suggested_key": {
+        "default": "MediaNextTrack"
+      },
+      "description": "Next Song",
+      "global": true
+    },
+    "play": {
+      "suggested_key": {
+        "default": "MediaPlayPause"
+      },
+      "description": "Play song",
+      "global": true
+    },
+    "pause": {
+      "suggested_key": {
+        "default": "MediaStop"
+      },
+      "description": "Pause song",
+      "global": true
+    }
+  }
+}

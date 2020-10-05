@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Sous",
+  "version": "1.2",
+  "description": "Your personal grocery shopping assistant",
+  "permissions": [
+    "tabs",
+    "storage",
+    "http://*/*",
+    "https://*/*",
+    "http://drsous.herokuapp.com/*",
+    "https://drsous.herokuapp.com/*",
+    "cookies"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "icon.png"
+    },
+    "default_title": "Sous",
+    "default_popup": "./Popup/popup.html"
+  },
+  "web_accessible_resources": [
+    "./Dependencies/semantic.min.css",
+    "./Dependencies/semantic.min.js"
+  ],
+  "background": {
+    "scripts": [
+      "./Dependencies/jquery.min.js",
+      "./BackgroundScripts/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://allrecipes.com/*",
+        "https://allrecipes.com/*"
+      ],
+      "js": [
+        "./ingredientsData.js",
+        "./Dependencies/jaro-winkler.js",
+        "./ContentScripts/utilityFuncs.js",
+        "./ContentScripts/cs.js"
+      ],
+      "css": [
+        "./Dependencies/semantic.min.css",
+        "./Dependencies/semantic.min.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "manifest_version": 2
+}

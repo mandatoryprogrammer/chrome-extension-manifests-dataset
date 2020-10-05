@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Grace Hopper 2018 Calendar View",
+  "version": "0.1.6",
+  "description": "Make the Grace Hopper 2018 schedule easier to visualize!",
+  "permissions": [
+    "storage",
+    "declarativeContent",
+    "activeTab"
+  ],
+  "background": {
+    "scripts": [
+      "./src/background.js"
+    ],
+    "persistent": false
+  },
+  "page_action": {
+    "default_popup": "./src/popup.html",
+    "default_icon": "images/gh_logo.png"
+  },
+  "icons": {
+    "16": "images/gh_logo.png",
+    "32": "images/gh_logo.png",
+    "48": "images/gh_logo.png",
+    "128": "images/gh_logo.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.cvent.com/events/*",
+        "https://www.cvent.com/events/*"
+      ],
+      "js": [
+        "./libraries/jquery.min.js",
+        "./libraries/vue.min.js",
+        "./libraries/bootstrap.min.js",
+        "./src/chrome_helper.js"
+      ],
+      "css": [
+        "./libraries/bootstrap.min.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "/src/index.html"
+  ],
+  "manifest_version": 2
+}

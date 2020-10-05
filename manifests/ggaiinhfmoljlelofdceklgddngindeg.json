@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com https://www.google-analytics.com/analytics.js https://apis.google.com https://www.google.com https://script.google.com https://script.googleusercontent.com 'unsafe-eval';frame-src https://www.youtube.com; object-src 'self'",
+  "name": "SweetCarts for NumiKids",
+  "version": "1.6.0",
+  "short_name": "SweetCarts for NumiKids",
+  "manifest_version": 2,
+  "description": "SweetCarts for NumiKids",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_title": "SweetCarts",
+    "default_popup": "home1.html"
+  },
+  "icons": {
+    "128": "icon.png"
+  },
+  "permissions": [
+    "https://numikids.com/*",
+    "http://sweetcartsclub.com/*",
+    "https://sweetcartsclub.com/*"
+  ],
+  "web_accessible_resources": [
+    "csv/*.csv"
+  ],
+  "background": {
+    "scripts": [
+      "js/aes.js",
+      "js/pbkdf2.js",
+      "js/localStorage.service.js",
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.numikids.com/*",
+        "http://www.numikids.com/*"
+      ],
+      "js": [
+        "js/jquery-3.1.1.min.js",
+        "js/numikids.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://checkout.us.shopifycs.com/*",
+        "http://checkout.us.shopifycs.com/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "js/jquery-3.1.1.min.js",
+        "js/paymentPage.js"
+      ]
+    }
+  ],
+  "oauth2": {
+    "client_id": "696763237280-bkfouv0030la6l9t2g1elim04no836fq.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/drive"
+    ]
+  }
+}

@@ -1,0 +1,205 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "homepage_url": "http://www.worldinternetacademy.com/",
+  "name": "WP E-Comm Pro",
+  "permissions": [
+    "contextMenus",
+    "tabs",
+    "storage",
+    "cookies",
+    "webNavigation",
+    "*://*/*",
+    "webRequest",
+    "webRequestBlocking",
+    "notifications",
+    "<all_urls>"
+  ],
+  "version": "2.5.6.1",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "*://*.aliexpress.com/"
+      ],
+      "js": [
+        "js/common.min.js",
+        "js/page_add_order.min.js"
+      ],
+      "css": [
+        "js/css/page_add_order.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://trade.aliexpress.com/orderList.htm*"
+      ],
+      "js": [
+        "js/common.min.js",
+        "js/p_orderList.min.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "js/common.min.js",
+        "js/iframe.min.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/common.min.js",
+        "js/content_ali_pages.min.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://*.aliexpress.com/*category/*",
+        "https://*.aliexpress.com/*category/*",
+        "https://*.aliexpress.com/*SearchText=*",
+        "http://*.aliexpress.com/*SearchText=*",
+        "*://*.aliexpress.com/af/*"
+      ],
+      "js": [
+        "js/common.min.js",
+        "js/content_ali_category.min.js"
+      ],
+      "css": [
+        "js/css/common.css",
+        "js/css/content_ali_category.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*/wp-login.php?action=oauth1_authorize&oauth_token=*"
+      ],
+      "js": [
+        "js/common.min.js",
+        "js/oauth1_authorize.min.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://*.aliexpress.com/item/*",
+        "https://*.aliexpress.com/item/*",
+        "http://*.aliexpress.com/store/*",
+        "https://*.aliexpress.com/store/*"
+      ],
+      "js": [
+        "js/common.min.js",
+        "js/content_ali_product.min.js"
+      ],
+      "css": [
+        "css/content.min.css",
+        "css/skin.min.css",
+        "js/css/common.css",
+        "js/css/content_ali_product.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://shoppingcart.aliexpress.com/order/payOnlineSuccess.htm*",
+        "*://shoppingcart.aliexpress.com/order/pay-online-success.htm*",
+        "*://shoppingcart.aliexpress.com/buynow/payOnlineSuccess.htm*",
+        "*://shoppingcart.aliexpress.com/buynow/pay-online-success.htm*",
+        "*://shoppingcart.aliexpress.com/order/payOnlineFailure.htm*",
+        "*://shoppingcart.aliexpress.com/order/pay-online-failure.htm*",
+        "*://shoppingcart.aliexpress.com/buynow/payOnlineFailure.htm*",
+        "*://shoppingcart.aliexpress.com/buynow/pay-online-failure.htm*"
+      ],
+      "js": [
+        "js/common.min.js",
+        "js/pay_online_success.min.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://icashier.alipay.com/payment/checkout.htm?orderId=*"
+      ],
+      "js": [
+        "js/common.min.js",
+        "js/pay_online_success_alipay.min.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://icashier.alipay.com/payment/payment-result.htm?orderId=*"
+      ],
+      "js": [
+        "js/common.min.js",
+        "js/pay_online_success_alipay_result.min.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://shoppingcart.aliexpress.com/*"
+      ],
+      "exclude_matches": [
+        "*://shoppingcart.aliexpress.com/order/payOnlineSuccess*",
+        "*://shoppingcart.aliexpress.com/order/pay-online-success*"
+      ],
+      "js": [
+        "js/common.min.js",
+        "js/content_shoppingcart.min.js"
+      ],
+      "css": [
+        "js/css/common.css",
+        "js/css/content_shoppingcart.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "*://*.aliexpress.com/"
+      ],
+      "js": [
+        "js/common.min.js",
+        "js/content_import_page.min.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "description": "Extension for WP E-Comm Pro plugin. Import products from AliExpress to your Dropship store directly.",
+  "icons": {
+    "128": "img/imageinfo-128.png",
+    "16": "img/imageinfo-16.png",
+    "48": "img/imageinfo-48.png"
+  },
+  "browser_action": {
+    "default_title": "WP E-Comm Pro",
+    "default_icon": "img/imageinfo-16.png",
+    "default_popup": "popup.html"
+  },
+  "web_accessible_resources": [
+    "getFrameId",
+    "fonts/*",
+    "js/*",
+    "img/*"
+  ]
+}

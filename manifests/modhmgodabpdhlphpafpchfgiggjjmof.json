@@ -1,0 +1,83 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_extName__",
+  "homepage_url": "http://browsy.earth/",
+  "description": "__MSG_appDesc__",
+  "default_locale": "en",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "icons": {
+    "16": "icons/16w/browsy-logo-16.png",
+    "19": "icons/19w/browsy-logo-19.png",
+    "38": "icons/38w/browsy-logo-38.png",
+    "48": "icons/48w/browsy-logo-48.png",
+    "128": "icons/128w/browsy-logo-128.png"
+  },
+  "web_accessible_resources": [
+    "icons/*",
+    "content_scripts/*",
+    "browsy-partner-notification.html"
+  ],
+  "permissions": [
+    "storage",
+    "webNavigation",
+    "tabs",
+    "*://*/*",
+    "*://localhost/*",
+    "<all_urls>"
+  ],
+  "browser_action": {
+    "icons": {
+      "16": "icons/16w/browsy-logo-16.png",
+      "19": "icons/19w/browsy-logo-19.png",
+      "38": "icons/38w/browsy-logo-38.png",
+      "48": "icons/48w/browsy-logo-48.png",
+      "128": "icons/128w/browsy-logo-128.png"
+    },
+    "default_title": "Browsy",
+    "browser_style": true,
+    "default_popup": "popup/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "content_scripts/google.js"
+      ],
+      "css": [
+        "css/google.css"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true,
+      "matches": [
+        "*://*/*"
+      ],
+      "include_globs": [
+        "*://www.google.*/*",
+        "https://www.google.*/*"
+      ]
+    },
+    {
+      "js": [
+        "content_scripts/all.js"
+      ],
+      "css": [
+        "css/all.css"
+      ],
+      "matches": [
+        "*://*/*"
+      ],
+      "run_at": "document_end",
+      "exclude_globs": [
+        "*://www.google.*/*",
+        "*://localhost/*"
+      ]
+    }
+  ],
+  "version": "1.1.31"
+}

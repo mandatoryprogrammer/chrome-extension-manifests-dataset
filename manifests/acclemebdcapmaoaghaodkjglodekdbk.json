@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Aliexpress Dropshipping Assistant",
+  "description": "Dropship Products from aliexpress.com in 1-Click.",
+  "version": "1.5.14",
+  "browser_action": {
+    "default_icon": "images/icon.png",
+    "default_title": "Aliexpress Dropshipping Assistant | CEDCommerce",
+    "default_popup": "html/shipping.html"
+  },
+  "permissions": [
+    "notifications",
+    "downloads",
+    "storage",
+    "tabs",
+    "https://aliexpress.com/*",
+    "https://bigcommerce.cedcommerce.com/*"
+  ],
+  "short_name": "DropShip Aliexpress Products to your BigCommerce store in 1-Click.",
+  "author": "CEDCommerce",
+  "background": {
+    "page": "html/bana.html",
+    "persistent": true
+  },
+  "icons": {
+    "128": "images/icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.aliexpress.com/*",
+        "*://www.aliexpress.com/wholesale?*",
+        "*://www.aliexpress.com/af/category/*",
+        "*://www.aliexpress.com/af/*",
+        "*://www.aliexpress.com/category/*",
+        "*://www.aliexpress.com/premium/*",
+        "*://www.aliexpress.com/w/*",
+        "*://www.aliexpress.com/wholesale*"
+      ],
+      "js": [
+        "content-script/jquery-3.2.1.min.js",
+        "content-script/product/import.js"
+      ],
+      "exclude_matches": [
+        "*://www.aliexpress.com/"
+      ],
+      "css": [
+        "css/import.css"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "images/csv.png",
+    "images/cancel.png",
+    "images/loader.gif"
+  ]
+}

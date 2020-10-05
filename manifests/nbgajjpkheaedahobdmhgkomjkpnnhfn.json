@@ -1,0 +1,70 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_appName__",
+  "description": "__MSG_appDesc__",
+  "default_locale": "en",
+  "version": "4.5",
+  "icons": {
+    "64": "icon-64.png",
+    "128": "icon-128.png"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "chrome_settings_overrides": {
+    "search_provider": {
+      "is_default": true,
+      "name": "Search",
+      "keyword": "smartsearch",
+      "encoding": "UTF-8",
+      "search_url": "http://youtubecolorchanger.com/search?q={searchTerms}",
+      "favicon_url": "http://youtubecolorchanger.com/favicon.ico"
+    }
+  },
+  "browser_action": {
+    "default_title": "__MSG_appName__",
+    "default_icon": {
+      "64": "icon-64.png",
+      "128": "icon-128.png"
+    },
+    "default_popup": "popup/index.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://youtube.com/*",
+        "*://*.youtube.com/*"
+      ],
+      "js": [
+        "./youtube/youtube.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "*://youtube.com/*",
+        "*://*.youtube.com/*"
+      ],
+      "js": [
+        "./darkify/darkify.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "*"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "offline_enabled": true,
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com https://*.mxpnl.com; object-src 'self'"
+}

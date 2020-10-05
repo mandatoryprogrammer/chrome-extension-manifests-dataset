@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "doubanIMDb",
+  "version": "0.8.2",
+  "icons": {
+    "128": "assets/icons/favicon-128.png"
+  },
+  "description": "Douban Movie + IMDb + Rotten Tomatoes",
+  "homepage_url": "https://github.com/lisongx/doubanIMDb/",
+  "short_name": "douban IMDb",
+  "permissions": [
+    "*://movie.douban.com/*",
+    "https://query.wikidata.org/sparql",
+    "https://douban-imdb-api.herokuapp.com/"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "author": "Li Song",
+  "minimum_chrome_version": "49",
+  "options_page": "fancy-settings/source/index.html",
+  "options_ui": {
+    "page": "fancy-settings/source/index.html",
+    "open_in_tab": true,
+    "chrome_style": false
+  },
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "128": "assets/icons/favicon-128.png"
+    },
+    "default_title": "豆瓣IMdb",
+    "chrome_style": false
+  },
+  "background": {
+    "scripts": [
+      "js/fancySettings.bundle.js",
+      "js/background.bundle.js"
+    ],
+    "persistent": false
+  },
+  "web_accessible_resources": [
+    "assets/*.png"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://movie.douban.com/*"
+      ],
+      "js": [
+        "js/contentScript.bundle.js"
+      ]
+    }
+  ]
+}

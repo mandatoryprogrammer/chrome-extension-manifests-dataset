@@ -1,0 +1,39 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "TeaVM debugger agent",
+  "description": "TeaVM debugger agent, that sends RDP commands over WebSocket",
+  "version": "0.6.0",
+  "permissions": [
+    "debugger",
+    "activeTab",
+    "tabs",
+    "storage",
+    "*://*/*"
+  ],
+  "browser_action": {
+    "default_icon": "teavm-16.png",
+    "default_title ": "Connect to TeaVM debugger"
+  },
+  "background": {
+    "scripts": [
+      "main.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file://*/*"
+      ],
+      "js": [
+        "contentscript.js"
+      ]
+    }
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  }
+}

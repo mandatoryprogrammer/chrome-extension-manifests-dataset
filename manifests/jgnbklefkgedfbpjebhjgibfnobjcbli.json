@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Crowdfire",
+  "description": "Crowdfire",
+  "version": "6.5.2",
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "images/icon16.png"
+  },
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "scripts/init.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.twitter.com/*"
+      ],
+      "exclude_matches": [
+        "*://tweetdeck.twitter.com/*"
+      ],
+      "js": [
+        "scripts/content-twitter.js"
+      ],
+      "css": [
+        "styles/content-twitter.css"
+      ]
+    }
+  ],
+  "permissions": [
+    "notifications",
+    "contextMenus"
+  ],
+  "web_accessible_resources": [
+    "*.png",
+    "*.html",
+    "*.css"
+  ],
+  "content_security_policy": "script-src 'self' https://ajax.googleapis.com https://www.google-analytics.com; object-src 'self';"
+}

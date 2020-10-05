@@ -1,0 +1,95 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Salesforce Data/Metadata Utility",
+  "version": "0.0.9",
+  "description": "Work With Salesforce Record Data and Metadata With Few Clicks",
+  "author": {
+    "name": "Maninder Singh",
+    "url": "https://letmeautomate.wordpress.com/"
+  },
+  "homepage_url": "https://letmeautomate.wordpress.com/",
+  "background": {
+    "scripts": [
+      "js/jquery.min.js",
+      "js/background.js",
+      "js/shared.js",
+      "js/utils.js",
+      "js/constants.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.salesforce.com/*"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "js/contentscript.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": true,
+      "css": [
+        "js/style.css"
+      ],
+      "matches": [
+        "*://*.salesforce.com/*00O*",
+        "*://*.force.com/*00O*"
+      ],
+      "exclude_globs": [
+        "*/o/Report/home*",
+        "*salesforce.com/00O/o*"
+      ]
+    }
+  ],
+  "page_action": {
+    "default_icon": "img/easyaccess_128x128.png",
+    "default_title": "Salesforce Data/Metadata Utility"
+  },
+  "permissions": [
+    "tabs",
+    "contextMenus",
+    "clipboardWrite",
+    "activeTab",
+    "clipboardRead",
+    "storage",
+    "cookies",
+    "https://*.force.com/*",
+    "https://*.salesforce.com/*",
+    "https://*.cloudforce.com/*"
+  ],
+  "icons": {
+    "128": "img/easyaccess_128x128.png"
+  },
+  "commands": {
+    "CallCopy15": {
+      "description": "Copy the 15 Digit record ID",
+      "suggested_key": {
+        "default": "Alt+Shift+5"
+      }
+    },
+    "CallCopy18": {
+      "description": "Copy the 18 Digit record ID",
+      "suggested_key": {
+        "default": "Alt+Shift+8"
+      }
+    },
+    "CallCopyClassicURL": {
+      "description": "Copy Classic URL",
+      "suggested_key": {
+        "default": "Alt+Shift+C"
+      }
+    },
+    "CallNavigateToRecordId": {
+      "description": "Navigate To record ID in new Tab",
+      "suggested_key": {
+        "default": "Alt+Shift+N"
+      }
+    },
+    "CallOpenInLEX": {
+      "description": "Open in LEX"
+    }
+  }
+}

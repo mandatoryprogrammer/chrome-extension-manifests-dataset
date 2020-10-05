@@ -1,0 +1,75 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "+Custom4",
+  "version": "5.0.0.2",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "description": "__MSG_extensiondescription__",
+  "icons": {
+    "128": "icon.png"
+  },
+  "background": {
+    "scripts": [
+      "storage.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "page_action": {
+    "default_icon": "images/icon-32x32.png",
+    "default_title": "+Custom"
+  },
+  "options_page": "options.html",
+  "permissions": [
+    "storage",
+    "http://plus.google.com/*",
+    "https://plus.google.com/*",
+    "http://*.google.com/",
+    "https://*.google.com/"
+  ],
+  "content_security_policy": "script-src 'self' https://plusone.google.com https://apis.google.com https://docs.google.com https://spreadsheets.google.com https://www.google.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://plus.google.com/",
+        "https://plus.google.com/",
+        "https://plus.google.com/*",
+        "https://plus.google.com/?hl=*",
+        "https://plus.google.com/u/*"
+      ],
+      "js": [
+        "jquery.js",
+        "storage.js",
+        "script.js",
+        "script-downloader.js",
+        "script-setting.js"
+      ],
+      "css": [
+        "style.css",
+        "style-setting.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://mewe.com/*"
+      ],
+      "js": [
+        "jquery.js",
+        "mewe/script.mewe.js"
+      ],
+      "css": [
+        "mewe/style.mewe.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "options.html",
+    "images/*.png",
+    "images/icon-32x32.png",
+    "images/downloader_splite.png",
+    "images/limited-gear-32x32.png",
+    "images/sprite_icons.png"
+  ]
+}

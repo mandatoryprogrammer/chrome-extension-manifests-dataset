@@ -1,0 +1,79 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "RTC Recorder (Beta)",
+  "description": "RTC Recorder",
+  "version": "0.9.916",
+  "manifest_version": 2,
+  "minimum_chrome_version": "65",
+  "icons": {
+    "32": "images/logo32.png"
+  },
+  "browser_action": {
+    "default_icon": "images/vrec_normal.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "background",
+    "clipboardRead",
+    "downloads",
+    "desktopCapture",
+    "tabs",
+    "storage",
+    "notifications",
+    "http://*/*",
+    "https://*/*",
+    "*://*/*"
+  ],
+  "commands": {
+    "toggleRecording": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+0"
+      },
+      "description": "Toggle Recording",
+      "global": true
+    },
+    "togglePause": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+1"
+      },
+      "description": "Toggle Pause",
+      "global": true
+    },
+    "screenDrawing": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+2"
+      },
+      "description": "Screen Drawing",
+      "global": true
+    },
+    "screenShot": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+3"
+      },
+      "description": "Screen Shot for whiteboard",
+      "global": true
+    }
+  },
+  "background": {
+    "scripts": [
+      "thirdParty/DetectRTC.min.js",
+      "thirdParty/jquery.min.js",
+      "thirdParty/jquery.xmpp.js",
+      "thirdParty/binary.min.js",
+      "libs/adapter.min.js",
+      "libs/util.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "content.js"
+      ],
+      "matches": [
+        "*://*.just.edu.tw/*",
+        "https://*.hinet-ip.hinet.net/wm2/*"
+      ]
+    }
+  ]
+}

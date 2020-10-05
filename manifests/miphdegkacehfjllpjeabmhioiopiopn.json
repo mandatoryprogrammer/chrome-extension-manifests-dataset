@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Big Fish Blocker",
+  "description": "Hides facebook messenger game messages",
+  "version": "1.4.1",
+  "icons": {
+    "16": "logo-16.png",
+    "48": "logo-48.png",
+    "128": "logo-128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.facebook.com/*"
+      ],
+      "exclude_matches": [
+        "*://*.facebook.com/messages/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "homepage.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.facebook.com/messages/*",
+        "*://*.messenger.com/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "messenger.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "*://www.facebook.com/*",
+    "*://www.messenger.com/*",
+    "tabs"
+  ]
+}

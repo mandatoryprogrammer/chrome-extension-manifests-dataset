@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "BBC iPlayer Playlists",
+  "description": "Allows adding videos from the BBC iPlayer website to a playlist",
+  "version": "1.0.0.2",
+  "icons": {
+    "48": "assets/logo/logo.png"
+  },
+  "permissions": [
+    "tabs",
+    "<all_urls>",
+    "storage"
+  ],
+  "browser_action": {
+    "default_icon": "assets/logo/logo.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "src/shared/playlist.js",
+      "lib/jquery.min.js",
+      "src/background/background.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "src/content/handler-hack.js"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.bbc.co.uk/iplayer/*"
+      ],
+      "js": [
+        "lib/jquery.min.js",
+        "lib/arrive.min.js",
+        "lib/jquery-ui/jquery-ui.min.js",
+        "src/shared/playlist.js",
+        "src/content/playlist-controls.js"
+      ],
+      "css": [
+        "lib/jquery-ui-themes/themes/smoothness/jquery-ui.css"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

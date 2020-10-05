@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Nextube",
+  "description": "This extensions allows you to skip youtube videos that you don't like by specifying text which appear in the youtube video title.",
+  "version": "1.0.10",
+  "browser_action": {
+    "default_icon": "./pics/Nextube16.png",
+    "default_popup": "Nextube.html",
+    "default_title": "Nextube"
+  },
+  "icons": {
+    "16": "./pics/Nextube16.png",
+    "48": "./pics/Nextube48.png",
+    "128": "./pics/Nextube128.png"
+  },
+  "background": {
+    "scripts": [
+      "libraries/jquery-2.1.4.min.js",
+      "nextube.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.youtube.com/*"
+      ],
+      "js": [
+        "libraries/jquery-2.1.4.min.js",
+        "tools/elementsManager.js",
+        "websites/youtube.com.content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "storage",
+    "tabs",
+    "activeTab",
+    "webRequest",
+    "webRequestBlocking",
+    "*://*.youtube.com/*"
+  ]
+}

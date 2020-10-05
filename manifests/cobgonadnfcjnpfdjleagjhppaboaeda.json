@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Upworkee",
+  "description": "Get instant update about a new upwork job and apply faster than others",
+  "author": "Sorokin Victor <victor@riverwaysoft.com>",
+  "version": "1.4.0",
+  "icons": {
+    "16": "icons/16.png",
+    "128": "icons/128.png"
+  },
+  "permissions": [
+    "https://upworkee.com/*",
+    "background",
+    "notifications",
+    "storage"
+  ],
+  "browser_action": {
+    "default_title": "Upworkee",
+    "default_popup": "pages/popup.html"
+  },
+  "background": {
+    "persistent": false,
+    "page": "pages/background.html"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "js/manifest.js",
+        "js/vendor.js",
+        "js/content.js"
+      ],
+      "run_at": "document_end",
+      "matches": [
+        "https://upworkee.com/*"
+      ],
+      "all_frames": true
+    }
+  ],
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "web_accessible_resources": [
+    "js/content.js"
+  ]
+}

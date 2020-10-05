@@ -1,0 +1,113 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Slickdeals: Automatic Coupons and Deals",
+  "version": "0.0.2.50",
+  "description": "Always get the best price: find the best deals from Slickdeals and automatically apply coupons!",
+  "homepage_url": "https://slickdeals.net/",
+  "manifest_version": 2,
+  "minimum_chrome_version": "49",
+  "permissions": [
+    "<all_urls>",
+    "contextMenus",
+    "cookies",
+    "notifications",
+    "storage",
+    "tabs",
+    "unlimitedStorage",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "background": {
+    "scripts": [
+      "vendors/bundle.js",
+      "background/bundle.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "logo-gray.png",
+    "default_title": "Slickdeals"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "content_start/bundle.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "content_wrap/bundle.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://slickdeals.net/f/*",
+        "https://slickdeals.net/e/*"
+      ],
+      "all_frames": true,
+      "run_at": "document_idle",
+      "js": [
+        "sdDealDetails/bundle.js",
+        "vendors/bundle.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://slickdeals.net/*"
+      ],
+      "all_frames": true,
+      "run_at": "document_start",
+      "js": [
+        "sd/start.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://slickdeals.net/*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "sd/bundle.js"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "SD-LOGO-16x16.png",
+    "48": "SD-LOGO-48x48.png",
+    "128": "SD-LOGO-128x128.png"
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true
+  },
+  "web_accessible_resources": [
+    "*.png",
+    "*.svg",
+    "*.gif",
+    "*.css",
+    "*.woff",
+    "*.woff2",
+    "*.ttf",
+    "*.otf",
+    "iframe.html",
+    "interstitial/interstitial.html"
+  ],
+  "incognito": "not_allowed",
+  "content_security_policy": "script-src 'self' https://www.google.com https://ssl.google-analytics.com https://www.googletagmanager.com https://www.google-analytics.com https://www.googleadservices.com; object-src 'self'",
+  "externally_connectable": {
+    "matches": [
+      "https://slickdeals.net/*"
+    ]
+  }
+}

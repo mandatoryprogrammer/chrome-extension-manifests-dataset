@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Douga Getter",
+  "version": "3.1.6",
+  "author": "DougaGetter",
+  "description": "__MSG_extension_description__",
+  "homepage_url": "https://www.douga-getter.com/",
+  "manifest_version": 2,
+  "default_locale": "ja",
+  "background": {
+    "persistent": true,
+    "page": "background.html"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "images/default_16px_normal.png",
+      "32": "images/default_16px_normal.png"
+    },
+    "default_title": "__MSG_action_button_default_title__"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/front.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://www.douga-getter.com/loader.html*site=*"
+      ],
+      "js": [
+        "js/internal.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "icons": {
+    "32": "images/icon_32.png",
+    "128": "images/icon_128.png"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "web_accessible_resources": [
+    "images/*"
+  ],
+  "content_security_policy": "default-src 'self' ; img-src 'self' http://* https://* data: ; script-src 'self' ; object-src 'self' ; style-src 'self' http://* https://* 'unsafe-inline' ; connect-src 'self' http://* https://* ;",
+  "permissions": [
+    "contextMenus",
+    "webRequest",
+    "webRequestBlocking",
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ]
+}

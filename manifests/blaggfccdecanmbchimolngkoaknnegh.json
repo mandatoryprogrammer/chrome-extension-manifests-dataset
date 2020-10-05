@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "minimum_chrome_version": "19",
+  "name": "__MSG_appName__",
+  "short_name": "Add to EveryDay",
+  "description": "__MSG_appDesc__",
+  "default_locale": "en",
+  "version": "1.0.43",
+  "homepage_url": "http://evrdy.com",
+  "permissions": [
+    "tabs",
+    "cookies",
+    "http://*/*",
+    "https://*/*",
+    "storage",
+    "contextMenus"
+  ],
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+  "browser_action": {
+    "default_title": "__MSG_iconTitle__",
+    "default_icon": "icon.png",
+    "default_popup": "html/popup.html"
+  },
+  "background": {
+    "page": "html/background.html"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "js/jquery-1.10.2.min.js",
+        "js/content.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start",
+      "all_frames": false
+    },
+    {
+      "js": [
+        "js/gmailr.js",
+        "js/content-gmail-injector.js"
+      ],
+      "css": [
+        "css/gmail.css"
+      ],
+      "matches": [
+        "https://mail.google.com/*",
+        "https://mail.google.com/*"
+      ],
+      "run_at": "document_start",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    "html/content-gmail.html",
+    "/img/gmail_icon.png"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://ssl.google-analytics.com/ga.js; object-src 'self'"
+}

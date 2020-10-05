@@ -1,0 +1,74 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "TFS 2012 kanban buddy",
+  "version": "0.5.71",
+  "manifest_version": 2,
+  "browser_action": {
+    "default_title": "TFS kanban board enhancer",
+    "default_icon": "icons/icon32.png",
+    "default_popup": "pages/popup.html"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "32": "icons/icon32.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": [
+    "unlimitedStorage"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "background": {
+    "scripts": [
+      "/utils_js/jquery-2.1.1.min.js",
+      "/utils_js/lodash.js",
+      "utils_js/util.js",
+      "utils_js/boarddata.js",
+      "utils_js/apiSnapshot.js",
+      "background/background.js",
+      "background/api.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*/*/_backlogs/board*",
+        "https://*/*/*/_backlogs/board*",
+        "http://*/*/*/_backlogs/TaskBoard*",
+        "https://*/*/*/_backlogs/TaskBoard*",
+        "http://*/*/*/_backlogs/taskboard*",
+        "https://*/*/*/_backlogs/taskboard*",
+        "http://*/*/*/_boards*"
+      ],
+      "js": [
+        "utils_js/util.js",
+        "utils_js/jquery-2.1.1.min.js",
+        "content_scripts/tfsBoardInit.js",
+        "content_scripts/board.js",
+        "content_scripts/projectUrl.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://*/*/*/_backlogs/board*",
+        "https://*/*/*/_backlogs/board*"
+      ],
+      "js": [
+        "utils_js/util.js",
+        "utils_js/jquery-2.1.1.min.js",
+        "content_scripts/snapshot.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://*/*/*",
+        "https://*/*/*"
+      ],
+      "js": [
+        "content_scripts/TfsLinksInit.js",
+        "content_scripts/boardlinks.js"
+      ]
+    }
+  ]
+}

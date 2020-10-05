@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Infusionsoft to CSG Actuarial & Whitepages",
+  "description": "This extension expedites the process of entering Infusionsoft contact data into CSG Actuarial and Whitepages.com forms.",
+  "version": "1.0.3",
+  "background": {
+    "scripts": [
+      "eventPage.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.infusionsoft.com/Contact/manageContact.jsp?*"
+      ],
+      "js": [
+        "js/content/manageContact.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://*.infusionsoft.com/app/nav/link?navSystem=nav.mynav&navModule=nav.home.myDay"
+      ],
+      "js": [
+        "js/content/myDay.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://www.insurancetoolsportal.com/medicare-supplement?*",
+        "https://www.insurancetoolsportal.com/medicare-advantage?*",
+        "https://www.insurancetoolsportal.com/final-expense-life?*",
+        "https://www.insurancetoolsportal.com/dental?*"
+      ],
+      "js": [
+        "js/content/csg.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    "js/embedded/manageContact.js",
+    "js/embedded/myDay.js",
+    "js/embedded/whitepages.js",
+    "js/embedded/csg.js"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://*.infusionsoft.com/Contact/manageContact.jsp?*",
+      "https://*.infusionsoft.com/app/nav/link?navSystem=nav.mynav&navModule=nav.home.myDay"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "https://*.infusionsoft.com/Contact/manageContact.jsp?*",
+    "https://*.infusionsoft.com/app/nav/link?navSystem=nav.mynav&navModule=nav.home.myDay",
+    "https://www.insurancetoolsportal.com/medicare-supplement?*",
+    "https://www.insurancetoolsportal.com/medicare-advantage?*",
+    "https://www.insurancetoolsportal.com/final-expense-life?*",
+    "https://www.insurancetoolsportal.com/dental?*"
+  ]
+}

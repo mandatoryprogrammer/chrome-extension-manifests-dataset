@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Фотографии из переписки ВК",
+  "version": "0.0.2",
+  "description": "Расширение достает фотографии из ваших переписок ВКонтакте",
+  "permissions": [
+    "storage",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "browser_action": {
+    "default_icon": "icon.png"
+  },
+  "background": {
+    "scripts": [
+      "data/js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "data/jquery/jquery-1.12.3.min.js",
+        "data/js/prep.js",
+        "data/js/jquery.fancybox.pack.js"
+      ],
+      "css": [
+        "data/css/messagehistory.css",
+        "data/css/jquery.fancybox.css"
+      ]
+    },
+    {
+      "js": [
+        "data/js/oauth2_inject.js"
+      ],
+      "matches": [
+        "*://oauth.vk.com/blank.html*",
+        "*://oauth.vk.com/error*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Outklip - Screen Recorder with Voice & Camera",
+  "short_name": "Outklip",
+  "author": "Sunil Kowlgi",
+  "version": "2.7.53",
+  "manifest_version": 2,
+  "minimum_chrome_version": "49",
+  "description": "Teach remotely with screencast video.",
+  "homepage_url": "https://outklip.com",
+  "background": {
+    "scripts": [
+      "build/background/background.min.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "images/main-icon.png",
+    "default_title": "Screen Recorder",
+    "default_popup": "dropdown/dropdown.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://outklip.com/*",
+        "https://*.google.com/*",
+        "https://*.youtube.com/*",
+        "https://*.twitter.com/*",
+        "https://*.instagram.com/*",
+        "https://*.facebook.com/*"
+      ],
+      "css": [
+        "content/jquery-ui/jquery-ui.min.css",
+        "css/all.min.css",
+        "css/instagram.min.css"
+      ],
+      "js": [
+        "content/jquery-3.2.1.min.js",
+        "content/jquery-ui/jquery-ui.min.js",
+        "build/content/content.min.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://outklip.com/*"
+      ],
+      "js": [
+        "content/firebase-app.js",
+        "content/firebase-auth.js",
+        "content/firebase-database.js",
+        "content/jquery-3.2.1.min.js",
+        "content/moment.min.js",
+        "build/content/id_token.min.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "icons": {
+    "16": "images/main-icon.png",
+    "22": "images/main-icon.png",
+    "32": "images/main-icon.png",
+    "48": "images/main-icon.png",
+    "128": "images/main-icon.png"
+  },
+  "permissions": [
+    "desktopCapture",
+    "storage",
+    "tabs",
+    "tabCapture",
+    "activeTab",
+    "identity",
+    "https://www.googleapis.com/*",
+    "webRequest",
+    "webRequestBlocking",
+    "notifications"
+  ],
+  "content_security_policy": "script-src 'self' https://apis.google.com; object-src 'self'",
+  "web_accessible_resources": [
+    "images/*.png",
+    "content/content.html",
+    "micpermission/getmic.css",
+    "micpermission/getmic.html",
+    "camerapermission/getcamera.css",
+    "camerapermission/getcamera.html",
+    "camerapermission/instagram.min.css",
+    "build/camerapermission/getcamera.min.js",
+    "lastvideo.html",
+    "settings.html",
+    "content/assets/outklip_highlight_mouse.cur",
+    "css/webfonts/fa-solid-900.eot",
+    "css/webfonts/fa-solid-900.svg",
+    "css/webfonts/fa-solid-900.ttf",
+    "css/webfonts/fa-solid-900.woff",
+    "css/webfonts/fa-solid-900.woff2",
+    "css/webfonts/fa-brands-400.eot",
+    "css/webfonts/fa-brands-400.svg",
+    "css/webfonts/fa-brands-400.ttf",
+    "css/webfonts/fa-brands-400.woff",
+    "css/webfonts/fa-brands-400.woff2",
+    "css/webfonts/fa-regular-400.eot",
+    "css/webfonts/fa-regular-400.svg",
+    "css/webfonts/fa-regular-400.ttf",
+    "css/webfonts/fa-regular-400.woff",
+    "css/webfonts/fa-regular-400.woff2",
+    "css/all.min.css",
+    "css/instagram.min.css"
+  ],
+  "commands": {
+    "start-recording": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+S",
+        "mac": "Command+Shift+S"
+      },
+      "description": "Start recording"
+    },
+    "stop-recording": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+X",
+        "mac": "Command+Shift+X"
+      },
+      "description": "Stop recording"
+    },
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+O",
+        "mac": "Command+Shift+O"
+      }
+    }
+  }
+}

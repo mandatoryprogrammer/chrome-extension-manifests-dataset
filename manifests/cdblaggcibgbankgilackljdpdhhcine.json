@@ -1,0 +1,72 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "short_name": "__MSG_appShortName__",
+  "description": "__MSG_appDescription__",
+  "version": "4.2.4",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "icons": {
+    "16": "images/16x16.png",
+    "32": "images/32x32.png",
+    "48": "images/48x48.png",
+    "64": "images/64x64.png",
+    "128": "images/128x128.png"
+  },
+  "background": {
+    "scripts": [
+      "scripts/tlds.js",
+      "scripts/regExpUtil.js",
+      "scripts/safeResponse.js",
+      "scripts/utils.js",
+      "scripts/userSettings.js",
+      "scripts/eventPage.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": "images/16x16.png",
+    "default_popup": "pages/popup.html",
+    "default_title": "Scan page for indicators."
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "scripts/tlds.js",
+        "scripts/userSettings.js",
+        "scripts/eventLog.js",
+        "scripts/regExpUtil.js",
+        "scripts/utils.js",
+        "scripts/highlight.js",
+        "scripts/contentscript.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    "images/16x16.png"
+  ],
+  "permissions": [
+    "contextMenus",
+    "storage",
+    "alarms",
+    "tabs",
+    "identity",
+    "https://id.recordedfuture.com/.well-known/openid-configuration",
+    "https://support.recordedfuture.com/hc/en-us/articles/115000894448-IP-Address-Risk-Rules",
+    "https://support.recordedfuture.com/hc/en-us/articles/115000846167-Hash-Risk-Rules",
+    "https://support.recordedfuture.com/hc/en-us/articles/115000894468-Vulnerability-Risk-Rules",
+    "https://support.recordedfuture.com/hc/en-us/articles/115003793388-Domain-Risk-Rules",
+    "https://app.recordedfuture.com/live/sc/createnote/",
+    "https://app.recordedfuture.com/live/sc/entity/",
+    "https://app.recordedfuture.com/live/sc/entity/?name=*",
+    "https://api.recordedfuture.com/rfq/express/track/action",
+    "https://express-api.recordedfuture.com/rfq/v2/soar/enrichment",
+    "https://www.recordedfuture.com/products/browser-extension/"
+  ]
+}

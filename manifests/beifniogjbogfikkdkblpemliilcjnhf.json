@@ -1,0 +1,36 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Make Twitter Great Again",
+  "description": "Block tweets about U.S. 2016 election in your feed",
+  "version": "1.0.2",
+  "icons": {
+    "128": "icon.png"
+  },
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html",
+    "default_title": "Switch blocking"
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs",
+    "<all_urls>"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://twitter.com/*",
+        "http://twitter.com/*"
+      ],
+      "js": [
+        "jquery.js",
+        "initialize.js",
+        "content.js",
+        "popup.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

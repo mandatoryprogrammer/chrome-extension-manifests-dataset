@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Маджента",
+  "description": "by BIBASOFT",
+  "version": "7.0.11.6",
+  "browser_action": {
+    "default_popup": "popup/index.html",
+    "default_icon": "favicon/favicon.png",
+    "default_title": "Открыть Мадженту"
+  },
+  "icons": {
+    "48": "favicon/extensions_icon48.png",
+    "128": "favicon/extensions_icon128.png"
+  },
+  "optional_permissions": [
+    "management",
+    "activeTab",
+    "tabs",
+    "cookies",
+    "https://magenta-app.ru/",
+    "https://vk.com/",
+    "https://api.vk.com/"
+  ],
+  "permissions": [],
+  "background": {
+    "page": "background/index.html",
+    "persistent": true
+  },
+  "content_security_policy": "script-src 'self' 'sha256-AQv2dEL6tl9fyPwEBz4X6FZ+2KjEARrcRiHJUrL2WdM=' https://api.vk.com https://www.google-analytics.com https://www.googletagmanager.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://vk.com/*"
+      ],
+      "js": [
+        "inject/js/runtime.js",
+        "inject/js/main.chunk.js",
+        "inject/js/2.chunk.js"
+      ],
+      "css": [
+        "inject/css/main.chunk.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "inject/*",
+    "inject/media/*"
+  ]
+}

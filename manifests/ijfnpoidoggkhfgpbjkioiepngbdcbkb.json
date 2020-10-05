@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Cupom de Desconto Blog",
+  "manifest_version": 2,
+  "description": "Receba um aviso sempre que houver um cupom disponível em uma loja que você estiver navegando",
+  "version": "1.41",
+  "icons": {
+    "16": "icons/zoom-16.png",
+    "48": "icons/zoom-48.png",
+    "128": "icons/zoom-128.png"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "alarms",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "libs/jquery-2.1.4.min.js",
+      "src/background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/cupom-19.png",
+      "38": "icons/cupom-19.png"
+    },
+    "default_title": "Cupom de Desconto Blog"
+  },
+  "content_scripts": [
+    {
+      "css": [
+        "/src/css_lib/trigger.css",
+        "/src/page_action/style.css"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "libs/jquery-2.1.4.min.js",
+        "src/pageScript.js"
+      ],
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    "*.css",
+    "*.html",
+    "*.png",
+    "*.js"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

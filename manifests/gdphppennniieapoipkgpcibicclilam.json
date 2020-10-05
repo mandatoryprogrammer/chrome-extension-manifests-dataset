@@ -1,0 +1,82 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "icons": {
+    "16": "images/icons/16x16.png",
+    "38": "images/icons/38x38.png",
+    "48": "images/icons/48x48.png",
+    "96": "images/icons/96x96.png",
+    "128": "images/icons/128x128.png"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+Shift+E"
+      }
+    }
+  },
+  "background": {
+    "scripts": [
+      "background/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.pivotaltracker.com/*"
+      ],
+      "js": [
+        "content/pivotal.js"
+      ],
+      "css": [
+        "content/pivotal.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://basecamp.com/*"
+      ],
+      "js": [
+        "content/basecamp.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://gitlab.digitalnz.org/*",
+        "https://gitlab.com/*/*/merge_requests/new*",
+        "https://github.com/*"
+      ],
+      "js": [
+        "content/pull_request.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "browser_action": {
+    "default_title": "Boost",
+    "default_popup": "popup/index.html?uilocation=popup",
+    "browser_style": true,
+    "default_icon": {
+      "16": "images/icons/16x16.png",
+      "38": "images/icons/38x38.png",
+      "48": "images/icons/48x48.png",
+      "96": "images/icons/96x96.png",
+      "128": "images/icons/128x128.png"
+    }
+  },
+  "permissions": [
+    "activeTab",
+    "clipboardWrite",
+    "storage",
+    "tabs",
+    "contextMenus"
+  ],
+  "name": "Combiner",
+  "short_name": "Combiner",
+  "description": "This extension provides harvest-pivotal-basecamp linking.",
+  "version": "2.3.5",
+  "homepage_url": "https://github.com/boost/combiner"
+}

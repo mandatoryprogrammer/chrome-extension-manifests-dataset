@@ -1,0 +1,76 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "YouTweak for YouTube™ - Subscription Manager",
+  "version": "4.108",
+  "manifest_version": 2,
+  "options_page": "/OptionsPage/options.html",
+  "background": {
+    "scripts": [
+      "BackgroundScripts/s_EventPage.js"
+    ]
+  },
+  "permissions": [
+    "notifications",
+    "storage",
+    "*://youtube.com/*",
+    "*://*.youtube.com/*",
+    "tabs",
+    "*://mattie432.com/*"
+  ],
+  "browser_action": {
+    "default_icon": "images/icon.png"
+  },
+  "icons": {
+    "16": "images/icon.png",
+    "48": "images/icon.png",
+    "128": "images/icon.png"
+  },
+  "description": "Adds many useful tweaks to pages on the youtube site. Remove subscriptions, clear watched videos & more!",
+  "web_accessible_resources": [
+    "images/icon.png"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.youtube.com/*",
+        "*://*.youtube.com.br/*",
+        "*://*.youtube.fr/*",
+        "*://*.youtube.jp/*",
+        "*://*.youtube.nl/*",
+        "*://*.youtube.pl/*",
+        "*://*.youtube.ie/*",
+        "*://*.youtube.co.uk/*",
+        "*://*.youtube.es/*",
+        "*://*.youtube.it/*"
+      ],
+      "js": [
+        "BackgroundScripts/s_CommonMethods.js",
+        "ContentScripts/s_VersionCheck.js",
+        "ContentScripts/f_RedirectYoutubeIcon.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.youtube.com/feed/*",
+        "*://*.youtube.com.br/feed/*",
+        "*://*.youtube.fr/feed/*",
+        "*://*.youtube.jp/feed/*",
+        "*://*.youtube.nl/feed/*",
+        "*://*.youtube.pl/feed/*",
+        "*://*.youtube.ie/feed/*",
+        "*://*.youtube.co.uk/feed/*",
+        "*://*.youtube.es/feed/*",
+        "*://*.youtube.it/feed/*"
+      ],
+      "js": [
+        "BackgroundScripts/s_CommonMethods.js",
+        "ContentScripts/f_RemoveVideoButton.js",
+        "ContentScripts/f_ClearAllVideos.js",
+        "ContentScripts/f_LoadAllVideos.js",
+        "ContentScripts/f_CollapseSubscriptionVideos.js",
+        "ContentScripts/f_RemoveWatchedVideos.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Iridize",
+  "version": "2.0.5",
+  "manifest_version": 2,
+  "description": "Iridize is a powerful platform for creating interactive product guides and walkthroughs for employee training and web users.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "homepage_url": "https://www.iridize.com/",
+  "background": {
+    "scripts": [
+      "js/lib/jquery-2.1.0.min.js",
+      "js/lib/jquery-migrate-1.2.1.min.js",
+      "js/src/stLogger.js",
+      "js/src/chrome.js",
+      "js/src/background.js"
+    ]
+  },
+  "commands": {
+    "capture-screenshot": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+A",
+        "mac": "Command+Shift+A"
+      },
+      "description": "Capture screenshhot"
+    }
+  },
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "activeTab"
+  ],
+  "content_security_policy": "default-src 'self'; script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/lib/jquery-2.1.0.min.js",
+        "js/lib/jquery-migrate-1.2.1.min.js",
+        "js/src/stLogger.js",
+        "js/src/chrome.js",
+        "js/src/extension.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": false
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "/js/src/setDocumentDomain.js"
+      ],
+      "matches": [
+        "https://*.lightning.force.com/*",
+        "https://*.visual.force.com/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "browser_action": {
+    "default_icon": "icons/actions/1.png",
+    "default_title": "Click to open Iridize Onboarding and Training for Web Products and Applications"
+  },
+  "web_accessible_resources": []
+}

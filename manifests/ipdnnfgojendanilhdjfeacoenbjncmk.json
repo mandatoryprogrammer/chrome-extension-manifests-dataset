@@ -1,0 +1,56 @@
+{
+  "name": "草榴看图助手",
+  "version": "2.0.1",
+  "manifest_version": 2,
+  "description": "草榴社区帖子内只看图片,爽到爆炸,幸福一辈子",
+  "icons": {
+    "16": "images/icon_16.png",
+    "24": "images/icon_24.png",
+    "32": "images/icon_32.png",
+    "48": "images/icon_48.png",
+    "64": "images/icon_64.png",
+    "128": "images/icon_128.png"
+  },
+  "browser_action": {
+    "default_icon": "images/icon_64.png",
+    "default_popup": "popup.html",
+    "default_title": "开启草榴看图"
+  },
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "css": [
+        "css/content_scripts.css"
+      ],
+      "js": [
+        "scripts/jquery-1.12.3.min.js",
+        "scripts/document_start.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "js": [
+        "scripts/content.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "http://www.t66y.com/*",
+    "http://*.t66y.com/*"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "update_url": "https://clients2.google.com/service/update2/crx"
+}

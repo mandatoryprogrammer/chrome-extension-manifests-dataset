@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Connect Me for Gmail™",
+  "short_name": "Connect Me for Gmail™",
+  "description": "Call using your regular business or private number from Gmail™ through a SIP account",
+  "version": "1.4.2",
+  "options_page": "extension/options/ec-options.html",
+  "icons": {
+    "16": "assets/images/icons/connectme-48.png",
+    "48": "assets/images/icons/connectme-48.png",
+    "128": "assets/images/icons/connectme-48.png"
+  },
+  "homepage_url": "http://www.connectme.io/",
+  "default_locale": "en",
+  "permissions": [
+    "https://mail.google.com/",
+    "https://contacts.google.com/",
+    "storage",
+    "tabs"
+  ],
+  "background": {
+    "scripts": [
+      "extension/background/ec-background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://contacts.google.com/*",
+        "https://www.google.com/contacts/*"
+      ],
+      "css": [
+        "extension/content_scripts/ec-gmail.css"
+      ],
+      "js": [
+        "extension/classes/phoneparser/global-number-parser.js",
+        "extension/classes/phoneparser/text-parser.js",
+        "extension/classes/phoneparser/internal-number-parser.js",
+        "extension/classes/phoneparser/national-number-parser.js",
+        "extension/classes/phoneparser/phone-number-parser.js",
+        "extension/classes/sidebar.js",
+        "extension/classes/modal-number.js",
+        "extension/classes/contact-call-link.js",
+        "extension/classes/call-link.js",
+        "extension/classes/transformed-link.js",
+        "extension/classes/tab-list.js",
+        "extension/content_scripts/ec-gmail.js",
+        "extension/vendor/libphonenumbers.min.js",
+        "extension/vendor/metadata.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "extension/options/ec-options.html"
+  ]
+}

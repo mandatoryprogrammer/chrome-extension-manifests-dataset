@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Configio Chrome Extension",
+  "description": "Allows for emails that are sent or forwarded from Gmail to be recorded as CRM Communications in the Configio Admin.",
+  "version": "1.1.1",
+  "permissions": [
+    "tabs",
+    "http://mail.google.com/*",
+    "https://mail.google.com/*",
+    "http://*.dev/*",
+    "https://*.configiotest.com/*",
+    "https://*.configio.com/*",
+    "storage"
+  ],
+  "browser_action": {
+    "default_title": "Log in / out of Configio Admin",
+    "default_icon": "images/icon.png",
+    "default_popup": "markup/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "jquery-3.1.1.min.js",
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://mail.google.com/*"
+      ],
+      "js": [
+        "jquery-3.1.1.min.js",
+        "js/inject.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "images/*.png",
+    "images/*.svg"
+  ],
+  "icons": {
+    "16": "images/icon.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "manifest_version": 2
+}

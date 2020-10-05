@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Qanairy Test Recorder",
+  "version": "0.0.1",
+  "description": "Record custom tests for the Qanairy.com platform",
+  "permissions": [
+    "declarativeContent",
+    "storage",
+    "webNavigation",
+    "tabs",
+    "activeTab",
+    "webRequest",
+    "webRequestBlocking",
+    "identity",
+    "notifications",
+    "https://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "scripts/auth0chrome.min.js",
+      "scripts/pusher.min.js",
+      "scripts/jwt-decode.min.js",
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "page_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "images/qanairy_q_logo_black_16.png",
+      "32": "images/qanairy_q_logo_black_32.png",
+      "48": "images/qanairy_q_logo_black_48.png",
+      "128": "images/qanairy_q_logo_black_128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "content_script.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "recorder.html"
+  ],
+  "icons": {
+    "16": "images/qanairy_q_logo_black_16.png",
+    "32": "images/qanairy_q_logo_black_32.png",
+    "48": "images/qanairy_q_logo_black_48.png",
+    "128": "images/qanairy_q_logo_black_128.png"
+  },
+  "content_security_policy": "script-src 'self' https://cdn.auth0.com/client/mMomHg1ZhzZkM4Tsz2NGkdJH3eeJqIq6.js; object-src 'self'",
+  "manifest_version": 2
+}

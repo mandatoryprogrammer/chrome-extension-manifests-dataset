@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Soda PDF: Convert PDF to Word",
+  "description": "Freely Convert your PDF document to Word without having to download any additional software.",
+  "short_name": "PDF to Word Chrome Extension",
+  "default_locale": "en",
+  "version": "1.0.0.2",
+  "author": "LULU Software",
+  "icons": {
+    "128": "images/soda_icon_128x128.jpg",
+    "16": "images/soda_icon_16x16.jpg",
+    "32": "images/soda_icon_16x16.jpg",
+    "48": "images/soda_icon_48x48.jpg"
+  },
+  "browser_action": {
+    "default_title": "PDF to Word Chrome Extension",
+    "default_icon": "images/soda_icon_16x16.jpg",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "tabs",
+    "contextMenus",
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "js/background.js",
+      "js/onInstall.js"
+    ]
+  },
+  "chrome_url_overrides": {
+    "newtab": "home.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.chrome.google.com/*",
+        "http://*.pdfmerge.com/*",
+        "https://*.pdfmerge.com/*",
+        "http://*.splitpdf.com/*",
+        "https://*.splitpdf.com/*",
+        "https://*.sodapdf.com/*",
+        "http://*.pdfjoin.com/*",
+        "https://*.pdfjoin.com/*"
+      ],
+      "js": [
+        "js/isInstalledContent.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

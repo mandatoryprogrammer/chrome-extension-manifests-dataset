@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Salesmate CRM for Gmail",
+  "version": "1.2.5",
+  "description": "Chrome Extension for Salesmate lets you access your CRM data and manage your day to day interactions with customers inside Gmail",
+  "browser_action": {
+    "default_icon": "images/chrome-icon.png"
+  },
+  "icons": {
+    "16": "images/salesmate_icon16.png",
+    "48": "images/salesmate_icon48.png",
+    "128": "images/salesmate_icon128.png"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://*.gmail.com/*/*",
+      "*://mail.google.com/*/*",
+      "*://*.salesmate.io/*/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "salesmate-chrome-icon.png",
+    "logo.svg",
+    "salesmate-h.png",
+    "content_script/*",
+    "images/*",
+    "*://*.google.com/*",
+    "*://*.googleapis.com/*"
+  ],
+  "content_security_policy": "script-src 'self' https://*.salesmate.io/ https://*.google.com/ https://*.googleapis.com/; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "http://mail.google.com/*"
+      ],
+      "js": [
+        "content_script/content_script_extension_id.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "*://*.salesmate.io/*",
+    "cookies",
+    "tabs",
+    "webRequest",
+    "*://*.google.com/*",
+    "*://*.googleusercontent.com/proxy/*",
+    "webRequestBlocking",
+    "*://*.googleapis.com/*",
+    "identity"
+  ],
+  "oauth2": {
+    "client_id": "1028486930387-4f5pmjd3m42610pjss3p5nl0r6afpi10.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email"
+    ]
+  }
+}

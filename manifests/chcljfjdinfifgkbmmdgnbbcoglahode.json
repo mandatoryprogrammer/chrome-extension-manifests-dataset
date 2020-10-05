@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "VIN Analytics Chrome Extension",
+  "short_name": "VIN Analytics Lookup Tool",
+  "commands": {
+    "trigger": {
+      "suggested_key": {
+        "default": "Ctrl+M",
+        "mac": "Command+K"
+      },
+      "description": "Trigger Build Sheet Lookup"
+    }
+  },
+  "version": "1.5",
+  "manifest_version": 2,
+  "description": "Retrieves factory Porsche Build Sheets from a Porsche VIN that is detected on a webpage.",
+  "icons": {
+    "16": "images/VA-APP-ICON16.png",
+    "32": "images/VA-APP-ICON32.png",
+    "48": "images/VA-APP-ICON48.png",
+    "128": "images/VA-APP-ICON128.png"
+  },
+  "options_page": "options.html",
+  "browser_action": {},
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "https://vinanalytics.com/*",
+        "https://nationalpreownedporsche.com/*"
+      ],
+      "js": [
+        "content.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://nationalpreownedporsche.com/*"
+      ],
+      "js": [
+        "npp-content.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "activeTab",
+    "https://ajax.googleapis.com/",
+    "tabs",
+    "storage",
+    "commands"
+  ],
+  "web_accessible_resources": [
+    "*.js"
+  ]
+}

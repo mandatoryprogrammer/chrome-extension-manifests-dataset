@@ -1,0 +1,42 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Amazon Price Checker",
+  "description": "This extension checks prices on Amazon.",
+  "version": "1.0",
+  "icons": {
+    "16": "img/amazon.png",
+    "48": "img/amazon.png",
+    "128": "img/amazon.png"
+  },
+  "browser_action": {
+    "default_icon": "img/amazon.png",
+    "default_title": "Amazon",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.amazon.de/*"
+      ],
+      "js": [
+        "js/jquery-1.7.1.min.js",
+        "js/content.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "https://ajax.googleapis.com/",
+    "https://www.google.de/"
+  ]
+}

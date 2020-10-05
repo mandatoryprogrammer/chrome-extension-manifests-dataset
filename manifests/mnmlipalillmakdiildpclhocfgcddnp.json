@@ -1,0 +1,78 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "author": "Rapid7",
+  "name": "Rapid7 AppSec plugin",
+  "short_name": "Rapid7 AppSec Plugin",
+  "description": "Rapid7 AppSec Plugin",
+  "version": "3.0.0",
+  "manifest_version": 2,
+  "incognito": "split",
+  "background": {
+    "scripts": [
+      "assets/js/lib/browser-polyfill.js",
+      "assets/js/classes.js",
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "assets/js/lib/browser-polyfill.js",
+        "content.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "all_frames": true,
+      "js": [
+        "assets/js/frame.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "permissions": [
+    "<all_urls>",
+    "activeTab",
+    "background",
+    "cookies",
+    "nativeMessaging",
+    "notifications",
+    "proxy",
+    "sessions",
+    "storage",
+    "tabs",
+    "unlimitedStorage",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking",
+    "contextMenus",
+    "debugger",
+    "http://*/",
+    "https://*/",
+    "ws://*/",
+    "wss://*/",
+    "file://*/"
+  ],
+  "icons": {
+    "128": "assets/images/icon.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "128": "assets/images/icon.png"
+    },
+    "default_title": "Rapid 7 Appsec Plugin",
+    "default_popup": "browser/popup/requestbuilder.html"
+  },
+  "web_accessible_resources": [
+    "assets/images/*.png",
+    "assets/js/*.js"
+  ]
+}

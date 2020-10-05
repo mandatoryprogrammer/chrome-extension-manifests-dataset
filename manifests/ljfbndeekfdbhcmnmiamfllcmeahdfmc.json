@@ -1,0 +1,71 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Moxtra for Google Calendar",
+  "description": "Easily schedule Moxtra Meets from your Google Calendar",
+  "version": "0.2.5",
+  "background": {
+    "scripts": [
+      "js/libs/jquery-3.1.1.min.js",
+      "js/oauth2/oauth2.js",
+      "js/server-api.js",
+      "js/browser-api.js",
+      "js/settings.js",
+      "js/utils.js",
+      "js/bg.js"
+    ]
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://calendar.google.com/*",
+        "https://calendar.google.com/*"
+      ],
+      "js": [
+        "js/libs/jquery-3.1.1.min.js",
+        "js/libs/moment.min.js",
+        "js/libs/handlebars.runtime.min.js",
+        "js/libs/jquery-ui.min.js",
+        "js/request-observer.js",
+        "js/templates.js",
+        "js/browser-api.js",
+        "js/utils.js",
+        "js/panel.js",
+        "js/content.js"
+      ],
+      "css": [
+        "css/jquery-ui.min.css",
+        "css/jquery-ui.structure.min.css",
+        "css/jquery-ui.theme.min.css",
+        "css/main.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://moxtra.com/robots.txt*"
+      ],
+      "js": [
+        "js/oauth2/injection.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "<all_urls>",
+    "tabs",
+    "activeTab",
+    "storage"
+  ],
+  "web_accessible_resources": [
+    "images/*.png",
+    "js/oauth2/oauth2.html",
+    "js/oauth2/images/loading.gif"
+  ],
+  "icons": {
+    "16": "images/moxtra_Icon_16x16.png",
+    "32": "images/moxtra_Icon_32x32.png",
+    "128": "images/moxtra_Icon_128x128.png"
+  },
+  "manifest_version": 2
+}

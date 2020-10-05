@@ -1,0 +1,83 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Weeberly - Product Importer",
+  "short_name": "Weeberly",
+  "version": "1.8.0",
+  "manifest_version": 2,
+  "description": "Import and sync products from wish.com & aliexpress.com to your Shopify store",
+  "homepage_url": "http://www.weeberly.com",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": "icons/icond19.png",
+    "default_title": "Weeberly",
+    "default_popup": "src/browser_action/browser_action.html"
+  },
+  "permissions": [
+    "cookies",
+    "notifications",
+    "tabs",
+    "activeTab",
+    "*://www.wish.com/",
+    "*://weeberly.com/weeberly/",
+    "*://www.aliexpress.com/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.wish.com/*",
+        "*://www.aliexpress.com/*"
+      ],
+      "css": [
+        "src/inject/inject.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.wish.com/product/*",
+        "*://www.aliexpress.com/item/*"
+      ],
+      "js": [
+        "src/inject/inject.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.wish.com/*",
+        "*://*.aliexpress.com/*"
+      ],
+      "js": [
+        "js/jquery/jquery.js",
+        "src/inject/main_inject.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://www.wish.com/*",
+        "https://weeberly.com/weeberly/*",
+        "*://*.aliexpress.com/*"
+      ],
+      "js": [
+        "js/jquery/jquery.js",
+        "src/inject/order.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "icons/import.png",
+    "icons/icon19.png",
+    "icons/icon48.png",
+    "icons/ajax-loader.gif"
+  ]
+}

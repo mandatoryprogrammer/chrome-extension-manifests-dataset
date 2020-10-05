@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_extName__",
+  "description": "__MSG_extDescription__",
+  "version": "0.1.10",
+  "default_locale": "en",
+  "browser_action": {
+    "default_icon": "icons/sheriffLarge.png",
+    "default_popup": "src/browser_action/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "src/page_action/jquery.js",
+      "src/bg/peer.js",
+      "src/bg/biginteger.js",
+      "src/bg/ElGamal.js",
+      "src/page_action/support.js",
+      "src/bg/peerHandler.js",
+      "src/bg/sanbox.js",
+      "src/bg/blacklist.js",
+      "src/bg/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "src/page_action/jquery.js",
+        "src/page_action/support.js",
+        "src/page_action/inject.js"
+      ]
+    }
+  ],
+  "icons": {
+    "64": "icons/sheriffLarge.png"
+  },
+  "permissions": [
+    "activeTab",
+    "notifications",
+    "tabs",
+    "storage",
+    "history",
+    "*://*/*",
+    "cookies",
+    "webNavigation",
+    "contextMenus"
+  ]
+}

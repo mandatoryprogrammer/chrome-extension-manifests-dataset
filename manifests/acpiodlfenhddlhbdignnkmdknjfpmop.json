@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Jewel Luxury Cash Back Shopping",
+  "short_name": "Jewel",
+  "version": "1.1.10",
+  "manifest_version": 2,
+  "description": "Don't miss out on cash back offers from your favorite luxury Jewel retailers",
+  "icons": {
+    "16": "assets/icons/jewel-icon16.png",
+    "48": "assets/icons/jewel-icon48.png",
+    "128": "assets/icons/jewel-icon128.png"
+  },
+  "permissions": [
+    "tabs",
+    "<all_urls>",
+    "cookies",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "web_accessible_resources": [
+    "js/*",
+    "assets/*"
+  ],
+  "background": {
+    "scripts": [
+      "js/bg.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "assets/icons/browser/status/non-partner-19.png",
+      "38": "assets/icons/browser/status/non-partner-38.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/pageView.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.usejewel.com/*"
+      ],
+      "js": [
+        "js/hasExtension.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self';"
+}

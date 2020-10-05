@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_ExtensionName__",
+  "version": "3.1.1",
+  "description": "__MSG_ExtensionDescription__",
+  "homepage_url": "http://rthaut.github.io/YouTubePopoutPlayer/",
+  "default_locale": "en",
+  "icons": {
+    "16": "images/logo/logo-16.png",
+    "32": "images/logo/logo-32.png",
+    "48": "images/logo/logo-48.png",
+    "64": "images/logo/logo-64.png"
+  },
+  "permissions": [
+    "*://*.youtube.com/*",
+    "*://*.youtube-nocookie.com/*",
+    "storage",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "optional_permissions": [
+    "tabs"
+  ],
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": [
+        "*://*.youtube.com/*",
+        "*://*.youtube-nocookie.com/*"
+      ],
+      "js": [
+        "vendor/webextension-polyfill/dist/browser-polyfill.min.js",
+        "scripts/content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "vendor/webextension-polyfill/dist/browser-polyfill.min.js",
+      "scripts/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "images/logo/logo-32.png",
+    "default_title": "__MSG_BrowserActionTitle__"
+  },
+  "commands": {
+    "open-popout": {
+      "suggested_key": {
+        "default": "Ctrl+Up"
+      },
+      "description": "__MSG_OpenPopoutCommandDescription__"
+    }
+  },
+  "minimum_chrome_version": "42.0",
+  "options_ui": {
+    "page": "pages/options/options.html"
+  }
+}

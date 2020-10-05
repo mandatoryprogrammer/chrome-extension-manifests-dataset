@@ -1,0 +1,42 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Yandex TV",
+  "description": "This extension adds a video player to the http://tv.yandex.ru pages",
+  "version": "1.16",
+  "browser_action": {
+    "default_title": "Yandex TV plugin by WorldStreamTV",
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "jquery.js",
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "cookies",
+    "*://tv.yandex.ru/*",
+    "*://*.worldstreamtv.com/*"
+  ],
+  "content_security_policy": "script-src 'self' https://api.worldstreamtv.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://tv.yandex.ru/*"
+      ],
+      "js": [
+        "jquery.js",
+        "doc_loaded.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "/yatv_inject.js",
+    "/yatv_inject.mini.js",
+    "/play.png"
+  ]
+}

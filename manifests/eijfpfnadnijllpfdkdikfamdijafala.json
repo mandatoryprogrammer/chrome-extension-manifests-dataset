@@ -1,0 +1,35 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Permalinks for Google Inbox",
+  "description": "Provides direct URLs to your emails, from Google Inbox.",
+  "version": "0.7",
+  "icons": {
+    "128": "icon.png"
+  },
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": "icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://inbox.google.com/*"
+      ],
+      "js": [
+        "inboxsdk.js",
+        "content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://apis.google.com; object-src 'self'",
+  "permissions": [
+    "identity",
+    "https://inbox.google.com/",
+    "https://mail.google.com/"
+  ],
+  "web_accessible_resources": [
+    "link.png"
+  ],
+  "manifest_version": 2
+}

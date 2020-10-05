@@ -1,0 +1,161 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Symantec VIP Access Manager",
+  "version": "3.0.0.4",
+  "manifest_version": 2,
+  "description": "Symantec VIP Access Manager",
+  "options_page": "optionPage/optionPage.html",
+  "incognito": "split",
+  "icons": {
+    "16": "res/images/symc-16.png",
+    "48": "res/images/symc-48.png",
+    "128": "res/images/symc-128.png"
+  },
+  "browser_action": {
+    "default_icon": "res/images/symcbw-32.png",
+    "default_title": "Symantec VIP Access Manager"
+  },
+  "permissions": [
+    "<all_urls>",
+    "webNavigation",
+    "tabs",
+    "storage",
+    "cookies",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "background": {
+    "scripts": [
+      "common/lib/jquery/jquery-2.1.3.min.js",
+      "common/init/ssgJQuery.js",
+      "trace/traceSpecific.js",
+      "common/trace/trace.js",
+      "common/utils/timers.js",
+      "common/domainMatch/domainMatchUtil.js",
+      "language/languageSpecific.js",
+      "common/language/languageManager.js",
+      "language/backgroundListener.js",
+      "panel/backgroundListener.js",
+      "preferences/backgoundListener.js",
+      "preferences/hostIgnoreListManagement.js",
+      "preferences/preferencesSpecific.js",
+      "common/preferences/preferences.js",
+      "serverStatus/serverStatus.js",
+      "common/serverStatus/serverStatus.js",
+      "serverStatus/logoutHelper.js",
+      "serverStatus/backgoundListener.js",
+      "common/serverStatus/logoutHelper.js",
+      "common/httpRequest/httpRequest.js",
+      "common/serverStatus/sessionAwareness.js",
+      "common/lib/cryptojs/rollups/aes.js",
+      "common/lib/cryptojs/rollups/pbkdf2.js",
+      "common/crypto/crypto.js",
+      "common/injection/lastExecutedApps.js",
+      "common/serverStatus/triggerDataBackground.js",
+      "common/serverStatus/triggerRequest.js",
+      "common/injection/appDataBackground.js",
+      "injection/backgroundListener.js",
+      "credentialAutoUpdate/backgroundListener.js",
+      "common/personalKey/events.js",
+      "personalKey/backgroundDiscoverListener.js",
+      "stepUp/requests.js",
+      "common/stepUp/events.js",
+      "stepUp/backgroundListener.js",
+      "common/notificationEngine/events.js",
+      "common/webEvents/webEvents.js",
+      "webEvents/webEventsBackground.js",
+      "injection/basicAuthentication.js",
+      "init/awarenessHeaderBackground.js",
+      "init/autoDiscoverHostBackground.js",
+      "notificationEngine/genericQuestion.js",
+      "notificationEngine/backgroundNotificationRequests.js",
+      "notificationEngine/backgroundListener.js",
+      "browserActionController/browserActionController.js",
+      "init/backgroundInit.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [
+        "notificationEngine/notification.css"
+      ],
+      "js": [
+        "common/lib/jquery/jquery-2.1.3.min.js",
+        "common/init/ssgJQuery.js",
+        "common/lib/cssesc/cssesc.js",
+        "trace/traceSpecific.js",
+        "common/trace/trace.js",
+        "language/languageSpecific.js",
+        "common/language/languageManager.js",
+        "common/injection/events.js",
+        "common/injection/documentHelper.js",
+        "common/ssgEventManager.js",
+        "common/injection/ajaxInsert.js",
+        "common/ssgServerDiscover.js",
+        "preferences/preferencesSpecific.js",
+        "common/preferences/preferences.js",
+        "common/init/events.js",
+        "common/lib/cryptojs/rollups/aes.js",
+        "common/lib/cryptojs/rollups/pbkdf2.js",
+        "common/crypto/crypto.js",
+        "common/personalKey/events.js",
+        "personalKey/eventProcess.js",
+        "personalKey/discoverEventProcess.js",
+        "common/personalKey/manager.js",
+        "common/stepUp/events.js",
+        "stepUp/eventProcess.js",
+        "common/stepUp/manager.js",
+        "common/serverStatus/triggerDataContent.js",
+        "common/notificationEngine/events.js",
+        "common/notificationEngine/types.js",
+        "common/notificationEngine/notification.js",
+        "notificationEngine/genericQuestionScript.js",
+        "notificationEngine/genericQuestion.js",
+        "notificationEngine/element.js",
+        "notificationEngine/chromeEngineEvents.js",
+        "notificationEngine/chromeEngine.js",
+        "notificationEngine/contentAllListener.js",
+        "common/personalKey/discoverPersonalKey.js",
+        "injection/prerenderedDocument.js",
+        "common/injection/appDataContent.js",
+        "common/injection/autoDiscover.js",
+        "common/injection/inject.js",
+        "common/injection/processDocument.js",
+        "injection/eventProcess.js",
+        "common/credentialAutoUpdate/events.js",
+        "common/credentialAutoUpdate/credentialAutoUpdate.js",
+        "credentialAutoUpdate/eventProcess.js",
+        "webEvents/webEventsSpecific.js",
+        "common/webEvents/webEvents.js",
+        "init/contentInit.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [],
+      "js": [
+        "notificationEngine/contentParentListener.js",
+        "injection/eventParentProcess.js",
+        "webEvents/eventParentProcess.js",
+        "common/personalKey/events.js",
+        "common/stepUp/events.js",
+        "stepUp/eventParentProcess.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    "common/lib/jquery/jquery-2.1.3.min.map",
+    "res/lang/*",
+    "res/fonts/*",
+    "common/injection/ajaxIntercept.js"
+  ]
+}

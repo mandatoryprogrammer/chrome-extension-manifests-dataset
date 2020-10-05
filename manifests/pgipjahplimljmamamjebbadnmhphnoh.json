@@ -1,0 +1,75 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Cluck: Avoid getting scammed on Craigslist",
+  "version": "0.0.27",
+  "manifest_version": 2,
+  "description": "See what other people have to say about listings on Craigslist",
+  "homepage_url": "http://cluckcluck.co",
+  "content_security_policy": "script-src 'self' https://www.googletagmanager.com; object-src 'self'",
+  "icons": {
+    "128": "icons/crowingHen128.png"
+  },
+  "background": {
+    "scripts": [
+      "js/auth0chrome.min.js",
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icons/crowingHen128.png",
+    "default_title": "Cluck"
+  },
+  "permissions": [
+    "https://hjeb703vyc.execute-api.us-west-2.amazonaws.com/prod/*",
+    "notifications",
+    "identity",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.craigslist.org/*.html",
+        "https://*.craigslist.ca/*.html",
+        "https://*.craigslist.co.uk/*.html",
+        "https://*.craigslist.jp/*.html",
+        "https://*.craigslist.org/*",
+        "https://post.craigslist.org/*",
+        "https://*.craigslist.org/*",
+        "https://www.tineye.com/*"
+      ],
+      "css": [
+        "inject.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.craigslist.org/*.html",
+        "https://*.craigslist.ca/*.html",
+        "https://*.craigslist.co.uk/*.html",
+        "https://*.craigslist.jp/*.html",
+        "https://*.craigslist.org/*",
+        "https://post.craigslist.org/*",
+        "https://*.craigslist.org/*",
+        "https://www.tineye.com/*"
+      ],
+      "js": [
+        "js/lib/apiGateway-js-sdk/lib/axios/dist/axios.standalone.js",
+        "js/lib/apiGateway-js-sdk/lib/CryptoJS/rollups/hmac-sha256.js",
+        "js/lib/apiGateway-js-sdk/lib/CryptoJS/rollups/sha256.js",
+        "js/lib/apiGateway-js-sdk/lib/CryptoJS/components/hmac.js",
+        "js/lib/apiGateway-js-sdk/lib/CryptoJS/components/enc-base64.js",
+        "js/lib/apiGateway-js-sdk/lib/url-template/url-template.js",
+        "js/lib/apiGateway-js-sdk/lib/apiGatewayCore/sigV4Client.js",
+        "js/lib/apiGateway-js-sdk/lib/apiGatewayCore/apiGatewayClient.js",
+        "js/lib/apiGateway-js-sdk/lib/apiGatewayCore/simpleHttpClient.js",
+        "js/lib/apiGateway-js-sdk/lib/apiGatewayCore/utils.js",
+        "js/lib/apiGateway-js-sdk/apigClient.js",
+        "js/inject.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "js/lib/googleAnalytics.js"
+  ]
+}

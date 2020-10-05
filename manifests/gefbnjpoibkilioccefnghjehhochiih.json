@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "WebRTC Development",
+  "description": "Development Chrome extension for webrtc based experiments",
+  "version": "1",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/icon48.png",
+    "default_title": "WebRTC Development"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "desktopCapture",
+    "activeTab",
+    "contextMenus",
+    "tabs",
+    "http://192.168.0.119/*",
+    "http://*.google.com/",
+    "https://192.168.0.119:8000/TFXCrossSiteProj",
+    "https://www.villageexperts.com/",
+    "https://tfxserver.above-inc.com/"
+  ],
+  "content_scripts": [
+    {
+      "js": [
+        "content.js"
+      ],
+      "all_frames": true,
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "https://tfxserver.above-inc.com/"
+      ]
+    }
+  ],
+  "omnibox": {
+    "keyword": "altanai,webrtc,videochat,chat,conferencing,communication,collaboration"
+  },
+  "web_accessible_resources": [
+    "environment.js"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'  https://apis.google.com/ https://www.googleapis.com/language/ https://api.flickr.com/  https://connect.facebook.net https://tfxserver.above-inc.com/; object-src 'self'"
+}

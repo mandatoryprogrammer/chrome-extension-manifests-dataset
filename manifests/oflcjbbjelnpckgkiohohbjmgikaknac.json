@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "ChromeKey",
+  "version": "1.0.1.5",
+  "permissions": [
+    "storage"
+  ],
+  "description": "use keyboard to effcient browse web pages(support website: baidu.com)",
+  "icons": {},
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "options_page": "options.html",
+  "browser_action": {
+    "default_icon": {},
+    "default_title": "ChromeKey",
+    "default_popup": "Main.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.baidu.com/*",
+        "http://www.baidu.com/*"
+      ],
+      "js": [
+        "jquery-2.1.4.min.js",
+        "baidu.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "jquery-2.1.4.min.js",
+        "all.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file://*/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://baike.baidu.com/*",
+        "https://baike.baidu.com/*"
+      ],
+      "js": [
+        "matchesJS/baikeBaidu.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

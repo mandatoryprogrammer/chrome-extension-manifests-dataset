@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Smart Bookmarks for YouTube: Productivity Up",
+  "short_name": "smart-bookmarks",
+  "version": "0.1.0.1",
+  "default_locale": "en",
+  "description": "Adds the ability to add a bookmark to any place on a YouTube video (aka time-tags, notes, private comments).",
+  "permissions": [
+    "storage"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com 'unsafe-eval'; object-src 'self'",
+  "author": "Pavel Sapehin",
+  "icons": {
+    "16": "icon-32.png",
+    "128": "icon-128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "icon-32.png",
+      "38": "icon-32.png"
+    },
+    "default_title": "Smart Bookmarks for YouTube",
+    "default_popup": "index.html"
+  },
+  "background": {
+    "scripts": [
+      "buy.js",
+      "background-script.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.youtube.com/*",
+        "*://youtube.com/*",
+        "*://youtu.be/*",
+        "*://*.skillshare.com/*",
+        "*://skillshare.com/*",
+        "*://coursera.org/*",
+        "*://*.coursera.org/*",
+        "*://*.khanacademy.org/*",
+        "*://khanacademy.org/*",
+        "*://*.vimcasts.org/*",
+        "*://vimcasts.org/*",
+        "*://*.edx.org/*",
+        "*://edx.org/*"
+      ],
+      "js": [
+        "content-script.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "components/snackbar/*",
+    "component-injector.js"
+  ],
+  "commands": {}
+}

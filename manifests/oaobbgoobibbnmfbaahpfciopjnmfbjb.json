@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "background": {
+    "scripts": [
+      "image-to-grayscale.js",
+      "background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "css": [
+        "styles.css"
+      ],
+      "js": [
+        "intercept.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "ipc-bridge.js"
+      ],
+      "matches": [
+        "https://webrtc.reachuc.com:443/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "description": "Click-2-Call finds phone numbers in pages making them clickable to make a call from the ReachUC on your pc with your PBX account.",
+  "icons": {
+    "128": "icon.png"
+  },
+  "manifest_version": 2,
+  "name": "ReachUC C2C",
+  "permissions": [
+    "tabs",
+    "storage"
+  ],
+  "version": "1.0.22",
+  "web_accessible_resources": [
+    "ipc-bridge-init.js",
+    "icon.png"
+  ]
+}

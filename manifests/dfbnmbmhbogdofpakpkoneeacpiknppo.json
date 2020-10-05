@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "G-Track",
+  "description": "This extension will append an icon in the gmail compose box and a pop-up will appear on click over that icon near address bar.",
+  "version": "1.0",
+  "manifest_version": 2,
+  "icons": {
+    "128": "src/imgicon/icon96.png"
+  },
+  "browser_action": {
+    "default_title": "TNT Plugin",
+    "default_popup": "src/bg/background.html",
+    "default_icon": {
+      "128": "src/imgicon/icon96.png"
+    }
+  },
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "src/bg/jquery-3.3.1.js",
+      "src/bg/script.js",
+      "src/bg/BackgroundScript.js"
+    ]
+  },
+  "permissions": [
+    "notifications",
+    "tabs",
+    "activeTab",
+    "identity",
+    "storage",
+    "https://mail.google.com/*"
+  ],
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "src/bg/jquery-3.3.1.js",
+        "src/bg/script.js",
+        "src/bg/ContentScript.js"
+      ],
+      "css": [
+        "src/bg/mycss.css",
+        "src/bg/MainView.css"
+      ]
+    }
+  ],
+  "content_security_policy": "default-src 'self';connect-src * data: blob: filesystem:;style-src 'self' data: chrome-extension-resource: 'unsafe-inline';img-src 'self' data: chrome-extension-resource:;frame-src 'self' data: chrome-extension-resource:;font-src 'self' data: chrome-extension-resource:;media-src * data: blob: filesystem:; object-src 'self'",
+  "oauth2": {
+    "client_id": "54597428874-rjk935mojlv2vlq6rvht75vrbik5h162.apps.googleusercontent.com",
+    "scopes": [
+      "https://mail.google.com/",
+      "https://www.googleapis.com/auth/userinfo.email"
+    ]
+  },
+  "web_accessible_resources": [
+    "src/imgicon/icon96.png"
+  ]
+}

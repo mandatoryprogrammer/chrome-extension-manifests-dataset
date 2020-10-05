@@ -1,0 +1,76 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Learnmatch Web Dictionary",
+  "description": "Look up any word on any web page in the Learnmatch Web Dictionary.",
+  "version": "4.1.1",
+  "manifest_version": 2,
+  "background": {
+    "scripts": [
+      "src/js/background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "webNavigation",
+    "webRequest",
+    "*://*.youtube.com/*",
+    "*://*.netflix.com/*",
+    "*://*.nflxvideo.net/*",
+    "activeTab"
+  ],
+  "content_scripts": [
+    {
+      "js": [
+        "src/js/content.js"
+      ],
+      "matches": [
+        "*://*.youtube.com/*",
+        "*://*.netflix.com/*"
+      ],
+      "run_at": "document_end",
+      "css": [
+        "src/css/content.css"
+      ]
+    },
+    {
+      "js": [
+        "src/js/content_all.js"
+      ],
+      "css": [
+        "src/css/content_all.css"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "src/js/main.js",
+    "src/js/parser.js",
+    "src/js/app.js",
+    "src/js/ytApp.js",
+    "src/js/nfApp.js",
+    "src/js/player-finder.js",
+    "src/js/draggable.js",
+    "src/js/interact.min.js",
+    "src/img/logo.png"
+  ],
+  "browser_action": {
+    "default_popup": "src/popup.html",
+    "default_icon": {
+      "16": "src/img/logo16.png",
+      "32": "src/img/logo32.png",
+      "48": "src/img/logo48.png",
+      "128": "src/img/logo128.png"
+    }
+  },
+  "icons": {
+    "16": "src/img/logo.png",
+    "32": "src/img/logo.png",
+    "48": "src/img/logo.png",
+    "128": "src/img/logo.png"
+  },
+  "options_page": "src/options.html"
+}

@@ -1,0 +1,72 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "author": "Malwarebytes",
+  "name": "Malwarebytes Browser Guard",
+  "description": "The fastest and safest web browsing experience.",
+  "version": "2.2.12",
+  "icons": {
+    "128": "app/assets/icon.png"
+  },
+  "web_accessible_resources": [
+    "redirects/*",
+    "vendor/*",
+    "app/eventpages/block.html",
+    "app/eventpages/downloading.html",
+    "app/scripts/injection-instart.js"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.msn.com/*"
+    ]
+  },
+  "background": {
+    "scripts": [
+      "vendor/vendor.js",
+      "app/scripts/app-consts.js",
+      "utils/bloom-filter.js",
+      "utils/indexed-database.js",
+      "utils/indexed-database-file.js",
+      "utils/file.js",
+      "app/scripts/app.js",
+      "utils/polyfill.js",
+      "utils/semver.js",
+      "utils/updater.js",
+      "utils/utils.js",
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "utils/polyfill.js",
+        "utils/utils.js",
+        "content-tss.js",
+        "content-ads.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "match_about_blank": true
+    }
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "browser_action": {
+    "default_icon": "app/assets/icon.png",
+    "default_popup": "app/pop.html",
+    "default_title": "Malwarebytes"
+  },
+  "permissions": [
+    "downloads",
+    "storage",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "unlimitedStorage",
+    "<all_urls>"
+  ],
+  "incognito": "split"
+}

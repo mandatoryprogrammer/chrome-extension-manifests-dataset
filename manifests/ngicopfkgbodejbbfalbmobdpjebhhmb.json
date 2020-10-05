@@ -1,0 +1,37 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "My IMDb",
+  "version": "4.2",
+  "description": "Highlights the movies you've already seen (voted for) when searching IMDb or displaying actor/director pages.",
+  "icons": {
+    "48": "myimdb48.png",
+    "128": "myimdb128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.imdb.com/*",
+        "https://*.imdb.com/*"
+      ],
+      "exclude_globs": [
+        "http://*.imdb.com/user/ur*/lists*",
+        "http://*.imdb.com/user/ur*/ratings*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "myimdb.js"
+      ],
+      "css": [
+        "myimdb.css"
+      ]
+    }
+  ],
+  "manifest_version": 2
+}

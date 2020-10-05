@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Omnity Web Clipper (Beta)",
+  "version": "2.0.0",
+  "manifest_version": 2,
+  "description": "Captures selected text from any webpage to generate an Omnity.io search.",
+  "homepage_url": "https://www.omnity.io",
+  "icons": {
+    "16": "icons/omnity-16.png",
+    "48": "icons/omnity-48.png",
+    "128": "icons/omnity-128.png"
+  },
+  "background": {
+    "page": "src/bg/background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icons/omnity-109.png",
+    "default_title": "Omnity Web Clipper"
+  },
+  "permissions": [
+    "notifications",
+    "tabs",
+    "http://*/",
+    "https://*/"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [
+        "css/styles.css"
+      ],
+      "js": [
+        "bower_components/jquery/dist/jquery.min.js",
+        "bower_components/underscore/underscore-min.js",
+        "src/lib/gmail.js",
+        "src/inject/common.js",
+        "src/inject/clip_document.js",
+        "src/inject/clip_email.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "icons/omnity-128.png"
+  ]
+}

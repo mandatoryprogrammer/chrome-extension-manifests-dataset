@@ -1,0 +1,87 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "author": "informUnity",
+  "manifest_version": 2,
+  "description": "__MSG_appDesc__",
+  "icons": {
+    "16": "img/logo-16.png",
+    "32": "img/logo-32.png",
+    "48": "img/logo-48.png",
+    "64": "img/logo-64.png",
+    "128": "img/logo-128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "22": "img/menubar-inactive.png"
+    },
+    "default_popup": "index.html",
+    "default_title": "Softphone24"
+  },
+  "background": {
+    "scripts": [
+      "js/vendor_bg.js",
+      "js/templates.js",
+      "js/app_i18n.js",
+      "js/app_i18n_plugins.js",
+      "js/app_bg_plugins.js",
+      "js/app_bg.js"
+    ]
+  },
+  "commands": {
+    "action-accept-hangup": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+A"
+      },
+      "description": "Accept an incoming call or hangup an accepted call."
+    },
+    "action-decline-new": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Z"
+      },
+      "description": "Decline an incoming call or switch to a new call."
+    },
+    "action-dnd": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+S"
+      },
+      "description": "Toggle do-not-disturb."
+    },
+    "action-hold-active": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+X"
+      },
+      "description": "Toggle on-hold on the active accepted call."
+    }
+  },
+  "permissions": [
+    "*://*/*",
+    "contextMenus",
+    "notifications",
+    "storage",
+    "tabs"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/app_observer.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "fonts/*.woff2",
+    "img/*.png",
+    "css/*.css",
+    "js/*.map"
+  ],
+  "default_locale": "ru",
+  "name": "__MSG_appName__",
+  "homepage_url": "https://informunity.ru",
+  "version": "2.0.2",
+  "minimum_chrome_version": "70"
+}

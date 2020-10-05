@@ -1,0 +1,107 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Lasertoast Trading Suite",
+  "short_name": "UES",
+  "version": "4.3.1",
+  "description": "Improvements to the Ustocktrade interface for a better trading experience.",
+  "icons": {
+    "16": "images/icon-16.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
+  },
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "js/env.js",
+      "js/moment.js",
+      "js/jquery-3.3.1.min.js",
+      "js/jwt-decode.min.js",
+      "js/auth0chrome.min.js",
+      "js/background_script.js"
+    ]
+  },
+  "permissions": [
+    "*://webux.ustocktrade.com/*",
+    "*://webux.ustocktrain.com/*",
+    "contextMenus",
+    "activeTab",
+    "storage",
+    "declarativeContent",
+    "notifications",
+    "identity"
+  ],
+  "page_action": {
+    "default_icon": "images/icon-16.png",
+    "default_popup": "options.html"
+  },
+  "web_accessible_resources": [
+    "templates/*.handlebars",
+    "images/*.png",
+    "options.html",
+    "https://lasertoast.io/img/logo-120.png",
+    "http://lasertoast.io/img/logo-120.png",
+    "https://fonts.gstatic.com/s/materialicons/v41/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2",
+    "https://fonts.googleapis.com/css?family=Cairo|Kodchasan|Niramit|Roboto",
+    "https://fonts.googleapis.com/icon?family=Material+Icons"
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  },
+  "commands": {
+    "toggle-command-center": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+C",
+        "mac": "Command+Shift+C"
+      },
+      "description": "Toggle the main command center panel"
+    },
+    "execute-buy": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+B",
+        "mac": "Command+Shift+B"
+      },
+      "description": "Execute a buy with the current Buy settings"
+    },
+    "execute-sell": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Z",
+        "mac": "Command+Shift+Z"
+      },
+      "description": "Execute a sell with the current Sell settings"
+    },
+    "execute-panic-sell": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+P",
+        "mac": "Command+Shift+P"
+      },
+      "description": "Cancel all pending transactions and sell all holdings immediately at the current bid"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://webux.ustocktrade.com/inet/webux/trading.html*",
+        "*://webux.ustocktrain.com/inet/webux/trading.html*"
+      ],
+      "js": [
+        "js/jquery-3.3.1.min.js",
+        "js/jquery-ui.min.js",
+        "js/whiskeybourbon.js",
+        "js/jwt-decode.min.js",
+        "js/env.js",
+        "js/handlebars.min-latest.js",
+        "js/auth0chrome.min.js",
+        "js/mutation-summary.js",
+        "js/materialize.js",
+        "js/script.js",
+        "js/command_center.js"
+      ],
+      "css": [
+        "css/main.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

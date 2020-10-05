@@ -1,0 +1,96 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "军火库",
+  "description": "军火库采集图片",
+  "version": "3.2.5",
+  "permissions": [
+    "contextMenus",
+    "notifications",
+    "storage",
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "activeTab",
+    "<all_urls>"
+  ],
+  "background": {
+    "page": "background.html"
+  },
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "icon.png"
+  },
+  "manifest_version": 2,
+  "content_scripts": [
+    {
+      "exclude_globs": [
+        "http://j-h-k.com*",
+        "http://www.j-h-k.com*",
+        "http://sso.huaban.com*",
+        "http://localhost*",
+        "http://local*",
+        "http://127.0.0.1*"
+      ],
+      "include_globs": [
+        "*"
+      ],
+      "js": [
+        "js/script.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "js/page.js",
+        "js/shortcut.js"
+      ],
+      "css": [
+        "css/capture.css"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "js/isload.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "js": [
+        "js/isinstalled.js"
+      ],
+      "matches": [
+        "http://www.j-h-k.com/*",
+        "https://www.j-h-k.com/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "js": [
+        "js/transmit.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://j-h-k.com https://ssl.google-analytics.com; object-src 'self'",
+  "minimum_chrome_version": "26"
+}

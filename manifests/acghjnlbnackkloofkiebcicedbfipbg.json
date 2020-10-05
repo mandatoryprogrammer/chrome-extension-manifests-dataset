@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Samosa",
+  "description": "Share audio clips in facebook",
+  "version": "1.5",
+  "background": {
+    "scripts": [
+      "js/jquery-2.1.4.min.js",
+      "js/background.js",
+      "js/client.js"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://apis.google.com; object-src 'self'",
+  "permissions": [
+    "webRequest",
+    "clipboardWrite",
+    "https://www.facebook.com/*",
+    "https://apis.google.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.facebook.com/*"
+      ],
+      "js": [
+        "js/jquery-2.1.4.min.js",
+        "js/parse.js",
+        "js/main.js"
+      ],
+      "css": [
+        "css/main.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "images/loading.gif",
+    "images/icon.png",
+    "modal.html",
+    "css/modal.css",
+    "js/jquery-2.1.4.min.js",
+    "js/modal.js",
+    "images/play.png",
+    "images/pause.png"
+  ],
+  "browser_action": {
+    "default_icon": "images/icon.png",
+    "default_popup": "popup.html"
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Audio Only Youtube",
+  "version": "0.8.2",
+  "manifest_version": 2,
+  "description": "Enables you to disable video streams on youtube and listen audio",
+  "offline_enabled": true,
+  "icons": {
+    "19": "img/icon19.png",
+    "38": "img/icon38.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "storage",
+    "*://www.youtube.com/*",
+    "*://*.googlevideo.com/*"
+  ],
+  "browser_action": {
+    "default_title": "Audio Only Youtube"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.youtube.com/*"
+      ],
+      "js": [
+        "js/content-script.js"
+      ],
+      "css": [
+        "css/content-script.css"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "options_page": "html/options.html"
+}

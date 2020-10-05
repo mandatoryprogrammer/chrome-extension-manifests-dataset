@@ -1,0 +1,91 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "short_name": "__MSG_appShortName__",
+  "version": "0.4.19",
+  "manifest_version": 2,
+  "description": "__MSG_appDescription__",
+  "icons": {
+    "16": "images/icon-64.png",
+    "128": "images/icon-128.png"
+  },
+  "applications": {
+    "gecko": {
+      "id": "fossaguard@fossa.me",
+      "strict_min_version": "65.0"
+    }
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "fossaguard@fossa.me",
+      "strict_min_version": "65.0"
+    }
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon-64.png",
+      "38": "images/icon-64.png"
+    },
+    "default_title": "__MSG_appName__"
+  },
+  "options_ui": {
+    "page": "settings.html",
+    "chrome_style": true,
+    "open_in_tab": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "scripts/contentscript.js"
+      ],
+      "css": [
+        "styles/contentstyle.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    "scripts/vendor.js",
+    "compose.html",
+    "styles/compose.css",
+    "scripts/compose.js",
+    "view.html",
+    "styles/view.css",
+    "scripts/view.js",
+    "scripts/proxy.js",
+    "images/*"
+  ],
+  "permissions": [
+    "storage",
+    "identity",
+    "identity.email",
+    "https://www.googleapis.com/gmail/*",
+    "https://www.google.com/m8/feeds/contacts/*",
+    "https://fossa.me/",
+    "http://*/",
+    "https://*/",
+    "tabs",
+    "windows"
+  ],
+  "oauth2": {
+    "client_id": "1001103668854-e5ilhmqqrg7hvs5n47t36njcg0a8fjrs.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/gmail.readonly",
+      "https://www.googleapis.com/auth/gmail.send",
+      "https://www.googleapis.com/auth/gmail.labels",
+      "https://www.googleapis.com/auth/gmail.modify",
+      "https://www.googleapis.com/auth/contacts.readonly"
+    ]
+  }
+}

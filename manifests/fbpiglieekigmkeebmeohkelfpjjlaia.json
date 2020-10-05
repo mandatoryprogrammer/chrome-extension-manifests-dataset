@@ -1,0 +1,101 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "2.6.2",
+  "name": "Harvest Time Tracker",
+  "description": "Track time from Chrome, Edge, Firefox and within popular project management tools.",
+  "author": "Iridesco, LLC d/b/a Harvest",
+  "manifest_version": 2,
+  "icons": {
+    "16": "images/h-app@16px.png",
+    "48": "images/h-app@48px.png",
+    "128": "images/h-app@128px.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/h-toolbar-off@19px.png",
+      "38": "images/h-toolbar-off@38px.png"
+    },
+    "default_title": "Start a Harvest timer",
+    "default_popup": "popup.html"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+Shift+H"
+      }
+    }
+  },
+  "background": {
+    "scripts": [
+      "js/background/config.js",
+      "js/background/cookie.js",
+      "js/background.js"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://*.harvestapp.com https://*.harvestapp.localhost; object-src 'self'",
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "cookies",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.harvestapp.com/time*",
+        "http://*.harvestapp.com/time*",
+        "http://*.harvestapp.localhost/time*"
+      ],
+      "js": [
+        "js/forwarding.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://basecamp.com/*"
+      ],
+      "js": [
+        "js/forwarding.js",
+        "js/profiles/basecamp2.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://3.basecamp.com/*"
+      ],
+      "js": [
+        "js/forwarding.js",
+        "js/profiles/basecamp3.js"
+      ],
+      "css": [
+        "css/basecamp3.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://trello.com/*"
+      ],
+      "js": [
+        "js/forwarding.js",
+        "js/profiles/trello.js"
+      ],
+      "css": [
+        "css/trello.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://github.com/*"
+      ],
+      "js": [
+        "js/forwarding.js",
+        "js/profiles/github.js"
+      ],
+      "css": [
+        "css/github.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": []
+}

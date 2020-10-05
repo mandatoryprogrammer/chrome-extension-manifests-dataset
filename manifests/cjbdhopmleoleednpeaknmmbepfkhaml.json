@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "PubMonkey",
+  "description": "Automate order setup and configuration of MoPub and Google Ad Manager ad servers.",
+  "version": "2.7.0.57",
+  "icons": {
+    "16": "images/16x16-favicon-PubMonkey.png",
+    "32": "images/32x32-logo-PubMonkey.png",
+    "48": "images/48x48-logo-PubMonkey.png",
+    "64": "images/64x64-logo-PubMonkey.png",
+    "128": "images/128x128-logo-PubMonkey.png"
+  },
+  "background": {
+    "scripts": [
+      "background/index.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "https://app.mopub.com/*",
+    "identity",
+    "https://ads.google.com/apis/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://app.mopub.com/*"
+      ],
+      "js": [
+        "content/content.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "externally_connectable": {
+    "matches": [
+      "https://app.mopub.com/*"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "images/16x16-favicon-PubMonkey.png",
+      "32": "images/32x32-logo-PubMonkey.png",
+      "48": "images/48x48-logo-PubMonkey.png",
+      "64": "images/64x64-logo-PubMonkey.png",
+      "128": "images/128x128-logo-PubMonkey.png"
+    },
+    "default_title": "PubMonkey"
+  },
+  "oauth2": {
+    "client_id": "917236193237-q3ggaet87ksdf2ql5joqqauccffsmnsg.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/dfp"
+    ]
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqSHaLCt6ViRzqae5i9gmz6wk0xzKDdG4Dg2PmhVz9+fj5cMFVolAzC194i3KvL+JP+ubQFI0zg1pyjS/152k3T7PHdLqCrJSoymKbuPfcMHyA5IsuqDw3m9MEyPz/EFqJpuEA7srfz5O2JbiVC6U6gzArPc2C4xUnwqu+FSdcjHBRT2e3tcOxUyjRS2EuClEBbWh431ub6OTWPxjpYvnidlORgSBe5p8ma6UW+uuOE20VcF/D++0O+7Uc1SLlx+VbQ764IQJf8Sj74tEv51Rt8QO8E2tO+JsQsECRiXcBUGL2TACo1yGVCd881jNSViNg+ahSAbN7yDXaNwmjACgfwIDAQAB"
+}

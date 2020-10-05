@@ -1,0 +1,85 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Aqdata",
+  "version": "1.1.9",
+  "description": "It easy to find niche for Amazon product and smart to check history price of amazon listing and easy check rank of history.",
+  "icons": {
+    "38": "images/38.png",
+    "48": "images/48.png",
+    "128": "images/128.png"
+  },
+  "options_page": "settings.html",
+  "author": "http://www.aqdata.com",
+  "homepage_url": "http://www.aqdata.com",
+  "permissions": [
+    "*://*.herokuapp.com/*",
+    "tabs",
+    "background",
+    "storage",
+    "unlimitedStorage",
+    "http://*/*",
+    "https://*/*",
+    "cookies"
+  ],
+  "browser_action": {
+    "default_icon": "images/38.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "js/libraries/jquery.min.js",
+      "js/libraries/bootstrap.js",
+      "js/libraries/helper.js",
+      "js/background.js",
+      "js/libraries/hmac-sha256.js",
+      "js/libraries/enc-base64.js"
+    ],
+    "persistent": true
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://ssl.google-analytics.com; object-src 'self'",
+  "web_accessible_resources": [
+    "*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.amazon.com/*",
+        "*://www.amazon.co.uk/*",
+        "*://www.amazon.fr/*",
+        "*://www.amazon.de/*",
+        "*://www.amazon.ca/*",
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/libraries/jquery.min.js",
+        "js/libraries/jquery-ui.js",
+        "js/libraries/enscroll.js",
+        "js/libraries/jquery.tablesorter.js",
+        "js/libraries/jquery.stickytableheaders.js",
+        "js/libraries/table2csv.js",
+        "js/regexer.js",
+        "js/common.js",
+        "js/options.js",
+        "js/parser.js",
+        "js/filter.js",
+        "js/profit.js",
+        "js/currentState.js",
+        "js/productPage.js",
+        "js/sellerPage.js",
+        "js/storefront.js",
+        "js/aqPopup.js",
+        "js/libraries/html2canvas.js"
+      ],
+      "css": [
+        "css/aqPopup.css",
+        "css/jquery-ui.css",
+        "css/filter.css",
+        "css/options.css",
+        "css/profit.css"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

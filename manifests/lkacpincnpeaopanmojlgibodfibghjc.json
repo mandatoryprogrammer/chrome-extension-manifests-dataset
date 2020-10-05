@@ -1,0 +1,97 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "小满助手",
+  "manifest_version": 2,
+  "description": "小满助手",
+  "version": "1.3.1",
+  "default_locale": "zh_CN",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.google.com/search*",
+        "*://*.google.com.hk/search*",
+        "*://*.google.com.tw/search*",
+        "*://*.google.com.au/search*",
+        "*://*.google.co.jp/search*",
+        "*://*.google.co.uk/search*",
+        "*://*.google.fr/search*",
+        "*://*.google.de/search*",
+        "*://*.google.it/search*",
+        "*://*.google.nl/search*",
+        "*://*.google.ch/search*"
+      ],
+      "run_at": "document_end",
+      "css": [
+        "css/googleSearch.css"
+      ],
+      "js": [
+        "scripts/googleSearch.js"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "*://*.xiaoman.cn/*",
+        "*://*.xiaoman.site/*",
+        "*://*.xiaoman.co/*",
+        "*://*.xiaoman.cc/*",
+        "*://*.m.tips/*"
+      ],
+      "run_at": "document_end",
+      "css": [
+        "css/finder.css"
+      ],
+      "js": [
+        "scripts/finder.js"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "scripts/content.js"
+      ],
+      "css": [
+        "css/content.css"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "img/icon@16.png",
+    "48": "img/icon@48.png",
+    "128": "img/icon@128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "img/icon@16.png",
+      "48": "img/icon@48.png",
+      "128": "img/icon@128.png"
+    },
+    "default_title": "正在运行",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "tabs",
+    "nativeMessaging",
+    "background",
+    "proxy",
+    "cookies",
+    "storage",
+    "<all_urls>"
+  ],
+  "web_accessible_resources": [
+    "img/*"
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Vidphon",
+  "short_name": "Vidphon",
+  "author": "",
+  "version": "0.3",
+  "manifest_version": 2,
+  "minimum_chrome_version": "49",
+  "description": "Vidphon extension to easily record calls and webinars locally on your system.",
+  "homepage_url": "https://vidphon.com",
+  "background": {
+    "scripts": [
+      "background/background.common.js",
+      "background/background.js",
+      "background/background.desktopCapture.js",
+      "background/background.tabCapture.js",
+      "background/background.badgeText.js",
+      "background/background.getUserMedia.js",
+      "background/background.messaging.js",
+      "background/background.players.js",
+      "RecordRTC/MediaStreamRecorder.js",
+      "RecordRTC/MultiStreamRecorder.js",
+      "RecordRTC/MultiStreamsMixer.js",
+      "RecordRTC/StereoAudioRecorder.js",
+      "RecordRTC/DiskStorage.js",
+      "RecordRTC/EBML.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://localhost:8000/*",
+        "https://localhost:8000/*",
+        "https://vidphon.com/*",
+        "https://test.vidphon.com/*",
+        "https://test1.vidphon.com/*",
+        "https://test2.vidphon.com/*"
+      ],
+      "js": [
+        "background/background.contentScript.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    }
+  ],
+  "browser_action": {
+    "default_icon": "images/main-icon.png",
+    "default_title": "Record Meeting/Webinar",
+    "default_popup": "dropdown.html"
+  },
+  "icons": {
+    "16": "images/main-icon.png",
+    "22": "images/main-icon.png",
+    "32": "images/main-icon.png",
+    "48": "images/main-icon.png",
+    "128": "images/main-icon.png"
+  },
+  "permissions": [
+    "desktopCapture",
+    "storage",
+    "tabs",
+    "tabCapture",
+    "activeTab",
+    "http://localhost:8000/*",
+    "https://localhost:8000/*",
+    "https://vidphon.com/*",
+    "https://test.vidphon.com/*",
+    "https://test1.vidphon.com/*",
+    "https://test2.vidphon.com/*",
+    "<all_urls>"
+  ],
+  "web_accessible_resources": [
+    "images/main-icon.png"
+  ]
+}

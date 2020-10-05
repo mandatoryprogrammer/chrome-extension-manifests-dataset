@@ -1,0 +1,73 @@
+{
+  "name": "Chess.com Analysis at Lichess",
+  "version": "3.4.0",
+  "manifest_version": 2,
+  "description": "Opens PGN of a game from chess.com or chessgames.com in lichess.org analysis",
+  "homepage_url": "http://www.zerosharp.com",
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "icons": {
+    "128": "icons/knight128.png",
+    "16": "icons/knight16.png",
+    "256": "icons/knight256.png",
+    "32": "icons/knight32.png",
+    "512": "icons/knight512.png",
+    "64": "icons/knight64.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "js/chrome-extension-async.js",
+      "js/execute-async-function.js",
+      "js/jquery-3.3.1.min.js",
+      "src/bg/background.js",
+      "src/bg/getpgn.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "js/jquery-3.3.1.min.js",
+        "src/bg/analysis.js"
+      ],
+      "matches": [
+        "https://*.lichess.org/paste"
+      ]
+    },
+    {
+      "css": [
+        "css/getpgn.css"
+      ],
+      "js": [
+        "js/jquery-3.3.1.min.js",
+        "src/bg/getpgn.js"
+      ],
+      "matches": [
+        "https://www.chess.com/live*",
+        "https://www.chess.com/play/computer",
+        "https://www.chess.com/live/game/*",
+        "https://www.chess.com/game/live/*",
+        "https://www.chess.com/analysis/game/live/*",
+        "https://www.chess.com/daily/game/*",
+        "http://www.chessgames.com/perl/chessgame*",
+        "https://chess-db.com/public/game.jsp*",
+        "https://chesstempo.com/gamedb/*/*",
+        "https://old.chesstempo.com/gamedb/*/*"
+      ]
+    }
+  ],
+  "page_action": {
+    "default_icon": {
+      "128": "icons/knight128.png",
+      "16": "icons/knight16.png",
+      "256": "icons/knight256.png",
+      "32": "icons/knight32.png",
+      "512": "icons/knight512.png",
+      "64": "icons/knight64.png"
+    }
+  },
+  "permissions": [
+    "webNavigation",
+    "activeTab"
+  ]
+}

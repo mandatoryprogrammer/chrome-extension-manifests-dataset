@@ -1,0 +1,70 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Classroom Quickview",
+  "description": "__MSG_extDescription__",
+  "version": "0.0.23",
+  "default_locale": "en",
+  "browser_action": {
+    "default_icon": "tafel.png"
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png",
+    "512": "icon512.png"
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "https://accounts.google.com/o/oauth2/token",
+    "https://cq.strempfer.works/*",
+    "https://classroom.googleapis.com/*",
+    "unlimitedStorage",
+    "https://www.googleapis.com/auth/classroom.courses.readonly",
+    "identity",
+    "alarms",
+    "https://maps.googleapis.com/"
+  ],
+  "content_security_policy": "script-src 'self' https://maps.googleapis.com/; object-src 'self'",
+  "web_accessible_resources": [
+    "oauth.html",
+    "chrome_ex_oauthsimple.html"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://strempfer.works/authorize-classroom-quickview/*"
+      ],
+      "js": [
+        "oauth_inject.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://cq.strempfer.works/*",
+        "https://cq.strempfer.works/*"
+      ],
+      "js": [
+        "extension_installed.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "chrome_url_overrides": {
+    "newtab": "dashboard.html"
+  },
+  "background": {
+    "scripts": [
+      "jquery-3.js",
+      "background.js"
+    ]
+  },
+  "oauth2": {
+    "client_id": "607980826808-ganncvfnc5r8csio9rct0g61n6u10v04.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/classroom.courses.readonly"
+    ]
+  }
+}

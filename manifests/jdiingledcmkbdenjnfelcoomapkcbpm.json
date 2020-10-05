@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "LinkHay QuickView",
+  "version": "1.1.16",
+  "description": "Cho phép xem nhanh trong LinkHay.com",
+  "icons": {
+    "192": "icon.png"
+  },
+  "permissions": [
+    "tabs",
+    "contextMenus",
+    "*://*/*"
+  ],
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_title": "Bấm để gửi tin",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "web_accessible_resources": [
+    "linkhay.css",
+    "stickers/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.linkhay.com/*"
+      ],
+      "css": [
+        "linkhay.css"
+      ],
+      "js": [
+        "jquery-3.2.1.min.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.linkhay.com/*"
+      ],
+      "js": [
+        "util.js",
+        "sticker.js",
+        "pageInfo.js",
+        "sites.js",
+        "preview.js",
+        "clean.js",
+        "improve.js",
+        "linkhay.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

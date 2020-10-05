@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "No Politics Social Filter",
+  "version": "1.0.6",
+  "description": "Erasing politics from your social feeds.",
+  "page_action": {
+    "default_icon": "images/icon-48x48.png",
+    "default_title": "No Politics Social Filter"
+  },
+  "permissions": [
+    "tabs",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.facebook.com/*",
+        "*://*.twitter.com/*",
+        "*://*.linkedin.com/*"
+      ],
+      "css": [
+        "styles/style.css"
+      ],
+      "js": [
+        "js/vendor.pkgd.js",
+        "js/filter.min.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/background.min.js"
+    ],
+    "persistent": false
+  },
+  "options_ui": {
+    "chrome_style": true,
+    "page": "options.html"
+  },
+  "icons": {
+    "16": "images/icon-32x32.png",
+    "48": "images/icon-48x48.png",
+    "128": "images/icon-128x128.png",
+    "550": "images/icon-500x500.png"
+  }
+}

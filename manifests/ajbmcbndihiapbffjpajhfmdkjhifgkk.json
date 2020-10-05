@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "ZenVALU: KaiZen Tools for VALU.is",
+  "short_name": "ZenVALU",
+  "description": "KaiZen Tools for VALU.is...",
+  "icons": {
+    "128": "icon/zenvalu_128.png",
+    "48": "icon/zenvalu_48.png",
+    "16": "icon/zenvalu_16.png"
+  },
+  "version": "1.0.2.0",
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": {
+      "48": "icon/zenvalu_48.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://valu.is/*/*",
+        "https://valu.is/*"
+      ],
+      "js": [
+        "jquery-3.2.1.slim.min.js",
+        "js/getValuerTSV.js",
+        "js/getBTCprice.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "storage",
+    "https://valu.is/*/*",
+    "https://valu.is/*",
+    "https://api.bitflyer.jp/v1/getprices"
+  ],
+  "web_accessible_resources": [
+    "icon/*.png"
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "transpire",
+  "author": "transpireapp.com",
+  "version": "0.2.1",
+  "manifest_version": 2,
+  "description": "Annotate websites quickly and easily",
+  "homepage_url": "https://www.transpireapp.com",
+  "icons": {
+    "16": "icons/transpire16.png",
+    "48": "icons/transpire48.png",
+    "128": "icons/transpire128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "src/lib/transpire.js",
+      "src/bg/background.js"
+    ],
+    "persistent": false
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://localhost/*",
+      "https://www.transpireapp.com/*"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "browser_action": {
+    "default_icon": "icons/transpire19.png"
+  },
+  "permissions": [
+    "notifications",
+    "activeTab",
+    "tabs",
+    "identity",
+    "storage",
+    "contextMenus",
+    "<all_urls>"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.transpireapp.com/*",
+        "https://transpireapp.com/*",
+        "http://localhost/*"
+      ],
+      "js": [
+        "src/inject/inject.js",
+        "src/inject/login.js"
+      ]
+    }
+  ]
+}

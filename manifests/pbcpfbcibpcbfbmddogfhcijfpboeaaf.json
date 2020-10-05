@@ -1,0 +1,86 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_appName__",
+  "short_name": "Amino",
+  "description": "__MSG_appDesc__",
+  "default_locale": "en",
+  "version": "2.11.9",
+  "browser_action": {
+    "default_icon": "assets/images/icon-128.png"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Space",
+        "mac": "MacCtrl+Shift+Space"
+      }
+    },
+    "devtools-panel": {
+      "suggested_key": {
+        "default": "Alt+Shift+Space"
+      },
+      "description": "Open Amino DevTools"
+    }
+  },
+  "options_page": "options.html",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "contextMenus",
+    "tabs",
+    "notifications",
+    "http://*/",
+    "https://*/"
+  ],
+  "icons": {
+    "16": "assets/images/icon-16.png",
+    "48": "assets/images/icon-48.png",
+    "64": "assets/images/icon-64.png",
+    "128": "assets/images/icon-128.png",
+    "512": "assets/images/icon-512.png"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com https://srv.buysellads.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "assets/js/lib/jquery-3.4.1.min.js",
+        "assets/js/lib/prism/prism.js",
+        "assets/js/lib/sass/sass.sync.min.js",
+        "assets/js/fix.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "assets/js/inspect.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "devtools_page": "devtools-index.html",
+  "background": {
+    "scripts": [
+      "assets/js/commands.js",
+      "assets/js/autosave.js",
+      "assets/js/context.js",
+      "assets/js/icon-state.js",
+      "assets/js/install.js",
+      "assets/js/uninstall.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "assets/images/icon-context.png",
+    "inspect-overlay.html",
+    "inspect-toolbar.html",
+    "assets/css/lib/prism.css"
+  ]
+}

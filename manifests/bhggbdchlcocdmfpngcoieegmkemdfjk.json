@@ -1,0 +1,64 @@
+{
+  "page_action": {
+    "default_icon": "library.png",
+    "default_popup": "Settings.html",
+    "default_title": "MathScinet article links"
+  },
+  "web_accessible_resources": [
+    "download.svg",
+    "PDFViewer.html",
+    "lib/dropbox-0.9.2.min.js",
+    "oauth/chrome_oauth_receiver.coffee "
+  ],
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "description": "Add direct article links to MathSciNet",
+  "background": {
+    "page": "background.html"
+  },
+  "name": "Add direct article links to MathSciNet",
+  "permissions": [
+    "http://*/*",
+    "storage",
+    "tabs"
+  ],
+  "options_page": "Settings.html",
+  "icons": {
+    "128": "library.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.ams.org/mathscinet*",
+        "http://ams.rice.edu/mathscinet*",
+        "http://ams.impa.br/mathscinet*",
+        "http://ams.math.uni-bielefeld.de/mathscinet*",
+        "http://ams.mpim-bonn.mpg.de/mathscinet*",
+        "http://ams.u-strasbg.fr/mathscinet*",
+        "http://www.ams.org.proxy.library.emory.edu/mathscinet*",
+        "http://www.ams.org.libproxy.mit.edu/mathscinet*",
+        "http://www.ams.org.virtual.anu.edu.au/mathscinet*"
+      ],
+      "js": [
+        "lib/jquery-1.9.1.min.js",
+        "lib/FileSaver.min.js",
+        "FileSystem.js",
+        "Load.js",
+        "lib/JSZip.js",
+        "direct-article-link.user.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://projecteuclid.org/DPubS?*&page=record"
+      ],
+      "all_frames": true,
+      "js": [
+        "lib/jquery-1.9.1.min.js",
+        "Load.js",
+        "euclid.js"
+      ]
+    }
+  ],
+  "manifest_version": 2,
+  "version": "0.1.5"
+}

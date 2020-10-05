@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Cochlear™ Hearprint",
+  "description": "Life calibrated to your ears.",
+  "version": "1.0.81",
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com/ https://www.google-analytics.com https://www.googletagmanager.com https://connect.facebook.net/ 'sha256-olSvM+/Cl+H+knV8kKGVLnVLnkXYayeuSmXC/gH/Dqc=' 'sha256-VB+pJbWK6izsPTXjx+rzItYoN3/S/k26uJY/HMCp5UM=' 'sha256-fbZvSoDcBMHiWCt8jnSn9G0AScyJ9JN6iDs4nV9YKyI=' 'sha256-JeW1TvW/tFfeoHnk7RpKch9j61gFHum7ER9A/nqCr5w=' 'sha256-GqRQ60pCzPAOeocoODCy415+0BQj3+3fdQfwvczx8dU='; object-src 'self';",
+  "permissions": [
+    "tabs",
+    "cookies",
+    "activeTab",
+    "storage",
+    "contextMenus",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>"
+  ],
+  "background": {
+    "scripts": [
+      "background/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_title": "Cochlear™ Hearprint",
+    "default_popup": "popup/popup.html",
+    "default_icon": "48.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "http://coc0032.chepdev.com/",
+        "https://staging.hearprint.com/",
+        "https://hearprint.com/",
+        "https://www.hearprint.com/"
+      ],
+      "js": [
+        "lib/jquery-3.3.1.slim.min.js",
+        "page/page.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "homepage_url": "https://hearprint.com/",
+  "icons": {
+    "48": "48.png"
+  }
+}

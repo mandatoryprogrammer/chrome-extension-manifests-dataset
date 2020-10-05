@@ -1,0 +1,43 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Tab Difficulty Predictor",
+  "description": "This extension uses machine learing to predict the difficulty level of a song.",
+  "version": "0.0.1",
+  "icons": {
+    "16": "icons/Guitar-icon-16.png",
+    "48": "icons/Guitar-icon-48.png",
+    "128": "icons/Guitar-icon-128.png"
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "https://tabs.ultimate-guitar.com/*"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "js/ramda.min.js",
+        "js/contentScript.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "js/jquery.min.js",
+    "js/ramda.min.js",
+    "popup.js"
+  ],
+  "browser_action": {
+    "default_icon": "icons/Guitar-icon.png",
+    "default_popup": "popup.html",
+    "default_title": "Predict!"
+  },
+  "permissions": [
+    "activeTab",
+    "https://ajax.googleapis.com/*",
+    "http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js",
+    "https://s3.amazonaws.com/chordml-weights/*",
+    "https://s3.amazonaws.com/*",
+    "<all_urls>"
+  ]
+}

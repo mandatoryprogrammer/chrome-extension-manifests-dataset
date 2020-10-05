@@ -1,0 +1,74 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "description": "Provides some simple Quality-of-Life enhancements to giantbomb.com.",
+  "manifest_version": 2,
+  "name": "Giant Bomb QoL",
+  "version": "4.14",
+  "permissions": [
+    "*://*.giantbomb.com/api/*",
+    "storage"
+  ],
+  "icons": {
+    "48": "img/icon-48.png",
+    "128": "img/icon-128.png"
+  },
+  "browser_action": {
+    "browser_style": true,
+    "default_popup": "popup/popup.html",
+    "default_icon": "img/gb-offair.png"
+  },
+  "background": {
+    "scripts": [
+      "third_party/jquery-3.5.1.min.js",
+      "updateStreamStatus.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.giantbomb.com/",
+        "*://www.giantbomb.com/shows/*"
+      ],
+      "css": [
+        "resources/giant_bomb_qol.css"
+      ],
+      "js": [
+        "third_party/jquery-3.5.1.min.js",
+        "content_scripts/hide_spoilers.js",
+        "content_scripts/add_playback_rate.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.giantbomb.com/videos/*"
+      ],
+      "css": [
+        "resources/giant_bomb_qol.css"
+      ],
+      "js": [
+        "third_party/jquery-3.5.1.min.js",
+        "content_scripts/add_playback_rate.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.giantbomb.com/*"
+      ],
+      "css": [
+        "resources/giant_bomb_qol.css"
+      ],
+      "js": [
+        "third_party/jquery-3.5.1.min.js",
+        "content_scripts/live_show_qol.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "img/*",
+    "resources/emotes.json"
+  ],
+  "options_ui": {
+    "page": "options/options.html"
+  }
+}

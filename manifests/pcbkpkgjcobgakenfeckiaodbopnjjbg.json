@@ -1,0 +1,91 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Synonyms.com",
+  "short_name": "Synonyms.com",
+  "version": "1.0.5",
+  "description": "__MSG_appDesc__",
+  "default_locale": "en",
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "64": "images/icon64.png",
+    "128": "images/icon128.png"
+  },
+  "author": "STANDS4 LLC",
+  "homepage_url": "http://www.synonyms.com",
+  "offline_enabled": false,
+  "browser_action": {
+    "default_icon": "images/syn-fav-48.png",
+    "default_popup": "popup.html",
+    "default_title": "__MSG_tooltip__",
+    "browser_style": false
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "contextMenus"
+  ],
+  "background": {
+    "scripts": [
+      "bs/background.js",
+      "share/tools.js",
+      "bs/common.js",
+      "share/markup.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "images/*",
+    "**/*.js",
+    "vendors/*",
+    "popup.html"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*"
+      ],
+      "js": [
+        "vendors/jquery.min.js",
+        "vendors/jquery-ui-1.12.0.min.js",
+        "vendors/jquery.placeholder.min.js",
+        "vendors/purify.min.js",
+        "vendors/ally.js",
+        "vendors/most.js",
+        "vendors/featherlight/featherlight.js",
+        "share/helpers.js",
+        "share/tools.js",
+        "share/markup.js",
+        "cs/contentscript.js",
+        "cs/textarea.js"
+      ],
+      "css": [
+        "vendors/featherlight/featherlight.css",
+        "css/lt-marker-style.css",
+        "css/jquery-ui-1.11.3.custom.min.css"
+      ]
+    },
+    {
+      "matches": [
+        "http://www.synonyms.com/*",
+        "https://www.synonyms.com/*"
+      ],
+      "js": [
+        "cs/contentscript-lt.js"
+      ]
+    }
+  ],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Space"
+      }
+    }
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  }
+}

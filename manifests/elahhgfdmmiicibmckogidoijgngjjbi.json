@@ -1,0 +1,43 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Gender Harassment Tweets Blocker",
+  "version": "0.1.5",
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "page_action": {
+    "default_icon": "logo.png",
+    "default_title": "Harassment tweets blocker",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "declarativeContent",
+    "tabs",
+    "https://twitter.com/*",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://twitter.com/*"
+      ],
+      "js": [
+        "jquery-3.1.1.min.js",
+        "filter_tweets.js"
+      ],
+      "css": [
+        "main.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "twitter-block-icon-small.png",
+    "twitter-block-icon-small-red.png"
+  ],
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

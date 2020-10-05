@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Video Bookmarks",
+  "short_name": "Video Bookmarks",
+  "version": "0.0.7",
+  "manifest_version": 2,
+  "description": "Bookmark your favorite moments in YouTube videos",
+  "icons": {
+    "16": "images/icon-16.png",
+    "128": "images/icon-128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "bookmarks",
+    "clipboardRead",
+    "clipboardWrite",
+    "notifications",
+    "topSites",
+    "storage",
+    "webNavigation",
+    "webRequest",
+    "*://*.google.com/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/*",
+        "http://www.youtube.com/*"
+      ],
+      "js": [
+        "bower_components/dexie/dist/dexie.js",
+        "bower_components/underscore/underscore.js",
+        "bower_components/jquery/dist/jquery.js",
+        "scripts/utils.js",
+        "scripts/videobookmark.js",
+        "scripts/contentscript.js"
+      ],
+      "css": [
+        "styles/bookmark.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "page_action": {
+    "default_icon": {
+      "19": "images/icon-19.png",
+      "38": "images/icon-38.png"
+    },
+    "default_title": "Video Bookmark",
+    "default_popup": "popup.html"
+  },
+  "web_accessible_resources": [
+    "images/icon-48.png"
+  ]
+}

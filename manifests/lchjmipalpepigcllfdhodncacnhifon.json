@@ -1,0 +1,162 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "ChromeLL",
+  "version": "2.69",
+  "manifest_version": 2,
+  "description": "Enhancements for the forums at the End of the Internet",
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": false
+  },
+  "minimum_chrome_version": "40.0.0.0",
+  "web_accessible_resources": [
+    "src/images/lueshi_48.png",
+    "src/images/lueshi_128.png",
+    "src/images/popup.png",
+    "src/images/heart_tiles.png",
+    "src/images/loading.png",
+    "src/js/like.js",
+    "src/js/topicPostTemplate.js",
+    "options.html",
+    "src/json/defaultconfig.json",
+    "lib/widgets.js"
+  ],
+  "icons": {
+    "16": "src/images/ll.png",
+    "48": "src/images/lueshi_48.png",
+    "128": "src/images/lueshi_128.png"
+  },
+  "browser_action": {
+    "default_icon": "src/images/lueshi.png",
+    "default_title": "ChromeLL",
+    "default_popup": "src/html/popup.html"
+  },
+  "omnibox": {
+    "keyword": "searcheti"
+  },
+  "background": {
+    "scripts": [
+      "src/js/allBg.js",
+      "src/js/transloader.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.endoftheinter.net/*"
+      ],
+      "js": [
+        "src/js/love.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.endoftheinter.net/showmessages.php*",
+        "*://*.endoftheinter.net/topics/*",
+        "*://*.endoftheinter.net/history.php*"
+      ],
+      "js": [
+        "src/js/dramalinks.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.endoftheinter.net/showmessages.php*",
+        "*://endoftheinter.net/inboxthread.php*"
+      ],
+      "js": [
+        "src/js/messageList.js",
+        "src/js/imagemap.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.endoftheinter.net/topics/*",
+        "*://*.endoftheinter.net/showfavorites.php*",
+        "*://endoftheinter.net/inbox.php*",
+        "*://*.endoftheinter.net/history.php*",
+        "*://endoftheinter.net/main.php*",
+        "*://*.endoftheinter.net/search.php*"
+      ],
+      "css": [
+        "lib/pikaday/pikaday.css"
+      ],
+      "js": [
+        "lib/moment.min.js",
+        "lib/pikaday/pikaday.js",
+        "src/js/topicList.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.endoftheinter.net/*"
+      ],
+      "js": [
+        "lib/jquery.js",
+        "src/js/allPages.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.endoftheinter.net/postmsg.php*"
+      ],
+      "js": [
+        "src/js/postMsg.js",
+        "src/js/imagemap.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.endoftheinter.net/imagemap.php*"
+      ],
+      "js": [
+        "src/js/backtotopic.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://endoftheinter.net/profile.php*"
+      ],
+      "js": [
+        "src/js/profile.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.endoftheinter.net/search.php*"
+      ],
+      "js": [
+        "src/js/search.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://endoftheinter.net/token.php?*"
+      ],
+      "js": [
+        "src/js/tokenhelper.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "clipboardWrite",
+    "notifications",
+    "http://*/*",
+    "https://*/*",
+    "contextMenus",
+    "webRequest",
+    "webRequestBlocking",
+    "storage",
+    "unlimitedStorage"
+  ]
+}

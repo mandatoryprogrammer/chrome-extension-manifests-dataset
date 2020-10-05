@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "short_name": "Buoy Up",
+  "name": "Buoy Up",
+  "description": "Do good while you read the news.",
+  "version": "2.1.1",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "login.html",
+    "default_title": "BuoyUp"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "https://www.google.com/*",
+        "https://mail.google.com/*",
+        "https://buoyup.org/charities/*",
+        "https://buoyup.org/",
+        "https://buoyup.org/account/*",
+        "https://buoyup.org/charity/*"
+      ],
+      "js": [
+        "jquery-3.1.1.min.js",
+        "extension.js"
+      ],
+      "css": [
+        "highlight.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://buoyup.org/account/",
+        "https://buoyup.org/account/?redirect=True",
+        "https://buoyup.org/account/payment-sources/*"
+      ],
+      "js": [
+        "sync.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs",
+    "<all_urls>"
+  ],
+  "web_accessible_resources": [
+    "*.woff",
+    "icon.png"
+  ]
+}

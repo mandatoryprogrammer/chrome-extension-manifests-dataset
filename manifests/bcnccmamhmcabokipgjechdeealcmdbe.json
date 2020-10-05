@@ -1,0 +1,180 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "author": "Kristijan Rosandić",
+  "name": "e-Dnevnik Plus",
+  "short_name": "e-Dnevnik+",
+  "description": "Napredne mogućnosti e-Dnevnika za učenike i roditelje.",
+  "version": "4.8.3",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "https://ocjene.skole.hr/*",
+    "https://webmail.carnet.hr/*"
+  ],
+  "optional_permissions": [
+    "notifications",
+    "cookies",
+    "background",
+    "http://*/",
+    "https://*/"
+  ],
+  "icons": {
+    "128": "images/icon-128.png"
+  },
+  "web_accessible_resources": [
+    "images/*.png",
+    "*.json",
+    "*.wav",
+    "*.mp3",
+    "*.ttf",
+    "*.css"
+  ],
+  "browser_action": {
+    "default_icon": "images/icon-19-disabled.png",
+    "default_popup": "extension/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "extension/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "themes/themes.js"
+      ],
+      "matches": [
+        "https://ocjene.skole.hr/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "css": [
+        "inject-at-login/preventFlicker.css"
+      ],
+      "js": [
+        "inject-at-login/auto-login.js"
+      ],
+      "matches": [
+        "https://ocjene.skole.hr/login/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "css": [
+        "libraries/checkbox.css",
+        "inject-at-login/login.css"
+      ],
+      "js": [
+        "libraries/jquery.min.js",
+        "inject-at-login/login.js"
+      ],
+      "matches": [
+        "https://ocjene.skole.hr/login/*"
+      ]
+    },
+    {
+      "css": [
+        "inject-at-classes/preventFlicker.css"
+      ],
+      "matches": [
+        "https://ocjene.skole.hr/class/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "css": [
+        "inject-at-classes/classes.css"
+      ],
+      "js": [
+        "libraries/jquery.min.js",
+        "libraries/chart.min.js",
+        "libraries/chartjs-plugin-annotation.min.js",
+        "inject-at-classes/classes.js"
+      ],
+      "matches": [
+        "https://ocjene.skole.hr/class/*",
+        "https://ocjene.skole.hr/student/*"
+      ]
+    },
+    {
+      "js": [
+        "inject-at-class/subjects.js",
+        "libraries/chart.min.js",
+        "libraries/chartjs-plugin-annotation.min.js",
+        "libraries/sortable.min.js"
+      ],
+      "matches": [
+        "https://ocjene.skole.hr/course/*"
+      ]
+    },
+    {
+      "js": [
+        "inject-at-class/subject.js"
+      ],
+      "matches": [
+        "https://ocjene.skole.hr/grade/*"
+      ]
+    },
+    {
+      "css": [
+        "inject-at-class/preventFlicker.css"
+      ],
+      "matches": [
+        "https://ocjene.skole.hr/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "css": [
+        "inject-global/global.css",
+        "libraries/jquery.modal.min.css",
+        "libraries/checkbox.css"
+      ],
+      "js": [
+        "libraries/jquery.min.js",
+        "inject-global/plus.js",
+        "libraries/jquery.modal.min.js",
+        "themes/matrix/listener.js"
+      ],
+      "matches": [
+        "https://ocjene.skole.hr/*"
+      ]
+    },
+    {
+      "css": [
+        "inject-at-class/exams.css"
+      ],
+      "js": [
+        "inject-at-class/exams.js"
+      ],
+      "matches": [
+        "https://ocjene.skole.hr/exam/*"
+      ]
+    },
+    {
+      "css": [
+        "libraries/pickr-nano.min.css"
+      ],
+      "js": [
+        "libraries/pickr.min.js",
+        "inject-at-class/schedule.js"
+      ],
+      "matches": [
+        "https://ocjene.skole.hr/schedule/*"
+      ]
+    },
+    {
+      "js": [
+        "inject-at-class/webmail.js"
+      ],
+      "matches": [
+        "https://webmail.carnet.hr/*"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'"
+}

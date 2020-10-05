@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_extName__",
+  "version": "1.7",
+  "manifest_version": 2,
+  "description": "__MSG_extDescription__",
+  "minimum_chrome_version": "17",
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*MobileBrowserSimulator/*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "lib/dojo/dojo.js",
+        "observer.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "run_at": "document_end",
+      "all_frames": true,
+      "js": [
+        "lib/dojo/dojo.js",
+        "inject.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "*://*/*"
+  ],
+  "icons": {
+    "16": "images/logo_16.png",
+    "48": "images/logo_48.png",
+    "128": "images/logo_128.png"
+  },
+  "web_accessible_resources": [
+    "dojo_useragent.js"
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Bookmark Favicon Changer",
+  "description": "Change bookmark favicon",
+  "version": "2.21",
+  "minimum_chrome_version": "28",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "incognito": "spanning",
+  "permissions": [
+    "idle",
+    "tabs",
+    "<all_urls>",
+    "chrome://favicon/",
+    "webRequest",
+    "webRequestBlocking",
+    "bookmarks",
+    "notifications"
+  ],
+  "options_page": "options.xhtml",
+  "page_action": {
+    "default_icon": {
+      "19": "icon19.png",
+      "38": "icon38.png"
+    }
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*"
+      ],
+      "js": [
+        "contentscript.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ]
+}

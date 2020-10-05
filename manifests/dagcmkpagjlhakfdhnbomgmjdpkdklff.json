@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Mendeley Web Importer",
+  "description": "__MSG_appDesc__",
+  "default_locale": "en",
+  "icons": {
+    "16": "assets/logo16.png",
+    "48": "assets/logo48.png",
+    "128": "assets/logo128.png"
+  },
+  "browser_action": {
+    "default_icon": "assets/logo48.png",
+    "default_title": "Mendeley Web Importer"
+  },
+  "permissions": [
+    "cookies",
+    "activeTab",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>",
+    "storage",
+    "notifications"
+  ],
+  "background": {
+    "scripts": [
+      "pdf-locator-1.0.1.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "windows": "Ctrl+Shift+S",
+        "mac": "Command+Shift+S",
+        "chromeos": "Ctrl+Shift+S",
+        "linux": "Ctrl+Shift+S"
+      }
+    }
+  },
+  "content_security_policy": "script-src 'self' blob:; object-src 'self'",
+  "incognito": "split",
+  "version": "3.1.1",
+  "web_accessible_resources": [
+    "index.html",
+    "enhanced-reader.html",
+    "reader.js",
+    "reader-style.js",
+    "fonts/NexusSansWebPro-Bold.*",
+    "fonts/NexusSansWebPro-Regular.*",
+    "assets/logoTransparent.png"
+  ]
+}

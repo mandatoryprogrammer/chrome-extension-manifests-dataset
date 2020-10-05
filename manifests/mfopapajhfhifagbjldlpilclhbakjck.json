@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Auratikum Web Clipper",
+  "short_name": "Auratikum",
+  "version": "1.0.2",
+  "description": "Save web references and notes to Auratikum.",
+  "browser_action": {
+    "default_title": "Save web reference",
+    "default_popup": "popup.html"
+  },
+  "author": "Auratikum GmbH",
+  "background": {
+    "page": "background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://app.auratikum.com/*"
+      ],
+      "js": [
+        "installed.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://app.auratikum.com/*"
+      ],
+      "js": [
+        "auth.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "https://api.auratikum.de/*",
+    "storage"
+  ],
+  "minimum_chrome_version": "60",
+  "icons": {
+    "16": "assets/logo16.png",
+    "48": "assets/logo48.png",
+    "128": "assets/logo128.png"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

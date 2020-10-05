@@ -1,0 +1,92 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Lyrical",
+  "version": "0.5.6",
+  "description": "Instantly get lyrics for songs on Youtube, Google Play Music, and Spotify Web Player",
+  "permissions": [
+    "activeTab",
+    "*://play.google.com/music/*",
+    "*://www.youtube.com/watch*",
+    "*://youtube.com/*",
+    "*://*.genius.com/*",
+    "*://genius.com/*",
+    "storage",
+    "*://open.spotify.com/*",
+    "*://www.open.spotify.com/*",
+    "unlimitedStorage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://play.google.com/music/listen*"
+      ],
+      "js": [
+        "src/libs/jquery-3.1.1.min.js",
+        "src/libs/jquery-ui.min.js",
+        "compiled/play_music.js",
+        "src/libs/lz-string.min.js"
+      ],
+      "css": [
+        "src/libs/jquery-ui.min.css",
+        "compiled/panel.min.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.youtube.com/*",
+        "*://youtube.com/*"
+      ],
+      "js": [
+        "src/libs/jquery-3.1.1.min.js",
+        "src/libs/jquery-ui.min.js",
+        "compiled/youtube.js",
+        "src/libs/lz-string.min.js"
+      ],
+      "css": [
+        "src/libs/jquery-ui.min.css",
+        "compiled/panel.min.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.open.spotify.com/*",
+        "*://open.spotify.com/*"
+      ],
+      "js": [
+        "src/libs/jquery-3.1.1.min.js",
+        "src/libs/jquery-ui.min.js",
+        "compiled/spotify.js",
+        "src/libs/lz-string.min.js"
+      ],
+      "css": [
+        "src/libs/jquery-ui.min.css",
+        "compiled/panel.min.css"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_popup": "src/ui/popup.html",
+    "default_title": "Lyrical",
+    "default_icon": "src/img/icon.png"
+  },
+  "icons": {
+    "16": "src/img/icon.png",
+    "48": "src/img/icon.png",
+    "128": "src/img/icon.png"
+  },
+  "options_ui": {
+    "page": "src/ui/options.html",
+    "chrome_style": true
+  },
+  "background": {
+    "scripts": [
+      "compiled/background.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "src/img/*.png",
+    "src/img/*.gif",
+    "src/ui/options.html"
+  ]
+}

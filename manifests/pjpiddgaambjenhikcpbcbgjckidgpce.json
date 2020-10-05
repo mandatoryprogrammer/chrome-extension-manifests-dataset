@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "AdIntuition",
+  "version": "1.1.0.5",
+  "description": "Automatic Sponsorship Detection on YouTube",
+  "background": {
+    "scripts": [
+      "redirects.js",
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "webRequest",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "browser_action": {
+    "default_icon": "logos/logo.png",
+    "default_title": "Information about AdIntuition",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.youtube.com/watch*"
+      ],
+      "js": [
+        "modules/mutation-summary/src/mutation-summary.js",
+        "couponFinder.js",
+        "video.js"
+      ],
+      "css": [
+        "common.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "options_page": "options.html",
+  "icons": {
+    "16": "logos/logo.png",
+    "48": "logos/logo.png",
+    "128": "logos/logo128x128.png"
+  },
+  "manifest_version": 2
+}

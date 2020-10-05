@@ -1,0 +1,152 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "short_name": "__MSG_appShortName__",
+  "description": "__MSG_appDescription__",
+  "version": "0.8.04",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon-128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon19.png",
+      "38": "images/icon38.png"
+    },
+    "default_title": "__MSG_browserActionTitle__"
+  },
+  "background": {
+    "page": "pages/background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.mindmeister.com/*"
+      ],
+      "js": [
+        "scripts/newMap.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.mindmeister.com/*"
+      ],
+      "exclude_matches": [
+        "https://www.mindmeister.com/oauth2/*",
+        "https://www.mindmeister.com/*account/login*",
+        "https://www.mindmeister.com/robots.txt*",
+        "https://www.mindmeister.com/#all",
+        "https://www.mindmeister.com/?filter=all#all"
+      ],
+      "js": [
+        "libs/ocrad.js",
+        "scripts/content_script_dscaffolding.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.mindmeister.com/robots.txt*"
+      ],
+      "js": [
+        "scripts/oauth2_inject.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://www.mendeley.com/robots.txt*"
+      ],
+      "js": [
+        "scripts/oauth2_inject.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://github.com/robots.txt*"
+      ],
+      "js": [
+        "scripts/oauth2_inject.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://www.mendeley.com/viewer/*"
+      ],
+      "js": [
+        "scripts/content_script_mendeley.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.mendeley.com/library/*"
+      ],
+      "js": [
+        "scripts/content_script_mendeley_library.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "scripts/contentScript.js",
+        "scripts/contentScriptIntegration.js"
+      ],
+      "exclude_matches": [
+        "https://www.mindmeister.com/*"
+      ],
+      "css": [
+        "styles/contentScript.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "scripts/feedbackIframeScript.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "options_page": "pages/options.html",
+  "options_ui": {
+    "page": "pages/options.html",
+    "chrome_style": false,
+    "open_in_tab": true
+  },
+  "permissions": [
+    "contextMenus",
+    "https://hypothes.is/",
+    "storage",
+    "tabs",
+    "unlimitedStorage",
+    "https://www.mindmeister.com/oauth2",
+    "https://www.mindmeister.com/services/rest/oauth2/token",
+    "https://api.mendeley.com/*",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>"
+  ],
+  "web_accessible_resources": [
+    "images/*",
+    "scripts/*",
+    "scripts/adapters/*",
+    "pages/*",
+    "resources/*",
+    "libs/*"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com/ blob: ; object-src 'self';"
+}

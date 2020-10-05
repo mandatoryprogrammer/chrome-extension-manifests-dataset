@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "SecApps",
+  "short_name": "SA",
+  "version": "4.0.1",
+  "description": "SecApps companion browser extension",
+  "homepage_url": "https://secapps.com",
+  "icons": {
+    "48": "icon.png",
+    "96": "icon@2x.png"
+  },
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "browser_action": {
+    "default_icon": "icon@2x.png",
+    "default_popup": "index.popup.html"
+  },
+  "background": {
+    "scripts": [
+      "index.background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://secapps.com/*",
+        "https://*.secapps.com/*"
+      ],
+      "js": [
+        "index.content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "index.page.js",
+    "index.worker.js"
+  ]
+}

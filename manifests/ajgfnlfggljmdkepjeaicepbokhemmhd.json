@@ -1,0 +1,137 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "ReachUC Complete",
+  "version": "3.2.8",
+  "description": "This Chrome extension allows you to Click-to-Dial phone numbers on web pages, send SMS and fax messages, and schedule web meetings.",
+  "icons": {
+    "128": "icons/128.png",
+    "16": "icons/16.png",
+    "32": "icons/32.png",
+    "48": "icons/48.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/32-disable.png",
+    "default_title": "ReachUC Complete",
+    "default_popup": "html/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "all_frames": true,
+      "css": [
+        "css/jquery.webui-popover.css",
+        "css/c2c.css",
+        "css/font-awesome.min.css"
+      ],
+      "js": [
+        "libs/worker_proxy.js",
+        "libs/jquery.js",
+        "libs/jquery.webui-popover.js",
+        "contentscripts/content.js",
+        "libs/xml2json.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "all_frames": false,
+      "css": [
+        "css/c2c.css"
+      ],
+      "js": [
+        "contentscripts/content_popup.js",
+        "libs/jquery.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://calendar.google.com/*",
+        "https://calendar.google.com/*",
+        "http://mail.google.com/*"
+      ],
+      "css": [
+        "css/bootstrap.min.css",
+        "css/c2c.css"
+      ],
+      "js": [
+        "libs/jquery.js",
+        "libs/jquery-dateFormat.js",
+        "libs/jquery-dateFormat.min.js",
+        "libs/dateFormat.js",
+        "libs/dateFormat.min.js",
+        "libs/bootstrap.min.js",
+        "contentscripts/content_meeting.js",
+        "contentscripts/content-gmail.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "https://www.google.com/contacts/*",
+        "https://contacts.google.com/*"
+      ],
+      "css": [
+        "css/bootstrap.min.css",
+        "css/c2c.css"
+      ],
+      "js": [
+        "libs/jquery.js",
+        "libs/bootstrap.min.js",
+        "contentscripts/content_contact.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    },
+    {
+      "js": [
+        "contentscripts/ipc-bridge.js"
+      ],
+      "matches": [
+        "https://webrtc.reachuc.com:443/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "libs/jquery.js",
+      "libs/xml2json.js",
+      "libs/jquery-dateFormat.js",
+      "libs/jquery-dateFormat.min.js",
+      "libs/dateFormat.js",
+      "libs/dateFormat.min.js",
+      "background.js",
+      "libs/worker_proxy.js"
+    ]
+  },
+  "permissions": [
+    "identity",
+    "http://*/*",
+    "webRequest",
+    "http://*/*",
+    "https://*/*",
+    "activeTab",
+    "tabs",
+    "storage",
+    "windows"
+  ],
+  "manifest_version": 2,
+  "web_accessible_resources": [
+    "contentscripts/*",
+    "libs/*",
+    "common/*",
+    "img/*",
+    "css/*",
+    "fonts/*",
+    "html/*",
+    "icons/*"
+  ],
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsep5VliOI+9C9cuWaRlFF8EciZS+4Pk7cQMdxdOlqCDD682YYDX7Jg8hPxeMc5P0cbXcRf9K0nbtveBbS0oKRv5lG4dp1ABwdVy6DLO6e/9x6K1tOKGgVALHsUNigWoOGM58HlENWqmRkt/7z/XjNPU8UXnXqdZizE87yF7yXA3RMOE3979otbYnTbzVDpkHMLe+/qw7jWMLTdFFZxQQLh95iYQfStqPZNfLzmgUL9ehNDExTPMI3zoUqwlpjvEzgnWFDVK7h+B1VOFH7fn8DrrIhYbGqgjLZOhngaaFMCLl9mtE1YRawgqCV+xwoUzpZkzNkQLW0wLOP2BaP1+KlwIDAQAB"
+}

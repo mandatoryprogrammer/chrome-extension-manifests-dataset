@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "灵梦御所",
+  "description": "灵梦御所，绅士的幻想乡",
+  "version": "3.3.0",
+  "manifest_version": 2,
+  "icons": {
+    "16": "logo.png",
+    "48": "logo.png",
+    "128": "logo.png"
+  },
+  "browser_action": {
+    "default_popup": "./popup.html",
+    "default_icon": "logo.png"
+  },
+  "permissions": [
+    "tabs",
+    "contextMenus",
+    "storage",
+    "*://*.reimu.com/*",
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "./bundle/background.js",
+      "./bundle/fetchReimu.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://blog.reimu.net/*"
+      ],
+      "js": [
+        "./bundle/reimu.js"
+      ],
+      "css": [
+        "./bundle/reimuCss.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://pan.baidu.com/share/*"
+      ],
+      "js": [
+        "./bundle/baidu.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

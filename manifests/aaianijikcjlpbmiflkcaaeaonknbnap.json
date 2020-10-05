@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Google Play Music: Work Timer",
+  "version": "0.0.4",
+  "manifest_version": 2,
+  "description": "This extension adds a timer to automatically pause/play google play music on a timer to remind you to take breaks whilst working.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "options_page": "src/options/options.html",
+  "permissions": [
+    "notifications",
+    "storage"
+  ],
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "/src/background/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://play.google.com/music/*"
+      ],
+      "js": [
+        "src/inject/inject.js"
+      ],
+      "css": [
+        "src/inject/inject.css"
+      ]
+    }
+  ],
+  "commands": {
+    "toggle-worktimer": {
+      "description": "Toggle Work Timer"
+    },
+    "worktimer-getWorked": {
+      "description": "Display worked time"
+    }
+  },
+  "web_accessible_resources": [
+    "/icons/break.png",
+    "/icons/start.png",
+    "/icons/stop.png",
+    "/icons/work.png",
+    "/sounds/stop.mp3"
+  ]
+}

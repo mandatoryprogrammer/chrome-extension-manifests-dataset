@@ -1,0 +1,109 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_ExtensionName__",
+  "description": "__MSG_ExtensionDescription__",
+  "version": "1.1.112.0",
+  "author": "Mitel",
+  "icons": {
+    "16": "images/icons/icon16.png",
+    "32": "images/icons/icon32.png",
+    "48": "images/icons/icon48.png",
+    "128": "images/icons/icon128.png",
+    "512": "images/icons/icon512.png"
+  },
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icons/icon19_disabled.png",
+      "38": "images/icons/icon38_disabled.png"
+    },
+    "default_popup": "foreground.html",
+    "default_title": "Mitel: Not Connected"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.google.com/calendar/render*",
+        "*://*.google.com/calendar/b/*/render*",
+        "*://*.google.com/calendar/a/*/render*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "gapi/shoretel.js",
+        "content/stGCAL.js"
+      ],
+      "css": [
+        "content/stGCAL.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.google.com/calendar/r*",
+        "*://*.google.com/calendar/b/*/r*",
+        "*://*.google.com/calendar/a/*/r*"
+      ],
+      "exclude_matches": [
+        "*://*.google.com/calendar/render*",
+        "*://*.google.com/calendar/b/*/render*",
+        "*://*.google.com/calendar/a/*/render*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "gapi/shoretel.js",
+        "content/stGCALBis.js"
+      ],
+      "css": [
+        "content/stGCALBis.css"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "*://*.google.com/calendar/r/*",
+        "*://*.google.com/calendar/b/*/r/*",
+        "*://*.google.com/calendar/a/*/r/*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "content/webdialer.js"
+      ],
+      "css": [
+        "content/webdialer.css"
+      ],
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "contextMenus",
+    "management",
+    "notifications",
+    "storage",
+    "tabs",
+    "identity",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "http://localhost/GapiAuth/GapiAuth*.html*",
+      "https://staazd-staging1.shoretelsky.com/GapiAuth/GapiAuth*.html*",
+      "https://staazd-staging1.shoretelsky.com/GapiAuthDev/GapiAuth*.html*"
+    ]
+  },
+  "web_accessible_resources": [
+    "images/content/GCALContentCallMe.png",
+    "images/content/GCALContentCallMeDisabled.png",
+    "images/icons/icon12.png",
+    "images/content/grey14.png"
+  ],
+  "default_locale": "en",
+  "incognito": "not_allowed",
+  "minimum_chrome_version": "39",
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://apis.google.com https://*.newrelic.com https://bam.nr-data.net; object-src 'self';"
+}

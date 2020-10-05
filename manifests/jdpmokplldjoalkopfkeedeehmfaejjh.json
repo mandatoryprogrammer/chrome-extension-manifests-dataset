@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "PhoneticNews",
+  "short_name": "PhoneticNews",
+  "version": "1.6.2",
+  "description": "10分ごとにNHK、ロイター、AFP、BBC、CNNの最新ニュースを読み込み、新しいニュースを読み上げます",
+  "permissions": [
+    "alarms",
+    "storage",
+    "notifications",
+    "https://api.voicetext.jp/*",
+    "https://www3.nhk.or.jp/*",
+    "http://feeds.reuters.com/*",
+    "http://feeds.afpbb.com/*",
+    "http://feeds.bbci.co.uk/*",
+    "http://feeds.cnn.co.jp/*",
+    "http://*.yahoo.co.jp/*",
+    "https://*.yahoo.co.jp/*"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://headlines.yahoo.co.jp/rss/list"
+      ],
+      "css": [
+        "frontend/yahoo.css"
+      ],
+      "js": [
+        "frontend/yahoo.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "icons": {
+    "16": "icon/icon016.png",
+    "48": "icon/icon048.png",
+    "128": "icon/icon128.png"
+  },
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "homepage_url": "http://appsweets.net/",
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "web_accessible_resources": [
+    "icon/*.png"
+  ]
+}

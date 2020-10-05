@@ -1,0 +1,97 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "The Verge Mini",
+  "manifest_version": 2,
+  "version": "3.95",
+  "description": "Read the latest articles from The Verge straight from your Chrome toolbar.",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.theverge.com/*"
+      ],
+      "exclude_matches": [
+        "http://www.theverge.com/forums/*",
+        "http://www.theverge.com/users/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "js/jquery-1.9.1.min.js",
+        "custom/mobileredirect.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://mobile.theverge.com/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "js/jquery-1.9.1.min.js",
+        "custom/backbutton.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://mobile.theverge.com/*"
+      ],
+      "all_frames": true,
+      "css": [
+        "custom/mystyles.css"
+      ],
+      "js": [
+        "js/jquery-1.9.1.min.js",
+        "custom/myscript.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://www.theverge.com/users/*"
+      ],
+      "all_frames": true,
+      "css": [
+        "custom/userpage.css"
+      ],
+      "js": [
+        "js/jquery-1.9.1.min.js",
+        "custom/userpage.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://www.theverge.com/forums",
+        "http://www.theverge.com/forums/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "js/jquery-1.9.1.min.js",
+        "custom/forums.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "browser_action": {
+    "default_icon": "icon16.png",
+    "default_title": "The Verge",
+    "default_popup": "redirect.htm"
+  },
+  "web_accessible_resources": [
+    "back.png",
+    "custom/forums.css",
+    "icon48.png"
+  ],
+  "background": {
+    "page": "notifications/background.htm"
+  },
+  "permissions": [
+    "notifications"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google.com/ https://ssl.google-analytics.com; object-src 'self'"
+}

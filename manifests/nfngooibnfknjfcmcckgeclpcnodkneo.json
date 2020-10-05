@@ -1,0 +1,41 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "PS1@BITS",
+  "version": "2.0.5",
+  "description": "Tired of CrappyUI",
+  "options_page": "index.html",
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js",
+      "jq.js"
+    ]
+  },
+  "page_action": {
+    "default_icon": "icon.png",
+    "default_title": "Fill In Your Preferences"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.bits-pilani.ac.in:12370/ps1prefent/servlet/ps1prefent.PreferenceEntry"
+      ],
+      "js": [
+        "jq.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "permissions": [
+    "storage"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  }
+}

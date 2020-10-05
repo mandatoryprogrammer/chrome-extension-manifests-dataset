@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Zoopdog",
+  "version": "2.1",
+  "author": "Justin Douglas",
+  "description": "Vietnamese-English popup dictionary",
+  "icons": {
+    "16": "icon/icon16.png",
+    "48": "icon/icon96.png",
+    "128": "icon/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "js/lib/dexie.min.js",
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "*://*/zoopdog/*"
+      ],
+      "js": [
+        "js/lib/handlebars.min.js",
+        "js/content.js",
+        "js/showframe.js",
+        "js/highlighter.js"
+      ],
+      "css": [
+        "css/zoopdog.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "sandbox": {
+    "pages": [
+      "frame.html"
+    ]
+  },
+  "web_accessible_resources": [
+    "js/vnedict.json",
+    "frame.html",
+    "css/fonts/*"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "38": "icon/icon76.png",
+      "19": "icon/icon19.png"
+    },
+    "default_popup": "popup.html",
+    "default_title": "Zoopdog"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "https://ajax.googleapis.com/",
+    "storage"
+  ]
+}

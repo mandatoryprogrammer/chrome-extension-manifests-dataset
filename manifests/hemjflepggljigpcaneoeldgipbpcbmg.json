@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Rocket Note",
+  "version": "2.3.7",
+  "author": "Rocket Note LLC",
+  "manifest_version": 2,
+  "description": "Extend the possibilities of YouTube with note-taking, pins, and timestamps.",
+  "homepage_url": "https://getrocketnote.com",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "web_accessible_resources": [
+    "assets/img/*",
+    "static/media/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.getrocketnote.com/*",
+      "*://getrocketnote.com/*",
+      "*://rocketnote.herokuapp.com/*"
+    ]
+  },
+  "browser_action": {
+    "default_popup": "index.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "https://www.youtube.com/*"
+      ],
+      "css": [
+        "styles/content-script.css",
+        "styles/app.css"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "https://www.youtube.com/*"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "tabs",
+    "storage",
+    "cookies",
+    "https://api.getrocketnote.com/v1/*",
+    "*://rocketnote.herokuapp.com/*"
+  ]
+}

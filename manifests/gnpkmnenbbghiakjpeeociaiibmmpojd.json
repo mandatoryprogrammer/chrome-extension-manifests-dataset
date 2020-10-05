@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_appName__",
+  "author": "bibi",
+  "description": "__MSG_appDesc__",
+  "default_locale": "en",
+  "version": "1.2",
+  "browser_action": {
+    "default_icon": "/static/icon.png",
+    "default_popup": "index.html",
+    "default_title": "Danmaku"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "*://www.bilibili.com/*",
+        "*://www.tucao.one/*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "Danmaku.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "activeTab",
+    "webRequest",
+    "<all_urls>",
+    "storage"
+  ],
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

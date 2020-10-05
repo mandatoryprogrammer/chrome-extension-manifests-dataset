@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Export your outline",
+  "short_name": "EYO",
+  "version": "0.9.8",
+  "version_name": "Beta 0.9.8",
+  "description": "__MSG_Manifestdesc__",
+  "icons": {
+    "16": "image/icon16.png",
+    "48": "image/icon48.png",
+    "128": "image/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "commands": {
+    "_execute_page_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+E",
+        "mac": "Command+Shift+E"
+      }
+    },
+    "open_workflowy": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Y",
+        "mac": "Command+Shift+Y"
+      },
+      "description": "__MSG_OpenWorkFlowy__"
+    }
+  },
+  "default_locale": "en",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://workflowy.com/*"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "js/content_script.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://dynalist.io/*"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "js/content_script_dynalist.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs",
+    "contextMenus"
+  ],
+  "page_action": {
+    "default_name": "Export your outline",
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "manifest_version": 2
+}

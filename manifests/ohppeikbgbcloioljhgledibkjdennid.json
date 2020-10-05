@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "short_name": "__MSG_appShortName__",
+  "description": "__MSG_appDesc__",
+  "version": "0.1.12",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "icons": {
+    "16": "resources/pandor16_active.png",
+    "19": "resources/pandor19_active.png",
+    "48": "resources/pandor48_active.png",
+    "128": "resources/pandor128_red.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://mail.google.com/*",
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "bootstrap.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com 'unsafe-eval'; object-src 'self'",
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "storage",
+    "cookies",
+    "tabs",
+    "webRequest",
+    "*://mail.google.com/",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "web_accessible_resources": [
+    "inject.js",
+    "resources/*"
+  ],
+  "options_page": "index.html",
+  "browser_action": {
+    "default_title": "P@ndor",
+    "default_icon": "resources/pandor19_inactive.png",
+    "default_popup": "popup.html"
+  }
+}

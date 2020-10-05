@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Outlearn for Amazon Kindle",
+  "short_name": "Outlearn",
+  "description": "With this extension you can save all your amazon kindle highlights to Outlearn Platform.",
+  "icons": {
+    "16": "resources/images/OutlearnIconExtension.png",
+    "48": "resources/images/OutlearnIconExtension.png",
+    "128": "resources/images/OutlearnIconExtension.png"
+  },
+  "version": "0.0.8",
+  "browser_action": {
+    "default_icon": "resources/images/OutlearnIconExtension.png",
+    "default_popup": "popup.html",
+    "default_title": "Outlearn"
+  },
+  "background": {
+    "scripts": [
+      "background-task/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://read.amazon.com/kp/notebook?/?"
+      ],
+      "js": [
+        "amazon-content-script/amazon-kindle.js",
+        "jquery/jquery-3.2.1.min.js"
+      ],
+      "css": [
+        "amazon-content-script/amazon_kindle.css"
+      ],
+      "run": "document_end"
+    },
+    {
+      "matches": [
+        "https://outlearn.app/"
+      ],
+      "js": [
+        "outlearn-content-script/outlearn-content-script.js",
+        "jquery/jquery-3.2.1.min.js"
+      ],
+      "css": [
+        "outlearn-content-script/outlearn-content-script.css"
+      ],
+      "run": "document_start"
+    }
+  ],
+  "permissions": [
+    "notifications",
+    "storage",
+    "webRequest",
+    "tabs",
+    "https://kindle.amazon.com/your_highlights?/?",
+    "https://outlearn.app/"
+  ],
+  "web_accessible_resources": [
+    "resources/images/OutlearnIconExtension.png",
+    "resources/images/outlearn-logo.png",
+    "amazon-content-script/amazon-kindle.html"
+  ]
+}

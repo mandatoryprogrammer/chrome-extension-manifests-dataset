@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Vtiger Buzz",
+  "short_name": "Vtiger Buzz",
+  "description": "Meet your New Personal Assistant",
+  "icons": {
+    "16": "assets/images/vtiger16.png",
+    "48": "assets/images/vtiger48.png",
+    "128": "assets/images/vtiger128.png"
+  },
+  "version": "0.0.7",
+  "browser_action": {
+    "default_icon": {
+      "16": "assets/images/vtiger16.png",
+      "48": "assets/images/vtiger48.png",
+      "128": "assets/images/vtiger128.png"
+    },
+    "default_title": "Vtiger Buzz",
+    "default_popup": "templates/index.html"
+  },
+  "background": {
+    "scripts": [
+      "js/libs/jquery.min.js",
+      "js/helper.js",
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://localhost/*",
+        "https://*.vtiger.ws/*",
+        "https://*.vtiger.com/*"
+      ],
+      "js": [
+        "js/content.js"
+      ],
+      "css": [],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "web_accessible_resources": [
+    "js/*.*",
+    "templates/*.*",
+    "assets/images/*.*",
+    "css/*.*",
+    "libs/*.*"
+  ],
+  "permissions": [
+    "cookies",
+    "http://localhost/",
+    "https://*.vtiger.ws/",
+    "https://*.vtiger.com/"
+  ]
+}

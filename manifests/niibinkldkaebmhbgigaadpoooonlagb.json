@@ -1,0 +1,72 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Watch Next: YouTube",
+  "short_name": "Watch Next",
+  "description": "Watch Next lets you tell YouTube which video you want to watch after this one.",
+  "version": "1.11.3",
+  "permissions": [
+    "https://youtube.com/",
+    "tabs",
+    "contextMenus",
+    "storage",
+    "identity"
+  ],
+  "content_security_policy": "script-src 'self' https://cdn.firebase.com https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com https://apis.google.com; object-src 'self'",
+  "background": {
+    "persistent": true,
+    "page": "background.html"
+  },
+  "browser_action": {
+    "default_icon": "icons/icon32.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "64": "icons/icon64.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.youtube.com/*",
+        "*://youtube.com/*"
+      ],
+      "css": [
+        "playnextbutton.css"
+      ],
+      "js": [
+        "scripts/config.js",
+        "scripts/playnextbutton.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.youtube.com/*"
+      ],
+      "exclude_matches": [
+        "*://*/watch*list=*"
+      ],
+      "js": [
+        "scripts/config.js",
+        "scripts/playnext.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "icons/icon_add_16.png",
+    "icons/icon_add_22.png",
+    "icons/icon_add_32.png",
+    "icons/icon_delete_16.png",
+    "icons/icon_delete_22.png",
+    "icons/icon_delete_32.png",
+    "icons/icon_disabled_32.png",
+    "icons/icon_done_16.png",
+    "icons/icon_done_22.png",
+    "icons/icon_fwd_22.png",
+    "icons/icon16.png",
+    "icons/icon32.png",
+    "icons/icon_info.png"
+  ]
+}

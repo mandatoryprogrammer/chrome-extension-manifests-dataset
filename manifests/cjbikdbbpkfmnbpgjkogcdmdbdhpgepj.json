@@ -1,0 +1,130 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Target Blank",
+  "description": "A simple tool to unify link behavior across the web. Control how and when links open in a new tab.",
+  "icons": {
+    "128": "icons/icon_disabled.png"
+  },
+  "version": "1.0.1",
+  "manifest_version": 2,
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs"
+  ],
+  "background": {
+    "scripts": [
+      "constants.js",
+      "enums.js",
+      "utils.js",
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_title": "A Google Chrome extension for unifying link behavior across the web.",
+    "default_popup": "options.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "constants.js",
+        "enums.js",
+        "utils.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "http://*.google.com/*",
+        "https://*.google.com/*",
+        "http://google.com/*",
+        "https://google.com/*"
+      ],
+      "js": [
+        "strategies/google.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "http://*.yahoo.com/*",
+        "https://*.yahoo.com/*",
+        "http://yahoo.com/*",
+        "https://yahoo.com/*"
+      ],
+      "js": [
+        "strategies/yahoo.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "http://*.github.com/*",
+        "https://*.github.com/*",
+        "http://github.com/*",
+        "https://github.com/*"
+      ],
+      "js": [
+        "strategies/github.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "http://*.facebook.com/*",
+        "https://*.facebook.com/*",
+        "http://facebook.com/*",
+        "https://facebook.com/*"
+      ],
+      "js": [
+        "strategies/facebook.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "vendors/mutation-summary.js",
+        "contentscript.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "commands": {
+    "toggle-feature-foo": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Y",
+        "mac": "Command+Shift+Y",
+        "windows": "Alt+Shift+P"
+      },
+      "description": "Toggle feature foo"
+    },
+    "_execute_browser_action": {
+      "suggested_key": {
+        "windows": "Ctrl+Shift+Y",
+        "mac": "Command+Shift+Y",
+        "chromeos": "Ctrl+Shift+U",
+        "linux": "Ctrl+Shift+J"
+      }
+    },
+    "_execute_page_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+E",
+        "windows": "Alt+Shift+P",
+        "mac": "Alt+Shift+P"
+      }
+    }
+  }
+}

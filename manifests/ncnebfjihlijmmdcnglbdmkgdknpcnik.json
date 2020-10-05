@@ -1,0 +1,104 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "IRCTC Tatkal Helper",
+  "short_name": "Tatkal Helper",
+  "description": "Helps you get a confirmed tatkal ticket by automating the form fill-up",
+  "version": "1.7",
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "icons": {
+    "16": "images/icon-16.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.services.irctc.co.in/"
+      ],
+      "js": [
+        "login_details.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.irctc.co.in/eticketing/loginHome.jsf"
+      ],
+      "js": [
+        "login_details_new.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.services.irctc.co.in/cgi-bin/bv60.dll/irctc/services/login.do"
+      ],
+      "js": [
+        "goto_book_ticket_page.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.irctc.co.in/eticketing/home"
+      ],
+      "js": [
+        "journey_details.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.irctc.co.in/eticketing/mainpage.jsf"
+      ],
+      "js": [
+        "book_ticket.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.irctc.co.in/eticketing/trainbetweenstns.jsf"
+      ],
+      "js": [
+        "passenger_form_fill.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.irctc.co.in/eticketing/jpInput.jsf*"
+      ],
+      "js": [
+        "select_payment_option.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://mobile.onlinesbi.com/sbipgnew/irctcrequest.action"
+      ],
+      "js": [
+        "fill_imps_merchant_payment_details.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": "images/icon-48.png",
+    "default_title": "IRCTC Tatkal Helper"
+  },
+  "options_page": "options.html",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "https://www.irctc.co.in/",
+    "https://mobile.onlinesbi.com/",
+    "https://www.services.irctc.co.in/",
+    "http://www.services.irctc.co.in/"
+  ],
+  "web_accessible_resources": [
+    "myscript.js",
+    "background.js",
+    "images/*"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

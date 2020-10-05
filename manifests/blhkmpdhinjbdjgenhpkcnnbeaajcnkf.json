@@ -1,0 +1,75 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Ecquire",
+  "version": "3.10.37",
+  "description": "Ecquire is a sales productivity tool that lets you update your CRM without leaving your workflow.",
+  "icons": {
+    "16": "extension-icon-16.png",
+    "48": "extension-icon-48.png",
+    "128": "extension-icon-128.png"
+  },
+  "permissions": [
+    "cookies",
+    "identity",
+    "activeTab",
+    "notifications",
+    "management",
+    "*://*.ecquire.com/",
+    "https://ecquire-main.herokuapp.com/",
+    "https://*.37signals.com/",
+    "https://*.highrisehq.com/",
+    "https://*.salesforce.com/",
+    "https://*.mailchimp.com/",
+    "https://localhost/"
+  ],
+  "background": {
+    "persistent": true,
+    "page": "background.html"
+  },
+  "browser_action": {
+    "default_icon": "browser-action-icon-19.png",
+    "default_title": "Ecquire",
+    "default_popup": "index.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://angel.co/*",
+        "*://*.linkedin.com/*",
+        "*://*.crunchbase.com/*",
+        "*://*.facebook.com/*",
+        "*://*.twitter.com/*",
+        "*://*.hootsuite.com/*",
+        "*://*.google.com/*"
+      ],
+      "js": [
+        "cs.min.js"
+      ],
+      "css": [
+        "inlay.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://ecquire-oauth.herokuapp.com/oauth/*",
+        "https://www.ecquire.com/oauth/*",
+        "https://ww.ecquire.com/oauth/*"
+      ],
+      "js": [
+        "auth.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.ecquire.com/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "inlay.html"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com https://api.mixpanel.com https://unpkg.com/mithril/mithril.js; object-src 'self'",
+  "manifest_version": 2
+}

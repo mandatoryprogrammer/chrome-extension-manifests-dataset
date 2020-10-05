@@ -1,0 +1,39 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Bibo Multiple Tab Checker",
+  "manifest_version": 2,
+  "description": "Show alert when same lesson is opened in different tab",
+  "version": "0.1",
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "icons": {
+    "16": "images/bibo_nobg_16.png",
+    "48": "images/bibo_nobg_48.png",
+    "128": "images/bibo_nobg_128.png"
+  },
+  "browser_action": {
+    "default_title": "Bibo Multiple Tab Checker"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://admin.eikaiwa.dmm.dev/schedules/lesson/*",
+        "http://admin.eikaiwa.dmm.com/schedules/lesson/*",
+        "https://admin.eikaiwa.dmm.com/schedules/lesson/*",
+        "https://tutor.eikaiwa.dmm.com/schedules/lesson/*"
+      ],
+      "js": [
+        "content_scripts.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "storage",
+    "tabs",
+    "webRequest",
+    "*://*.eikaiwa.dmm.com/schedules/lesson/*"
+  ]
+}

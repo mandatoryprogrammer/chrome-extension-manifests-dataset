@@ -1,0 +1,71 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Newsletter Creator for Gmail - Flashissue",
+  "version": "3.3.8",
+  "manifest_version": 2,
+  "minimum_chrome_version": "80.0.0.0",
+  "description": "Email marketing & newsletter creator for Gmail. Design emails, create mailing lists & track performance. All inside Gmail.",
+  "icons": {
+    "128": "icon_128.png",
+    "48": "res/icon-48.png"
+  },
+  "browser_action": {
+    "default_icon": "res/fiplus.png",
+    "default_title": "Click to start curating!",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "js/jquery.js",
+      "js/const.js",
+      "js/env.js",
+      "js/analytics-client.js",
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "*://www.google.com/contacts/*"
+      ],
+      "js": [
+        "js/jquery.js",
+        "js/const.js",
+        "js/env.js",
+        "js/inject_content.js"
+      ],
+      "css": [
+        "css/gmail.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "js/jquery.js",
+        "js/const.js",
+        "js/env.js",
+        "js/fi_integrate.js"
+      ],
+      "matches": [
+        "*://app.flashissue.com/*",
+        "*://peek.flashissue.com/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "homepage_url": "https://www.flashissue.com",
+  "permissions": [
+    "tabs",
+    "webRequest"
+  ],
+  "web_accessible_resources": [
+    "fiframe.html",
+    "silentfiframe.html",
+    "empty.html",
+    "res/*",
+    "js/*"
+  ]
+}

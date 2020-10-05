@@ -1,0 +1,68 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "ZenHub for GitHub",
+  "short_name": "ZenHub",
+  "version": "2.45.30",
+  "manifest_version": 2,
+  "description": "ZenHub – Project Management Inside GitHub",
+  "author": "Axiom Zen",
+  "permissions": [
+    "*://api.zenhub.com/*",
+    "*://github.com/*",
+    "*://api.github.com/*",
+    "storage"
+  ],
+  "icons": {
+    "16": "img/ZH-16.png",
+    "48": "img/ZH-48.png",
+    "128": "img/ZH-128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "img/ZH-19.png",
+      "38": "img/ZH-38.png"
+    },
+    "default_title": "ZenHub",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://github.com/*"
+      ],
+      "css": [
+        "css/extension-main.css"
+      ],
+      "run_at": "document_start",
+      "exclude_matches": [
+        "https://github.com/pages/*"
+      ]
+    },
+    {
+      "matches": [
+        "https://github.com/*"
+      ],
+      "js": [
+        "js/utils/ChromeAPI.js",
+        "js/built/vendor.js",
+        "js/built/config.js",
+        "js/built/main.js",
+        "js/built/zenhubio.js"
+      ],
+      "run_at": "document_end",
+      "exclude_matches": [
+        "https://github.com/pages/*"
+      ]
+    }
+  ],
+  "background": {
+    "page": "./background.html"
+  },
+  "web_accessible_resources": [
+    "js/*",
+    "templates/*",
+    "img/**/*",
+    "font/*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.google-analytics.com/analytics.js https://cdn4.mxpnl.com/libs/mixpanel-2-latest.min.js https://cdnjs.salesmachine.io/salesmachine.min.js https://api.salesmachine.io/; object-src 'self'"
+}

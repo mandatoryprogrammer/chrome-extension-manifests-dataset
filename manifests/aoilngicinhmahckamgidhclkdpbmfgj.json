@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Monitorsky",
+  "version": "0.2.26",
+  "description": "Chrome extension for Monitorsky",
+  "icons": {
+    "144": "icons/icon_144.png",
+    "19": "icons/icon_19.png",
+    "38": "icons/icon_38.png"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "https://*.skype.com/",
+    "*://*.monitorsky.com/",
+    "https://*.live.com/",
+    "https://auth.gfx.ms/"
+  ],
+  "browser_action": {
+    "default_title": "Monitorsky",
+    "default_icon": "icons/icon_19.png",
+    "default_popup": "html/default.html"
+  },
+  "background": {
+    "scripts": [
+      "js/bluebird.js",
+      "js/bluebird-retry.js",
+      "js/ajax.js",
+      "js/utils.js",
+      "js/BigInteger.js",
+      "js/sha256.js",
+      "js/sha256Auth.js",
+      "js/skypeClient.js",
+      "js/monitorskyClient.js",
+      "js/background.js",
+      "js/update.js"
+    ],
+    "persistent": true
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://*.monitorsky.com/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.monitorsky.com/*"
+      ],
+      "css": [
+        "css/monitorsky.com.css"
+      ],
+      "js": [
+        "js/content/monitorsky.com.js"
+      ]
+    }
+  ]
+}

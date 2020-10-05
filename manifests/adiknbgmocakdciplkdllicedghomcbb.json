@@ -1,0 +1,50 @@
+{
+  "manifest_version": 2,
+  "name": "Flight Scan - Google Flights Tool",
+  "description": "Searches travel aggregate sites for the same Google Flight.",
+  "version": "1.0.0",
+  "icons": {
+    "128": "img/icon/icon128.png",
+    "16": "img/icon/icon16.png",
+    "32": "img/icon/icon32.png",
+    "48": "img/icon/icon48.png"
+  },
+  "browser_action": {
+    "default_icon": "img/icon/icon32.png",
+    "default_popup": "html/settings.html"
+  },
+  "background": {
+    "scripts": [
+      "js/defaultStorage.js",
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "js/injectGeneral.js"
+      ],
+      "matches": [
+        "https://www.google.com/flights*",
+        "https://www.google.com/travel/flights*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com/; object-src 'self'",
+  "permissions": [
+    "storage",
+    "https://www.google.com/flights*",
+    "https://www.google.com/travel/flights*"
+  ],
+  "short_name": "Flight Scan",
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "web_accessible_resources": [
+    "js/*",
+    "html/*",
+    "css/*",
+    "fonts/*",
+    "img/*"
+  ]
+}

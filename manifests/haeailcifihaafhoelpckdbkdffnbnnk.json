@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "YOUTUBE QUEUE",
+  "description": "Queue and control your youtube videos and keep the performance. Queues your Youtube videos with a click or the search bar in the app",
+  "version": "6.6.4",
+  "permissions": [
+    "https://www.youtube.com/*",
+    "contextMenus",
+    "background",
+    "storage",
+    "tabs"
+  ],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Q",
+        "mac": "Ctrl+Q"
+      }
+    },
+    "playpause": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Q",
+        "mac": "Ctrl+Shift+Q"
+      },
+      "description": "Play or pause current video.",
+      "global": true
+    }
+  },
+  "icons": {
+    "128": "images/icon1.png"
+  },
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.gstatic.com/ https://ajax.googleapis.com https://*.firebaseio.com https://www.googleapis.com/ https://apis.google.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/*"
+      ],
+      "css": [
+        "contentCSS.css"
+      ],
+      "js": [
+        "arrive.min.js",
+        "content.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "images/*"
+  ]
+}

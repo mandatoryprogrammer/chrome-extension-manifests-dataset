@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Price Checker of Amazon Variations",
+  "short_name": "amzvar",
+  "version": "0.4.0",
+  "manifest_version": 2,
+  "description": "Shown on Amazon product page to provide the lowest price including price history of product variations or recommendations.",
+  "homepage_url": "https://shopecific.com/amzvar.html",
+  "icons": {
+    "16": "icons/amz2_logo_16.png",
+    "48": "icons/amz2_logo_48.png",
+    "128": "icons/amz2_logo_128.png"
+  },
+  "default_locale": "en",
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ]
+  },
+  "permissions": [
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.amazon.com/*",
+        "https://*.amazon.ca/*"
+      ],
+      "js": [
+        "js/jquery/jquery.min.js",
+        "js/jquery/jquery-ui.min.js",
+        "src/inject/inject.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "src/inject/inject.css",
+    "icons/*"
+  ],
+  "browser_action": {
+    "default_icon": "icons/amz2_logo_48.png",
+    "default_popup": "src/options_custom/popup.html"
+  },
+  "options_page": "src/options_custom/options.html"
+}

@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "browseye toolbar",
+  "version": "0.8.19",
+  "description": "Search for words on a web page",
+  "manifest_version": 2,
+  "browser_action": {
+    "default_icon": "b128.png",
+    "default_title": "Activate/Deactivate browseye toolbar"
+  },
+  "background": {
+    "scripts": [
+      "lib/url-min.js",
+      "background.js"
+    ]
+  },
+  "icons": {
+    "16": "b16.png",
+    "48": "b48.png",
+    "128": "b128.png"
+  },
+  "homepage_url": "http://www.browseye.com",
+  "content_security_policy": "script-src 'self' https://browseye-toolbar.appspot.com https://ssl.google-analytics.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "lib/url-min.js",
+        "csst-injector.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "contextMenus",
+    "webRequest",
+    "webRequestBlocking",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "web_accessible_resources": [
+    "ac/publisherConf.json"
+  ]
+}

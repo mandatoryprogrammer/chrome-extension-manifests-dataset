@@ -1,0 +1,79 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Udacity Global Pause Hotkeys",
+  "description": "Register global hotkeys for pausing and skipping around in udacity videos.",
+  "version": "0.0.0.3",
+  "background": {
+    "scripts": [
+      "udacity_pause_background.js"
+    ],
+    "persistent": false
+  },
+  "commands": {
+    "udacity_pause_back": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+8"
+      },
+      "description": "Seek udacity course viewer backward.",
+      "global": true
+    },
+    "udacity_pause_pause": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+9"
+      },
+      "description": "Pause any udacity course viewer videos.",
+      "global": true
+    },
+    "udacity_pause_forward": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+0"
+      },
+      "description": "Seek udacity course viewer forward.",
+      "global": true
+    },
+    "udacity_pause_next": {
+      "description": "Go to the next morsel.",
+      "global": true
+    },
+    "udacity_pause_prev": {
+      "description": "Go to the previous morsel.",
+      "global": true
+    }
+  },
+  "browser_action": {
+    "default_icon": {
+      "128": "icon128.png"
+    },
+    "default_popup": "options.html"
+  },
+  "icons": {
+    "128": "icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://classroom.udacity.com/courses/*"
+      ],
+      "js": [
+        "udacity_pause_content.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://www.youtube.com/embed/*"
+      ],
+      "js": [
+        "udacity_pause_youtube_frame_content.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "storage",
+    "*://classroom.udacity.com/courses/*"
+  ]
+}

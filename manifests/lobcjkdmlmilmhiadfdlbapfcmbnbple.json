@@ -1,0 +1,131 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "HowNow",
+  "version": "1.31",
+  "description": "HowNow: Get the knowledge you need, where you need it.",
+  "permissions": [
+    "contextMenus",
+    "tabs",
+    "activeTab",
+    "storage",
+    "https://*.hownow.app/",
+    "https://*.hownow.tech/",
+    "https://*.hownow.cloud/",
+    "http://localhost:3000/"
+  ],
+  "background": {
+    "scripts": [
+      "background.js",
+      "libs/jquery-3.3.1.min.js",
+      "scripts/common_search.js"
+    ]
+  },
+  "options_ui": {
+    "page": "extension_options.html",
+    "open_in_tab": false
+  },
+  "content_security_policy": "script-src 'self' https://fast.wistia.com https://fast.wistia.net https://app.wistia.com; object-src 'self'",
+  "browser_action": {
+    "default_popup": "popup_check.html",
+    "default_icon": {
+      "16": "images/hownow4-16.png",
+      "32": "images/hownow4-32.png",
+      "48": "images/hownow4-48.png",
+      "128": "images/hownow4-128.png"
+    }
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "windows": "Ctrl+Shift+H",
+        "mac": "Command+Shift+H",
+        "chromeos": "Ctrl+Shift+H",
+        "linux": "Ctrl+Shift+H"
+      }
+    }
+  },
+  "icons": {
+    "16": "images/hownow4-16.png",
+    "32": "images/hownow4-32.png",
+    "48": "images/hownow4-48.png",
+    "128": "images/hownow4-128.png"
+  },
+  "manifest_version": 2,
+  "chrome_url_overrides": {
+    "newtab": "new_tab_override.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.google.com.au/*",
+        "https://www.google.at/*",
+        "https://www.google.bs/*",
+        "https://www.google.com.bd/*",
+        "https://www.google.be/*",
+        "https://www.google.bt/*",
+        "https://www.google.com.br/*",
+        "http://www.google.cn/*",
+        "https://www.google.com.cy/*",
+        "https://www.google.dk/*",
+        "https://www.google.cz/*",
+        "https://www.google.de/*",
+        "https://www.google.gr/*",
+        "https://www.google.com.hk/*",
+        "https://www.google.hu/*",
+        "https://www.google.is/*",
+        "https://www.google.co.in/*",
+        "https://www.google.co.id/*",
+        "https://www.google.com.my/*",
+        "https://www.google.com.mx/*",
+        "https://www.google.com.np/*",
+        "https://www.google.co.nz/*",
+        "https://www.google.nl/*",
+        "https://www.google.com.pk/*",
+        "https://www.google.com.ph/*",
+        "https://www.google.ru/*",
+        "https://www.google.ro/*",
+        "https://www.google.sc/*",
+        "https://www.google.lk/*",
+        "https://www.google.ch/*",
+        "https://www.google.se/*",
+        "https://www.google.co.th/*",
+        "https://www.google.com.sg/*",
+        "https://www.google.co.uk/*",
+        "https://www.google.ae/*",
+        "https://www.google.com.tr/*",
+        "https://www.google.com/*"
+      ],
+      "js": [
+        "libs/jquery-3.3.1.min.js",
+        "scripts/common_search.js",
+        "search_overlay.js"
+      ],
+      "css": [
+        "search_overlay.css"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "extension-injection.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "html-templates/*",
+    "images/*",
+    "search_overlay.css",
+    "popup.html"
+  ],
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA3oyTyrYJJp7gLyA5N0NB9pKz1ZEyeC+tH4rQK8/eCfOrcEEfwEB85AXNBCLEObSObYC6oufQDx5mqIgBMCS1tfUF13Eaf25L9XlbJuvHfQOkCRD4F4krJDhWbAIWGuIcoJxijWMe4St0n+IYF5pSYya/f7ouU2FrxLE6tbY8kKXX/uEys+YpXcIA5Rh6+CxGhxnzzBFXosTFPPGCPCUBJttiJ0O4MnT0tBpVHSR5XtK7/+53ngMm3a3YWWPsgSOM6UHBXrguLUfq/xYmx1yW/UUJn2Xx7ViUT/5SAFTvi4rvyMx/fN8cG4ihAF1mVu7FsaUv1yuwbN+POkYqxJMm+wIDAQAB",
+  "externally_connectable": {
+    "matches": [
+      "http://localhost:3000/*",
+      "https://hownow.app/*",
+      "https://hownow.cloud/*"
+    ]
+  }
+}

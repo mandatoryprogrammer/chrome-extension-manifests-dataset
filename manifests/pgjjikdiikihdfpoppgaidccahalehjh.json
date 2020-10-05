@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_extName__",
+  "short_name": "Speedtest",
+  "content_security_policy": "script-src 'self' https://www.speedtest.net https://www.googletagmanager.com/gtm.js https://www.google-analytics.com/analytics.js; object-src 'self'",
+  "version": "1.0.9.4",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "description": "__MSG_extDescription__",
+  "icons": {
+    "16": "images/gauge-16.png",
+    "48": "images/gauge-48.png",
+    "128": "images/gauge-128.png"
+  },
+  "permissions": [
+    "webRequest",
+    "background",
+    "storage",
+    "tabs"
+  ],
+  "background": {
+    "page": "/background.html"
+  },
+  "options_page": "index.html?options=true",
+  "browser_action": {
+    "default_icon": {
+      "19": "images/gauge-19.png",
+      "38": "images/gauge-38.png"
+    },
+    "default_title": "Speedtest",
+    "default_popup": "index.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "js": [
+        "webspeed.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

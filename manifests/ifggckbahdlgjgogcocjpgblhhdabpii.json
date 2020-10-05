@@ -1,0 +1,67 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Sherlock",
+  "description": "Best companion to Zillow and Redfin. Sherlock tells you everything you need to know about a home.",
+  "version": "4.0.3",
+  "browser_action": {
+    "default_icon": "sherlock32.png",
+    "default_title": "Sherlock",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "src/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.zillow.com/*"
+      ],
+      "js": [
+        "src/zillowScraper.js",
+        "src/badge.js"
+      ],
+      "css": [
+        "style.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.redfin.com/*"
+      ],
+      "js": [
+        "src/redfinScraper.js",
+        "src/badge.js"
+      ],
+      "css": [
+        "style.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.trulia.com/*"
+      ],
+      "js": [
+        "src/truliaScraper.js",
+        "src/badge.js"
+      ],
+      "css": [
+        "style.css"
+      ]
+    }
+  ],
+  "icons": {
+    "32": "sherlock32.png",
+    "48": "sherlock48.png",
+    "128": "sherlock128.png"
+  },
+  "permissions": [
+    "declarativeContent",
+    "tabs",
+    "storage",
+    "https://fonts.googleapis.com/"
+  ]
+}

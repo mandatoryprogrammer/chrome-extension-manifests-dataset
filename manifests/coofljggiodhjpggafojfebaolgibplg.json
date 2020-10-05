@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "SalesJoy",
+  "short_name": "Free Email Tracking for Gmail",
+  "description": "Track your sent emails",
+  "version": "1.0.5",
+  "icons": {
+    "16": "img/sale-joy-16.png",
+    "48": "img/sale-joy-48.png",
+    "128": "img/sale-joy-128.png"
+  },
+  "browser_action": {
+    "default_popup": "pages/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "js/common.js",
+      "js/salesjoy-api.js",
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*"
+      ],
+      "css": [
+        "css/bootstrap.min.css",
+        "css/salesjoy-gmail.css",
+        "css/popup.css"
+      ],
+      "js": [
+        "js/jquery-2.2.0.min.js",
+        "js/inboxsdk.js",
+        "js/common.js",
+        "js/salesjoy-api.js",
+        "js/salesjoy-gmail.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "https://mail.google.com/",
+    "https://inbox.google.com/",
+    "https://app.salesjoy.co/",
+    "https://api.salesjoy.co/",
+    "*://*.googleusercontent.com/",
+    "storage",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "web_accessible_resources": [
+    "img/sale-joy-16.png",
+    "img/sale-joy-16-disabled.png"
+  ],
+  "manifest_version": 2
+}

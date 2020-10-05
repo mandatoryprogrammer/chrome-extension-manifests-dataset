@@ -1,0 +1,72 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Chrome Wrangler",
+  "version": "2.0.13",
+  "icons": {
+    "16": "icons/chromewrangler16.png",
+    "48": "icons/chromewrangler48.png",
+    "128": "icons/chromewrangler128.png"
+  },
+  "description": "Annotate crbug.com bugs for easier wrangling.",
+  "background": {
+    "persistent": false,
+    "page": "background/background.html"
+  },
+  "permissions": [
+    "activeTab",
+    "clipboardWrite",
+    "declarativeContent",
+    "contextMenus",
+    "storage",
+    "https://clusterfuzz.com/*",
+    "https://cluster-fuzz.appspot.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://bugs.chromium.org/*"
+      ],
+      "js": [
+        "shared/shared.js",
+        "content/mutex.js",
+        "content/css.js",
+        "content/omahaHistory.js",
+        "content/issueInfo.js",
+        "content/pageUtils.js",
+        "content/updatePeriphery.js",
+        "content/updateComments.js",
+        "content/content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    "injected/parseFromPage.js",
+    "injected/addLabels.js"
+  ],
+  "page_action": {
+    "default_icon": {
+      "16": "icons/chromewrangler16.png",
+      "48": "icons/chromewrangler48.png",
+      "128": "icons/chromewrangler128.png"
+    },
+    "default_title": "Chrome Bug Wrangling",
+    "default_popup": "popup/popup.html"
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": false
+  },
+  "commands": {
+    "openBugsInList": {
+      "suggested_key": {
+        "windows": "Ctrl+Shift+O",
+        "mac": "Command+Shift+O",
+        "chromeos": "Ctrl+Shift+O",
+        "linux": "Ctrl+Shift+O"
+      },
+      "description": "Open all bugs on list page"
+    }
+  }
+}

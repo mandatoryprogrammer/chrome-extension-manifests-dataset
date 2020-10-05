@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "timelog",
+  "description": "Rally extension for time logging.",
+  "version": "0.1",
+  "browser_action": {
+    "default_icon": "ressources/icon.png",
+    "default_popup": "src/popup/popup.html"
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "src/background/eventbackground.js"
+    ]
+  },
+  "permissions": [
+    "storage",
+    "webNavigation",
+    "webRequest",
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://rally1.rallydev.com/slm/analytics/timeTrack"
+      ],
+      "css": [
+        "src/helpers/bootstrap/css/bootstrap.min.prefixed.css"
+      ],
+      "js": [
+        "src/helpers/jquery-1.9.1.min.js",
+        "src/helpers/insertionQuery/insQ.js",
+        "src/background/insert.js",
+        "src/background/timer.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "ressources/addTimer.png",
+    "src/background/timer.js",
+    "src/helpers/jquery-1.9.1.min.js"
+  ]
+}

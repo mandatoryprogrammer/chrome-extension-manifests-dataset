@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "New Address Bar",
+  "short_name": "No Address Bar",
+  "manifest_version": 2,
+  "version": "1.0.0.3",
+  "description": "Search by Google, open webpage right on browsing site.",
+  "browser_action": {
+    "default_icon": "48.png",
+    "default_title": "GSearch"
+  },
+  "background": {
+    "page": "bgr.html",
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "match_about_blank": true,
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_end",
+      "exclude_globs": [
+        "*/chrome/newtab*"
+      ],
+      "css": [
+        "gsearch.css"
+      ],
+      "js": [
+        "gsearch.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "storage",
+    "<all_urls>"
+  ],
+  "web_accessible_resources": [
+    "128.png"
+  ],
+  "icons": {
+    "48": "48.png",
+    "16": "16.png",
+    "128": "128.png"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

@@ -1,0 +1,123 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Przypominajka FaniMani.pl",
+  "description": "Pomagaj bezpłatnie przy okazji zakupów online. Średnio 2.5% z tego co i tak płacisz trafi do organizacji, którą wybierzesz.",
+  "author": "FaniMani.pl",
+  "version": "3.4.4",
+  "background": {
+    "scripts": [
+      "background_pages/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "content_scripts/widget.js"
+      ],
+      "css": [
+        "resources/css/widget.css"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "include_globs": [
+        "*://google.??",
+        "*://google.??/*",
+        "*://google.???",
+        "*://google.???/*",
+        "*://google.co.uk",
+        "*://google.co.uk/*",
+        "*://www.google.??",
+        "*://www.google.??/*",
+        "*://www.google.???",
+        "*://www.google.???/*",
+        "*://www.google.co.uk",
+        "*://www.google.co.uk/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "content_scripts/google_buttons.js"
+      ],
+      "css": [
+        "resources/css/google_buttons.css"
+      ]
+    },
+    {
+      "matches": [
+        "http://localhost/*",
+        "*://fanimani.pl/*",
+        "*://www.fanimani.pl/*",
+        "*://dev.fanimani.pl/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "content_scripts/fanimani_pl.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "storage",
+    "cookies",
+    "*://localhost/*",
+    "*://fanimani.pl/*",
+    "*://*.fanimani.pl/*"
+  ],
+  "icons": {
+    "16": "resources/img/icon16.png",
+    "48": "resources/img/icon48.png",
+    "128": "resources/img/icon128.png"
+  },
+  "web_accessible_resources": [
+    "resources/css/google_buttons.css",
+    "resources/css/widget.css",
+    "resources/img/icon16.png",
+    "resources/img/icon32.png",
+    "resources/img/icon48.png",
+    "resources/img/icon128.png",
+    "resources/img/search-logo.png",
+    "resources/img/search-icon.png",
+    "resources/img/serce1.png",
+    "resources/img/serce2.png",
+    "resources/img/serce3.png",
+    "resources/img/serce4.png",
+    "resources/img/serce5.png",
+    "resources/img/serce6.png",
+    "resources/img/loader.gif",
+    "resources/img/logo-full.png",
+    "resources/img/logo.png",
+    "resources/img/logo-128.png",
+    "resources/img/bg-side.png",
+    "resources/img/ico-toggle-on.png",
+    "resources/img/ico-toggle-off.png",
+    "resources/img/ico-toggle-big-off.png",
+    "resources/img/ico-more.png",
+    "resources/img/zamkniecie.png",
+    "resources/css/fonts/OpenSans-400-latin.woff2",
+    "resources/css/fonts/OpenSans-400-latin-ext.woff2",
+    "resources/css/fonts/OpenSans-600-latin.woff2",
+    "resources/css/fonts/OpenSans-600-latin-ext.woff2"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "16": "resources/img/icon16.png",
+      "32": "resources/img/icon32.png"
+    }
+  },
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "externally_connectable": {
+    "matches": [
+      "http://localhost/*",
+      "*://fanimani.pl/*",
+      "*://www.fanimani.pl/*",
+      "*://dev.fanimani.pl/*"
+    ]
+  }
+}

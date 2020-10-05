@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "version": "5.0.1",
+  "name": "YouTubeTutor",
+  "description": "The best way to organize education by tutorials from YouTube.",
+  "short_name": "YTT",
+  "icons": {
+    "16": "./icons/logo16.png",
+    "48": "./icons/logo48.png",
+    "128": "./icons/logo128.png"
+  },
+  "browser_action": {
+    "default_title": "YouTubeTutor",
+    "default_icon": "./icons/logo48.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "activeTab",
+    "webNavigation",
+    "unlimitedStorage",
+    "*://*.youtube.com/*"
+  ],
+  "background": {
+    "scripts": [
+      "./js/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.youtube.com/*"
+      ],
+      "js": [
+        "./js/content.js"
+      ],
+      "css": [
+        "./content.css"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

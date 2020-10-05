@@ -1,0 +1,70 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "author": "Denis Podgurskii",
+  "name": "Penetration Testing Kit",
+  "short_name": "PenTestKit",
+  "description": "Penetration Testing Kit",
+  "version": "4.1.2",
+  "manifest_version": 2,
+  "incognito": "split",
+  "background": {
+    "scripts": [
+      "assets/js/lib/browser-polyfill.js",
+      "assets/js/background/Tab.js",
+      "assets/js/background/Settings.js",
+      "assets/js/background/Request.js",
+      "assets/js/background/Utils.js",
+      "assets/js/background/eXHeaders.js",
+      "assets/js/background/Recorder.js",
+      "assets/js/background/Exporter.js",
+      "assets/js/background/Scan.js",
+      "assets/js/background/modules/SqlInjection.js",
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "assets/js/lib/browser-polyfill.js",
+        "content.js"
+      ],
+      "all_frames": false,
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "<all_urls>",
+    "activeTab",
+    "background",
+    "cookies",
+    "nativeMessaging",
+    "notifications",
+    "storage",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "debugger"
+  ],
+  "icons": {
+    "128": "assets/images/icon.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "128": "assets/images/icon.png"
+    },
+    "default_title": "Penetration Testing Kit",
+    "default_popup": "browser/index.html"
+  },
+  "options_ui": {
+    "page": "browser/settings.html",
+    "open_in_tab": false
+  },
+  "web_accessible_resources": [
+    "assets/images/*.png",
+    "assets/js/*.js"
+  ]
+}

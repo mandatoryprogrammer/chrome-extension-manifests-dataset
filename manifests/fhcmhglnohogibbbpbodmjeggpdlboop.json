@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Popup for Keep™",
+  "description": "Load Google Keep™ in a popup from the current tab in Google Chrome™.",
+  "version": "0.15.2",
+  "author": "Claudio d'Angelis",
+  "browser_action": {
+    "default_icon": {
+      "19": "img/icon-19.png",
+      "38": "img/icon-38.png"
+    },
+    "default_title": "Keep as a popup",
+    "default_popup": "popup.html"
+  },
+  "incognito": "not_allowed",
+  "icons": {
+    "16": "img/icon-16.png",
+    "32": "img/icon-32.png",
+    "48": "img/icon-48.png",
+    "64": "img/icon-64.png",
+    "128": "img/icon-128.png"
+  },
+  "background": {
+    "scripts": [
+      "js/background.bundle.js"
+    ],
+    "persistent": true
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://keep.google.com/*"
+      ],
+      "js": [
+        "js/addTo.bundle.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "contextMenus",
+    "webRequest",
+    "webRequestBlocking",
+    "storage",
+    "https://keep.google.com/keep/"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

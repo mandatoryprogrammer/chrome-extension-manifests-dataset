@@ -1,0 +1,69 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "img/icon19.png",
+    "default_title": "__MSG_search_string__"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "js/funnel-visibility.js"
+      ],
+      "matches": [
+        "*://*.miaraka.org/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "js": [
+        "js/miaraka-search.js"
+      ],
+      "matches": [
+        "https://www.miaraka.org/search*"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "default_locale": "en",
+  "description": "__MSG_extdescription__",
+  "homepage_url": "http://www.amelior.ml",
+  "icons": {
+    "128": "img/logo_square_transparent128.png",
+    "16": "img/favicon16.png",
+    "48": "img/logo_square_transparent48.png"
+  },
+  "manifest_version": 2,
+  "name": "__MSG_extname__",
+  "options_page": "options.html",
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "history",
+    "<all_urls>",
+    "storage"
+  ],
+  "version": "1.0.2",
+  "web_accessible_resources": [
+    "img/favicon16.png",
+    "img/tree-100x100.png",
+    "img/logo.png"
+  ],
+  "chrome_settings_overrides": {
+    "search_provider": {
+      "name": "__MSG_extname__",
+      "keyword": "__MSG_tracking_string__",
+      "search_url": "https://miaraka.org/search?q={searchTerms}",
+      "favicon_url": "https://miaraka.org/wp-content/themes/wpry/medias/rywp/md/favicon-96x96.png",
+      "image_url": "https://miaraka.org/search?q={searchTerms}",
+      "encoding": "UTF-8",
+      "is_default": true
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "disregard that, i'm an asshole",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "A passive aggressive emoji filtering system for slack",
+  "homepage_url": "https://github.com/rkachowski/disregard-that-i-m-an-asshole",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": true
+  },
+  "options_page": "src/options_custom/index.html",
+  "permissions": [
+    "http://*.slack.com/*",
+    "https://*.slack.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.slack.com/*",
+        "https://*.slack.com/*"
+      ],
+      "js": [
+        "js/jquery/jquery.min.js",
+        "src/inject/inject.js"
+      ],
+      "css": [
+        "src/inject/inject.css"
+      ]
+    }
+  ]
+}

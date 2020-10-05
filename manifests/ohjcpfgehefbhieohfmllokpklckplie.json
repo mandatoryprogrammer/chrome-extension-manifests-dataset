@@ -1,0 +1,85 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Mailbutler for Gmail",
+  "short_name": "Mailbutler",
+  "description": "__MSG_extDescription__",
+  "version": "2337",
+  "version_name": "3123",
+  "default_locale": "en",
+  "browser_action": {
+    "default_icon": {
+      "16": "assets/img/logo_16x16.png",
+      "48": "assets/img/logo_48x48.png"
+    },
+    "default_popup": "html/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "libs/OneSignal.js",
+      "script/vendors.js",
+      "script/mailbutler.js",
+      "script/mailbutler_background.js"
+    ]
+  },
+  "options_ui": {
+    "page": "html/options.html",
+    "chrome_style": true
+  },
+  "permissions": [
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "https://mail.google.com/",
+    "https://*.mailbutler.io/",
+    "https://*.googleusercontent.com/",
+    "contextMenus",
+    "gcm",
+    "notifications",
+    "identity"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "css": [
+        "css/vendors.css",
+        "css/mailbutler.css",
+        "css/mailbutler_content.css"
+      ],
+      "js": [
+        "libs/mousetrap/mousetrap.js",
+        "libs/mousetrap/mousetrap-global-bind.js",
+        "libs/mousetrap/mousetrap-record.js",
+        "libs/inboxsdk.js",
+        "script/vendors.js",
+        "script/mailbutler.js",
+        "script/mailbutler_content.js"
+      ],
+      "runt_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://*.mailbutler.io/auth/*"
+      ],
+      "js": [
+        "script/oauth_callback.js"
+      ],
+      "runt_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "assets/fonts/*",
+    "assets/img/*",
+    "data/*",
+    "_locales/*"
+  ],
+  "icons": {
+    "16": "assets/img/logo_16x16.png",
+    "48": "assets/img/logo_48x48.png",
+    "128": "assets/img/logo_128x128.png"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com http://localhost:8098; object-src 'self'",
+  "homepage_url": "https://www.mailbutler.io"
+}

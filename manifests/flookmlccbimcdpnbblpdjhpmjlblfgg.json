@@ -1,0 +1,119 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "RiteBoost",
+  "short_name": "RiteBoost",
+  "description": "Improve the ROI of your posts with one click, right in your favorite scheduling tool.",
+  "version": "4.5.19",
+  "icons": {
+    "16": "img/icon-16.png",
+    "32": "img/icon-32.png",
+    "48": "img/icon-48.png",
+    "64": "img/icon-64.png",
+    "128": "img/icon-128.png",
+    "256": "img/icon-256.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "img/icon-19.png"
+    },
+    "default_popup": "html/popup.html",
+    "default_title": "RiteBoost"
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "web_accessible_resources": [
+    "img/*",
+    "fonts/*",
+    "js/libs/*",
+    "html/*",
+    "js/*",
+    "css/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "*://*.ritetag.com/hootsuite/app*",
+        "*://*.ritetag.com/hootsuite/optimize*"
+      ],
+      "css": [
+        "css/riteboost.css"
+      ],
+      "js": [
+        "js/riteboost.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://twitter.com/*"
+      ],
+      "exclude_matches": [
+        "*://twitter.com/intent*"
+      ],
+      "js": [
+        "js/twitter.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://twitter.com/intent*"
+      ],
+      "js": [
+        "js/twitter-intent.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.buffer.com/*"
+      ],
+      "js": [
+        "js/riteboost.js",
+        "js/buffer.js"
+      ],
+      "css": [
+        "css/riteboost.css"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*.sendible.com/*"
+      ],
+      "js": [
+        "js/sendible.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*.hootsuite.com/*"
+      ],
+      "js": [
+        "js/hootsuite.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://*.riteforge.com/*"
+    ]
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "contextMenus",
+    "notifications"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

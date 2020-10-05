@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Locus Point",
+  "version": "3.0.0",
+  "manifest_version": 2,
+  "description": "Keep relevant, in the know, and up to date.",
+  "icons": {
+    "128": "/images/logo-128.png",
+    "48": "/images/logo-48.png",
+    "16": "/images/logo-16.png"
+  },
+  "browser_action": {
+    "default_icon": "/images/logo-16.png",
+    "default_title": "Keep relevant, in the know, and up to date.",
+    "default_popup": "/popup.html"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com https://www.googletagservices.com; object-src 'self'; frame-src 'self';",
+  "web_accessible_resources": [
+    "/popup-prerendered.html",
+    "/css/popup.css",
+    "/omnibar.html",
+    "/images/logo-16.png"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.facebook.com/connect/login_success.html*"
+      ],
+      "all_frames": true,
+      "js": [
+        "/content-script-js-0-1C936A33BB264C675F9A053F541D24EE.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://api.twitter.com/oauth/authorize"
+      ],
+      "all_frames": true,
+      "js": [
+        "/content-script-js-1-01926444FBCD235854E4EC3EB3126F2B.js"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "http://*.locuspoint.net/*"
+      ],
+      "js": [
+        "/content-script-js-2-F3477D43E9C3D8A9EDC53F4A39A8ABA0.js"
+      ]
+    }
+  ],
+  "background": {
+    "page": "/background.html"
+  },
+  "options_page": "/options.html",
+  "permissions": [
+    "history",
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "homepage_url": "http://www.locuspoint.net"
+}

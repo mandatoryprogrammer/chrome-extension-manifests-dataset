@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Browser Stream",
+  "description": "Stream your browsing history. Creep on your friends. What do you have to hide?",
+  "version": "3.9",
+  "icons": {
+    "128": "browser-stream.png"
+  },
+  "browser_action": {
+    "default_icon": "browser-stream.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "firebase.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "firebase.js",
+        "content-script.js"
+      ],
+      "run_at": "document_end",
+      "exclude_globs": [
+        "https://search-feed-35574.firebaseapp.com/*"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "activeTab",
+    "tabs",
+    "storage"
+  ],
+  "content_security_policy": "script-src 'self' https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com; object-src 'self'",
+  "oauth2": {
+    "client_id": "286843100545-jni6i3qj18ck1bhbqik7ajh22bf48js7.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/userinfo.profile"
+    ]
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxtiLfR5IRp6sQro4uhS9uHipJfU2tHyYtwiebOgO1lLXBcwhLrj1pfr0IRu5ChbnTE0lMSD82V8smmueFvh2YQYeVaG8Vsus4ZQzZ+0z4Gyqjd1PlB5bhbGge9EKjhJx9x6RgSwfGsZlArNP74ELw/e/OSA+mKngWzpS5wG263NHcaqWHclvDPAgDGGCEKXxy7LZ77ikj7iGozfqJqQynCewoCZk7izV3cRaqz9e6ZusLSWz8EcRi6ke6+YtA6YeFzL3DN/2ryymN0zOebIGADrjqe8WWxm4pI6o65wCBXlW9ZMIj7O6GmiDuvRSGWeSg7E1Va1SjHXfWMjtDlSpLwIDAQAB"
+}

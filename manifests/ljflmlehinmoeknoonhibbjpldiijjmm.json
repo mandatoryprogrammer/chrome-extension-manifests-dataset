@@ -1,0 +1,96 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Speechify for Chrome",
+  "author": "Speechify Inc",
+  "version": "4.0.9",
+  "description": "Listen to the Internet.",
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "minimum_chrome_version": "40.0",
+  "content_security_policy": "script-src 'sha256-Qcd1S5XAuSTIuXH4NgKRf8If0mMbg7uAxcUkCe7azvI=' 'self' https://*.firebaseio.com/ https://api.amplitude.com https://speechify-api-polly.s3.amazonaws.com/ https://files.getspeechify.com/; object-src 'self'",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "https://speechifydev.firebaseio.com/"
+  ],
+  "background": {
+    "scripts": [
+      "background/config.js",
+      "background/lib/firebase-app.js",
+      "background/lib/firebase-auth.js",
+      "background/lib/firebase-database.js",
+      "background/lib/firebase-firestore.js",
+      "background/lib/simple-crypto.js",
+      "background/lib/amplitude.js",
+      "background/utils.js",
+      "background/analytics.js",
+      "background/userSettings.js",
+      "background/initialize.js",
+      "background/authentication.js",
+      "background/osxSpeechSynth.js",
+      "background/tts.js"
+    ],
+    "persistence": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "dom-manipulators/lib/nlp-compromise.js",
+        "dom-manipulators/lib/plyr.js",
+        "dom-manipulators/lib/jquery.min.js"
+      ],
+      "css": [
+        "dom-manipulators/css/plyr.css",
+        "dom-manipulators/css/speechify.css",
+        "dom-manipulators/css/welcome.css",
+        "dom-manipulators/css/popup.css"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "dom-manipulators/popup.js",
+        "dom-manipulators/svgIcons.js",
+        "dom-manipulators/draggable.js",
+        "dom-manipulators/highlighting.js",
+        "dom-manipulators/constants.js",
+        "dom-manipulators/config.js",
+        "dom-manipulators/utils.js",
+        "dom-manipulators/heading-player.js",
+        "dom-manipulators/paragraph-player.js",
+        "dom-manipulators/selection-player.js",
+        "dom-manipulators/player.js",
+        "dom-manipulators/unsupportedWebsites.js",
+        "dom-manipulators/init.js",
+        "dom-manipulators/welcome-screen.js",
+        "dom-manipulators/draggable.js",
+        "dom-manipulators/feedback.js",
+        "dom-manipulators/helpers/sanitization.js",
+        "dom-manipulators/helpers/dom.js",
+        "dom-manipulators/helpers/strings.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://127.0.0.1/*",
+      "*://localhost/*",
+      "*://auth.getspeechify.com/*"
+    ]
+  },
+  "browser_action": {
+    "default_title": "Speechify Plugin",
+    "default_popup": "index.html"
+  }
+}

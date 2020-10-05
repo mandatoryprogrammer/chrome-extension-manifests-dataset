@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_appName__",
+  "description": "__MSG_appDesc__",
+  "short_name": "Insta DM",
+  "default_locale": "en",
+  "version": "1.9.2",
+  "icons": {
+    "48": "img/logo48x48.png",
+    "64": "img/logo64x64.png",
+    "128": "img/logo128x128.png"
+  },
+  "background": {
+    "page": "html/instagram.main.html",
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.instagram.com/*"
+      ],
+      "js": [
+        "js/kbdPlugin/punycode.js",
+        "js/kbdPlugin/react-trigger-change.js",
+        "js/kbdPlugin/emojiDataUsc2.js",
+        "js/kbdPlugin/html.js",
+        "js/kbdPlugin/index.js",
+        "js/instMsg.injected.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "cookies",
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "*://*.instagram.com/*"
+  ],
+  "browser_action": {
+    "default_popup": "instagram.popUp.html?idmpopup=true",
+    "default_icon": "img/logo48x48.png"
+  },
+  "web_accessible_resources": [
+    "css/*",
+    "img/*",
+    "snd/*",
+    "webfonts/*"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

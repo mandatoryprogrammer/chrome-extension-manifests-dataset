@@ -1,0 +1,69 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Lucid Meetings for Google Chrome",
+  "version": "2.0.15",
+  "description": "Schedule Lucid Meetings using Google Calendar.",
+  "icons": {
+    "128": "images/lm_icon_128.png",
+    "48": "images/lm_icon_48.png",
+    "32": "images/lm_icon_32.png",
+    "16": "images/lm_icon_16.png"
+  },
+  "browser_action": {
+    "default_title": "Lucid Meetings",
+    "default_popup": "browser-popup.html"
+  },
+  "background": {
+    "scripts": [
+      "/js/lib/jquery-3.3.1.min.js",
+      "/js/lib/stacktrace/stackframe.min.js",
+      "/js/lib/stacktrace/error-stack-parser-with-polyfills.min.js",
+      "/js/util.js",
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "css": [
+        "/css/lucid-content-extension.css"
+      ],
+      "js": [
+        "/js/lib/jquery-3.3.1.min.js",
+        "/js/lib/stacktrace/stackframe.min.js",
+        "/js/lib/stacktrace/error-stack-parser-with-polyfills.min.js",
+        "/js/util.js",
+        "/js/util_googleDom.js",
+        "/js/content.js"
+      ],
+      "matches": [
+        "*://calendar.google.com/calendar/*",
+        "*://www.calendar.google.com/calendar/*"
+      ]
+    }
+  ],
+  "author": "https://lucidmeetings.com",
+  "homepage_url": "https://lucidmeetings.com",
+  "incognito": "spanning",
+  "offline_enabled": false,
+  "options_page": "options.html",
+  "permissions": [
+    "storage",
+    "https://*.lucidmeetings.com/"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://calendar.google.com/calendar/*",
+      "*://www.calendar.google.com/calendar/*",
+      "*://*.lucidmeetings.com/oauth2/google*"
+    ],
+    "accepts_tls_channel_id": false
+  },
+  "web_accessible_resources": [
+    "icons/*",
+    "images/*"
+  ],
+  "short_name": "Lucid"
+}

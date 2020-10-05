@@ -1,0 +1,73 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Blog Comment Killfile",
+  "short_name": "killfile",
+  "description": "Provides a killfile for certain blogs.",
+  "background": {
+    "scripts": [
+      "serverload.js",
+      "define.js",
+      "scenarios.js",
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "icons": {
+    "128": "kficon128.png",
+    "64": "kficon64.png",
+    "48": "kficon48.png"
+  },
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "storage",
+    "alarms"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "scenario.css"
+      ],
+      "js": [
+        "clientload.js",
+        "define.js",
+        "startthunk.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "*://disqus.com/embed*",
+        "*://*.disqus.com/embed*"
+      ],
+      "css": [
+        "scenario.css"
+      ],
+      "js": [
+        "clientload.js",
+        "define.js",
+        "startthunk.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "page_action": {
+    "default_icon": {
+      "19": "kficon19.png",
+      "38": "kficon38.png",
+      "48": "kficon48.png",
+      "64": "kficon64.png",
+      "128": "kficon128.png"
+    },
+    "default_title": "Killfile inactive"
+  },
+  "manifest_version": 2,
+  "version": "0.2.11"
+}

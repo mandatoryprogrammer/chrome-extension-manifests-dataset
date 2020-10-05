@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "SDSU Webportal+",
+  "description": "This extension enhances SDSU Webportal's UI.",
+  "version": "1.01",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://sunspot.sdsu.edu/schedule/search*"
+      ],
+      "js": [
+        "jquery-3.3.1.min.js",
+        "main.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://sunspot.sdsu.edu/schedule/myclasses*",
+        "https://sunspot.sdsu.edu/schedule/myregistrationinfo*"
+      ],
+      "js": [
+        "jquery-3.3.1.min.js",
+        "save_current_classes.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Adult Blocker - Porn Adult Filter",
+  "short_name": "Adult Blocker",
+  "version": "6.2.8",
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.google-analytics.com https://dc.airdropanalytics.com; object-src 'self'",
+  "description": "__MSG_manifest_desc__",
+  "default_locale": "en",
+  "incognito": "split",
+  "homepage_url": "https://adult-blocker.com",
+  "background": {
+    "page": "html/background.html"
+  },
+  "icons": {
+    "16": "images/icon-16.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/_.png",
+      "38": "images/icon-38.png"
+    },
+    "default_title": "Adult Blocker",
+    "default_popup": "html/actionPopup.html"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "js/jquery-3.3.1.js",
+        "js/library.js",
+        "js/utils.js",
+        "js/disablePlugin.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file://*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "js": [
+        "js/jquery-3.3.1.js",
+        "js/contentBlockPage.js"
+      ],
+      "matches": [
+        "*://adult-blocker.com/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "html/block.html",
+    "html/options.html"
+  ],
+  "options_page": "html/pwd.html",
+  "permissions": [
+    "storage",
+    "unlimitedStorage",
+    "webRequest",
+    "webRequestBlocking",
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ]
+}

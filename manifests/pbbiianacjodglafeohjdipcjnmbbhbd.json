@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Page Camera",
+  "short_name": "Page Camera",
+  "description": "Capture snapshots of pages to track with Crazy Egg",
+  "version": "2.0.63",
+  "minimum_chrome_version": "78",
+  "incognito": "split",
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/48.png",
+    "default_popup": "common/panel.html"
+  },
+  "permissions": [
+    "activeTab",
+    "debugger",
+    "tabs",
+    "*://*.crazyegg.com/*",
+    "*://*.crazyegg.com/*"
+  ],
+  "optional_permissions": [
+    "http://*/",
+    "https://*/"
+  ],
+  "homepage_url": "http://www.crazyegg.com/",
+  "web_accessible_resources": [
+    "user_script/tracking/*.js",
+    "user_script/common/*.js",
+    "common/*.js",
+    "common/working.gif",
+    "get_all_fingerprints.js",
+    "source_page.js",
+    "hide_scrollbars.css"
+  ],
+  "background": {
+    "scripts": [
+      "background.js",
+      "conversation.js",
+      "emulator.js",
+      "snapshot.js",
+      "config.js",
+      "common/request.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.crazyegg.com/*"
+      ],
+      "js": [
+        "home.js"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "description": "Modifies request header for SharePoint REST API calls to get JSON instead of XML. For best results you'll need a JSON viewer Add-on.",
+  "manifest_version": 2,
+  "name": "SP REST JSON",
+  "short_name": "SP REST JSON",
+  "version": "1.3.1",
+  "author": "Daniel Desch",
+  "homepage_url": "https://github.com/ddesch/SP-REST-JSON/tree/master/",
+  "icons": {
+    "16": "icons/16/active.png",
+    "32": "icons/32/active.png",
+    "48": "icons/48/active.png",
+    "64": "icons/64/active.png",
+    "128": "icons/128/active.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/16/inactive.png",
+      "32": "icons/32/inactive.png",
+      "48": "icons/48/inactive.png",
+      "64": "icons/64/inactive.png",
+      "128": "icons/128/inactive.png"
+    },
+    "default_popup": "popup/tabOptions.html"
+  },
+  "background": {
+    "scripts": [
+      "SPRESTJSON.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start",
+      "css": [
+        "JSONViewer/json-viewer.css"
+      ],
+      "js": [
+        "JSONViewer/json-viewer.js",
+        "content.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "<all_urls>",
+    "activeTab",
+    "tabs",
+    "storage",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "browser_style": true,
+    "open_in_tab": true
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{7284ef85-567a-43f4-ab24-b07dabe8de7e}",
+      "strict_min_version": "57.0a1"
+    }
+  }
+}

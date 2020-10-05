@@ -1,0 +1,82 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "CloudDiff",
+  "version": "1.0.2.27",
+  "description": "Compare versions of your cloud text files in-browser or using your configured diff tool.",
+  "icons": {
+    "16": "16.png",
+    "48": "48.png",
+    "128": "128.png"
+  },
+  "author": "Victor Shih <victor.shih@gmail.com>",
+  "background": {
+    "page": "background.html",
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.dropbox.com/history/*",
+        "https://my.pcloud.com/*"
+      ],
+      "css": [
+        "lib/jquery.alertable.css",
+        "lib/codemirror-5.54.0/lib/codemirror.css",
+        "lib/codemirror-5.54.0/addon/merge/merge.css",
+        "common.css"
+      ],
+      "js": [
+        "lib/jquery-3.5.1.min.js",
+        "lib/jquery.alertable.min.js",
+        "lib/js.cookie.min.js",
+        "lib/diff_match_patch.js",
+        "lib/codemirror-5.54.0/lib/codemirror.js",
+        "lib/codemirror-5.54.0/addon/merge/merge.js",
+        "common.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.dropbox.com/history/*"
+      ],
+      "css": [
+        "dropbox/content.css"
+      ],
+      "js": [
+        "dropbox/Dropbox-sdk.min.js",
+        "dropbox/content.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://my.pcloud.com/*"
+      ],
+      "css": [
+        "pcloud/content.css"
+      ],
+      "js": [
+        "pcloud/content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "default-src 'self'; img-src 'self' https://cdn.buymeacoffee.com",
+  "minimum_chrome_version": "35.0.0.0",
+  "offline_enabled": false,
+  "options_page": "options.html",
+  "permissions": [
+    "https://my.pcloud.com/*",
+    "https://www.dropbox.com/history/*",
+    "nativeMessaging",
+    "storage"
+  ],
+  "short_name": "CloudDiff",
+  "web_accessible_resources": [
+    "dropbox/content-inject.js",
+    "dropbox/oauth-receiver.html",
+    "dropbox/oauth-receiver.js"
+  ]
+}

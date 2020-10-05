@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Consulta Plus",
+  "version": "1.5",
+  "manifest_version": 2,
+  "description": "Extrado de pagamento INSS",
+  "homepage_url": "http://consulta.plus",
+  "icons": {
+    "48": "icons/logo.png"
+  },
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "*://sipa.inss.gov.br/SipaINSS/pages/hiscre/*",
+        "*://www8.dataprev.gov.br/SipaINSS/pages/hiscre/*"
+      ],
+      "js": [
+        "src/action/content_dataprev.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "*://*.consulta.plus/APP/global/*/legacy/*/hiscre*"
+      ],
+      "js": [
+        "src/action/content_assert.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "browser_action": {
+    "default_icon": "icons/logo.png",
+    "default_title": "Consulta Plus"
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://*.consulta.plus/*",
+      "*://*.advgestor.com.br/*",
+      "*://sipa.inss.gov.br/*",
+      "*://www8.dataprev.gov.br/*"
+    ]
+  },
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "notifications",
+    "activeTab",
+    "tabs",
+    "storage",
+    "*://sipa.inss.gov.br/*",
+    "*://www8.dataprev.gov.br/*",
+    "http://*.consulta.plus/*",
+    "background"
+  ]
+}

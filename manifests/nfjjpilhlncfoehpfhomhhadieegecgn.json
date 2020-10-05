@@ -1,0 +1,42 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "HubHarvester Time Tracking",
+  "short_name": "HubHarvester",
+  "version": "2.0.3",
+  "manifest_version": 2,
+  "description": "A chrome extension to integrate harvest time tracking with GitHub and GitHub specific tools (like Huboard).",
+  "icons": {
+    "128": "img/logo-128.png",
+    "48": "img/logo-48.png"
+  },
+  "options_ui": {
+    "page": "templates/popup.html",
+    "chrome_style": true
+  },
+  "background": {
+    "scripts": [
+      "lib/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "data/index.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://*.harvestapp.com; object-src 'self'",
+  "permissions": [
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "http://*/",
+    "https://*/",
+    "tabs"
+  ]
+}

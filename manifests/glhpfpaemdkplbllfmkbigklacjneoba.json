@@ -1,0 +1,72 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Bookmarker",
+  "short_name": "Bookmarker",
+  "description": "Say goodbye to millions of open chrome windows that clutter your screen and slow your machine! A tab manager for the power user.",
+  "version": "1.2.1",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/icon-19.png",
+      "38": "icons/icon-38.png"
+    },
+    "default_title": "Bookmarker",
+    "default_popup": "pages/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "scripts/content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "options_page": "pages/options.html",
+  "options_ui": {
+    "page": "pages/options.html",
+    "chrome_style": true
+  },
+  "permissions": [
+    "tabs",
+    "bookmarks",
+    "activeTab",
+    "storage",
+    "management",
+    "chrome://favicon/"
+  ],
+  "commands": {
+    "_execute_browser_action": {
+      "global": false,
+      "suggested_key": [
+        {
+          "default": "Ctrl+D",
+          "windows": "Ctrl+D",
+          "mac": "Command+D"
+        }
+      ]
+    },
+    "delete_bookmark": {
+      "suggested_key": {
+        "default": "Ctrl+I",
+        "mac": "Command+I"
+      },
+      "description": "ブックマークの削除"
+    }
+  }
+}

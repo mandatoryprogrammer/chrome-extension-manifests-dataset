@@ -1,0 +1,41 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "acfun 推送",
+  "description": "推送提醒，文章区改版和增加屏蔽功能",
+  "version": "1.3.4",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "permissions": [
+    "*.acfun.cn/*",
+    "http://webapi.acfun.cn/*",
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "js/jquery.min.js",
+      "js/event.js",
+      "dist/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.acfun.cn/*",
+        "https://www.acfun.cn/*"
+      ],
+      "css": [
+        "style.css"
+      ],
+      "js": [
+        "dist/vendor.js",
+        "dist/content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "browser_action": {
+    "default_icon": "favicon.png",
+    "default_popup": "popup.html"
+  },
+  "options_page": "option.html"
+}

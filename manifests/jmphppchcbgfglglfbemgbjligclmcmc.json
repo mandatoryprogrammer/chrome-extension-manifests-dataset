@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "VLCTechHub Publisher Addon",
+  "description": "Publish events in VLCTechHub directly from your browser",
+  "version": "3.4",
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "page_action": {
+    "default_icon": "img/icon.png",
+    "default_popup": "popup.html",
+    "default_title": "Publicar en VLCTechHub"
+  },
+  "permissions": [
+    "activeTab",
+    "http://vlctechhub-api.herokuapp.com/"
+  ],
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.meetup.com/*",
+        "http://valenciarb.org/",
+        "https://www.eventbrite.com/e/*",
+        "https://www.eventbrite.es/e/*"
+      ],
+      "js": [
+        "js/scrapers/meetupscraper.js",
+        "js/scrapers/eventbritescraper.js",
+        "js/scrapers/valenciarbscraper.js",
+        "js/content.js",
+        "js/dommatcher.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

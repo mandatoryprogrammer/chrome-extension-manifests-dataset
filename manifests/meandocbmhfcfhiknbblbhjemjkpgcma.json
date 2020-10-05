@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Chrome Image Switcher",
+  "description": "Allow designers to preview images and content on a site",
+  "version": "0.0.0.2",
+  "manifest_version": 2,
+  "icons": {
+    "16": "icons/success-16.png",
+    "19": "icons/success-19.png",
+    "48": "icons/success-48.png",
+    "128": "icons/success-128.png"
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "lib/jquery-1.9.0.js",
+        "js/inject.js",
+        "js/DragnDrop.js"
+      ],
+      "css": [
+        "css/designer.css"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "js/inject.js.map",
+    "js/inject.ts"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/success-19.png",
+      "38": "icons/success-48.png"
+    },
+    "default_title": "Chrome Image Switcher"
+  },
+  "permissions": [
+    "tabs"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

@@ -1,0 +1,120 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Corporate Food Manager",
+  "description": "This is an extension to make food order by group/domain.",
+  "version": "1.13",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmrXvbL+RESk+4hD5NJElvNuYuxEktvvxoy16f5hFhdqq3WDqdzExDjxAIwJ4A4cU2cfEXyz41uHJZ53PoZB+pRmChTFZRZDP1GNIlgZVrxhSAeQbHXeAyZQlBr0WhKH0z79ZlDJ/aELDpg5Vvbeue9Cx2mZZbSi72mdHE+AMOSiRD+E3rD+nn1JCwMcdeO2DZWZ1wT3g35lQ+Z8PCmbqpURs/dmHs98r9cbHBLabFKFSHNcJ9NjKqY0vBDr3iQGNDdZCG2ZaDXvEODJZbY+rq+KvvAE2HTc6itWuksXX6o5mRKpBBgfoRxNYNh6CuGdkGe0xUotI6oRyInXyT97ZAwIDAQAB",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "activeTab",
+    "identity",
+    "identity.email",
+    "cookies",
+    "*://*.andys.md/*",
+    "*://*.laplacinte.md/*",
+    "*://*.celentano.md/*",
+    "*://*.oliva.md/*",
+    "background",
+    "https://ajax.googleapis.com/",
+    "tabs",
+    "https://docs.google.com/feeds/*",
+    "https://spreadsheets.google.com/feeds/*",
+    "http://www.google.com/m8/feeds/",
+    "https://accounts.google.com/o/oauth2/token"
+  ],
+  "background": {
+    "scripts": [
+      "thirdparty/jquery-2.1.4.min.js",
+      "thirdparty/underscore-min.js",
+      "/oauth2/oauth2.js",
+      "common/utilities.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.andys.md/*"
+      ],
+      "js": [
+        "thirdparty/jquery-2.1.4.min.js",
+        "common/utilities.js",
+        "common/parser.js",
+        "parsers/andys-parser.js"
+      ],
+      "css": [
+        "css/iOrder.css",
+        "css/andys.css"
+      ]
+    },
+    {
+      "matches": [
+        "http://laplacinte.md/*"
+      ],
+      "js": [
+        "thirdparty/jquery-2.1.4.min.js",
+        "common/utilities.js",
+        "common/parser.js",
+        "parsers/laplacinte-parser.js"
+      ],
+      "css": [
+        "css/iOrder.css",
+        "css/laplacinte.css"
+      ]
+    },
+    {
+      "matches": [
+        "http://www.google.com/robots.txt*"
+      ],
+      "js": [
+        "oauth2/oauth2_inject.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://www.oliva.md/*"
+      ],
+      "js": [
+        "thirdparty/jquery-2.1.4.min.js",
+        "common/utilities.js",
+        "common/parser.js",
+        "parsers/oliva-parser.js"
+      ],
+      "css": [
+        "css/iOrder.css",
+        "css/oliva.css"
+      ]
+    },
+    {
+      "matches": [
+        "http://www.celentano.md/*"
+      ],
+      "js": [
+        "thirdparty/jquery-2.1.4.min.js",
+        "common/utilities.js",
+        "common/parser.js",
+        "parsers/celentano-parser.js"
+      ],
+      "css": [
+        "css/iOrder.css",
+        "css/celentano.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "oauth2/oauth2.html"
+  ],
+  "oauth2": {
+    "client_id": "970815733576-8fguvu2q1bm1kq90usgrrr87sjhm11r3.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/drive",
+      "https://www.googleapis.com/auth/userinfo.profile",
+      "https://www.googleapis.com/auth/userinfo.email"
+    ]
+  }
+}

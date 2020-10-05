@@ -1,0 +1,109 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_appName__",
+  "description": "__MSG_appDesc__",
+  "default_locale": "en",
+  "short_name": "POCU Proctor",
+  "version": "0.1.18.0",
+  "icons": {
+    "16": "img/16x16.png",
+    "24": "img/24x24.png",
+    "32": "img/32x32.png",
+    "48": "img/48x48.png",
+    "64": "img/64x64.png",
+    "128": "img/128x128.png",
+    "256": "img/256x256.png",
+    "512": "img/512x512.png"
+  },
+  "page_action": {
+    "default_popup": "html/description.html"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "system.display",
+    "webRequest",
+    "webRequestBlocking",
+    "desktopCapture",
+    "https://pocu.academy/*",
+    "https://www.pocu.academy/*",
+    "https://test.pocu.academy/*"
+  ],
+  "web_accessible_resources": [
+    "img/*",
+    "lib/*"
+  ],
+  "background": {
+    "scripts": [
+      "lib/jquery-3.0.0.min.js",
+      "js/proctor.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://pocu.academy/*/VerifyID",
+        "https://www.pocu.academy/*/VerifyID",
+        "https://test.pocu.academy/*/VerifyID"
+      ],
+      "js": [
+        "lib/jquery-3.0.0.min.js",
+        "js/session.js"
+      ],
+      "css": [
+        "css/blocker.css"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://pocu.academy/*/Questions/*",
+        "https://www.pocu.academy/*/Questions/*",
+        "https://test.pocu.academy/*/Questions/*",
+        "https://pocu.academy/*/Review",
+        "https://www.pocu.academy/*/Review",
+        "https://test.pocu.academy/*/Review",
+        "https://pocu.academy/*/ReviewAndFinish",
+        "https://www.pocu.academy/*/ReviewAndFinish",
+        "https://test.pocu.academy/*/ReviewAndFinish"
+      ],
+      "js": [
+        "lib/jquery-3.0.0.min.js",
+        "js/session.js"
+      ],
+      "css": [
+        "css/blocker.css"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://www.pocu.academy/*/End",
+        "https://pocu.academy/*/End",
+        "https://test.pocu.academy/*/End"
+      ],
+      "js": [
+        "lib/jquery-3.0.0.min.js",
+        "js/end-session.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "externally_connectable": {
+    "ids": [
+      "*"
+    ],
+    "matches": [
+      "https://pocu.academy/*",
+      "https://www.pocu.academy/*",
+      "https://test.pocu.academy/*"
+    ],
+    "accepts_tls_channel_id": true
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

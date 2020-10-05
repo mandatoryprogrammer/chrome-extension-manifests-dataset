@@ -1,0 +1,68 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Body of Work (BoW) for Reddit",
+  "short_name": "BoW",
+  "description": "Supercharge your /r/gonewild browsing!",
+  "version": "1.5",
+  "icons": {
+    "16": "BoW_16.png",
+    "48": "BoW_48.png",
+    "128": "BoW_128.png"
+  },
+  "page_action": {
+    "default_icon": "BoW_16.png",
+    "default_title": "BoW for Reddit"
+  },
+  "permissions": [
+    "webRequestBlocking",
+    "webRequest",
+    "*://*.reddit.com/",
+    "storage",
+    "tabs",
+    "*://*.reddit.com/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://old.reddit.com/r/*",
+        "https://old.reddit.com/r/*",
+        "http://old.reddit.com/",
+        "https://old.reddit.com/",
+        "http://old.reddit.com/#",
+        "https://old.reddit.com/#"
+      ],
+      "js": [
+        "jquery-2.0.3.min.js",
+        "content_script.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "http://old.reddit.com/u/*",
+        "https://old.reddit.com/u/*",
+        "http://old.reddit.com/user/*",
+        "https://old.reddit.com/user/*"
+      ],
+      "js": [
+        "jquery-2.0.3.min.js",
+        "content_script_user_page.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "scripts": [
+      "jquery-2.0.3.min.js",
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  }
+}

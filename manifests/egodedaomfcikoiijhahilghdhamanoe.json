@@ -1,0 +1,67 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Syiwe",
+  "version": "0.0.6",
+  "manifest_version": 2,
+  "description": "Syiwe is the perfect way to save all images from any website at once. Try now!",
+  "permissions": [
+    "contextMenus",
+    "https://www.syiwe.com/",
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "windows",
+    "https://www.syiwe.com/oauth/token",
+    "https://www.syiwe.com/robots.txt",
+    "storage"
+  ],
+  "web_accessible_resources": [
+    "oauth2/oauth2.html"
+  ],
+  "icons": {
+    "16": "icons/syiwe_16x16.png",
+    "48": "icons/syiwe_48x48.png",
+    "128": "icons/syiwe_128x128.png"
+  },
+  "omnibox": {
+    "keyword": "syiwe"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/syiwe_19x19.png",
+      "38": "icons/syiwe_38x38.png"
+    },
+    "default_title": "Click here to save all images.",
+    "default_popup": "browseraction/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js",
+      "scripts/jquery.js",
+      "scripts/imagesloaded.pkgd.js",
+      "scripts/jquery.isotope.js",
+      "scripts/bootstrap.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "content.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.syiwe.com/robots.txt*"
+      ],
+      "js": [
+        "oauth2/oauth2_inject.js"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Altmail ~A smart inbox without a reply button",
+  "version": "1.0.1",
+  "manifest_version": 2,
+  "description": "A smart inbox for all your favorite newsletter, deal, digest and update emails. Spend more time acquiring knowledge.",
+  "homepage_url": "https://altmail.in",
+  "short_name": "Altmail",
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon19.png",
+      "38": "images/icon38.png"
+    }
+  },
+  "permissions": [
+    "chrome://favicon/",
+    "contentSettings",
+    "contextMenus",
+    "cookies",
+    "https://*/* ",
+    "http://*/*",
+    "tabs",
+    "<all_urls>",
+    "storage",
+    "alarms"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "styles/inject.css"
+      ],
+      "js": [
+        "bower_components/jquery/jquery.min.js",
+        "bower_components/typed.js/dist/typed.min.js",
+        "scripts/inject.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    "images/*.png",
+    "images/*.jpg",
+    "images/*.jpeg"
+  ]
+}

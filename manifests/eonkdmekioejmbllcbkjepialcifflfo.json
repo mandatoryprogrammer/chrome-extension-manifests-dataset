@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Search and Highlight",
+  "version": "1.4.0.0",
+  "icons": {
+    "128": "icons/searchAndHighlightIcon.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "128": "icons/searchAndHighlightIcon.png"
+    },
+    "default_title": "Search and Highlight",
+    "default_popup": "popup/popup.html",
+    "browser_style": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*",
+        "file:///*/*"
+      ],
+      "js": [
+        "contentScripts/scripts/contentScript.js",
+        "contentScripts/scripts/highlight.js"
+      ],
+      "css": [
+        "contentScripts/css/highlight.css"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background/background.js"
+    ]
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+L"
+      }
+    },
+    "command_toggleHighlightNow": {
+      "suggested_key": {
+        "default": "Alt+Shift+L"
+      },
+      "description": "Toggle Highlight"
+    }
+  },
+  "permissions": [
+    "storage"
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "In The Loop for School Loop™ (beta)",
+  "version": "0.6.1",
+  "short_name": "In The Loop",
+  "homepage_url": "http://maheshmurag.com/InTheLoop",
+  "description": "A suite of features that improve the School Loop interface",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "browser_action": {
+    "default_title": "InTheLoop",
+    "default_popup": "src/browser_action/browser_action.html"
+  },
+  "background": {
+    "scripts": [
+      "lib/jquery-2.1.3.min.js",
+      "lib/aes.js",
+      "src/scripts/autoRefresh.js",
+      "src/bg/background.js"
+    ],
+    "pages": [
+      "src/bg/background.html"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.schoolloop.com/",
+        "https://*.schoolloop.com/portal/student_home*",
+        "https://*.schoolloop.com/news/*",
+        "https://*.schoolloop.com/progress_report/*",
+        "http://*.schoolloop.com/",
+        "http://*.schoolloop.com/portal/student_home*",
+        "http://*.schoolloop.com/news/*",
+        "http://*.schoolloop.com/progress_report/*"
+      ],
+      "js": [
+        "lib/jquery-2.1.3.min.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://*.schoolloop.com/progress_report/*",
+        "http://*.schoolloop.com/portal/student_home*"
+      ],
+      "css": [
+        "styles/buttons.css",
+        "lib/tipr.css"
+      ],
+      "js": [
+        "lib/jquery-2.1.3.min.js",
+        "lib/tipr.min.js",
+        "src/scripts/grades.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.schoolloop.com/portal/student_home*",
+        "http://*.schoolloop.com/portal/student_home*"
+      ],
+      "css": [
+        "styles/inject.css"
+      ],
+      "js": [
+        "lib/jquery-2.1.3.min.js",
+        "src/scripts/themer.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "storage",
+    "alarms",
+    "notifications"
+  ],
+  "options_ui": {
+    "page": "src/options/options.html",
+    "chrome_style": true
+  }
+}

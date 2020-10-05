@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "0.1.1",
+  "name": "Browser TAP",
+  "short_name": "TAP",
+  "description": "Visualize and controls your TAP tests from the DevTools",
+  "manifest_version": 2,
+  "icons": {
+    "16": "images/icon16-green.png",
+    "48": "images/icon48-green.png",
+    "128": "images/icon128-green.png"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "browser_action": {
+    "default_title": "TAP Browser",
+    "default_icon": "images/icon48-grey.png"
+  },
+  "devtools_page": "devtools.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_globs": [
+        "https://www.google*"
+      ],
+      "js": [
+        "js/contentScript.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "externally_connectable": {
+    "ids": [
+      "*"
+    ]
+  },
+  "permissions": [
+    "notifications",
+    "contextMenus",
+    "tabs",
+    "storage",
+    "<all_urls>"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'; style-src * 'unsafe-inline'; img-src 'self' data:;"
+}

@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Weather Forecast",
+  "description": "Provides local and long range weather forecast using Weather Underground",
+  "version": "0.4.0",
+  "manifest_version": 2,
+  "permissions": [
+    "storage",
+    "alarms",
+    "idle",
+    "*://www.wunderground.com/*",
+    "*://api.weather.com/*",
+    "webRequest",
+    "webRequestBlocking",
+    "contextMenus"
+  ],
+  "browser_action": {
+    "default_popup": "data/popup/index.html"
+  },
+  "background": {
+    "scripts": [
+      "common.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.wunderground.com/*"
+      ],
+      "js": [
+        "data/inject/clean.js",
+        "data/inject/observe.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "homepage_url": "https://add0n.com/forecast-plus.html",
+  "icons": {
+    "16": "data/icons/16.png",
+    "24": "data/icons/24.png",
+    "32": "data/icons/32.png",
+    "48": "data/icons/48.png",
+    "64": "data/icons/64.png",
+    "128": "data/icons/128.png",
+    "256": "data/icons/256.png"
+  },
+  "options_ui": {
+    "page": "data/options/index.html",
+    "chrome_style": true
+  }
+}

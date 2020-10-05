@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Email Tracking for Gmail",
+  "description": "Track your Dropbox and Google Drive email attachments. Be notified when your attachments are read and downloaded.",
+  "permissions": [
+    "<all_urls>",
+    "tabs",
+    "notifications",
+    "unlimitedStorage",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "version": "1.0.3",
+  "homepage_url": "https://orangedox.com/gmail",
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "js/util.js",
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "js/plugins/inboxsdk.js",
+        "js/util.js",
+        "config.js",
+        "js/load.js"
+      ],
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "icons": {
+    "128": "logo-icon-colour-128.png"
+  },
+  "web_accessible_resources": [
+    "iframe.html"
+  ]
+}

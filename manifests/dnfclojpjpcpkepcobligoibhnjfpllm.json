@@ -1,0 +1,79 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Music Meal: Audio Player & Playlist Streamer",
+  "description": "Create playlists from the top song streaming sources & play music in background",
+  "version": "3.13.6",
+  "browser_action": {
+    "default_icon": "img/128-icon.png",
+    "default_popup": "popup.html",
+    "default_title": "Music Meal Audio Player"
+  },
+  "author": "Kristiyan Ivanov",
+  "background": {
+    "page": "background.html"
+  },
+  "permissions": [
+    "background",
+    "notifications",
+    "contextMenus",
+    "https://api.spotify.com/*",
+    "https://musicmeal.io/*",
+    "https://soundcloud.com/*",
+    "https://api.soundcloud.com/*",
+    "https://www.youtube.com/*",
+    "https://googleads.g.doubleclick*",
+    "http://auiolisten.quatinus.info/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://musicmeal.io/*",
+        "http://audioplayer.quatinus.info/*",
+        "http://auiolisten.quatinus.info/*"
+      ],
+      "js": [
+        "contentScript.bundle.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "commands": {
+    "play/pause": {
+      "suggested_key": {
+        "default": "Alt+P"
+      },
+      "global": true,
+      "description": "Play/Pause the player"
+    },
+    "nextSong": {
+      "suggested_key": {
+        "default": "Alt+N"
+      },
+      "global": true,
+      "description": "Plays the Next Song"
+    },
+    "previousSong": {
+      "suggested_key": {
+        "default": "Alt+B",
+        "mac": "Alt+B"
+      },
+      "global": true,
+      "description": "Plays the Previous Song"
+    },
+    "_execute_browser_action": {
+      "suggested_key": {
+        "windows": "Alt+M",
+        "mac": "Alt+M",
+        "chromeos": "Alt+M",
+        "linux": "Alt+M"
+      }
+    }
+  },
+  "icons": {
+    "16": "img/16-icon.png",
+    "48": "img/48-icon.png",
+    "128": "img/128-icon.png"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' 'sha256-TLBIOSoP8/ZacxIxs0/doKXmh5eFaz7r+n0/aVgi94s=' 'sha256-pJVwkFy7BFX4jGyt5GmNEzAIYzQtoMR4s1TFrEwe4Q4=' https://sdk.scdn.co/spotify-player.js; object-src 'self' 'unsafe-inline' https://sdk.scdn.co/*; frame-src 'self' 'unsafe-eval' https://www.youtube.com https://sdk.scdn.co/ https://musicmeal.io/;"
+}

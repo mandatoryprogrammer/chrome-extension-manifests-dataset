@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Youtube Bookmarker",
+  "version": "2.0.0",
+  "manifest_version": 2,
+  "description": "Now create Bookmarks inside YouTube videos.",
+  "icons": {
+    "16": "icons/youtube.png",
+    "48": "icons/youtube.png",
+    "128": "icons/youtube.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icons/youtube.png",
+    "default_title": "Youtube Bookmarker",
+    "default_popup": "src/browser_action/browser_action.html"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "webNavigation",
+    "https://www.youtube.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/*"
+      ],
+      "css": [
+        "src/inject/inject.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.youtube.com/*"
+      ],
+      "js": [
+        "src/inject/jquery.js",
+        "src/inject/inject.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "src/inject/bootstrap.css",
+    "src/inject/jquery.js",
+    "src/inject/inject.js",
+    "src/inject/inject.css"
+  ]
+}

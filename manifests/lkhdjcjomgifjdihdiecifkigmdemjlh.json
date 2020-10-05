@@ -1,0 +1,88 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "0.77.696",
+  "name": "__MSG_appName__",
+  "short_name": "__MSG_appShortName__",
+  "manifest_version": 2,
+  "description": "__MSG_appDescription__",
+  "icons": {
+    "16": "images/kernel/icon16.png",
+    "32": "images/kernel/icon32.png",
+    "48": "images/kernel/icon48.png",
+    "128": "images/kernel/icon128.png"
+  },
+  "default_locale": "ru",
+  "browser_action": {
+    "default_icon": "images/kernel/icon-ba-false.png",
+    "default_title": "__MSG_appName__",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "cookies",
+    "storage",
+    "https://.vk.com/",
+    "https://*.vk.com/*",
+    "https://super-smm.com/*",
+    "https://vkgram-2d1d2.firebaseio.com/*",
+    "https://*.userapi.com/*",
+    "https://*.vk-cdn.net/*",
+    "https://*.instagram.com/*",
+    "https://*.facebook.com/*"
+  ],
+  "optional_permissions": [
+    "<all_urls>"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://vk.com/*",
+        "https://*.facebook.com/*"
+      ],
+      "js": [
+        "libs/cloudpayments.js",
+        "scripts/contentscript.bundle.js"
+      ],
+      "css": [
+        "css/contentscript.bundle.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "scripts/contentscriptInst.bundle.js"
+      ],
+      "matches": [
+        "https://*.instagram.com/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://*.super-smm.com/*",
+      "https://sendapp-mw.web.app/*"
+    ],
+    "ids": [
+      "dmcinkihbalbalneakclgkkjpceaaglo"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://www.gstatic.com https://*.firebaseio.com https://www.googleapis.com https://www.google-analytics.com; object-src 'self'",
+  "web_accessible_resources": [
+    "https://pp.userapi.com/*",
+    "images/**/*.svg",
+    "images/**/*.png",
+    "images/**/*.jpg",
+    "images/*.svg",
+    "images/*.png",
+    "images/*.jpg",
+    "fonts/*.ttf"
+  ]
+}

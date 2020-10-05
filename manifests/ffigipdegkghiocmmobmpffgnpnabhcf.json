@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Inbox Cleaner",
+  "description": "Inbox Cleaner cleans your inbox automatically",
+  "version": "0.0.0.2",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*"
+      ],
+      "js": [
+        "js.cookie.min.js",
+        "jquery-1.12.4.min.js",
+        "inboxsdk.js",
+        "content.js",
+        "templates/js/mui.min.js",
+        "templates/js/settings.js"
+      ],
+      "css": [
+        "main.css",
+        "templates/css/mui.min.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "https://mail.google.com/",
+    "https://inbox.google.com/",
+    "https://inbox-cleaner.herokuapp.com/",
+    "storage",
+    "tabs",
+    "activeTab"
+  ],
+  "page_action": {
+    "default_title": "Inbox Cleaner",
+    "default_icon": "images/icon-small.png",
+    "default_popup": "templates/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "boot.js"
+    ],
+    "persistent": false
+  },
+  "manifest_version": 2,
+  "web_accessible_resources": [
+    "images/icon-medium.png",
+    "images/icon-small.png"
+  ],
+  "icons": {
+    "128": "images/icon128.png",
+    "48": "images/icon48.png",
+    "16": "images/icon16.png",
+    "21": "images/icon-small.png"
+  },
+  "content_security_policy": "script-src 'self' https://www.gstatic.com/; object-src 'self'"
+}

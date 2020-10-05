@@ -1,0 +1,88 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "TweakPass: Free Password Manager",
+  "description": "Manage your passwords on a single click",
+  "version": "1.0.22",
+  "browser_action": {
+    "default_icon": {
+      "19": "common/logo/logo-gray-19.png",
+      "38": "common/logo/logo-gray-38.png"
+    },
+    "default_popup": "common/html/popup.html",
+    "default_title": "TweakPass"
+  },
+  "icons": {
+    "16": "common/logo/logo-16.png",
+    "32": "common/logo/logo-32.png",
+    "48": "common/logo/logo-48.png",
+    "128": "common/logo/logo-128.png"
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "common/js/jquery.min.js",
+      "common/js/fingerprint2.js",
+      "common/js/CallClasses.js",
+      "common/js/db.js",
+      "common/js/CommonHelper.js",
+      "common/js/helperLib.js",
+      "common/js/parseHelper.js",
+      "common/js/background.js",
+      "common/js/passwordScore.js",
+      "common/js/zxcvbn.js",
+      "common/js/defiant.min.js",
+      "common/js/psl.min.js"
+    ]
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://vault.tweakpass.com/*"
+    ]
+  },
+  "permissions": [
+    "storage",
+    "<all_urls>",
+    "webNavigation",
+    "tabs",
+    "contextMenus",
+    "notifications"
+  ],
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "common/js/jquery.min.js",
+        "common/js/defiant.min.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*",
+        "<all_urls>"
+      ],
+      "run_at": "document_start",
+      "content_security_policy": "script-src 'self'"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "common/js/inject.js",
+        "common/js/psl.min.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*",
+        "<all_urls>"
+      ],
+      "run_at": "document_end",
+      "content_security_policy": "script-src 'self'"
+    }
+  ],
+  "web_accessible_resources": [
+    "common/logo/icon-16.png",
+    "common/html/DialogListSites.html",
+    "common/html/DialogSavePopup.html"
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Megasale Collector",
+  "description": "Megasale Collector",
+  "version": "1.1.1.9",
+  "content_security_policy": "script-src 'self' https://aliexpress.com; object-src 'self'",
+  "permissions": [
+    "tabs",
+    "*://*.aliexpress.com/*",
+    "https://api-dbh1-alitools.com/products/*",
+    "unlimitedStorage",
+    "activeTab",
+    "storage",
+    "chrome-extension://jfibkmhejhpgggokihadmlapajnjomdh/tabs_api.html"
+  ],
+  "browser_action": {
+    "default_icon": "img/icon.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "jsCss/js/jquery-3.3.1.js",
+      "jsCss/js/bootstrap.min.js",
+      "popup.js",
+      "background.js",
+      "backgroundServices.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.aliexpress.com/*",
+        "*://*.ebay.com/*",
+        "*://*.ebay.de/*",
+        "*://*.ebay.co.uk/*",
+        "*://*.autods.com/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "jsCss/js/jquery-3.3.1.js",
+        "content/getPageSourceBanggood.js",
+        "content/common.js",
+        "content/background.js"
+      ]
+    }
+  ]
+}

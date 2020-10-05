@@ -1,0 +1,70 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "InstantView for YouTube™",
+  "short_name": "InstantView",
+  "version": "4.6.3",
+  "default_locale": "en",
+  "description": "__MSG_extDesc__",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAve/BD/fMx2rrKK1I3DNEvDKXZ7XV2rinGukIzHB4/RJeWjWUGkOoNa3E8dM0U5Rq2rKa2cYu1hSWRIwixKf/dLqDLYQ5St++OCTIk5TNPIYZEyqIMfPyOHLubZp/01Sp8jQ9mXpNqmVmwFyuTCy22DNlEA8Afg9nnSYWRS3XCyKraQpjNhB6LjMKmwkOVF+Yx3tSt00O3XdFHtNDbg8fMMUdl9KRHWm17bkMcAgulHcj2O8Yj1Nxp1HJ/nb7r8L0GYoW0sC93QAAFy6LbfIJE+E4i1LInpqrwnkCFysjUYCHmANfqNaQ6HS5M+jMgCSfGenACTEXgjkZc1SLEYg0GQIDAQAB",
+  "oauth2": {
+    "client_id": "158705016768-ks78eptpg2blcdltoihe0mger4ptalgf.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/youtube.force-ssl"
+    ]
+  },
+  "permissions": [
+    "https://www.googleapis.com/youtube/v3/videos",
+    "storage"
+  ],
+  "optional_permissions": [
+    "identity"
+  ],
+  "icons": {
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "web_accessible_resources": [
+    "images/*.png"
+  ],
+  "browser_action": {
+    "default_title": "InstantView",
+    "default_popup": "src/options/dist/index.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/*"
+      ],
+      "js": [
+        "libs/youtube_iframe_api.js",
+        "src/iv.js",
+        "src/modal/dist/js/bundle.js"
+      ],
+      "all_frames": false
+    }
+  ],
+  "background": {
+    "scripts": [
+      "src/background.js",
+      "src/datasource/youtube.js",
+      "src/background_video_info.js"
+    ],
+    "persistent": false
+  },
+  "commands": {
+    "instantview-video-play-pause": {
+      "description": "Play/Pause Video"
+    },
+    "instantview-video-next": {
+      "description": "Next Video"
+    },
+    "instantview-video-previous": {
+      "description": "Previous Video"
+    },
+    "instantview-video-stop": {
+      "description": "Stop Video"
+    }
+  }
+}

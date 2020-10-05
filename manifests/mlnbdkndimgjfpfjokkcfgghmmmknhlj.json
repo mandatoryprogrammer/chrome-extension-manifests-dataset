@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "KUKU.io",
+  "short_name": "KUKU.io",
+  "version": "1.4",
+  "manifest_version": 2,
+  "description": "Share content in seconds with KUKU.io!",
+  "icons": {
+    "16": "images/16.png",
+    "128": "images/128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "page": "background.html",
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/19.png",
+      "48": "images/48.png"
+    },
+    "default_title": "kuku.io"
+  },
+  "omnibox": {
+    "keyword": "kuku.io"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "scripts/config.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "bower_components/jquery/dist/jquery.min.js",
+        "scripts/contentscript.js"
+      ],
+      "css": [
+        "styles/main.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [],
+  "permissions": [
+    "tabs",
+    "history",
+    "management",
+    "storage",
+    "http://*/*",
+    "https://*/*"
+  ]
+}

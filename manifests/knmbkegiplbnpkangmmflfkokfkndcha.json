@@ -1,0 +1,43 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "A browser action to Expr.cc",
+  "version": "1.0.4",
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "browser_action": {
+    "default_title": "add this page's to Expr.cc",
+    "default_icon": "static/img/index_logo.png",
+    "default_popup": "popup.html"
+  },
+  "manifest_version": 2,
+  "permissions": [
+    "tabs",
+    "*://*/*",
+    "cookies",
+    "*://expr-dev.appspot.com/*/",
+    "*://localhost.org/*",
+    "http://localhost:12085/*",
+    "*://www.expr.cc/*/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "*://expr.cc/*",
+        "*://www.expr.cc/*"
+      ],
+      "js": [
+        "expr.js",
+        "selection_client.js",
+        "quick_add_client.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": false
+    }
+  ]
+}

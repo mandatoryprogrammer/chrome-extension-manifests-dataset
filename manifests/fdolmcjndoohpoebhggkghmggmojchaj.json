@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Upwork Auto proposal (Enterprise Level)",
+  "short_name": "Upwork Auto proposal",
+  "description": "Upwork Auto proposal - fully automated system which allows to apply on latest jobs in smart way you can apply to job as freelancer",
+  "version": "0.0.1",
+  "icons": {
+    "128": "images/up-auto-128.png"
+  },
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "browsingData",
+    "storage",
+    "unlimitedStorage",
+    "http://upwork.com/*",
+    "https://upwork.com/*",
+    "http://*.upwork.com/*",
+    "https://*.upwork.com/*",
+    "http://www.upwork.com/*",
+    "https://www.upwork.com/*",
+    "http://127.0.0.1:9615/*",
+    "https://upwork.serfcompany.com/*"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "browser_action": {
+    "default_icon": {
+      "128": "images/up-auto-128.png"
+    },
+    "default_title": "Upwork Auto proposal"
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://upwork.com/*",
+        "https://upwork.com/*",
+        "http://*.upwork.com/*",
+        "https://*.upwork.com/*"
+      ],
+      "js": [
+        "js/content_script.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    "js/utils.js",
+    "js/cmds.json",
+    "js/selector_helper_module.js"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.upwork.com/*",
+      "*://upwork.com/*"
+    ]
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "XRM World",
+  "author": "Ramy Victor",
+  "description": "Customize Dynamics365 with consistent metadata naming conventions",
+  "version": "2.41",
+  "icons": {
+    "128": "img/logo128.png",
+    "16": "img/logo16.png",
+    "48": "img/logo48.png"
+  },
+  "browser_action": {
+    "default_icon": "img/logo48.png",
+    "default_popup": "pages/options.html",
+    "default_title": "XRM World for Dynamics365"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "app.js",
+        "jquery-3.3.1.min.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "js": [
+        "scripts/crmTopContext.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "js": [
+        "scripts/entityRecordContext.js",
+        "scripts/formActions.js"
+      ],
+      "matches": [
+        "http://*/*form/ClientApiWrapper.aspx*",
+        "https://*/*form/ClientApiWrapper.aspx*"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "js": [
+        "scripts/formActions.js"
+      ],
+      "matches": [
+        "http://*/*pagetype=entityrecord",
+        "https://*/*pagetype=entityrecord",
+        "http://*/*form/page.aspx*",
+        "https://*/*form/page.aspx*"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "js": [
+        "webresourceNCs.js"
+      ],
+      "matches": [
+        "http://*/*tools/webresourceeditor/edit.aspx*",
+        "https://*/*tools/webresourceeditor/edit.aspx*"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "js": [
+        "fieldNCs.js"
+      ],
+      "matches": [
+        "http://*/*systemcustomization/attributes/manageAttribute.aspx*",
+        "https://*/*systemcustomization/attributes/manageAttribute.aspx*"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "js": [
+        "scripts/crmTopContext.js",
+        "scripts/workflowNCs.js"
+      ],
+      "matches": [
+        "https://*/*sfa/workflow/edit.aspx*",
+        "https://*/*tools/systemcustomization/businessrules*",
+        "http://*/*sfa/workflow/edit.aspx*",
+        "http://*/*tools/systemcustomization/businessrules*"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "js": [
+        "formNCs.js"
+      ],
+      "matches": [
+        "http://*/*FormEditor/Dialogs/*",
+        "https://*/*FormEditor/Dialogs/*"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "storage",
+    "unlimitedStorage",
+    "activeTab",
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "web_accessible_resources": [
+    "scripts/crm2013oneclicknavigation.js",
+    "scripts/xrmqn.js",
+    "css/xrmqn.css",
+    "jquery-3.3.1.min.js",
+    "scripts/jquery-ui.js",
+    "scripts/formActions.js",
+    "scripts/copyworkflow.js"
+  ],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+X"
+      },
+      "description": "Activate the extension"
+    }
+  }
+}

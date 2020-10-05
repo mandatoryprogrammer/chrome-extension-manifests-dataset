@@ -1,0 +1,53 @@
+{
+  "update_url": "http://clients2.google.com/service/update2/crx",
+  "name": "ShockedFish Deal Alert",
+  "version": "1.0.1",
+  "manifest_version": 2,
+  "description": "Never miss out on a gamedeal! Uses the shockedfish api to alert you for the games you want!",
+  "background": {
+    "page": "background.html"
+  },
+  "options_page": "options.html",
+  "browser_action": {
+    "default_icon": "wrapper/icon19.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "128": "wrapper/icon128.png",
+    "48": "wrapper/icon48.png"
+  },
+  "permissions": [
+    "http://*.shockedfish.com/*",
+    "unlimitedStorage",
+    "background",
+    "notifications",
+    "webRequest"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://shockedfish.com/*"
+      ],
+      "js": [
+        "js/jquery-1.8.1.min.js",
+        "js/sf_contentscript.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "wrapper/icon128.png",
+    "wrapper/icon48.png"
+  ],
+  "intents": {
+    "http://webintents.org/share": [
+      {
+        "type": [
+          "text/uri-list"
+        ],
+        "href": "/services/intent.html",
+        "title": "ShockedFish Deal Alert",
+        "disposition": "inline"
+      }
+    ]
+  }
+}

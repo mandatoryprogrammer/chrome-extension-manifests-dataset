@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "author": "Ashampoo GmbH & Co KG",
+  "name": "Ashampoo Browser Security",
+  "description": "__MSG_appDesc__",
+  "version": "2018.12.0.12",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "icons": {
+    "128": "assets/logo.png"
+  },
+  "background": {
+    "scripts": [
+      "lib/browser-polyfill.min.js",
+      "lib/jquery.min.js",
+      "lib/md5.min.js",
+      "lib/rc4.js",
+      "icon.js",
+      "background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "assets/logo.png",
+    "default_popup": "popup.html"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "lib/browser-polyfill.min.js",
+        "content_script.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "https://alomar.emsisoft.com/*",
+    "downloads",
+    "storage",
+    "tabs"
+  ]
+}

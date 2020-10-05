@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Clipboard",
+  "version": "1.0.2",
+  "manifest_version": 2,
+  "description": "Store copy items to Clipboard to be retrieved at a lather point",
+  "homepage_url": "https://massinflux.com",
+  "icons": {
+    "16": "icons/icon16.png",
+    "19": "icons/icon19.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "src/inject/jquery.min.js",
+      "src/bg/background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "Clipboard",
+    "default_popup": "src/browser_action/browser_action.html"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "contextMenus",
+    "clipboardRead",
+    "clipboardWrite",
+    "http://*/*, https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "src/inject/jquery.min.js",
+        "src/inject/inject.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

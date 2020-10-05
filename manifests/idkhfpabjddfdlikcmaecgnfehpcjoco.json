@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Incognito Watcher for Hulu",
+  "description": "Watch shows on a  guest hulu account without leaving any traces.",
+  "version": "1.5",
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "icons": {
+    "19": "media/icon.png",
+    "38": "media/icon38.png",
+    "48": "media/icon48.png",
+    "128": "media/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "media/icon-on.png",
+    "default_title": "Incognito Watcher"
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "storage",
+    "*://*.hulu.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.hulu.com/*"
+      ],
+      "js": [
+        "scripts/hulu-script.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.hulu.com/*"
+    ]
+  }
+}

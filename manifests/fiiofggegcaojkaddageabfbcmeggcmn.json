@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' ; object-src 'self'; https://ssl.google-analytics.com ",
+  "name": "IPShare.net",
+  "description": "IPShare.net - Share your clipboard",
+  "version": "0.2",
+  "browser_action": {
+    "default_icon": "icons/logo@16.png",
+    "default_popup": "html/index.html"
+  },
+  "commands": {
+    "add_tab": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+A",
+        "mac": "Command+Shift+A"
+      },
+      "description": "Post current active tab."
+    },
+    "open_latest_post": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+L",
+        "mac": "Command+Shift+L"
+      },
+      "description": "Open latest posted tab."
+    }
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "js/jquery.min.js",
+      "js/background.js"
+    ]
+  },
+  "options_page": "html/options.html",
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "bookmarks",
+    "storage",
+    "webRequest",
+    "https://ssl.google-analytics.com/",
+    "http://*.google.com/",
+    "https://ajax.googleapis.com/",
+    "*://*.ipshare.net/"
+  ],
+  "content_scripts": [
+    {
+      "js": [
+        "js/jquery.min.js",
+        "js/bootstrap.min.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "icons/logo@16.png",
+    "48": "icons/logo@48.png"
+  }
+}

@@ -1,0 +1,171 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "short_name": "__MSG_appShortName__",
+  "version": "1.1.5",
+  "manifest_version": 2,
+  "description": "__MSG_appDescription__",
+  "author": "Juno_okyo",
+  "homepage_url": "https://www.junookyo.com/2016/10/j2team-security-chrome-extension.html?utm_source=extension&utm_medium=j2team_security",
+  "icons": {
+    "16": "images/icon-16.png",
+    "128": "images/icon-128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "notifications",
+    "contextMenus",
+    "cookies",
+    "storage",
+    "unlimitedStorage",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "include_globs": [
+        "https://*/*fbclid=*"
+      ],
+      "js": [
+        "scripts/contentscript.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "scripts/anti-fb-phishing.js",
+        "scripts/anti-clickjacking.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://*.facebook.com/*"
+      ],
+      "exclude_matches": [
+        "https://m.facebook.com/*",
+        "https://touch.facebook.com/*",
+        "https://mobile.facebook.com/*",
+        "https://mbasic.facebook.com/*",
+        "https://graph.facebook.com/*",
+        "https://developers.facebook.com/*",
+        "https://code.facebook.com/*"
+      ],
+      "js": [
+        "scripts/fb-timer.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "https://*.facebook.com/*"
+      ],
+      "exclude_matches": [
+        "https://m.facebook.com/*",
+        "https://touch.facebook.com/*",
+        "https://mobile.facebook.com/*",
+        "https://mbasic.facebook.com/*",
+        "https://graph.facebook.com/*",
+        "https://developers.facebook.com/*",
+        "https://code.facebook.com/*"
+      ],
+      "js": [
+        "scripts/dark-theme-base.js",
+        "scripts/facebook-dark-theme.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "https://www.google.com/*",
+        "https://www.google.com.vn/*",
+        "https://www.google.com.co/*",
+        "https://www.google.com.bz/*",
+        "https://www.google.co.uk/*",
+        "https://encrypted.google.com/*"
+      ],
+      "exclude_matches": [
+        "https://www.google.com/maps/*"
+      ],
+      "js": [
+        "scripts/dark-theme-base.js",
+        "scripts/google-dark-theme.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "http://*.junookyo.xyz/*/j2team-security/login*",
+        "http://*.junookyo.xyz/j2team-security/login*",
+        "https://*.junookyo.xyz/*/j2team-security/login*",
+        "https://*.junookyo.xyz/j2team-security/login*"
+      ],
+      "js": [
+        "scripts/facebook-authentication.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon-19.png",
+      "38": "images/icon-38.png"
+    },
+    "default_title": "__MSG_appName__"
+  },
+  "web_accessible_resources": [
+    "images/icon-16.png",
+    "images/icon-48.png",
+    "images/facebook-group.png"
+  ],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+S",
+        "mac": "Command+Shift+S"
+      }
+    },
+    "toggle_block_seen": {
+      "suggested_key": {
+        "default": "Alt+S"
+      },
+      "description": "__MSG_toggleBlockSeen__",
+      "global": false
+    },
+    "toggle_block_typing": {
+      "suggested_key": {
+        "default": "Alt+T"
+      },
+      "description": "__MSG_toggleBlockTypingChat__",
+      "global": false
+    }
+  },
+  "externally_connectable": {
+    "matches": [
+      "http://*.junookyo.xyz/*",
+      "https://*.junookyo.xyz/*"
+    ]
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.google-analytics.com https://ssl.google-analytics.com https://ajax.googleapis.com https://cdnjs.cloudflare.com; object-src 'self'"
+}

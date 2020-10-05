@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_nameApp__",
+  "short_name": "MediaSave",
+  "description": "__MSG_descriptionApp__",
+  "author": "Linber LLC",
+  "default_locale": "en",
+  "version": "2.0.18",
+  "icons": {
+    "16": "app/shared/images/icon-32.png",
+    "48": "app/shared/images/icon-96.png",
+    "128": "app/shared/images/icon-256.png"
+  },
+  "background": {
+    "page": "app/background/background.html"
+  },
+  "page_action": {
+    "default_icon": {
+      "38": "app/shared/images/icon-page-action.png"
+    },
+    "default_popup": "app/popup-web/popup-web.html"
+  },
+  "permissions": [
+    "cookies",
+    "storage",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "http://*/*",
+    "https://*/*",
+    "https://www.google-analytics.com/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "app/site/site.min.js"
+      ],
+      "all_frames": false,
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "/app/ui/ui.html",
+    "/app/ui-web/ui-web.html",
+    "/app/site/site.min.css"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "homepage_url": "https://mediasave.ru"
+}

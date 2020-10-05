@@ -1,0 +1,43 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Account Switcher for eBay",
+  "manifest_version": 2,
+  "version": "0.5",
+  "description": "Simple extension that allows you to switch ebay accounts with a single click.",
+  "options_page": "option.html",
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "icon19.png",
+      "38": "icon38.png"
+    },
+    "default_title": "Account Switcher for eBay",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "alarms",
+    "tabs"
+  ],
+  "icons": {
+    "128": "icon_128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.ebay.com/*",
+        "https://*.ebay.com/*"
+      ],
+      "js": [
+        "js/jquery-1.8.2.js",
+        "js/contentscript.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://www.google.com; object-src 'self'"
+}

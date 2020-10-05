@@ -1,0 +1,150 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Kami Extension - PDF and Document Annotation",
+  "short_name": "Kami",
+  "version": "2.0.12332",
+  "description": "Best PDF and Document Annotation and Markup Tool. Works with Google Drive and Google Classroom",
+  "homepage_url": "https://www.kamihq.com",
+  "icons": {
+    "128": "icon128.png",
+    "48": "icon48.png",
+    "16": "icon16.png"
+  },
+  "permissions": [
+    "fileBrowserHandler",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>",
+    "tabs",
+    "webNavigation",
+    "contextMenus",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://canary.kamihq.com/web/*",
+        "*://staging.kamihq.com/web/*",
+        "*://local.kamipdf.com/web/*",
+        "*://web.kamihq.com/web/*"
+      ],
+      "js": [
+        "notable/viewer/bootstrap.js",
+        "notable/viewer/auto_login.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://classroom.google.com/*"
+      ],
+      "css": [
+        "notable/integrations/classroom/styles.css"
+      ],
+      "js": [
+        "notable/integrations/classroom/content.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "notable/integrations/schoology/content.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "notable/viewer/open_with_kami.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "file_browser_handlers": [
+    {
+      "id": "open-as-notable",
+      "default_title": "Open with Kami",
+      "file_filters": [
+        "filesystem:*.pdf"
+      ]
+    }
+  ],
+  "mime_types": [
+    "application/pdf"
+  ],
+  "storage(disabled)": {
+    "managed_schema": "preferences_schema.json"
+  },
+  "background": {
+    "page": "pdfHandler.html"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "icon19.png",
+      "38": "icon38.png"
+    },
+    "default_title": "Kami - PDF and Document Annotation"
+  },
+  "incognito": "split",
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://s.ytimg.com https://*.youtube.com https://*.pusher.com https://pusher.com https://www.dropbox.com https://apis.google.com https://app.box.com https://checkout.stripe.com https://widget.intercom.io https://js.intercomcdn.com https://static.accountdock.com; object-src 'self' https://notabletemporarydownloads.s3.amazonaws.com",
+  "web_accessible_resources": [
+    "getFrameId",
+    "delegate.html",
+    "hello",
+    "content/web/options.html",
+    "content/web/viewer.html",
+    "notable/viewer/open_with_kami.html",
+    "notable/integrations/schoology/page_script.js",
+    "notable/integrations/schoology/styles.css",
+    "http:/*",
+    "https:/*",
+    "ftp:/*",
+    "file:/*",
+    "chrome-extension:/*",
+    "filesystem:/*",
+    "drive:*"
+  ],
+  "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCwR9U86SNBHfB5fmt90yCpMIsejJg6Is0ltJcMgyDw74cPGXNuhfbfkJEVOBJsGXTad/i8NIFDDUFi1R92BBVlrXkF/Wz0oqGDhaTVafpAJDdVACImLMTT4N/XBsmq45trG+v4PzrqIyXrX9dOUo5K83d/ZfUw1iZtm7rNlR9CswIDAQAB",
+  "offline_enabled": true,
+  "options_page": "content/web/options.html",
+  "container": "GOOGLE_DRIVE",
+  "api_console_project_id": "185741998891",
+  "gdrive_mime_types": {
+    "http://drive.google.com/intents/opendrivedoc": [
+      {
+        "type": [
+          "application/pdf",
+          "application/vnd.google.drive.ext-type.pdf"
+        ],
+        "href": "https://web.kamihq.com/web/viewer.html",
+        "title": "Open",
+        "disposition": "window"
+      }
+    ]
+  },
+  "oauth2": {
+    "client_id": "185741998891-boet3ik0ho58mic9ttbhbtl75bjekic5.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/drive",
+      "https://www.googleapis.com/auth/drive.install",
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/userinfo.profile",
+      "https://www.googleapis.com/auth/drive.readonly",
+      "https://www.googleapis.com/auth/classroom.courses",
+      "https://www.googleapis.com/auth/classroom.coursework.me",
+      "https://www.googleapis.com/auth/classroom.coursework.students"
+    ]
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://*.kamihq.com/*",
+      "*://*.kamipdf.com/*"
+    ]
+  }
+}

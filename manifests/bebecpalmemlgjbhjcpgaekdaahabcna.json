@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "SEC Filings Search",
+  "short_name": "SEC Filings Search",
+  "description": "Search a ticker to get the company's SEC filings.",
+  "version": "0.1.8",
+  "icons": {
+    "16": "res/edgar16.png",
+    "48": "res/edgar48.png",
+    "128": "res/edgar128.png"
+  },
+  "permissions": [
+    "*://www.sec.gov/*",
+    "storage"
+  ],
+  "options_page": "options.html",
+  "browser_action": {
+    "default_title": "SEC Filings Search",
+    "default_popup": "search.html",
+    "default_icon": "res/edgar38.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://sec.gov/*",
+        "*://www.sec.gov/*"
+      ],
+      "css": [
+        "filing_injection.css"
+      ],
+      "js": [
+        "jquery.min.js",
+        "filing_injection.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "manifest_version": 2
+}

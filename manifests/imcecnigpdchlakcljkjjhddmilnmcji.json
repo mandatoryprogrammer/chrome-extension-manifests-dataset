@@ -1,0 +1,91 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "StickyNotes",
+  "version": "1.2.4",
+  "manifest_version": 2,
+  "applications": {
+    "gecko": {
+      "id": "sticky@filenamezero.dip.jp"
+    }
+  },
+  "permissions": [
+    "contextMenus",
+    "storage",
+    "notifications",
+    "tabs",
+    "activeTab",
+    "webNavigation",
+    "*://stickynotes.kumabook.tokyo/*"
+  ],
+  "background": {
+    "scripts": [
+      "background/bundle.js"
+    ]
+  },
+  "default_locale": "en",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "match_about_blank": true,
+      "css": [
+        "content_scripts/sticky-view.css"
+      ],
+      "js": [
+        "content_scripts/bundle.js"
+      ]
+    }
+  ],
+  "options_ui": {
+    "page": "options_ui/index.html"
+  },
+  "browser_action": {
+    "browser_style": true,
+    "default_icon": "icons/icon-32.png",
+    "default_title": "StickyNotes",
+    "default_popup": "popup/index.html"
+  },
+  "sidebar_action": {
+    "default_icon": "icons/icon-32.png",
+    "default_title": "StickyNotes",
+    "default_panel": "sidebar/index.html"
+  },
+  "commands": {
+    "_execute_sidebar_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+S",
+        "mac": "MacCtrl+Shift+S"
+      },
+      "description": "Show stickies on sidebar"
+    },
+    "create_sticky": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+C",
+        "mac": "MacCtrl+Shift+C"
+      },
+      "description": "Create a sticky in active tab"
+    },
+    "toggle_stickies": {
+      "suggested_key": {
+        "default": "Ctrl+Q",
+        "mac": "MacCtrl+Q"
+      },
+      "description": "Toggle visiblities of stickies in active tab"
+    }
+  },
+  "web_accessible_resources": [
+    "content_scripts/delete.png",
+    "content_scripts/delete-hover.png",
+    "content_scripts/menu.png",
+    "content_scripts/menu-hover.png",
+    "content_scripts/edit-tag.png",
+    "content_scripts/edit-tag-hover.png",
+    "content_scripts/minimize.png",
+    "content_scripts/minimize-hover.png",
+    "content_scripts/color.png",
+    "content_scripts/page-option.png",
+    "content_scripts/back.png",
+    "content_scripts/close.png"
+  ]
+}

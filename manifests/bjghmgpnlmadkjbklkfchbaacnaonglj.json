@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "M Clip Twitch",
+  "description": "Download Twitch clips with a title in a configurable format and quickly access its VOD",
+  "version": "1.13.8",
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true
+  },
+  "browser_action": {
+    "default_icon": "images/icon.png"
+  },
+  "icons": {
+    "128": "images/icon.png"
+  },
+  "background": {
+    "scripts": [
+      "js/moment.js",
+      "js/lang.js",
+      "background.js",
+      "downloadClip.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "https://clips.twitch.tv/*",
+        "https://www.twitch.tv/*"
+      ],
+      "js": [
+        "js-content/utils.js",
+        "js/lang.js",
+        "js-content/vars.js",
+        "js-content/buttonsUtils.js",
+        "js-content/manageButtons.js",
+        "js-content/manageButtonsList.js",
+        "js-content/init.js"
+      ]
+    }
+  ],
+  "commands": {
+    "download-clip": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+H",
+        "mac": "Command+Shift+H"
+      },
+      "description": "Allows you to download the Twitch clip from its page"
+    }
+  },
+  "permissions": [
+    "downloads",
+    "storage",
+    "activeTab"
+  ],
+  "web_accessible_resources": [
+    "images/*",
+    "queue/queue.html"
+  ]
+}

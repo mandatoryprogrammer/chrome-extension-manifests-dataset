@@ -1,0 +1,145 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "SigTools",
+  "short_name": "Sigarra Tools",
+  "version": "4.0.0",
+  "description": "Sigarra Tools - Sigarra on Steroids: Export Calendar Events, Infinite Scroll, DataTables, and more",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "browser_action": {
+    "default_title": "SigTools",
+    "default_icon": "icons/icon-48.png"
+  },
+  "background": {
+    "scripts": [
+      "js/scripts/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.up.pt/*"
+      ],
+      "css": [
+        "css/content_style.css"
+      ],
+      "js": [
+        "js/lib/jquery-3.4.1.js",
+        "js/lib/ics.deps.min.js",
+        "js/lib/ics.js",
+        "js/lib/sweetalert.min.js",
+        "js/utils/calendar.js",
+        "js/utils/global.js",
+        "js/utils/dropdown.js",
+        "js/utils/modal.js",
+        "js/utils/time.js",
+        "js/lib/datatables.min.js",
+        "js/extractors/extractor.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://sigarra.up.pt/*"
+      ],
+      "css": [
+        "css/datatables.min.css"
+      ],
+      "js": [
+        "js/extractors/infinite_scroll.js",
+        "js/extractors/datatable.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://*.up.pt/*hor_geral*",
+        "https://*.up.pt/*HOR_GERAL*"
+      ],
+      "js": [
+        "js/extractors/timetable.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://*.up.pt/*exa_geral*",
+        "https://*.up.pt/*EXA_GERAL*"
+      ],
+      "js": [
+        "js/extractors/exams.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://moodle.up.pt/*"
+      ],
+      "js": [
+        "js/extractors/moodle.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://*.up.pt/*show_pauta_resul*",
+        "https://*.up.pt/*SHOW_PAUTA_RESUL*"
+      ],
+      "js": [
+        "js/lib/chart.min.js",
+        "js/lib/math.min.js",
+        "js/lib/mustache.min.js",
+        "js/extractors/grades.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://*.up.pt/*exa_geral.exame_view*",
+        "https://*.up.pt/*EXA_GERAL.EXAME_VIEW*"
+      ],
+      "js": [
+        "js/extractors/single_exam.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://catalogo.up.pt/F/?func=bor-loan*",
+        "https://catalogo.up.pt/F/?func=BOR-LOAN*"
+      ],
+      "js": [
+        "js/extractors/library.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://*.up.pt/*gpag_ccorrente_geral.conta_corrente_view*",
+        "https://*.up.pt/*GPAG_CCORRENTE_GERAL.CONTA_CORRENTE_VIEW*"
+      ],
+      "js": [
+        "js/extractors/bills.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "https://*.up.pt/*",
+    "storage"
+  ],
+  "web_accessible_resources": [
+    "icons/*"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "homepage_url": "https://github.com/msramalho/SigTools",
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  }
+}

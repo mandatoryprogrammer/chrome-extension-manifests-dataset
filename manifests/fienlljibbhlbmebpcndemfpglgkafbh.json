@@ -1,0 +1,149 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Lectio modern",
+  "version": "1.8.1",
+  "description": "Update Lectio to 2020 and customize for your needs.",
+  "permissions": [
+    "activeTab",
+    "declarativeContent",
+    "storage",
+    "unlimitedStorage",
+    "https://*/"
+  ],
+  "options_page": "options.html",
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "page_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "img/beta/16.png",
+      "32": "img/beta/32.png",
+      "48": "img/beta/48.png",
+      "128": "img/beta/128.png"
+    }
+  },
+  "icons": {
+    "16": "img/beta/16.png",
+    "32": "img/beta/32.png",
+    "48": "img/beta/48.png",
+    "128": "img/beta/128.png"
+  },
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://apis.google.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.lectio.dk/"
+      ],
+      "js": [
+        "jQuery.js",
+        "lectioIndex.js"
+      ],
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "*://www.lectio.dk/lectio*"
+      ],
+      "js": [
+        "jQuery.js",
+        "lectioGeneral.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://www.lectio.dk/lectio/login_list.aspx*"
+      ],
+      "js": [
+        "jQuery.js",
+        "lectioIndex.js",
+        "lectioSchoolList.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://www.lectio.dk/lectio/*/forside.aspx*"
+      ],
+      "js": [
+        "jQuery.js",
+        "lectioForside.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://www.lectio.dk/lectio/*/SkemaNy.aspx*"
+      ],
+      "js": [
+        "jQuery.js",
+        "lectioSkema.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://www.lectio.dk/lectio/*/login.aspx*"
+      ],
+      "js": [
+        "jQuery.js",
+        "lectioLogin.js"
+      ],
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "*://www.lectio.dk/lectio/*/OpgaverElev.aspx*"
+      ],
+      "js": [
+        "jQuery.js",
+        "lectioOpgaver.js"
+      ],
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "*://www.lectio.dk/lectio/681/DokumentOversigt.aspx*"
+      ],
+      "js": [
+        "jQuery.js",
+        "lectioDocuments.js"
+      ],
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "*://www.lectio.dk/lectio/*/beskeder2.aspx*"
+      ],
+      "js": [
+        "jQuery.js",
+        "lectioMessages.js"
+      ],
+      "all_frames": false,
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "style.css",
+    "popup.css",
+    "options.css",
+    "switch.css",
+    "lectioGeneral.css",
+    "lectioIndex.css",
+    "lectioForside.css",
+    "lectioSkema.css",
+    "lectioMessages.css",
+    "general.css",
+    "hideImage.css",
+    "hideHeaders.css",
+    "hideSurveys.css"
+  ]
+}

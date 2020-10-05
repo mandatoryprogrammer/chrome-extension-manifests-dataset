@@ -1,0 +1,41 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "py3redirect",
+  "description": "Automatically redirect to a specific Python 3 version's documentation",
+  "author": "Mateusz \"m4tx\" Maćkowski",
+  "version": "1.3.0",
+  "icons": {
+    "64": "icon.png",
+    "128": "icon128.png"
+  },
+  "page_action": {
+    "default_icon": "icon.png",
+    "default_title": "Python 3 docs page",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "browser-wrapper.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://docs.python.org/*"
+      ],
+      "js": [
+        "browser-wrapper.js",
+        "content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "*://docs.python.org/*",
+    "webRequest",
+    "webRequestBlocking",
+    "storage"
+  ]
+}

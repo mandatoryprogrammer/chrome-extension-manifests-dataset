@@ -1,0 +1,51 @@
+{
+  "update_url": "http://clients2.google.com/service/update2/crx",
+  "description": "Do you want the old YouTube channel behaviour back? By clicking on a video on a channel you will stay there without redirect.",
+  "name": "YouTube™ Stay On Channel",
+  "version": "1.5",
+  "manifest_version": 2,
+  "permissions": [
+    "tabs",
+    "*://*.youtube.com/*",
+    "*://youtube.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.youtube.com/*",
+        "*://youtube.com/*"
+      ],
+      "js": [
+        "src/globals.js",
+        "src/communicator.js",
+        "src/template.js",
+        "src/videoPlayer.js",
+        "src/stayOnChannel.js"
+      ],
+      "css": [
+        "src/style.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "src/resources/player.html",
+    "icons/yt.png"
+  ],
+  "options_page": "options/options.html",
+  "background": {
+    "scripts": [
+      "background/communicator.js",
+      "background/settings.js",
+      "background/background.js"
+    ]
+  },
+  "icons": {
+    "48": "icons/icon48_red.png",
+    "128": "icons/icon128_red.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/icon19_red.png",
+    "default_title": "YouTube™ Stay On Channel"
+  }
+}

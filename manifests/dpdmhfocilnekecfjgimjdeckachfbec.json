@@ -1,0 +1,67 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_name__",
+  "short_name": "__MSG_short_name__",
+  "description": "__MSG_description__",
+  "version": "1.1.10",
+  "default_locale": "en",
+  "icons": {
+    "16": "images/app_icon16.png",
+    "48": "images/app_icon48.png",
+    "128": "images/app_icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "constants.js",
+      "util.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*"
+      ],
+      "js": [
+        "inboxsdk.js",
+        "constants.js",
+        "sha1.js",
+        "util.js",
+        "content.js"
+      ],
+      "css": [
+        "onboarding.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.dropbox.com/gmail_integration"
+      ],
+      "js": [
+        "isinstalled.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self';",
+  "permissions": [
+    "https://mail.google.com/*",
+    "https://inbox.google.com/*",
+    "storage",
+    "tabs"
+  ],
+  "web_accessible_resources": [
+    "images/logo.png",
+    "images/icon16.png",
+    "images/icon48.png",
+    "images/icon128.png",
+    "images/white_icon48.png",
+    "images/checkmark.png",
+    "images/x.png",
+    "blank.html"
+  ]
+}

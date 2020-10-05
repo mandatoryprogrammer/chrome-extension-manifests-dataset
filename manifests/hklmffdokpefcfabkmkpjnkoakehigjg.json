@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "QREW Tools",
+  "version": "1.027",
+  "description": "An AppSheet plugin to help you get more out of Expressions",
+  "icons": {
+    "16": "16x16.png",
+    "48": "48x48.png",
+    "128": "128x128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "https://help.appsheet.com/*",
+    "storage"
+  ],
+  "web_accessible_resources": [
+    "qrew-logo-hires.png",
+    "codemirror/theme/*"
+  ],
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.appsheet.com/Template/*"
+      ],
+      "css": [
+        "mirrorMain.css",
+        "codemirror/lib/codemirror.css",
+        "font-awesome.min.css"
+      ],
+      "js": [
+        "jquery-3.4.1.js",
+        "content.js",
+        "codemirror/lib/codemirror.js",
+        "codemirror/mode/spreadsheet/spreadsheet.js",
+        "codemirror/mode/spreadsheet/spreadsheet.js",
+        "codemirror/addon/edit/matchbrackets.js",
+        "codemirror/addon/edit/closebrackets.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://help.appsheet.com/*"
+      ],
+      "js": [
+        "help-frame.js"
+      ],
+      "all_frames": true
+    }
+  ]
+}

@@ -1,0 +1,128 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "xLaw",
+  "description": "Extension to extend EUR-Lex, Riigi Teataja, Riigikohus.ee (§ link + additional info)",
+  "version": "2.1.5.2",
+  "minimum_chrome_version": "61",
+  "optional_permissions": [
+    "*://*/*"
+  ],
+  "permissions": [
+    "storage",
+    "identity",
+    "https://xlaw.ee/",
+    "contextMenus"
+  ],
+  "omnibox": {
+    "keyword": "x"
+  },
+  "background": {
+    "scripts": [
+      "js/config.js",
+      "js/background.js",
+      "dist/js/background.js"
+    ],
+    "persistent": false
+  },
+  "icons": {
+    "16": "img/16x16.png",
+    "48": "img/48x48.png",
+    "128": "img/128x128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.riigiteataja.ee/akt/*",
+        "https://www.riigiteataja.ee/en/eli/*"
+      ],
+      "css": [
+        "lib/awesomplete/awesomplete.css",
+        "css/drop-theme.css",
+        "css/buttons.css"
+      ],
+      "js": [
+        "lib/font-awesome/regular.min.js",
+        "lib/font-awesome/fontawesome.min.js",
+        "lib/jsdiff/jsdiff.js",
+        "dist/js/cs_riigiteataja.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://www.nc.ee/*",
+        "https://www.riigikohus.ee/lahendid*",
+        "https://www.riigikohus.ee/et/lahendid*"
+      ],
+      "js": [
+        "dist/js/cs_riigikohus.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://eur-lex.europa.eu/*"
+      ],
+      "css": [
+        "lib/awesomplete/awesomplete.css",
+        "css/drop-theme.css",
+        "css/buttons.css"
+      ],
+      "js": [
+        "lib/font-awesome/regular.min.js",
+        "lib/font-awesome/fontawesome.min.js",
+        "dist/js/cs_eurlex.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://curia.europa.eu/*"
+      ],
+      "js": [
+        "js/curia.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.riigiteataja.ee/kohtulahendid/detailid.html*"
+      ],
+      "css": [
+        "css/drop-theme.css",
+        "css/buttons.css"
+      ],
+      "js": [
+        "dist/js/cs_kohtulahend_detailid.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.riigiteataja.ee/kohtulahendid/otsingutulemus.html*",
+        "https://www.riigiteataja.ee/kohtulahendite_liigitus.html*",
+        "https://www.riigiteataja.ee/akt_seosed_kohtulahenditega.html*"
+      ],
+      "js": [
+        "dist/js/cs_kohtulahendid.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.riigiteataja.ee/otsingu_tulemus.html*"
+      ],
+      "js": [
+        "dist/js/cs_riigiteataja_otsing.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "img/19x19.png",
+      "38": "img/38x38.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "web_accessible_resources": [
+    "config.json",
+    "img/*",
+    "data/*"
+  ],
+  "content_security_policy": "script-src 'self' https://apis.google.com; object-src 'self'"
+}

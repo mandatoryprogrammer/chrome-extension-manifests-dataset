@@ -1,0 +1,93 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Kineviz REC",
+  "version": "1.6.3",
+  "description": "Kineviz REC and Screenshot, Record screen activity, camera, tab, speakers in 4K HD video format",
+  "manifest_version": 2,
+  "minimum_chrome_version": "49",
+  "homepage_url": "http://www.kineviz.com/",
+  "background": {
+    "scripts": [
+      "background/background.actions.js",
+      "background/background.common.js",
+      "background/background.js",
+      "background/background.desktopCapture.js",
+      "background/background.tabCapture.js",
+      "background/background.badgeText.js",
+      "background/background.getUserMedia.js",
+      "background/background.messaging.js",
+      "background/background.players.js",
+      "RecordRTC/MediaStreamRecorder.js",
+      "RecordRTC/MultiStreamRecorder.js",
+      "RecordRTC/DiskStorage.js"
+    ],
+    "persistent": false
+  },
+  "icons": {
+    "128": "images/kineviz-128.png",
+    "16": "images/kineviz-128.png",
+    "22": "images/kineviz-128.png",
+    "32": "images/kineviz-128.png",
+    "48": "images/kineviz.png"
+  },
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "content/content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "browser_action": {
+    "default_icon": "images/kineviz.png",
+    "default_title": "Kineviz REC",
+    "default_popup": "dropdown.html"
+  },
+  "commands": {
+    "track-video": {
+      "description": "Auto track video with hot key",
+      "suggested_key": {
+        "default": "Ctrl+Shift+V",
+        "mac": "MacCtrl+Shift+V"
+      }
+    },
+    "track-video-mp4": {
+      "description": "Auto track mp4 with hot key",
+      "suggested_key": {
+        "default": "Alt+Shift+V",
+        "mac": "Alt+Shift+V"
+      }
+    },
+    "save-image": {
+      "description": "Auto save image with hot key",
+      "suggested_key": {
+        "default": "Ctrl+Shift+I",
+        "mac": "MacCtrl+Shift+I"
+      }
+    }
+  },
+  "permissions": [
+    "http://*/",
+    "<all_urls>",
+    "desktopCapture",
+    "storage",
+    "tabs",
+    "tabCapture",
+    "activeTab",
+    "unlimitedStorage"
+  ],
+  "web_accessible_resources": [
+    "images/kineviz-fullscreen.png",
+    "images/kineviz-close.png"
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": false,
+    "open_in_tab": true
+  }
+}

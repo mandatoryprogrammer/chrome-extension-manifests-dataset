@@ -1,0 +1,74 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Jump Send",
+  "version": "2.0.1",
+  "description": "Jump Send lets shoppers find great deals on Amazon. Find great products at discounted prices!",
+  "icons": {
+    "38": "images/38.png",
+    "48": "images/48.png",
+    "128": "images/128.png"
+  },
+  "homepage_url": "https://www.jumpsend.com",
+  "permissions": [
+    "*://*.herokuapp.com/*",
+    "tabs",
+    "background",
+    "storage",
+    "unlimitedStorage",
+    "*://*.amazon.com/*",
+    "*://*.amazon.fr/*",
+    "*://*.amazon.de/*",
+    "*://*.amazon.co.uk/*",
+    "*://*.amazon.ca/*",
+    "*://*.amazon.com.mx/*",
+    "*://*.amazon.it/*",
+    "*://*.amazon.es/*",
+    "*://*.amazon.co.jp/*",
+    "*://*.amazon.cn/*",
+    "*://*.amazon.in/*",
+    "*://*.jumpsend.com/*",
+    "contextMenus"
+  ],
+  "browser_action": {
+    "default_icon": "images/38.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "js/libraries/jquery.js",
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://ssl.google-analytics.com; object-src 'self'",
+  "web_accessible_resources": [
+    "*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.jumpsend.com/*",
+        "*://*.amazon.com/*",
+        "*://*.amazon.fr/*",
+        "*://*.amazon.de/*",
+        "*://*.amazon.co.uk/*",
+        "*://*.amazon.ca/*",
+        "*://*.amazon.com.mx/*",
+        "*://*.amazon.it/*",
+        "*://*.amazon.es/*",
+        "*://*.amazon.co.jp/*",
+        "*://*.amazon.cn/*",
+        "*://*.amazon.in/*"
+      ],
+      "js": [
+        "js/libraries/jquery.js",
+        "js/jumpPopup.js"
+      ],
+      "css": [
+        "css/jumpPopup.css"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

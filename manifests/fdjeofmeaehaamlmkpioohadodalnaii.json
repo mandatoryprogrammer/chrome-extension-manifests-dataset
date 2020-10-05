@@ -1,0 +1,70 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Gotoguy",
+  "version": "0.0.34",
+  "description": "The Social Shopping App",
+  "background": {
+    "scripts": [
+      "js/jquery.js",
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com/analytics.js; object-src 'self'",
+  "permissions": [
+    "tabs",
+    "unlimitedStorage",
+    "http://www.flipkart.com/*",
+    "http://www.ebay.com/*",
+    "http://www.amazon.com/*",
+    "https://www.flipkart.com/*",
+    "https://www.ebay.com/*",
+    "https://www.amazon.com/*",
+    "https://graph.facebook.com/*",
+    "http://graph.facebook.com/*",
+    "https://*.facebook.com/*",
+    "http://*.facebook.com/*",
+    "cookies",
+    "webRequest"
+  ],
+  "web_accessible_resources": [
+    "sidebar.html",
+    "https://getgotoguy.com/api/v1/askQue.html",
+    "https://getgotoguy.com/api/v1/getNomineesForProduct.php",
+    "https://getgotoguy.com/api/v1//insertUser.php",
+    "http://fonts.googleapis.com/css?family=Oswald:400,700",
+    "images/hide.png",
+    "images/show.png"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/jquery.js",
+        "js/content.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://www.flipkart.com/*",
+        "http://www.ebay.com/*",
+        "http://www.amazon.com/*",
+        "https://www.flipkart.com/*",
+        "https://www.ebay.com/*",
+        "https://www.amazon.com/*"
+      ],
+      "js": [
+        "js/sidebar.js",
+        "js/datapipe.js",
+        "js/jquery.min.js",
+        "js/jquery.autoSuggest.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

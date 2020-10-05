@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Rikaichan",
+  "version": "4.0.3",
+  "description": "Japanese dictionary",
+  "author": "Kalamandea",
+  "default_locale": "en",
+  "icons": {
+    "16": "img/Rikai_new_icon_on.png",
+    "48": "img/Rikai_new_icon_on.png",
+    "128": "img/Rikai_new_icon_on.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "img/Rikai_new_icon_off.png",
+      "38": "img/Rikai_new_icon_off.png"
+    },
+    "default_popup": "bg/popup.html"
+  },
+  "background": {
+    "page": "bg/background.html"
+  },
+  "minimum_chrome_version": "45.0.0.0",
+  "options_ui": {
+    "page": "bg/options.html"
+  },
+  "permissions": [
+    "<all_urls>",
+    "downloads",
+    "downloads.open",
+    "storage",
+    "contextMenus",
+    "clipboardWrite"
+  ],
+  "content_scripts": [
+    {
+      "js": [
+        "fg/frame.js",
+        "lib/wanakana.min.js"
+      ],
+      "matches": [
+        "file://*/*",
+        "http://*/*",
+        "https://*/*"
+      ],
+      "all_frames": true
+    }
+  ],
+  "commands": {
+    "toggle": {
+      "suggested_key": {
+        "default": "Alt+Insert"
+      },
+      "description": "Toggle text scanning"
+    },
+    "toolbar": {
+      "suggested_key": {
+        "default": "Alt+Delete"
+      },
+      "description": "Toggle lookup bar"
+    }
+  }
+}

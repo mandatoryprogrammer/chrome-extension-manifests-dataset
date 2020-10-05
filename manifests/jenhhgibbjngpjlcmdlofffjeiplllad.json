@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "ThisLife Selected Photo Downloader",
+  "version": "1.0.1",
+  "manifest_version": 2,
+  "description": "Download multiple photos at a time with ThisLife",
+  "homepage_url": "http://redth.codes",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": true
+  },
+  "page_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "Download Selected Photos"
+  },
+  "permissions": [
+    "contentSettings",
+    "downloads",
+    "https://app.thislife.com/*"
+  ],
+  "omnibox": {
+    "keyword": "ThisLife"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://app.thislife.com/*"
+      ],
+      "js": [
+        "src/inject/inject.js",
+        "js/jquery/jquery.min.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "src/inject/page.js",
+    "src/inject/downloadselected.js"
+  ]
+}

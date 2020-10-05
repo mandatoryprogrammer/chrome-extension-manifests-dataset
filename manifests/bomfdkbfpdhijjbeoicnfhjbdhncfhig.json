@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Paperpile Extension",
+  "version": "1.5.206",
+  "description": "Collect, organize, annotate and cite your research papers in Chrome",
+  "permissions": [
+    "clipboardWrite",
+    "contextMenus",
+    "http://*/",
+    "https://*/",
+    "ftp://*/",
+    "*://*.paperpile.com/",
+    "storage",
+    "tabs",
+    "unlimitedStorage",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://apis.google.com https://www.google-analytics.com/ https://ssl.google-analytics.com https://*.firebaseio.com/; object-src 'self' filesystem:",
+  "minimum_chrome_version": "27",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://stage.paperpile.com/app",
+        "*://stage.paperpile.com/view/*",
+        "*://paperpile.com/app",
+        "*://paperpile.com/view/*"
+      ],
+      "js": [
+        "dist/pp-cb.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon19.png",
+      "38": "images/icon38.png"
+    },
+    "default_title": "Paperpile",
+    "default_popup": "html/popup.html"
+  },
+  "manifest_version": 2,
+  "background": {
+    "page": "html/background.html"
+  },
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "web_accessible_resources": [
+    "/*.png",
+    "/*.gif",
+    "/*.css",
+    "/css/*.css",
+    "/html/*.html",
+    "/dist-new/*.html",
+    "dist/pp-cs.css"
+  ]
+}

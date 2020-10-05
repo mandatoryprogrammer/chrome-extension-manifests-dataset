@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "1.5.1",
+  "name": "Word Root",
+  "manifest_version": 2,
+  "description": "learn word root, one by one",
+  "browser_action": {
+    "default_title": "Root Root Go",
+    "default_popup": "cr-popup.html"
+  },
+  "icons": {
+    "16": "img/icon-16.png",
+    "48": "img/icon-48.png",
+    "128": "img/icon-128.png"
+  },
+  "web_accessible_resources": [
+    "inject.html",
+    "css/*",
+    "fonts/*",
+    "img/*",
+    "js/*"
+  ],
+  "background": {
+    "page": "cr-bg.html"
+  },
+  "content_scripts": [
+    {
+      "persistent": true,
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/content.bundle.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "contextMenus",
+    "management",
+    "tabs",
+    "storage",
+    "identity",
+    "cookies",
+    "https://wordroot.net/*"
+  ],
+  "content_security_policy": "script-src 'self' https://wordroot.net https://ssl.google-analytics.com 'unsafe-eval';   object-src 'self'; connect-src https://wordroot.net https://ssl.google-analytics.com/; style-src * 'unsafe-inline' 'self' blob:; img-src * 'self' data: https:;"
+}

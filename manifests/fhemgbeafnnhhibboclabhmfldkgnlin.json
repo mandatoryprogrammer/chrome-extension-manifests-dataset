@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "DronaHQ APIGenie",
+  "description": "Records network traffic like HTTP requests and gives you an option to create a RESTful endpoint.",
+  "version": "1.0.5",
+  "manifest_version": 2,
+  "devtools_page": "devtools.dronahq.html",
+  "browser_action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": "assets/images/apigenie-mono.png"
+  },
+  "permissions": [
+    "activeTab",
+    "webRequest",
+    "webRequestBlocking",
+    "http://*/*",
+    "https://*/*",
+    "tabs",
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://apigenie.dronahq.com/*",
+        "*://apigenie.io/*",
+        "*://www.apigenie.io/*"
+      ],
+      "js": [
+        "js/content.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+L",
+        "mac": "MacCtrl+Shift+L"
+      },
+      "description": "Opens popup/popup.html"
+    }
+  },
+  "icons": {
+    "300": "assets/images/apigenie.png"
+  }
+}

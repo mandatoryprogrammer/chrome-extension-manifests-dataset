@@ -1,0 +1,80 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxEbTTLZD8GrbWrHzBbRjGh2gsIDIducgOSuVyVW7NGYER5v02Vvkr7hNjpPYkrgrLDmuBwP/uyp6Jp4eTJCEVMl/5XYPh2J+Gd3vsh46CwloZRwuu8yJOjE8svHvTQNNxI0cMKacAtreT7zMkCuy5Eh6gn4+6vimgOJp2jvsYCDasha6JB1jZxVBg6zyhwHow66NGO1sw+wSoFq1Aj9hL1D9pcQjAEm4wUnAD8pV3GL6b+H/x2XqJYxfWuGw6DiK30ziE43BNCVjX6q+HoV2OJQTB2Jfvvpru6buNbQokzcTA1UQdSZRl6R7/obuQVZuGNBtC81qCTXdjIUXoLM8wwIDAQAB",
+  "manifest_version": 2,
+  "name": "Legal Files Chrome Extension",
+  "short_name": "LFSW Chrome Ext",
+  "version": "0.5.4",
+  "description": "Easily import Gmail Emails, Google Calendar Events and Chrome Web Pages into Legal Files.",
+  "homepage_url": "http://www.legalfiles.com",
+  "browser_action": {
+    "default_icon": "images/icon_48_gear.png",
+    "default_title": "Legal Files",
+    "default_popup": "html/popup.html"
+  },
+  "icons": {
+    "16": "images/icon_16_gear.png",
+    "48": "images/icon_48_gear.png",
+    "128": "images/icon_128_gear.png"
+  },
+  "permissions": [
+    "tabs",
+    "<all_urls>",
+    "identity",
+    "*://*.google.com/*"
+  ],
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.google.com/mail/*",
+        "*://mail.google.com/*"
+      ],
+      "css": [
+        "styles/extension.css"
+      ],
+      "js": [
+        "scripts/buttonizer.js",
+        "scripts/gmail_access.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.google.com/calendar/*",
+        "*://calendar.google.com/*"
+      ],
+      "css": [
+        "styles/extension.css"
+      ],
+      "js": [
+        "scripts/buttonizer.js",
+        "scripts/event_access.js"
+      ]
+    }
+  ],
+  "sandbox": {
+    "pages": [
+      "html/sandbox.html"
+    ]
+  },
+  "web_accessible_resources": [
+    "images/icon_48.png",
+    "images/icon_48_wbg.png",
+    "gmail.js"
+  ],
+  "content_security_policy": "script-src https://*.google.com 'self'; object-src 'self'",
+  "oauth2": {
+    "client_id": "711637196767-veatoreof80smr7ivuv1fibbmq44gr4t.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/gmail.readonly",
+      "https://www.googleapis.com/auth/calendar.events",
+      "profile",
+      "email"
+    ]
+  }
+}

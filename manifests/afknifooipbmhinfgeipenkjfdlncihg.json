@@ -1,0 +1,43 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "My Newsfeed",
+  "short_name": "My Newsfeed",
+  "version": "1",
+  "manifest_version": 2,
+  "description": "This extension allows you to control what you see on Facebook, You can restrict Images, Ads, Videos, Albums and Links",
+  "icons": {
+    "128": "images/icon-128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "scripts/jquery-2.1.4.js",
+      "scripts/background.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "background",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.facebook.com/*"
+      ],
+      "js": [
+        "scripts/jquery-2.1.4.js",
+        "scripts/contentscript.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "browser_action": {
+    "default_icon": {},
+    "default_title": "my newsfeed",
+    "default_popup": "popup.html"
+  }
+}

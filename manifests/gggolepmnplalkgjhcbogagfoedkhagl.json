@@ -1,0 +1,81 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_projectName__",
+  "short_name": "__MSG_shortProjectName__",
+  "version": "0.5.1",
+  "manifest_version": 2,
+  "description": "__MSG_projectDescription__",
+  "icons": {
+    "128": "images/qa-recorder-logo-128.png"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "activeTab",
+    "webRequest",
+    "webRequestBlocking",
+    "*://*.qa-recorder.com/*"
+  ],
+  "content_security_policy": "script-src 'self' https://cdn.walkme.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/pages.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.qa-recorder.com/*",
+        "http://localhost.qa-recorder.com/*"
+      ],
+      "js": [
+        "js/pages/admin.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": "images/qa-recorder-logo-128.png",
+    "default_popup": "html/recorder.html"
+  },
+  "web_accessible_resources": [
+    "css/pages-init.css",
+    "html/pages-init.html",
+    "js/actions/*.js"
+  ],
+  "background": {
+    "scripts": [
+      "js/config.js",
+      "js/bg/tabs.js",
+      "js/bg/auth.js",
+      "js/bg/api.js",
+      "js/bg/popup.js",
+      "js/bg/actions.js",
+      "js/bg/csp.js",
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "default_locale": "en",
+  "commands": {
+    "qa-recorder--recording-toggle": {
+      "description": "Start/Stop recording the current page",
+      "suggested_key": {
+        "default": "Ctrl+Shift+R",
+        "mac": "MacCtrl+Shift+R"
+      }
+    },
+    "qa-recorder--recording-note": {
+      "description": "Create a new Note while recording",
+      "suggested_key": {
+        "default": "Alt+Shift+N",
+        "mac": "MacCtrl+Shift+N"
+      }
+    }
+  },
+  "homepage_url": "https://www.qa-recorder.com/",
+  "offline_enabled": false
+}

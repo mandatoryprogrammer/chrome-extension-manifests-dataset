@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Service Worker Detector",
+  "short_name": "SW Detector",
+  "description": "This extension detects if a website registers a Service Worker.",
+  "author": "Thomas Steiner (tomac@google.com, @tomayac)",
+  "version": "2.3.17",
+  "content_security_policy": "script-src 'self' 'sha256-DXqn4fZAsJsbXVJfQzuKahbEuXv7fAkH7dd8fSd2jA8='; object-src 'self'",
+  "icons": {
+    "16": "assets/icon-female.png",
+    "48": "assets/icon-female.png",
+    "128": "assets/icon-female.png"
+  },
+  "page_action": {
+    "default_icon": {
+      "19": "assets/icon.png",
+      "38": "assets/icon.png",
+      "40": "assets/icon.png",
+      "160": "assets/icon.png"
+    },
+    "default_popup": "popup.html",
+    "default_title": "❌👷‍ No active Service Worker found."
+  },
+  "permissions": [
+    "activeTab"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "contentscript.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "minimum_chrome_version": "40"
+}

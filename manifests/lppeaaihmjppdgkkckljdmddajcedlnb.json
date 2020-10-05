@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Budaigou购物助手",
+  "version": "2",
+  "manifest_version": 2,
+  "description": "【Budaigou出品】在您浏览商品的同时，可直接添加商品到Budaigou购物车，无需复制粘贴，简单便捷！",
+  "browser_action": {
+    "default_icon": "images/icon.png"
+  },
+  "icons": {
+    "128": "images/icon.png",
+    "16": "images/icon.png",
+    "48": "images/icon.png"
+  },
+  "permissions": [
+    "webNavigation",
+    "tabs",
+    "contextMenus",
+    "notifications",
+    "http://*.budaigou.com/"
+  ],
+  "background": {
+    "scripts": [
+      "js/jquery.min.js",
+      "js/inject_csp.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "css": [
+        "css/inject.css",
+        "css/box.css"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "js/content_scripts.js",
+        "js/inject_csp.js"
+      ],
+      "matches": [
+        "*://*.taobao.com/*",
+        "*://*.tmall.com/*",
+        "*://*.tmall.hk/*",
+        "*://*.budaigou.com/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "js/*.js",
+    "images/*.png"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'"
+}

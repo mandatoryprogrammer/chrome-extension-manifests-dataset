@@ -1,0 +1,96 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "DropWired - AliExpress Automator",
+  "version": "1.2.1",
+  "description": "DropWired - AliExpress Product Importer and Order Automator",
+  "manifest_version": 2,
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "storage",
+    "notifications",
+    "https://www.dropwired.com/*",
+    "https://api.dropwired.com/*",
+    "*://*.aliexpress.com/*",
+    "*://*.aliexpress.ru/*",
+    "cookies"
+  ],
+  "background": {
+    "scripts": [
+      "json5.js",
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.aliexpress.com/category/*"
+      ],
+      "css": [
+        "category_script.css"
+      ],
+      "js": [
+        "category_script.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.aliexpress.com/item/*"
+      ],
+      "css": [
+        "product_script.css"
+      ],
+      "js": [
+        "product_script.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.dropwired.com/orders*"
+      ],
+      "js": [
+        "order_script.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.aliexpress.com/order/confirm_order.htm*"
+      ],
+      "js": [
+        "checkoutfinal_script.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://trade.aliexpress.com/orderList.htm*",
+        "*://trade.aliexpress.com/order_list.htm*"
+      ],
+      "js": [
+        "aliexpress_order_script.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.dropwired.com/getting_started*"
+      ],
+      "js": [
+        "getting_started.js"
+      ]
+    }
+  ],
+  "page_action": {
+    "default_popup": "popup_help.html",
+    "default_icon": {
+      "16": "images/dropwired_inactive16.png",
+      "32": "images/dropwired_inactive32.png",
+      "48": "images/dropwired_inactive48.png",
+      "128": "images/dropwired_inactive128.png"
+    }
+  },
+  "web_accessible_resources": [
+    "images/*.png",
+    "images/*.gif"
+  ]
+}

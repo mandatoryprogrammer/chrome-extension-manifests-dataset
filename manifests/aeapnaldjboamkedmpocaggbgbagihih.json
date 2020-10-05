@@ -1,0 +1,73 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Smart Link",
+  "version": "0.3.96",
+  "manifest_version": 2,
+  "description": "设置某些页面(甚至可以是页面里的某个区块)链接的打开方式，以更适应您的使用习惯。Modify hyperlinks open mode, for specified pages, even specified blocks on the page.",
+  "author": "Anxon",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "permissions": [
+    "tabs",
+    "http://*/",
+    "https://*/*",
+    "<all_urls>",
+    "storage",
+    "background",
+    "activeTab",
+    "contextMenus",
+    "webNavigation"
+  ],
+  "icons": {
+    "16": "img/icon_16.png",
+    "48": "img/icon_48.png",
+    "128": "img/icon_128.png"
+  },
+  "background": {
+    "scripts": [
+      "js/lib/vendor.js",
+      "js/lib/anxon.js",
+      "js/lib/i18n.js",
+      "js/backend.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "js/*",
+    "img/*",
+    "css/*",
+    "fonts/*",
+    "sourcemap/*"
+  ],
+  "minimum_chrome_version": "41",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/lib/vendor.js",
+        "js/lib/anxon.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/lib/i18n.js",
+        "js/frontend.js"
+      ],
+      "css": [
+        "css/frontend.css"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "options_page": "html/options.html",
+  "browser_action": {
+    "default_title": "Smart Link",
+    "default_popup": "html/popup.html"
+  }
+}

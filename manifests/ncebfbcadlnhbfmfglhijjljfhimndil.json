@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Google Meet Controls",
+  "short_name": "Meet Controls",
+  "description": "Control your microphone manners for Meet",
+  "version": "2.0",
+  "icons": {
+    "128": "notmuted.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://meet.google.com/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "meet_controller.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "keyboard_listener.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "tabs",
+    "notifications"
+  ],
+  "commands": {
+    "toggle": {
+      "description": "Toggle mute",
+      "global": true,
+      "suggested_key": {
+        "default": "Ctrl+X",
+        "mac": "MacCtrl+X"
+      }
+    },
+    "mute": {
+      "description": "Force mute",
+      "global": true,
+      "suggested_key": {
+        "default": "Ctrl+M",
+        "mac": "MacCtrl+M"
+      }
+    },
+    "unmute": {
+      "description": "Force unmute",
+      "global": true,
+      "suggested_key": {
+        "default": "Ctrl+U",
+        "mac": "MacCtrl+U"
+      }
+    }
+  }
+}

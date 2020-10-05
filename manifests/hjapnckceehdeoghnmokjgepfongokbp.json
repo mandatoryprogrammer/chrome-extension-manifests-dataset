@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Safemail",
+  "options_page": "options.html",
+  "version": "2.1.0",
+  "description": "Improve the security in your email through the use of open source PGP",
+  "icons": {
+    "48": "lib/icon48.png",
+    "128": "lib/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "lib/icon48.png",
+    "default_popup": "popup.html"
+  },
+  "author": "Jorge Olmeda",
+  "background": {
+    "scripts": [
+      "lib/openpgp.min.js",
+      "lib/lodash.min.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "http://mail.google.com/*"
+      ],
+      "js": [
+        "lib/jquery-1.11.3.min.js",
+        "mycontentscript.js"
+      ],
+      "run at": "document_iddle",
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "storage",
+    "*://mail.google.com/"
+  ],
+  "web_accessible_resources": [
+    "lib/zlib.min.js.map"
+  ]
+}

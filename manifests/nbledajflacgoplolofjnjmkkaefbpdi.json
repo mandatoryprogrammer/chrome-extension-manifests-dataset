@@ -1,0 +1,44 @@
+{
+  "name": "ReScrub - Attachment Optimizer",
+  "version": "3.1",
+  "manifest_version": 2,
+  "description": "Remove metadata and compress attachments in Gmail – quickly and safely. Built for legal professionals.",
+  "homepage_url": "https://okatee.com/",
+  "icons": {
+    "16": "icons/icon_16.png",
+    "48": "icons/icon_48.png",
+    "128": "icons/icon_128.png"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'; connect-src ws://localhost:*/",
+  "browser_action": {
+    "default_title": "ReScrub",
+    "default_popup": "popup.html"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "storage",
+    "https://mail.google.com/",
+    "https://inbox.google.com/",
+    "https://okatee-alb.matters.ai/"
+  ],
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "vendor/inboxsdk.js",
+        "js/content.js"
+      ]
+    }
+  ]
+}

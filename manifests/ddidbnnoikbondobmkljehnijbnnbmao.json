@@ -1,0 +1,38 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Wiki Researcher",
+  "description": "Don't Waste Time Opening Multiple Wiki Windows And Lose Track Of What You Are Reading. Do More With Search,Books And NYT Articles",
+  "version": "1.2",
+  "browser_action": {
+    "default_title": "Research Wikipedia Tooltip",
+    "default_icon": "tooltip.png"
+  },
+  "icons": {
+    "48": "tooltip_48.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.wikipedia.org/*"
+      ],
+      "exclude_matches": [
+        "https://*.m.wikipedia.org/*"
+      ],
+      "js": [
+        "jquery-3.1.1.js",
+        "analytics.js",
+        "wikicontentscript.js",
+        "hoverIntent.js",
+        "sanitize-html/sanitize-html.js"
+      ],
+      "css": [
+        "wikidiv.css",
+        "tabscss.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "content_security_policy": "default-src 'none';script-src 'self' https://ssl.google-analytics.com; object-src 'self'; img-src 'self';media-src 'self';style-src 'self'",
+  "manifest_version": 2
+}

@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Email Tracking Extension",
+  "description": "To track sent mails",
+  "version": "2.6",
+  "browser_action": {
+    "default_icon": "./Assets/Images/menu-32.png",
+    "default_popup": "./Views/popup.html"
+  },
+  "icons": {
+    "16": "./Assets/Images/menu-32.png",
+    "68": "./Assets/Images/menu-32.png",
+    "128": "./Assets/Images/menu-32.png"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "activeTab",
+    "<all_urls>"
+  ],
+  "background": {
+    "scripts": [
+      "./Scripts/BackgroundScript/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://mail.google.com/*"
+      ],
+      "css": [
+        "./Assets/CSS/developer.css"
+      ],
+      "all_frames": false,
+      "js": [
+        "./Libs/jquery.min.js",
+        "./Libs/excellentexport.js",
+        "./Libs/nicEdit/nicEdit.js",
+        "./Scripts/ContentScript/assetsManager.js",
+        "./Scripts/ContentScript/apiUrlManager.js",
+        "./Scripts/ContentScript/userModel.js",
+        "./Scripts/ContentScript/eventManager.js",
+        "./Scripts/ContentScript/localStorageManager.js",
+        "./Scripts/ContentScript/authService.js",
+        "./Scripts/ContentScript/templateManager.js",
+        "./Scripts/ContentScript/main.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "/Assets/Images/*"
+  ]
+}

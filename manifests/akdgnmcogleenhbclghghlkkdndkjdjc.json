@@ -1,0 +1,100 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_extName__",
+  "version": "3.8.8",
+  "manifest_version": 2,
+  "description": "__MSG_extDescription__",
+  "short_name": "SEOquake",
+  "icons": {
+    "16": "static/icon_16x16.png",
+    "48": "static/logo_48x48.png",
+    "128": "static/logo_128x128.png"
+  },
+  "default_locale": "en",
+  "browser_action": {
+    "default_icon": {
+      "19": "static/icon-disabled19.png",
+      "38": "static/icon-disabled38.png"
+    },
+    "default_title": "SEOquake",
+    "default_popup": "panel.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "css": [
+        "plugins.css"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "*://*.facebook.com/*",
+        "*://*.facebook.net/*",
+        "*://*.fbcdn.net/*",
+        "*://*.akamaihd.net/*",
+        "*://*.virtualearth.net/*",
+        "*://*.youtube.com/*"
+      ],
+      "js": [
+        "data/plugins.js"
+      ],
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "http://ipv4.google.com/sorry/IndexRedirect*",
+        "https://ipv4.google.com/sorry/IndexRedirect*",
+        "http://ipv4.google.com/sorry/index*",
+        "https://ipv4.google.com/sorry/index*",
+        "*://*.yandex.ru/showcaptcha*",
+        "*://yandex.ru/showcaptcha*",
+        "*://*.yandex.ua/showcaptcha*",
+        "*://yandex.ua/showcaptcha*",
+        "*://*.yandex.by/showcaptcha*",
+        "*://yandex.by/showcaptcha*",
+        "*://*.yandex.kz/showcaptcha*",
+        "*://yandex.kz/showcaptcha*",
+        "*://*.yandex.com/showcaptcha*",
+        "*://yandex.com/showcaptcha*",
+        "*://*.yandex.com.tr/showcaptcha*",
+        "*://yandex.com.tr/showcaptcha*"
+      ],
+      "js": [
+        "data/captcha.js"
+      ],
+      "css": [
+        "captcha.css"
+      ]
+    },
+    {
+      "matches": [
+        "http://localhost:8000/oauth2/success*",
+        "https://auth.rc.semrush.net/oauth2/success*",
+        "https://oauth.semrush.com/oauth2/success*"
+      ],
+      "js": [
+        "data/oauth.js"
+      ]
+    }
+  ],
+  "options_page": "options.html",
+  "permissions": [
+    "contextMenus",
+    "storage",
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "https://www.seoquake.com/"
+  ],
+  "web_accessible_resources": [
+    "/static/fonts/*",
+    "/static/icons/*",
+    "/static/svg/*"
+  ]
+}

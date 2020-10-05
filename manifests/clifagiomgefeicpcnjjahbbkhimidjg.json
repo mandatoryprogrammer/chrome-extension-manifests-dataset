@@ -1,0 +1,74 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "author": "SSTS",
+  "manifest_version": 2,
+  "name": "OpKey Recorder",
+  "permissions": [
+    "desktopCapture",
+    "tabs",
+    "<all_urls>",
+    "contextMenus"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://localhost/*",
+      "*://*.myopkey.com/*",
+      "*://*.smartopkey.com/*"
+    ]
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "version": "2.0.2.8",
+  "background": {
+    "scripts": [
+      "js/jsonpath.js",
+      "js/jquery_min.js",
+      "salesforce_configurator.js",
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "description": "OpKey Recorder is a smart record engine which allow users to record steps on any Web Application including Salesforce and Workday.",
+  "icons": {
+    "16": "icons/addon128.png",
+    "32": "icons/addon128.png",
+    "48": "icons/addon128.png",
+    "128": "icons/addon128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "32": "icons/addon128.png",
+      "16": "icons/addon128.png",
+      "14": "icons/addon128.png",
+      "12": "icons/addon128.png"
+    },
+    "default_title": "OpKey"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "js/recorder/fjson.js",
+        "js/jquery_min.js",
+        "js/toastify.js",
+        "js/recorder/HTML2CANVAS.js",
+        "js/recorder/salesforcemdai.js",
+        "js/recorder/locatorBuilders.js",
+        "js/recorder/state.js",
+        "js/recorder/concat.js",
+        "js/recorder/workday_recorder.js",
+        "js/recorder/oraclefusion_recorder.js",
+        "js/recorder/peoplesoft_recorder.js",
+        "js/recorder/language_pack.js",
+        "datasender.js"
+      ],
+      "css": [
+        "css/OpkeyHighlight.css",
+        "css/toastify.css"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    }
+  ]
+}

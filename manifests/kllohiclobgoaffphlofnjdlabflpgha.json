@@ -1,0 +1,75 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "ADZbuzz uBlock",
+  "version": "0.0.0.2",
+  "default_locale": "en",
+  "description": "__MSG_extShortDesc__",
+  "icons": {
+    "16": "img/icon_16.png",
+    "128": "img/icon_128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "img/browsericons/icon19.png",
+      "38": "img/browsericons/icon38.png"
+    },
+    "default_title": "ADZbuzz uBlock",
+    "default_popup": "popup.html"
+  },
+  "author": "ADZbuzz Developers and All uBlock Origin contributors",
+  "background": {
+    "page": "background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/vapi-client.js",
+        "js/contentscript.js",
+        "js/adzbuzz.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/scriptlets/subscriber.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "incognito": "split",
+  "minimum_chrome_version": "26.0",
+  "optional_permissions": [
+    "file:///*"
+  ],
+  "options_page": "dashboard.html",
+  "options_ui": {
+    "page": "options_ui.html"
+  },
+  "permissions": [
+    "contextMenus",
+    "privacy",
+    "storage",
+    "tabs",
+    "unlimitedStorage",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "short_name": "ADZbuzz uBlock",
+  "storage": {
+    "managed_schema": "managed_storage.json"
+  }
+}

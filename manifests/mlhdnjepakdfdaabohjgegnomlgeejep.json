@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "IT Glue Chrome Extension",
+  "short_name": "offered by IT Glue",
+  "version": "1.2.3.0",
+  "description": "Quickly and securely access all of your IT Glue passwords, create passwords, and preview your assets right from within Chrome.",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "*://*.itglue.com/",
+    "*://*.itglue.localhost/",
+    "clipboardWrite",
+    "contextMenus",
+    "cookies"
+  ],
+  "browser_action": {
+    "default_icon": "images/itg-32-disconnected.png",
+    "default_popup": "popup.html"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "web_accessible_resources": [
+    "css/*",
+    "images/*"
+  ],
+  "background": {
+    "scripts": [
+      "js/background.bundle.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "match_about_blank": true,
+      "matches": [
+        "*://*/*"
+      ],
+      "exclude_matches": [
+        "*://*.myglue.com/*",
+        "*://*.myglue.localhost/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "js/content.bundle.js"
+      ],
+      "css": []
+    }
+  ],
+  "manifest_version": 2,
+  "icons": {
+    "16": "images/icon-16.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Social Book Post Manager",
+  "short_name": "Social Book Post Manager",
+  "description": "Batch delete posts in Fackbook (TM) timeline. Other batch processing: hide / unhide / unlike items. FREE!",
+  "version": "1.4.13",
+  "browser_action": {
+    "default_title": "Social Book Post Manager",
+    "default_icon": "icon48.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "96": "icon96.png",
+    "128": "icon128.png",
+    "256": "icon256.png"
+  },
+  "permissions": [
+    "activeTab",
+    "*://*.facebook.com/*"
+  ],
+  "background": {
+    "scripts": [
+      "jquery-1.10.2.min.js",
+      "ext-eventPage.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.facebook.com/*"
+      ],
+      "css": [
+        "content.css",
+        "jquery-ui.min.css",
+        "jquery.ui.theme.css",
+        "jquery.dropdown.min.css"
+      ],
+      "js": [
+        "jquery-1.10.2.min.js",
+        "content-commons-utils.js",
+        "content-activityLogOpener.js",
+        "content-backupPageOpener.js",
+        "content-postDeletor.js",
+        "jquery-ui.min.js",
+        "jquery.dropdown.min.js",
+        "math.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://ssl.google-analytics.com; object-src 'self'"
+}

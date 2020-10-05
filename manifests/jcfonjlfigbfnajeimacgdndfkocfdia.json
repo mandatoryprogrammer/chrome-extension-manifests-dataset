@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Scout Manager",
+  "version": "1.1.0.11",
+  "description": "Connects Scoutbook to Scout Manager to enable bi-directonal synchronization of scouting records.",
+  "background": {
+    "scripts": [
+      "third-party/jquery.3.4.1.min.js",
+      "om/User.js",
+      "om/Award.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "page_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "images/sm-icon-16.png",
+      "32": "images/sm-icon-32.png",
+      "48": "images/sm-icon-48.png",
+      "128": "images/sm-icon-128.png"
+    }
+  },
+  "icons": {
+    "16": "images/sm-icon-16.png",
+    "32": "images/sm-icon-32.png",
+    "48": "images/sm-icon-48.png",
+    "128": "images/sm-icon-128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.scoutbook.com/*"
+      ],
+      "js": [
+        "third-party/jquery.3.4.1.min.js",
+        "third-party/bootstrap.4.3.1.min.js",
+        "third-party/moment.2.24.0.min.js",
+        "delegate/LogDelegate.js",
+        "delegate/RosterDelegate.js",
+        "delegate/AwardDelegate.js",
+        "delegate/UserAwardDelegate.js",
+        "delegate/AdvancementExportDelegate.js",
+        "om/User.js",
+        "om/Award.js",
+        "sm_integration.js"
+      ],
+      "css": [
+        "third-party/bootstrap.4.3.1.min.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "/view/*"
+  ],
+  "permissions": [
+    "https://www.scoutmanager.com/*",
+    "https://*.scoutbook.com/*",
+    "http://localhost/*",
+    "declarativeContent",
+    "storage"
+  ],
+  "options_page": "options.html"
+}

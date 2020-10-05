@@ -1,0 +1,76 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Fast Search",
+  "description": "Puts selected text to search box and finds it on the current page. Like Cntrl+С Cntrl+F Cntrl+V combination.",
+  "version": "1.0.7",
+  "content_scripts": [
+    {
+      "js": [
+        "jquery.min.js",
+        "hilitor-yanosh.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "event.js"
+    ],
+    "persistent": false
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/icon.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "tabs",
+    "<all_urls>",
+    "notifications",
+    "storage"
+  ],
+  "web_accessible_resources": [
+    "options.html",
+    "hilitor-yanosh.js",
+    "content.js"
+  ],
+  "options_page": "options.html",
+  "commands": {
+    "toggle-feature-foo": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+F"
+      },
+      "description": "Search selected text",
+      "global": false
+    },
+    "next_found": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+X"
+      },
+      "description": "Go to next found fragment",
+      "global": false
+    },
+    "prev_found": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Z"
+      },
+      "description": "Go to previous found fragment",
+      "global": false
+    },
+    "stop_search": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+A"
+      },
+      "description": "Cancel search and close search form",
+      "global": false
+    }
+  }
+}

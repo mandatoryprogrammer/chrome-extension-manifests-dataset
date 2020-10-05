@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Tempo",
+  "description": "Track and visualize your progress on JIRA issues",
+  "version": "1.2.6",
+  "background": {
+    "scripts": [
+      "build/background-jira.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "24": "icons/icon24.png",
+      "32": "icons/icon32.png",
+      "128": "icons/icon128.png"
+    },
+    "default_title": "Tempo",
+    "default_popup": "build/popup.html"
+  },
+  "permissions": [
+    "storage",
+    "*://*.tempo.io/*",
+    "*://*.atlassian.net/*",
+    "*://*.jira.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.atlassian.net/*",
+        "https://*.jira.com/*"
+      ],
+      "css": [],
+      "js": [
+        "build/content-apps-jira.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://cdn.segment.com/; object-src 'self'",
+  "web_accessible_resources": [
+    "build/auth.html"
+  ]
+}

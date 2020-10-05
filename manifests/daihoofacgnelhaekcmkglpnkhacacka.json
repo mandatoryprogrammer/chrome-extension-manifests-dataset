@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Mark It Down",
+  "version": "0.0.12",
+  "manifest_version": 2,
+  "description": "Add markdown support to popular online services, like Google Keep",
+  "author": "Nir Elbaz",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "commands": {
+    "markdown-to-html": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+M",
+        "mac": "Command+Shift+M"
+      },
+      "description": "Convert markdown to HTML"
+    }
+  },
+  "background": {
+    "scripts": [
+      "src/vendor/markdown-it.min.js",
+      "src/background.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "contextMenus",
+    "https://keep.google.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://keep.google.com/*"
+      ],
+      "js": [
+        "src/vendor/markdown-it.min.js",
+        "src/adapters/keep.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "src/broker.js"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,129 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "PrettyMerch for Merch by Amazon™",
+  "version": "5.41",
+  "description": "A beautiful dashboard for Merch by Amazon. It updates as you sell and notifies you instantly about new sales with a cha-ching sound",
+  "icons": {
+    "16": "assets/icons/icon16.png",
+    "48": "assets/icons/icon48.png",
+    "128": "assets/icons/icon128.png"
+  },
+  "background": {
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "24": "icons/icon24.png",
+      "32": "icons/icon32.png"
+    },
+    "scripts": [
+      "plugins/jquery/jquery-3.4.1.min.js",
+      "plugins/moment.min.js",
+      "plugins/moment-timezone-with-data-2012-2022.min.js",
+      "plugins/dexie.min.js",
+      "plugins/validate_license.min.js",
+      "plugins/jquery-csv/jquery.csv.min.js",
+      "src/background.min.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_title": "PrettyMerch",
+    "default_icon": {
+      "16": "assets/icons/icon16.png",
+      "24": "assets/icons/icon24.png",
+      "32": "assets/icons/icon32.png"
+    }
+  },
+  "permissions": [
+    "notifications",
+    "tabs",
+    "storage",
+    "unlimitedStorage",
+    "alarms",
+    "*://*.amazon.com/*",
+    "*://*.amazon.co.uk/*",
+    "*://*.amazon.de/*",
+    "*://*.amazon.fr/*",
+    "*://*.amazon.com.au/*",
+    "*://*.amazon.com.br/*",
+    "*://*.amazon.ca/*",
+    "*://*.amazon.cn/*",
+    "*://*.amazon.in/*",
+    "*://*.amazon.it/*",
+    "*://*.amazon.co.jp/*",
+    "*://*.amazon.com.mx/*",
+    "*://*.amazon.nl/*",
+    "*://*.amazon.es/*",
+    "*://*.gumroad.com/*",
+    "*://*.prettymerch.com/*"
+  ],
+  "web_accessible_resources": [
+    "assets/*.*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://merch.amazon.com/*"
+      ],
+      "js": [
+        "plugins/jquery/jquery-3.4.1.min.js",
+        "plugins/bootstrap/js/popper.min.js",
+        "plugins/bootstrap/js/bootstrap.min.js",
+        "plugins/moment.min.js",
+        "plugins/moment-timezone-with-data-2012-2022.min.js",
+        "plugins/validate_license.min.js",
+        "plugins/odometer/odometer.min.js",
+        "plugins/confetti.min.js",
+        "plugins/floatingScrollbar.min.js",
+        "plugins/floatThead.min.js",
+        "src/content.min.js"
+      ],
+      "css": [
+        "css/pm_css_overrides.min.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://merch.amazon.com/dashboard*"
+      ],
+      "exclude_matches": [
+        "https://merch.amazon.com/dashboard*oldDash*"
+      ],
+      "css": [
+        "plugins/bootstrap/css/bootstrap.min.css",
+        "css/pretty-styles.min.css",
+        "css/pretty-fonts.min.css",
+        "plugins/odometer/odometer-theme-minimal.min.css",
+        "css/font-awesome.min.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.amazon.com/ap/signin*"
+      ],
+      "js": [
+        "plugins/jquery/jquery-3.4.1.min.js",
+        "plugins/moment.min.js",
+        "plugins/moment-timezone-with-data-2012-2022.min.js",
+        "plugins/validate_license.min.js",
+        "src/content.min.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://merch.amazon.com/*"
+      ],
+      "js": [
+        "plugins/Chart.min.js",
+        "plugins/datepicker/caleran.min.js"
+      ],
+      "css": [
+        "plugins/datepicker/caleran.min.css"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

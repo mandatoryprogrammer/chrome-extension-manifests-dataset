@@ -1,0 +1,351 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "images/logo.png",
+    "default_title": "CloudCall Chrome"
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "js/logger.js"
+      ],
+      "matches": [
+        "*://*/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "css": [
+        "css/content-page.css",
+        "css/pnotify.custom.min.css",
+        "css/bullhorn.css"
+      ],
+      "js": [
+        "lib/jquery-1.11.1.js",
+        "lib/jquery.parseurl.js",
+        "lib/moment.min.js",
+        "lib/number-formatter.js",
+        "lib/jquery.tooltipster.js",
+        "lib/jquery.jplayer.it.min.js",
+        "js/bullhorn/bullhorn-util.js",
+        "js/bullhorn/bullhorn-recording.js",
+        "js/number-detection.js",
+        "js/legacy-number-detection.js",
+        "js/bullhorn/bullhorn-number-detection.js",
+        "js/bullhorn/bullhorn-click-to-call.js"
+      ],
+      "matches": [
+        "*://*.bullhornstaffing.com/*",
+        "https://*/BullhornS/Calls/CallHistory*"
+      ],
+      "exclude_matches": [
+        "*://*.bullhornstaffing.com/Blank.htm*",
+        "*://*.bullhornstaffing.com/*/EmbedAsObject.cfm*",
+        "*://*.bullhornstaffing.com/*/MainFrame.jsp*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "css": [
+        "css/content-page.css",
+        "css/pnotify.custom.min.css",
+        "css/bullhorn.css"
+      ],
+      "js": [
+        "lib/jquery-1.11.1.js",
+        "lib/jquery.parseurl.js",
+        "lib/moment.min.js",
+        "lib/number-formatter.js",
+        "lib/jquery.tooltipster.js",
+        "lib/jquery.jplayer.it.min.js",
+        "js/bullhorn/bullhorn-recording.js"
+      ],
+      "matches": [
+        "*://*.bullhornstaffing.com/*/MainFrame.jsp*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "js/bullhorn/bullhorn-click-to-call-shortlists.js"
+      ],
+      "matches": [
+        "https://*.bullhornstaffing.com/*ShortLists.cfm*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "lib/moment.min.js",
+        "lib/cloudcall-util.js",
+        "lib/cloudcall-client.js",
+        "js/bullhorn/bullhorn-call-notes.js"
+      ],
+      "matches": [
+        "https://*.bullhornstaffing.com/*/EditUserComment.cfm?*&sessionId=*",
+        "https://*.bullhornstaffing.com/*/EditUserComment.cfm?*&SESSIONID=*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "js/bullhorn/bullhorn-util.js",
+        "js/bullhorn/bullhorn-call-notes-saved.js"
+      ],
+      "matches": [
+        "https://*.bullhornstaffing.com/*/Update/UpdUserComments.cfm?sessionId=*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "js/bullhorn/bullhorn-util.js",
+        "js/bullhorn/bullhorn-add-as-new-complete.js"
+      ],
+      "matches": [
+        "https://*.bullhornstaffing.com/*/UserProfile.cfm*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "js/bullhorn/bullhorn-util.js",
+        "js/bullhorn/bullhorn-call-notes-edit.js"
+      ],
+      "matches": [
+        "https://*.bullhornstaffing.com/*/Forms/EditUserComment_Existing.cfm*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "js/bullhorn/bullhorn-util.js",
+        "js/bullhorn/bullhorn-schedule-next-action.js"
+      ],
+      "matches": [
+        "https://*.bullhornstaffing.com/*/EditSchedule.cfm*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "js/bullhorn/bullhorn-add-as-new.js"
+      ],
+      "matches": [
+        "https://*.bullhornstaffing.com/*/EditCandidate.cfm*addAsNew=true*",
+        "https://*.bullhornstaffing.com/*/EditClient.cfm*addAsNew=true*",
+        "https://*.bullhornstaffing.com/*/AddLead.cfm*addAsNew=true*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "lib/jquery-1.11.1.js",
+        "js/bullhorn/bullhorn-jasper-reporting.js"
+      ],
+      "matches": [
+        "https://*.bullhornstaffing.com/*LoadJasperReport*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "lib/jquery-1.11.1.js",
+        "lib/moment.min.js",
+        "lib/cloudcall-client.js",
+        "js/bullhorn/bullhorn-util.js",
+        "js/bullhorn/bullhorn-dialler-upload.js"
+      ],
+      "matches": [
+        "https://*.cloudcall.com/dialler-upload.html*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": false,
+      "js": [
+        "js/bullhorn/bullhorn-main-window.js"
+      ],
+      "matches": [
+        "*://*.bullhornstaffing.com/*/MainFrame.jsp*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": false,
+      "js": [
+        "js/bullhorn/bullhorn-util.js",
+        "js/bullhorn/bullhorn-bowling-alley.js"
+      ],
+      "matches": [
+        "*://*.bullhornstaffing.com/*/MainFrame.jsp*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": true,
+      "css": [
+        "css/content-page.css",
+        "css/pnotify.custom.min.css"
+      ],
+      "exclude_matches": [
+        "https://*.bullhornstaffing.com/*",
+        "http://*/WebApp/*",
+        "https://*/WebApp/*",
+        "https://*/BullhornS/Calls/CallHistory*",
+        "https://api.uk.cloudcall.com/Bullhorns/Calls/MakeCall*"
+      ],
+      "js": [
+        "lib/jquery-1.11.1.js",
+        "lib/moment.min.js",
+        "lib/number-formatter.js",
+        "js/number-detection.js",
+        "js/portal-auto-login.js",
+        "js/legacy-number-detection.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "all_frames": true,
+      "css": [
+        "css/content-page.css",
+        "css/bond-content.css"
+      ],
+      "js": [
+        "lib/jquery-1.11.1.js",
+        "lib/jquery.parseurl.js",
+        "lib/moment.min.js",
+        "lib/number-formatter.js",
+        "js/bond/bond-ux.js",
+        "lib/jquery.jplayer.it.min.js",
+        "js/bond/bond.js"
+      ],
+      "matches": [
+        "http://*/WebApp/*",
+        "https://*/WebApp/*"
+      ],
+      "exclude_matches": [
+        "https://c4.adaptondemand.com/*"
+      ]
+    },
+    {
+      "all_frames": true,
+      "css": [
+        "css/content-page.css",
+        "css/bond-content.css"
+      ],
+      "js": [
+        "lib/jquery-1.11.1.js",
+        "lib/jquery.parseurl.js",
+        "lib/moment.min.js",
+        "lib/number-formatter.js",
+        "js/bond/bond-ux.js",
+        "lib/jquery.jplayer.it.min.js",
+        "js/bond/bond.js"
+      ],
+      "matches": [
+        "https://c4.adaptondemand.com/WebApp/*"
+      ]
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "lib/jquery-1.11.1.js",
+        "js/zoho/zoho-accounts.js"
+      ],
+      "matches": [
+        "https://*.zoho.com/crm/EntityInfo.do?module=Accounts*",
+        "https://*.zoho.eu/crm/EntityInfo.do?module=Accounts*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "css": [
+        "css/zoho.css",
+        "css/content-page.css"
+      ],
+      "js": [
+        "lib/jquery.jplayer.it.min.js",
+        "js/zoho/zoho.js"
+      ],
+      "exclude_matches": [
+        "https://*.zoho.com/crm/EntityInfo.do?module=Accounts*",
+        "https://*.zoho.eu/crm/EntityInfo.do?module=Accounts*"
+      ],
+      "matches": [
+        "https://*.zoho.com/*",
+        "https://*.zoho.eu/*"
+      ]
+    }
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "description": "Make, record, categorize and replay calls directly in Google Chrome",
+  "externally_connectable": {
+    "matches": [
+      "https://chrome.uk.cloudcall.com/*",
+      "https://chrome.cloudcall.com/*",
+      "http://*.bullhornstaffing.com/*",
+      "https://*.bullhornstaffing.com/*"
+    ]
+  },
+  "icons": {
+    "16": "images/logo.png",
+    "48": "images/logo.png",
+    "96": "images/logo.png",
+    "128": "images/logo.png"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://google-analytics.com/analytics.js; object-src 'self';",
+  "manifest_version": 2,
+  "name": "Make Calls from Google Chrome",
+  "omnibox": {
+    "keyword": "click2call"
+  },
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "https://chrome.uk.cloudcall.com/*",
+    "https://chrome.cloudcall.com/*",
+    "notifications",
+    "idle",
+    "tabs",
+    "background",
+    "system.memory",
+    "contextMenus",
+    "storage"
+  ],
+  "short_name": "CloudCall",
+  "version": "1.711.1",
+  "web_accessible_resources": [
+    "images/icon-answer.png",
+    "images/icon-hang.png",
+    "images/logo.png",
+    "images/magnify.gif",
+    "images/placeholder.png",
+    "images/pause.png"
+  ]
+}

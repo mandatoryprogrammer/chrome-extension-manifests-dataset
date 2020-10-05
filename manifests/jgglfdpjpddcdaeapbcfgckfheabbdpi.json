@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "AAMC MCAT Interface by Jack Westin",
+  "description": "This extension allows users who have purchased AAMC practice material to view it in the proper intended MCAT exam format.",
+  "version": "1.2.4",
+  "permissions": [
+    "tabs",
+    "storage",
+    "activeTab",
+    "https://www.mcatofficialprep.org/*",
+    "https://www.jackwestin.com/*",
+    "https://jackwestin.com/*"
+  ],
+  "background": {
+    "scripts": [
+      "js/jquery-3.3.1.min.js",
+      "js/background.js"
+    ]
+  },
+  "icons": {
+    "180": "images/icon180.png"
+  },
+  "browser_action": {
+    "default_title": "MCAT Extension",
+    "default_icon": "images/icon180.png"
+  },
+  "web_accessible_resources": [
+    "js/*.*",
+    "images/*.*",
+    "font/*.*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.mcatofficialprep.org/app/*"
+      ],
+      "js": [
+        "js/jquery-3.3.1.min.js",
+        "js/modal.js",
+        "js/easytimer.min.js",
+        "js/content.js"
+      ],
+      "css": [
+        "css/fontAwesome.css",
+        "css/style_content.css"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

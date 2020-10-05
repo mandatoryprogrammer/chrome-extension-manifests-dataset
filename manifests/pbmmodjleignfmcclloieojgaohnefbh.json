@@ -1,0 +1,99 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "version": "1.2.1",
+  "name": "Ratingman",
+  "description": "Расширение браузера для создание списков на ratingman.com",
+  "author": "Michael Polazhynets, Luxury-Lab",
+  "homepage_url": "http://www.ratingman.com/",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "100": "icons/icon100.png",
+    "128": "icons/icon128.png"
+  },
+  "web_accessible_resources": [
+    "css/*",
+    "img/*",
+    "js/*",
+    "icons/*",
+    "*"
+  ],
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "js/context.js",
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "assets/jquery/jquery.min.js",
+        "js/contentscript.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "browser_action": {
+    "default_icon": "icons/button.png",
+    "default_title": "Ratingman list creator"
+  },
+  "commands": {
+    "run_application": {
+      "suggested_key": {
+        "windows": "Alt+R",
+        "mac": "Command+Shift+R",
+        "chromeos": "Alt+R",
+        "linux": "Alt+R"
+      },
+      "description": "Запуск приложения"
+    },
+    "add_position": {
+      "suggested_key": {
+        "windows": "Alt+X",
+        "mac": "Command+Shift+X",
+        "chromeos": "Alt+X",
+        "linux": "Alt+X"
+      },
+      "description": "Добавить позицию"
+    },
+    "add_desc_position": {
+      "suggested_key": {
+        "windows": "Alt+Z",
+        "mac": "Command+Shift+Z",
+        "chromeos": "Alt+Z",
+        "linux": "Alt+Z"
+      },
+      "description": "Добавить описание позиции"
+    },
+    "save_desc_position": {
+      "suggested_key": {
+        "windows": "Alt+S",
+        "mac": "Command+Shift+S",
+        "chromeos": "Alt+S",
+        "linux": "Alt+S"
+      },
+      "description": "Сохранить описание позиции"
+    }
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "activeTab",
+    "http://*/*",
+    "https://*/*",
+    "contextMenus",
+    "webNavigation",
+    "chrome://favicon/*",
+    "sessions",
+    "webRequest",
+    "webRequestBlocking"
+  ]
+}

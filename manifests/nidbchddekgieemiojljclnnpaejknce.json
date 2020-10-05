@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "\"Did you mean...?\" for GitHub",
+  "version": "1.2",
+  "description": "This extension suggests you similar repository names when you get a 404 error on GitHub",
+  "homepage_url": "https://github.com/vantezzen/did-you-mean-for-github",
+  "permissions": [
+    "https://github.com/*/*",
+    "storage"
+  ],
+  "icons": {
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://github.com/*"
+      ],
+      "js": [
+        "content/main.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background/data/dictionary.js",
+      "background/data/popular_users.js",
+      "background/data/popular.js",
+      "background/libraries/distance.js",
+      "background/possibleCorrections.js",
+      "background/contactGitHubAPI.js",
+      "background/main.js"
+    ]
+  },
+  "options_ui": {
+    "page": "options/index.html",
+    "open_in_tab": true
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "didyoumeanforgithub@vantezzen.io"
+    }
+  }
+}

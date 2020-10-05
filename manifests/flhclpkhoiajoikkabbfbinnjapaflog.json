@@ -1,0 +1,81 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "author": "Laporte Nicolas",
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "minified/background.js"
+    ]
+  },
+  "options_page": "public/html/options_modal.html",
+  "options_ui": {
+    "page": "public/html/options_modal.html",
+    "open_in_tab": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "css": [
+        "public/style/url-render.css"
+      ],
+      "js": [
+        "public/javascript/lib_extern/jquery.min.js",
+        "public/javascript/lib_extern/jquery.hotkeys.js",
+        "minified/content.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "js": [
+        "minified/frame_content.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "browser_action": {
+    "default_title": "Url render",
+    "default_icon": {
+      "48": "public/image/icon-48-48.png",
+      "128": "public/image/icon-128-128.png"
+    },
+    "default_popup": "public/html/options_modal.html"
+  },
+  "default_locale": "en",
+  "description": "__MSG_appDesc__",
+  "icons": {
+    "48": "public/image/icon-48-48.png",
+    "128": "public/image/icon-128-128.png"
+  },
+  "web_accessible_resources": [
+    "public/font/Sansation_Bold.ttf",
+    "public/font/Sansation_Light.ttf",
+    "public/style/url-render-options.css",
+    "public/image/icon-128-128.png",
+    "public/image/close.svg",
+    "public/image/move.svg",
+    "public/image/resize.svg",
+    "public/image/left-arrow.svg",
+    "public/image/right-arrow.svg",
+    "public/image/default.svg"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com/analytics.js; object-src 'self'",
+  "manifest_version": 2,
+  "name": "url render",
+  "offline_enabled": false,
+  "permissions": [
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>",
+    "tabs"
+  ],
+  "version": "1.4.0"
+}

@@ -1,0 +1,84 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "SaferPass: Free Password Manager",
+  "short_name": "SaferPass",
+  "description": "Never forget a password again! SaferPass will make your life easier and passwords safer.",
+  "version": "6.7.14",
+  "author": "SaferPass s.r.o.",
+  "homepage_url": "https://www.saferpass.net",
+  "background": {
+    "page": "background_page.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": {
+      "128": "src/images/icons/icon-128.png"
+    },
+    "default_popup": "src/ui/index.html",
+    "default_title": "SaferPass: Free Password Manager"
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "src/forge/forge.js",
+        "src/content_scripts/content-script.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "icons": {
+    "16": "src/images/icons/icon-16.png",
+    "48": "src/images/icons/icon-48.png",
+    "128": "src/images/icons/icon-128.png"
+  },
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "tabs",
+    "browsingData",
+    "storage",
+    "cookies",
+    "unlimitedStorage",
+    "clipboardWrite"
+  ],
+  "optional_permissions": [],
+  "web_accessible_resources": [
+    "src/images/icons/blank.png",
+    "src/content_scripts/popups/accounts.html",
+    "src/content_scripts/popups/identities.html",
+    "src/content_scripts/popups/cards.html",
+    "src/content_scripts/popups/password_generator.html",
+    "src/content_scripts/popups/premium.html",
+    "src/content_scripts/popups/login.html",
+    "src/content_scripts/popups/pwReset.html",
+    "src/content_scripts/notifications/update-password-prompt.html",
+    "src/content_scripts/notifications/save-generated-password.html",
+    "src/content_scripts/notifications/save-account-prompt.html",
+    "src/content_scripts/notifications/premium-from-registered.html",
+    "src/content_scripts/notifications/show-autoreg-prompt.html",
+    "src/content_scripts/notifications/autoreg-success.html",
+    "src/content_scripts/notifications/autoreg-failed.html",
+    "src/content_scripts/notifications/register-please.html",
+    "src/content_scripts/notifications/phishing-note.html",
+    "src/content_scripts/notifications/advanced-user.html",
+    "src/content_scripts/notifications/update-account-success.html",
+    "src/content_scripts/notifications/update-identity-success.html",
+    "src/content_scripts/notifications/update-identity-prompt.html",
+    "src/content_scripts/notifications/save-identity-prompt.html",
+    "src/content_scripts/notifications/pw-reset-save.html",
+    "src/content_scripts/notifications/pw-reset-update.html",
+    "src/content_scripts/notifications/pw-reset-in-progress.html",
+    "src/content_scripts/notifications/pw-reset-failed.html",
+    "src/content_scripts/notifications/websocket-notification.html",
+    "src/images/icons/icon-32.png",
+    "src/images/icons/icon-32-i.png",
+    "src/images/icons/iconForce-32.png"
+  ],
+  "content_security_policy": "script-src 'self' https://e.saferpass.net; img-src * data: ; object-src 'self'"
+}

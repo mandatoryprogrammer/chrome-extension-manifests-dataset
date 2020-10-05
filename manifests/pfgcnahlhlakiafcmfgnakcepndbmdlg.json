@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Beagli",
+  "version": "0.0.0.6",
+  "short_name": "by beagli.com",
+  "description": "Beagli stores tab navigation",
+  "permissions": [
+    "https://beagli.com/*",
+    "tabs",
+    "history",
+    "http://*/*",
+    "https://*/*",
+    "tabs"
+  ],
+  "content_security_policy": "script-src 'unsafe-eval'; object-src 'self'",
+  "background": {
+    "page": "forge.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "forge/app_config.js",
+        "forge/all.js",
+        "src/js/script_page.js"
+      ],
+      "css": [],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.beagli.com/*"
+    ]
+  },
+  "icons": {
+    "128": "src/img/beagli_128x128.png",
+    "48": "src/img/beagli_48x48.png",
+    "16": "src/img/beagli_16x16.png"
+  },
+  "browser_action": {
+    "default_popup": "src/index.html",
+    "default_icon": "src/img/beagli_active.png",
+    "default_title": "Beagli Sniffs"
+  },
+  "manifest_version": 2
+}

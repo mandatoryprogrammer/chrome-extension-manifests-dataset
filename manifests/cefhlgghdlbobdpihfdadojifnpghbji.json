@@ -1,0 +1,79 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "PowerNotes Research",
+  "description": "PowerNotes is a productivity tool that allows you to gather, organize, and track internet research easily and efficiently.",
+  "version": "0.55.3",
+  "version_name": "0.55.3",
+  "browser_action": {
+    "default_icon": "img/icon-19.png",
+    "default_popup": "popup.html",
+    "default_title": "PowerNotes Research"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "commands": {
+    "toggle-sidebar": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+E"
+      },
+      "description": "Toggle sidebar"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "ftp://*/*",
+        "file://*/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "js/build/common.js",
+        "js/build/ContentScript.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "storage",
+    "background",
+    "https://*/",
+    "http://*/",
+    "activeTab",
+    "fileBrowserHandler",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>",
+    "webNavigation",
+    "clipboardWrite",
+    "contextMenus"
+  ],
+  "storage": {
+    "managed_schema": "content/preferences_schema.json"
+  },
+  "web_accessible_resources": [
+    "css/*.*",
+    "fonts/*.*",
+    "img/*.*",
+    "content/web/viewer.html",
+    "http:/*",
+    "https:/*",
+    "ftp:/*",
+    "file:/*",
+    "chrome-extension:/*",
+    "blob:*",
+    "data:*",
+    "filesystem:/*",
+    "drive:*"
+  ],
+  "icons": {
+    "16": "img/icon-16.png",
+    "48": "img/icon-48.png",
+    "128": "img/icon-128.png"
+  },
+  "content_security_policy": "script-src 'self'; object-src 'self'"
+}

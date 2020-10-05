@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Ethereum Dapper Legacy Developer Sandbox",
+  "version": "1.0.0.43",
+  "version_name": "1.0.0-beta.43",
+  "description": "Ethereum Dapper Legacy is your portal to the decentralized world",
+  "icons": {
+    "100": "img/icons/dapper_sandbox.png"
+  },
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "content_security_policy": "object-src 'self'; script-src 'self' https://cdn.segment.com/analytics.js/v1/clLyBgRaklIbhWTpqZQTdGcyhCTLy0nV/analytics.min.js https://www.gstatic.com/recaptcha/ https://www.google.com/recaptcha/; frame-src *",
+  "web_accessible_resources": [
+    "inject.js"
+  ],
+  "permissions": [
+    "activeTab",
+    "storage",
+    "geolocation",
+    "notifications",
+    "alarms",
+    "tabs",
+    "https://api.sandbox.app.dapperlabs.com/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "file://*/*",
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "contentScript.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "filmowo.co",
+  "short_name": "filmowo.co",
+  "description": "Odtwarzacz video obsługujący OpenLoad, Streamango, RapidVideo i inne serwisy bez reklam.",
+  "version": "1.0.0",
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "browser_action": {
+    "default_icon": "assets/icons/logo256.png",
+    "default_popup": "html/PopupMenu/PopupMenu.html"
+  },
+  "options_ui": {
+    "page": "html/OptionsSite/OptionsSite.html"
+  },
+  "applications": {
+    "gecko": {
+      "id": "tomaszmaj12345@gmail.com"
+    }
+  },
+  "icons": {
+    "16": "assets/icons/logo16.png",
+    "48": "assets/icons/logo48.png",
+    "64": "assets/icons/logo64.png",
+    "128": "assets/icons/logo128.png",
+    "256": "assets/icons/logo256.png"
+  },
+  "background": {
+    "scripts": [
+      "assets/js/openvideo.js",
+      "assets/js/redirectScriptBase.js",
+      "RedirectScripts.js",
+      "assets/js/background.js"
+    ]
+  },
+  "permissions": [
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>",
+    "tabs",
+    "unlimitedStorage",
+    "webNavigation",
+    "downloads",
+    "proxy"
+  ],
+  "web_accessible_resources": [
+    "html/VidPlaySite/VidPlaySite.html",
+    "html/VideoPopup/VideoPopup.html",
+    "html/VideoPopup/VideoPopup.css",
+    "html/LibrarySite/librarySite.html"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://openvideo.droppages.com/*"
+      ],
+      "js": [
+        "assets/js/openvideo.js",
+        "assets/js/csOpenVideoSite.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "assets/js/openvideo.js",
+        "assets/js/redirectScriptBase.js",
+        "RedirectScripts.js",
+        "assets/js/csDocStart.js",
+        "assets/js/csVideoSearch.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "assets/js/csVideoPopup.js",
+        "assets/js/csTheaterMode.js"
+      ],
+      "css": [
+        "/assets/css/csVideoPopup.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "assets/js/openvideo.js",
+        "assets/js/redirectScriptBase.js",
+        "RedirectScripts.js",
+        "assets/js/csDocIdle.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "assets/js/openvideo.js",
+        "assets/js/redirectScriptBase.js",
+        "RedirectScripts.js",
+        "assets/js/csDocEnd.js",
+        "assets/js/csSiteDetector.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ]
+}

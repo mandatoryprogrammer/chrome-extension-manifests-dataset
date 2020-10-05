@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Font blocker",
+  "description": "Blocks the fonts you want to block.",
+  "version": "1.19",
+  "permissions": [
+    "storage",
+    "contextMenus"
+  ],
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "fontblocker.logic.js",
+        "fontblocker.content.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "fontblocker.logic.js",
+      "fontblocker.background.js"
+    ]
+  },
+  "page_action": {
+    "default_title": "Font blocker - (Un)glimpse blocked fonts",
+    "default_icon": {
+      "128": "images/128x128.png"
+    }
+  },
+  "applications": {
+    "gecko": {
+      "id": "fontblocker@hotblocks.nl"
+    }
+  },
+  "icons": {
+    "128": "images/128x128.png"
+  },
+  "manifest_version": 2
+}

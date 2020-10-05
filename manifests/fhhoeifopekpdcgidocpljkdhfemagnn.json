@@ -1,0 +1,40 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "OpenTrends",
+  "description": "Integrates OpenTrends inside GitHub, allowing you to see repositories rating and subscribe to them without leaving GitHub.",
+  "version": "1.4.1",
+  "icons": {
+    "128": "icons/icon-128px.png",
+    "64": "icons/icon-64px.png",
+    "48": "icons/icon-48px.png",
+    "16": "icons/icon-16px.png"
+  },
+  "permissions": [
+    "cookies",
+    "https://*.open-trends.com/*",
+    "*://*.open-trends.com/*",
+    "https://*.github.com/*",
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "dist/background_cookies.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.open-trends.com/*",
+        "https://*.github.com/*"
+      ],
+      "js": [
+        "dist/index.js"
+      ],
+      "css": [
+        "dist/index.css"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

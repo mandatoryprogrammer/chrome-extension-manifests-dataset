@@ -1,0 +1,88 @@
+{
+  "author": "EAB",
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "polyfill.js",
+      "ext/common.js",
+      "ext/background.js",
+      "lib/compat.js",
+      "lib/publicSuffixList.js",
+      "lib/easyadblock.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/abp-16.png",
+      "19": "icons/abp-19.png",
+      "20": "icons/abp-20.png",
+      "32": "icons/abp-32.png",
+      "38": "icons/abp-38.png",
+      "40": "icons/abp-40.png"
+    },
+    "default_popup": "popup.html",
+    "default_title": "Easy Ad Blocker"
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "polyfill.js",
+        "ext/common.js",
+        "ext/content.js",
+        "include.preload.js"
+      ],
+      "match_about_blank": true,
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "include.postload.js"
+      ],
+      "match_about_blank": true,
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "default_locale": "en_US",
+  "description": "Adblocker fast, effective and easy to use.",
+  "icons": {
+    "128": "icons/detailed/abp-128.png",
+    "16": "icons/abp-16.png",
+    "32": "icons/abp-32.png",
+    "48": "icons/detailed/abp-48.png",
+    "64": "icons/detailed/abp-64.png"
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAj3xScZurXYbAK/mnSxMV7+G+CYM7qg1TKsvstkUXnBqLGeIGKZhtpOjE0YRNpvbEkRu+Ncxud0TcKFLA/EKGazPYE1rosg1GCMQSzBqJZT8ywKLBbUEF2FSnPrz7KzRjota6hXG/Gw9Uw6VrRyyB5j8tyj/M6LawbvrTMODPZ3C9jOCcMxIMtSHRSh8vy5AAWT9/SZEbRglHT0tbe8haySnzUahSg57N7r9I0LCpUxuLVQNdCA8jgdFyuXptQTMIp3BbxmL2E4QdQABqB50KV9r5rumqGcASLnldtaZzhGweMLh42gdeVLv3XPUcQQ7JdG/ZK3CxVKY6im4vMCmBzQIDAQAB",
+  "manifest_version": 2,
+  "minimum_chrome_version": "49.0",
+  "name": "Easy Ad Blocker",
+  "permissions": [
+    "tabs",
+    "<all_urls>",
+    "contextMenus",
+    "webRequest",
+    "webRequestBlocking",
+    "webNavigation",
+    "storage",
+    "unlimitedStorage",
+    "notifications"
+  ],
+  "short_name": "Easy Ad Blocker",
+  "storage": {
+    "managed_schema": "managed-storage-schema.json"
+  },
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "0.11.2",
+  "web_accessible_resources": [
+    "skin/background.png"
+  ]
+}

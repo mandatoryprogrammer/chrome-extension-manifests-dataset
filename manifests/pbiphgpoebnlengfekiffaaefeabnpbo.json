@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAg4Q/Qe+yO0sro3X80erNvaIO10AZofnPkmqMO1MmrkxQIMGpgpC/cgPmYGArOOEYETXC4IdY96NGNWEUy5IldKkkl/78c3qOSOSWoSkJ+HnnIeeG49sw3tVRxgMbNiBBPm96VBmLhK0/vTI5+qFl4vKB9aH/+sfkznsz3BGmlQ6Av5tByBsMyMCWIdjvju/O0P5mLNeX4Q+a50mbkFBzwSAd83gLTmVyUM0ZzoFBHaM8jv5ZMfrNRa/l06bfmZ91m5EUIpp+DW6OePtTMUHEi1KqFDaj2xK01H2N66fuNUxkuDRcv++9dS4MMBuo7xjf7czMoFZ26CuE8rJCxF8sIwIDAQAB",
+  "name": "Flash Spanish",
+  "description": "Translates words and uploads them to Quizlet",
+  "version": "0.18",
+  "web_accessible_resources": [
+    "help.html"
+  ],
+  "icons": {
+    "128": "flash-card-icon.png"
+  },
+  "browser_action": {
+    "default_title": "Flash Spanish",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "identity",
+    "storage",
+    "tabs",
+    "background",
+    "webRequest",
+    "management",
+    "https://quizlet.com/authorize*",
+    "https://api.quizlet.com/oauth/token*",
+    "https://api.quizlet.com/2.0/",
+    "https://api.quizlet.com/2.0/*",
+    "http://*/",
+    "https://*/",
+    "http://code.jquery.com/jquery-3.2.1.min.js"
+  ],
+  "background": {
+    "scripts": [
+      "jquery-3.2.1.min.js",
+      "lang_codes.js",
+      "background.js",
+      "auth.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "http://code.jquery.com/jquery-3.2.1.min.js"
+      ],
+      "js": [
+        "jquery-3.2.1.min.js",
+        "jquery-ui.min.js",
+        "lang_codes.js",
+        "translate.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

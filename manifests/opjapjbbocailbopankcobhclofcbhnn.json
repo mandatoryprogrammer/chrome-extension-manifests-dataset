@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Job Ninja",
+  "version": "0.0.4",
+  "manifest_version": 2,
+  "description": "Job Ninja web clipper. Saves a position from any job board to Job Ninja application.",
+  "icons": {
+    "16": "images/icon-16.png",
+    "128": "images/icon-128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "bower_components/jquery/dist/jquery.js",
+        "scripts/grab-content.js",
+        "scripts/panel-content.js",
+        "scripts/entrypoint-content.js"
+      ],
+      "css": [
+        "styles/panel.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "panel.html",
+    "styles/panel.css",
+    "bower_components/bootstrap/dist/css/bootstrap.min.css"
+  ],
+  "permissions": [
+    "notifications",
+    "storage",
+    "tabs",
+    "<all_urls>"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon-19.png",
+      "38": "images/icon-38.png"
+    },
+    "default_title": "Job Ninja",
+    "default_popup": "popup.html"
+  }
+}

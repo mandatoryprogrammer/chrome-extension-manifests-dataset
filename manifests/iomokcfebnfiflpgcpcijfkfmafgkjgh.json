@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "3.2.3",
+  "name": "Wakelet",
+  "manifest_version": 2,
+  "description": "Save, organize and share content from across the web!",
+  "options_page": "options.html",
+  "browser_action": {
+    "default_title": "Wakelet",
+    "default_icon": {
+      "19": "img/icon.png",
+      "38": "img/icon.png"
+    }
+  },
+  "icons": {
+    "16": "img/icon.png",
+    "48": "img/icon.png",
+    "128": "img/icon.png"
+  },
+  "web_accessible_resources": [
+    "inject.html",
+    "popup.build.html"
+  ],
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "<all_urls>"
+      ],
+      "css": [
+        "css/wakelet.css"
+      ],
+      "js": [
+        "contentLoader.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "cookies",
+    "contextMenus",
+    "notifications",
+    "storage",
+    "tabs",
+    "windows",
+    "https://wakelet.com/*",
+    "https://staging.wakelet.com/*",
+    "https://localhost.wakelet.com/*",
+    "https://*.reddit.com/*",
+    "https://twitter.com/*"
+  ],
+  "content_security_policy": "default-src 'self'; script-src 'sha256-RISw2ky+bTvuPNDgr9G3ujByp4dH0e6XL/Z+UO1vY+8=' 'sha256-ioX0wO7xAQl8yoglBv0RP14IQW7x9VkiJIM27ZmsQsc=' 'sha256-cA7Dh/AXWt0V3e4m6aJoy+VdntpQjcd5JhuZcP8FoVc=' 'sha256-atn6duuZbIf/LJO3h6sV7u7BFAI8Kx9+hu44VWKB9UI=' https://cdn4.mxpnl.com https://www.google-analytics.com https://www.youtube.com/iframe_api https://s.ytimg.com 'self' 'unsafe-eval'; font-src http://fonts.gstatic.com https://fonts.gstatic.com; connect-src http://localhost:3000 https://localhost:3000 https://api.wakelet.com https://settings.wakelet.com https://api-cdn.wakelet.com https://search.wakelet.com https://api.mixpanel.com https://graphql.wakelet.com/ https://graphql.wakelet.com/ https://api-js.mixpanel.com; style-src * 'unsafe-inline' 'self' blob:; img-src * https://res.cloudinary.com data:; frame-src https://www.youtube.com"
+}

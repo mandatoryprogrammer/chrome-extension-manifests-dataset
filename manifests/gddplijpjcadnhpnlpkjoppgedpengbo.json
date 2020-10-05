@@ -1,0 +1,38 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Accessibility monitor",
+  "description": "Audit pages for accessibility bugs as they're being used.",
+  "version": "1.0",
+  "browser_action": {
+    "default_icon": "img/icon-48.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "lodash.min.js",
+        "axs_testing.js",
+        "content.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "activeTab"
+  ],
+  "icons": {
+    "16": "img/icon-16.png",
+    "48": "img/icon-48.png",
+    "128": "img/icon-128.png"
+  },
+  "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'"
+}

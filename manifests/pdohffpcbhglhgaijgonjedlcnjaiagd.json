@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Claw4Twitter",
+  "version": "1.0.2",
+  "manifest_version": 2,
+  "description": "A sharp claw (i.e. Chrome Extension) for Larry (the Twitter Bird), which adds some utility to the twitter website user experience.",
+  "icons": {
+    "128": "claw.png"
+  },
+  "browser_action": {
+    "default_icon": "coolicon.png",
+    "default_popup": "popup.html",
+    "permissions": [
+      "http://jsonplaceholder.typicode.com/posts/1"
+    ]
+  },
+  "background": {
+    "scripts": [
+      "background.js",
+      "jquery.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://twitter.com/"
+      ],
+      "js": [
+        "jquery.js",
+        "content.js"
+      ],
+      "css": [
+        "framestyle.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "iframe/hackbar.html",
+    "iframe/hackbar.css",
+    "iframe/taggle.css"
+  ],
+  "content_security_policy": "script-src https://twitter.com/* ; object-src 'self'",
+  "permissions": [
+    "<all_urls>",
+    "webNavigation"
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "background": {
+    "scripts": [
+      "external/parseuri.js",
+      "framework/common.js",
+      "framework/prefs.js",
+      "framework/remoteConfig.js",
+      "framework/chrome_helper.js",
+      "external/versionCompare.js",
+      "globaldata.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "js": [
+        "injection.js",
+        "docload.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "ftp://*/*",
+        "file://*/*"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "docload_iframe.js",
+        "guess_base.js",
+        "guess_userdata.js",
+        "guess_register.js",
+        "guess_login.js",
+        "globaldata.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "ftp://*/*",
+        "file://*/*"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "name": "__MSG_appName__",
+  "description": "__MSG_appDesc__",
+  "version": "20.0.2",
+  "version_name": "20.0.2.3073",
+  "author": "Steganos Software GmbH",
+  "homepage_url": "https://www.steganos.com",
+  "default_locale": "en",
+  "icons": {
+    "16": "logos/logo16.png",
+    "48": "logos/logo48.png",
+    "96": "logos/logo96.png",
+    "128": "logos/logo128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "logos/logo16.png"
+    }
+  },
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "web_accessible_resources": [
+    "logos/logo16.png",
+    "web/generate_password_icon.png"
+  ]
+}

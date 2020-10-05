@@ -1,0 +1,113 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "豆瓣の豆皮",
+  "version": "1.2.7",
+  "manifest_version": 2,
+  "description": "搜索「豆瓣广播、联系人、看过和想看的电影、看过和想看的书、日记、喜欢」、电影快速链接、小组屏蔽用户和帖子排序、右键推荐到豆瓣",
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "contextMenus",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://movie.douban.com/subject/*"
+      ],
+      "js": [
+        "js/libs/jquery-2.1.4.min.js",
+        "js/contentScripts/movie.js"
+      ],
+      "css": [
+        "css/common.css",
+        "css/inject.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.douban.com/",
+        "*://www.douban.com/?p=*",
+        "*://*.douban.com/people/*/statuses*"
+      ],
+      "js": [
+        "js/libs/jquery-2.1.4.min.js",
+        "js/contentScripts/broadcast.js"
+      ],
+      "css": [
+        "css/common.css",
+        "css/inject.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.douban.com/people/*/notes*"
+      ],
+      "js": [
+        "js/libs/jquery-2.1.4.min.js",
+        "js/contentScripts/note.js"
+      ],
+      "css": [
+        "css/common.css",
+        "css/inject.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.douban.com/people/*/likes*",
+        "*://www.douban.com/contacts/rlist*",
+        "*://www.douban.com/people/*/contacts*",
+        "*://www.douban.com/people/*/rev_contacts*",
+        "*://movie.douban.com/people/*/collect*",
+        "*://movie.douban.com/people/*/wish*",
+        "*://movie.douban.com/mine?status=*",
+        "*://book.douban.com/people/*/collect*",
+        "*://book.douban.com/people/*/wish*",
+        "*://book.douban.com/mine?status=*"
+      ],
+      "js": [
+        "js/libs/jquery-2.1.4.min.js",
+        "js/contentScripts/doupiSearcher.js",
+        "js/contentScripts/search.js"
+      ],
+      "css": [
+        "css/common.css",
+        "css/inject.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.douban.com/group/*"
+      ],
+      "js": [
+        "js/libs/jquery-2.1.4.min.js",
+        "js/libs/lodash-3.9.3.min.js",
+        "js/libs/moment.min.js",
+        "js/libs/moment.zh-cn.js",
+        "js/utils/util.js",
+        "js/contentScripts/group.js"
+      ],
+      "css": [
+        "css/common.css",
+        "css/inject.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "images/loading.gif",
+    "images/loop.png",
+    "images/pauseCover.png",
+    "fonts/*.*"
+  ]
+}

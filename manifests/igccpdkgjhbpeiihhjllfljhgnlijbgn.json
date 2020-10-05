@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "short_name": "__MSG_appShortName__",
+  "description": "__MSG_appDescription__",
+  "version": "1.3.3",
+  "author": "__MSG_appAuthor__",
+  "manifest_version": 2,
+  "icons": {
+    "16": "images/icon16.png",
+    "32": "images/icon32.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_label": "__MSG_extName__",
+    "default_icon": "images/icon16.png"
+  },
+  "chrome_settings_overrides": {
+    "search_provider": {
+      "name": "GMX.com",
+      "keyword": "gmx.com",
+      "search_url": "https://search.gmx.com/web?origin=se_splugin_gc&enc=UTF-8&q={searchTerms}",
+      "suggest_url": "https://suggestplugin.ui-portal.de/s?su={searchTerms}&brand=gmxcom&origin=se_splugin_gc_sg",
+      "image_url": "https://search.gmx.com/pic?origin=se_splugin_gc&enc=UTF-8&q={searchTerms}",
+      "favicon_url": "https://search.gmx.com/favicon.ico",
+      "encoding": "UTF-8",
+      "is_default": true
+    }
+  },
+  "options_ui": {
+    "page": "pages/options.html",
+    "chrome_style": true
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "js/identify-to-site-cs.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "*://*.gmx.com/*"
+      ]
+    }
+  ],
+  "default_locale": "en",
+  "version_name": "1.3.3",
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "storage",
+    "*://*.gmx.com/*"
+  ]
+}

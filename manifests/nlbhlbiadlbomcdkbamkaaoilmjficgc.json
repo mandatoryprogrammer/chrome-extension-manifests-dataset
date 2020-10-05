@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "necho",
+  "version": "2.0.0",
+  "manifest_version": 2,
+  "description": "Necho developer tool helps the developer to save/retry/mock the network requests to the back-end APIs, right from the web browser.",
+  "devtools_page": "devtools.html",
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "scripts/contentScript.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "scripts/xhrInterceptor.js"
+  ],
+  "icons": {
+    "16": "assets/necho-16.png",
+    "32": "assets/necho-32.png",
+    "48": "assets/necho-48.png",
+    "128": "assets/necho-128.png"
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "storage",
+    "unlimitedStorage",
+    "webNavigation",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "options_ui": {
+    "page": "modules/config/config.html",
+    "open_in_tab": true
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

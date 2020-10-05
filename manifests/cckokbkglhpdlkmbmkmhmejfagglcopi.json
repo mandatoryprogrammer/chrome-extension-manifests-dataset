@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Jops - Job.Post.Search",
+  "version": "0.0.7",
+  "manifest_version": 2,
+  "description": "ג'ופס ימצא לך עבודה!",
+  "icons": {
+    "48": "images/icon.png"
+  },
+  "browser_action": {
+    "default_icon": "images/icon.png",
+    "default_popup": "html/app.html#/popup",
+    "default_title": "Jops"
+  },
+  "background": {
+    "page": "html/background.html"
+  },
+  "options_page": "html/application.html#/options",
+  "permissions": [
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "tabs",
+    "http://api.filepicker.io/v1/filepicker.js",
+    "<all_urls>"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.jops.co.il/*"
+      ],
+      "js": [
+        "js/lib/jquery-1.10.2.min.js",
+        "js/modules/content/main.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "js/*",
+    "html/*",
+    "css/*",
+    "images/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.jops.co.il/*"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

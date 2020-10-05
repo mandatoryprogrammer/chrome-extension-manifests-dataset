@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "ISBN Extractor",
+  "offline_enabled": true,
+  "permissions": [
+    "webNavigation",
+    "chrome://favicon/",
+    "contextMenus",
+    "https://*/*",
+    "http://*/*",
+    "tabs",
+    "storage"
+  ],
+  "version": "1.1.1",
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icons/icon512.png",
+    "default_title": "ISBN Extractor!",
+    "default_popup": "src/page_action/page_action.html"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "js/content.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file://*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "description": "Automatically extract all ISBN from a webpage.",
+  "icons": {
+    "512": "icons/icon512.png"
+  }
+}

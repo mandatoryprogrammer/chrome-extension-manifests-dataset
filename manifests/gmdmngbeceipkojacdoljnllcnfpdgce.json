@@ -1,0 +1,79 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "CanvasTools",
+  "description": "Customize your Canvas experience and do advanced things with your Canvas by Instructure account.",
+  "version": "0.0.4.4",
+  "optional_permissions": [
+    "*://*/*",
+    "downloads",
+    "<all_urls>"
+  ],
+  "icons": {
+    "128": "assets/images/icon.png"
+  },
+  "omnibox": {
+    "keyword": "canvas"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "commands": {
+    "open-canvas": {
+      "suggested_key": {
+        "default": "Ctrl+Space"
+      },
+      "description": "Open Canvas"
+    }
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "vendor/jQuery/jquery-3.2.1.min.js",
+        "js/custom-colors-content.js",
+        "vendor/bootstrap-tour/js/bootstrap-tour-standalone.min.js",
+        "vendor/handlebars/js/handlebars-v4.0.11.js",
+        "js/content.js",
+        "vendor/jszip/FileSaver.js",
+        "vendor/jszip/jszip.min.js",
+        "js/content/download-course.js",
+        "api/canvas-code.js"
+      ],
+      "css": [
+        "vendor/bootstrap-tour/css/bootstrap-tour-standalone.min.css",
+        "css/content.css"
+      ],
+      "matches": [
+        "https://*.instructure.com/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_title": "CanvasTools"
+  },
+  "web_accessible_resources": [
+    "js/api.js",
+    "assets/*"
+  ],
+  "permissions": [
+    "webRequest",
+    "storage",
+    "notifications",
+    "alarms",
+    "webRequestBlocking",
+    "unlimitedStorage",
+    "contextMenus",
+    "*://*.instructure.com/*"
+  ],
+  "options_page": "options.html",
+  "externally_connectable": {
+    "matches": [
+      "*://*.instructure.com/*",
+      "https://canvastools-demo.glitch.me/*",
+      "https://jczstudios.github.io/*"
+    ]
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://apis.google.com; object-src 'self'"
+}

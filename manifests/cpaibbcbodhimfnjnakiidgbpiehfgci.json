@@ -1,0 +1,126 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "version": "4.2.0.9290",
+  "name": "True Key™ by McAfee",
+  "description": "__MSG_appDesc__",
+  "default_locale": "en",
+  "icons": {
+    "16": "resources/icon16.png",
+    "38": "resources/icon38.png",
+    "48": "resources/icon48.png",
+    "128": "resources/icon128.png"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "permissions": [
+    "clipboardWrite",
+    "contextMenus",
+    "cookies",
+    "nativeMessaging",
+    "privacy",
+    "storage",
+    "tabs",
+    "unlimitedStorage",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "web_accessible_resources": [
+    "pages/tk-inpages-frame.html",
+    "pages/dashboard.html",
+    "scripts/*.js.map"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "resources/icon19.png",
+      "38": "resources/icon38.png"
+    }
+  },
+  "background": {
+    "scripts": [
+      "scripts/core-vendor.js",
+      "scripts/chrome-shim.js",
+      "scripts/common.js",
+      "scripts/core.js",
+      "scripts/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "*://googleads.g.doubleclick.net/*",
+        "*://platform.twitter.com/widgets/*",
+        "*://www.facebook.com/plugins/*",
+        "*://plusone.google.com/_/+1/*",
+        "*://metrics.truekey.com/*",
+        "*://webauthn.truekey.com/v2/bind.html"
+      ],
+      "js": [
+        "scripts/chrome-shim.js",
+        "scripts/common.js",
+        "scripts/translations.js",
+        "scripts/content-script-libs.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "*://googleads.g.doubleclick.net/*",
+        "*://platform.twitter.com/widgets/*",
+        "*://www.facebook.com/plugins/*",
+        "*://plusone.google.com/_/+1/*",
+        "*://metrics.truekey.com/*",
+        "*://webauthn.truekey.com/v2/bind.html"
+      ],
+      "js": [
+        "scripts/frames.js",
+        "scripts/content-script.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "*://googleads.g.doubleclick.net/*",
+        "*://platform.twitter.com/widgets/*",
+        "*://www.facebook.com/plugins/*",
+        "*://plusone.google.com/_/+1/*",
+        "*://metrics.truekey.com/*",
+        "*://webauthn.truekey.com/v2/bind.html"
+      ],
+      "js": [
+        "scripts/chrome-shim.js",
+        "scripts/translations.js",
+        "scripts/cs-loader.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://webauthn.truekey.com/v2/bind.html"
+      ],
+      "js": [
+        "scripts/windows-hello-auth.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://truekey.intelsecurity.com/*",
+      "https://d.tkassets.com/*",
+      "https://*.mcafee.com/*"
+    ]
+  }
+}

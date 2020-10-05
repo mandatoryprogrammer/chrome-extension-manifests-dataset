@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Sopularity",
+  "description": "Use Sopularity hashtag suggestions for each tweet you post.",
+  "version": "0.2.5",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "app.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.twitter.com/*",
+        "*://twitter.com/*"
+      ],
+      "js": [
+        "jquery.js",
+        "content_twitter.js"
+      ],
+      "css": [
+        "content_twitter.css"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.hootsuite.com/*"
+      ],
+      "js": [
+        "content_hootsuite.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "jquery.js",
+    "jquery.min.map"
+  ],
+  "manifest_version": 2
+}

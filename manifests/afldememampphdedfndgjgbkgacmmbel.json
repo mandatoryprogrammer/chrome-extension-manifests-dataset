@@ -1,0 +1,112 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Nicomm",
+  "short_name": "Nicomm",
+  "version": "0.0.0.16",
+  "description": "NicoNico(ニコニコ) style comments for live stream",
+  "author": "RayNGC",
+  "applications": {
+    "gecko": {
+      "id": "nicomm@rayngc"
+    }
+  },
+  "icons": {
+    "16": "images/icon16.png",
+    "32": "images/icon32.png",
+    "48": "images/icon48.png",
+    "64": "images/icon64.png",
+    "128": "images/icon128.png",
+    "256": "images/icon256.png"
+  },
+  "permissions": [
+    "storage",
+    "tabs"
+  ],
+  "background": {
+    "scripts": [
+      "scripts/jquery-2.2.4.js",
+      "scripts/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.twitch.tv/*"
+      ],
+      "js": [
+        "scripts/content/platforms/twitch.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.youtube.com/*"
+      ],
+      "js": [
+        "scripts/content/platforms/youtube.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.streamup.com/*"
+      ],
+      "js": [
+        "scripts/content/platforms/streamup.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.hitbox.tv/*"
+      ],
+      "js": [
+        "scripts/content/platforms/hitbox.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.twitch.tv/*",
+        "*://*.streamup.com/*",
+        "*://*.hitbox.tv/*",
+        "*://*.youtube.com/*"
+      ],
+      "js": [
+        "scripts/jquery-2.2.4.js",
+        "scripts/velocity.js",
+        "scripts/content/resources.js",
+        "scripts/content/chat.js",
+        "scripts/content/command.js",
+        "scripts/content/comment.js",
+        "scripts/content/settings.js",
+        "scripts/content/poll.js",
+        "scripts/content/image.js",
+        "scripts/content/emote.js",
+        "scripts/content/preview.js",
+        "scripts/content/nicomm.js",
+        "scripts/content/content.js"
+      ],
+      "css": [
+        "styles/content/font.css",
+        "styles/content/content.css",
+        "styles/content/menu.css",
+        "styles/content/chat.css",
+        "styles/content/comment.css",
+        "styles/content/poll.css",
+        "styles/content/preview.css",
+        "styles/content/emote.css"
+      ],
+      "all_frames": true
+    }
+  ],
+  "options_ui": {
+    "page": "pages/options.html",
+    "open_in_tab": false
+  },
+  "manifest_version": 2
+}

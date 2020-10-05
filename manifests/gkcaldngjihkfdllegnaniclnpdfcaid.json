@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "FFL Boss 2 Click Background Check",
+  "description": "This Chrome extension allows FFL Boss users to automate the FBI's LEEP background check.",
+  "version": "0.39",
+  "icons": {
+    "16": "images/icon16.png",
+    "24": "images/icon24.png",
+    "32": "images/icon32.png",
+    "48": "images/icon48.png"
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "background",
+    "storage",
+    "contextMenus",
+    "webNavigation",
+    "*://app.fflboss.com/*",
+    "*://www.cjis.gov/*"
+  ],
+  "page_action": {
+    "default_icon": {
+      "16": "images/icon16.png",
+      "24": "images/icon24.png",
+      "32": "images/icon32.png",
+      "48": "images/icon48.png"
+    },
+    "default_title": "FFL Boss eNICS Autofill",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://app.fflboss.com/*",
+        "*://beta.fflboss.com/*",
+        "*://dev.fflboss.com/*",
+        "*://www.cjis.gov/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://app.fflboss.com/*"
+    ]
+  }
+}

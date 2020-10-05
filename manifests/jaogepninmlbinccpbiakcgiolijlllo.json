@@ -1,0 +1,158 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "short_name": "__MSG_appShortName__",
+  "description": "__MSG_appDescription__",
+  "version": "5.0.4",
+  "author": "__MSG_appAuthor__",
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/envelope-19.png",
+      "38": "images/envelope-38.png"
+    },
+    "default_title": "__MSG_browserActionTitle__"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "js/google-web-auth-cs.js"
+      ],
+      "run_at": "document_end",
+      "matches": [
+        "https://accounts.google.com/o/oauth2/approval/*"
+      ]
+    },
+    {
+      "js": [
+        "js/brand-web-auth-cs.js"
+      ],
+      "run_at": "document_idle",
+      "matches": [
+        "https://web.de/login/oauth2/*",
+        "https://www.web.de/login/oauth2/*",
+        "https://www.gmx.net/login/oauth2/*"
+      ]
+    },
+    {
+      "js": [
+        "js/microsoft-web-auth-cs.js"
+      ],
+      "run_at": "document_end",
+      "matches": [
+        "https://login.live.com/*"
+      ],
+      "include_globs": [
+        "*/oauth20_desktop*code=*",
+        "*/oauth20_desktop*error=*"
+      ]
+    },
+    {
+      "js": [
+        "js/identify-to-site-cs.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "*://localhost/*",
+        "https://*.web.de/*",
+        "https://*.gmx.net/*",
+        "https://*.gmx.de/*",
+        "https://*.gmx.ch/*",
+        "https://*.gmx.at/*",
+        "https://*.gmx.com/*",
+        "https://*.mail.com/*",
+        "https://*.1und1.de/*",
+        "https://*.1and1.com/*"
+      ]
+    },
+    {
+      "js": [
+        "js/portal-page-badge-cs.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true,
+      "matches": [
+        "https://suche.web.de/*"
+      ]
+    },
+    {
+      "js": [
+        "js/webapp-start-proxy.js"
+      ],
+      "run_at": "document_end",
+      "matches": [
+        "https://dl.web.de/backend/post.html?*",
+        "https://dl.gmx.net/backend/post.html?*",
+        "https://dl.gmx.com/backend/post.html?*",
+        "https://dl.mail.com/backend/post.html?*",
+        "https://dl.1und1.de/backend/post.html?*"
+      ]
+    },
+    {
+      "js": [
+        "js/backtab-ads-cs.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true,
+      "matches": [
+        "https://www.google.at/afs/ads?*",
+        "https://www.google.at/afs/ads/*",
+        "https://www.google.ch/afs/ads?*",
+        "https://www.google.ch/afs/ads/*",
+        "https://www.google.com/afs/ads?*",
+        "https://www.google.com/afs/ads/*",
+        "https://www.google.co.uk/afs/ads?*",
+        "https://www.google.co.uk/afs/ads/*",
+        "https://www.google.de/afs/ads?*",
+        "https://www.google.de/afs/ads/*",
+        "https://www.google.es/afs/ads?*",
+        "https://www.google.es/afs/ads/*",
+        "https://www.google.fr/afs/ads?*",
+        "https://www.google.fr/afs/ads/*",
+        "https://www.google.it/afs/ads?*",
+        "https://www.google.it/afs/ads/*",
+        "https://www.google.pl/afs/ads?*",
+        "https://www.google.pl/afs/ads/*",
+        "https://www.google.ro/afs/ads?*",
+        "https://www.google.ro/afs/ads/*"
+      ]
+    }
+  ],
+  "default_locale": "de",
+  "manifest_version": 2,
+  "version_name": "5.0.4",
+  "minimum_chrome_version": "72.0",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "management",
+    "notifications",
+    "contextMenus",
+    "identity",
+    "https://*.web.de/*"
+  ],
+  "optional_permissions": [
+    "https://*.gmx.net/*",
+    "https://*.1und1.de/*",
+    "https://*.uilogin.de/*",
+    "https://*.mail.com/*",
+    "https://accounts.google.com/*",
+    "https://www.googleapis.com/*",
+    "https://mail.google.com/*",
+    "https://*.live.com/*",
+    "*://localhost/*"
+  ],
+  "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDGXNIZmQNEwqmqx57LfsAfvYYZYioHMaQFwBQlWV25SoNuoe0v5fM34HvtYqqtrJJoL+WwM8r1F181qhHCqaV7lzMO9+cJtQriiXLcNHxgygl1b6ESUlSTkHO4AWlmg7DfqqUueT80vzqcFZ3/NGZDXUNQlzE9W4CinelnX76W7wIDAQAB"
+}

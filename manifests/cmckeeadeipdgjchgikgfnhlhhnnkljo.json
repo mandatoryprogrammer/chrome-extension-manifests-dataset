@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "読書メーター 図書館検索",
+  "short_name": "読書メーター 図書館検索",
+  "description": "読書メーターに近隣の図書館の蔵書検索結果を表示します.",
+  "version": "0.210",
+  "minimum_chrome_version": "16.0.884",
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "<all_urls>",
+    "https://api.calil.jp/",
+    "storage"
+  ],
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://elk.bookmeter.com/*",
+        "https://bookmeter.com/*"
+      ],
+      "js": [
+        "jquery-3.1.1.min.js",
+        "calilapi.js",
+        "content.js"
+      ],
+      "css": [
+        "calilapi.css",
+        "content.css"
+      ]
+    }
+  ],
+  "page_action": {
+    "default_icon": {
+      "16": "images/icon16.png",
+      "24": "images/icon24.png",
+      "32": "images/icon32.png"
+    },
+    "default_title": "Find books from a library",
+    "default_popup": "popup.html"
+  },
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://calil.jp https://api.calil.jp; object-src 'self' https://calil.jp https://api.calil.jp",
+  "sandbox": {}
+}

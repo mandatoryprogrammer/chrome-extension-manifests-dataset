@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "FinEye",
+  "version": "0.0.27",
+  "manifest_version": 2,
+  "description": "Look deeper into Tehran stock market.",
+  "homepage_url": "https://fineye.ir/ext",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "FinEye",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.tsetmc.com/*ParTree=151311&*i=*",
+        "*://*.tsetmc.ir/*ParTree=151311&*i=*"
+      ],
+      "js": [
+        "js/jquery/jquery-3.2.0.min.js",
+        "js/amcharts/amcharts.js",
+        "js/amcharts/serial.js",
+        "js/amcharts/amstock.js",
+        "js/amcharts/themes/light.js",
+        "js/amcharts/export.min.js",
+        "js/amcharts/export/libs/fabric.js/fabric.min.js",
+        "js/amcharts/export/libs/FileSaver.js/FileSaver.min.js",
+        "inject.js"
+      ],
+      "css": [
+        "inject.css",
+        "css/font-awesome.min.css",
+        "css/amcharts-export.css"
+      ]
+    }
+  ],
+  "permissions": [
+    "storage",
+    "gcm",
+    "identity",
+    "notifications",
+    "https://sa.fineye.ir/*"
+  ],
+  "web_accessible_resources": [
+    "fonts/*",
+    "bg/*",
+    "vids/*",
+    "js/amcharts/export/*",
+    "disclaimer.html"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com 'unsafe-eval'; object-src 'self'"
+}

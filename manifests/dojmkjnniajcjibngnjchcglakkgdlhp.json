@@ -1,0 +1,75 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "0.1.0",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "name": "__MSG_chrome_extension_name__",
+  "description": "__MSG_chrome_extension_description__",
+  "homepage_url": "http://eccorem.com/apps/translator.html",
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "options_ui": {
+    "page": "data/option/option.html",
+    "chrome_style": true
+  },
+  "web_accessible_resources": [
+    "data/popup/popup.html",
+    "data/icons/24.png"
+  ],
+  "permissions": [
+    "*://*/*",
+    "tabs",
+    "storage",
+    "contextMenus",
+    "notifications"
+  ],
+  "browser_action": {
+    "default_popup": "data/popup/popup.html",
+    "default_title": "__MSG_browser_action_title__",
+    "default_icon": {
+      "16": "data/icons/16.png",
+      "24": "data/icons/24.png",
+      "32": "data/icons/32.png",
+      "48": "data/icons/48.png",
+      "64": "data/icons/64.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "run_at": "document_start",
+      "js": [
+        "data/translator/token.js"
+      ],
+      "matches": [
+        "*://translate.google.com/*"
+      ]
+    },
+    {
+      "all_frames": true,
+      "match_about_blank": true,
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start",
+      "css": [
+        "data/translator/style.css"
+      ],
+      "js": [
+        "data/translator/translator.js"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "data/icons/16.png",
+    "24": "data/icons/24.png",
+    "32": "data/icons/32.png",
+    "48": "data/icons/48.png",
+    "64": "data/icons/64.png",
+    "128": "data/icons/128.png"
+  }
+}

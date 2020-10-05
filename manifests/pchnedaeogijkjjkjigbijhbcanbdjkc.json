@@ -1,0 +1,72 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Linkman",
+  "manifest_version": 2,
+  "description": "This extension communicates between the Chrome browser and the Windows bookmark manager Linkman.",
+  "version": "8.9.7.0",
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "icons": {
+    "16": "linkman16.png",
+    "48": "linkman48.png",
+    "128": "linkman128.png"
+  },
+  "options_page": "options.html",
+  "permissions": [
+    "tabs",
+    "contextMenus",
+    "http://*/*",
+    "https://*/*",
+    "http://127.0.0.1/*",
+    "http://localhost/*"
+  ],
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "content.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "ftp://*/*",
+        "file://*/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "browser_action": {
+    "default_title": "Linkman",
+    "default_popup": "popup.html",
+    "default_icon": "linkman19.png"
+  },
+  "commands": {
+    "ADDURL": {
+      "suggested_key": {
+        "default": "Ctrl+Q"
+      },
+      "description": "Add to Linkman"
+    },
+    "ADDURLEDIT": {
+      "suggested_key": {
+        "default": "Ctrl+B"
+      },
+      "description": "Add to Linkman and Edit"
+    },
+    "SEARCH": {
+      "suggested_key": {
+        "default": "Ctrl+Y"
+      },
+      "description": "Search Linkman"
+    },
+    "ADDURLMULTIPLE": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+A"
+      },
+      "description": "Add all tabs to Linkman"
+    }
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "short_name": "FloriBunda",
+  "name": "FloriBunda",
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "description": "Unofficial extension for FloraBase providing interactive maps.",
+  "icons": {
+    "16": "images/favicon-leaf.ico",
+    "128": "images/icon-128.png"
+  },
+  "background": {
+    "scripts": [
+      "/static/js/background.9cd09d1ca3864ba2249a.js",
+      "/static/js/options.9cd09d1ca3864ba2249a.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "notifications"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://florabase.dbca.wa.gov.au/browse/profile/*",
+        "*://florabase.dpaw.wa.gov.au/browse/profile/*"
+      ],
+      "js": [
+        "/static/js/main.9cd09d1ca3864ba2249a.js"
+      ],
+      "css": [
+        "static/css/leaflet.awesome-markers.css",
+        "/static/css/main.c38cdd0a.css"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    "images/*",
+    "static/css/*",
+    "static/js/*"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "floribunda@chid.science"
+    }
+  }
+}

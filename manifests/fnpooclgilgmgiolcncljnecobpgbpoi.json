@@ -1,0 +1,72 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Adams12 Resources Helper",
+  "description": "This extension is for Adams12 school district users.",
+  "version": "0.33",
+  "background": {
+    "scripts": [
+      "jquery-2.1.4.js",
+      "background.js",
+      "background_contextmenu.js"
+    ]
+  },
+  "permissions": [
+    "contextMenus",
+    "tabs",
+    "activeTab",
+    "http://*.adams12.org/*",
+    "https://*.adams12.org/*"
+  ],
+  "browser_action": {
+    "default_icon": "img/icon.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "img/AD12ResourcesImage16.png",
+    "32": "img/AD12ResourcesImage32.png",
+    "48": "img/AD12ResourcesImage48.png",
+    "128": "img/AD12ResourcesImage.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://ic.adams12.org/*",
+        "https://ic-testing.adams12.org/*",
+        "https://ic-dev.adams12.org/*"
+      ],
+      "js": [
+        "jquery-2.1.4.js",
+        "content_ic.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://webfarm-dev.adams12.org/dev/datadashboard/*",
+        "https://webfarm-dev.adams12.org/test/datadashboard/*",
+        "https://webfarm.adams12.org/datadashboard/*"
+      ],
+      "js": [
+        "jquery-2.1.4.js",
+        "content_ews.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://enrich-training.adams12.org/*",
+        "https://enrich-test.adams12.org/*",
+        "https://enrich.adams12.org/*"
+      ],
+      "js": [
+        "jquery-2.1.4.js",
+        "content_enrich.js"
+      ],
+      "all_frames": false,
+      "run_at": "document_end"
+    }
+  ]
+}

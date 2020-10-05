@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Mail Merge for Gmail - Pabbly Email Marketing",
+  "description": "Create an email campaign for your audience right inside Gmail account and we will take care of the rest",
+  "version": "1.4",
+  "permissions": [
+    "https://mail.google.com/*",
+    "cookies",
+    "*://emails.pabbly.com/*"
+  ],
+  "background": {
+    "scripts": [
+      "vendor/jquery.min.js",
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "vendor/jquery.min.js",
+        "vendor/vue.js",
+        "vendor/vuex.min.js",
+        "store/store.vue",
+        "vendor/inboxsdk.js",
+        "components/composeViewNoticeBar.vue",
+        "components/sideBar.vue",
+        "components/toolBar.vue",
+        "js/app.js"
+      ],
+      "css": [
+        "css/main.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "images/*"
+  ],
+  "icons": {
+    "16": "images/icon-16x16.png",
+    "48": "images/icon-48x48.png",
+    "128": "images/icon-128x128.png"
+  },
+  "browser_action": {
+    "default_title": "Pabbly Email Marketing",
+    "default_popup": "html/popup.html"
+  }
+}

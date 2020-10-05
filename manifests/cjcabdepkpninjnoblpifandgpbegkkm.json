@@ -1,0 +1,41 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Price Normalizer",
+  "description": "Convert odd prices to real prices on shopping web sites",
+  "version": "1.0.0",
+  "icons": {
+    "16": "assets/icons/icon-16.png",
+    "48": "assets/icons/icon-48.png",
+    "128": "assets/icons/icon-128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "assets/icons/icon-19.png",
+      "38": "assets/icons/icon-38.png"
+    },
+    "default_popup": "src/options.html",
+    "default_name": "Price Normalizer"
+  },
+  "background": {
+    "scripts": [
+      "src/background.js"
+    ]
+  },
+  "options_page": "src/options.html",
+  "permissions": [
+    "tabs",
+    "*://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "src/price-normalizer.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

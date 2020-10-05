@@ -1,0 +1,92 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_chrome_extension_name__",
+  "short_name": "Instazzap",
+  "description": "__MSG_chrome_extension_description__",
+  "version": "1.1.4",
+  "default_locale": "en",
+  "homepage_url": "http://www.instazzap.com/",
+  "background": {
+    "persistent": true,
+    "page": "background.html"
+  },
+  "browser_action": {
+    "default_icon": "icons/icon-browser-action.png",
+    "default_title": "__MSG_browser_action_hint__",
+    "persistent": true
+  },
+  "minimum_chrome_version": "17.0.0.0",
+  "web_accessible_resources": [
+    "public/*"
+  ],
+  "permissions": [
+    "storage",
+    "unlimitedStorage",
+    "webRequest",
+    "activeTab",
+    "<all_urls>",
+    "tabs",
+    "cookies",
+    "webRequestBlocking",
+    "contextMenus"
+  ],
+  "icons": {
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png",
+    "96": "icons/icon-96.png",
+    "128": "icons/icon-128.png"
+  },
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://web.whatsapp.com/*"
+      ],
+      "js": [
+        "public/js/izutils.js",
+        "public/js/Majordomo.js",
+        "libs/CallbackStorage.js",
+        "libs/Mutex.js",
+        "libs/WhatsApp.js",
+        "libs/Postman/ChromePostman.js",
+        "public/js/jquery-2.1.4.min.js",
+        "libs/content_scripts/whatsapp.geoip.js",
+        "libs/content_scripts/whatsapp.ninja.js",
+        "libs/content_scripts/whatsapp.emoji.js",
+        "libs/content_scripts/whatsapp.fastImageSend.js",
+        "libs/content_scripts/whatsapp.close.js",
+        "libs/content_scripts/whatsapp.rtl.js",
+        "libs/content_scripts/whatsapp.retailBar.js",
+        "libs/content_scripts/whatsapp.js"
+      ],
+      "css": [
+        "public/style/whatsapp.css"
+      ]
+    },
+    {
+      "matches": [
+        "http://www.instazzap.com/*"
+      ],
+      "js": [
+        "libs/content_scripts/instazzap.js"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "https://web.whatsapp.com/*"
+      ],
+      "js": [
+        "public/js/jquery-2.1.4.min.js",
+        "libs/content_scripts/shareImages.js"
+      ],
+      "css": [
+        "public/style/cssreset-context-hard.css"
+      ]
+    }
+  ],
+  "options_page": "public/options.html"
+}

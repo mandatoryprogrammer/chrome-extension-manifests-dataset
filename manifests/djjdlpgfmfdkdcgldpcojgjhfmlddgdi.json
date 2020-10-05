@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Comeet",
+  "short_name": "Comeet",
+  "description": "Async conversations into your Calendar. Effective collaboration at your own pace",
+  "version": "0.18.5",
+  "browser_action": {
+    "default_popup": "index.html",
+    "default_title": "Write down meeting decisions here"
+  },
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+  "background": {
+    "scripts": [
+      "config_extension.js",
+      "config_common.js",
+      "background.js",
+      "moment.js",
+      "amplitude-5.8.0.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://calendar.google.com/*",
+        "https://meet.google.com/*"
+      ],
+      "js": [
+        "static/js/2.3bac64b1.chunk.js",
+        "static/js/main.bff65fbb.chunk.js",
+        "static/js/runtime-main.b09b8120.js"
+      ],
+      "css": [
+        "static/css/2.bd26e155.chunk.css",
+        "static/css/main.30b374f3.chunk.css"
+      ]
+    }
+  ],
+  "permissions": [
+    "storage",
+    "identity",
+    "alarms",
+    "notifications",
+    "contextMenus"
+  ],
+  "web_accessible_resources": [
+    "index.html",
+    "icon.png",
+    "icon_bw.png",
+    "/images/*",
+    "/images/*/*",
+    "/static/media/*",
+    "/irp/*"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "externally_connectable": {
+    "matches": [
+      "http://localhost:3000/*",
+      "*://*.comeet.me/*"
+    ]
+  }
+}

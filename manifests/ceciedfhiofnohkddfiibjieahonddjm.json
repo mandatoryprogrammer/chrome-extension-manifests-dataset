@@ -1,0 +1,92 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "V2EX HELPER",
+  "manifest_version": 2,
+  "version": "2.0.0",
+  "description": "the way to make v2ex better",
+  "icons": {
+    "16": "icons/icon_16.png",
+    "48": "icons/icon_48.png",
+    "128": "icons/icon_128.png"
+  },
+  "browser_action": {
+    "default_title": "",
+    "default_icon": {
+      "19": "icons/icon_19.png",
+      "38": "icons/icon_38.png"
+    }
+  },
+  "background": {
+    "scripts": [
+      "background-scripts/background.js"
+    ]
+  },
+  "options_ui": {
+    "page": "option/option.html"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "notifications",
+    "*://*.weibo.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.v2ex.com/notifications*"
+      ],
+      "js": [
+        "content-scripts/checkReply/insertCheckBtn.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://www.v2ex.com/t/*isJump=1*"
+      ],
+      "js": [
+        "content-scripts/checkReply/jump.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://www.v2ex.com/t/*"
+      ],
+      "js": [
+        "content-scripts/zoom/zoom.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://www.v2ex.com/new"
+      ],
+      "js": [
+        "content-scripts/uploadImg/uploadImg.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://www.v2ex.com/t/*"
+      ],
+      "js": [
+        "content-scripts/checkConversation/checkConversation.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://www.v2ex.com/*"
+      ],
+      "js": [
+        "content-scripts/signin/signin.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    ""
+  ]
+}

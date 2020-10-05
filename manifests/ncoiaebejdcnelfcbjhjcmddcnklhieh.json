@@ -1,0 +1,95 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Appit",
+  "description": "This extension offers a quick way to access the powerful tools that are developed and provided by BluIP.",
+  "version": "1.1.7",
+  "icons": {
+    "512": "logo_512.png",
+    "256": "logo_256.png",
+    "128": "logo_128.png",
+    "64": "logo_64.png",
+    "32": "logo_32.png",
+    "16": "logo_16.png"
+  },
+  "web_accessible_resources": [
+    "*"
+  ],
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "browser_action": {
+    "default_title": "Appit",
+    "default_icon": "logo_32.png",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.bluip.com/*",
+        "*://*.bluip.io/*",
+        "*://*.redial.io/*"
+      ],
+      "js": [
+        "loader.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "file://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "jquery-1.11.1.min.js",
+        "click-to-dial.js"
+      ],
+      "css": [
+        "click-to-dial.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "permissions": [
+    "*://*.bluip.com/*",
+    "*://*.bluip.io/*",
+    "*://*.redial.io/*",
+    "*://*.google.com/*",
+    "*://*.chrome.com/*",
+    "*://ajax.googleapis.com/*",
+    "notifications",
+    "downloads",
+    "downloads.open",
+    "alarms",
+    "desktopCapture",
+    "gcm",
+    "idle",
+    "tabs",
+    "activeTab",
+    "tts",
+    "identity",
+    "contextMenus",
+    "background",
+    "storage",
+    "unlimitedStorage",
+    "bookmarks",
+    "clipboardRead",
+    "clipboardWrite"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.bluip.io/*",
+      "*://*.redial.io/*"
+    ]
+  },
+  "omnibox": {
+    "keyword": "--"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://*.uservoice.com https://ssl.google-analytics.com https://www.google.com/jsapi https://www.google.com https://cdn.bluip.io https://hangoutsapi.talkgadget.google.com https://plus.google.com https://socket.bluip.io; object-src 'self'"
+}

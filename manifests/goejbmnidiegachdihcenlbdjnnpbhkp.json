@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "DHC CashBack",
+  "version": "1.0.4",
+  "manifest_version": 2,
+  "description": "DHC CashBack",
+  "homepage_url": "https://www.dealhubcentral.com",
+  "icons": {
+    "16": "icons/icon16.png",
+    "19": "icons/icon19.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "browser_action": {
+    "default_icon": "icons/icon128-disabled.png",
+    "default_title": "DHC CashBack",
+    "default_popup": "src/templates/options.html"
+  },
+  "background": {
+    "scripts": [
+      "js/jquery/jquery.min.js",
+      "js/md5.min.js",
+      "src/bg/background.js"
+    ]
+  },
+  "permissions": [
+    "webRequest",
+    "webNavigation",
+    "<all_urls>",
+    "clipboardWrite",
+    "history",
+    "clipboardRead",
+    "cookies",
+    "tabs",
+    "https://*/*",
+    "http://*/*",
+    "geolocation",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "js/jquery/jquery.min.js",
+        "src/inject/inject.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "web_accessible_resources": [
+    "**.jpg",
+    "**.png",
+    "**.html",
+    "**.css",
+    "**.js"
+  ]
+}

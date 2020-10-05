@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Github TestLens",
+  "short_name": "TestLens",
+  "description": "Jump between code and tests when reviewing code in Github.",
+  "version": "0.5.2",
+  "permissions": [
+    "storage",
+    "*://github.com/*",
+    "tabs",
+    "webNavigation"
+  ],
+  "icons": {
+    "16": "img/icon-16.png",
+    "32": "img/icon-32.png",
+    "48": "img/icon-48.png",
+    "64": "img/icon-64.png",
+    "128": "img/icon-128.png"
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "*://github.com/*"
+      ],
+      "js": [
+        "levenshtein.min.js",
+        "options/defaults.js",
+        "dom.js",
+        "search.js",
+        "main.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background/background.js"
+    ],
+    "persistent": false
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "chrome_style": true
+  }
+}

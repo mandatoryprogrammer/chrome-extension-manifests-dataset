@@ -1,0 +1,74 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_title__",
+  "description": "__MSG_about__",
+  "author": "TNK Software / Tanaka Yusuke",
+  "homepage_url": "https://www.tnksoft.com/",
+  "version": "2.7",
+  "default_locale": "en",
+  "icons": {
+    "16": "res/icon16.png",
+    "32": "res/icon32.png",
+    "64": "res/icon64.png",
+    "128": "res/icon128.png"
+  },
+  "options_page": "setting/index.htm",
+  "options_ui": {
+    "page": "setting/index.htm",
+    "open_in_tab": true
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "util.js",
+      "background.js",
+      "convert.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "res/icon16.png",
+      "32": "res/icon32.png",
+      "64": "res/icon64.png",
+      "128": "res/icon128.png"
+    },
+    "default_title": "__MSG_title__"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "util.js",
+        "start.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "idle.js"
+      ],
+      "css": [
+        "popup.css"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "permissions": [
+    "storage",
+    "tabs",
+    "contextMenus",
+    "downloads",
+    "http://*/*",
+    "https://*/*"
+  ]
+}

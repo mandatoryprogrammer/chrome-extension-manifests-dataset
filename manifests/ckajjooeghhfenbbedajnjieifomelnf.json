@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "ShareQuick",
+  "description": "Send links, images and snippets immediately to your smartphone.",
+  "version": "0.7.9",
+  "browser_action": {
+    "default_icon": "images/paper_plane.png",
+    "default_popup": "minified/popup.min.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [
+        "minified/pagehighlight.css"
+      ],
+      "js": [
+        "minified/pagehighlight.js"
+      ],
+      "exclude_matches": [
+        "https://www.google.com/analytics/*",
+        "http://www.producthunt.com/*",
+        "https://mail.google.com/*"
+      ]
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "identity",
+    "cookies",
+    "contextMenus",
+    "*://*/*"
+  ],
+  "icons": {
+    "16": "images/paper_plane.png"
+  },
+  "web_accessible_resources": [
+    "images/*.png",
+    "images/*.gif"
+  ],
+  "background": {
+    "scripts": [
+      "minified/background.js"
+    ]
+  },
+  "oauth2": {
+    "client_id": "790775098108-s61vd63euq76s69n6h8vb5biegp0so5f.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.profile",
+      "https://www.googleapis.com/auth/userinfo.email"
+    ]
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Ayima Page Insights",
+  "short_name": "Page Insights",
+  "version": "1.4.1",
+  "version_name": "1.4.1",
+  "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDTM2GEp0eKDHPZ9hOabDHb40F0xEXz4X6RBJsrVlgEaCrzumWWiWfYkomHoK5xqBwsSMSjkwyrvIRa0XB2WW9ubulQbMrxGcFlqNsja5bio+ZF4UOEF0+wakoi5fK7RSbOmG3b2Nm6hJDd7AqfB+Z7QKYx0ZGIrH8WRHSNsLOXwwIDAQAB",
+  "manifest_version": 2,
+  "minimum_chrome_version": "32",
+  "description": "Highlight on-page issues on the fly",
+  "options_page": "app/options.html",
+  "oauth2": {
+    "client_id": "1039883590441-50uec87i81c43es10jpahpju01qqa99g.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/webmasters.readonly"
+    ]
+  },
+  "icons": {
+    "128": "assets/img/page-insights-icon.png"
+  },
+  "browser_action": {
+    "default_popup": "app/popup.html",
+    "default_title": "View Alerts"
+  },
+  "background": {
+    "scripts": [
+      "/assets/vendor/jquery/jquery.1.9.1.min.js",
+      "app/ayima.js",
+      "app/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "/assets/vendor/jquery/jquery.1.9.1.min.js",
+        "app/ayima.js",
+        "app/pageScanner.js",
+        "app/rules.js",
+        "app/content/onPageChecks.js"
+      ],
+      "css": [
+        "/assets/css/content.css"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://www.googletagservices.com https://adservice.google.co.uk https://adservice.google.com https://*.doubleclick.net https://*.googlesyndication.com/ 'sha256-QyEq3RIFJWNW5b0TuRnRGTZS6COnlhXqDbxDoa9tr+Q=' 'sha256-DDNG2paLgkZPkGIYdWjFzEJV0LiVhAEp3skFKJejwzg=' 'sha256-91RZD3n20qo0EoC4BRmMLdz6zXcCf3gTFWyz9KeYhyk='; object-src 'self'",
+  "permissions": [
+    "tabs",
+    "<all_urls>",
+    "background",
+    "webRequest",
+    "storage",
+    "identity",
+    "clipboardWrite"
+  ]
+}

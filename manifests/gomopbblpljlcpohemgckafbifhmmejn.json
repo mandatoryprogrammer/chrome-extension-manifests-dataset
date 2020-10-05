@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "default_locale": "ja",
+  "name": "__MSG_extName__",
+  "version": "0.1.0",
+  "manifest_version": 2,
+  "minimum_chrome_version": "22",
+  "description": "__MSG_extDesc__",
+  "homepage_url": "https://github.com/tknhs/K.I.Tools",
+  "icons": {
+    "16": "assets/icon/icon16.png",
+    "48": "assets/icon/icon48.png",
+    "128": "assets/icon/icon128.png"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com https://apis.google.com; object-src 'self'",
+  "permissions": [
+    "tabs",
+    "http://portal10.mars.kanazawa-it.ac.jp/",
+    "https://ras.kanazawa-it.ac.jp/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://portal10.mars.kanazawa-it.ac.jp/portal/student",
+        "https://ras.kanazawa-it.ac.jp/portal/,DanaInfo=portal10.mars.kanazawa-it.ac.jp+student"
+      ],
+      "js": [
+        "assets/js/lib/jquery.min.js",
+        "assets/js/content.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://accounts.google.com/o/oauth2/*"
+      ],
+      "js": [
+        "assets/js/gcalapi.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "assets/js/lib/jquery.min.js",
+      "assets/js/lib/underscore.min.js",
+      "assets/js/background.js"
+    ]
+  },
+  "options_page": "options.html"
+}

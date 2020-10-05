@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Filter Affinity",
+  "short_name": "Filter Affinity",
+  "description": "Filters out unwanted artists/images while browsing on Furaffinity.net",
+  "version": "1.4.2",
+  "icons": {
+    "128": "128icon.png"
+  },
+  "permissions": [
+    "notifications",
+    "storage",
+    "tabs"
+  ],
+  "background": {
+    "scripts": [
+      "background-script.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "128icon.png",
+    "default_title": "Filter Affinity",
+    "default_popup": "popup/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.furaffinity.net/",
+        "*://*.furaffinity.net/browse/*",
+        "*://*.furaffinity.net/search/*",
+        "*://*.furaffinity.net/gallery/*",
+        "*://*.furaffinity.net/favorites/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "content-script.js"
+      ],
+      "css": [
+        "content-css.css"
+      ]
+    }
+  ]
+}

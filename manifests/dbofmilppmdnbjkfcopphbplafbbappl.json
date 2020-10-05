@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Meteoprog",
+  "description": "Всегда точный прогноз погоды от сайта Meteoprog.ua",
+  "version": "1.6",
+  "icons": {
+    "32": "images/cloud.png",
+    "48": "images/meteoprog_logo.png",
+    "128": "images/logo128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "32": "images/cloud.png",
+      "48": "images/meteoprog_logo.png",
+      "128": "images/logo128.png"
+    },
+    "default_popup": "templates/main_page.html",
+    "default_title": "METEOPROG.UA. Погода в Украине и мире. Прогноз погоды"
+  },
+  "background": {
+    "scripts": [
+      "js/jquery.min.js",
+      "js/i18n.js",
+      "js/config.js",
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "js/handlebars-v4.0.10.js",
+        "js/config.js",
+        "js/i18n.js",
+        "js/constructor_main.js",
+        "js/select2.full.min.js",
+        "js/i18n/ru.js",
+        "js/i18n/uk.js",
+        "js/i18n/en.js",
+        "js/constructor_config.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "templates/config_page.html"
+  ],
+  "options_page": "templates/config_page.html",
+  "permissions": [
+    "unlimitedStorage",
+    "notifications",
+    "activeTab",
+    "https://ajax.googleapis.com/",
+    "http://www.meteoprog.ua/",
+    "https://www.meteoprog.ua/",
+    "tabs",
+    "storage",
+    "contextMenus",
+    "alarms"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://ssl.google-analytics.com; object-src 'self'"
+}

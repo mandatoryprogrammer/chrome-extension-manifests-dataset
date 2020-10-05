@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_manifest_name__",
+  "version": "1.2.2",
+  "author": "LoadMonkey",
+  "description": "__MSG_manifest_description__",
+  "homepage_url": "https://www.hlsloader.com/",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "background": {
+    "page": "background.html"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "images/action_off_19.png"
+    },
+    "default_title": "__MSG_manifest_browser_action__"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.hlsloader.com/*rec.html*"
+      ],
+      "js": [
+        "libs/url-toolkit.js",
+        "libs/spark-md5.js",
+        "libs/hls.js",
+        "js/loader.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "js/inject.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    }
+  ],
+  "icons": {
+    "16": "images/icon_16.png",
+    "32": "images/icon_32.png",
+    "128": "images/icon_128.png"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "content_security_policy": "default-src 'self' ; img-src 'self' http://* https://* data: ; script-src 'self' ; object-src 'self' ; style-src 'self' http://* https://* 'unsafe-inline' ; connect-src 'self' http://* https://* blob: ;",
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ]
+}

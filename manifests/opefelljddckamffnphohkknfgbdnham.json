@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Bittrex Enhanced",
+  "description": "Enhance your Bittrex experience by including USD values alongside BTC & ETH prices, and using the TradingView chart widget instead.",
+  "version": "1.10.0",
+  "browser_action": {
+    "default_title": "Enhance Trex",
+    "default_popup": "settings.html"
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "https://bittrex.com/*"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "icons": {
+    "128": "icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.bittrex.com/Market/Index?MarketName=BTC-*",
+        "https://*.bittrex.com/Market/Index?MarketName=ETH-*",
+        "https://*.bittrex.com/Market/Index?MarketName=USDT-*",
+        "https://*.bittrex.com/Balance",
+        "https://*.bittrex.com/History",
+        "https://*.bittrex.com/home/markets*",
+        "https://*.bittrex.com/Home/Markets*",
+        "https://*.bittrex.com/"
+      ],
+      "js": [
+        "enhancer.js",
+        "tv.js"
+      ],
+      "css": [
+        "enhanced-styles.css"
+      ]
+    }
+  ],
+  "content_security_policy": "default-src 'none'; style-src 'self' 'unsafe-inline'; script-src 'self'; script-src https://*.tradingview.com;"
+}

@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Extraflix - External Ratings for Netflix",
+  "short_name": "Extraflix",
+  "description": "Extraflix shows external user ratings for Movies and TV Shows right where you need them: on the Netflix website.",
+  "version": "0.6",
+  "author": "Sam Gielis",
+  "manifest_version": 2,
+  "options_ui": {
+    "page": "./options/options.html",
+    "chrome_style": true
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "https://*.netflix.com/browse/*",
+    "https://*.netflix.com/search/*",
+    "https://*.netflix.com/title/*",
+    "https://*.netflix.com/watch/*",
+    "https://github.com/FortAwesome/Font-Awesome/tree/master/fonts/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.netflix.com/browse/*",
+        "https://*.netflix.com/search/*",
+        "https://*.netflix.com/title/*",
+        "https://*.netflix.com/watch/*"
+      ],
+      "js": [
+        "extraflix.js",
+        "./utils/jquery.min.js",
+        "./utils/efx-general-utils.js",
+        "./utils/efx-player-utils.js",
+        "./utils/magnific-popup.obf.js"
+      ],
+      "css": [
+        "./css/extraflix.css",
+        "./css/fonts.css",
+        "./css/extraflix-deps.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "extraflix.js",
+    "./css/extraflix.css",
+    "./utils/jquery.js",
+    "./utils/magnific-popup.obf.js",
+    "./utils/efx-general-utils.js",
+    "./utils/efx-player-utils.js",
+    "./css/*",
+    "/fonts/*.woff2"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

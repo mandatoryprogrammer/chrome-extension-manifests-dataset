@@ -1,0 +1,107 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Vocabulary.com Enhancer",
+  "short_name": "Voc.com Enhancer",
+  "author": "Thor Galle",
+  "description": "Translations and other useful features for vocabulary.com (unofficial)",
+  "icons": {
+    "16": "icons/favicon-16x16.png",
+    "32": "icons/favicon-32x32.png",
+    "64": "icons/favicon-64x64.png",
+    "128": "icons/favicon-128x128.png"
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "chrome_style": true
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "content/voc-adder.js"
+      ],
+      "css": [
+        "styles.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.vocabulary.com/*"
+      ],
+      "js": [
+        "content/misc.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.vocabulary.com/",
+        "*://*.vocabulary.com/play/",
+        "*://www.vocabulary.com/lists/*/practice*"
+      ],
+      "js": [
+        "content/element-creator.js",
+        "content/quiz-injector.js",
+        "common.js"
+      ],
+      "css": [
+        "styles.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.vocabulary.com/dictionary/*"
+      ],
+      "js": [
+        "api/translate.js",
+        "content/element-creator.js",
+        "content/definition-injector.js",
+        "common.js"
+      ],
+      "css": [
+        "styles.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.vocabulary.com/lists/*"
+      ],
+      "exclude_matches": [
+        "*://*.vocabulary.com/lists/*/edit"
+      ],
+      "js": [
+        "api/translate.js",
+        "content/element-creator.js",
+        "content/list-injector.js",
+        "common.js"
+      ],
+      "css": [
+        "styles.css"
+      ]
+    }
+  ],
+  "permissions": [
+    "contextMenus",
+    "activeTab",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "notifications",
+    "*://*.vocabulary.com/",
+    "http://*/*",
+    "https://*/*",
+    "storage"
+  ],
+  "web_accessible_resources": [
+    "icons/*"
+  ],
+  "version": "0.6.1"
+}

@@ -1,0 +1,39 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "squish",
+  "description": "Make tall tweets short.",
+  "version": "1.0",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html",
+    "default_title": "Make tall tweets short."
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.twitter.com/*",
+        "https://twitter.com/*"
+      ],
+      "js": [
+        "jquery.js",
+        "contentScript.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "http://twitter.com/",
+    "https://twitter.com/",
+    "tabs",
+    "activeTab",
+    "storage"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

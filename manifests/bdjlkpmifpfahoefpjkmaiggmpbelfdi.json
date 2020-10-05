@@ -1,0 +1,136 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Zistemo extension",
+  "version": "1.0.65",
+  "description": "zistemo is the smartest app for instant time tracking and expense tracking. Stay organized, boost productivity and save time.",
+  "manifest_version": 2,
+  "author": "Vitaly Penchuk",
+  "background": {
+    "page": "background.html"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "*://*.zistemo.com/*",
+    "*://*.moneypenny.me/*",
+    "*://app.asana.com/*",
+    "*://trello.com/*",
+    "*://*.zistemobox.com/*",
+    "https://*.atlassian.net/*",
+    "https://*.atlassian.io/*",
+    "https://*.atlassian.com/*",
+    "https://*.jira.com/*",
+    "https://*.atl-paas/*"
+  ],
+  "icons": {
+    "16": "images/default.png",
+    "20": "images/default.png",
+    "32": "images/default.png",
+    "48": "images/default_48.png",
+    "128": "images/default_48.png"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "vendors/jquery-3.3.1.js",
+        "vendors/jquery-ui.js",
+        "vendors/moment.js",
+        "vendors/lodash.js",
+        "vendors/vue.js",
+        "vendors/popper.min.js",
+        "vendors/tippy.all.min.js",
+        "vendors/notify.js",
+        "scripts/functions.js",
+        "scripts/kernel/Tab.js",
+        "scripts/kernel/DomObserver.js",
+        "scripts/kernel/EventDispatcher.js",
+        "scripts/kernel/Settings.js",
+        "scripts/ZistemoContentScript.js",
+        "scripts/kernel/VueComponents.js",
+        "scripts/kernel/ContentScriptProxyApi.js",
+        "scripts/kernel/Browser.js",
+        "scripts/contentScript/BaseApp.js"
+      ],
+      "matches": [
+        "*://app.asana.com/*",
+        "*://trello.com/*",
+        "https://*.atlassian.net/*",
+        "https://*.atlassian.io/*",
+        "https://*.atlassian.com/*",
+        "https://*.jira.com/*",
+        "https://*.atl-paas/*"
+      ]
+    },
+    {
+      "js": [
+        "scripts/contentScript/asana/Helpers.js",
+        "scripts/contentScript/asana/Controls.js",
+        "scripts/contentScript/asana/App.js"
+      ],
+      "matches": [
+        "*://app.asana.com/*"
+      ]
+    },
+    {
+      "js": [
+        "scripts/contentScript/jira/Helpers.js",
+        "scripts/contentScript/jira/Controls.js",
+        "scripts/contentScript/jira/App.js"
+      ],
+      "matches": [
+        "https://*.atlassian.net/*",
+        "https://*.atlassian.io/*",
+        "https://*.atlassian.com/*",
+        "https://*.jira.com/*",
+        "https://*.atl-paas/*"
+      ]
+    },
+    {
+      "js": [
+        "scripts/contentScript/trello/Helpers.js",
+        "scripts/contentScript/trello/Controls.js",
+        "scripts/contentScript/trello/App.js"
+      ],
+      "matches": [
+        "*://trello.com/*"
+      ]
+    },
+    {
+      "js": [
+        "vendors/jquery-3.3.1.js",
+        "vendors/lodash.js",
+        "scripts/functions.js",
+        "scripts/kernel/Tab.js",
+        "scripts/kernel/EventDispatcher.js",
+        "scripts/kernel/Settings.js",
+        "scripts/ZistemoContentScript.js",
+        "scripts/kernel/ContentScriptProxyApi.js",
+        "scripts/kernel/Browser.js",
+        "scripts/contentScript/zistemo/App.js"
+      ],
+      "matches": [
+        "*://*.zistemo.com/*",
+        "*://*.moneypenny.me/*"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self';",
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "images/signed_out.png",
+      "20": "images/signed_out.png",
+      "32": "images/signed_out.png",
+      "48": "images/signed_out_48.png",
+      "128": "images/signed_out_48.png"
+    }
+  },
+  "web_accessible_resources": [
+    "images/*",
+    "css/jquery-ui.css",
+    "css/common.css",
+    "scripts/contentScript/asana/css/asana.css",
+    "scripts/contentScript/trello/css/trello.css",
+    "scripts/contentScript/jira/css/jira.css"
+  ]
+}

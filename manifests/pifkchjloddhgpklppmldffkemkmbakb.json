@@ -1,0 +1,182 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Keep it simple",
+  "description": "Web less hyper",
+  "version": "0.3.0",
+  "browser_action": {
+    "default_icon": "icons/wheel128.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "128": "icons/wheel128.png"
+  },
+  "options_page": "options.html",
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true,
+    "browser_style": true,
+    "chrome_style": false
+  },
+  "permissions": [
+    "background",
+    "tabs",
+    "webNavigation",
+    "storage",
+    "history",
+    "http://*/",
+    "https://*/"
+  ],
+  "web_accessible_resources": [
+    "icons/*",
+    "dist/*.js",
+    "src/styles/*",
+    "src/styles/yt-thumbs.css",
+    "src/styles/yt-old-hidden-side-recos.css",
+    "src/styles/yt-old-side-recos-container.css",
+    "src/styles/ted-side-recos.css"
+  ],
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "bg.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "dist/remove-controls.js"
+      ],
+      "matches": [
+        "*://*/*"
+      ],
+      "css": [
+        "src/styles/remove-controls.css"
+      ]
+    },
+    {
+      "js": [
+        "dist/main-injector.js"
+      ],
+      "matches": [
+        "*://*/*"
+      ],
+      "exclude_matches": [
+        "http://localhost/*",
+        "http://127.0.0.1:5500/*",
+        "*://www.ted.com/",
+        "*://www.ted.com/*",
+        "*://mail.google.com/",
+        "*://mail.google.com/*",
+        "*://gmail.com/*",
+        "*://gmail.com/",
+        "*://www.youtube.com/*",
+        "https://*.glitch.me/*"
+      ],
+      "exclude_globs": [
+        "*://www.google.*/maps/*",
+        "*://www.fastcompany.com*"
+      ]
+    },
+    {
+      "js": [
+        "dist/gifOnce.js",
+        "dist/video-stop.js"
+      ],
+      "matches": [
+        "*://*/*"
+      ],
+      "exclude_matches": [
+        "http://localhost/*",
+        "http://127.0.0.1:5500/*",
+        "*://www.ted.com/",
+        "*://www.ted.com/*",
+        "*://mail.google.com/",
+        "*://mail.google.com/*",
+        "*://gmail.com/*",
+        "*://gmail.com/",
+        "*://www.youtube.com/*",
+        "https://*.glitch.me/*",
+        "*://*.facebook.com/*"
+      ],
+      "exclude_globs": [
+        "*://www.google.*/maps/*",
+        "*://www.fastcompany.com*"
+      ]
+    },
+    {
+      "css": [
+        "src/styles/articles.css"
+      ],
+      "js": [
+        "dist/articles.js"
+      ],
+      "matches": [
+        "*://*/*"
+      ],
+      "run_at": "document_start",
+      "exclude_matches": [
+        "http://localhost/*",
+        "http://127.0.0.1:5500/*",
+        "*://www.ted.com/",
+        "*://www.ted.com/*",
+        "*://www.youtube.com/*",
+        "https://*.glitch.me/*"
+      ],
+      "exclude_globs": [
+        "*://www.google.*/maps/*",
+        "*://www.fastcompany.com*"
+      ]
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "https://www.youtube.com/*"
+      ],
+      "include_globs": [
+        "https://www.youtube.com/embed/*"
+      ],
+      "css": [
+        "src/styles/yt-embedded.css"
+      ],
+      "js": [
+        "dist/yt-embedded.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.youtube.com/*"
+      ],
+      "run_at": "document_start",
+      "css": [
+        "src/styles/yt.css",
+        "src/styles/yt-homepage-styles.css"
+      ],
+      "js": [
+        "dist/yt.js",
+        "dist/yt-moving-thumbs.js",
+        "dist/yt-recosBWFilter.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.ted.com/*"
+      ],
+      "run_at": "document_start",
+      "css": [
+        "src/styles/ted.css"
+      ],
+      "js": [
+        "dist/ted.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://qz.com/*"
+      ],
+      "css": [
+        "src/styles/qz.css"
+      ]
+    }
+  ]
+}

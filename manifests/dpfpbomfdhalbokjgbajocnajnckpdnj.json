@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_extName__",
+  "description": "__MSG_extDescription__",
+  "version": "1.6.2",
+  "default_locale": "en",
+  "icons": {
+    "16": "images/icon_16.png",
+    "48": "images/icon_48.png",
+    "128": "images/icon_128.png"
+  },
+  "browser_action": {
+    "default_icon": "images/icon_32.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "options_page": "options.html",
+  "permissions": [
+    "tabs",
+    "<all_urls>"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_globs": [
+        "file://*",
+        "http://google.*/*",
+        "http://*.google.*/*",
+        "https://google.*/*",
+        "https://*.google.*/*",
+        "http://acidtests.org/*",
+        "http://*.acidtests.org/*"
+      ],
+      "js": [
+        "includes/common.js",
+        "includes/link_modifier.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

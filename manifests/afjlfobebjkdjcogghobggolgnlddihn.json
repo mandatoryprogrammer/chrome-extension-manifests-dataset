@@ -1,0 +1,43 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Tagdit",
+  "description": "TAGDit enables teams to build a shared knowledge base of web pages and information that can benefit all.",
+  "version": "2.2",
+  "permissions": [
+    "tabs",
+    "alarms",
+    "background",
+    "storage",
+    "activeTab",
+    "webNavigation",
+    "<all_urls>"
+  ],
+  "browser_action": {
+    "default_icon": "content/img/icon.png"
+  },
+  "background": {
+    "scripts": [
+      "extension.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' 'sha256-cEb1GGJoHcBzb5lotEPwcI/lxURyIIZLZUe4fGcexK0='; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "extension.js",
+        "content.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    "index.html"
+  ]
+}

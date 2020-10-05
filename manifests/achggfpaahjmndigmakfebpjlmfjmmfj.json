@@ -1,0 +1,103 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "HG Focus – Instant Technology Install Lookup",
+  "short_name": "HG Focus",
+  "description": "HG Focus is the quickest way to get instant insight into what technologies are installed at companies you are visiting on the web.",
+  "version": "5.37.20",
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com/analytics.js; object-src 'self'",
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "storage",
+    "alarms",
+    "https://*/"
+  ],
+  "icons": {
+    "16": "assets/images/hg-swirl-blue-16x16.png",
+    "48": "assets/images/hg-swirl-blue-48x48.png",
+    "128": "assets/images/hg-swirl-blue-128x128.png"
+  },
+  "browser_action": {
+    "default_popup": "chromex.html"
+  },
+  "background": {
+    "scripts": [
+      "assets/background.bundle.js"
+    ],
+    "persistent": true
+  },
+  "externally_connectable": {
+    "ids": [
+      "dajgookkolcoopglmfbeejafclaahcke"
+    ],
+    "matches": [
+      "*://*.api.hgdata.com/*",
+      "*://*.hgdata.com/*",
+      "https://localhost/*/focus_ui/*",
+      "http://localhost/*",
+      "*://iuliant-discovery.api/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://localhost:8020/*",
+        "https://*/*/focus_ui/*"
+      ],
+      "js": [
+        "assets/confirmation_content_script.bundle.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "assets/scraping_urls_content_script.bundle.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://*.salesforce.com/*",
+        "https://*.force.com/*",
+        "https://*.office365.com/*",
+        "https://*.office.com/*",
+        "https://*.live.com/*",
+        "https://*.quotafactoryapp.com/*",
+        "https://*.linkedin.com/*",
+        "https://*.salesloft.com/app/*",
+        "https://*.frontspin.com/*",
+        "https://*.intelliconnection.com/*",
+        "https://*.visitor-track.com/*"
+      ],
+      "exclude_matches": [
+        "*://login.salesforce.com/*"
+      ],
+      "css": [
+        "assets/hgdata-popup.css"
+      ],
+      "js": [
+        "assets/popup_activator_content_script.bundle.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://localhost/*",
+        "*://*.hgdata.com/*",
+        "*://*.api/*"
+      ],
+      "js": [
+        "assets/discovery_content_script.bundle.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "popup.html",
+    "assets/*.js.map",
+    "assets/images/*.png"
+  ]
+}

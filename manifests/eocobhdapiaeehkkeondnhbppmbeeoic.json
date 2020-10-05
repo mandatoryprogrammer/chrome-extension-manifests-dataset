@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "version": "1.0.34",
+  "author": "Measuring Usability LLC",
+  "name": "__MSG_extName__",
+  "description": "__MSG_extDescr__",
+  "default_locale": "en",
+  "browser_action": {
+    "default_icon": {
+      "19": "/assets/image/muiq-19.png",
+      "38": "/assets/image/muiq-38.png"
+    }
+  },
+  "icons": {
+    "128": "/assets/image/muiq-128.png",
+    "16": "/assets/image/muiq-16.png",
+    "48": "/assets/image/muiq-48.png"
+  },
+  "background": {
+    "page": "/html/background.html",
+    "persistent": true
+  },
+  "permissions": [
+    "<all_urls>",
+    "*://*/*",
+    "activeTab",
+    "tabs",
+    "webNavigation"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*",
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "*://*/admin",
+        "*://*/administrator"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "/libs/bluebird.min.js",
+        "/js/WxCommonHelper.js",
+        "/js/WxLogger.js",
+        "/js/MediaCaptureWorker.js",
+        "/js/SurveyConnector.js",
+        "/js/study-page-init.js",
+        "/js/webext-install-notifier.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "html/task-window.html",
+    "/assets/image/*",
+    "/assets/css/*"
+  ],
+  "content_security_policy": "script-src 'self'; img-src data:; object-src 'self'"
+}

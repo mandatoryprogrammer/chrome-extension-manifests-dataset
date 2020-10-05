@@ -1,0 +1,94 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Tucker",
+  "short_name": "Tucker",
+  "manifest_version": 2,
+  "description": "Tuck MTG cards away for later use, across all of your favorite sites.",
+  "version": "0.9",
+  "homepage_url": "https://tuck.cards",
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "app/lib/jquery-3.2.1.min.js",
+      "app/scripts/init.js",
+      "app/scripts/scry.js",
+      "app/scripts/storage.js",
+      "app/scripts/background.js",
+      "app/scripts/tcgplayer.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "icon-128.png",
+    "default_title": "Tucker"
+  },
+  "icons": {
+    "128": "icon-128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "app/lib/jquery-3.2.1.min.js",
+        "app/scripts/init.js"
+      ],
+      "css": [
+        "app/styles/tucker.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.reddit.com/*"
+      ],
+      "js": [
+        "app/sites/reddit.tucker.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.scryfall.com/*"
+      ],
+      "js": [
+        "app/sites/scryfall.tucker.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://gatherer.wizards.com/*"
+      ],
+      "js": [
+        "app/sites/gatherer.tucker.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.deckbox.org/*"
+      ],
+      "js": [
+        "app/sites/deckbox.tucker.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.tappedout.net/*"
+      ],
+      "js": [
+        "app/sites/tappedout.tucker.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "unlimitedStorage",
+    "contextMenus",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "web_accessible_resources": [
+    "app/images/*",
+    "app/scripts/*",
+    "app/views/*",
+    "app/sites/deckbox-inject.tucker.js"
+  ]
+}

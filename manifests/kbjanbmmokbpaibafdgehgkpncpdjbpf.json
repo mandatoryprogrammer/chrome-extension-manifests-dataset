@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "HackNotice Extension",
+  "version": "1.0.16",
+  "author": "HackNotice",
+  "description": "Extends HackNotice, shows you hacked sites as you visit them.",
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "storage",
+    "notifications"
+  ],
+  "background": {
+    "page": "index.html#/event-page",
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://app.hacknotice.com/*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "content-script.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_title": "HackNotice",
+    "default_popup": "index.html#/popup",
+    "persistent": true
+  },
+  "icons": {
+    "19": "assets/hn_logo_19.png",
+    "36": "assets/hn_logo_36.png",
+    "38": "assets/hn_logo_38.png",
+    "48": "assets/hn_logo_48.png",
+    "128": "assets/hn_logo_128.png"
+  },
+  "web_accessible_resources": [
+    "assets/hn_logo_48.png"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

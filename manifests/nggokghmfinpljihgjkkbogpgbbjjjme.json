@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Coding Shout",
+  "description": "Stop staring at your screen waiting for the result to pop up. Relax and let this extension notify you with the results",
+  "version": "1.7",
+  "manifest_version": 2,
+  "icons": {
+    "16": "icon_16.png",
+    "32": "icon_32.png",
+    "48": "icon_48.png",
+    "128": "icon_128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.codeforces.com/*/my"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "codeforces.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.atcoder.jp/contests/*/submissions/me"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "atcoder.js"
+      ]
+    }
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  },
+  "browser_action": {
+    "default_popup": "options.html",
+    "default_icon": {
+      "16": "icon_16.png",
+      "32": "icon_32.png",
+      "48": "icon_48.png",
+      "128": "icon_128.png"
+    }
+  },
+  "background": {
+    "scripts": [
+      "script.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "notifications",
+    "storage",
+    "tts",
+    "webRequest",
+    "*://*.codechef.com/submit/complete/*",
+    "*://*.codechef.com/get_submission_status/*"
+  ]
+}

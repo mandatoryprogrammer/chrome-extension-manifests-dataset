@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "description": "__MSG_appDescription__",
+  "author": "Michael Pospisil",
+  "icons": {
+    "16": "images/linkz_logo_16.png",
+    "200": "images/linkz_logo_200.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "scripts/chromereload.js",
+      "scripts/background.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "bookmarks",
+    "contextMenus",
+    "clipboardRead",
+    "clipboardWrite",
+    "cookies",
+    "*://*.google.com/",
+    "storage",
+    "webNavigation",
+    "webRequest"
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "scripts/contentscript.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "omnibox": {
+    "keyword": "OMNIBOX-KEYWORD"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "images/linkz_logo_16.png",
+      "19": "images/linkz_logo_19.png",
+      "24": "images/linkz_logo_24.png",
+      "32": "images/linkz_logo_32.png",
+      "38": "images/linkz_logo_38.png",
+      "200": "images/linkz_logo_200.png"
+    },
+    "default_title": "Links (Click to search your Bookmarks)",
+    "default_popup": "popup.html"
+  }
+}

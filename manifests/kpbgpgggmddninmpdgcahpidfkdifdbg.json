@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_extName__",
+  "short_name": "BLAST",
+  "version": "0.0.5",
+  "manifest_version": 2,
+  "description": "__MSG_description__",
+  "default_locale": "en",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "https://*.amazon.com/"
+  ],
+  "commands": {
+    "toggle-enhanced-merchant-picker": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+S",
+        "mac": "Command+Shift+S"
+      },
+      "description": "Show the Enhanced Merchant Picker"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://sellercentral.amazon.com/*",
+        "https://sellercentral-europe.amazon.com/*",
+        "https://sellercentral.amazon.co.uk/*",
+        "https://sellercentral.amazon.fr/*",
+        "https://sellercentral.amazon.it/*",
+        "https://sellercentral.amazon.es/*",
+        "https://sellercentral.amazon.de/*",
+        "https://sellercentral.amazon.co.uk/*",
+        "https://sellercentral-japan.amazon.com/*",
+        "https://sellercentral.amazon.co.jp/*"
+      ],
+      "exclude_matches": [
+        "*://*/*signin*"
+      ],
+      "css": [
+        "/css/content.css"
+      ],
+      "js": [
+        "js/jquery/jquery.min.js",
+        "src/inject/content.js"
+      ]
+    }
+  ]
+}

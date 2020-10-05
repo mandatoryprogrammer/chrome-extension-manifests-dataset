@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Kiliso's App",
+  "icons": {
+    "16": "assets/16.png",
+    "48": "assets/48.png",
+    "128": "assets/128.png"
+  },
+  "version": "0.3",
+  "description": "Auto reverts amazon.com to my affiliate link to help my stream on https://twitch.tv/Kiliso. More to come in the future.",
+  "permissions": [
+    "activeTab"
+  ],
+  "background": {
+    "scripts": [
+      "checkIfTwitch.js"
+    ],
+    "persistent": false
+  },
+  "page_action": {
+    "default_icon": {},
+    "default_title": "twitch_bard"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.amazon.com/"
+      ],
+      "js": [
+        "amazon.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.twitch.tv/kiliso"
+      ],
+      "js": [
+        "jQuery.min.js",
+        "twitch.js"
+      ],
+      "css": [],
+      "exclude_globs": [
+        "https://www.twitch.tv/directory/*",
+        "https://www.twitch.tv/p/*",
+        "https://www.twitch.tv/products/*",
+        "https://www.twitch.tv/*/manager*",
+        "https://www.twitch.tv/*/dashboard",
+        "https://www.twitch.tv/broadcast",
+        "https://www.twitch.tv/messages/*",
+        "https://www.twitch.tv/settings"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "assets/PandaFams.png"
+  ]
+}

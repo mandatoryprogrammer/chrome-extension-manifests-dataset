@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Quickfix CSS Editor",
+  "short_name": "Quickfix",
+  "version": "0.5.1",
+  "description": "Quickly tweak and fix website CSS. Publish the fixes to your live website in no time.",
+  "homepage_url": "http://www.quickfix.io/",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "background": {
+    "page": "quickfix.html"
+  },
+  "browser_action": {
+    "default_title": "Quickfix",
+    "default_icon": "icon48_1.png"
+  },
+  "permissions": [
+    "tabs",
+    "http://*/",
+    "https://*/*",
+    "contextMenus",
+    "storage",
+    "clipboardWrite",
+    "clipboardRead"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "all_frames": true,
+      "css": [
+        "data/chrome/css/editor.css",
+        "data/shared/icons/pe-icon-7-stroke.css"
+      ],
+      "js": [
+        "data/chrome/port-wrapper.js",
+        "data/chrome/quickfix-chrome.js",
+        "data/shared/libs/jquery-2.1.1.js",
+        "data/shared/overlay.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "web_accessible_resources": [
+    "editor.html",
+    "data/shared/icons/pe-icon-7-stroke.css",
+    "data/shared/icons/Pe-icon-7-stroke.ttf",
+    "frame.html"
+  ],
+  "manifest_version": 2
+}

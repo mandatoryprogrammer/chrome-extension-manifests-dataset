@@ -1,0 +1,80 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "TMetric – Time Tracker & Productivity App",
+  "short_name": "TMetric",
+  "description": "Simple time tracking extension which helps you be more productive, complete projects in time and bill your clients correctly.",
+  "author": "Devart",
+  "version": "4.0.4",
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "64": "images/icon64.png",
+    "128": "images/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/inactive19.png",
+      "38": "images/inactive38.png"
+    },
+    "default_popup": "popup/popup.html",
+    "default_title": "Not Connected"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "webNavigation",
+    "notifications",
+    "storage",
+    "*://*.tmetric.com/*"
+  ],
+  "optional_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "lib/jquery.min.js",
+      "lib/signalr.min.js",
+      "background/oidcClient.js",
+      "background/webToolDescriptions.js",
+      "background/webToolManager.js",
+      "background/contentScriptsPolyfill.js",
+      "background/contentScriptsRegistrator.js",
+      "background/simpleEvent.js",
+      "background/serverConnection.js",
+      "background/signalRHubProxy.js",
+      "background/signalRConnection.js",
+      "background/backgroundBase.js",
+      "background/extensionBase.js",
+      "background/chromeExtension.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "popup/popup.html"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.tmetric.com/*"
+      ],
+      "js": [
+        "in-page-scripts/version.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.tmetric.com/extension/callback.html?*"
+      ],
+      "js": [
+        "in-page-scripts/authorizationCode.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "options_ui": {
+    "page": "settings/settings.html",
+    "open_in_tab": true
+  }
+}

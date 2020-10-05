@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Deezerify",
+  "version": "2.2.4",
+  "manifest_version": 2,
+  "description": "This extension improves look and feel of Deezer",
+  "icons": {
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "src/options_custom/lib/store.js",
+      "src/options_custom/manifest.js",
+      "src/bg/background.js"
+    ],
+    "persistent": true
+  },
+  "options_page": "src/options_custom/index.html",
+  "permissions": [
+    "contentSettings",
+    "notifications",
+    "history",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.deezer.com/*"
+      ],
+      "css": [
+        "src/inject/plus-button/plus-button.css",
+        "src/inject/dark-theme/dark-theme.css"
+      ],
+      "js": [
+        "src/inject/common/inject-code.js",
+        "src/inject/common/startup-task.js",
+        "src/inject/dark-theme/dark-theme.js",
+        "src/inject/menu-content/menu-content.js",
+        "src/inject/plus-button/plus-button.js"
+      ]
+    }
+  ]
+}

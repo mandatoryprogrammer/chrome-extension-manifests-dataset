@@ -1,0 +1,49 @@
+{
+  "browser_action": {
+    "default_icon": "delicious.png",
+    "default_title": "StartEngine Chat"
+  },
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "description": "Chat in real-time with your StartEngine colleagues.",
+  "background": {
+    "scripts": [
+      "background.js",
+      "options_shortcut.js"
+    ]
+  },
+  "name": "StartEngine Chat",
+  "permissions": [
+    "http://delicious.com/*",
+    "http://feeds.delicious.com/*",
+    "tabs",
+    "http://*/",
+    "https://*/",
+    "webRequest",
+    "*://*.delicious.com/api/v1/posts/addoredit*",
+    "*://*.delicious.com/api/v1/posts/delete*",
+    "https://ajax.googleapis.com/*"
+  ],
+  "minimum_chrome_version": "17",
+  "icons": {
+    "48": "delicious48.png",
+    "128": "delicious128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "addDelicious.js",
+        "getSelection.js"
+      ],
+      "css": [
+        "style.css"
+      ]
+    }
+  ],
+  "manifest_version": 2,
+  "content_security_policy": "default-src 'self';   script-src 'self' https://ajax.googleapis.com;   style-src 'self' 'unsafe-inline';   img-src 'self' data: chrome: filesystem:;   connect-src 'self' http: https: chrome-extension:;   frame-src http: https:",
+  "version": "0.0.1"
+}

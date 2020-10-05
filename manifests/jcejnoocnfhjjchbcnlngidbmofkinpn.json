@@ -1,0 +1,91 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "version": "0.0.6",
+  "manifest_version": 2,
+  "description": "__MSG_appDescription__",
+  "icons": {
+    "16": "images/icon-16.png",
+    "19": "images/icon-19.png",
+    "38": "images/icon-38.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
+  },
+  "default_locale": "en",
+  "author": "Kit.co",
+  "homepage_url": "https://kit.co",
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "permissions": [
+    "activeTab",
+    "cookies",
+    "http://localhost:5000/",
+    "https://*.kit.co/",
+    "webNavigation"
+  ],
+  "web_accessible_resources": [
+    "styles/contentscript.css",
+    "template/addProductDialog.tpl.html"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "css": [],
+      "js": [
+        "scripts/documentstart.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "*://*.amazon.com/*/**"
+      ],
+      "css": [
+        "styles/amazon_handler.css"
+      ],
+      "js": [
+        "scripts/amazon_handler.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "*://*/_/chrome/newtab*"
+      ],
+      "css": [
+        "styles/contentscript.css"
+      ],
+      "js": [
+        "bower_components/underscore/underscore-min.js",
+        "bower_components/fingerprintjs2/dist/fingerprint2.min.js",
+        "bower_components/angular/angular.min.js",
+        "bower_components/angular-resource/angular-resource.min.js",
+        "scripts/kitExtensionApp.js",
+        "scripts/contentscript.js"
+      ],
+      "web_accessible_resources": [
+        "template/addProductDialog.tpl.html"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon-19.png",
+      "38": "images/icon-38.png"
+    },
+    "default_title": "Add this product to Kit"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Cherry Highlighter",
+  "version": "0.1.7",
+  "manifest_version": 2,
+  "description": "Highlight, Save and Retrieve anything you find on the internet",
+  "icons": {
+    "128": "img/cherry_logo_color_large.png"
+  },
+  "browser_action": {
+    "default_icon": "img/cherry_logo_color_small@3x.png",
+    "default_title": "Cherry",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "parse.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*",
+        "file://*/*"
+      ],
+      "exclude_matches": [
+        "*://cherry.wiki/p/"
+      ],
+      "css": [
+        "cherry.css"
+      ],
+      "js": [
+        "jquery-3.2.1.min.js",
+        "cherryApp.js",
+        "rangyLibrary/rangy-core.js",
+        "rangyLibrary/rangy-classapplier.js",
+        "rangyLibrary/rangy-highlighter.js",
+        "rangyLibrary/rangy-selectionsaverestore.js",
+        "rangyLibrary/rangy-serializer.js",
+        "rangyLibrary/rangy-textrange.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "identity.email",
+    "identity",
+    "storage"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "web_accessible_resources": [
+    "img/*",
+    "rangyLibrary/*",
+    "cherry-fonts/*"
+  ]
+}

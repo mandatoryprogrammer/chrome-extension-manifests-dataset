@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Addvocate",
+  "version": "2014.7.29",
+  "description": "Enable all coworkers to create, curate, and share content for your company",
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "options_page": "options.html",
+  "background": {
+    "scripts": [
+      "require.js",
+      "packages/addv-chrome.js",
+      "background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "images/icon16.png"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "notifications",
+    "*://*.addvocate.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.addvocate.com/*"
+      ],
+      "js": [
+        "contentscript_addvocate.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "contentscript.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

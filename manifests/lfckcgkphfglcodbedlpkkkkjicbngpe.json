@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "icons": {
+    "128": "images/icon.png"
+  },
+  "browser_action": {
+    "default_title": "Chameleon Builder",
+    "default_icon": "images/icon-mode-admin.png",
+    "default_popup": "html/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://app.trychameleon.com/*",
+        "http://dashboard.trychameleon.local/*"
+      ],
+      "js": [
+        "js/content/app.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://*/*",
+        "http://dashboard.trychameleon.local/*"
+      ],
+      "js": [
+        "js/content/end.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "externally_connectable": {
+    "ids": [],
+    "matches": [
+      "https://*.trychameleon.com/*",
+      "http://dashboard.trychameleon.local/*"
+    ]
+  },
+  "permissions": [
+    "https://*/*",
+    "http://*/*",
+    "http://dashboard.trychameleon.local/*",
+    "tabs"
+  ],
+  "web_accessible_resources": [],
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "name": "Chameleon Builder",
+  "short_name": "Chameleon Builder",
+  "version": "3.0.7",
+  "description": "Create in-product Experiences (microsurveys, tours, banners, modals etc.) without coding."
+}

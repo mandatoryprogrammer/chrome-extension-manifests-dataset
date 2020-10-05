@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Streamers Connected",
+  "version": "4.0.0",
+  "description": "The official Streamers Connected Chrome extension, showing notifications when Streamers Connected goes live.",
+  "icons": {
+    "64": "icons/64.png",
+    "128": "icons/128.png"
+  },
+  "permissions": [
+    "storage",
+    "notifications",
+    "background",
+    "http://*.twitch.tv/",
+    "https://*.streamersconnected.tv/"
+  ],
+  "options_page": "options/options.html",
+  "options_ui": {
+    "page": "options/options.html"
+  },
+  "background": {
+    "scripts": [
+      "external/jquery.min.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "/external/jquery.min.js",
+        "content.js"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "run_at": "document_end",
+      "matches": [
+        "*://*.twitch.tv/*",
+        "*://*.twitch.tv/*"
+      ]
+    }
+  ],
+  "manifest_version": 2,
+  "browser_action": {
+    "default_icon": "icons/128.png",
+    "default_title": "Streamers Connected",
+    "default_popup": "popup/popup.html"
+  },
+  "content_security_policy": "script-src 'self' https://*.twitter.com https://*.twimg.com; object-src 'self'",
+  "web_accessible_resources": [
+    "64.png",
+    "icons/chat-badge.png",
+    "icons/chat-badge-square.png"
+  ]
+}

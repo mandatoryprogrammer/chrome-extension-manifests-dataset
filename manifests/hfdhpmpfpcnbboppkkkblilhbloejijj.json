@@ -1,0 +1,86 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Backit Plugin",
+  "content_security_policy": "script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com; object-src 'self'",
+  "description": "__MSG_extDescription__",
+  "default_locale": "en",
+  "version": "2.6.4",
+  "author": "Backit Development Team",
+  "homepage_url": "https://backit.me",
+  "minimum_chrome_version": "80",
+  "incognito": "not_allowed",
+  "icons": {
+    "16": "icons/logo-16.png",
+    "32": "icons/logo-32.png",
+    "42": "icons/logo-42.png",
+    "48": "icons/logo-48.png",
+    "70": "icons/logo-70.png",
+    "120": "icons/logo-120.png",
+    "128": "icons/logo-128.png"
+  },
+  "permissions": [
+    "proxy",
+    "management",
+    "notifications",
+    "cookies",
+    "tabs",
+    "storage",
+    "webNavigation",
+    "http://*.backit.me/*",
+    "https://*.backit.me/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "http://*.backit.me/*",
+      "https://*.backit.me/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "./cs_index.js",
+        "./cs_search_integration.js"
+      ],
+      "css": [
+        "./cs_index.css",
+        "assets/contentScriptsStyle/searchIntegration.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "browser_action": {
+    "default_title": "Backit Plugin",
+    "default_popup": "popup/popup.html",
+    "default_icon": "icons/logo-48.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Z",
+        "mac": "MacCtrl+Shift+Z"
+      }
+    }
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "chrome_style": true
+  },
+  "web_accessible_resources": [
+    "/assets/appIcons/cog-solid.svg",
+    "/assets/appIcons/times-circle-light.svg",
+    "/assets/appIcons/angle-up-light.svg",
+    "/assets/backit/main-logo.svg",
+    "/assets/tapicash/main-logo.svg"
+  ]
+}

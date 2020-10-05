@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "dewHighlight",
+  "description": "My screen scraps and highlight tools",
+  "version": "1.0",
+  "icons": {
+    "16": "./icon.png",
+    "48": "./icon.png",
+    "128": "./icon.png"
+  },
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "background",
+    "storage",
+    "clipboardRead",
+    "declarativeContent",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "page": "background.html",
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "js": [
+        "./lib/jquery-1.12.4.min.js",
+        "content.js",
+        "utils.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

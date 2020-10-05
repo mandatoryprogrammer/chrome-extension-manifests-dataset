@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "CastCraft Extension",
+  "manifest_version": 2,
+  "description": "ライブチャットのコメントをCastCraftに取り込みます",
+  "version": "1.20.0",
+  "browser_action": {
+    "default_title": "CastCraftを開く",
+    "default_popup": "index.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://studio.youtube.com/channel/*/livestreaming*",
+        "https://studio.youtube.com/video/*/livestreaming*",
+        "https://www.youtube.com/live_dashboard*",
+        "https://www.youtube.com/live_event_analytics*",
+        "https://www.youtube.com/livestreaming/dashboard*",
+        "https://www.youtube.com/live_chat*",
+        "https://studio.youtube.com/live_chat*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "content.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "https://*.youtube.com/",
+    "webRequest",
+    "storage",
+    "tabs",
+    "activeTab"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://castcraft.app/*",
+      "https://*.youtube.com/*"
+    ]
+  },
+  "background": {
+    "page": "index.html?page=background",
+    "persistent": true
+  },
+  "options_page": "index.html?page=options",
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://cdn4.mxpnl.com 'sha256-Jixa59iTq8dWp1bq4RmMEmK8phG6mG00U9vexcl7CCI='; object-src 'self'",
+  "web_accessible_resources": [
+    "assets/*",
+    "assets/images/*"
+  ],
+  "icons": {
+    "16": "assets/icons/icon-16.png",
+    "48": "assets/icons/icon-48.png",
+    "128": "assets/icons/icon-128.png"
+  }
+}

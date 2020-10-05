@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "ForoCoches Hide",
+  "short_name": "FC Hide",
+  "options_page": "options.html",
+  "description": "Bloquea los hilos que no te interesen de cualquier subforo de Forocoches.",
+  "version": "1.1.1",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "declarativeContent"
+  ],
+  "icons": {
+    "16": "img/icon.png",
+    "48": "img/icon.png",
+    "128": "img/icon.png"
+  },
+  "page_action": {
+    "default_icon": {
+      "19": "img/icon.png",
+      "38": "img/icon.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.forocoches.com/foro/forumdisplay.php?f=*",
+        "https://www.forocoches.com/foro/forumdisplay.php?f=*"
+      ],
+      "js": [
+        "js/libs/jquery-3.2.1.js",
+        "js/utils.js",
+        "js/myscript.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.forocoches.com/foro/showthread.php?t=*",
+        "http://www.forocoches.com/foro/showthread.php?t=*"
+      ],
+      "js": [
+        "js/libs/jquery-3.2.1.js",
+        "js/libs/isInViewport.js",
+        "js/utils.js",
+        "js/posts.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/eventPage.js"
+    ],
+    "persistent": false
+  }
+}

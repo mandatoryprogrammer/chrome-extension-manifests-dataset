@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Artistic Inked Wallpaper New Tab",
+  "short_name": "Inked",
+  "manifest_version": 2,
+  "version": "1.0.1",
+  "description": "Colorful illustrations from your browser to inspire new ideas",
+  "icons": {
+    "16": "images/icons/16x16.png",
+    "64": "images/icons/64x64.png",
+    "128": "images/icons/128x128.png"
+  },
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "permissions": [
+    "*://tabzmania.com/",
+    "*://.tabzmania.com/",
+    "cookies",
+    "tabs",
+    "unlimitedStorage",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "scripts/sitecontent.js"
+      ],
+      "match_about_blank": true,
+      "matches": [
+        "*://*.tabzmania.com/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "chrome_url_overrides": {
+    "newtab": "redirect.html"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "images/icons/16x16.png"
+    },
+    "default_title": "Artistic Inked Wallpaper New Tab"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://ssl.google-analytics.com https://ajax.googleapis.com; object-src 'self'"
+}

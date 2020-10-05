@@ -1,0 +1,83 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "name": "__MSG_appTitle__",
+  "short_name": "Reverso Context",
+  "description": "__MSG_appDesc__",
+  "version": "2.2.202",
+  "author": "Softissimo Inc.",
+  "homepage_url": "https://context.reverso.net/",
+  "options_page": "dist/index.html?navigateTo=options",
+  "icons": {
+    "16": "dist/assets/images/reverso-logo16x16.png",
+    "32": "dist/assets/images/reverso-logo32x32.png",
+    "48": "dist/assets/images/reverso-logo48x48.png",
+    "65": "dist/assets/images/reverso-logo.png",
+    "128": "dist/assets/images/reverso-logo.png"
+  },
+  "browser_action": {
+    "default_title": "Reverso Context",
+    "default_popup": "dist/index.html"
+  },
+  "background": {
+    "scripts": [
+      "dist/background-script.bundle.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "ftp://*/*",
+        "file://*/*"
+      ],
+      "js": [
+        "dist/content-script.bundle.js"
+      ],
+      "css": [
+        "dist/content-script.bundle.css"
+      ],
+      "all_frames": false,
+      "run_at": "document_end",
+      "match_about_blank": true
+    }
+  ],
+  "incognito": "split",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "file_browser_handlers": [
+    {
+      "default_title": "Open with PDF Viewer",
+      "file_filters": [
+        "filesystem:*.pdf"
+      ],
+      "id": "open-as-pdf"
+    }
+  ],
+  "permissions": [
+    "<all_urls>",
+    "tabs",
+    "contextMenus",
+    "background",
+    "notifications",
+    "cookies"
+  ],
+  "web_accessible_resources": [
+    "dist/assets/*",
+    "dist/index.html",
+    "content/web/viewer.html",
+    "dist/page-bar.html",
+    "dist/contentStyles.css",
+    "http:/*",
+    "https:/*",
+    "ftp:/*",
+    "file:/*",
+    "chrome-extension:/*",
+    "filesystem:/*",
+    "drive:*",
+    "blob:*",
+    "data:*"
+  ]
+}

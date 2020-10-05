@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_extension_name__",
+  "description": "__MSG_extension_description__",
+  "version": "1.0.6",
+  "minimum_chrome_version": "18",
+  "author": "Christian Volmering <christian@volmering.name>",
+  "default_locale": "en",
+  "icons": {
+    "48": "/images/extension_icon_48.png",
+    "128": "/images/extension_icon_128.png"
+  },
+  "options_page": "/pages/cisco_dialer_config.htm",
+  "permissions": [
+    "storage",
+    "notifications",
+    "*://mail.google.com/*",
+    "*://www.google.com/contacts/*",
+    "*://www.google.de/contacts/*",
+    "*://*/CGI/Execute"
+  ],
+  "optional_permissions": [
+    "*://*/CGI/Execute"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://mail.google.com/*",
+        "*://www.google.com/contacts/*",
+        "*://www.google.de/contacts/*"
+      ],
+      "js": [
+        "/scripts/cisco_dialer_sjcl.js",
+        "/scripts/cisco_dialer_content.js"
+      ],
+      "css": [
+        "/styles/cisco_dialer_content.css"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "scripts": [
+      "/scripts/cisco_dialer_event.js"
+    ],
+    "persistent": false
+  },
+  "web_accessible_resources": [
+    "/images/dial_icon.png"
+  ]
+}

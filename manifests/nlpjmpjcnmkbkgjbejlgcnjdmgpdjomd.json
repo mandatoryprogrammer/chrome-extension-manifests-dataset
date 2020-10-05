@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Catalyst Connect",
+  "description": "This extension tracks contact id from zoho and shows chat box with the contact.",
+  "version": "5.2",
+  "icons": {
+    "128": "include/images/icon128.png",
+    "48": "include/images/icon48.png",
+    "16": "include/images/icon16.png"
+  },
+  "browser_action": {
+    "default_icon": "include/images/icon16.png",
+    "default_popup": "popup.html",
+    "default_title": "Catalyst Connect"
+  },
+  "background": {
+    "scripts": [
+      "include/jquery-3.1.0.min.js",
+      "eventPage.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://crm.zoho.com/*"
+      ],
+      "js": [
+        "content.js",
+        "include/jquery-3.1.0.min.js",
+        "twilio.min.js"
+      ],
+      "css": [
+        "content.css"
+      ]
+    }
+  ],
+  "permissions": [
+    "storage",
+    "tabs",
+    "https://crm.zoho.com/*",
+    "https://my.catalystconnect.com/*"
+  ]
+}

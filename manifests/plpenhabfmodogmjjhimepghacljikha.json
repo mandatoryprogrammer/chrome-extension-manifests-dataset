@@ -1,0 +1,42 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Presentation tool for zeplin",
+  "description": "A simple presentation mode for zeplin, designed for stakeholders.",
+  "version": "0.0.5",
+  "browser_action": {
+    "default_icon": "img/extension_placeholder.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://app.zeplin.io/*/**",
+        "https://app.zeplin.io/*/**",
+        "http://localhost:7000/*",
+        "https://portal.krum.io/*",
+        "http://*.ngrok.io/*",
+        "https://*.ngrok.io/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "storage",
+    "background",
+    "https://api.zeplin.io/*"
+  ],
+  "web_accessible_resources": [
+    "img/*"
+  ]
+}

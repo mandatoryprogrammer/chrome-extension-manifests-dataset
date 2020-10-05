@@ -1,0 +1,69 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_extName__",
+  "short_name": "__MSG_appShortName__",
+  "description": "__MSG_appDescription__",
+  "version": "2.13.1",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "homepage_url": "https://shipright.co",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "128": "icons/icon-128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "https://*.shipright.co/",
+    "https://*.shipright.app/"
+  ],
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_title": "__MSG_browserActionTitle__",
+    "default_icon": {
+      "19": "icons/icon-19.png",
+      "38": "icons/icon-38.png"
+    }
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.shipright.co/*",
+        "https://*.shipright.app/*"
+      ],
+      "js": [
+        "content_scripts/detect-catch-install.js",
+        "content_scripts/authenticate-catch.js",
+        "content_scripts/forward-onboarding-sample.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://mail.google.com/*",
+        "*://app.intercom.com/*",
+        "*://app.frontapp.com/*",
+        "*://app.hubspot.com/*",
+        "*://secure.helpscout.net/*"
+      ],
+      "js": [
+        "content_scripts/inject-domain-hint.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "addon@shipright.co"
+    }
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Annotate: Web Annotations with Screen Sharing",
+  "short_name": "Annotate Screen Sharing",
+  "description": "Freely annotate web pages, highlight text, and take screen captures as you share your screen to a projector and student devices.",
+  "manifest_version": 2,
+  "version": "5.31",
+  "icons": {
+    "128": "icon.png",
+    "48": "icon48.png",
+    "16": "icon16.png"
+  },
+  "permissions": [
+    "desktopCapture",
+    "activeTab",
+    "contextMenus",
+    "tabs",
+    "<all_urls>"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "js/UILib.js",
+        "js/content.js",
+        "js/highlight.js",
+        "js/pen.js",
+        "js/eraser.js",
+        "js/highlighter.js",
+        "js/texttool.js",
+        "js/webAnnotationItem.js"
+      ],
+      "matches": [
+        "https://*/*",
+        "http://*/*",
+        "ftp://*/*",
+        "file://*"
+      ],
+      "css": [
+        "css/highlight.css",
+        "css/content.css",
+        "css/texttool.css",
+        "css/webAnnotationItem.css"
+      ],
+      "match_about_blank": true,
+      "all_frames": true
+    }
+  ],
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html",
+    "default_title": "Annotate"
+  },
+  "web_accessible_resources": [
+    "images/*.png",
+    "fonts/*.ttf"
+  ]
+}

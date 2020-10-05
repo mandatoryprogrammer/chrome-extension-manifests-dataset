@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "FreeMyTube",
+  "short_name": "FreeMyTube",
+  "version": "0.1.12",
+  "manifest_version": 2,
+  "description": "This extension adds your sub feed to the front page of Youtube.com. Relevant content is back.",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApnR8nOUaQaa+07t+mBp7OaBcL7rdm4mk6oTctSjLh+rkElCWX1VXxEpKJwzYoJIhi/a+mmu6SIHwFiyoRKyBNTFKnsfsUvZ9NyhCcdefCrHcfqRW568uO03oglzMnIaCn4mi2jDd2wuDfIc26bTB/LbNppC8g75+N0oujUWFg2Fp4T1UhEcIaX5m8WlQ16H6c0L7/V1ArAAEVeQM+uJjq2MKt+Wat+iusJ2NzvFePZww8GJbu3Upry2QSGivNw5aKRF3uILymnd5OIQqfAX+y5Kw5cXeAmJz1J2ZEGA2i4ILQxnimHx57CKEbXEJSulXb08p4kcy42vyCZbmJcAIHQIDAQAB",
+  "icons": {
+    "16": "logo_16.png",
+    "32": "logo_32.png",
+    "128": "logo_128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.youtube.com/*"
+      ],
+      "js": [
+        "jquery.js",
+        "inject.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "logo_128.png"
+  ],
+  "background": {
+    "scripts": [
+      "jquery.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "oauth2": {
+    "client_id": "875028662733-31i21vruia3cj18lrcg8or7cap59vod6.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/youtube",
+      "https://www.googleapis.com/auth/youtube.force-ssl",
+      "https://www.googleapis.com/auth/youtube.readonly",
+      "https://www.googleapis.com/auth/youtubepartner"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://apis.google.com/; object-src 'self'",
+  "permissions": [
+    "identity",
+    "https://accounts.google.com/*"
+  ]
+}

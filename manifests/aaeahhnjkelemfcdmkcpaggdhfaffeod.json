@@ -1,0 +1,90 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Style-Validator",
+  "version": "0.6.1.6",
+  "description": "A CSS Validator that can check the combination of styles and elements after browser rendering.",
+  "icons": {
+    "16": "./style-validator.logo_16x16.png",
+    "48": "./style-validator.logo_200x200.png",
+    "128": "./style-validator.logo_200x200.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "./style-validator.logo_200x200.png",
+      "38": "./style-validator.logo_200x200.png"
+    },
+    "default_title": "Style Validator"
+  },
+  "author": "Igari Takeharu",
+  "background": {
+    "page": "./background.html",
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_idle",
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "css": [
+        "./style-validator-for-elements.css"
+      ],
+      "js": [
+        "./specificity.js",
+        "./style-validator.js"
+      ]
+    }
+  ],
+  "devtools_page": "./devtools.html",
+  "options_page": "./options.html",
+  "options_ui": {
+    "page": "./options.html",
+    "chrome_style": false
+  },
+  "commands": {
+    "toggle-validation": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+I",
+        "mac": "Command+Shift+I"
+      },
+      "description": "Toggle Validation"
+    }
+  },
+  "homepage_url": "https://style-validator.io/",
+  "offline_enabled": true,
+  "short_name": "Style Validator",
+  "web_accessible_resources": [
+    "data/rules.json",
+    "data/tags-all.json",
+    "data/tags-empty.json",
+    "data/tags-replaced-element.json",
+    "data/tags-filter.json",
+    "data/special-kw-vals.json",
+    "iconmonstr-refresh-3-icon.svg",
+    "iconmonstr-refresh-3-icon-active.svg",
+    "iconmonstr-minus-2-icon.svg",
+    "iconmonstr-x-mark-icon.svg",
+    "iconmonstr-plus-2-icon.svg",
+    "iconmonstr-link-4-icon.svg",
+    "iconmonstr-link-5-icon.svg",
+    "iconmonstr-responsive.svg",
+    "iconmonstr-edit-8-icon-white.svg",
+    "style-validator.logo.black.svg",
+    "style-validator-for-console.css",
+    "specificity.js",
+    "webcomponents.min.js",
+    "google-analytics.js"
+  ],
+  "permissions": [
+    "activeTab",
+    "webNavigation",
+    "tabs",
+    "https://*/*",
+    "http://*/*",
+    "storage",
+    "management"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'"
+}

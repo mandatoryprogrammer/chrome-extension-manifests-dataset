@@ -1,0 +1,123 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Trustnav Safesearch BETA",
+  "short_name": "Trustnav Safesearch",
+  "default_locale": "en",
+  "version": "5.3.2",
+  "description": "Trustnav prevents you from accessing dangerous websites and blocks unwanted ads.",
+  "browser_action": {
+    "default_icon": "./icons/Safe48.png",
+    "default_title": "Trustnav Safesearch",
+    "default_popup": "./views/popup/popup.html"
+  },
+  "chrome_settings_overrides": {
+    "search_provider": {
+      "name": "Trustnav safe search",
+      "keyword": "trustnav",
+      "favicon_url": "https://www.trustnav.com/favicon.png",
+      "search_url": "https://safesearch.trustnav.com/?src=ext&action=search&q={searchTerms}",
+      "is_default": true,
+      "encoding": "utf8"
+    }
+  },
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "js": [
+        "./vendors/jquery.min.js",
+        "./config/config.js",
+        "./utils/utils.js",
+        "./content_scripts/notifications.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "*://*.trustnav.com/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://safesearch.trustnav.com/*"
+      ],
+      "js": [
+        "./content_scripts/search_engine/search.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://g.results.supply/*"
+      ],
+      "js": [
+        "./content_scripts/search_engine/search_tracker_trustnav.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://*.search.yahoo.com/*"
+      ],
+      "js": [
+        "./content_scripts/search_engine/search_tracker_yahoo.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://www.bing.com/*"
+      ],
+      "js": [
+        "./content_scripts/search_engine/search_tracker_bing.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "all_frames": false,
+      "js": [
+        "./content_scripts/account.js"
+      ],
+      "matches": [
+        "*://develop.account.trustnav.com/*",
+        "*://testing.account.trustnav.com/*",
+        "*://account.trustnav.com/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": false,
+      "js": [
+        "./config/config.js",
+        "./content_scripts/trustnav_frame.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "icons": {
+    "16": "./icons/Safe16.png",
+    "32": "./icons/Safe32.png",
+    "48": "./icons/Safe48.png",
+    "64": "./icons/Safe64.png",
+    "128": "./icons/Safe128.png"
+  },
+  "background": {
+    "page": "./background/background.html?ext=safebrowsing"
+  },
+  "permissions": [
+    "<all_urls>",
+    "tabs",
+    "storage",
+    "cookies",
+    "unlimitedStorage"
+  ],
+  "web_accessible_resources": [
+    "/views/notifications/unsafe_site/index.html"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com https://connect.facebook.net; object-src 'self'"
+}

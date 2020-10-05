@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "UK NOTAM Map extension",
+  "version": "2.1",
+  "manifest_version": 2,
+  "description": "Generates a Google Map representation of an AIS NOTAM Brief",
+  "icons": {
+    "16": "16.png",
+    "48": "48.png",
+    "128": "128.png"
+  },
+  "page_action": {
+    "default_icon": "48.png",
+    "default_title": "NOTAM Map"
+  },
+  "background": {
+    "scripts": [
+      "anmBackgroundPage.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "js/DebugLog.js",
+        "js/IcaoDataEG.js",
+        "anmSaxParser.js",
+        "anmSaxEventHandler.js",
+        "anmNotamLoader.js",
+        "anmContent.js"
+      ],
+      "matches": [
+        "http://www.nats-uk.ead-it.com/fwf-natsuk/restricted/user/ino/*",
+        "http://metutil.appspot.com/static/htm/AisMapDemo.htm"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "http://www.nats-uk.ead-it.com/fwf-natsuk/restricted/user/ino/*",
+    "http://metutil.appspot.com/static/htm/AisMapDemo.htm"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://; object-src 'self'"
+}

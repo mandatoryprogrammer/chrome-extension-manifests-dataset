@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Douban Search",
+  "version": "0.0.1",
+  "description": "Search ratings of movies or books through douban.com",
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+S",
+        "mac": "MacCtrl+Shift+S"
+      },
+      "description": "Open popup.html"
+    }
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "js/content.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_title": "Douban Search",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "permissions": [
+    "contextMenus",
+    "declarativeContent"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://api.douban.com/; object-src 'self'"
+}

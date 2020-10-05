@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Nicofinder",
+  "version": "2.10.2",
+  "manifest_version": 2,
+  "description": "Nicofinderでの動画視聴を支援する拡張機能です。",
+  "author": "Hayu",
+  "permissions": [
+    "tabs",
+    "cookies",
+    "storage",
+    "webRequest",
+    "contextMenus",
+    "notifications",
+    "webRequestBlocking",
+    "*://*.nicofinder.net/*",
+    "*://*.nicovideo.jp/*",
+    "*://*.dmc.nico/*",
+    "*://*.smilevideo.jp/*",
+    "*://*.nimg.jp/*"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "img/icon19.png",
+      "38": "img/icon38.png"
+    },
+    "default_title": "Nicofinder",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "vendor.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.nicofinder.net/watch/*"
+      ],
+      "js": [
+        "vendor.js",
+        "content-scripts/watch.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.nicofinder.net/*"
+    ]
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "homepage_url": "https://github.com/githayu/nicofinder-extension"
+}

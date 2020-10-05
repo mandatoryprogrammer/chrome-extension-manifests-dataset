@@ -1,0 +1,79 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "minimum_chrome_version": "18.0",
+  "name": "Privacy Butler",
+  "version": "2014.7.15",
+  "author": {
+    "email": "olga.musayev@gmail.com"
+  },
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "contextMenus",
+    "webRequest",
+    "webRequestBlocking",
+    "webNavigation",
+    "unlimitedStorage",
+    "storage",
+    "cookies",
+    "privacy",
+    "notifications"
+  ],
+  "background": {
+    "scripts": [
+      "lib/compat.js",
+      "lib/io.js",
+      "src/utils.js",
+      "lib/adblockplus.js",
+      "lib/punycode.js",
+      "lib/publicSuffixList.js",
+      "lib/basedomain.js",
+      "lib/sha1.js",
+      "lib/jsbn.js",
+      "lib/rsa.js",
+      "lib/popupBlocker.js",
+      "src/cookieblocklist.js",
+      "src/fakecookiestore.js",
+      "src/userchoices.js",
+      "src/blockedDomainList.js",
+      "src/webrequest.js",
+      "src/heuristicblocking.js",
+      "src/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "src/include.preload.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "default_locale": "en_US",
+  "description": "Privacy Butler Alpha Release",
+  "icons": {
+    "128": "icons/butler-128.png",
+    "16": "icons/butler-16.png",
+    "170": "icons/butler-170.png",
+    "19": "icons/butler-19.png",
+    "24": "icons/butler-24.png",
+    "32": "icons/butler-32.png",
+    "48": "icons/butler-48.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/butler-19.png",
+    "default_popup": "skin/popup.html",
+    "default_title": "Privacy Butler"
+  },
+  "web_accessible_resources": [
+    "skin/*",
+    "icons/*"
+  ]
+}

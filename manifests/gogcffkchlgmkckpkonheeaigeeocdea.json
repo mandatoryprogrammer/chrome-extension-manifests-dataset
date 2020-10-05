@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "version": "1.0.1",
+  "manifest_version": 2,
+  "description": "__MSG_appDescription__",
+  "icons": {
+    "16": "images/icon-16.png",
+    "128": "images/icon-128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "scripts/Background.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "loading.html",
+    "images/*"
+  ],
+  "permissions": [
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking",
+    "storage",
+    "<all_urls>"
+  ],
+  "page_action": {
+    "default_icon": {
+      "19": "images/icon-19.png",
+      "38": "images/icon-38.png"
+    },
+    "default_title": "WikiZoom",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "http://*.wikipedia.org/*",
+        "https://*.wikipedia.org/*"
+      ],
+      "js": [
+        "dependencies/jquery-3.1.0.min.js",
+        "scripts/exceptions/IllegalStateException.js",
+        "scripts/loading-indicator/LoadingHTMLInject.js",
+        "scripts/cache/WebsiteCacheManager.js",
+        "scripts/ClickManager.js",
+        "scripts/ClickActionHandler.js",
+        "scripts/WikipediaLayoutManager.js",
+        "scripts/PreviewManager.js",
+        "scripts/MessageManager.js",
+        "scripts/Application.js",
+        "scripts/preview-application/ApplicationInject.js"
+      ],
+      "css": [
+        "styles/main.css"
+      ]
+    }
+  ]
+}

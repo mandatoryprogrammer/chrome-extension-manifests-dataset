@@ -1,0 +1,74 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "EdShot",
+  "short_name": "EdShot",
+  "version": "3.4",
+  "manifest_version": 2,
+  "description": "Screenshots, Cropped shots, Snap-shots, Videos and Screencasts taken with a single click.",
+  "icons": {
+    "16": "logo.png",
+    "48": "logo.png",
+    "128": "logo.png"
+  },
+  "browser_action": {
+    "default_popup": "src/browser_action/browser_action.html",
+    "default_icon": "logo.png",
+    "default_title": "EdShot"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "contextMenus",
+    "activeTab"
+  ],
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "js/jquery.min.js",
+      "src/bg/background.js",
+      "js/RecordRTC.min.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "/js/jquery.min.js",
+        "/js/webcam.js"
+      ],
+      "css": [
+        "css/style.css"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "js": [
+        "/js/jquery.min.js",
+        "/js/edit.js"
+      ],
+      "matches": [
+        "http://www.jaymurphy.org/edshot/image/edit/index.html"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "src/inject/content-script.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "cropper/index.html",
+    "camera/selfie/index.html",
+    "camera/video/index.html",
+    "camera/screencast/index.html",
+    "images/main-icon.png",
+    "unlimitedStorage"
+  ]
+}

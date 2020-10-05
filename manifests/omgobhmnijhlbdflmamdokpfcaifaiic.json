@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Bittrex balances in legal currency",
+  "short_name": "Bittrex balances in USD & JPY & more values",
+  "version": "0.1.4",
+  "manifest_version": 2,
+  "description": "Add value in USD & JPY & EUR & GBP & KRW & CNY and BTC Rate columns into Bittrex Balances view. add chrome tab preview",
+  "oauth2": {
+    "client_id": "106154869894-uafimv5loa7d107udmq1l341bidbb4rg.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/plus.login",
+      "https://www.googleapis.com/auth/chromewebstore.readonly"
+    ]
+  },
+  "icons": {
+    "16": "img/bittrex-30.png",
+    "48": "img/bittrex-30.png",
+    "128": "img/bittrex-30.png"
+  },
+  "web_accessible_resources": [
+    "img/*.png",
+    "img/add.css"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "img/bittrex-30.png",
+      "38": "img/bittrex-30.png"
+    },
+    "default_title": "Bittrex balances in USD & JPY & EUR"
+  },
+  "permissions": [
+    "background",
+    "tabs",
+    "https://api.coindesk.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://bittrex.com/*"
+      ],
+      "css": [
+        "add.css"
+      ],
+      "js": [
+        "jquery.min.js",
+        "chart.js",
+        "chartLabel.js",
+        "script.js"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

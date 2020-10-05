@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "cafe51",
+  "short_name": "cafe51",
+  "version": "0.2.2",
+  "description": "Build your Spotify playlists with tracks from Youtube and Offradio.gr",
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ],
+    "persistent": false
+  },
+  "icons": {
+    "19": "images/icon-gray-19.png",
+    "38": "images/icon-gray-38.png",
+    "48": "images/icon-gray-48.png",
+    "128": "images/icon-gray-128.png"
+  },
+  "page_action": {
+    "default_icon": {
+      "19": "images/icon-gray-19.png",
+      "38": "images/icon-gray-38.png",
+      "48": "images/icon-gray-48.png",
+      "128": "images/icon-gray-128.png"
+    },
+    "default_title": "cafe51"
+  },
+  "web_accessible_resources": [
+    "images/sad-96.png",
+    "images/welcome-logo.svg"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://localhost:8080/",
+        "https://www.youtube.com/*",
+        "http://www.offradio.gr/player"
+      ],
+      "js": [
+        "scripts/popup.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "declarativeContent",
+    "identity",
+    "tabs",
+    "activeTab",
+    "https://accounts.spotify.com/*",
+    "webNavigation",
+    "storage"
+  ],
+  "commands": {
+    "_execute_page_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+S",
+        "mac": "Command+Shift+S"
+      },
+      "description": "Search currently playing track"
+    }
+  },
+  "manifest_version": 2
+}

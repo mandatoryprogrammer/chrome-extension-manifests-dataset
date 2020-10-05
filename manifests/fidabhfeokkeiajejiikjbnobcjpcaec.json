@@ -1,0 +1,75 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_extension_name__",
+  "version": "0.30",
+  "default_locale": "ru",
+  "description": "__MSG_extension_description__",
+  "permissions": [
+    "contextMenus",
+    "tabs",
+    "storage",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "browser_action": {
+    "default_icon": "icon48.png",
+    "default_popup": "toolbar_popup.html"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "web_accessible_resources": [
+    "quicli.html",
+    "_locales/ru/messages.json",
+    "_locales/en/messages.json"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "data/js/plugins/jq.js",
+        "data/js/build/storage.min.js",
+        "data/js/build/include.min.js",
+        "data/js/plugins/jq.selection.js",
+        "data/js/plugins/sortable.js"
+      ],
+      "css": [
+        "data/css/include.css"
+      ]
+    },
+    {
+      "matches": [
+        "http://ok.ru/*",
+        "https://ok.ru/*",
+        "http://vk.com/*",
+        "https://vk.com/*",
+        "https://www.facebook.com/*",
+        "https://www.tumblr.com/*",
+        "https://twitter.com/*",
+        "https://pikabu.ru/*",
+        "https://www.instagram.com/*"
+      ],
+      "css": [
+        "data/css/networks.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://quicli.net/*, https://randomup.ru/*"
+      ],
+      "js": [
+        "data/js/build/extinstalled.min.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}

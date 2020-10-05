@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "AO3rdr",
+  "description": "Rating system and block by tag system for Archive of Our Own",
+  "version": "1.8.1",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs"
+  ],
+  "background": {
+    "scripts": [
+      "src/background-chrome.js",
+      "src/background.js",
+      "src/article.js",
+      "src/images.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://archiveofourown.org/*",
+        "https://archiveofourown.org/*",
+        "https://boiling-caverns-2782.herokuapp.com/*",
+        "https://*.ao3rdr.com/*",
+        "https://*.archiveofourown.org/*",
+        "http://*.archiveofourown.org/*"
+      ],
+      "css": [
+        "data/style.css"
+      ],
+      "js": [
+        "lib/jquery-3.3.1.min.js",
+        "src/ao3lib.js",
+        "src/toolbar-ao3.js",
+        "src/toolbar-chrome.js",
+        "data/settings/articles-table-chrome.js",
+        "src/toolbar-content.js",
+        "src/article.js",
+        "src/images.js",
+        "src/contentscript.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "options_page": "data/settings/index.html",
+  "browser_action": {
+    "default_title": "AO3rdr",
+    "default_popup": "data/settings/popup.html",
+    "default_icon": "data/images/icon_128.png"
+  },
+  "icons": {
+    "16": "data/images/icon_16.png",
+    "48": "data/images/icon_48.png",
+    "128": "data/images/icon_128.png"
+  },
+  "manifest_version": 2,
+  "web_accessible_resources": [
+    "data/images/*",
+    "data/settings/*"
+  ]
+}

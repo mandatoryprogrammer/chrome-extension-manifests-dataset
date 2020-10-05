@@ -1,0 +1,38 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Нет новостям",
+  "version": "0.1.0",
+  "offline_enabled": true,
+  "description": "Убирает переходы на страницу новостей в социальной сети 'Вконтакте'",
+  "minimum_chrome_version": "12",
+  "icons": {
+    "128": "img/nonews128.png",
+    "256": "img/nonews256.png",
+    "512": "img/nonews512.png"
+  },
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "notifications",
+    "storage"
+  ],
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "content.js"
+      ],
+      "matches": [
+        "*://*/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "web_accessible_resources": []
+}

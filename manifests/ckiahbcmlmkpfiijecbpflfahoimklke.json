@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Gom VPN - Bypass and unblock",
+  "short_name": "Gom",
+  "description": "Quickly access blocked sites securely",
+  "version": "7.3.3",
+  "permissions": [
+    "proxy",
+    "storage",
+    "notifications",
+    "tabs",
+    "cookies",
+    "webRequest",
+    "webRequestBlocking",
+    "http://*/*",
+    "https://*/*",
+    "identity"
+  ],
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "vendor/bower/moment/min/moment.min.js",
+      "vendor/aes.js",
+      "vendor/bower/jquery/dist/jquery.min.js",
+      "vendor/analytics.js",
+      "pcurl.js",
+      "gom.js"
+    ]
+  },
+  "manifest_version": 2,
+  "icons": {
+    "128": "assets/images/icon128.png"
+  },
+  "options_page": "pages/options.html",
+  "browser_action": {
+    "default_icon": {
+      "19": "assets/images/icon-19.png",
+      "38": "assets/images/icon-38.png"
+    },
+    "default_title": "Toggle Gom VPN"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.google.com/robots.txt*",
+        "https://www.google.com/robots.txt*"
+      ],
+      "js": [
+        "/vendor/oauth2/oauth2_inject.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "/vendor/oauth2/oauth2.html"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'; ",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAs6EcVhws4sw1GXmxBkHOGBKFl/vBVo0vhLkKZh+6tMdDqmS21M8I3/Sf5hvokgHzlSvlYrAYjOIi/PDxvbyCLvAFVs83cmftVOU7Z9mLJm5RWKOUOC5SswU3C1wFP4uEs+LI5yqd812M9KZ8eoHrGfboSOfArJ/dcgwnAgfFu3ZMWd3y75dQ5QjK7md0ZH12fIOrr10xsY6VBemsgl1hQ1zvCMe/Iw/xgftXGt0f91oQlcNGLqmbZ48D1yvM0/z8wHufOJLfwBJcjLtu7gN3WoGydPOYWGaPBp9Gu9leqWYlL9fhnDy1I92aUEg+9sdTwSeXsuFH5g22PYg9yakIOwIDAQAB",
+  "oauth2": {
+    "client_id": "276771460617-5tb4upsb72g8qai11204l33vp5l6dr67.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/contacts.readonly"
+    ]
+  }
+}

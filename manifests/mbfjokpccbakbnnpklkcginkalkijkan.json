@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Password Manager",
+  "description": "This extension connects to your password manager and inserts passwords and usernames into input fields.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128_alpha.png"
+  },
+  "version": "0.3.15",
+  "browser_action": {
+    "default_icon": "iconLoggedOut.png",
+    "default_popup": "popup/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "scripts": [
+      "ext/commonFunctions.js",
+      "ext/cryptoWrapper.js",
+      "ext/account.js",
+      "ext/backend.js",
+      "background/context.js",
+      "background/activeTabAction.js",
+      "background/backgroundListener.js",
+      "background/hostCommunication.js",
+      "ext/sha512.js",
+      "ext/aes.js",
+      "ext/pbkdf2.js"
+    ]
+  },
+  "permissions": [
+    "activeTab",
+    "*://*/*",
+    "contextMenus",
+    "storage"
+  ],
+  "options_ui": {
+    "page": "popup/options.html",
+    "chrome_style": true
+  }
+}

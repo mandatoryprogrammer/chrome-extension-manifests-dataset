@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Bookindy – Browse Amazon, buy independent",
+  "short_name": "Bookindy",
+  "version": "1.2.3",
+  "manifest_version": 2,
+  "description": "Browse Amazon and get the local bookshop price, which is sometimes cheaper. Buy online and pick up or get it delivered.",
+  "icons": {
+    "16": "images/icon-16.png",
+    "128": "images/icon-128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.amazon.co.uk/*",
+        "*://www.amazon.com/*"
+      ],
+      "js": [
+        "scripts/contentscript.js"
+      ],
+      "css": [],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    "elements/*",
+    "bower_components/*"
+  ],
+  "permissions": [
+    "tabs",
+    "*://www.amazon.co.uk/*",
+    "*://www.amazon.com/*",
+    "*://*.hive.co.uk/*",
+    "geolocation",
+    "storage"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

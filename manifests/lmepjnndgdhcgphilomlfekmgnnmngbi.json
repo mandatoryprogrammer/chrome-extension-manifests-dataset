@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://app.wistia.io https://fast.wistia.com https://fast.wistia.net https://fast.wistia.io https://d1fc8wv8zag5ca.cloudfront.net; object-src 'self'",
+  "name": "Soapbox —  Video Recorder",
+  "short_name": "Soapbox",
+  "description": "Capture your screen and webcam to create professional-looking pitches, presentations, and demos.",
+  "minimum_chrome_version": "57",
+  "icons": {
+    "16": "static/images/crx-camera-16.png",
+    "32": "static/images/crx-camera-32.png",
+    "48": "static/images/crx-camera-48.png",
+    "128": "static/images/crx-camera-128.png"
+  },
+  "web_accessible_resources": [
+    "static/*.*",
+    "index.html",
+    "iframe.html"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://soapbox.wistia.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "browser_action": {
+    "default_icon": "static/images/crx-camera-32.png",
+    "default_popup": "index.html#/popup"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "options_page": "index.html#/options?forward=true",
+  "externally_connectable": {
+    "matches": [
+      "https://soapbox.wistia.com/*"
+    ]
+  },
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "desktopCapture",
+    "storage",
+    "unlimitedStorage",
+    "declarativeContent",
+    "https://*.wistia.com/"
+  ],
+  "optional_permissions": [
+    "contentSettings",
+    "*://mail.google.com/*"
+  ],
+  "version": "2020.9.30.7250",
+  "version_name": "2020.9.30-7250-c466de0a96"
+}

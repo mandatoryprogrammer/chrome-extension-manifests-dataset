@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "IITC Button",
+  "description": "__MSG_extDescription__",
+  "version": "1.4.0",
+  "minimum_chrome_version": "61",
+  "applications": {
+    "gecko": {
+      "id": "iitc@modos189.ru",
+      "strict_min_version": "57.0"
+    }
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "webNavigation",
+    "https://intel.ingress.com/*",
+    "https://iitc.app/*",
+    "http://*/*.json",
+    "http://*/*.meta.js",
+    "http://*/*.user.js",
+    "https://*/*.meta.js",
+    "https://*/*.user.js"
+  ],
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "assets/js/browser-polyfill.min.js",
+      "scripts/defaults.js",
+      "scripts/helpers.js",
+      "scripts/background.js",
+      "scripts/updater.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://intel.ingress.com/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "assets/js/browser-polyfill.min.js",
+        "scripts/loader.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "browser_style": true,
+    "default_popup": "app/popup/popup.html",
+    "default_title": "__MSG_titleDefault__",
+    "default_icon": {
+      "48": "assets/images/48/icon.png",
+      "96": "assets/images/96/icon.png"
+    }
+  },
+  "icons": {
+    "48": "assets/images/48/icon.png",
+    "128": "assets/images/128/icon.png"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'; font-src 'self' data:;",
+  "manifest_version": 2
+}

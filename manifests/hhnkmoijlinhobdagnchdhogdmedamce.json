@@ -1,0 +1,83 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Comodo UAdBlocker",
+  "version": "1.0.8",
+  "default_locale": "en",
+  "description": "__MSG_extShortDesc__",
+  "icons": {
+    "16": "img/icon_16.png",
+    "128": "img/icon_128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "img/browsericons/icon19.png",
+      "38": "img/browsericons/icon38.png"
+    },
+    "default_title": "Comodo UAdBlocker",
+    "default_popup": "popup.html"
+  },
+  "author": "All Comodo UAdBlocker contributors",
+  "background": {
+    "page": "background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/vapi-client.js",
+        "js/contentscript-start.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/contentscript-end.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://*.adblockplus.org/*",
+        "https://*.adblockplus.me/*",
+        "https://www.fanboy.co.nz/*",
+        "https://github.com/gorhill/uBlock/wiki/Filter-lists-from-around-the-web"
+      ],
+      "js": [
+        "js/subscriber.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "incognito": "split",
+  "minimum_chrome_version": "22.0",
+  "options_page": "dashboard.html",
+  "options_ui": {
+    "page": "options_ui.html"
+  },
+  "permissions": [
+    "contextMenus",
+    "privacy",
+    "storage",
+    "tabs",
+    "unlimitedStorage",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "short_name": "Comodo UAdBlocker",
+  "storage": {
+    "managed_schema": "managed_storage.json"
+  }
+}

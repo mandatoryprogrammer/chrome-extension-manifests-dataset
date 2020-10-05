@@ -1,0 +1,91 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Find Emails on Websites and Social Networks",
+  "short_name": "Findthat",
+  "version": "1.3.0",
+  "manifest_version": 2,
+  "description": "Find prospects instantly right from your browser on any social platform.",
+  "homepage_url": "https://findthat.email",
+  "icons": {
+    "16": "shared/img/icon16.png",
+    "48": "shared/img/icon48.png",
+    "128": "shared/img/icon128.png"
+  },
+  "default_locale": "en",
+  "permissions": [
+    "tabs",
+    "storage",
+    "notifications",
+    "clipboardWrite",
+    "webRequest",
+    "webRequestBlocking",
+    "unlimitedStorage",
+    "https://*.findthat.email/*",
+    "https://*.linkedin.com/*",
+    "https://*.facebook.com/*",
+    "https://*.ahrefs.com/*",
+    "https://chrome.google.com/webstore/detail/*"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "shared/img/icon19.png",
+      "38": "shared/img/icon38.png"
+    },
+    "default_title": "Find email addresses",
+    "default_popup": "browser_action/popup.html"
+  },
+  "background": {
+    "page": "background/background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.linkedin.com/*"
+      ],
+      "js": [
+        "shared/js/jquery-3.0.0.min.js",
+        "shared/js/underscore-1.8.3.js",
+        "shared/js/md5.js",
+        "shared/js/utilities.js",
+        "content_scripts/linkedin/index.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.facebook.com/*"
+      ],
+      "js": [
+        "shared/js/jquery-3.0.0.min.js",
+        "shared/js/underscore-1.8.3.js",
+        "shared/js/md5.js",
+        "shared/js/utilities.js",
+        "content_scripts/facebook/index.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.ahrefs.com/*"
+      ],
+      "js": [
+        "shared/js/jquery-3.0.0.min.js",
+        "shared/js/underscore-1.8.3.js",
+        "shared/js/utilities.js",
+        "shared/js/md5.js",
+        "content_scripts/ahrefs/index.js"
+      ],
+      "css": [
+        "content_scripts/ahrefs/index.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "shared/img/*",
+    "shared/fonts/*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://*.google-analytics.com; object-src 'self'",
+  "externally_connectable": {
+    "matches": [
+      "https://*.findthat.email/*"
+    ]
+  }
+}

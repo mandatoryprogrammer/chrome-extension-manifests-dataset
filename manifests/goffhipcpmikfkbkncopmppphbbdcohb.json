@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Everygoody",
+  "description": "Faîtes des dons gratuits à chaque visite sur votre moteur de recherche favori... sans même y penser !",
+  "version": "0.3.4",
+  "icons": {
+    "48": "assets/icons/icon_48.png",
+    "128": "assets/icons/icon_128.png"
+  },
+  "browser_action": {
+    "default_icon": "assets/icons/icon_128_large.png",
+    "default_popup": "popup/popup.html",
+    "default_title": "Cliquez ici pour ouvrir le menu Everygoody"
+  },
+  "permissions": [
+    "tabs",
+    "idle",
+    "alarms",
+    "storage",
+    "webNavigation",
+    "cookies",
+    "https://*/*",
+    "http://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "background/background.min.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*"
+      ],
+      "css": [
+        "contentscript/contentscript.min.css"
+      ],
+      "js": [
+        "contentscript/contentscript.min.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://everygoody.com/*",
+      "*://localhost/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "*.html",
+    "*.png",
+    "*.gif",
+    "*.svg",
+    "*.js",
+    "*.ttf",
+    "*.eot",
+    "*.woff2",
+    "*.woff",
+    "*.truetype",
+    "*.mp3"
+  ],
+  "content_security_policy": "script-src 'self' https://factory.everygoody.com; object-src 'self'"
+}

@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Click to Remove Element",
+  "version": "2.0.6",
+  "manifest_version": 2,
+  "description": "Remove annoying elements with a single click",
+  "icons": {
+    "128": "icons/icon_128.png",
+    "48": "icons/icon_48.png",
+    "16": "icons/action_inactive.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/action_inactive.png"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "windows": "Ctrl+Shift+X",
+        "mac": "Command+Shift+X",
+        "chromeos": "Ctrl+Shift+X",
+        "linux": "Ctrl+Shift+X"
+      }
+    }
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "js": [
+        "ctre_content.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "incognito": "spanning"
+}

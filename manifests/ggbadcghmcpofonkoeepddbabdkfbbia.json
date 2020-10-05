@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Map Overlays",
+  "short_name": "Map Overlays",
+  "version": "3.19.0",
+  "manifest_version": 2,
+  "description": "Change satellite images in mapping websites.",
+  "icons": {
+    "16": "images/logo_16.png",
+    "128": "images/logo_128.png"
+  },
+  "page_action": {
+    "default_title": "Overlays",
+    "default_icon": {
+      "19": "images/logo_19.png",
+      "38": "images/logo_38.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.google.com/maps/d*",
+        "*://*.waze.com/*editor*"
+      ],
+      "js": [
+        "scripts/jquery-3.4.1.min.js",
+        "scripts/conversions.js",
+        "scripts/overlay.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "*://*.google.com/maps/d*",
+    "*://*.waze.com/*editor*",
+    "https://*.tiles.virtualearth.net/tiles*",
+    "https://services.arcgisonline.com/ArcGIS/rest/services*",
+    "https://*.tile.openstreetmap.org/*",
+    "*://*.communitymaptiles.nokia.com/tilehub*",
+    "https://*.aerial.maps.api.here.com/maptile*",
+    "https://cache.map2web.eu/toursprung/wmts/toursprung/webmercator*",
+    "https://geoportal.ancpi.ro/*",
+    "https://mapy.geoportal.gov.pl/*"
+  ],
+  "commands": {
+    "toggle-last-layer": {
+      "suggested_key": {
+        "default": "Alt+L"
+      },
+      "description": "Toggle last layer"
+    }
+  }
+}

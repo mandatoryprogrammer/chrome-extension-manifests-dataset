@@ -1,0 +1,200 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "author": "NortonLifeLock Inc",
+  "background": {
+    "page": "global.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "content/images/safe-web-icon-norton-untested@2x.png",
+    "default_popup": "content/ui/popup.html",
+    "default_title": "__MSG_3in1Name__"
+  },
+  "chrome_settings_overrides": {
+    "search_provider": {
+      "encoding": "UTF-8",
+      "favicon_url": "https://searchsafe.norton.com/img/logoicon.ico",
+      "is_default": true,
+      "keyword": "Norton",
+      "name": "Norton Safe",
+      "search_url": "https://searchsafe.norton.com/search?omnisearch=yes&q={searchTerms}",
+      "suggest_url": ""
+    }
+  },
+  "chrome_url_overrides": {
+    "newtab": "homePageRedirect.html"
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "content/libs/uri.min.js",
+        "content/libs/levenshtein.min.js",
+        "content/scripts/SymBfwCS.js",
+        "content/scripts/NSSS_CS.js",
+        "content/scripts/ClientEvents.js",
+        "content/scripts/SymWaxCS.js",
+        "content/scripts/WCID_CS.js",
+        "content/scripts/beforeLoad.js"
+      ],
+      "match_about_blank": false,
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "include_globs": [
+        "https://*.google.*/*",
+        "https://nortonsafe.search.ask.com/*"
+      ],
+      "js": [
+        "content/scripts/SafeWebDefs/sb_shasta.js",
+        "content/scripts/SafeWebDefs/sb_ask.js",
+        "content/scripts/SafeWebDefs/sb_utils.js",
+        "content/scripts/bfShastaHelper.js",
+        "content/scripts/annotatePage.js",
+        "content/scripts/SafeWebDefs/sb_serpCampaign.js"
+      ],
+      "matches": [
+        "https://*/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "include_globs": [
+        "https://*.yahoo.*/*"
+      ],
+      "js": [
+        "content/scripts/SafeWebDefs/sb_shasta.js",
+        "content/scripts/SafeWebDefs/sb_yahoo.js",
+        "content/scripts/SafeWebDefs/sb_utils.js",
+        "content/scripts/bfShastaHelper.js",
+        "content/scripts/annotatePage.js",
+        "content/scripts/SafeWebDefs/sb_serpCampaign.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "content/scripts/SymBfwCS.js",
+        "content/scripts/NSSS_CS.js",
+        "content/scripts/portalInstallFlowCS.js",
+        "content/scripts/webCommunication.js"
+      ],
+      "matches": [
+        "https://*.norton.com/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "content/scripts/SymBfwCS.js",
+        "content/scripts/portalInstallFlowCS.js",
+        "content/scripts/webCommunication.js",
+        "content/scripts/NSSS_CS.js"
+      ],
+      "matches": [
+        "https://secure.norton.myway.com/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": false,
+      "js": [
+        "content/scripts/SymBfwCS.js",
+        "content/scripts/BfwNotificationCenterProxy.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "content/scripts/SymBfwCS.js",
+        "content/scripts/SymWaxCS.js",
+        "content/scripts/SafeWebCS.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": false,
+      "js": [
+        "content/scripts/keepAssistHelper.js",
+        "content/scripts/keepAssistDSP.js"
+      ],
+      "matches": [
+        "https://nortonsafe.search.ask.com/*",
+        "https://*.search.yahoo.com/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "content/libs/avl.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'wasm-eval'; object-src 'self'",
+  "default_locale": "en",
+  "description": "__MSG_dsDesc__",
+  "icons": {
+    "128": "Icon-128.png",
+    "16": "Icon-16.png",
+    "32": "Icon-32.png",
+    "48": "Icon-48.png",
+    "64": "Icon-64.png"
+  },
+  "incognito": "split",
+  "manifest_version": 2,
+  "name": "__MSG_3in1Name__",
+  "options_page": "content/ui/settings.html",
+  "permissions": [
+    "tabs",
+    "background",
+    "webNavigation",
+    "storage",
+    "<all_urls>",
+    "webRequest",
+    "webRequestBlocking",
+    "downloads",
+    "notifications"
+  ],
+  "version": "3.13.0.6",
+  "version_name": "3.13.0.6",
+  "web_accessible_resources": [
+    "content/images/*.png",
+    "content/images/*.svg",
+    "content/images/fireglass/*.png",
+    "content/images/fireglass/*.svg",
+    "content/scripts/*.js",
+    "content/libs/*.js",
+    "_locales/*",
+    "content/ui/SiteRatingPane.html",
+    "content/ui/content-page.css",
+    "content/ui/notification.html",
+    "content/ui/keepAssist.html",
+    "content/ui/fireglass/*.html",
+    "content/ui/styles/fireglass/*.css",
+    "content/wciddefs/*.json",
+    "content/defObject.json"
+  ]
+}

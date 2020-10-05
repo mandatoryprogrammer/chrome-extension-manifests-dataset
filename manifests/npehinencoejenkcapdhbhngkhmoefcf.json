@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "[Unofficial] BGO External Jukebox",
+  "short_name": "BGO Jukebox",
+  "version": "0.0.0.4",
+  "icons": {
+    "16": "bgo.16.png",
+    "48": "bgo.48.png",
+    "128": "bgo.128.png"
+  },
+  "description": "Maps Board Game Online jukebox to youtube tabs to reduce resource usage and prevent jukebox related crashes.",
+  "permissions": [
+    "tabs",
+    "http://*.boardgame-online.com/",
+    "https://www.youtube.com/"
+  ],
+  "browser_action": {
+    "default_icon": "bgo.48.png",
+    "default_popup": "bgo-popup.html"
+  },
+  "author": "Rafael Fillipe Silva (rafaelfsilva) <dev.rafaelfsilva@gmail.com>",
+  "background": {
+    "scripts": [
+      "bgo-jukebox-events.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.boardgame-online.com/g/game.php*"
+      ],
+      "js": [
+        "jquery.js",
+        "mutation-summary.js",
+        "jquery.mutation-summary.js",
+        "bgo-game.js"
+      ],
+      "css": [
+        "bgo-game.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "cross.png"
+  ]
+}

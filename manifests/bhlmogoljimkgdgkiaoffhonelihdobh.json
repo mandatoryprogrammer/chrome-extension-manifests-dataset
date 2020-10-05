@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Taboola-Hubspot Integration",
+  "description": "Launch Taboola campaigns straight from the Hubspot dashboard",
+  "version": "1.1.0.0",
+  "icons": {
+    "128": "images/icon.png"
+  },
+  "permissions": [
+    "webNavigation",
+    "tabs",
+    "storage",
+    "http://*/",
+    "https://*/"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_title": "Taboola",
+    "default_popup": "popup.html"
+  },
+  "web_accessible_resources": [
+    "images/icon_white.svg",
+    "images/question.svg",
+    "images/desktop.svg",
+    "images/mobile.svg",
+    "images/tablet.svg",
+    "images/success.svg",
+    "images/error.svg"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://app.hubspot.com/website/*",
+        "*://app.hubspot.com/content-detail/*"
+      ],
+      "css": [
+        "hubspot.css"
+      ],
+      "js": [
+        "hubspot.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://hubspot-integration-12.appspot.com/success*"
+      ],
+      "css": [
+        "success.css"
+      ],
+      "js": [
+        "success.js"
+      ]
+    }
+  ]
+}

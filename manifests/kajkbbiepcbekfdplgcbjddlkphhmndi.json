@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "offline_enabled": true,
+  "version": "2.0",
+  "name": "Ytel Click2Call",
+  "description": "Ytel Cloud Contact Center - Click2Call extension for Chrome.",
+  "icons": {
+    "16": "icon16.png",
+    "128": "icon128.png"
+  },
+  "browser_action": {
+    "default_title": "Ytel Click2Call",
+    "default_icon": "icon16.png",
+    "default_popup": "options.html"
+  },
+  "options_page": "options.html",
+  "background": {
+    "scripts": [
+      "jquery.js",
+      "cryptojs-hmac-sha1.js",
+      "./cryptoJS/components/enc-base64-min.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "mutation-summary.js",
+        "jquery.js",
+        "cryptojs-hmac-sha1.js",
+        "./cryptoJS/components/enc-base64-min.js",
+        "content.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.google.com https://www.google-analytics.com; object-src 'self' https://www.google.com https://www.google-analytics.com",
+  "permissions": [
+    "<all_urls>",
+    "tabs"
+  ],
+  "manifest_version": 2
+}

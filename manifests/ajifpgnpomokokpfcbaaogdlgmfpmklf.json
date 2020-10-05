@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "W3Dart.com : Audio-Visual bug reporting tool",
+  "short_name": "W3Dart",
+  "version": "1.2.7",
+  "description": "Capture bugs and feedback instantly",
+  "author": "W3Dart.com",
+  "manifest_version": 2,
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "img/icon16.png",
+    "default_title": "Capture and Record Bugs"
+  },
+  "background": {
+    "scripts": [
+      "background-script.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "js": [
+        "js/RecordRTC.js",
+        "js/getScreenId.js",
+        "js/jquery.min.js",
+        "js/jquery-ui.js",
+        "js/intro.js",
+        "script.js",
+        "content-script.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "desktopCapture",
+    "tabs",
+    "https://app.w3dart.com/*",
+    "<all_urls>",
+    "webRequest",
+    "contextMenus"
+  ],
+  "web_accessible_resources": [
+    "css/front.css",
+    "css/introjs.css",
+    "css/popup.css",
+    "img/*"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'; media-src 'self'"
+}

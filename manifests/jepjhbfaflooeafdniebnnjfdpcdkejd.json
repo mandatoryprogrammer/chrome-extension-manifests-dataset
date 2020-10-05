@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Extract People also search phrases in Google",
+  "short_name": "People also search for SEO",
+  "description": "Shows and adds all phrases from \"People also search for\" to the textarea in top right corner - so you can simply harvest them all.",
+  "icons": {
+    "16": "/images/icon16.png",
+    "24": "/images/icon24.png",
+    "32": "images/icon32.png",
+    "64": "images/icon64.png",
+    "128": "images/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "images/icon16.png",
+      "24": "images/icon24.png",
+      "32": "images/icon32.png",
+      "128": "images/icon128.png"
+    },
+    "default_popup": "html/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "version": "1.21",
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "*://*/*"
+      ],
+      "include_globs": [
+        "*://www.google.*/*q=*",
+        "*://encrypted.google.*/*q=*"
+      ],
+      "exclude_matches": [
+        "*://*/*tbm=lcl*"
+      ],
+      "js": [
+        "js/jquery-3.2.1.min.js",
+        "js/content.js"
+      ],
+      "css": [
+        "css/css.css"
+      ],
+      "all_frames": true
+    }
+  ]
+}

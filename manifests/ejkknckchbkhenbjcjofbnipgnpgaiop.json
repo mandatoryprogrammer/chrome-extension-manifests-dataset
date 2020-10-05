@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Tagger",
+  "description": "This extension allows creating Hypothes.is tags from Mindmeister nodes",
+  "short_name": "Tagger",
+  "version": "0.5",
+  "options_page": "Options/options.html",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/icon19.png",
+      "38": "icons/icon38.png"
+    },
+    "default_title": "DScaffolding"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.mindmeister.com/*"
+      ],
+      "exclude_matches": [
+        "https://www.mindmeister.com/oauth2/*",
+        "https://www.mindmeister.com/*account/login*",
+        "https://www.mindmeister.com/robots.txt*",
+        "https://www.mindmeister.com/#all",
+        "https://www.mindmeister.com/?filter=all#all"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "content_script.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.mindmeister.com/robots.txt*"
+      ],
+      "js": [
+        "js/oauth2_inject.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "page": "background.html"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "contextMenus",
+    "clipboardWrite",
+    "https://www.mindmeister.com/oauth2",
+    "https://www.mindmeister.com/services/rest/oauth2/token",
+    "<all_urls>"
+  ],
+  "web_accessible_resources": [
+    "js/adapters/mindmeister.js",
+    "js/oauth2.html",
+    "Options/options.html"
+  ]
+}

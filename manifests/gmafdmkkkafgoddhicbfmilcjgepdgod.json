@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Info Lab",
+  "version": "2.0.8",
+  "manifest_version": 2,
+  "description": "Info Lab Модуль интеграции",
+  "homepage_url": "https://www.ico.kz",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/icon16.png"
+  },
+  "options_page": "src/options/index.html",
+  "permissions": [
+    "clipboardWrite",
+    "contextMenus"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://pol.eisz.kz/Human*"
+    ]
+  },
+  "background": {
+    "page": "src/background/background.html",
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://pol.eisz.kz/Human*"
+      ],
+      "js": [
+        "vendor/jquery-3.2.1/jquery-3.2.1.min.js",
+        "vendor/bootstrap-3.3.7-dist/js/bootstrap.js",
+        "src/common/common.js",
+        "src/inject/inject_init.js"
+      ],
+      "css": [
+        "vendor/bootstrap-3.3.7-dist/css/bootstrap.css",
+        "src/inject/inject.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "src/inject/inject.js"
+  ]
+}

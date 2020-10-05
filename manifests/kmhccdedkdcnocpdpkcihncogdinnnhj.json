@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "TextUs Extension",
+  "version": "4.20.1",
+  "manifest_version": 2,
+  "description": "Business-class Texting Software - Start texting directly from your CRM, ATS or any website.",
+  "icons": {
+    "16": "icons/textus-icon16.png",
+    "48": "icons/textus-icon48.png",
+    "128": "icons/textus-icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "scripts/pusher.min.js",
+      "scripts/background.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "cookies",
+    "storage",
+    "http://localhost:3000/",
+    "*://*.textus.biz/*",
+    "*://textus-staging.herokuapp.com/*",
+    "*://*.textus.com/*",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "browser_action": {
+    "default_title": "TextUs Login",
+    "default_popup": "popup.html"
+  },
+  "content_security_policy": "script-src 'self' https://cdn.segment.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_globs": [
+        "*//app.textus*",
+        "*//next.textus*",
+        "*textus-staging*",
+        "*//localhost*",
+        "*//mail.google.com*",
+        "*bamboohr.com*",
+        "*bbo.bullhornstaffing*",
+        "*zuora.com*"
+      ],
+      "css": [
+        "styles/main.css"
+      ],
+      "js": [
+        "scripts/contentscript.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    "fonts/*.*",
+    "icons/*.*",
+    "images/*.*"
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Scroll Preview",
+  "version": "5.2",
+  "description": "Scroll Preview integrates a whole-page preview with scrollbar that inspired by Sublime Text's mini map.",
+  "icons": {
+    "16": "icons/monocle-16.png",
+    "48": "icons/monocle-48.png",
+    "128": "icons/monocle-128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/monocle-19.png",
+      "38": "icons/monocle-38.png"
+    },
+    "default_title": "Scroll Preview"
+  },
+  "author": "Mike Chen",
+  "background": {
+    "scripts": [
+      "common/dev.js",
+      "common/user_settings.js",
+      "src/background.js"
+    ],
+    "persistent": true
+  },
+  "commands": {
+    "basic-snapshot": {
+      "description": "Simple",
+      "suggested_key": {
+        "default": "Alt+A"
+      }
+    },
+    "refined-snapshot": {
+      "description": "Refined",
+      "suggested_key": {
+        "default": "Alt+Shift+A"
+      }
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "css": [
+        "src/style.css"
+      ],
+      "js": [
+        "libs/jquery-shim.js",
+        "libs/html2canvas.js",
+        "common/dev.js",
+        "common/user_settings.js",
+        "src/content.js"
+      ]
+    }
+  ],
+  "options_page": "options/options.html",
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "storage",
+    "*://*/*"
+  ],
+  "web_accessible_resources": [
+    "libs/jquery-shim.js"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'"
+}

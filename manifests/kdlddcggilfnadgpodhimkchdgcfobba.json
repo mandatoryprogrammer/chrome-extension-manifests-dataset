@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Active Collab Inline Timers",
+  "version": "1.0.9",
+  "description": "Provides instant access to timers on any Active Collab page that lists tasks.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "19": "icons/icon19.png",
+    "32": "icons/icon32.png",
+    "38": "icons/icon38.png",
+    "48": "icons/icon48.png",
+    "64": "icons/icon64.png",
+    "128": "icons/icon128.png"
+  },
+  "browser_action": {
+    "default_title": "Active Collab Inline Timers",
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "19": "icons/icon16.png",
+      "38": "icons/icon38.png"
+    }
+  },
+  "author": "DRM Productions",
+  "background": {
+    "scripts": [
+      "server.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "client.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "homepage_url": "https://drminc.com",
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "webNavigation",
+    "storage",
+    "*://*/*"
+  ],
+  "web_accessible_resources": [
+    "utils.js",
+    "page.js",
+    "page.css"
+  ]
+}

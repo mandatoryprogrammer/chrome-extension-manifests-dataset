@@ -1,0 +1,43 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Reddit Hot Swap",
+  "version": "2.0.0",
+  "description": "Changes Reddit's default sorting to hot.",
+  "browser_action": {
+    "default_icon": "icons/reddithotswap_48.png",
+    "default_popup": "html/browser-action.html"
+  },
+  "icons": {
+    "16": "icons/reddithotswap_16.png",
+    "48": "icons/reddithotswap_48.png",
+    "128": "icons/reddithotswap_128.png"
+  },
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.reddit.com/*",
+        "https://reddit.com/*"
+      ],
+      "css": [],
+      "js": [
+        "js/content.reddithotswap.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/background.reddithotswap.js"
+    ],
+    "persistent": true
+  },
+  "web_accessible_resources": [
+    "js/*"
+  ]
+}

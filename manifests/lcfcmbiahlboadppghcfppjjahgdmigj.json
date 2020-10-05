@@ -1,0 +1,51 @@
+{
+  "name": "智能代理",
+  "version": "2.9",
+  "description": "定制化制定自己的代理规则",
+  "short_name": "代理",
+  "browser_action": {
+    "default_icon": "imgs/icon16.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "imgs/icon16.png",
+    "24": "imgs/icon24.png",
+    "32": "imgs/icon32.png",
+    "48": "imgs/icon48.png",
+    "64": "imgs/icon64.png",
+    "72": "imgs/icon72.png",
+    "96": "imgs/icon96.png",
+    "128": "imgs/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "dist/background.js"
+    ]
+  },
+  "options_page": "manager.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://proxy.qianrong.net/proxy/loginToChrome"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "js": [
+        "./dist/content.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "proxy",
+    "tabs",
+    "webRequest",
+    "storage",
+    "<all_urls>"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "web_accessible_resources": [
+    "manager.html"
+  ],
+  "manifest_version": 2,
+  "update_url": "https://clients2.google.com/service/update2/crx"
+}

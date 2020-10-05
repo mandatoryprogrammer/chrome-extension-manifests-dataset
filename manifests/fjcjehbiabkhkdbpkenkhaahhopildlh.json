@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "LambdaTest Screenshots",
+  "short_name": "LambdaTest Screenshots",
+  "description": "Generate Screenshots on different mobile and desktop browsers from Google Chrome.",
+  "version": "2.0.10",
+  "manifest_version": 2,
+  "incognito": "not_allowed",
+  "permissions": [
+    "storage",
+    "tabs"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com 'unsafe-eval'; object-src 'self'",
+  "browser_action": {
+    "default_popup": "screenshot.html"
+  },
+  "background": {
+    "scripts": [
+      "./assets/js/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.lambdatest.com/*",
+        "http://*.lambdatest.com/*"
+      ],
+      "js": [
+        "./assets/js/jquery.min.js",
+        "./assets/js/app.js",
+        "./assets/js/axios.js"
+      ],
+      "run_at": "document_end",
+      "match_about_blank": true
+    }
+  ],
+  "web_accessible_resources": [
+    "./assets/*"
+  ],
+  "icons": {
+    "16": "./assets/icons/favicon-16x16.png",
+    "32": "./assets/icons/favicon-32x32.png",
+    "96": "./assets/icons/favicon-96x96.png"
+  }
+}

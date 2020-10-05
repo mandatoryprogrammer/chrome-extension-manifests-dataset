@@ -1,0 +1,80 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "enggHeads Video Recorder",
+  "short_name": "Record Classroom",
+  "author": "Dinesh pathak",
+  "version": "1.0.13",
+  "manifest_version": 2,
+  "minimum_chrome_version": "49",
+  "content_security_policy": "script-src 'self' https://apis.google.com; object-src 'self'",
+  "description": "Record screen activity, camera, microphone & speakers in Full HD video format",
+  "homepage_url": "https://edubot.enggheads.com",
+  "background": {
+    "scripts": [
+      "background/background.common.js",
+      "background/background.js",
+      "background/background.desktopCapture.js",
+      "background/background.tabCapture.js",
+      "background/background.badgeText.js",
+      "background/background.getUserMedia.js",
+      "background/background.messaging.js",
+      "background/background.players.js",
+      "RecordRTC/MediaStreamRecorder.js",
+      "RecordRTC/MultiStreamRecorder.js",
+      "RecordRTC/MixMultiStream.js",
+      "RecordRTC/DiskStorage.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.enggheads.com/*",
+        "http://*.enggheads.com/*"
+      ],
+      "js": [
+        "dropdown.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": "images/logo128.png",
+    "default_title": "enggHeads Recorder",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "images/logo16.png",
+    "22": "images/logo22.png",
+    "32": "images/logo32.png",
+    "48": "images/logo48.png",
+    "128": "images/logo128.png"
+  },
+  "permissions": [
+    "desktopCapture",
+    "storage",
+    "tabs",
+    "contextMenus",
+    "tabCapture",
+    "activeTab",
+    "identity",
+    "https://www.googleapis.com/*",
+    "<all_urls>"
+  ],
+  "oauth2": {
+    "client_id": "9989860785-krr6bf1e9rpjqorelrm1ler7gem6fbu9.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/youtube.upload",
+      "https://www.googleapis.com/auth/youtube",
+      "https://www.googleapis.com/auth/drive",
+      "https://www.googleapis.com/auth/drive.file"
+    ]
+  },
+  "web_accessible_resources": [
+    "images/logo128.png"
+  ],
+  "options_ui": {
+    "page": "preview.html",
+    "chrome_style": false,
+    "open_in_tab": true
+  }
+}

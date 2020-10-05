@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Malaysiakini News",
+  "description": "Malaysiakini news coverage concentrates mainly on local events, with a strong emphasis on items related to Malaysian politics.",
+  "manifest_version": 2,
+  "version": "1.0.7",
+  "version_name": "1.0.7 (Build 20160428)",
+  "browser_action": {
+    "default_icon": "images/mkini.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "icons": {
+    "48": "images/mkini.png"
+  },
+  "permissions": [
+    "notifications",
+    "gcm",
+    "http://www.malaysiakini.com/*",
+    "http://mobile-app-api.malaysiakini.com/",
+    "storage",
+    "https://www.google-analytics.com/analytics.js"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://related.news/api/*",
+        "http://mk-cdn.mkini.net/*",
+        "https://mobile-app-api.malaysiakini.com/*"
+      ],
+      "js": [
+        "script.js"
+      ],
+      "css": [
+        "style.css"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

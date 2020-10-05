@@ -1,0 +1,78 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Open TortoiseSVN for Google Chrome™",
+  "version": "2.1.1",
+  "description": "Extension to open a file directly in TortoiseSVN instead of in the browser.",
+  "icons": {
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "js/common/misc.js",
+      "js/common/action_matcher.js",
+      "js/common/misc_settings.js",
+      "js/common/error.js",
+      "js/common/data_migrator.js",
+      "js/common/svn_url.js",
+      "js/background/badge_manager.js",
+      "js/background/context_menu.js",
+      "js/background/message_receiver.js",
+      "js/background/tortoise_svn_opener.js",
+      "js/background/background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": "icons/icon32.png",
+    "default_title": "Open TortoiseSVN"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*/*"
+      ],
+      "css": [
+        "css/page.css"
+      ],
+      "js": [
+        "js/common/misc.js",
+        "js/common/action_matcher.js",
+        "js/common/misc_settings.js",
+        "js/common/error.js",
+        "js/common/svn_url.js",
+        "js/content_script/a_tag_parser.js",
+        "js/content_script/icon.js",
+        "js/content_script/icon_decorator.js",
+        "js/content_script/message_sender.js",
+        "js/content_script/proxy.js",
+        "js/content_script/content_script.js"
+      ]
+    }
+  ],
+  "options_ui": {
+    "page": "html/options.html",
+    "open_in_tab": true,
+    "chrome_style": true
+  },
+  "permissions": [
+    "tabs",
+    "contextMenus",
+    "nativeMessaging",
+    "storage",
+    "unlimitedStorage"
+  ],
+  "web_accessible_resources": [
+    "images/en/tooltip_repobrowser.svg",
+    "images/en/tooltip_blame.svg",
+    "images/en/tooltip_log.svg",
+    "images/ja/tooltip_repobrowser.svg",
+    "images/ja/tooltip_blame.svg",
+    "images/ja/tooltip_log.svg"
+  ]
+}

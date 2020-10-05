@@ -1,0 +1,42 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "SDL Clipboard Extension",
+  "version": "1.3.1",
+  "manifest_version": 2,
+  "description": "The SDL Clipboard Extension for copy/paste in your SDL Xopus, SDL LiveContent or SDL Knowledge Center editor",
+  "icons": {
+    "16": "logo16.png",
+    "48": "logo48.png",
+    "128": "logo128.png"
+  },
+  "permissions": [
+    "tabs",
+    "clipboardWrite",
+    "clipboardRead",
+    "chrome://favicon/",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "background.js",
+      "clipboardProxy.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "selection.js",
+        "eventProxy.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "offline_enabled": true,
+  "content_security_policy": "default-src 'self'; style-src 'self' 'unsafe-inline';"
+}

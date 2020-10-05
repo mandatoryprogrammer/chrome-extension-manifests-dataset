@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Fake News Guard",
+  "description": "The search engine for fake news",
+  "version": "0.2.2",
+  "browser_action": {
+    "default_icon": "./assets/favicon.png",
+    "default_popup": "./src/static/popup.html"
+  },
+  "permissions": [
+    "activeTab",
+    "contextMenus"
+  ],
+  "web_accessible_resources": [
+    ".src/content_scripts/materialize/fonts/roboto/*",
+    "assets/googleMaterialIcons/MaterialIcons-Regular.woff2",
+    "./assets/designAssets/svg/color_logo_transparent.svg",
+    "./assets/Spinner.gif",
+    "./assets/Spinner.svg",
+    "src/content_scripts/designAssets/img/logo.png",
+    "src/content_scripts/designAssets/img/logo-fake.png",
+    "src/content_scripts/designAssets/img/logo-bias.png",
+    "src/content_scripts/designAssets/img/fb-logo-fake.png",
+    "src/content_scripts/designAssets/img/fb-logo-bias.png",
+    "src/content_scripts/designAssets/img/fake-icon.png",
+    "src/content_scripts/designAssets/img/bias-icon.png",
+    "src/content_scripts/designAssets/img/info-icon.png",
+    "src/content_scripts/designAssets/img/indicator.png",
+    "src/content_scripts/designAssets/img/dark_logo.png",
+    "src/content_scripts/designAssets/logos/yellowLogo.png"
+  ],
+  "background": {
+    "scripts": [
+      "./build/build.js",
+      "./src/bg/searchSelection.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false,
+      "js": [
+        "./src/lib/jquery-3.2.1.min.js",
+        "./src/content_scripts/markSelection.js"
+      ]
+    }
+  ],
+  "icons": {
+    "48": "./assets/favicon.png",
+    "128": "./assets/favicon96.png"
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "LastPlayer",
+  "description": "Extensions for convenient use of the LastPlayer (popup control panel, hotkeys, VK status update)",
+  "version": "1.0.2",
+  "browser_action": {
+    "default_icon": "logo16.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "logo16.png",
+    "48": "logo48.png",
+    "128": "logo128.png"
+  },
+  "permissions": [
+    "tabs",
+    "https://api.vk.com/",
+    "http://lastplayer.ru/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://lastplayer.ru/player*"
+      ],
+      "js": [
+        "jquery-1.8.3.min.js",
+        "cs.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://oauth.vk.com/blank.html"
+      ],
+      "js": [
+        "jquery-1.8.3.min.js",
+        "oauth-vk-cs.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "jquery-1.8.3.min.js",
+        "utils.js",
+        "hotkeys.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "jquery-1.8.3.min.js",
+      "utils.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "options_page": "options.html"
+}

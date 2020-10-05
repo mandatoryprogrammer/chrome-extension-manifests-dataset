@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Anti Clickbait",
+  "short_name": "Anti Clickbait",
+  "description": "Fighting clickbaits - What's wrong with that? :)",
+  "version": "1.0.4",
+  "browser_action": {
+    "default_icon": "./resources/logo.png"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "./resources/jquery-1.11.3.min.js",
+        "./content//handlers/facebook.js",
+        "./content/main.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start",
+      "css": [
+        "./content/style.css"
+      ]
+    }
+  ],
+  "icons": {
+    "128": "./resources/logo.png",
+    "16": "./resources/logo.png",
+    "48": "./resources/logo.png"
+  },
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "http://*/*",
+    "https://*/*",
+    "storage"
+  ],
+  "web_accessible_resources": [
+    "/resources/loading_spinner.gif"
+  ],
+  "background": {
+    "scripts": [
+      "./resources/jquery-1.11.3.min.js",
+      "./background/background.js"
+    ],
+    "persistent": true
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Hume",
+  "description": "The easy way to make ethical buying choices",
+  "version": "1.1.6",
+  "icons": {
+    "16": "images/extension-logo-default-16x16.png",
+    "48": "images/extension-logo-default-48x48.png",
+    "128": "images/extension-logo-default-128x128.png"
+  },
+  "permissions": [
+    "webRequest",
+    "tabs",
+    "<all_urls>",
+    "webNavigation",
+    "webRequestBlocking",
+    "identity",
+    "notifications",
+    "contextMenus",
+    "notifications",
+    "cookies",
+    "activeTab"
+  ],
+  "content_scripts": [
+    {
+      "run_at": "document_idle",
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/content.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://accounts.google.com https://apis.google.com https://ajax.googleapis.com; object-src 'self'",
+  "background": {
+    "scripts": [
+      "js/jquery-3.2.1.min.js",
+      "js/config.js",
+      "js/url_checker.js",
+      "js/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "images/extension-logo-default-128x128.png",
+    "default_popup": "html/main.html"
+  },
+  "oauth2": {
+    "client_id": "1009595378311-08jdb0qj71848v94e1u5c0tt89q55f60.apps.googleusercontent.com",
+    "scopes": [
+      "profile",
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/plus.login",
+      "https://www.googleapis.com/auth/contacts.readonly"
+    ]
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvH0nQJZSNXCe6zXvS3820Vz/utkrYViRDjEWegEYEa6Lr8cdHAvjDeqgCBsXtxJ8cA6wQvoTk/WtoVm0eoNVogG0sLrsqOhkyk1Do44bwT71Z9ZoV6uqWsS9gzS/KP4UfsA4/LL6l2vk0jeC50iKEECEYvNWQHJoye0hp0d11Xmod0p1oLZItWs/BbjE/j2UEBBQXdjLuVquro5Zw7f0wydayALAjD1VuVqC4+3+ARh6iUkH5Xp/Sd7cr8IVQ8Vwj0f23f1+ybPcFMqwC+PtFVJP59MFCp4TpBwmFMOx47AEu6rpaBf/rNQ5zSiXoLEFxlBJx9zlRmn9PQdac/wCEQIDAQAB"
+}

@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Liberal Post-Dispatch Blocker",
+  "short_name": "Liberal PD Blocker",
+  "description": "Block the liberal St Louis Post-Dispatch",
+  "author": "Toy Remple",
+  "version": "1.4",
+  "icons": {
+    "128": "128.png"
+  },
+  "permissions": [
+    "<all_urls>",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.stltoday.com/*"
+      ],
+      "all_frames": true,
+      "css": [
+        "styles.css"
+      ],
+      "js": [
+        "document_start.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.stltoday.com/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "document_end.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "applications": {
+    "gecko": {
+      "id": "alexsander.santos@luizalabs.com",
+      "strict_min_version": "58.0"
+    }
+  },
+  "manifest_version": 2,
+  "name": "github-board-refined",
+  "version": "2.1.13",
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "https://github.com/*/projects/*"
+      ],
+      "js": [
+        "dist/browser-polyfill.min.js",
+        "dist/content.js"
+      ],
+      "css": [
+        "css/window.css",
+        "css/options.css",
+        "css/content.css"
+      ]
+    }
+  ],
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "dist/background.js",
+      "dist/browser-polyfill.min.js"
+    ]
+  },
+  "browser_action": {
+    "browser_style": true,
+    "default_icon": {
+      "48": "images/final-state-48.png"
+    },
+    "default_title": "Github Board Refined",
+    "default_popup": "options.html"
+  },
+  "options_ui": {
+    "chrome_style": false,
+    "page": "options.html"
+  },
+  "permissions": [
+    "storage",
+    "contextMenus",
+    "activeTab",
+    "https://api.github.com/*",
+    "https://github.com/*",
+    "https://jsbin-user-assets.s3.amazonaws.com/*",
+    "https://jsbin-user-assets.s3.amazonaws.com/rafaelcastrocouto/password.ttf"
+  ]
+}

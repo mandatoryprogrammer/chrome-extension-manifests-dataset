@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "MagicTime - Auto Time Capture for Lawyers",
+  "short_name": "MagicTime",
+  "description": "It automatically captures your time spent on each website in the background.",
+  "version": "1.2",
+  "browser_action": {
+    "default_icon": "images/icons/icon16.png",
+    "default_popup": "index.html"
+  },
+  "icons": {
+    "16": "images/icons/icon16.png",
+    "24": "images/icons/icon24.png",
+    "32": "images/icons/icon32.png",
+    "64": "images/icons/icon64.png",
+    "128": "images/icons/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "jquery-3.4.1.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "js": [
+        "jquery-3.4.1.js",
+        "lg_topaz.js"
+      ],
+      "css": [
+        "lg_topaz.css"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://*.lawgro.com; object-src 'self'",
+  "permissions": [
+    "tabs",
+    "idle",
+    "storage",
+    "identity",
+    "https://up.lawgro.com/",
+    "http://*/",
+    "https://*/"
+  ]
+}

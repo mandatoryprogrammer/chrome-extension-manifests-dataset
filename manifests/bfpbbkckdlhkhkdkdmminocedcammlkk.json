@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Debitoor Visualizzatore eFattura",
+  "version": "1.1.4",
+  "description": "Visualizza la fattura elettronica in XML con il modello dell'Agenzia delle Entrate gratis.",
+  "manifest_version": 2,
+  "author": "Debitoor",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*.xml",
+        "file://*/*.xml"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "src/content_script.js"
+      ],
+      "css": [
+        "src/page.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*/chrome-visualizzatore-efattura"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "src/permission_script.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "resources/*"
+  ],
+  "permissions": [
+    "<all_urls>",
+    "activeTab",
+    "storage",
+    "tabs"
+  ],
+  "background": {
+    "scripts": [
+      "src/background.js"
+    ]
+  },
+  "icons": {
+    "16": "resources/blue-debitoor-icon-16.png",
+    "48": "resources/blue-debitoor-icon-48.png",
+    "128": "resources/blue-debitoor-icon-128.png"
+  },
+  "offline_enabled": true,
+  "browser_action": {
+    "default_icon": {
+      "16": "resources/blue-debitoor-icon-16.png",
+      "24": "resources/blue-debitoor-icon-24.png",
+      "32": "resources/blue-debitoor-icon-32.png"
+    },
+    "default_popup": "src/browser_action.html"
+  },
+  "minimum_chrome_version": "45"
+}

@@ -1,0 +1,41 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Charitable",
+  "version": "0.0.2",
+  "manifest_version": 2,
+  "description": "Do good by doing what you already do. Visit Amazon normally in the UK or US, and some money will go to charity.",
+  "homepage_url": "https://gdgr.co.uk/charitable",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": true
+  },
+  "options_ui": {
+    "page": "src/options/index.html",
+    "chrome_style": true
+  },
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "notifications",
+    "https://*/*",
+    "http://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://amazon.co.uk/*",
+        "https://amazon.com/*"
+      ],
+      "js": [
+        "src/inject/inject.js"
+      ]
+    }
+  ]
+}

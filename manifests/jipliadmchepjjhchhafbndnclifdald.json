@@ -1,0 +1,80 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "short_name": "Dsc Ext",
+  "description": "Automate 95% your dropshipping workflow with Dropship Connector",
+  "manifest_version": 2,
+  "icons": {
+    "16": "assets/images/boostflow-2x-extension.png",
+    "128": "assets/images/boostflow-2x-extension.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "assets/images/boostflow-icon-browser.png",
+      "38": "assets/images/boostflow-icon-browser.png"
+    },
+    "default_title": "Aliepxress product Importer"
+  },
+  "omnibox": {
+    "keyword": "dropshipping"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.aliexpress.com/store/product/*",
+        "https://*.aliexpress.com/item/*"
+      ],
+      "css": [
+        "css/content_detail_page.css"
+      ],
+      "js": [
+        "js/content_detail_page.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://trade.aliexpress.com/*"
+      ],
+      "css": [
+        "css/content_bulk_payment.css"
+      ],
+      "js": [
+        "js/content_bulk_payment.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.aliexpress.com/category/*",
+        "https://*.aliexpress.com/wholesale?*",
+        "https://*.aliexpress.com/w/wholesale-*",
+        "https://*.aliexpress.com/af/*"
+      ],
+      "css": [
+        "css/content_category_page.css"
+      ],
+      "js": [
+        "js/content_category_page.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "storage",
+    "tabs",
+    "https://*.aliexpress.com/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.boostflow.com/*"
+    ]
+  },
+  "background": {
+    "page": "index.html",
+    "persistent": true
+  },
+  "web_accessible_resources": [
+    "assets/images/*.svg",
+    "assets/fonts/*/*.ttf"
+  ],
+  "name": "Dropship Connector",
+  "version": "0.1.10.11"
+}

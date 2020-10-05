@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "EasyWiki",
+  "version": "0.2",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "description": "Simplifying Wikipedia research. No more multiple tabs.",
+  "homepage_url": "https://github.com/sanketsaurav/easywiki",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/icon48.png",
+      "38": "icons/icon48.png"
+    },
+    "default_title": "Toggle EasyWiki"
+  },
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "*://*.wikipedia.org/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "css": [
+        "src/inject/inject.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.wikipedia.org/*"
+      ],
+      "js": [
+        "js/jquery/jquery.min.js",
+        "js/tooltip.js",
+        "js/popover.js",
+        "src/inject/inject.js"
+      ]
+    }
+  ]
+}

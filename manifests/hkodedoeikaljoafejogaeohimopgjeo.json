@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "编程学院",
+  "manifest_version": 2,
+  "version": "1.0.4",
+  "description": "编程学院 - 在线交互式编程学习平台。在几秒钟之内启动在线编程环境，超过70种预制编程环境可用，支持自定义编程环境，随处可用。",
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "icons": {
+    "128": "icon.png"
+  },
+  "minimum_chrome_version": "65.0.0.0",
+  "permissions": [
+    "notifications",
+    "activeTab",
+    "contextMenus",
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "browser_action": {
+    "default_title": "打开编程环境",
+    "default_icon": "icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "css/inject.css",
+        "css/splitpanes.css"
+      ],
+      "js": [
+        "js/vue@2.6.10.js",
+        "js/splitpanes.umd.min.js",
+        "js/inject.js"
+      ]
+    }
+  ]
+}

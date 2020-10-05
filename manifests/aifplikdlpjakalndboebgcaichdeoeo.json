@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "前方高能",
+  "version": "1.3",
+  "description": "A small tool for visualizing the density of damuku from videos in Bilibili",
+  "manifest_version": 2,
+  "icons": {
+    "16": "./img/icon16.png",
+    "48": "./img/icon48.png",
+    "128": "./img/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "./third-party/js/jquery-3.1.1.min.js"
+    ]
+  },
+  "permissions": [
+    "*://*.bilibili.com/*",
+    "storage"
+  ],
+  "browser_action": {
+    "default_title": "",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "matches": [
+        "*://www.bilibili.com/video/av*"
+      ],
+      "js": [
+        "./third-party/js/echarts.custom.js",
+        "./third-party/js/jquery-3.1.1.min.js",
+        "./js/bilibili/constVar.js",
+        "./js/bilibili/normal.js",
+        "./js/common/danmukuProcess.js",
+        "./js/bilibili/mainFunc.js",
+        "./js/common/commonConstVar.js"
+      ]
+    },
+    {
+      "all_frames": false,
+      "matches": [
+        "*://bangumi.bilibili.com/anime/*/play*"
+      ],
+      "js": [
+        "./third-party/js/echarts.custom.js",
+        "./third-party/js/jquery-3.1.1.min.js",
+        "./js/bilibili/constVar.js",
+        "./js/bilibili/bangumi.js",
+        "./js/common/danmukuProcess.js",
+        "./js/bilibili/mainFunc.js",
+        "./js/common/commonConstVar.js"
+      ]
+    }
+  ]
+}

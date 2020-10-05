@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Save to Google Contacts",
+  "oauth2": {
+    "client_id": "270968660643-4bts5g2ugouo87vghnrumuko4dio4vc3.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/contacts"
+    ]
+  },
+  "version": "0.0.4",
+  "manifest_version": 2,
+  "description": "A chrome extension that lets you directly save contacts in phone from web pages",
+  "icons": {
+    "16": "images/icon-16.png",
+    "128": "images/icon-128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "background.bundle.js"
+    ]
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "<all_urls>",
+    "identity"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon-19.png",
+      "38": "images/icon-38.png"
+    },
+    "default_title": "Save to Google Contacts",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content_script.bundle.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "web_accessible_resources": [
+    "images/*.png"
+  ]
+}

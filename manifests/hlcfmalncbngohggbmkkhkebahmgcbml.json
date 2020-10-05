@@ -1,0 +1,89 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "AISD Tweaks",
+  "author": "MarioCMFlys",
+  "version": "1.8.3",
+  "description": "Additional features for AISD internal apps",
+  "applications": {
+    "gecko": {
+      "id": "aisd-tweaks-gecko@mariocmflys.tk",
+      "update_url": "https://cwu.mariocmflys.tk/aisd_tweaks_versions.json"
+    }
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "notifications",
+    "alarms",
+    "contextMenus",
+    "*://canvas.allenisd.org/*"
+  ],
+  "icons": {
+    "16": "images/icon16.png",
+    "32": "images/icon32.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_popup": "menu/popup.html",
+    "default_icon": {
+      "16": "images/icon16.png",
+      "32": "images/icon32.png",
+      "48": "images/icon48.png",
+      "128": "images/icon128.png"
+    },
+    "browser_style": true,
+    "show_matches": [
+      "*://*/*"
+    ]
+  },
+  "omnibox": {
+    "keyword": "aisd"
+  },
+  "content_scripts": [
+    {
+      "css": [
+        "cscripts/canvas.css"
+      ],
+      "js": [
+        "cscripts/canvas.js"
+      ],
+      "matches": [
+        "https://canvas.allenisd.org/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "css": [],
+      "js": [
+        "cscripts/portal.js"
+      ],
+      "matches": [
+        "https://portal.allenisd.org/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "css": [],
+      "js": [
+        "cscripts/skyward.js"
+      ],
+      "matches": [
+        "https://skyward.allenisd.org/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "cscripts/canvasdark.css",
+    "cscripts/apg-dark.css",
+    "images/*.png"
+  ]
+}

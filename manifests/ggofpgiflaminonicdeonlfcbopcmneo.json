@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Title URL Clipboarad",
+  "version": "1.1.6",
+  "description": "Copy page title and URL just one click to your clipboad.",
+  "permissions": [
+    "tabs",
+    "idle",
+    "storage",
+    "identity",
+    "*://*.chromiumapp.org/*",
+    "*://bitly.com/*"
+  ],
+  "background": {
+    "page": "src/background.html",
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "file:///*/options.html",
+        "file:///*/popup.html",
+        "file:///*/callback.html"
+      ],
+      "js": [
+        "src/scripts/inject.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "browser_action": {
+    "default_popup": "src/popup.html",
+    "default_icon": {
+      "16": "src/images/clipboard16.png",
+      "32": "src/images/clipboard32.png",
+      "48": "src/images/clipboard48.png",
+      "128": "src/images/clipboard128.png"
+    }
+  },
+  "icons": {
+    "16": "src/images/clipboard16.png",
+    "32": "src/images/clipboard32.png",
+    "48": "src/images/clipboard48.png",
+    "128": "src/images/clipboard128.png"
+  },
+  "options_page": "src/options.html",
+  "manifest_version": 2
+}

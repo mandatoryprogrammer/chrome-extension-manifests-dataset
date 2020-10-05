@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "EBN Blog Login",
+  "version": "19.1.18.1144",
+  "description": "Login to your blogs without visiting the EBN app.",
+  "homepage_url": "https://app.easyblognetworks.com",
+  "manifest_version": 2,
+  "minimum_chrome_version": "58",
+  "applications": {
+    "gecko": {
+      "strict_min_version": "55.0",
+      "id": "{1efdcd74-5e54-4caa-9658-5d6a68a1c81d}"
+    }
+  },
+  "permissions": [
+    "storage",
+    "clipboardWrite",
+    "contextMenus",
+    "activeTab",
+    "https://app.easyblognetworks.com/*"
+  ],
+  "optional_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "icons": {
+    "16": "16.png",
+    "48": "32.png",
+    "128": "icon.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "16.png",
+      "32": "32.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "browser-polyfill.min.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "browser-polyfill.min.js",
+        "content.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "track.js"
+  ]
+}

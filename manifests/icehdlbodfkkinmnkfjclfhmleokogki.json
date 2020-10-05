@@ -1,0 +1,36 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "gh-cluster-assign",
+  "version": "1.0.5",
+  "description": "Assign multiple member by 1 click on GitHub",
+  "browser_action": {
+    "default_icon": "icon_128.png",
+    "default_popup": "uis/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "https://github.com/*",
+    "storage"
+  ],
+  "icons": {
+    "128": "icon_128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://github.com/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "scripts/gh-operator.js",
+        "scripts/starter.js"
+      ]
+    }
+  ]
+}

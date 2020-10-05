@@ -1,0 +1,77 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "蓝芽",
+  "version": "1.30",
+  "manifest_version": 2,
+  "description": "支持新浪微博,绿佛罗,淘宝联盟的快速登录，帮助用户在多个账号之间实现无缝切换",
+  "icons": {
+    "16": "icon.ico"
+  },
+  "browser_action": {
+    "default_icon": "icon.ico",
+    "default_popup": "account_list.html"
+  },
+  "permissions": [
+    "tabs",
+    "http://bluegerm.sinaapp.com/"
+  ],
+  "background": {
+    "page": "background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://weibo.com/"
+      ],
+      "js": [
+        "base.js",
+        "autologin_weibo.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://weibo.com/a/*"
+      ],
+      "js": [
+        "base.js",
+        "redirect_weibo.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://weibo.com/login.php?url=http%3A%2F%2Fweibo.com%2F"
+      ],
+      "js": [
+        "base.js",
+        "autologin_weibo.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://api.weibo.com/oauth2/authorize?client_id=4290141482*"
+      ],
+      "js": [
+        "base.js",
+        "autologin_lvfoluo.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://login.taobao.com/member/login.jhtml?style=minisimple&from=alimama&redirectURL=http%3A%2F%2Flogin.taobao.com%2Fmember%2Ftaobaoke%2Flogin.htm%3Fis_login%3d1&full_redirect=true&disableQuickLogin=true"
+      ],
+      "js": [
+        "base.js",
+        "autologin_taobao.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://www.alimama.com/member/minilogin.htm?redirect=&proxy=http://www.alimama.com/proxy.htm"
+      ],
+      "js": [
+        "base.js",
+        "autologin_alimama.js"
+      ]
+    }
+  ]
+}

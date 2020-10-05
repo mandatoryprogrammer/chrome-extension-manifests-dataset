@@ -1,0 +1,70 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Vuntec Video Notes",
+  "version": "0.9.4",
+  "description": "Bookmark a note at any point in a YouTube video.",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "declarativeContent",
+    "unlimitedStorage",
+    "https://www.youtube.com/*",
+    "*://*.vunic.com/*",
+    "*://*.googlevideo.com/*"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "options_page": "options.html",
+  "background": {
+    "scripts": [
+      "admin/js/deepstream.min.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "page_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "images/video-editing16.png",
+      "32": "images/video-editing32.png",
+      "64": "images/video-editing64.png",
+      "128": "images/video-editing128.png"
+    }
+  },
+  "icons": {
+    "16": "images/video-editing16.png",
+    "32": "images/video-editing32.png",
+    "64": "images/video-editing64.png",
+    "128": "images/video-editing128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.youtube.com/*"
+      ],
+      "css": [
+        "css/toastr.min.css"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "js/toastr.min.js",
+        "contentFunc.js",
+        "contentScript.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    "viewer.html",
+    "admin/*",
+    "css/*",
+    "js/*",
+    "images/*",
+    "fonts/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.youtube.com/*"
+    ]
+  },
+  "manifest_version": 2
+}

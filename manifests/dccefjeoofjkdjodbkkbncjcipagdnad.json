@@ -1,0 +1,71 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Japanese IO",
+  "description": "Helps you read Japanese text",
+  "version": "0.12.0",
+  "permissions": [
+    "contextMenus",
+    "activeTab",
+    "background",
+    "tabs",
+    "storage",
+    "*://*/*",
+    "http://localhost:5000/",
+    "https://*.japanese.io/",
+    "http://commons.wikimedia.org/",
+    "https://fonts.googleapis.com/"
+  ],
+  "icons": {
+    "16": "favicon.ico",
+    "128": "favicon-128x128.png",
+    "196": "favicon-196x196.png"
+  },
+  "background": {
+    "scripts": [
+      "background.bundle.js"
+    ]
+  },
+  "externally_connectable": {
+    "matches": [
+      "http://localhost:5000/*",
+      "https://staging.japanese.io/*",
+      "https://www.japanese.io/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "bootstrap.bundle.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "options_page": "pages/options/OptionsPage.html",
+  "browser_action": {
+    "default_title": "Japanese IO",
+    "default_icon": {
+      "128": "favicon-128x128.png"
+    }
+  },
+  "web_accessible_resources": [
+    "css/japanese-io-extension.injected.css",
+    "css/japanese-io-extension.injectedSelectDecorationButton.css",
+    "css/japanese-io-extension.optionsPage.css",
+    "css/japanese-io-extension.notificationStyle.css",
+    "/images/icons/triangle.svg",
+    "/images/icons/wikipedia-w.svg",
+    "/images/icons/close.svg",
+    "/images/logos/japanese-io-logo.svg",
+    "/images/icons/star.svg",
+    "/images/icons/star-grey.svg",
+    "/images/icons/speaker.svg",
+    "/images/icons/speaker-grey.svg",
+    "/api/vocabulary/*/audio"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self';",
+  "manifest_version": 2
+}

@@ -1,0 +1,40 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Bookmark Tweet to Browser",
+  "version": "0.1.0",
+  "short_name": "Bookmark Tweet to Browser",
+  "description": "Bookmark tweet to browser bookmark directly from timeline using embedded button.",
+  "permissions": [
+    "activeTab",
+    "declarativeContent",
+    "storage",
+    "bookmarks"
+  ],
+  "background": {
+    "scripts": [
+      "dist/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_idle",
+      "matches": [
+        "*://*.twitter.com/*"
+      ],
+      "css": [
+        "dist/css/styles.css"
+      ],
+      "js": [
+        "dist/content.js"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "app/images/icon16.png",
+    "48": "app/images/icon48.png",
+    "128": "app/images/icon128.png"
+  },
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

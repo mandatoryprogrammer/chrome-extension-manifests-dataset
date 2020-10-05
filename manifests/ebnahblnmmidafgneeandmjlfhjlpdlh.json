@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_ext_name__",
+  "version": "1.2.6",
+  "description": "__MSG_ext_description__",
+  "default_locale": "en",
+  "homepage_url": "https://checkermygmail.com/",
+  "author": "checkermygmail.com",
+  "browser_action": {
+    "default_icon": "images/icons/icon48.png",
+    "default_title": "__MSG_ext_name__"
+  },
+  "icons": {
+    "16": "images/icons/icon16.png",
+    "32": "images/icons/icon32.png",
+    "48": "images/icons/icon48.png",
+    "128": "images/icons/icon128.png"
+  },
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "popup/gmail/tabletView.js",
+        "js/content_script.js"
+      ],
+      "matches": [
+        "*://*.dy1.com/*",
+        "https://mail.google.com/mail/mu/mp/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/config.js",
+      "js/jquery-3.4.1.min.js",
+      "js/lib/addressparser.js",
+      "js/gmail.js",
+      "js/bookmark_manager.js",
+      "js/account.js",
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "tabs",
+    "alarms",
+    "activeTab",
+    "notifications",
+    "https://mail.google.com/",
+    "bookmarks",
+    "history",
+    "topSites"
+  ],
+  "web_accessible_resources": [
+    "popup/gmail/gmail.html",
+    "popup/gmail/tabletView.css"
+  ]
+}

@@ -1,0 +1,128 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_extName__",
+  "description": "__MSG_extName__",
+  "default_locale": "en",
+  "version": "1.0.18.1404",
+  "icons": {
+    "16": "www/img/16.png",
+    "32": "www/img/32.png",
+    "48": "www/img/48.png",
+    "128": "www/img/128.png"
+  },
+  "permissions": [
+    "background",
+    "tabs",
+    "idle",
+    "http://*/*",
+    "https://*/*",
+    "https://esna.conferencing/*",
+    "https://esna.conferencing.spaces/*"
+  ],
+  "background": {
+    "scripts": [
+      "www/app/loader.js"
+    ]
+  },
+  "options_page": "www/app/options.html",
+  "options_ui": {
+    "page": "www/app/options.html",
+    "chrome_style": true,
+    "open_in_tab": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.google.com/*/hovercard*"
+      ],
+      "all_frames": true,
+      "run_at": "document_start",
+      "js": [
+        "www/lib/bootcs.js",
+        "www/lib/jsl/module.js",
+        "www/lib/inject/client.js",
+        "www/lib/shared/zang.io/inject/methods.js",
+        "www/app/inject/google.card.js",
+        "www/lib/inject/google.card.js"
+      ],
+      "css": [
+        "www/lib/inject/google.card.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://mail.google.com/mail/*",
+        "https://manage1.esna.com/interop/spaces2gate0.html*"
+      ],
+      "all_frames": false,
+      "run_at": "document_start",
+      "js": [
+        "www/lib/bootcs.js",
+        "www/lib/jsl/module.js",
+        "www/lib/inject/client.js",
+        "www/lib/shared/zang.io/inject/methods.js",
+        "www/app/inject/google.people.js",
+        "www/lib/inject/google.people.js",
+        "www/lib/inject/google.popup.js"
+      ],
+      "css": [
+        "www/lib/inject/google.people.css",
+        "www/lib/inject/google.popup.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://calendar.google.com/*"
+      ],
+      "all_frames": false,
+      "run_at": "document_start",
+      "js": [
+        "www/lib/bootcs.js",
+        "www/lib/jsl/module.js",
+        "www/lib/inject/client.js",
+        "www/lib/shared/zang.io/inject/methods.js",
+        "www/app/inject/google.calendar.js",
+        "www/lib/inject/google.calendar.js",
+        "www/lib/inject/google.popup.js"
+      ],
+      "css": [
+        "www/lib/inject/google.calendar.css",
+        "www/lib/inject/google.popup.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://teams.microsoft.com/*"
+      ],
+      "all_frames": true,
+      "run_at": "document_start",
+      "js": [
+        "www/lib/bootcs.js",
+        "www/lib/jsl/module.js",
+        "www/lib/inject/client.js",
+        "www/lib/shared/zang.io/inject/methods.js",
+        "www/app/inject/ms.teams.js",
+        "www/lib/inject/ms.teams.js",
+        "www/lib/inject/google.popup.js"
+      ],
+      "css": [
+        "www/lib/inject/ms.teams.css",
+        "www/lib/inject/google.popup.css"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "www/img/19d.png",
+      "38": "www/img/38d.png"
+    },
+    "default_popup": "www/app/app.html"
+  },
+  "web_accessible_resources": [
+    "www/app/app.html",
+    "www/app/auth.html",
+    "www/img/16bw.png",
+    "www/img/32bw.png"
+  ]
+}

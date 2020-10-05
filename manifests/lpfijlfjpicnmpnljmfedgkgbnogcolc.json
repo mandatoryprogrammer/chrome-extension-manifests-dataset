@@ -1,0 +1,67 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "background": {
+    "scripts": [
+      "./background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_popup": "./popup.html"
+  },
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "js": [
+        "./contentScripts.js"
+      ],
+      "matches": [
+        "http://paipai.jd.com/auction-list/*",
+        "https://paipai.jd.com/auction-list/*"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "all_frames": false,
+      "js": [
+        "./page.js"
+      ],
+      "matches": [
+        "http://paipai.jd.com/auction-detail/*",
+        "https://paipai.jd.com/auction-detail/*"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "description": "京东夺宝岛监控助手",
+  "icons": {
+    "16": "assets/icons/Icon16.png",
+    "32": "assets/icons/Icon32.png",
+    "64": "assets/icons/Icon64.png",
+    "128": "assets/icons/Icon128.png"
+  },
+  "manifest_version": 2,
+  "name": "京东夺宝岛监控助手",
+  "options_ui": {
+    "chrome_style": true,
+    "page": "./options.html"
+  },
+  "permissions": [
+    "declarativeContent",
+    "http://*",
+    "https://*",
+    "downloads",
+    "storage",
+    "clipboardWrite",
+    "clipboardRead",
+    "activeTab",
+    "webRequest",
+    "tabs",
+    "cookies",
+    "notifications",
+    "alarms",
+    "webRequestBlocking"
+  ],
+  "version": "1.1.8",
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://used-api.jd.com/; object-src 'self'"
+}

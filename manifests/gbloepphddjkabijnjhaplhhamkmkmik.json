@@ -1,0 +1,70 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Pixiv Ugoira WebM",
+  "description": "Converts Pixiv Ugoira Animations to WebM video files.",
+  "version": "0.1.1",
+  "minimum_chrome_version": "46",
+  "icons": {
+    "16": "Image/16.png",
+    "48": "Image/48.png",
+    "128": "Image/128.png"
+  },
+  "options_page": "Extension/Options.html",
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "Common/Thirdparty/jquery-2.2.4.js",
+      "Extension/Background.js"
+    ]
+  },
+  "page_action": {
+    "default_icon": {
+      "19": "Image/19.png",
+      "38": "Image/38.png"
+    },
+    "default_title": "Pixiv Ugoira WebM",
+    "default_popup": "Extension/Options.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.pixiv.net/*"
+      ],
+      "css": [
+        "ContentScript/PUW.css"
+      ],
+      "js": [
+        "Common/Thirdparty/jquery-2.2.4.js",
+        "Common/jQueryPlugins.js",
+        "Common/Thirdparty/zip/zip.js",
+        "Common/Thirdparty/zip/zip-ext.js",
+        "Common/Thirdparty/zip/deflate.js",
+        "Common/Thirdparty/zip/inflate.js",
+        "Common/Thirdparty/whammy.js",
+        "Common/Thirdparty/GIFEncoder/LZWEncoder.js",
+        "Common/Thirdparty/GIFEncoder/NeuQuant.js",
+        "Common/Thirdparty/GIFEncoder/GIFEncoder.js",
+        "Common/Thirdparty/GIFEncoder/b64.js",
+        "ContentScript/PUW.js"
+      ]
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.pixiv.net/*"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "downloads",
+    "*://*.pixiv.net/*"
+  ],
+  "web_accessible_resources": [
+    "PageScript/PUWPageScript.js",
+    "Image/ConvertButton_32.png",
+    "Image/ConvertButton_48.png",
+    "Image/header.png"
+  ]
+}

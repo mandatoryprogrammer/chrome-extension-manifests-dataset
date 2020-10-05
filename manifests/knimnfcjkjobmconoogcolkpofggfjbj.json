@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "PriceScanner",
+  "short_name": "PriceScanner",
+  "version": "1.8",
+  "description": "PriceScanner checks for better prices while your are shopping on Amazon!",
+  "icons": {
+    "16": "images/icon-16x16.png",
+    "32": "images/icon-32x32.png",
+    "48": "images/icon-48x48.png",
+    "128": "images/icon-128x128.png"
+  },
+  "permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "background": {
+    "scripts": [
+      "dist/config.js",
+      "dist/util.js",
+      "dist/ga.js",
+      "dist/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.amazon.com/*",
+        "*://*.amazon.ca/*",
+        "*://*.amazon.co.uk/*",
+        "*://*.amazon.de/*"
+      ],
+      "exclude_matches": [
+        "*://*.aws.amazon.com/*",
+        "*://*.affiliate-program.amazon.com/*",
+        "*://*.associates.amazon.ca/*",
+        "*://*.affiliate-program.amazon.co.uk/*",
+        "*://*.affiliate-program.amazon.in/*",
+        "*://*.afiliados.amazon.es/*",
+        "*://*.partenaires.amazon.fr/*",
+        "*://*.programma-affiliazione.amazon.it/*"
+      ],
+      "css": [
+        "styles/main.css"
+      ],
+      "js": [
+        "dist/config.js",
+        "dist/util.js",
+        "dist/ga.js",
+        "dist/amzn.js"
+      ]
+    }
+  ]
+}

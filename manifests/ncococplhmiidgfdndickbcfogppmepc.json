@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "豆瓣图书助手",
+  "version": "1.6",
+  "manifest_version": 2,
+  "minimum_chrome_version": "17.0.0",
+  "description": "豆瓣图书评分插件，在京东、亚马逊、VeryCD图书页面自动出现豆瓣评分，点击图标直接穿越到豆瓣图书页面查看详情。",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.amazon.cn/*",
+        "https://*.amazon.cn/*",
+        "https://www.z.cn/*",
+        "https://*.z.cn/*",
+        "https://item.jd.com/*",
+        "https://e.jd.com/*",
+        "https://www.verycd.com/*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "douban.js"
+      ],
+      "css": [
+        "douban.css"
+      ],
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "*://*/*",
+    "https://api.douban.com/",
+    "webRequestBlocking",
+    "webRequest"
+  ],
+  "web_accessible_resources": [
+    "dou.png"
+  ],
+  "page_action": {
+    "default_icon": "icon.png"
+  },
+  "icons": {
+    "16": "icon-16.png",
+    "128": "icon-128.png"
+  },
+  "background": {
+    "scripts": [
+      "init.js"
+    ]
+  }
+}

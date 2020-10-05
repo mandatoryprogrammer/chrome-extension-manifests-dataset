@@ -1,0 +1,42 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "影片/直播精彩片段偵測",
+  "description": "自動將巴哈動畫瘋、Twitch精彩片段標記在撥放器進度條(時間軸)上!",
+  "version": "1.31",
+  "browser_action": {
+    "default_icon": "icon128.png"
+  },
+  "manifest_version": 2,
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+F",
+        "mac": "MacCtrl+Shift+F"
+      },
+      "description": "Opens hello.html"
+    }
+  },
+  "content_security_policy": "script-src 'self' http://127.0.0.1; object-src 'self'",
+  "permissions": [
+    "tabs",
+    "<all_urls>",
+    "webNavigation"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "jquery.min.js",
+        "content-script(no server).js"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Add to Calendar",
+  "version": "1.3",
+  "description": "Automatically add Facebook events to Google Calendar with one click.",
+  "permissions": [
+    "declarativeContent",
+    "activeTab",
+    "clipboardWrite",
+    "*://*/*"
+  ],
+  "content_security_policy": "script-src 'self' https://connect.facebook.net; object-src 'self'",
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.facebook.com/events/*",
+        "https://*.facebook.com/events/*"
+      ],
+      "js": [
+        "contentscript.js"
+      ]
+    }
+  ],
+  "page_action": {
+    "default_icon": {
+      "128": "images/calendar_icon128.png"
+    }
+  },
+  "icons": {
+    "128": "images/calendar_icon128.png"
+  },
+  "manifest_version": 2
+}

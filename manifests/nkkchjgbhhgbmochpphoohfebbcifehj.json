@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "TrackerRMS for LinkedIn",
+  "manifest_version": 2,
+  "description": "Sidebar tool to capture individual candidates and contacts and import them directly into your TrackerRMS system",
+  "version": "1.4.9",
+  "background": {
+    "scripts": [
+      "content.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_title": "TrackerRMS for LinkedIn"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.linkedin.com/*",
+        "https://www.linkedin.co.uk/*"
+      ],
+      "js": [
+        "scripts/jquery-1.11.2.min.js",
+        "script.js",
+        "scripts/jszip.min.js",
+        "scripts/jquery.slimscroll.min.js"
+      ],
+      "all_frames": false,
+      "run_at": "document_end"
+    }
+  ],
+  "externally_connectable": {
+    "ids": [
+      "jcbndbbemiadifgncmbffjbplmponane"
+    ],
+    "matches": [
+      "*://www.linkedin.com/*",
+      "*://www.linkedin.co.uk/*"
+    ]
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "permissions": [
+    "storage",
+    "activeTab"
+  ],
+  "web_accessible_resources": [
+    "*.*"
+  ]
+}

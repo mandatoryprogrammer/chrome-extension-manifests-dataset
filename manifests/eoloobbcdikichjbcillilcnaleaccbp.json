@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "bookmarksBackup",
+  "version": "0.5",
+  "description": "save all website page as picture/mhtml in bookmarks to google drive",
+  "default_locale": "en",
+  "icons": {
+    "16": "src/img/icon.png",
+    "48": "src/img/icon.png",
+    "128": "src/img/icon.png"
+  },
+  "background": {
+    "page": "src/background.html"
+  },
+  "permissions": [
+    "identity",
+    "pageCapture",
+    "contextMenus",
+    "downloads",
+    "tabs",
+    "storage",
+    "bookmarks",
+    "webRequest",
+    "<all_urls>"
+  ],
+  "browser_action": {
+    "default_title": "bookmarks2picture",
+    "default_icon": "src/img/icon.png"
+  },
+  "options_page": "src/options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "src/lib/html2canvas.js",
+        "src/contentScript/getHTML.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://apis.google.com; object-src 'self'",
+  "oauth2": {
+    "client_id": "709549032264-n7bafg333opibn2iuo0kpjbphba0hoat.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/drive",
+      "https://www.googleapis.com/auth/drive.file",
+      "https://www.googleapis.com/auth/drive.appdata"
+    ]
+  },
+  "manifest_version": 2
+}

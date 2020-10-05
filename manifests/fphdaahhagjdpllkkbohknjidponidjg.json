@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "MFC MyFreeCams Token Usage Summary",
+  "version": "4.1.1",
+  "description": "Token Usage window: summarizes the total amount tipped to each model during the specified time period",
+  "short_name": "TokenSummary",
+  "icons": {
+    "16": "images/icon-16.png",
+    "32": "images/icon-32.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.myfreecams.com/*"
+      ],
+      "exclude_globs": [],
+      "include_globs": [
+        "*account.php*all_token_sessions=1*"
+      ],
+      "css": [
+        "css/fonts.css"
+      ],
+      "js": [
+        "lib/axios.min.js",
+        "lib/moment.min.js",
+        "lib/sweetalert2.all.min.js",
+        "tokensummary.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    "page.js",
+    "fonts/*"
+  ],
+  "permissions": [
+    "cookies",
+    "https://www.myfreecams.com/"
+  ],
+  "converted_from_user_script": true,
+  "manifest_version": 2
+}

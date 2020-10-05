@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "PANIST",
+  "version": "1.0.0",
+  "description": "An add-on for identifying PANIST resources in the browser pages",
+  "icons": {
+    "16": "icons/panist-logo-16.png",
+    "48": "icons/panist-logo-48.png"
+  },
+  "permissions": [
+    "<all_urls>",
+    "tabs",
+    "webNavigation",
+    "storage",
+    "*://api.jsonbin.io/"
+  ],
+  "background": {
+    "scripts": [
+      "background/postInstall.js",
+      "background/tabBootstrap.js"
+    ]
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true
+  },
+  "browser_action": {
+    "default_icon": "icons/panist-logo.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>",
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "content_scripts/tabBootstrap.js"
+      ],
+      "css": [
+        "content_scripts/main.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://scholar.google.fr/*3094930661629783031*",
+        "*://scholar.google.com/*3094930661629783031*"
+      ],
+      "js": [
+        "vendors/jquery.min.js",
+        "content_scripts/gs-pref.js"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "update_url": "http://clients2.google.com/service/update2/crx",
+  "name": "XDA Gallery - Beta",
+  "version": "0.2.6.1",
+  "manifest_version": 2,
+  "description": "View XDA threads as an image gallery",
+  "default_locale": "en",
+  "icons": {
+    "128": "images/xda_pic_viewer_on_128.png"
+  },
+  "browser_action": {
+    "default_icon": "images/icon.png"
+  },
+  "background": {
+    "page": "views/background.html"
+  },
+  "options_page": "views/options.html",
+  "permissions": [
+    "tabs",
+    "http://forum.xda-developers.com/*",
+    "storage"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://forum.xda-developers.com/*"
+      ],
+      "js": [
+        "javascript/jquery.js",
+        "javascript/background.js",
+        "javascript/xda/xda_utils.js",
+        "javascript/xda/xda_gallery_detail.js"
+      ]
+    }
+  ]
+}

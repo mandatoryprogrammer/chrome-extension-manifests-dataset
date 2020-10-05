@@ -1,0 +1,73 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Masterlingo - Learn languages as you scroll",
+  "short_name": "Masterlingo",
+  "version": "0.4.3",
+  "manifest_version": 2,
+  "description": "Translate, save into flashcards and review vocabulary right in any page!",
+  "homepage_url": "https://masterlingoapp.com",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "src/background/background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icons/icon16.png",
+    "default_title": "Masterlingo extension.",
+    "default_popup": "src/browser_action/browser_action.html",
+    "scripts": [
+      "src/browser_action/popup.js"
+    ],
+    "css": [
+      "browser_action/popup.css"
+    ]
+  },
+  "permissions": [
+    "http://masterlingoapp.com/",
+    "http://masterlingoapp.com/*",
+    "http://masterlingoapp.com/api/*",
+    "storage"
+  ],
+  "options_page": "src/options/options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "css": [
+        "css/style.css"
+      ],
+      "js": [
+        "src/content/content.js"
+      ],
+      "exclude_matches": [
+        "https://masterlingoapp.com/*",
+        "https://www.youtube.com/*",
+        "https://www.instagram.com/*",
+        "https://www.messenger.com/*"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "assets/*.svg",
+    "assets/*.png",
+    "assets/fonts/*.woff",
+    "assets/fonts/*.woff2",
+    "assets/fonts/*.eot",
+    "assets/fonts/*.ttf"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://masterlingoapp.com/*",
+      "http://localhost:3000/*",
+      "http://localhost:5000/*"
+    ]
+  }
+}

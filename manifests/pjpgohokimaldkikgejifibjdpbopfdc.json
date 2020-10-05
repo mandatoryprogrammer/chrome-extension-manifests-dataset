@@ -1,0 +1,102 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Sapling Grammar Checker and Writing Assistant",
+  "short_name": "Sapling",
+  "description": "Improve your writing with a spell + grammar checker and writing suggestions.",
+  "version": "2.0.1",
+  "author": "sapling.ai",
+  "icons": {
+    "32": "assets/sapling-32x32.png",
+    "48": "assets/sapling-48x48.png",
+    "128": "assets/sapling-128x128.png",
+    "176": "assets/sapling-176x176.png"
+  },
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "browser_action": {
+    "default_icon": {
+      "40": "assets/sapling-40x40.png"
+    },
+    "default_title": "Sapling",
+    "default_popup": "generated/popup.html"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "addon@sapling.ai",
+      "strict_min_version": "42.0"
+    }
+  },
+  "permissions": [
+    "alarms",
+    "identity",
+    "identity.email",
+    "storage",
+    "activeTab",
+    "tabs",
+    "<all_urls>",
+    "notifications",
+    "clipboardWrite",
+    "clipboardRead",
+    "webNavigation"
+  ],
+  "background": {
+    "scripts": [
+      "generated/jquery-3.5.1.min.js",
+      "generated/background-bundle.js"
+    ],
+    "persistent": true
+  },
+  "commands": {
+    "accept-all-edits": {
+      "suggested_key": {
+        "default": "Alt+O",
+        "mac": "MacCtrl+O"
+      },
+      "description": "Accept all edit suggestions"
+    },
+    "accept-current-sentence-edits": {
+      "suggested_key": {
+        "default": "Alt+I",
+        "mac": "MacCtrl+I"
+      },
+      "description": "Accept edit suggestions in current sentence"
+    },
+    "toggle-snippet-controls": {
+      "suggested_key": {
+        "default": "Alt+L",
+        "mac": "MacCtrl+L"
+      },
+      "description": "Launch snippet selector"
+    },
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+S",
+        "mac": "MacCtrl+S"
+      }
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://sapling.ai/no_declarative_injections"
+      ],
+      "all_frames": true,
+      "css": [
+        "assets/sapling.css",
+        "generated/icomoon.css"
+      ],
+      "js": [
+        "generated/jquery-3.5.1.min.js",
+        "generated/main-bundle.js"
+      ],
+      "match_about_blank": true
+    }
+  ],
+  "web_accessible_resources": [
+    "assets/*"
+  ],
+  "-ms-preload": {
+    "backgroundScript": "backgroundScriptsAPIBridge.js",
+    "contentScript": "contentScriptsAPIBridge.js"
+  }
+}

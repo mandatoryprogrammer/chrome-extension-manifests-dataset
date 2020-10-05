@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Nexthink for Chrome",
+  "description": "A Chrome plugin that allows for the integration of Nexthink device data into the browser.",
+  "version": "1.0.3",
+  "options_page": "options.html",
+  "background": {
+    "scripts": [
+      "lib/aes.js",
+      "lib/jsaes.js",
+      "lib/browserAdapter.js",
+      "lib/xml2json.min.js",
+      "lib/nexthink.js",
+      "background/background-functions.js",
+      "background/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "img/icon_disabled_48.png",
+    "default_title": "Nexthink Plugin"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file://*/*"
+      ],
+      "css": [
+        "inject/box.css"
+      ],
+      "all_frames": true
+    }
+  ],
+  "icons": {
+    "16": "img/icon_16.png",
+    "48": "img/icon_48.png",
+    "128": "img/icon_128.png"
+  },
+  "omnibox": {
+    "keyword": "nxtp"
+  },
+  "permissions": [
+    "http://*/",
+    "https://*/",
+    "file://*/",
+    "activeTab",
+    "contextMenus",
+    "notifications",
+    "storage",
+    "tabs"
+  ],
+  "web_accessible_resources": [
+    "img/icon.png",
+    "inject/box.css",
+    "inject/box.js",
+    "img/logo.png"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

@@ -1,0 +1,103 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Rough Cuts",
+  "description": "Screen recording for SAAS - sales, support and product demos",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqn53lqB9xbitCdF1GQJqgKA5efG865n3p4tCUPqxfowu541XzHkReCum7W31jg8Iqfxbg6VFhJJsCaiqyBhhofQiTMMAIfio8LjgTK45T4SVFrlk5xkutGNus16dYYGxECu7G1snJCAM07MKKCqM3QKL6ZXES/1+BlInxkTgDfBBY6xUE3v/dVvotTn2rx2F+Kl/MklEfRaakN/JcCm+dTXZeSRgUpS64c4XEUF1bc1cnwvEwJJ+nWhmmiAnR95k4QFwyyHtdWTbyOt1EokuKG+tZMU8Qeq+Xd6uw8nMY3oV0tEVuoPjifI6G2ZzO4d3cXn+dAJOYnkeSGdcCBMfuQIDAQAB",
+  "version": "0.0.5",
+  "manifest_version": 2,
+  "minimum_chrome_version": "72",
+  "permissions": [
+    "tabs",
+    "identity",
+    "desktopCapture"
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "64": "icons/icon64.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "app/firebase/5.8.6/firebase-app.js",
+      "app/firebase/5.8.6/firebase-auth.js",
+      "app/firebase/5.8.6/firebase-firestore.js",
+      "app/firebase/5.8.6/firebase-storage.js",
+      "app/firebase/config.js",
+      "app/_js/preferences.service.js",
+      "app/background/state.js",
+      "app/background/uploads.js",
+      "app/background/auth.js",
+      "app/background/getDesktopVideoStream.js",
+      "app/background/getAudioInputStream.js",
+      "app/background/webcam.js",
+      "app/background/background.js",
+      "app/background/exit.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "app/content/content.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_popup": "app/popup/popup.html",
+    "default_title": "Rough Cuts",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "64": "icons/icon64.png"
+    }
+  },
+  "content_security_policy": "script-src 'self' https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com; object-src 'self'",
+  "oauth2": {
+    "client_id": "533413422482-mcr9lmda2bfo1vfq8ve5afhi874semi4.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/userinfo.profile"
+    ]
+  },
+  "web_accessible_resources": [
+    "app/_img/*",
+    "app/content/markup.html",
+    "app/content/iframe.html"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://*.oodavid.com/*"
+    ]
+  },
+  "commands": {
+    "start_stop": {
+      "suggested_key": {
+        "default": "Alt+Shift+S"
+      },
+      "description": "Start / Stop"
+    },
+    "show_webcam_thumbnail": {
+      "suggested_key": {
+        "default": "Alt+Shift+A"
+      },
+      "description": "Show a thumbnail webcam"
+    },
+    "show_webcam_talking_head": {
+      "suggested_key": {
+        "default": "Alt+Shift+D"
+      },
+      "description": "Show a talking-head webcam"
+    },
+    "hide_webcam": {
+      "suggested_key": {
+        "default": "Alt+Shift+X"
+      },
+      "description": "Hide the webcam"
+    }
+  }
+}

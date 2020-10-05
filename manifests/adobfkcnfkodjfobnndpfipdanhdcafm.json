@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Almonit",
+  "version": "0.0.8",
+  "author": "Almonit",
+  "description": "Extension for Decentralized Web",
+  "homepage_url": "https://almonit.eth",
+  "icons": {
+    "48": "icons/almonit-48.png"
+  },
+  "background": {
+    "scripts": [
+      "js/check-browser.js",
+      "js/promisify.js",
+      "js/multihashes-min.js",
+      "js/web3-wrapper/dist/main.js",
+      "js/metrics.js",
+      "js/socket.io.js",
+      "js/normalize-url.js",
+      "js/background-scripts/settings-utils.js",
+      "js/background-scripts/dweb-utils.js",
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "activeTab",
+    "http://*.eth/*",
+    "https://*.eth/*",
+    "http://*/*ipfs*",
+    "https://*/*ipfs*",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/ipfs/*"
+      ],
+      "js": [
+        "js/check-browser.js",
+        "js/promisify.js",
+        "frontend.js"
+      ],
+      "css": [
+        "style/main.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "resources/*.png",
+    "pages/*"
+  ],
+  "options_ui": {
+    "page": "pages/settings.html",
+    "open_in_tab": true
+  },
+  "browser_action": {
+    "default_icon": "icons/almonit-32.png",
+    "default_title": "Almonit",
+    "default_popup": "popup/almonit_popup.html"
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Gist.IO Page Switcher",
+  "version": "0.2.0",
+  "manifest_version": 2,
+  "homepage_url": "http://gist.io/3278455",
+  "description": "Quickly switching between gist.github.com and gist.io pages.",
+  "background": {
+    "scripts": [
+      "gist_io.js",
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "tabs"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://gist.github.com/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "gist_content_script.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://gist.io/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "io_content_script.js"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "page_action": {
+    "default_icon": "icon19.png",
+    "default_name": "Gist.IO"
+  }
+}

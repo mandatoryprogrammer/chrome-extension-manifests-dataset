@@ -1,0 +1,78 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Bipsync Web Clipper",
+  "version": "0.0.32",
+  "manifest_version": 2,
+  "description": "Save web articles to Bipsync",
+  "icons": {
+    "16": "images/icon-16.png",
+    "128": "images/icon-128.png"
+  },
+  "background": {
+    "scripts": [
+      "bower_components/jquery/dist/jquery.min.js",
+      "scripts/chromereload.js",
+      "scripts/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "images/icon-16.png",
+      "19": "images/icon-19.png",
+      "38": "images/icon-38.png",
+      "48": "images/icon-48.png",
+      "128": "images/icon-128.png"
+    },
+    "default_title": "bipsync browser extension",
+    "default_popup": "popup.html",
+    "scripts": [
+      "bower_components/jquery/dist/jquery.min.js",
+      "scripts/popup.js"
+    ],
+    "run_at": "document_end"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "scripts/utils.js",
+        "scripts/vendor/readability.js",
+        "scripts/vendor/tokeninput.js",
+        "scripts/bookmarklet.js",
+        "scripts/contentscript.js",
+        "bower_components/html2canvas/build/html2canvas.min.js"
+      ],
+      "css": [
+        "styles/common.css",
+        "styles/clipper.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "options_page": "options.html",
+  "permissions": [
+    "tabs",
+    "http://*.bipsync.com/",
+    "https://*.bipsync.com/",
+    "storage",
+    "identity"
+  ],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "windows": "Alt+Shift+B",
+        "mac": "Alt+Shift+B",
+        "chromeos": "Alt+Shift+B",
+        "linux": "Alt+Shift+B"
+      }
+    }
+  },
+  "web_accessible_resources": [
+    "images/*",
+    "fonts/*"
+  ]
+}

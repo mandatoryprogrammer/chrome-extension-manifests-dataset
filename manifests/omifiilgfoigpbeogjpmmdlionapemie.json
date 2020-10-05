@@ -1,0 +1,43 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "short_name": "Flickr Snipr",
+  "version": "0.0.10",
+  "manifest_version": 2,
+  "description": "__MSG_appDesc__",
+  "homepage_url": "https://github.com/fabiocaccamo/flickr-snipr",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "clipboardRead",
+    "clipboardWrite",
+    "contextMenus",
+    "downloads",
+    "notifications",
+    "tabs",
+    "*://*/*"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.flickr.com/*"
+      ],
+      "js": [
+        "js/libs/jquery/dist/jquery.min.js",
+        "js/libs/xhrm/xhrm.js",
+        "src/inject/inject.js"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Comfortable Atcoder",
+  "version": "1.6.10",
+  "manifest_version": 2,
+  "description": "Comfort your atcoder life. For more detail, visit https://github.com/drafear/comfortable-atcoder",
+  "author": "drafear",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://atcoder.jp/contests/*",
+        "*://atcoder.jp/users/*",
+        "*://*.contest.atcoder.jp/*"
+      ],
+      "exclude_matches": [
+        "*://*.contest.atcoder.jp/users/*"
+      ],
+      "js": [
+        "lib/jquery.min.js",
+        "lib/jquery.cookie.js",
+        "content/all.js"
+      ],
+      "css": [
+        "css/all.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://atcoder.jp/contests/*"
+      ],
+      "js": [
+        "content/betalib.js",
+        "content/dropdown-modify.js",
+        "content/clar-notify.js"
+      ],
+      "css": [
+        "css/dropdown-modify.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://atcoder.jp/contests/*/submissions/me"
+      ],
+      "js": [
+        "content/result-notify.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://atcoder.jp/contests/*/submit*",
+        "*://atcoder.jp/contests/*/tasks/*"
+      ],
+      "js": [
+        "content/submission-warning.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://atcoder.jp/users/*/history*"
+      ],
+      "js": [
+        "content/add-tweet-button.js"
+      ],
+      "css": [
+        "css/add-twitter-button.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.contest.atcoder.jp/*"
+      ],
+      "js": [
+        "content/link-to-beta.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "image/beta.png"
+  ],
+  "background": {
+    "scripts": [
+      "lib/jquery.min.js",
+      "background/oninstall.js",
+      "background/dispatcher.js"
+    ],
+    "persistent": true
+  },
+  "options_page": "options-page/options.html",
+  "permissions": [
+    "notifications",
+    "storage",
+    "tabs"
+  ],
+  "icons": {
+    "16": "image/icon.png",
+    "48": "image/icon.png",
+    "128": "image/icon.png"
+  }
+}

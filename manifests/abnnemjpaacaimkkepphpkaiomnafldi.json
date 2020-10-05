@@ -1,0 +1,74 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "description": "Qualys Browser Recorder is a free browser extension to record & play back scripts of any web application.",
+  "manifest_version": 2,
+  "name": "Qualys Browser Recorder",
+  "version": "1.1.6",
+  "version_name": "1.1.6_6",
+  "homepage_url": "https://chrome.google.com/webstore/detail/qualys-browser-recorder/abnnemjpaacaimkkepphpkaiomnafldi",
+  "icons": {
+    "16": "icons/image-16.png",
+    "48": "icons/image-48.png",
+    "128": "icons/image-128.png"
+  },
+  "incognito": "split",
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "webRequest",
+    "contextMenus",
+    "downloads",
+    "webNavigation",
+    "notifications",
+    "storage"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content/atoms.js",
+        "content/utils.js",
+        "content/sizzle.js",
+        "content/selenium-commandhandlers.js",
+        "content/selenium-browserbot.js",
+        "common/escape.js",
+        "content/selenium-api.js",
+        "content/locatorBuilders.js",
+        "content/record-api.js",
+        "content/record.js",
+        "content/commands-api.js",
+        "content/targetSelecter.js"
+      ],
+      "match_about_blank": true,
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "common/browser-polyfill.js",
+        "content/prompt-injecter.js"
+      ],
+      "match_about_blank": true,
+      "all_frames": true,
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "common/browser-polyfill.js",
+      "background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "icons/image-48.png",
+    "default_title": "Qualys Browser Recorder"
+  },
+  "web_accessible_resources": [
+    "prompt.js"
+  ]
+}

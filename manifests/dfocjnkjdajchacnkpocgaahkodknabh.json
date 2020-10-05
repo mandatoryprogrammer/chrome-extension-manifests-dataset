@@ -1,0 +1,72 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Green Gallery - Green Screen",
+  "version": "1.0.0",
+  "default_locale": "en",
+  "description": "__MSG_extShortDesc__",
+  "icons": {
+    "16": "img/icon_16.png",
+    "128": "img/icon_128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "img/browsericons/icon19.png",
+      "38": "img/browsericons/icon38.png"
+    },
+    "default_title": "Green Gallery - Green Screen",
+    "default_popup": "popup.html"
+  },
+  "author": "Green Gallery",
+  "background": {
+    "page": "background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/artists-data-tunnel.js",
+        "js/vapi-client.js",
+        "js/contentscript.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/scriptlets/subscriber.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "incognito": "split",
+  "minimum_chrome_version": "26.0",
+  "optional_permissions": [
+    "file:///*"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "permissions": [
+    "contextMenus",
+    "privacy",
+    "storage",
+    "tabs",
+    "unlimitedStorage",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "short_name": "__MSG_extName__",
+  "storage": {
+    "managed_schema": "managed_storage.json"
+  }
+}

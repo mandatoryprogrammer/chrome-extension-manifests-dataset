@@ -1,0 +1,69 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://www.google.com; object-src 'self'",
+  "author": "AlphaSense",
+  "name": "AlphaSense Web Clipper",
+  "description": "Easily save articles to AlphaSense",
+  "version": "2.3.5",
+  "minimum_chrome_version": "50.0.0",
+  "background": {
+    "page": "html/background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "img/logo/ua_as_logo_16.png",
+      "24": "img/logo/ua_as_logo_24.png",
+      "32": "img/logo/ua_as_logo_32.png"
+    },
+    "default_title": "Sign in to Web Clipper"
+  },
+  "icons": {
+    "16": "img/logo/as_logo_16.png",
+    "48": "img/logo/as_logo_48.png",
+    "128": "img/logo/as_logo_128.png"
+  },
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "storage",
+    "activeTab",
+    "contextMenus",
+    "webRequest",
+    "webRequestBlocking",
+    "cookies"
+  ],
+  "commands": {
+    "ASoptions": {
+      "suggested_key": {
+        "default": "Alt+Shift+C"
+      },
+      "description": "Show Options"
+    }
+  },
+  "web_accessible_resources": [
+    "html/loading.html",
+    "html/mainDailog.html",
+    "img/dnd.png"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "css/clipperFrame.css"
+      ],
+      "js": [
+        "js/lib/jquery-3.1.1.min.js",
+        "js/pageConverter.js",
+        "js/framehandler.js",
+        "js/content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

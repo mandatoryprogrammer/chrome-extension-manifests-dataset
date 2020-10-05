@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "MyLOFT",
+  "version": "3.1.4",
+  "manifest_version": 2,
+  "author": "Eclat Engineering Pvt. Ltd.",
+  "description": "__MSG_manifest_description__",
+  "homepage_url": "https://app.myloft.xyz/",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "src/bg/ua-detect.min.js",
+      "src/bg/fingerprint.min.js",
+      "src/bg/background.js",
+      "src/bg/bundle_myloft.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "__MSG_browser_action_title__",
+    "default_popup": "src/browser_action/browser_action.html"
+  },
+  "options_ui": {
+    "page": "src/options/options.html",
+    "open_in_tab": false
+  },
+  "minimum_chrome_version": "65",
+  "permissions": [
+    "cookies",
+    "idle",
+    "webRequest",
+    "webRequestBlocking",
+    "proxy",
+    "notifications",
+    "tabs",
+    "<all_urls>"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://app.myloft.xyz/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "src/content/content.js",
+        "src/content/reporting.js"
+      ]
+    }
+  ],
+  "content_security_policy": "default-src 'self' https://myloft-app-settings.s3.amazonaws.com https://*.myloft.xyz https://*.remotexs.cn https://*.eclateng.com https://*.remotexs.co; font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com data:; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'"
+}

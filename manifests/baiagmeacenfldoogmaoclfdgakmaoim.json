@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "short_name": "KMG Extension",
+  "name": "KMG Extension",
+  "description": "Easily access and view your leads in the KMG Leads Management Portal.",
+  "manifest_version": 2,
+  "version": "1.0.19",
+  "homepage_url": "https://kmg.showroomxpress.com",
+  "icons": {
+    "16": "images/kmg_small.png",
+    "32": "images/kmg_small.png",
+    "48": "images/kmg_small.png",
+    "128": "images/kmg_small.png"
+  },
+  "browser_action": {
+    "default_title": "KMG Extension"
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "app/js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "app/js/constants.js",
+        "app/js/underscore.gz.js",
+        "app/js/content.js"
+      ],
+      "css": [
+        "app/css/styles.css",
+        "app/css/kmg.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "source": "kmg",
+  "web_accessible_resources": [
+    "app/content.js"
+  ],
+  "permissions": [
+    "*://*/*",
+    "activeTab",
+    "webNavigation",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking"
+  ]
+}

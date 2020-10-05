@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Virtual Tour for Google Street View™",
+  "version": "0.0.5",
+  "description": "Driving, biking, hiking, or rowing in Google Street View. Go sight-seeing around the world without burning fosil fuel. ",
+  "background": {
+    "scripts": [
+      "background/dependencies/socket.io-1.3.5.js",
+      "background/background.js",
+      "common/gsvstatus.js",
+      "common/view-object.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_idle",
+      "matches": [
+        "http://www.ouramazinghome.com/*",
+        "*://*.google.com/*",
+        "file:///*"
+      ],
+      "js": [
+        "common/assert.js",
+        "common/gsvstatus.js",
+        "common/view-object.js",
+        "common/logger.js",
+        "contentScript/content_script.js"
+      ],
+      "css": [
+        "contentScript/content_script.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "inject/*.js",
+    "common/*.js"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "http://www.ouramazinghome.com/*",
+      "*://*.google.com/*"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "virtual.png",
+    "default_title": "Start your virtual tour on Google Street View!",
+    "default_popup": "popup/popup.html"
+  },
+  "icons": {
+    "128": "virtual.png"
+  },
+  "permissions": [
+    "http://www.google.com/",
+    "http://www.ouramazinghome.com:8606/",
+    "https://cbks0.googleapis.com/",
+    "webRequest",
+    "tabs"
+  ],
+  "manifest_version": 2
+}

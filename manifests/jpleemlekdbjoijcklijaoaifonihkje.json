@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "View & Load",
+  "description": "__MSG_description__",
+  "version": "0.0.1.1",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "permissions": [
+    "webNavigation",
+    "tabs",
+    "downloads",
+    "storage",
+    "https://*.instagram.com/*"
+  ],
+  "web_accessible_resources": [
+    "shared/js/jquery-3.4.0.min.js"
+  ],
+  "browser_action": {
+    "default_icon": "shared/media/comments-64.png",
+    "default_popup": "popup/html/popup.html"
+  },
+  "icons": {
+    "16": "shared/media/comments-16.png",
+    "48": "shared/media/comments-48.png",
+    "64": "shared/media/comments-64.png",
+    "128": "shared/media/comments-128.png"
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "background/js/comments_background.js",
+      "background/js/followers_background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.instagram.com/*"
+      ],
+      "js": [
+        "shared/js/jquery-3.4.0.min.js",
+        "content/js/inject.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.instagram.com/*"
+    ]
+  }
+}

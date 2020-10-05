@@ -1,0 +1,68 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Text Input Recover Extension",
+  "short_name": "TIRE",
+  "description": "Remember text input fields on any page",
+  "version": "1.0.5",
+  "author": "Chuck Baker",
+  "browser_action": {
+    "default_icon": "tire16x16Gold.png"
+  },
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "notifications",
+    "http://*/",
+    "https://*/",
+    "https://accounts.google.com/*",
+    "https://www.googleapis.com/*",
+    "file:///*/*",
+    "storage",
+    "tabs",
+    "webNavigation",
+    "*://*/*"
+  ],
+  "background": {
+    "persistent": true,
+    "page": "sandbox.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "jQuery2.1.4min.js",
+        "jquery-ui.min.js",
+        "taffy.js",
+        "tireCommon.js",
+        "tireContent.js",
+        "propsConsole.js"
+      ],
+      "css": [
+        "TIREtooltip.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "icons": {
+    "16": "tire16x16Gold.png",
+    "48": "tire48x48GoldTransparent.png",
+    "128": "tire128x128GoldGray.png"
+  },
+  "options_ui": {
+    "page": "tireOptions.html",
+    "chrome_style": false,
+    "open_in_tab": true
+  },
+  "content_security_policy": "script-src 'self' https://apis.google.com; object-src 'self'",
+  "web_accessible_resources": [
+    "tireOptions.html",
+    "TIREbutton.png",
+    "tire48x48Gold.png",
+    "TIREtooltipImg.png"
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Technion Moodle Connector",
+  "author": "Daniel Mittelman",
+  "description": "A simple Firefox addon to automate the login process to the Technion's Moodle website",
+  "version": "1.2.2",
+  "icons": {
+    "32": "res/icon32.png",
+    "48": "res/icon48.png",
+    "64": "res/icon64.png",
+    "128": "res/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "res/icon32.png",
+    "default_popup": "panel.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://moodle.technion.ac.il/*",
+        "https://moodle.technion.ac.il/*"
+      ],
+      "js": [
+        "res/js/init_message.js",
+        "res/js/get-login-state.js",
+        "res/js/connecting-overlay.js",
+        "res/js/skip_file_pages.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "res/*"
+  ],
+  "permissions": [
+    "tabs",
+    "*://moodle.technion.ac.il/*"
+  ]
+}

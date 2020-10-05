@@ -1,0 +1,82 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "version": "2.0.9",
+  "name": "Email tracker extension for Gmail - Engage",
+  "short_name": "Adapt Engage",
+  "description": "Adapt Engage is a email tracker extension for your Gmail that allows to track email opens, email link clicks, automate follow-ups",
+  "icons": {
+    "128": "images/Logo/logo128.png",
+    "48": "images/Logo/logo48.png",
+    "16": "images/Logo/logo16.png"
+  },
+  "browser_action": {
+    "default_icon": "images/Logo/logo64.png",
+    "default_title": "Email tracker extension for Gmail - Adapt Engage"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.force.com/lightning/*",
+        "https://*.pipedrive.com/*",
+        "https://crm.zoho.in/*",
+        "https://crm.zoho.com/*",
+        "https://app.hubspot.com/*",
+        "*://*.salesforce.com/*",
+        "*://crmplus.zoho.com/*",
+        "*://crmplus.zoho.in/*"
+      ],
+      "js": [
+        "crm-main-bundle.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "gmail-main-bundle.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://engage.adapt.io/*"
+      ],
+      "js": [
+        "web-content-main-bundle.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "homepage_url": "https://www.adapt.io/products/engage",
+  "web_accessible_resources": [
+    "images/*.png"
+  ],
+  "background": {
+    "scripts": [
+      "background-bundle.js"
+    ]
+  },
+  "permissions": [
+    "https://mail.google.com/*",
+    "https://*.force.com",
+    "https://*.pipedrive.com",
+    "*://*.zoho.in/*",
+    "*://*.salesforce.com/*",
+    "*://*.zoho.com/*",
+    "https://app.hubspot.com/*",
+    "*://*.adapt.io/*",
+    "*://*.googleusercontent.com/proxy/*",
+    "gcm",
+    "tabs",
+    "notifications",
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>"
+  ]
+}

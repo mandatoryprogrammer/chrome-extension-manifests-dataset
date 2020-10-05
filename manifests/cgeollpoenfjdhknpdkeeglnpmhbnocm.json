@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Crypto Airdrop - Tools",
+  "author": "@luluwebmaster",
+  "description": "Addon for Auto Fill your Airdrop forms and send notifications for new Airdrop.",
+  "version": "1.3.6",
+  "permissions": [
+    "<all_urls>",
+    "tabs",
+    "notifications",
+    "contextMenus"
+  ],
+  "homepage_url": "https://www.luc-mergault.fr/",
+  "icons": {
+    "16": "/publics/images/icon.png",
+    "48": "/publics/images/icon.png",
+    "128": "/publics/images/icon.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "128": "/publics/images/icon.png",
+      "40": "/publics/images/icon-40.png"
+    },
+    "default_title": "Crypto Airdrop - Tools",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "/publics/libraries/jquery/jquery-3.2.1.min.js",
+        "/publics/js/functions/OP_getJsonFromUrl.js",
+        "/publics/js/config/config.js",
+        "/publics/js/websites/insert.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://web.telegram.org/*"
+      ],
+      "js": [
+        "/publics/js/functions/uid.js",
+        "/publics/js/websites/telegram.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    }
+  ],
+  "applications": {
+    "gecko": {
+      "id": "contact@luluwebmaster.fr-crypto-airdrop-autofill",
+      "strict_min_version": "45.0"
+    }
+  }
+}

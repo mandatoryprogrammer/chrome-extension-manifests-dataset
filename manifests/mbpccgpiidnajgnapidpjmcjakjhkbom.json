@@ -1,0 +1,126 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_extName__",
+  "description": "__MSG_extDesc__",
+  "version": "3.1.0",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "browser_action": {
+    "default_icon": "build/logo_16.png",
+    "default_popup": "build/popup.html"
+  },
+  "icons": {
+    "16": "build/logo_16.png",
+    "48": "build/logo_48.png",
+    "128": "build/logo_128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.deals99.com/*"
+      ],
+      "js": [
+        "build/install_status.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.aliexpress.com/*"
+      ],
+      "exclude_matches": [
+        "*://portals.aliexpress.com/*",
+        "*://*.aliexpress.com/item/*",
+        "*://*.aliexpress.com/store/product/*"
+      ],
+      "js": [
+        "build/main.js",
+        "build/aliexpress_toolbar.js",
+        "build/promotion_urls.js"
+      ],
+      "css": [
+        "build/main.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.aliexpress.com/item/*",
+        "*://*.aliexpress.com/store/product/*"
+      ],
+      "js": [
+        "build/main.js",
+        "build/aliexpress_item.js",
+        "build/promotion_urls.js"
+      ],
+      "css": [
+        "build/main.css",
+        "build/aliexpress_item.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.aliexpress.com/wholesale*",
+        "*://*.aliexpress.com/w/wholesale*",
+        "*://*.aliexpress.com/af/*",
+        "*://*.aliexpress.com/category/*",
+        "*://*.aliexpress.com/af/category/*",
+        "*://*.aliexpress.com/premium/category/*"
+      ],
+      "js": [
+        "build/aliexpress_item_list.js"
+      ],
+      "css": [
+        "build/aliexpress_item_list.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.jetradar.com/*",
+        "*://*.jetradar.co.th/*",
+        "*://*.aviasales.ru/*",
+        "*://*.hotellook.com/*",
+        "*://*.hotellook.ru/*"
+      ],
+      "js": [
+        "build/travelpayouts_index.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.booking.com/*",
+        "*://*.banggood.com/*",
+        "*://*.agoda.com/*",
+        "*://*.gearbest.com/*"
+      ],
+      "js": [
+        "build/main.js",
+        "build/promotion_urls.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "build/*"
+  ],
+  "options_ui": {
+    "page": "build/options.html"
+  },
+  "background": {
+    "scripts": [
+      "build/main.js",
+      "build/background_message.js",
+      "build/background_installed.js",
+      "build/background_notification.js",
+      "build/background_context_menus.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "alarms",
+    "storage",
+    "contextMenus",
+    "notifications",
+    "http://localhost/*",
+    "https://*.deals99.com/*",
+    "https://api.alitools.io/*"
+  ]
+}

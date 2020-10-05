@@ -1,0 +1,40 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "name": "Kudani FeedGrabber",
+  "description": "Grabs feeds from your favourite web pages for use in the Kudani desktop app",
+  "version": "1.0",
+  "permissions": [
+    "cookies",
+    "tabs",
+    "*://*.kudani.com/",
+    "http://localhost/*"
+  ],
+  "icons": {
+    "48": "assets/icon-48.png",
+    "128": "assets/icon-128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "page_action": {
+    "default_icon": "assets/icon.png",
+    "default_title": "There's a feed in this page. Open Kudani FeedGrabber to save it!"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "contentscript.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ]
+}

@@ -1,0 +1,135 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Rollo Label Converter for Thermal Printers",
+  "description": "Convert labels from popular websites to formats suitable for thermal printers.",
+  "version": "2.6",
+  "author": "Rollo",
+  "background": {
+    "page": "background.html"
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "48_black.png",
+    "default_popup": "popup.html",
+    "default_title": ""
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.amazon.com/*"
+      ],
+      "js": [
+        "./helpers/errors.js",
+        "./controllers/amazon/amazon-modal.js",
+        "./controllers/amazon/tooltip-please-login.js",
+        "./controllers/amazon/fnsku-scanner.js",
+        "./controllers/amazon/pallet-scanner.js",
+        "./controllers/amazon/box-scanner.js",
+        "./controllers/amazon/item-scanner.js",
+        "./controllers/amazon/return-scanner.js",
+        "./controllers/amazon/amazon-scanner.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://cns.usps.com/*"
+      ],
+      "js": [
+        "./helpers/errors.js",
+        "./helpers/tooltip-please-login.js",
+        "./controllers/usps/usps-modal.js",
+        "./controllers/usps/inject-checkout-button.js",
+        "./controllers/usps/inject-detail-button.js",
+        "./controllers/usps/inject-history-button.js",
+        "./controllers/usps/usps-scanner.js"
+      ],
+      "css": [
+        "./controllers/usps/usps.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.ups.com/*"
+      ],
+      "js": [
+        "./helpers/errors.js",
+        "./controllers/ups/main/ups-modal.js",
+        "./controllers/ups/main/ups-scanner.js"
+      ],
+      "css": [
+        "./controllers/ups/ups.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.campusship.ups.com/*"
+      ],
+      "js": [
+        "./helpers/errors.js",
+        "./controllers/ups/campus-ship/campus-ship-modal.js",
+        "./controllers/ups/campus-ship/campus-ship-scanner.js"
+      ],
+      "css": [
+        "./controllers/ups/ups.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.fedex.com/*"
+      ],
+      "js": [
+        "./helpers/errors.js",
+        "./helpers/tooltip-please-login.js",
+        "./controllers/fedex/fedex-modal.js",
+        "./controllers/fedex/fedex-scanner.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.ebay.com/*"
+      ],
+      "js": [
+        "./helpers/errors.js",
+        "./helpers/tooltip-please-login.js",
+        "./controllers/ebay/ebay-modal.js",
+        "./controllers/ebay/ebay-scanner.js"
+      ],
+      "css": [
+        "./controllers/ebay/ebay.css"
+      ]
+    }
+  ],
+  "permissions": [
+    "downloads",
+    "storage",
+    "notifications",
+    "activeTab",
+    "cookies",
+    "https://chrome.rollo.com/*",
+    "https://www.rollo.com/*",
+    "https://*.amazon.com/*",
+    "https://*.usps.com/*",
+    "https://www.ups.com/*",
+    "https://*.ups.com/*",
+    "https://www.campusship.ups.com/*",
+    "https://www.fedex.com/*",
+    "https://*.ebay.com/*",
+    "https://*.stamps.com/*",
+    "https://*.shopify.com/*",
+    "https://*.paypal.com/*",
+    "https://*.shipworks.com/*",
+    "https://*.endicia.com/*",
+    "https://*.etsy.com/*",
+    "https://*.shipstation.com/*",
+    "https://*.shippingeasy.com/*",
+    "https://*.bigcommerce.com/*",
+    "https://*.sellbrite.com/*",
+    "https://*.poshmark.com/*",
+    "https://*.goshippo.com/*"
+  ]
+}

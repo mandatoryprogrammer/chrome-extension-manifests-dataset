@@ -1,0 +1,116 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "app": {
+    "background": {
+      "scripts": [
+        "common/libs/constants.js",
+        "common/libs/UtilsEvents.js",
+        "common/libs/UtilsLog.js",
+        "common/libs/node_modules/file-saver/dist/FileSaver.min.js",
+        "teacher/script/teacher.js"
+      ],
+      "persistent": false
+    }
+  },
+  "manifest_version": 2,
+  "name": "Netop Vision Teacher",
+  "short_name": "Teacher",
+  "version": "1.7.0.194",
+  "description": "Save time, enhance learning, and keep students safe in the digital classroom.",
+  "icons": {
+    "16": "teacher/images/icon_16.png",
+    "48": "teacher/images/icon_48.png",
+    "128": "teacher/images/icon_128.png"
+  },
+  "author": "Netop Solutions A/S",
+  "kiosk_enabled": true,
+  "minimum_chrome_version": "70",
+  "offline_enabled": false,
+  "oauth2": {
+    "client_id": "671601101455-lb0019hc8thflfnv3tfevmn5kttousbc.apps.googleusercontent.com",
+    "scopes": [
+      "profile",
+      "email",
+      "openid"
+    ]
+  },
+  "permissions": [
+    "<all_urls>",
+    "alwaysOnTopWindows",
+    "app.window.fullscreen.overrideEsc",
+    "background",
+    "browser",
+    "desktopCapture",
+    "fullscreen",
+    "identity",
+    "identity.email",
+    "notifications",
+    "pointerLock",
+    "power",
+    "serial",
+    "storage",
+    "syncFileSystem",
+    "system.display",
+    "https://www.google-analytics.com/",
+    {
+      "socket": [
+        "tcp-connect:*:*",
+        "tcp-listen:*"
+      ]
+    },
+    {
+      "fileSystem": [
+        "write",
+        "retainEntries",
+        "directory"
+      ]
+    }
+  ],
+  "optional_permissions": [
+    {
+      "usbDevices": [
+        {
+          "vendorId": 1003,
+          "productId": 8271
+        }
+      ]
+    }
+  ],
+  "sockets": {
+    "udp": {
+      "bind": "*",
+      "send": "*",
+      "multicastMembership": "",
+      "joinGroup": "*"
+    },
+    "tcp": {
+      "connect": "*"
+    },
+    "tcpServer": {
+      "listen": "*"
+    }
+  },
+  "storage": {
+    "managed_schema": "schema.json"
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://*.netop.com/*"
+    ]
+  },
+  "url_handlers": {
+    "oauth_login": {
+      "matches": [
+        "https://vision.netop.com/apps/chrome/teacher/launch*",
+        "https://vision-beta.netop.com/apps/chrome/teacher/launch*"
+      ],
+      "title": "OAuth Login"
+    },
+    "logs": {
+      "matches": [
+        "https://vision.netop.com/apps/chrome/teacher/logs"
+      ],
+      "title": "Download application logs"
+    }
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Stack Search",
+  "description": "Stack Search adds to your Google Search results answers from: StackOverflow and StackExchange sites.",
+  "version": "2.2.0",
+  "short_name": "Stack Search",
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com/; object-src 'self'",
+  "minimum_chrome_version": "40",
+  "background": {
+    "run_at": "document_end",
+    "page": "html/background.html",
+    "js": [
+      "js/lib/analytics.js",
+      "js/lib/tracker.js",
+      "js/answers_manager.js",
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "options_ui": {
+    "page": "html/options.html",
+    "chrome_style": true
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "js": [
+        "js/lib/jquery.js",
+        "js/lib/highlight.min.js",
+        "js/lib/analytics.js",
+        "js/lib/stack_exchnage.js",
+        "js/lib/stack-exchange-wrapper.js",
+        "js/lib/utils.js",
+        "js/lib/tracker.js",
+        "js/answers_manager.js",
+        "js/background.js"
+      ],
+      "css": [
+        "css/font-awesome.css",
+        "css/bootstrap.css",
+        "css/background.css",
+        "css/default.min.css"
+      ],
+      "matches": [
+        "*://*/*"
+      ],
+      "include_globs": [
+        "*://www.google.*/*",
+        "*://google.*/*"
+      ]
+    },
+    {
+      "matches": [
+        "https://stackexchange.com/oauth/login_success?robw&*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "js/login_success.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "optional_permissions": [
+    "background",
+    "tabs"
+  ],
+  "browser_action": {
+    "default_title": "Stack Search",
+    "default_icon": "icon_ex.png",
+    "default_popup": "html/popups.html"
+  },
+  "web_accessible_resources": [
+    "css/fonts/*.*",
+    "*.ttf",
+    "*.eot",
+    "*.svg",
+    "*.woff",
+    "*.woff2"
+  ],
+  "author": "dor amir",
+  "permissions": [
+    "https://api.stackexchange.com/2.2/*",
+    "storage",
+    "tabs"
+  ],
+  "manifest_version": 2,
+  "icons": {
+    "16": "icon_ex.png",
+    "48": "icon_ex.png",
+    "128": "icon_ex.png"
+  }
+}

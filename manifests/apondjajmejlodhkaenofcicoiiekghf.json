@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "version": "3.9",
+  "options_page": "options.html",
+  "name": "Video Scrubber for Instagram",
+  "description": "Displays player controls for video content on Instagram. Because why isn't that already a feature?",
+  "default_locale": "en",
+  "icons": {
+    "128": "images/icon.128.png"
+  },
+  "background": {
+    "scripts": [
+      "js/ActivityLogger.js",
+      "js/BackgroundScriptBridge.js",
+      "js/MessageAction.js",
+      "js/background.js",
+      "js/ga.background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://instagram.com/*",
+        "http://*.instagram.com/*",
+        "https://instagram.com/*",
+        "https://*.instagram.com/*"
+      ],
+      "js": [
+        "lib/progress.js-0.1.0/progress.min.js",
+        "js/lib/FileSaver.v2.0.2.min.js",
+        "js/ActiveVideoManager.js",
+        "js/Config.js",
+        "js/ContentScriptBridge.js",
+        "js/FeatureIntroducer.js",
+        "js/MailMerger.js",
+        "js/MessageAction.js",
+        "js/InstaUtils.js",
+        "js/Util.js",
+        "js/VideoModifier.js",
+        "js/content.js"
+      ],
+      "css": [
+        "lib/progress.js-0.1.0/progressjs.min.css",
+        "css/scrub.css"
+      ],
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "contextMenus",
+    "storage"
+  ]
+}

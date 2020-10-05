@@ -1,0 +1,78 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_appName__",
+  "description": "__MSG_appDesc__",
+  "default_locale": "ja",
+  "version": "1.0",
+  "author": "sagan",
+  "icons": {
+    "16": "icon16.png",
+    "64": "icon64.png",
+    "128": "icon128.png",
+    "512": "icon512.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "page_action": {
+    "default_title": "__MSG_appName__"
+  },
+  "permissions": [
+    "*://www.musixmatch.com/*",
+    "*://*.j-lyric.net/",
+    "activeTab",
+    "contextMenus",
+    "storage",
+    "declarativeContent"
+  ],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "windows": "Ctrl+Shift+L",
+        "mac": "Command+Shift+L",
+        "chromeos": "Ctrl+Shift+L",
+        "linux": "Ctrl+Shift+L"
+      }
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://play.google.com/music/*"
+      ],
+      "js": [
+        "jquery-3.3.1.min.js",
+        "jquery-ui.min.js",
+        "script.js",
+        "sites/playmusic/content.js"
+      ],
+      "run_at": "document_end",
+      "css": [
+        "css/lyrics.css",
+        "css/jquery-ui.min.css",
+        "sites/playmusic/content.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://music.youtube.com/*"
+      ],
+      "js": [
+        "jquery-3.3.1.min.js",
+        "jquery-ui.min.js",
+        "script.js",
+        "sites/youtubemusic/content.js"
+      ],
+      "run_at": "document_end",
+      "css": [
+        "css/lyrics.css",
+        "css/jquery-ui.min.css",
+        "sites/youtubemusic/content.css"
+      ]
+    }
+  ]
+}

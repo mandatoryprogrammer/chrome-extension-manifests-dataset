@@ -1,0 +1,82 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_extName__",
+  "version": "1.05.05",
+  "default_locale": "en",
+  "description": "__MSG_extDesc__",
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_title": "HubSpot Dev Tools",
+    "default_icon": {
+      "16": "icon-16.png",
+      "19": "icon-19.png",
+      "38": "icon-38.png",
+      "48": "icon-48.png",
+      "128": "icon-128.png"
+    }
+  },
+  "icons": {
+    "16": "icon-16.png",
+    "19": "icon-19.png",
+    "38": "icon-38.png",
+    "48": "icon-48.png",
+    "128": "icon-128.png"
+  },
+  "permissions": [
+    "storage",
+    "activeTab"
+  ],
+  "optional_permissions": [
+    "https://app.hubspot.com/*",
+    "https://app.hubspotqa.com/*"
+  ],
+  "web_accessible_resources": [
+    "mac-text-cursor.svg",
+    "mac-text-cursor.png"
+  ],
+  "content_scripts": [
+    {
+      "run_at": "document_idle",
+      "js": [
+        "jquery-3.2.1.min.js",
+        "design-manager.js"
+      ],
+      "css": [
+        "hsDarkIde.css"
+      ],
+      "document_idle": "document_start",
+      "matches": [
+        "https://app.hubspot.com/*",
+        "https://app.hubspotqa.com/*",
+        "https://login.hubspot.com/*"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "options_page": "options.html",
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "hot-reload.js",
+      "background.js"
+    ]
+  },
+  "devtools_page": "devtools.html",
+  "commands": {
+    "bust-cache": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+1",
+        "mac": "Ctrl+Shift+1"
+      },
+      "description": "Run Cache Buster"
+    },
+    "hs-debug": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+2",
+        "mac": "Ctrl+Shift+2"
+      },
+      "description": "toggle ?hsDebug=True in the URL"
+    }
+  }
+}

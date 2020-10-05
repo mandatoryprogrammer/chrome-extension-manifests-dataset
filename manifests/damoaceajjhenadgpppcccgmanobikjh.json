@@ -1,0 +1,72 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_application_title__",
+  "short_name": "Context",
+  "description": "__MSG_application_description__",
+  "default_locale": "en",
+  "version": "1.0.30",
+  "manifest_version": 2,
+  "permissions": [
+    "storage",
+    "declarativeContent",
+    "https://analytics.google.com/",
+    "https://tagmanager.google.com/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://analytics.google.com/*"
+      ],
+      "js": [
+        "js/utils.js",
+        "js/client.js",
+        "js/chart_reader.js",
+        "js/onpage_helper.js"
+      ],
+      "css": [
+        "css/onpage_helper.css"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://tagmanager.google.com/*"
+      ],
+      "js": [
+        "js/moment.min.js",
+        "js/utils.js",
+        "js/client.js",
+        "js/gtm_onpage_helper.js"
+      ],
+      "css": [
+        "css/gtm_onpage_helper.css"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "web_accessible_resources": [
+    "images/*.png"
+  ],
+  "background": {
+    "scripts": [
+      "js/utils.js",
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "page_action": {
+    "default_popup": "html/popup.html",
+    "default_icon": {
+      "16": "images/icon16.png",
+      "32": "images/icon48.png",
+      "48": "images/icon48.png",
+      "128": "images/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "images/icon16.png",
+    "32": "images/icon48.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  }
+}

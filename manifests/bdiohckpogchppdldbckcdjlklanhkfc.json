@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "PhishFort | Protect",
+  "short_name": "PhishFort | Protect",
+  "description": "Protect yourself from phishing attacks.",
+  "version": "1.0.1.8",
+  "author": "PhishFort",
+  "browser_action": {
+    "default_icon": "img/tab-icon.png",
+    "default_title": "PhishFort | Protect",
+    "default_popup": "html/index.html"
+  },
+  "icons": {
+    "16": "./img/tab-icon16.png",
+    "32": "./img/tab-icon32.png",
+    "48": "./img/tab-icon48.png",
+    "128": "./img/tab-icon.png"
+  },
+  "background": {
+    "scripts": [
+      "js/jquery-3.3.1.min.js",
+      "js/background.js"
+    ]
+  },
+  "externally_connectable": {
+    "matches": [
+      "https://www.phishfort.com/login",
+      "https://www.phishfort.com/profile"
+    ]
+  },
+  "web_accessible_resources": [
+    "html/warning.html",
+    "html/modal.html",
+    "img/twitter-whitelisted.png"
+  ],
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>"
+  ],
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "https://twitter.com/*"
+      ],
+      "js": [
+        "js/twitter.js"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/addressBlacklist.js"
+      ]
+    }
+  ]
+}

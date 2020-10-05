@@ -1,0 +1,88 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "TornData",
+  "description": "TornData.com Extension - Combine Chains - Show Personal Stats",
+  "version": "2.14",
+  "options_page": "options.html",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "storage",
+    "notifications",
+    "activeTab",
+    "https://api.torn.com/",
+    "https://torn.com/",
+    "https://torndata.com/",
+    "http://torndata.com/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.torn.com/profiles.php?XID=*"
+      ],
+      "css": [
+        "style.css"
+      ],
+      "js": [
+        "profile_script.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://www.torn.com/bazaar.php*"
+      ],
+      "css": [
+        "style.css"
+      ],
+      "js": [
+        "jquery-3.3.1.min.js",
+        "bazaar_script.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://www.torn.com/factions.php?step=profile&ID=*"
+      ],
+      "js": [
+        "jquery-3.3.1.min.js",
+        "faction_revive.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.torn.com/war.php?step=chainreport*"
+      ],
+      "js": [
+        "jquery-3.3.1.min.js",
+        "chain.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.torn.com/joblist.php*"
+      ],
+      "js": [
+        "jquery-3.3.1.min.js",
+        "job.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://www.torn.com/stockexchange.php?step=portfolio"
+      ],
+      "js": [
+        "jquery-3.3.1.min.js",
+        "stocks.js"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Generate to Lately",
+  "version": "2.1",
+  "description": "Generate content with Lately with any webpage in one click!",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs",
+    "contextMenus",
+    "https://*.trylately.com/*",
+    "http://localhost:3000/*"
+  ],
+  "short_name": "Lately Generator",
+  "icons": {
+    "16": "icon16.png",
+    "128": "icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "icon16.png"
+  },
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://localhost:3000/app/dashboard/content/generate/*",
+        "https://*.trylately.com/app/dashboard/content/generate/*"
+      ],
+      "js": [
+        "scripts/dashboardConfig.js"
+      ]
+    }
+  ]
+}

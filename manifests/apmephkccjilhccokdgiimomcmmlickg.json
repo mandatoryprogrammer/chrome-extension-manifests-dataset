@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Georgia Tech Scholar",
+  "version": "2.0.3",
+  "description": "Allows chrome to save your GT password, and provides easy access to online journal papers",
+  "icons": {
+    "16": "gt16.png",
+    "48": "gt48.png"
+  },
+  "background": {
+    "scripts": [
+      "gtscholar.js"
+    ],
+    "persistent": false
+  },
+  "options_page": "options.html",
+  "permissions": [
+    "contextMenus",
+    "tabs",
+    "http://*/",
+    "https://*/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://login.gatech.edu/cas/login*"
+      ],
+      "js": [
+        "gtlogin.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://scholar.google.com/*"
+      ],
+      "js": [
+        "jquery.js",
+        "direct2gt.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

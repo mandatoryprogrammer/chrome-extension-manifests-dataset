@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Easy Mail: Word suggestions drafting emails",
+  "description": "Get word auto suggestions while drafting emails in English or Spanish language",
+  "version": "0.0.10",
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "img/icon19.png",
+      "38": "img/icon38.png"
+    },
+    "default_title": "Easy Write: Type in and get auto suggestions",
+    "default_popup": "src/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "src/jquery-2.1.1.min.js",
+      "src/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://outlook.live.com/*",
+        "https://outlook.office365.com/*",
+        "https://outlook.office.com/mail/*",
+        "https://*.mail.yahoo.com/*"
+      ],
+      "js": [
+        "src/jquery-2.1.1.min.js",
+        "src/content.js",
+        "src/caret.js",
+        "src/b.js"
+      ],
+      "all_frames": true,
+      "match_about_blank": true
+    }
+  ],
+  "permissions": [
+    "storage"
+  ],
+  "web_accessible_resources": [
+    "en-UK.json",
+    "en-US.json",
+    "es-ES.json"
+  ]
+}

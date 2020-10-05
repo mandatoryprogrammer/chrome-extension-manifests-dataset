@@ -1,0 +1,79 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_name__",
+  "description": "__MSG_description__",
+  "version": "0.6.0",
+  "background": {
+    "scripts": [
+      "lib/jquery/js/jquery-2.1.0.min.js",
+      "js/sm_config.js",
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": "images/logo.png",
+    "default_title": "__MSG_default_title__",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "ftp://*/*",
+        "file://*/*"
+      ],
+      "js": [
+        "lib/jquery/js/jquery-2.1.0.min.js",
+        "lib/jquery/js/jquery-ui-1.10.4.custom.min.js",
+        "js/page.js"
+      ],
+      "css": [
+        "lib/jquery/css/jquery-ui-1.10.4.custom.min.css",
+        "style.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "ftp://*/*",
+        "file://*/*"
+      ],
+      "js": [
+        "js/isLoad.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "default_locale": "en",
+  "icons": {
+    "16": "images/logo16.png",
+    "32": "images/logo32.png",
+    "48": "images/logo48.png",
+    "128": "images/logo128.png"
+  },
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "<all_urls>",
+    "storage",
+    "background"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://uat.seyzme.net/*",
+      "*://www.seyzme.com/*",
+      "*://localhost/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "lib/jquery/js/jquery-2.1.0.min.map",
+    "style.css"
+  ]
+}

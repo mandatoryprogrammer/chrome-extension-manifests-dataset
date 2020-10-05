@@ -1,0 +1,84 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Yeti Text - ActiveCampaign",
+  "description": "This extension enhances ActiveCampaign for Yeti Text users.",
+  "version": "0.0.0.1",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png",
+    "256": "icons/icon256.png"
+  },
+  "manifest_version": 2,
+  "externally_connectable": {
+    "matches": [
+      "*://*.yetitext.com/*"
+    ]
+  },
+  "background": {
+    "scripts": [
+      "jquery.js",
+      "background.js"
+    ],
+    "pages": [
+      "background.html"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "icons/icon16.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "storage",
+    "notifications",
+    "http://*.yetitext.com/",
+    "https://*.yetitext.com/"
+  ],
+  "content_scripts": [
+    {
+      "js": [
+        "jquery.js",
+        "add_menu_button.js"
+      ],
+      "css": [
+        "add_menu_button.css"
+      ],
+      "matches": [
+        "*://*.activehosted.com/*"
+      ],
+      "all_frames": false
+    },
+    {
+      "js": [
+        "twilio.min.js",
+        "growl.js",
+        "login.js",
+        "contact_record.js"
+      ],
+      "css": [
+        "growl.css",
+        "yetiStyle.css"
+      ],
+      "matches": [
+        "*://*.activehosted.com/app/contacts/*"
+      ],
+      "all_frames": false
+    },
+    {
+      "js": [
+        "twilio.min.js",
+        "growl.js",
+        "login.js",
+        "contact_search.js"
+      ],
+      "css": [
+        "growl.css",
+        "yetiStyle.css"
+      ],
+      "matches": [
+        "*://*.activehosted.com/app/contacts?*"
+      ],
+      "all_frames": false
+    }
+  ]
+}

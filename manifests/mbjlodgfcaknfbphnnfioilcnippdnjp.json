@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "id": "kwh",
+  "applications": {
+    "gecko": {
+      "id": "kwh@alhur.es",
+      "strict_min_version": "57.0"
+    }
+  },
+  "manifest_version": 2,
+  "name": "kWh",
+  "description": "Send and receive Lightning payments in the browser with c-lightning, Eclair or Ptarmigan.",
+  "version": "0.5.3",
+  "author": "fiatjaf",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "64": "icon64.png",
+    "128": "icon128.png"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "browser_style": true,
+    "open_in_tab": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "file://*/*",
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "content-bundle.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background-bundle.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "icon16.png",
+      "64": "icon64.png"
+    },
+    "default_title": "KwH",
+    "default_popup": "popup.html"
+  },
+  "web_accessible_resources": [
+    "webln-bundle.js"
+  ],
+  "permissions": [
+    "storage",
+    "clipboardWrite",
+    "notifications",
+    "contextMenus",
+    "tabs",
+    "<all_urls>"
+  ]
+}

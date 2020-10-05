@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Dev Account",
+  "version": "1.0.4",
+  "description": "Account inject Chrome Extension for debug",
+  "author": "yuyiming",
+  "homepage_url": "http://git.vemic.com/yuyiming/Account",
+  "manifest_version": 2,
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "permissions": [
+    "http://*.vemic.com/*",
+    "http://*.made-in-china.com/*",
+    "https://*.made-in-china.com/*",
+    "activeTab",
+    "tabs",
+    "cookies",
+    "background",
+    "contextMenus",
+    "unlimitedStorage",
+    "storage",
+    "notifications",
+    "identity",
+    "identity.email",
+    "proxy"
+  ],
+  "browser_action": {
+    "default_title": "Dev Account",
+    "default_popup": "pages/popup.html"
+  },
+  "background": {
+    "persistent": true,
+    "page": "pages/background.html"
+  },
+  "devtools_page": "pages/devtools.html",
+  "options_page": "pages/options.html",
+  "content_scripts": [
+    {
+      "js": [
+        "js/manifest.js",
+        "js/vendor.js",
+        "js/content.js"
+      ],
+      "run_at": "document_end",
+      "matches": [
+        "http://*.made-in-china.com/*",
+        "https://*.made-in-china.com/*"
+      ],
+      "all_frames": true
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "web_accessible_resources": [
+    "panel.html",
+    "js/external.js"
+  ]
+}

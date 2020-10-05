@@ -1,0 +1,467 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "author": "Cumulus Consulting",
+  "manifest_version": 2,
+  "name": "Cumulus Web",
+  "description": "Helping users of the Plex Manufacturing Cloud by adding custom functionality.",
+  "version": "2.1.24",
+  "permissions": [
+    "history",
+    "webRequest",
+    "webRequestBlocking",
+    "webNavigation",
+    "tabs",
+    "storage",
+    "alarms",
+    "clipboardRead",
+    "<all_urls>"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "16": "Framework/Icons/CumulusWeb-16px.png",
+      "32": "Framework/Icons/CumulusWeb-32px.png"
+    },
+    "default_popup": "Framework/BrowserAction/popup.html",
+    "default_title": "Cumulus Web 2.1.24"
+  },
+  "options_ui": {
+    "page": "0_Chrome/Options/options.html",
+    "chrome_style": true
+  },
+  "background": {
+    "scripts": [
+      "Common/browserPolyfill.js",
+      "jQuery/jquery-2.2.3.min.js",
+      "jQuery/polyfill.js",
+      "Common/environment.js",
+      "Common/messaging.js",
+      "Platform/WebSocket/WebSocket.js",
+      "Background/settingsManager.js",
+      "Background/session.js",
+      "Background/auth.js",
+      "Background/background.js",
+      "Background/AppStore.js",
+      "Background/loader.js"
+    ]
+  },
+  "storage": {
+    "managed_schema": "policies.json"
+  },
+  "icons": {
+    "16": "Framework/Icons/CumulusWeb-16px.png",
+    "32": "Framework/Icons/CumulusWeb-32px.png",
+    "48": "Framework/Icons/CumulusWeb-48px.png",
+    "96": "Framework/Icons/CumulusWeb-96px.png",
+    "128": "Framework/Icons/CumulusWeb-128px.png",
+    "256": "Framework/Icons/CumulusWeb-256px.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.plexonline.com/*/Control_Panel/Control_Panel_Output.asp*",
+        "*://*.plexus-online.com/*/Control_Panel/Control_Panel_Output.asp*",
+        "*://*.plexonline.com/*/Control_Panel/Control_Panel_Output.asp*",
+        "*://*.plexus-online.com/*/Control_Panel/Control_Panel_Output.asp*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "ProductionTracking/Control_Panel_Loading_Blocker.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://test.plexus-online.com/*",
+        "*://www.plexus-online.com/*",
+        "*://test.plexonline.com/*",
+        "*://www.plexonline.com/*",
+        "*://cloud.plex.com/*",
+        "*://test.cloud.plex.com/*",
+        "*://plus.plexonline.com/*"
+      ],
+      "include_globs": [
+        "*://*.plex*online.com/*.asp*",
+        "*://*cloud.plex.com/*"
+      ],
+      "js": [
+        "Common/browserPolyfill.js",
+        "jQuery/jquery-2.2.3.min.js",
+        "jQuery/jquery.js",
+        "jQuery/jquery-ui.min.js",
+        "jQuery/jquery.cookie.js",
+        "Common/ajax.js",
+        "Common/environment.js",
+        "Common/messaging.js",
+        "0_Chrome/Storage/Storage.js",
+        "0_Chrome/Authorization/0_AuthMain.js",
+        "Common/numbers.js",
+        "Common/interface.js",
+        "Common/settingsUtility.js",
+        "Common/MenuSearch.js",
+        "Common/common.js",
+        "Common/utility.js",
+        "Common/datetime.js"
+      ],
+      "css": [
+        "/0_Chrome/style/jquery-ui.min.css",
+        "/0_Chrome/style/jquery-ui.theme.min.css"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://test.plexus-online.com/*",
+        "*://www.plexus-online.com/*",
+        "*://test.plexonline.com/*",
+        "*://www.plexonline.com/*",
+        "*://plus.plexonline.com/*"
+      ],
+      "include_globs": [
+        "*://*.plex*online.com/*.asp*"
+      ],
+      "js": [
+        "/0_Chrome/Utility/ExportEverywhere/ExportEverywhereLoader.js",
+        "/DCS/UAS/UASLoader.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.plexonline.com/*/Rendering_Engine/Default.aspx*",
+        "*://*.plexus-online.com/*/Rendering_Engine/Default.aspx*",
+        "*://*.plexonline.com/*/Rendering_Engine/default.aspx*",
+        "*://*.plexus-online.com/*/Rendering_Engine/default.aspx*"
+      ],
+      "js": [
+        "/Common/visionplex.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.plexus-online.com/*Platform/DocumentControlSystem/DocumentUploadForm.aspx*",
+        "*://*.plexonline.com/*Platform/DocumentControlSystem/DocumentUploadForm.aspx*"
+      ],
+      "js": [
+        "DCS/DocumentUploadForm.js"
+      ],
+      "css": [
+        "DCS/DocumentUploadForm.css"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*.plexus-online.com/*DCS_v2/DCS_v2.asp*",
+        "*://*.plexonline.com/*DCS_v2/DCS_v2.asp*"
+      ],
+      "js": [
+        "DCS/DCS_v2.js"
+      ],
+      "css": [
+        "DCS/DocumentUploadForm.css"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*.plexus-online.com/*Accounting/AP_Invoice_Form_v2_1.asp*",
+        "*://*.plexonline.com/*Accounting/AP_Invoice_Form_v2_1.asp*"
+      ],
+      "js": [
+        "Accounting/AP_Invoice_Form_v2_1.js"
+      ],
+      "css": [
+        "Accounting/AP_Invoice_Form_v2_1.css"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*.plexus-online.com/*Accounting/AP_Invoice_v2_1.asp*",
+        "*://*.plexonline.com/*Accounting/AP_Invoice_v2_1.asp*"
+      ],
+      "js": [
+        "Accounting/AP_Invoice_v2_1.js"
+      ],
+      "css": [
+        "Accounting/AP_Invoice_v2_1.css"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*.plexus-online.com/*Rendering_Engine/Default.aspx*",
+        "*://*.plexonline.com/*Rendering_Engine/Default.aspx*"
+      ],
+      "js": [
+        "Rendering_Engine/Default.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.plexus-online.com/*Modules/Communication/AutomaticEmailNotification/Send.aspx*",
+        "*://*.plexonline.com/*Modules/Communication/AutomaticEmailNotification/Send.aspx*"
+      ],
+      "js": [
+        "Communication/AutomaticEmailNotification/Send.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*.plexus-online.com/*modules/systemadministration/login/*",
+        "*://*.plexonline.com/*modules/systemadministration/login/*",
+        "*://*.plexus-online.com/*Modules/SystemAdministration/Login/*",
+        "*://*.plexonline.com/*Modules/SystemAdministration/Login/*",
+        "*://*.plexus-online.com/signon/views/launcher.aspx",
+        "*://*.plexonline.com/signon/views/launcher.aspx"
+      ],
+      "js": [
+        "Login/login.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.plexus-online.com/*Modules/Platform/SingleSignOn/ServiceLauncher.aspx*",
+        "*://*.plexonline.com/*Modules/Platform/SingleSignOn/ServiceLauncher.aspx*"
+      ],
+      "js": [
+        "Platform/SingleSignOn/ServiceLauncher.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*.plexus-online.com/*Control_Panel/Control_Panel_Dispatch.asp*",
+        "*://*.plexonline.com/*Control_Panel/Control_Panel_Dispatch.asp*"
+      ],
+      "js": [
+        "ProductionTracking/JobTracking.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.plexonline.com/*/Modules/Quality/Checksheet/ChecksheetLine.aspx*",
+        "*://*.plexus-online.com/*/Modules/Quality/Checksheet/ChecksheetLine.aspx*"
+      ],
+      "js": [
+        "0_Chrome/Utility/SuperFastInput.js",
+        "ProductionTracking/Checksheet.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.plexus-online.com/*/Kanban/Kanban_Racks.asp*",
+        "*://*.plexonline.com/*/Kanban/Kanban_Racks.asp*"
+      ],
+      "js": [
+        "Scheduling/KanbanRacks.js"
+      ],
+      "css": [
+        "Scheduling/KanbanRacks.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.plexus-online.com/*/Kanban/Kanban_Rack.asp*",
+        "*://*.plexonline.com/*/Kanban/Kanban_Rack.asp*"
+      ],
+      "js": [
+        "Scheduling/KanbanManager.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.plexus-online.com/*Kanban/Kanban_Rack_Form.asp*",
+        "*://*.plexonline.com/*Kanban/Kanban_Rack_Form.asp*"
+      ],
+      "js": [
+        "Scheduling/KanbanRackSetup.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.plexus-online.com/*Part/Subcontract_Receiving_Only_Report.asp*",
+        "*://*.plexonline.com/*Part/Subcontract_Receiving_Only_Report.asp*"
+      ],
+      "js": [
+        "Shipping/SubcontractReceivingOnlyReport.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.plexonline.com/*/Rendering_Engine/Default.aspx?*RequestData=SourceType(Screen)SourceKey(10591)*",
+        "*://*.plexus-online.com/*/Rendering_Engine/Default.aspx?*RequestData=SourceType(Screen)SourceKey(10591)*"
+      ],
+      "js": [
+        "Inventory/LotInventory.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.plexonline.com/*/Rendering_Engine/Default.aspx?*RequestData=SourceType(Screen)SourceKey(25345)*",
+        "*://*.plexus-online.com/*/Rendering_Engine/Default.aspx?*RequestData=SourceType(Screen)SourceKey(25345)*"
+      ],
+      "js": [
+        "/Accounting/ARObligationExtract.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.plexonline.com/*/Rendering_Engine/Default.aspx?*RequestData=SourceType(Screen)SourceKey(36292)*",
+        "*://*.plexus-online.com/*/Rendering_Engine/Default.aspx?*RequestData=SourceType(Screen)SourceKey(36292)*",
+        "*://*.plexonline.com/*/Rendering_Engine/default.aspx?*RequestData=SourceType(Screen)SourceKey(36292)*",
+        "*://*.plexus-online.com/*/Rendering_Engine/default.aspx?*RequestData=SourceType(Screen)SourceKey(36292)*"
+      ],
+      "js": [
+        "0_Chrome/AppStore/AppStore.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.plexonline.com/*/Rendering_Engine/Default.aspx?*RequestData=SourceType(Screen)SourceKey(7303)*",
+        "*://*.plexus-online.com/*/Rendering_Engine/Default.aspx?*RequestData=SourceType(Screen)SourceKey(7303)*"
+      ],
+      "js": [
+        "0_Chrome/AppStore/PricingSetup.js"
+      ],
+      "css": [
+        "0_Chrome/AppStore/PricingSetup.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.plexonline.com/*/Plexus_Control/Report_Viewer_2.asp?URL=../Rendering_Engine/default.aspx&Request=Print&RenderedReport=true&RequestData=SourceType(Screen)SourceKey(31784)*",
+        "*://*.plexus-online.com/*/Plexus_Control/Report_Viewer_2.asp?URL=../Rendering_Engine/default.aspx&Request=Print&RenderedReport=true&RequestData=SourceType(Screen)SourceKey(31784)*",
+        "*://*.plexonline.com/*/Rendering_Engine/Default.aspx?*RequestData=SourceType(Screen)SourceKey(31784)*",
+        "*://*.plexus-online.com/*/Rendering_Engine/Default.aspx?*RequestData=SourceType(Screen)SourceKey(31784)*"
+      ],
+      "js": [
+        "/Accounting/ShipperPreInvoice.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*.plexonline.com/*/Rendering_Engine/Default.aspx?*RequestData=SourceType(Screen)SourceKey(36749)*",
+        "*://*.plexus-online.com/*/Rendering_Engine/Default.aspx?*RequestData=SourceType(Screen)SourceKey(36749)*"
+      ],
+      "js": [
+        "/ProductionTracking/WorkcenterRequirements/WorkcenterRequirements.js",
+        "/0_Chrome/Utility/moment.js"
+      ],
+      "css": [
+        "/ProductionTracking/WorkcenterRequirements/WorkcenterRequirements.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.plexonline.com/*/Modules/SystemAdministration/MenuSystem/Menu.aspx?*",
+        "*://*.plexonline.com/*/Modules/SystemAdministration/MenuSystem/menu.aspx?*",
+        "*://*.plexus-online.com/*/Modules/SystemAdministration/MenuSystem/Menu.aspx?*",
+        "*://*.plexus-online.com/*/Modules/SystemAdministration/MenuSystem/menu.aspx?*"
+      ],
+      "js": [
+        "Platform/MenuSystem/Menu.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.plexonline.com/*/Rendering_Engine/Default.aspx?*RequestData=SourceType(Screen)SourceKey(39268)*",
+        "*://*.plexus-online.com/*/Rendering_Engine/Default.aspx?*RequestData=SourceType(Screen)SourceKey(39268)*"
+      ],
+      "js": [
+        "Shipping/IntegratedShipping/IntegratedShippingReset.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.plexus-online.com/*Pickers/Menu_Quick_Search_Picker.asp*",
+        "*://*.plexonline.com/*Pickers/Menu_Quick_Search_Picker.asp*"
+      ],
+      "js": [
+        "Platform/MenuSystem/ClassicMenuSearch.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*.plexus-online.com/*Modules/systemadministration/login/iframe/MenuAuthenticationCallback.aspx*",
+        "*://*.plexonline.com/*Modules/systemadministration/login/iframe/MenuAuthenticationCallback.aspx*"
+      ],
+      "js": [
+        "Platform/MenuSystem/ReauthenticationCallback.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.plexus-online.com/*/Sales/Truck.asp*",
+        "*://*.plexonline.com/*/Sales/Truck.asp*"
+      ],
+      "js": [
+        "Shipping/TruckSerralles.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.plexonline.com/*/Rendering_Engine/Default.aspx?*RequestData=SourceType(Screen)SourceKey(38299)*",
+        "*://*.plexus-online.com/*/Rendering_Engine/Default.aspx?*RequestData=SourceType(Screen)SourceKey(38299)*"
+      ],
+      "js": [
+        "HumanResources/EmployeePictureReport.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.plexonline.com/*/Rendering_Engine/Default.aspx?*RequestData=SourceType(Screen)SourceKey(38882)*",
+        "*://*.plexus-online.com/*/Rendering_Engine/Default.aspx?*RequestData=SourceType(Screen)SourceKey(38882)*",
+        "*://*.plexonline.com/*/Rendering_Engine/default.aspx?*RequestData=SourceType(Screen)SourceKey(38882)*",
+        "*://*.plexus-online.com/*/Rendering_Engine/default.aspx?*RequestData=SourceType(Screen)SourceKey(38882)*"
+      ],
+      "js": [
+        "0_Chrome/Utility/FileSaver.min.js",
+        "Accounting/ActualsVsForecast.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.plexus-online.com/*/Sales/Shipper.asp*",
+        "*://*.plexonline.com/*/Sales/Shipper.asp*"
+      ],
+      "js": [
+        "Shipping/ShipperSerralles.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.plexonline.com/*/Rendering_Engine/Default.aspx?*RequestData=SourceType(Screen)SourceKey(39103)*",
+        "*://*.plexus-online.com/*/Rendering_Engine/Default.aspx?*RequestData=SourceType(Screen)SourceKey(39103)*",
+        "*://*.plexonline.com/*/Rendering_Engine/default.aspx?*RequestData=SourceType(Screen)SourceKey(39103)*",
+        "*://*.plexus-online.com/*/Rendering_Engine/default.aspx?*RequestData=SourceType(Screen)SourceKey(39103)*"
+      ],
+      "js": [
+        "0_Chrome/Utility/moment.js",
+        "0_Chrome/Utility/FileSaver.min.js",
+        "Platform/UniversalUpload/UniversalUpload.js"
+      ],
+      "css": [
+        "Platform/UniversalUpload/UniversalUpload.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.plexonline.com/*/Create_Jobs/Create_Jobs_From_Orders.asp*",
+        "*://*.plexus-online.com/*/Create_Jobs/Create_Jobs_From_Orders.asp*"
+      ],
+      "js": [
+        "Sales/Create_Jobs_PO_Line_Item_Note.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "**/*"
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "storieBot",
+  "description": "This extension provides easy instagram login to the storibot app.",
+  "version": "1.5",
+  "author": "Storiebot.io",
+  "background": {
+    "scripts": [
+      "/js/background.js"
+    ],
+    "persistent": false
+  },
+  "icons": {
+    "48": "asset/icon.png"
+  },
+  "browser_action": {
+    "default_title": "storiebot login",
+    "default_popup": "popup.html",
+    "default_icon": "/asset/icon.png"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+F",
+        "mac": "MacCtrl+Shift+F"
+      },
+      "description": "Opens popup.html"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://instagram.com/*"
+      ],
+      "js": [
+        "/js/app.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "cookies",
+    "storage",
+    "https://www.instagram.com/",
+    "http://www.instagram.com/",
+    "declarativeContent"
+  ]
+}

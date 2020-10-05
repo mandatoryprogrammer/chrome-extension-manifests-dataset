@@ -1,0 +1,90 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "SuperOffice Gmail Link",
+  "short_name": "SO-GmailLink",
+  "version": "2.3.7335.922",
+  "author": "SuperOffice",
+  "description": "Archive incoming and outgoing emails and manage contacts directly from your Gmail inbox into SuperOffice CRM!",
+  "icons": {
+    "19": "icons/19.png",
+    "20": "icons/20.png",
+    "30": "icons/30.png",
+    "36": "icons/36.png",
+    "38": "icons/38.png",
+    "40": "icons/40.png",
+    "48": "icons/48.png",
+    "72": "icons/72.png",
+    "96": "icons/96.png",
+    "128": "icons/128.png",
+    "144": "icons/144.png",
+    "192": "icons/192.png"
+  },
+  "page_action": {
+    "default_icon": {
+      "19": "icons/19.png",
+      "20": "icons/20.png",
+      "30": "icons/30.png",
+      "36": "icons/36.png",
+      "38": "icons/38.png",
+      "40": "icons/40.png",
+      "48": "icons/48.png",
+      "72": "icons/72.png",
+      "96": "icons/96.png",
+      "128": "icons/128.png",
+      "144": "icons/144.png",
+      "192": "icons/192.png"
+    },
+    "default_title": "SuperOffice",
+    "default_popup": "dist/settingsPage.html"
+  },
+  "background": {
+    "scripts": [
+      "dist/backgroundIcon.js",
+      "dist/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.superoffice.com/cust*",
+        "https://*.superoffice.com/Cust*"
+      ],
+      "js": [
+        "dist/onlineConfigGenerator.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://mail.google.com/*"
+      ],
+      "js": [
+        "dist/gmailExtensionInjector.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "dist/gmailExtensionLoader.js",
+    "dist/superofficeMessageListener.js",
+    "dist/extensionUpdated.js",
+    "dist/fedlogin.html",
+    "icons/logo_red.svg",
+    "icons/logo_white.svg"
+  ],
+  "options_ui": {
+    "page": "dist/settingsPage.html"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "webRequest",
+    "https://*.superoffice.com/*",
+    "https://mail.google.com/*"
+  ],
+  "optional_permissions": [
+    "https://*/*"
+  ]
+}

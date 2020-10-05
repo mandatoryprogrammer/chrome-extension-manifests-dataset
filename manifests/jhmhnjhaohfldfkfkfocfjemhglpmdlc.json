@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "short_name": "__MSG_appShortName__",
+  "description": "__MSG_appDescription__",
+  "version": "0.9.1",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "icons": {
+    "16": "images/icon-16.png",
+    "128": "images/icon-128.png"
+  },
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon-19.png",
+      "38": "images/icon-38.png"
+    },
+    "default_title": "__MSG_browserActionTitle__",
+    "default_popup": "pages/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://miraitranslate.com/trial/",
+        "https://miraitranslate.com/en/trial/"
+      ],
+      "css": [
+        "styles/content.css"
+      ],
+      "js": [
+        "scripts/content.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "scripts/currentTab.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "tabs"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' chrome-extension-resource: ; object-src 'self' ; child-src 'self' ; style-src 'self' ; default-src 'self' ; img-src 'self' ; connect-src 'self' "
+}

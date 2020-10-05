@@ -1,0 +1,67 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "해외뽐뿌 알리미",
+  "description": "뽐뿌 게시판과 해외뽐뿌 게시판에 새로운 글이 등록되면 알려줍니다.",
+  "version": "1.4.0",
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "img/icon.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "jquery-2.1.4.min.js",
+      "image_string.js",
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "notifications",
+    "alarms",
+    "storage",
+    "gcm",
+    "http://*/",
+    "https://*/"
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.ppomppu.co.kr/zboard/view.php*"
+      ],
+      "js": [
+        "removeDetourLink.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.yoox.com/*"
+      ],
+      "js": [
+        "cs/yoox.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.gilt.com/*"
+      ],
+      "js": [
+        "cs/gilt.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "web_accessible_resources": [
+    "img/icon.png"
+  ],
+  "short_name": "해뽐 알리미"
+}

@@ -1,0 +1,50 @@
+{
+  "browser_action": {
+    "default_icon": "img/szmalback48.png",
+    "default_popup": "pages/popup.html"
+  },
+  "default_locale": "pl",
+  "options_page": "pages/options.html",
+  "version": "0.0.8",
+  "content_security_policy": "script-src 'self' 'unsafe-eval' ; object-src 'self'",
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "description": "Ten plugin łączy Cię bezpośrednio z Szmalback.pl - najlepszym cashbackiem w Polsce!",
+  "name": "Szmalback",
+  "background": {
+    "page": "pages/background.html"
+  },
+  "permissions": [
+    "tabs",
+    "notifications",
+    "https://szmalback.pl/",
+    "https://test.szmalback.pl/",
+    "https://sb.sb.colo.biuro.net.pl:8443/",
+    "https://localhost:8443/"
+  ],
+  "icons": {
+    "48": "img/szmalback48.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/shopInterceptor.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.google.com/*",
+        "*://*.google.pl/*",
+        "*://*.ceneo.pl/*"
+      ],
+      "js": [
+        "js/domModifier.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "manifest_version": 2
+}

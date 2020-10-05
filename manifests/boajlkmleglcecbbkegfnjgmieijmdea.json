@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "101LINK",
+  "version": "1.0.1",
+  "description": "101LINK",
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "icons": {
+    "16": "images/logo16.png",
+    "48": "images/logo48.png",
+    "128": "images/logo128.png"
+  },
+  "browser_action": {
+    "default_icon": "images/logo16.png",
+    "default_popup": "content/popup.html",
+    "default_name": "101LINK",
+    "default_title": "101LINK"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+F",
+        "windows": "Ctrl+Shift+F",
+        "mac": "Command+Shift+F",
+        "chromeos": "Ctrl+Shift+F",
+        "linux": "Ctrl+Shift+F"
+      },
+      "description": "Open 101LINK",
+      "global": true
+    }
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://apx.101voice.com; object-src 'self' https://apx.101voice.com; frame-src 'self' https://apx.101voice.com;",
+  "permissions": [
+    "http://*/",
+    "https://*/",
+    "background",
+    "contextMenus",
+    "cookies",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content/overlay.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "script.js"
+  ]
+}

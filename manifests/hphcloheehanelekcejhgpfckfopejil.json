@@ -1,0 +1,123 @@
+{
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "/js/jquery-1.7.min.js",
+      "/js/common.js",
+      "/js/common-1.js",
+      "/js/logerror.js",
+      "/js/md5-min.js",
+      "/js/background-new.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "img/Youhub19.png",
+    "default_title": "Open Youhub"
+  },
+  "chrome_url_overrides": {
+    "newtab": "html/Youhub.html#newTab"
+  },
+  "commands": {
+    "addressBoxCurrentTab": {
+      "description": "Open Youhub's Address Box in the current tab",
+      "suggested_key": {
+        "default": "Alt+D"
+      }
+    },
+    "addressBoxNewTab": {
+      "description": "Open Youhub's Address Box in a new tab",
+      "suggested_key": {
+        "default": "Ctrl+T"
+      }
+    },
+    "searchBoxCurrentTab": {
+      "description": "Open Youhub's Search Box in the current tab",
+      "suggested_key": {
+        "default": "Ctrl+K"
+      }
+    },
+    "searchBoxNewTab": {
+      "description": "Open Youhub's Search Box in a new tab",
+      "suggested_key": {
+        "default": "Ctrl+Shift+K"
+      }
+    }
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "exclude_matches": [
+        "https://chrome.google.com/webstore*"
+      ],
+      "js": [
+        "js/jquery-1.7.min.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "exclude_matches": [
+        "https://chrome.google.com/webstore*"
+      ],
+      "include_globs": [
+        "http*"
+      ],
+      "js": [
+        "js/contextMenu-hoverToggle.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "exclude_matches": [
+        "https://chrome.google.com/webstore*"
+      ],
+      "js": [
+        "js/updatetitle.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "default-src 'self';   script-src 'self' https://platform.twitter.com;   style-src 'self' 'unsafe-inline';   img-src 'self' data: chrome: filesystem:;   connect-src 'self' http: https: chrome-extension:;   frame-src http: https:",
+  "description": "An alternative to Chrome's Omnibox. Replaces the New Tab page.",
+  "icons": {
+    "128": "img/Youhub128.png",
+    "16": "img/Youhub16.png",
+    "19": "img/Youhub19.png",
+    "48": "img/Youhub48.png"
+  },
+  "manifest_version": 2,
+  "minimum_chrome_version": "28",
+  "name": "Youhub Search",
+  "omnibox": {
+    "keyword": "f"
+  },
+  "options_page": "html/launchoptions.html",
+  "permissions": [
+    "<all_urls>",
+    "tabs",
+    "history",
+    "bookmarks",
+    "chrome://favicon/*",
+    "unlimitedStorage",
+    "management",
+    "clipboardWrite",
+    "clipboardRead",
+    "contextMenus",
+    "notifications",
+    "storage"
+  ],
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "1.4.0",
+  "web_accessible_resources": [
+    "html/Youhub.html"
+  ]
+}

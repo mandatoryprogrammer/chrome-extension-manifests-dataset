@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "grep-click: type button text to click",
+  "short_name": "grep-click",
+  "description": "More browse, less mouse. Navigate chrome by typing text of buttons on the page",
+  "version": "1.3.2",
+  "icons": {
+    "16": "./images/logo-16.png",
+    "32": "./images/logo-32.png",
+    "48": "./images/logo-48.png",
+    "128": "./images/logo-128.png"
+  },
+  "permissions": [
+    "tabs",
+    "<all_urls>"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "browser_action": {
+    "default_icon": {},
+    "default_title": "Grep Click",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "events.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "node_modules/jquery/dist/jquery.min.js",
+        "trie.js",
+        "content-script.js"
+      ]
+    }
+  ],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+E",
+        "linux": "Ctrl+Shift+K",
+        "windows": "Alt+Shift+P",
+        "mac": "Alt+Shift+P"
+      }
+    }
+  },
+  "manifest_version": 2
+}

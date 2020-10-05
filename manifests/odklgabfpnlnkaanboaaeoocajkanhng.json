@@ -1,0 +1,43 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Listing Maps for Kijiji",
+  "version": "1.1",
+  "description": "Places a button beside each Kijiji listing, and will display the location on a map once clicked.",
+  "icons": {
+    "128": "images/canada_big.jpg"
+  },
+  "background": {
+    "scripts": [
+      "jquery-2.2.1.min.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*"
+      ],
+      "js": [
+        "jquery-2.2.1.min.js",
+        "jquery-ui-1.11.4/jquery-ui.js",
+        "kijiji_content_script.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "https://maps.google.com/*",
+    "https://maps.googleapis.com/*",
+    "http://*/*"
+  ],
+  "page_action": {
+    "default_icon": "images/marker.png"
+  },
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://maps.googleapis.com https://maps.gstatic.com; object-src 'self'",
+  "web_accessible_resources": [
+    "images/*.png"
+  ]
+}

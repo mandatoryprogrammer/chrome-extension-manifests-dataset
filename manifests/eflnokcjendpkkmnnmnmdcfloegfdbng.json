@@ -1,0 +1,82 @@
+{
+  "name": "__MSG_EXTENSION_NAME__",
+  "short_name": "Souq Assistant",
+  "version": "2.1.0",
+  "manifest_version": 2,
+  "description": "__MSG_EXTENSION_DESCRIPTION__",
+  "homepage_url": "https://www.aliprice.com",
+  "default_locale": "en",
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "permissions": [
+    "tabs",
+    "contextMenus",
+    "cookies",
+    "storage",
+    "notifications",
+    "*://*.aliprice.com/*",
+    "*://*.aliexpress.com/*",
+    "*://*.lazada.sg/*",
+    "*://*.lazada.com.my/*",
+    "*://*.lazada.com.ph/*",
+    "*://*.lazada.vn/*",
+    "*://*.lazada.co.th/*",
+    "*://*.lazada.co.id/*",
+    "*://*.dhgate.com/*",
+    "*://*.gearbest.com/*",
+    "*://*.banggood.com/*",
+    "*://*.joybuy.com/*",
+    "*://*.joybuy.es/*",
+    "*://*.jd.ru/*",
+    "*://*.jd.id/*",
+    "*://*.amazon.com/*",
+    "*://*.souq.com/*",
+    "*://*.amazon.eg/*",
+    "*://*.amazon.sa/*",
+    "*://*.amazon.ae/*",
+    "*://ssl.google-analytics.com/*"
+  ],
+  "browser_action": {
+    "default_title": "Souq",
+    "default_popup": "popup/popup.html",
+    "default_icon": "icons/19.png"
+  },
+  "background": {
+    "page": "background/background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.souq.com/*",
+        "*://*.amazon.eg/*",
+        "*://*.amazon.sa/*",
+        "*://*.amazon.ae/*",
+        "*://*.aliexpress.com/*"
+      ],
+      "js": [
+        "assets/js/vendor.js",
+        "assets/js/common.js",
+        "contentScript/contentScript.js"
+      ],
+      "css": [
+        "assets/css/common.css",
+        "assets/css/contentScript/contentScript.css"
+      ]
+    }
+  ],
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true
+  },
+  "web_accessible_resources": [
+    "_locales/**/*.json",
+    "assets/css/common.css",
+    "assets/css/contentScript/contentScript.css",
+    "assets/images/*"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

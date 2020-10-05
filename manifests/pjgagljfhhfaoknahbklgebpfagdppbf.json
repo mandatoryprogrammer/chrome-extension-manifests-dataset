@@ -1,0 +1,37 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "TV Enhance",
+  "version": "0.0.4",
+  "manifest_version": 2,
+  "description": "Chrome Extension to make working with TradingView charts a little bit more intuitive.",
+  "homepage_url": "https://github.com/pkaske/tv-enhance",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "page": "src/bg/background.html",
+    "persistent": false
+  },
+  "options_page": "src/options/index.html",
+  "permissions": [
+    "storage",
+    "https://www.tradingview.com/chart/*"
+  ],
+  "content_scripts": [
+    {
+      "run_at": "document_idle",
+      "matches": [
+        "https://www.tradingview.com/chart/*"
+      ],
+      "js": [
+        "src/inject/injecter.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "src/inject/inject.js"
+  ]
+}

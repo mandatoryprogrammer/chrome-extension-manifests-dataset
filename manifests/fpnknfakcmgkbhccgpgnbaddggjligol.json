@@ -1,0 +1,92 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_extName__",
+  "version": "1.5.0.4",
+  "description": "__MSG_extDesc__",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://v.youku.com/v_show/*",
+        "*://player.youku.com/embed/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "dom_gen.js",
+        "md5.js",
+        "hookFetch.js",
+        "flv.min.js",
+        "youku_html5_hack.js"
+      ],
+      "css": [
+        "ABPlayer.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://v.youku.com/v_show/*",
+        "*://player.youku.com/embed/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "resizeSensor.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "exclude_matches": [
+        "*://v.youku.com/v_show/*",
+        "*://player.youku.com/embed/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "dom_gen.js",
+        "youku_embed_replacer.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://v-wb.youku.com/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "v_slash_jumper.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "hookFetch_background.js",
+      "playerCounter_background.js",
+      "script_executer.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "options.html"
+  },
+  "permissions": [
+    "*://*/*",
+    "storage",
+    "clipboardWrite",
+    "alarms"
+  ],
+  "icons": {
+    "48": "icon.png"
+  },
+  "default_locale": "en",
+  "options_ui": {
+    "page": "options.html"
+  },
+  "web_accessible_resources": [
+    "options.html"
+  ],
+  "minimum_chrome_version": "50.0"
+}

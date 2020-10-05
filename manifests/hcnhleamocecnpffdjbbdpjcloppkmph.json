@@ -1,0 +1,132 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "default_locale": "ja",
+  "name": "__MSG_name__",
+  "version": "2.5.1",
+  "description": "__MSG_description__",
+  "permissions": [
+    "contextMenus",
+    "storage",
+    "http://*.sengokuixa.jp/*"
+  ],
+  "web_accessible_resources": [
+    "/contentScripts/map/dataarea_back.png",
+    "/plugin/jquery-2.0.3.min.map"
+  ],
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "options_page": "/option/option.html",
+  "background": {
+    "scripts": [
+      "ixa/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": [
+        "http://*.sengokuixa.jp/*",
+        "http://*.app0.mixi-platform.com/*sengokuixa*"
+      ],
+      "exclude_matches": [
+        "http://sengokuixa.jp/*"
+      ],
+      "js": [
+        "/plugin/jquery.min.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "http://world.sengokuixa.jp/world/select_world.php*",
+        "http://*.app0.mixi-platform.com/*sengokuixa*"
+      ],
+      "js": [
+        "contentScripts/select_world/select_world.js"
+      ]
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "http://*.sengokuixa.jp/*"
+      ],
+      "exclude_matches": [
+        "http://sengokuixa.jp/*",
+        "http://world.sengokuixa.jp/world/select_world.php*"
+      ],
+      "js": [
+        "contentScripts/getWorld.js",
+        "contentScripts/tabArea/tabMenu.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "http://*.sengokuixa.jp/*"
+      ],
+      "exclude_matches": [
+        "http://sengokuixa.jp/*",
+        "http://world.sengokuixa.jp/world/select_world.php*"
+      ],
+      "js": [
+        "contentScripts/tabArea/tab.js",
+        "contentScripts/tabArea/torideLink.js",
+        "contentScripts/sideBox/appendToolBox.js"
+      ],
+      "css": [
+        "contentScripts/tabArea/tab.css",
+        "contentScripts/tabArea/torideLink.css",
+        "contentScripts/cardWindow.css",
+        "contentScripts/sideBox/toolBox.css"
+      ]
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "http://*.sengokuixa.jp/map.php*"
+      ],
+      "css": [
+        "contentScripts/map/map.css"
+      ],
+      "js": [
+        "contentScripts/map/map.js"
+      ]
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "http://*.sengokuixa.jp/card/deck.php*"
+      ],
+      "css": [
+        "contentScripts/deck/cardDeck.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "http://*.sengokuixa.jp/union/levelup.php*"
+      ],
+      "css": [
+        "contentScripts/deck/unionDeck.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "http://*.sengokuixa.jp/facility/facility.php*"
+      ],
+      "js": [
+        "contentScripts/facility/facility.js"
+      ]
+    }
+  ]
+}

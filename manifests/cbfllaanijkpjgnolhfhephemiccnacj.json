@@ -1,0 +1,137 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Bublup",
+  "short_name": "Bublup",
+  "description": "Save any web page and discover fascinating content.",
+  "version": "2.0.3",
+  "browser_action": {
+    "default_icon": "data/images/bublup-icon_16.png",
+    "default_title": "Bublup"
+  },
+  "icons": {
+    "16": "data/images/bublup-icon_16.png",
+    "48": "data/images/bublup-icon_48.png",
+    "128": "data/images/bublup-icon_128.png"
+  },
+  "background": {
+    "scripts": [
+      "data/js/lib/jquery-1.11.1.js",
+      "shared/js/event_constants.js",
+      "lib/js/modules/bg_bublup_app.js",
+      "lib/js/adapters/bg_chrome_adapter.js",
+      "lib/js/modules/bg_bublup_toolbar.js",
+      "lib/js/modules/bg_messaging.js",
+      "lib/js/modules/bg_mystuff.js",
+      "lib/js/modules/bg_bublup_ajax.js",
+      "lib/js/modules/bg_bublup_user.js",
+      "lib/js/modules/bg_webservices.js",
+      "lib/js/modules/bg_shading.js",
+      "lib/js/modules/bg_filtering.js",
+      "lib/js/modules/bg_discovery.js",
+      "lib/js/modules/main.js"
+    ],
+    "persistent": true
+  },
+  "commands": {
+    "bublup-save": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+S",
+        "mac": "Command+Shift+S"
+      },
+      "description": "Opens bublup quicksave"
+    },
+    "bublup-save-review-later": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+X",
+        "mac": "Command+Shift+X"
+      },
+      "description": "Saves the current page to review later"
+    },
+    "bublup-save-most-recent": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+A",
+        "mac": "Command+Shift+A"
+      },
+      "description": "Saves the current page to the most recent folder"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "data/js/lib/jquery-1.11.1.js",
+        "shared/js/event_constants.js",
+        "data/js/lib/jquery-ui.min.js",
+        "data/js/lib/q.js",
+        "data/js/lib/event-queue.js",
+        "data/js/modules/inj_bublup_app.js",
+        "data/js/adapters/inj_chrome_adapter.js",
+        "data/js/host_page/inj_host_page.js",
+        "data/js/host_page/inj_page_data.js",
+        "data/js/modules/inj_messaging.js",
+        "data/js/modules/inj_translation.js",
+        "data/js/transformers/inj_transformer.js",
+        "data/js/transformers/inj_transformer_store.js",
+        "data/js/transformers/shaders/inj_google_shader.js",
+        "data/js/transformers/filters/inj_google_filter.js",
+        "data/js/transformers/drag/inj_google_drag.js",
+        "data/js/modules/inj_grip.js",
+        "data/js/toolbar/inj_nano_toolbar.js",
+        "data/js/notification/inj_notification.js",
+        "data/js/search/inj_search_app.js",
+        "data/js/discovery/inj_discovery_app.js",
+        "data/js/mybublup/inj_mybublup_app.js",
+        "data/js/modules/inj_main.js"
+      ],
+      "css": [
+        "data/css/toolbar.css",
+        "data/css/shading.css",
+        "data/css/filtering.css",
+        "data/css/chrome.css",
+        "data/css/notification.css",
+        "data/css/discovery.css",
+        "data/css/search.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://mystuff.bublup.com/*",
+        "https://mystuff.bublup.com/*"
+      ],
+      "js": [
+        "data/js/lib/jquery-1.11.1.js",
+        "shared/js/event_constants.js",
+        "data/js/modules/inj_bublup_app.js",
+        "data/js/adapters/inj_chrome_adapter.js",
+        "data/js/modules/inj_messaging.js",
+        "data/js/iframe/inj_iframe_listener.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "run_at": "document_start",
+      "matches": [
+        "https://www.bublup.com/*",
+        "https://www.bublupstaging.com/*"
+      ],
+      "js": [
+        "data/js/host_page/inj_bublup_site.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAgv3Neg/vuE0+cDqPsphkJsmxLDHwAiLPC35bBqiZIAYSCc4DH1mDJvhyLtUe9Ho4yLDk0K9HlRtZpPXhCmBGg36ERGPmJkmi6Uhe0lF26GSEqBgxlliEhxK9kFKBA1rf/fO50ucCb4pK12Xe+vIvbwAcG822insgR1mYlkWYUC/QcQPPYxwNSwh/PrTXA3mxr9H5m/FssZ0O2d9jT5n4evE2954Jb5blddN99IpdIgsMy4r50sPEUI4hWnOH/EWrpl1cM7g5y1wG12/qssCoXHWcmORLoGfHL9L7BorkczztC9CkDEz1r+YWkSwh5z00kC8kVja/R+dJs81lMmQgrwIDAQAB",
+  "permissions": [
+    "tabs",
+    "contextMenus",
+    "<all_urls>"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "web_accessible_resources": [
+    "data/*"
+  ],
+  "version_name": "2.0.3.147"
+}

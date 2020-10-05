@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "ErrorAnnex",
+  "short_name": "ErrorAnnex",
+  "description": "ErrorAnnex is the easiest way to listen for errors on your products and sites around the web.",
+  "version": "1.0.3",
+  "permissions": [
+    "tabs",
+    "<all_urls>",
+    "webNavigation",
+    "notifications",
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/icon16_d.png",
+      "19": "icons/icon19_d.png",
+      "38": "icons/icon38_d.png",
+      "48": "icons/icon48_d.png",
+      "128": "icons/icon128_d.png"
+    },
+    "default_popup": "interface.html"
+  },
+  "icons": {
+    "16": "icons/icon16_d.png",
+    "19": "icons/icon19_d.png",
+    "38": "icons/icon38_d.png",
+    "48": "icons/icon48_d.png",
+    "128": "icons/icon128_d.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "scripts/content.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "offline_enabled": true,
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  }
+}

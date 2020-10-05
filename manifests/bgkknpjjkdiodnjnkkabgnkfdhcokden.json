@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Screen Capture, Screenshot & Record - Bukket ",
+  "homepage_url": "http://www.bukketapp.com",
+  "description": "The First Ever All-in-One Screenshot, Screen Capture and Recording app! Everything made possible within the browser.",
+  "version": "1.2",
+  "icons": {
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
+  },
+  "browser_action": {
+    "default_icon": "images/icon-bukket-app@2x.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "js": [
+      "background.min.js"
+    ],
+    "page": "background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "js": [
+        "content.min.js",
+        "js/gif.min.js",
+        "js/keymaster.min.js"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "options_ui": {
+    "chrome_style": true,
+    "page": "options.html"
+  },
+  "web_accessible_resources": [
+    "images/*.svg",
+    "images/*.png",
+    "fonts/*.otf"
+  ],
+  "permissions": [
+    "<all_urls>",
+    "activeTab",
+    "tabCapture",
+    "tabs",
+    "downloads",
+    "https://www.bukketapp.com/",
+    "storage",
+    "unlimitedStorage",
+    "desktopCapture"
+  ],
+  "incognito": "split",
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'"
+}

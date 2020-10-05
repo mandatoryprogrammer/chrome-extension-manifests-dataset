@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Black Buy",
+  "version": "0.5.4",
+  "description": "O Black Buy consiste em uma central do comprador, com diversas funções para que você possa economizar !",
+  "icons": {
+    "16": "img/logo_16.png",
+    "48": "img/logo_48.png",
+    "128": "img/logo_128.png"
+  },
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_title": "Black Buy",
+    "default_icon": "img/icon.png"
+  },
+  "permissions": [
+    "tabs",
+    "alarms",
+    "background",
+    "storage",
+    "activeTab",
+    "declarativeContent",
+    "webRequest",
+    "http://black-buy.herokuapp.com/*",
+    "https://black-buy.herokuapp.com/*",
+    "https://blackbuy.com.br/*",
+    "http://blackbuy.com.br/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/chrome_scripts/content.js",
+        "js/utils/generalUtils.js",
+        "js/utils/storeUtils.js",
+        "js/compressedStores/stores.js"
+      ]
+    }
+  ],
+  "sandbox": {
+    "pages": [
+      "sandBox/application.html"
+    ]
+  },
+  "content_security_policy": "sandbox allow-modals allow-popups allow-scripts allow-forms allow-same-origin allow-pointer-lock; script-src 'self' 'unsafe-eval'; object-src 'self'; font-src 'self'"
+}

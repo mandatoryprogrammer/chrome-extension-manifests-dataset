@@ -1,0 +1,89 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Gooplayer",
+  "short_name": "Gooplayer",
+  "author": "Helpnetsoluciones",
+  "version": "3.1",
+  "manifest_version": 2,
+  "description": "__MSG_appDescription__",
+  "icons": {
+    "16": "images/icon-16.png",
+    "128": "images/icon-128.png"
+  },
+  "default_locale": "es",
+  "background": {
+    "page": "background.html"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon-19.png",
+      "38": "images/icon-38.png"
+    },
+    "default_title": "Gooplayer",
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "commands": {
+    "next": {
+      "suggested_key": {
+        "default": "Alt+N",
+        "mac": "MediaNextTrack"
+      },
+      "description": "Reproducir siguiente",
+      "global": true
+    },
+    "previous": {
+      "suggested_key": {
+        "default": "Alt+Shift+N",
+        "mac": "MediaPrevTrack"
+      },
+      "description": "Reproducir anterior",
+      "global": true
+    },
+    "playpause": {
+      "suggested_key": {
+        "default": "Alt+P",
+        "mac": "MediaPlayPause"
+      },
+      "description": "Reproducir/pausa",
+      "global": true
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.youtube.com/*",
+        "*://*.soundcloud.com/*",
+        "*://suggestqueries.google.com/*"
+      ],
+      "css": [],
+      "js": [
+        "scripts/contentscript.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.google-analytics.com https://api-v2.soundcloud.com; object-src 'self'",
+  "permissions": [
+    "identity",
+    "identity.email",
+    "webRequest",
+    "webRequestBlocking",
+    "storage",
+    "notifications",
+    "*://*.youtube.com/*",
+    "*://*.ytimg.com/*",
+    "*://*.sndcdn.com/*",
+    "http://api.getsoundcloudify.com/*"
+  ],
+  "oauth2": {
+    "client_id": "1087409237803-jbbudeinlv3badr1qvhhm6p3ttiuiogr.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/drive"
+    ]
+  },
+  "web_accessible_resources": [
+    "images/*"
+  ]
+}

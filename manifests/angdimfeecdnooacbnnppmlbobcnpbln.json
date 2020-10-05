@@ -1,0 +1,41 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Read the Effing Article",
+  "short_name": "RTFA",
+  "version": "1.0",
+  "description": "Read the effing article! RTFA prevents reading the comments before the article on HackerNews and Reddit.",
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "storage",
+    "http://www.reddit.com/*",
+    "https://www.reddit.com/*",
+    "http://news.ycombinator.com/*",
+    "https://news.ycombinator.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.reddit.com/*",
+        "https://www.reddit.com/*",
+        "http://news.ycombinator.com/*",
+        "https://news.ycombinator.com/*"
+      ],
+      "js": [
+        "jquery.min.js",
+        "rtfa.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "manifest_version": 2
+}

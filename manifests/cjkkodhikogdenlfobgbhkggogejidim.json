@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Houseparty",
+  "description": "See who is on Houseparty even when you're not online. Say Hi to your friends as you browse the web.",
+  "browser_action": {
+    "default_icon": "wave.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://app.houseparty.com/*"
+      ],
+      "js": [
+        "js/contentScript.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/background.js",
+      "js/analytics.js"
+    ],
+    "persistent": true
+  },
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com",
+  "externally_connectable": {
+    "matches": [
+      "https://app.houseparty.com/*"
+    ]
+  },
+  "permissions": [
+    "background",
+    "tabs",
+    "storage",
+    "https://app.houseparty.com/*"
+  ],
+  "manifest_version": 2,
+  "version": "0.10.90"
+}

@@ -1,0 +1,75 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Oh Caption, My Caption",
+  "short_name": "Oh Caption!",
+  "version": "1.0.2018.924",
+  "homepage_url": "https://www.ohcaption.com/",
+  "description": "Crowd-sourced image captions and descriptions for the visually-impaired.",
+  "author": "Patrick Stein <pat@nklein.com>",
+  "content_security_policy": "default-src 'self' https://www.ohcaption.com; img-src 'self' http://* https://*",
+  "icons": {
+    "48": "icon48.png",
+    "96": "icon96.png",
+    "200": "icon200.png"
+  },
+  "permissions": [
+    "storage",
+    "contextMenus",
+    "webRequest",
+    "*://*/*",
+    "https://www.ohcaption.com/api/GetCaptions.php",
+    "https://www.ohcaption.com/api/UpdateCaption.php"
+  ],
+  "commands": {
+    "toggle-oh-caption": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+H",
+        "mac": "MacCtrl+Shift+H"
+      },
+      "description": "Toggle Oh-Caption! image descriptions"
+    }
+  },
+  "background": {
+    "scripts": [
+      "polyfill/browser-polyfill.js",
+      "ohcaption.js",
+      "options/options.js",
+      "toggle/toggle-dispatch.js",
+      "captions/context-menu.js",
+      "monitor/monitor-dispatch.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "all_frames": false,
+      "run_at": "document_idle",
+      "css": [
+        "ohcaption.css",
+        "cleanup/cleanup.css"
+      ],
+      "js": [
+        "polyfill/browser-polyfill.js",
+        "ohcaption.js",
+        "options/options.js",
+        "toggle/toggle-listener.js",
+        "cleanup/cleanup.js",
+        "captions/context-menu-toggle.js",
+        "captions/request.js",
+        "captions/query.js",
+        "captions/page.js",
+        "captions/popup-listener.js",
+        "monitor/monitor-listener.js",
+        "content.js"
+      ]
+    }
+  ],
+  "options_ui": {
+    "page": "options/options.html"
+  },
+  "web_accessible_resources": []
+}

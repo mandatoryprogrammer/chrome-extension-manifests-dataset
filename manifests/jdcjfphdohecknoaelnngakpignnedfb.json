@@ -1,0 +1,89 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_application_title__",
+  "short_name": "Lead Connect",
+  "description": "__MSG_application_description__",
+  "version": "2.0.9",
+  "default_locale": "en",
+  "content_security_policy": "script-src 'self' https://www.gstatic.com https://ajax.googleapis.com  https://cdnjs.cloudflare.com https://*.intercom.io https://*.intercomcdn.com; object-src 'self'",
+  "browser_action": {
+    "default_icon": "img/logo_ext.png",
+    "default_title": "Lead Connect",
+    "default_popup": "/prospectpopup.html"
+  },
+  "icons": {
+    "16": "img/logo_ext.png",
+    "48": "img/logo_ext.png",
+    "128": "img/logo_ext.png"
+  },
+  "options_ui": {
+    "page": "settings.html",
+    "chrome_style": false,
+    "open_in_tab": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.linkedin.com/*"
+      ],
+      "css": [
+        "css/inject_style.css",
+        "libs/tooltipster.bundle.min.css"
+      ],
+      "js": [
+        "libs/jquery.min.js",
+        "libs/tooltipster.bundle.min.js",
+        "js/functions.js",
+        "js/linkedin_helper.js",
+        "js/api.js",
+        "js/script.js",
+        "js/bootstrap.min.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://app.leadconnect.io/*"
+      ],
+      "js": [
+        "js/auth_helper.js"
+      ],
+      " ": "document_idle"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "libs/jquery.min.js",
+      "libs/dexie.min.js",
+      "js/functions.js",
+      "js/api.js",
+      "js/sequences.js",
+      "js/background.js",
+      "js/sequences_handler.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "background",
+    "activeTab",
+    "storage",
+    "notifications",
+    "cookies",
+    "*://*.linkedin.com/*",
+    "https://www.gstatic.com//*",
+    "http://app.leadconnect.io/*",
+    "*://*.hubspot.com/*",
+    "*://*.hubapi.com/*",
+    "https://api.anymailfinder.com/*",
+    "https://api.findthatlead.com/*",
+    "https://api.emailhunter.co/*",
+    "https://*.toofr.com/*",
+    "https://bpi.briteverify.com/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://app.leadconnect.io/*"
+    ]
+  }
+}

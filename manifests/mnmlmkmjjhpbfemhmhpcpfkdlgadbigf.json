@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Salesforce Mass Editor",
+  "short_name": "Salesforce Mass Editor",
+  "version": "3.1.8",
+  "manifest_version": 2,
+  "description": "Mass create, mass update, mass clone, mass delete on any list view. Support for both Classic and Lightning!",
+  "browser_action": {
+    "matches": [
+      "https://*.force.com/*",
+      "https://*.salesforce.com/*",
+      "https://*.cloudforce.com/*"
+    ],
+    "default_icon": "icon/icon.png",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.force.com/*",
+        "https://*.salesforce.com/*",
+        "https://*.cloudforce.com/*",
+        "https://github.com/*"
+      ],
+      "css": [
+        "dist/css/style.min.css",
+        "dist/css/lightning.min.css"
+      ],
+      "js": [
+        "dist/js/main.min.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "components/jsforce/build/jsforce.min.js",
+      "dist/js/analytics.min.js"
+    ]
+  },
+  "permissions": [
+    "activeTab",
+    "https://*force.com/*",
+    "storage",
+    "unlimitedStorage",
+    "contextMenus",
+    "clipboardRead"
+  ],
+  "icons": {
+    "16": "icon/icon-16.png",
+    "48": "icon/icon-48.png",
+    "128": "icon/icon-128.png"
+  },
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'; style-src 'self' https://use.fontawesome.com;"
+}

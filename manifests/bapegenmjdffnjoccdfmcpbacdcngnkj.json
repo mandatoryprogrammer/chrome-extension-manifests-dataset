@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "TINYpulse",
+  "description": "TINYpulse Chrome extension for quick accessing feature",
+  "short_name": "TINYpulse",
+  "version": "1.11.0",
+  "browser_action": {
+    "default_popup": "index.html",
+    "default_icon": "images/logo.png"
+  },
+  "icons": {
+    "16": "images/logo.png",
+    "48": "images/logo.png",
+    "128": "images/logo.png"
+  },
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "permissions": [
+    "debugger",
+    "storage",
+    "notifications",
+    "background",
+    "https://app.tinypulse.com/",
+    "http://staging.tinyserver.info/",
+    "http://dev.tinyserver.info/",
+    "http://app.lvh.me:3000/",
+    "https://production-tinypulse-shared.s3.amazonaws.com/",
+    "https://staging-tinypulse-shared.s3.amazonaws.com/",
+    "https://heroku-dev-tinypulse-shared.s3.amazonaws.com/",
+    "https://localhost-tinypulse-shared.s3.amazonaws.com/",
+    "alarms",
+    "activeTab"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://app.lvh.me:3000/saml/sso/chrome_ext*",
+        "*://*.tinyserver.info/saml/sso/chrome_ext*",
+        "*://app.tinypulse.com/saml/sso/chrome_ext*"
+      ],
+      "js": [
+        "/lib/jquery/jquery-2.1.3.min.js",
+        "/js/check-saml-login.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.google-analytics.com; object-src 'self'"
+}

@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Emotion Tracker",
+  "version": "0.2",
+  "description": "Anonymously collect or view video highlights.",
+  "manifest_version": 2,
+  "permissions": [
+    "storage",
+    "declarativeContent",
+    "activeTab",
+    "https://expression-tracker.herokuapp.com/*/"
+  ],
+  "page_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon.png",
+      "32": "icon.png",
+      "48": "icon.png",
+      "128": "icon.png"
+    }
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.youtube.com/watch?v=*"
+      ],
+      "js": [
+        "face-api.min.js",
+        "main.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "assets/*",
+    "models/*"
+  ],
+  "icons": {
+    "16": "icon.png",
+    "32": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "description": "__MSG_appDesc__",
+  "short_name": "Tris",
+  "version": "0.9.92",
+  "manifest_version": 2,
+  "homepage_url": "https://www.tris.com",
+  "default_locale": "en",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "js/socketcluster.js",
+      "js/background.js",
+      "js/ga.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "tabs",
+    "notifications",
+    "http://*/*",
+    "https://*/*",
+    "storage",
+    "contextMenus"
+  ],
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": "icons/button16.png",
+    "default_title": "Tris"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/content_scripts.js",
+        "js/tris.extension.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "web_accessible_resources": [
+    "frame.html"
+  ]
+}

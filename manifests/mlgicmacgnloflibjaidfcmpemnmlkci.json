@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "微博助手",
+  "version": "4.0.1",
+  "author": "neko4zheng",
+  "description": "功能列表：归档微博原图, 解析视频地址，帐号切换",
+  "icons": {
+    "128": "public/logo_wh_128.png"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "browser_action": {
+    "default_icon": {},
+    "default_title": "微博助手",
+    "default_popup": "app/popup.html"
+  },
+  "permissions": [
+    "downloads",
+    "tabs",
+    "storage",
+    "cookies",
+    "*://wb.yizhibo.com/*",
+    "*://*.xiaoka.*/*",
+    "*://*.sinaimg.*/*",
+    "*://*.weibo.com/*",
+    "*://*.sina.com.cn/*"
+  ],
+  "background": {
+    "scripts": [
+      "app/background.bundle.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://weibo.com/*",
+        "*://*.weibo.com/*",
+        "*://*.meipai.com/*"
+      ],
+      "js": [
+        "app/contentScriptsEnvInit.bundle.js",
+        "app/contentScripts.bundle.js",
+        "app/contentScripts_photos_autoDownloadVideo.bundle.js"
+      ],
+      "css": [
+        "app/contentScripts.bundle.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "image/*",
+    "resources/*",
+    "dist/resources/*"
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Passwarden",
+  "description": "Passwarden Extension for Google Chrome",
+  "version": "1.0",
+  "homepage_url": "https://passwarden.com",
+  "icons": {
+    "16": "data/img/browsers/icon-16.png",
+    "48": "data/img/browsers/icon-48.png",
+    "128": "data/img/browsers/icon-128.png"
+  },
+  "browser_action": {
+    "default_icon": "data/img/browsers/icon-plugin-browser-chrome.png",
+    "default_popup": "data/html/popup.html"
+  },
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "tabs",
+    "contextMenus",
+    "clipboardWrite",
+    "clipboardRead",
+    "unlimitedStorage"
+  ],
+  "web_accessible_resources": [
+    "data/html/notification_bar.html",
+    "data/html/popup.html"
+  ],
+  "background": {
+    "scripts": [
+      "main.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "run_at": "document_end",
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "data/js/jquery-2.0.0.min.js",
+        "data/js/form-autofill.js",
+        "data/js/content.js"
+      ],
+      "css": [],
+      "exclude_globs": [
+        "*://ad.*/*",
+        "*://ad?.*/*",
+        "*://ads?.*/*",
+        "*://adserver*.*/*",
+        "*://*/*adframe*",
+        "*://tag.admeld*.*/*",
+        "*://*.atdmt.com/*",
+        "*://*.doubleclick.*/*",
+        "*://*.ak.fbcdn.net/*",
+        "*://plusone.google.com/*",
+        "*://platform.twitter.com/widgets/*",
+        "*://*.facebook.com/widgets/*",
+        "*://*.facebook.com/plugins/*",
+        "*://*.facebook.com/extern/*",
+        "*://stats.complex.com/*",
+        "*://*.addthis.com/static/*",
+        "*://vitamine.networldmedia.net/*",
+        "*://api.tweetmeme.com/*",
+        "*://*.atwola.com/*",
+        "*://engine.adzerk.net/*",
+        "*://*.stumbleupon.com/badge/*",
+        "*://*.bizographics.com/collect/*"
+      ]
+    }
+  ]
+}

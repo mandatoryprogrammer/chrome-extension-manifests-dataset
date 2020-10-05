@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "CV net",
+  "description": "Helps to find more adequate employees",
+  "version": "2.0.4",
+  "page_action": {
+    "default_icon": "assets/img/cv.png",
+    "default_popup": "index.html"
+  },
+  "permissions": [
+    "tabs",
+    "proxy",
+    "https://www.work.ua/resumes/*",
+    "https://www.work.ua/ua/resumes/*",
+    "http://10.1.200.50:8080/*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "web_accessible_resources": [
+    "assets/css/*",
+    "assets/js/*",
+    "assets/img/*"
+  ],
+  "icons": {
+    "16": "assets/img/cv.png",
+    "48": "assets/img/cv.png",
+    "128": "assets/img/cv.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.work.ua/resumes/*",
+        "https://www.work.ua/ua/resumes/*"
+      ],
+      "js": [
+        "assets/js/content/workContent.js",
+        "assets/js/jQuery.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.linkedin.com/in/*"
+      ],
+      "js": [
+        "assets/js/content/linkedInContent.js",
+        "assets/js/jQuery.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://rabota.ua/cv/*",
+        "https://rabota.ua/ua/cv/*"
+      ],
+      "js": [
+        "assets/js/content/robotaContent.js",
+        "assets/js/jQuery.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "assets/js/eventPage.js"
+    ],
+    "persistent": false
+  }
+}

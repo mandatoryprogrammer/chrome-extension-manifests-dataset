@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Youtube Prime",
+  "version": "1.1",
+  "minimum_chrome_version": "23",
+  "description": "Removing the friction with using Youtube as a music player.",
+  "author": "Philippe Laferriere",
+  "icons": {
+    "128": "icon.png"
+  },
+  "browser_action": {
+    "default_title": "Shortcuts",
+    "default_icon": "icon.png",
+    "default_popup": "browser_action.html"
+  },
+  "commands": {
+    "play-pause": {
+      "suggested_key": {
+        "default": "Alt+P"
+      },
+      "description": "Play and pause the player."
+    },
+    "player-search": {
+      "suggested_key": {
+        "default": "Alt+S"
+      },
+      "description": "Search. Switches to the player tab if not already active selects the search bar."
+    },
+    "tab-switch": {
+      "suggested_key": {
+        "default": "Alt+L"
+      },
+      "description": "Leaps between the player and last visited tabs."
+    },
+    "toggle-active": {
+      "suggested_key": {
+        "default": "Alt+A"
+      },
+      "description": "Start/stop using the extension."
+    }
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "https://*.youtube.com/watch*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.youtube.com/*"
+      ],
+      "js": [
+        "youtube_script.js"
+      ]
+    }
+  ]
+}

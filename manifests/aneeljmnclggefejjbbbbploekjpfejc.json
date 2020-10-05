@@ -1,0 +1,36 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Anime Ratings",
+  "manifest_version": 2,
+  "version": "36",
+  "description": "Adds MyAnimeList ratings to corresponding Wikipedia pages and to Wikpedia lists of anime.",
+  "permissions": [
+    "http://myanimelist.net/api/anime/search.xml",
+    "https://myanimelist.net/api/anime/search.xml",
+    "http://stacked-crooked.googlecode.com/*"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "eventPage.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://en.wikipedia.org/*",
+        "https://en.wikipedia.org/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "content.js"
+      ]
+    }
+  ]
+}

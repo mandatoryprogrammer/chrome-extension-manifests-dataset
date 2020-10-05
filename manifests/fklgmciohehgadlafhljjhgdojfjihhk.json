@@ -1,0 +1,71 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "short_name": "saasrum",
+  "version": "1.3.2.4",
+  "description": "__MSG_appDesc__",
+  "default_locale": "en_US",
+  "browser_action": {
+    "default_icon": "css/icon-gray-32.png"
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "chrome_style": false,
+    "open_in_tab": true
+  },
+  "icons": {
+    "128": "css/icon-128.png",
+    "32": "css/icon-32.png"
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "css": [],
+      "js": [
+        "shared/constants.js",
+        "content_scripts/override.js",
+        "content_scripts/installation.js",
+        "content_scripts/utils.js",
+        "content_scripts/injection.js",
+        "content_scripts/mutationobserver.js",
+        "content_scripts/mutations.js",
+        "content_scripts/proxy.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "manifest_version": 2,
+  "permissions": [
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>"
+  ],
+  "optional_permissions": [
+    "notifications"
+  ],
+  "background": {
+    "scripts": [
+      "shared/constants.js",
+      "globalconfig-init-chrome.js",
+      "background/migrations.js",
+      "background/utils.js",
+      "background/csp.js",
+      "background/globalconfig.js",
+      "background/visitor.js",
+      "background/background.js",
+      "background/session-replay/utils.js",
+      "background/session-replay/storage.js",
+      "background/session-replay/permissions.js",
+      "background/session-replay/notifications.js",
+      "background/session-replay/proxy.js"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://js-cdn.dynatracelabs.com; object-src 'self'",
+  "storage": {
+    "managed_schema": "globalconfig_schema.json"
+  }
+}

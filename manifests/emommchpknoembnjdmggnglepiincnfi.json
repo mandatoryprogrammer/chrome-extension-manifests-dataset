@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Radio Nula",
+  "version": "0.2.3",
+  "manifest_version": 2,
+  "description": "Listen to www.radionula.com and find songs currently playing on YouTube in one click",
+  "browser_action": {
+    "default_popup": "index.html",
+    "default_icon": {
+      "19": "images/nula_ico16.png",
+      "38": "images/nula_ico38.png"
+    },
+    "default_title": "Radio Nula"
+  },
+  "permissions": [
+    "identity",
+    "*://www.youtube.com/*",
+    "webRequest",
+    "webRequestBlocking",
+    "http://www.radionula.com/"
+  ],
+  "oauth2": {
+    "client_id": "897029467528-60e73h5g73dee5v4ekr6k1h1qu9js71q.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/youtube"
+    ]
+  },
+  "background": {
+    "scripts": [
+      "background/audio.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.radionula.com/*"
+      ],
+      "js": [
+        "background/injected.js"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "images/nula_ico16.png",
+    "48": "images/nula_ico48.png",
+    "128": "images/nula_ico128.png"
+  },
+  "content_security_policy": "script-src 'self' https://apis.google.com https://www.youtube.com https://s.ytimg.com https://ssl.google-analytics.com; object-src 'self'"
+}

@@ -1,0 +1,71 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqX7Swr3Yzm9tqY477rnyuZ86cg7oXQtSjkhP4szOthVSwVLqJR1VKAfId+BIlyKeeBrLIldd+Ip7bYqfoZNyTPP0GapOTF117r+T69NJsWlY2P6hqlJLKO7AMfhV5XjgtAQRWo70IW4YwDKXUJAkqhrJiP6ZjRlfj+2MgVKZR0gWe9GF/2AEjdJ6YeijyjQQm7qTOfiz5ieHkMiQVuaFWM9djl8SH/CAiwWp2CQ6EI/BfHPcQN8bk6ZQazBu5DqIy0lAPsXjnKzZyVqr9Z7LmrClE2Ln0VuG37+ng/Q/82jLfICrboMxZz2eQczQ/axCEn7mCwFftKxdpW7HMjWJvQIDAQAB",
+  "name": "Better Voice Click-to-Call",
+  "description": "Make calls by clicking on any phone number or selecting from text.",
+  "version": "0.91",
+  "icons": {
+    "16": "img/icon-16.png",
+    "48": "img/icon-48.png",
+    "128": "img/icon-128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "img/icon-19.png",
+      "38": "img/icon-38.png"
+    },
+    "default_title": "Open Better Voice"
+  },
+  "permissions": [
+    "management",
+    "contextMenus",
+    "tabs",
+    "cookies",
+    "storage",
+    "*://*.bettervoice.com/*",
+    "*://localhost/*"
+  ],
+  "background": {
+    "scripts": [
+      "js/jquery.js",
+      "js/underscore.js",
+      "js/background.js"
+    ]
+  },
+  "options_ui": {
+    "page": "html/options.html",
+    "chrome_style": true
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/jquery.js",
+        "js/underscore.js",
+        "js/contentScript.js"
+      ],
+      "css": [
+        "css/contentScript.css"
+      ]
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://app.bettervoice.com/*",
+      "*://localhost/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "img/*.png"
+  ],
+  "applications": {
+    "gecko": {
+      "id": "extension@bettervoice.com"
+    }
+  }
+}

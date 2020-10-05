@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Twitter Web - Night Mode",
+  "version": "0.0.21",
+  "description": "Android/iOS like night mode for twitter web app",
+  "homepage_url": "https://github.com/tsriram/twitter-web-night-mode",
+  "background": {
+    "scripts": [
+      "js/twitter-night-mode-bg.js"
+    ]
+  },
+  "icons": {
+    "16": "images/icon16.png",
+    "32": "images/icon32.png",
+    "128": "images/icon128.png"
+  },
+  "page_action": {
+    "default_icon": "images/icon32.png",
+    "default_title": "Extension will be enabled when you open twitter.com"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://twitter.com/*",
+        "https://twitter.com/",
+        "https://twitter.com/i/cards/*"
+      ],
+      "js": [
+        "js/twitter-night-mode.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://twitter.com/"
+      ],
+      "js": [
+        "js/notification.js"
+      ],
+      "all_frames": false,
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "css/main.css"
+  ],
+  "permissions": [
+    "https://twitter.com/",
+    "tabs",
+    "storage"
+  ],
+  "author": "Sriram Thiagarajan"
+}

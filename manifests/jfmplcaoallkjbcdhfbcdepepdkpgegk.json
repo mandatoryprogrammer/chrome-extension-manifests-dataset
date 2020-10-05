@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "ONDiGO",
+  "description": "ONDiGO - Your CRM on Autopilot",
+  "version": "1.3",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "permissions": [
+    "gcm",
+    "storage",
+    "https://ondigo.me/*"
+  ],
+  "optional_permissions": [
+    "notifications"
+  ],
+  "browser_action": {
+    "default_icon": "icons/popup.png",
+    "default_popup": "popup.html"
+  },
+  "externally_connectable": {
+    "matches": [
+      "https://ondigo.me/*"
+    ]
+  },
+  "background": {
+    "scripts": [
+      "js/jquery-3.1.1.min.js",
+      "js/lodash.min.js",
+      "js/common.js",
+      "js/notifications.js",
+      "js/eventPage.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.salesforce.com/001*",
+        "*://*.salesforce.com/003*",
+        "*://*.salesforce.com/006*",
+        "*://*.salesforce.com/00Q*",
+        "*://*.lightning.force.com/one/one.app*"
+      ],
+      "js": [
+        "js/jquery-3.1.1.min.js",
+        "js/canvasjs.min.js",
+        "js/common.js",
+        "js/salesforce.js"
+      ],
+      "css": [
+        "css/salesforce.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "images/*"
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Minimal Productivity App",
+  "short_name": "MiniPro",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "Minimal Productivity App makes your work/study productive and easier. It helps you with Notes, Chats, Limit of Websites and more.",
+  "homepage_url": "http://niush.tk/minimal-productivity",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "page": "src/bg/background.html",
+    "persistent": true
+  },
+  "options_page": "src/options_custom/index.html",
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/icon19.png",
+      "48": "icons/icon48.png"
+    },
+    "default_popup": "src/page_action/page_action.html",
+    "default_title": "Productivity App - Settings"
+  },
+  "permissions": [
+    "storage",
+    "unlimitedStorage",
+    "bookmarks",
+    "contextMenus",
+    "history",
+    "idle",
+    "notifications",
+    "tabs",
+    "activeTab",
+    "geolocation",
+    "<all_urls>"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [
+        "src/inject/inject.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/jquery/jquery.min.js",
+        "js/jquery/jquery-ui.min.js",
+        "src/inject/inject.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://*.niush.tk https://stats.pusher.com https://pusher.com https://*.pusher.com; object-src 'self'; font-src 'self';",
+  "web_accessible_resources": [
+    "src/options_custom/index.html",
+    "icons/icon128.png",
+    "icons/material-icon.woff2",
+    "src/inject/floaters.html",
+    "src/inject/iframe/index.html",
+    "src/inject/iframe/css/style.css",
+    "js/functions/inject_chat.js",
+    "js/materialize/materialize.min.js",
+    "js/quill/quill.js",
+    "css/materialize.min.css",
+    "css/quill.snow.css",
+    "js/jquery/jquery.min.js",
+    "js/jquery/jquery-ui.min.js",
+    "src/inject/iframe/note.html"
+  ]
+}

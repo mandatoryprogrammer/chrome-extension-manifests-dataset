@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4uYt2PZv6Dmyyqxiyx40fS/2GU/MCZy1fr+bRpkBCdF4jx+aaHlK8IjoAvpg0Uqr001RPgtx17tfaxi1ov1Gb3XfIIGjjqC6zA+UibLn1I2MycKmNGXqz0i1E1Kf0ByNi2b8i6L0Jh5zFgMGjD2CHnEQcXPKa+UDHlhui8/nKJe/rEFtk+gskLA7FVz2jBAnHz2nHjAH5NMAbF+6OZjjEtqDCnNzR8limAWwTbelzb3VUdcYYzPlZjxLiMURvXjCu69Z3C9DNWYP/MaKb0DkYgspEOrUH6H1zlGzn+1qOxmubZM+ooIoMnnHhIvI1xLSoAKz6BhxFDoiNfQIusVPfQIDAQAB",
+  "name": "Gryffin Assistant",
+  "version": "1.17.1",
+  "manifest_version": 2,
+  "description": "Gryffin Assistant Extension",
+  "homepage_url": "http://www.gryffin.com",
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "Gryffin Assistant"
+  },
+  "background": {
+    "scripts": [
+      "src/browser_action/js/jquery.min.js",
+      "src/browser_action/js/frame.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "identity",
+    "tabs",
+    "storage",
+    "activeTab",
+    "unlimitedStorage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "js": [
+        "src/browser_action/js/jquery.min.js",
+        "src/inject/inject.js",
+        "src/browser_action/js/inboxsdk.js",
+        "src/browser_action/js/inbox.js"
+      ],
+      "css": [
+        "css/frame.css",
+        "src/browser_action/css/inbox.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "src/browser_action/browser_action.html",
+    "svg_icons/*",
+    "src/browser_action/iframe.html",
+    "src/gryffin_logo.png"
+  ],
+  "oauth2": {
+    "client_id": "390132442668-l2lnuhj13f60s01bts6ovansd433a0i8.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/userinfo.profile",
+      "https://mail.google.com"
+    ]
+  }
+}

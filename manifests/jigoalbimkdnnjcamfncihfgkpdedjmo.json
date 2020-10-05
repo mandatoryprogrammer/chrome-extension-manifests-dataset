@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Ebay DropShipping : order from Aliexpress",
+  "description": "Copy & Paste Shipping Data from Ebay to Aliexpress in 2 Clicks - For Free",
+  "version": "2.1.2.1",
+  "manifest_version": 2,
+  "permissions": [
+    "storage"
+  ],
+  "browser_action": {
+    "default_title": "Ebay to Aliexpress",
+    "default_icon": "icon.png"
+  },
+  "icons": {
+    "256": "icon.png"
+  },
+  "web_accessible_resources": [
+    "country_translations/*.json"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://shoppingcart.aliexpress.com/order/confirm_order.htm?*",
+        "https://shoppingcart.aliexpress.ru/order/confirm_order.htm?*"
+      ],
+      "js": [
+        "utils.js",
+        "page-ali.js"
+      ],
+      "css": [
+        "style.css"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "*://*.aliexpress.com/*",
+        "*://*.aliexpress.ru/*"
+      ],
+      "js": [
+        "aliAll.bundle.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://gslblui.ebay.com/gslblui/*",
+        "https://postage.ebay.de/psl/lblde_print*"
+      ],
+      "js": [
+        "utils.js",
+        "page-ebay.js"
+      ],
+      "css": [
+        "style.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

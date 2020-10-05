@@ -1,0 +1,69 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "homepage_url": "https://browsec.com/",
+  "default_locale": "en",
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "lodash.js",
+      "background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "images/icons/16x16/disabled.png",
+      "19": "images/icons/19x19/disabled.png",
+      "24": "images/icons/24x24/disabled.png",
+      "32": "images/icons/32x32/disabled.png",
+      "38": "images/icons/38x38/disabled.png"
+    },
+    "default_title": "__MSG_browser_action_inactive_title__",
+    "default_popup": "popup/popup.html"
+  },
+  "permissions": [
+    "proxy",
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>",
+    "background"
+  ],
+  "content_scripts": [
+    {
+      "js": [
+        "browsecSiteContentScript.js"
+      ],
+      "run_at": "document_start",
+      "matches": [
+        "https://browsec.com/*"
+      ]
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "timezoneChange.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "content_security_policy": "default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.google.com chrome:; font-src 'self'; object-src 'none'; connect-src 'self' https: http://*.aimcdn.me http://connectivitycheck.android.com http://*.lunrac.com http://*.postls.com http://*.tcdn.me http://example.com http://www.root-servers.org",
+  "version": "3.28.0",
+  "name": "Browsec VPN - Free VPN for Chrome",
+  "short_name": "Browsec VPN",
+  "description": "Browsec VPN is a Chrome VPN extension that protects your IP from Internet threats and lets you browse privately for free.",
+  "minimum_chrome_version": "49.0",
+  "optional_permissions": [
+    "chrome://favicon/",
+    "management",
+    "privacy",
+    "tabs"
+  ]
+}

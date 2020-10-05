@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Sonsiri - Web Surfing Assistant",
+  "description": "Sonsiri is your web surfing assistant",
+  "version": "1.0.6",
+  "background": {
+    "scripts": [
+      "./js/raven.min.js",
+      "./build/app.background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "./js/raven.min.js",
+        "./js/analytics.js",
+        "./build/app.init_script.js",
+        "./build/app.main.js"
+      ],
+      "css": [
+        "./build/main.css",
+        "./styles/init-style.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "images/*.png",
+    "images/icon/*.png",
+    "images/*.jpg",
+    "images/broswer_action/*.png",
+    "styles/*",
+    "js/*.js",
+    "build/*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.google-analytics.com; object-src 'self'",
+  "permissions": [
+    "activeTab",
+    "notifications",
+    "gcm",
+    "history",
+    "tabs",
+    "bookmarks",
+    "storage",
+    "cookies",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "icons": {
+    "16": "app_icon.png",
+    "48": "app_icon.png",
+    "128": "app_icon.png"
+  },
+  "browser_action": {
+    "default_icon": "app_icon.png"
+  }
+}

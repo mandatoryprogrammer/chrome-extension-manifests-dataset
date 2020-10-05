@@ -1,0 +1,87 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "划词翻译",
+  "description": "支持谷歌、百度、有道三大翻译和朗读引擎，可以方便的查看、复制和朗读不同引擎的翻译结果。",
+  "homepage_url": "https://hcfy.limingkai.cn",
+  "manifest_version": 2,
+  "version": "7.1.3",
+  "icons": {
+    "16": "logo.png",
+    "48": "logo.png",
+    "128": "logo.png"
+  },
+  "permissions": [
+    "<all_urls>",
+    "contextMenus",
+    "storage",
+    "clipboardWrite",
+    "clipboardRead",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "background": {
+    "scripts": [
+      "browser-polyfill.js",
+      "vendors-background-content-script-panel-popup-settings.js",
+      "vendors-background.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "browser-polyfill.js",
+        "vendors-background-content-script-panel-popup-settings.js",
+        "vendors-content-script-panel-popup-settings.js",
+        "content-script.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "logo.png",
+      "38": "logo.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Q",
+        "mac": "MacCtrl+Q"
+      }
+    },
+    "translate": {
+      "suggested_key": {
+        "default": "Alt+A"
+      },
+      "description": "翻译网页中选中的文本"
+    },
+    "panel": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+1"
+      },
+      "description": "打开独立翻译窗口",
+      "global": true
+    }
+  },
+  "web_accessible_resources": [
+    "youdao.ico",
+    "baidu.ico",
+    "google.ico",
+    "logo.png",
+    "pdf-viewer/*",
+    "panel.html",
+    "vendors-background-content-script-panel-popup-settings.js",
+    "vendors-content-script-panel-popup-settings.js",
+    "panel.css",
+    "panel.js"
+  ],
+  "incognito": "split",
+  "options_page": "settings.html"
+}

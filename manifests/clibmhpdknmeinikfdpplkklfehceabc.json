@@ -1,0 +1,102 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "PingSense",
+  "short_name": "PingSense Admob Sync",
+  "description": "This extension will create and sync PingSense adunits in your Admob account.",
+  "version": "1.1",
+  "browser_action": {
+    "default_icon": {
+      "16": "img/icon/icon-16.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "img/icon/icon-16.png",
+    "32": "img/icon/icon-32.png",
+    "64": "img/icon/icon-64.png",
+    "128": "img/icon/icon-128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "js/vendor/jquery.min.js",
+        "js/vendor/node_modules/airbrake-js/dist/client.js",
+        "js/airbrake.js",
+        "js/utils.js",
+        "js/login.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://console.developers.google.com/*"
+      ],
+      "js": [
+        "js/vendor/jquery.min.js",
+        "js/vendor/node_modules/airbrake-js/dist/client.js",
+        "js/airbrake.js",
+        "js/utils.js",
+        "js/modal.js"
+      ],
+      "css": [
+        "css/modal.console.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://apps.admob.com/*"
+      ],
+      "js": [
+        "js/vendor/jquery.min.js",
+        "js/vendor/node_modules/airbrake-js/dist/client.js",
+        "js/airbrake.js",
+        "js/utils.js",
+        "js/adunits.js",
+        "js/admob.js",
+        "js/admob_v2.js",
+        "js/modal.js",
+        "js/progressBar.js"
+      ],
+      "css": [
+        "css/modal.css"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/vendor/jquery.min.js",
+      "js/vendor/node_modules/airbrake-js/dist/client.js",
+      "js/airbrake.js",
+      "js/utils.js",
+      "js/bg.js"
+    ],
+    "persistent": false
+  },
+  "web_accessible_resources": [
+    "img/*",
+    "js/vendor/*",
+    "js/helpers/*"
+  ],
+  "permissions": [
+    "tabs",
+    "cookies",
+    "storage",
+    "notifications",
+    "webNavigation",
+    "identity",
+    "*://*/*",
+    "*://*.admob.com/*",
+    "*://console.developers.google.com/*",
+    "*://chrome.google.com/webstore/detail/pingsense/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.admob.com/*",
+      "*://console.developers.google.com/*",
+      "*://chrome.google.com/webstore/detail/pingsense/*"
+    ]
+  }
+}

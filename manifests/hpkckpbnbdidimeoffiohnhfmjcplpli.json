@@ -1,0 +1,69 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Pubo for Slack",
+  "version": "1.2.8",
+  "description": "Smarter, actionable slack notifications",
+  "icons": {
+    "16": "app-icon.png",
+    "48": "app-icon.png",
+    "128": "app-icon.png"
+  },
+  "permissions": [
+    "activeTab",
+    "https://*.slack.com/*",
+    "https://*.trello.com/*",
+    "https://github.com/*",
+    "https://app.pubo.co:8000/*",
+    "contextMenus",
+    "tabs",
+    "storage",
+    "webNavigation",
+    "cookies"
+  ],
+  "background": {
+    "scripts": [
+      "js/jquery.js",
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "css/pubo-css.css"
+      ],
+      "js": [
+        "js/jquery.js",
+        "js/chosen.proto.min.js",
+        "content-script.js",
+        "content-view.js",
+        "content-script-listener.js",
+        "pubo-events.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "browser_action": {
+    "default_title": "Smarter, actionable slack notifications",
+    "default_icon": "app-icon.png"
+  },
+  "externally_connectable": {
+    "ids": [
+      "hpkckpbnbdidimeoffiohnhfmjcplpli"
+    ],
+    "matches": [
+      "*://app.pubo.co/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "js/*",
+    "inject-me.js",
+    "css/*",
+    "images/*"
+  ],
+  "manifest_version": 2
+}

@@ -1,0 +1,75 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "name": "__MSG_extName__",
+  "description": "__MSG_extDescription__",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "img/icon16.png",
+      "24": "img/icon24.png",
+      "32": "img/icon32.png"
+    },
+    "default_popup": "html/popup.html"
+  },
+  "permissions": [
+    "identity",
+    "activeTab",
+    "tabs",
+    "storage",
+    "https://timecrowd.net/",
+    "https://timecrowd-assets.s3-ap-northeast-1.amazonaws.com/",
+    "https://ssl.google-analytics.com/",
+    "https://www.chatwork.com/",
+    "https://kcw.kddi.ne.jp/"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://timecrowd.net https://timecrowd-assets.s3-ap-northeast-1.amazonaws.com https://ssl.google-analytics.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.chatwork.com/*",
+        "https://kcw.kddi.ne.jp/*"
+      ],
+      "js": [
+        "js/namespace.js",
+        "js/keys.js",
+        "js/env.js",
+        "js/api.js",
+        "js/duration.js",
+        "js/annotator.js",
+        "js/content.js"
+      ],
+      "css": [
+        "css/content.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.chatwork.com/*",
+        "https://kcw.kddi.ne.jp/*"
+      ],
+      "js": [
+        "js/chatwork.js"
+      ],
+      "css": [
+        "css/chatwork.css"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/namespace.js",
+      "js/keys.js",
+      "js/env.js",
+      "js/api.js",
+      "js/event.js"
+    ],
+    "persistent": false
+  },
+  "version": "1.0.175"
+}

@@ -1,0 +1,33 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Automatically add UTMs to Pardot email URLs",
+  "description": "Quickly append Google Analytics UTM parameters to all URLs in Pardot email templates.",
+  "version": "0.0.0.3",
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "activeTab",
+    "declarativeContent",
+    "storage"
+  ],
+  "page_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "css": [
+        "lightbox.css"
+      ],
+      "matches": [
+        "https://pi.pardot.com/email/template/draft/edit/*"
+      ]
+    }
+  ]
+}

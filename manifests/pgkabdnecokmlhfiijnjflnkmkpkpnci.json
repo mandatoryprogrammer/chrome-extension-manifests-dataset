@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Play Music Extension",
+  "description": "This extension allows you to map keyboard controls to Google's Play Music.",
+  "version": "1.0.2",
+  "author": "Matt Gaunt",
+  "permissions": [
+    "tabs"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "scripts/key-handler.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://play.google.com/music/*"
+      ],
+      "js": [
+        "scripts/music-event-handler.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "scripts/bg-messaging-center.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "images/headphone-logo.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "48": "images/headphone-logo-48.png",
+    "128": "images/headphone-logo-128.png",
+    "256": "images/headphone-logo-256.png"
+  }
+}

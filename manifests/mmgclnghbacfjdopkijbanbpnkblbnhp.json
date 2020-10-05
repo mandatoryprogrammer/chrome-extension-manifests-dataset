@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "PoD(Simplest Website Blocker, Stay Focused)",
+  "author": "podapp.io",
+  "manifest_version": 2,
+  "version": "1.1.0",
+  "description": "Simplest website blocker, Stay focused and improve productivity. Stop procrastination once and for all!",
+  "icons": {
+    "32": "images/standard32.png",
+    "128": "images/standard128.png",
+    "512": "images/standard512.png"
+  },
+  "web_accessible_resources": [
+    "images/*.png",
+    "images/*.svg",
+    "fonts/*.ttf"
+  ],
+  "browser_action": {
+    "default_icon": "images/standard512.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://podapp.io/blocker*",
+        "http://localhost:8080/blocker*"
+      ],
+      "js": [
+        "content_blocker.js"
+      ]
+    }
+  ],
+  "options_page": "options.html",
+  "permissions": [
+    "storage",
+    "tabs",
+    "history",
+    "idle"
+  ],
+  "content_security_policy": "script-src 'self' https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com; object-src 'self'",
+  "externally_connectable": {
+    "matches": [
+      "http://localhost:8080/*",
+      "http://localhost:3000/*",
+      "https://podapp.io/*"
+    ]
+  }
+}

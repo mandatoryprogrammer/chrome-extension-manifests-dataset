@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "MonkiBu TV y Radios Online",
+  "version": "2.1.6",
+  "version_name": "2.1.6",
+  "manifest_version": 2,
+  "description": "Mira Televisión y escucha Radios Online, las mejores señales del mundo directamente en tu computador.",
+  "minimum_chrome_version": "61",
+  "background": {
+    "page": "background/Background.html"
+  },
+  "browser_action": {
+    "default_icon": "static_extension/tvIcon.png",
+    "default_popup": "pages/Popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.juicedev.me/*",
+        "*://*.monkibu.net/*"
+      ],
+      "js": [
+        "content_script/detectMonkibuExt.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.juicedev.me/*",
+      "*://*.monkibu.net/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "static/*",
+    "pages/*",
+    "script/*"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com https://s-static.ak.fbcdn.net https://*.twitter.com https://apis.google.com; object-src 'self'",
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "*://*.juicedev.me/*",
+    "*://*.monkibu.net/*"
+  ],
+  "optional_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "icons": {
+    "128": "static_extension/tv_128.png",
+    "256": "static_extension/tv_256.png"
+  }
+}

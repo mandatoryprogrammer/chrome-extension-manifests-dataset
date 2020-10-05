@@ -1,0 +1,118 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Purple Rails stable",
+  "short_name": "Purple Rails",
+  "version": "8.25",
+  "manifest_version": 2,
+  "description": "Encrypted archiving and bookmarking of web pages in the cloud!",
+  "options_page": "options.html",
+  "background": {
+    "page": "background.html",
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "extension-icon.png"
+    },
+    "default_title": "Purple Rails",
+    "default_popup": "popup.html"
+  },
+  "omnibox": {
+    "keyword": "purp"
+  },
+  "icons": {
+    "16": "extension-icon.png"
+  },
+  "web_accessible_resources": [
+    "Bubble.js",
+    "Bubble.css",
+    "bubble.html",
+    "no_preview.png"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.purplerails.com/stable/a/makepage/*"
+      ],
+      "js": [
+        "bubblemake.js",
+        "bubble_for_makepage.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.purplerails.com/stable/c/login"
+      ],
+      "js": [
+        "savekey.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.purplerails.com/stable/a/home"
+      ],
+      "js": [
+        "sjcl.js",
+        "csutils.js",
+        "pako.js",
+        "enc.js",
+        "decryptbridge.js",
+        "savekey2.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.purplerails.com/stable/a/makepage/*",
+        "https://www.purplerails.com/stable/a/list",
+        "https://www.purplerails.com/stable/a/list?*",
+        "https://www.purplerails.com/stable/a/search",
+        "https://www.purplerails.com/stable/a/editnote/*"
+      ],
+      "js": [
+        "sjcl.js",
+        "csutils.js",
+        "pako.js",
+        "enc.js",
+        "notes_utils.js",
+        "decryptbridge.js",
+        "dodecryptbridge.js",
+        "bubblemake.js",
+        "bubble_for_list.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.purplerails.com/stable/a/list",
+        "https://www.purplerails.com/stable/a/list?*",
+        "https://www.purplerails.com/stable/a/search"
+      ],
+      "js": [
+        "search_ui.js",
+        "uri.js",
+        "notes_ui.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.purplerails.com/stable/a/change_password"
+      ],
+      "js": [
+        "enc_currpasswd.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "tabs",
+    "unlimitedStorage",
+    "pageCapture",
+    "contextMenus",
+    "alarms",
+    "idle",
+    "<all_urls>"
+  ]
+}

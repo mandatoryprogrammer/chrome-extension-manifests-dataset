@@ -1,0 +1,81 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Mojenákupy.sk - cashback rozšírenie",
+  "version": "3.7",
+  "description": "Mojenákupy.sk Vás upozornia na možnosť získania spätnej odmeny z Vášho nákupu.",
+  "author": "ADV Europe, s.r.o.",
+  "homepage_url": "http://www.mojenakupy.sk",
+  "icons": {
+    "16": "assets/icon16.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "notifications",
+    "cookies",
+    "tabs",
+    "storage",
+    "alarms",
+    "<all_urls>"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "16": "assets/icon16.png",
+      "48": "assets/icon48.png",
+      "128": "assets/icon128.png"
+    },
+    "default_title": "Mojenakupy.sk - cashback",
+    "default_popup": "src/popup.html"
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "config.js",
+      "src/vendor/jquery-3.2.1.min.js",
+      "src/vendor/moment.min.js",
+      "src/vendor/psl.min.js",
+      "src/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.google.cz/*",
+        "https://www.google.sk/*",
+        "https://www.google.pl/*",
+        "https://www.google.com/*"
+      ],
+      "js": [
+        "config.js",
+        "src/vendor/jquery-3.2.1.min.js",
+        "src/vendor/moment.min.js",
+        "src/vendor/psl.min.js",
+        "src/google.js"
+      ],
+      "css": [
+        "src/google.css"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "config.js",
+        "src/vendor/jquery-3.2.1.min.js",
+        "src/vendor/moment.min.js",
+        "src/vendor/psl.min.js",
+        "src/content.js"
+      ],
+      "css": [
+        "src/content.css",
+        "src/font.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "assets/icon48.png"
+  ]
+}

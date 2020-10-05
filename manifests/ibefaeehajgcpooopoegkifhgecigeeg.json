@@ -1,0 +1,122 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "壹伴 · 小插件",
+  "description": "简单好用的公众号效率工具",
+  "version": "7.15.5",
+  "icons": {
+    "16": "assets/icons/icon.png",
+    "48": "assets/icons/icon.png",
+    "128": "assets/icons/icon.png"
+  },
+  "browser_action": {
+    "default_icon": "assets/icons/icon.png",
+    "default_popup": "pages/popup-page.html"
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "assets/libs/jquery.min.js",
+      "assets/libs/crypto-js-3.1.9-1.min.js",
+      "assets/js/background-script.js"
+    ]
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://yiban.io/*",
+      "*://bosshost/*",
+      "*://10.0.0.54/*",
+      "*://*.yiban.io/*",
+      "*://yb.miemie.la/*",
+      "*://demo.miemie.la/*",
+      "https://localhost:17070/*",
+      "http://localhost:7070/*",
+      "http://local.yiban.io:7070/*",
+      "*://mp.weixin.qq.com/*",
+      "*://tool-gifcrop.soogif.com/gifCrop/res/*",
+      "*://om.qq.com/article/articlePublish",
+      "*://baijiahao.baidu.com/*",
+      "*://card.weibo.com/article/v3/editor*",
+      "*://www.jianshu.com/*",
+      "*://zhuanlan.zhihu.com/write",
+      "*://mp.dayu.com/*",
+      "*://mp.toutiao.com/*",
+      "*://frame.getgetai.com/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mp.weixin.qq.com/*",
+        "*://*/*"
+      ],
+      "css": [
+        "assets/css/global.css"
+      ],
+      "js": [
+        "assets/libs/chuangkitApiV4.js",
+        "assets/libs/crypto-js-3.1.9-1.min.js",
+        "assets/libs/FotorFrame.min.js",
+        "assets/libs/jquery.min.js",
+        "assets/libs/jquery-qrcode.min.js",
+        "assets/libs/Readability.min.js",
+        "assets/libs/wangEditorForChat.min.js",
+        "assets/libs/emoji.min.js",
+        "assets/libs/highcharts.min.js",
+        "assets/libs/echarts.common.min.js",
+        "assets/libs/Sortable.min.js",
+        "assets/libs/jspdf.min.js",
+        "assets/js/content-script.js",
+        "assets/libs/medium-editor.min.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://mp.weixin.qq.com/*"
+      ],
+      "js": [
+        "assets/libs/html2canvas.min.js",
+        "assets/libs/jszip.min.js",
+        "assets/libs/jimp.min.js",
+        "assets/libs/datepicker.min.js",
+        "assets/libs/zh-CN.js",
+        "assets/libs/spectrum.min.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "*://mp.weixin.qq.com/cgi-bin/appmsg*"
+      ],
+      "js": [
+        "assets/libs/dark-mode.js",
+        "assets/libs/mammoth.browser.min.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    "templates/*.html",
+    "assets/*",
+    "*://yiban.io/*",
+    "*://yb.miemie.la/*",
+    "*://demo.miemie.la/*",
+    "*://local.yiban.io:7070/*"
+  ],
+  "permissions": [
+    "tabs",
+    "storage",
+    "unlimitedStorage",
+    "cookies",
+    "notifications",
+    "contextMenus",
+    "webRequest",
+    "webRequestBlocking",
+    "proxy",
+    "<all_urls>"
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "DeeToolbar",
+  "version": "1.1",
+  "description": "Adds a browser action icon to the toolbar to take control of deezer tab. ",
+  "icons": {
+    "48": "Content/play.png",
+    "96": "Content/play.png"
+  },
+  "browser_action": {
+    "default_icon": "Content/deezer-icon.png",
+    "default_title": "DeeToolbar",
+    "default_popup": "Popup/DeeCtrl-chrome.html"
+  },
+  "background": {
+    "scripts": [
+      "Background/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.deezer.com/*"
+      ],
+      "js": [
+        "content_scripts/jquery-2.1.4.min.js",
+        "content_scripts/jquery-ui.min.js",
+        "content_scripts/jquery-simulator.js",
+        "content_scripts/actions.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "*://*.deezer.com/*",
+    "tabs"
+  ],
+  "commands": {
+    "MediaPrevTrack": {
+      "description": "MediaPrevTrack",
+      "suggested_key": {
+        "default": "Ctrl+Left"
+      }
+    },
+    "MediaNextTrack": {
+      "description": "MediaNextTrack",
+      "suggested_key": {
+        "default": "Ctrl+Right"
+      }
+    },
+    "MediaPlayPause": {
+      "description": "MediaPlayPause",
+      "suggested_key": {
+        "default": "Ctrl+Up"
+      }
+    },
+    "MediaStop": {
+      "description": "MediaStop",
+      "suggested_key": {
+        "default": "Ctrl+Down"
+      }
+    }
+  }
+}

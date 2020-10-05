@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Odoo chrome extension",
+  "version": "1.17",
+  "description": "This extension exports profile data from linkedin page to Odoo",
+  "permissions": [
+    "tabs",
+    "https://www.linkedin.com/*",
+    "declarativeContent",
+    "storage",
+    "notifications",
+    "cookies",
+    "https://odoo-dev-docker.qarea.org/",
+    "http://207.180.243.86/*",
+    "https://odoo.qarea.org/",
+    "https://media.licdn.com/*",
+    "contextMenus"
+  ],
+  "manifest_version": 2,
+  "background": {
+    "page": "background/background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_popup": "index.html",
+    "default_title": "Open the popup",
+    "default_icon": {
+      "19": "images/logo19_black.png",
+      "38": "images/logo38_black.png",
+      "128": "images/logo128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.linkedin.com/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "content/choicesJS/choices.min.js",
+        "content/button.js",
+        "content/popup.js",
+        "content/table.js",
+        "content/loading.js",
+        "content/openOdooProfileBtn.js",
+        "content/helpers.js",
+        "content/comments.js",
+        "content/defaultBtn.js"
+      ],
+      "css": [
+        "content/choicesJS/choices.min.css",
+        "content/li.additional.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "images/*.png",
+    "images/*.svg",
+    "images/*.gif"
+  ],
+  "content_security_policy": "script-src 'self' 'sha256-GgRxrVOKNdB4LrRsVPDSbzvfdV4UqglmviH9GoBJ5jk='; object-src 'self'",
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": false
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "version": "1.5.2",
+  "manifest_version": 2,
+  "description": "__MSG_appDescription__",
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.google-analytics.com https://perkcanada.com; object-src 'self'",
+  "icons": {
+    "128": "icons/icon-128.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/icon-128.png",
+    "default_title": "__MSG_appName__"
+  },
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "js/vendor.js",
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://pluspets.com/*"
+      ],
+      "js": [
+        "js/vendor-content.js",
+        "js/content.js"
+      ],
+      "css": [
+        "css/content.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    "installed.html",
+    "newtab.html"
+  ],
+  "permissions": [
+    "cookies",
+    "activeTab",
+    "storage",
+    "*://pluspets.com/"
+  ],
+  "chrome_settings_overrides": {
+    "search_provider": {
+      "name": "Yahoo! Search",
+      "keyword": "Yahoo Search",
+      "favicon_url": "http://pluspets.com/ext/favicon.ico",
+      "search_url": "http://pluspets.com/ext/search/?searchTerms={searchTerms}",
+      "encoding": "UTF-8",
+      "is_default": true
+    }
+  }
+}

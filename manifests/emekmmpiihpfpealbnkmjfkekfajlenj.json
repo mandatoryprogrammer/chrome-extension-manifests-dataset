@@ -1,0 +1,67 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "MetaBackOffice tecnikè by Applyx srl",
+  "description": "Il plugin per estendere il tuo backoffice Assicurativo",
+  "version": "0.7.39",
+  "manifest_version": 2,
+  "icons": {
+    "16": "resources/MetaBackOffice/img/icon16.png",
+    "48": "resources/MetaBackOffice/img/icon48.png",
+    "128": "resources/MetaBackOffice/img/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "js/jquery-2.1.1.js",
+      "js/site.js",
+      "automa/scriptsMessageWrapper.js",
+      "automa/pluginFileSupport.js",
+      "automa/configSupport.js",
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "activeTab",
+    "http://*.siaspa.com/*",
+    "https://*.siaspa.com/*",
+    "https://*.axa-italia.it/*",
+    "https://*.anima.cloud/*",
+    "background",
+    "webNavigation",
+    "storage",
+    "notifications",
+    "tabs",
+    "nativeMessaging",
+    "clipboardRead",
+    "downloads"
+  ],
+  "browser_action": {
+    "default_title": "MetaBackOffice",
+    "default_icon": "resources/MetaBackOffice/img/icon.png",
+    "default_popup": "view/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.siaspa.com/*",
+        "https://*.siaspa.com/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "automa/scriptsMessageWrapper.js",
+        "automa/pluginFileSupport.js",
+        "automa/backgroundScriptSelector.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.axa-italia.it/*"
+      ],
+      "all_frames": true,
+      "run_at": "document_start",
+      "js": [
+        "automa/scriptsMessageWrapper.js",
+        "automa/scriptsUICapture.js"
+      ]
+    }
+  ]
+}

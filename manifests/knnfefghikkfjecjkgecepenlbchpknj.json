@@ -1,0 +1,75 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Digital ID",
+  "description": "__MSG_pw_app_description_digitalID__",
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "Webpack/Vendors1.js",
+      "Webpack/Vendors2.js",
+      "Webpack/Shared.js",
+      "Webpack/Background.js",
+      "app/build/background/pwBackground.js"
+    ]
+  },
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' 'unsafe-eval' blob:; object-src 'self'",
+  "browser_action": {
+    "default_icon": "/Webpack/Images/logoDisabled.png",
+    "default_title": "Digital ID 1.25.1.8",
+    "default_popup": "/app/build/main/main.html"
+  },
+  "icons": {
+    "128": "/Webpack/Images/logoPrimary.png"
+  },
+  "incognito": "spanning",
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": [
+        "*://api.digitalid.privowny.com/*",
+        "*://auth.digitalid.privowny.com/*"
+      ],
+      "js": [
+        "/Webpack/Vendors1.js",
+        "/Webpack/Vendors2.js",
+        "/Webpack/Shared.js",
+        "/Webpack/AuthContent.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "Webpack/Fonts/*",
+    "Webpack/Data/*",
+    "Webpack/Images/*",
+    "app/build/bar/css/common.css",
+    "Webpack/Styles/ContentStyles.css",
+    "Webpack/Styles/UIGlobals.css",
+    "app/images/bar/move.png",
+    "app/images/bar/move_bottom.png",
+    "app/images/trackers/close-icon.png",
+    "app/images/trackers/close-icon-hover.png",
+    "app/modules/core/content/promptService.html",
+    "app/libs/js/encrypt/rsa_async/async_rsa.js"
+  ],
+  "permissions": [
+    "*://*/*",
+    "<all_urls>",
+    "alarms",
+    "contextMenus",
+    "cookies",
+    "idle",
+    "management",
+    "notifications",
+    "privacy",
+    "storage",
+    "tabs",
+    "unlimitedStorage",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "version": "1.25.1.8",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAj4dtcqTYa1XyovaHzVJR0zk8XeYBpots7t2QL5xZ9L1eQYLcficCYxVQp/d5QkG4aOTBrnBhkhtzllNN+Ft0P311SazZgj3zN4UyI3jOnqIntZcqCn5Jkwht015mHrpT5+vpEf4gqrHXL+3FuWjzVCU7DoLNNN8+oYzFOSimqxv1dDDth2ij40IjlyD7mxKSBN1mIrWoaAN1haYLdxZd5jAdfd07f6zCCWdKImfC4mXdjO1D7Bo4GKUob+FiMoc/xsJlTsbGgTEQCNCYhucAuV468CqpaLUkVzc9lu0PXIZo7rsw4bTGaJ2ILr+Wed/VTuZu50m1kmWJiv9HVgsLfQIDAQAB"
+}

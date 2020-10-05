@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Musiqueue",
+  "version": "0.8",
+  "manifest_version": 2,
+  "description": "A Last.fm band pages bookmark tool to keep your next music discoveries in a safe, quiet place.",
+  "icons": {
+    "19": "icons/19.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "background": {
+    "page": "src/bg/background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icons/19.png",
+    "default_title": "Click to save your next music discovery!",
+    "default_popup": "src/browser_action/popup.html"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "/js/jquery.min.js",
+        "/js/content_script.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "tabs",
+    "storage",
+    "unlimitedStorage"
+  ],
+  "web_accessible_resources": [
+    "/js/jquery.min.js",
+    "/js/content_script.js"
+  ]
+}

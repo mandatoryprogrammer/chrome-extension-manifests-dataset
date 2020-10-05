@@ -1,0 +1,99 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Veeva Web2PDF",
+  "version": "19.3.5.0",
+  "description": "Create a PDF of your website that captures user interactions and links.",
+  "permissions": [
+    "activeTab",
+    "downloads",
+    "storage",
+    "tabs"
+  ],
+  "background": {
+    "scripts": [
+      "scripts/background.js",
+      "scripts/web2pdfRequestHandler.js",
+      "scripts/storage.js",
+      "resources/jquery.min.js"
+    ]
+  },
+  "browser_action": {
+    "default_title": "Web2pdf Hint Selector",
+    "default_icon": "./icons/V32.png",
+    "default_popup": "/templates/menu.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_globs": [
+        "http://127.0.0.1:8991/webcrawler/crawl/*",
+        "https://www.veevaweb2pdf.com/crawl/*",
+        "https://wwwqa.veevaweb2pdf.com/crawl/*",
+        "https://devweb2pdf.vaultpdf.com/crawl/*"
+      ],
+      "css": [
+        "styles/elementSelector.css"
+      ],
+      "js": [
+        "scripts/elementSelector.js",
+        "scripts/storage.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_globs": [
+        "http://127.0.0.1:8991/webcrawler/crawl/*",
+        "https://www.veevaweb2pdf.com/crawl/*",
+        "https://wwwqa.veevaweb2pdf.com/crawl/*",
+        "https://devweb2pdf.vaultpdf.com/crawl/*"
+      ],
+      "css": [
+        "styles/credentialValidationService.css"
+      ],
+      "js": [
+        "scripts/credentialValidationService.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_globs": [
+        "http://127.0.0.1:8991/webcrawler/crawl/*",
+        "https://www.veevaweb2pdf.com/crawl/*",
+        "https://wwwqa.veevaweb2pdf.com/crawl/*",
+        "https://devweb2pdf.vaultpdf.com/crawl/*"
+      ],
+      "css": [
+        "styles/hintLimitPopup.css"
+      ],
+      "js": [
+        "scripts/hintLimitService.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "icons": {
+    "16": "icons/V16.png",
+    "32": "icons/V32.png",
+    "48": "icons/V48.png",
+    "128": "icons/V128.png"
+  },
+  "web_accessible_resources": [
+    "templates/eventPopupFullV2.html",
+    "templates/credentialPopup.html",
+    "templates/hintLimitAlert.html"
+  ],
+  "manifest_version": 2,
+  "short_name": "Web2PDF",
+  "content_security_policy": "script-src 'self' 'sha256-NVNnzY/9KmXG9SU0c+Nx+aMoTa4CvaZr5T04EoPcels='; object-src 'self'"
+}

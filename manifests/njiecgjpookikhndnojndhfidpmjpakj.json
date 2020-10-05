@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Кнопка импорта резюме в Talantix",
+  "version": "4.9",
+  "description": "Кнопка импорта резюме с сайтов для поиска работы на Talantix.ru",
+  "author": "HeadHunter https://talantix.ru",
+  "icons": {
+    "128": "./icons/enabled128.png",
+    "48": "./icons/enabled48.png",
+    "32": "./icons/enabled32.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "<all_urls>",
+    "http://*/",
+    "https://*/",
+    "https://*/*"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "128": "./icons/enabled128.png",
+      "48": "./icons/enabled48.png",
+      "32": "./icons/enabled32.png"
+    },
+    "default_popup": "./popup/index.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "tab-styles.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://talantix.ru/*"
+      ],
+      "js": [
+        "content-script.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "shared/*"
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Scraping Tool",
+  "short_name": "Scraping Tool",
+  "version": "1.0.1",
+  "description": "Scrap an entire web page",
+  "background": {
+    "page": "background.html"
+  },
+  "manifest_version": 2,
+  "browser_action": {
+    "name": "Manipulate DOM",
+    "icons": [
+      "icons/iconInactive.png",
+      "icons/iconActive.png",
+      "icons/iconDefault"
+    ],
+    "default_popup": "background.html",
+    "default_icon": "icons/iconInactive.png"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "permissions": [
+    "tabs",
+    "<all_urls>",
+    "contextMenus",
+    "storage",
+    "downloads"
+  ],
+  "content_scripts": [
+    {
+      "js": [
+        "scrap.js"
+      ],
+      "run_at": "document_idle",
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ]
+    }
+  ]
+}

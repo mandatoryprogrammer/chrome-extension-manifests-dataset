@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Citrus: Get More Done",
+  "short_name": "Citrus",
+  "version": "2.3",
+  "description": "Vitamin C for your Productivity",
+  "author": "David G. Daniel",
+  "manifest_version": 2,
+  "icons": {
+    "16": "icons/16x16.png",
+    "24": "icons/24x24.png",
+    "32": "icons/32x32.png",
+    "48": "icons/48x48.png",
+    "64": "icons/64x64.png",
+    "128": "icons/128x128.png",
+    "256": "icons/256x256.png",
+    "512": "icons/512x512.png",
+    "1024": "icons/1024x1024.png"
+  },
+  "permissions": [
+    "<all_urls>",
+    "*://*/*",
+    "activeTab",
+    "alarms",
+    "tabs",
+    "cookies",
+    "contextMenus",
+    "unlimitedStorage",
+    "storage",
+    "notifications",
+    "webNavigation"
+  ],
+  "browser_action": {
+    "default_title": "Citrus",
+    "default_icon": "icons/64x64.png",
+    "default_popup": "pages/popup.html"
+  },
+  "background": {
+    "page": "pages/background.html"
+  },
+  "devtools_page": "pages/devtools.html",
+  "content_scripts": [
+    {
+      "js": [
+        "js/content.js"
+      ],
+      "run_at": "document_end",
+      "matches": [
+        "https://dashboard.citrus.app/*"
+      ],
+      "all_frames": true
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "web_accessible_resources": [
+    "panel.html",
+    "js/content.js"
+  ]
+}

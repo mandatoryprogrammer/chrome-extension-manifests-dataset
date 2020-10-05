@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "WebVault",
+  "version": "1.0.3",
+  "manifest_version": 2,
+  "description": "Generates and manages your website passwords safely",
+  "icons": {
+    "128": "img/icon.png"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "browser_action": {
+    "default_icon": {
+      "128": "img/icon.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "lib/jquery.min.js",
+      "lib/cryptojs.min.js",
+      "lib/msgpack.min.js",
+      "lib/vault.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "lib/jquery.min.js",
+        "content.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_idle"
+    }
+  ],
+  "permissions": [
+    "storage",
+    "contextMenus",
+    "tabs",
+    "identity",
+    "*://*/*"
+  ],
+  "applications": {
+    "gecko": {
+      "id": "webvault@zookatron.com"
+    }
+  }
+}

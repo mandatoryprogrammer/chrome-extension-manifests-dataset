@@ -1,0 +1,60 @@
+{
+  "update_url": "http://clients2.google.com/service/update2/crx",
+  "name": "Gimply",
+  "description": "Nice view of commits from all branches, issues and custom updates of any repository on github.com",
+  "icons": {
+    "128": "images/gimply128.png",
+    "48": "images/gimply48.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://github.com/*"
+      ],
+      "js": [
+        "js/lib/jquery-171.js",
+        "js/lib/underscore-min.js",
+        "js/lib/jquery-ui-1.8.20.custom.min.js",
+        "js/lib/event.js",
+        "js/lib/util.js",
+        "js/widgets.js",
+        "js/github_content.js",
+        "js/post_status_ui.js",
+        "js/gimply_ui.js",
+        "js/user_creds.js"
+      ],
+      "css": [
+        "style.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://gimply.herokuapp.com/login_success*"
+      ],
+      "js": [
+        "js/oauth_token_reader.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "page": "index.html"
+  },
+  "permissions": [
+    "https://api.github.com/",
+    "https://gimply.herokuapp.com/",
+    "unlimitedStorage",
+    "notifications"
+  ],
+  "version": "1.0",
+  "manifest_version": 2,
+  "web_accessible_resources": [
+    "images/gimply_logo_small.png",
+    "images/glyphicons-halflings.png",
+    "images/loading.gif",
+    "images/gimply_logo.png",
+    "images/gimply128.png",
+    "style.css"
+  ]
+}

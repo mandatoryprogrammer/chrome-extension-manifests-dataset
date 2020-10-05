@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Pipa",
+  "version": "0.0.0.3",
+  "description": "Pipa Chrome Extension",
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_title": "Pipa",
+    "default_icon": "assets/pipa-icon.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.tesco.com/*",
+        "https://www.sainsburys.co.uk/*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "content.css"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com/analytics.js https://www.pipa.pp.ua https://pipa.pp.ua; object-src 'self'",
+  "icons": {
+    "48": "assets/pipa-icon.png"
+  },
+  "permissions": [
+    "storage",
+    "identity",
+    "geolocation",
+    "activeTab",
+    "declarativeContent",
+    "tabs"
+  ]
+}

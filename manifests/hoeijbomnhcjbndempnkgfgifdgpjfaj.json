@@ -1,0 +1,43 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "JVC author finder",
+  "description": "Met en évidence l'auteur d'un topic de forum jeuxvideo.com",
+  "version": "1.0",
+  "manifest_version": 2,
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "background/main.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.jeuxvideo.com/forums/*",
+        "https://www.jeuxvideo.com/forums/*"
+      ],
+      "exclude_matches": [
+        "http://www.jeuxvideo.com/forums/0-*",
+        "https://www.jeuxvideo.com/forums/0-*"
+      ],
+      "js": [
+        "content/storage.js",
+        "content/main.js"
+      ]
+    }
+  ],
+  "options_ui": {
+    "page": "options/options.html",
+    "chrome_style": true
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "alarms"
+  ]
+}

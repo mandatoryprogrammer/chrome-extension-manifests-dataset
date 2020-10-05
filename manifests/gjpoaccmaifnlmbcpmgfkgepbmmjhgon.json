@@ -1,0 +1,72 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApoKJovMod2kauBeZqp+SDFukSd+BhsKa7ySsuLzIXTuOEIb2vK/aQn504ZSn/RaICSJFiTYGGJEqdertaneWJ3PXjhqiT3SFzG41AOrKOp9g5K8oI50qxL6HRDEj/g2dPFmxqWS00HxAInf/s+YZCE8sgI12xFaduYIaryCv8Vx8/TM5gaQhXwgqTvxtzuFxpRIp1Ol16A+GAK0pgV0Br6TvzyVBN2qttC5LyrPV20TWNy6j2I3KlrxSYvdqGIcStYFbLiMXc8IAn7UU/qr/2rR8YxGQ1WOSWT2AFTJLrvxUNBIKVue6iAerQ+sL93jpsm+bjg35sUqvdSut6umMhwIDAQAB",
+  "name": "LumWork Extension",
+  "short_name": "LumWork",
+  "version": "0.8.51",
+  "description": "Soon to be deprecated - Manage your corporate data and documentation within Google Apps, with advanced functionalities",
+  "permissions": [
+    "https://drive.google.com/*",
+    "https://work.lumapps.com/*",
+    "tabs",
+    "nativeMessaging",
+    "storage",
+    "identity",
+    "identity.email"
+  ],
+  "oauth2": {
+    "client_id": "490275249852-vqf54gmee53pcr0miq8lsdfn8a5ip88f.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/userinfo.profile",
+      "https://www.googleapis.com/auth/drive"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://drive.google.com/drive/*"
+      ],
+      "js": [
+        "common/module_loader/content_script_trigger_drive.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://work.lumapps.com/*"
+      ],
+      "js": [
+        "common/module_loader/content_script_trigger_lumwork.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "common/user/user_auth_background.js",
+      "common/module_loader/init_default_config.js",
+      "common/page_icon.js",
+      "common/module_loader/module_loader.js",
+      "common/lang.js",
+      "common/api/ajax_background.js",
+      "features/file_opener/run_host_app.js"
+    ],
+    "persistent": false
+  },
+  "page_action": {
+    "default_icon": "resources/img/icons/lumwork_icon_48.png"
+  },
+  "options_ui": {
+    "page": "common/options/options.html",
+    "chrome_style": true
+  },
+  "icons": {
+    "128": "resources/img/icons/lumwork_icon_48.png"
+  },
+  "web_accessible_resources": [
+    "features/file_move/picker_injected.js",
+    "resources/img/*",
+    "resources/vendor/multiple-select/multiple-select.png",
+    "resources/vendor/*"
+  ],
+  "manifest_version": 2
+}

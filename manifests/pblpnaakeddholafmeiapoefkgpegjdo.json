@@ -1,0 +1,64 @@
+{
+  "name": "__MSG_EXTENSION_NAME__",
+  "short_name": "Daraz Assistant",
+  "version": "2.2.0",
+  "manifest_version": 2,
+  "description": "__MSG_EXTENSION_DESCRIPTION__",
+  "homepage_url": "https://www.aliprice.com",
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "default_locale": "en",
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "permissions": [
+    "tabs",
+    "contextMenus",
+    "cookies",
+    "storage",
+    "notifications",
+    "*://*.aliprice.com/*",
+    "https://*/*",
+    "http://*/*",
+    "*://ssl.google-analytics.com/*"
+  ],
+  "browser_action": {
+    "default_title": "Daraz",
+    "default_popup": "popup/popup.html",
+    "default_icon": "icons/19.png"
+  },
+  "background": {
+    "page": "background/background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.daraz.pk/*",
+        "*://*.daraz.com.bd/*",
+        "*://*.daraz.lk/*",
+        "*://*.shop.com.mm/*",
+        "*://*.daraz.com.np/*"
+      ],
+      "js": [
+        "assets/js/vendor.js",
+        "assets/js/common.js",
+        "contentScript/contentScript.js"
+      ],
+      "css": [
+        "assets/css/common.css",
+        "assets/css/contentScript/contentScript.css"
+      ]
+    }
+  ],
+  "options_ui": {
+    "page": "options/options.html"
+  },
+  "web_accessible_resources": [
+    "_locales/**/*.json",
+    "assets/css/common.css",
+    "assets/css/contentScript/contentScript.css",
+    "assets/images/*"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

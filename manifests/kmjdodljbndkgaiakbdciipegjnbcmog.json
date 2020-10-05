@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "author": "デベロッパー",
+  "name": "はちまバスター",
+  "short_name": "はちバス",
+  "version": "0.19.0",
+  "description": "はちまやJINへのリンクを無効にします。",
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "icons": {
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "contextMenus"
+  ],
+  "background": {
+    "scripts": [
+      "/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "/content.css"
+      ],
+      "js": [
+        "/content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "browser_action": {
+    "default_icon": "icons/48.png",
+    "default_title": "はちまバスター",
+    "default_popup": "popup.html"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": false,
+    "open_in_tab": true
+  }
+}

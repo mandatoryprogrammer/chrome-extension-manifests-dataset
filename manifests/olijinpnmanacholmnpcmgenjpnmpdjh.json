@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "AutoChan",
+  "version": "0.8.4",
+  "description": "A 4chan.org extension for expanding images inline and automatically updating the page with new posts.",
+  "icons": {
+    "128": "icons/128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://boards.4chan.org/*/res/*"
+      ],
+      "run_at": "document_end",
+      "css": [
+        "override.css",
+        "autochan.css"
+      ],
+      "js": [
+        "init.js",
+        "lib/jquery.js",
+        "Regex.js",
+        "PrimaryDomModification.js",
+        "document_end.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://boards.4chan.org/*/res/*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "init.js",
+        "lib/jquery.js",
+        "Regex.js",
+        "ImageQueue.js",
+        "PrimaryDomModification.js",
+        "ResizeImage.js",
+        "ResizeAllImages.js",
+        "Updater.js",
+        "HttpErrorNotification.js",
+        "Main.js",
+        "document_idle.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "*://boards.4chan.org/"
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "E-SSOM Web SSO",
+  "version": "1.1.0.1",
+  "description": "E-SSOM Web SSO Chrome extension",
+  "short_name": "E-SSOM Web SSO",
+  "homepage_url": "https://plugins.tools4ever.com/files/Chrome",
+  "minimum_chrome_version": "18.0.1025.142",
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "nativeMessaging",
+    "http://*/",
+    "https://*/",
+    "privacy",
+    "unlimitedStorage",
+    "tabs"
+  ],
+  "background": {
+    "scripts": [
+      "Utils.js",
+      "jquery-1.11.0.min.js",
+      "Storage.js",
+      "WebConfig.js",
+      "ESSOMbg.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "safe.png",
+    "default_title": "E-SSOM Web SSO Configuration",
+    "default_popup": "SSOConfig.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*/*"
+      ],
+      "css": [
+        "style.css"
+      ],
+      "js": [
+        "Utils.js",
+        "Window.js",
+        "Storage.js",
+        "SSO.js",
+        "ESSOMcs.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "offline_enabled": true
+}

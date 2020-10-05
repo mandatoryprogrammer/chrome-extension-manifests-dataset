@@ -1,0 +1,37 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "ScriptMix",
+  "description": "Chrome extension for detecting mixed scripting vulnerabilities.",
+  "version": "1.0",
+  "background": {
+    "page": "background.html"
+  },
+  "permissions": [
+    "<all_urls>",
+    "webRequest",
+    "tabs"
+  ],
+  "browser_action": {
+    "default_icon": "images/good.png",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*"
+      ],
+      "js": [
+        "contentScriptHttps.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://*/*"
+      ],
+      "js": [
+        "contentScriptHttp.js"
+      ]
+    }
+  ]
+}

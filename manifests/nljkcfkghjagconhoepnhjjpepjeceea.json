@@ -1,0 +1,42 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Eckerd Schedule Advanced Search",
+  "version": "0.1.4",
+  "description": "Makes searching Eckerd courses more flexible.",
+  "author": "Raybb",
+  "browser_action": {
+    "default_title": "Use this to open the popup",
+    "default_popup": "popup/popup.html"
+  },
+  "icons": {
+    "128": "icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "tabs",
+    "http://numbersapi.com/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://class-schedule.apps2.eckerd.edu/course/search/results/*"
+      ],
+      "js": [
+        "jquery-2.2.3.min.js",
+        "dataTables.min.js",
+        "content.js"
+      ],
+      "css": [
+        "content.css"
+      ]
+    }
+  ],
+  "default_locale": "en",
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://code.jquery.com; object-src 'self'"
+}

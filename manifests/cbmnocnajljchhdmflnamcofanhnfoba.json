@@ -1,0 +1,85 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_extName__",
+  "short_name": "__MSG_extName__",
+  "description": "__MSG_extDescription__",
+  "version": "2.0.6",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "libs/jquery.min.js",
+      "libs/ga.js",
+      "js/background.js",
+      "js/gaConfig.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "img/icon-send16.png",
+      "24": "img/icon-send24.png",
+      "32": "img/icon-send32.png"
+    },
+    "default_title": "__MSG_extPopupName__",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "img/icon-send16.png",
+    "48": "img/icon-send48.png",
+    "128": "img/icon-send128.png"
+  },
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "matches": [
+        "https://www.shipped.io/*",
+        "https://shipped2.myshopify.com/*"
+      ],
+      "js": [
+        "libs/jquery.min.js",
+        "js/loginDetect.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": false,
+      "matches": [
+        "https://www.amazon.com/*",
+        "http://www.amazon.com/*",
+        "http://amazon.com/*",
+        "https://amazon.com/*"
+      ],
+      "css": [
+        "libs/bootstrap/css/bootstrap.min.css",
+        "css/app.css",
+        "css/buttons.css"
+      ],
+      "js": [
+        "libs/jquery.min.js",
+        "libs/ga.js",
+        "libs/jquery-3.3.1.slim.min.js",
+        "libs/bootstrap/js/popper.min.js",
+        "libs/bootstrap/js/bootstrap.min.js",
+        "js/content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "permissions": [
+    "tabs",
+    "https://www.amazon.com/*",
+    "http://www.amazon.com/*",
+    "http://amazon.com/*",
+    "https://amazon.com/*",
+    "https://www.shipped.io/*",
+    "https://shipped2.myshopify.com/*",
+    "storage",
+    "activeTab",
+    "webNavigation",
+    "background"
+  ],
+  "web_accessible_resources": [
+    "*.png"
+  ]
+}

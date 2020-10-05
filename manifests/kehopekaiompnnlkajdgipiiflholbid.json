@@ -1,0 +1,67 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "VideoTracker",
+  "description": "VTracker 1.4.1.0",
+  "version": "1.4.1.0",
+  "browser_action": {
+    "default_icon": "icon/icon19v.png",
+    "default_popup": "popup.html",
+    "default_title": "VTrack"
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "unlimitedStorage",
+    "http://*/*",
+    "https://*/*",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.youtube.com/*"
+      ],
+      "js": [
+        "util/jquery.min.js",
+        "js/youtube.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://www.flv2mp3.com/"
+      ],
+      "js": [
+        "util/jquery.min.js",
+        "js/flv2mp3.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://www.flv2mp3.com/download/*"
+      ],
+      "js": [
+        "util/jquery.min.js",
+        "js/download.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "options_page": "options.html",
+  "icons": {
+    "16": "icon/icon16v.png",
+    "19": "icon/icon19v.png",
+    "32": "icon/icon32v.png",
+    "48": "icon/icon48v.png",
+    "128": "icon/icon128v.png"
+  }
+}

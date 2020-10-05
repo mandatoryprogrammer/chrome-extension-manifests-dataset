@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "YoCoBoard: An Online Time Tracker",
+  "description": "Add YoCo to Chrome and track real time work hours and productivity right away.",
+  "version": "2.6.6",
+  "icons": {
+    "16": "images/inactive_yoco_16.png",
+    "48": "images/yoco48.png",
+    "128": "images/yoco128.png"
+  },
+  "browser_action": {
+    "default_icon": "images/inactive_yoco_16.png",
+    "default_title": "YoCoBoard Time tracker",
+    "default_popup": "html/yoco.html"
+  },
+  "options_page": "html/options.html",
+  "options_ui": {
+    "page": "html/options.html",
+    "chrome_style": true
+  },
+  "background": {
+    "scripts": [
+      "js/minifiedJS/jquery-3.4.1.min.js",
+      "js/background.js",
+      "js/minifiedJS/utils.min.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "css": [
+        "css/minifiedCSS/main.min.css"
+      ],
+      "matches": [
+        "*://*.my.yocoboard.com/dummy"
+      ],
+      "js": [
+        "js/minifiedJS/dom.min.js",
+        "js/minifiedJS/content.min.js",
+        "js/minifiedJS/options.min.js",
+        "js/minifiedJS/utils.min.js",
+        "js/minifiedJS/jquery-3.4.1.min.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://mystaging.yocoboard.com/*",
+      "https://my.yocoboard.com/*"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "identity"
+  ],
+  "optional_permissions": [
+    "*://*/"
+  ],
+  "oauth2": {
+    "client_id": "547495109623-1qbgtk0s409r44hpisem96q76rl8hd5r.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email"
+    ]
+  }
+}

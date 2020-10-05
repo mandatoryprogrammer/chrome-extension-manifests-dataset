@@ -1,0 +1,70 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "short_name": "__MSG_shortName__",
+  "version": "1.0.5",
+  "manifest_version": 2,
+  "description": "__MSG_appDescription__",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_title": "__MSG_shortName__",
+    "default_icon": {
+      "19": "icons/toolbar-icon-19.png",
+      "24": "icons/toolbar-icon-24.png",
+      "38": "icons/toolbar-icon-38.png",
+      "128": "icons/toolbar-icon-128.png"
+    }
+  },
+  "permissions": [
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "tabs",
+    "notifications",
+    "*://server1.glaxosoft.com/",
+    "*://mail.google.com/",
+    "*://inbox.google.com/",
+    "*://superinbox.glaxosoft.com/",
+    "*://superinboxglxsft.localtunnel.me/",
+    "*://*.googleusercontent.com/proxy/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://mail.google.com/*",
+        "*://inbox.google.com/*"
+      ],
+      "js": [
+        "scripts/vendor/inboxsdk.js",
+        "scripts/contentscript.js"
+      ],
+      "css": [
+        "styles/plugin.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "*://superinbox.glaxosoft.com/extension/*",
+        "*://superinboxglxsft.localtunnel.me/extension/*"
+      ],
+      "js": [
+        "scripts/auth.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "images/*"
+  ]
+}

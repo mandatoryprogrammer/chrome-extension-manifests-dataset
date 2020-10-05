@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_extName__",
+  "short_name": "Procurios",
+  "version": "2.1.0",
+  "description": "__MSG_extDescription__",
+  "minimum_chrome_version": "10.0",
+  "default_locale": "en",
+  "icons": {
+    "16": "assets/icon-active16.png",
+    "32": "assets/icon-active32.png",
+    "48": "assets/icon-active48.png",
+    "128": "assets/icon-active128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "assets/icon-inactive16.png",
+      "32": "assets/icon-inactive32.png",
+      "48": "assets/icon-inactive48.png"
+    },
+    "default_title": "__MSG_extName__",
+    "default_popup": "popup/html/popup-login.html"
+  },
+  "background": {
+    "scripts": [
+      "background/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "content/gmail.js"
+      ],
+      "matches": [
+        "*://mail.google.com/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "storage",
+    "*://*/*",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "web_accessible_resources": [
+    "assets/*",
+    "content/saveContactMoment.js"
+  ]
+}

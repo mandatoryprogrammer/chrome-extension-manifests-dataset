@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_app_name__",
+  "short_name": "Block Sender",
+  "description": "__MSG_appDesc__",
+  "version": "4.4.4",
+  "version_name": "4.4.4",
+  "default_locale": "en",
+  "minimum_chrome_version": "54",
+  "icons": {
+    "16": "images/app-icon-16.png",
+    "48": "images/app-icon-48.png",
+    "128": "images/app-icon-128.png"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "browser_action": {
+    "default_title": "Block Sender",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "content.js",
+        "content-injector.js"
+      ],
+      "css": [
+        "css/bootstrap.css",
+        "css/font-awesome.css",
+        "global.css",
+        "css/components.css"
+      ]
+    }
+  ],
+  "options_ui": {
+    "page": "settings.html",
+    "open_in_tab": true
+  },
+  "web_accessible_resources": [
+    "gmail.js",
+    "fonts/*",
+    "images/*",
+    "settings.html"
+  ],
+  "permissions": [
+    "*://*.blocksender.io/*",
+    "https://mail.google.com/*",
+    "*://*.googleusercontent.com/*",
+    "https://www.google-analytics.com/*",
+    "tabs",
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "notifications",
+    "alarms"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'"
+}

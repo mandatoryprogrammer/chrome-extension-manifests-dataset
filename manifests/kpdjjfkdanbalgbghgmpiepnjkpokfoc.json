@@ -1,0 +1,41 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Remove Retweets",
+  "description": "An Extension for removing retweets of given users on twitter.com",
+  "version": "1.0",
+  "permissions": [
+    "https://twitter.com/",
+    "storage",
+    "activeTab"
+  ],
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "img/icon48.png",
+      "38": "img/icon48.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "web_accessible_resources": [
+    "img/icon128.png",
+    "js/underscore-1.5.2.min.map"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://twitter.com/*"
+      ],
+      "js": [
+        "js/underscore-1.5.2.min.js",
+        "js/content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

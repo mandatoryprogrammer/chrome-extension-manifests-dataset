@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Ling.pl - Szybkie wyszukiwanie",
+  "version": "3.1",
+  "description": "Największy słownik internetowy",
+  "author": "Mateusz Solecki",
+  "icons": {
+    "128": "icons/128.png",
+    "48": "icons/48.png",
+    "16": "icons/16.png"
+  },
+  "background": {
+    "scripts": [
+      "lib/jquery-1.6.2.min.js",
+      "scripts/background.js",
+      "scripts/context_menu.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icons/16.png",
+    "default_popup": "html/popup.html"
+  },
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "permissions": [
+    "contextMenus",
+    "tabs"
+  ],
+  "web_accessible_resources": [
+    "css/img/*",
+    "css/*"
+  ],
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "lib/jquery-1.6.2.min.js",
+        "lib/jquery-ui-1.8.16.custom.min.js",
+        "scripts/content.js"
+      ],
+      "css": [
+        "css/content.css"
+      ]
+    }
+  ],
+  "options_page": "html/options.html"
+}

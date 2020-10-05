@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Toyota Nation Enhancement Suite",
+  "version": "2",
+  "manifest_version": 2,
+  "description": "Adds a few nifty features to toyota nation.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/camry48.png",
+    "128": "icons/camry128.png"
+  },
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": false
+  },
+  "page_action": {
+    "default_icon": "icons/icon19a.png",
+    "default_title": "Toyota Nation Enhancement Extension",
+    "default_popup": "src/page_action/page_action.html"
+  },
+  "permissions": [
+    "tabs",
+    "http://www.toyotanation.com/forum/*",
+    "http://www.benzworld.org/forums/*"
+  ],
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "http://www.toyotanation.com/forum/*",
+        "https://www.toyotanation.com/forum/*",
+        "http://www.benzworld.org/forums/*",
+        "https://www.benzworld.org/forums/*"
+      ],
+      "js": [
+        "src/inject/redditify.js",
+        "src/inject/fixConsole.js",
+        "src/inject/makeImgsZoomable.js",
+        "src/inject/changeModeratorTitleAndAvatar.js",
+        "src/inject/removeAdvertising.js",
+        "src/inject/sendMessageToBgPage.js",
+        "src/inject/injectCSS.js",
+        "src/inject/updateCamryForumLink.js",
+        "src/inject/scrollToTop.js",
+        "src/inject/endlessScrolling.js",
+        "src/inject/remove_ncode_moderateWarning.js",
+        "src/inject/fixTitles.js"
+      ],
+      "css": [
+        "src/inject/inject.css"
+      ]
+    }
+  ]
+}

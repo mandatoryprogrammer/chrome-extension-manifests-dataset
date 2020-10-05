@@ -1,0 +1,103 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_name__",
+  "short_name": "__MSG_shortName__",
+  "description": "__MSG_description__",
+  "version": "3.9.0",
+  "default_locale": "en",
+  "minimum_chrome_version": "64",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjWvzwaRsYG2l3QkI13CVqX6qPcoih4cLb0VK9VQAXjEc0fvfw+e/XHXK7VCfVPK+ndcAafjUCvsghix2VQHquI+JJtDCs6tLU+Ba+PIA7IdA8MfQC8Dk2tihWD2T478bEQax0+6QkgZO4+M9SDs5CKjMikxr1Z9R4Lxdm1ToLx444c9SRI3ARytO0tJm25DovXL3ceIfZps+F0OqVwoeGyQx0FYXFGHP+OMmAgBrjpg4yCaSYAedWzRC12PxvvplmvVvBWZ1pqw8gTh+B/rwN/0fa9lkUC1tc/1nCHSHoFqnOyYl84pgI/i8fiQ5GlDG8X/2+eQhdTduY1DpcKz5vQIDAQAB",
+  "background": {
+    "page": "dist/views/background.html",
+    "persistent": true
+  },
+  "icons": {
+    "16": "assets/icon-16.png",
+    "48": "assets/icon-48.png",
+    "128": "assets/icon-128.png"
+  },
+  "browser_action": {
+    "default_title": "__MSG_btnHover__",
+    "default_icon": "assets/icon-128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "match_about_blank": true,
+      "run_at": "document_start",
+      "css": [
+        "assets/font-face-hack.css"
+      ],
+      "js": [
+        "dist/page.js"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "dist/frame-beacon.js"
+      ],
+      "match_about_blank": true,
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://www.lipsurf.com/updates/*"
+      ],
+      "js": [
+        "dist/opened-updates.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://www.redditmedia.com/*",
+        "https://www.redditmedia.com/*"
+      ],
+      "js": [
+        "dist/reddit-media-frame-beacon.js"
+      ],
+      "css": [
+        "assets/iframe-styles.css"
+      ],
+      "all_frames": true
+    }
+  ],
+  "author": "Miko Borys",
+  "chrome_url_overrides": {
+    "newtab": "dist/views/new-tab.html"
+  },
+  "options_page": "dist/views/options.html",
+  "permissions": [
+    "*://*/*",
+    "tabs",
+    "debugger",
+    "notifications",
+    "tts",
+    "storage"
+  ],
+  "optional_permissions": [
+    "clipboardRead",
+    "clipboardWrite"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com https://apis.google.com/ https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com https://js.stripe.com 'unsafe-eval' blob:; object-src 'self'",
+  "web_accessible_resources": [
+    "dist/modules/*.js",
+    "dist/styles/base.css",
+    "assets/barlow-latin.woff2",
+    "assets/barlow-latin-ex.woff2",
+    "assets/barlow-latin-200.woff2",
+    "assets/barlow-latin-ex-200.woff2",
+    "assets/barlow-latin-500.woff2",
+    "assets/barlow-latin-ex-500.woff2",
+    "worker/downsampling_worker.js",
+    "worker/porcupine_worker.js",
+    "worker/porcupine.js",
+    "worker/pv_porcupine.js"
+  ]
+}

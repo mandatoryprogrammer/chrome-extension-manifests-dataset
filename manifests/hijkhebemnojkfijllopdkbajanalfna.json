@@ -1,0 +1,107 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Comment Protector",
+  "version": "1.1.1",
+  "description": "Sichern Sie Ihre Kommentare aus Onlinemedien und veroeffentlichen Sie sie auf https://dieandereseite.me",
+  "browser_action": {
+    "default_icon": "icons/icon-19.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "48": "icons/icon-48.png",
+    "96": "icons/icon-96.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.derstandard.at/*"
+      ],
+      "js": [
+        "jquery.min.js",
+        "smc.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://derstandard.at/userprofil/postings?sortMode=1&groupMode=2&pageNumber=1"
+      ],
+      "js": [
+        "jquery.min.js",
+        "k_seite1.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://derstandard.at/userprofil/postings?sortMode=1&groupMode=2&pageNumber=2"
+      ],
+      "js": [
+        "jquery.min.js",
+        "k_seite2.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://derstandard.at/userprofil/postings?sortMode=1&groupMode=2&pageNumber=3"
+      ],
+      "js": [
+        "jquery.min.js",
+        "k_seite3.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://derstandard.at/userprofil/persoenliches"
+      ],
+      "js": [
+        "jquery.min.js",
+        "getUsermail.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://derstandard.at/userprofil/postings"
+      ],
+      "js": [
+        "jquery.min.js",
+        "getUsernamePermalink.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://derstandard.at/2*"
+      ],
+      "js": [
+        "jquery.min.js",
+        "getUsername.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "scripts": [
+      "jquery.min.js",
+      "bg.js"
+    ]
+  },
+  "permissions": [
+    "http://dieandereseite.me/*",
+    "https://dieandereseite.me/*",
+    "storage",
+    "tabs"
+  ],
+  "web_accessible_resources": [
+    "/icons/*.png"
+  ]
+}

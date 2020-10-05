@@ -1,0 +1,91 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "WowApp SmartWeb",
+  "description": "WowApp brings you 'Smart Web', with a host of different ways to receive wowcoins.",
+  "version": "4.5.0",
+  "icons": {
+    "16": "/data/img/icon-16.png",
+    "32": "/data/img/icon-32.png",
+    "64": "/data/img/icon-64.png"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "topSites",
+    "cookies",
+    "alarms",
+    "<all_urls>"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "16": "/data/img/icon-grey-16.png",
+      "32": "/data/img/icon-grey-32.png",
+      "64": "/data/img/icon-grey-64.png"
+    }
+  },
+  "options_ui": {
+    "page": "/data/options.html"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "/data/js/document-messages.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_end",
+      "match_about_blank": false
+    },
+    {
+      "run_at": "document_end",
+      "js": [
+        "/data/js/jquery.js",
+        "/data/js/favorites.js",
+        "/data/js/shop-selector.js"
+      ],
+      "css": [
+        "/data/css/checkbox.css",
+        "/data/css/modal.css"
+      ],
+      "matches": [
+        "*://smartweb.wowapp.com/*",
+        "*://prelive-smartweb.wowapp.com/*",
+        "*://dev-smartweb.wowapp.com/*"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "js": [
+        "/data/js/jquery.js",
+        "/data/js/shop.js"
+      ],
+      "css": [
+        "/data/css/shop.css"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "match_about_blank": false
+    }
+  ],
+  "background": {
+    "scripts": [
+      "/data/js/jquery.js",
+      "/data/js/background.js"
+    ]
+  },
+  "chrome_url_overrides": {
+    "newtab": "/data/redirect.html"
+  },
+  "web_accessible_resources": [
+    "data/css/*.*",
+    "data/img/*.*",
+    "data/js/jquery.js",
+    "data/js/favorites.js",
+    "data/js/shop-selector.js",
+    "data/js/shop.js",
+    "data/js/document-messages.js"
+  ]
+}

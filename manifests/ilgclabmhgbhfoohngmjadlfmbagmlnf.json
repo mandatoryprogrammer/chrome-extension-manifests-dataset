@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_extName__",
+  "description": "__MSG_extDesc__",
+  "version": "4.0.28",
+  "default_locale": "en",
+  "options_page": "options.html",
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": "assets/images/logo.png"
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*",
+        "*://*/options.html"
+      ],
+      "js": [
+        "js/inboxsdk.js",
+        "js/content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "icons": {
+    "16": "assets/images/icon16.png",
+    "48": "assets/images/icon48.png",
+    "128": "assets/images/icon128.png"
+  },
+  "permissions": [
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "contextMenus",
+    "https://mail.google.com/*",
+    "https://inbox.google.com/*",
+    "*://*.api-us1.com/lt.php?*",
+    "*://*.googleusercontent.com/*"
+  ],
+  "web_accessible_resources": [
+    "img/*",
+    "js/*",
+    "html/*",
+    "assets/*",
+    "favicon.ico",
+    "js/analytics.js"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://ssl.google-analytics.com; object-src 'self'",
+  "manifest_version": 2
+}

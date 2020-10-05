@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "infoPat 專利易讀器",
+  "version": "2.0.3",
+  "description": "凡網路資料具專利號者，主動建立連結，提供專利完整資料，掌握專利情報。Actively provides patent on web data with patent numbers, giving control over patent information",
+  "author": "Learningtech corp.",
+  "short_name": "infoPat",
+  "icons": {
+    "16": "src/icon/icon16.png",
+    "48": "src/icon/icon48.png",
+    "128": "src/icon/icon128.png"
+  },
+  "permissions": [
+    "nativeMessaging",
+    "activeTab",
+    "tabs",
+    "background"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "src/icon/icon16.png",
+      "38": "src/icon/icon48.png"
+    },
+    "default_title": "infoPat 專利易讀器",
+    "default_popup": "src/html/popupList.html"
+  },
+  "background": {
+    "scripts": [
+      "src/js/background.js",
+      "src/js/jquery-1.11.3.min.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "src/js/jquery-1.11.3.min.js",
+        "src/js/InfoPat.js",
+        "src/js/rules.js"
+      ],
+      "css": [
+        "src/css/InfoPat.css"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "*://*.webpat.tw/*",
+        "*://*.ltc.tw/*",
+        "*://*.webpatimage.twipr.com/*"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

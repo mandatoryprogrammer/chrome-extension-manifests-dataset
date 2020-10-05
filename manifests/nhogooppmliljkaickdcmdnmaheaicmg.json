@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Fetching Browser History Search",
+  "short_name": "Fetching.io",
+  "version": "2.4.0",
+  "manifest_version": 2,
+  "description": "Supercharge your Chrome history. Fetching is your personal Google for all the web pages you've seen.",
+  "homepage_url": "http://fetching.io",
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "app/background.js"
+    ],
+    "persistent": true
+  },
+  "options_page": "app/options.html",
+  "page_action": {
+    "default_icon": {
+      "19": "icons/star-full-19.png",
+      "38": "icons/star-full-38.png"
+    },
+    "default_title": "Bookmark",
+    "default_popup": "app/popup.html"
+  },
+  "omnibox": {
+    "keyword": "f"
+  },
+  "icons": {
+    "16": "icons/logo-16.png",
+    "48": "icons/logo-48.png",
+    "128": "icons/logo-128.png"
+  },
+  "permissions": [
+    "*://*/*",
+    "storage",
+    "tabs"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://app.fetching.io/*",
+      "*://local.fetching.io/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "app/inject.js"
+      ],
+      "css": [
+        "app/related/google.css"
+      ]
+    }
+  ]
+}

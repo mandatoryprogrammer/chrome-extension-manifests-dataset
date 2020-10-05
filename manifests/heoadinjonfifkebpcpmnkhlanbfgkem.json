@@ -1,0 +1,66 @@
+{
+  "description": "Chrome extension for Green Screens Web Terminal to improve user experience by enabling local user settings.",
+  "author": "Green Screens Ltd.",
+  "name": "5250 Web Terminal Add-on",
+  "homepage_url": "http://www.greenscreens.io",
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "4.2.3.444",
+  "manifest_version": 2,
+  "icons": {
+    "128": "icons/icon128.png",
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png"
+  },
+  "permissions": [
+    "nativeMessaging",
+    "tabs",
+    "storage",
+    "activeTab",
+    "contextMenus",
+    "notifications",
+    "pageCapture",
+    "http://*/lite/*",
+    "https://*/lite/*"
+  ],
+  "omnibox": {
+    "keyword": "webterm"
+  },
+  "background": {
+    "page": "src/bg/build/background.html",
+    "persistent": true
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "js": [
+        "src/inject/less.js",
+        "src/inject/colors.js",
+        "src/bridge/Constants.js",
+        "src/bridge/Options.js",
+        "src/bridge/Messenger.js",
+        "src/bridge/Messenger.Browser.js",
+        "src/bridge/Messenger.Extension.js"
+      ],
+      "matches": [
+        "http://*/lite/*",
+        "https://*/lite/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "options_page": "options/index.html",
+  "options_ui": {
+    "open_in_tab": true,
+    "chrome_style": false,
+    "page": "options/index.html"
+  },
+  "page_action": {
+    "default_icon": "icons/icon19.png",
+    "default_popup": "src/popup/index.html",
+    "default_title": "Macros"
+  },
+  "web_accessible_resources": [
+    "src/colors/params.less",
+    "src/colors/style.less"
+  ]
+}

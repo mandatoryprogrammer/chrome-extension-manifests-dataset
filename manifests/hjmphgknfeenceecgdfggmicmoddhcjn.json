@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "background": {
+    "scripts": [
+      "scripts/core/background.js"
+    ]
+  },
+  "name": "Crypto News Updates",
+  "short_name": "CryptoNews",
+  "offline_enabled": true,
+  "icons": {
+    "128": "icons/icon128.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "16": "icons/icon16.png"
+  },
+  "web_accessible_resources": [
+    "icons/*"
+  ],
+  "description": "Cryptocurrency News - From your new tab page!",
+  "version": "33.1.1",
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end",
+      "all_frames": false,
+      "js": [
+        "scripts/core/content.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.todaysnewsupdates.co/*"
+      ],
+      "run_at": "document_end",
+      "all_frames": false,
+      "js": [
+        "scripts/core/distribution-content.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "history",
+    "cookies",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "chrome_url_overrides": {
+    "newtab": "html/bitcoin/index.html"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "YoutubeQueue",
+  "description": "A persistant, auto-playing queue for streaming Youtube videos.",
+  "version": "1.2",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "https://www.youtube.com/watch?v=*"
+  ],
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "/js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/watch?v=*"
+      ],
+      "css": [
+        "/css/background.css"
+      ],
+      "js": [
+        "/js/jquery-3.1.1.min.js",
+        "/js/content.js"
+      ]
+    }
+  ],
+  "icons": {
+    "64": "images/icon64.png",
+    "32": "images/icon32.png",
+    "16": "images/icon16.png",
+    "24": "images/icon24.png"
+  },
+  "page_action": {
+    "default_title": "YoutubeQueue",
+    "default_popup": "popup.html"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "web_accessible_resources": [
+    "/js/playerinjection.js"
+  ]
+}

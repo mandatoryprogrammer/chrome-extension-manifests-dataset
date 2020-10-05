@@ -1,0 +1,41 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "youtube music playlist",
+  "version": "0.5.0.2",
+  "manifest_version": 2,
+  "description": "youtubeのプレイリストを便利に。 Make a youtube play list more convenient.",
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "permissions": [
+    "storage",
+    "unlimitedStorage",
+    "tabs"
+  ],
+  "browser_action": {
+    "default_icon": "icons/16.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "eventPage.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "common.js",
+        "content_scripts.js",
+        "player.js"
+      ]
+    }
+  ],
+  "options_page": "main_page.html"
+}

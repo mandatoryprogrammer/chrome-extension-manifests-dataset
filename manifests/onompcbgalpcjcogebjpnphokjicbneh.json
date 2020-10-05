@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Glyph Imager - turn glyphs to images",
+  "version": "0.0.10",
+  "description": "Turn any font glyph into a png image",
+  "icons": {
+    "16": "images/logo_128.png",
+    "48": "images/logo_128.png",
+    "128": "images/logo_128.png"
+  },
+  "browser_action": {
+    "default_icon": "images/logo_128.png",
+    "default_title": "Click here and hover over the glyph to save it"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "libs/jquery.min.js",
+        "libs/handlebars.js",
+        "content.js"
+      ],
+      "css": [
+        "views/canvas.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js",
+      "tracker.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "<all_urls>",
+    "contextMenus",
+    "downloads"
+  ],
+  "web_accessible_resources": [
+    "*"
+  ],
+  "content_security_policy": "script-src 'self' https://cdn.mxpnl.com/; object-src 'self'"
+}

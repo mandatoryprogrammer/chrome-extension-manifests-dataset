@@ -1,0 +1,70 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "minimum_chrome_version": "32",
+  "name": "Search Selector",
+  "description": "Manage your search results, your way.",
+  "homepage_url": "https://search-selector.co",
+  "version": "2.0.3",
+  "icons": {
+    "16": "images/icons/16.png",
+    "32": "images/icons/32.png",
+    "48": "images/icons/48.png",
+    "64": "images/icons/64.png",
+    "128": "images/icons/128.png",
+    "256": "images/icons/256.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "images/icons/16.png",
+      "32": "images/icons/32.png",
+      "48": "images/icons/48.png",
+      "64": "images/icons/64.png",
+      "128": "images/icons/128.png",
+      "256": "images/icons/256.png"
+    }
+  },
+  "chrome_settings_overrides": {
+    "search_provider": {
+      "is_default": true,
+      "encoding": "UTF-8",
+      "favicon_url": "http://search-selector.co/assets/img/favicon.ico",
+      "keyword": "ss",
+      "name": "Selected Search",
+      "search_url": "https://search.search-selector.co/b?query={searchTerms}&om=1",
+      "suggest_url": "https://search.search-selector.co/suggest/b?query={searchTerms}"
+    }
+  },
+  "content_security_policy": "script-src 'self' https://query.yahooapis.com/ https://ipinfo.io/; object-src 'self'",
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "libs/jquery.js",
+      "libs/deskmetrics.js",
+      "src/config.js",
+      "src/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "src/content.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "images/logo.png"
+  ],
+  "permissions": [
+    "*://*/",
+    "storage",
+    "unlimitedStorage",
+    "privacy",
+    "cookies",
+    "tabs"
+  ],
+  "chrome_url_overrides": {}
+}

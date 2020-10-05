@@ -1,0 +1,73 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Deník.cz",
+  "version": "2.0.3",
+  "description": "Najděte nejnovější a nejzajímavější zprávy co nejrychleji. Stáhněte si rozšíření Deníku ještě dnes a buďte každý den v obraze.",
+  "icons": {
+    "128": "images/icon128.png"
+  },
+  "applications": {
+    "gecko": {
+      "id": "rozsireni@denik.cz"
+    }
+  },
+  "browser_action": {
+    "chrome_style": true,
+    "browser_style": true,
+    "default_icon": {
+      "16": "images/icon16.png",
+      "32": "images/icon32.png"
+    },
+    "default_title": "Deník.cz",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://search.seznam.cz/*",
+        "https://www.google.com/search*",
+        "https://www.google.cz/search*"
+      ],
+      "js": [
+        "search.bundle.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://*.denik.cz/*"
+      ],
+      "js": [
+        "detect.bundle.js"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "*://*.denik.cz/"
+      ],
+      "js": [
+        "inject.bundle.js"
+      ]
+    }
+  ],
+  "homepage_url": "https://denik.cz",
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "web_accessible_resources": [
+    "images/*",
+    "resources/*",
+    "libs/*"
+  ],
+  "permissions": [
+    "storage",
+    "alarms",
+    "tabs",
+    "<all_urls>"
+  ]
+}

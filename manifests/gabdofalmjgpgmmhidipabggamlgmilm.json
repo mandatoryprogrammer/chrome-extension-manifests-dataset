@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Fill Your Funnel",
+  "description": "Get inspired by your favourite marketers and content creators saving posts from their social platforms",
+  "version": "0.2.3",
+  "manifest_version": 2,
+  "icons": {
+    "16": "icons/icon_16.png",
+    "48": "icons/icon_48.png",
+    "128": "icons/icon_128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "unlimitedStorage",
+    "http://funnel.test/api/*",
+    "https://app.fillyourfunnel.com/api/*",
+    "*://facebook.com/*",
+    "*://*.facebook.com/*",
+    "*://twitter.com/*",
+    "*://*.twitter.com/*",
+    "*://youtube.com/*",
+    "*://*.youtube.com/*",
+    "*://instagram.com/*",
+    "*://*.instagram.com/*"
+  ],
+  "browser_action": {
+    "default_title": "Fill Your Funnel"
+  },
+  "web_accessible_resources": [
+    "save-button/*",
+    "app/*"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "*://facebook.com/*",
+        "*://*.facebook.com/*",
+        "*://twitter.com/*",
+        "*://*.twitter.com/*",
+        "*://youtube.com/*",
+        "*://*.youtube.com/*",
+        "*://instagram.com/*",
+        "*://*.instagram.com/*"
+      ],
+      "js": [
+        "content-script.js"
+      ],
+      "css": [
+        "content-script.css"
+      ]
+    }
+  ]
+}

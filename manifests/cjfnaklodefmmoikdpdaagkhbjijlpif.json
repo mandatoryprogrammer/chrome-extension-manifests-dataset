@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Chrome tab explorer",
+  "short_name": "Tab explorer",
+  "description": "Navigate through the tabs by searching keywords in the page title or url.  Also shows the tab count.",
+  "version": "0.4",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html",
+    "default_title": "Find tabs by searching keywords in the title or url.  Shortcut: Alt+T."
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "bookmarks",
+    "https://ajax.googleapis.com/"
+  ],
+  "content_scripts": [
+    {
+      "js": [
+        "popup.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "eventPage.js"
+    ],
+    "persistent": false
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "windows": "Alt+T",
+        "mac": "Alt+T",
+        "chromeos": "Alt+T",
+        "linux": "Alt+T"
+      }
+    }
+  }
+}

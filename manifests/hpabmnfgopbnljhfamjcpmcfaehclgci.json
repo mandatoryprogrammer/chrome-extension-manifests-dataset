@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "short_name": "__MSG_appShortName__",
+  "description": "__MSG_appDescription__",
+  "version": "1.4.5",
+  "author": "Untethered Labs, Inc.",
+  "manifest_version": 2,
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApj1nIkeriOaS9d2Ny/fdIdreqG21JWvxyU8O7DOQJDvoscEj2ueqoLRCRPdg2K979LSXLrHNOnyid6/clnemubtp9Ex0JT6DtAckHCXOZf/jjfyEWG0dSnzRuWBicmu0JXpC2lBAF6pcaTn3U/lFAg6jL2r8ihLMSsDVdqfWIK/fFEO1HQ4t5CQGpmQX0MNfPEaLrl13fJxBflBcvKgikfzz6/uittxrV2TRoooe2zlCTrHh+F4HpCZIyfe9I1XuKgwq2ROGNNjGqTN2wk8rvZH5fGR/QNIBbzlkASgFm0gHmgPY/B02ThM5DzbIvBV8YuBOSDj8FpmpXr8l0GTL8wIDAQAB",
+  "default_locale": "en",
+  "icons": {
+    "16": "images/icon-16.png",
+    "128": "images/icon-128.png"
+  },
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon-19-disconnected.png",
+      "38": "images/icon-38-disconnected.png"
+    },
+    "default_title": "__MSG_browserActionTitle__",
+    "default_popup": "pages/popup.html"
+  },
+  "content_security_policy": "script-src https://cdn.ravenjs.com/ 'self'; object-src 'self'",
+  "permissions": [
+    "tabs",
+    "storage",
+    "clipboardWrite",
+    "webRequest",
+    "nativeMessaging",
+    "<all_urls>"
+  ],
+  "web_accessible_resources": [
+    "content/matchingConfig.json",
+    "pages/inlinepopup.html",
+    "pages/addcredentialprompt.html",
+    "images/*.png"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "styles/contentscript.css"
+      ],
+      "js": [
+        "scripts/contentscript.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ]
+}

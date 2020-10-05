@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "UET Tag Helper (by Microsoft Advertising)",
+  "short_name": "UET Tag Helper",
+  "description": "This extension helps to identify issues in Microsoft Advertising UET tags",
+  "version": "0.5.6",
+  "icons": {
+    "16": "images/icon_16x16.png",
+    "48": "images/icon_48x48.png",
+    "128": "images/icon_128x128.png"
+  },
+  "browser_action": {
+    "default_icon": "images/icon_100x100.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "lib/require.js",
+      "lib/aria.telemetry.min.js",
+      "scripts/logHelper.js",
+      "scripts/shared_utils.js",
+      "templates/report.js",
+      "templates/minimized_view.js",
+      "scripts/advice.js",
+      "scripts/report.js",
+      "background.js"
+    ]
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://*.microsoft.com/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "images/icon_100x100.png",
+    "styles/minimized_view.css"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "lib/jquery-2.1.4.min.js",
+        "scripts/staticTagAnalysis.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "downloads",
+    "tabs",
+    "webNavigation",
+    "webRequest",
+    "http://*/",
+    "https://*/"
+  ],
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjnD3Q/R517wJ4wtf3ZbI0fmk5BpqO3uQJJiMna2l1tJSlMlfLDab95B2uhBjWacT8xPO3ZlIf42h3sK8b3vKtndPjwPR/ph/iZDFor/2AppXETgx0rjSabzV4e6OjHD1kRALpMjAsjqI/VLv2c1uf3Pe6paDJrdfBf6FZLwNWb5UK+/mImx3MEHrXQE0H1VivnidOKiNsE2OC8FqrQriUN9y+WcA2tCw/t5OzyYV4imetMk+rybihzU1O6thInFHjsUAExXsNp2B+gsaiZEjoLb3Pdz3Nfi0GyNPQSGMSczMPtEkJFpTZE0IzM+YOppzmxQMdMqBNvL+k7YNzbXocwIDAQAB"
+}

@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "LeadWho Bookmark",
+  "description": "A bookmarking extension for LeadWho.",
+  "version": "0.4.1",
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "page_action": {
+    "default_icon": {
+      "19": "img/icon19.png",
+      "38": "img/icon38.png"
+    },
+    "default_title": "LeadWho Bookmark"
+  },
+  "externally_connectable": {
+    "matches": [
+      "http://leadwho.com/*"
+    ]
+  },
+  "permissions": [
+    "cookies",
+    "tabs",
+    "*://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "js/background-tab.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.linkedin.com/start/*",
+        "https://*.linkedin.com/pub/*",
+        "https://*.linkedin.com/in/*",
+        "https://*.google.com/search?as_q=*&as_sitesearch=linkedin.com&num=100&filter=0"
+      ],
+      "js": [
+        "js/bookmark.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://ipv4.google.com/*"
+      ],
+      "js": [
+        "js/robot.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://leadwho.com/*"
+      ],
+      "js": [
+        "js/tag.js"
+      ]
+    }
+  ]
+}

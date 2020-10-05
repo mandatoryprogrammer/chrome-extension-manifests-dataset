@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_appName__",
+  "description": "__MSG_appDesc__",
+  "short_name": "WhatsGo",
+  "version": "1.8",
+  "homepage_url": "https://whatscenter.com/whatsgo",
+  "default_locale": "en",
+  "icons": {
+    "32": "icons/logo-32.png",
+    "64": "icons/logo-64.png"
+  },
+  "background": {
+    "scripts": [
+      "vendor/jquery.min.js",
+      "dist/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://web.whatsapp.com/*"
+      ],
+      "css": [
+        "dist/content.css"
+      ],
+      "js": [
+        "dist/content.js"
+      ],
+      "run_at": "document_end",
+      "persistent": false,
+      "match_about_blank": true,
+      "all_frames": false
+    }
+  ],
+  "permissions": [
+    "identity",
+    "contextMenus",
+    "*://*.googleapis.com/*",
+    "*://*.google.com/*",
+    "*://web.whatsapp.com/*"
+  ],
+  "browser_action": {
+    "browser_style": true,
+    "default_title": "WhatsGo",
+    "default_popup": "index.html",
+    "default_icon": {
+      "32": "icons/logo-32.png",
+      "64": "icons/logo-64.png"
+    }
+  },
+  "content_security_policy": "script-src 'self' https://*.google.com 'unsafe-eval'; object-src 'self'",
+  "oauth2": {
+    "client_id": "586734912284-gqc205o2oe9m7osg0u4a58b4r0b4u3mj.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/spreadsheets.readonly"
+    ]
+  }
+}

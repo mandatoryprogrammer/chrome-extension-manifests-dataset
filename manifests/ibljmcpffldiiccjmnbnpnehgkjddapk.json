@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Robinhood NewsFeed",
+  "short_name": "RobinNews",
+  "version": "0.0.17",
+  "description": "Real time news with sentiment analysis for daily stock trader! Add on useful features such as: profit display, sector performance...",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://robinhood.com/*",
+        "https://robinhood.com/**/*"
+      ],
+      "js": [
+        "lib/tensorflow.js",
+        "lib/jquery.js",
+        "lib/moment.js",
+        "data/stocks.js",
+        "components/robinews.js",
+        "components/main.js",
+        "components/news.js",
+        "components/profit.js",
+        "components/sector.js",
+        "components/risk.js",
+        "ga/ga.js",
+        "ga/ga-config.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "cookies",
+    "tabs",
+    "storage",
+    "activeTab",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "browser_action": {
+    "default_icon": "images/32.png"
+  },
+  "icons": {
+    "16": "images/16.png",
+    "32": "images/32.png",
+    "48": "images/48.png",
+    "128": "images/128.png"
+  },
+  "manifest_version": 2
+}

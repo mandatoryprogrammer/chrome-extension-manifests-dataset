@@ -1,0 +1,36 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Chess.com Enhancement Suite",
+  "description": "Some additional features on the chess.com website; save the puzzles you failed in puzzle rush and replay them afterwards.",
+  "version": "1.0",
+  "browser_action": {
+    "default_popup": "browser_action/chess.html",
+    "default_icon": "browser_action/icon.png"
+  },
+  "icons": {
+    "16": "icons/chess-icon16.png",
+    "32": "icons/chess-icon32.png",
+    "48": "icons/chess-icon48.png",
+    "128": "icons/chess-icon128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "declarativeContent",
+    "storage",
+    "tabs"
+  ],
+  "manifest_version": 2,
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.chess.com/tactics/*",
+        "https://*.chess.com/puzzles/*"
+      ],
+      "js": [
+        "js/jquery-3.3.1.min.js",
+        "js/puzzlerush.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

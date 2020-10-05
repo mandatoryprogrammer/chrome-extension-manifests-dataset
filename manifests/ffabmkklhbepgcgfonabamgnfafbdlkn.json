@@ -1,0 +1,68 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "GitZip for github",
+  "description": "It can make the sub-directories and files of github repository as zip and download it",
+  "version": "0.4.0",
+  "icons": {
+    "16": "images/icon-16px.png",
+    "32": "images/icon-32px.png",
+    "48": "images/icon-48px.png",
+    "128": "images/icon-128px.png"
+  },
+  "page_action": {
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "permissions": [
+    "storage",
+    "contextMenus",
+    "https://api.github.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://github.com/*"
+      ],
+      "js": [
+        "js/content/jszip.min.js",
+        "js/content/FileSaver.min.js",
+        "js/content/main.js"
+      ],
+      "css": [
+        "css/main.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://github.com/*",
+        "*://gitzip.org/*"
+      ],
+      "js": [
+        "js/content/show.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://kinolien.github.io/gitzip/*"
+      ],
+      "js": [
+        "js/content/keysync.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://gitzip.org/gettoken/success"
+      ],
+      "js": [
+        "js/content/autosave.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'"
+}

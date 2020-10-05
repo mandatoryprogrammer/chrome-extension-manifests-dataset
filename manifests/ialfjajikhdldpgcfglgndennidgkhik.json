@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Ctrl+Tab MRU",
+  "description": "Switch between tabs in the most recently used order, Chrome on Windows allows you to set Ctrl+Tab as a shortcut",
+  "version": "0.6",
+  "manifest_version": 2,
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "icons": {
+    "16": "ctrltabmru16.png",
+    "48": "ctrltabmru48.png",
+    "128": "ctrltabmru128.png"
+  },
+  "permissions": [
+    "tabs",
+    "<all_urls>"
+  ],
+  "commands": {
+    "next": {
+      "suggested_key": {
+        "default": "Ctrl+Y"
+      },
+      "description": "Switch to older tab"
+    },
+    "previous": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Y"
+      },
+      "description": "Switch to newer tab"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "content.js",
+    "content.css"
+  ],
+  "incognito": "split"
+}

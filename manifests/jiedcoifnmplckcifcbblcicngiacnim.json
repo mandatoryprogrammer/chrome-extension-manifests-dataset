@@ -1,0 +1,104 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Wiretap",
+  "version": "0.16.54",
+  "manifest_version": 2,
+  "environment": "prd",
+  "description": "Watch shows on Netflix.com with friends and fans",
+  "short_name": "wiretap",
+  "icons": {
+    "16": "images/icon128x128_big.png",
+    "48": "images/icon128x128_big.png",
+    "128": "images/icon128x128_big.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "images/logo-pink-disabled.png",
+      "32": "images/logo-pink-disabled.png",
+      "48": "images/logo-pink-disabled.png",
+      "128": "images/logo-pink-disabled.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "background-0d4b16673a902286ed83.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.netflix.com/*"
+      ],
+      "js": [
+        "app-0d4b16673a902286ed83.js"
+      ],
+      "css": [
+        "app-d8bfd1c280af35193c142787436648a2-styles.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.netflix.com/*"
+      ],
+      "js": [
+        "listener-0d4b16673a902286ed83.js"
+      ],
+      "css": [
+        "app-d8bfd1c280af35193c142787436648a2-styles.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.wiretap.co/*"
+      ],
+      "js": [
+        "listener-0d4b16673a902286ed83.js"
+      ],
+      "css": [
+        "app-d8bfd1c280af35193c142787436648a2-styles.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.wiretap.co/*"
+      ],
+      "js": [
+        "wiretapco_login-0d4b16673a902286ed83.js"
+      ],
+      "css": [
+        "app-d8bfd1c280af35193c142787436648a2-styles.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "images/*.png",
+    "images/*.svg",
+    "images/*.jpg",
+    "images/icons/*.svg",
+    "fonts/**/*.otf",
+    "fonts/**/*.ttf",
+    "app.js",
+    "facebookSDKInject.js",
+    "twitterSDKInject.js",
+    "postInstalledScript.js"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://oauth.io/*",
+      "*://staging.wiretap.co/*",
+      "*://wiretap.co/*",
+      "*://www.wiretap.co/*"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "declarativeContent",
+    "history",
+    "https://www.netflix.com/*",
+    "*://*.wiretap.co/*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.google-analytics.com https://*.twitter.com https://connect.facebook.net https://cdn.matomo.cloud; object-src 'self'"
+}

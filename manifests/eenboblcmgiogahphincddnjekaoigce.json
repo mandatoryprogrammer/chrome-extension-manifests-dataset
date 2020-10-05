@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "wp",
+  "description": "Wolk Protocol Chrome Extension",
+  "version": "0.1.13",
+  "manifest_version": 2,
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "downloads",
+    "https://*.wolk.com/*"
+  ],
+  "background": {
+    "scripts": [
+      "extension.js",
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "img/wp-16.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "img/wp-16.png",
+    "128": "img/wp-128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.wolk.com/*",
+        "https://*.wolk.com:81/*",
+        "https://*.wolk.com:83/*"
+      ],
+      "js": [
+        "extension.js",
+        "contentscript.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "message.js"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://*.wolk.com/*",
+      "https://*.wolk.com:81/*",
+      "https://*.wolk.com:83/*"
+    ]
+  }
+}

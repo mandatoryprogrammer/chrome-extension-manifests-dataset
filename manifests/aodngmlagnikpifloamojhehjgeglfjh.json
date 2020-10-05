@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "author": "8x8",
+  "manifest_version": 2,
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmUPhUvNaX31XqdxcC/qJRHGLqnZrFSaMkYYwLz0x1chqE50JfK5eEoSYOHar/LStd4mJorqE7WW2LqbJeNOArGoIxC1N+PtSbLOIIMjRKWoce1rfe3Elxt/ujEmaknRn7YIyyO5+p3dn8KeAt+w0oWOg76m7uNoPIAPVAZd4w6WuZOr3hIjS9yEXpOB4+3CJCkaHigQ0vbkpZDNgDQK/0BrRVOsalYWtfJro+5a01GpDFdosvXryoYA5ajinGw2rVV6A6dRo+IWKf5I/azrJ3EhOugpDFuQYWkxFL9IZKGRStu8pilFtnqtAA0MlJDeZcuSX5mXDW9V+AYEfMha1QQIDAQAB",
+  "name": "8x8 Meet for Google Chrome",
+  "version": "2.9.2",
+  "description": "Easily schedule 8x8 meetings in any calendaring application in a Google Chrome Browser.",
+  "icons": {
+    "128": "assets/images/auth0/logo128.png"
+  },
+  "background": {
+    "scripts": [
+      "scripts/analytics.js",
+      "scripts/auth0.js",
+      "scripts/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "128": "assets/images/auth0/logo128.png"
+    },
+    "default_title": "8x8 Video Meetings",
+    "default_popup": "templates/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://calendar.google.com/calendar/*",
+        "*://outlook.office.com/*",
+        "*://outlook.office365.com/*",
+        "*://calendly.com/*"
+      ],
+      "js": [
+        "scripts/main.js"
+      ],
+      "css": [
+        "assets/css/meeting.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "assets/images/icon48.png",
+    "assets/css/meeting.css"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "permissions": [
+    "https://www.google-analytics.com/*",
+    "https://api-vo.jitsi.net/*",
+    "https://cloud8.8x8.com/*",
+    "https://calendar.google.com/*",
+    "https://outlook.office365.com/*",
+    "https://outlook.live.com/*",
+    "https://outlook.office.com/*",
+    "https://eight.auth0.com/*",
+    "https://calendly.com/*",
+    "tabs",
+    "storage"
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "author": "WHOT?!",
+  "name": "WHOT?!",
+  "description": "follow @friends or #hashtags -- discover & discuss WHAT'S HOT on the web",
+  "version": "1.0.16",
+  "minimum_chrome_version": "35",
+  "browser_action": {
+    "default_icon": "images/logo-off-38.png"
+  },
+  "homepage_url": "https://whot.is",
+  "icons": {
+    "16": "images/logo-on-16.png",
+    "48": "images/logo-on-48.png",
+    "128": "images/logo-on-128.png"
+  },
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com https://www.googletagmanager.com 'unsafe-eval'; object-src 'self'",
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "options_page": "options.html",
+  "permissions": [
+    "tabs",
+    "gcm",
+    "notifications",
+    "storage",
+    "http://*/*",
+    "https://*/*",
+    "activeTab"
+  ],
+  "web_accessible_resources": [
+    "angular-client/*",
+    "css/*",
+    "images/*"
+  ],
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "js/third-party/jquery-1.12.1.min.js",
+        "js/main-content.js"
+      ],
+      "css": [
+        "css/main-content.css"
+      ]
+    }
+  ]
+}

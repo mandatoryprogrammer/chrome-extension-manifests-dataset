@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Controls for YouTube",
+  "description": "A Chrome extension that provides useful controls and options for open YouTube tabs.",
+  "version": "0.1",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "author": "James Turner",
+  "homepage_url": "http://jamesturner.im/controls-for-youtube",
+  "permissions": [
+    "tabs",
+    "*://*.youtube.com/watch*",
+    "*://*.youtube.com/results*"
+  ],
+  "web_accessible_resources": [
+    "js/*.js"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.youtube.com/watch*",
+        "*://*.youtube.com/results*"
+      ],
+      "js": [
+        "js/controls.js"
+      ],
+      "css": [
+        "css/style.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": false
+  }
+}

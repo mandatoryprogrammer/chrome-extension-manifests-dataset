@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "YouTube Captions Search",
+  "short_name": "YCS",
+  "description": "It's like 'ctrl + f' (or 'cmd + f'), but for YouTube",
+  "version": "2.1.9",
+  "permissions": [
+    "tabs",
+    "storage",
+    "webRequest",
+    "https://www.youtube.com/api/timedtext?*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/*"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "popup.js"
+    ],
+    "persistent": true,
+    "run_at": "document_start"
+  },
+  "browser_action": {
+    "default_icon": "images/video-player.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "images/youtube-16.png",
+    "32": "images/youtube-32.png",
+    "48": "images/youtube-48.png",
+    "128": "images/youtube-128.png"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "windows": "Ctrl+Shift+Y",
+        "mac": "Command+Shift+I",
+        "chromeos": "Ctrl+Shift+Y",
+        "linux": "Ctrl+Shift+Y"
+      }
+    }
+  },
+  "web_accessible_resources": [
+    "style.css"
+  ]
+}

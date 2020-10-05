@@ -1,0 +1,121 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "64": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "browser_action": {},
+  "name": "__MSG_name__",
+  "description": "__MSG_description__",
+  "version": "3.7.4",
+  "default_locale": "he",
+  "permissions": [
+    "notifications",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "*://*.yad2.co.il/*",
+    "*://*.madlan.co.il/*",
+    "*://*.komo.co.il/*",
+    "*://*.madas.co.il/*",
+    "*://*.nadlan.co.il/*",
+    "*://*.nadlan.com/*",
+    "*://*.homeless.co.il/*",
+    "*://*.winwin.co.il/*",
+    "*://*.zap.co.il/*",
+    "*://*.bipbip.co.il/*",
+    "*://*.diradira.co.il/*",
+    "*://*.homely.co.il/*",
+    "*://*.focusnet.co.il/*",
+    "*://*.handz.co.il/*",
+    "*://*.handz.local/*",
+    "*://*.google-analytics.com/*",
+    "storage",
+    "unlimitedStorage"
+  ],
+  "web_accessible_resources": [
+    "img/dirobot-logo-36.png"
+  ],
+  "background": {
+    "scripts": [
+      "/dist/3rdParty.js",
+      "dist/background.js"
+    ],
+    "run_at": "document_start"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://extlogin-dev.handz.co.il/*",
+        "https://extlogin.handz.co.il/*"
+      ],
+      "js": [
+        "dist/3rdParty.js",
+        "dist/handshake.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.komo.co.il/*",
+        "*://*.madas.co.il/*",
+        "*://*.nadlan.com/*",
+        "*://*.homeless.co.il/*",
+        "*://*.winwin.co.il/*",
+        "*://*.zap.co.il/*",
+        "*://*.bipbip.co.il/*",
+        "*://*.diradira.co.il/*",
+        "*://*.homely.co.il/*",
+        "*://*.focusnet.co.il/*",
+        "*://*.handz.co.il/*"
+      ],
+      "js": [
+        "placeholder/placeholder.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.madlan.co.il/*"
+      ],
+      "js": [
+        "dist/3rdParty.js",
+        "dist/madlan.js"
+      ],
+      "css": [
+        "css/main.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.yad2.co.il/",
+        "*://*.yad2.co.il/realestate/*",
+        "*://*.yad2.co.il/vehicles/*"
+      ],
+      "js": [
+        "/dist/3rdParty.js",
+        "dist/y2new.js"
+      ],
+      "css": [
+        "css/main.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://www.yad2.co.il/Nadlan/*rentDetails.php?NadlanID=*&SubCatID=*"
+      ],
+      "js": [
+        "/dist/3rdParty.js",
+        "dist/rentEnrich.js"
+      ],
+      "run_at": "document_end",
+      "match_about_blank": true,
+      "all_frames": true
+    }
+  ],
+  "manifest_version": 2
+}

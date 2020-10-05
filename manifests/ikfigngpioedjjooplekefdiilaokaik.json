@@ -1,0 +1,175 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "version": "1.8.0.376",
+  "description": "__MSG_appDesc__",
+  "default_locale": "en_US",
+  "permissions": [
+    "identity",
+    "identity.email",
+    "storage",
+    "tabs",
+    "activeTab",
+    "management",
+    "alarms",
+    "idle",
+    "gcm",
+    "tts"
+  ],
+  "icons": {
+    "16": "assets/16.png",
+    "48": "assets/48.png",
+    "128": "assets/128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://docs.google.com/document/*",
+        "https://docs.google.com/presentation/*edit",
+        "https://docs.google.com/forms/*",
+        "https://*.sharepoint.com/*",
+        "https://onedrive.live.com/edit.aspx*app=Word",
+        "https://onedrive.live.com/edit.aspx*app=OneNote",
+        "https://onedrive.live.com/edit.aspx*&wdOrigin*",
+        "https://*.texthelp.com/*",
+        "https://www.tiny.cloud/*",
+        "https://onedrive.live.com/*",
+        "https://*.officeapps.live.com/*",
+        "https://*.qaheroes.com/*",
+        "https://*.instructure.com/*"
+      ],
+      "js": [
+        "inject.js",
+        "assets/scr/cs.js",
+        "assets/accountselection/selectiondialog.js",
+        "simplify.js",
+        "assets/textclassifier/csif.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://docs.google.com/document/*",
+        "https://docs.google.com/presentation/*edit",
+        "https://docs.google.com/forms/*",
+        "https://*.sharepoint.com/*",
+        "https://onedrive.live.com/edit.aspx*app=Word",
+        "https://onedrive.live.com/edit.aspx*app=OneNote",
+        "https://onedrive.live.com/edit.aspx*&wdOrigin*",
+        "https://*.texthelp.com/*",
+        "https://www.tiny.cloud/*",
+        "https://onedrive.live.com/*",
+        "https://*.officeapps.live.com/*"
+      ],
+      "js": [
+        "assets/textclassifier/cs.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "assets/textclassifier/tcbs.js",
+      "assets/scr/bg.js",
+      "assets/google-analytics-bundle.js",
+      "assets/moment.js",
+      "assets/checkit/ciibs.js",
+      "assets/checkit/ciib.js",
+      "assets/rw-family-auth-browser.js",
+      "assets/thHashing.js",
+      "assets/identity.js",
+      "assets/socketmanager.js",
+      "assets/thFunctionManager.js",
+      "assets/equatio-latex-extractor.js",
+      "assets/background.js",
+      "assets/xmlIncludes/linq.js",
+      "assets/xmlIncludes/jszip.js",
+      "assets/xmlIncludes/jszip-load.js",
+      "assets/xmlIncludes/jszip-deflate.js",
+      "assets/xmlIncludes/jszip-inflate.js",
+      "assets/xmlIncludes/ltxml.js",
+      "assets/xmlIncludes/ltxml-extensions.js",
+      "assets/xmlIncludes/testxml.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "assets/24.png",
+    "default_title": "__MSG_appName__"
+  },
+  "web_accessible_resources": [
+    "chdialog.html",
+    "dialog.html",
+    "inject.js",
+    "deps.js",
+    "locale/*",
+    "buttonSettings.js",
+    "textHelp_Configuration.js",
+    "textHelp_FixedToolbar.js",
+    "textHelp_GDocsParser.js",
+    "textHelp_GoogleFormsParser.js",
+    "textHelp_GoogleSlidesParser.js",
+    "textHelp_HTMLParser.js",
+    "textHelp_MSWordOnlineParser.js",
+    "textHelp_WebReader.js",
+    "textHelp_WebReaderAPI.js",
+    "assets/*",
+    "SpeechStream/*",
+    "v195/*",
+    "cc/*",
+    "rwGooglePrediction/*",
+    "rwGooglePrediction/assets/*",
+    "toolbarSetting.js",
+    "options/options.html",
+    "*",
+    "195/*"
+  ],
+  "options_ui": {
+    "page": "options/options.html",
+    "chrome_style": true
+  },
+  "storage": {
+    "managed_schema": "preferences_schema.json"
+  },
+  "oauth2": {
+    "client_id": "982754197589-4hjusoj9167oevhth09pg5i6u5jgtf3p.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/userinfo.profile",
+      "https://www.googleapis.com/auth/drive.file",
+      "https://www.googleapis.com/auth/drive.install",
+      "https://www.googleapis.com/auth/drive.apps.readonly",
+      "https://www.googleapis.com/auth/drive",
+      "https://www.googleapis.com/auth/drive.appdata"
+    ]
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "windows": "Alt+Shift+R",
+        "mac": "Alt+Shift+R",
+        "chromeos": "Alt+Shift+R",
+        "linux": "Alt+Shift+R"
+      }
+    },
+    "setfocus": {
+      "suggested_key": {
+        "windows": "Alt+Shift+K",
+        "mac": "Alt+Shift+K",
+        "chromeos": "Alt+Shift+K",
+        "linux": "Alt+Shift+K"
+      },
+      "description": "__MSG_commandFocus__"
+    }
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://reading.texthelp.com/*",
+      "*://fluency.texthelp.com/*",
+      "*://docs.google.com/*"
+    ]
+  },
+  "content_security_policy": "script-src 'self'  https://ssl.google-analytics.com  ; object-src 'self'",
+  "manifest_version": 2
+}

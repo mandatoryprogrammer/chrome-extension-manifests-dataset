@@ -1,0 +1,43 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Salesforce Workbench Tools for Google Chrome™",
+  "description": "Google Chrome™ extension for logging into Salesforce Workbench from an active Salesforce session.",
+  "version": "1.3.5",
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "manifest_version": 2,
+  "icons": {
+    "16": "workbench-3-cube-16x16.png",
+    "48": "workbench-3-cube-48x48.png",
+    "128": "workbench-3-cube-128x128.png"
+  },
+  "options_page": "options.html",
+  "permissions": [
+    "activeTab",
+    "cookies",
+    "tabs",
+    "https://*.salesforce.com/*",
+    "https://*.force.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.salesforce.com/*",
+        "https://*.force.com/*"
+      ],
+      "js": [
+        "showPageAction.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "page_action": {
+    "default_title": "Login to Workbench from Salesforce",
+    "default_icon": "workbench-3-cube-48x48.png"
+  }
+}

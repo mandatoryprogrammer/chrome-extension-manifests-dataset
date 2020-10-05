@@ -1,0 +1,68 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Etsy Heart Exchanger",
+  "description": "Tool for automatic exchanging of item views and hearts.",
+  "version": "4.0.30",
+  "homepage_url": "http://heartexchanger.com",
+  "icons": {
+    "256": "/icons/icon.png"
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://*.heartexchanger.com/*"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "icons/icon.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "webRequest",
+    "notifications",
+    "storage",
+    "*://*.etsy.com/*",
+    "*://*.heartexchanger.com/*"
+  ],
+  "background": {
+    "scripts": [
+      "vendor.bundle.js",
+      "background.bundle.js"
+    ]
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "https://*.etsy.com/*"
+      ],
+      "js": [
+        "vendor.bundle.js",
+        "etsy.bundle.js"
+      ],
+      "css": []
+    },
+    {
+      "run_at": "document_start",
+      "matches": [
+        "https://*.heartexchanger.com/*",
+        "http://*.heartexchanger.com/*"
+      ],
+      "js": [
+        "vendor.bundle.js",
+        "hex.bundle.js"
+      ],
+      "css": []
+    }
+  ],
+  "web_accessible_resources": [
+    "/node_modules/**/*.*",
+    "/dist/**/*.js",
+    "/js/*.js",
+    "*.html",
+    "icons/*.*"
+  ]
+}

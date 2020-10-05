@@ -1,0 +1,68 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Market Ninja",
+  "description": "Adds average eBay price to Facebook Marketplace and Craigslist",
+  "version": "1.0.0.3",
+  "browser_action": {
+    "default_icon": {
+      "16": "icon_16_16.png"
+    },
+    "default_popup": "html/extension.html"
+  },
+  "icons": {
+    "16": "icon_16_16.png",
+    "48": "icon_48_48.png",
+    "128": "icon_128_128.png"
+  },
+  "background": {
+    "scripts": [
+      "lib/js/jquery-3.0.0.min.js",
+      "js/constants/customEvents.js",
+      "js/helpers/resultHelper.js",
+      "js/helpers/searchHelper.js",
+      "js/extension.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "http://*.craigslist.org/*",
+    "https://*.craigslist.org/*",
+    "https://www.facebook.com/marketplace/*",
+    "https://1ruet6pzk7.execute-api.us-east-2.amazonaws.com/*/ebayresolver/*"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.craigslist.org/*",
+        "https://*.craigslist.org/*",
+        "https://www.facebook.com/marketplace/*"
+      ],
+      "js": [
+        "lib/js/jquery-3.0.0.min.js",
+        "lib/js/bootstrap.min.js",
+        "lib/js/googleAnalytics.js",
+        "js/storage/googleStorage.js",
+        "js/sites/craigslist.js",
+        "js/sites/facebook.js",
+        "js/constants/customEvents.js",
+        "js/readers/baseReader.js",
+        "js/readers/craigslistReader.js",
+        "js/readers/facebookReader.js",
+        "js/modifiers/baseTemplate.js",
+        "js/modifiers/baseModifier.js",
+        "js/modifiers/craigslistModifier.js",
+        "js/modifiers/facebookModifier.js"
+      ],
+      "css": [
+        "lib/css/bootstrap-iso.min.css",
+        "css/custom.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "close.png"
+  ]
+}

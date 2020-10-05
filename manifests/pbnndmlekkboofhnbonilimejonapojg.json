@@ -1,0 +1,559 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Midnight Lizard",
+  "short_name": "Mid.Lizard",
+  "description": "__MSG_appDesc__",
+  "default_locale": "en",
+  "version": "10.6.0",
+  "author": "Pavel Agarkov",
+  "icons": {
+    "128": "img/ml-icon-128+.png",
+    "48": "img/ml-icon-48++.png",
+    "32": "img/ml-icon-32.png",
+    "16": "img/ml-icon-16.png"
+  },
+  "permissions": [
+    "storage",
+    "<all_urls>"
+  ],
+  "offline_enabled": true,
+  "commands": {
+    "global-toggle": {
+      "description": "__MSG_globalToggleKey__",
+      "suggested_key": {
+        "default": "Alt+Shift+M"
+      }
+    },
+    "current-toggle": {
+      "description": "__MSG_currentToggleKey__",
+      "suggested_key": {
+        "default": "Alt+Shift+L"
+      }
+    }
+  },
+  "browser_action": {
+    "default_title": "Midnight Lizard",
+    "default_icon": {
+      "38": "img/ml-toolbar-icon-38.png"
+    },
+    "default_popup": "ui/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "js/background-page.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "js/page-script.js"
+  ],
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "match_about_blank": true,
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [
+        "css/preload.css",
+        "css/content-vars.css",
+        "css/dynamic-loading.css",
+        "css/dynamic-complete.css",
+        "css/dynamic-universal.css",
+        "css/dynamic-filter.css",
+        "css/custom/bookmark-sidebar.css"
+      ],
+      "js": [
+        "js/content-script.js"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "matches": [
+        "https://*/*/chrome/newtab*"
+      ],
+      "css": [
+        "css/custom/chrome-new-tab.css"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "https://www.youtube.com/*"
+      ],
+      "css": [
+        "css/custom/youtube.css"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "https://*/*"
+      ],
+      "include_globs": [
+        "https://mail.google.*/*"
+      ],
+      "css": [
+        "css/custom/google-mail.css"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "*://*/*"
+      ],
+      "include_globs": [
+        "http?://www.google.*/*"
+      ],
+      "css": [
+        "css/custom/google.css"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "https://*/*"
+      ],
+      "include_globs": [
+        "https://plus.google.*/*"
+      ],
+      "css": [
+        "css/custom/google-plus.css"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "https://*/*"
+      ],
+      "include_globs": [
+        "https://docs.google.*/forms/*"
+      ],
+      "css": [
+        "css/custom/google-forms.css"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "https://*/*"
+      ],
+      "include_globs": [
+        "https://docs.google.*/*"
+      ],
+      "css": [
+        "css/custom/google-docs.css"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "https://*/*"
+      ],
+      "include_globs": [
+        "https://docs.google.*/document/*"
+      ],
+      "css": [
+        "css/custom/google-documents.css"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "https://*/*"
+      ],
+      "include_globs": [
+        "https://docs.google.*/spreadsheets/*"
+      ],
+      "css": [
+        "css/custom/google-spreadsheets.css"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "https://docs.google.com/document/*",
+        "https://docs.google.com/presentation/*",
+        "https://docs.google.com/drawings/*"
+      ],
+      "css": [
+        "css/custom/google-slides.css"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "https://poeditor.com/*"
+      ],
+      "css": [
+        "css/custom/poeditor.css"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "https://*/*"
+      ],
+      "include_globs": [
+        "https://accounts.google.*/*"
+      ],
+      "css": [
+        "css/custom/google-accounts.css"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "https://*/*"
+      ],
+      "include_globs": [
+        "https://www.google.*/maps/*",
+        "https://www.google.*/maps?*"
+      ],
+      "css": [
+        "css/custom/google-maps.css"
+      ]
+    },
+    {
+      "run_at": "document_idle",
+      "all_frames": true,
+      "matches": [
+        "https://*/*"
+      ],
+      "include_globs": [
+        "https://www.bing.*/maps/*",
+        "https://www.bing.*/maps?*"
+      ],
+      "js": [
+        "js/custom/bing-maps.js"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "https://*/*"
+      ],
+      "include_globs": [
+        "https://www.bing.*/maps/*",
+        "https://www.bing.*/maps?*"
+      ],
+      "css": [
+        "css/custom/bing-maps.css"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "https://developer.mozilla.org/*"
+      ],
+      "css": [
+        "css/custom/mozilla.css"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "https://*/*"
+      ],
+      "include_globs": [
+        "https://*.wikipedia.org/*"
+      ],
+      "css": [
+        "css/custom/wikipedia.css"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "https://*/*"
+      ],
+      "include_globs": [
+        "https://*.wikibooks.org/*"
+      ],
+      "css": [
+        "css/custom/wikibooks.css"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "https://www.facebook.com/*"
+      ],
+      "css": [
+        "css/custom/facebook.css"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "https://www.medium.com/*",
+        "https://medium.com/*"
+      ],
+      "css": [
+        "css/custom/medium.css"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "https://www.quora.com/*"
+      ],
+      "css": [
+        "css/custom/quora.css"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "https://www.twitter.com/*",
+        "https://twitter.com/*"
+      ],
+      "css": [
+        "css/custom/twitter.css"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "https://www.producthunt.com/*",
+        "https://producthunt.com/*"
+      ],
+      "css": [
+        "css/custom/producthunt.css"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "https://www.trello.com/*",
+        "https://trello.com/*"
+      ],
+      "css": [
+        "css/custom/trello.css"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "https://www.reddit.com/*"
+      ],
+      "css": [
+        "css/custom/reddit.css"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "https://www.crowdin.com/*",
+        "https://crowdin.com/*",
+        "https://translate.midnight-lizard.org/*"
+      ],
+      "css": [
+        "css/custom/crowdin.css"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "https://photos.google.com/*"
+      ],
+      "css": [
+        "css/custom/google-photos.css"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "https://groups.google.com/*"
+      ],
+      "css": [
+        "css/custom/google-groups.css"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "https://opencollective.com/*"
+      ],
+      "css": [
+        "css/custom/opencollective.css"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "https://*.slack.com/*"
+      ],
+      "css": [
+        "css/custom/slack.css"
+      ]
+    },
+    {
+      "run_at": "document_idle",
+      "all_frames": false,
+      "matches": [
+        "*://*.midnight-lizard.org/*"
+      ],
+      "js": [
+        "js/custom/chrome-runtime-connect-external-polyfill.js"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "https://*.stackoverflow.com/*",
+        "https://*.stackexchange.com/*"
+      ],
+      "css": [
+        "css/custom/stackoverflow.css"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "https://github.com/*",
+        "https://*.github.com/*"
+      ],
+      "css": [
+        "css/custom/github.css"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "https://mail.yahoo.com/*"
+      ],
+      "css": [
+        "css/custom/yahoo-mail.css"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "https://*/*"
+      ],
+      "include_globs": [
+        "https://translate.google.*/*"
+      ],
+      "css": [
+        "css/custom/google-translate.css"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "https://www.amazon.com/*"
+      ],
+      "css": [
+        "css/custom/amazon.css"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "https://yandex.ru/maps/*",
+        "https://www.yandex.ru/maps/*"
+      ],
+      "css": [
+        "css/custom/yandex-maps.css"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "https://instagram.com/*",
+        "https://www.instagram.com/*"
+      ],
+      "css": [
+        "css/custom/instagram.css"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "https://web.whatsapp.com/*"
+      ],
+      "css": [
+        "css/custom/whatsapp.css"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "https://www.twitch.tv/*"
+      ],
+      "css": [
+        "css/custom/twitch.css"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "https://yandex.ru/portal/video*",
+        "https://www.yandex.ru/portal/video*"
+      ],
+      "css": [
+        "css/custom/yandex-portal-video.css"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "https://calendar.yahoo.com/*"
+      ],
+      "css": [
+        "css/custom/yahoo-calendar.css"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "https://www.linkedin.com/*"
+      ],
+      "css": [
+        "css/custom/linkedin.css"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,178 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Lyrics Here by Rob W",
+  "description": "Instant lyrics on YouTube, Spotify and other sites in a flexible panel. 40+ sources ensure that lyrics are always found",
+  "version": "3.14.2",
+  "manifest_version": 2,
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "declarativeContent",
+    "storage",
+    "*://www.youtube.com/*",
+    "*://rob.lekensteyn.nl/youtubelyrics/*",
+    "*://www.azlyrics.com/*",
+    "*://search.azlyrics.com/*",
+    "*://www.lyrics.com/*",
+    "*://lyrics.wikia.com/*",
+    "*://m.lyricsmode.com/*",
+    "*://m.metrolyrics.com/*"
+  ],
+  "optional_permissions": [
+    "*://www.lyricsmode.com/*",
+    "*://*.letras.mus.br/*",
+    "*://www.vagalume.com.br/*",
+    "*://www.lyricsmania.com/*",
+    "*://*.spotify.com/*",
+    "*://www.darklyrics.com/*",
+    "*://www.metal-archives.com/*",
+    "*://www.musica.com/*",
+    "*://shironet.mako.co.il/*",
+    "*://*.angolotesti.it/*",
+    "*://*.paroles2chansons.com/*",
+    "*://paroles2chansons.lemonde.fr/*",
+    "*://*.jango.com/*",
+    "*://*.rapgenius.com/*",
+    "*://*.genius.com/*",
+    "*://www.tekstowo.pl/*",
+    "*://www.animelyrics.com/*",
+    "*://*.mojim.com/*",
+    "*://songmeanings.com/*",
+    "*://www.metrolyrics.com/*",
+    "*://www.songlyrics.com/*",
+    "*://*.accuradio.com/*",
+    "*://www.songteksten.nl/*",
+    "*://www.stixoi.info/*",
+    "*://www.plyrics.com/*",
+    "*://search.plyrics.com/*",
+    "*://*.guitarparty.com/*",
+    "*://www.lyrics.my/*",
+    "*://*.deezer.com/*",
+    "*://*.8tracks.com/*",
+    "*://www.lyricsmasti.com/*",
+    "*://www.hindilyrics.net/*",
+    "*://www.myhindilyrics.com/*",
+    "*://www.lyricsmint.com/*",
+    "*://www.stlyrics.com/*",
+    "*://www.newreleasetuesday.com/*",
+    "*://www.newreleasetoday.com/*",
+    "*://www.karaoketexty.cz/*",
+    "*://www.supermusic.sk/*",
+    "*://www.supermusic.eu/*",
+    "*://www.supermusic.cz/*",
+    "*://play.google.com/*",
+    "*://music.google.com/*",
+    "*://tekstove.info/*",
+    "*://*.iheart.com/*",
+    "*://*.superplayer.fm/*",
+    "*://www.paadalvarigal.com/*",
+    "*://tamillyrics.hosuronline.com/*",
+    "*://www.siamzone.com/*",
+    "*://*.last.fm/*",
+    "*://www.songtexte.com/*",
+    "*://www.kpoplyrics.net/*",
+    "*://api.lololyrics.com/*",
+    "*://www.lololyrics.com/*",
+    "*://gasazip.com/*",
+    "*://new.gasazip.com/*",
+    "*://www.gasazip.com/*",
+    "*://music.yandex.ru/*",
+    "*://music.yandex.by/*",
+    "*://music.yandex.kz/*",
+    "*://music.yandex.ua/*",
+    "*://player.qobuz.com/*",
+    "*://play.qobuz.com/*",
+    "*://www.versuri.ro/*",
+    "*://soundcloud.com/*",
+    "*://www.saavn.com/*",
+    "*://www.coveralia.com/*",
+    "*://www.pandora.com/*",
+    "*://sarki.alternatifim.com/*",
+    "*://lirik.kapanlagi.com/*",
+    "*://nashe.com.ua/*",
+    "*://*.touhouwiki.net/*",
+    "*://*.cmtv.com.ar/*",
+    "*://*.bandcamp.com/*",
+    "*://tekstovi.net/*",
+    "*://www.zeneszoveg.hu/*",
+    "*://www.flashlyrics.com/*",
+    "*://*.teksteshqip.com/*",
+    "*://api.qwant.com/*",
+    "*://*.startpage.com/*",
+    "*://*.ixquick.com/*",
+    "*://*.ixquick.eu/*",
+    "*://colorcodedlyrics.com/*",
+    "*://search.yahoo.com/*",
+    "*://www.google.com/*",
+    "*://*.bing.com/*",
+    "*://duckduckgo.com/*",
+    "webNavigation",
+    "*://*/*"
+  ],
+  "content_scripts": [
+    {
+      "js": [
+        "optional_origins.js"
+      ],
+      "matches": [
+        "*://rob.lekensteyn.nl/youtubelyrics/*"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    },
+    {
+      "js": [
+        "contentscript-bridge.js"
+      ],
+      "matches": [
+        "*://rob.lekensteyn.nl/youtubelyrics/chrome-only.html*"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    },
+    {
+      "js": [
+        "yt_lyrics.js"
+      ],
+      "matches": [
+        "*://*.youtube.com/*",
+        "*://rob.lekensteyn.nl/youtubelyrics/*"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    }
+  ],
+  "icons": {
+    "128": "icons/128.png",
+    "48": "icons/48.png",
+    "32": "icons/32.png",
+    "16": "icons/16.png"
+  },
+  "page_action": {
+    "default_icon": {
+      "19": "icons/19.png",
+      "38": "icons/38.png"
+    },
+    "default_title": "Lyrics Here"
+  },
+  "background": {
+    "scripts": [
+      "processRequest.js",
+      "background.js",
+      "optional_origins.js",
+      "bg-contextMenus.js",
+      "bg-optional.js"
+    ],
+    "persistent": false
+  },
+  "web_accessible_resources": [
+    "contentscript-bridge.html",
+    "optional_origins.js",
+    "yt_lyrics.js"
+  ],
+  "options_ui": {
+    "page": "options.html#optionsV2",
+    "chrome_style": false
+  },
+  "options_page": "options.html#config"
+}

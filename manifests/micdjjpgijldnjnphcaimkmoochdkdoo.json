@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Hidery - tag watched images",
+  "version": "1.0.6",
+  "manifest_version": 2,
+  "description": "Helps to distinct new content from watched, like focus mode",
+  "icons": {
+    "48": "icons/icon96.png",
+    "128": "icons/icon256.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "js/underscore.js",
+      "js/moment.js",
+      "js/async.js",
+      "src/bg/bgCommunicator.js",
+      "src/bg/background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "*://*/*"
+  ],
+  "browser_action": {
+    "default_icon": "icons/icon19_on.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "css": [
+        "src/content/inject.css"
+      ],
+      "js": [
+        "src/content/csCommunicator.js",
+        "src/content/content.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "src/content/content_after.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    "js/underscore.js",
+    "src/content/csCommunicator.js",
+    "src/content/content.js",
+    "src/content/inject.js",
+    "icons/watch.png",
+    "icons/watch@2x.png",
+    "icons/watch_green.png",
+    "icons/watch_green@2x.png"
+  ]
+}

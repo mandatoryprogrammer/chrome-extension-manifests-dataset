@@ -1,0 +1,42 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "BC Web app config import/export",
+  "description": "Now you can export/import/share Adobe's Business Catalyst web apps easily from within Google Chrome.",
+  "version": "0.0.0.6",
+  "background": {
+    "scripts": [
+      "scripts/background.min.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "storage"
+  ],
+  "icons": {
+    "48": "assets/img/logo_48.png"
+  },
+  "page_action": {
+    "default_icon": {
+      "19": "assets/img/logo.png"
+    },
+    "default_title": "BC Web app export/import utility",
+    "default_popup": "index.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/AdminConsole/*",
+        "http://*/AdminConsoleXT/*",
+        "https://*/AdminConsole/*",
+        "https://*/AdminConsoleXT/*"
+      ],
+      "js": [
+        "scripts/contentscript-libs.js",
+        "scripts/contentscript.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": false
+    }
+  ]
+}

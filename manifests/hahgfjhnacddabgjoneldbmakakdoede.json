@@ -1,0 +1,167 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "CANDDi Email Integration",
+  "description": "CANDDi Email Integration for Gmail and hosted Email Platforms",
+  "version": "2.37.0",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.admin.mailchimp.com/templates/edit*",
+        "*://*.admin.mailchimp.com/campaigns/wizard*",
+        "*://console.e-shot.net/Messages/HTMLEditor/Editor*",
+        "*://*.createsend.com/campaign/design*",
+        "*://ui.constantcontact.com/rnavmap/emcf/email*",
+        "*://mail.google.com/*",
+        "*://*.office365.com/*"
+      ],
+      "js": [
+        "js/shared/vendor/jquery-2.1.1.min.js",
+        "js/shared/vendor/url.min.js",
+        "js/shared/vendor/plugins.js",
+        "js/shared/canddi.js",
+        "js/shared/canddi-jquery.js",
+        "js/shared/storage.js",
+        "js/shared/content-script.js",
+        "js/bulk-mail/bulkMailProvider.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.admin.mailchimp.com/templates/edit*",
+        "*://*.admin.mailchimp.com/campaigns/wizard*"
+      ],
+      "js": [
+        "js/bulk-mail/platforms/mailchimp.js"
+      ],
+      "css": [
+        "css/bulk-mail/mailchimp.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://console.e-shot.net/Messages/HTMLEditor/Editor*"
+      ],
+      "js": [
+        "js/bulk-mail/platforms/eshot.js"
+      ],
+      "css": [
+        "css/bulk-mail/eshot.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.createsend.com/campaign/design*"
+      ],
+      "js": [
+        "js/bulk-mail/platforms/campaignmonitor.js"
+      ],
+      "css": [
+        "css/bulk-mail/campaignmonitor.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://ui.constantcontact.com/rnavmap/emcf/email*"
+      ],
+      "js": [
+        "js/bulk-mail/platforms/constantcontact.js"
+      ],
+      "css": [
+        "css/bulk-mail/constantcontact.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://mail.google.com/*"
+      ],
+      "js": [
+        "js/shared/vendor/inboxsdk.js",
+        "js/shared/vendor/jquery-2.1.1.min.js",
+        "js/shared/canddi.js",
+        "js/shared/canddi-jquery.js",
+        "js/shared/vendor/autolinker.min.js",
+        "js/shared/vendor/handlebars.min.js",
+        "js/environment.js",
+        "js/shared/helpers.js",
+        "js/gmail/sidebar.js",
+        "js/gmail/inboxsdk-content.js"
+      ],
+      "css": [
+        "css/email/gmail.css",
+        "css/font-awesome.min.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.office365.com/*"
+      ],
+      "js": [
+        "js/office365/content.js"
+      ],
+      "css": [
+        "css/email/office365.css"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": "img/icon.png",
+    "default_title": "CANDDi Email Integration"
+  },
+  "icons": {
+    "16": "img/display16.png",
+    "32": "img/display32.png",
+    "48": "img/display48.png",
+    "128": "img/display128.png"
+  },
+  "background": {
+    "scripts": [
+      "js/shared/vendor/underscore-min.js",
+      "js/shared/vendor/jquery-2.1.1.min.js",
+      "js/shared/vendor/handlebars.min.js",
+      "js/shared/storage.js",
+      "js/shared/helpers.js",
+      "js/environment.js",
+      "js/shared/canddi.js",
+      "js/shared/startup.js",
+      "js/shared/eventPage.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "gcm",
+    "notifications",
+    "alarms",
+    "storage",
+    "tabs",
+    "management",
+    "http://*/",
+    "https://*/"
+  ],
+  "web_accessible_resources": [
+    "img/icon.png",
+    "img/display128.png",
+    "js/shared/vendor/jquery-2.1.1.min.js",
+    "js/shared/vendor/url.min.js",
+    "js/shared/vendor/autolinker.min.js",
+    "js/shared/canddi.js",
+    "js/shared/canddi-jquery.js",
+    "js/shared/helpers.js",
+    "js/shared/storage.js",
+    "js/office365/injected.js",
+    "img/gmail/canddidots.svg",
+    "fonts/fontawesome-webfont.eot",
+    "fonts/fontawesome-webfont.svg",
+    "fonts/fontawesome-webfont.ttf",
+    "fonts/fontawesome-webfont.woff",
+    "fonts/fontawesome-webfont.woff2",
+    "fonts/FontAwesome.otf",
+    "handlebars/gmail/font-awesome.handlebars",
+    "handlebars/gmail/inline/sidebar-toggle.handlebars",
+    "handlebars/gmail/inline/identified-icon.handlebars",
+    "handlebars/gmail/inline/not-identified-icon.html",
+    "handlebars/gmail/inline/tracking-popup.html",
+    "handlebars/gmail/sidebar-wrapper.html"
+  ],
+  "content_security_policy": "script-src 'self' 'sha256-dqE3Bupsix3hu3SAUNUBgY/yPODhXNJeir7BIIuxjzQ='; object-src 'self'"
+}

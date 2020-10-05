@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Velocity Tracker",
+  "description": "Track your tasks in one click.",
+  "version": "0.3.3",
+  "background": {
+    "scripts": [
+      "settings.js",
+      "jquery-2.1.1.min.js",
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/clock-19-off.png",
+      "38": "images/clock-38-off.png"
+    },
+    "default_popup": "popup.html",
+    "default_title": "Tracker"
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "css": [
+        "css/insert.css"
+      ],
+      "js": [
+        "jquery-2.1.1.min.js",
+        "js/asana.js"
+      ],
+      "matches": [
+        "https://app.asana.com/*"
+      ]
+    },
+    {
+      "css": [
+        "css/insert.css"
+      ],
+      "js": [
+        "js/trello.js"
+      ],
+      "matches": [
+        "https://trello.com/0/*"
+      ]
+    }
+  ],
+  "icons": {
+    "128": "images/clock128px.png",
+    "16": "images/clock16px.png",
+    "32": "images/clock32px.png"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "notifications",
+    "http://*/",
+    "https://*/"
+  ]
+}

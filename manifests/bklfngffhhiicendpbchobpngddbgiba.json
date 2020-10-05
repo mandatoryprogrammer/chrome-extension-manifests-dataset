@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "云盘管家",
+  "short_name": "云盘管家",
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "description": "云盘管家 - 自动识别百度网盘提取密码，标识已失效的网盘链接，网盘分享从此更加简单",
+  "homepage_url": "https://www.iizhi.cn",
+  "icons": {
+    "16": "img/logo/ext-logo-16.png",
+    "48": "img/logo/ext-logo-48.png",
+    "128": "img/logo/ext-logo-128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "img/logo/ext-logo-48.png",
+      "38": "img/logo/ext-logo-48.png"
+    },
+    "default_title": "云盘管家",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "js/background/index.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "js/content-script/baidu-checkurl.js"
+      ],
+      "matches": [
+        "*://*/*"
+      ],
+      "exclude_matches": [
+        "*://pan.baidu.com/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "js": [
+        "js/content-script/baidu-pwd.js"
+      ],
+      "matches": [
+        "https://pan.baidu.com/share/init*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "<all_urls>"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://pan.baidu.com/*"
+    ]
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.google-analytics.com https://www.googletagmanager.com; object-src 'self'"
+}

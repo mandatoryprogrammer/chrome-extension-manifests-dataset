@@ -1,0 +1,112 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "HIRETUAL - 10x faster talent sourcing",
+  "description": "The ultimate sourcing tool: Recruit the strongest talent with boolean building, contact finding, and AI Sourcing.",
+  "version": "4.3.0",
+  "icons": {
+    "16": "images/icon.png",
+    "48": "images/icon.png",
+    "128": "images/icon.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon.png",
+      "38": "images/icon.png"
+    },
+    "default_popup": "popup/index.html",
+    "default_title": "HIRETUAL"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "windows": "Ctrl+Shift+H",
+        "mac": "Command+Shift+H",
+        "chromeos": "Ctrl+Shift+H",
+        "linux": "Ctrl+Shift+H"
+      }
+    }
+  },
+  "permissions": [
+    "storage",
+    "cookies",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "*://*.hiretual.com/*",
+    "*://*.testhtm.com/*",
+    "*://*.linkedin.com/*",
+    "*://*.twitter.com/*",
+    "*://*.indeed.com/*",
+    "*://*.glassdoor.com/*",
+    "*://*.monster.com/*",
+    "*://*.google.com/*",
+    "*://*.greenhouse.io/*",
+    "*://stackoverflow.com/*",
+    "*://*.facebook.com/*",
+    "*://*.kaggle.com/*",
+    "*://*.lever.co/*"
+  ],
+  "externally_connectable": {
+    "ids": [
+      "*"
+    ],
+    "matches": [
+      "http://localhost:8081/*",
+      "https://app.testhtm.com/*",
+      "https://stageapp.testhtm.com/*",
+      "https://*.hiretual.com/*",
+      "https://app.hiretual.com/*",
+      "https://hiretual.com/*",
+      "https://*.google.com/*",
+      "*://*.chromium.org/*"
+    ]
+  },
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.google-analytics.com; object-src 'self'",
+  "incognito": "split",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.facebook.com/*",
+        "https://github.com/*",
+        "https://twitter.com/*",
+        "https://stackoverflow.com/*",
+        "https://www.kaggle.com/*",
+        "https://scholar.google.com/*",
+        "https://angel.co/*",
+        "https://employers.indeed.com/*",
+        "https://www.glassdoor.com/*",
+        "file://*"
+      ],
+      "css": [
+        "content/index.css"
+      ],
+      "js": [
+        "content/bundle.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://localhost:8081/*",
+        "https://*.testhtm.com/*",
+        "https://*.hiretual.com/*",
+        "https://*.indeed.com/*",
+        "https://*.glassdoor.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "content/*.js",
+    "fonts/*",
+    "images/*.png",
+    "images/*.gif"
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Folio",
+  "version": "1.1.2205",
+  "icons": {
+    "128": "128x128.png",
+    "48": "48x48.png",
+    "16": "16x16.png"
+  },
+  "manifest_version": 2,
+  "description": "Folio helps busy professionals organize and manage their business right from Gmail.",
+  "web_accessible_resources": [
+    "fonts/folio.ttf",
+    "assets/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "assets/vendor.js",
+        "assets/folio.js",
+        "assets/inject-css.js",
+        "assets/pusher.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "content_security_policy": "script-src 'self' https://apis.google.com https://maps.googleapis.com 'unsafe-eval' https://connect.facebook.net https://www.googleadservices.com https://s3.amazonaws.com https://www.google-analytics.com https://www.googletagmanager.com; object-src 'self'",
+  "permissions": [
+    "storage",
+    "cookies",
+    "https://www.amitree.com/",
+    "https://apis.google.com/"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://www.amitree.com/*"
+    ]
+  },
+  "browser_action": {
+    "default_title": "Folio"
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Importer kontaktów do miniCRM z Social Media",
+  "short_name": "miniCRM",
+  "description": "Prosty CRM online dla małych firm — miniCRM. Plugin pozwala importować kontakty z social media, wprost do aplikacji.",
+  "homepage_url": "https://minicrm.pl/",
+  "version": "1.25",
+  "permissions": [
+    "webNavigation",
+    "activeTab",
+    "tabs",
+    "storage",
+    "https://*.minicrm.pl/",
+    "https://minicrm.pl/"
+  ],
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon19.png",
+      "38": "images/icon38.png"
+    },
+    "default_title": "Dodaj kontakt do miniCRM",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "rollbar.js",
+      "lib/rollbar.min.js",
+      "lib/jquery.min.js",
+      "background.js",
+      "api.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.facebook.com/*"
+      ],
+      "js": [
+        "aggregators/BaseAggregator.js",
+        "aggregators/FacebookAggregator.js",
+        "content.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.linkedin.com/*"
+      ],
+      "js": [
+        "aggregators/BaseAggregator.js",
+        "aggregators/LinkedinAggregator.js",
+        "content.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.goldenline.pl/*"
+      ],
+      "js": [
+        "aggregators/BaseAggregator.js",
+        "aggregators/GoldenlineAggregator.js",
+        "content.js"
+      ]
+    }
+  ],
+  "options_page": "options.html",
+  "manifest_version": 2
+}

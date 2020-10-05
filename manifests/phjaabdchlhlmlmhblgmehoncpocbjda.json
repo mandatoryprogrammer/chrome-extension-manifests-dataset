@@ -1,0 +1,71 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "共识魔方盯盘助手",
+  "version": "1.0.2",
+  "description": "共识魔方盯盘助手：币圈投资必备的链上数据提醒插件，不论是在币安等交易盯盘交易，还是在非小号查询信息，都能对各大币种链上token的流转情况做到实时提醒；跟共识魔方做智能投资，不当韭菜更赚钱",
+  "browser_action": {
+    "default_title": "共识魔方盯盘助手",
+    "default_icon": {
+      "38": "icons/main-icon.png",
+      "19": "icons/main-icon.png"
+    }
+  },
+  "icons": {
+    "16": "icons/main-icon.png",
+    "48": "icons/main-icon.png",
+    "128": "icons/main-icon.png"
+  },
+  "background": {
+    "persistent": true,
+    "page": "background/index.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.binance.com/*",
+        "https://*.feixiaohao.com/*",
+        "<all_urls>"
+      ],
+      "js": [
+        "inject/index.js"
+      ],
+      "css": [
+        "ui/inject.css"
+      ],
+      "run_at": "document_start",
+      "all_frames": false,
+      "match_about_blank": false,
+      "exclude_globs": [
+        "https://*.consencube.com/*",
+        "http://*.consencube.com/*"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>",
+    "https://*.consencube.com/*",
+    "http://*.consencube.com/*",
+    "https://*.binance.com/*",
+    "https://*.feixiaohao.com/*"
+  ],
+  "content_security_policy": "frame-src https://wx.consencube.com http://wx.consencube.com; script-src 'self' 'unsafe-eval';object-src 'self'; style-src 'self' https://wx.consencube.com/ 'unsafe-inline'; img-src 'self' http://*.consencube.com https://*.consencube.com",
+  "commands": {
+    "toggle": {
+      "suggested_key": {
+        "default": "Alt+Shift+D"
+      },
+      "description": "打开侧边栏"
+    }
+  },
+  "web_accessible_resources": [
+    "icons/*",
+    "data:*",
+    "http:*",
+    "https:*"
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "name": "__MSG_appName__",
+  "version": "1.18.61",
+  "short_name": "__MSG_appShortDesc__",
+  "description": "__MSG_appDesc__",
+  "permissions": [
+    "storage",
+    "cookies",
+    "tabs",
+    "*://*.knowblearticles.com/",
+    "*://*.knowblereader.com/",
+    "*://*/*",
+    "http://localhost:3000/"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "images/knowble-reader-19.png",
+      "48": "images/knowble-reader-48.png",
+      "128": "images/knowble-reader-128.png"
+    },
+    "default_title": "__MSG_appName__",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "plugin.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "icons": {
+    "19": "images/knowble-reader-19.png",
+    "20": "images/knowble-reader-off-19.png",
+    "48": "images/knowble-reader-48.png",
+    "128": "images/knowble-reader-128.png"
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "bg.js"
+    ]
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://*.knowblearticles.com/*",
+      "*://*.knowblereader.com/*",
+      "*://*.dutchreader.com/*",
+      "http://localhost:3000/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "index.html",
+    "images/knowble-reader-large.svg",
+    "is_installed.json",
+    "logo-small.png",
+    "includes/*",
+    "images/*"
+  ],
+  "author": "Knowble"
+}

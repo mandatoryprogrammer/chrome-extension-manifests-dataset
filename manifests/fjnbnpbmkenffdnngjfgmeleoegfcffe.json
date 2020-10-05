@@ -1,0 +1,104 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_extName__",
+  "short_name": "Stylish",
+  "description": "__MSG_description__",
+  "homepage_url": "https://userstyles.org",
+  "manifest_version": 2,
+  "icons": {
+    "128": "images/128.png"
+  },
+  "permissions": [
+    "tabs",
+    "webNavigation",
+    "webRequest",
+    "contextMenus",
+    "storage",
+    "*://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "src/ua-parser.js",
+      "src/utils.js",
+      "src/refilter.js",
+      "src/helpers.js",
+      "src/messaging.js",
+      "src/storage-websql.js",
+      "src/storage.js",
+      "src/analyticsMain.js",
+      "src/state.js",
+      "src/pre_background.js",
+      "src/background.js"
+    ]
+  },
+  "commands": {
+    "openManage": {
+      "description": "__MSG_openManage__"
+    },
+    "styleDisableAll": {
+      "description": "__MSG_disableAllStyles__"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "js": [
+        "src/inject/apply.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://userstyles.org/*",
+        "https://userstyles.org/*"
+      ],
+      "run_at": "document_end",
+      "all_frames": false,
+      "js": [
+        "src/inject/install.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://userstyles.org/**?autofb",
+        "https://userstyles.org/**?autofb"
+      ],
+      "run_at": "document_end",
+      "all_frames": false,
+      "js": [
+        "src/inject/auto-feedback-forward.js"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_end",
+      "all_frames": true,
+      "js": [
+        "src/inject/frame.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "images/128.png",
+    "images/off.svg",
+    "images/on.svg",
+    "external/fonts/Roboto-Regular.ttf"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "128": "images/128w.png"
+    },
+    "default_title": "Stylish",
+    "default_popup": "src/popup/popup.html"
+  },
+  "default_locale": "en",
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCr3yiiN7TIDoaEvh7W34g5YsxfUIGkvVUylq9bm29v8EzULCNIpi74KOBrvprYB6/YAdLjvYmGya1CJfgkuQy3/rZ7gGLSrDk9B1qgsHurhNaCJ0ogfSR50bfYUp0qJlIAgBgZWrVWLogfXbU8x+LFgV8pdMjFuWJgzketxjP6nwIDAQAB",
+  "options_page": "manage.html",
+  "version": "2.0.9"
+}

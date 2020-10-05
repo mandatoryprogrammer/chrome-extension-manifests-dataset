@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "CiteKeeper.com",
+  "version": "0.0.6",
+  "manifest_version": 2,
+  "description": "This extension integrates CiteKeeper with FastCase, Lexis, and Westlaw.",
+  "homepage_url": "http://www.citekeeper.com",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": false
+  },
+  "options_page": "src/options_custom/index.html",
+  "page_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "CiteKeeper Extension",
+    "default_popup": "src/page_action/page_action.html"
+  },
+  "permissions": [
+    "contextMenus",
+    "clipboardRead",
+    "clipboardWrite",
+    "http://www.citekeeper.com/",
+    "https://www.citekeeper.com/",
+    "http://localhost/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://apps.fastcase.com/Research/Pages/Document.aspx*",
+        "http://advance.lexis.com/*",
+        "https://advance.lexis.com/*",
+        "https://scholar.google.com/scholar_case*",
+        "http://localhost:3000/*"
+      ],
+      "js": [
+        "js/jquery/jquery.min.js",
+        "src/inject/inject.js"
+      ]
+    }
+  ]
+}

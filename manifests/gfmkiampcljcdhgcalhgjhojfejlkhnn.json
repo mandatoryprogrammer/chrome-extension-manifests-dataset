@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "WonderSwitcher",
+  "description": "Switch between HTTP proxies quickly and easily",
+  "version": "4.6.1",
+  "icons": {
+    "16": "icons/16x16.png",
+    "32": "icons/32x32.png",
+    "48": "icons/48x48.png",
+    "128": "icons/128x128.png"
+  },
+  "browser_action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "WonderSwitcher",
+    "default_icon": "icons/48x48-inactive.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.wonderproxy.com/*"
+      ],
+      "js": [
+        "content_scripts/wp-site.js"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content_scripts/geo.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start",
+      "match_about_blank": true
+    }
+  ],
+  "options_ui": {
+    "page": "options/options.html#proxy",
+    "open_in_tab": true
+  },
+  "permissions": [
+    "tabs",
+    "<all_urls>",
+    "storage",
+    "proxy",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

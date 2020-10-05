@@ -1,0 +1,43 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "WaniKani Highlighter",
+  "version": "1.0.3",
+  "description": "Highlights your WaniKani kanji and vocabulary on webpages that you visit.",
+  "icons": {
+    "128": "img/icon128.png"
+  },
+  "browser_action": {
+    "default_title": "WaniKani Highlighter",
+    "default_popup": "html/popup.html"
+  },
+  "options_page": "html/popup.html",
+  "permissions": [
+    "storage",
+    "tabs",
+    "*://www.wanikani.com/api/*"
+  ],
+  "background": {
+    "scripts": [
+      "/js/helper.js",
+      "/js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "exclude_matches": [
+        "*://wanikani.com/*",
+        "*://*.wanikani.com/*"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "js/jquery.ba-replacetext.min.js",
+        "js/helper.js",
+        "js/highlight.js"
+      ]
+    }
+  ]
+}

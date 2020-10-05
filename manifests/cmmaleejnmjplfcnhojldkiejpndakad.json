@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "LCHS Go",
+  "version": "1.9",
+  "description": "Extension version of go.lciteam.club.",
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "manifest_version": 2,
+  "icons": {
+    "16": "spartan_16.png",
+    "48": "spartan_48.png",
+    "128": "spartan_128.png"
+  },
+  "permissions": [
+    "https://go.lciteam.club/*",
+    "alarms"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://go.lciteam.club/home/?utm_source=extension_badge"
+      ],
+      "js": [
+        "getTime.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://go.lciteam.club/home/?utm_source=extension"
+      ],
+      "js": [
+        "newTab.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://go.lciteam.club/*"
+      ],
+      "js": [
+        "contentScript.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "options_page": "options.html"
+}

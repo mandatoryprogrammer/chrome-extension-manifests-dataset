@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Linked Helper",
+  "description": "This extension allows view linkedin profile",
+  "version": "1.0",
+  "minimum_chrome_version": "46",
+  "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'",
+  "icons": {
+    "48": "icon-disabled.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js",
+      "content.js"
+    ],
+    "pages": [
+      "linkedViewer.html"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": "icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.linkedin.com/*",
+        "http://www.linkedin.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "styleExt.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "notifications",
+    "storage",
+    "http://*/*",
+    "https://*/*",
+    "https://linkedin.com/*",
+    "<all_urls>",
+    "contextMenus"
+  ]
+}

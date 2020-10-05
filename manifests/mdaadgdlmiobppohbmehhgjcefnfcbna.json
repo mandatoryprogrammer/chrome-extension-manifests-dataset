@@ -1,0 +1,142 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "PGM+",
+  "description": "PGM+: Adiciona funcionalidades aos sistemas da Procuradoria Geral do Município de São Paulo",
+  "author": "Huno Molina Rodrigues dos Santos",
+  "version": "0.9.3",
+  "permissions": [
+    "storage",
+    "https://pgmsp.net/",
+    "clipboardRead"
+  ],
+  "web_accessible_resources": [
+    "img/*.png"
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  },
+  "icons": {
+    "16": "img/city16.png",
+    "32": "img/city32.png",
+    "48": "img/city48.png",
+    "128": "img/city128.png",
+    "256": "img/city256.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "img/city16.png",
+      "32": "img/city32.png",
+      "48": "img/city48.png",
+      "128": "img/city128.png",
+      "256": "img/city256.png"
+    }
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://siajd.pgm.prefeitura.sp.gov.br/UC_ACA_024_ConsultarAutos/Pesquisar?*NumeroAutos=*",
+        "*://siajd.prefeitura.sp.gov.br/UC_ACA_024_ConsultarAutos/Pesquisar?*NumeroAutos=*",
+        "*://siajd.prodam/UC_ACA_024_ConsultarAutos/Pesquisar?*NumeroAutos=*"
+      ],
+      "js": [
+        "getpa.js",
+        "getsei.js",
+        "copyCNJ.js",
+        "intCalcPraz.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "*://processos.prefeitura.sp.gov.br/Forms/consultarProcessos.aspx*"
+      ],
+      "js": [
+        "simproc.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "*://sei.prefeitura.sp.gov.br/sei/controlador.php*",
+        "*://sei.prefeitura.sp.gov.br/sei/"
+      ],
+      "js": [
+        "sei.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "*://sei.prefeitura.sp.gov.br/sei/controlador.php?acao=procedimento_trabalhar*"
+      ],
+      "js": [
+        "seiMapCnj.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "*://esaj.tjsp.jus.br/cpopg/show.do?*",
+        "*://esaj.tjsp.jus.br/cposg/show.do?*",
+        "*://esaj.tjsp.jus.br/cposg/search.do?*"
+      ],
+      "js": [
+        "esaj.js",
+        "esajNovo.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "*://siajd.pgm.prefeitura.sp.gov.br/UC_INT_032_ManterIntimacao/Pesquisar*",
+        "*://siajd.prefeitura.sp.gov.br/UC_INT_032_ManterIntimacao/Pesquisar*",
+        "*://siajd.prodam/UC_INT_032_ManterIntimacao/Pesquisar*"
+      ],
+      "js": [
+        "intCalcPraz.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "*://siajd.prefeitura.sp.gov.br/UC_ACA_017_ManterAcaoJudicial/Adicionar*",
+        "*://siajd.pgm.prefeitura.sp.gov.br/UC_ACA_017_ManterAcaoJudicial/Adicionar*",
+        "*://siajd.prodam/UC_ACA_017_ManterAcaoJudicial/Adicionar*"
+      ],
+      "js": [
+        "cadAcao.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "*://siajd.prefeitura.sp.gov.br/UC_ACA_017_ManterAcaoJudicial/*",
+        "*://siajd.pgm.prefeitura.sp.gov.br/UC_ACA_017_ManterAcaoJudicial/*",
+        "*://siajd.prodam/UC_ACA_017_ManterAcaoJudicial/*"
+      ],
+      "js": [
+        "saveCtrlY.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "*://siajd.prefeitura.sp.gov.br/UC_ACA_023_ConsultaGeralAcoes/Pesquisar*",
+        "*://siajd.pgm.prefeitura.sp.gov.br/UC_ACA_023_ConsultaGeralAcoes/Pesquisar*",
+        "*://siajd.prodam/UC_ACA_023_ConsultaGeralAcoes/Pesquisar*"
+      ],
+      "js": [
+        "consultaGeral.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "manifest_version": 2
+}

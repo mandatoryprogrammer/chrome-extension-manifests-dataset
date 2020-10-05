@@ -1,0 +1,126 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Coloreador de Séneca",
+  "description": "Extensión que colorea las evaluaciones de Séneca, servicio web de la Junta de Andalucía",
+  "version": "35",
+  "short_name": "Coloreador de Séneca",
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "browser_action": {
+    "default_title": "Coloreador de Séneca",
+    "default_icon": "icon16.png",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://senecav2.ced.junta-andalucia.es/seneca/menus/*",
+        "https://www.juntadeandalucia.es/educacion/senecav2/seneca/menus/*",
+        "https://senecav2.ced.junta-andalucia.es/seneca/nav/*",
+        "https://www.juntadeandalucia.es/educacion/senecav2/seneca/nav/*"
+      ],
+      "js": [
+        "jquery-3.4.1.min.js",
+        "senecav2_eval.js",
+        "senecav2_evalsel.js",
+        "senecav2_inventario.js",
+        "senecav2_main.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://seneca.ced.junta-andalucia.es/seneca/jsp/Principal.jsp*",
+        "https://www.juntadeandalucia.es/educacion/seneca/seneca/jsp/Principal.jsp*",
+        "http://*/senecafor/jsp/Principal.jsp*",
+        "http://www.juntadeandalucia.es/educacion/seneca/formacion/senecafor/jsp/Principal.jsp*"
+      ],
+      "js": [
+        "coloreador_seneca.user.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://www.juntadeandalucia.es/educacion/portaldocente/consultas/datosgenerales/nombramientosCentroServicio.ced",
+        "https://portaldocente.ced.junta-andalucia.es/educacion/portaldocente/consultas/datosgenerales/nombramientosCentroServicio.ced"
+      ],
+      "js": [
+        "tiempos_servicio.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://www.juntadeandalucia.es/educacion/portaldocente/consultas/datosgenerales/sexenios.ced",
+        "https://portaldocente.ced.junta-andalucia.es/educacion/portaldocente/consultas/datosgenerales/sexenios.ced"
+      ],
+      "js": [
+        "sexenio.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://www.juntadeandalucia.es/educacion/portaldocente/consultas/datosgenerales/trienios.ced",
+        "https://portaldocente.ced.junta-andalucia.es/educacion/portaldocente/consultas/datosgenerales/trienios.ced"
+      ],
+      "js": [
+        "trienio.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://www.juntadeandalucia.es/educacion/seneca/seneca/senecamovil/PrincipalPagina.jsp*NOMBRE_*X_HORARIORE*",
+        "https://seneca.ced.junta-andalucia.es/seneca/senecamovil/PrincipalPagina.jsp*NOMBRE_*X_HORARIORE*"
+      ],
+      "js": [
+        "isenecaweb_faltas.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://www.juntadeandalucia.es/educacion/seneca/seneca/senecamovil/PrincipalPagina.jsp*",
+        "https://seneca.ced.junta-andalucia.es/seneca/senecamovil/PrincipalPagina.jsp*"
+      ],
+      "js": [
+        "colores_almacenados.js",
+        "isenecaweb_calificacion.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true,
+    "open_in_tab": true
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "permissions": [
+    "clipboardWrite",
+    "http://*/*",
+    "https://*/*",
+    "tabs",
+    "storage",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "manifest_version": 2
+}

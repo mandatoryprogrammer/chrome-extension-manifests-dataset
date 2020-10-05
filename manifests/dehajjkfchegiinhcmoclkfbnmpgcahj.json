@@ -1,0 +1,74 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "InsertLearning",
+  "description": "Insert instructional content on any web page",
+  "version": "1.12.5",
+  "icons": {
+    "128": "lib/img/icon.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://docentedu.com/*",
+        "https://insertlearning.com/*",
+        "https://www.okeebo.com/*"
+      ],
+      "js": [
+        "version.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://insertlearning.com/v1/share/*"
+      ],
+      "js": [
+        "share.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://insertlearning.com/v1/lesson/*"
+      ],
+      "js": [
+        "lesson.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    }
+  ],
+  "browser_action": {
+    "default_title": "InsertLearning",
+    "default_icon": "lib/img/icon.png"
+  },
+  "permissions": [
+    "activeTab",
+    "webNavigation",
+    "<all_urls>"
+  ],
+  "optional_permissions": [
+    "identity"
+  ],
+  "oauth2": {
+    "client_id": "127401089900-rarcch2uc0f83u0bdcm1fchpi8brttqu.apps.googleusercontent.com",
+    "scopes": [
+      "profile",
+      "email",
+      "openid"
+    ]
+  },
+  "web_accessible_resources": [
+    "lib/fonts/*",
+    "lib/iframe/*",
+    "lib/img/*"
+  ],
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAx77dY6nQKrjpTulS2r/78MgizLQbjonZBoL/CQy2/IuLEYviiW23gk9xK8Ba8N/v7x2C1WcqrkZSVgtqsoSbYt5XoOvPAMZLcS3REvFJGCsrtGrndnoX0bFdZVrlIPDVvHIcRsjnDFYWC8SoWaDEuTAWi+PTcjck8dZ+69Q8S9lHotgh01KxFJtxwxi8PNF4koUREPKOcsopq0OC8MJH9foIGCSmyzz6wiiozCD8ryhV6EM8JqhQ7+MsnHMzv5rJfw+g8ZKDDH/ZM/uM3skmOAJF1e9lfX21X6UFYjHzVUoYH+c4Xosx3XCLgBIcyyTSyas+cZtBptcUtJDFEdLNuQIDAQAB"
+}

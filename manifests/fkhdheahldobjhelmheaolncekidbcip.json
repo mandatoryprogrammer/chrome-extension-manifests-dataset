@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "version": "2.18",
+  "name": "__MSG_appName__",
+  "description": "__MSG_appDescription__",
+  "default_locale": "en",
+  "minimum_chrome_version": "22.0.0.0",
+  "icons": {
+    "128": "images/icon128.png",
+    "48": "images/icon48.png",
+    "16": "images/icon16.png"
+  },
+  "browser_action": {
+    "default_icon": "images/icon128.png",
+    "default_title": "__MSG_appName__",
+    "default_popup": "src/popup/popup.html"
+  },
+  "options_ui": {
+    "page": "src/options/index.html",
+    "open_in_tab": true
+  },
+  "background": {
+    "page": "src/background/background.html"
+  },
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "alarms"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/achievo/dispatch.php?*",
+        "*://*/achievo/"
+      ],
+      "js": [
+        "src/options/lib/store.js",
+        "scripts/browser.js",
+        "scripts/consts.js",
+        "scripts/alarms.js",
+        "scripts/common.js",
+        "scripts/achievo.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "images/icon16.png",
+    "images/icon48.png",
+    "images/icon128.png",
+    "images/ajax_loader.gif"
+  ]
+}

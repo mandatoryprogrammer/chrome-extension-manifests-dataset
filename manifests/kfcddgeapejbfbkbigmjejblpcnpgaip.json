@@ -1,0 +1,75 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "version": "0.9",
+  "name": "Falcon AWS Helper",
+  "short_name": "Falcon AWS Helper",
+  "description": "Falcon AWS Helper",
+  "permissions": [
+    "<all_urls>",
+    "activeTab",
+    "storage"
+  ],
+  "icons": {
+    "16": "assets/images/icon-16.png",
+    "48": "assets/images/icon-48.png",
+    "128": "assets/images/icon-128.png"
+  },
+  "externally_connectable": {
+    "matches": [
+      "http://localhost:3000/*",
+      "*://app.falconcloud.io/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "assets/images/icon-16.png",
+    "assets/images/icon-48.png",
+    "assets/images/icon-128.png",
+    "assets/images/icon-19.png",
+    "assets/images/icon-38.png"
+  ],
+  "background": {
+    "scripts": [
+      "scripts/main.js",
+      "scripts/aws/main.js",
+      "scripts/pagerduty/main.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://app.falconcloud.io/redirects/extension?*",
+        "http://localhost:3000/redirects/extension?*"
+      ],
+      "js": [
+        "content_scripts/content_script.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.aws.amazon.com/console/home?*",
+        "*://*.aws.amazon.com/iam/home*"
+      ],
+      "js": [
+        "content_scripts/aws/content_script.js"
+      ],
+      "css": [
+        "assets/css/spinner.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.pagerduty.com/*"
+      ],
+      "js": [
+        "content_scripts/pagerduty/content_script.js"
+      ],
+      "css": [
+        "assets/css/spinner.css"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

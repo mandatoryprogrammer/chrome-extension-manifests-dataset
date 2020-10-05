@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "YouTube Ambilight",
+  "description": "Immersive yourself in YouTube videos with ambilight!",
+  "version": "2.35.3",
+  "author": "Wessel Kroos",
+  "icons": {
+    "16": "images/icon-16.png",
+    "32": "images/icon-32.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
+  },
+  "browser_action": {
+    "default_icon": "images/icon-19.png",
+    "default_popup": "options.html"
+  },
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/*"
+      ],
+      "js": [
+        "scripts/content.js"
+      ],
+      "css": [
+        "styles/youtube-ambilight.css",
+        "styles/youtube-ambilight-classic.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.youtube.com/live_chat*"
+      ],
+      "css": [
+        "styles/youtube-ambilight-iframe-live-chat.css"
+      ],
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "styles/options.css",
+    "scripts/youtube-ambilight.js",
+    "images/noise-1.png",
+    "images/noise-2.png",
+    "images/noise-3.png"
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": false
+  },
+  "permissions": [
+    "https://www.youtube.com/*"
+  ]
+}

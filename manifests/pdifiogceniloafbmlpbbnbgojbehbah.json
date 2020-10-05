@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Homework Dictionary",
+  "description": "Extension stores and translates selected words, phrases and sentences",
+  "version": "1.0.3",
+  "browser_action": {
+    "default_icon": "images/dictionary.png",
+    "default_popup": "popup.html",
+    "default_title": "Homework Distionary"
+  },
+  "web_accessible_resources": [
+    "images/*.png"
+  ],
+  "permissions": [
+    "notifications",
+    "tabs",
+    "storage",
+    "background",
+    "https://ajax.googleapis.com/",
+    "http://translate.yandex.net/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "style/jquery-ui.min.css",
+        "style/myWords_content_script.css"
+      ],
+      "js": [
+        "js/lib/jquery.js",
+        "js/content.js",
+        "js/lib/jquery-ui.min.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/background.js",
+      "js/lib/jquery.js",
+      "js/lib/lodash.min.js"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'"
+}

@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Jobiak",
+  "description": "Extract Job Links from a Page",
+  "version": "0.0.1",
+  "author": "Jobiak.ai",
+  "browser_action": {
+    "default_title": "Jobiak",
+    "default_icon": "favicon.ico"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "<all_urls>",
+    "storage",
+    "webRequest"
+  ],
+  "background": {
+    "scripts": [
+      "script.js"
+    ],
+    "all_frames": true,
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "all_frames": true,
+      "js": [
+        "contentScript.js"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "all_frames": true,
+      "css": [
+        "highlight.css"
+      ]
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "http://127.0.0.1:8887/*",
+      "http://localhost:8089/*",
+      "https://*.jobiak.ai/*",
+      "http://*.jobiak.ai/*"
+    ]
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Pin tabs - Tab Manager",
+  "short_name": "Keep tabs history",
+  "version": "1.2.0",
+  "description": "Pin Tabs allows the user to pin one or more tabs for short periods, keep track of the expired tabs in the history and save energy",
+  "browser_action": {
+    "default_title": "Show the list of pinned tabs",
+    "default_popup": "pages/popup.html"
+  },
+  "author": "Pier Roberto Lucisano",
+  "background": {
+    "page": "pages/background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "pages/index.js"
+      ],
+      "run_at": "document_end",
+      "exclude_matches": [
+        "https://www.youtube.com/*"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "http://*/*",
+    "https://*/*",
+    "storage",
+    "alarms"
+  ],
+  "minimum_chrome_version": "60",
+  "icons": {
+    "16": "assets/list.png",
+    "48": "assets/list.png",
+    "128": "assets/list128.png"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

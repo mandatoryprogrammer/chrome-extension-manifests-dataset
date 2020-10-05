@@ -1,0 +1,130 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "ContentStudio - Social Media Scheduler",
+  "version": "0.3.4",
+  "description": "ContentStudio is a content marketing and social media management platform to grow your social presence and boost content marketing.",
+  "manifest_version": 2,
+  "icons": {
+    "16": "icons/16.png",
+    "32": "icons/32.png",
+    "64": "icons/64.png",
+    "128": "icons/128.png"
+  },
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "tabs",
+    "cookies",
+    "background",
+    "storage"
+  ],
+  "browser_action": {
+    "default_title": "Share with ContentStudio",
+    "default_icon": "icons/48.png"
+  },
+  "background": {
+    "persistent": false,
+    "page": "pages/background.html"
+  },
+  "devtools_page": "pages/devtools.html",
+  "options_page": "pages/options.html",
+  "content_scripts": [
+    {
+      "js": [
+        "extended/jquery.min.js",
+        "extended/cs-share-button.js",
+        "extended/keymaster.js",
+        "extended/he.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ]
+    },
+    {
+      "js": [
+        "extended/cs-hacker-news.js"
+      ],
+      "matches": [
+        "*://*.ycombinator.org/*",
+        "*://*.ycombinator.com/*"
+      ]
+    },
+    {
+      "css": [
+        "extended/cs-twitter.css"
+      ],
+      "js": [
+        "extended/cs-twitter.js"
+      ],
+      "matches": [
+        "*://*.twitter.com/*"
+      ]
+    },
+    {
+      "css": [
+        "extended/cs-facebook.css"
+      ],
+      "js": [
+        "extended/cs-facebook.js"
+      ],
+      "matches": [
+        "*://*.facebook.com/*"
+      ]
+    },
+    {
+      "css": [
+        "extended/cs-linkedin.css"
+      ],
+      "js": [
+        "extended/cs-linkedin.js"
+      ],
+      "matches": [
+        "*://*.linkedin.com/*"
+      ]
+    },
+    {
+      "css": [
+        "extended/cs-pinterest.css"
+      ],
+      "js": [
+        "extended/cs-pinterest.js"
+      ],
+      "matches": [
+        "*://*.pinterest.com/*",
+        "*://*.pinterest.pt/*",
+        "*://*.pinterest.de/*",
+        "*://*.pinterest.com.mx/*",
+        "*://*.pinterest.ie/*",
+        "*://*.pinterest.co.uk/*",
+        "*://*.pinterest.fr/*",
+        "*://*.pinterest.es/*",
+        "*://*.pinterest.nl/*",
+        "*://*.pinterest.ca/*",
+        "*://*.pinterest.dk/*",
+        "*://*.pinterest.at/*",
+        "*://*.pinterest.se/*",
+        "*://*.pinterest.ch/*",
+        "*://*.pinterest.jp/*",
+        "*://*.pinterest.nz/*",
+        "*://*.pinterest.com.au/*"
+      ]
+    },
+    {
+      "js": [
+        "js/inject.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "web_accessible_resources": [
+    "css/inject.css",
+    "pages/app.html",
+    "js/content.js",
+    "extended/*"
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "version": "1.0.1",
+  "manifest_version": 2,
+  "description": "__MSG_appDesc__",
+  "homepage_url": "https://www.searchadministrator.com",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "js/polyfill.js",
+      "js/jquery.js",
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/icon19.png",
+      "38": "icons/icon38.png"
+    },
+    "default_popup": "html/popup.html"
+  },
+  "permissions": [
+    "contextMenus",
+    "tabs",
+    "storage",
+    "*://*.searchadministrator.com/*",
+    "*://*.thebettertab.com/*",
+    "*://search.yahoo.com/*",
+    "webRequest",
+    "webRequestBlocking",
+    "management"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.searchadministrator.com/*",
+        "https://*.searchadministrator.com/*"
+      ],
+      "js": [
+        "js/jquery.js",
+        "js/attribution.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*.searchadministrator.com/*",
+        "*://*.thebettertab.com/*",
+        "*://search.yahoo.com/*"
+      ],
+      "css": [
+        "css/searchadministrator.css"
+      ],
+      "js": [
+        "js/jquery.js",
+        "js/searchadministrator.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "/img/*",
+    "/html/rate.html"
+  ],
+  "chrome_settings_overrides": {
+    "search_provider": {
+      "name": "Search Administrator",
+      "keyword": "searchadministrator.com",
+      "favicon_url": "https://www.searchadministrator.com/images/favicon.png",
+      "search_url": "https://www.searchadministrator.com/search?q={searchTerms}&aid=53",
+      "suggest_url": "https://www.searchadministrator.com/ss?q={searchTerms}",
+      "image_url": "https://www.searchadministrator.com/search?q={searchTerms}&tbm=isch&aid=53",
+      "encoding": "UTF-8",
+      "is_default": true
+    }
+  }
+}

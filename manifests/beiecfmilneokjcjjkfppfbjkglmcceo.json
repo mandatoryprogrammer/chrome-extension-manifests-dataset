@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "background": {
+    "page": "bg.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icons/icon-128.png",
+    "default_popup": "panel.html#init"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "chromeos": "Alt+Shift+E",
+        "linux": "Alt+Shift+E",
+        "mac": "Ctrl+Shift+E",
+        "windows": "Alt+Shift+E"
+      }
+    }
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "jquery.js",
+        "contentScript.data.js",
+        "contentScript.concat.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "https://www.google-analytics.com/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.google-analytics.com; object-src 'self'",
+  "description": "Keyboard emoji for browsers",
+  "icons": {
+    "128": "icons/icon-128.png",
+    "256": "icons/icon-256.png",
+    "48": "icons/icon-48.png",
+    "64": "icons/icon-64.png"
+  },
+  "manifest_version": 2,
+  "name": "Keyboard Emoji™",
+  "options_ui": {
+    "page": "options.html"
+  },
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "version": "1.0.0",
+  "web_accessible_resources": [
+    "/test.js",
+    "/data/emojione.sprites.svg"
+  ]
+}

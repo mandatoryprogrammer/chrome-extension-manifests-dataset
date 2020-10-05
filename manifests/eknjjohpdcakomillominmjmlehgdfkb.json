@@ -1,0 +1,40 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Everybody is Scottish",
+  "description": "An extension to convert all tweets into Scottish People tweets.",
+  "version": "0.1",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html",
+    "default_title": "Click to open extension"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.twitter.com/*",
+        "https://twitter.com/*"
+      ],
+      "js": [
+        "jquery.js",
+        "dictionary.js",
+        "contentScript.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "http://twitter.com/",
+    "https://twitter.com/",
+    "tabs",
+    "activeTab",
+    "storage"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

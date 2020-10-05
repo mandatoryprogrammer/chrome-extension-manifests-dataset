@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "smaxer",
+  "author": "Paul Hatton",
+  "version": "1.0.500",
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "description": "smaxer: The SchoolMAX helper for PGCPS teachers.",
+  "browser_action": {
+    "default_icon": "icons/smaxer.icon.19x19.png",
+    "default_title": "smaxer SchoolMAX helper",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "icons/smaxer.icon.16x16.png",
+    "48": "icons/smaxer.icon.48x48.png",
+    "128": "icons/smaxer.icon.128x128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://sis.pgcps.org/schoolmax/*"
+      ],
+      "css": [
+        "css/jquery-ui.css",
+        "js/timeentry/jquery.timeentry.css"
+      ],
+      "js": [
+        "js/jquery-2.1.1.min.js",
+        "js/jquery-ui.min.js",
+        "js/jquery.form.js",
+        "js/lodash-2.4.1.min.js",
+        "js/timeentry/jquery.plugin.min.js",
+        "js/timeentry/jquery.timeentry.min.js",
+        "content_script.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "options_page": "options.html",
+  "permissions": [
+    "tabs",
+    "https://sis.pgcps.org/schoolmax/*",
+    "storage",
+    "webRequest"
+  ],
+  "web_accessible_resources": [
+    "css/images/*",
+    "icons/checkmark.gif",
+    "images/*",
+    "js/timeentry/spinnerUpDown.png"
+  ]
+}

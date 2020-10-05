@@ -1,0 +1,151 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Yiton 淘宝助手",
+  "description": "Yiton 淘宝助手。www.yiton.net出品",
+  "version": "1.3.56",
+  "permissions": [
+    "cookies",
+    "notifications",
+    "contextMenus",
+    "tabs",
+    "http://*/",
+    "https://*/*",
+    "storage",
+    "background",
+    "webRequest"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.taobao.com/*",
+        "*://*.tmall.com/*",
+        "*://*.tmall.hk/*",
+        "*://*.alipay.com/*",
+        "*://*.yiton.net/yiton/*",
+        "*://*.1ton.cc/yiton/*"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "js": [
+        "js/jquery-1.8.3.min.js",
+        "js/URI.min.js",
+        "js/underscore-min.js",
+        "js/jquery-observe.js",
+        "js/inc.js",
+        "js/user.js",
+        "js/taobao/yiton-cart.js"
+      ],
+      "css": [
+        "css/common.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.tmall.com/*",
+        "*://*.tmall.hk/*",
+        "*://*.taobao.com/*",
+        "*://*.1ton.cc/yiton/tbk_items_convert.php*",
+        "*://*.yiton.net/yiton/tbk_items_convert.php*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "js/sweetalert.min.js",
+        "js/jquery.mousewheel.js",
+        "js/then.min.js",
+        "content.js"
+      ],
+      "css": [
+        "css/sweetalert.css",
+        "css/sweetalert-themes/facebook/facebook.css",
+        "css/button.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://item.taobao.com/item.htm*",
+        "*://detail.tmall.com/item.htm*",
+        "*://*.tmall.hk/*",
+        "*://world.taobao.com/item/*",
+        "*://world.tmall.com/item/*",
+        "*://ai.taobao.com/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "js/taobao/yiton-money.js",
+        "js/taobao/yiton-address.js",
+        "js/taobao/yiton-daigou.js",
+        "js/taobao/yiton-zizhu.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.yiton.net/yiton/*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "yiton.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://buyertrade.taobao.com/trade/detail/trade_item_detail.htm*",
+        "*://trade.taobao.com/trade/itemlist/list_bought_items.htm*",
+        "*://buyertrade.taobao.com/trade/itemlist/list_bought_items.htm*",
+        "*://unit.buyer.trade.taobao.com/trade/itemlist/listBoughtItems.htm*",
+        "*://unit.buyer.trade.taobao.com/trade/itemlist/list_bought_items.htm*",
+        "*://unit.buyer.trade.taobao.com/trade/detail/trade_item_detail.htm*",
+        "*://tradearchive.taobao.com/trade/detail/trade_item_detail.htm*",
+        "*://trade.taobao.com/trade/detail/trade_item_detail.htm*",
+        "*://trade.tmall.com/detail/orderDetail.htm*",
+        "*://buyer.trade.taobao.com/trade/itemlist/list_bought_items.htm*",
+        "*://buyer.trade.taobao.com/trade/itemlist/listBoughtItems.htm*",
+        "*://buyer.trade.taobao.com/trade/detail/trade_item_detail.htm*",
+        "*://world.taobao.com/trade/itemlist/list_bought_items.htm*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "trade.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://member1.taobao.com/member/fresh/deliver_address_frame.htm*",
+        "*://member1.taobao.com/member/fresh/deliver_address.htm*",
+        "*://unit.buy.taobao.com/auction/buy_now.jhtml*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "js/then.min.js",
+        "js/jquery.color.js",
+        "address.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "icons": {
+    "16": "images/icon.png",
+    "48": "images/icon.png",
+    "128": "images/icon.png"
+  },
+  "browser_action": {
+    "default_title": "Yiton 淘宝助手",
+    "default_icon": "images/icon.png",
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "background": {
+    "scripts": [
+      "background.js",
+      "js/jquery-1.8.3.min.js",
+      "js/underscore-min.js",
+      "js/inc.js",
+      "js/user.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "js/*",
+    "images/*"
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "flitStore",
+  "description": "On-Demand Price Comparison between Amazon and Flipkart",
+  "version": "962.0.7",
+  "author": "Manoj Kumar Chandrasekhar",
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "icons": {
+    "48": "icon-ext-small.png",
+    "128": "icon-ext.png"
+  },
+  "page_action": {
+    "default_icon": "icon.png",
+    "default_popup": "index.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.flipkart.com/*",
+        "*://*.amazon.in/*"
+      ],
+      "js": [
+        "bower_components/jquery/dist/jquery.min.js",
+        "js/amazon.js",
+        "js/index.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "*://*/*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

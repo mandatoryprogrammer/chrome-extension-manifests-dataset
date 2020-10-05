@@ -1,0 +1,99 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "AdStudy",
+  "version": "0.0.0.8",
+  "devtools_page": "devtools.html",
+  "description": "Helps a user collect and see their Facebook information.",
+  "background": {
+    "scripts": [
+      "polyFill.js",
+      "thirdParty/jquery-1.12.4.js",
+      "serverUtils.js",
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "icons": {
+    "48": "icons/border-48.png",
+    "128": "icons/border-128.png"
+  },
+  "browser_action": {
+    "default_popup": "defaultPopup.html"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "declarativeContent",
+    "notifications"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.facebook.com/"
+      ],
+      "js": [
+        "polyFill.js",
+        "thirdParty/jquery-1.12.4.js",
+        "thirdParty/jquery-ui-1.12.1.custom/jquery-ui.js",
+        "parsinghelpers.js",
+        "adCollectionUtils.js",
+        "adchecker.js",
+        "useralert.js"
+      ],
+      "css": [
+        "css/jquery-ui.css",
+        "css/button_style.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.facebook.com/?*"
+      ],
+      "js": [
+        "polyFill.js",
+        "thirdParty/jquery-1.12.4.js",
+        "thirdParty/jquery-ui-1.12.1.custom/jquery-ui.js",
+        "parsinghelpers.js",
+        "adCollectionUtils.js",
+        "adchecker.js",
+        "useralert.js"
+      ],
+      "css": [
+        "css/jquery-ui.css",
+        "css/button_style.css"
+      ]
+    },
+    {
+      "js": [
+        "polyFill.js",
+        "thirdParty/jquery-1.12.4.js",
+        "getAdsPreferences.js"
+      ],
+      "matches": [
+        "http://www.facebook.com/ads/preferences*",
+        "https://www.facebook.com/ads/preferences*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.facebook.com/*"
+      ],
+      "js": [
+        "polyFill.js",
+        "thirdParty/jquery-1.12.4.js",
+        "thirdParty/jquery-ui-1.12.1.custom/jquery-ui.js",
+        "parsinghelpers.js",
+        "sanitycheck.js"
+      ],
+      "css": [
+        "css/jquery-ui.css",
+        "css/button_style.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "xhrOverloadButtons.js"
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Spotlight Capture",
+  "version": "1.0",
+  "description": "Utility Make Screen Capturing Focused & Easy!",
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "source/javascript/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_title": "Spotlight Capture",
+    "default_popup": "./dist/popup.html"
+  },
+  "icons": {
+    "48": "img/extensionIcon48.png",
+    "128": "img/extensionIcon128.png"
+  },
+  "content_security_policy": "script-src 'self' https://apis.google.com; object-src 'self'",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "tabCapture"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "css": [
+        "dist/stylesheets/contentScriptInput.css"
+      ],
+      "js": [
+        "dist/js/app.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "img/*.svg",
+    "fonts/*.ttf"
+  ],
+  "manifest_version": 2
+}

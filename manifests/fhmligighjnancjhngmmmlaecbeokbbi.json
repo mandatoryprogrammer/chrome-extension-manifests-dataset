@@ -1,0 +1,38 @@
+{
+  "update_url": "http://clients2.google.com/service/update2/crx",
+  "name": "Video Stack",
+  "version": "2.0",
+  "manifest_version": 2,
+  "description": "Collect your videos.",
+  "icons": {
+    "16": "static/img/icon16.png",
+    "48": "static/img/icon48.png",
+    "128": "static/img/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "static/img/icon48.png",
+    "default_title": "Video Stack",
+    "default_popup": "index.html"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.youtube.com/watch?v=*",
+        "http://vimeo.com/*"
+      ],
+      "js": [
+        "static/js/lib/jquery.js",
+        "static/js/common/Message.js",
+        "static/js/business/UrlManager.js",
+        "static/js/business/CommunicatorManager.js",
+        "static/js/helper/html.js",
+        "static/js/content/Processor.js",
+        "static/js/content/observer.js"
+      ]
+    }
+  ]
+}

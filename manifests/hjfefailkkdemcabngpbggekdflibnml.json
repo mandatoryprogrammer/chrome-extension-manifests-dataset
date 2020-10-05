@@ -1,0 +1,40 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "ClipSave",
+  "version": "1",
+  "manifest_version": 2,
+  "description": "An extension to make sure you never lose your clipboard history",
+  "homepage_url": "https://clippy.com",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "page": "/src/bg/background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icons/icon128.png",
+    "default_title": "Your Saved Clipboard",
+    "default_popup": "src/bg/background.html"
+  },
+  "permissions": [
+    "clipboardRead",
+    "clipboardWrite",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "src/inject/inject.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'"
+}

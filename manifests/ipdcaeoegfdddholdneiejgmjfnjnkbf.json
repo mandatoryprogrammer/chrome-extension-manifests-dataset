@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "web_accessible_resources": [
+    "res/skins.css"
+  ],
+  "description": "KlavoTools Kango",
+  "icons": {
+    "128": "icons/icon128.png",
+    "48": "icons/icon48.png",
+    "16": "icons/button.png"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "name": "KlavoTools Kango",
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "homepage_url": "https://klavogonki.ru/",
+  "version": "3.6.3",
+  "options_page": "options.html",
+  "manifest_version": 2,
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.klavogonki.ru/*"
+      ],
+      "js": [
+        "klavotools/foreground/protocol.js",
+        "klavotools/foreground/userstyle.js",
+        "klavotools/foreground/userjs-exec.js",
+        "klavotools/foreground/auth-state.js"
+      ],
+      "css": [
+        "res/skins.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "browser_action": {
+    "default_icon": "icons/button_default.png",
+    "default_title": "KlavoTools",
+    "default_popup": "popup.html"
+  },
+  "applications": {
+    "gecko": {
+      "id": "klavotools-kango@klavogonki.ru"
+    }
+  },
+  "permissions": [
+    "tabs",
+    "*://*.klavogonki.ru/*",
+    "*://*.zzzae.biz/*",
+    "*://*.githubusercontent.com/*",
+    "contextMenus",
+    "webNavigation",
+    "notifications"
+  ]
+}

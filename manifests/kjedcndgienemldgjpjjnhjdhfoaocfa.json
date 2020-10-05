@@ -1,0 +1,102 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "short_name": "__MSG_appShortName__",
+  "description": "__MSG_appDescription__",
+  "version": "0.2.5",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "icons": {
+    "256": "images/mag/icon-512.png"
+  },
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*",
+        "file:///*/*"
+      ],
+      "exclude_matches": [
+        "*://*/*grade/grading/*",
+        "*://*/*mod/assign/view.php*",
+        "*://*/*course/modedit.php?add=assign*"
+      ],
+      "js": [
+        "scripts/contentScript.js"
+      ],
+      "css": [
+        "styles/contentScript.css"
+      ],
+      "run_at": "document_start",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "*://*/*grade/grading/*",
+        "*://*/*mod/assign/view.php*"
+      ],
+      "js": [
+        "scripts/moodleContentScript.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*/*course/modedit.php?add=assign*"
+      ],
+      "js": [
+        "scripts/moodleAssignmentAddContentScript.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*/*course/view.php*"
+      ],
+      "js": [
+        "scripts/moodleResumption.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*/*mod/assign/view.php*"
+      ],
+      "js": [
+        "scripts/moodleEstimation.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "page_action": {
+    "default_icon": "images/mag/icon-38-bw.png",
+    "default_title": "__MSG_browserActionTitle__"
+  },
+  "options_page": "pages/options.html",
+  "options_ui": {
+    "page": "pages/options.html",
+    "chrome_style": false,
+    "open_in_tab": true
+  },
+  "permissions": [
+    "https://hypothes.is/",
+    "storage",
+    "tabs",
+    "downloads",
+    "notifications",
+    "file://*/*",
+    "contextMenus",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "web_accessible_resources": [
+    "pages/*.html",
+    "content/*",
+    "images/*"
+  ]
+}

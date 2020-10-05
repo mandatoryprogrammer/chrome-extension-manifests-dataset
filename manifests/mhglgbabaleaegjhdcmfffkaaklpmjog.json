@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Pass the Plebs",
+  "short_name": "Pass the Plebs",
+  "version": "1.2.0",
+  "version_name": "1.2.0",
+  "description": "Adds Polyratings (and much more) to PASS!",
+  "omnibox": {
+    "keyword": "rating"
+  },
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "author": "Tim Stoddard",
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "bundle/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://pass.calpoly.edu/*"
+      ],
+      "js": [
+        "bundle/index.js"
+      ],
+      "css": [
+        "bundle/index.css"
+      ]
+    }
+  ],
+  "incognito": "split",
+  "options_page": "options/index.html",
+  "options_ui": {
+    "page": "options/index.html"
+  },
+  "permissions": [
+    "http://polyratings.com/",
+    "activeTab",
+    "contextMenus",
+    "storage"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

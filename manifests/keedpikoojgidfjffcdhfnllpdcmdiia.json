@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "ViewPoint Web Click To Dial",
+  "description": "The extension allows users to click on a number to dial out. This would initiate a call using Vertical's ViewPoint Web application.",
+  "version": "1.0.9",
+  "icons": {
+    "16": "images/vertical_16.png",
+    "32": "images/vertical_32.png",
+    "48": "images/vertical_48.png",
+    "128": "images/vertical_128.png"
+  },
+  "browser_action": {
+    "default_icon": "images/vertical_128.png"
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "chrome_style": true
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "<all_urls>",
+    "storage",
+    "contextMenus",
+    "webRequest"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.vappcenter.com/vpw/*",
+        "*://*.vappcenter.com/*"
+      ],
+      "js": [
+        "jquery-1.12.0.min.js",
+        "vpw_window/vpw_window_content.js"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "*://*.vappcenter.com/vpw/*",
+        "*://*.vappcenter.com/*"
+      ],
+      "js": [
+        "jquery-1.12.0.min.js",
+        "libphonenumber.js",
+        "phone_number/mutation-summary.js",
+        "phone_number/content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "images/vertical_128.png",
+    "images/Call.png.png"
+  ]
+}

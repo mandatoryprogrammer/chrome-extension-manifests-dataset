@@ -1,0 +1,93 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Bugcam - Screen recorder for web apps",
+  "short_name": "Bugcam",
+  "version": "0.0.20",
+  "manifest_version": 2,
+  "description": "Record your screen while capturing network and javascript errors to quickly communicate and resolve web application issues.",
+  "homepage_url": "https://www.bugcam.io",
+  "icons": {
+    "16": "images/icon-16.png",
+    "128": "images/icon-128.png"
+  },
+  "web_accessible_resources": [
+    "images/arrow-pointer.png",
+    "finish.html",
+    "styles/main.css",
+    "styles/bulma.css",
+    "styles/font-awesome.min.css",
+    "fonts/fontawesome-webfont.woff",
+    "fonts/fontawesome-webfont.woff2",
+    "fonts/fontawesome-webfont.ttf",
+    "fonts/fontawesome-webfont.svg",
+    "fonts/fontawesome-webfont.eot"
+  ],
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "styles/contentscript.css"
+      ],
+      "js": [
+        "scripts/contentscript.js"
+      ]
+    },
+    {
+      "include_globs": [
+        "https://bugcam.io/extension_login_successful*token=*"
+      ],
+      "matches": [
+        "https://bugcam.io/extension_login_successful*"
+      ],
+      "js": [
+        "scripts/auth-login.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://bugcam.io/login?st=0"
+      ],
+      "js": [
+        "scripts/auth-logout.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "debugger",
+    "cookies",
+    "proxy",
+    "storage",
+    "webRequest",
+    "activeTab",
+    "*://*.google.com/",
+    "desktopCapture",
+    "notifications",
+    "tabCapture"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "16": "images/icon-16.png",
+      "32": "images/icon-32.png",
+      "48": "images/icon-48.png"
+    },
+    "default_title": "Bugcam"
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://bugcam.dev/*",
+      "https://bugcam.io/*"
+    ]
+  }
+}

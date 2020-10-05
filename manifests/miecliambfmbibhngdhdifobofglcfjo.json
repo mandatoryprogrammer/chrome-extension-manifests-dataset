@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "HeJIRA (Beta)",
+  "description": "A set of tools to automatize JIRA workflow",
+  "version": "0.2.4",
+  "icons": {
+    "16": "images/icon16.png",
+    "19": "images/icon19.png",
+    "38": "images/icon38.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "images/icon19.png",
+    "default_popup": "popup/popup.html"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "contextMenus",
+    "background",
+    "activeTab",
+    "http://*/",
+    "https://*/"
+  ],
+  "background": {
+    "scripts": [
+      "jquery.min.js",
+      "contextmenu/contextmenu.js"
+    ],
+    "run_at": "document_end"
+  },
+  "options_page": "settings/settings.html",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "web_accessible_resources": [
+    "script.js",
+    "common/js/common.js"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "jquery.min.js",
+        "background.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

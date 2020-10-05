@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Leaddesk plugin",
+  "version": "1.31.3",
+  "default_locale": "en_US",
+  "description": "A plugin for recognizing phone numbers for LeadDesk.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "author": "LeadDesk Oy",
+  "background": {
+    "scripts": [
+      "js/prefManager.js",
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "applications": {
+    "gecko": {
+      "id": "development@leaddesk.com",
+      "strict_min_version": "45.0"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*"
+      ],
+      "css": [
+        "css/callManagerPro.css"
+      ],
+      "js": [
+        "libs/jquery.js",
+        "js/callManagerPro.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/bar_icon19.png",
+      "38": "icons/bar_icon38.png"
+    }
+  },
+  "options_ui": {
+    "page": "html/options.html"
+  },
+  "offline_enabled": false,
+  "permissions": [
+    "tabs",
+    "http://login-1.leaddesk.com/buttons/patterns/patterns.xml",
+    "https://login-1.leaddesk.com/",
+    "https://support.leaddesk.com/"
+  ]
+}

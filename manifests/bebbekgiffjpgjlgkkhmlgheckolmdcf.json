@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Nehan Reader",
+  "version": "4.2.7",
+  "manifest_version": 2,
+  "short_name": "あらゆるサイトをページ送り（縦書き、横書き、見開きに対応）に変換し、電子書籍のように閲覧できるリーダー",
+  "description": "あらゆるサイトをページ送り（縦書き、横書き、見開きに対応）に変換し、電子書籍のように閲覧できるリーダーです。",
+  "homepage_url": "https://github.com/tategakibunko",
+  "icons": {
+    "16": "images/icon-16.png",
+    "19": "images/icon-19.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
+  },
+  "permissions": [
+    "storage",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": "images/icon-19.png"
+  },
+  "web_accessible_resources": [
+    "fonts/ipaexm.woff",
+    "images/loading.gif",
+    "images/config.png",
+    "images/toc.png",
+    "images/help.png",
+    "images/bookmark.png"
+  ],
+  "options_ui": {
+    "page": "options/options.html",
+    "chrome_style": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "scripts/content.js"
+      ],
+      "css": [
+        "styles/nehan.css",
+        "styles/reader.semantic.css",
+        "styles/reader.css"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

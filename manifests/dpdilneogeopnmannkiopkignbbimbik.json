@@ -1,0 +1,93 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Temporary Email",
+  "short_name": "TempEmail",
+  "version": "1.1.0",
+  "description": "Quickly create a temporary email address",
+  "author": "Deniz Dogan",
+  "icons": {
+    "16": "img/icons/icon-16.png",
+    "32": "img/icons/icon-32.png",
+    "48": "img/icons/icon-48.png",
+    "64": "img/icons/icon-64.png",
+    "128": "img/icons/icon-128.png"
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/content.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://10minutemail.com/*"
+      ],
+      "js": [
+        "js/providers/tenminutemail.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.getairmail.com/*"
+      ],
+      "js": [
+        "js/providers/airmail.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.guerrillamail.com/*"
+      ],
+      "js": [
+        "js/providers/guerrillamail.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://mailto.space/*"
+      ],
+      "js": [
+        "js/providers/mailtospace.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://temp-mail.org/*"
+      ],
+      "js": [
+        "js/providers/tempmail.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.throwawaymail.com/*"
+      ],
+      "js": [
+        "js/providers/throwawaymail.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "contextMenus",
+    "tabs",
+    "storage",
+    "*://10minutemail.com/",
+    "*://*.getairmail.com/",
+    "*://mailto.space/",
+    "*://temp-mail.org/",
+    "*://www.guerrillamail.com/",
+    "*://www.throwawaymail.com/"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

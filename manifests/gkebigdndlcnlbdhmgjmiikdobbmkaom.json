@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "TeamsID",
+  "description": "TeamsID is the simple password manager that helps teams of all sizes collaborate and get business done.",
+  "short_name": "TeamsID",
+  "version": "2.17.3",
+  "manifest_version": 2,
+  "icons": {
+    "48": "icons/logo_48.png",
+    "128": "icons/logo_128.png"
+  },
+  "background": {
+    "scripts": [
+      "js/jquery.3.2.1.jquery.min.js",
+      "js/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/logo_16.png",
+      "32": "icons/logo_32.png"
+    },
+    "default_title": "Click Here",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "tabs",
+    "<all_urls>",
+    "storage",
+    "activeTab",
+    "unlimitedStorage",
+    "notifications"
+  ],
+  "web_accessible_resources": [
+    "icons/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "js/jquery.3.2.1.jquery.min.js",
+        "js/purify.min.js",
+        "js/contentScript.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'; frame-ancestors 'self' *.teamsid.com"
+}

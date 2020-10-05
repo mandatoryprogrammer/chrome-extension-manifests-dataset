@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Turbo Audio Player",
+  "version": "0.0.2",
+  "manifest_version": 2,
+  "description": "Adds playback buttons for <audio> tags",
+  "homepage_url": "https://github.com/redronin/turbo_audio_player",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": true
+  },
+  "options_page": "src/options/index.html",
+  "permissions": [
+    "https://*/*",
+    "http://*/*",
+    "activeTab"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "css": [
+        "src/inject/inject.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "src/inject/domready.js",
+        "src/inject/inject.js"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "OnlyWire | Social Media Management Platform",
+  "short_name": "OnlyWire",
+  "description": "Post to all your social networks at once.",
+  "permissions": [
+    "storage",
+    "declarativeContent",
+    "tabs",
+    "activeTab",
+    "<all_urls>"
+  ],
+  "version": "7.0.8",
+  "author": "OnlyWire",
+  "icons": {
+    "16": "./icon16.png",
+    "48": "./icon48.png",
+    "96": "./icon96.png",
+    "128": "./icon128.png"
+  },
+  "browser_action": {
+    "default_title": "OnlyWire"
+  },
+  "web_accessible_resources": [
+    "mask.html"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.onlywire.com/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>",
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "./content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "background": {
+    "scripts": [
+      "./background.js"
+    ],
+    "persistent": false
+  }
+}

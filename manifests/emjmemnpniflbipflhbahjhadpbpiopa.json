@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Quick Screenshot",
+  "version": "1.0.1",
+  "description": "Take a screenshot of browser.",
+  "browser_action": {
+    "default_icon": "images/capture.png",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/lib/jquery-1.9.1.min.js",
+        "js/contents-script.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://www.google.com/robots.txt*"
+      ],
+      "js": [
+        "js/lib/oauth2/oauth2_inject.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/lib/jquery-1.9.1.min.js",
+      "js/desktop-capturing.js",
+      "js/background.js",
+      "js/selection.inject.js"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "icons": {
+    "16": "images/capture.png"
+  },
+  "web_accessible_resources": [
+    "selection.html",
+    "images/number-1.png",
+    "images/number-2.png",
+    "images/number-3.png",
+    "css/bootstrap.css.map"
+  ],
+  "offline_enabled": true,
+  "optional_permissions": [
+    "clipboardWrite"
+  ],
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "<all_urls>",
+    "storage",
+    "contextMenus",
+    "desktopCapture",
+    "background"
+  ],
+  "manifest_version": 2
+}

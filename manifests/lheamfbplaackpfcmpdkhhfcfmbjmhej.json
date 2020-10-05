@@ -1,0 +1,185 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "miDASH Oscar Plugin",
+  "short_name": "miDASH Plugin",
+  "description": "Adding MiDash refill process, DIR, miDASH registration, video consultation, DIR, Spark Acannabis, Care Alert to Oscar",
+  "version": "7.1",
+  "applications": {
+    "gecko": {
+      "id": "hqicOscarMidashRefillEmrTools@hqic.ca",
+      "strict_min_version": "55.0",
+      "update_url": "https://webapps.idash.ca/PluginStore/updateRefill.json"
+    }
+  },
+  "icons": {
+    "16": "images/icon-16.png",
+    "128": "images/icon-128.png"
+  },
+  "background": {
+    "scripts": [
+      "utility.js",
+      "HqicRefillBackground.js",
+      "Background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*/*"
+      ],
+      "js": [
+        "hqicrc.js",
+        "sha1.js",
+        "oauth.js",
+        "jquery/jquery-2.0.0.js",
+        "utility.js",
+        "HqicRefillDataservice.js",
+        "HqicRefillAllPages.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*/*/provider/providercontrol.jsp?*"
+      ],
+      "js": [
+        "HqicRefillProvidercontrol_regis.js",
+        "hqicaes.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*/*/admin/admin.jsp"
+      ],
+      "css": [
+        "css/HqicRefillAdmin.css",
+        "css/hqicGeneralPopup.css"
+      ],
+      "js": [
+        "HqicRefillAdmin.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*/*/administration/"
+      ],
+      "css": [
+        "css/HqicRefillAdmin.css",
+        "css/hqicGeneralPopup.css"
+      ],
+      "js": [
+        "HqicRefillAdminOscar15.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*/*/oscarRx/choosePatient.do?*"
+      ],
+      "js": [
+        "HqicRefillPresc_Refill.js",
+        "hqicHtml2canvas_4.0.js"
+      ],
+      "css": [
+        "css/HqicRefillPrescription.css",
+        "css/hqicGeneralPopup.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*/*/oscarRx/ViewScript2.jsp?*"
+      ],
+      "js": [
+        "hqicHtml2canvas_4.0.js",
+        "HqicRefillPresc_Refill.js",
+        "HqicRefillPresc_viewScript2.js"
+      ],
+      "css": [
+        "css/HqicRefillPrescription.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*/*/oscarRx/SelectPharmacy2.jsp"
+      ],
+      "js": [
+        "HqicRefillSelectPharmacy.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*/*/oscarRx/SearchDrug3.jsp"
+      ],
+      "js": [
+        "HqicRefillPresc_Refill_block.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*/*/casemgmt/forward.jsp?*",
+        "*://*/*/demographic/demographiccontrol.jsp?demographic_no=*"
+      ],
+      "js": [
+        "hqicrc.js"
+      ],
+      "css": [
+        "css/hqicGeneralPopup.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*/*/demographic/demographiccontrol.jsp?*"
+      ],
+      "js": [
+        "HqicRefillPatientDetail.js"
+      ],
+      "css": [
+        "css/hqicGeneralPopup.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*/*/oscarRx/searchDrug.do?*"
+      ],
+      "js": [
+        "HqicRefillSearchDrugDo.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "css/HqicRefillProvidercontrol.css",
+    "css/hqicGeneralPopup.css",
+    "css/HqicRefillEncounter.css",
+    "css/HqicRefillDemographic.css",
+    "css/HqicRefillProvidercontrol_regis.css",
+    "css/HqicRefillAdmin.css",
+    "HqicRefillRegistration.html",
+    "HqicRefillAmpleCareForm.html",
+    "HqicRefillPresc_RefillInjected.js",
+    "images/*"
+  ],
+  "permissions": [
+    "declarativeWebRequest",
+    "tabs",
+    "activeTab",
+    "webRequest",
+    "webRequestBlocking",
+    "cookies",
+    "https://*/WebApi/PluginApi/*",
+    "http://*/IntellidashService.svc/*",
+    "https://*/IntellidashAPI/IntellidashService.svc/*",
+    "contextMenus",
+    "tabs",
+    "storage",
+    "https://*/MidashService.svc/*",
+    "https://*/webapi/pluginapi/*",
+    "https://webapps.dev.midash.ca/"
+  ],
+  "content_security_policy": "script-src 'self' https://maxcdn.bootstrapcdn.com https://code.jquery.com https://cdnjs.cloudflare.com; object-src 'self'"
+}

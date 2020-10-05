@@ -1,0 +1,79 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_extension_name__",
+  "description": "__MSG_extension_description__",
+  "short_name": "myaeroplugin",
+  "version": "2.13.0",
+  "default_locale": "en",
+  "icons": {
+    "16": "ui/skin/images/icon-16.png",
+    "32": "ui/skin/images/icon-32.png",
+    "48": "ui/skin/images/icon-48.png",
+    "128": "ui/skin/images/icon-128.png"
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "*://*.ebay.com/*",
+        "*://*.ebay.es/*",
+        "*://*.amazon.com/*",
+        "*://*.rakuten.com/*",
+        "*://*.forever21.com/*",
+        "*://*.aeropostale.com/*",
+        "*://login.aeropost.com/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "lib/jquery-2.1.1.min.js",
+        "lib/jquery.colorbox-min.js",
+        "lib/jquery.appear.js",
+        "background/helpers/logger.js",
+        "ui/view/contentScript/amazonContentScript.js",
+        "ui/view/contentScript/ebayContentScript.js",
+        "ui/view/contentScript/rakutenContentScript.js",
+        "ui/view/contentScript/aeropostaleContentScript.js",
+        "ui/view/contentScript/forever21ContentScript.js",
+        "ui/view/contentScript/contentScript.js",
+        "ui/view/contentScript/quoteScript.js",
+        "lib/html2canvas.min.js",
+        "lib/bootstrap/js/tooltip.js",
+        "lib/bootstrap/js/popover.js"
+      ],
+      "css": [
+        "ui/skin/colorbox.css",
+        "ui/skin/contentScript.css"
+      ]
+    }
+  ],
+  "background": {
+    "page": "background/background.html"
+  },
+  "permissions": [
+    "storage",
+    "notifications",
+    "*://*.amazon.com/*",
+    "*://*.ebay.com/*",
+    "*://*.rakuten.com/*",
+    "*://*.forever21.com/*",
+    "*://*.aeropostale.com/*",
+    "https://*.myaeropost.com/"
+  ],
+  "browser_action": {
+    "default_icon": "ui/skin/images/icon-32.png",
+    "default_title": "__MSG_button_openPopup__",
+    "default_popup": "ui/view/mainPanel.html"
+  },
+  "web_accessible_resources": [
+    "ui/skin/core/fonts/*.woff",
+    "ui/skin/core/img/*.png",
+    "ui/skin/core/img/*.gif",
+    "ui/skin/core/images/*.png",
+    "ui/skin/core/images/*.gif",
+    "ui/skin/core/images/*.svg",
+    "ui/skin/core/images/icon/*.png",
+    "ui/view/siteScripts/amazonScript.js"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'"
+}

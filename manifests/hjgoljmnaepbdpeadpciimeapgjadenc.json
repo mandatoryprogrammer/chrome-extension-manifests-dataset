@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Protopage Start Page",
+  "description": "Protopage Start Page",
+  "version": "1.27",
+  "icons": {
+    "128": "images/extension-icon128.png",
+    "48": "images/extension-icon48.png",
+    "16": "images/extension-icon16.png"
+  },
+  "incognito": "split",
+  "permissions": [
+    "tabs",
+    "<all_urls>",
+    "webRequest",
+    "webRequestBlocking",
+    "cookies"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon19.png",
+      "38": "images/icon38.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "ext-pp-concatenated-sources-contentscript.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://protopage.com/*",
+        "https://protopage.com/*",
+        "http://*.protopage.com/*",
+        "https://*.protopage.com/*"
+      ],
+      "js": [
+        "ext-pp-concatenated-sources-contentscript-protopage.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "ext-pp-concatenated-sources-background.js"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

@@ -1,0 +1,109 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "NeatClip",
+  "short_name": "NeatClip - Clip Creator",
+  "description": "The simplest way to create clips from YouTube Live, Twitch, Mixer and many more livestreaming sites!",
+  "version": "1.4.12",
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "match_about_blank": true,
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [],
+      "css": [
+        "css/style.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": true,
+      "match_about_blank": true,
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "content_default.js"
+      ]
+    },
+    {
+      "all_frames": true,
+      "match_about_blank": true,
+      "matches": [
+        "*://*.youtube.com/*",
+        "*://*.youtu.be/*"
+      ],
+      "js": [
+        "content_youtube.js"
+      ]
+    },
+    {
+      "all_frames": true,
+      "match_about_blank": true,
+      "matches": [
+        "*://*.twitch.tv/*"
+      ],
+      "js": [
+        "content_twitch.js"
+      ]
+    },
+    {
+      "all_frames": true,
+      "match_about_blank": true,
+      "matches": [
+        "*://*.facebook.com/*"
+      ],
+      "js": [
+        "content_facebook.js"
+      ]
+    },
+    {
+      "all_frames": true,
+      "match_about_blank": true,
+      "matches": [
+        "*://*.mixer.com/*"
+      ],
+      "js": [
+        "content_mixer.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": "logo_16x16.png",
+    "default_title": "NeatClip",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "logo_16x16.png",
+    "48": "logo_48x48.png",
+    "128": "logo_128x128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "notifications",
+    "storage",
+    "tabs",
+    "webNavigation",
+    "webRequest",
+    "<all_urls>",
+    "http://*/",
+    "https://*/"
+  ],
+  "commands": {
+    "clip-feature": {
+      "suggested_key": {
+        "default": "Alt+C"
+      },
+      "description": "Create a clip"
+    }
+  }
+}

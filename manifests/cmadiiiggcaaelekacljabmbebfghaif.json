@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "description": "Find any user manual for many brand products from your browser page",
+  "icons": {
+    "16": "icons/icon128.png",
+    "48": "icons/icon128.png",
+    "128": "icons/icon128.png"
+  },
+  "version": "1.4",
+  "web_accessible_resources": [
+    "icons/*"
+  ],
+  "browser_action": {
+    "default_icon": "icons/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "cookies",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "storage"
+  ],
+  "manifest_version": 2,
+  "name": "Find Manual",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.findmanual.org/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "core/content.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "all_frames": false,
+      "js": [
+        "js/content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "chrome_url_overrides": {
+    "newtab": "web_page_home.html"
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Axiad Portal Extension",
+  "version": "1.3.2",
+  "author": "Axiad",
+  "description": "Interface for authenticators such a Smart Cards and YubiKeys",
+  "icons": {
+    "48": "img/48.png",
+    "128": "img/128.png"
+  },
+  "permissions": [
+    "nativeMessaging",
+    "storage"
+  ],
+  "page_action": {
+    "default_icon": {
+      "40": "img/off.png"
+    },
+    "default_title": "Axiad Portal Extension"
+  },
+  "background": {
+    "scripts": [
+      "api.js",
+      "bg.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "file:///*"
+      ],
+      "js": [
+        "fg.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "minimum_chrome_version": "55",
+  "options_page": "opt/page.htm",
+  "storage": {
+    "managed_schema": "storage.json"
+  }
+}

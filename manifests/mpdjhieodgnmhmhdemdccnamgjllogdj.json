@@ -1,0 +1,118 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "YouWorth for LinkedIn: Job & Salary Predictor",
+  "version": "1.1.6",
+  "short_name": "YouWorth",
+  "description": "Instant salary estimates for Indeed, ZipRecruiter, StackOverflow, & Dice",
+  "homepage_url": "https://www.youworth.app",
+  "manifest_version": 2,
+  "icons": {
+    "16": "icons/icon16.png",
+    "19": "icons/icon19.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "src/js/jquery.min.js",
+      "src/js/background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "identity",
+    "notifications",
+    "https://*.youworth.app/*",
+    "https://www.linkedin.com/in/*"
+  ],
+  "browser_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "YouWorth for Chrome",
+    "default_popup": "src/popup.html"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "src/js/jquery.min.js",
+        "src/js/bugsnag.min.js",
+        "src/js/accounting.min.js",
+        "src/js/animate-number.min.js",
+        "src/js/quote.js",
+        "src/js/dice.js"
+      ],
+      "css": [
+        "src/css/youworth.css",
+        "src/css/dice.css"
+      ],
+      "run_at": "document_end",
+      "matches": [
+        "http://*.dice.com/jobs/detail/*",
+        "https://*.dice.com/jobs/detail/*"
+      ]
+    },
+    {
+      "js": [
+        "src/js/jquery.min.js",
+        "src/js/bugsnag.min.js",
+        "src/js/accounting.min.js",
+        "src/js/animate-number.min.js",
+        "src/js/quote.js",
+        "src/js/indeed.js"
+      ],
+      "css": [
+        "src/css/youworth.css",
+        "src/css/indeed.css"
+      ],
+      "run_at": "document_end",
+      "matches": [
+        "http://*.indeed.com/*",
+        "https://*.indeed.com/*"
+      ]
+    },
+    {
+      "js": [
+        "src/js/jquery.min.js",
+        "src/js/bugsnag.min.js",
+        "src/js/accounting.min.js",
+        "src/js/animate-number.min.js",
+        "src/js/quote.js",
+        "src/js/stackoverflow.js"
+      ],
+      "css": [
+        "src/css/youworth.css",
+        "src/css/stackoverflow.css"
+      ],
+      "run_at": "document_end",
+      "matches": [
+        "http://*.stackoverflow.com/jobs/*",
+        "https://*.stackoverflow.com/jobs/*"
+      ]
+    },
+    {
+      "js": [
+        "src/js/jquery.min.js",
+        "src/js/bugsnag.min.js",
+        "src/js/accounting.min.js",
+        "src/js/animate-number.min.js",
+        "src/js/quote.js",
+        "src/js/ziprecruiter.js"
+      ],
+      "css": [
+        "src/css/youworth.css",
+        "src/css/ziprecruiter.css"
+      ],
+      "run_at": "document_end",
+      "matches": [
+        "http://*.ziprecruiter.com/jobs/*",
+        "http://*.ziprecruiter.com/ojob/*",
+        "https://*.ziprecruiter.com/jobs/*",
+        "https://*.ziprecruiter.com/ojob/*"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "src/*"
+  ]
+}

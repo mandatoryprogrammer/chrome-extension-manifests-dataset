@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Tell Me More",
+  "description": "Look up terms in Wikipedia without leaving your current page",
+  "version": "0.1.2",
+  "manifest_version": 2,
+  "background": {
+    "scripts": [
+      "scripts/background-page.js"
+    ],
+    "persistent": false
+  },
+  "options_page": "options.html",
+  "permissions": [
+    "storage",
+    "contextMenus",
+    "tabs",
+    "notifications"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [
+        "styles/fonts.css",
+        "styles/hover-pane.css"
+      ],
+      "js": [
+        "scripts/jquery-2.1.1.min.js",
+        "scripts/utilities.js",
+        "scripts/config.js",
+        "scripts/cardstacks.js",
+        "scripts/hover-pane.js",
+        "scripts/run-tutorial.js",
+        "scripts/content-retriever.js",
+        "scripts/content-script.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://en.m.wikipedia.org/*"
+      ],
+      "js": [
+        "scripts/jquery-2.1.1.min.js",
+        "scripts/mobile-wikipedia-links.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "scripts/*",
+    "styles/*",
+    "fonts/*",
+    "templates/*",
+    "icons/*"
+  ],
+  "icons": {
+    "16": "logo/logo_green_16.png",
+    "48": "logo/logo-hover_green-on-white_48.png",
+    "128": "logo/logo-hover_green-on-white_128.png"
+  }
+}

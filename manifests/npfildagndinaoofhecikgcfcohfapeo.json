@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "mabl Trainer",
+  "short_name": "mabl Trainer",
+  "description": "Mabl is the leading intelligent test automation platform built for CI/CD and the Trainer helps you quickly create scriptless tests.",
+  "version": "2.23.35",
+  "devtools_page": "devtools.html",
+  "browser_action": {
+    "default_icon": "images/mabl_logo_cube_128_contour.png",
+    "default_popup": "popup.html",
+    "default_title": "mabl Trainer"
+  },
+  "icons": {
+    "128": "images/mabl_logo_cube_128_contour.png",
+    "16": "images/mabl_logo_cube_16.png",
+    "48": "images/mabl_logo_cube_48.png"
+  },
+  "permissions": [
+    "<all_urls>",
+    "background",
+    "cookies",
+    "debugger",
+    "downloads",
+    "notifications",
+    "tabs",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "content.js"
+      ],
+      "match_about_blank": true
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://cdn.rollbar.com/rollbarjs/refs/tags/v2.19.2/rollbar.min.js https://fullstory.com/s/fs.js https://edge.fullstory.com/s/fs.js; object-src 'self'",
+  "background": {
+    "scripts": [
+      "env.js",
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "web_accessible_resources": [
+    "login.js",
+    "login.html",
+    "images/mabl_attention_bounce.gif",
+    "images/mabl_logo_cube_48.png",
+    "pdf-viewer/mabl_pdf_steps.html",
+    "popup.html"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.mabl.com/*"
+    ]
+  }
+}

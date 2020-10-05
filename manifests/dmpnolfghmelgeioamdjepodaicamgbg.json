@@ -1,0 +1,42 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "AU BlackBoard Auto Login",
+  "description": "AU BlackBoard Auto Login",
+  "version": "1.3",
+  "manifest_version": 2,
+  "icons": {
+    "16": "res/logo.png",
+    "48": "res/logo.png",
+    "128": "res/logo.png"
+  },
+  "background": {
+    "scripts": [
+      "js/firstrun.js",
+      "js/background.js"
+    ]
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://wayf.au.dk/module.php/core/loginuserpass.php?AuthState=*"
+      ],
+      "js": [
+        "lib/jquery.min.js",
+        "js/autologin.js"
+      ],
+      "css": [
+        "css/loginstyle.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "permissions": [
+    "storage",
+    "tabs",
+    "*://bb.au.dk/webapps/portal/execute/tabs/tabAction?tab_tab_group_id=_21_1",
+    "*://www.wayf.dk/",
+    "webRequest",
+    "webRequestBlocking"
+  ]
+}

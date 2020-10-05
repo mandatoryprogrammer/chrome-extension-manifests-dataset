@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "PictureMate - View tagged FB pics",
+  "short_name": "PictureMate",
+  "description": "View hidden tagged photos of anyone without being friends (This is a NON-official Facebook app)",
+  "version": "3.1.14",
+  "permissions": [
+    "notifications",
+    "tabs",
+    "storage",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "persistent": true,
+    "page": "html/proxy.html"
+  },
+  "manifest_version": 2,
+  "icons": {
+    "128": "resources/imgs/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "resources/imgs/icon19.png",
+      "38": "resources/imgs/icon38.png"
+    },
+    "default_title": "Find hidden photos",
+    "default_popup": "/html/popup/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.bing.com/robots.txt*"
+      ],
+      "js": [
+        "/vendor/oauth2/oauth2_inject.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "/vendor/oauth2/oauth2.html"
+  ]
+}

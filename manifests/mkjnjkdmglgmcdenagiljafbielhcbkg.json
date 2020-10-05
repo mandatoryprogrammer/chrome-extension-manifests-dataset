@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "icons": {
+    "16": "images/icon16.png",
+    "32": "images/icon32.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "name": "Netspective Media Curator",
+  "short_name": "Netspective Media Curators",
+  "description": "Netspective News Submission",
+  "version": "3.1.1",
+  "background": {
+    "scripts": [
+      "build/background-bundle.js"
+    ]
+  },
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "tabs",
+    "cookies",
+    "storage",
+    "activeTab",
+    "http://*/",
+    "https://*/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "build/content-bundle.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com/analytics.js https://api.algorithmia.com/v1/algo/algo://nlp/SummarizeURL/0.1.1; object-src 'self'"
+}

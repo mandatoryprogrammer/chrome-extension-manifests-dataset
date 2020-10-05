@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_appName__",
+  "description": "__MSG_appDesc__",
+  "version": "1.0.20",
+  "default_locale": "en",
+  "icons": {
+    "16": "img/conx_logo_16.png",
+    "128": "img/conx_logo_128.png"
+  },
+  "background": {
+    "scripts": [
+      "js/background.js",
+      "js/scheduler.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "img/conx_logo_16.png",
+    "default_popup": "main.html",
+    "default_title": "ConX Scheduler",
+    "externally_connectable": {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ]
+    }
+  },
+  "content_scripts": [
+    {
+      "css": [
+        "styles/content.css"
+      ],
+      "js": [
+        "js/content.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "*://apis.google.com/*",
+    "http://calendar.google.com/calendar/*",
+    "https://calendar.google.com/calendar/*"
+  ],
+  "web_accessible_resources": [
+    "*.png",
+    "js/content.js"
+  ],
+  "content_security_policy": "script-src 'self' https://apis.google.com https://www.gstatic.com/ https://*.firebaseio.com https://calendar.google.com https://ajax.googleapis.com 'unsafe-eval'; object-src 'self'",
+  "oauth2": {
+    "client_id": "86348056966-i9iobq4sjdo0er5j34seq3aanqbqostu.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/calendar",
+      "https://www.googleapis.com/auth/plus.login",
+      "https://www.googleapis.com/auth/userinfo.email"
+    ]
+  }
+}

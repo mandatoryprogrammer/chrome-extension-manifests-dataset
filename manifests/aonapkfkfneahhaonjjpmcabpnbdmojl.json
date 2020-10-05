@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "WebP Highlighter",
+  "version": "1.21",
+  "description": "Makes WebP's recognizable on a webpage.",
+  "icons": {
+    "48": "icons/webplogo.png"
+  },
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "storage",
+    "tabs",
+    "webNavigation",
+    "<all_urls>"
+  ],
+  "browser_action": {
+    "default_icon": "icons/webplogo.webp",
+    "default_popup": "popup.html",
+    "default_title": "WebP highlighter"
+  },
+  "background": {
+    "scripts": [
+      "background.js",
+      "quality_estimate.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "all_frames": true,
+      "js": [
+        "jquery-3.1.1.min.js",
+        "webp_reformatter.js"
+      ],
+      "css": [
+        "webp.css"
+      ]
+    }
+  ]
+}

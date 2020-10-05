@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Steadfasttech - BitBucket DiffPage - Open VS",
+  "description": "On BitBucket Code Diff Page, provides a button on each file item, to open the file in Visual Studio.",
+  "version": "1.0.0",
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "framework/log.js",
+      "background/main.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "https://bitbucket.org/*"
+      ],
+      "js": [
+        "framework/log.js",
+        "libs/jquery/jquery.js",
+        "content/scripts/config.js",
+        "content/scripts/common.js",
+        "content/scripts/diff-pages.js"
+      ],
+      "css": [
+        "content/css/main.css",
+        "content/css/bitbucket.diff-page.css"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": "images/logo.png",
+    "default_title": "On BitBucket Code Diff Page, provides a button on each file item, to open the file in Visual Studio."
+  },
+  "icons": {
+    "128": "images/logo.png",
+    "16": "images/logo.png",
+    "48": "images/logo.png"
+  },
+  "permissions": [
+    "webNavigation",
+    "history",
+    "storage",
+    "tabs",
+    "https://bitbucket.org/*",
+    "nativeMessaging"
+  ],
+  "web_accessible_resources": [
+    "content/*",
+    "css/*",
+    "images/*",
+    "lib/*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

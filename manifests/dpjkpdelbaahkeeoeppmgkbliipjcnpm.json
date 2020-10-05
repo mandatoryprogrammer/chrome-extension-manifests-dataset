@@ -1,0 +1,94 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_name__",
+  "version": "41.13.9",
+  "description": "__MSG_description__",
+  "icons": {
+    "16": "16x16.png",
+    "48": "48x48.png",
+    "128": "128x128.png"
+  },
+  "default_locale": "en",
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "notifications",
+    "<all_urls>",
+    "contextMenus",
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "*://postila.ru/*",
+        "*://*.postila.ru/*",
+        "*://postila.io/*",
+        "*://*.postila.io/*",
+        "*://postila.co/*",
+        "*://*.postila.co/*"
+      ],
+      "css": [
+        "css/hoverButton.css",
+        "screenshot/screenshotHelper.css"
+      ],
+      "js": [
+        "hoverButton.js",
+        "js/shortcut.js",
+        "screenshotHelper.js",
+        "hotkeys.helper.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "mark.helper.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "*://postila.ru/*",
+        "*://*.postila.ru/*",
+        "*://postila.io/*",
+        "*://*.postila.io/*",
+        "*://postila.co/*",
+        "*://*.postila.co/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "js/es6-promise.min.js",
+        "js/fetch.min.js",
+        "post.js",
+        "js/purify.min.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "*.png",
+    "js/domains/*",
+    "*.svg",
+    "*.map"
+  ],
+  "browser_action": {
+    "default_title": "__MSG_action__",
+    "default_icon": "40x40.png"
+  },
+  "options_page": "options.html",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "YT Music Mini for YouTube™ Music",
+  "description": "Control YouTube™ Music from anywhere in Chrome with this mini player! Now with Lyrics, LastFM, light theme for YTM, and more!",
+  "version": "2.0.5",
+  "browser_action": {
+    "default_icon": "assets/128-icon.png",
+    "default_popup": "html/popup.html"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "https://music.youtube.com/*",
+    "notifications"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "icons": {
+    "16": "assets/16-icon.png",
+    "48": "assets/48-icon.png",
+    "128": "assets/128-icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://music.youtube.com/*"
+      ],
+      "js": [
+        "js/services/Options.js",
+        "js/third-party/md5.js",
+        "config.js",
+        "js/services/LastFM.js",
+        "js/youtube_page.js"
+      ]
+    }
+  ],
+  "options_page": "html/options.html",
+  "web_accessible_resources": [
+    "html/options.html",
+    "css/youtube_music_light.css",
+    "css/popup.css",
+    "assets/*",
+    "js/*",
+    "js/services/*"
+  ],
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "js/services/Options.js",
+      "background.js"
+    ]
+  }
+}

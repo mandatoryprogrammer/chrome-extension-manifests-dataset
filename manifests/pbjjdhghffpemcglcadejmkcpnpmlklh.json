@@ -1,0 +1,87 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Salesforce Navigator for Lightning",
+  "version": "2.7.2",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "page_action": {
+    "default_icon": "images/sf-navigator32.png",
+    "default_popup": "popup.html",
+    "default_title": "Salesforce Navigator for Lightning"
+  },
+  "background": {
+    "scripts": [
+      "scripts/shared.js",
+      "scripts/pluralize.js",
+      "scripts/background.js"
+    ],
+    "persistent": true
+  },
+  "icons": {
+    "16": "images/sf-navigator16.png",
+    "32": "images/sf-navigator32.png",
+    "48": "images/sf-navigator48.png",
+    "128": "images/sf-navigator128.png"
+  },
+  "web_accessible_resources": [
+    "images/ajax-loader.gif",
+    "images/sf-navigator128.png"
+  ],
+  "description": "Get more done in Salesforce - list and search records, make new ones, create a task or login as on the fly!",
+  "content_scripts": [
+    {
+      "css": [
+        "styles/main.css"
+      ],
+      "matches": [
+        "https://*.force.com/*",
+        "https://*.salesforce.com/*",
+        "https://*.cloudforce.com/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "scripts/mousetrap.min.js",
+        "scripts/pluralize.js",
+        "scripts/shared.js",
+        "scripts/main.js",
+        "scripts/popup.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "commands": {
+    "goToTasks": {
+      "description": "Go directly to Tasks",
+      "suggested_key": {
+        "default": "Ctrl+Shift+1"
+      }
+    },
+    "goToReports": {
+      "description": "Go directly to Reports",
+      "suggested_key": {
+        "default": "Ctrl+Shift+2"
+      }
+    },
+    "showSearchBox": {
+      "description": "Open Search Box",
+      "suggested_key": {
+        "default": "Ctrl+Shift+Space"
+      }
+    },
+    "showAppMenu": {
+      "description": "Open Lightning App Menu",
+      "suggested_key": {
+        "default": "Ctrl+Shift+A"
+      }
+    }
+  },
+  "permissions": [
+    "activeTab",
+    "https://*.force.com/*",
+    "https://*.salesforce.com/*",
+    "https://*.cloudforce.com/*",
+    "storage",
+    "clipboardRead",
+    "cookies"
+  ]
+}

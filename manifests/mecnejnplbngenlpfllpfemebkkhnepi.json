@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_ext_name__",
+  "short_name": "__MSG_ext_short_name__",
+  "description": "__MSG_ext_description__",
+  "version": "1.0.3",
+  "default_locale": "en",
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "permissions": [
+    "cookies",
+    "tabs",
+    "clipboardRead",
+    "clipboardWrite",
+    "storage",
+    "https://*.die-staemme.de/*",
+    "http://*.die-staemme.de/*"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon19.png",
+      "38": "images/icon38.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.die-staemme.de/logout.php"
+      ],
+      "js": [
+        "kill_cookie.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  }
+}

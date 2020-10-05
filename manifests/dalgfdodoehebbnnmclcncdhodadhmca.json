@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Moovism Template",
+  "version": "0.0.6",
+  "manifest_version": 2,
+  "description": "This extension integrates with Moovism",
+  "homepage_url": "https://moovism.com",
+  "icons": {
+    "16": "icons/logo.png",
+    "48": "icons/logo.png",
+    "128": "icons/logo.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "page": "src/bg/background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icons/logo.png",
+    "default_title": "Moovism",
+    "default_popup": "src/page_action/page_action.html"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "permissions": [
+    "tabs",
+    "contentSettings",
+    "https://go.xero.com/*",
+    "https://app.moovism.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://go.xero.com/*"
+      ],
+      "css": [
+        "src/page_action/sweetalert2.css",
+        "src/inject/inject.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://go.xero.com/*"
+      ],
+      "js": [
+        "js/jquery/jquery.min.js",
+        "src/inject/inject.js",
+        "src/inject/bootstrap.min.js",
+        "src/bg/background.js",
+        "js/sweetalert2@7.js"
+      ]
+    }
+  ]
+}

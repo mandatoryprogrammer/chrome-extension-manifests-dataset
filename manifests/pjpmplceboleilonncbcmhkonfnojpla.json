@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "EnglishDom Translator",
+  "description": "Переводите слова и фразы прямо в браузере. Добавляйте незнакомые слова на изучение.",
+  "version": "1.26.0",
+  "browser_action": {
+    "default_title": "EnglishDom Translator",
+    "default_icon": "logo/ed.png",
+    "default_popup": "index.html"
+  },
+  "permissions": [
+    "identity",
+    "identity.email",
+    "browser",
+    "activeTab",
+    "declarativeContent",
+    "storage",
+    "tabs"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "run_at": "document_start",
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "https://www.englishdom.com/*",
+        "https://englishdom.com/*",
+        "https://www.eddev.cf/*",
+        "https://eddev.cf/*",
+        "https://develop.eddev.cf/*",
+        "https://release.eddev.cf/*"
+      ],
+      "js": [
+        "bundles-builded/content.js"
+      ],
+      "css": [
+        "bundles-builded/content.css",
+        "bundles-static/fonts.css"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "bundles-builded/background.js"
+    ]
+  },
+  "icons": {
+    "16": "logo/ed.png",
+    "48": "logo/ed_48.png",
+    "128": "logo/ed.png"
+  },
+  "oauth2": {
+    "client_id": "436816325914-k9kfgjilpvk70mtpaa4u09ukbi0jis0m.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.profile",
+      "https://www.googleapis.com/auth/userinfo.email"
+    ]
+  }
+}

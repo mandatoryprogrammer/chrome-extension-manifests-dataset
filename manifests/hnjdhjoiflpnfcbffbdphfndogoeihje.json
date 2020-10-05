@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Zalora Capture (public version)",
+  "version": "0.2.4",
+  "manifest_version": 2,
+  "description": "Reporting bugs from Chrome Browser",
+  "homepage_url": "http://zalora.vn",
+  "icons": {
+    "16": "src/images/icons/icon16.png",
+    "48": "src/images/icons/icon48.png",
+    "128": "src/images/icons/icon128.png"
+  },
+  "background": {
+    "page": "src/background.html"
+  },
+  "browser_action": {
+    "default_icon": "src/images/icons/icon19.png",
+    "default_title": "Zalora Capture",
+    "default_popup": "src/popup.html"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "src/js/third-party/rpf.content.js"
+      ],
+      "matches": [
+        "*://*/*"
+      ],
+      "all_frames": true
+    },
+    {
+      "js": [
+        "src/js/console-listener.js"
+      ],
+      "matches": [
+        "*://*/*"
+      ],
+      "all_frames": false,
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "storage",
+    "tabs",
+    "notifications",
+    "<all_urls>"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' http://localhost:35729 https://ssl.google-analytics.com; object-src 'self'"
+}

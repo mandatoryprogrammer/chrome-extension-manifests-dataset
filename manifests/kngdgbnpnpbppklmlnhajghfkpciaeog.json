@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Buoga Extension",
+  "version": "1.3",
+  "description": "For quickly adding links to buoga, bookmarks import included.",
+  "default_locale": "en",
+  "permissions": [
+    "bookmarks",
+    "webRequest",
+    "browsingData",
+    "tabs",
+    "storage",
+    "webNavigation",
+    "*://*/*"
+  ],
+  "icons": {
+    "16": "/data/img/icons/icon16.png",
+    "48": "/data/img/icons/icon48.png",
+    "128": "/data/img/icons/icon128.png"
+  },
+  "browser_action": {
+    "default_title": "Buoga",
+    "default_icon": "/data/img/icons/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "/data/js/jquery.js",
+      "/data/js/buogaApi.js",
+      "/data/js/buoga.js",
+      "/data/js/cache.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "css": [
+        "/data/css/bootstrap.min.css"
+      ],
+      "js": [
+        "/data/js/jquery.js",
+        "/data/js/buogaApi.js",
+        "/data/js/icons/icons.js",
+        "/data/js/addLink.js",
+        "content.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "/data/html/tpl/*",
+    "data/html/tpl/*"
+  ],
+  "options_page": "/data/html/options.html",
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'",
+  "chrome_url_overrides": {
+    "newtab": "/data/html/main.html"
+  }
+}

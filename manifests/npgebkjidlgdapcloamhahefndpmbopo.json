@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Google Calendar Events to Kintone",
+  "description": "Googleカレンダーの1日分のスケジュールをKintoneの業務日報に登録（入力補助）する拡張機能です。",
+  "version": "1.1.0",
+  "minimum_chrome_version": "29",
+  "icons": {
+    "128": "images/icon/icon_128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "128": "images/icon/icon_128.png"
+    },
+    "default_title": "Google Calendar Events to Kintone",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "tabs",
+    "http://www.google.com/*",
+    "https://www.google.com/*",
+    "https://www.googleapis.com/*",
+    "https://accounts.google.com/o/oauth2/token",
+    "https://www.googleapis.com/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.cybozu.com/*"
+      ],
+      "js": [
+        "js/jquery-2.1.1.min.js",
+        "js/jquery-ui.js",
+        "js/content.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.google.com/robots.txt*"
+      ],
+      "js": [
+        "oauth2/oauth2_inject.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "oauth2/oauth2.html"
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "version": "0.3.5",
+  "default_locale": "ru",
+  "name": "__MSG_epiExtensionName__",
+  "short_name": "__MSG_epiExtensionShortName__",
+  "description": "__MSG_epiExtensionDescription__",
+  "options_page": "options.html",
+  "icons": {
+    "16": "images/icon-16.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
+  },
+  "browser_action": {
+    "default_icon": "images/icon-48.png",
+    "default_title": "__MSG_epiDefaultTitle__",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "storage",
+    "cookies",
+    "https://my.ecwid.com/cp/*",
+    "https://my.ecwid.com/print_invoice/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://my.ecwid.com/cp/*"
+      ],
+      "run_at": "document_start",
+      "css": [
+        "content_script.css"
+      ],
+      "js": [
+        "lib/jquery-1.10.2.min.js",
+        "lib/doT.min.js",
+        "content_script.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://my.ecwid.com/print_invoice/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "lib/jquery-1.10.2.min.js",
+        "content_script.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "content_script.css"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

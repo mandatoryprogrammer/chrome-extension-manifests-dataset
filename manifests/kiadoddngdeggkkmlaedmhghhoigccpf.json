@@ -1,0 +1,104 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Influencer Marketing Analytics by WeFind",
+  "description": "Influencer Marketing Analytics with our Chrome Extension",
+  "version": "4.2.4",
+  "permissions": [
+    "tabs",
+    "*://www.instagram.com/*",
+    "*://instagram.com/*",
+    "*://www.youtube.com/*",
+    "*://youtube.com/*",
+    "*://list.trywefind.com/*",
+    "*://dashboard.trywefind.com/*",
+    "*://www.trywefind.com/*",
+    "cookies",
+    "storage",
+    "unlimitedStorage"
+  ],
+  "browser_action": {
+    "default_icon": "icons/16x16.png",
+    "default_popup": "popup/popup.html",
+    "default_title": "Instagram Analytics by WeFind"
+  },
+  "icons": {
+    "16": "icons/16x16.png",
+    "32": "icons/32x32.png",
+    "48": "icons/48x48.png",
+    "128": "icons/128x128.png"
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "static/media/*.png",
+    "utils/xhook.min.js",
+    "listcontentscript.js",
+    "popup/popup.html"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "*://www.instagram.com/*",
+        "*://instagram.com/*"
+      ],
+      "js": [
+        "instagram/init.xhook.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.instagram.com/*",
+        "*://instagram.com/*"
+      ],
+      "js": [
+        "utils/xhook.min.js",
+        "static/js/main.f830c540.js"
+      ],
+      "css": [
+        "static/css/main.75dd59ce.css"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "matches": [
+        "*://www.youtube.com/*",
+        "*://youtube.com/*"
+      ],
+      "js": [
+        "youtube/init.xhook.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.youtube.com/*",
+        "*://youtube.com/*"
+      ],
+      "js": [
+        "utils/xhook.min.js",
+        "static/js/main.f830c540.js"
+      ],
+      "css": [
+        "static/css/main.75dd59ce.css"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "matches": [
+        "*://dev-list.trywefind.com/*",
+        "*://list.trywefind.com/*",
+        "*://dashboard.trywefind.com/*",
+        "*://www.trywefind.com/*"
+      ],
+      "js": [
+        "listcontentscript.js"
+      ]
+    }
+  ],
+  "manifest_version": 2
+}

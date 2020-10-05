@@ -1,0 +1,41 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "0.0.4",
+  "name": "Chairlift",
+  "manifest_version": 2,
+  "description": "Chairlift for gmail extension",
+  "browser_action": {
+    "default_icon": "img/logo/48x48.png",
+    "default_title": "Chairlift for gmail extension"
+  },
+  "icons": {
+    "16": "img/logo/16x16.png",
+    "48": "img/logo/48x48.png",
+    "128": "img/logo/128x128.png"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://mail.google.com/*"
+      ],
+      "js": [
+        "js/content.bundle.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "storage",
+    "identity",
+    "https://mail.google.com/*",
+    "https://accounts.google.com/o/oauth2/v2/auth/*"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'; style-src * 'unsafe-inline'; img-src 'self' data:;",
+  "web_accessible_resources": [
+    "js/inject.bundle.js"
+  ]
+}

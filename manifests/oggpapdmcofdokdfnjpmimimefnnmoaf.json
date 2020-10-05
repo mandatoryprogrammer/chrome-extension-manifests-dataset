@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "AWS Region Warning",
+  "description": "Be notified when AWS switches your default region.",
+  "version": "1.1",
+  "icons": {
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "page_action": {
+    "default_icon": {
+      "19": "images/icon19.png",
+      "38": "images/icon38.png",
+      "48": "images/icon48.png",
+      "128": "images/icon128.png"
+    },
+    "default_popup": "change-region.html",
+    "default_title": "AWS Region Warning"
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "declarativeContent",
+    "tabs"
+  ],
+  "background": {
+    "scripts": [
+      "docReady.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.aws.amazon.com/*"
+      ],
+      "css": [
+        "aws-region.css"
+      ],
+      "js": [
+        "docReady.js",
+        "aws-region.js"
+      ]
+    }
+  ]
+}

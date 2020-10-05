@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Videos While You Work",
+  "version": "0.0.6",
+  "manifest_version": 2,
+  "description": "Watch videos while you work with a floating, popout window. This extension requires you change some chrome flags.",
+  "homepage_url": "https://chrome.google.com/webstore/detail/pfbpkjjanplkjiplbbhpbidpfhnphahc",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "page": "src/background.html",
+    "persistent": true
+  },
+  "options_page": "src/options/options.html",
+  "browser_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "Videos While You Work"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "src/inject_panel.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "storage",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "web_accessible_resources": [
+    "src/injects.css",
+    "src/inject_panel.js"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'"
+}

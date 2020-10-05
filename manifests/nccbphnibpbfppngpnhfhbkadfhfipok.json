@@ -1,0 +1,72 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "CaptionClass.com",
+  "version": "1.0.34",
+  "description": "Learn Korean by watching Kids’ videos from Naver (and soon dramas on YouTube as well) with simultaneous dual subtitles.",
+  "homepage_url": "https://captionclass.com",
+  "manifest_version": 2,
+  "permissions": [
+    "tabs",
+    "storage",
+    "<all_urls>",
+    "*://captionclass.com/*",
+    "https://code.responsivevoice.org/*"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "inactive19.png",
+      "38": "inactive76.png"
+    },
+    "default_title": "Show subtitles"
+  },
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "js": [
+        "tlite.js",
+        "content.js"
+      ],
+      "css": [
+        "fonts.css",
+        "content.css",
+        "tlite.css"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": false,
+      "js": [
+        "responsivevoice.js"
+      ],
+      "matches": [
+        "*://*.youtube.com/*",
+        "*://jr.naver.com/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "page": "background.html"
+  },
+  "icons": {
+    "16": "icon16.png",
+    "32": "icon32.png",
+    "48": "icon48.png",
+    "64": "icon64.png",
+    "128": "icon128.png"
+  },
+  "web_accessible_resources": [
+    "logo.png",
+    "common/material-design-icon-fonts/*",
+    "common/materialize-css/fonts/roboto/*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://code.responsivevoice.org; object-src 'self'; font-src 'self'",
+  "externally_connectable": {
+    "matches": [
+      "*://*.captionclass.com/*"
+    ]
+  }
+}

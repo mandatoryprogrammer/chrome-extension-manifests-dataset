@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Garmin Bigger Course Creator Map",
+  "version": "1.8",
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "web_accessible_resources": [
+    "popup.html",
+    "popup.css",
+    "fileStruct1.png",
+    "suunto.png"
+  ],
+  "icons": {
+    "16": "bigger16.png",
+    "48": "bigger48.png",
+    "128": "bigger128.png"
+  },
+  "permissions": [
+    "tabs",
+    "webNavigation",
+    "https://connect.garmin.com/modern/courses",
+    "https://connect.garmin.com/modern/courses/create",
+    "https://connect.garmin.com/mincourse/create"
+  ],
+  "background": {
+    "matches": [
+      "https://connect.garmin.com/modern/courses/create"
+    ],
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://connect.garmin.com/modern/courses"
+      ],
+      "js": [
+        "injectbuttonintomincourses.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://connect.garmin.com/mincourse/create"
+      ],
+      "js": [
+        "adjust.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

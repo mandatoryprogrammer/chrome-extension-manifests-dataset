@@ -1,0 +1,101 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "content_security_policy": "script-src 'self' https://apis.google.com https://ssl.google-analytics.com https://*.yahoo.com https://suggestqueries.google.com https://www.gstatic.com https://drscdn.500px.org https://ppcdn.500px.org  https://*.vo.msecnd.net https://*.staticflickr.com 'unsafe-eval'; object-src 'self'",
+  "name": "__MSG_extName__",
+  "short_name": "__MSG_extShortName__",
+  "version": "3.6",
+  "description": "__MSG_extDescription__",
+  "default_locale": "zh_CN",
+  "browser_action": {
+    "default_title": "谷歌助手",
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "icon.png",
+    "32": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+  "background": {
+    "scripts": [
+      "js/global.js",
+      "js/jquery-1.11.1.js",
+      "js/md5.js",
+      "js/system.js",
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.baidu.com/?tn=59046333_dg*"
+      ],
+      "js": [
+        "js/jquery-1.11.1.js",
+        "js/content-script.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://www.google.com/search?*",
+        "*://www.google.com.hk/search?*",
+        "*://www.google.com.sg/search?*"
+      ],
+      "js": [
+        "js/jquery-1.11.1.js",
+        "js/global.js",
+        "js/gs_content_script.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://www.iwikipage.com/public/ppgg/serverreport.htm*"
+      ],
+      "js": [
+        "js/jquery-1.11.1.js",
+        "js/global.js",
+        "js/serverreport.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://item.taobao.com/*",
+        "*://detail.tmall.com/*",
+        "*://item.jd.com/*",
+        "*://chaoshi.detail.tmall.com/*"
+      ],
+      "js": [
+        "js/jquery-1.11.1.js",
+        "js/gw_content_script.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "permissions": [
+    "proxy",
+    "storage",
+    "tabs",
+    "management",
+    "webRequest",
+    "notifications",
+    "*://www.ppgoogle.net/*",
+    "*://www.google.com/*",
+    "*://*.google.com/*",
+    "*://*.google.cn/*",
+    "*://*.google.com.hk/*",
+    "*://*.google.ca/*"
+  ],
+  "manifest_version": 2,
+  "web_accessible_resources": [
+    "nav.html",
+    "footer.html",
+    "single.html",
+    "updateNotify.html",
+    "gw.html"
+  ]
+}

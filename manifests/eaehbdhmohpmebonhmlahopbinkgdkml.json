@@ -1,0 +1,52 @@
+{
+  "name": "Silber Bird",
+  "version": "1.9.11.1",
+  "manifest_version": 2,
+  "description": "__MSG_extDescription__",
+  "default_locale": "en",
+  "browser_action": {
+    "default_icon": "img/icon19.png",
+    "default_title": "Silber Bird",
+    "default_popup": "popup.html?popup"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "permissions": [
+    "notifications",
+    "http://www.twitter.com",
+    "https://www.twitter.com"
+  ],
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://twitter.com/oauth/authorize",
+        "https://twitter.com/oauth/authorize",
+        "http://api.twitter.com/oauth/authorize",
+        "https://api.twitter.com/oauth/authorize"
+      ],
+      "js": [
+        "lib/3rdparty/jquery.js",
+        "lib/oauth_authorizer.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://identi.ca/api/oauth/authorize",
+        "https://identi.ca/api/oauth/authorize"
+      ],
+      "js": [
+        "lib/3rdparty/jquery.js",
+        "lib/oauth_identica_authorizer.js"
+      ]
+    }
+  ],
+  "options_page": "options.html",
+  "update_url": "http://clients2.google.com/service/update2/crx"
+}

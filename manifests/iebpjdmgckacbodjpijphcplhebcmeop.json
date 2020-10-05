@@ -1,0 +1,143 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.google-analytics.com; object-src 'self'",
+  "version": "10.0.10",
+  "background": {
+    "scripts": [
+      "js/lib/js.cookie.v2.2.0.js",
+      "js/lib/clipboard.js",
+      "js/ActivityLogger.js",
+      "js/BigSyncStorage.js",
+      "js/BrowserEnv.js",
+      "js/Config.js",
+      "js/GMikeAPI.js",
+      "js/MessageAction.js",
+      "js/OutputFormat.js",
+      "js/ScreenshotUtil.js",
+      "js/TableUtil.js",
+      "js/table.analytics.js",
+      "js/background.js"
+    ]
+  },
+  "options_page": "options.html",
+  "web_accessible_resources": [
+    "images/icon.addressbar.gif",
+    "images/icon.addressbar.19.gif",
+    "images/loader.gif",
+    "images/icon.png",
+    "images/icon.csv.b.png",
+    "images/icon.clipboard.add.png",
+    "images/icon.clipboard.edit.png",
+    "images/icon.excel.svg",
+    "images/icon.html.png",
+    "images/icon.markdown.png",
+    "images/icon.o365.png",
+    "images/icon.publish.png",
+    "images/icon.sheets.png",
+    "images/icon.screenshot.big.png",
+    "activate.html",
+    "activity.html",
+    "options.html",
+    "recipes.html",
+    "support.html",
+    "upgrade.html"
+  ],
+  "name": "Table Capture",
+  "short_name": "Table Capture",
+  "description": "Copies HTML tables to the clipboard or exports them to Microsoft Excel, CSV, Google Sheets, Office 365, etc.",
+  "default_locale": "en",
+  "icons": {
+    "128": "images/icon.png"
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "file://*/*",
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "http://*/*.xml",
+        "https://*/*.xml"
+      ],
+      "js": [
+        "js/lib/Blob.js",
+        "js/lib/FileSaver.v2.0.4.min.js",
+        "js/lib/xlsx.full.0.16.1.min.js",
+        "js/lib/js.cookie.v2.2.0.js",
+        "js/lib/clipboard.js",
+        "js/lib/html2canvas.js",
+        "js/lib/markdown-table.js",
+        "js/DataProvider.js",
+        "js/MockActivityLogger.js",
+        "js/MessageAction.js",
+        "js/OutputFormat.js",
+        "js/MutationSnoop.js",
+        "js/TableShow.js",
+        "js/DetachedTableShow.js",
+        "js/ElementWrapper.js",
+        "js/TableWrapper.js",
+        "js/JsonTableWrapper.js",
+        "js/SelectionWrapper.js",
+        "js/SpecialCaseElementWrapper.js",
+        "js/NotionTableWrapper.js",
+        "js/RecipeTableWrapper.js",
+        "js/app/ContentScriptUtil.js",
+        "js/app/PagingListener.js",
+        "js/app/ResponseLogger.js",
+        "js/app/WorkshopEvent.js",
+        "js/app/WorkshopFrame.js",
+        "js/app/SelectionWorkshop.js",
+        "js/BigSyncStorage.js",
+        "js/BrowserEnv.js",
+        "js/Config.js",
+        "js/CcyUtil.js",
+        "js/ExcelUtil.js",
+        "js/TableUtil.js",
+        "js/ScreenshotUtil.js",
+        "js/TableManager.js",
+        "js/content.js",
+        "js/content_xhr.js"
+      ],
+      "css": [
+        "css/content.css",
+        "css/SelectionWorkshop.css",
+        "css/Loading.css",
+        "css/Toggle.css"
+      ],
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "storage",
+    "contextMenus",
+    "webNavigation"
+  ],
+  "commands": {
+    "display-inline-table-capture": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+D",
+        "windows": "Alt+Shift+D",
+        "mac": "Alt+Shift+D"
+      },
+      "description": "Display Table Capture Inline"
+    },
+    "_execute_page_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+T",
+        "windows": "Alt+Shift+T",
+        "mac": "Alt+Shift+T"
+      }
+    }
+  },
+  "page_action": {
+    "default_name": "Tables Available to Capture",
+    "default_icon": {
+      "19": "images/icon.addressbar.19.gif"
+    },
+    "default_popup": "popup.html"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "VWO Heatmap Download",
+  "version": "0.2.1",
+  "manifest_version": 2,
+  "description": "VWO Heatmap Download",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "<all_urls>",
+    "downloads",
+    "webNavigation"
+  ],
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "content-script.js"
+      ],
+      "matches": [
+        "*://*.vwo.com/visitor-behavior-analysis/dist/heatmaps/index.html"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "scripts": [
+      "eventPage.js"
+    ],
+    "persistent": true
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://*.vwo.com/*"
+    ]
+  }
+}

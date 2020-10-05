@@ -1,0 +1,91 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_extName__",
+  "short_name": "__MSG_extShortName__",
+  "version": "8.1.3",
+  "applications": {
+    "gecko": {
+      "id": "{bfb54675-2fd9-4e22-949d-c36333aff6b5}"
+    }
+  },
+  "minimum_chrome_version": "45.0",
+  "minimum_opera_version": "32.0",
+  "default_locale": "en",
+  "description": "__MSG_extDescription__",
+  "icons": {
+    "16": "images/brand/dov-brand-16.png",
+    "32": "images/brand/dov-brand-32.png",
+    "64": "images/brand/dov-brand-64.png",
+    "128": "images/brand/dov-brand-128.png",
+    "256": "images/brand/dov-brand-256.png",
+    "512": "images/brand/dov-brand-512.png"
+  },
+  "author": "Deekshith Allamaneni",
+  "homepage_url": "http://dov.parishod.com/",
+  "browser_action": {
+    "default_icon": "images/brand/dov-brand-128.png",
+    "default_popup": "html/popup.html",
+    "default_title": "Docs Online Viewer"
+  },
+  "options_ui": {
+    "page": "html/options.html",
+    "chrome_style": false
+  },
+  "options_page": "html/options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "*://*/*.pdf",
+        "*://*.facebook.com/*",
+        "*://www.messenger.com/*",
+        "*://mail.google.com/*",
+        "*://docs.google.com/*",
+        "*://www.mediafire.com/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "js/core/config.js",
+        "js/content/insert-link-icons.js",
+        "js/libs/dov-utils.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://dov.parishod.com/*"
+      ],
+      "js": [
+        "js/content/announce-dov-info.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://view.officeapps.live.com/op/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "js/content/ms-office-online-content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/libs/dov-utils.js",
+      "js/core/config.js",
+      "js/core/background.js"
+    ],
+    "persistent": false
+  },
+  "web_accessible_resources": [
+    "images/beside-link-icon.svg",
+    "data/user-preferences-default.json"
+  ],
+  "permissions": [
+    "storage",
+    "*://*/*"
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "AWS X-Ray Service Map",
+  "version": "0.0.2",
+  "manifest_version": 2,
+  "description": "AWS X-Ray Service map visualizer",
+  "icons": {
+    "16": "images/icon-16.png",
+    "128": "images/icon-128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "browser_action": {
+    "default_icon": "images/icon-128.png"
+  },
+  "background": {
+    "scripts": [
+      "scripts/jquery-3.3.1.min.js",
+      "scripts/background.js"
+    ]
+  },
+  "commands": {
+    "colorize-aws-xray": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+X",
+        "mac": "Command+Shift+X"
+      },
+      "description": "Colorize AWS X-ray"
+    }
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "scripts/jquery-3.3.1.min.js",
+        "scripts/chroma.min.js",
+        "scripts/content.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ]
+}

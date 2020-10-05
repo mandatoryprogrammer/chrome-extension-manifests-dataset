@@ -1,0 +1,100 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "version": "0.3.4",
+  "manifest_version": 2,
+  "description": "__MSG_appDescription__",
+  "icons": {
+    "16": "images/icons/mover16.png",
+    "48": "images/icons/mover48.png",
+    "128": "images/icons/mover128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "storage"
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*quoteStep1.jsp*",
+        "https://*/*quoteStep1.jsp*"
+      ],
+      "js": [
+        "bower_components/jquery/dist/jquery.min.js",
+        "scripts/autocomplete_loader.js",
+        "scripts/autocomplete.js",
+        "scripts/directions.js",
+        "scripts/mp_lead.js"
+      ],
+      "css": [
+        "styles/maps.css"
+      ]
+    },
+    {
+      "matches": [
+        "http://*/*overview.jsp*",
+        "https://*/overview.jsp*"
+      ],
+      "js": [
+        "bower_components/jquery/dist/jquery.min.js",
+        "bower_components/ready/dist/ready.min.js",
+        "scripts/pay_mp.js"
+      ],
+      "css": [
+        "styles/maps.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://mxmerchant.com/mx6/*"
+      ],
+      "js": [
+        "bower_components/jquery/dist/jquery.min.js",
+        "scripts/pay_mx.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "bower_components/jquery/dist/jquery.min.js",
+        "bower_components/ready/dist/ready.min.js",
+        "scripts/gmail_leads.js"
+      ],
+      "css": [
+        "styles/maps.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://praqtiq.com/web_accessible_resources*"
+      ],
+      "js": [
+        "bower_components/jquery/dist/jquery.min.js",
+        "scripts/autocomplete.js",
+        "scripts/gmail.js",
+        "scripts/leads.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "bower_components/jquery/dist/jquery.min.js",
+    "scripts/autocomplete.js",
+    "scripts/gmail.js",
+    "scripts/leads.js"
+  ]
+}

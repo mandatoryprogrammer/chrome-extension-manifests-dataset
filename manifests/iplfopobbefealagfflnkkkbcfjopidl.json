@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Canopy",
+  "description": "Find and share amazing products, all available on Amazon.",
+  "version": "1.34",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon128.png",
+    "128": "icon128.png"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "permissions": [
+    "http://*.amazon.com/",
+    "https://*.amazon.com/",
+    "tabs"
+  ],
+  "page_action": {
+    "default_icon": "icon16.png",
+    "default_popup": "popup/popup.html",
+    "default_title": "Recommend on Canopy"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.amazon.com/*",
+        "https://*.amazon.com/*",
+        "http://*.amazon.ca/*",
+        "https://*.amazon.ca/*"
+      ],
+      "js": [
+        "popup/jquery.js",
+        "content.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://canopy.co/extras",
+        "http://localhost:3000/extras",
+        "http://localhost:5000/extras"
+      ],
+      "js": [
+        "canopy-content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "images/add-to.png",
+    "images/added.png",
+    "images/adding-to.png",
+    "popup/jquery.min.map"
+  ]
+}

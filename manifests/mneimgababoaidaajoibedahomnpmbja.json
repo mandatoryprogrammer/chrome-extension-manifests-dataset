@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Salesforce Credentials",
+  "description": "Manage your Salesforce Credentials and login with one click.",
+  "version": "1.4.3",
+  "browser_action": {
+    "default_icon": "icons/logo/icon48.png",
+    "default_title": "Salesforce Credentials",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "icons/logo/icon16.png",
+    "48": "icons/logo/icon48.png",
+    "128": "icons/logo/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "https://*.salesforce.com/*",
+        "https://*.force.com/*",
+        "https://*.visualforce.com/*"
+      ],
+      "js": [
+        "js/utils.js",
+        "js/setTabs.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.salesforce.com/*",
+        "https://*.force.com/*",
+        "https://*.visualforce.com/*"
+      ],
+      "js": [
+        "js/loginHelper.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "addCredentialPopup.html"
+  ],
+  "omnibox": {
+    "keyword": "sf"
+  },
+  "background": {
+    "scripts": [
+      "js/utils.js",
+      "js/background.build.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "https://*.salesforce.com/*",
+    "https://*.force.com/*",
+    "https://*.visualforce.com/*",
+    "storage",
+    "tabs",
+    "downloads",
+    "cookies"
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "When I Clock Out",
+  "description": "When I Clock Out is an extension for users of WhenIWork. It displays the hours you've worked and notifies you of when to clock out.",
+  "version": "1.4",
+  "options_page": "options.html",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "128": "images/Logo128.png",
+    "48": "images/Logo48.png",
+    "16": "images/Logo16.png"
+  },
+  "permissions": [
+    "https://app.wheniwork.com/",
+    "activeTab",
+    "https://*/",
+    "alarms",
+    "cookies",
+    "storage"
+  ],
+  "web_accessible_resources": [
+    "options.html"
+  ],
+  "background": {
+    "scripts": [
+      "js/analytics.js",
+      "js/jquery-3.1.0.min.js",
+      "js/calculator.js",
+      "js/google.js",
+      "js/alert.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://app.wheniwork.com/*",
+        "https://app.wheniwork.com/*"
+      ],
+      "js": [
+        "js/google.js",
+        "js/redirect.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

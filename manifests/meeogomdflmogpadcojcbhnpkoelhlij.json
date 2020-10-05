@@ -1,0 +1,80 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Bubble Buddy",
+  "author": "elitecodex",
+  "description": "A handful of useful utilities for http://www.bubblews.com/",
+  "version": "1.4.0",
+  "options_page": "options.html",
+  "permissions": [
+    "http://www.bubblews.com/",
+    "storage"
+  ],
+  "page_action": {
+    "default_icon": {
+      "19": "smile19.png",
+      "38": "smile38.png"
+    },
+    "default_title": "Bubble Buddy",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "bubble-buddy-bg.js"
+    ],
+    "persistent": false
+  },
+  "icons": {
+    "16": "smile16.png",
+    "48": "smile48.png",
+    "128": "smile128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.bubblews.com/news/submit*"
+      ],
+      "css": [
+        "post-counter.css"
+      ],
+      "js": [
+        "jquery.js",
+        "post-counter.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://www.bubblews.com/notifications"
+      ],
+      "css": [
+        "notifications.css"
+      ],
+      "js": [
+        "jquery.js",
+        "db.js",
+        "utils.js",
+        "shared.js",
+        "notifications.js",
+        "pageAction.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://www.bubblews.com/news/*"
+      ],
+      "exclude_matches": [
+        "http://www.bubblews.com/news/submit*"
+      ],
+      "css": [
+        "utils.css"
+      ],
+      "js": [
+        "jquery.js",
+        "db.js",
+        "utils.js",
+        "shared.js",
+        "post.js"
+      ]
+    }
+  ]
+}

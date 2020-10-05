@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Double Tick",
+  "description": "Email Tracking and Reporting",
+  "version": "1.2",
+  "browser_action": {
+    "default_icon": "static/img/19x19.png",
+    "default_popup": "src/pop.html"
+  },
+  "web_accessible_resources": [
+    "src/js/lib/gmail.js",
+    "src/js/lib/jquery.min.js",
+    "src/js/boom.js",
+    "src/js/pop.js",
+    "src/js/loader.js",
+    "src/js/pop.js",
+    "src/js/background.js",
+    "src/css/sonicboom.css",
+    "static/img/19x19.png",
+    "static/img/16x10.png",
+    "static/img/gmail.png"
+  ],
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "notifications",
+    "background",
+    "<all_urls>",
+    "webRequest"
+  ],
+  "background": {
+    "scripts": [
+      "src/js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "src/js/loader.js"
+      ],
+      "css": [
+        "src/css/sonicboom.css"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

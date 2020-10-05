@@ -1,0 +1,162 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "MyriadHub: Mail Merge, Templates, Tracking",
+  "short_name": "MyriadHub",
+  "description": "Easily respond to hundreds of recipients in Gmail with email templates. Organize contacts in spreadsheets. Add a Giphy GIF.",
+  "version": "1.4.0",
+  "options_page": "options/options.generated.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*"
+      ],
+      "css": [
+        "gmail/styles/noflicker.hack.css",
+        "gmail/styles/content.css",
+        "gmail/styles/dropdowns.css",
+        "gmail/styles/sidebar.css",
+        "gmail/styles/tracker.css",
+        "gmail/styles/welcome.css",
+        "gmail/styles/compose.css",
+        "gmail/styles/compose.hacks.css",
+        "gmail/styles/compose.css",
+        "gmail/styles/modal.hack.css",
+        "gmail/styles/giphy.css",
+        "gmail/styles/jquery.autocomplete.css",
+        "gmail/styles/tipr.css",
+        "gmail/styles/new_campaign.css",
+        "gmail/styles/progressbox.css"
+      ],
+      "js": [
+        "lib/almond.js",
+        "lib/jquery-2.1.4.js",
+        "lib/async-for.js",
+        "lib/inboxsdk.js",
+        "lib/hexConvert.js",
+        "lib/jquery.autocomplete.patched.js",
+        "lib/tipr.patched.js",
+        "lib/kefir.patched.js",
+        "lib/sightglass.patched.js",
+        "lib/rivets.patched.js",
+        "lib/rivets_formatters.js",
+        "lib/taglineHelper.generated.js",
+        "shared.js",
+        "gmail/ajax_resource_fetcher.js",
+        "gmail/constants.generated.js",
+        "gmail/url_helper.js",
+        "gmail/events.js",
+        "gmail/templates.js",
+        "gmail/tagline.js",
+        "gmail/iframe.js",
+        "gmail/widgets/dynamicbutton.js",
+        "gmail/widgets/infobox.js",
+        "gmail/widgets/progressbox.js",
+        "gmail/widgets/framebox.js",
+        "gmail/windowfocus.hack.js",
+        "gmail/view.welcome.js",
+        "gmail/view.new_campaign.js",
+        "gmail/view.import_spreadsheet.js",
+        "gmail/view.compose.filter.js",
+        "gmail/view.compose.filters.chip.js",
+        "gmail/view.compose.filters.image.js",
+        "gmail/view.compose.filters.image.hacks.js",
+        "gmail/view.compose.attachments.js",
+        "gmail/view.compose.attachments.hacks.js",
+        "gmail/view.compose.templates.js",
+        "gmail/view.compose.template_edited.js",
+        "gmail/view.compose.startcheckboxrow.js",
+        "gmail/view.compose.details.js",
+        "gmail/view.compose.placeholders.js",
+        "gmail/view.compose.giphy.js",
+        "gmail/view.compose.tracker.js",
+        "gmail/view.compose.send.js",
+        "gmail/view.compose.editnamesbox.js",
+        "gmail/view.compose.js",
+        "gmail/view.share.js",
+        "gmail/view.toolbar.js",
+        "gmail/view.list.js",
+        "gmail/view.list.toolbar.js",
+        "gmail/view.message.js",
+        "gmail/view.message.toolbar.js",
+        "gmail/view.message.hacks.js",
+        "gmail/view.message.body.js",
+        "gmail/view.upgrade.dialog.js",
+        "gmail/view.create_campaign.dialog.js",
+        "gmail/view.invite.dialog.js",
+        "gmail/ui.js",
+        "gmail/sync.js",
+        "gmail/main.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://docs.google.com/spreadsheets/*/edit"
+      ],
+      "js": [
+        "shared.js",
+        "gdocs/content.hacks.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://*.myriadhub.com/*",
+        "https://*.myriadhub.com/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "shared.js",
+        "myriad/content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "icons": {
+    "16": "res/icon-brand2-16.png",
+    "48": "res/icon-brand2-48.png",
+    "128": "res/icon-brand2-128.png"
+  },
+  "background": {
+    "scripts": [
+      "lib/require.js",
+      "lib/async-for.js",
+      "lib/jquery-2.1.4.js",
+      "lib/jq-ajax-progress.patched.js",
+      "core/main.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "gmail/templates/*.html",
+    "res/frame.html",
+    "res/logo.svg",
+    "res/myriad-love.svg",
+    "res/icon-brand2.svg",
+    "res/icon-brand2-error.svg",
+    "res/icon-brand2-warning.svg",
+    "res/icon-brand2-grey.svg",
+    "res/shared.svg",
+    "res/placeholders.svg",
+    "res/placeholders_grey.svg",
+    "res/tracker.svg",
+    "res/tracker_grey.svg",
+    "res/doublecheckmark.svg",
+    "res/checkmark.svg",
+    "res/spinner.gif",
+    "res/giphy.svg",
+    "res/pb_giphy.png"
+  ],
+  "permissions": [
+    "tabs",
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "webNavigation",
+    "https://*.google.com/*",
+    "https://*.googleusercontent.com/",
+    "http://*.myriadhub.com/*",
+    "https://*.myriadhub.com/*"
+  ],
+  "manifest_version": 2
+}

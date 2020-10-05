@@ -1,0 +1,40 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Nielsen SDK Inspector",
+  "description": "A plugin that visualizes the SDK API calls and Network calls",
+  "version": "0.4.0",
+  "manifest_version": 2,
+  "icons": {
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "browser_action": {
+    "default_icon": "icons/icon48.png"
+  },
+  "web_accessible_resources": [
+    "content_scripts/nlsn-sdk-inspector.js",
+    "content_scripts/nlsn-sdk-inspector.css"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "inject.js"
+      ],
+      "all_frames": true
+    }
+  ]
+}

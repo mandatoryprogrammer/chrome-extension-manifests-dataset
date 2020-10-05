@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Magic Pricing",
+  "description": "Retrieves prices for Magic the gathering cards on gatherer.wizards.com. ",
+  "version": "1.0.4",
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "web_accessible_resources": [
+    "images/*"
+  ],
+  "page_action": {
+    "default_icon": {
+      "19": "images/icon19.png",
+      "38": "images/icon38.png"
+    },
+    "default_title": "Magic Pricing"
+  },
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://gatherer.wizards.com/Pages/Card/Details.aspx*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "js/priceGrabber.js"
+      ],
+      "css": [
+        "css/priceGrabber.css"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "declarativeContent",
+    "http://gatherer.wizards.com/Pages/Card/Details.aspx*",
+    "https://www.cardhoarder.com/*",
+    "http://partner.tcgplayer.com/*"
+  ]
+}

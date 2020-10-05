@@ -1,0 +1,67 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Convert Gmail™ to PDF (locally)",
+  "description": "Convert your emails to PDF format locally (without a server interaction; secure and private) to backup your emails",
+  "version": "0.2.1",
+  "manifest_version": 2,
+  "permissions": [
+    "storage",
+    "*://mail.google.com/*",
+    "downloads"
+  ],
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "common.js"
+    ]
+  },
+  "storage": {
+    "managed_schema": "schema.json"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://mail.google.com/*"
+      ],
+      "run_at": "document_start",
+      "css": [
+        "/data/button/index.css"
+      ],
+      "js": [
+        "/data/button/index.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://mail.google.com/mail/u/*/*&view=pt&*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "/prefs.js",
+        "/data/view/index.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "data/button/icon-blue.svg",
+    "data/button/icon-orange.svg",
+    "data/print/index.html",
+    "data/assets/*.ttf"
+  ],
+  "homepage_url": "https://add0n.com/to-pdf.html?from=gmail",
+  "options_ui": {
+    "page": "/data/options/index.html",
+    "chrome_style": true
+  },
+  "icons": {
+    "16": "/data/icons/16.png",
+    "19": "/data/icons/19.png",
+    "32": "/data/icons/32.png",
+    "38": "/data/icons/38.png",
+    "48": "/data/icons/48.png",
+    "64": "/data/icons/64.png",
+    "128": "/data/icons/128.png",
+    "256": "/data/icons/256.png"
+  }
+}

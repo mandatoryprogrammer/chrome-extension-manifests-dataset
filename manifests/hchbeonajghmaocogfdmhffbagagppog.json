@@ -1,0 +1,73 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "VAC: VK audio changer",
+  "short_name": "VAC",
+  "description": "Расширение позволяет управлять аудиозаписями ВК из любых вкладок, а также с помощью горячих клавиш.",
+  "author": "littleguga",
+  "homepage_url": "http://littleguga.ru/vac",
+  "version": "1.1",
+  "offline_enabled": false,
+  "browser_action": {
+    "default_icon": {
+      "38": "icons/icon.png"
+    },
+    "default_title": "VAC: VK audio changer",
+    "default_popup": "popup/index.html"
+  },
+  "commands": {
+    "play": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+9",
+        "mac": "Command+Shift+9"
+      },
+      "description": "Play/Pause shortcut",
+      "global": true
+    },
+    "next": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+0",
+        "mac": "Command+Shift+0"
+      },
+      "description": "Next track shortcut",
+      "global": true
+    },
+    "prev": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+8",
+        "mac": "Command+Shift+8"
+      },
+      "description": "Prev track shortcut",
+      "global": true
+    }
+  },
+  "content_security_policy": "script-src 'self' https://www.google.com; object-src 'self'",
+  "permissions": [
+    "tabs",
+    "background",
+    "*://vk.com/*"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://vk.com/*"
+      ],
+      "js": [
+        "audio/vk_audio_controls.js"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "96": "icons/icon96.png",
+    "128": "icons/icon.png"
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "VidGrid Beta",
+  "short_name": "VidGrid",
+  "manifest_version": 2,
+  "icons": {
+    "16": "images/icon16active.png",
+    "48": "images/icon48active.png",
+    "128": "images/icon128active.png"
+  },
+  "browser_action": {
+    "default_icon": "images/icon48active.png",
+    "default_title": "VidGrid",
+    "default_popup": "popup/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "downloads",
+    "downloads.shelf",
+    "notifications",
+    "desktopCapture",
+    "storage",
+    "https://mail.google.com/",
+    "https://*.vidgrid.com/*",
+    "http://vidgrid-production-upload.s3.amazonaws.com/*",
+    "https://vidgrid-production-upload.s3.amazonaws.com/*",
+    "http://vidgrid-production-upload.s3-accelerate.amazonaws.com/*",
+    "https://vidgrid-production-upload.s3-accelerate.amazonaws.com/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.vidgrid.com/*",
+      "*://*.ilosvideos.com/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "camview.html",
+    "frame.html",
+    "images/icon128active.png"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "homepage_url": "https://app.vidgrid.com",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.vidgrid.com/*",
+        "https://*.ilosvideos.com/*"
+      ],
+      "js": [
+        "is-installed.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "inboxsdk.js",
+        "inbox.js"
+      ]
+    }
+  ],
+  "description": "Record videos directly from your browser. Access your video library and send from Gmail.",
+  "version": "1.3.0"
+}

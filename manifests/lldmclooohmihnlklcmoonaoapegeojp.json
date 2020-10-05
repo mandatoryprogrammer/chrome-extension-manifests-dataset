@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Wisdom - Snippet Testing",
+  "short_name": "Wisdom",
+  "version": "0.3.13",
+  "manifest_version": 2,
+  "description": "Test Wisdom Session Replay by injecting your Wisdom snippet into any list of websites.",
+  "homepage_url": "https://getwisdom.io",
+  "minimum_chrome_version": "49",
+  "incognito": "split",
+  "icons": {
+    "128": "icon_128.png"
+  },
+  "permissions": [
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "https://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "exclude_globs": [
+        "https://*.getwisdom.io:*/*"
+      ],
+      "js": [
+        "init.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "options_page": "options.html",
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  }
+}

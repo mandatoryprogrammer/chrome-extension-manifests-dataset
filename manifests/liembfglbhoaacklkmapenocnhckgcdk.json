@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "2.0.0",
+  "name": "CB Insights",
+  "manifest_version": 2,
+  "description": "Pull CB Insights’ VC Data Right Into Your Browser",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAiznV4z6J8eGtYKfbFUjfhQSqnVDYtFGMWm6nwcKvaRr0rfbhjowyGFSKiibMtZNqgaw9f9oiS1zRwU2qknyvc6PFoctYWIOA8NxIOa9Gqtn2xWSzy9S18xKai/oOUwPddwAYMxMvPVZhBUxjN7euC6XihBKibwNlMqFDBEtQNZ6bai5q3O+uIVmGZ2PORRh+1Q/m1wgesXMJfoTqtJogaSpnjuUb6zAKOxdZLvWADhc8iPek0OneGTtdXTFbJPMVatxwal31TP0ZGdTHvHeMl+jFybeLd2gD6X+nLVIwks7Psh9akjDS0zmEN43oL9+5gcck7rN1P+iiHu3PfmsjcQIDAQAB",
+  "browser_action": {
+    "default_title": "Look up on CB Insights",
+    "default_icon": "img/icons/icon-small.png"
+  },
+  "icons": {
+    "16": "img/icons/icon-bitty.png",
+    "48": "img/icons/icon-small.png",
+    "128": "img/icons/icon-large.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "js/gmail.bundle.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "inject.html",
+    "js/libs/jquery.min.js",
+    "js/libs/gmail.js",
+    "js/gmailRunner.bundle.js"
+  ],
+  "omnibox": {
+    "keyword": "cbi"
+  },
+  "background": {
+    "persistent": true,
+    "page": "background.html"
+  },
+  "permissions": [
+    "contextMenus",
+    "notifications",
+    "tabs",
+    "<all_urls>"
+  ],
+  "content_security_policy": "object-src 'self' ;script-src 'self' 'unsafe-eval'; style-src * 'unsafe-inline'; img-src *;"
+}

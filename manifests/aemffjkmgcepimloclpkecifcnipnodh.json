@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "AdLock - adblock & privacy protection",
+  "short_name": "AdLock",
+  "version": "0.1.28",
+  "minimum_chrome_version": "69",
+  "default_locale": "en",
+  "description": "__MSG_app_desc__",
+  "icons": {
+    "128": "img/icon128.png",
+    "16": "img/icon16.png"
+  },
+  "permissions": [
+    "tabs",
+    "<all_urls>",
+    "storage",
+    "unlimitedStorage",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "options_ui": {
+    "open_in_tab": true,
+    "page": "options.html"
+  },
+  "browser_action": {
+    "default_title": "AdLock",
+    "default_icon": "img/icon16.png",
+    "default_popup": "./popup.html"
+  },
+  "web_accessible_resources": [],
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "js/content-script.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

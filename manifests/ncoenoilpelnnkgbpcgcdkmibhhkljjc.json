@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Netflix Rottenizer",
+  "version": "0.7.6",
+  "manifest_version": 2,
+  "description": "Overlays Rotten Tomato reviews when browsing Netflix.",
+  "permissions": [
+    "http://api.rottentomatoes.com/",
+    "http://www.rottentomatoes.com/",
+    "http://netflixrottenizer.appspot.com/",
+    "storage",
+    "tabs"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "page_action": {
+    "default_icon": {
+      "19": "icon16.png",
+      "38": "icon48.png"
+    },
+    "default_title": "Netflix Rottenizer",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.netflix.com/*"
+      ],
+      "js": [
+        "jquery-1.7.1.min.js",
+        "hoverIntent-1.8.js",
+        "lodash.js",
+        "netflix_rottenizer.js"
+      ],
+      "css": [
+        "netflix_rottenizer.css"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}

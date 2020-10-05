@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Autofill for Chrome by Fillr",
+  "short_name": "Autofill",
+  "description": "The world’s most intelligent autofill. Fillr is so good, it will change the way you shop and fill forms online forever.",
+  "version": "1.7.34",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjmwzXRG1JehIhaaFuUQtjynqd2qNHmlkyJ1NuexzNKBBRvwNNCKQCJIyD5Per1spYc0OLUDbMcLgHEVuTPZw7t0vsfAI5mhFNQkJH5IHfuG/+YBpIe5hjROht18xfwqLdqYb9WD1xjgJECCRk4Jo9c4e1cNKtBWbYkvsa52qvrhz6TvffKq4/dEVgl/VGVetcywbwbOHK1irWkbMB2tTD+38731DNcfsR0SPjbecek1SekbmXJbcBTifqehkpajcGt0Cv6dla9LnZ5ofkRvlZAUq3wWQSo4LZ8giAEa8xTpSdHxFZy/SjZX+843Ce7JMb4ueCVNFfXIabQi+Z3EtSwIDAQAB",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "sjcl.js",
+      "rncryptor.js",
+      "background-bundled.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "identity",
+    "identity.email",
+    "privacy",
+    "webNavigation"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "MobileWidget.js",
+        "content-script-bundled.js"
+      ]
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.fillr.com/*",
+      "*://*.fillrdev.com/*",
+      "*://localhost/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "abandonment.js",
+    "icon.png",
+    "chip.html",
+    "popup.html"
+  ],
+  "content_security_policy": "script-src 'self' https://maps.googleapis.com https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js; object-src 'self'"
+}

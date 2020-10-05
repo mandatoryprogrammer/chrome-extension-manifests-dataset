@@ -1,0 +1,109 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Robinhood Mint Sync for Chrome",
+  "description": "Automatically add your Robinhood portfolio to Mint",
+  "version": "1.3.0",
+  "author": "George Walker",
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png",
+    "512": "images/icon512.png"
+  },
+  "background": {
+    "scripts": [
+      "js/analytics.js",
+      "js/background/event-listener.js",
+      "js/background/update-install-listener.js",
+      "js/background/browser-action.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "images/icon16.png",
+      "48": "images/icon48.png",
+      "128": "images/icon128.png",
+      "512": "images/icon512.png"
+    },
+    "default_title": "Robinhood Mint Sync for Chrome"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://robinhood.com/account?mintRobinhood=true"
+      ],
+      "js": [
+        "js/external/jquery/jquery.min.js",
+        "js/shared.js",
+        "js/robinhood/robinhood.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://robinhood.com/login?redirectMint=true"
+      ],
+      "js": [
+        "js/external/jquery/jquery.min.js",
+        "js/shared.js",
+        "js/robinhood/login.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://mint.intuit.com/settings.event?filter=property&addRobinhood=true*"
+      ],
+      "js": [
+        "js/external/jquery/jquery.min.js",
+        "js/shared.js",
+        "js/mint/mint-update.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://mint.intuit.com/addprovider.event?addRobinhood=true"
+      ],
+      "js": [
+        "js/external/jquery/jquery.min.js",
+        "js/shared.js",
+        "js/mint/mint-add.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://mint.intuit.com/overview.event*"
+      ],
+      "js": [
+        "js/external/jquery/jquery.min.js",
+        "js/external/noty/noty.js",
+        "js/mint/mint-overview.js"
+      ],
+      "css": [
+        "css/mint-overview.css",
+        "css/noty.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://mint.intuit.com/*"
+      ],
+      "js": [
+        "js/mint/mint.js"
+      ],
+      "css": [
+        "css/mint.css"
+      ]
+    }
+  ],
+  "options_ui": {
+    "page": "html/settings.html",
+    "open_in_tab": true
+  },
+  "permissions": [
+    "storage"
+  ],
+  "web_accessible_resources": [
+    "images/*.png"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com https://www.googletagmanager.com; object-src 'self'"
+}

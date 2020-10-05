@@ -1,0 +1,70 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Upsales Gmail Sync",
+  "version": "1.3.9",
+  "description": "",
+  "options_page": "src/options/options.html",
+  "icons": {
+    "16": "src/icons/iconBlue16.png",
+    "48": "src/icons/iconBlue48.png",
+    "128": "src/icons/iconBlue128.png"
+  },
+  "content_security_policy": "script-src 'self' https://fonts.googleapis.com/* https://use.fontawesome.com/*; object-src 'self'",
+  "background": {
+    "scripts": [
+      "src/lib/js/moment.min.js",
+      "src/lib/js/moment-timezone.js",
+      "src/lib/js/axios.min.js",
+      "src/lib/js/jquery.min.js",
+      "src/background/index.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "css": [
+        "src/lib/css/content.css",
+        "src/lib/css/select2.min.css"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "src/lib/js/pusher.min.js",
+        "src/lib/js/axios.min.js",
+        "src/lib/js/inboxSDK.min.js",
+        "src/lib/js/jquery.min.js",
+        "src/lib/js/select2.min.js",
+        "src/lib/js/floatingFormLabels.min.js",
+        "src/helpers/index.js",
+        "src/views/index.js",
+        "src/content/index.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "tabs",
+    "storage",
+    "identity",
+    "identity.email"
+  ],
+  "web_accessible_resources": [
+    "src/lib/css/*",
+    "src/lib/js/*",
+    "src/icons/*"
+  ],
+  "browser_action": {
+    "default_icon": "src/icons/iconBlue48.png"
+  },
+  "author": "Konstantin Kuksin",
+  "oauth2": {
+    "client_id": "2691531424-jfvp1lg0r95o0859fossbgcui43ou6j2.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/gmail.readonly"
+    ]
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAm/ZOePPwQuJNFv5SXbEBT+Y+95nX9nGGdq33Og/J+ruhggo+/jwnORv4pXtYEhOSLgVLtxsQ3aqx7MeS0CSA7lf3nkksfC/WbvnV6b+sNm3hyK9+rqdHcxnnQskDUo/4G+DhHUPrC40B3Bhq0PLdUjtF1hgpWwKG4XpkR1dCbKEsv6J/kYm/l8ITjjoQ8zN5uD+saB4IYm49lXXYZ5Yz564/a44mrt4KC1NPSobLHIMEwWpk4sSE6BJE7CKdvSRmfYC6UdU1uVtKLyl2oIpnyUStucnw04Be7KgQyiYJATl1JZ44StiLZovrG7Lz5Utet8LbOSCIpr3L0mJLVQIskwIDAQAB"
+}

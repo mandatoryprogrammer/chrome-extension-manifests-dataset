@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "CA SV/App Test Chrome Extension",
+  "short_name": "DevTest Chrome Extension",
+  "version": "1.0.5.14",
+  "description": "DevTest Extension for Chrome Developer Tools automates generating test cases out of captured http(s) paths.",
+  "devtools_page": "pf.html",
+  "manifest_version": 2,
+  "web_accessible_resources": [
+    "*"
+  ],
+  "icons": {
+    "128": "Panel/images/pfPathVisualization/pficons_agent_n.png"
+  },
+  "permissions": [
+    "storage",
+    "cookies",
+    "activeTab",
+    "tabs",
+    "webRequest",
+    "webNavigation",
+    "webRequestBlocking",
+    "nativeMessaging",
+    "*://*/*",
+    "<all_urls>"
+  ],
+  "background": {
+    "page": "background.html"
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "Panel/automation/connector.js",
+        "Panel/automation/recorder.js",
+        "Panel/automation/locator.js",
+        "Panel/automation/util.js",
+        "Panel/automation/actionDetector.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file://*"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

@@ -1,0 +1,71 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Google YouTube Music Hotkeys",
+  "version": "1.7.0",
+  "description": "Use keyboard shortcuts to control Google/YouTube Music",
+  "homepage_url": "https://github.com/lidel/google-music-hotkeys",
+  "author": "Marcin Rataj",
+  "icons": {
+    "128": "Play_music_triangle.png"
+  },
+  "permissions": [
+    "https://play.google.com/music/listen*",
+    "https://music.youtube.com/*",
+    "contextMenus",
+    "tabs"
+  ],
+  "background": {
+    "scripts": [
+      "browser-polyfill.min.js",
+      "background.js"
+    ]
+  },
+  "options_ui": {
+    "page": "options.html",
+    "browser_style": true
+  },
+  "browser_action": {
+    "browser_style": true,
+    "default_icon": {
+      "128": "Play_music_triangle.png"
+    }
+  },
+  "commands": {
+    "toggle-playback": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+8",
+        "windows": "Alt+Shift+8"
+      },
+      "description": "Toggle Playback"
+    },
+    "previous-song": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+9",
+        "windows": "Alt+Shift+9"
+      },
+      "description": "Previous Song"
+    },
+    "next-song": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+0",
+        "windows": "Alt+Shift+0"
+      },
+      "description": "Next Song"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://play.google.com/music/listen*",
+        "https://music.youtube.com/*"
+      ],
+      "js": [
+        "browser-polyfill.min.js",
+        "autoplay.js"
+      ],
+      "all_frames": false,
+      "run_at": "document_idle"
+    }
+  ]
+}

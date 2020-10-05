@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "GitHub Inline Log Viewer",
+  "short_name": "GitHub Inline Log Viewer",
+  "description": "View CircleCI/Azure/Jenkins Logs directly on GitHub",
+  "version": "3.0",
+  "author": "pytorch",
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "background": {
+    "scripts": [
+      "remove_cors.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://github.com/*/*"
+      ],
+      "js": [
+        "lib.js",
+        "scrollview.js",
+        "azure.js",
+        "github_checks.js",
+        "unsupported.js",
+        "jenkins.js",
+        "circleci.js",
+        "build_info.js",
+        "build_logs.js"
+      ],
+      "css": [
+        "widescreen.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "storage",
+    "https://ci.pytorch.org/jenkins/*",
+    "https://github.com/*",
+    "https://circleci.com/*",
+    "https://*.amazonaws.com/"
+  ]
+}

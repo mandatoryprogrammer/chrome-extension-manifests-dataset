@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "BugDigger",
+  "version": "1.4",
+  "description": "Create truly helpful bug reports at the push of a button. Capture web page screenshot, annotate image and upload to bug tracker.",
+  "background": {
+    "page": "background.html"
+  },
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": "images/icon24.png",
+    "default_title": "Report an issue for this page"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "scripts/jquery-1.4.2.min.js",
+        "check-upload-signal.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.browserstack.com/*"
+      ],
+      "js": [
+        "browserstack.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.crossbrowsertesting.com/*"
+      ],
+      "js": [
+        "crossbrowsertesting.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "options_page": "options.html",
+  "icons": {
+    "128": "images/icon128.png",
+    "16": "images/icon16.png",
+    "32": "images/icon32.png",
+    "48": "images/icon48.png"
+  },
+  "permissions": [
+    "tabs",
+    "history",
+    "<all_urls>"
+  ]
+}

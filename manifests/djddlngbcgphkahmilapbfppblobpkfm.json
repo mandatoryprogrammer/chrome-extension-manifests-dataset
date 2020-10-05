@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Power Notes Searcher",
+  "short_name": "Power Notes Searcher",
+  "description": "Search for multiple SAP notes easily & with history.",
+  "version": "2.6",
+  "author": "in2DB Consultants Ltd",
+  "minimum_chrome_version": "30",
+  "permissions": [
+    "https://*.sap.com/*",
+    "https://*.sap-ag.de/*",
+    "https://*.sap-ag.com/*",
+    "contextMenus",
+    "tabs",
+    "storage",
+    "clipboardWrite",
+    "webRequestBlocking",
+    "webRequest"
+  ],
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "omnibox": {
+    "keyword": "note"
+  },
+  "browser_action": {
+    "default_icon": "icon16.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "gfuncs-min.js",
+      "handler-min.js",
+      "context-min.js",
+      "omni-min.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://launchpad.support.sap.com/*",
+        "https://*.sap-ag.de/sap(*)/bc/bsp/sno/ui_entry/entry.htm*",
+        "https://*.sap-ag.com/sap(*)/bc/bsp/sno/ui_entry/entry.htm*"
+      ],
+      "js": [
+        "highlightnotes-min.js",
+        "notecontent-min.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ]
+}

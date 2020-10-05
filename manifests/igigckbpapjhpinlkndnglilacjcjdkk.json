@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "default_locale": "pl",
+  "name": "__MSG_extensionName__",
+  "description": "__MSG_extensionDescription__",
+  "version": "1.2.2",
+  "author": "__MSG_companyName__",
+  "icons": {
+    "16": "images/icon16.png",
+    "32": "images/icon32.png",
+    "180": "images/icon180.png"
+  },
+  "browser_action": {
+    "default_title": "__MSG_defaultTitle__",
+    "default_icon": "images/icon32.png",
+    "default_popup": "views/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "scripts/pasteFromClipboard.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "scripts/copyToClipboard.js"
+      ],
+      "all_frames": false
+    }
+  ],
+  "permissions": [
+    "contextMenus",
+    "declarativeContent",
+    "activeTab",
+    "storage",
+    "notifications",
+    "clipboardRead",
+    "clipboardWrite",
+    "tabs"
+  ],
+  "incognito": "not_allowed",
+  "offline_enabled": false
+}

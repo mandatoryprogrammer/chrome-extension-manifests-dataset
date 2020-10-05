@@ -1,0 +1,76 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Startup Erector",
+  "version": "0.0.17",
+  "manifest_version": 2,
+  "description": "Startup Erector",
+  "icons": {
+    "16": "images/icon-16.png",
+    "128": "images/icon-128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "background",
+    "storage",
+    "activeTab",
+    "tabs"
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_globs": [
+        "*://*.google.*/*"
+      ],
+      "js": [
+        "scripts/contentscript-all.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "include_globs": [
+        "*://*.google.*/*"
+      ],
+      "js": [
+        "scripts/contentscript-google.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon-128.png",
+      "38": "images/icon-128.png"
+    },
+    "default_title": "Startup Erector",
+    "default_popup": "popup.html"
+  },
+  "web_accessible_resources": [
+    "images/banana.png",
+    "images/icon-128.png",
+    "images/icon-19.png",
+    "images/loading-38.svg",
+    "images/loading-19.svg",
+    "images/disable-38.png",
+    "images/disable-19.png"
+  ]
+}

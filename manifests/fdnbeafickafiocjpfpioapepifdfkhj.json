@@ -1,0 +1,91 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "version": "0.3.1",
+  "manifest_version": 2,
+  "description": "__MSG_appDescription__",
+  "icons": {
+    "16": "images/icon-16.png",
+    "128": "images/icon-128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "scripts/helpers.js",
+        "scripts/start.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "scripts/content.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://trendingproducts.com/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "scripts/frames.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://home.aliexpress.com/embed.html?productId=*"
+      ],
+      "all_frames": true,
+      "js": [
+        "scripts/embed.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "<all_urls>",
+    "http://*/*",
+    "https://*/*",
+    "alarms",
+    "tabs",
+    "background",
+    "cookies",
+    "webNavigation",
+    "contextMenus",
+    "webRequest",
+    "webRequestBlocking",
+    "browsingData",
+    "notifications",
+    "proxy",
+    "storage",
+    "unlimitedStorage"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon-19.png",
+      "38": "images/icon-38.png"
+    },
+    "default_title": "Trending Products",
+    "default_popup": "popup.html"
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://trendingproducts.com/*",
+      "*://trendingproducts/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "images/icon-48.png"
+  ]
+}

@@ -1,0 +1,200 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "ActiveDEMAND Lead Insights for Chrome",
+  "description": "ActiveDEMAND Lead Insights enables you to track emails, get browser notifications on site visits, make calls from your browser.",
+  "version": "3.9.6",
+  "manifest_version": 2,
+  "permissions": [
+    "notifications",
+    "tabs",
+    "storage",
+    "unlimitedStorage",
+    "contextMenus",
+    "https://*.activedemand.com/*",
+    "https://*.pipedrive.com/*",
+    "https://app.pipelinedeals.com/*",
+    "https://account.enquiresolutions.com/*",
+    "https://*.salesforce.com/*",
+    "https://*.lightning.force.com/*",
+    "https://*.nocrm.io/*",
+    "https://app.nimble.com/*",
+    "https://*.freshsales.io/*",
+    "https://*.sherpacrm.com/*",
+    "https://*.dynamics.com/*",
+    "https://*.zoho.com/*",
+    "https://mail.google.com/*"
+  ],
+  "optional_permissions": [
+    "http://*/",
+    "https://*/"
+  ],
+  "background": {
+    "scripts": [
+      "libs/jquery-3.1.0.min.js",
+      "libs/jquery-dateFormat.min.js",
+      "mode.js",
+      "utils.js",
+      "libs/twilio.min.js",
+      "c2c.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "libs/jquery-3.1.0.min.js",
+        "libs/jquery-dateFormat.min.js",
+        "libs/pagination.min.js",
+        "mode.js",
+        "utils.js",
+        "ui.js",
+        "libs/inboxsdk.js",
+        "gmail/inject.js",
+        "gmail/main.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "https://*.pipedrive.com/*",
+        "https://app.pipelinedeals.com/*",
+        "https://account.enquiresolutions.com/*",
+        "https://*.salesforce.com/*",
+        "https://*.lightning.force.com/*",
+        "https://*.nocrm.io/*",
+        "https://app.nimble.com/*",
+        "https://*.freshsales.io/*",
+        "https://*.sherpacrm.com/*",
+        "https://*.dynamics.com/*",
+        "https://*.zoho.com/*",
+        "https://*.activedemand.com/*"
+      ],
+      "js": [
+        "libs/jquery-3.1.0.min.js",
+        "libs/notify.js",
+        "libs/jConfirm.js",
+        "mode.js",
+        "crm_integrations/contact_popup_integration.js",
+        "crm_integrations/nimble.js",
+        "crm_integrations/sherpa.js",
+        "crm_integrations/dynamics.js",
+        "crm_integrations/app.js"
+      ],
+      "css": [],
+      "run_at": "document_idle",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "https://*.pipedrive.com/*",
+        "https://app.pipelinedeals.com/*",
+        "https://account.enquiresolutions.com/*",
+        "https://*.salesforce.com/*",
+        "https://*.lightning.force.com/*",
+        "https://*.nocrm.io/*",
+        "https://app.nimble.com/*",
+        "https://*.freshsales.io/*",
+        "https://*.sherpacrm.com/*",
+        "https://*.dynamics.com/*",
+        "https://*.zoho.com/*",
+        "https://*.activedemand.com/*"
+      ],
+      "js": [],
+      "css": [
+        "css/jConfirm.css",
+        "crm_integrations/crm_integrations.css"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://*.activedemand.com/*",
+        "https://*.pipedrive.com/*",
+        "https://app.pipelinedeals.com/*",
+        "https://account.enquiresolutions.com/*",
+        "https://*.salesforce.com/*",
+        "https://*.lightning.force.com/*",
+        "https://*.nocrm.io/*",
+        "https://app.nimble.com/*",
+        "https://*.freshsales.io/*",
+        "https://*.sherpacrm.com/*",
+        "https://*.dynamics.com/*",
+        "https://*.zoho.com/*",
+        "https://mail.google.com/*"
+      ],
+      "css": [
+        "css/content.css"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://*.pipedrive.com/*",
+        "https://app.pipelinedeals.com/*",
+        "https://account.enquiresolutions.com/*",
+        "https://*.salesforce.com/*",
+        "https://*.lightning.force.com/*",
+        "https://*.nocrm.io/*",
+        "https://app.nimble.com/*",
+        "https://*.freshsales.io/*",
+        "https://*.sherpacrm.com/*",
+        "https://*.dynamics.com/*",
+        "https://*.zoho.com/*"
+      ],
+      "js": [
+        "libs/jquery-3.1.0.min.js",
+        "mode.js",
+        "utils.js",
+        "ui.js",
+        "emailTemplates.js"
+      ],
+      "css": [
+        "css/emailTemplates.css"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://*.activedemand.com/*"
+      ],
+      "js": [
+        "libs/jquery-3.1.0.min.js",
+        "mode.js",
+        "utils.js",
+        "ui.js",
+        "bridge_connector.js",
+        "emailTemplates.js"
+      ],
+      "css": [
+        "css/emailTemplates.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "icons": {
+    "16": "img/logo16.png",
+    "48": "img/logo48.png",
+    "128": "img/logo128.png"
+  },
+  "web_accessible_resources": [
+    "*.js",
+    "libs/*.js",
+    "img/*",
+    "dialer/*",
+    "power_dialer/*.*",
+    "*.css"
+  ],
+  "browser_action": {
+    "default_icon": "img/logo.png",
+    "default_title": "ActiveDEMAND Lead Insights for Chrome",
+    "default_popup": "popup/popup.html"
+  },
+  "content_security_policy": "script-src 'self' https://static.twilio.com https://media.twiliocdn.com https://www.inboxsdk.com; object-src 'self'"
+}

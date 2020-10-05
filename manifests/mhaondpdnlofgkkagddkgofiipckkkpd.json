@@ -1,0 +1,42 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "7Cups Highlight Extension",
+  "icons": {
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "description": "This extension implements a highlight function when someone mentions your name on 7Cups",
+  "version": "1.6.11",
+  "web_accessible_resources": [
+    "ping.wav"
+  ],
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html",
+    "default_title": "Highlight Settings"
+  },
+  "background": {
+    "scripts": [
+      "eventPage.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.7cups.com/*",
+        "https://7cups.com/*"
+      ],
+      "js": [
+        "highlighter.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "http://*.7cups.com/",
+    "https://*.7cups.com/",
+    "storage"
+  ]
+}

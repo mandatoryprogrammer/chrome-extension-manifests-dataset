@@ -1,0 +1,166 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "version": "7.5.1",
+  "name": "__MSG_appName__",
+  "short_name": "__MSG_appTitle__",
+  "description": "__MSG_appDesc__",
+  "default_locale": "en",
+  "options_page": "options.html",
+  "content_security_policy": "script-src 'self' http://localhost https://*.dux-soup.com; object-src 'self'; font-src 'self' 'unsafe-inline' *; style-src 'self' 'unsafe-inline' *; connect-src 'self' http://localhost:8080 ws://localhost:8080 https://*.dux-soup.com  ws://*.dux-soup.com https://*.googleapis.com *; img-src 'self' data: blob: http://localhost:8080 https://*.dux-soup.com https://*.linkedin.com https://*.licdn.com; frame-src 'self' http://localhost:8080 https://*.dux-soup.com https://*.linkedin.com https://*.licdn.com; default-src 'self' http://localhost:8080 https://*.dux-soup.com;",
+  "icons": {
+    "48": "icon-medium.png",
+    "128": "icon-large.png"
+  },
+  "browser_action": {
+    "default_icon": "icon_free.png",
+    "default_title": "Unable to Access GoogleID",
+    "default_popup": "init_popup_broken.html"
+  },
+  "permissions": [
+    "tabs",
+    "identity",
+    "webRequest",
+    "webRequestBlocking",
+    "power",
+    "idle",
+    "downloads",
+    "management",
+    "cookies",
+    "https://*.linkedin.com/*",
+    "https://hooks.zapier.com/*",
+    "https://webhook.site/*",
+    "https://local.adguard.com/*",
+    "https://www.google.com/*",
+    "https://www.googleapis.com/*",
+    "https://*.dux-soup.com/*",
+    "https://*.pipedrive.com/*",
+    "http://localhost:8080/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.dux-soup.com/*",
+      "http://localhost/*"
+    ]
+  },
+  "oauth2": {
+    "scopes": [
+      "https://www.googleapis.com/auth/chromewebstore.readonly",
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/userinfo.profile"
+    ],
+    "client_id": "1084229908612-j3mft6jbpenvbcru1gu910a03jueb6t8.apps.googleusercontent.com",
+    "realm": "https://app.dux-soup.com/"
+  },
+  "background": {
+    "scripts": [
+      "server.js"
+    ],
+    "persistent": true
+  },
+  "minimum_chrome_version": "48.0",
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "*://*.linkedin.com/*",
+        "*://*.google.com/search*"
+      ],
+      "exclude_matches": [
+        "*://*/*pulse*",
+        "*://www.linkedin.com/post/new",
+        "*://www.linkedin.com/psettings",
+        "*://www.linkedin.com/campaignmanager",
+        "*://*.pointdrive.linkedin.com/psettings"
+      ],
+      "js": [
+        "client.js"
+      ]
+    },
+    {
+      "run_at": "document_idle",
+      "matches": [
+        "https://www.linkedin.com/mynetwork/invite-connect/connections/*"
+      ],
+      "include_globs": [
+        "*/#convert"
+      ],
+      "js": [
+        "pointcontributor.js"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "matches": [
+        "*://www.linkedin.com/sales/*"
+      ],
+      "js": [
+        "rewrite_li.js"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "matches": [
+        "*://customer.jvzoo.com/receipt/*"
+      ],
+      "js": [
+        "pass_license.js"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "matches": [
+        "https://www.linkedin.com/feed/*"
+      ],
+      "include_globs": [
+        "*/#*"
+      ],
+      "js": [
+        "dslauncher.js"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "https://media.licdn.com/embeds/native-document.html",
+        "https://test.dux-soup.com/web/*",
+        "https://app.dux-soup.com/web/*",
+        "https://app-fo.dux-soup.com/web/*",
+        "http://localhost/web/*"
+      ],
+      "css": [
+        "libs/toastr/toastr.min.css",
+        "libs/tag-it/jquery.tagit.css",
+        "libs/tag-it/tagit.ui-zendesk.css",
+        "libs/vex/vex.css",
+        "libs/vex/vex-theme-default.css",
+        "touch.css"
+      ],
+      "js": [
+        "touch.js"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "https://*.pipedrive.com/*"
+      ],
+      "css": [
+        "libs/toastr/toastr.min.css",
+        "libs/tag-it/jquery.tagit.css",
+        "libs/tag-it/tagit.ui-zendesk.css",
+        "libs/vex/vex.css",
+        "libs/vex/vex-theme-default.css",
+        "touch.css"
+      ],
+      "js": [
+        "pipedrive.js"
+      ]
+    }
+  ],
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlWL7fO6ooU/TLZUoa0suJIUtI/jW1exgTfiParS4ZxK8HFd4jeAUcK1uj0oHly5t+cc1INxcs1q6m82fWW8Mc63OhV5c3KcwX3NvJIGcX49OCJWRH+b3md1dZ3NNIH0xOwUWPmXxIvyOvpnA7mEcy+gXNCyxGHsiyzeQCybbT+7MQcP6NFnpI+T7AGGvZCn1tvgar3HospeEemrfGkMORgUfh6GfR8j56TUbbJbEzV1yo33tKb3F5A989oQJBkTjiTlo4u7iGvn1Zw0p6FfIdl2JU5VsW1dP3x1z/zVUJ7FZgTgYX5fcXUbcovsG/XbuI8fC9XOTz9jSQu3/jrWwnwIDAQAB",
+  "homepage_url": "https://www.dux-soup.com"
+}

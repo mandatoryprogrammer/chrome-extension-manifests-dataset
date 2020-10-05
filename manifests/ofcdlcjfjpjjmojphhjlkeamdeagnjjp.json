@@ -1,0 +1,40 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "osu! koko",
+  "version": "3.2.2",
+  "description": "osu! koko download beatmaps automatically! (Now working in old site!)",
+  "author": "Jecsham",
+  "manifest_version": 2,
+  "icons": {
+    "16": "src/img/icon16.png",
+    "48": "src/img/icon48.png",
+    "128": "src/img/icon128.png"
+  },
+  "browser_action": {
+    "default_title": "Open osu! koko",
+    "default_icon": "src/img/icon128.png",
+    "default_popup": "src/popup.html"
+  },
+  "options_page": "src/options.html",
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "https://osu.ppy.sh/beatmapsets/*",
+        "https://osu.ppy.sh/s/*",
+        "https://osu.ppy.sh/b/*"
+      ],
+      "css": [
+        "src/css/dom-style.css"
+      ],
+      "js": [
+        "src/js/content.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "storage",
+    "https://osu-koko.herokuapp.com/*"
+  ]
+}

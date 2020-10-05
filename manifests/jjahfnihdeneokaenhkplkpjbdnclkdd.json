@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Megafile",
+  "description": "Pobieranie plików bezpośrednio z poziomu przeglądarki!",
+  "version": "1.1",
+  "browser_action": {
+    "default_icon": "data/images/icon.png",
+    "default_popup": "data/html/login.html"
+  },
+  "icons": {
+    "16": "data/images/icon.png",
+    "48": "data/images/icon48.png",
+    "128": "data/images/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "data/vendor/jquery-3.1.0.min.js",
+      "data/js/helperFunctions.js",
+      "data/js/onBrowserStartEvents.js",
+      "data/js/contextMenu.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "data/vendor/jquery-3.1.0.min.js",
+        "data/js/content_scripts.js"
+      ],
+      "matches": [
+        "*://*/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "*://*/*",
+    "tabs",
+    "contextMenus",
+    "notifications",
+    "storage",
+    "downloads",
+    "https://*.megafile.pl/"
+  ],
+  "web_accessible_resources": [
+    "data/*"
+  ]
+}

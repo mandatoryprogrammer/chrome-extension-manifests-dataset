@@ -1,0 +1,88 @@
+{
+  "minimum_chrome_version": "29.0",
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "description": "Real-time Privacy Quantification for the Web",
+  "manifest_version": 2,
+  "name": "PrivacyMeter",
+  "version": "0.1",
+  "background": {
+    "scripts": [
+      "adblockplus/filterClasses.js",
+      "adblockplus/punycode.js",
+      "adblockplus/publicSuffixList.js",
+      "adblockplus/tldjs.js",
+      "adblockplus/url.js",
+      "adblockplus/matcher.js",
+      "utils.js",
+      "temporal_cache.js",
+      "default-stats.js",
+      "background.js",
+      "engine.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "webRequest",
+    "webRequestBlocking",
+    "webNavigation",
+    "storage",
+    "unlimitedStorage",
+    "notifications"
+  ],
+  "web_accessible_resources": [
+    "stats.html",
+    "stats.js",
+    "crawl.html",
+    "crawl.js",
+    "expose.html",
+    "popup.html",
+    "popup.js",
+    "images/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "all_frames": true,
+      "match_about_blank": true,
+      "js": [
+        "monitor-fapis.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "all_frames": true,
+      "match_about_blank": true,
+      "js": [
+        "monitor-forms.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "engine-client.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "options_page": "options.html",
+  "browser_action": {
+    "default_icon": "pm-icon.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "128": "pm-icon.png"
+  }
+}

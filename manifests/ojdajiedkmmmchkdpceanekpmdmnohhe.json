@@ -1,0 +1,116 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "name": "단타의 신 for 업비트, 빗썸, 바이낸스, 비트맥스",
+  "description": "업비트(UPBIT), 빗썸(BITHUMB), 바이낸스(BINANCE), 비트맥스(BITMEX) 사이트 내 단축키를 통한 매수/매도의 빠른 진행과 예약주문(자동감시[스탑로스, 트레일링스탑]) 기능을 제공하는 보조프로그램입니다.",
+  "version": "2.1.4",
+  "manifest_version": 2,
+  "icons": {
+    "48": "dantasin_icon.png"
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "notifications",
+    "alarms",
+    "power",
+    "https://*.upbit.com/*",
+    "https://*.bithumb.com/*",
+    "https://*.binance.com/*",
+    "http://*.dantasin.com/*"
+  ],
+  "web_accessible_resources": [
+    "upbit_buysell.png",
+    "bithumb_buysell.png",
+    "binance_buysell.png",
+    "question_icon.png",
+    "sound_icon.png",
+    "sound/sound1.mp3",
+    "sound/sound2.mp3",
+    "sound/sound3.mp3",
+    "sound/sound-f1.mp3",
+    "sound/sound-f2.mp3",
+    "sound/sound-f3.mp3",
+    "sound/sound-m1.mp3",
+    "sound/sound-m2.mp3",
+    "sound/sound-m3.mp3"
+  ],
+  "background": {
+    "scripts": [
+      "jquery-3.2.1.min.js",
+      "background.js"
+    ],
+    "persistent": true,
+    "permissions": [
+      "tabs, activeTab",
+      "notifications",
+      "alarms",
+      "power"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.upbit.com/*",
+        "https://*.bithumb.com/*",
+        "https://*.binance.com/*",
+        "https://*.bitmex.com/*"
+      ],
+      "js": [
+        "jquery-3.2.1.min.js",
+        "jquery-ui.min.js",
+        "jquery.number.min.js",
+        "jquery.cookie.js",
+        "shortcut.js",
+        "jquery.sendkeys.js",
+        "bililiteRange.js",
+        "common.js",
+        "upbit_wizzard.js",
+        "reservation.js",
+        "shortKey_script.js",
+        "upbit_cal.js",
+        "content.js"
+      ],
+      "css": [
+        "upbit_wizzard.css",
+        "reservation.css"
+      ],
+      "permissions": [
+        "tabs, activeTab",
+        "notifications",
+        "alarms",
+        "power"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "16": "dantasin_icon.png",
+      "48": "dantasin_icon.png"
+    },
+    "default_popup": "browser_action.html",
+    "js": [
+      "jquery-3.2.1.min.js",
+      "jquery.cookie.js",
+      "jquery.number.min.js",
+      "browser_action.js"
+    ],
+    "permissions": [
+      "activeTab"
+    ]
+  },
+  "commands": {
+    "shortKey_ON": {
+      "description": "매수/매도 단축키 동작 ON"
+    },
+    "shortKey_OFF": {
+      "description": "매수/매도 단축키 동작 OFF"
+    },
+    "coinKey_ON": {
+      "description": "코인 바로가기 동작 ON"
+    },
+    "coinKey_OFF": {
+      "description": "코인 바로가기 동작 OFF"
+    }
+  }
+}

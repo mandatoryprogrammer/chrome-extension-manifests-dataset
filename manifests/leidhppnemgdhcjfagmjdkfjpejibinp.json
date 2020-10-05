@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "LaxarJS Developer Tools",
+  "version": "2.0.0",
+  "description": "A browser extension that helps to develop LaxarJS applications",
+  "author": "aixigo AG",
+  "icons": {
+    "16": "icons/laxar-icon-16.png",
+    "48": "icons/laxar-icon-48.png",
+    "128": "icons/laxar-icon-128.png"
+  },
+  "devtools_page": "devtools.html",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "activate-laxar-connection.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "laxar-developer-tools-content/lib/laxar-developer-tools/widget-outline.js",
+        "laxar-developer-tools-content/lib/laxar-developer-tools/grid.js"
+      ],
+      "css": [
+        "css/widget-outline.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "background",
+    "storage"
+  ],
+  "page_action": {
+    "default_icon": {
+      "38": "laxar-developer-tools-content/application/widgets/developer-toolbar-widget/default.theme/images/title-icon.png"
+    },
+    "default_title": "LaxarJS Developer Tools"
+  }
+}

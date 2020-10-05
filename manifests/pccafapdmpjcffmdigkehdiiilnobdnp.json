@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Connections SamiTime Blocker",
+  "version": "1.0",
+  "description": "Block SameTime (SamiTime) from connecting on the IBM Connections website.",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://unite.un.org/connections/*"
+      ],
+      "js": [
+        "CXSametimeCookieBlocker.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://unite.un.org/connections/*"
+      ],
+      "js": [
+        "CXSametimeRemover.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "bg.js"
+    ]
+  },
+  "permissions": [
+    "cookies",
+    "tabs",
+    "declarativeContent",
+    "storage",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "icons": {
+    "19": "sami-19.png",
+    "38": "sami-38.png",
+    "48": "sami-48.png",
+    "128": "sami-128.png"
+  },
+  "page_action": {
+    "default_icon": "sami-38.png",
+    "default_title": "SamiBlocker",
+    "default_popup": "popup.html"
+  },
+  "manifest_version": 2
+}

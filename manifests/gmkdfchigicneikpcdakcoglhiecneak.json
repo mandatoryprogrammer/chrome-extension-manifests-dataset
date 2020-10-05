@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "SSL/TLS安全评估报告",
+  "short_name": "MySSL评估报告",
+  "description": "MySSL评估报告检测部署SSL/TLS的服务是否符合行业最佳实践，是否ATS合规，是否符合PCI DSS支付卡行业安全标准",
+  "version": "2.4.2",
+  "author": "myssl.com",
+  "homepage_url": "https://myssl.com",
+  "minimum_chrome_version": "49.0",
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "browser_action": {
+    "default_icon": "myssl-logo-64x64.png",
+    "default_title": "MySSL",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "myssl-logo-64x64.png",
+    "24": "myssl-logo-64x64.png",
+    "32": "myssl-logo-64x64.png",
+    "48": "myssl-logo-64x64.png",
+    "64": "myssl-logo-64x64.png",
+    "128": "myssl-logo-64x64.png"
+  },
+  "background": {
+    "persistent": true,
+    "page": "background.html"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "contextMenus",
+    "webRequest",
+    "webRequestBlocking",
+    "webNavigation",
+    "https://myssl.com/",
+    "http://localhost:8080/*/*",
+    "https://*/*",
+    "http://*/*"
+  ],
+  "content_scripts": [
+    {
+      "js": [
+        "javascript/content.js"
+      ],
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ]
+    }
+  ]
+}

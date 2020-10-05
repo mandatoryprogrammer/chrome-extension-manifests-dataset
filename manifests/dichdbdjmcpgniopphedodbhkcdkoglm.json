@@ -1,0 +1,101 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "AdAnalyst",
+  "version": "0.0.0.69",
+  "manifest_version": 2,
+  "description": "__MSG_extensionDesc__",
+  "default_locale": "en",
+  "browser_action": {
+    "browser_style": true,
+    "default_icon": "media/alert1.png",
+    "default_popup": "ui/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "third-party/jquery-3.1.1.min.js",
+      "third-party/sha512.min.js",
+      "utils/globalParams.js",
+      "utils/errorHandling.js",
+      "utils/background/general.js",
+      "utils/background/consent.js",
+      "utils/background/preferenceCrawl.js",
+      "utils/background/explanationCrawl.js",
+      "utils/interfaceVersionDetection.js",
+      "utils/userIdentification.js",
+      "background.js"
+    ]
+  },
+  "icons": {
+    "16": "media/enabled.png",
+    "48": "media/enabled.png",
+    "128": "media/enabled.png"
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "js": [
+        "third-party/jquery-3.1.1.min.js",
+        "graphics/loading.js",
+        "utils/globalParams.js",
+        "utils/content-scripts/universalMethods.js",
+        "utils/errorHandling.js",
+        "utils/content-scripts/browserDetection.js",
+        "utils/interfaceVersionDetection.js",
+        "utils/userIdentification.js",
+        "content-scripts/universal.js"
+      ],
+      "matches": [
+        "http://www.facebook.com/*",
+        "https://www.facebook.com/*"
+      ],
+      "all_frames": true
+    },
+    {
+      "run_at": "document_end",
+      "js": [
+        "utils/content-scripts/anyAdCollection.js",
+        "utils/content-scripts/sideAdsCollection.js",
+        "utils/content-scripts/feedAdCollection.js",
+        "utils/content-scripts/feedAdCollectionNewInterface.js",
+        "utils/content-scripts/dialogCaptcha.js",
+        "content-scripts/adgrabber.js"
+      ],
+      "matches": [
+        "http://www.facebook.com/*",
+        "https://www.facebook.com/*"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "js": [
+        "content-scripts/preferencesGrabber.js"
+      ],
+      "matches": [
+        "http://www.facebook.com/ds/preferences/*",
+        "https://www.facebook.com/ds/preferences/*"
+      ],
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "http://www.facebook.com/*",
+    "https://www.facebook.com/*",
+    "webRequest",
+    "webRequestBlocking",
+    "storage",
+    "https://adanalyst.mpi-sws.org/*"
+  ],
+  "incognito": "spanning",
+  "web_accessible_resources": [
+    "injections/errorHandling.js",
+    "injections/adActivityCrawl.js",
+    "injections/adBlockDetection.js",
+    "injections/adsNewInterface.js",
+    "injections/explanationCrawl.js",
+    "injections/preferenceCrawl.js",
+    "injections/universal.js",
+    "injections/xhrOverloadPreferences.js",
+    "injections/xhrOverloadButtons.js",
+    "media/solving_captcha.gif"
+  ]
+}

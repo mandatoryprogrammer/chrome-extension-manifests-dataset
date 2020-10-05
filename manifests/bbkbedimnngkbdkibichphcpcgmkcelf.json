@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Lorem: Expert Website Help",
+  "short_name": "Lorem",
+  "description": "Work with Lorem to design, build, and fix your website.",
+  "version": "2.0.62",
+  "author": "Lorem Technologies",
+  "browser_action": {
+    "default_icon": "assets/logos/logo32.png",
+    "default_title": "Open Lorem"
+  },
+  "icons": {
+    "16": "assets/logos/logo16.png",
+    "24": "assets/logos/logo24.png",
+    "32": "assets/logos/logo32.png",
+    "48": "assets/logos/logo48.png",
+    "128": "assets/logos/logo128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.asklorem.com/*",
+        "https://*.lorem.tech/*",
+        "https://*.storetasker.com/*"
+      ],
+      "js": [
+        "src/lorem-installed.bundle.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": false
+    }
+  ],
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "src/index.bundle.js",
+      "src/hot-reload.bundle.js"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://js.stripe.com https://*.asklorem.com https://asklorem.com https://*.storetasker.com https://storetasker.com https://connect.facebook.net https://apis.google.com; connect-src https://storetasker.com https://asklorem.com https://api.airbrake.io wss://api.asklorem.com/subscriptions wss://dev.asklorem.com/subscriptions https://*.asklorem.com https://*.storetasker.com; style-src https://*.storetasker.com https://*.asklorem.com https://fonts.googleapis.com; object-src 'none';",
+  "web_accessible_resources": [],
+  "optional_permissions": [],
+  "permissions": []
+}

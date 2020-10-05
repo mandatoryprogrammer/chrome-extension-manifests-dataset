@@ -1,0 +1,42 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "LandAhead",
+  "version": "0.0.2",
+  "manifest_version": 2,
+  "description": "Use this extension on a tab with a Google maps route and it will show you elevation changes along the way",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*"
+      ],
+      "js": [
+        "js/landahead_content_script.js"
+      ]
+    }
+  ],
+  "page_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "LandAhead",
+    "default_popup": "src/page_action/page_action.html"
+  },
+  "permissions": [
+    "contentSettings",
+    "declarativeContent",
+    "tabs",
+    "https://www.google.com/maps/*",
+    "https://maps.google.com/*",
+    "https://maps.googleapis.com/*"
+  ],
+  "content_security_policy": "default-src 'none'; style-src 'self'; script-src 'self'; connect-src https://maps.googleapis.com;"
+}

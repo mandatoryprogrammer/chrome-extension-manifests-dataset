@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "TripShaker Scout",
+  "description": "This extension lets you scan current opened page for map coordinates and saves it for you in your cloud on TripShaker",
+  "version": "0.0.2",
+  "author": "Dmytro Babych",
+  "homepage_url": "http://tripshaker.com/scout/",
+  "icons": {
+    "16": "icon16.png",
+    "32": "icon32.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "icon_browser.png",
+    "default_title": "TripShaker Scout: click to save locations"
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "cookies",
+    "<all_urls>",
+    "https://maps.googleapis.com/*",
+    "http://maps.googleapis.com/*"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://tripshaker.googleapis.com/*"
+      ],
+      "js": [
+        "tripshaker_scout.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://maps.googleapis.com/*; object-src 'self'",
+  "web_accessible_resources": [
+    "tripshaker_scout_logo.png"
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "JPEG Explorer: Hangar Importer",
+  "short_name": "Hangar Importer",
+  "author": "Defter",
+  "version": "1.1.7",
+  "description": "Plugin to import Star Citizen hangar & buy back upgrades into JPEG Explorer application",
+  "icons": {
+    "48": "icons/ic_launcher_48.png",
+    "96": "icons/ic_launcher_96.png",
+    "192": "icons/ic_launcher_192.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://robertsspaceindustries.com/account/pledges*"
+      ],
+      "js": [
+        "jquery-3.4.1.min.js",
+        "options/options.js",
+        "data_sender.js",
+        "items_group.js",
+        "hangar_parser.js",
+        "hangar_importer.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://robertsspaceindustries.com/account/buy-back-pledges*"
+      ],
+      "js": [
+        "jquery-3.4.1.min.js",
+        "options/options.js",
+        "data_sender.js",
+        "items_group.js",
+        "buyback_parser.js",
+        "buyback_cache.js",
+        "buyback_importer.js"
+      ]
+    }
+  ],
+  "options_ui": {
+    "page": "options/main.html"
+  },
+  "permissions": [
+    "storage",
+    "webRequest",
+    "https://fcm.googleapis.com/fcm/send",
+    "https://robertsspaceindustries.com/pledge/buyback/*"
+  ],
+  "applications": {
+    "gecko": {
+      "id": "jpeg-explorer-importer@defter.org"
+    }
+  }
+}

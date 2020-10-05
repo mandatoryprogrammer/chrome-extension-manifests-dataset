@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "A1救生員",
+  "version": "1.1.8",
+  "description": "簡單的步驟，就能為您回報發生的異常狀況。",
+  "permissions": [
+    "https://a1practice.azurewebsites.net/*",
+    "https://a1cloud.digiwin.com/*",
+    "https://a1trial.digiwin.com/*",
+    "http://localhost:4200/*",
+    "https://dw-issue.digiwin.com/issue/*",
+    "accessibilityFeatures.read",
+    "accessibilityFeatures.modify",
+    "cookies",
+    "storage",
+    "tabs",
+    "activeTab",
+    "debugger",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://a1practice.azurewebsites.net/*",
+        "https://a1cloud.digiwin.com/*",
+        "https://a1trial.digiwin.com/*",
+        "http://localhost:4200/*",
+        "https://dw-issue.digiwin.com/issue/*"
+      ],
+      "js": [
+        "content-script.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "request-listener.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_title": "A1救生員",
+    "default_icon": "./lib/images/icon.png",
+    "default_popup": "index.html#/popup"
+  },
+  "options_page": "index.html#/popup",
+  "icons": {
+    "128": "./lib/images/icon.png"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://maxcdn.bootstrapcdn.com https://ssl.google-analytics.com ; object-src 'self';"
+}

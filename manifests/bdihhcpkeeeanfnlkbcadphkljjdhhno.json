@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "TeamCity build checker for TFS pull requests",
+  "description": "Shows a status of a corresponding TeamCity build on the TFS pull request pages. Tested with TFS 2017 and TeamCity 10.x",
+  "version": "1.0",
+  "icons": {
+    "16": "images/icon16.png",
+    "24": "images/icon24.png",
+    "32": "images/icon32.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "permissions": [
+    "tabs",
+    "declarativeContent",
+    "storage",
+    "http://*/",
+    "https://*/"
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "background": {
+    "scripts": [
+      "scripts/background/ruleManager.js",
+      "scripts/background/tfsClient.js",
+      "scripts/background/teamCityClient.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_end",
+      "css": [
+        "styles/injection.css"
+      ],
+      "js": [
+        "external/jquery-3.2.1.min.js",
+        "scripts/content/tfsPageAdapter.js",
+        "scripts/content/injector.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "images/*"
+  ],
+  "page_action": {
+    "default_icon": {
+      "16": "images/icon16.png",
+      "24": "images/icon24.png",
+      "32": "images/icon32.png"
+    },
+    "default_popup": "popup.html"
+  }
+}

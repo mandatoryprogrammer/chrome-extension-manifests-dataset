@@ -1,0 +1,94 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Faster Suite Browser Link",
+  "short_name": "AD4Chrome",
+  "description": "Open documents straight from Clio, get free PACER looks, and much, much more.\n",
+  "version": "19.07.14.1136",
+  "manifest_version": 2,
+  "background": {
+    "scripts": [
+      "assets/js/jquery-3.2.1.js",
+      "utils.js",
+      "notifier.js",
+      "toolbar_button.js",
+      "pacer.js",
+      "recap.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://app.clio.com/*",
+        "https://app.goclio.eu/*",
+        "https://*.app.clio.com/*",
+        "https://*.app.goclio.eu/*"
+      ],
+      "js": [
+        "scriptinjector.js"
+      ],
+      "css": [
+        "main.css"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*.uscourts.gov/*"
+      ],
+      "include_globs": [
+        "*://ecf.*",
+        "*://ecf-train.*",
+        "*://pacer.*"
+      ],
+      "css": [
+        "assets/css/style.css",
+        "assets/css/font-awesome.css"
+      ],
+      "js": [
+        "assets/js/jquery-3.2.1.js",
+        "assets/js/FileSaver.js",
+        "assets/js/moment.js",
+        "assets/js/livestamp.js",
+        "utils.js",
+        "notifier.js",
+        "toolbar_button.js",
+        "pacer.js",
+        "recap.js",
+        "content_delegate.js",
+        "content.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.courtlistener.com/*"
+      ],
+      "js": [
+        "install_notifier.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    "script.js",
+    "assets/*"
+  ],
+  "icons": {
+    "64": "icon-0128.png"
+  },
+  "browser_action": {
+    "default_icon": "icon-0128.png",
+    "default_popup": "popup.html",
+    "default_title": "Faster Suite Browser Link"
+  },
+  "permissions": [
+    "storage",
+    "notifications",
+    "*://*.uscourts.gov/",
+    "tabs",
+    "cookies"
+  ],
+  "author": "Hank X  yrstyh@gmail.com"
+}

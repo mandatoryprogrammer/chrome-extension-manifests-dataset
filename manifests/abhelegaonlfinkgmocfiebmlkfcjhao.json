@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "mvtBuddy",
+  "version": "0.0.2",
+  "manifest_version": 2,
+  "description": "Compare real price with crawled price and write it to spreadsheet",
+  "author": "Prasenjit Jana",
+  "icons": {
+    "16": "users24.png",
+    "48": "users64.png",
+    "128": "users128.png"
+  },
+  "page_action": {
+    "default_title": "mvtBuddy"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "https://apis.google.com/js/client.js",
+    "notifications",
+    "identity"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.omgubuntu.co.uk/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "script.js"
+  ],
+  "background": {
+    "scripts": [
+      "tempauth.js"
+    ],
+    "persistent": false
+  },
+  "oauth2": {
+    "client_id": "12163888986-8c2lnl8tbft4mrhdc6n1spm5ut3vo73t.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/spreadsheets"
+    ]
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://apis.google.com; object-src 'self'"
+}

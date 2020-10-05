@@ -1,0 +1,78 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "QAS Web Recorder",
+  "short_name": "QAS Web Recorder",
+  "description": " It helps smoothly transition from Manual Testing to Automated Testing using Exploratory UI Testing.",
+  "version": "1.1.2",
+  "default_locale": "en",
+  "icons": {
+    "16": "icons/QAS-16.png",
+    "48": "icons/QAS-48.png",
+    "128": "icons/QAS-128.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/icon.png",
+    "default_title": "QAS Recorder",
+    "default_popup": "popup/popup.html"
+  },
+  "permissions": [
+    "activeTab",
+    "http://*/*/",
+    "https://*/*/",
+    "<all_urls>",
+    "tabs",
+    "storage",
+    "contextMenus",
+    "*://*/*/",
+    "desktopCapture",
+    "contextMenus"
+  ],
+  "input_components": [
+    {
+      "name": "Test IME",
+      "type": "ime",
+      "id": "test",
+      "description": "Test IME",
+      "language": "en-US",
+      "layouts": [
+        "us::eng"
+      ]
+    }
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file://*/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "libs/jquery-2.1.0.js",
+        "content scripts/Shared/communicator.js",
+        "content scripts/Shared/utility.js",
+        "content scripts/Shared/DOMNodeProperties.js",
+        "content scripts/Recorder/bindListeners.js",
+        "content scripts/Recorder/removeListeners.js",
+        "content scripts/Recorder/recorder.js",
+        "content scripts/Recorder/xhr_recorder.js",
+        "content scripts/Player/DOMElementFinder.js",
+        "content scripts/Player/eventInject.js",
+        "content scripts/Player/player.js"
+      ],
+      "all_frame": false
+    }
+  ],
+  "background": {
+    "page": "background/background.html"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "externally_connectable": {
+    "matches": [
+      "*://localhost/*",
+      "*://qmetry.com/*"
+    ]
+  },
+  "options_page": "options/options.html"
+}

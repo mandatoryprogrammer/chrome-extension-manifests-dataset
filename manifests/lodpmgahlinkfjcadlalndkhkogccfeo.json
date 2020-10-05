@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "借贷宝-员工考勤插件（新）",
+  "short_name": "jdb-newBaoXiao",
+  "version": "1.0.0",
+  "description": "借贷宝内部专用chrome插件，用于查询加班天数，并计算此月餐补金额，导出excel数据",
+  "author": "姜振祥",
+  "icons": {
+    "16": "new-icon.png",
+    "48": "new-icon.png",
+    "128": "new-icon.png"
+  },
+  "permissions": [
+    "tabs",
+    "http://*.jiedaibao.com/"
+  ],
+  "browser_action": {
+    "default_title": "个人考勤查询"
+  },
+  "background": {
+    "scripts": [
+      "./background/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://e-hr.jiedaibao.com/"
+      ],
+      "js": [
+        "./lib/jquery-3.2.1.min.js",
+        "./lib/moment.js",
+        "./lib/pikaday.js",
+        "./content/content.js"
+      ],
+      "css": [
+        "./lib/pikaday.css"
+      ],
+      "all_frames": true
+    }
+  ]
+}

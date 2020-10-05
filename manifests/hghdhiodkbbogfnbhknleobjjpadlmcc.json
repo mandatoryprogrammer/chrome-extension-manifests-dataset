@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "description": "Princess Princess Copy. When no range selected on page, Alt-c copy with template composedof url, title, or so",
+  "manifest_version": 2,
+  "name": "PrsPrsCopy",
+  "version": "0.10.2",
+  "minimum_chrome_version": "72",
+  "background": {
+    "scripts": [
+      "lib/browser-polyfill.min.js",
+      "background/background.js"
+    ]
+  },
+  "browser_action": {
+    "chrome_style": false,
+    "default_icon": {
+      "48": "icons/icon-48_0.png"
+    },
+    "default_title": "PrsPrsCopy",
+    "default_popup": "popup/menu.html"
+  },
+  "commands": {
+    "PrsPrsCopy": {
+      "suggested_key": {
+        "default": "Alt+C"
+      },
+      "description": "Addon's Copy key."
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "lib/browser-polyfill.min.js",
+        "content_scripts/textPicker.js"
+      ]
+    }
+  ],
+  "homepage_url": "https://github.com/PrsPrsBK/PrsPrsCopy",
+  "icons": {
+    "48": "icons/icon-48_app.png"
+  },
+  "options_ui": {
+    "chrome_style": false,
+    "open_in_tab": true,
+    "page": "options_ui/options.html"
+  },
+  "permissions": [
+    "activeTab",
+    "clipboardWrite",
+    "storage",
+    "tabs"
+  ]
+}

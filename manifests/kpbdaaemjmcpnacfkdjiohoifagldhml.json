@@ -1,0 +1,74 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "chrome_url_overrides": {
+    "newtab": "iframe.html"
+  },
+  "name": "Launch",
+  "version": "1.0.112",
+  "default_locale": "en",
+  "manifest_version": 2,
+  "description": "Find new games and live streams on Twitch and YouTube games. Get automatic notifications when your favorite stream goes online.",
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "*://*.twitch.tv/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "common/content/theatre-mode.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "common/lib/constants.js",
+      "common/dist/contributors.js",
+      "common/lib/3rd/async.js",
+      "common/lib/3rd/jquery.js",
+      "common/lib/3rd/underscore.js",
+      "common/lib/3rd/backbone.js",
+      "common/lib/3rd/backbone.memento.js",
+      "common/lib/3rd/backbone.mixin.js",
+      "common/lib/3rd/eventemitter.js",
+      "common/lib/utils.js",
+      "common/lib/oauth2.js",
+      "background.js",
+      "common/lib/twitch-api.js",
+      "common/lib/onerror.js",
+      "common/lib/app.js"
+    ],
+    "persistent": true
+  },
+  "chrome_settings_overrides": {
+    "search_provider": {
+      "name": "Launch Bing",
+      "keyword": "Launch Bing Search Engine",
+      "search_url": "https://click.launch.am/geo_redirect.php?a=b&q={searchTerms}",
+      "favicon_url": "https://launch.am/img/launch_icon.png",
+      "encoding": "UTF-8",
+      "is_default": true
+    }
+  },
+  "minimum_chrome_version": "1.1.142",
+  "icons": {
+    "16": "common/icons/32_1.png",
+    "48": "common/icons/48_1.png",
+    "128": "common/icons/128_1.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "common/icons/19_2.png",
+      "38": "common/icons/38_2.png"
+    },
+    "default_popup": "common/html/popup.html"
+  },
+  "permissions": [
+    "storage",
+    "background",
+    "*://*.launch.am/*",
+    "notifications",
+    "activeTab",
+    "cookies"
+  ]
+}

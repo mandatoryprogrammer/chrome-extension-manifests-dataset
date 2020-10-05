@@ -1,0 +1,131 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "version": "2.3.2",
+  "name": "Teamleader Integrations",
+  "description": "This extension implements Teamleader functionality into other services such as Gmail, Outlook and LinkedIn.",
+  "icons": {
+    "128": "img/icon128.png"
+  },
+  "options_page": "settings.html",
+  "permissions": [
+    "storage",
+    "cookies",
+    "webRequest",
+    "webRequestBlocking",
+    "tabs",
+    "activeTab",
+    "management",
+    "https://mail.google.com/*",
+    "https://*.office365.com/*",
+    "https://www.linkedin.com/*",
+    "https://outlook.office.com/*",
+    "https://chromeextensionapi.teamleader.eu/",
+    "https://app.teamleader.eu/",
+    "https://test.teamleader.eu/",
+    "https://app.teamleader.dev/",
+    "https://www.teamleader.eu/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "css": [
+        "css/TL_fonts.css",
+        "css/TL_main.css",
+        "css/TL_emailtracking.css"
+      ],
+      "js": [
+        "js/TL_plugins.js",
+        "js/TL_main.js",
+        "js/TL_settings.js",
+        "js/TL_emailtracking.js",
+        "js/TL_language.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://outlook.office365.com/*",
+        "https://outlook.office.com/*"
+      ],
+      "css": [
+        "css/TL_fonts.css",
+        "css/TL_main.css",
+        "css/TL_emailtracking.css"
+      ],
+      "js": [
+        "js/TL_plugins.js",
+        "js/TL_main.js",
+        "js/TL_settings.js",
+        "js/TL_owa_data.js",
+        "js/TL_emailtracking.js",
+        "js/TL_language.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://outlook.office365.com/*",
+        "https://outlook.office.com/*"
+      ],
+      "js": [
+        "js/TL_head.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://www.linkedin.com/*"
+      ],
+      "css": [
+        "css/TL_fonts.css",
+        "css/TL_main.css",
+        "css/TL_linkedin.css"
+      ],
+      "js": [
+        "js/TL_plugins.js",
+        "js/TL_main.js",
+        "js/TL_settings.js",
+        "js/TL_linkedin.js",
+        "js/TL_language.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.linkedin.com/profile/view*",
+        "https://www.linkedin.com/in/*",
+        "https://www.linkedin.com/pub/*"
+      ],
+      "css": [
+        "css/TL_fonts.css",
+        "css/TL_main.css",
+        "css/TL_linkedin_old_version.css"
+      ],
+      "js": [
+        "js/TL_plugins.js",
+        "js/TL_main.js",
+        "js/TL_settings.js",
+        "js/TL_linkedin_old_version.js",
+        "js/TL_language.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/TL_plugins.js",
+      "js/TL_background.js"
+    ],
+    "persistent": true
+  },
+  "web_accessible_resources": [
+    "img/*",
+    "css/*",
+    "css/fonts/*",
+    "js/*"
+  ],
+  "content_security_policy": "script-src 'self' https://app.teamleader.eu 'unsafe-eval'; object-src 'self' "
+}

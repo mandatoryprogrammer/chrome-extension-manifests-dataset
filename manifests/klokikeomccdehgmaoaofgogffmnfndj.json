@@ -1,0 +1,67 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "ACTÚA POR LA IGUALDAD",
+  "description": "Descárgate el plugin para denunciar fotos, tweets o artículos ofensivos hacia las mujeres y que no las integren por igual.",
+  "short_name": "#actuaporlaigualdad",
+  "version": "0.0.6",
+  "options_page": "page.html?page=settings",
+  "default_locale": "en",
+  "permissions": [
+    "clipboardWrite",
+    "clipboardRead",
+    "tabs",
+    "contextMenus",
+    "storage",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "browser_action": {
+    "default_icon": "img/chrome_extension.png",
+    "default_popup": "page.html"
+  },
+  "icons": {
+    "16": "img/chrome_extension_little.png",
+    "48": "img/chrome_extension.png",
+    "128": "img/chrome_extension.png"
+  },
+  "background": {
+    "scripts": [
+      "js/lib/jquery-1.10.1.min.js",
+      "js/lib/bootstrap.js",
+      "js/lib/async.js",
+      "js/lib/codebird.js",
+      "js/common.js",
+      "js/store.js",
+      "js/menu.js",
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "all_frames": true,
+      "run_at": "document_idle",
+      "js": [
+        "js/lib/jquery-1.10.1.min.js",
+        "js/lib/async.js",
+        "js/lib/mustache.js",
+        "js/common.js",
+        "js/lib/twitter-text-1.14.3.min.js",
+        "js/contentscript.js"
+      ],
+      "css": [
+        "css/contentscript.css",
+        "css/font-awesome.min.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "page.html",
+    "img/spinner.gif",
+    "fonts/*"
+  ]
+}

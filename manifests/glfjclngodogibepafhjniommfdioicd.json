@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Gauss media tools",
+  "short_name": "gauss tools",
+  "description": "Выгружает площадки  со страницы \"Площадки\" AdSpoiler и рассчитывает CPM в РСВК на странице \"Статистика\"",
+  "version": "0.1.6",
+  "author": "Гамолин Н. Г.",
+  "homepage_url": "https://vk.com/gaussmedia",
+  "page_action": {
+    "default_icon": {
+      "16": "images/icon.png",
+      "24": "images/icon.png",
+      "32": "images/icon.png"
+    },
+    "default_title": "Расширяет возможности AdSpoiler и РСВК"
+  },
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "icons": {
+    "128": "images/icon.png",
+    "16": "images/icon.png",
+    "32": "images/icon.png",
+    "48": "images/icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://socialcentrum.com/adsweb"
+      ],
+      "js": [
+        "jquery-3.2.1.min.js",
+        "mutation-summary.js",
+        "rsvkAdsweb.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://app.adspoiler.com/publishers"
+      ],
+      "js": [
+        "jquery-3.2.1.min.js",
+        "mutation-summary.js",
+        "adSpoilerPublishers.js"
+      ],
+      "css": [
+        "adSpoiler.css"
+      ]
+    }
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "permissions": [
+    "clipboardWrite",
+    "storage"
+  ]
+}

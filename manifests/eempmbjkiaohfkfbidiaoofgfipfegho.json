@@ -1,0 +1,39 @@
+{
+  "update_url": "http://clients2.google.com/service/update2/crx",
+  "name": "Email Tracking & Signature by Flap Lab",
+  "version": "2.0.0",
+  "description": "Flap Lab is a Gmail tracking signature (Google Chrome extension) that helps track if and when recipients read the email.",
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://twitter.com; object-src 'self'",
+  "icons": {
+    "16": "images/icon.png"
+  },
+  "manifest_version": 2,
+  "content_scripts": [
+    {
+      "matches": [
+        "http://mail.google.com/*",
+        "https://mail.google.com/*"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "js": [
+        "js/jquery.min.js",
+        "js/jQuery.js",
+        "js/GmailAPI.js",
+        "js/GmailSigInstance.js",
+        "js/GmailInit.js",
+        "js/bcc.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "http://www.flaplab.com/flaplab/*",
+    "tabs",
+    "http://search.twitter.com/*"
+  ]
+}

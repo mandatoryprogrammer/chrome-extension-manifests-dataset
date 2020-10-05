@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Nyaa&Kage Notifier",
+  "description": "Получай уведомления о появлении новых равок на nyaa.se и субтитров на fansubs.ru",
+  "version": "0.3.3",
+  "background": {
+    "scripts": [
+      "sources/external/jquery-2.1.3.min.js",
+      "sources/WatchListEntry/WatchListEntry.js",
+      "sources/nyaaHelpers.js",
+      "sources/kageHelpers.js",
+      "sources/helpers.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.nyaa.se/*"
+      ],
+      "js": [
+        "sources/external/jquery-2.1.3.min.js",
+        "sources/helpers.js",
+        "sources/WatchListEntry/WatchListEntry.js",
+        "sources/nyaaHelpers.js",
+        "sources/nyaa.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://www.fansubs.ru/base.php?id=*"
+      ],
+      "js": [
+        "sources/external/jquery-2.1.3.min.js",
+        "sources/helpers.js",
+        "sources/WatchListEntry/WatchListEntry.js",
+        "sources/kageHelpers.js",
+        "sources/kage.js"
+      ]
+    }
+  ],
+  "options_ui": {
+    "page": "options/options.html",
+    "chrome_style": true
+  },
+  "page_action": {
+    "default_icon": "images/icons/38.png",
+    "default_title": "Следить"
+  },
+  "permissions": [
+    "declarativeContent",
+    "storage",
+    "alarms",
+    "notifications"
+  ],
+  "web_accessible_resources": [
+    "images/icons/*"
+  ]
+}

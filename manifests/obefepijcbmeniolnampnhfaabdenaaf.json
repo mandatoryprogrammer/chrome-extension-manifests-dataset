@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Remind Me! By StubHub Labs",
+  "version": "0.0.50",
+  "manifest_version": 2,
+  "description": "Tracks your events",
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.google-analytics.com https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js https://ajax.googleapis.com;object-src 'self'",
+  "homepage_url": "http://go.stubhublabs.com/",
+  "icons": {
+    "16": "icons/newer/icon16.png",
+    "48": "icons/newer/icon48.png",
+    "128": "icons/newer/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "page": "src/bg/background.html",
+    "persistent": true
+  },
+  "options_page": "src/options/options.html",
+  "browser_action": {
+    "default_icon": "icons/newer/icon16.png",
+    "default_title": "Remind Me!"
+  },
+  "web_accessible_resources": [
+    "src/options/options.html",
+    "src/browser_action/*",
+    "src/js/*",
+    "src/css/*"
+  ],
+  "permissions": [
+    "notifications",
+    "activeTab",
+    "http://*/*",
+    "https://*/*",
+    "storage",
+    "webRequest",
+    "tabs",
+    "https://mandrillapp.com/api/1.0/messages/send-template.json"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://remynd.herokuapp.com/*"
+    ],
+    "ids": [
+      "*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "css": [
+        "src/inject/inject.css"
+      ],
+      "js": [
+        "js/jquery/jquery.js",
+        "src/inject/multiSH.js",
+        "src/inject/multiEV.js",
+        "src/inject/inject.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ]
+    }
+  ]
+}

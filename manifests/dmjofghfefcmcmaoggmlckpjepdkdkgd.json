@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "DAD wallet",
+  "description": "DAD wallet",
+  "version": "1.0.3",
+  "icons": {
+    "16": "img/logo.png",
+    "48": "img/logo.png",
+    "128": "img/logo.png"
+  },
+  "browser_action": {
+    "default_icon": "img/logo.png",
+    "default_popup": "pages/login.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "file://*/*",
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/vendor.js",
+        "js/content_script.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/vendor.js",
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "permissions": [
+    "storage",
+    "http://127.0.0.1/*",
+    "webRequest",
+    "webRequestBlocking",
+    "activeTab"
+  ]
+}

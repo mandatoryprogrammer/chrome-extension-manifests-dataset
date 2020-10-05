@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Merch by Amazon Trademark Protection",
+  "description": "Merch by Amazon Trademark Protection (Merch Informer)",
+  "background": {
+    "scripts": [
+      "scripts/background.min.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": "images/icon.png",
+    "default_title": "Merch by Amazon Trademark Protection (Merch Informer)",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://merch.amazon.com/*",
+        "https://www.amazon.com/*"
+      ],
+      "js": [
+        "scripts/amazon-content.min.js"
+      ],
+      "css": [
+        "styles/amazon-content.min.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.etsy.com/your/shops/*"
+      ],
+      "js": [
+        "scripts/etsy-content.min.js"
+      ],
+      "css": [
+        "styles/etsy-content.min.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "images/checkbox-0.svg",
+    "images/checkbox-1.svg",
+    "images/loader.svg",
+    "images/cross.svg"
+  ],
+  "content_security_policy": "script-src 'self' https://fonts.googleapis.com; object-src 'self'",
+  "icons": {
+    "128": "images/icon.png",
+    "16": "images/icon.png",
+    "48": "images/icon.png"
+  },
+  "manifest_version": 2,
+  "permissions": [
+    "tabs",
+    "storage",
+    "https://members.merchinformer.com/",
+    "https://api.markinformer.com/"
+  ],
+  "version": "4.0.7"
+}

@@ -1,0 +1,72 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_extName__",
+  "short_name": "__MSG_extShortName__",
+  "description": "__MSG_extDesc__",
+  "author": "LiYing",
+  "homepage_url": "https://github.com/liying2008/jenkins-helper",
+  "version": "2.2.1",
+  "minimum_chrome_version": "55",
+  "default_locale": "en",
+  "omnibox": {
+    "keyword": "jk"
+  },
+  "browser_action": {
+    "browser_style": false,
+    "default_icon": "img/icon.png",
+    "default_popup": "popup.html",
+    "default_title": "__MSG_extShortName__ - __MSG_extDesc__"
+  },
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "js/libs/browser-polyfill.min.js",
+      "js/backgrounds/storage.js",
+      "js/backgrounds/tools.js",
+      "js/backgrounds/omnibox.js",
+      "js/backgrounds/job_services.js",
+      "js/backgrounds/node_services.js",
+      "js/backgrounds/content_services.js",
+      "js/backgrounds/background.js"
+    ]
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "storage",
+    "notifications",
+    "tabs",
+    "downloads"
+  ],
+  "web_accessible_resources": [
+    "js/contents/params_stash_recover_btn_for_build.html",
+    "js/contents/params_stash_recover_btn_for_param.html"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [],
+      "js": [
+        "js/libs/browser-polyfill.min.js",
+        "js/libs/jquery.min.js",
+        "js/contents/jenkins_helper_alerts.js",
+        "js/contents/params_stash_recover.js",
+        "js/contents/content_scripts.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

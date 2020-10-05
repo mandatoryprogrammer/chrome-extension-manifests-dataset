@@ -1,0 +1,58 @@
+{
+  "update_url": "http://clients2.google.com/service/update2/crx",
+  "name": "Junker",
+  "version": "0.6",
+  "manifest_version": 2,
+  "description": "Clean up your facebook news feed.",
+  "icons": {
+    "48": "icon48.png",
+    "72": "icon72.png",
+    "128": "icon128.png"
+  },
+  "permissions": [
+    "contextMenus",
+    "cookies",
+    "idle",
+    "notifications",
+    "unlimitedStorage",
+    "tabs",
+    "http://*.facebook.com/*",
+    "https://*.facebook.com/*"
+  ],
+  "browser_action": {
+    "default_title": "Junker",
+    "default_icon": "icon48.png",
+    "default_popup": "options.html"
+  },
+  "options_page": "options.html",
+  "background": {
+    "scripts": [
+      "backend.js",
+      "message_storage.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.facebook.com/*",
+        "https://*.facebook.com/*"
+      ],
+      "css": [
+        "style.css"
+      ],
+      "js": [
+        "./jquery.min.js",
+        "./stopwords_pt-br.js",
+        "./tokenizer.js",
+        "./underscore.js",
+        "./require.js",
+        "./bayesian.js",
+        "./parser.js",
+        "./backend.js",
+        "./classifier.js",
+        "./content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

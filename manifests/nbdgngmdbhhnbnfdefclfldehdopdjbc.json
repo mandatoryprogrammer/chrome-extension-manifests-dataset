@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_extName__",
+  "description": "__MSG_extDesc__",
+  "version": "2020.6.7027",
+  "default_locale": "en",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://mail.google.com/*"
+      ],
+      "js": [
+        "lib/jquery.min.js",
+        "lib/inboxsdk.js",
+        "lib/uuid.min.js",
+        "dist/main.js"
+      ],
+      "css": [
+        "dist/main.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "lib/hot-reload.js",
+      "dist/background.js"
+    ]
+  },
+  "options_ui": {
+    "page": "dist/options.html",
+    "chrome_style": true
+  },
+  "icons": {
+    "16": "icons/inbox_16.png",
+    "48": "icons/inbox_48.png",
+    "128": "icons/inbox_128.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/inbox_128.png",
+    "default_title": "__MSG_extName__",
+    "default_popup": "dist/popup.html"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "cookies",
+    "gcm",
+    "notifications",
+    "*://mail.google.com/*",
+    "*://*.followupfred.com/*",
+    "webRequest",
+    "webRequestBlocking",
+    "*://*.googleusercontent.com/*"
+  ],
+  "web_accessible_resources": [
+    "icons/*.*",
+    "lib/*.*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self';"
+}

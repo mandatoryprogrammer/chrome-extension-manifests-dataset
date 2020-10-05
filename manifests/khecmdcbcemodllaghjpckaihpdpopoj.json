@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "WarmWelcome",
+  "version": "0.2.0",
+  "browser_action": {
+    "default_icon": "./dist/icons/logo-32.png"
+  },
+  "description": "This Chrome and Gmail extension allows you to send Warm Welcomes and see your stats anytime and from any website!",
+  "icons": {
+    "16": "./dist/icons/logo-16.png",
+    "48": "./dist/icons/logo-48.png",
+    "128": "./dist/icons/logo-128.png"
+  },
+  "background": {
+    "scripts": [
+      "./dist/background-bundle.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "./dist/main-bundle.js"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "https://mail.google.com/*",
+        "https://*.warmwelcome.com/*"
+      ],
+      "js": [
+        "./dist/parser-bundle.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "./dist/gmail-bundle.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "web_accessible_resources": [
+    "dist/images/*.png",
+    "dist/images/*.svg",
+    "dist/images/*.gif"
+  ],
+  "permissions": [
+    "activeTab"
+  ]
+}

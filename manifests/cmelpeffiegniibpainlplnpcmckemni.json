@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Browser Tab Recorder",
+  "short_name": "Tab recorder",
+  "version": "1.0.2",
+  "manifest_version": 2,
+  "description": "A chrome extension to record tab content in GIF or WebM video file format.",
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "default_locale": "en",
+  "offline_enabled": true,
+  "background": {
+    "scripts": [
+      "js/third_party/whammy.js",
+      "js/third_party/gifshot.min.js",
+      "js/constants.js",
+      "js/videoRecorder.js",
+      "js/background.js"
+    ]
+  },
+  "options_page": "options.html",
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon24.png",
+      "38": "images/icon48.png"
+    },
+    "default_title": "browser tab recorder",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [
+        "css/content_script.css"
+      ],
+      "js": [
+        "js/third_party/jquery-2.1.0.min.js",
+        "js/constants.js",
+        "js/content_script.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "unlimitedStorage",
+    "tabCapture",
+    "<all_urls>"
+  ],
+  "web_accessible_resources": [
+    "images/*",
+    "plugins/*"
+  ]
+}

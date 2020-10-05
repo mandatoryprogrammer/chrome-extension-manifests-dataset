@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_name__",
+  "description": "__MSG_description__",
+  "default_locale": "en",
+  "version": "1.1.5",
+  "icons": {
+    "128": "/img/logo_128.png",
+    "256": "/img/logo_256.png"
+  },
+  "browser_action": {
+    "default_icon": "/img/logo_grey_16.png",
+    "default_popup": "/pages/popup/index.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "/js/content_scripts/link_highlighting.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "/lib/jquery.min.js",
+      "/lib/webx.js",
+      "/lib/url.min.js",
+      "/js/chrome_promise.js",
+      "/lib/webx_modules/cache_manager.js",
+      "/lib/webx_modules/ba_manager.js",
+      "/js/converters/robots_main.js",
+      "/js/background/modules/page_info_manager.js",
+      "/js/background/modules/robot_validator.js",
+      "/js/background/modules/main_background_module.js",
+      "/js/background/background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "unlimitedStorage",
+    "webRequest",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "web_accessible_resources": [
+    "/*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://connect.facebook.net; object-src 'self'"
+}

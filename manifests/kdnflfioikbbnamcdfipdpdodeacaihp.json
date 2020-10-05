@@ -1,0 +1,75 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Proofbyte for Gmail on Chrome",
+  "short_name": "Proofbyte",
+  "description": "This extension provides Proofbyte services to Google's Chrome browser.",
+  "version": "0.5",
+  "background": {
+    "scripts": [
+      "bg.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/favicon_18.png",
+      "38": "images/favicon_32.png"
+    }
+  },
+  "icons": {
+    "48": "icons/ProofByteIcon_48.png",
+    "128": "icons/ProofByteIcon_128.png"
+  },
+  "options_page": "settings.html",
+  "permissions": [
+    "http://*/",
+    "https://*/*",
+    "tabs",
+    "activeTab",
+    "notifications"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://register.proofbyte.com/extensions/browsersetup.php*"
+      ],
+      "js": [
+        "rollups/aes.js",
+        "rollups/hmac-sha1.js",
+        "rollups/sha1.js",
+        "components/core-min.js",
+        "components/cipher-core-min.js",
+        "components/pad-nopadding-min.js",
+        "components/mode-cfb-min.js",
+        "omjson.js",
+        "omwebmail.js",
+        "om_extsetup.js",
+        "om_chrome.js",
+        "om_extsetup_chrome.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://mail.google.com/mail*"
+      ],
+      "js": [
+        "rollups/aes.js",
+        "rollups/hmac-sha1.js",
+        "rollups/sha1.js",
+        "components/core-min.js",
+        "components/cipher-core-min.js",
+        "components/pad-nopadding-min.js",
+        "components/mode-cfb-min.js",
+        "jquery-2.1.1.js",
+        "om_common.js",
+        "omjson.js",
+        "omwebmail.js",
+        "om_gmail.js",
+        "om_chrome.js"
+      ]
+    }
+  ],
+  "externally_connectable": {
+    "ids": []
+  }
+}

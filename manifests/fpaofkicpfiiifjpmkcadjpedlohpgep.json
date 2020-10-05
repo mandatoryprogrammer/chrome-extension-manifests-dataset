@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Cursor Traveler: mouse move counter",
+  "description": "Count how many moves make your mouse",
+  "version": "2.0.5",
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "icons": {
+    "16": "16.png",
+    "32": "32.png",
+    "48": "48.png",
+    "128": "128.png"
+  },
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "browser_action": {
+    "default_icon": "128.png",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/content_script.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/analytics.js",
+      "js/background.js"
+    ]
+  },
+  "offline_enabled": true,
+  "permissions": [
+    "<all_urls>",
+    "storage"
+  ]
+}

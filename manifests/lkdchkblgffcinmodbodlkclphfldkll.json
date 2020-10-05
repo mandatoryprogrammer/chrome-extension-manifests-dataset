@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "HTML Inserter for Gmail™",
+  "version": "1.0.2",
+  "manifest_version": 2,
+  "description": "Inject HTML into Gmail™. Great for HTML Signatures and fun email widgets!",
+  "homepage_url": "http://trever.com/htmlgmail",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "web_accessible_resources": [
+    "src/bg/background.html",
+    "src/bg/background.js",
+    "src/bg/style.css",
+    "js/*/*.js",
+    "js/*.js",
+    "icons/icon.png",
+    "css/*.css"
+  ],
+  "background": {
+    "scripts": [
+      "js/jquery/jquery.min.js",
+      "src/bg/snippet.js"
+    ],
+    "persistent": true
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://*.segment.com https://*.google-analytics.com https://*.facebook.net https://*.woopra.com; object-src 'self'",
+  "permissions": [
+    "storage",
+    "cookies",
+    "https://mail.google.com/",
+    "https://inbox.google.com/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*"
+      ],
+      "js": [
+        "js/inboxsdk.js",
+        "js/jquery/jquery.min.js",
+        "src/inject/analytics.js",
+        "src/inject/inject.js"
+      ],
+      "css": [
+        "src/inject/inject.css"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

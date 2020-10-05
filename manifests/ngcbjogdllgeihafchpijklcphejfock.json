@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "iTeach.world",
+  "version": "2.1",
+  "manifest_version": 2,
+  "description": "iTeach.world",
+  "minimum_chrome_version": "34",
+  "homepage_url": "https://iteach.world",
+  "background": {
+    "scripts": [
+      "background.js",
+      "screenshare-background.js"
+    ]
+  },
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "permissions": [
+    "desktopCapture",
+    "storage",
+    "tabs",
+    "http://*/",
+    "https://*/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "inject.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "screenshare-content.js"
+      ],
+      "matches": [
+        "https://*.iteach.world/*",
+        "https://*.tgabi.dev/*"
+      ]
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://*.iteach.world/*",
+      "https://*.tgabi.dev/*"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "icons/16.png",
+    "default_title": "iTeach.world - installing..."
+  }
+}

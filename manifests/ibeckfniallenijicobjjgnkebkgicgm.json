@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Note Extractor for Kindle",
+  "description": "",
+  "version": "1.1.5",
+  "manifest_version": 2,
+  "offline_enabled": false,
+  "icons": {
+    "48": "icons/on_icon_48.png",
+    "128": "icons/on_icon_128.png"
+  },
+  "browser_action": {
+    "default_title": "note-extractor",
+    "default_popup": ""
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "chrome_style": true
+  },
+  "web_accessible_resources": [
+    "images/*.png",
+    "options/options.html"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://read.amazon.com/*",
+        "https://read.amazon.uk/*",
+        "https://lesen.amazon.de/*"
+      ],
+      "css": [
+        "content/content.css"
+      ],
+      "js": [
+        "content/content.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "webRequest",
+    "tabs",
+    "https://*.amazon.com/*",
+    "https://*.amazon.de/*",
+    "https://*.amazon.uk/*",
+    "storage",
+    "cookies"
+  ],
+  "content_security_policy": "script-src 'self' https://www.gstatic.com/ https://*.firebaseio.com https://*.cloudfunctions.net https://www.googleapis.com; object-src 'self'"
+}

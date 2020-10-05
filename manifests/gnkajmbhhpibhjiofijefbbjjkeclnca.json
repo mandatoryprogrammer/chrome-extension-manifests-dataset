@@ -1,0 +1,175 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Rating4U 豆瓣、IMDB评分助手",
+  "short_name": "Rating4U",
+  "description": "鼠标移动到电影或者图书上，即时显示豆瓣、IMDB评分已经相关信息。目前支持的网站有：京东、亚马逊中国、腾讯视频、爱奇艺、优酷、天天美剧以及rarbg，持续更新中。",
+  "author": "Damon Ma",
+  "version": "1.0",
+  "icons": {
+    "16": "icon_128.png",
+    "48": "icon_128.png",
+    "128": "icon_128.png"
+  },
+  "permissions": [
+    "https://api.douban.com/",
+    "https://www.theimdbapi.org/"
+  ],
+  "web_accessible_resources": [
+    "css/*"
+  ],
+  "browser_action": {
+    "default_icon": "icon_128.png",
+    "default_title": "Rating info for Books & Movies"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://rarbg.is/*",
+        "*://film.qq.com/*",
+        "*://v.qq.com/*",
+        "http://ttmeiju.com/*/Movie*",
+        "*://www.iqiyi.com/dianying/",
+        "*://www.iqiyi.com/dianshiju/",
+        "*://list.iqiyi.com/www/1/*",
+        "*://list.iqiyi.com/www/2/*",
+        "*://list.iqiyi.com/www/3/*",
+        "*://list.iqiyi.com/www/4/*",
+        "*://so.iqiyi.com/so/q_*",
+        "*://movie.youku.com/*",
+        "*://list.youku.com/category/show/c_97*",
+        "*://list.youku.com/category/show/c_96*",
+        "*://list.youku.com/category/show/c_100*",
+        "*://www.amazon.cn/*",
+        "*://item.jd.com/*",
+        "*://re.jd.com/cps/item/*",
+        "*://e.jd.com/*",
+        "*://book.jd.com/*",
+        "*://list.jd.com/*",
+        "*://search.e.jd.com/*",
+        "*://search.jd.com/*",
+        "*://sale.jd.com/*"
+      ],
+      "css": [
+        "css/star.css",
+        "css/loaders.css"
+      ],
+      "js": [
+        "js/lib/jquery-3.2.1.min.js",
+        "js/model/base_info.js",
+        "js/model/douban_info.js",
+        "js/model/imdb_info.js",
+        "js/view/template.js",
+        "js/base/common.js",
+        "js/controller/util.js",
+        "js/model/test_data.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://item.jd.com/*",
+        "http://re.jd.com/cps/item/*",
+        "http://e.jd.com/*",
+        "http://book.jd.com/*",
+        "http://list.jd.com/*",
+        "http://search.e.jd.com/*",
+        "http://search.jd.com/*",
+        "http://sale.jd.com/*",
+        "https://item.jd.com/*",
+        "https://re.jd.com/cps/item/*",
+        "https://e.jd.com/*",
+        "https://book.jd.com/*",
+        "https://list.jd.com/*",
+        "https://search.e.jd.com/*",
+        "https://search.jd.com/*",
+        "https://sale.jd.com/*"
+      ],
+      "css": [
+        "css/book.css"
+      ],
+      "js": [
+        "js/controller/jd.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.amazon.cn/*"
+      ],
+      "css": [
+        "css/book.css"
+      ],
+      "js": [
+        "js/controller/amazon.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://film.qq.com/*",
+        "http://v.qq.com/*",
+        "https://film.qq.com/*",
+        "https://v.qq.com/*"
+      ],
+      "css": [
+        "css/movie.css"
+      ],
+      "js": [
+        "js/controller/qq.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://so.iqiyi.com/so/q_*",
+        "*://www.iqiyi.com/dianying/",
+        "*://www.iqiyi.com/dianshiju/",
+        "*://list.iqiyi.com/www/1/*",
+        "*://list.iqiyi.com/www/2/*",
+        "*://list.iqiyi.com/www/3/*",
+        "*://list.iqiyi.com/www/4/*"
+      ],
+      "css": [
+        "css/movie.css"
+      ],
+      "js": [
+        "js/controller/iqiyi.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://movie.youku.com/*",
+        "*://list.youku.com/category/show/c_97*",
+        "*://list.youku.com/category/show/c_96*",
+        "*://list.youku.com/category/show/c_100*"
+      ],
+      "css": [
+        "css/movie.css"
+      ],
+      "js": [
+        "js/controller/youku.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://rarbg.is/*"
+      ],
+      "css": [
+        "css/movie.css"
+      ],
+      "js": [
+        "js/utils/parse_torrent_name/parser.js",
+        "js/controller/rarbg.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://ttmeiju.com/*/Movie*"
+      ],
+      "css": [
+        "css/movie.css"
+      ],
+      "js": [
+        "js/controller/ttmeiju.js",
+        "js/utils/parse_torrent_name/parser.js"
+      ]
+    }
+  ]
+}

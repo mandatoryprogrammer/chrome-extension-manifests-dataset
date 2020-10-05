@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Refined Prismic",
+  "version": "18.10.23.1829",
+  "description": "Simplifies the Prismic interface and adds useful features",
+  "homepage_url": "https://github.com/mrmartineau/refined-prismic",
+  "manifest_version": 2,
+  "minimum_chrome_version": "58",
+  "applications": {
+    "gecko": {
+      "id": "{a4c4eda4-fb84-4a84-b4a1-f7c1cbf2a1ad}",
+      "strict_min_version": "55.0"
+    }
+  },
+  "permissions": [
+    "storage",
+    "clipboardWrite",
+    "contextMenus",
+    "activeTab"
+  ],
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "options.html",
+    "browser_style": true
+  },
+  "optional_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "icons": {
+    "128": "icon.png"
+  },
+  "options_ui": {
+    "chrome_style": true,
+    "page": "options.html"
+  },
+  "background": {
+    "scripts": [
+      "browser-polyfill.min.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "https://*.prismic.io/*"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "js": [
+        "browser-polyfill.min.js",
+        "content.js"
+      ]
+    }
+  ]
+}

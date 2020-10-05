@@ -1,0 +1,132 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "MLB The Show Nation: Helper Extension 2019",
+  "description": "Helper extension to make MLB The Show Nation website more usable",
+  "version": "2019.4.30.1",
+  "permissions": [
+    "background",
+    "contextMenus",
+    "notifications",
+    "webRequest",
+    "webRequestBlocking",
+    "activeTab",
+    "tabs",
+    "https://mlb19.theshownation.com/*"
+  ],
+  "externally_connectable": {
+    "ids": [
+      "*"
+    ],
+    "matches": [
+      "https://mlb19.theshownation.com/*"
+    ]
+  },
+  "omnibox": {
+    "keyword": "mlb"
+  },
+  "icons": {
+    "16": "icons/16.png",
+    "32": "icons/32.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png",
+    "180": "icons/180.png",
+    "192": "icons/192.png",
+    "512": "icons/512.png"
+  },
+  "browser_action": {},
+  "background": {
+    "page": "background/background.html",
+    "persistent": true
+  },
+  "web_accessible_resources": [
+    "css/extraCss.css",
+    "css/icons.css",
+    "lib/brutusinForms.js",
+    "lib/md5.js",
+    "lib/tableSort.js",
+    "lib/versionCompare.js",
+    "lib/settings.js",
+    "lib/injectScript.js",
+    "lib/showUpdates.js",
+    "lib/helpers.js",
+    "lib/moment.js",
+    "MLBTamperSettingsFramework.library.js",
+    "MLBTSNCardData.library.js",
+    "Hotkeys.userscript.js",
+    "CommunityMarketHelper.userscript.js",
+    "OpenOrders.userscript.js",
+    "ProfitReporter.userscript.js",
+    "CompletedOrders.userscript.js",
+    "backgroundProcesses.library.js",
+    "updateHeaders.content.js"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mlb19.theshownation.com/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "defaults.inject.js",
+        "updateHeaders.content.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://mlb19.theshownation.com/community_market*"
+      ],
+      "exclude_globs": [
+        "https://mlb19.theshownation.com/community_market/listings/*",
+        "https://mlb19.theshownation.com/community_market/orders/*",
+        "https://mlb19.theshownation.com/community_market/shortcuts"
+      ],
+      "all_frames": true,
+      "js": [
+        "CommunityMarketHelper.inject.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://mlb19.theshownation.com/community_market/listings/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "ProfitReporter.inject.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://mlb19.theshownation.com/community_market/orders/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "CompletedOrders.inject.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://mlb19.theshownation.com/community_market/orders/open"
+      ],
+      "all_frames": true,
+      "js": [
+        "OpenOrders.inject.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://mlb19.theshownation.com/dashboard"
+      ],
+      "all_frames": true,
+      "js": [
+        "background.inject.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

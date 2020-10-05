@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Unread Cats",
+  "description": "Link up your unread emails with cat videos.",
+  "version": "1.1",
+  "permissions": [
+    "identity",
+    "https://ajax.googleapis.com/",
+    "https://www.googleapis.com/*",
+    "*://*.google.com/*"
+  ],
+  "background": {
+    "scripts": [
+      "background/background.js",
+      "background/background-message-handler.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "http://mail.google.com/*"
+      ],
+      "js": [
+        "vendor/jquery-2.1.4.min.js",
+        "vendor/jquery-ui.min.js",
+        "content/messenger.js",
+        "content/video-container-generator.js",
+        "content/main.js",
+        "vendor/YT.js",
+        "vendor/YTHelper.js"
+      ],
+      "css": [
+        "css/video-container.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "views/*.html"
+  ],
+  "icons": {
+    "16": "icons/cat_icon_16.png",
+    "48": "icons/cat_icon_48.png",
+    "128": "icons/cat_icon_128.png"
+  },
+  "content_security_policy": "script-src 'unsafe-eval' 'self' https://*.google.com https://www.youtube.com https://s.ytimg.com; object-src 'self'",
+  "oauth2": {
+    "client_id": "523156386456-c04vhd7u6p1jr2r8qbnoegunhg7551dh.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/gmail.readonly",
+      "https://www.googleapis.com/auth/youtube.readonly"
+    ]
+  }
+}

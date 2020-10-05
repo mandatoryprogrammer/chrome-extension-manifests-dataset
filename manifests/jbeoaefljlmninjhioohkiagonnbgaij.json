@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "description": "Recognize special XC:: code before an a tag and display the content inline.",
+  "background": {
+    "page": "background.html"
+  },
+  "name": "G+ eXtended Content",
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "tabs",
+    "cookies",
+    "notifications",
+    "contextMenus",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking",
+    "unlimitedStorage"
+  ],
+  "icons": {
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png",
+    "16": "icons/icon16.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "js/lib/logging.js",
+        "js/lib/reports.js",
+        "js/lib/xhr.js",
+        "js/api/cookie.js",
+        "js/api/message.js",
+        "js/lib/async_api.js",
+        "js/lib/app_api.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "version": "1.23.17"
+}

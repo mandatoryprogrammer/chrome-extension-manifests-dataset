@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Legal Leaf",
+  "version": "0.0.3",
+  "manifest_version": 2,
+  "description": "We read the terms and conditions so you don't have to",
+  "homepage_url": "https://andrewnc.github.io",
+  "options_page": "src/options/options.html",
+  "icons": {
+    "16": "icons/leaf.png",
+    "48": "icons/leaf.png",
+    "128": "icons/leaf.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": "icons/leaf.png",
+    "default_title": "See Terms Summary",
+    "default_popup": "src/browser_action/browser_action.html"
+  },
+  "permissions": [
+    "activeTab",
+    "<all_urls>",
+    "http://*/*",
+    "https://*/*",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.google.com/*",
+        "https://*/*"
+      ],
+      "js": [
+        "src/inject/inject.js"
+      ]
+    }
+  ]
+}

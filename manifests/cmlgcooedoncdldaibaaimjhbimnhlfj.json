@@ -1,0 +1,40 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "1.0.5",
+  "name": "食 Proof",
+  "manifest_version": 2,
+  "description": "使用者可以利用食Proof，在愛料理的食譜頁面一鍵搜尋具有產銷履歷的食材提供商，免去手動搜尋的困擾。",
+  "browser_action": {
+    "default_title": "食 Proof",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "img/proofood-icon-16.png",
+    "48": "img/proofood-icon-48.png",
+    "128": "img/proofood-icon-128.png",
+    "scalable": "proofood-icon-large.svg"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://icook.tw/recipes/*"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "contextMenus",
+    "tabs",
+    "storage",
+    "*://icook.tw/recipes/*",
+    "http://proofood.tw/*"
+  ],
+  "content_security_policy": "default-src 'self'; script-src 'self' https://ajax.googleapis.com 'unsafe-eval'; connect-src http://proofood.tw; style-src * 'unsafe-inline';"
+}

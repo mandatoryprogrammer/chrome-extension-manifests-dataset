@@ -1,0 +1,50 @@
+{
+  "update_url": "http://clients2.google.com/service/update2/crx",
+  "name": "Drive Time",
+  "description": "",
+  "version": "1.0.13",
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://maps.googleapis.com https://maps.gstatic.com; object-src 'self'",
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "geolocation"
+  ],
+  "browser_action": {
+    "default_title": "Drive Time",
+    "default_icon": "icon128.png",
+    "default_popup": "main.html"
+  },
+  "sandbox": {
+    "pages": [
+      "map.html"
+    ]
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.waze.co.il/*"
+      ],
+      "js": [
+        "js/jquery-min.js",
+        "js/jquery.livequery.min.js",
+        "js/content_script.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://maps.google.com/*"
+      ],
+      "js": [
+        "js/jquery-min.js",
+        "js/content-google.js"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Genny the magic booking fairy",
+  "description": "Generate bookings for Xola's Local/Sandbox environments",
+  "version": "1.0.4",
+  "icons": {
+    "128": "icon-128.png"
+  },
+  "permissions": [
+    "contextMenus",
+    "tabs"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://xola.local/*",
+        "*://*.xola.local/*",
+        "https://sandbox1.xola.com/*",
+        "https://staging1.xola.com/*"
+      ],
+      "css": [
+        "/static/css/main.css"
+      ],
+      "js": [
+        "/static/js/main.js",
+        "index.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "vendor/async.min.js",
+      "vendor/jQuery.js",
+      "vendor/lodash.js",
+      "vendor/faker.js",
+      "booking_generator.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "web_accessible_resources": [
+    "booking_generator_injector.js"
+  ]
+}

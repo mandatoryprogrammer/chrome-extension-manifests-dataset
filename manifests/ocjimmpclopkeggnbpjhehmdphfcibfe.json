@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Graph by Benchrise",
+  "short_name": "Graph",
+  "version": "0.5.5",
+  "icons": {
+    "19": "icon_19.png",
+    "38": "icon_38.png",
+    "48": "icon_48.png",
+    "128": "icon_128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "icon_inactive_19.png",
+      "38": "icon_inactive_38.png",
+      "48": "icon_inactive_48.png",
+      "128": "icon_inactive_128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.linkedin.com/*",
+        "https://twitter.com/*",
+        "https://github.com/*",
+        "https://*.benchrise.com/browserExtension/flow/*"
+      ],
+      "js": [
+        "graph.min.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "storage",
+    "https://api2.benchrise.com/*"
+  ],
+  "background": {
+    "scripts": [
+      "constants.js",
+      "configuration.js",
+      "analytics.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://*.benchrise.com/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "views/*",
+    "styles/*",
+    "linkedin-data-gatherer.js"
+  ],
+  "content_security_policy": "default-src 'self'; script-src 'self' 'unsafe-eval' https://www.google-analytics.com; connect-src; style-src * 'unsafe-inline' 'self' blob:; img-src 'self' https://www.google-analytics.com https://stats.g.doubleclick.net https://s3.amazonaws.com https://twitter https://github; font-src 'self' https://fonts.gstatic.com"
+}

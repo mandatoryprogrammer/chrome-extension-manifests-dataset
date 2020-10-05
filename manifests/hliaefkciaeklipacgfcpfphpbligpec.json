@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Challonge Text Alert",
+  "description": "Enables you to text participants when their games are about to start",
+  "version": "0.0.10",
+  "icons": {
+    "128": "assets/img/challonge_128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.challonge.com/*"
+      ],
+      "css": [
+        "assets/css/challonge.css"
+      ],
+      "js": [
+        "assets/js/lib/mustache.min.js",
+        "assets/js/lib/form2js.min.js",
+        "assets/js/helpers.js",
+        "assets/js/bracket.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "http://*.challonge.com/*/participants",
+        "http://*.challonge.com/*/participants/"
+      ],
+      "css": [
+        "assets/css/challonge.css"
+      ],
+      "js": [
+        "assets/js/lib/mustache.min.js",
+        "assets/js/helpers.js",
+        "assets/js/participants.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    "templates/*",
+    "assets/img/phone_icon.png"
+  ],
+  "options_page": "templates/options.html",
+  "permissions": [
+    "tabs",
+    "storage",
+    "http://twilio.joequery.me/sms"
+  ]
+}

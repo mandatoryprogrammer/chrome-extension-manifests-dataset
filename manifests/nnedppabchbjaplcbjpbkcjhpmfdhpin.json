@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_extName__",
+  "short_name": "__MSG_extShortName__",
+  "version": "0.0.5.2",
+  "manifest_version": 2,
+  "description": "__MSG_extDescription__",
+  "minimum_chrome_version": "29",
+  "permissions": [
+    "storage",
+    "identity",
+    "*://*.startmeeting.com/*"
+  ],
+  "background": {
+    "scripts": [
+      "vendor/jquery/jquery.min.js",
+      "js/config.js",
+      "js/background_oauth.js",
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "icons": {
+    "16": "dock_icon_16x16_active.png",
+    "48": "dock_icon_48x48_active.png",
+    "128": "dock_icon_128x128_active.png"
+  },
+  "page_action": {
+    "default_icon": {
+      "16": "dock_icon_16x16.png",
+      "48": "dock_icon_48x48.png",
+      "128": "dock_icon_128x128.png"
+    },
+    "default_title": "__MSG_extDefaultTitle__"
+  },
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://calendar.google.com/*"
+      ],
+      "js": [
+        "vendor/jquery/jquery.min.js",
+        "js/config.js",
+        "js/general_api_calls.js",
+        "js/event_tools.js",
+        "js/subscription_tools.js",
+        "js/calendar.js"
+      ],
+      "css": [
+        "css/general.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "default_locale": "en",
+  "web_accessible_resources": [
+    "resources/images/*.png"
+  ]
+}

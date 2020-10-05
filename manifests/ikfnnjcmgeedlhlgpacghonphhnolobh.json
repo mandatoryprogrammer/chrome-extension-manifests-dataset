@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Working Holiday Visa Auto-Fill - Super X",
+  "author": "WHVStore",
+  "version": "3.0.1",
+  "manifest_version": 2,
+  "description": "Auto fill, auto submit. Shortcut: Ctrl+Shift+V （ Mac Command+Shift+V ）",
+  "browser_action": {
+    "default_icon": "images/icon.png",
+    "default_title": "Super X",
+    "default_popup": "popup.html"
+  },
+  "commands": {
+    "click-page-cation": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+V",
+        "mac": "Command+Shift+V"
+      },
+      "description": "click-page-cation"
+    }
+  },
+  "icons": {
+    "19": "images/icon.png",
+    "32": "images/icon32.png",
+    "38": "images/icon38.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "js/jquery-3.5.1.min.js",
+      "js/bg.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/jquery-3.5.1.min.js",
+        "content_script.js"
+      ],
+      "exclude_matches": [
+        "*://*.paymark.co.nz/*"
+      ]
+    }
+  ],
+  "options_ui": {
+    "page": "popup.html",
+    "open_in_tab": false
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'; connect-src 'self' data ",
+  "permissions": [
+    "<all_urls>",
+    "storage",
+    "activeTab",
+    "tabs",
+    "clipboardWrite",
+    "clipboardRead"
+  ]
+}

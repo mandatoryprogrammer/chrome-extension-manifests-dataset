@@ -1,0 +1,204 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Unlimited Email Tracker - Free Email Tracking",
+  "short_name": "EngageBay Email Tracker",
+  "version": "1.5.4",
+  "description": "Free Unlimited Email tracker. Track email opens, track email link clicks and many more directly from Gmail, Google Inbox & Outlook.",
+  "homepage_url": "https://engagebay.com",
+  "browser_action": {
+    "default_title": "EngageBay",
+    "default_popup": "pages/popup.html",
+    "default_icon": {
+      "16": "images/icon_16.png",
+      "32": "images/icon_32.png",
+      "48": "images/icon_48.png",
+      "128": "images/icon_128.png"
+    }
+  },
+  "icons": {
+    "16": "images/icon_16.png",
+    "32": "images/icon_32.png",
+    "48": "images/icon_48.png",
+    "128": "images/icon_128.png"
+  },
+  "permissions": [
+    "<all_urls>",
+    "cookies",
+    "activeTab",
+    "notifications",
+    "storage",
+    "management",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "background": {
+    "page": "pages/background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*"
+      ],
+      "js": [
+        "js/lib/jquery.min.js",
+        "js/lib/handlebars.min.js",
+        "js/content-template.js",
+        "js/lib/md5.js",
+        "js/commons.js",
+        "js/inboxsdk.js",
+        "js/content-script.js",
+        "js/lib/jquery.validate.min.js",
+        "js/content-gmail.js"
+      ],
+      "run_at": "document_start",
+      "css": [
+        "css/gmail.css",
+        "css/commons.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*"
+      ],
+      "js": [
+        "js/content/engagebay-data.js",
+        "js/content/custom-fields.js",
+        "js/content/entity-fields.js",
+        "js/content/deserialize.js",
+        "js/content/serialize.js",
+        "js/lib/jquery.countrydropdown.js",
+        "js/lib/jquery.bootstrap3-typeahead.min.js",
+        "js/content/typeahead.js"
+      ],
+      "run_at": "document_end",
+      "css": [
+        "css/typeahead.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.appspot.com/*",
+        "*://*.engagebay.com/*",
+        "http://localhost:8888/*"
+      ],
+      "js": [
+        "js/lib/jquery.min.js",
+        "js/lib/handlebars.min.js",
+        "js/content-template.js",
+        "js/commons.js",
+        "js/content-utils.js",
+        "js/content-engagebay.js",
+        "js/content-linkedin-gadget.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true,
+      "css": []
+    },
+    {
+      "js": [
+        "js/lib/jquery.min.js",
+        "js/content-linkedin-widget-frame-events.js"
+      ],
+      "matches": [
+        "https://*.linkedin.com/*",
+        "http://*.linkedin.com/*"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://*.linkedin.com/*",
+        "http://*.linkedin.com/*"
+      ],
+      "js": [
+        "js/lib/jquery.min.js",
+        "js/lib/md5.js",
+        "js/engagebay-content-linkedin-filter.js",
+        "js/engagebay-content-country-code.js",
+        "js/engagebay-content-lnk.js",
+        "js/engagebay-linkedin-fetch-single.js",
+        "js/commons.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://*.linkedin.com/in/*",
+        "http://*.linkedin.com/in/*"
+      ],
+      "js": [
+        "js/lib/jquery.min.js",
+        "js/lib/md5.js",
+        "js/commons.js",
+        "js/engagebay-content-country-code.js",
+        "js/engagebay-content-lnk.js",
+        "js/engagebay-linkedin-fetch-single.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://*.google.co.in/search?num=100*",
+        "http://*.google.co.in/search?num=100*",
+        "https://*.google.com/search?num=100*",
+        "https://www.google.com/search?gws_rd=cr&as_qdr=all&q=*",
+        "https://www.google.co.in/search?gws_rd=cr&as_qdr=all&q=*",
+        "https://*.google.com/search?q=*"
+      ],
+      "js": [
+        "js/lib/jquery.min.js",
+        "js/engagebay-content-linkedin-generic.js",
+        "js/commons.js"
+      ],
+      "run_at": "document_end",
+      "css": [
+        "css/commons.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.twitter.com/*"
+      ],
+      "js": [
+        "js/lib/jquery.min.js",
+        "js/lib/md5.js",
+        "js/engagebay-content-country-code.js",
+        "js/engagebay-content-twitter-scrapper.js",
+        "js/engagebay-twitter-fetch-single.js",
+        "js/commons.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.outlook.live.com/*",
+        "*://*.outlook.office365.com/*",
+        "*://*.outlook.office.com/*"
+      ],
+      "js": [
+        "js/lib/jquery.min.js",
+        "js/lib/handlebars.min.js",
+        "js/content-template.js",
+        "js/commons.js",
+        "js/content-script.js",
+        "js/content-outlook.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "css": [
+        "css/outlook.css",
+        "css/commons.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "images/*",
+    "js/outlook2.js",
+    "js/outlook.js"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://stats.pusher.com https://js.pusher.com/5.0/pusher.min.js  https://*.engagebay.com/* https://cdnjs.cloudflare.com https://ajax.googleapis.com https://d2p078bqz5urf7.cloudfront.net; object-src 'self'"
+}

@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Sale Expert",
+  "version": "0.3.0",
+  "description": "Цены ниже с Sale Expert",
+  "icons": {
+    "16": "img/icon_ext_16.png",
+    "48": "img/icon_ext_48.png",
+    "128": "img/icon_ext_128.png"
+  },
+  "author": "Sale Expert",
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "img/icon_inactive_16.png",
+      "32": "img/icon_inactive_32.png",
+      "48": "img/icon_inactive_48.png",
+      "128": "img/icon_inactive_128.png"
+    }
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "https://*.sale.expert/*"
+  ],
+  "web_accessible_resources": [
+    "img/*.svg",
+    "font/ProximaNova-Bold.woff",
+    "font/ProximaNova-Regular.woff",
+    "global.css",
+    "content.html"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [
+        "global.css"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

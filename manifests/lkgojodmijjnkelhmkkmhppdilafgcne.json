@@ -1,0 +1,71 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "author": "David Ward",
+  "name": "Versature Dialer",
+  "short_name": "Versature Dialer",
+  "version": "2.3.30",
+  "description": "An extension that provides Versature telephony integration.",
+  "manifest_version": 2,
+  "omnibox": {
+    "keyword": "-call"
+  },
+  "browser_action": {
+    "default_title": "Versature Dialer",
+    "default_icon": {
+      "16": "images/versature_logo_16x16.png",
+      "48": "images/versature_logo_48x48.png"
+    },
+    "default_popup": "main.html"
+  },
+  "web_accessible_resources": [
+    "images/click2dial.png",
+    "js/injected.js"
+  ],
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "js/jsapi.js",
+      "js/jquery.min.js",
+      "js/pubnub.4.21.6.min.js",
+      "js/browser.js",
+      "js/log.js",
+      "js/moment.min.js",
+      "js/integrate.2.0.js",
+      "js/vactions.js",
+      "js/backgroundCallMessages.js",
+      "js/background.js"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://maps.googleapis.com https://maps.gstatic.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "https://*.salesforce.com/*",
+        "https://*.lightning.force.com/*",
+        "https://sonar.versature.com/*"
+      ],
+      "js": [
+        "js/browser.js",
+        "js/prepareDocument.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "notifications",
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "identity"
+  ],
+  "icons": {
+    "16": "images/versature_logo_16x16.png",
+    "48": "images/versature_logo_48x48.png",
+    "128": "images/versature_logo_128x128.png"
+  }
+}

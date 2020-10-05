@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Quizbot",
+  "version": "1.2.8.39",
+  "description": "Generates quizzes based off of text in the page.",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqDSIZFkeS6GXbxjoigXcotlHNBwFUmVjv61tC18C3HQWq09DLRTiRye81rz9tg/XK7zwdk4U+0r299+RSbmFSUvwGKgILyF3t/KGan6mbHrOKguuelfM46uXSUxke/PVSwomQhNn48zSHb1xyn1USUyeLoHlkY6gAmATpLTlK9jk8e463nchEA7LBwglSpTvo1aGDsr2H8dx4cwuMxos4UsKZ901VgotH5+XEU26kKLg+kmkuTv+y+u1rHy6zUW4jLUToEPcLZ4uJcQqDTSChxx9RiIXNmdR5+ta8wF3W7+3eBJZWzDEHU6Wv5u7TQ3pfmE5aIOK11gdrghOvBHeDQIDAQAB",
+  "icons": {
+    "16": "resources/icons/ttqActive_19.png",
+    "48": "resources/icons/ttqActive_38.png",
+    "128": "resources/icons/ttqActive_57.png"
+  },
+  "browser_action": {
+    "default_icon": "resources/icons/ttqActive_19.png",
+    "default_title": "Quizbot"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://apis.google.com https://script.google.com https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js; object-src 'self' 'unsafe-eval' https://script.google.com",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "thirdParty/jquery-3.0.0.min.js",
+        "thirdParty/readability.js",
+        "common/logger.js",
+        "common/utilities.js",
+        "content/googleDocsUtil.js",
+        "content/contentScriptManager.js",
+        "content/content.js"
+      ],
+      "css": [
+        "content/content.css"
+      ]
+    }
+  ],
+  "background": {
+    "page": "background/background.html"
+  },
+  "permissions": [
+    "<all_urls>",
+    "tabs",
+    "notifications",
+    "unlimitedStorage",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "web_accessible_resources": [
+    "resources/icons/ttqActive_19.png",
+    "content/verify-google-account.html"
+  ],
+  "externally_connectable": {
+    "ids": [
+      "ifajfiofeifbbhbionejdliodenmecna",
+      "mloajfnmjckfjbeeofcdaecbelnblden",
+      "cbcfbhjolgdaepkoaoepejclfggmdand"
+    ],
+    "matches": [
+      "https://quizbot.com/*",
+      "https://quizbot.stagedji.com/*",
+      "https://quizbot.qadji.com/*"
+    ]
+  }
+}

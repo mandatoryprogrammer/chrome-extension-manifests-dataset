@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "background": {
+    "page": "background.html"
+  },
+  "browser_action": {
+    "default_icon": "icons/ICON_16.png",
+    "default_popup": "/webapp/index.html"
+  },
+  "description": "Find emails from LinkedIn profiles",
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "js": [
+        "content_scripts/cs_script.min.js"
+      ],
+      "matches": [
+        "https://www.linkedin.com/*"
+      ]
+    },
+    {
+      "all_frames": false,
+      "js": [
+        "/content_scripts/ext.js"
+      ],
+      "matches": [
+        "https://app.profilelocator.com/*",
+        "http://app.profilelocator.com/*"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "icons/ICON_16.png",
+    "48": "icons/ICON_48.png",
+    "128": "icons/ICON_128.png",
+    "512": "icons/ICON_512.png"
+  },
+  "manifest_version": 2,
+  "name": "Profile Locator",
+  "content_security_policy": "script-src 'self' 'unsafe-eval';",
+  "permissions": [
+    "unlimitedStorage",
+    "storage",
+    "contextMenus",
+    "tabs",
+    "activeTab",
+    "identity",
+    "identity.email",
+    "https://*.linkedin.com/*",
+    "https://www.googleapis.com/*",
+    "https://accounts.google.com/o/oauth2/token",
+    "webRequest",
+    "downloads",
+    "cookies",
+    "https://app.profilelocator.com/",
+    "alarms"
+  ],
+  "version": "1.0.3"
+}

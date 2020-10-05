@@ -1,0 +1,89 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Gurn",
+  "short_name": "Gurn",
+  "description": "Instant access to what you need, when you need it!",
+  "version": "1.9.6",
+  "version_name": "1.9.6",
+  "author": "Gradient Ltd",
+  "homepage_url": "https://www.gurn.io",
+  "incognito": "spanning",
+  "offline_enabled": true,
+  "icons": {
+    "16": "assets/img/gurn-16.png",
+    "32": "assets/img/gurn-32.png",
+    "64": "assets/img/gurn-64.png",
+    "128": "assets/img/gurn-128.png",
+    "256": "assets/img/gurn-256.png"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+G"
+      }
+    },
+    "add-keyword": {
+      "suggested_key": {
+        "default": "Alt+Shift+G"
+      },
+      "description": "Send a 'add keyword' event"
+    }
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://localhost/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://go.gurn.io/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://internal.gurn.io/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "omnibox": {
+    "keyword": "go"
+  },
+  "browser_action": {
+    "default_icon": "assets/img/icon.png",
+    "default_popup": "index-plugin.html"
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://*.gurn.io/*",
+      "http://localhost:*/*"
+    ]
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "bookmarks",
+    "webRequest",
+    "*://*/*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

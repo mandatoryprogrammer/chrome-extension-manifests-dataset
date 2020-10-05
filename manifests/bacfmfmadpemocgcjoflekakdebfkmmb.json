@@ -1,0 +1,91 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "酷投刷单机器人",
+  "version": "1.1.11",
+  "description": "酷投刷单机器人，让刷单飞起!",
+  "manifest_version": 2,
+  "permissions": [
+    "tabs",
+    "contextMenus",
+    "cookies",
+    "notifications",
+    "activeTab",
+    "storage"
+  ],
+  "icons": {
+    "16": "static/images/icon.jpg",
+    "48": "static/images/icon.jpg",
+    "128": "static/images/icon.jpg"
+  },
+  "background": {
+    "scripts": [
+      "background/index.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_title": "酷投",
+    "default_popup": "option/index.html",
+    "chrome_style": true
+  },
+  "web_accessible_resources": [
+    "base.js",
+    "exchanges/9ex.js"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file://*/*"
+      ],
+      "js": [
+        "base.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "https://www.btb.com/*"
+      ],
+      "js": [
+        "exchanges/btb.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "https://9ex.io/*"
+      ],
+      "js": [
+        "exchanges/9ex.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "https://www.ocx.com/*"
+      ],
+      "js": [
+        "exchanges/ocx.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "http://www.manbiwang.com/*",
+        "http://www.coinbene.com/*"
+      ],
+      "js": [
+        "exchanges/coinbebe.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

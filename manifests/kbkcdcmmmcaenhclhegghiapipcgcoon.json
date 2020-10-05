@@ -1,0 +1,70 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "issue.sh for GitHub",
+  "description": "issue.sh - Issue board & project management for GitHub",
+  "short_name": "issue.sh",
+  "version": "1.2.19",
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "content-script.js"
+      ],
+      "matches": [
+        "https://github.com/*"
+      ],
+      "exclude_matches": [
+        "https://github.com/about/*",
+        "https://github.com/contact/*",
+        "https://github.com/pricing/*",
+        "https://github.com/site/*",
+        "https://github.com/search/*",
+        "https://github.com/settings/*",
+        "https://github.com/organizations/new/*",
+        "https://github.com/new/*",
+        "https://github.com/pages/*",
+        "https://github.com/explore/*",
+        "https://github.com/issues/*",
+        "https://github.com/pulls/*",
+        "https://github.com/notifications/*",
+        "https://github.com/login/*",
+        "https://github.com/marketplace/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "js": [
+        "install-detection.js"
+      ],
+      "matches": [
+        "https://issue.sh/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "icons": {
+    "16": "assets/icon16.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png"
+  },
+  "permissions": [
+    "storage",
+    "https://github.com/*",
+    "https://*.issue.sh/*"
+  ],
+  "web_accessible_resources": [
+    "*"
+  ],
+  "applications": {
+    "gecko": {
+      "id": "{d0b2446b-d24b-4f48-a72f-445d6322c92c}",
+      "update_url": "https://release.issue.sh/firefox/latest.json"
+    }
+  }
+}

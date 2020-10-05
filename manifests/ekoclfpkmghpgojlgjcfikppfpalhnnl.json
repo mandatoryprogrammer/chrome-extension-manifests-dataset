@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Undercov",
+  "version": "1.0.2",
+  "homepage_url": "https://github.com/kyeah/undercov",
+  "description": "Overlay code coverage from arbitrary HTTPS sources onto the Github UI.",
+  "offline_enabled": false,
+  "manifest_version": 2,
+  "icons": {
+    "16": "resources/18dp.png",
+    "48": "resources/18dp.png",
+    "72": "resources/18dp.png",
+    "96": "resources/24dp.png",
+    "144": "resources/36dp.png",
+    "192": "resources/48dp.png"
+  },
+  "options_ui": {
+    "page": "lib/options.html",
+    "chrome_style": true
+  },
+  "background": {
+    "scripts": [
+      "lib/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://github.com/*",
+        "https://raw.githubusercontent.com/*"
+      ],
+      "all_frames": true,
+      "run_at": "document_end",
+      "js": [
+        "lib/jquery.min.js",
+        "lib/rx.min.js",
+        "lib/rx.jquery.js",
+        "lib/coveralls.js"
+      ],
+      "css": [
+        "lib/coveralls.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "lib/jquery.min.js",
+    "lib/rx.min.js",
+    "lib/rx.jquery.js",
+    "lib/coveralls.js"
+  ],
+  "permissions": [
+    "storage",
+    "notifications"
+  ],
+  "optional_permissions": [
+    "https://*/"
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Reason Tools",
+  "description": "Adds Reason to the browser",
+  "icons": {
+    "19": "logo19.png",
+    "38": "logo38.png",
+    "128": "logo128.png"
+  },
+  "background": {
+    "scripts": [
+      "Background.bundle.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "logo19.png",
+      "38": "logo38.png"
+    },
+    "default_popup": "popup.html",
+    "default_title": "Reason Tools"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "ContentLoader.bundle.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "commands": {
+    "toggle_between_interface_and_implementation": {
+      "suggested_key": {
+        "default": "Alt+I"
+      },
+      "description": "Toggle between interface and implementation files"
+    },
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+D"
+      }
+    }
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "contextMenus",
+    "http://*/",
+    "https://*/"
+  ],
+  "web_accessible_resources": [
+    "ocamlDoc.css",
+    "logo128.png",
+    "ocamlLogo128.png"
+  ],
+  "version": "0.3.2"
+}

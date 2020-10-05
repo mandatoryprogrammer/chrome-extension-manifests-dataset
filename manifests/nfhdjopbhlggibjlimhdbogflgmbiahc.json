@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Better Pull Request for GitHub",
+  "short_name": "Better PRs",
+  "permissions": [
+    "contextMenus",
+    "storage",
+    "*://*.github.com/*"
+  ],
+  "optional_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.github.com/*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "better_github_prs.js"
+      ],
+      "css": []
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "16": "16x16.png",
+      "48": "48x48.png",
+      "128": "128x128.png"
+    },
+    "default_popup": "options.html"
+  },
+  "options_page": "options.html",
+  "web_accessible_resources": [
+    "options.html",
+    "*.woff2"
+  ],
+  "icons": {
+    "16": "16x16.png",
+    "48": "48x48.png",
+    "128": "128x128.png"
+  },
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self';",
+  "description": "Add a file tree to GitHub Pull Requests",
+  "version": "1.0.32"
+}

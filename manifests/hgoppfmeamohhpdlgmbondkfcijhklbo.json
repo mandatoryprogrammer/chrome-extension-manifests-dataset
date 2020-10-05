@@ -1,0 +1,84 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "SEO-анализ сайта от Be1.ru",
+  "short_name": "Be1.ru",
+  "version": "1.9.9",
+  "description": "Анализ сайта, поможет проверить состояние важных показателей, от которых зависят позиции ресурса в выдаче поисковых систем.",
+  "homepage_url": "https://be1.ru/",
+  "manifest_version": 2,
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "vendor/jquery-3.4.1.js",
+      "common/functions.js",
+      "background/background.js",
+      "background/badge.js",
+      "background/worker.js"
+    ]
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>"
+  ],
+  "content_security_policy": "script-src 'self' https://*.google.com https://*.gstatic.com; object-src 'self'",
+  "browser_action": {
+    "default_popup": "popup/analiz/popup.html",
+    "default_title": "SEO анализ сайта от Be1.ru",
+    "default_icon": {
+      "32": "icons/32.png",
+      "128": "icons/128.png"
+    }
+  },
+  "options_page": "options/options.html",
+  "icons": {
+    "32": "icons/32.png",
+    "128": "icons/128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://be1.ru/*"
+      ],
+      "js": [
+        "content/be1_helper/script.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://wordstat.yandex.ru/*",
+        "*://wordstat.yandex.com/*",
+        "*://wordstat.yandex.ua/*",
+        "*://wordstat.yandex.by/*",
+        "*://wordstat.yandex.kz/*",
+        "*://wordstat.yandex.com.tr/*",
+        "*://www.wordstat.yandex.ru/*",
+        "*://www.wordstat.yandex.com/*",
+        "*://www.wordstat.yandex.ua/*",
+        "*://www.wordstat.yandex.by/*",
+        "*://www.wordstat.yandex.kz/*"
+      ],
+      "css": [
+        "content/wordstat_assistant/style.css"
+      ],
+      "js": [
+        "vendor/jquery-3.4.1.js",
+        "common/functions.js",
+        "content/wordstat_assistant/script.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.similarweb.com/website/*",
+        "https://www.similarweb.com/error/notfound"
+      ],
+      "js": [
+        "content/similarweb/script.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_idle"
+    }
+  ]
+}

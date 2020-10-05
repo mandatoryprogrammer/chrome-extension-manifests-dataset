@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Hangremote",
+  "description": "This extension provides remote control for Google Hangouts",
+  "version": "1.0.3",
+  "background": {
+    "scripts": [
+      "src/js/commands.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.google.com/hangouts*",
+        "*://*.google.com/call*",
+        "*://meet.google.com/*"
+      ],
+      "js": [
+        "src/js/content.js",
+        "src/js/elements.js"
+      ]
+    }
+  ],
+  "commands": {
+    "toggleMic": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+7"
+      },
+      "global": true,
+      "description": "Toggle Microphone in Hangouts"
+    },
+    "toggleCam": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+8"
+      },
+      "global": true,
+      "description": "Toggle Webcam in Hangouts"
+    }
+  },
+  "browser_action": {
+    "default_popup": "src/popup.html",
+    "default_title": "Manage microphone and camera settings on google hangouts",
+    "default_icon": {
+      "19": "icons/PNG/hangouts2_19.png",
+      "38": "icons/PNG/hangouts2_38.png"
+    }
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage"
+  ]
+}

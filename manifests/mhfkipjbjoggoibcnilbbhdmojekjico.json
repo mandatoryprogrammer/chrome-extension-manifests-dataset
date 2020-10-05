@@ -1,0 +1,132 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Dropship N Paste",
+  "version": "2.0.3",
+  "description": "Automatically fills in buyers address at your supplier/dropship checkout.",
+  "offline_enabled": true,
+  "icons": {
+    "16": "imgs/16.png",
+    "48": "imgs/48.png",
+    "128": "imgs/128.png"
+  },
+  "permissions": [
+    "clipboardRead",
+    "clipboardWrite",
+    "storage",
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "notifications",
+    "contextMenus"
+  ],
+  "background": {
+    "page": "background.html"
+  },
+  "options_page": "options.html",
+  "browser_action": {
+    "default_popup": "",
+    "default_title": "Dropship N Paste",
+    "default_icon": {
+      "19": "imgs/19dis.png",
+      "38": "imgs/38dis.png"
+    }
+  },
+  "commands": {
+    "copy": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+C",
+        "windows": "Ctrl+Shift+C",
+        "linux": "Ctrl+Shift+C",
+        "mac": "Command+Shift+C"
+      },
+      "description": "Copy detected address to clipboard"
+    },
+    "paste": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+V",
+        "windows": "Ctrl+Shift+V",
+        "linux": "Ctrl+Shift+V",
+        "mac": "Command+Shift+V"
+      },
+      "description": "Paste address in clipboard on page"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://app.appath.com/app/orders"
+      ],
+      "js": [
+        "js/vendors/bluebird.min.js",
+        "js/vendors/xregexp-all.js",
+        "js/vendors/url-match.js",
+        "js/vendors/jquery.min.js",
+        "js/vendors/clipboard.min.js",
+        "js/vendors/usaddress.js",
+        "js/ContactParser.js",
+        "js/content-apppath.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "https://sellercentral.amazon.com/orders-v3*"
+      ],
+      "js": [
+        "js/vendors/jquery.min.js",
+        "js/content-scripts/seller-notes.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/content-scripts/tag.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "options/css/popup.css"
+      ],
+      "js": [
+        "js/vendors/jquery.min.js",
+        "js/modal.js",
+        "js/vendors/url-match.js",
+        "js/Storage.js",
+        "js/ContactParser.js",
+        "js/DOM.js",
+        "js/content-scripts/_generic.js",
+        "js/popup.js",
+        "js/content-scripts/drag-and-drop.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "https://k2b-bulk.ebay.com/ws/*"
+      ],
+      "js": [
+        "js/vendors/jquery.min.js",
+        "js/content-scripts/ebay-seller-notes.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    "imgs/*.png"
+  ]
+}

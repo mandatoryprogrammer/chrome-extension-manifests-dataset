@@ -1,0 +1,512 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Keywords Everywhere - Keyword Tool",
+  "description": "Keyword search volume, cpc and competition for 15+ websites like Google™ Search Console, YouTube™, Amazon™ & more",
+  "version": "9.0",
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "/img/icon128.png",
+    "default_popup": "/html/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "/lib/jquery-3.3.1.min.js",
+      "/js/SourceList.js",
+      "/js/API.js",
+      "/js/GoogleTrendsAPI.js",
+      "/js/AutocompleteAPI.js",
+      "/js/background.js"
+    ]
+  },
+  "options_page": "html/options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.google.com/webmasters/tools/search-analytics*"
+      ],
+      "js": [
+        "/lib/jquery-3.3.1.min.js",
+        "/js/cs-pageview.js",
+        "/js/cs-ui-helper.js",
+        "/js/cs-common.js",
+        "/js/cs-starter.js",
+        "/js/cs-wmtools.js",
+        "/js/cs-run.js"
+      ],
+      "css": [
+        "/css/style.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://search.google.com/search-console*",
+        "https://search.google.com/u/*/search-console*"
+      ],
+      "js": [
+        "/lib/jquery-3.3.1.min.js",
+        "/js/cs-pageview.js",
+        "/js/cs-ui-helper.js",
+        "/js/cs-common.js",
+        "/js/cs-starter.js",
+        "/js/cs-gsearch-console.js",
+        "/js/cs-run.js"
+      ],
+      "css": [
+        "/css/style.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://analytics.google.com/analytics/web/*",
+        "https://analytics.google.com/analytics/app/*"
+      ],
+      "js": [
+        "/lib/jquery-3.3.1.min.js",
+        "/js/cs-pageview.js",
+        "/js/cs-ui-helper.js",
+        "/js/cs-common.js",
+        "/js/cs-starter.js",
+        "/js/cs-ga.js",
+        "/js/cs-run.js"
+      ],
+      "css": [
+        "/css/style.css"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://adwords.google.com/aw/*",
+        "https://ads.google.com/aw/*"
+      ],
+      "js": [
+        "/lib/jquery-3.3.1.min.js",
+        "/js/cs-pageview.js",
+        "/js/cs-ui-helper.js",
+        "/js/cs-common.js",
+        "/js/cs-starter.js",
+        "/js/cs-gkp2.js",
+        "/js/cs-run.js"
+      ],
+      "css": [
+        "/css/style.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://adwords.google.com/ko/KeywordPlanner/*"
+      ],
+      "js": [
+        "/lib/jquery-3.3.1.min.js",
+        "/js/cs-pageview.js",
+        "/js/cs-ui-helper.js",
+        "/js/cs-common.js",
+        "/js/cs-starter.js",
+        "/js/cs-gkp.js",
+        "/js/cs-run.js"
+      ],
+      "css": [
+        "/css/style.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "include_globs": [
+        "*://www.google.*/*"
+      ],
+      "exclude_globs": [
+        "https://analytics.google.com/analytics/web/*",
+        "https://www.google.com/webmasters/tools/search-analytics*"
+      ],
+      "js": [
+        "/lib/jquery-3.3.1.min.js",
+        "/lib/chartjs/Chart.bundle.min.js",
+        "/js/CSV.js",
+        "/js/TrendsChart.js",
+        "/js/cs-pageview.js",
+        "/js/cs-ui-helper.js",
+        "/js/cs-common.js",
+        "/js/cs-starter.js",
+        "/js/cs-google.js",
+        "/js/cs-run.js"
+      ],
+      "css": [
+        "/lib/chartjs/Chart.min.css",
+        "/css/style.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "include_globs": [
+        "*://www.google.*/trends/*",
+        "*://trends.google.*/trends/*"
+      ],
+      "js": [
+        "/lib/jquery-3.3.1.min.js",
+        "/js/cs-pageview.js",
+        "/js/cs-ui-helper.js",
+        "/js/cs-common.js",
+        "/js/cs-starter.js",
+        "/js/cs-gtrends.js",
+        "/js/cs-run.js"
+      ],
+      "css": [
+        "/css/style.css"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "*://ubersuggest.io/*"
+      ],
+      "js": [
+        "/lib/jquery-3.3.1.min.js",
+        "/js/cs-pageview.js",
+        "/js/cs-ui-helper.js",
+        "/js/cs-common.js",
+        "/js/cs-starter.js",
+        "/js/cs-uberio.js",
+        "/js/cs-run.js"
+      ],
+      "css": [
+        "/css/style.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://majestic.com/reports/site-explorer/anchor-text*"
+      ],
+      "js": [
+        "/lib/jquery-3.3.1.min.js",
+        "/js/cs-pageview.js",
+        "/js/cs-ui-helper.js",
+        "/js/cs-common.js",
+        "/js/cs-starter.js",
+        "/js/cs-majestic.js",
+        "/js/cs-run.js"
+      ],
+      "css": [
+        "/css/style.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://moz.com/researchtools/ose/*"
+      ],
+      "js": [
+        "/lib/jquery-3.3.1.min.js",
+        "/js/cs-pageview.js",
+        "/js/cs-ui-helper.js",
+        "/js/cs-common.js",
+        "/js/cs-starter.js",
+        "/js/cs-moz.js",
+        "/js/cs-run.js"
+      ],
+      "css": [
+        "/css/style.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://answerthepublic.com/reports/*",
+        "*://answerthepublic.com/*/reports/*"
+      ],
+      "js": [
+        "/lib/jquery-3.3.1.min.js",
+        "/lib/jquery-ui/jquery-ui.min.js",
+        "/js/cs-pageview.js",
+        "/js/cs-ui-helper.js",
+        "/js/cs-common.js",
+        "/js/cs-starter.js",
+        "/js/cs-atp.js",
+        "/js/cs-run.js"
+      ],
+      "css": [
+        "/lib/jquery-ui/jquery-ui.min.css",
+        "/css/style.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://soovle.com/*"
+      ],
+      "js": [
+        "/lib/jquery-3.3.1.min.js",
+        "/lib/jquery-ui/jquery-ui.min.js",
+        "/js/cs-pageview.js",
+        "/js/cs-ui-helper.js",
+        "/js/cs-common.js",
+        "/js/cs-starter.js",
+        "/js/cs-soovle.js",
+        "/js/cs-run.js"
+      ],
+      "css": [
+        "/lib/jquery-ui/jquery-ui.min.css",
+        "/css/style.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://keywordshitter.com/*",
+        "*://www.keywordshitter.com/*"
+      ],
+      "js": [
+        "/lib/jquery-3.3.1.min.js",
+        "/js/cs-pageview.js",
+        "/js/cs-ui-helper.js",
+        "/js/cs-common.js",
+        "/js/cs-starter.js",
+        "/js/cs-kshitter.js",
+        "/js/cs-run.js"
+      ],
+      "css": [
+        "/css/style.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://www.bing.com/*"
+      ],
+      "js": [
+        "/lib/jquery-3.3.1.min.js",
+        "/js/cs-pageview.js",
+        "/js/cs-ui-helper.js",
+        "/js/cs-common.js",
+        "/js/cs-starter.js",
+        "/js/cs-bing.js",
+        "/js/cs-run.js"
+      ],
+      "css": [
+        "/css/style.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://duckduckgo.com/*"
+      ],
+      "js": [
+        "/lib/jquery-3.3.1.min.js",
+        "/js/cs-pageview.js",
+        "/js/cs-ui-helper.js",
+        "/js/cs-common.js",
+        "/js/cs-starter.js",
+        "/js/cs-duckduckgo.js",
+        "/js/cs-run.js"
+      ],
+      "css": [
+        "/css/style.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.yahoo.com/*",
+        "*://*.search.yahoo.com/*"
+      ],
+      "js": [
+        "/lib/jquery-3.3.1.min.js",
+        "/js/cs-pageview.js",
+        "/js/cs-ui-helper.js",
+        "/js/cs-common.js",
+        "/js/cs-starter.js",
+        "/js/cs-yahoo.js",
+        "/js/cs-run.js"
+      ],
+      "css": [
+        "/css/style.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://www.amazon.ae/*",
+        "*://www.amazon.com/*",
+        "*://www.amazon.co.uk/*",
+        "*://www.amazon.es/*",
+        "*://www.amazon.nl/*",
+        "*://www.amazon.mx/*",
+        "*://www.amazon.it/*",
+        "*://www.amazon.in/*",
+        "*://www.amazon.de/*",
+        "*://www.amazon.fr/*",
+        "*://www.amazon.cn/*",
+        "*://www.amazon.ca/*",
+        "*://www.amazon.com.au/*",
+        "*://www.amazon.com.br/*",
+        "*://www.amazon.com.tr/*",
+        "*://www.amazon.co.jp/*",
+        "*://smile.amazon.ae/*",
+        "*://smile.amazon.com/*",
+        "*://smile.amazon.co.uk/*",
+        "*://smile.amazon.es/*",
+        "*://smile.amazon.nl/*",
+        "*://smile.amazon.mx/*",
+        "*://smile.amazon.it/*",
+        "*://smile.amazon.in/*",
+        "*://smile.amazon.de/*",
+        "*://smile.amazon.fr/*",
+        "*://smile.amazon.cn/*",
+        "*://smile.amazon.ca/*",
+        "*://smile.amazon.com.au/*",
+        "*://smile.amazon.com.br/*",
+        "*://smile.amazon.com.tr/*",
+        "*://smile.amazon.co.jp/*"
+      ],
+      "js": [
+        "/lib/jquery-3.3.1.min.js",
+        "/js/cs-pageview.js",
+        "/js/cs-ui-helper.js",
+        "/js/cs-common.js",
+        "/js/cs-starter.js",
+        "/js/cs-amazon.js",
+        "/js/cs-run.js"
+      ],
+      "css": [
+        "/css/style.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://www.youtube.com/*"
+      ],
+      "js": [
+        "/lib/jquery-3.3.1.min.js",
+        "/lib/chartjs/Chart.bundle.min.js",
+        "/js/CSV.js",
+        "/js/TrendsChart.js",
+        "/js/cs-pageview.js",
+        "/js/cs-ui-helper.js",
+        "/js/cs-common.js",
+        "/js/cs-starter.js",
+        "/js/cs-youtube.js",
+        "/js/cs-run.js"
+      ],
+      "css": [
+        "/lib/chartjs/Chart.min.css",
+        "/css/style.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://www.ebay.com/*",
+        "*://www.ebay.com.au/*",
+        "*://www.ebay.co.uk/*",
+        "*://www.ebay.ca/*",
+        "*://www.ebay.fr/*",
+        "*://www.ebay.ie/*",
+        "*://www.ebay.in/*",
+        "*://www.ebay.ph/*",
+        "*://www.ebay.com.sg/*"
+      ],
+      "js": [
+        "/lib/jquery-3.3.1.min.js",
+        "/js/cs-pageview.js",
+        "/js/cs-ui-helper.js",
+        "/js/cs-common.js",
+        "/js/cs-starter.js",
+        "/js/cs-ebay.js",
+        "/js/cs-run.js"
+      ],
+      "css": [
+        "/css/style.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://www.etsy.com/*"
+      ],
+      "js": [
+        "/lib/jquery-3.3.1.min.js",
+        "/js/cs-pageview.js",
+        "/js/cs-ui-helper.js",
+        "/js/cs-common.js",
+        "/js/cs-starter.js",
+        "/js/cs-etsy.js",
+        "/js/cs-run.js"
+      ],
+      "css": [
+        "/css/style.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://keywordseverywhere.com/ke/*/autocomplete.html*",
+        "https://keywordseverywhere.com/ke/*/autocomplete.php*",
+        "https://keywordseverywhere.com/ke/*/manual.html*",
+        "https://keywordseverywhere.com/ke/*/manual.php*",
+        "https://keywordseverywhere.com/*/keywords.html*",
+        "https://keywordseverywhere.com/*/keywords.php*",
+        "https://keywordseverywhere.com/*/trends.html*",
+        "https://keywordseverywhere.com/*/trends.php*",
+        "https://keywordseverywhere.com/*/favorites.html*",
+        "https://keywordseverywhere.com/*/favorites.php*",
+        "https://keywordseverywhere.com/ke/*/analyze.html*",
+        "https://keywordseverywhere.com/ke/*/analyze.php*"
+      ],
+      "js": [
+        "/lib/jquery-3.3.1.min.js",
+        "/js/cs-common.js",
+        "/js/bridge.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://keywordseverywhere.com/*"
+      ],
+      "js": [
+        "/js/cs-keywordseverywhere.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://keywordseverywhere.com/ke/widget.php*"
+      ],
+      "all_frames": true,
+      "js": [
+        "/js/cs-iframe-resize.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "/img/*",
+    "/html/ytstats.html",
+    "/html/page.html"
+  ],
+  "permissions": [
+    "storage",
+    "http://*/*",
+    "https://*/*",
+    "activeTab",
+    "contextMenus"
+  ]
+}

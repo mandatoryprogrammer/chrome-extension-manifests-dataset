@@ -1,0 +1,110 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "ScreenLife",
+  "default_locale": "en",
+  "description": "Create and share interactive screen recordings",
+  "version": "0.1.66",
+  "options_ui": {
+    "page": "src/pages/options/options.html",
+    "chrome_style": true
+  },
+  "web_accessible_resources": [
+    "src/*",
+    "libs/*",
+    "images/*",
+    "*"
+  ],
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "src/background.js"
+    ],
+    "all_frames": true
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://localhost/*",
+      "*://html-recorder-9003.chisw.us/*",
+      "*://screenlife.com/*",
+      "*://player.screenlife.com/*",
+      "*://stage.screenlife.com/*",
+      "*://stage.player.screenlife.com/*",
+      "*://srplatform.chisw.us/*",
+      "*://130.211.216.229/*",
+      "*://records.preprod.screenlife.com/*",
+      "*://records.screenlife.com/*",
+      "*://stage.webeditor.screenlife.com/*",
+      "*://editor.screenlife.com/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://localhost/*",
+        "*://html-recorder-9003.chisw.us/*",
+        "*://screenlife.com/*",
+        "*://player.screenlife.com/*",
+        "*://stage.screenlife.com/*",
+        "*://stage.player.screenlife.com/*",
+        "*://srplatform.chisw.us/*",
+        "*://130.211.216.229/*",
+        "*://records.preprod.screenlife.com/*",
+        "*://records.screenlife.com/*",
+        "*://stage.webeditor.screenlife.com/*",
+        "*://editor.screenlife.com/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "src/auth.js",
+        "src/syncIndexedDB.js"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "src/BrowserEventsEmitter.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "tabCapture",
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "webNavigation",
+    "http://*/*",
+    "https://*/*",
+    "nativeMessaging",
+    "tabs",
+    "notifications",
+    "<all_urls>",
+    "unlimitedStorage",
+    "system.cpu",
+    "system.memory"
+  ],
+  "icons": {
+    "16": "images/logo.png",
+    "48": "images/logo.png",
+    "128": "images/logo.png"
+  },
+  "content_security_policy": "connect-src * data: blob: filesystem:;script-src 'self' 'sha256-ukAONOF1WGQmkyD+pqDoutAUdtMZQEsFc+gEbJ9rarE=' 'sha256-ysNvUHH9PZ/jOcWhs0qx47U4WxiqRG6eHbicbbApsIs=' https://tagmanager.google.com https://www.googletagmanager.com https://ssl.google-analytics.com https://www.google-analytics.com https://connect.facebook.net 'unsafe-eval'; object-src 'self'",
+  "browser_action": {
+    "default_icon": "images/html-extension-icon-default-blue.png",
+    "default_popup": "src/pages/popup/popup.html",
+    "default_title": "Record Browser Session"
+  },
+  "commands": {
+    "start-stop-recording": {
+      "suggested_key": {
+        "default": "Alt+Shift+R"
+      },
+      "description": "Start/Stop Recording"
+    }
+  },
+  "incognito": "not_allowed"
+}

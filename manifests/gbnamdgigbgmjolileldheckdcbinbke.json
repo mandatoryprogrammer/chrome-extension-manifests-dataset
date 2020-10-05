@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Burner for Chrome",
+  "version": "2.0.5",
+  "description": "Burner for Chrome allows Burner customers to use their Burner number on the web.",
+  "author": "Ad Hoc Labs",
+  "browser_action": {
+    "default_icon": "burner_logo.png",
+    "default_title": "Burner for Chrome",
+    "default_popup": "./index.html"
+  },
+  "background": {
+    "scripts": [
+      "async-tracking.js",
+      "background-ga.js",
+      "constants.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "jquery-3.4.1.slim.min.js",
+        "constants.js",
+        "content-script.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    "burner-popup.html"
+  ],
+  "icons": {
+    "16": "Burner-Logo-16.png",
+    "32": "Burner-Logo-32.png",
+    "48": "Burner-Logo-48.png",
+    "128": "Burner-Logo-128.png"
+  },
+  "permissions": [
+    "storage",
+    "https://*.burnerapp.com/*",
+    "contextMenus",
+    "activeTab",
+    "background",
+    "tabs",
+    "clipboardRead"
+  ],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+B",
+        "mac": "MacCtrl+Shift+B"
+      },
+      "description": "Opens index.html"
+    }
+  },
+  "content_security_policy": "script-src 'self' https://ajax.googleapis.com https://www.google-analytics.com https://sentry.io 'sha256-S2sQkRPCMSDd3CSvzkbzBnLkiAChqAYzAQOdG0qQzR0=' 'sha256-5As4+3YpY62+l38PsxCEkjB1R4YtyktBtRScTJ3fyLU=' 'sha256-eQph3Q5sUt0Ew5g1vrDyjwudbY79jnY3jRMj0zUPEUU=' 'sha256-MN/cEbX2Ph2w7oNNWRDeUwG7Xt8rxMaeQ+4hzdB6VzM=' 'sha256-xAMUtS1BMO3PxpLrJdxPOWH2Hw6J5kiUKEyFovXqF34='; object-src 'self'"
+}

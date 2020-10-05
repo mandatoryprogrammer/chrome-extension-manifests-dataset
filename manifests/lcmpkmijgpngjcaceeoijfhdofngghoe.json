@@ -1,0 +1,69 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_extName__",
+  "short_name": "__MSG_extShort__",
+  "description": "__MSG_extDescription__",
+  "version": "0.1.2",
+  "manifest_version": 2,
+  "default_locale": "ja",
+  "homepage_url": "http://imagict.com/",
+  "author": "Takafumi Yamano",
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "icons": {
+    "128": "images/imagict-icon-128.png",
+    "16": "images/imagict-icon-16.png",
+    "32": "images/imagict-icon-32.png",
+    "48": "images/imagict-icon-48.png"
+  },
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "storage",
+    "tts"
+  ],
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "vendor/js/underscore.js",
+      "vendor/js/lemmatizer.js",
+      "js/analytics.js",
+      "js/default.js",
+      "js/background.js",
+      "js/lemmatizer.js",
+      "js/lookup.js",
+      "js/dictionary.js"
+    ]
+  },
+  "options_page": "html/options.html",
+  "browser_action": {
+    "default_icon": "images/imagict-icon.png",
+    "default_popup": "html/options.html",
+    "default_title": "__MSG_extName__"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "http://imagict.com/*",
+        "https://imagict.com/*",
+        "http://localhost:3000/*"
+      ],
+      "css": [
+        "css/custom.css"
+      ],
+      "js": [
+        "vendor/js/jquery.js",
+        "vendor/js/underscore.js",
+        "js/default.js",
+        "js/content_script.js",
+        "js/position.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    }
+  ]
+}

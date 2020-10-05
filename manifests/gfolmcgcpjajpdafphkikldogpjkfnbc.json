@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Wealthbox CRM for Chrome",
+  "short_name": "Wealthbox",
+  "version": "1.0.47",
+  "manifest_version": 2,
+  "description": "Wealthbox CRM for Financial Advisors",
+  "homepage_url": "http://www.wealthbox.com",
+  "icons": {
+    "16": "icons/wealthbox.png",
+    "48": "icons/wealthbox.png",
+    "128": "icons/wealthbox.png"
+  },
+  "default_locale": "en",
+  "options_ui": {
+    "page": "src/options/index.html",
+    "chrome_style": true
+  },
+  "permissions": [
+    "storage",
+    "*://mail.google.com/*",
+    "*://outlook.office365.com/*",
+    "*://outlook.office.com/*"
+  ],
+  "background": {
+    "scripts": [
+      "src/background/index.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://mail.google.com/*",
+        "*://outlook.office365.com/*",
+        "*://outlook.office.com/*"
+      ],
+      "css": [
+        "src/inject/app.css"
+      ],
+      "js": [
+        "src/inject/app.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "src/inject/injected-scripts/*",
+    "icons/*"
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "ACF Thinks",
+  "version": "0.94",
+  "short_name": "ACF Thinks",
+  "description": "A place where ACFers can write their thoughts",
+  "icons": {
+    "16": "assets/icons/icon16.png",
+    "48": "assets/icons/icon48.png",
+    "128": "assets/icons/icon128.png"
+  },
+  "author": "Paul Chun",
+  "homepage_url": "http://acfpcc.org",
+  "web_accessible_resources": [
+    "assets/images/*",
+    "assets/fonts/*",
+    "templates/*",
+    "messages/*"
+  ],
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_title": "ACF Thinks"
+  },
+  "permissions": [
+    "background",
+    "storage",
+    "tabs",
+    "activeTab",
+    "*://*/*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.facebook.com/*",
+        "https://www.facebook.com/*",
+        "http://web.facebook.com/*",
+        "https://web.facebook.com/*",
+        "http://www.youtube.com/*",
+        "https://www.youtube.com/*"
+      ],
+      "js": [
+        "scripts/init.js",
+        "scripts/inject.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

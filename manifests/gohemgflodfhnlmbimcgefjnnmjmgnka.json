@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Profitario - AliExpress Invoices For Free",
+  "short_name": "Profitario",
+  "version": "0.2.3.3",
+  "description": "This extension allows you to import orders directly from AliExpress into Profitario.",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://trade.aliexpress.com/orderList.htm*",
+        "https://trade.aliexpress.com/orderList.htm*",
+        "http://trade.aliexpress.com/order_list.htm*",
+        "https://trade.aliexpress.com/order_list.htm*",
+        "http://trade1.aliexpress.com/orderList.htm*",
+        "https://trade1.aliexpress.com/orderList.htm*",
+        "http://trade1.aliexpress.com/order_list.htm*",
+        "https://trade1.aliexpress.com/order_list.htm*"
+      ],
+      "js": [
+        "util/jquery.js",
+        "util/toastr.min.js",
+        "content/content.js"
+      ],
+      "css": [
+        "content/styles.css",
+        "util/toastr.min.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://app.profitario.com/*"
+      ],
+      "js": [
+        "util/jquery.js",
+        "content/contentIntegration.js"
+      ],
+      "css": [
+        "content/styles.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "icons": {
+    "256": "images/icon.png"
+  },
+  "page_action": {
+    "default_icon": "images/icon.png"
+  },
+  "background": {
+    "scripts": [
+      "util/jquery.js",
+      "util/Scrapper.js",
+      "background/background.js"
+    ]
+  },
+  "permissions": [
+    "storage",
+    "tabs"
+  ]
+}

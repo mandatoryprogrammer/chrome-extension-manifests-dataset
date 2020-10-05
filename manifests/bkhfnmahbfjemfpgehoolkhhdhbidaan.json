@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Loadster Recorder",
+  "description": "Create test scripts to run in Loadster and Speedway.",
+  "version": "12",
+  "icons": {
+    "16": "images/icon-16x16.png",
+    "32": "images/icon-32x32.png",
+    "48": "images/icon-48x48.png",
+    "128": "images/icon-128x128.png",
+    "256": "images/icon-256x256.png"
+  },
+  "browser_action": {
+    "default_icon": "images/icon-32x32.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "js/browser-polyfill.min.js",
+      "js/constants.js",
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://localhost/*",
+        "https://loadster.app/*",
+        "https://speedway.app/*"
+      ],
+      "js": [
+        "js/browser-polyfill.min.js",
+        "js/content.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "js/browser-polyfill.min.js",
+        "js/finder.js",
+        "js/constants.js",
+        "js/blinker.js",
+        "js/windowEventRecorder.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "webNavigation",
+    "*://*/*"
+  ]
+}

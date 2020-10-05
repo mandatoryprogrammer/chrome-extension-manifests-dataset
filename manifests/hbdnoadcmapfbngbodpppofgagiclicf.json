@@ -1,0 +1,68 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "SnipCSS",
+  "version": "1.0",
+  "description": "Extract the CSS/HTML for any element on any page, only take the styles you want",
+  "icons": {
+    "16": "img/snipcss-16x16.png",
+    "48": "img/snipcss-48x48.png",
+    "128": "img/snipcss-128x128.png"
+  },
+  "browser_action": {
+    "default_icon": "img/snip_kiwi_small_css3.png",
+    "default_popup": "popup.html",
+    "default_title": "SnipCSS"
+  },
+  "background": {
+    "scripts": [
+      "js/jquery-3.3.1.min.js",
+      "js/uri.all.js",
+      "js/css.min.js",
+      "snipbackground.js"
+    ]
+  },
+  "options_page": "options.html",
+  "permissions": [
+    "https://www.snipcss.com/",
+    "debugger",
+    "activeTab"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [
+        "css/snipcss_styles.css",
+        "css/tether.css",
+        "css/tether-theme-basic.css"
+      ],
+      "js": [
+        "js/jquery-3.3.1.min.js",
+        "js/mustache.js",
+        "js/tether.min.js",
+        "js/sniptools.js",
+        "js/kiwi_walker.js",
+        "js/selectionBox.js",
+        "js/selectElemListeners.js",
+        "js/uri.all.min.js",
+        "contentscript.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "externally_connectable": {
+    "matches": [
+      "*://*.snipcss.com/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "templates/*",
+    "css/*",
+    "site/*",
+    "img/*",
+    "sound/*",
+    "js/*"
+  ]
+}

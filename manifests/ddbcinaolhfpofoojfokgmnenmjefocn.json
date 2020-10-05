@@ -1,0 +1,101 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Uniq extension",
+  "description": "Extends the Uniq on your Mac or Windows PC, so you can quick dial phone numbers across partner platforms and much more.",
+  "version": "1.0.14",
+  "manifest_version": 2,
+  "author": "Uniq",
+  "permissions": [
+    "activeTab",
+    "background",
+    "tabs",
+    "declarativeContent",
+    "contextMenus",
+    "storage",
+    "contentSettings",
+    "notifications",
+    "https://api.uniq.app/",
+    "https://*.pipedrive.com/*",
+    "https://*.force.com/*",
+    "https://*.hubspot.com/*"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "pluginPipedrive.js"
+      ],
+      "run_at": "document_end",
+      "matches": [
+        "https://*.pipedrive.com/*"
+      ],
+      "all_frames": true
+    },
+    {
+      "js": [
+        "pluginSalesforce.js"
+      ],
+      "run_at": "document_end",
+      "matches": [
+        "https://*.force.com/*"
+      ],
+      "all_frames": true
+    },
+    {
+      "js": [
+        "pluginHubspot.js"
+      ],
+      "run_at": "document_end",
+      "matches": [
+        "https://*.hubspot.com/*"
+      ],
+      "all_frames": true
+    }
+  ],
+  "omnibox": {
+    "keyword": "call"
+  },
+  "commands": {
+    "_call": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+C",
+        "mac": "MacCtrl+Shift+C"
+      },
+      "description": "Call selected number"
+    }
+  },
+  "web_accessible_resources": [
+    "icon/icon16.png",
+    "icon/icon32.png"
+  ],
+  "browser_action": {
+    "default_title": "Uniq extension",
+    "default_icon": {
+      "16": "icon/icon16.png",
+      "32": "icon/icon32.png",
+      "48": "icon/icon48.png",
+      "64": "icon/icon64.png",
+      "128": "icon/icon128.png"
+    }
+  },
+  "externally_connectable": {
+    "matches": [
+      "https://*.uniq.app/*",
+      "https://*.pipedrive.com/*",
+      "https://*.hubspot.com/*",
+      "https://*.force.com/*"
+    ]
+  },
+  "icons": {
+    "16": "icon/icon16.png",
+    "32": "icon/icon32.png",
+    "48": "icon/icon48.png",
+    "64": "icon/icon64.png",
+    "128": "icon/icon128.png"
+  }
+}

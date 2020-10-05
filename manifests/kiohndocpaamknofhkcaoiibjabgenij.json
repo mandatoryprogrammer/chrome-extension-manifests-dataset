@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "version": "0.9.0",
+  "manifest_version": 2,
+  "description": "__MSG_appDescription__",
+  "icons": {
+    "16": "images/icon-16.png",
+    "48": "images/icon-48.png",
+    "64": "images/icon-64.png",
+    "128": "images/icon-128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "scripts/background/main.js"
+    ]
+  },
+  "permissions": [
+    "webRequest",
+    "https://www.googleapis.com/analytics/v3/data/ga",
+    "https://content.googleapis.com/analytics/v3/data/ga"
+  ],
+  "sandbox": {
+    "pages": [
+      "chart.html"
+    ],
+    "content_security_policy": "sandbox allow-scripts; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.google.com/jsapi https://www.google.com/uds/"
+  },
+  "web_accessible_resources": [
+    "chart.html"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://ga-dev-tools.appspot.com/query-explorer/*"
+      ],
+      "js": [
+        "lib/jquery.min.js",
+        "scripts/contentscript/main.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ]
+}

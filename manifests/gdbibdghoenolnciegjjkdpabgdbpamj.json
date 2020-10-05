@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Custom pagedown & pageup",
+  "version": "1.0",
+  "manifest_version": 2,
+  "description": "Customize the amount scrolled by your pagedown and pageup keys.",
+  "homepage_url": "https://nicksulkers.nl",
+  "icons": {
+    "16": "icons/icon16.png",
+    "19": "icons/icon19.png",
+    "48": "icons/icon48.png",
+    "64": "icons/icon128.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": false
+  },
+  "options_page": "src/options_custom/index.html",
+  "permissions": [
+    "storage",
+    "<all_urls>"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/jquery/jquery.js",
+        "src/inject/all.js"
+      ],
+      "run_at": "document_start",
+      "match_about_blank": true,
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://docs.google.com/*"
+      ],
+      "js": [
+        "js/jquery/jquery.js",
+        "src/inject/gdocs.js"
+      ],
+      "run_at": "document_start",
+      "match_about_blank": true,
+      "all_frames": true
+    }
+  ]
+}

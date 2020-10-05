@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_extName__",
+  "version": "1.0.0",
+  "description": "__MSG_extDesc__",
+  "short_name": "Hyperise",
+  "default_locale": "en",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "page": "pages/bg.html"
+  },
+  "options_page": "pages/options.html",
+  "permissions": [
+    "https://*/*",
+    "http://*/*",
+    "identity",
+    "tabs",
+    "contextMenus",
+    "storage",
+    "declarativeContent"
+  ],
+  "oauth2": {
+    "client_id": "142776734562-mtqo7pf9nk2mtr5kse0p19sg5ccsab8n.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/drive"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://mail.google.com/*",
+        "*://inbox.google.com/*"
+      ],
+      "js": [
+        "pages/jquery-1.11.0.min.js",
+        "content/js/content.js",
+        "pages/sweetalert.min.js",
+        "pages/form_validation.js"
+      ],
+      "css": [
+        "content/css/content.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "pages/bg.html",
+    "pages/options.html",
+    "pages/content.html"
+  ],
+  "browser_action": {
+    "default_title": "Hyperise",
+    "default_icon": {
+      "19": "icons/icon19.png",
+      "38": "icons/icon38.png"
+    }
+  },
+  "content_security_policy": "script-src 'self' https://apis.google.com https://www-onepick-opensocial.googleusercontent.com https://d24n15hnbwhuhn.cloudfront.net https://checkout.stripe.com/checkout.js https://js.stripe.com/v3/; object-src 'self'"
+}

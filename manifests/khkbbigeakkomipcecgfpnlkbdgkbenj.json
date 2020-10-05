@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "PageRank by MoonSearch",
+  "version": "2.3",
+  "icons": {
+    "48": "images/48.png",
+    "128": "images/128.png"
+  },
+  "background": {
+    "scripts": [
+      "moon-back.js",
+      "moon-background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "moon-content.js"
+      ],
+      "matches": [
+        "http://*/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "js": [
+        "moon-ext.js"
+      ],
+      "matches": [
+        "*://moonsearch.com/*",
+        "*://moonsearchtest.com/*"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "bookmarks",
+    "storage",
+    "http://*/",
+    "https://*/*"
+  ],
+  "browser_action": {
+    "default_title": "PageRank by MoonSearch",
+    "default_icon": {
+      "19": "images/19.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

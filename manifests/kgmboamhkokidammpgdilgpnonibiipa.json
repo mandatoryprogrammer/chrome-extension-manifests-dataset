@@ -1,0 +1,67 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Newstrition",
+  "description": "Nutrition Labels for News.",
+  "version": "2020.9.27.1",
+  "browser_action": {
+    "default_icon": "images/logo-32.png"
+  },
+  "icons": {
+    "128": "images/logo-128.png",
+    "64": "images/logo-64.png",
+    "32": "images/logo-32.png",
+    "16": "images/logo-16.png"
+  },
+  "background": {
+    "scripts": [
+      "assets/jquery.js",
+      "csp.js",
+      "record.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "assets/jquery.js",
+        "pagewarning.js"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "assets/jquery.js",
+        "content.js"
+      ],
+      "css": [
+        "assets/grid.css",
+        "assets/common.css"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "background",
+    "storage",
+    "activeTab",
+    "<all_urls>",
+    "webRequest",
+    "webRequestBlocking",
+    "management"
+  ],
+  "web_accessible_resources": [
+    "background",
+    "assets/*",
+    "images/*",
+    "pagelevel.js",
+    "content.html"
+  ]
+}

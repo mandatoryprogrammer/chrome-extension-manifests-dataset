@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "VADIMO",
+  "short_name": "VAD",
+  "version": "2.0.1",
+  "description": "The official VADIMO browser extension, includes showing notifications when VADIMO goes live.",
+  "icons": {
+    "64": "icons/64.png",
+    "128": "icons/128.png"
+  },
+  "permissions": [
+    "storage",
+    "notifications",
+    "background",
+    "http://*.youtube.com/",
+    "http://35.234.64.120:3000/",
+    "http://35.234.64.120/",
+    "https://twitchemotes.com/api_cache/v2/*.json",
+    "https://api.betterttv.net/2/emotes",
+    "https://api.betterttv.net/2/channels/*"
+  ],
+  "options_page": "options/options.html",
+  "options_ui": {
+    "page": "options/options.html"
+  },
+  "background": {
+    "scripts": [
+      "external/jquery.js",
+      "background.js"
+    ]
+  },
+  "manifest_version": 2,
+  "browser_action": {
+    "default_icon": "icons/128.png",
+    "default_title": "VADIMO",
+    "default_popup": "popup/popup.html"
+  },
+  "content_security_policy": "script-src 'self' https://*.twitter.com https://*.twimg.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "js": [
+        "external/jquery.js",
+        "content.js"
+      ],
+      "css": [
+        "external/hint.css",
+        "content.css"
+      ],
+      "run_at": "document_end",
+      "matches": [
+        "*://*.gaming.youtube.com/*",
+        "*://*.youtube.com/*"
+      ],
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "external/chat-colors.css",
+    "icons/*.png",
+    "icons/emotes/*.png",
+    "content.html"
+  ]
+}

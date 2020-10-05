@@ -1,0 +1,77 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_extName__",
+  "description": "__MSG_extDescription__",
+  "version": "0.1.13",
+  "default_locale": "en",
+  "browser_action": {
+    "default_icon": "icons/eyeWnderLogo128.png",
+    "default_popup": "src/browser_action/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "src/page_action/jquery.js",
+      "src/bg/localStorage.js",
+      "src/bg/database.js",
+      "src/bg/background_support.js",
+      "src/bg/background.js",
+      "src/bg/categorizer.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "src/page_action/cleanslate.css"
+      ],
+      "js": [
+        "src/page_action/jquery.js",
+        "src/page_action/html2canvas.js",
+        "src/lists/adDomains.js",
+        "src/lists/adSizes.js",
+        "src/lists/blacklist.js",
+        "src/lists/mainWindowBlackList.js",
+        "src/lists/plusList.js",
+        "src/lists/adSrcBlackList.js",
+        "src/lists/sureThing.js",
+        "src/lists/topLevelList.js",
+        "src/lists/landingPageKeysList.js",
+        "src/lists/scriptsBlacklistUrls.js",
+        "src/lists/social.js",
+        "src/page_action/ads_inject_support.js",
+        "src/page_action/iFrame/iFrames_support.js",
+        "src/page_action/iFrame/ad_detector_iframe.js",
+        "src/page_action/mainWindow/mainWindow_main.js",
+        "src/page_action/ads_inject_main.js"
+      ],
+      "all_frames": true,
+      "match_about_blank": true,
+      "run_at": "document_end"
+    }
+  ],
+  "icons": {
+    "128": "icons/eyeWnderLogo128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "notifications",
+    "tabs",
+    "storage",
+    "unlimitedStorage",
+    "history",
+    "webRequest",
+    "webRequestBlocking",
+    "*://*/*"
+  ],
+  "web_accessible_resources": [
+    "icons/adTypes/checked_ok.png",
+    "icons/adTypes/circle_green.png",
+    "icons/adTypes/checked_ok_orange.png",
+    "icons/adTypes/circle_orange.png"
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "CallShark Screensharing",
+  "description": "Screensharing utility for CallShark",
+  "version": "0.0.8",
+  "manifest_version": 2,
+  "minimum_chrome_version": "34",
+  "browser_action": {
+    "default_icon": "images/main-icon.png",
+    "default_title": "Record Your Screen, Tab or Camera",
+    "default_popup": "dropdown.html"
+  },
+  "icons": {
+    "16": "images/main-icon.png",
+    "22": "images/main-icon.png",
+    "32": "images/main-icon.png",
+    "48": "images/main-icon.png",
+    "128": "images/main-icon.png"
+  },
+  "permissions": [
+    "desktopCapture",
+    "storage",
+    "tabs",
+    "tabCapture",
+    "activeTab",
+    "identity",
+    "https://www.googleapis.com/*"
+  ],
+  "background": {
+    "scripts": [
+      "background/background.common.js",
+      "background/background.js",
+      "background/background.desktopCapture.js",
+      "background/background.tabCapture.js",
+      "background/background.badgeText.js",
+      "background/background.getUserMedia.js",
+      "background/background.messaging.js",
+      "background/background.players.js",
+      "RecordRTC/MediaStreamRecorder.js",
+      "RecordRTC/MultiStreamRecorder.js",
+      "RecordRTC/DiskStorage.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "content.js"
+      ],
+      "matches": [
+        "https://*.callshark.ru/*"
+      ]
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://*.callshark.ru/*"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://apis.google.com; object-src 'self'",
+  "web_accessible_resources": [
+    "images/main-icon.png"
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": false,
+    "open_in_tab": true
+  }
+}

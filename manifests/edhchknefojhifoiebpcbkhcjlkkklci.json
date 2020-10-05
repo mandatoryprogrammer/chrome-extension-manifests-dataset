@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "百度翻译：网页翻译、海淘神器",
+  "description": "百度翻译官方出品。支持27种语言的翻译，浏览外文网页时可一键网页翻译、双语对照查看、查询单词结果等。特别针对20+家海淘网站进行过翻译优化，让你的海淘过程更加得心应手。",
+  "version": "1.2.6",
+  "permissions": [
+    "*://*/*",
+    "activeTab",
+    "tabs",
+    "contextMenus",
+    "webRequest",
+    "webRequestBlocking",
+    "storage"
+  ],
+  "icons": {
+    "16": "imgs/map/icon16.png",
+    "48": "imgs/map/icon48.png",
+    "128": "imgs/map/icon128.png"
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyMpxI8rMOTPVkIdN6L3Qlbl+gDKx2rmmpTcwwPl0fqvp3Zlw2WPowsn1Yek5GAY7zu313zMAblOd1wPFY67oC4G96jigpWpaPNBKirinno/R1yH8V/XEjWm33ThMJYm2FB8IVXZgL1eaxJBwgjg9ASNzJXWLd6cxfrfMr/BGscCB6WnhTYuHO2jy4JP1uVTYmEVkyAf0ebFn+8JfXjRUpg77JMHu0o9rfI3h2GhoqcqeFNFH25JfPeCiBXoYoa66i0GoZ3MK7Yiz4eQSHTjLKAtHipkqx9MuH0Rs5quIStDQcK5aV06NG7jRXYZDL7HdUOdTWhVSql0Vc0dsrqd6eQIDAQAB",
+  "background": {
+    "page": "background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "exclude_matches": [
+        "https://www.taobao.com/*"
+      ],
+      "css": [
+        "css/trans-src.css",
+        "css/inject-bar.css"
+      ],
+      "js": [
+        "js/jquery-1.11.3.js",
+        "js/htmlparser.js",
+        "js/inject-bar.js",
+        "js/trans-lib.js",
+        "js/cs-main.js",
+        "js/trans-src.js",
+        "js/lookup.js",
+        "js/third_party/hm.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "browser_action": {
+    "default_title": "点击进行网页翻译或文字翻译",
+    "default_icon": {
+      "19": "imgs/map/icon19.png",
+      "38": "imgs/map/icon38.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://hm.baidu.com; object-src 'self'",
+  "web_accessible_resources": [
+    "imgs/map/*.png",
+    "imgs/map/sound.gif"
+  ],
+  "manifest_version": 2
+}

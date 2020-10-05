@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "SeekAssist",
+  "description": "Take your online research to the next level",
+  "version": "1.8",
+  "browser_action": {
+    "default_icon": "assets/images/logo/logo_48.png",
+    "default_popup": "popup.html",
+    "default_title": "SeekAssist"
+  },
+  "icons": {
+    "48": "assets/images/logo/logo_48.png",
+    "128": "assets/images/logo/logo_128.png"
+  },
+  "permissions": [
+    "https://www.google.com/*",
+    "https://www.bing.com/*",
+    "file:///Users/mac/Projects/SearchTool/google.com.htm",
+    "storage"
+  ],
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "vendor/js/jquery.min.js",
+      "assets/js/background_run.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "vendor/js/pluralize.js",
+        "vendor/js/jquery.min.js",
+        "content/parseKeywords.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.google.com/*",
+        "https://www.bing.com/*",
+        "file:///Users/mac/Projects/SearchTool/google.com.htm"
+      ],
+      "js": [
+        "vendor/js/jquery.min.js",
+        "content/searchPage.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "assets/content/content.html",
+    "assets/images/logo/logo_128.png"
+  ]
+}

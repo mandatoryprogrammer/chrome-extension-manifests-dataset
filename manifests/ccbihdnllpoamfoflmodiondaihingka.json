@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "GmailTimer",
+  "description": "An effortless way to keep track of how much time you spend sending and reading emails",
+  "version": "1.6",
+  "manifest_version": 2,
+  "icons": {
+    "16": "img/logo16.png",
+    "48": "img/logo48.png",
+    "128": "img/logo128.png"
+  },
+  "browser_action": {
+    "default_icon": "img/logo48.png",
+    "default_title": "GmailTimer Logs"
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*"
+      ],
+      "js": [
+        "js/inboxsdk.js",
+        "js/content.js"
+      ],
+      "css": [
+        "css/content.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "*://*.google.com/*",
+    "tabs",
+    "storage"
+  ],
+  "web_accessible_resources": [
+    "partials/timerTemplate.html"
+  ]
+}

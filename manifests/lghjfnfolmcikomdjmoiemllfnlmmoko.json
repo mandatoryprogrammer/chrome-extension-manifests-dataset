@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "InvisibleHand",
+  "short_name": "InvisibleHand",
+  "version": "11.39",
+  "description": "Automatically get the lowest price on whatever you’re buying.",
+  "permissions": [
+    "http://*/",
+    "https://*/",
+    "tabs",
+    "webRequest",
+    "storage",
+    "alarms",
+    "cookies"
+  ],
+  "background": {
+    "scripts": [
+      "vendor/lodash.min.js",
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "js": [
+        "vendor/jquery.min.js",
+        "vendor/lodash.min.js",
+        "js/autocoupons.js",
+        "js/main.js",
+        "js/autoapplycoupons.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "html/popup.html",
+    "css/popup.css",
+    "vendor/clamp.min.js",
+    "js/popup.js",
+    "fonts/*",
+    "images/*",
+    "html/*",
+    "js/*",
+    "css/*",
+    "vendor/*"
+  ],
+  "browser_action": {
+    "default_icon": "images/ih_logo.png",
+    "default_title": "InvisibleHand"
+  },
+  "icons": {
+    "16": "images/ih_logo.png",
+    "48": "images/ih_logo.png",
+    "128": "images/ih_logo.png"
+  },
+  "options_ui": {
+    "page": "html/options.html"
+  }
+}

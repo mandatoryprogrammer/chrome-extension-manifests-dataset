@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Sharebird",
+  "version": "2.6.4.2",
+  "options_page": "options.html",
+  "icons": {
+    "128": "resources/images/icon_128x128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://*.sharebird.com/*"
+      ],
+      "js": [
+        "resources/scripts/inboxsdk.js",
+        "resources/scripts/loader.js",
+        "resources/scripts/plugin.js",
+        "resources/scripts/isInstall.js"
+      ],
+      "css": [
+        "resources/style/plugin.css"
+      ],
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "page": "background.html"
+  },
+  "permissions": [
+    "notifications",
+    "gcm",
+    "tabs",
+    "activeTab",
+    "webRequest",
+    "webRequestBlocking",
+    "storage",
+    "https://*.sharebird.com/*",
+    "*://*.googleusercontent.com/*",
+    "*://*.google.com/*"
+  ],
+  "content_security_policy": "script-src 'self' https://app.sharebird.com; object-src 'self'; frame-src 'self' https://app.sharebird.com",
+  "browser_action": {
+    "default_title": "Sharebird",
+    "default_icon": "resources/images/icon_32x32.png",
+    "default_popup": "popup.html"
+  },
+  "externally_connectable": {
+    "matches": [
+      "https://*.sharebird.com/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "resources/images/icon_32x32.png",
+    "resources/images/full_screen.png",
+    "resources/images/preview.png",
+    "resources/images/google_expand.png",
+    "resources/images/logotype-icon.png",
+    "resources/images/logotype-txt.png",
+    "resources/images/notofication_icon.png",
+    "resources/images/checked.png",
+    "resources/images/not_checked.png",
+    "resources/images/search.png"
+  ]
+}

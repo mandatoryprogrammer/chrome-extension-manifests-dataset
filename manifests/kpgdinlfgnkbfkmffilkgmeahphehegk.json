@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Stash Extension",
+  "description": "Allow to add group of reviewers for pull request in stash + other features",
+  "version": "1.6.6",
+  "permissions": [
+    "storage",
+    "alarms",
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "icons": {
+    "16": "img/stash19.png",
+    "48": "img/stash48.png",
+    "128": "img/stash148.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "img/stash48.png",
+      "38": "img/stash48.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "js/jquery.min.js",
+        "js/storage.js",
+        "js/injector_loader.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/jquery.min.js",
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "web_accessible_resources": [
+    "js/stash_page.js",
+    "js/stash_detector.js",
+    "css/page_injection.css",
+    "js/default.json",
+    "js/template.txt",
+    "img/stash128.png"
+  ],
+  "options_ui": {
+    "page": "popup.html"
+  },
+  "applications": {
+    "gecko": {
+      "id": "stash@dragouf.org",
+      "strict_min_version": "48.0"
+    }
+  }
+}

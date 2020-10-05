@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "TeleApp: push App Store links to your iPhone",
+  "short_name": "TeleApp",
+  "description": "TeleApp adds a handy 'Push to iPhone' button on any iOS App Store link, so you can push the app directly to your iPhone.",
+  "version": "1.6",
+  "background": {
+    "scripts": [
+      "background/ganalytics.js",
+      "shared/parser.js",
+      "background/pushservice.js",
+      "background/background.js"
+    ]
+  },
+  "icons": {
+    "128": "icon-128.png"
+  },
+  "page_action": {
+    "default_icon": "icon-76.png",
+    "default_popup": "popup/popup.html",
+    "default_title": "Show TeleApp options for this page"
+  },
+  "permissions": [
+    "http://teleapp.herokuapp.com/",
+    "http://localhost/",
+    "https://itunes.apple.com/",
+    "tabs",
+    "storage"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "css": [
+        "content/bootstrap.css"
+      ],
+      "js": [
+        "content/jquery-2.0.3.js",
+        "content/bootstrap.js",
+        "shared/parser.js",
+        "content/content.js"
+      ]
+    }
+  ]
+}

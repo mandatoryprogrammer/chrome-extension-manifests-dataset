@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Salesforce.com Developer Console Extension",
+  "short_name": "SFDC DC Extension",
+  "version": "0.1.1",
+  "default_locale": "en",
+  "description": "__MSG_ManifestDescription__",
+  "icons": {
+    "256": "img/256_cloud-check.png",
+    "128": "img/128_cloud-check.png",
+    "64": "img/64_cloud-check.png",
+    "32": "img/32_cloud-check.png",
+    "24": "img/24_cloud-check.png",
+    "16": "img/16_cloud-check.png"
+  },
+  "browser_action": {
+    "default_title": "SFDC DC Extension",
+    "default_icon": "/img/16_cloud-check.png",
+    "default_popup": "popup.html"
+  },
+  "author": "Radek Baxa",
+  "options_page": "options.html",
+  "options_ui": {
+    "chrome_style": false,
+    "page": "options.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/_ui/common/apex/debug/ApexCSIPage*"
+      ],
+      "js": [
+        "jquery-1.11.3.min.js",
+        "sfdcdc-content-script.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "img/*.png",
+    "dev-console-goto-actions.js",
+    "prevent-default-back-forward-actions.js"
+  ],
+  "permissions": [
+    "tabs",
+    "storage",
+    "https://*/_ui/common/apex/debug/ApexCSIPage*"
+  ]
+}

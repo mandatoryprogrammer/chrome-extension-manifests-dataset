@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "SaltBot",
+  "description": "This extension automates betting on SaltyBet.com.",
+  "version": "2.6.2",
+  "permissions": [
+    "storage",
+    "unlimitedStorage",
+    "tabs",
+    "alarms"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.saltybet.com/",
+        "https://*.saltybet.com/"
+      ],
+      "js": [
+        "js/lib/FileSaver.min.js",
+        "js/lib/jquery.min.js",
+        "js/lib/jquery-ui.min.js",
+        "js/lib/moment.min.js",
+        "js/contentscript.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://www.twitch.tv/saltybet/chat",
+        "https://www.twitch.tv/saltybet/chat",
+        "https://www.twitch.tv/popout/saltybet/chat"
+      ],
+      "js": [
+        "js/lib/jquery.min.js",
+        "js/lib/moment.min.js",
+        "js/chat.js"
+      ]
+    }
+  ],
+  "background": {
+    "persistent": false,
+    "page": "background.html"
+  },
+  "page_action": {
+    "default_icon": "images/32.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "images/16.png",
+    "48": "images/48.png",
+    "128": "images/128.png"
+  },
+  "web_accessible_resources": [
+    "images/ui-icons*.png",
+    "css/jquery-ui.css"
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Boomerang for Gmail",
+  "version": "1.2.8",
+  "description": "The ultimate email productivity tool. Send later, track responses, and use AI to write better emails.",
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "management",
+    "activeTab"
+  ],
+  "manifest_version": 2,
+  "icons": {
+    "16": "b4g_16.png",
+    "48": "b4g_48.png",
+    "128": "b4g_128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://mail.google.com/*",
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "uninstall_old.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://mail.google.com/*",
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "b4g.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "b4g_19.png",
+      "38": "b4g_38.png"
+    },
+    "default_popup": "popup.html",
+    "default_title": "Boomerang - Send this page later"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

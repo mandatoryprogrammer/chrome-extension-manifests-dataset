@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "MailStopper link for Gmail",
+  "description": "A Gmail extension to add 'unsubscribe' links to any email and share the list of unsubscribes within your team.",
+  "version": "1.0",
+  "icons": {
+    "16": "images/icon/16x16/logo-black.png",
+    "48": "images/icon/48x48/logo-black.png",
+    "64": "images/icon/64x64/logo-black.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*",
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*"
+      ],
+      "js": [
+        "j.js",
+        "inboxsdk.js",
+        "content.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://app.mailstopper.com/*"
+      ],
+      "js": [
+        "/extract-api-key.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "inboxsdk.js",
+    "images/*",
+    "j.js",
+    "content.js"
+  ],
+  "permissions": [
+    "https://mail.google.com/",
+    "https://inbox.google.com/",
+    "contextMenus",
+    "tabs",
+    "*://*/*",
+    "storage",
+    "<all_urls>",
+    "<all_urls>",
+    "cookies",
+    "clipboardWrite",
+    "clipboardRead",
+    "unlimitedStorage"
+  ],
+  "manifest_version": 2
+}

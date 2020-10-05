@@ -1,0 +1,111 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "OU Tools",
+  "description": "베스트리플, 짤 선택, 글 임시저장, 오유 북마크, 오유 단축키, 일베차단, 회원메모, IP 차단, 브금끄기, 오유 더블클릭기능 토글, 당첨자뽑기 등",
+  "version": "2.3.7",
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon19.png",
+      "38": "images/icon38.png"
+    },
+    "default_title": "OU Tools",
+    "default_popup": "popup/popup.html"
+  },
+  "options_page": "options/options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.todayhumor.co.kr/board/view.php*"
+      ],
+      "js": [
+        "jquery.js",
+        "/functions/reset_jjals.js",
+        "contents/view.js"
+      ],
+      "css": [
+        "contents/view.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://*.todayhumor.co.kr/board/list.php*"
+      ],
+      "js": [
+        "jquery.js",
+        "contents/list.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://*.todayhumor.co.kr/board/write.php*",
+        "http://*.todayhumor.co.kr/board/modify.php*"
+      ],
+      "js": [
+        "jquery.js",
+        "contents/write.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://*.todayhumor.co.kr/*"
+      ],
+      "js": [
+        "jquery.js",
+        "contents/all.js"
+      ],
+      "css": [
+        "contents/all.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://*.ilbe.com/*"
+      ],
+      "js": [
+        "jquery.js",
+        "contents/ilbe.js"
+      ],
+      "css": [
+        "contents/ilbe.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "jquery.js",
+        "contents/every_website.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "jquery.js",
+      "/functions/reset_jjals.js",
+      "background.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "images/xbutton.png"
+  ],
+  "permissions": [
+    "*://*/*",
+    "storage",
+    "contextMenus",
+    "tabs"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

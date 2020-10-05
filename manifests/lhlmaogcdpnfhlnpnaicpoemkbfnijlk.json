@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Tap My Back for Chrome",
+  "short_name": "TMB - Chrome",
+  "version": "1.3",
+  "description": "Share Taps & Feedback, see notifications and have immediate access to your profile with our Chrome extension integrated with Gmail.",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "declarativeContent",
+    "storage",
+    "https://*.tapmyback.com/",
+    "https://tapmyback.com/",
+    "https://www.tapmyback.com/"
+  ],
+  "background": {
+    "scripts": [
+      "background.js",
+      "tapmyback_token.js",
+      "browsernotifications.js",
+      "ajax.js",
+      "analytics.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "images/icon-16x16.png",
+      "32": "images/icon-32x32.png",
+      "48": "images/icon-48x48.png",
+      "128": "images/icon-128x128.png"
+    }
+  },
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "icons": {
+    "16": "images/icon-16x16.png",
+    "32": "images/icon-32x32.png",
+    "48": "images/icon-48x48.png",
+    "128": "images/icon-128x128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/mail/u*"
+      ],
+      "js": [
+        "gmail_interaction/content_script.js",
+        "ajax.js",
+        "event_manager.js",
+        "tapmyback_token.js",
+        "analytics.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "gmail_interaction/template.html",
+    "images/icon-32x32.png"
+  ],
+  "manifest_version": 2
+}

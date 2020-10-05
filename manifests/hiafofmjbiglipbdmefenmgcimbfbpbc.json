@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "BBBI - Better Bitbucket Issues",
+  "version": "0.0.16",
+  "manifest_version": 2,
+  "description": "Improves Bitbucket issues. CSS fixes and quick access to issues from list",
+  "homepage_url": "https://github.com/acutmore/bbbi",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "js/requirejs/require.js",
+      "src/bg/main.js"
+    ],
+    "persistent": false
+  },
+  "options_page": "src/options_custom/index.html",
+  "permissions": [
+    "https://bitbucket.org/*",
+    "https://api.bitbucket.org/*",
+    "https://positiveanalogue.com/bbbi/*",
+    "identity"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://bitbucket.org/*/*/issues",
+        "https://bitbucket.org/*/*/issues?*"
+      ],
+      "css": [
+        "src/inject/inject.css"
+      ],
+      "js": [
+        "js/jquery/jquery.min.js",
+        "js/easyModal/jquery.easyModal.js",
+        "src/inject/requests.js",
+        "src/inject/issues_list.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://bitbucket.org/*/*/issues/new",
+        "https://bitbucket.org/*/*/issues/new?",
+        "https://bitbucket.org/*/*/issues/edit/*"
+      ],
+      "js": [
+        "js/jquery/jquery.min.js",
+        "src/inject/new_issue.js"
+      ]
+    }
+  ],
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAndUKTxTjNw+qLLRgaE59bhBdk126ZVA37TcLgy2mv+b+xpFiZjQs2SUpOdIL+bVbScz6wwCbNZYprn1SSjnUtP6K/tNLT1JSe+83+9pMBPvYl+1XSA8mAMbmnNgyucsZ9j1mB1A7f58d6mdGYTliF+rA56bpq4K+3QvulaVdqTpCG+V4vPuLQNfrCluEwLRtAD9S23rSZ0dHLXlGv/IKO5KpWlmWEQ6ytoSYXqIXrWb5vNaD23+nESAAdTwHZt3WM7WZAdOTtJEuD39sKu59R15VYhDhVPBLHVoWcy+KPOLjMa84UQRuGu5EnzCNsnW2AerEW6AJsFWJY0qPrbTMTQIDAQAB"
+}

@@ -1,0 +1,37 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "WishGenie for Cancer Research UK",
+  "manifest_version": 2,
+  "version": "1.26",
+  "description": "Donate to charity for free every time you shop online",
+  "icons": {
+    "48": "html/images/wg-icon-48.png"
+  },
+  "background": {
+    "page": "global.html"
+  },
+  "permissions": [
+    "webNavigation",
+    "webRequest",
+    "tabs",
+    "<all_urls>",
+    "cookies"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "web_accessible_resources": [
+    "html/*/*.*",
+    "html/*.*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "inject_content.js",
+        "content.adapter.js"
+      ]
+    }
+  ]
+}

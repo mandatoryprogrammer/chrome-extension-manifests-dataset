@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Subject7 Smart XPath",
+  "short_name": "Subject7",
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "description": "Gutenberg Smart XPath, by Subject7",
+  "browser_action": {
+    "default_title": "Click to enable Gutenberg",
+    "default_icon": "img/app-disabled.png"
+  },
+  "icons": {
+    "16": "img/app-icon16x16.png",
+    "48": "img/app-icon48x48.png",
+    "128": "img/app-icon128x128.png"
+  },
+  "options_page": "options.html",
+  "background": {
+    "scripts": [
+      "js/utils.js",
+      "js/background.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "notifications",
+    "storage",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file://*/*"
+      ],
+      "js": [
+        "js/jquery-3.2.1.min.js",
+        "js/utils.js",
+        "js/smartXpathEngine.js",
+        "js/smartXpathEngine2.js",
+        "js/locator_explorer.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "offline_enabled": true,
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "web_accessible_resources": [
+    "templates/*"
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Splyt",
+  "version": "0.0.8",
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "description": "the best experience for discovering, sharing and listening to web-hosted music in the browser",
+  "homepage_url": "http://splytmusic.io",
+  "icons": {
+    "16": "icons/buds.png",
+    "48": "icons/buds.png",
+    "128": "icons/buds.png"
+  },
+  "commands": {
+    "toggleMusic": {
+      "suggested_key": {
+        "default": "Alt+P",
+        "mac": "Alt+P"
+      },
+      "description": "Pause and play music in the web app."
+    }
+  },
+  "default_locale": "en",
+  "background": {
+    "page": "src/bg/background.html",
+    "persistent": true
+  },
+  "options_page": "src/options_custom/index.html",
+  "browser_action": {
+    "default_icon": "icons/ba_buds.png",
+    "default_title": "Splyt",
+    "default_popup": "src/browser_action/browser_action.html"
+  },
+  "externally_connectable": {
+    "matches": [
+      "http://localhost:9000/*",
+      "*://splytmusic.herokuapp.com/*",
+      "*://www.splytmusic.herokuapp.com/*",
+      "*://splytmusic.io/*",
+      "*://www.splytmusic.io/*"
+    ]
+  },
+  "permissions": [
+    "notifications",
+    "tabs",
+    "https://*/*",
+    "http://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "css": [
+        "src/inject/css/reset.css",
+        "src/inject/css/inject.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "js/jquery/jquery.js",
+        "js/lodash.js",
+        "src/inject/js/hooks.js",
+        "src/inject/js/helpers.js",
+        "src/inject/js/platforms/twitter.js",
+        "src/inject/js/platforms/youtube.js",
+        "src/inject/js/platforms/soundcloud.js",
+        "src/inject/js/platforms/reddit.js",
+        "src/inject/js/platforms/facebook.js",
+        "src/inject/js/platforms/tumblr.js",
+        "src/inject/js/embeds.js",
+        "src/inject/js/app.js"
+      ]
+    }
+  ]
+}

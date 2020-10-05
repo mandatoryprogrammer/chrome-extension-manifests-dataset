@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Not Just Guys -- the Gmail Plug-in",
+  "short_name": "NotJustGuys",
+  "author": "genEquality",
+  "version": "1.1.1",
+  "description": "A Gmail Plug-in that corrects for masculine default bias in written communications",
+  "icons": {
+    "16": "img/NotJustGuys-16.png",
+    "48": "img/NotJustGuys-48.png",
+    "128": "img/NotJustGuys-128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*"
+      ],
+      "css": [
+        "not-just-guys.css"
+      ],
+      "js": [
+        "lib/head.load.min.js",
+        "src/ScriptLoader.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "lib/google-analytics-bundle.js",
+      "src/background.js"
+    ],
+    "persistent": false
+  },
+  "page_action": {
+    "default_icon": {
+      "19": "img/NotJustGuys-19.png",
+      "38": "img/NotJustGuys-38.png"
+    },
+    "default_title": "Not Just Guys"
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "chrome_style": true
+  },
+  "web_accessible_resources": [
+    "lib/dom-regexp-match-1.1.0.js",
+    "src/HighlightGenerator.js",
+    "src/WarningChecker.js",
+    "src/Warnings.js",
+    "src/NotJustGuys.js"
+  ],
+  "permissions": [
+    "https://www.google-analytics.com/",
+    "storage",
+    "declarativeContent"
+  ]
+}

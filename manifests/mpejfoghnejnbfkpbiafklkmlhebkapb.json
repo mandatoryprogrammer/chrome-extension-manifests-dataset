@@ -1,0 +1,193 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "NZB Unity",
+  "version": "1.15.0",
+  "author": "clutterskull@gmail.com",
+  "description": "Send and control NZB files directly with SABnzbd or NZBGet download clients.",
+  "background": {
+    "scripts": [
+      "background/util.js",
+      "background/nzb.js",
+      "background/main.js"
+    ]
+  },
+  "icons": {
+    "16": "content/images/nzb-16-green.png",
+    "32": "content/images/icon-32.png",
+    "40": "content/images/icon-40.png",
+    "48": "content/images/icon-48.png",
+    "64": "content/images/nzb-64-green.png",
+    "128": "content/images/icon-128.png"
+  },
+  "web_accessible_resources": [
+    "content/images/nzb-16-green.png",
+    "content/images/nzb-16-grey.png",
+    "content/images/nzb-16-orange.png",
+    "content/images/nzb-16-red.png",
+    "content/images/nzb-32-green.png",
+    "content/images/nzb-64-green.png"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "16": "content/images/nzb-16-green.png",
+      "32": "content/images/icon-32.png",
+      "128": "content/images/icon-128.png"
+    },
+    "default_title": "NZB Unity",
+    "default_popup": "content/popup.html"
+  },
+  "options_ui": {
+    "browser_style": false,
+    "open_in_tab": true,
+    "page": "content/options.html"
+  },
+  "permissions": [
+    "<all_urls>",
+    "notifications",
+    "storage",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.althub.co.za/*",
+        "*://*.binsearch.info/*",
+        "*://*.dognzb.cr/*",
+        "*://*.drunkenslug.com/*",
+        "*://*.gingadaddy.com/*",
+        "*://*.nzbfinder.ws/*",
+        "*://*.nzbgeek.info/*",
+        "*://*.nzbindex.com/*",
+        "*://*.nzbindex.nl/*",
+        "*://*.nzbking.com/*",
+        "*://*.nzbserver.com/*",
+        "*://*.nzb.su/*",
+        "*://*.omgwtfnzbs.me/*",
+        "*://*.tabula-rasa.pw/*"
+      ],
+      "js": [
+        "vendor/jquery-3.3.1.slim.min.js",
+        "background/util.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.althub.co.za/*"
+      ],
+      "js": [
+        "content/sites/althub.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.binsearch.info/*"
+      ],
+      "js": [
+        "content/sites/binsearch.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.dognzb.cr/*"
+      ],
+      "js": [
+        "content/sites/dognzb.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.drunkenslug.com/*"
+      ],
+      "js": [
+        "content/sites/drunkenslug.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.gingadaddy.com/*"
+      ],
+      "js": [
+        "content/sites/gingadaddy.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.nzbfinder.ws/*"
+      ],
+      "js": [
+        "content/sites/nzbfinder.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.nzbgeek.info/*"
+      ],
+      "js": [
+        "content/sites/nzbgeek.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.nzbindex.com/*",
+        "*://*.nzbindex.nl/*"
+      ],
+      "js": [
+        "content/sites/nzbindex.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.nzbking.com/*"
+      ],
+      "js": [
+        "content/sites/nzbking.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.nzbserver.com/*"
+      ],
+      "js": [
+        "content/sites/nzbserver.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.nzb.su/*"
+      ],
+      "js": [
+        "content/sites/nzbsu.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.omgwtfnzbs.me/*"
+      ],
+      "js": [
+        "content/sites/omgwtfnzbs.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.tabula-rasa.pw/*"
+      ],
+      "js": [
+        "content/sites/tabularasa.js"
+      ]
+    }
+  ],
+  "commands": {
+    "_execute_browser_action": {
+      "description": "Toggle toolbar popup"
+    },
+    "toggle-queue": {
+      "description": "Toggle queue"
+    },
+    "open-profile-page": {
+      "description": "Open server URL"
+    }
+  }
+}

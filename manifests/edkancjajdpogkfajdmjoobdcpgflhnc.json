@@ -1,0 +1,261 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "FixYourFunnel",
+  "description": "This extension enhances Infusionsoft for FixYourFunnel users.",
+  "version": "3.7.3",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png",
+    "256": "icons/icon256.png"
+  },
+  "manifest_version": 2,
+  "externally_connectable": {
+    "matches": [
+      "*://*.fixyourfunnel.com/*",
+      "*://keap.app/*",
+      "*://*.infusionsoft.com/*"
+    ]
+  },
+  "background": {
+    "scripts": [
+      "jquery.js",
+      "background.js"
+    ],
+    "pages": [
+      "background.html"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "icons/icon16.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "contextMenus",
+    "storage",
+    "tabs",
+    "notifications",
+    "http://*.fixyourfunnel.com/",
+    "https://*.fixyourfunnel.com/",
+    "https://keap.app/",
+    "https://*.infusionsoft.com/*"
+  ],
+  "content_scripts": [
+    {
+      "js": [
+        "fyf.js"
+      ],
+      "css": [
+        "overRide.css"
+      ],
+      "matches": [
+        "*://*.infusionsoft.com/fyf*"
+      ],
+      "all_frames": false
+    },
+    {
+      "js": [
+        "jquery.js",
+        "add_menu_button.js"
+      ],
+      "css": [
+        "add_menu_button.css"
+      ],
+      "matches": [
+        "*://*.infusionsoft.com/*",
+        "*://keap.app/*"
+      ],
+      "all_frames": false
+    },
+    {
+      "js": [
+        "campaign_builder.js"
+      ],
+      "css": [
+        "fyfStyle.css"
+      ],
+      "matches": [
+        "*://*.infusionsoft.com/Reports/searchTemplate.jsp?reportClass=SetupFunnel&view=resultsPage*"
+      ],
+      "all_frames": false
+    },
+    {
+      "js": [
+        "growl.js",
+        "login.js",
+        "contact_record.js"
+      ],
+      "css": [
+        "growl.css",
+        "fyfStyle.css"
+      ],
+      "matches": [
+        "*://*.infusionsoft.com/Contact/oldManageContact.jsp?view=edit&ID=*",
+        "*://*.infusionsoft.com/Contact/manageContact.jsp*",
+        "*://*.infusionsoft.com/Company/manageCompany.jsp?view=edit&ID=*"
+      ],
+      "all_frames": false
+    },
+    {
+      "js": [
+        "growl.js",
+        "login.js",
+        "opportunity_search.js"
+      ],
+      "css": [
+        "growl.css",
+        "fyfStyle.css"
+      ],
+      "matches": [
+        "*://*.infusionsoft.com/app/nav/link*navModule=opportunity*",
+        "*://*.infusionsoft.com/Reports/searchTemplate.jsp?reportClass=OpportunitySearch*"
+      ],
+      "all_frames": false
+    },
+    {
+      "js": [
+        "smsconvos.js"
+      ],
+      "css": [
+        "fyfStyle.css"
+      ],
+      "matches": [
+        "*://*.infusionsoft.com/app/searchResults/searchResult*",
+        "*://*.infusionsoft.com/Reports/searchTemplate.jsp?reportClass=AdvContactSearch&view=resultsPage*",
+        "*://*.infusionsoft.com/Contact/manageContact.jsp*",
+        "*://*.infusionsoft.com/Contact/oldManageContact.jsp?view=edit&ID=*"
+      ],
+      "all_frames": false
+    },
+    {
+      "js": [
+        "linkify.min.js",
+        "linkify-jquery.min.js",
+        "linkifyis.js"
+      ],
+      "css": [
+        "fyfStyle.css"
+      ],
+      "matches": [
+        "*://*.infusionsoft.com/Opportunity/manageOpportunity.jsp?view=edit&ID=*",
+        "*://*.infusionsoft.com/app/myDay/home*",
+        "*://*.infusionsoft.com/app/nav/link?*navModule=nav.home.myDay",
+        "*://*.infusionsoft.com/ContactAction/allHistoryPop.jsp?contactId=*",
+        "*://*.infusionsoft.com/ContactAction/allHistoryPop_legacy.jsp?contactId=*",
+        "*://*.infusionsoft.com/app/searchResults/searchResult*",
+        "*://*.infusionsoft.com/Reports/searchTemplate.jsp?reportClass=AdvContactSearch&view=resultsPage*",
+        "*://*.infusionsoft.com/Contact/manageContact.jsp*",
+        "*://*.infusionsoft.com/Contact/oldManageContact.jsp?view=edit&ID=*"
+      ],
+      "all_frames": false
+    },
+    {
+      "css": [
+        "searchResult.css"
+      ],
+      "matches": [
+        "*://*.infusionsoft.com/app/searchResults/searchResult*"
+      ],
+      "all_frames": false
+    },
+    {
+      "css": [
+        "contactRecord.css"
+      ],
+      "matches": [
+        "*://*.infusionsoft.com/Contact/manageContact.jsp*",
+        "*://*.infusionsoft.com/Contact/oldManageContact.jsp?view=edit&ID=*"
+      ],
+      "all_frames": false
+    },
+    {
+      "css": [
+        "searchTemplate.css"
+      ],
+      "matches": [
+        "*://*.infusionsoft.com/Reports/searchTemplate.jsp?reportClass=AdvContactSearch&view=resultsPage*",
+        "*://*.infusionsoft.com/Reports/searchTemplate.jsp?reportClass=AdvContactSearch&action=none&reportStateId=*",
+        "*://*.infusionsoft.com/Reports/searchTemplate.jsp?reportClass=AdvContactSearch&reset=true&action=resetReport&reportStateId=*"
+      ],
+      "all_frames": false
+    },
+    {
+      "js": [
+        "notes.js"
+      ],
+      "css": [
+        "fyfStyle.css"
+      ],
+      "matches": [
+        "*://*.infusionsoft.com/ContactAction/manageContactAction.jsp*",
+        "*://*.infusionsoft.com/ContactAction/manageContactAction_legacy.jsp*"
+      ],
+      "all_frames": true
+    },
+    {
+      "js": [
+        "growl.js",
+        "login.js",
+        "manageOpportunity.js"
+      ],
+      "css": [
+        "growl.css",
+        "fyfStyle.css",
+        "manageOpportunity.css"
+      ],
+      "matches": [
+        "*://*.infusionsoft.com/Opportunity/manageOpportunity.jsp?view=edit&ID=*"
+      ],
+      "all_frames": false
+    },
+    {
+      "js": [
+        "growl.js",
+        "login.js",
+        "my_day.js"
+      ],
+      "css": [
+        "growl.css",
+        "fyfStyle.css",
+        "myDay.css"
+      ],
+      "matches": [
+        "*://*.infusionsoft.com/app/myDay/home*",
+        "*://*.infusionsoft.com/app/nav/link?*navModule=nav.home.myDay"
+      ],
+      "all_frames": false
+    },
+    {
+      "js": [
+        "growl.js",
+        "login.js",
+        "contact_search.js"
+      ],
+      "css": [
+        "growl.css",
+        "fyfStyle.css"
+      ],
+      "matches": [
+        "*://*.infusionsoft.com/app/searchResults/searchResult*",
+        "*://*.infusionsoft.com/app/nav/link*navModule=contact*",
+        "*://*.infusionsoft.com/Reports/searchTemplate.jsp?reportClass=AdvContactSearch&view=resultsPage*",
+        "*://*.infusionsoft.com/Reports/searchTemplate.jsp?reportClass=AdvContactSearch&action=none&reportStateId=*",
+        "*://*.infusionsoft.com/Reports/searchTemplate.jsp?reportClass=AdvContactSearch&reset=true&action=resetReport&reportStateId=*"
+      ],
+      "all_frames": false
+    },
+    {
+      "js": [
+        "jquery.js",
+        "keapNotes.js"
+      ],
+      "css": [
+        "fyfStyle.css"
+      ],
+      "matches": [
+        "*://keap.app/contacts/list/all/contact/*"
+      ],
+      "all_frames": false
+    }
+  ]
+}

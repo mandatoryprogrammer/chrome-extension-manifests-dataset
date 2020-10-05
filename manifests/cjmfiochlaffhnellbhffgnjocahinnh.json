@@ -1,0 +1,68 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Lustre",
+  "short_name": "Lustre",
+  "description": "Lustre instantly recommends the best products right on Amazon – USA Only",
+  "version": "1.7.5",
+  "permissions": [
+    "storage",
+    "*://lustre.ai/*"
+  ],
+  "background": {
+    "scripts": [
+      "background/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "match_about_blank": false,
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "content/content.css"
+      ],
+      "js": [
+        "content/content.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.amazon.com/*"
+      ],
+      "js": [
+        "prefetch/prefetch.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com https://cdn.amplitude.com; object-src 'self'",
+  "browser_action": {
+    "default_title": "Lustre",
+    "default_popup": "popup/popup.html"
+  },
+  "web_accessible_resources": [
+    "assets/images/icons/*.svg",
+    "assets/images/lustre-illustration.svg",
+    "*.json"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.slant.co/*",
+      "*://*.reefpig.com/*",
+      "*://*.lustre.ai/*",
+      "*://127.0.0.1/*",
+      "*://localhost/*"
+    ]
+  },
+  "icons": {
+    "16": "assets/images/logo-16.png",
+    "48": "assets/images/logo-48.png",
+    "128": "assets/images/logo-128.png"
+  },
+  "manifest_version": 2
+}

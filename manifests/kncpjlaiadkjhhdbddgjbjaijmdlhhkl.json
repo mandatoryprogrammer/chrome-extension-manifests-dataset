@@ -1,0 +1,119 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "cyb",
+  "description": "Robot transformer of web2 to web3",
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "icons": {
+    "48": "icons/icon_48.png",
+    "128": "icons/icon_128.png"
+  },
+  "browser_action": {
+    "default_title": "cyb-browser-extension",
+    "default_popup": "popup/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "singlefile/index.js",
+      "singlefile/chrome-browser-polyfill.js",
+      "singlefile/fetch-resources.js",
+      "singlefile/content-fetch-resources.js",
+      "singlefile/frame-tree.js",
+      "singlefile/config.js",
+      "singlefile/tabs-data.js",
+      "singlefile/business.js",
+      "singlefile/messages.js",
+      "singlefile/tabs.js",
+      "singlefile/downloads.js",
+      "singlefile/autosave.js",
+      "singlefile/ui-main.js",
+      "singlefile/ui-menus.js",
+      "singlefile/ui-commands.js",
+      "singlefile/ui-button.js",
+      "singlefile/lazy-timeout.js",
+      "singlefile/css-minifier.js",
+      "singlefile/css-tree.js",
+      "singlefile/css-media-query-parser.js",
+      "singlefile/html-srcset-parser.js",
+      "singlefile/css-font-property-parser.js",
+      "singlefile/single-file-util.js",
+      "singlefile/single-file-helper.js",
+      "singlefile/css-fonts-minifier.js",
+      "singlefile/css-fonts-alt-minifier.js",
+      "singlefile/css-medias-alt-minifier.js",
+      "singlefile/css-matched-rules.js",
+      "singlefile/css-rules-minifier.js",
+      "singlefile/html-minifier.js",
+      "singlefile/html-serializer.js",
+      "singlefile/html-images-alt-minifier.js",
+      "singlefile/single-file-core.js",
+      "singlefile/single-file.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "contentScript.js"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "singlefile/index.js",
+        "singlefile/chrome-browser-polyfill.js",
+        "singlefile/content-hooks-frames.js",
+        "singlefile/single-file-helper.js",
+        "singlefile/content-frame-tree.js"
+      ],
+      "all_frames": true,
+      "match_about_blank": true
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "singlefile/index.js",
+        "singlefile/content-ui-infobar.js"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "singlefile/index.js",
+        "singlefile/content-hooks.js",
+        "singlefile/content-bootstrap.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "singlefile/content-hooks-web.js",
+    "singlefile/content-hooks-frames-web.js"
+  ],
+  "permissions": [
+    "contextMenus",
+    "clipboardWrite",
+    "contextMenus",
+    "downloads",
+    "storage",
+    "activeTab",
+    "webNavigation",
+    "<all_urls>"
+  ],
+  "options_ui": {
+    "page": "options/options.html",
+    "chrome_style": true
+  },
+  "default_locale": "en",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

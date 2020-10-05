@@ -1,0 +1,99 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "DigZilla",
+  "description": "Audience Analyzer for Facebook",
+  "version": "3.6.2",
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com https://apis.google.com https://api.github.com; object-src 'self'",
+  "icons": {
+    "16": "images/icon.png",
+    "48": "images/icon.png",
+    "128": "images/icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.facebook.com/*"
+      ],
+      "js": [
+        "jquery.min.js",
+        "js/jquery-ui.min.js",
+        "js/promise.js",
+        "js/functions.js",
+        "js/settings.js",
+        "js/bootstrap.min.js",
+        "js/sweetalert.min.js",
+        "js/jquery.dataTables.min.js",
+        "js/dataTables.buttons.js",
+        "js/dataTables.select.min.js",
+        "js/dataTables.fixedHeader.min.js",
+        "js/custom_analyzer.js",
+        "scrape.js",
+        "js/post_analyzer.js",
+        "js/comment_analyzer.js"
+      ],
+      "css": [
+        "scrape.css",
+        "css/sweetalert.css",
+        "css/jquery.dataTables.min.css",
+        "css/fixedHeader.dataTables.min.css",
+        "css/analyzer.css",
+        "font-awesome/css/font-awesome.min.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.facebook.com/*"
+      ],
+      "js": [
+        "js/engagementview/contentscript.bundle.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.facebook.com/",
+        "*://*.facebook.com/feed*"
+      ],
+      "js": [
+        "js/toggle-sponsored/contentscript.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "scrape.js",
+    "images/*",
+    "css/*",
+    "js/*",
+    "font-awesome/*",
+    "custom_analyzer.html",
+    "save-page.html",
+    "manifest.json"
+  ],
+  "browser_action": {
+    "default_icon": "images/icon.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "js/promise.js",
+      "js/functions.js",
+      "js/settings.js",
+      "js/background.js",
+      "js/right_click.js"
+    ]
+  },
+  "permissions": [
+    "contextMenus",
+    "cookies",
+    "https://*.facebook.com/*",
+    "notifications",
+    "activeTab",
+    "storage",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>",
+    "unlimitedStorage"
+  ]
+}

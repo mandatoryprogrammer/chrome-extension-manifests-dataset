@@ -1,0 +1,91 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_extBetaName__",
+  "short_name": "1Password",
+  "author": "AgileBits",
+  "description": "__MSG_extDescription__",
+  "default_locale": "en",
+  "homepage_url": "https://1password.com",
+  "version": "1.22.4",
+  "manifest_version": 2,
+  "icons": {
+    "16": "/images/icons/app_icon-light_bg-color-unlocked-32.png",
+    "48": "/images/icons/onepassword-48.png",
+    "128": "/images/icons/onepassword-128.png"
+  },
+  "content_security_policy": "default-src 'self'; img-src 'self' https://c.1password.com https://a.1passwordentusercontent.com https://a.1passwordusercontent.com https://a.1passwordusercontent.eu https://a.1passwordusercontent.ca; connect-src https://*.1password.com wss://b5n.1password.com wss://b5n.ent.1password.com https://*.b5test.com wss://b5n.b5test.com https://*.b5dev.com wss://b5n.b5dev.com https://*.b5local.com:3000 wss://b5local.com:3001 https://*.1password.ca wss://b5n.1password.ca https://*.1password.eu wss://b5n.1password.eu https://api.pwnedpasswords.com https://f.1passwordusercontent.com https://f.1passwordentusercontent.com https://f.1passwordusercontent.eu https://f.1passwordusercontent.ca https://*.agilebits.com https://sandbox.privacy.com https://api.privacy.com; style-src 'self' 'unsafe-inline'; script-src 'self' 'wasm-eval';",
+  "background": {
+    "scripts": [
+      "background/background.js"
+    ]
+  },
+  "permissions": [
+    "<all_urls>",
+    "contextMenus",
+    "downloads",
+    "idle",
+    "management",
+    "nativeMessaging",
+    "notifications",
+    "privacy",
+    "tabs",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.1password.com/*",
+        "https://*.b5staging.com/*",
+        "https://*.b5test.com/*",
+        "https://*.b5dev.com/*",
+        "https://*.b5local.com/*",
+        "https://*.1password.ca/*",
+        "https://*.1password.eu/*"
+      ],
+      "js": [
+        "inline/injected/b5.js"
+      ],
+      "css": [
+        "inline/injected/styles/b5integration.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+X",
+        "mac": "Command+Shift+X"
+      }
+    },
+    "lock": {
+      "name": "lock",
+      "suggested_key": {
+        "default": "Ctrl+Shift+L",
+        "mac": "Command+Shift+L"
+      },
+      "description": "Lock the extension"
+    }
+  },
+  "browser_action": {
+    "default_title": "1Password"
+  },
+  "web_accessible_resources": [
+    "images/*",
+    "mini/images/*",
+    "inline/images/*",
+    "fonts/*",
+    "mini/fonts/*",
+    "inline/fonts/*",
+    "inline/button/injected.css",
+    "inline/menu/menu.html",
+    "inline/menu/injected.css",
+    "inline/notifications/add-account/add-account.html",
+    "save-dialog/save-dialog.html",
+    "inline/save-dialog/privacy-create-dialog.html",
+    "inline/save-dialog/privacy-enable-dialog.html"
+  ],
+  "minimum_chrome_version": "73"
+}

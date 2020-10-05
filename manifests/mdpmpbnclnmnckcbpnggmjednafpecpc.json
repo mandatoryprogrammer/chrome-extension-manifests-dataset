@@ -1,0 +1,41 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Click2Call",
+  "version": "1.0.3",
+  "version_name": "1.0.3",
+  "description": "Finds phone numbers in the web page you're on and allows you to call the number.",
+  "icons": {
+    "128": "green-icon-38.png"
+  },
+  "background": {
+    "scripts": [
+      "thirdParty/jquery-2.2.1.min.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "thirdParty/jquery-2.2.1.min.js",
+        "click2call_content_script.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "storage",
+    "tabs"
+  ],
+  "browser_action": {
+    "default_name": "Click2Call",
+    "default_icon": "red-icon-38.png",
+    "default_popup": "popup.html"
+  },
+  "manifest_version": 2,
+  "content_security_policy": "default-src 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self'; connect-src *; img-src *; font-src https://fonts.gstatic.com"
+}

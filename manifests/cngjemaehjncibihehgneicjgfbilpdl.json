@@ -1,0 +1,42 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Referer Privacy",
+  "description": "This extension provides easy to use privacy options for managing referer headers.",
+  "version": "1.0",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup/popup.html"
+  },
+  "icons": {
+    "128": "icon.png"
+  },
+  "background": {
+    "scripts": [
+      "interceptor.js",
+      "debug.js",
+      "common/settings.js",
+      "lib/uri.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "injector.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ]
+}

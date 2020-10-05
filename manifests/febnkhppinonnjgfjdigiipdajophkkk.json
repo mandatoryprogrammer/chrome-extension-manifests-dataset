@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Clipbrd Beta",
+  "version": "0.10.1",
+  "manifest_version": 2,
+  "description": "Synchronize clipboard between all your devices!",
+  "background": {
+    "page": "background.html"
+  },
+  "icons": {
+    "48": "img/icon-48x48.png",
+    "128": "img/icon-128x128.png"
+  },
+  "options_page": "options.html",
+  "permissions": [
+    "background",
+    "notifications",
+    "clipboardRead",
+    "clipboardWrite",
+    "https://api.clipbrd.com/"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "img/icon-inactive.png",
+      "38": "img/icon-inactive@2x.png"
+    },
+    "default_title": "Offline - Clipbrd"
+  },
+  "web_accessible_resources": [
+    "options.html",
+    "img/icon-48x48.png",
+    "img/icon-128x128.png"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.clipbrd.com/*"
+      ],
+      "js": [
+        "js/cs/reset-hash.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

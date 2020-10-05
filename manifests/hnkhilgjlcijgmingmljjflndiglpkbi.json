@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "SocialSec",
+  "description": "This is the second functional build of our project.",
+  "version": "0.2.0",
+  "icons": {
+    "128": "img/SS128.png",
+    "16": "img/SS16.png",
+    "48": "img/SS48.png"
+  },
+  "browser_action": {
+    "default_icon": "img/icon2.png",
+    "default_popup": "popup.html",
+    "default_title": "Click for more info!"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "notifications"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/passwordDetect.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://www.facebook.com/connect/*"
+      ],
+      "js": [
+        "js/grabAccessToken.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "options_page": "index.html"
+}

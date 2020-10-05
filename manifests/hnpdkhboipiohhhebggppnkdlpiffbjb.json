@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Remembr V2 Plugin",
+  "version": "3.0",
+  "description": "The Remembr V2 plugin helps you to get contacts from LinkedIn",
+  "content_security_policy": "default-src *; style-src 'self' https://* 'unsafe-inline'; script-src 'self' https://* 'unsafe-inline' 'unsafe-eval'; connect-src *",
+  "browser_action": {
+    "default_popup": "popupDir/index.html",
+    "default_icon": "512.png"
+  },
+  "manifest_version": 2,
+  "background": {
+    "scripts": [
+      "jquery.min.js",
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "*://linkedin.com/*",
+    "*://linkedin.com",
+    "*://*.linkedin.com",
+    "*://remembrsandbox.eu/server/*"
+  ],
+  "icons": {
+    "16": "16.png",
+    "48": "48.png",
+    "128": "128.png",
+    "512": "512.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.linkedin.com/feed/*",
+        "*://*.linkedin.com/",
+        "*://*.linkedin.com/in/*",
+        "*://*.linkedin.com/company/*",
+        "*://*.linkedin.com/mynetwork/*",
+        "*://*.linkedin.com/messaging/*",
+        "*://*.linkedin.com/search/*",
+        "*://*.linkedin.com/me/*",
+        "*://*.linkedin.com/groups/*",
+        "*://linkiomatic.com/server/*",
+        "*://remembr.app/api/*",
+        "*://remembrsandbox.eu/server/*"
+      ],
+      "js": [
+        "injectSimple.js",
+        "pluginDir/runtime.js",
+        "pluginDir/polyfills.js",
+        "pluginDir/styles.js",
+        "pluginDir/vendor.js",
+        "pluginDir/main.js",
+        "fontawesome.js",
+        "jquery.min.js"
+      ],
+      "css": [
+        "remembr.css",
+        "bulma.min.css"
+      ]
+    }
+  ]
+}

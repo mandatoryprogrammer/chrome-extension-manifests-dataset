@@ -1,0 +1,68 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAs3aFyJRuZlsxoEV65GavCmAqeEKSWoNjQMlU42Ayr0RH85xXLvZHFN9nV1URuX9sCiOKTGYgFQRF1sGp/BrpWou7k6mdMoX7pksDtDLpWbLKnT7EptILHJx6g6Ly9I1O3gye4wXspRvJ9MLgV6OKdJMhSprclZkcPI8uAZRSUqm96wwPmPN+dqkbvflF1jYMC7flo/4rcjdfiH6rZHJteRqPls4WNLxa/T3PCi/v6CVxbfjFFFfLjeGockmEzuA/C8ZLAE6KVHlZknv07RiujvMDMZdtnZbiRYeFFgy/8gYbDtIhtLHNQqOyErzMAp329UJ1Nz/iaJBaf5VrVXYh+wIDAQAB",
+  "name": "__MSG_appName__",
+  "short_name": "__MSG_appShortName__",
+  "description": "__MSG_appDescription__",
+  "version": "1.2.3",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "icons": {
+    "16": "images/icon-16.png",
+    "19": "images/icon-19.png",
+    "38": "images/icon-38.png",
+    "128": "images/icon-128.png"
+  },
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "images/icon-16.png",
+      "19": "images/icon-19.png",
+      "38": "images/icon-38.png",
+      "128": "images/icon-128.png"
+    },
+    "default_title": "__MSG_browserActionTitle__"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "styles/contentscript.css"
+      ],
+      "js": [
+        "scripts/contentscript.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "https://api.newspicks.us/browser-extension/oauth/*"
+      ],
+      "js": [
+        "scripts/redirect-listener.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "permissions": [
+    "storage",
+    "tabs",
+    "cookies",
+    "identity",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_security_policy": "script-src 'self' https://api.newspicks.us; object-src 'self'",
+  "web_accessible_resources": [
+    "pages/sidebar.html"
+  ]
+}

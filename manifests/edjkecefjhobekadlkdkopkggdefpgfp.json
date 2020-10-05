@@ -1,0 +1,74 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Smarty",
+  "version": "6.6.1.4",
+  "description": "Add coupon codes & get cash back when shopping online! By installing, you agree to the terms at joinsmarty.com",
+  "author": "Smarty",
+  "browser_action": {
+    "default_icon": {
+      "16": "images/icon16.png",
+      "32": "images/icon32.png",
+      "48": "images/icon48.png",
+      "128": "images/icon128.png"
+    },
+    "default_title": "Smarty"
+  },
+  "icons": {
+    "16": "images/activate-icon16.png",
+    "32": "images/activate-icon32.png",
+    "48": "images/activate-icon48.png",
+    "128": "images/activate-icon128.png"
+  },
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "https://www.joinsmarty.com/*"
+      ],
+      "css": [
+        "css/content.css",
+        "css/sweetalert.min.css"
+      ],
+      "js": [
+        "js/libs/jquery-3.4.1.min.js",
+        "js/libs/mustache.min.js",
+        "js/libs/sweetalert-dev.min.js",
+        "js/libs/clipboard.min.js",
+        "js/content_script.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://www.joinsmarty.com/*"
+      ],
+      "js": [
+        "js/install.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "cookies",
+    "storage",
+    "tabs",
+    "webRequest",
+    "unlimitedStorage",
+    "<all_urls>"
+  ],
+  "short_name": "Smarty",
+  "web_accessible_resources": [
+    "css/*",
+    "fonts/*",
+    "images/*",
+    "js/*",
+    "partials/*",
+    "popups/*"
+  ]
+}

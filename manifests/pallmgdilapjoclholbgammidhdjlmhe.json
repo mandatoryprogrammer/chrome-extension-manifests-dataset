@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://*.segment.io https://cdn.segment.com https://cdn.segment.io https://doug1izaerwt3.cloudfront.net https://i.kissmetrics.com https://assets.customer.io https://cdn.mxpnl.com https://www.google-analytics.com https://connect.facebook.net; object-src 'self'",
+  "name": "Virtru Email Protection for Office 365",
+  "description": "Surprisingly easy email protection and control for Outlook Web Access.",
+  "version": "1.1.0.3347",
+  "homepage_url": "https://www.virtru.com",
+  "icons": {
+    "128": "icons/icon-128.png",
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/browser-action-19.png",
+      "38": "icons/browser-action-38.png"
+    },
+    "default_popup": "popup.html",
+    "default_title": "Virtru"
+  },
+  "permissions": [
+    "identity",
+    "tabs",
+    "storage",
+    "https://*/",
+    "http://*/",
+    "contextMenus"
+  ],
+  "content_scripts": [
+    {
+      "css": [
+        "css/owa-content.css"
+      ],
+      "js": [
+        "js/owa-shared.js",
+        "js/owa-content.js"
+      ],
+      "matches": [
+        "https://outlook.office365.com/owa/*",
+        "https://outlook.office.com/owa/*"
+      ],
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/owa-background.js"
+    ],
+    "persistent": false
+  },
+  "web_accessible_resources": [
+    "js/*",
+    "css/*",
+    "images/*"
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "WaterLink Connect",
+  "description": "Enables sending data from a LaMotte meter to DataMate Web via Chrome",
+  "version": "1.4.0",
+  "icons": {
+    "16": "images/waterlink_connect_icon_16x16.png",
+    "48": "images/waterlink_connect_icon_48x48.png",
+    "128": "images/waterlink_connect_icon_128x128.png"
+  },
+  "permissions": [
+    "http://localhost:1451/*",
+    "*://+http/-screen/*",
+    "http://staging.waterlinkconnect.com/*",
+    "https://waterlinkconnect.com/*",
+    "https://www.waterlinkconnect.com/*",
+    "http://staging.ui.waterlinkconnect.com/*",
+    "https://ui.waterlinkconnect.com/*",
+    "http://pts.ui.waterlinkconnect.com/*",
+    "http://ui.waterlinkconnect.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://waterlinkconnect.com/Session/Create*",
+        "https://www.waterlinkconnect.com/Session/Create*",
+        "https://waterlinkconnect.com/Session/Create*",
+        "http://staging.waterlinkconnect.com/Session/Create*",
+        "http://localhost:1451/Session/Create*",
+        "http://pts.ui.waterlinkconnect.com/*",
+        "http://ui.waterlinkconnect.com/*",
+        "https://ui.waterlinkconnect.com/*"
+      ],
+      "js": [
+        "scripts/jquery-1.7.1.js",
+        "eventPage.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ]
+}

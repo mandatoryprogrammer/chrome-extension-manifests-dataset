@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "ReadDict",
+  "description": "a Language Learning Widget",
+  "version": "0.0.0.5",
+  "permissions": [
+    "storage",
+    "tabs",
+    "unlimitedStorage",
+    "contextMenus",
+    "<all_urls>"
+  ],
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "icon16.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "main.js",
+        "ajax.js",
+        "content.js",
+        "readdict.js",
+        "rangy-master/lib/rangy-core.js",
+        "rangy-master/lib/rangy-serializer.js",
+        "rangy-master/lib/rangy-textrange.js",
+        "rangy-master/lib/rangy-selectionsaverestore.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "images/*"
+  ]
+}

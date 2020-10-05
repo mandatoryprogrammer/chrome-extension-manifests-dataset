@@ -1,0 +1,95 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "1.6.0",
+  "description": "View lead response data from SnapApp in popular sales tools.",
+  "permissions": [
+    "identity",
+    "storage",
+    "https://*.salesforce.com/*",
+    "https://*.lightning.force.com/lightning/r/Lead/*",
+    "https://*.lightning.force.com/lightning/r/Contact/*",
+    "https://app.salesloft.com/app/people/*",
+    "https://app2a.outreach.io/*"
+  ],
+  "background": {
+    "scripts": [
+      "static/js/vendors-background-outreachContent-salesforceClassicContent-salesforceLightningContent-salesloftCont-4cef2601.chunk.js",
+      "static/js/vendors-background.chunk.js",
+      "static/js/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "static/js/vendors-background-outreachContent-salesforceClassicContent-salesforceLightningContent-salesloftCont-4cef2601.chunk.js",
+        "static/js/vendors-outreachContent-salesforceClassicContent-salesforceLightningContent-salesloftContent.chunk.js",
+        "static/js/outreachContent.js"
+      ],
+      "matches": [
+        "https://app2a.outreach.io/*"
+      ]
+    },
+    {
+      "js": [
+        "static/js/vendors-background-outreachContent-salesforceClassicContent-salesforceLightningContent-salesloftCont-4cef2601.chunk.js",
+        "static/js/vendors-outreachContent-salesforceClassicContent-salesforceLightningContent-salesloftContent.chunk.js",
+        "static/js/salesforceClassicContent.js"
+      ],
+      "matches": [
+        "https://*.salesforce.com/*",
+        "http://*.salesforce.com/*"
+      ],
+      "exclude_matches": [
+        "https://login.salesforce.com/*",
+        "http://login.salesforce.com/*"
+      ],
+      "include_globs": [
+        "*://*.salesforce.com/?*"
+      ],
+      "exclude_globs": [
+        "*://*.salesforce.com/?*/*"
+      ]
+    },
+    {
+      "js": [
+        "static/js/vendors-background-outreachContent-salesforceClassicContent-salesforceLightningContent-salesloftCont-4cef2601.chunk.js",
+        "static/js/vendors-outreachContent-salesforceClassicContent-salesforceLightningContent-salesloftContent.chunk.js",
+        "static/js/salesloftContent.js"
+      ],
+      "matches": [
+        "https://app.salesloft.com/*"
+      ]
+    },
+    {
+      "js": [
+        "static/js/vendors-background-outreachContent-salesforceClassicContent-salesforceLightningContent-salesloftCont-4cef2601.chunk.js",
+        "static/js/vendors-outreachContent-salesforceClassicContent-salesforceLightningContent-salesloftContent.chunk.js",
+        "static/js/salesforceLightningContent.js"
+      ],
+      "matches": [
+        "https://*.lightning.force.com/lightning/*"
+      ]
+    }
+  ],
+  "page_action": {
+    "default_icon": {
+      "16": "images/snapapp_16.png",
+      "32": "images/snapapp_32.png",
+      "48": "images/snapapp_48.png",
+      "128": "images/snapapp_128.png"
+    },
+    "default_title": "SnapApp for Salesforce"
+  },
+  "icons": {
+    "16": "images/snapapp_16.png",
+    "32": "images/snapapp_32.png",
+    "48": "images/snapapp_48.png",
+    "128": "images/snapapp_128.png"
+  },
+  "web_accessible_resources": [
+    "static/media/*"
+  ],
+  "manifest_version": 2,
+  "name": "SnapApp"
+}

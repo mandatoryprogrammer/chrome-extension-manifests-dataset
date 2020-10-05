@@ -1,0 +1,109 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "FreeKiss",
+  "short_name": "FreeKiss",
+  "description": "Enhance your KissManga experience.",
+  "version": "1.3.3",
+  "icons": {
+    "16": "Images/Icons/icon16.png",
+    "48": "Images/Icons/icon48.png",
+    "128": "Images/Icons/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "Images/Icons/icon16.png",
+      "48": "Images/Icons/icon48.png",
+      "128": "Images/Icons/icon128.png"
+    },
+    "default_popup": "Views/FreeKissPopup.html",
+    "default_title": "FreeKiss"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://kissmanga.com/*"
+      ],
+      "css": [
+        "Styles/FreeKiss.css"
+      ],
+      "js": [
+        "Tools/jquery-3.1.1.min.js",
+        "Tools/lz-string.min.js",
+        "Scripts/Class/FreeKiss.js",
+        "Scripts/Class/Bookmarks.js",
+        "Scripts/Class/Manager.js",
+        "Scripts/Menu.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://kissmanga.com/"
+      ],
+      "css": [
+        "Styles/FrontPage.css"
+      ],
+      "js": [
+        "Scripts/FrontPage.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://kissmanga.com/BookmarkList"
+      ],
+      "css": [
+        "Styles/Bookmarks.css"
+      ],
+      "js": [
+        "Scripts/Bookmarks.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://kissmanga.com/Manga/*"
+      ],
+      "exclude_matches": [
+        "*://kissmanga.com/Manga/*/*"
+      ],
+      "css": [
+        "Styles/Manga.css"
+      ],
+      "js": [
+        "Scripts/Manga.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://kissmanga.com/Manga/*/*"
+      ],
+      "css": [
+        "Styles/Chapter.css"
+      ],
+      "js": [
+        "Scripts/Chapter.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "page": "Views/Background.html"
+  },
+  "web_accessible_resources": [
+    "Images/Status/Default.png",
+    "Images/Status/OnHold.png",
+    "Images/Status/PlanToRead.png"
+  ],
+  "permissions": [
+    "*://kissmanga.com/*",
+    "tabs",
+    "activeTab",
+    "storage",
+    "alarms",
+    "webRequest",
+    "webRequestBlocking"
+  ]
+}

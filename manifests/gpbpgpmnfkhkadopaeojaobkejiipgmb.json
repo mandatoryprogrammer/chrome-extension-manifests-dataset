@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "guideLinr",
+  "manifest_version": 2,
+  "version": "1.1.0",
+  "description": "Photoshop-like guide lines for any page",
+  "icons": {
+    "128": "images/128.png",
+    "64": "images/64.png",
+    "48": "images/48.png",
+    "32": "images/32.png",
+    "24": "images/24.png",
+    "16": "images/16.png"
+  },
+  "permissions": [
+    "tabs",
+    "contextMenus",
+    "http://*/*",
+    "https://*/*",
+    "*://*/*"
+  ],
+  "browser_action": {
+    "default_title": "guideLinr",
+    "default_icon": "images/16.png",
+    "default_popup": "interface.html",
+    "permissions": [
+      "tabs",
+      "http://*/*",
+      "https://*/*"
+    ]
+  },
+  "background": {
+    "scripts": [
+      "scripts/guideLinr.background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "styles/guideLinr.inject.css"
+      ],
+      "js": [
+        "scripts/jquery-1.10.2.min.js",
+        "scripts/guideLinr.inject.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

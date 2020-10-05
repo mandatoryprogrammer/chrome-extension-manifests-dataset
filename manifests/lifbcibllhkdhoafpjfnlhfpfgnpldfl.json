@@ -1,0 +1,67 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Skype",
+  "version": "10.2.0.9950",
+  "description": "Quickly access Skype for Web and Share on Skype through your browser",
+  "background": {
+    "page": "background.html"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "options_page": "skype_options_menu.html",
+  "browser_action": {
+    "default_icon": {
+      "19": "skypelogo_19.png",
+      "38": "skypelogo_38.png"
+    },
+    "default_title": "Skype",
+    "default_popup": "browserActionPopup.html"
+  },
+  "permissions": [
+    "tabs",
+    "contextMenus"
+  ],
+  "icons": {
+    "16": "skypelogo_16.png",
+    "19": "skypelogo_19.png",
+    "38": "skypelogo_38.png",
+    "48": "skypelogo_48.png",
+    "128": "skypelogo_128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file://*/*"
+      ],
+      "js": [
+        "browserSpecificScript.js",
+        "contentscript.js"
+      ],
+      "css": [
+        "skypeFont.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    "*.woff",
+    "*.eot",
+    "*.ttf",
+    "*.css",
+    "*.svg",
+    "*.gif",
+    "*.png"
+  ],
+  "manifest_version": 2,
+  "commands": {
+    "save-page-to-backpack": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+S",
+        "mac": "Command+M"
+      },
+      "description": "Saves current page to backpack"
+    }
+  }
+}

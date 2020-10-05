@@ -1,0 +1,108 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "author": "Ben Larkins",
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "images/icon_16.png",
+      "32": "images/icon_32.png",
+      "48": "images/icon_48.png",
+      "128": "images/icon_128.png"
+    },
+    "default_popup": "popup.html",
+    "default_title": "Snagshout - Amazon coupons and rebates"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "js/buy.js"
+      ],
+      "matches": [
+        "https://*.amazon.com/gp/buy/*"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "js": [
+        "js/cart.js"
+      ],
+      "matches": [
+        "https://*.amazon.com/gp/cart/*"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "js": [
+        "js/offer.js"
+      ],
+      "matches": [
+        "https://*.amazon.com/gp/offer-listing/*/*"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "js": [
+        "js/order.js"
+      ],
+      "matches": [
+        "https://*.amazon.com/gp/your-account/order-history/*"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "css": [
+        "css/icons.css"
+      ],
+      "js": [
+        "js/product.js"
+      ],
+      "matches": [
+        "https://*.amazon.com/dp/*",
+        "https://*.amazon.com/*/dp/*"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "js": [
+        "js/search.js"
+      ],
+      "matches": [
+        "https://*.amazon.com/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "description": "Snagshout - Find coupons and get cash back for your Amazon purchases.",
+  "externally_connectable": {
+    "matches": [
+      "https://*.snagshout.com/*"
+    ]
+  },
+  "icons": {
+    "16": "images/icon_16.png",
+    "32": "images/icon_32.png",
+    "48": "images/icon_48.png",
+    "128": "images/icon_128.png"
+  },
+  "manifest_version": 2,
+  "name": "Snagshout",
+  "permissions": [
+    "activeTab",
+    "declarativeContent",
+    "https://www.facebook.com/v3.2/dialog/oauth",
+    "https://*.amazon.com/",
+    "https://*.snagshout.com/",
+    "identity",
+    "storage",
+    "tabs"
+  ],
+  "web_accessible_resources": [
+    "fonts/*"
+  ],
+  "version": "0.0.5"
+}

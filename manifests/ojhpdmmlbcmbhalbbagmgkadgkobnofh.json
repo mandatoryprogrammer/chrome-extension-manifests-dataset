@@ -1,0 +1,79 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "The Bitbucket PR Fixer",
+  "version": "1.5",
+  "description": "Bitbucket PR Updates: Smaller tabs, a 'reviewed' button, a toggle collapse button, and code highlighting. ",
+  "permissions": [
+    "activeTab",
+    "declarativeContent",
+    "storage"
+  ],
+  "author": "Jason D. Cox",
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "js": [
+        "jquery-3.3.1.min.js",
+        "utils/updatePRLinks.js"
+      ],
+      "matches": [
+        "https://bitbucket.org/*/pull-requests/"
+      ]
+    },
+    {
+      "css": [
+        "pull-requests/styles.css",
+        "highlight/styles/default.css"
+      ],
+      "js": [
+        "jquery-3.3.1.min.js",
+        "md5.min.js",
+        "highlight/highlight.pack.js",
+        "pull-requests/content.js"
+      ],
+      "matches": [
+        "https://bitbucket.org/*/pull-requests/*/*"
+      ]
+    },
+    {
+      "js": [
+        "jquery-3.3.1.min.js",
+        "utils/updatePRLinks.js"
+      ],
+      "matches": [
+        "https://bitbucket.org/dashboard/overview"
+      ]
+    },
+    {
+      "js": [
+        "jquery-3.3.1.min.js",
+        "branch-create/branchCreate.js"
+      ],
+      "matches": [
+        "https://bitbucket.org/branch/create*"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "page_action": {
+    "default_popup": "options.html",
+    "default_icon": {
+      "16": "images/bb_fixer16.png",
+      "32": "images/bb_fixer32.png",
+      "48": "images/bb_fixer48.png",
+      "128": "images/bb_fixer128.png"
+    }
+  },
+  "icons": {
+    "16": "images/bb_fixer16.png",
+    "32": "images/bb_fixer32.png",
+    "48": "images/bb_fixer48.png",
+    "128": "images/bb_fixer128.png"
+  },
+  "manifest_version": 2
+}

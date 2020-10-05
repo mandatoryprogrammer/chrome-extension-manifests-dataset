@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "greenview",
+  "version": "0.0.3",
+  "manifest_version": 2,
+  "description": "Reduces webpage average energy consumption for a more eco-friendly browsing experience",
+  "icons": {
+    "16": "icons/greenview_1.png",
+    "48": "icons/greenview_1.png",
+    "128": "icons/greenview_1.png"
+  },
+  "background": {
+    "scripts": [
+      "scripts/fontHandler.js",
+      "scripts/background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_title": "greenview"
+  },
+  "permissions": [
+    "debugger",
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/jquery-3.2.0.min.js",
+        "js/jquery.scrollstop.min.js",
+        "js/jquery.lazyload.min.js",
+        "scripts/inject.js",
+        "scripts/imageHandler.js"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Aghaejazeh Online",
+  "description": "This allows you to schedule aghaejazeh OnLine and stream your desktop into Online conferences.",
+  "version": "1.3.0",
+  "minimum_chrome_version": "34",
+  "icons": {
+    "16": "aghaejazeh-logo-16x16.png",
+    "48": "aghaejazeh-logo-48x48.png",
+    "128": "aghaejazeh-logo-128x128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "desktopCapture",
+    "https://calendar.google.com/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://aghaejazeh.org/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://calendar.google.com/calendar/*",
+        "https://outlook.live.com/owa/*"
+      ],
+      "js": [
+        "jquery.js",
+        "RandomUtil.js",
+        "RoomnameGenerator.js",
+        "meet-calendar.js"
+      ],
+      "css": [
+        "/css/all.css"
+      ],
+      "all_frames": false,
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "aghaejazeh-logo-48x48.png",
+    "aghaejazeh-logo-white-48x48.png",
+    "aghaejazeh-logo-blue.svg",
+    "aghaejazeh-logo-grey.svg"
+  ],
+  "browser_action": {
+    "default_title": "Create aghaejazeh OnLine",
+    "default_popup": "popup.html"
+  }
+}

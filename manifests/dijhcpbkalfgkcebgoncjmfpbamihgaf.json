@@ -1,0 +1,99 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Discoverly",
+  "description": "Reveal, and now save, more complete social contact info alongside those online profiles you normally view.",
+  "version": "1.12.12",
+  "permissions": [
+    "*://discover.ly/",
+    "tabs",
+    "activeTab",
+    "cookies",
+    "storage"
+  ],
+  "icons": {
+    "16": "images/dly-icon_16.png",
+    "48": "images/dly-icon_48.png",
+    "128": "images/dly-icon_128.png"
+  },
+  "background": {
+    "scripts": [
+      "libs/underscore.js",
+      "libs/promise.min.js",
+      "libs/monet.js",
+      "googleanalytics.js",
+      "mixpanel.js",
+      "firebase.js",
+      "build/core-classes.js",
+      "core.js"
+    ]
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://buy.discover.ly/*",
+      "*://localhost/"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://*.facebook.com/*",
+        "https://*.linkedin.com/*",
+        "https://*.twitter.com/*",
+        "https://buy.discover.ly/*"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "js": [
+        "libs/jquery.js",
+        "libs/underscore.js",
+        "libs/monet.js",
+        "build/content-classes.js",
+        "build/content-bundle/content-bundle.js",
+        "content.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.discover.ly/*"
+      ],
+      "js": [
+        "installation_check.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "js-lib/content-scripts/dly-gmail.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "images/dly-icon_19.png",
+      "38": "images/dly-icon_38.png"
+    }
+  },
+  "web_accessible_resources": [
+    "js-lib/inject-scripts/*",
+    "dly-popover.html",
+    "dly-templates.html",
+    "dly-li_social_plugin.css",
+    "images/*",
+    "sass/slds/assets/icons/*"
+  ],
+  "content_security_policy": "script-src 'self' https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com https://*.licdn.com https://ssl.google-analytics.com https://cdn.mxpnl.com/libs/mixpanel-2.2.min.js https://use.typekit.net; object-src 'self'; img-src *",
+  "oauth2": {
+    "client_id": "999208686170-bfac4dun74aldhbpmn9g4s47963jhf2k.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/userinfo.profile"
+    ]
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzELJU7thb5Qd9yn3XorC4Km+o/jCeaPcjD48xT5+ZAKG2y8x24uOjbAZIHeXnEcQPbAfxwQtNr1WNSgm8960iSeFT/izJZU0pY5ikYsfQVlp8/UY5/qBv1/2ltn4DY4mfxgyL1O7lIACNEsaOs/UlBLBvtKhgLZqQ6sbnGb6Mq9CNm5eXuJhDD8cja2HX1FXAwEc3oH0YaIVtLm3EW+4wG1A6tCVywX03KQiBX53z5ogluufBJU2aU9wJe/fX/i7hrOMwGLp0defzp9yL/6mKEEFtEW6X+mgmLF4gB+vWZ5Gw1vUjNc81uWk3OMo/PwxHfaIFkMpMLssMIIjISwlYQIDAQAB"
+}

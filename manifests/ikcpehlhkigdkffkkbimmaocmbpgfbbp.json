@@ -1,0 +1,88 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_extName__",
+  "default_locale": "en",
+  "version": "0.1.0.0",
+  "minimum_chrome_version": "49",
+  "manifest_version": 2,
+  "description": "__MSG_extDescription__",
+  "author": "Testapic.com",
+  "icons": {
+    "16": "img/logo_16_grey.png",
+    "48": "img/logo_48_grey.png",
+    "128": "img/logo_128_grey.png"
+  },
+  "browser_action": {
+    "default_icon": "img/logo_48_grey.png",
+    "default_popup": "html/application.html#/init",
+    "default_title": "Testapic"
+  },
+  "background": {
+    "page": "html/background.html"
+  },
+  "options_page": "html/application.html#/options",
+  "permissions": [
+    "system.cpu",
+    "system.memory",
+    "system.storage",
+    "system.display",
+    "activeTab",
+    "storage",
+    "unlimitedStorage",
+    "webRequest",
+    "webRequestBlocking",
+    "tabs",
+    "windows",
+    "*://*/*",
+    "<all_urls>",
+    "notifications",
+    "contextMenus",
+    "desktopCapture",
+    "background",
+    "alarms",
+    "gcm",
+    "webNavigation"
+  ],
+  "web_accessible_resources": [
+    "js/*",
+    "html/*",
+    "css/*",
+    "images/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/lib/require.js",
+        "js/lib/jquery.js",
+        "js/lib/underscore.js",
+        "js/lib/process.js",
+        "js/lib/filer.js",
+        "js/requireContent.js",
+        "js/requireConfig.js",
+        "js/modules/util/record_testapic.js",
+        "js/modules/util/harvester_main_testapic.js"
+      ]
+    },
+    {
+      "js": [
+        "js/modules/util/harvester_sub_testapic.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "all_frames": true
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self' blob: filesystem: chrome-extension-resource:",
+  "externally_connectable": {
+    "ids": [
+      "ikcpehlhkigdkffkkbimmaocmbpgfbbp"
+    ],
+    "matches": [
+      "*://*.testapic.com/*"
+    ]
+  }
+}

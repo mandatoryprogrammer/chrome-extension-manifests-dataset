@@ -1,0 +1,114 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Fuze for Chrome",
+  "version": "120.10921.12151.0",
+  "description": "The Fuze for Chrome extension allows you to place phone calls directly from websites and create Fuze Meetings from your Calendar.",
+  "browser_action": {
+    "default_title": "Fuze for Chrome",
+    "default_popup": "html/popup.html"
+  },
+  "background": {
+    "page": "html/background.html",
+    "persistent": true
+  },
+  "permissions": [
+    "desktopCapture",
+    "storage",
+    "unlimitedStorage",
+    "tabs",
+    "activeTab",
+    "webNavigation",
+    "cookies",
+    "https://*.fuzemeeting.com/*",
+    "https://*.thinkingphones.com/*",
+    "https://*.contactive.com/*",
+    "https://*.fuze.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "javascript/vendor/jquery-3.2.0.min.js",
+        "javascript/vendor/jquery-ui-1.12.1.min.js",
+        "javascript/vendor/enscroll-0.6.2.min.js",
+        "javascript/vendor/intlTelInput.min.js",
+        "javascript/vendor/fuze-app-launcher.min.js",
+        "javascript/utils/utils.js",
+        "javascript/utils/log.js",
+        "javascript/extension-initializer.bundle.js"
+      ],
+      "css": [
+        "styles/roboto.css",
+        "styles/styles.css"
+      ],
+      "run_at": "document_start",
+      "exclude_matches": [
+        "*://*/_/chrome/newtab*"
+      ]
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://browser.fuzemeeting.com/*",
+      "*://web.fuze.com/*",
+      "*://web-alpha.fuze.com/*",
+      "*://web-beta.fuze.com/*",
+      "*://web-nightly.fuze.com/*",
+      "*://intgbrowser.fuzemeeting.com/*",
+      "*://mainbrowser.fuzemeeting.com/*",
+      "*://local.fuze.com/*",
+      "*://localhost/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "images/popup/person-icon.png",
+    "images/popup/desktop-icon.png",
+    "images/popup/polycom-icon.png",
+    "images/popup/mobile-phone-icon.png",
+    "images/popup/other-phone-icon.png",
+    "images/popup/logo-background.png",
+    "images/popup/spinner.svg",
+    "images/popup/check.svg",
+    "images/popup/check-green.svg",
+    "images/logo/logo-image-color.svg",
+    "images/logo/logo-image-color-disabled.png",
+    "images/logo/logo-with-text.svg",
+    "images/logo/fuze-loading.gif",
+    "images/modals/no-contacts-icon.svg",
+    "images/modals/default-avatar.svg",
+    "images/notifications/sign-in-is-possible-be-late.png",
+    "images/popup/arrow-down.svg",
+    "images/popup/arrow-up-active.svg",
+    "images/popup/arrow-checked.svg",
+    "images/popup/gray-arrow-down.svg",
+    "images/popup/blue-arrow-up-active.svg",
+    "images/popup/green-arrow-checked.svg",
+    "images/popup/alert-icon.svg",
+    "images/popup/remove-button.svg",
+    "images/popup/edit-button.svg",
+    "images/popup/info-sign.svg",
+    "images/popup/info-sign-checked.svg",
+    "images/popup/gmail-c2c.svg",
+    "images/modals/join-desktop-logo.svg",
+    "images/modals/join-web-logo.svg",
+    "images/modals/close-modal-icon.png",
+    "styles/roboto/roboto-light.woff",
+    "styles/roboto/roboto-regular.woff",
+    "styles/roboto/roboto-medium.woff",
+    "images/logo/icon-disabled-16.png",
+    "styles/roboto.css",
+    "styles/styles.css"
+  ],
+  "icons": {
+    "16": "images/logo/logo-image-color-16.png",
+    "32": "images/logo/logo-image-color-32.png",
+    "48": "images/logo/logo-image-color-48.png",
+    "128": "images/logo/logo-image-color-128.png"
+  },
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self'; object-src 'self'"
+}

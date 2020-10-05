@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Intercom Chrome Extension",
+  "description": "Checks emails on the current page against users in your Intercom account. If found, it will add a link and information on the user.",
+  "version": "0.5.0",
+  "minimum_chrome_version": "26",
+  "permissions": [
+    "https://api.intercom.io/",
+    "activeTab",
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ],
+    "persistent": false
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "scripts/jq.js",
+        "scripts/check_emails.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.linkedin.com/company/*"
+      ],
+      "js": [
+        "scripts/jq.js",
+        "scripts/linkedin.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": "images/logo.png"
+  },
+  "icons": {
+    "16": "images/logo16.png",
+    "48": "images/logo48.png",
+    "128": "images/logo128.png"
+  },
+  "web_accessible_resources": [
+    "images/*.png"
+  ],
+  "manifest_version": 2
+}

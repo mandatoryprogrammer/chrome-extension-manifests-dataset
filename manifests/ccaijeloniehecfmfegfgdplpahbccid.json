@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_extension_name__",
+  "version": "1.1.10",
+  "description": "__MSG_extension_description__",
+  "author": "Talentry",
+  "manifest_version": 2,
+  "minimum_chrome_version": "70",
+  "default_locale": "en",
+  "permissions": [
+    "cookies",
+    "activeTab",
+    "webNavigation",
+    "storage",
+    "https://*.talentry.com/"
+  ],
+  "background": {
+    "scripts": [
+      "dist/background-bundle.js"
+    ]
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.linkedin.com/*",
+        "https://*.xing.com/*"
+      ],
+      "css": [
+        "dist/content-script-bundle.css"
+      ],
+      "js": [
+        "dist/content-script-bundle.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "icons/*",
+    "dist/overlay/*"
+  ],
+  "page_action": {
+    "default_icon": "icons/icon-disabled.png"
+  },
+  "icons": {
+    "128": "icons/icon.png",
+    "64": "icons/icon.png",
+    "32": "icons/icon.png"
+  }
+}

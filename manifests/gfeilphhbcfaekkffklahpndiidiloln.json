@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Antibias",
+  "version": "1.7.5",
+  "description": "Antibias hides user names and profile pictures on LinkedIn to reduce bias when screening job applicants.",
+  "minimum_chrome_version": "63",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "http://*.linkedin.com/*",
+    "https://*.linkedin.com/*"
+  ],
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_popup": "html/popup.html",
+    "default_icon": {
+      "16": "images/16x16.png",
+      "32": "images/32x32.png",
+      "48": "images/48x48.png",
+      "128": "images/128x128.png"
+    },
+    "matches": [
+      "https://*.linkedin.com/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "persistent": false,
+      "matches": [
+        "https://*.linkedin.com/*"
+      ],
+      "web_accessible_resources": [
+        "css/*",
+        "js/*",
+        "images/*"
+      ],
+      "css": [
+        "css/content.css"
+      ],
+      "js": [
+        "js/content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "icons": {
+    "16": "images/16x16.png",
+    "32": "images/32x32.png",
+    "48": "images/48x48.png",
+    "128": "images/128x128.png"
+  },
+  "manifest_version": 2
+}

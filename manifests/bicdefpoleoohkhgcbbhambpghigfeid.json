@@ -1,0 +1,92 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "方片收集",
+  "version": "1.0.1.92",
+  "description": "一键摘录,永久保存,轻松构建自己的在线灵感库和图书馆",
+  "browser_action": {
+    "default_icon": "icons/icon.png",
+    "default_popup": "./pages/popup.html"
+  },
+  "options_page": "./pages/option.html",
+  "default_locale": "zh_CN",
+  "background": {
+    "scripts": [
+      "scripts/jquery.min.js",
+      "build/jstorage.min.js",
+      "scripts/background.js",
+      "build/analytic.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "build/index.js"
+      ],
+      "css": [
+        "build/index.css"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "commands": {
+    "toggle-ext": {
+      "suggested_key": {
+        "default": "Alt+1",
+        "windows": "Alt+1",
+        "mac": "Alt+1"
+      },
+      "description": "Toggle the sidebar visibility"
+    }
+  },
+  "permissions": [
+    "<all_urls>",
+    "contextMenus",
+    "downloads",
+    "tabs",
+    "geolocation",
+    "webRequest",
+    "webRequestBlocking",
+    "clipboardWrite",
+    "clipboardRead"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://ssl.google-analytics.com https://okay-pic.oss-cn-hangzhou.aliyuncs.com https://img.okay.do https://cdn.okay.do https://cdn.quickwis.com https://api.okay.do https://test.api.okay.do https://test.funp.in https://test.api.funp.in https://funp.in https://api.funp.in; object-src 'self'; style-src https://okay-pic.oss-cn-hangzhou.aliyuncs.com https://img.okay.do https://cdn.quickwis.com 'unsafe-inline' ",
+  "web_accessible_resources": [
+    "build/extension.html",
+    "images/w-qrcode.png",
+    "images/zhai.png",
+    "images/ajax-loader.gif",
+    "images/switcher_c.png",
+    "images/ok-done.png",
+    "images/ok-done-cyan.png",
+    "images/ok-saved.png",
+    "images/video-drag.png",
+    "images/video-drag-tip.png",
+    "images/erweima.png",
+    "build/index.css",
+    "images/switch_back.png",
+    "images/avatar_06.jpg",
+    "images/white-logo.png",
+    "scripts/jquery.min.js",
+    "build/index.js",
+    "images/quick_add.gif",
+    "images/switch.gif",
+    "images/drag_download.gif"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.funp.in/*",
+      "*://funp.in/*"
+    ]
+  },
+  "icons": {
+    "16": "icons/icon-bitty.png",
+    "32": "icons/icon-nousenow.png",
+    "48": "icons/icon-small.png",
+    "128": "icons/icon-large.png"
+  }
+}

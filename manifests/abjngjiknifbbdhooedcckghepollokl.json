@@ -1,0 +1,122 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqrq9t5vXn9pZNQaExeg5inYAL0bPbCkTCxxh0E8ROzDeDXqu3TxOSH5qWG3SyMpepHQbfMGJ2J6cW0X/sm2wTlPyzGUT60PPZMhCHwJcZECpfTSIBOvTpACRHg3H8JTz2yz4UbNuRzQlUL423wwYfR3/CrWT3ZwOmXHEeFg/oN9LVshrzJJG7UTKUnE6KbFePCUA1TzgPgQIjFhEBmRcuLFsADM4H0Ls0GfFM7cI2fFTmKoAS61P+InfGQdHG+BiV+wUNwODZSWt4OOlfKSaD+J+tSmQn2oIBPG6zMn1AA/GKffGiTOl0CkAXDCTverIZemqacWFiYatgW65jGmlQwIDAQAB",
+  "name": "VIEWBOMB",
+  "description": "Viewbomb is a service for YouTubers that automates the release of videos at the optimal time for their specific audience & channel.",
+  "version": "1.5.0",
+  "icons": {
+    "16": "icons/icon-16x16.png",
+    "48": "icons/icon-48x48.png",
+    "128": "icons/icon-128x128.png"
+  },
+  "browser_action": {
+    "default_title": "VIEWBOMB",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "notifications"
+  ],
+  "background": {
+    "scripts": [
+      "environment.js",
+      "settings.js",
+      "functions.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "https://viewbomb.com/dashboard*"
+      ],
+      "js": [
+        "environment.js",
+        "settings.js",
+        "functions.js",
+        "content/vbomb/setup.js"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "https://www.youtube.com/upload*"
+      ],
+      "js": [
+        "lib/hashids.js-1.1.4/hashids.min.js",
+        "environment.js",
+        "settings.js",
+        "functions.js",
+        "fetch.js",
+        "content/youtube.js",
+        "content/youtube/classic.js",
+        "content/youtube/classic/upload.js"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "https://www.youtube.com/my_videos*"
+      ],
+      "css": [
+        "content/youtube.css"
+      ],
+      "js": [
+        "environment.js",
+        "settings.js",
+        "functions.js",
+        "fetch.js",
+        "content/youtube.js",
+        "content/youtube/classic.js",
+        "content/youtube/classic/videos.js"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "https://www.youtube.com/edit*"
+      ],
+      "js": [
+        "environment.js",
+        "settings.js",
+        "functions.js",
+        "fetch.js",
+        "content/youtube.js",
+        "content/youtube/classic.js",
+        "content/youtube/classic/edit.js"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "https://studio.youtube.com/*"
+      ],
+      "css": [
+        "content/studio.css"
+      ],
+      "js": [
+        "lib/hashids.js-1.1.4/hashids.min.js",
+        "environment.js",
+        "settings.js",
+        "functions.js",
+        "fetch.js",
+        "content/youtube.js",
+        "content/youtube/studio/page.js",
+        "content/youtube/studio/vbomb-radio-buttons.js",
+        "content/youtube/studio/upload-dialog.js",
+        "content/youtube/studio.js"
+      ]
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://viewbomb.com/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "icons/icon-48x48.png"
+  ]
+}

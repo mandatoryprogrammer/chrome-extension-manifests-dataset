@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_extName__",
+  "version": "0.1.8",
+  "description": "__MSG_extDescription__",
+  "default_locale": "ja",
+  "permissions": [
+    "tabs",
+    "contextMenus",
+    "http://*/*/",
+    "https://api.twitter.com/",
+    "chrome://favicon/"
+  ],
+  "icons": {
+    "16": "res/tl_logo16.png",
+    "48": "res/tl_logo48.png",
+    "128": "res/tl_logo128.png"
+  },
+  "background": {
+    "scripts": [
+      "js/jquery.min.js",
+      "js/underscore-min.js",
+      "js/lemmatizer.js",
+      "js/utils.js",
+      "js/db.js",
+      "js/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "res/tl_logo19.png"
+    },
+    "default_title": "__MSG_extName__"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "js/jquery.say.js",
+        "js/utils.js",
+        "js/content_scripts.js"
+      ],
+      "css": [
+        "css/popwindow.css",
+        "css/popwindow_font-awesome.min.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "template.html",
+    "dict/*",
+    "fonts/*"
+  ],
+  "content_security_policy": "script-src 'self' https://api.flickr.com; object-src 'self'"
+}

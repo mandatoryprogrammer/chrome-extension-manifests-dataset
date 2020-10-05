@@ -1,0 +1,88 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Hilton ResSmart Click to Dial",
+  "description": "Enables clickable telephone numbers inside the ResSmart application which will call via Amazon Connect",
+  "version": "1.2",
+  "manifest_version": 2,
+  "externally_connectable": {
+    "matches": [
+      "*://localhost/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.awsapps.com/connect/ccp*",
+        "https://ccp.connectrouting.com/*",
+        "https://*.salesforce.com/console",
+        "http://resmax.hiltonres.com/*",
+        "http://ressmart.hiltonres.com/*",
+        "https://resmax.hiltonres.com/*",
+        "https://ressmart.hiltonres.com/*"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true,
+      "js": [
+        "js/lib/apexcharts.min.js",
+        "js/lib/vue-apexcharts.min.js",
+        "js/inject.js",
+        "js/click2call.js",
+        "js/app.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.awsapps.com/connect/ccp*",
+        "https://ccp.connectrouting.com/*",
+        "https://*.salesforce.com/console",
+        "http://resmax.hiltonres.com/*",
+        "http://ressmart.hiltonres.com/*",
+        "https://resmax.hiltonres.com/*",
+        "https://ressmart.hiltonres.com/*"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "js": [
+        "js/lib/vue.js",
+        "js/lib/moment.min.js",
+        "js/lib/jquery.min.js",
+        "js/lib/axios.min.js",
+        "js/lib/libphonenumber.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "contentSettings",
+    "tabs",
+    "declarativeContent",
+    "storage"
+  ],
+  "browser_action": {
+    "default_icon": "./status-icons/green.png",
+    "default_popup": "ui.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "icons": {
+    "16": "./status-icons/green.png",
+    "128": "./status-icons/green.png"
+  },
+  "web_accessible_resources": [
+    "css/stockccp.style.css",
+    "images/bg.svg",
+    "images/call_icon.svg",
+    "images/close_icon_nw.svg",
+    "images/duration.svg",
+    "images/date-icon.svg",
+    "images/time-icon.svg",
+    "js/history.js",
+    "js/lib/axios.min.js",
+    "images/down.svg",
+    "images/outgoing-call-icon.svg"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

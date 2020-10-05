@@ -1,0 +1,152 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "5.0.1",
+  "name": "eJOY English - Learn with Movies",
+  "manifest_version": 2,
+  "description": "__MSG_ext_description__",
+  "default_locale": "en",
+  "options_page": "options/index.html",
+  "homepage_url": "https://ejoy-english.com/",
+  "browser_action": {
+    "default_title": "eJOY English",
+    "default_popup": "popup.html"
+  },
+  "commands": {
+    "play": {
+      "suggested_key": {
+        "default": "Alt+Space"
+      },
+      "description": "Read/Pause"
+    },
+    "forward": {
+      "description": "Next"
+    },
+    "rewind": {
+      "description": "Previous"
+    },
+    "speaker": {
+      "description": "Speaker"
+    },
+    "showAdv": {
+      "suggested_key": {
+        "default": "Alt+T"
+      },
+      "description": "Show Advanced"
+    }
+  },
+  "icons": {
+    "16": "img/logo/icon.png",
+    "48": "img/logo/icon@2x.png",
+    "128": "img/logo/icon@3x.png"
+  },
+  "web_accessible_resources": [
+    "inject.html",
+    "nfSettings.html",
+    "options/history.html",
+    "pop-ups/translation.html",
+    "/html/*",
+    "/css/*",
+    "/img/*",
+    "/lib/*",
+    "injected/*",
+    "assetsReader/*"
+  ],
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.netflix.com/*",
+        "*://www.youtube.com/*",
+        "*://piay.iflix.com/*"
+      ],
+      "css": [
+        "css/netflix.css",
+        "css/youtube.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://www.youtube.com/embed/*"
+      ],
+      "include_globs": [
+        "*://www.youtube.com/embed/*controls=0&start=0&origin=*"
+      ],
+      "all_frames": true,
+      "css": [
+        "css/hiddenElemen.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://www.youtube-nocookie.com/embed/*",
+        "*://www.coursera.org/*",
+        "https://smile.amazon.ca/*",
+        "https://www.amazon.ca/*",
+        "https://smile.amazon.com/*",
+        "https://www.amazon.com/*",
+        "https://smile.amazon.co.uk/*",
+        "https://www.amazon.co.uk/*",
+        "https://www.amazon.de/*",
+        "https://www.amazon.es/*",
+        "https://www.amazon.fr/*",
+        "https://www.amazon.in/*",
+        "https://smile.amazon.it/*",
+        "https://www.amazon.it/*",
+        "*://www.udemy.com/*",
+        "*://www.primevideo.com/*",
+        "*://www.khanacademy.org/*",
+        "*://www.youtube-nocookie.com/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "js/ejoy.bundle.js"
+      ],
+      "css": [
+        "css/netflix.css",
+        "css/youtube.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://ejoy-english.com/*",
+      "*://studify.tv/*",
+      "*://phimlearning.com/*",
+      "*://easylearning.gift/*",
+      "*://*.ejoy.ws/*"
+    ]
+  },
+  "permissions": [
+    "tts",
+    "gcm",
+    "notifications",
+    "contextMenus",
+    "unlimitedStorage",
+    "tabs",
+    "webRequest",
+    "webNavigation",
+    "storage",
+    "*://*.nflximg.com/*",
+    "*://*.nflxvideo.net/*",
+    "*://*.nflxext.com/*",
+    "*://*.netflix.com/*",
+    "*://*.nflximg.net/*",
+    "*://api.ejoy.io/*",
+    "*://translate.google.com/*",
+    "*://api.urbandictionary.com/*",
+    "*://glosbe.com/*",
+    "*://api.ejoy.io/*",
+    "*://connect.ejoy.io/*",
+    "*://youtube.com/*",
+    "<all_urls>",
+    "http://fonts.googleapis.com/",
+    "https://fonts.googleapis.com/"
+  ],
+  "content_security_policy": "default-src 'self'; script-src 'self' https://translate.google.com https://www.youtube.com https://www.youtube.com/iframe_api https://s.ytimg.com http://localhost:4000 https://localhost:4000 https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js https://use.fontawesome.com/releases/v5.0.13/css/all.css 'unsafe-eval'; connect-src *; font-src *; frame-src *; style-src * 'unsafe-inline' 'self' blob:; media-src *; img-src * data:;"
+}

@@ -1,0 +1,122 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "background": {
+    "scripts": [
+      "ext/common.js",
+      "ext/background.js",
+      "lib/compat.js",
+      "lib/info.js",
+      "lib/adblockplus.js",
+      "lib/punycode.js",
+      "lib/publicSuffixList.js",
+      "lib/sha1.js",
+      "lib/jsbn.js",
+      "lib/rsa.js",
+      "webrequest.js",
+      "messageResponder.js",
+      "popupBlocker.js",
+      "background.js",
+      "standalone.js",
+      "crypto-md5-min.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/abp-19.png",
+      "38": "icons/abp-38.png"
+    },
+    "default_popup": "popup.html",
+    "default_title": "Clear"
+  },
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "ext/common.js",
+        "ext/content.js",
+        "include.preload.js"
+      ],
+      "match_about_blank": true,
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "include.postload.js"
+      ],
+      "match_about_blank": true,
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "css": [
+        "skin/widget.css"
+      ],
+      "js": [
+        "ext/widget.js"
+      ],
+      "match_about_blank": true,
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "default_locale": "en_US",
+  "description": "__MSG_description_chrome__",
+  "icons": {
+    "128": "icons/detailed/abp-128.png",
+    "16": "icons/abp-16.png",
+    "32": "icons/abp-32.png",
+    "48": "icons/detailed/abp-48.png",
+    "64": "icons/detailed/abp-64.png"
+  },
+  "manifest_version": 2,
+  "minimum_chrome_version": "28.0",
+  "name": "Clear",
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "contextMenus",
+    "webRequest",
+    "webRequestBlocking",
+    "webNavigation",
+    "storage",
+    "unlimitedStorage",
+    "notifications",
+    "system.cpu"
+  ],
+  "short_name": "Clear",
+  "storage": {
+    "managed_schema": "managed-storage-schema.json"
+  },
+  "version": "1.2.0.1",
+  "web_accessible_resources": [
+    "block.html",
+    "skin/arrow.png",
+    "skin/Loop.webm",
+    "skin/RampUp.webm",
+    "skin/0-1.webm",
+    "skin/1-2.webm",
+    "skin/2-3.webm",
+    "skin/3-4.webm",
+    "skin/4-5.webm",
+    "skin/5-6.webm",
+    "skin/6-7.webm",
+    "skin/7-8.webm",
+    "skin/8-9.webm",
+    "skin/9-0.web"
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "EOVD Clipboard Manager",
+  "version": "5.2.1",
+  "description": "Allows users to grant direct clipboard access to the EOVD application virtualization solution, using the W3C Clipboard API.",
+  "icons": {
+    "16": "icons/clipboard-allow-16.png",
+    "32": "icons/clipboard-allow-32.png",
+    "48": "icons/clipboard-allow-48.png",
+    "64": "icons/clipboard-allow-64.png",
+    "128": "icons/clipboard-allow-128.png"
+  },
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "clipboardRead",
+    "clipboardWrite",
+    "storage"
+  ],
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "private/background/clipboardService.js",
+      "private/background/popupService.js",
+      "private/background/analytics.js"
+    ]
+  },
+  "page_action": {
+    "default_popup": "private/popup/popup.html",
+    "default_icon": {
+      "19": "private/popup/icons/clipboard-maybe-19.png",
+      "38": "private/popup/icons/clipboard-maybe-38.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "private/content/init.js",
+        "private/content/clipboardBroker.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "public/execCommand.js"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

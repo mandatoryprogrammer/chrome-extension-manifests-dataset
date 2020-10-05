@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "0.2.90",
+  "manifest_version": 2,
+  "name": "Politbot",
+  "description": "Инструменты для поиска \"политботов\"",
+  "homepage_url": "https://pikabu.ru",
+  "default_locale": "ru",
+  "permissions": [
+    "tabs",
+    "storage",
+    "activeTab",
+    "*://pikabu.ru/*",
+    "*://new.pikabu.ru/*",
+    "*://pastebin.com/*",
+    "*://politbot.info/*",
+    "https://raw.githubusercontent.com/*"
+  ],
+  "icons": {
+    "32": "icons/politbot-32.png",
+    "48": "icons/politbot-48.png",
+    "98": "icons/politbot-98.png",
+    "128": "icons/politbot-128.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/politbot-32.png",
+    "default_title": "Politbot",
+    "default_popup": "templates/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://pikabu.ru/*",
+        "*://new.pikabu.ru/*"
+      ],
+      "run_at": "document_start",
+      "css": [
+        "css/content.css"
+      ],
+      "js": [
+        "scripts/vendors.js",
+        "scripts/content.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "css/*",
+    "images/*"
+  ]
+}

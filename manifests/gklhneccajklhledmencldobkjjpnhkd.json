@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Sticky Ducky",
+  "author": "Boris Lykah",
+  "description": "Automatically cleans pages of the sticky headers and other fixed elements",
+  "version": "1.5",
+  "minimum_chrome_version": "51",
+  "permissions": [
+    "tabs",
+    "storage",
+    "<all_urls>"
+  ],
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": "assets/icon48.png"
+  },
+  "icons": {
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "lib/underscore-1.9.1.js",
+      "lib/detectIt-3.0.3.js",
+      "lib/css-what-3.2.1.js",
+      "js/vapiBackground.js",
+      "js/explorer.js",
+      "js/whitelist.js",
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "lib/underscore-1.9.1.js",
+        "lib/css-what-3.2.1.js",
+        "js/vapiInjected.js",
+        "js/explorer.js",
+        "js/content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

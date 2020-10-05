@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "short_name": "__MSG_shortAppName__",
+  "author": "SABIO GmbH",
+  "version": "2.4.0",
+  "description": "__MSG_appDesc__",
+  "default_locale": "en",
+  "icons": {
+    "16": "extension/resources/icons/icon-active-16.png",
+    "48": "extension/resources/icons/icon-active-48.png",
+    "128": "extension/resources/icons/icon-active-128.png"
+  },
+  "browser_action": {
+    "default_icon": "extension/resources/icons/icon-inactive-48.png",
+    "default_popup": "popup/index.html"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+Shift+S"
+      }
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "app/content-script.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*/*/services/authentication/keycloak*"
+      ],
+      "js": [
+        "extra/keycloak-script.js"
+      ]
+    }
+  ],
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "extension/background.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "shared/resources/*"
+  ],
+  "permissions": [
+    "*://*/*",
+    "contextMenus",
+    "tabs",
+    "storage",
+    "notifications",
+    "identity"
+  ],
+  "manifest_version": 2,
+  "options_ui": {
+    "page": "options/index.html",
+    "open_in_tab": true
+  }
+}

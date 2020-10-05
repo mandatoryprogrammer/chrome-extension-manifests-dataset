@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "description": "__MSG_appDesc__",
+  "version": "1.6.7",
+  "manifest_version": 2,
+  "icons": {
+    "16": "images/icon-16.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "images/icon-16.png",
+      "24": "images/icon-24.png",
+      "32": "images/icon-32.png",
+      "48": "images/icon-48.png"
+    }
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "web_accessible_resources": [
+    "images/icon-lock-gmail-32.png"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://inboxwhenready.org/*",
+        "https://mail.google.com/*"
+      ],
+      "css": [
+        "styles/gmail.css",
+        "styles/inbox-when-ready.css"
+      ],
+      "js": [
+        "scripts/content_scripts/vendor/zepto.min.js",
+        "scripts/content_scripts/vendor/raven.min.js",
+        "scripts/content_scripts/inbox-when-ready.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": false
+    }
+  ],
+  "permissions": [
+    "storage",
+    "https://inboxwhenready.org/*",
+    "http://mail.google.com/*",
+    "https://mail.google.com/*"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js; object-src 'self'"
+}

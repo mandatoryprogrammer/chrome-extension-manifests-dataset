@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Robolectric",
+  "description": "Adds Robolectric documentation to the Android developer docs.",
+  "version": "0.2018.1031.1",
+  "icons": {
+    "16": "main/images/robolectric-icon.png",
+    "48": "main/images/robolectric-48.png",
+    "128": "main/images/robolectric-128.png"
+  },
+  "browser_action": {
+    "default_icon": "main/images/robolectric-icon.png",
+    "default_popup": "main/popup.html",
+    "default_title": "Robolectric"
+  },
+  "options_ui": {
+    "page": "main/options.html",
+    "chrome_style": true
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "http://robolectric.org/",
+    "https://robolectric.org/"
+  ],
+  "background": {
+    "scripts": [
+      "main/js/RoboDefaults.js",
+      "main/js/RoboOptions.js",
+      "main/js/RoboBackground.js",
+      "main/js/background.js"
+    ],
+    "pesistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://developer.android.com/*"
+      ],
+      "css": [
+        "main/css/robodac.css"
+      ],
+      "js": [
+        "main/js/lib/showdown-1.6.4.min.js",
+        "main/js/util.js",
+        "main/js/Javadoc.js",
+        "main/js/RoboPage.js",
+        "main/js/content-script.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://robolectric.org/*"
+      ],
+      "css": [
+        "main/css/robolectric-org.css"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "description": "Useful things for freelancer.com",
+  "version": "1.2.4",
+  "name": "Freelancer Helper",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "alarms"
+  ],
+  "optional_permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "https://www.freelancer.com/fs/download-api.php*"
+  ],
+  "background": {
+    "page": "background.html"
+  },
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_title": "Freelancer Helper",
+    "default_icon": {
+      "16": "public/freelancer_f_16.png",
+      "48": "public/freelancer_f_48.png",
+      "128": "public/freelancer_f_128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.freelancer.com/projects/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "projectPage.bundle.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.freelancer.com/search/projects/*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "filterProjects.bundle.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.freelancer.com/u/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "employerPage.bundle.js"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "public/freelancer_f_16.png",
+    "48": "public/freelancer_f_48.png",
+    "128": "public/freelancer_f_128.png"
+  },
+  "web_accessible_resources": [
+    "public/**/*.png",
+    "public/**/*.jpg",
+    "public/*.woff2"
+  ],
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

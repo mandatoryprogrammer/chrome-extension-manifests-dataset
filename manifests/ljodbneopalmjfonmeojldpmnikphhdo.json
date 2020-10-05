@@ -1,0 +1,94 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "version": "3.9.14",
+  "name": "Knotes",
+  "short_name": "Capture your thoughts, faster.",
+  "description": "Super fast notes from your New Tab window",
+  "chrome_url_overrides": {
+    "newtab": "app/index.html"
+  },
+  "options_ui": {
+    "page": "app/chrome-extension/options.html",
+    "chrome_style": true
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "app/background/platform.js",
+      "app/background/noticeHelper.js",
+      "app/background/webAppAutoLoginHelper.js",
+      "app/common/constants.js",
+      "app/common/messaging-service.js",
+      "app/background/connections-manager.js",
+      "app/common/knotes-helper.js",
+      "app/vendor/jquery.2.1.0.js",
+      "app/vendor/underscore-min.js",
+      "app/vendor/moment.min.js",
+      "app/vendor/q.js",
+      "app/vendor/retry.js",
+      "app/common/general_helpers.js",
+      "app/common/url_helper.js",
+      "app/common/login_helper.js",
+      "app/common/cache-helper.js",
+      "app/config.js",
+      "app/background/ddp-log.js",
+      "app/background/backgroundImage.js",
+      "app/background/logger.js",
+      "app/background/knote_server.js",
+      "app/common/analytics.js",
+      "app/build/asteroid-bundle.js",
+      "app/background/account-helper.js",
+      "app/background/background.js",
+      "app/background/reactive_controller.js",
+      "app/background/messageManager.js",
+      "app/background/offline_mode.js",
+      "app/background/main.js",
+      "app/build/background-bundle.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "app/vendor/underscore-min.js",
+        "app/common/general_helpers.js",
+        "app/common/messaging-service.js",
+        "app/content-script/knotable-web-app.js"
+      ],
+      "matches": [
+        "*://knote.com/*",
+        "*://*.knote.com/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://apis.google.com https://www.google.com https://www.google-analytics.com https://ssl.google-analytics.com; object-src 'self' 'unsafe-eval'",
+  "icons": {
+    "128": "app/images/icon-128.png",
+    "16": "app/images/icon-16.png",
+    "48": "app/images/icon-48.png"
+  },
+  "permissions": [
+    "activeTab",
+    "background",
+    "notifications",
+    "storage",
+    "cookies",
+    "https://knote.com/*",
+    "https://www.knote.com/*"
+  ],
+  "web_accessible_resources": [
+    "app/views/dropbox_receiver.html",
+    "app/views/panel-app.html"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://knote.com/*",
+      "https://www.knote.com/*"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "app/images/icon-48.png",
+    "default_title": "Note Instantly"
+  }
+}

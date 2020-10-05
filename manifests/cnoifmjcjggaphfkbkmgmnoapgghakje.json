@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Pointzi Digital Adoption",
+  "short_name": "Pointzi Digital Adoption",
+  "author": "Pointzi Team",
+  "version": "3.1.18",
+  "version_name": "3.1.18",
+  "description": "Pointzi Digital Adoption allows you to design tips/tours/announcement etc on your website without needing to write code.",
+  "icons": {
+    "16": "./public/img/plugin-icon-16.png",
+    "48": "./public/img/plugin-icon-48.png",
+    "128": "./public/img/plugin-icon-128.png"
+  },
+  "browser_action": {
+    "default_icon": "./public/img/state-icon/pointzi-icon-idle-48px.png"
+  },
+  "background": {
+    "scripts": [
+      "./dist/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "./dist/middleware.js"
+      ]
+    }
+  ],
+  "options_ui": {
+    "page": "src/options/options.html",
+    "open_in_tab": false
+  },
+  "permissions": [
+    "activeTab",
+    "identity",
+    "storage",
+    "contextMenus",
+    "https://fonts.gstatic.com/",
+    "https://fonts.googleapis.com/",
+    "https://*.pointzi.com/v1/*",
+    "https://*.pointzi.com/v2/*",
+    "https://*.pointzi.com/v3/*",
+    "https://*.streethawk.com/v1/*",
+    "https://*.streethawk.com/v2/*",
+    "https://*.streethawk.com/v3/*",
+    "https://api.filestackapi.com/filestack.js"
+  ],
+  "web_accessible_resources": [
+    "libs/*",
+    "public/*",
+    "dist/*",
+    "src/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.pointzi.com/*"
+    ]
+  }
+}

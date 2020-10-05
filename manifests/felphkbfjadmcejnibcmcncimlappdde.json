@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "version": "5.6.1",
+  "name": "Clear New Tab",
+  "description": "__MSG_desc__",
+  "default_locale": "en",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "icon16.png",
+      "19": "icon19.png",
+      "32": "icon32.png",
+      "64": "icon64.png"
+    }
+  },
+  "permissions": [
+    "storage",
+    "https://clients2.google.com/*",
+    "https://clients2.googleusercontent.com/*",
+    "https://www.themebeta.com/*",
+    "management"
+  ],
+  "optional_permissions": [
+    "bookmarks",
+    "clipboardRead",
+    "*://*/*",
+    "https://www.google-analytics.com/*"
+  ],
+  "background": {
+    "scripts": [
+      "env.js",
+      "background.js"
+    ]
+  },
+  "chrome_url_overrides": {
+    "newtab": "new_tab.html"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": false,
+    "open_in_tab": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.themebeta.com/*"
+      ],
+      "js": [
+        "env.js",
+        "content_script.js"
+      ],
+      "css": [
+        "content_script.css"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

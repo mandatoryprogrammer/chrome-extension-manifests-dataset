@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Kaggle Download Assistant",
+  "description": "A chrome extension for Kaggle. Provides commands for downloading and uncompressing files of a competition.",
+  "author": "KHvic <notesalt@hotmail.com>",
+  "version": "0.8.5",
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "permissions": [
+    "<all_urls>",
+    "*://*/*",
+    "activeTab",
+    "background",
+    "unlimitedStorage",
+    "storage"
+  ],
+  "browser_action": {
+    "default_title": "Kaggle Download Assistant",
+    "default_popup": "pages/popup.html"
+  },
+  "background": {
+    "persistent": false,
+    "page": "pages/background.html"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "js/manifest.js",
+        "js/vendor.js",
+        "js/content.js"
+      ],
+      "run_at": "document_end",
+      "matches": [
+        "<all_urls>"
+      ],
+      "all_frames": true
+    }
+  ],
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "web_accessible_resources": [
+    "js/content.js"
+  ]
+}

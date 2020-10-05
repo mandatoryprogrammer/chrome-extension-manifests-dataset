@@ -1,0 +1,68 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Pirateer",
+  "version": "0.7.1",
+  "manifest_version": 2,
+  "author": "Gilad Peleg",
+  "description": "Pirateer is a Chrome Extension that adds IMDb ratings to TV shows and movies on The Pirate Bay",
+  "icons": {
+    "16": "img/icon_16x16.png",
+    "48": "img/icon_48x48.png",
+    "128": "img/icon_128x128.png"
+  },
+  "permissions": [
+    "http://www.imdb.com/*",
+    "http://p.media-imdb.com/static*",
+    "storage"
+  ],
+  "background": {
+    "page": "background.html",
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "include_globs": [
+        "*://thepiratebay.*/*",
+        "*://www.imdb.com/title/tt*",
+        "*://bayproxy.me/*",
+        "*://pirateproxy.se/*",
+        "*://piratebaybyproxy.com/*",
+        "*://tpb.ic0nic.de/*",
+        "*://tpb.unblocked.co/*",
+        "*://tpb.so/*",
+        "*://bayproxy.nl/*"
+      ],
+      "exclude_globs": [
+        "*://thepiratebay.*/",
+        "*://*top",
+        "*://*browse",
+        "*://*browse/4*",
+        "*://*browse/3*",
+        "*://*browse/1*"
+      ],
+      "js": [
+        "js/content_script.js"
+      ],
+      "css": [
+        "css/content.min.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "js/vendor/jquery-2.0.3.min.map",
+    "img/icon_19x19.png"
+  ],
+  "options_page": "options.html",
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com https://apis.google.com; object-src 'self'",
+  "page_action": {
+    "default_icon": {
+      "19": "img/icon_19x19.png",
+      "38": "img/icon_38x38.png"
+    },
+    "default_title": "Pirateer Movie Ratings"
+  }
+}

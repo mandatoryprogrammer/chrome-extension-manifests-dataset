@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "KicksBoy - Buscador de zapatillas baratas",
+  "description": "KicksBoy",
+  "version": "0.1.6",
+  "manifest_version": 2,
+  "icons": {
+    "19": "resources/images/16.png",
+    "32": "resources/images/32.png",
+    "128": "resources/images/128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "resources/images/16.png",
+      "32": "resources/images/32.png",
+      "128": "resources/images/128.png"
+    },
+    "default_title": "Kicksboy"
+  },
+  "permissions": [
+    "identity",
+    "tabs",
+    "storage",
+    "activeTab",
+    "notifications"
+  ],
+  "background": {
+    "scripts": [
+      "scripts/vendor/jquery-3.2.1.min.js",
+      "scripts/background/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*"
+      ],
+      "js": [
+        "scripts/vendor/jquery-3.2.1.min.js",
+        "scripts/vendor/arrive.min.js",
+        "scripts/contentscript/config.js",
+        "scripts/contentscript/contentscript.js"
+      ],
+      "css": [
+        "css/popup.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "options_ui": {
+    "page": "html/options.html"
+  },
+  "web_accessible_resources": [
+    "resources/images/*",
+    "html/*"
+  ]
+}

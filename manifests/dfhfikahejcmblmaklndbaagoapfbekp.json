@@ -1,0 +1,39 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Twitch Highlander - There can be only one",
+  "short_name": "Twitch Highlander",
+  "version": "2.0",
+  "manifest_version": 2,
+  "description": "Mutes any but the most recent tab playing a Twitch stream.",
+  "permissions": [
+    "*://*/*",
+    "tabs",
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://twitch.tv/*",
+        "*://*.twitch.tv/*"
+      ],
+      "js": [
+        "content_tth.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "32": "images/icon32.png"
+    },
+    "default_popup": "popup.html",
+    "default_title": "Twitch Highlander"
+  }
+}

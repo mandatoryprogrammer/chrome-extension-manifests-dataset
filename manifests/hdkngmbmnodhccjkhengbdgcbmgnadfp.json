@@ -1,0 +1,78 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Proofi",
+  "version": "0.1.6",
+  "manifest_version": 2,
+  "description": "Proofi for Chrome",
+  "short_name": "Proofi",
+  "homepage_url": "https://proofi.com",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "browser_action": {
+    "default_title": "Proofi",
+    "default_popup": "popup.html"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "https://proofi.com/",
+    "https://*.proofi.com/",
+    "https://mail.google.com/",
+    "https://inbox.google.com/",
+    "http://localhost/",
+    "http://localhost:3000/",
+    "storage",
+    "history",
+    "activeTab",
+    "webNavigation"
+  ],
+  "web_accessible_resources": [
+    "lib/*",
+    "js/*",
+    "assets/*",
+    "icons/*",
+    "css/*"
+  ],
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*"
+      ],
+      "css": [
+        "lib/bootstrap.css",
+        "lib/snackbar.min.css",
+        "css/global.css"
+      ],
+      "js": [
+        "lib/inboxsdk.js",
+        "lib/snackbar.min.js",
+        "js/gmail.js"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "https://*.proofi.com/*",
+        "http://localhost:4200/*"
+      ],
+      "css": [],
+      "js": [
+        "js/frontend.js"
+      ]
+    }
+  ]
+}

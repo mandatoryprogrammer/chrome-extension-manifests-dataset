@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "TunnelBear VPN",
+  "short_name": "TunnelBear VPN",
+  "description": "Rawwwr! Put a Bear in your browser and privately access a more open internet in seconds!",
+  "homepage_url": "https://tunnelbear.com",
+  "author": "TunnelBear Inc.",
+  "incognito": "spanning",
+  "browser_action": {
+    "default_icon": "images/icon_off2x.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "images/icon_16.png",
+    "128": "images/icon_128.png"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "permissions": [
+    "proxy",
+    "tabs",
+    "storage",
+    "webRequestBlocking",
+    "webRequest",
+    "privacy",
+    "<all_urls>",
+    "management"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.tunnelbear.com/*"
+      ],
+      "js": [
+        "js/content.js"
+      ]
+    }
+  ],
+  "commands": {
+    "toggle-tunnelling": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+U",
+        "windows": "Ctrl+Shift+U",
+        "mac": "Command+Shift+U"
+      },
+      "description": "Toggle tunnelling"
+    },
+    "incognito-tunnelling": {
+      "suggested_key": {
+        "default": "Alt+Shift+N",
+        "windows": "Alt+Shift+N",
+        "mac": "Alt+Shift+N"
+      },
+      "description": "Incognito tunnelling"
+    },
+    "send-feedback": {
+      "description": "Send feedback"
+    }
+  },
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "version": "3.3.3",
+  "offline_enabled": false
+}

@@ -1,0 +1,73 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Tradutor Rapido/Facil",
+  "version": "1.2.3",
+  "manifest_version": 2,
+  "description": "Traduza textos: ingles-portugues ou portugues-ingles, selecione o texto e clique no icone da extensao. (by Charllison Policarpo)",
+  "browser_action": {
+    "default_icon": "img/iconeTradutor.png",
+    "default_popup": "prjTraduzir.html"
+  },
+  "icons": {
+    "128": "img/iconeTradutor_MAIOR.png"
+  },
+  "permissions": [
+    "http://api.microsofttranslator.com/V2/Ajax.svc/*",
+    "https://api.microsofttranslator.com/V2/Ajax.svc/*",
+    "http://www.google.com/jsapi",
+    "tabs",
+    "activeTab",
+    "webRequest",
+    "tts",
+    "storage"
+  ],
+  "tts_engine": {
+    "voices": [
+      {
+        "voice_name": "Alice",
+        "lang": "en-US",
+        "gender": "female",
+        "event_types": [
+          "start",
+          "marker",
+          "end"
+        ]
+      },
+      {
+        "voice_name": "Pat",
+        "lang": "en-US",
+        "event_types": [
+          "end"
+        ]
+      }
+    ]
+  },
+  "web_accessible_resources": [
+    "js/geral.js"
+  ],
+  "content_security_policy": "script-src 'self' https://api.microsofttranslator.com; object-src 'self'; connect-src *",
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "js/rightcontext.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "js/geral.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

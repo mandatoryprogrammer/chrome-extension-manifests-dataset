@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "version": "1.0.6",
+  "description": "__MSG_appDesc__",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "browser_action": {
+    "default_title": "__MSG_appDesc__"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.google.com/*search*oq=*"
+      ],
+      "js": [
+        "google_search.js"
+      ],
+      "css": [
+        "css/google_search.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "exclude_globs": [
+        "https://*.google.com/*",
+        "*://*/*search*oq=*"
+      ],
+      "js": [
+        "js/jquery-3.4.1.min.js",
+        "js/axios.min.js",
+        "js/sale/activate_cashback.js"
+      ],
+      "css": [
+        "css/sale/activate_cashback.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "storage",
+    "webNavigation",
+    "https://www.jawab360.com/ext/affiliate/get/"
+  ],
+  "web_accessible_resources": [
+    "js/app_info.js",
+    "html/sale/activate_cashback.html",
+    "html/sale/cashback_activated_popup.html",
+    "html/sale/deals_popup.html"
+  ],
+  "icons": {
+    "16": "icons/logo-animation.png",
+    "48": "icons/logo-animation.png",
+    "128": "icons/logo-animation.png"
+  }
+}

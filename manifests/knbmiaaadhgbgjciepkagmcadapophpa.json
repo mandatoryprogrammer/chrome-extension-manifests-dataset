@@ -1,0 +1,120 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Grammalecte [fr]",
+  "short_name": "Grammalecte [fr]",
+  "version": "1.12.0",
+  "minimum_chrome_version": "61",
+  "author": "Olivier R.",
+  "homepage_url": "https://grammalecte.net/",
+  "description": "Correcteur grammatical, orthographique et typographique pour le français.",
+  "default_locale": "fr",
+  "icons": {
+    "16": "img/logo-16.png",
+    "32": "img/logo-32.png",
+    "48": "img/logo-48.png",
+    "64": "img/logo-64.png",
+    "80": "img/logo-80.png",
+    "96": "img/logo-96.png"
+  },
+  "browser_action": {
+    "default_icon": "img/logo-32.png",
+    "default_popup": "panel/main.html",
+    "default_title": "Grammalecte [fr]",
+    "browser_style": false
+  },
+  "background": {
+    "scripts": [
+      "grammalecte/graphspell/helpers.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "*://*.wikisource.org/*",
+        "*://*.wikipedia.org/*",
+        "*://*.wiktionary.org/*"
+      ],
+      "js": [
+        "content_scripts/editor.js",
+        "content_scripts/html_src.js",
+        "content_scripts/panel.js",
+        "grammalecte/fr/textformatter.js",
+        "content_scripts/panel_tf.js",
+        "content_scripts/panel_gc.js",
+        "content_scripts/message_box.js",
+        "content_scripts/menu.js",
+        "content_scripts/init.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.wikisource.org/*",
+        "*://*.wikipedia.org/*",
+        "*://*.wiktionary.org/*"
+      ],
+      "js": [
+        "content_scripts/editor.js",
+        "content_scripts/html_src.js",
+        "content_scripts/panel.js",
+        "grammalecte/fr/textformatter.js",
+        "content_scripts/panel_tf.js",
+        "content_scripts/panel_gc.js",
+        "content_scripts/message_box.js",
+        "content_scripts/menu.js",
+        "content_scripts/init.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "commands": {
+    "grammar_checker": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+F"
+      },
+      "description": "Ouvre le correcteur grammatical"
+    },
+    "conjugueur_tab": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+6"
+      },
+      "description": "Ouvre le conjugueur"
+    },
+    "lexicon_editor": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+7"
+      },
+      "description": "Ouvre l’éditeur lexical"
+    }
+  },
+  "web_accessible_resources": [
+    "content_scripts/api.js",
+    "content_scripts/panel.css",
+    "content_scripts/panel_tf.css",
+    "content_scripts/panel_gc.css",
+    "content_scripts/panel_lxg.css",
+    "content_scripts/panel_conj.css",
+    "content_scripts/message_box.css",
+    "content_scripts/menu.css",
+    "grammalecte/graphspell/_dictionaries/fr-allvars.json",
+    "grammalecte/graphspell/_dictionaries/fr-classic.json",
+    "grammalecte/graphspell/_dictionaries/fr-reform.json",
+    "grammalecte/fr/conj_data.json",
+    "grammalecte/fr/mfsp_data.json",
+    "grammalecte/fr/phonet_data.json",
+    "grammalecte/fr/tests_data.json",
+    "img/logo-16.png"
+  ],
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "downloads",
+    "clipboardWrite",
+    "storage"
+  ]
+}

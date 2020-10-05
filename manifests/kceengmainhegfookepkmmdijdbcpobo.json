@@ -1,0 +1,81 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "DeliMail",
+  "version": "0.8.6",
+  "description": "DeliMail to innowacyjne narzędzie, które pozwala w pełni monitorować wiadomości e-mail. Usługi DeliMail są całkowicie bezpłatne.",
+  "icons": {
+    "16": "images/icon_16.png",
+    "64": "images/icon_64.png",
+    "128": "images/icon_128.png"
+  },
+  "permissions": [
+    "*://localhost/*",
+    "https://localhost:8443/api/gcm",
+    "*://*.delimail.pl/*",
+    "*://*.googleusercontent.com/proxy/*",
+    "storage",
+    "alarms",
+    "notifications",
+    "gcm",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "browser_action": {
+    "default_icon": "images/icon_128.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "jquery-1.12.0.min.js",
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "jquery-1.12.0.min.js",
+        "gmail_content.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.delimail.pl/*"
+      ],
+      "js": [
+        "jquery-1.12.0.min.js",
+        "delimail_content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "web_accessible_resources": [
+    "jquery-1.12.0.min.js",
+    "gmail.js",
+    "gmail_main.js",
+    "moment-with-locales.js",
+    "bootstrap.css",
+    "gmail_styles.css",
+    "gmail_dialogs.html",
+    "css/font-awesome.min.css",
+    "fonts/FontAwesome.otf",
+    "fonts/fontawesome-webfont.eot",
+    "fonts/fontawesome-webfont.svg",
+    "fonts/fontawesome-webfont.ttf",
+    "fonts/fontawesome-webfont.woff",
+    "fonts/fontawesome-webfont.woff2",
+    "fonts/glyphicons-halflings-regular.eot",
+    "fonts/glyphicons-halflings-regular.svg",
+    "fonts/glyphicons-halflings-regular.ttf",
+    "fonts/glyphicons-halflings-regular.woff",
+    "fonts/glyphicons-halflings-regular.woff2",
+    "Autolinker.js",
+    "Autolinker.min.js"
+  ],
+  "manifest_version": 2
+}

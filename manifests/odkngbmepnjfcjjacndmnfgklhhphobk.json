@@ -1,0 +1,43 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Bluepoints Price Checker",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "Compare the prices in the Bluepoints store against their real Amazon price.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "page": "src/bg/background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_popup": "src/popup/popup.html"
+  },
+  "permissions": [],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.amazon.com/s/*"
+      ],
+      "js": [
+        "src/inject/extract.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://ibmrr.performnet.com/*",
+        "https://ibmenterpriseus.awardsworldwide.com/*"
+      ],
+      "js": [
+        "src/inject/blue.js"
+      ],
+      "css": [
+        "src/inject/blue.css"
+      ]
+    }
+  ]
+}

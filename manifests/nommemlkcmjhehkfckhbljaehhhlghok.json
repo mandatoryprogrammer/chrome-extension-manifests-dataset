@@ -1,0 +1,35 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "TC to MS Test Playlist",
+  "description": "Chrome extension to download a MS Test Playlist file built from the failed tests from TeamCity",
+  "version": "1.0.2",
+  "page_action": {
+    "default_icon": "app/icon.png",
+    "default_popup": "app/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "lib/jquery-1.10.2.min.js",
+      "app/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/viewLog.html?buildId=*&tab=buildResultsDiv&buildTypeId=*"
+      ],
+      "js": [
+        "lib/jquery-1.10.2.min.js",
+        "lib/underscore.js",
+        "lib/underscore.string.js",
+        "lib/FileSaver.js",
+        "app/tcPage.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs"
+  ]
+}

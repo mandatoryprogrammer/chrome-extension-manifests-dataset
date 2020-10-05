@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Twitch Chat Overhaul",
+  "short_name": "TCO",
+  "description": "Change font size, message spacing, and make chat easier to read. Especially if you're streaming",
+  "version": "1.8.2",
+  "manifest_version": 2,
+  "icons": {
+    "16": "icon16.png",
+    "20": "icon20.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "contextMenus",
+    "storage",
+    "notifications",
+    "*://*.bungie.net/*",
+    "*://*.twitch.tv/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.twitch.tv/*"
+      ],
+      "css": [
+        "tco.css",
+        "spectrum.css"
+      ],
+      "js": [
+        "jquery.js",
+        "background.js",
+        "spectrum.js",
+        "arrive.min.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

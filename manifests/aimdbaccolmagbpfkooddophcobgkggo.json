@@ -1,0 +1,84 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "携程降价提醒",
+  "version": "1.0.1",
+  "default_locale": "zh_CN",
+  "description": "一键设定您关注的携程机票和酒店，价格下降时自动通知您！",
+  "icons": {
+    "128": "images/icon128.png",
+    "16": "images/icon16.png",
+    "48": "images/icon48.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "css": [
+        "styles/buttons.css"
+      ],
+      "js": [
+        "jquery-3.4.1.min.js",
+        "ctrip_hotel.js"
+      ],
+      "matches": [
+        "https://hotels.ctrip.com/hotel/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "css": [
+        "styles/buttons.css"
+      ],
+      "js": [
+        "jquery-3.4.1.min.js",
+        "ctrip_flight_rt.js"
+      ],
+      "matches": [
+        "https://flights.ctrip.com/itinerary/roundtrip/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "css": [
+        "styles/buttons.css"
+      ],
+      "js": [
+        "jquery-3.4.1.min.js",
+        "ctrip_flight_ow.js"
+      ],
+      "matches": [
+        "https://flights.ctrip.com/itinerary/oneway/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "css": [
+        "styles/buttons.css"
+      ],
+      "js": [
+        "jquery-3.4.1.min.js",
+        "ctrip_flight_int.js"
+      ],
+      "matches": [
+        "https://flights.ctrip.com/international/search/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "storage",
+    "alarms",
+    "notifications",
+    "http://www.ilowerprice.com/"
+  ],
+  "browser_action": {
+    "default_title": "我关注的携程机票酒店降价提醒",
+    "default_popup": "popup.html"
+  }
+}

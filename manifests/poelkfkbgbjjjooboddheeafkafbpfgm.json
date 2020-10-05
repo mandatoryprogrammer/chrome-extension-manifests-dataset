@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "1.0.4",
+  "name": "UBA 可视化插件",
+  "manifest_version": 2,
+  "description": "UBA 可视化插件",
+  "browser_action": {
+    "default_title": "UBA",
+    "default_icon": "imgs/icon_48.png"
+  },
+  "icons": {
+    "16": "imgs/icon_16.png",
+    "48": "imgs/icon_48.png",
+    "128": "imgs/icon_128.png"
+  },
+  "externally_connectable": {
+    "matches": [
+      "https://uba.alibaba-inc.com/*",
+      "http://uba.aliyun-inc.com/*",
+      "http://127.0.0.1:7001/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.aliyun.com/*",
+        "*://*.aliyun-inc.com/*",
+        "*://*.alibaba-inc.com/*",
+        "*://*.alibaba.net/*"
+      ],
+      "js": [
+        "content/index.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://uba.alibaba-inc.com/*",
+        "http://127.0.0.1:7001/*"
+      ],
+      "js": [
+        "content/stub.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "page": "bg.html"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "<all_urls>"
+  ],
+  "content_security_policy": "default-src 'self'; script-src 'self' http://localhost:3000 https://g.alicdn.com; connect-src http://localhost:3000 http://127.0.0.1:7001 https://g.alicdn.com http://uba.aliyun-inc.com https://uba.alibaba-inc.com; img-src data:;"
+}

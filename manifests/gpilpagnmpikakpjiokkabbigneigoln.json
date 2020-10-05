@@ -1,0 +1,86 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Qoala",
+  "version": "1.11.10",
+  "description": "¡Encuentre y aplique automáticamente cupones y descuentos cuando compre online!",
+  "homepage_url": "https://joinqoala.com",
+  "icons": {
+    "16": "qoala_icon_16.png",
+    "48": "qoala_icon_48.png",
+    "128": "qoala_icon_128.png"
+  },
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_title": "Abre Qoala"
+  },
+  "background": {
+    "page": "background.html",
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*"
+      ],
+      "js": [
+        "notification-script.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*/*"
+      ],
+      "js": [
+        "basket-script.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*/*"
+      ],
+      "js": [
+        "try-coupons.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.amazon.es/*"
+      ],
+      "js": [
+        "amazon-script.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://*.amazon.com/*"
+      ],
+      "js": [
+        "amazon-script.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://*.amazon.com.mx/*"
+      ],
+      "js": [
+        "amazon-script.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    "e08c7bc5507ead23d61c24004511b36a.png",
+    "notification.html",
+    "cashback.html",
+    "basket.html",
+    "amazon.html"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://apis.google.com https://*.intercom.io https://*.intercomcdn.com/ https://*.amplitude.com https://*.segment.com; object-src 'self'",
+  "permissions": [
+    "storage",
+    "tabs"
+  ]
+}

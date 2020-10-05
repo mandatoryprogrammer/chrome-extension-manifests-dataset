@@ -1,0 +1,37 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Virtel WebAccess Extender",
+  "description": "Enables Virtel WebAccess advanced features and OS integration.",
+  "version": "40.0",
+  "manifest_version": 2,
+  "minimum_chrome_version": "30.0",
+  "options_page": "options/options.html",
+  "icons": {
+    "64": "icon_64.png"
+  },
+  "background": {
+    "scripts": [
+      "main.js"
+    ],
+    "persistent": false
+  },
+  "content_security_policy": "script-src 'self' ; object-src 'self' ",
+  "permissions": [
+    "clipboardRead",
+    "clipboardWrite",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "worker.js",
+        "settings.js"
+      ]
+    }
+  ]
+}

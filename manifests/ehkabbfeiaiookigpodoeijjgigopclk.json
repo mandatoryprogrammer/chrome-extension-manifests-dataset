@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Tracy",
+  "short_name": "Track your emails",
+  "description": "Track emails anytime",
+  "version": "1.6.4",
+  "icons": {
+    "16": "tracyIcon16.png",
+    "32": "tracyIcon32.png",
+    "48": "tracyIcon48.png",
+    "64": "tracyIcon64.png",
+    "128": "tracyIcon128.png",
+    "256": "tracyIcon256.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "oauth2": {
+    "client_id": "533444421265-nkrh92m2le4lrkugug8tkidljhq226u9.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/drive"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "jquery-3.2.1.min.js",
+        "bootstrap.min.js",
+        "content.js",
+        "background.js"
+      ],
+      "run_at": "document_end",
+      "css": [
+        "content.css"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "browser_action": {
+    "default_icon": "tracyIcon64.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "identity",
+    "notifications",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "web_accessible_resources": []
+}

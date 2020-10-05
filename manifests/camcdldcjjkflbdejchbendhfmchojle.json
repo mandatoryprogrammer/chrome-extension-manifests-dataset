@@ -1,0 +1,68 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "QwipIn - Say It With Video!",
+  "short_name": "Create and share viral clips from any video on the web",
+  "version": "1.2",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_title": "Lets Qwip this video!",
+    "default_popup": "popup.html"
+  },
+  "homepage_url": "https://qwip.in/",
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "icons": {
+    "128": "icon.png",
+    "16": "icon.png",
+    "48": "icon.png"
+  },
+  "permissions": [
+    "webNavigation",
+    "activeTab",
+    "contextMenus",
+    "tabs",
+    "storage",
+    "https://qwip.in/*",
+    "https://*.qwip.in/*",
+    "http://*/*",
+    "https://*/*",
+    "<all_urls>"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://qwip.in/?qwip-url=*",
+        "https://*.qwip.in/?qwip-url=*"
+      ],
+      "js": [
+        "jquery.js",
+        "content-script.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "jquery.js",
+        "scan-and-add-icon.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "img/*",
+    "css/*"
+  ],
+  "description": "Qwip your favorite moment of any video",
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  }
+}

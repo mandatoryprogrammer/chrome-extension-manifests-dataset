@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "44score Extension",
+  "version": "1.28",
+  "manifest_version": 2,
+  "description": "44score for Google Chrome",
+  "browser_action": {
+    "default_icon": "logo-16px.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "logo-16px.png",
+    "48": "logo-48px.png",
+    "128": "logo-128px.png"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "assets/scripts/uuid.core.js",
+        "assets/scripts/ffsconnect_contentscript.js",
+        "assets/scripts/everypage.js",
+        "assets/scripts/everypage_early.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "assets/scripts/uuid.core.js",
+        "assets/scripts/ffsconnect_contentscript.js",
+        "assets/scripts/everypage.js",
+        "assets/scripts/html-sanitizer-bundle.js",
+        "assets/scripts/everypage_end.js",
+        "assets/scripts/44score_contentscript.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "assets/scripts/ffsconnect_webpage.js",
+    "assets/scripts/extensionapi.js",
+    "norefer.html"
+  ],
+  "background": {
+    "page": "main.html"
+  },
+  "permissions": [
+    "tabs",
+    "http://*.44score.com/*",
+    "https://*.44score.com/*",
+    "unlimitedStorage"
+  ]
+}

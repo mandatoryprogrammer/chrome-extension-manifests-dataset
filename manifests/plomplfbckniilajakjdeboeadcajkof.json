@@ -1,0 +1,81 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "ChromeControl (alpha)",
+  "version": "0.1.2",
+  "manifest_version": 2,
+  "description": "Control Google Chrome with your Mobile Device",
+  "permissions": [
+    "tabs",
+    "browsingData",
+    "activeTab",
+    "bookmarks",
+    "history",
+    "notifications",
+    "storage",
+    "<all_urls>"
+  ],
+  "web_accessible_resources": [
+    "installed.js",
+    "js/lib/jquery.qrcode.js",
+    "js/lib/click.js",
+    "js/lib/googleInjected.js",
+    "js/lib/pandoraInjected.js"
+  ],
+  "icons": {
+    "48": "images/icon48.png"
+  },
+  "content_security_policy": "script-src 'self' https://clients5.google.com https://chrome.google.com https://apis.google.com https://accounts.google.com https://platform.twitter.com https://ssl.google-analytics.com https://ajax.googleapis.com; frame-src 'self' https://clients5.google.com https://plusone.google.com https://www.facebook.com https://apis.google.com https://accounts.google.com https://platform.twitter.com; object-src 'self'",
+  "default_locale": "en",
+  "background": {
+    "page": "src/bg/background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon48.png"
+    },
+    "default_title": "chromeControl",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.youtube.com/*"
+      ],
+      "js": [
+        "js/jquery.js",
+        "js/lib/youtube.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.google.com/*"
+      ],
+      "js": [
+        "js/jquery.js",
+        "js/lib/google.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.pandora.com/*"
+      ],
+      "js": [
+        "js/lib/pandora.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.facebook.com/*"
+      ],
+      "js": [
+        "js/jquery.js",
+        "js/lib/facebook.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

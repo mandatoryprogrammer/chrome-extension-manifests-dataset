@@ -1,0 +1,58 @@
+{
+  "manifest_version": 2,
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_app_name__",
+  "version": "3.0.1.0",
+  "default_locale": "en",
+  "description": "__MSG_app_description__",
+  "permissions": [
+    "storage",
+    "tabs",
+    "activeTab",
+    "webRequest",
+    "<all_urls>"
+  ],
+  "icons": {
+    "16": "/icons/icon_16.png",
+    "32": "/icons/icon_32.png",
+    "48": "/icons/icon_48.png",
+    "128": "/icons/icon_128.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/browser.png",
+    "default_title": "__MSG_app_popup__",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "js/libs/jquery-3.4.1.min.js",
+      "js/background/collection_animated.js",
+      "js/background/collections.js",
+      "js/background/init.js",
+      "js/background/background.js",
+      "js/background/before_update_page.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "js/content/init.js",
+        "js/content/content.js"
+      ],
+      "matches": [
+        "*://*/*"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "/resources/*",
+    "/js/content/main.js"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.cursor.style/*"
+    ]
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "UFABC Help!",
+  "author": "Fernando Freitas Alves",
+  "description": "Traz scripts para melhorar a funcionalidade com o site do UFABC Help!",
+  "version": "0.10.1",
+  "icons": {
+    "128": "icon.png"
+  },
+  "browser_action": {
+    "default_icon": "icon.png"
+  },
+  "background": {
+    "scripts": [
+      "open-page.js"
+    ]
+  },
+  "permissions": [
+    "https://aluno.ufabc.edu.br/*",
+    "http://matricula.ufabc.edu.br/matricula*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://aluno.ufabc.edu.br/*",
+      "https://aluno.ufabc.edu.br/ficha_individual/*",
+      "http://www.ufabchelp.me/beta/*",
+      "http://matricula.ufabc.edu.br/matricula*",
+      "http://sistema.seufabc.com.br/huds"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://aluno.ufabc.edu.br/*"
+      ],
+      "js": [
+        "portal-transmut.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://matricula.ufabc.edu.br/matricula*"
+      ],
+      "js": [
+        "matrículap.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://sistema.seufabc.com.br/huds"
+      ],
+      "js": [
+        "seufabcp.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "omnibox": {
+    "keyword": "help"
+  }
+}

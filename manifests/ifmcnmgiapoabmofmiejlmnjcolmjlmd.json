@@ -1,0 +1,73 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Google Music Ultimate Shortcuts&Player",
+  "short_name": "GMusic S&P",
+  "description": "Control your Google Music player from any tab with shortcuts or popup player from chrome toolbar!!!",
+  "version": "2.1.2",
+  "icons": {
+    "256": "icon256.png",
+    "128": "icon128.png",
+    "48": "icon48.png",
+    "24": "icon24.png",
+    "16": "icon16.png"
+  },
+  "permissions": [
+    "tabs"
+  ],
+  "options_page": "options.html",
+  "browser_action": {
+    "default_icon": "icon24.png",
+    "default_title": "Google Music Shortcut Player",
+    "default_popup": "popup/popup.html"
+  },
+  "commands": {
+    "player|play": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+A"
+      },
+      "description": "Play / Pause",
+      "global": true
+    },
+    "player|next": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+X"
+      },
+      "description": "Next song",
+      "global": true
+    },
+    "player|prev": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Z"
+      },
+      "description": "Previous song",
+      "global": true
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://play.google.com/music/listen*"
+      ],
+      "js": [
+        "player.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "key.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "page": "dispatch.html"
+  },
+  "web_accessible_resources": [
+    "icon24.png"
+  ]
+}

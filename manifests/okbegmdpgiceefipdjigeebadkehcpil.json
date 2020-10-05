@@ -1,0 +1,128 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "豆芽：豆瓣小组的体验升级",
+  "short_name": "豆芽",
+  "description": "轻松发现感兴趣的话题，找到更多有趣有爱的灵魂。",
+  "version": "2.0",
+  "author": "haoxi911",
+  "options_page": "options.html",
+  "manifest_version": 2,
+  "icons": {
+    "16": "img/icon32.png",
+    "24": "img/icon48.png",
+    "32": "img/icon64.png",
+    "48": "img/icon96.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "img/icon16.png",
+      "24": "img/icon24.png",
+      "32": "img/icon32.png",
+      "48": "img/icon48.png",
+      "64": "img/icon64.png",
+      "96": "img/icon96.png"
+    },
+    "default_title": "发现有趣有爱的灵魂，点击开始"
+  },
+  "content_scripts": [
+    {
+      "_comment": "Rendering '我的小组': https://www.douban.com/group/",
+      "css": [
+        "css/button.css",
+        "css/style1.css"
+      ],
+      "js": [
+        "lib/jquery-3.4.1.min.js",
+        "js/content_script1.js"
+      ],
+      "run_at": "document_start",
+      "matches": [
+        "https://www.douban.com/group/"
+      ]
+    },
+    {
+      "_comment": "Rendering '小组主页': https://www.douban.com/group/xx/",
+      "css": [
+        "css/button.css",
+        "css/style2.css"
+      ],
+      "js": [
+        "lib/jquery-3.4.1.min.js",
+        "js/content_script2.js"
+      ],
+      "run_at": "document_start",
+      "matches": [
+        "https://www.douban.com/group/*"
+      ],
+      "exclude_matches": [
+        "https://www.douban.com/group/",
+        "https://www.douban.com/group/people*",
+        "https://www.douban.com/group/*/discussion"
+      ]
+    },
+    {
+      "_comment": "Rendering '帐号管理': https://www.douban.com/accounts/",
+      "css": [
+        "css/style3.css"
+      ],
+      "js": [
+        "lib/jquery-3.4.1.min.js",
+        "js/helper.js",
+        "js/content_script3.js"
+      ],
+      "matches": [
+        "https://accounts.douban.com/",
+        "https://accounts.douban.com/?*",
+        "https://*.douban.com/accounts/",
+        "https://*.douban.com/accounts/?*",
+        "https://*.douban.com/accounts/profile",
+        "https://*.douban.com/accounts/profile?*",
+        "https://*.douban.com/accounts/apptokens",
+        "https://*.douban.com/accounts/apptokens?*"
+      ]
+    },
+    {
+      "_comment": "Rendering '帐号管理': https://accounts.douban.com/passport/setting",
+      "css": [
+        "css/style4.css"
+      ],
+      "js": [
+        "lib/jquery-3.4.1.min.js",
+        "js/helper.js",
+        "js/content_script4.js"
+      ],
+      "matches": [
+        "https://accounts.douban.com/passport/setting",
+        "https://accounts.douban.com/passport/setting#*"
+      ]
+    }
+  ],
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "storage",
+    "*://*.douban.com/",
+    "*://*.doubanio.com/"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.douban.com/*"
+    ]
+  },
+  "background": {
+    "scripts": [
+      "lib/jquery-3.4.1.min.js",
+      "lib/jquery-dateFormat.min.js",
+      "js/helper.js",
+      "js/api.js",
+      "js/background.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "img/*",
+    "lib/*",
+    "js/helper.js",
+    "js/client_script*.js"
+  ],
+  "content_security_policy": "script-src 'self' https://secure.statcounter.com; object-src 'self'"
+}

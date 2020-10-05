@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Simple Pocket",
+  "version": "1.1",
+  "manifest_version": 2,
+  "description": "__MSG_extDescription__",
+  "default_locale": "en",
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "js/jquery-2.1.1.min.js",
+      "js/utils.js",
+      "js/all.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "images/browser-action-icon.png"
+    },
+    "default_title": "__MSG_browserActionTitle__"
+  },
+  "permissions": [
+    "tabs",
+    "contextMenus",
+    "cookies",
+    "notifications",
+    "https://readitlaterlist.com/",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "icons": {
+    "128": "images/icon128.png",
+    "256": "images/icon256.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://getpocket.com/extension_login_success"
+      ],
+      "js": [
+        "js/jquery-2.1.1.min.js",
+        "js/utils.js",
+        "js/auth-login.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://getpocket.com/login?e=4"
+      ],
+      "js": [
+        "js/jquery-2.1.1.min.js",
+        "js/utils.js",
+        "js/auth-logout.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "images/error.png",
+    "images/success.png"
+  ]
+}

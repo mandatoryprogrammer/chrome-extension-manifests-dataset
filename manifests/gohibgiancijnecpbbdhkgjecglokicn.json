@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "MailChimp Get Campaign ID",
+  "short_name": "mailchimp-get-campaign-id",
+  "version": "1.0.0",
+  "author": "grpace",
+  "description": "Get the MailChimp Campaign API ID (not the web_id) when viewing your emails.",
+  "icons": {
+    "128": "img/icon_128.png"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "lib/api.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "lib/run.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "lib/base.js",
+    "lib/custom4.js"
+  ],
+  "browser_action": {
+    "default_icon": "img/icon.png",
+    "default_popup": "popup.html"
+  },
+  "content_security_policy": "script-src 'self' https://*.googleapis.com; object-src 'self'",
+  "permissions": [
+    "storage",
+    "http://*/",
+    "https://*/",
+    "tabs"
+  ]
+}

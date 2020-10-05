@@ -1,0 +1,33 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "re:Scan",
+  "description": "A Chrome extension that provides a detailed report on how well-tailored an applicant's resume is to a particular job description.",
+  "version": "1.2",
+  "browser_action": {
+    "default_icon": "./lib/icon.png",
+    "default_popup": "./lib/rescan.html"
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "https://ajax.googleapis.com/"
+  ],
+  "background": {
+    "scripts": [
+      "bundle.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "./lib/jquery-3.1.1.min.js",
+        "./lib/pullDescription.js"
+      ]
+    }
+  ]
+}

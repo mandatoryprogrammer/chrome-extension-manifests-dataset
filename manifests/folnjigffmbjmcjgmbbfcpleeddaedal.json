@@ -1,0 +1,87 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "applications": {
+    "gecko": {
+      "id": "extension@logmeonce.com",
+      "strict_min_version": "50.0",
+      "update_url": "https://logmeonce.s3.amazonaws.com/download/firefox/updates.json"
+    }
+  },
+  "author": "LogMeOnce",
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": {
+      "24": "icon_off.png"
+    }
+  },
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "components/jquery-1.8.3.min.js",
+        "components/sjcl.js",
+        "content/logmeonce.js",
+        "content/translate.js",
+        "content/tools.js",
+        "content/chrome_contentscript.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://*.logmeonce.com https://dm0bq27skfs63.cloudfront.net https://ws-na.amazon-adsystem.com https://images-na.ssl-images-amazon.com https://www.google.com https://www.gstatic.com; object-src 'self' https://images-na.ssl-images-amazon.com",
+  "default_locale": "en",
+  "description": "__MSG_appDesc__",
+  "icons": {
+    "16": "icon16.png",
+    "32": "icon32.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "manifest_version": 2,
+  "name": "LogMeOnce",
+  "permissions": [
+    "geolocation",
+    "nativeMessaging",
+    "tabs",
+    "cookies",
+    "webRequest",
+    "contextMenus",
+    "notifications",
+    "privacy",
+    "history",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "version": "7.0.2",
+  "web_accessible_resources": [
+    "contentscript.html",
+    "components/jquery-1.8.3.min.js",
+    "components/jquery-ui-1.9.2.min.js",
+    "components/fontawesome.min.js",
+    "components/fontawesome-solid.min.js",
+    "components/fontawesome-regular.min.js",
+    "components/sjcl.js",
+    "components/creditcards.js",
+    "components/ui.js",
+    "content/translate.js",
+    "content/tools.js",
+    "ui/*",
+    "skin/*",
+    "html/newtab.html",
+    "html/login.html"
+  ],
+  "-ms-preload": {
+    "backgroundScript": "backgroundScriptsAPIBridge.js",
+    "contentScript": "contentScriptsAPIBridge.js"
+  }
+}

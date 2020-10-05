@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "GUS Markdown Format",
+  "version": "1.5.0",
+  "description": "Supports markdown text previews and descriptions in GUS",
+  "icons": {
+    "16": "icons/gusmd16.png",
+    "48": "icons/gusmd48.png",
+    "128": "icons/gusmd128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/gusmd16.png",
+      "24": "icons/gusmd24.png",
+      "32": "icons/gusmd32.png"
+    },
+    "default_title": "GUS Markdown"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "author": "Salesforce",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://gus.my.salesforce.com/apex/adm_*",
+        "https://gus.lightning.force.com/one/one.app*"
+      ],
+      "js": [
+        "rolledExtension.js"
+      ],
+      "css": [
+        "styles/extensionStyles.css"
+      ],
+      "run-at": "document_idle",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://gus.my.salesforce.com/apex/ADM_WorkManager*"
+      ],
+      "js": [
+        "rolledWorkManager.js"
+      ],
+      "css": [
+        "styles/extensionStyles.css"
+      ],
+      "run-at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "incognito": "split",
+  "permissions": [
+    "tabs"
+  ]
+}

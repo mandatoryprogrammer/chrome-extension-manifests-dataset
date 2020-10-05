@@ -1,0 +1,159 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "description": "Comprehensive protection from online threats such as malicious emails, password theft, malware, ransomware and more.",
+  "version": "8.3.4",
+  "author": "Paladin Cyber",
+  "short_name": "Paladin Browser Protection",
+  "browser_action": {
+    "default_icon": {
+      "16": "images/logo16.png",
+      "32": "images/logo32.png",
+      "48": "images/logo48.png",
+      "128": "images/logo128.png"
+    },
+    "default_popup": "html/popup.html",
+    "default_title": "Protecting this web session"
+  },
+  "icons": {
+    "16": "images/browser-signedin16.png",
+    "32": "images/browser-signedin32.png",
+    "48": "images/browser-signedin48.png",
+    "128": "images/browser-signedin128.png"
+  },
+  "incognito": "spanning",
+  "permissions": [
+    "tabs",
+    "storage",
+    "proxy",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking",
+    "downloads",
+    "<all_urls>"
+  ],
+  "web_accessible_resources": [
+    "images/*",
+    "html/*",
+    "html/test-assets/*",
+    "css/*",
+    "css/font/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "src/cacheSanta.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "https://*.meetpaladin.com/*",
+        "http://localhost/*"
+      ],
+      "js": [
+        "lib/jQuery.js",
+        "src/context_notification.js"
+      ],
+      "css": [
+        "css/notificationIframe.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "https://*.meetpaladin.com/*",
+        "http://localhost/*"
+      ],
+      "js": [
+        "lib/jQuery.js",
+        "src/context_password.js"
+      ],
+      "css": [
+        "css/paladin-icon-inject.css"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "lib/jQuery.js",
+        "lib/dialog-polyfill.js",
+        "src/context_google.js"
+      ],
+      "css": [
+        "css/google.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://outlook.office.com/owa/*",
+        "https://outlook.office365.com/owa/*",
+        "https://outlook.live.com/owa/*",
+        "https://outlook.live.com/mail/*",
+        "https://*/owa/*"
+      ],
+      "js": [
+        "lib/jQuery.js",
+        "lib/dialog-polyfill.js",
+        "src/context_outlook.js"
+      ],
+      "css": [
+        "css/outlook.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://shield.meetpaladin.com/google*",
+        "https://shield.meetpaladin.com/microsoft*"
+      ],
+      "js": [
+        "src/sdk.js",
+        "src/oauthLoginHandler.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://*/*"
+      ],
+      "exclude_matches": [
+        "https://*.meetpaladin.com/*",
+        "http://localhost/*"
+      ],
+      "js": [
+        "lib/jQuery.js",
+        "src/context_smartNotifications.js"
+      ],
+      "css": [
+        "css/smartIframe.css"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "background": {
+    "page": "html/background.html",
+    "persistent": true
+  },
+  "name": "Paladin Browser Protection",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlBnJ/wCvPMW/hXzThOZ1PCDV11SbvEGVa+vP/skmgjTi26c+Hf4d/mqNn9o+fpzGSai9bgl2KwAT+s7qaLcwEzrN8LLgXas9CVSbLv/8B8VY/yPecJrRhlPg3eGmlpukx/VkqYX4f35Mh8ACGV9ipedPKWDwpsXxfdhC7l6d32zV31nvcQibZA5C3WIcmbohPg4JvggZbm9ale73OAAMxRUy29YFjsiO80oUaxodpmCOtUGivY0VAcJ/aDgmc4uWzULeILZqG1R3KedSCSW7kfhh6iPgxSY1yN8vyps+QAjp1HG48ys8nrdNGHUGufjieO0m8a7RWbjsluzarGO7IQIDAQAB"
+}

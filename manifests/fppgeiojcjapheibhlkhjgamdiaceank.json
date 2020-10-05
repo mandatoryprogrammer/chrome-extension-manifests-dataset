@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Bug Spray",
+  "description": "One-click to create a detailed document to attach to bug tickets.",
+  "version": "1.0",
+  "author": "Jordan McRae",
+  "icons": {
+    "48": "icons/icon-on.png"
+  },
+  "browser_action": {
+    "default_title": "Bug Spray",
+    "default_icon": {
+      "19": "icons/icon-on.png",
+      "20": "icons/icon-on.png",
+      "38": "icons/icon-on.png"
+    },
+    "default_popup": "index.html"
+  },
+  "background": {
+    "scripts": [
+      "browserPolyfill.js",
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "bugspray.client.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "management",
+    "webRequest",
+    "debugger",
+    "tabs",
+    "storage"
+  ]
+}

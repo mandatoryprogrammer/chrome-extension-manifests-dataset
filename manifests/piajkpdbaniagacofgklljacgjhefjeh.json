@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Advanced Profanity Filter",
+  "short_name": "Profanity Filter",
+  "author": "Richard Frost",
+  "manifest_version": 2,
+  "version": "2.9.1",
+  "description": "Advanced Profanity Filter helps to clean up bad language on the websites you and your family visit.",
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "permissions": [
+    "contextMenus",
+    "notifications",
+    "storage",
+    "tabs"
+  ],
+  "optional_permissions": [
+    "file://*/*"
+  ],
+  "options_ui": {
+    "chrome_style": false,
+    "open_in_tab": true,
+    "page": "optionPage.html"
+  },
+  "background": {
+    "scripts": [
+      "eventPage.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "img/icon19.png",
+      "38": "img/icon38.png"
+    },
+    "default_title": "Advanced Profanity Filter",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "webFilter.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "match_about_blank": true
+    }
+  ]
+}

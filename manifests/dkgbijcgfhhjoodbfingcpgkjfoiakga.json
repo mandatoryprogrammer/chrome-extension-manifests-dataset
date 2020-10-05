@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "investiere toolbar",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyYQiCzPGU2cco97yuqoQm6koOHTbGqr9pTnPFs7xS4MtDpqRw9M465QBwSqlZT5Nm77FoqK3RsQgLXT0mKgpOhQ4M1cfFZkcaXXb2kt1EiA2SQdaQLlrS7DyPyZcTKiRc2ceVXMsPmMkoCvmSCG09ZVzHSMI0KFSETHVoCihNuavFDBVEIzBkXIvSHcs9Kdtq8YS7ur+jhzoWHVPjgkMu+Dnhi4GhEkWwjdwRlFF14YPuEgt/eEol2ThlcQDz+StfhH+xgQN+CxCAlZcPArOYT9q+q6RNdNMXAVSTpkP7Ro96Zs73bOR67wooUpahmXhUN4AJcrPV89mbPygly8vQQIDAQAB",
+  "description": "The investiere toolbar makes it really easy to research start-up companies and get contextual information anywhere on the web.",
+  "version": "0.8",
+  "background": {
+    "scripts": [
+      "lib/jquery-1.9.1.js",
+      "ToolBarContent/lib/jquery.ba-postmessage.js",
+      "InvExtCommonConfigService.js",
+      "js/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "investiere-icon.png",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "style/style.css"
+      ],
+      "js": [
+        "lib/jquery-1.9.1.js",
+        "InvExtCommonConfigService.js",
+        "contentScripts/extentionViewContentController.js",
+        "contentScripts/commandHandler.js",
+        "contentScripts/initialLoader.js"
+      ]
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.investiere.ch/*",
+      "*://d26b395fwzu5fz.cloudfront.net/*",
+      "*://www.google.com/*",
+      "*://api.keen.io/*"
+    ]
+  },
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "tabs",
+    "cookies",
+    "<all_urls>",
+    "management"
+  ],
+  "web_accessible_resources": [
+    "ToolBarContent/top-bar.html",
+    "ToolBarContent/profile.html",
+    "ToolBarContent/bookMark.html",
+    "ToolBarContent/Images/toolbar-icon-sprite.png"
+  ],
+  "content_security_policy": "script-src 'self' https://api.keen.io https://d26b395fwzu5fz.cloudfront.net https://www.google.com 'unsafe-eval'; object-src 'self'"
+}

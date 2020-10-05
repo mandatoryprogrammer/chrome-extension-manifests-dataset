@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "CSPRO",
+  "version": "1.6",
+  "description": "CSPRO extension prevents sending Content Security Policy report to servers and enables report only mode.",
+  "author": "Roman Shafigullin",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "cspAnalyzer.js",
+        "logger.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "CSPRO.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "tabs",
+    "notifications",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "128": "icon.png"
+    },
+    "default_title": "CSPRO"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "icons": {
+    "128": "icon.png"
+  },
+  "manifest_version": 2
+}

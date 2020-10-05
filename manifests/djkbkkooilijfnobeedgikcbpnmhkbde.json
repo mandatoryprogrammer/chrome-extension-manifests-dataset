@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "DropFlowy",
+  "version": "0.3.4",
+  "description": "Load custom CSS to WorkFlowy from a shared Dropbox link.",
+  "icons": {
+    "128": "css_128.png"
+  },
+  "browser_action": {
+    "default_icon": "css_128.png",
+    "default_title": "Toggle Style"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "storage",
+    "https://workflowy.com/*",
+    "https://beta.workflowy.com/*",
+    "https://dev.workflowy.com/*"
+  ],
+  "content_scripts": [
+    {
+      "js": [
+        "content.js"
+      ],
+      "matches": [
+        "https://workflowy.com/*",
+        "https://beta.workflowy.com/*",
+        "https://dev.workflowy.com/*"
+      ],
+      "exclude_matches": [
+        "https://workflowy.com/s/*",
+        "https://*.workflowy.com/s/*"
+      ],
+      "all_frames": true
+    }
+  ],
+  "options_ui": {
+    "chrome_style": true,
+    "page": "options.html"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+Shift+S"
+      }
+    }
+  },
+  "manifest_version": 2
+}

@@ -1,0 +1,68 @@
+{
+  "manifest_version": 2,
+  "default_locale": "en",
+  "name": "Masterani Plus",
+  "description": "Masterani Anime helper extension. It tracks the anime you watch, and it remembers the last episode you watched of each show.",
+  "author": "Matias Pierdomenico",
+  "version": "1.3.2",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.masterani.me/anime/watch/*"
+      ],
+      "js": [
+        "scripts/contentscript.js"
+      ],
+      "match_about_blank": true,
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://mp4upload.com/embed*",
+        "https://streamango.com/embed/*",
+        "https://openload.co/embed/*",
+        "https://tiwi.kiwi/embed*",
+        "https://www.rapidvideo.com/e/*",
+        "https://embed.mystream.to/*"
+      ],
+      "js": [
+        "scripts/mp4.js"
+      ],
+      "match_about_blank": true,
+      "all_frames": true,
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "https://www.masterani.me/*",
+    "https://mp4upload.com/*"
+  ],
+  "icons": {
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/icon-19.png",
+      "38": "icons/icon-38.png"
+    },
+    "default_popup": "popup.html",
+    "default_title": "Your Anime"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "web_accessible_resources": [
+    "styles/theatermode.css"
+  ],
+  "update_url": "https://clients2.google.com/service/update2/crx"
+}

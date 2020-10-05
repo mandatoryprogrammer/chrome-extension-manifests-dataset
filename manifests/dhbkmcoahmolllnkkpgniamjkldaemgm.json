@@ -1,0 +1,74 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Recruitment Automation by Wisestep",
+  "version": "2.1",
+  "description": "Automate resume import from job boards to your talent pool",
+  "permissions": [
+    "storage",
+    "contextMenus",
+    "tabs",
+    "activeTab",
+    "webRequest",
+    "webRequestBlocking",
+    "notifications",
+    "<all_urls>"
+  ],
+  "options_page": "options.html",
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://www.myhost.com/*",
+      "*://*.wisestep.com/*",
+      "*://*.wisestep.co/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "contentscript.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "images/wisestep-16.png",
+      "32": "images/wisestep-32.png",
+      "48": "images/wisestep-48.png",
+      "128": "images/wisestep-128.png"
+    }
+  },
+  "icons": {
+    "16": "images/wisestep-16.png",
+    "32": "images/wisestep-32.png",
+    "48": "images/wisestep-48.png",
+    "128": "images/wisestep-128.png"
+  },
+  "web_accessible_resources": [
+    "index.html",
+    "extension.html",
+    "images/extension_min.png",
+    "images/wisestep.png",
+    "injected.js"
+  ],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+W"
+      }
+    }
+  },
+  "incognito": "split",
+  "content_security_policy": "object-src 'self' blob:; script-src 'self' https://extensionstaging.wisestep.com https://www.google-analytics.com https://www.google-analytics.com/analytics.js https://maps.googleapis.com https://recruiter.wisestep.com https://recruiter.wisestep.co https://lens.wisestep.com https://cdn.ravenjs.com https://apis.google.com;",
+  "manifest_version": 2,
+  "minimum_chrome_version": "25",
+  "offline_enabled": false
+}

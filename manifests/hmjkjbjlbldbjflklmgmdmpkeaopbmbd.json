@@ -1,0 +1,70 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "NanoTipBot",
+  "description": "Add a tip button to tweets so you can easily send Nano through Twitter.",
+  "version": "0.1.2",
+  "author": "Andrew Mitchell",
+  "icons": {
+    "24": "logo24.png",
+    "16": "logo16.png",
+    "32": "logo32.png",
+    "48": "logo48.png",
+    "64": "logo64.png",
+    "128": "logo128.png"
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_idle",
+      "css": [
+        "style.css"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "matches": [
+        "https://twitter.com/*"
+      ],
+      "exclude_matches": [
+        "https://twitter.com/intent/*"
+      ]
+    },
+    {
+      "run_at": "document_idle",
+      "css": [
+        "style.css"
+      ],
+      "js": [
+        "intentscreen.js"
+      ],
+      "matches": [
+        "https://twitter.com/intent/tweet*@NanoTipBot*!tip*"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "css": [
+      "style.css"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "declarativeContent",
+    "activeTab",
+    "storage"
+  ],
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "24": "logo24.png",
+      "16": "logo16.png",
+      "32": "logo32.png",
+      "48": "logo48.png",
+      "64": "logo64.png",
+      "128": "logo128.png"
+    }
+  }
+}

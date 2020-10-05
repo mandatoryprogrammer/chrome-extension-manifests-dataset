@@ -1,0 +1,57 @@
+{
+  "update_url": "http://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "remindMe",
+  "version": "1.0",
+  "description": "Don't forget a thing!!",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "permissions": [
+    "https://accounts.google.com/o/oauth2/token",
+    "https://www.googleapis.com/",
+    "http://*/",
+    "tabs",
+    "background",
+    "notifications"
+  ],
+  "content_scripts": [
+    {
+      "js": [
+        "oauth2/oauth2_inject.js"
+      ],
+      "run_at": "document_start",
+      "css": [
+        "bootstrap.css",
+        "remindme.css"
+      ],
+      "matches": [
+        "http://remindme.madradavid.com/googleChrome.php*"
+      ]
+    },
+    {
+      "js": [
+        "jquery.js",
+        "run_alert.js"
+      ],
+      "run_at": "document_start",
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ]
+    }
+  ],
+  "background": {
+    "page": "background.html"
+  },
+  "web_accessible_resources": [
+    "icon.png",
+    "manifest.json"
+  ]
+}

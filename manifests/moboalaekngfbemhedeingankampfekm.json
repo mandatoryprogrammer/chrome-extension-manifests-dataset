@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "description": "Analyzes sentiment of comments on github pull requests",
+  "manifest_version": 2,
+  "name": "PRS-A - Pull Request Sentiment Analyzer",
+  "version": "1.3.1",
+  "homepage_url": "https://github.com/olore/prs-a",
+  "icons": {
+    "48": "brain.png"
+  },
+  "permissions": [
+    "*://developer.mozilla.org/*",
+    "activeTab",
+    "declarativeContent",
+    "storage",
+    "tabs",
+    "webRequest"
+  ],
+  "background": {
+    "scripts": [
+      "background-worker.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*/pull/*",
+        "*://*/*/pull-requests/*"
+      ],
+      "js": [
+        "content-script.js"
+      ]
+    }
+  ],
+  "page_action": {
+    "default_title": "PRS-A - Pull Request Sentiment Analyzer",
+    "default_icon": {
+      "16": "brain.png",
+      "32": "brain.png"
+    }
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": false
+  }
+}

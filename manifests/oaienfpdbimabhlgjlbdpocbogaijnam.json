@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Userlane",
+  "manifest_version": 2,
+  "description": "The Navigation System for software that allows anybody to use any application instantly",
+  "homepage_url": "https://userlane.com/",
+  "icons": {
+    "128": "commonAssets/icons/userlane_icon_128.png"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "browser_action": {
+    "default_icon": "commonAssets/icons/userlane_icon_128.png",
+    "default_title": "Userlane Extension",
+    "default_popup": "popup/index.html"
+  },
+  "storage": {
+    "managed_schema": "commonAssets/config/managed_schema.json"
+  },
+  "background": {
+    "scripts": [
+      "background/main.js"
+    ],
+    "persistent": true
+  },
+  "options_page": "options/index.html",
+  "externally_connectable": {
+    "matches": [
+      "*://*.usln.rocks/*",
+      "*://*.userlane.com/*",
+      "*://localhost/*"
+    ]
+  },
+  "permissions": [
+    "https://*/*",
+    "http://*/*",
+    "tabs",
+    "storage"
+  ],
+  "web_accessible_resources": [
+    "snippets/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.usln.rocks/*",
+        "*://*.userlane.com/*",
+        "*://localhost/*"
+      ],
+      "js": [
+        "snippets/intentpagecontentscript.js"
+      ]
+    }
+  ],
+  "version": "20.9.0"
+}

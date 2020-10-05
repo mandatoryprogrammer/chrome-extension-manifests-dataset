@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "DGText2Area",
+  "version": "1.1.6",
+  "manifest_version": 2,
+  "description": "DailyGammon: Replace Text Line inputs with Area inputs. Replace board with scalable version. Save reminders for a match.",
+  "options_page": "options.html",
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "icons": {
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.dailygammon.com/bg/user/*"
+      ],
+      "js": [
+        "dgtext2area.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://*.dailygammon.com/bg/move/*",
+        "http://*.dailygammon.com/bg/game/*",
+        "http://*.dailygammon.com/bg/nextgame"
+      ],
+      "js": [
+        "svgboard.js",
+        "reminder.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://*.dailygammon.com/bg/move/*",
+        "http://*.dailygammon.com/bg/nextgame"
+      ],
+      "js": [
+        "dgtext2area.js",
+        "format_reply.js",
+        "win_reply.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

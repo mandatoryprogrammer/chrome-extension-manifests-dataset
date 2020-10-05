@@ -1,0 +1,80 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_name__",
+  "short_name": "__MSG_shortName__",
+  "default_locale": "en",
+  "description": "__MSG_description__",
+  "version": "8.0",
+  "manifest_version": 2,
+  "minimum_chrome_version": "63",
+  "container": "GOOGLE_DRIVE",
+  "permissions": [
+    "notifications",
+    "declarativeContent",
+    "storage"
+  ],
+  "icons": {
+    "16": "img/extension/awesome-drive-16.png",
+    "32": "img/extension/awesome-drive-32.png",
+    "48": "img/extension/awesome-drive-48.png",
+    "128": "img/extension/awesome-drive-128.png"
+  },
+  "incognito": "split",
+  "background": {
+    "scripts": [
+      "module/common/common.bundle.js",
+      "vendor/vendor.bundle.js",
+      "module/background/background.bundle.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://drive.google.com/*"
+      ],
+      "js": [
+        "module/content-script/drive/preload.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://drive.google.com/*"
+      ],
+      "js": [
+        "module/common/common.bundle.js",
+        "vendor/vendor.bundle.js",
+        "lib/lib.bundle.js",
+        "module/content-script/drive.bundle.js"
+      ],
+      "css": [
+        "css/common/common.css",
+        "css/content-script/common.css",
+        "css/content-script/drive.css"
+      ]
+    }
+  ],
+  "page_action": {
+    "default_icon": {
+      "16": "img/extension/awesome-drive-loading-16.png",
+      "32": "img/extension/awesome-drive-loading-32.png"
+    },
+    "default_title": "__MSG_pageActionTitle__",
+    "default_popup": "html/page-action/status.html"
+  },
+  "web_accessible_resources": [
+    "manifest.json",
+    "img/*",
+    "office-template/*",
+    "module/embedded/addEventListenerOverride.js",
+    "module/embedded/embedded.bundle.js",
+    "html/iframe-bridge.html"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAh32EE4lZDkbUGJpC4NLwKlwtGSPVgt1OXZl4avtz5Rj3NyIi5n2BCbHeAhCxu3CzzrHAL6kq6UA3y8AfXOBhwV3IbgnMa0yYUfeebsK0PAWSpre1nufcLLRr/aUYxZZUeJcJO2LhKaBYRSoz85T8zAcP7TMYh4ip8tHzIQT0EQOnkXH1s38XzDe/KwE15k2+bclDwwWXtUu0dwuih7iVIDHTuSfNXkIqBx2aSaZu5X23ZilYCi7uXreMeVwaPWXl6HlzldMS3IPctxr9Ido8IJpbU35Qw20RFVuU7Iq1oi+Tlyb5X6AgYJcmsj3Mqb2C5ZF6ajLusJ2m5GpzIkmIgQIDAQAB",
+  "externally_connectable": {
+    "matches": [
+      "https://auth.aodocs.com/*"
+    ]
+  }
+}

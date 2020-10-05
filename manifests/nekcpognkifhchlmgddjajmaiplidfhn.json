@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "529andYou",
+  "version": "3.3.0.0",
+  "description": "Tracks 23andMe Matches using a local database",
+  "background": {
+    "page": "background.html"
+  },
+  "page_action": {
+    "default_icon": "529andYou-19.png",
+    "default_title": "View matches in 529andYou"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://you.23andme.com/tools/relatives/dna/",
+        "https://you.23andme.com/tools/relatives/dna/#"
+      ],
+      "js": [
+        "contentscript2.js",
+        "manipulate2.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "https://you.23andme.com/profile/*",
+        "https://you.23andme.com/p/*",
+        "https://you.23andme.com/tools/compare/match/*"
+      ],
+      "js": [
+        "compare_matches.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "unlimitedStorage"
+  ],
+  "icons": {
+    "16": "529andYou-16.png",
+    "19": "529andYou-19.png",
+    "48": "529andYou-48.png",
+    "128": "529andYou-128.png"
+  },
+  "web_accessible_resources": [
+    "*.png"
+  ]
+}

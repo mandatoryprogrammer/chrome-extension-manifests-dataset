@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Back To Top for Chrome",
+  "short_name": "Back To Top",
+  "description": "Go to top/bottom of current page",
+  "version": "2.0",
+  "author": "Chuck Baker",
+  "browser_action": {
+    "default_icon": "b2t38x38.png",
+    "default_title": "Click goes to top, double-click goes to bottom"
+  },
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "storage",
+    "tabs",
+    "http://*/",
+    "https://*/"
+  ],
+  "background": {
+    "scripts": [
+      "common.js",
+      "back2top.js"
+    ],
+    "persistent": true
+  },
+  "icons": {
+    "16": "b2t16x16.png",
+    "48": "b2t48x48.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "back2topContent.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "options_ui": {
+    "page": "back2topOptions.html",
+    "open_in_tab": true
+  },
+  "content_security_policy": "script-src 'self' https://apis.google.com; object-src 'self'"
+}

@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnBavkR258p13MrjMWNxXdyRgS+/G6XoyudG/YbrgrN/5uevgc3uFvIYqC7yYveP7HNRL0rao1qr3xNJAEaszNbHO5OxbPNGdOsORz2XQWe4VmjPq+EZ/0fpHc+JFI8z4Bhc4jMSgzwVQL/0TeA4F9QLWU0AhGyaN6UlZzh6rcGn7TXb/Xudo5bg5x3H++TFq9K625LIdknQNtq2a/e2slSs5OaegLc48oXggYjVn4Xur6fOf1NXkoUccHG6vU/penuDWQQtz3xkHgTuu51IpriVIRvYt6V4EWsDwqsFBMAaYjziUtsNOy6FScBM99NO83t7o5qLfqUYd+vODAgj/xQIDAQAB",
+  "name": "Web PKI",
+  "description": "Extension to use digital certificates within webpages",
+  "version": "2.15.0",
+  "icons": {
+    "16": "img/icon16.png",
+    "32": "img/icon32.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "scripts/content-script.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "scripts": [
+      "scripts/forge-cipher.js",
+      "scripts/signalr-client-1.0.4.js",
+      "scripts/sjcl.js",
+      "scripts/event-page.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "nativeMessaging",
+    "storage",
+    "downloads",
+    "tabs"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "img/browser-icon-small.png",
+      "38": "img/browser-icon-big.png"
+    },
+    "default_title": "Web PKI options",
+    "default_popup": "popup.html"
+  },
+  "default_locale": "en"
+}

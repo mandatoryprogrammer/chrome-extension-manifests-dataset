@@ -1,0 +1,74 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Managebaker",
+  "author": "Felix Liu, Martin Wang",
+  "description": "We bake Managebac.",
+  "version": "4.1.5",
+  "icons": {
+    "16": "assets/icon16.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png"
+  },
+  "browser_action": {
+    "default_title": "Managebaker",
+    "default_popup": "modules/popup.html"
+  },
+  "options_page": "modules/options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.managebac.cn/*",
+        "https://*.managebac.com/*"
+      ],
+      "exclude_matches": [
+        "https://www.managebac.cn/*",
+        "https://www.managebac.com/*",
+        "https://subjectcentre.managebac.cn/*",
+        "https://subjectcentre.managebac.com/*"
+      ],
+      "js": [
+        "core/managebaker.js"
+      ],
+      "css": [
+        "core/managebaker.css",
+        "lib/material/material.css",
+        "lib/dropzone.min.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://managebaker.com/User/*"
+      ],
+      "js": [
+        "lib/jquery-3.3.1.js",
+        "lib/localforage.min.js",
+        "core/managebaker.com.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "core/background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "https://*.managebac.cn/*",
+    "https://*.managebac.com/*",
+    "https://*.amazonaws.com.cn/",
+    "https://*.amazonaws.com/",
+    "https://managebaker.com/*",
+    "tabs",
+    "alarms"
+  ],
+  "web_accessible_resources": [
+    "assets/*",
+    "core/*",
+    "doc_handler/*",
+    "lib/*",
+    "modules/*"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "manifest_version": 2
+}

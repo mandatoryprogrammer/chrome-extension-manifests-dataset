@@ -1,0 +1,86 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Additor - The Simplest Bookmark & Highlighter",
+  "version": "2.1.4",
+  "description": "Additor helps you to bookmark, highlight, annotate and curate anything including article, blog, PDF, and video.",
+  "icons": {
+    "16": "images/icons/app_icon_16.png",
+    "48": "images/icons/app_icon_48.png",
+    "128": "images/icons/app_icon_128.png"
+  },
+  "browser_action": {
+    "default_title": "Additor",
+    "default_icon": {
+      "16": "images/icons/app_icon_16.png",
+      "24": "images/icons/app_icon_24.png",
+      "32": "images/icons/app_icon_32.png"
+    }
+  },
+  "author": "Additor Team <dev@additor.io>",
+  "background": {
+    "persistent": true,
+    "page": "./html/backgroundPage.html"
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "*://additor.io/*",
+        "*://betamon.xyz/*",
+        "*://alphamon.xyz/*",
+        "*://*.additor.io/*",
+        "*://*.betamon.xyz/*",
+        "*://*.alphamon.xyz/*",
+        "*://localhost/*"
+      ],
+      "js": [
+        "./build/contentScript.js"
+      ],
+      "css": [
+        "./styles/OpenSans.Fonts.css",
+        "./styles/initialize.css",
+        "./build/contentScript.css"
+      ]
+    }
+  ],
+  "commands": {
+    "CREATE_CARD": {
+      "description": "Save this page",
+      "suggested_key": {
+        "default": "Ctrl+Shift+S",
+        "mac": "Command+Shift+S"
+      }
+    },
+    "SWITCH_HIGHLIGHT_MODE": {
+      "description": "Turn on/off highlighter",
+      "suggested_key": {
+        "default": "Ctrl+Shift+U",
+        "mac": "Command+Shift+U"
+      }
+    }
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.google-analytics.com; object-src 'self';",
+  "homepage_url": "https://chrome.google.com/webstore/detail/additor-bookmarkhighlight/hfllajanfnlimffhkjbondolipoimcgn",
+  "permissions": [
+    "cookies",
+    "contextMenus",
+    "tabs",
+    "storage",
+    "<all_urls>"
+  ],
+  "short_name": "Additor",
+  "web_accessible_resources": [
+    "build/*",
+    "images/*",
+    "js/*",
+    "styles/*",
+    "fonts/*",
+    "pdf/*",
+    "html/*"
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "browser_action": {
+    "default_icon": {
+      "128": "imgs/icon.png"
+    }
+  },
+  "icons": {
+    "128": "imgs/icon.png"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "*://*.twitter.com/*",
+        "*://*.redditstatic.com/*",
+        "*://*.hn-button.herokuapp.com/*"
+      ],
+      "all_frames": true,
+      "run_at": "document_start",
+      "js": [
+        "global.js",
+        "widgets.js",
+        "page.js"
+      ]
+    }
+  ],
+  "manifest_version": 2,
+  "description": "Block share with social media icons.",
+  "name": "Miser",
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "<all_urls>",
+    "contextMenus"
+  ],
+  "options_page": "options.html",
+  "version": "0.1.7",
+  "content_security_policy": "default-src 'self' http://*.webdever.net 'unsafe-eval'; script-src 'self' 'unsafe-eval'; object-src 'self' 'unsafe-eval'; frame-src 'self' https://davidkarn.github.io ",
+  "web_accessible_resources": [
+    "block.css",
+    "popup.js",
+    "popup.html",
+    "popup.css",
+    "iframe.html",
+    "http://miser.webdever.net/popup.html",
+    "https://davidkarn.github.io/miser/popup.html"
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "NBA Close Games",
+  "description": "Highlights if a game was close based on your settings. Useful if you don't watch the games live and have spoilers turned off.",
+  "version": "2.2.1",
+  "options_page": "options.html",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "browser_action": {
+    "icons": [
+      "icons/icon.png",
+      "icons/icon-disabled.png"
+    ],
+    "default_icon": "icons/icon-disabled.png"
+  },
+  "background": {
+    "scripts": [
+      "js/background.js",
+      "js/utils.js",
+      "js/options.js",
+      "js/manipulate.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://watch.nba.com/*"
+      ],
+      "css": [
+        "css/manipulate.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "https://stats.nba.com/*",
+    "https://data.nba.net/*",
+    "https://wikihoops.com/*"
+  ]
+}

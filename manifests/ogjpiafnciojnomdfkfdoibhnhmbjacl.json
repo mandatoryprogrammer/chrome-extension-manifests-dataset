@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "SalesCrowd画面キャプチャ",
+  "short_name": "SalesCrowd画面キャプチャ",
+  "version": "1.0",
+  "manifest_version": 2,
+  "description": "SalesCrowd画面キャプチャ",
+  "browser_action": {
+    "default_icon": "icon48.png"
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "permissions": [
+    "desktopCapture",
+    "tabs",
+    "storage",
+    "https://sc.sense.co.jp/room",
+    "https://sc2.sense.co.jp/room",
+    "https://demo.sales-crowd.jp/room",
+    "https://online.sales-crowd.jp/room"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://sc.sense.co.jp/*",
+        "https://sc2.sense.co.jp/*",
+        "https://demo.sales-crowd.jp/*",
+        "https://online.sales-crowd.jp/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    }
+  ]
+}

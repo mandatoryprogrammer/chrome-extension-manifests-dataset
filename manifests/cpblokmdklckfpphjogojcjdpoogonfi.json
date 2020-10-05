@@ -1,0 +1,67 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Email templates for Gmail",
+  "version": "1.2.2",
+  "manifest_version": 2,
+  "minimum_chrome_version": "29.0.0.0",
+  "description": "Supercharge Gmail with a gallery of email templates - emails designed for business, personal or fun.",
+  "icons": {
+    "128": "icon-128.png",
+    "48": "res/icon-48.png"
+  },
+  "background": {
+    "scripts": [
+      "js/jquery.js",
+      "js/const.js",
+      "js/env.js",
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "js/jquery.js",
+        "js/const.js",
+        "js/env.js",
+        "js/gmail_integrate.js"
+      ],
+      "css": [
+        "css/gmail.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "*://app.flashissue.com/*",
+        "*://peek.flashissue.com/*",
+        "*://dev-eran.flashissue.com/*"
+      ],
+      "js": [
+        "js/jquery.js",
+        "js/const.js",
+        "js/env.js",
+        "js/fi_integrate.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "homepage_url": "http://www.flashissue.com",
+  "permissions": [
+    "management",
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "web_accessible_resources": [
+    "fiframe.html",
+    "empty.html",
+    "res/loader.gif",
+    "res/down_pointer.png"
+  ]
+}

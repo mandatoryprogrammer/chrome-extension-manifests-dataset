@@ -1,0 +1,94 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "That is Worth",
+  "version": "1.8.1.0",
+  "description": "Track prices on Amazon and Steam you think are currently too expensive and get notified once they drop to a price you specify.",
+  "background": {
+    "scripts": [
+      "fancy-settings/source/lib/store.js",
+      "js/lib/db.js",
+      "js/lib/jquery.min.js",
+      "js/Store.js",
+      "js/storage.js",
+      "js/utils.js",
+      "js/analytics.js",
+      "js/parsing.js",
+      "js/bgReqHandler.js",
+      "js/background.js",
+      "js/install.js",
+      "js/analytics-setup.js"
+    ],
+    "persistent": false
+  },
+  "options_page": "fancy-settings/source/index.html",
+  "icons": {
+    "16": "img/logo16.png",
+    "48": "img/logo48.png",
+    "128": "img/logo128.png"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*"
+      ],
+      "js": [
+        "js/lib/jquery.min.js",
+        "js/Store.js",
+        "js/utils.js",
+        "js/store/schema.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://store.steampowered.com/app/*",
+        "http://store.steampowered.com/sub/*"
+      ],
+      "js": [
+        "js/Store.js",
+        "js/utils.js",
+        "js/store/infobar-handler.js",
+        "js/store/steam.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://*.amazon.com/*",
+        "http://*.amazon.co.uk/*",
+        "http://*.amazon.ca/*",
+        "http://*.amazon.cn/*",
+        "http://*.amazon.fr/*",
+        "http://*.amazon.de/*",
+        "http://*.amazon.it/*",
+        "http://*.amazon.co.jp/*",
+        "http://*.amazon.es/*",
+        "http://*.amazon.com.br/*",
+        "http://*.amazon.in/*",
+        "http://*.amazon.com.au/*",
+        "http://*.amazon.com.mx/*"
+      ],
+      "js": [
+        "js/Store.js",
+        "js/utils.js",
+        "js/store/infobar-handler.js",
+        "js/store/amazon.js"
+      ]
+    }
+  ],
+  "page_action": {
+    "default_icon": "img/logo19.png",
+    "default_popup": "tracked-items.html"
+  },
+  "permissions": [
+    "*://*/*",
+    "tabs",
+    "notifications",
+    "alarms",
+    "unlimitedStorage"
+  ],
+  "minimum_chrome_version": "28",
+  "web_accessible_resources": [
+    "infobar.html"
+  ]
+}

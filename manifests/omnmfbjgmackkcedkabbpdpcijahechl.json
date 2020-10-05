@@ -1,0 +1,120 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_ext_name__",
+  "description": "__MSG_ext_desc__",
+  "version": "1.2.3",
+  "icons": {
+    "8": "icons/icon8.png",
+    "16": "icons/icon16.png",
+    "28": "icons/icon28.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "64": "icons/icon64.png",
+    "128": "icons/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/icon32.png",
+    "default_popup": "popup/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "lib/chrome-promise.js",
+      "background.js",
+      "hot-reload.js"
+    ],
+    "persistent": false
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "chrome_style": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://docs.google.com/sharing/*"
+      ],
+      "css": [
+        "inject/inject.css"
+      ],
+      "js": [
+        "lib/arrive.min.js",
+        "inject/inject.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://docs.google.com/document/*"
+      ],
+      "css": [
+        "inject/doc.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://docs.google.com/document/*"
+      ],
+      "css": [
+        "inject/doc.css"
+      ],
+      "js": [
+        "inject/doc.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://docs.google.com/presentation/*"
+      ],
+      "css": [
+        "inject/doc.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://docs.google.com/presentation/*"
+      ],
+      "css": [
+        "inject/doc.css"
+      ],
+      "js": [
+        "inject/doc.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://docs.google.com/spreadsheets/*"
+      ],
+      "css": [
+        "inject/doc.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://docs.google.com/spreadsheets/*"
+      ],
+      "css": [
+        "inject/doc.css"
+      ],
+      "js": [
+        "inject/doc.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "permissions": [
+    "storage",
+    "tabs"
+  ],
+  "web_accessible_resources": [
+    "images/*",
+    "lib/roboto.ttf"
+  ],
+  "default_locale": "en"
+}

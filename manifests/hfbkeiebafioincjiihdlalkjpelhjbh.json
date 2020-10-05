@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "On The Money Phone",
+  "manifest_version": 2,
+  "version": "1.3.3",
+  "description": "CRM Phone System",
+  "background": {
+    "scripts": [
+      "taskrouter.min.js",
+      "twilio.client.min.js",
+      "dist/background.bundle.js"
+    ]
+  },
+  "icons": {
+    "16": "icons/sig_emblem_16x16.png",
+    "32": "icons/sig_emblem_32x32.png",
+    "48": "icons/sig_emblem_48x48.png",
+    "128": "icons/sig_emblem_128x128.png"
+  },
+  "browser_action": {
+    "default_title": "On The Money Phone",
+    "default_popup": "popup.html"
+  },
+  "web_accessible_resources": [
+    "audio/incomingCall.mp3",
+    "dist/images/keypad.svg"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.loan.co.uk/*",
+        "*://*.signet.systems/*",
+        "*://*.signet.online/*",
+        "*://*.onthemoney.co.uk/*",
+        "*://*.onthemoney.net/*"
+      ],
+      "css": [
+        "dist/content.css"
+      ],
+      "js": [
+        "dist/content.bundle.js"
+      ]
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.loan.co.uk/*",
+      "*://*.signet.systems/*",
+      "*://*.signet.online/*",
+      "*://*.onthemoney.co.uk/*",
+      "*://*.onthemoney.net/*"
+    ]
+  },
+  "permissions": [
+    "idle",
+    "tabs",
+    "notifications",
+    "*://*.twilio.com/*",
+    "*://*.loan.co.uk/*",
+    "*://*.signet.systems/*",
+    "*://*.signet.online/*",
+    "*://*.onthemoney.co.uk/*",
+    "*://*.onthemoney.net/*"
+  ]
+}

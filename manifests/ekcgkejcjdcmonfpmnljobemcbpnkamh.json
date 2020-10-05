@@ -1,0 +1,76 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkhamYCMgCC55uGcUpvTVrDoCI2Ad+OgmJv7xSKx4bLmMD2swJZVPM/en0z733oH3B5b2GCcr2R3qRQky1T0k6Qdb+M7tFtvhZamuFwlmkIAAlhca2toeWFqm6bGy5ucxuIenOtjKl/smFhJkDMCLEh9VXbzl6SijaCiXuhB6gc5uoJhdu31Pxo6rZnqAJBhY64WaLnVfYJfe3JPR+IdtnKXUvNk9GexlwOU+iAUPFowER6j1tUz9EoL+nBfNvWEzsQmXT5pME65Bx32fIUtu4pbgEBTJDLr+vb0VYS8F824dIrMVCEL9t3yKuJjHzQjDk2DBxaU83EZitMrq8gicRQIDAQAB",
+  "name": "WA Web Plus for WhatsApp™",
+  "version": "4.7.1",
+  "manifest_version": 2,
+  "description": "__MSG_appDesc__",
+  "homepage_url": "https://wawplus.com",
+  "default_locale": "en",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "background": {
+    "scripts": [
+      "/src/js/background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": "icons/icon-128.png",
+    "default_title": "WA Web Plus",
+    "default_popup": "/src/popup.html"
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "unlimitedStorage",
+    "notifications",
+    "*://web.whatsapp.com/*",
+    "*://wawplus.com/*",
+    "*://*.web.app/*",
+    "*://*.firebaseio.com/*",
+    "*://*.firebaseapp.com/*",
+    "*://*.cloudfunctions.net/*",
+    "*://*.zapier.com/*",
+    "*://*.pabbly.com/*",
+    "*://*.integrately.com/*",
+    "*://*.integromat.com/*",
+    "*://apiway.ai/*",
+    "*://*.paddle.com/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://wawplus.com/*"
+    ]
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' 'style-src-elem' https://*.paddle.com https://apiway.ai https://*.web.app https://*.firebaseio.com https://*.firebaseapp.com https://*.cloudfunctions.net https://*.googleapis.com https://www.gstatic.com; object-src 'style-src-elem' 'self';",
+  "web_accessible_resources": [
+    "/src/*",
+    "/_locales/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://web.whatsapp.com/*"
+      ],
+      "css": [
+        "src/css/style.css"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "*://web.whatsapp.com/*"
+      ],
+      "js": [
+        "src/js/firebase-app.js",
+        "src/js/firebase-database.js",
+        "src/js/paddle.js",
+        "src/js/content.js"
+      ]
+    }
+  ]
+}

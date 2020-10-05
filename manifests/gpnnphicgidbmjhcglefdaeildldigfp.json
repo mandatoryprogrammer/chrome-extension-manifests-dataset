@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Chromescraper",
+  "version": "0.2",
+  "description": "Easily any data from any webpage",
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "permissions": [
+    "contentSettings",
+    "contextMenus",
+    "tabs",
+    "identity",
+    "https://spreadsheets.google.com/feeds/",
+    "storage"
+  ],
+  "oauth2": {
+    "client_id": "167010525276-nt5qkngb2dnifsnjg9b70lfkujl3pu30.apps.googleusercontent.com",
+    "scopes": [
+      "https://spreadsheets.google.com/feeds",
+      "https://www.googleapis.com/auth/drive"
+    ]
+  },
+  "web_accessible_resources": [
+    "utils.js",
+    "libs/*",
+    "snippets/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "libs/require.js",
+        "require_config.js",
+        "content_script.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "chromescrap.js"
+    ]
+  }
+}

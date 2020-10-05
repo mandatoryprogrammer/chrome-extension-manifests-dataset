@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Web Audio Inspector",
+  "author": "Google Web Audio API Tools",
+  "description": "View web audio graphs. Inspect AudioNodes.",
+  "version": "0.1.4",
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "js/tab-page-changed.js"
+      ],
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "js/inject-tracing.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "images/*",
+    "js/*"
+  ],
+  "icons": {
+    "48": "media/images/icon.png",
+    "128": "media/images/icon.png"
+  },
+  "devtools_page": "dev-tools.html"
+}

@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Scrab.in",
+  "description": "Get social information automatically",
+  "version": "4.0.8",
+  "browser_action": {
+    "default_popup": "./Views/popup.html",
+    "default_icon": "./Assets/Images/icon-128.png"
+  },
+  "icons": {
+    "128": "./Assets/Images/icon-128.png",
+    "16": "./Assets/Images/icon-16.png",
+    "48": "./Assets/Images/icon-48.png",
+    "32": "./Assets/Images/icon-32.png",
+    "64": "./Assets/Images/icon-64.png"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "unlimitedStorage",
+    "http://linkedin.com/*",
+    "https://linkedin.com/*",
+    "http://*.linkedin.com/*",
+    "https://*.linkedin.com/*",
+    "http://www.linkedin.com/*",
+    "https://www.linkedin.com/*"
+  ],
+  "background": {
+    "scripts": [
+      "./Libs/jquery.min.js",
+      "./Assets/JS/web.api.js",
+      "./Assets/JS/notify.min.js",
+      "./Scripts/BackgroundScript/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.linkedin.com/*"
+      ],
+      "css": [
+        "./Assets/CSS/style.css",
+        "./Libs/jquery-ui.css"
+      ],
+      "all_frames": false,
+      "js": [
+        "./Libs/jquery-1.12.4.js",
+        "./Libs/jquery-ui.js",
+        "./Libs/toast.min.js",
+        "./Libs/alert.min.js",
+        "./Assets/JS/web.api.js",
+        "./Assets/JS/notify.min.js",
+        "./Scripts/ContentScript/content_script.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "web_accessible_resources": [
+    "*.*"
+  ]
+}

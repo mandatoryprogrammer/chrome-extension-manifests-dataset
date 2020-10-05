@@ -1,0 +1,81 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Supreme Bot 9000",
+  "version": "0.0.5.2",
+  "author": "Javier Nieto",
+  "description": "Quickly Cop Supreme Items",
+  "options_page": "main/index.html",
+  "manifest_version": 2,
+  "permissions": [
+    "storage",
+    "alarms",
+    "proxy",
+    "<all_urls>",
+    "tabs",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "browser_action": {},
+  "background": {
+    "scripts": [
+      "main/scripts/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://sanicspeed.000webhostapp.com/*"
+      ],
+      "js": [
+        "main/js/jquery-3.3.1.min.js",
+        "main/js/mainController.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.supremenewyork.com/*"
+      ],
+      "js": [
+        "main/scripts/addReq.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://www.supremenewyork.com/shop/*"
+      ],
+      "exclude_globs": [
+        "*cart*"
+      ],
+      "js": [
+        "main/scripts/addToCart.js",
+        "main/scripts/human.js",
+        "main/scripts/find.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://www.supremenewyork.com/checkout"
+      ],
+      "js": [
+        "main/js/typed.min.js",
+        "main/scripts/human.js",
+        "main/scripts/checkout.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://recaptcha-demo.appspot.com/recaptcha-v3-request-scores.php"
+      ],
+      "js": [
+        "main/scripts/autoCap.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

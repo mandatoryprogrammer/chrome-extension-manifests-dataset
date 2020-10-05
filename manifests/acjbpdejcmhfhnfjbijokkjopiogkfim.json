@@ -1,0 +1,81 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "ReadNoEvil",
+  "description": "Redact Twitter/Tweetdeck streams, so you don't have to read users you've blocked.",
+  "version": "0.0.12",
+  "homepage_url": "https://github.com/Vhati/ReadNoEvil",
+  "minimum_chrome_version": "40",
+  "icons": {
+    "32": "images/book_gray_32.png",
+    "48": "images/book_gray_48.png",
+    "128": "images/book_gray_128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://tweetdeck.twitter.com/*"
+      ],
+      "css": [
+        "toastr.css"
+      ],
+      "js": [
+        "toastr.js",
+        "rne-logging.js",
+        "rne-registry.js",
+        "content-tweetdeck.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://twitter.com/*"
+      ],
+      "css": [
+        "toastr.css"
+      ],
+      "js": [
+        "toastr.js",
+        "rne-logging.js",
+        "rne-registry.js",
+        "content-vanilla.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "codebird.js",
+      "rne-logging.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "page_action": {
+    "default_title": "ReadNoEvil",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "19": "images/book_gray_19.png",
+      "38": "images/book_gray_38.png"
+    }
+  },
+  "web_accessible_resources": [
+    "tweetdeck-blank.css",
+    "vanilla-blank.css",
+    "tweetdeck-faded.css",
+    "vanilla-faded.css",
+    "toastr.css",
+    "images/book_gray_19.png"
+  ],
+  "permissions": [
+    "activeTab",
+    "alarms",
+    "storage",
+    "unlimitedStorage",
+    "https://*.twitter.com/"
+  ],
+  "manifest_version": 2
+}

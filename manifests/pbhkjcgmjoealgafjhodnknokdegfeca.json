@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Gabbler",
+  "description": "make a foreign language your augmented reality",
+  "version": "4.2",
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/jquery-1.11.3.min.js",
+        "js/_languageData.js",
+        "js/guessLanguage.js",
+        "js/highlight.js",
+        "js/script.js"
+      ],
+      "css": [
+        "css/css.css",
+        "css/popup.css"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' http://localhost:32861 http://gabbler.me/ https://gabbler.me/; object-src 'self'",
+  "permissions": [
+    "http://*/",
+    "https://*/",
+    "http://*/*",
+    "https://*/*",
+    "tabs",
+    "notifications",
+    "browsingData",
+    "webRequest",
+    "webNavigation"
+  ],
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "img/icon.png",
+    "default_popup": "popup.html"
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "minimum_chrome_version": "36.0.1985.1",
+  "oauth2": {
+    "scopes": [
+      "https://www.googleapis.com/auth/drive",
+      "https://www.googleapis.com/auth/drive.install"
+    ],
+    "client_id": "911569945122-0tcrnl8lnu5b0ccgpp92al27pplahn5a.apps.googleusercontent.com"
+  },
+  "name": "coLaboratory Notebook",
+  "icons": {
+    "256": "colab-black-256.png"
+  },
+  "app": {
+    "background": {
+      "scripts": [
+        "app/params.js",
+        "app/launch.js",
+        "app/main.js"
+      ]
+    }
+  },
+  "version": "10",
+  "manifest_version": 2,
+  "webview": {
+    "partitions": [
+      {
+        "accessible_resources": [
+          "notebook/*",
+          "closure/*",
+          "colab/*",
+          "extern/*",
+          "ipython/*"
+        ],
+        "name": "frontend"
+      }
+    ]
+  },
+  "permissions": [
+    "identity",
+    {
+      "socket": [
+        "tcp-listen:*:*",
+        "tcp-connect",
+        "resolve-host",
+        "udp-bind:*:*",
+        "udp-send-to:*:*"
+      ]
+    },
+    "webview",
+    {
+      "fileSystem": [
+        "write",
+        "directory",
+        "retainEntries"
+      ]
+    },
+    "unlimitedStorage",
+    "storage",
+    "clipboardRead",
+    "clipboardWrite",
+    {
+      "fileSystem": [
+        "write",
+        "retainEntries",
+        "directory"
+      ]
+    }
+  ],
+  "url_handlers": {
+    "handle_drive_action": {
+      "matches": [
+        "http://colaboratory.jupyter.org/drive*"
+      ],
+      "title": "Drive Action"
+    }
+  },
+  "description": "A Chrome App for running a port of IPython to PNaCl, in a notebook environment with Google Drive Integration."
+}

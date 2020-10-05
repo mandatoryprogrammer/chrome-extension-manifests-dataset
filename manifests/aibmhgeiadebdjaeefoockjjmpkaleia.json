@@ -1,0 +1,117 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "AnimeDaoDark",
+  "description": "A redesigned user-interface for AnimeDao.com",
+  "version": "2.0",
+  "icons": {
+    "128": "images/icon_128.png"
+  },
+  "browser_action": {
+    "default_icon": "images/icon.png",
+    "default_popup": "menu/menu.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "https://*/*"
+      ],
+      "js": [
+        "javascript/baseUrl.js"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "matches": [
+        "https://animedao.com/*",
+        "https://animedao24.stream/*",
+        "https://animedao25.stream/*",
+        "https://animedao26.stream/*",
+        "https://animedao27.stream/*",
+        "https://animedao28.stream/*",
+        "https://animedao29.stream/*",
+        "https://disqus.com/embed/*"
+      ],
+      "js": [
+        "javascript/activate.js"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "matches": [
+        "https://disqus.com/embed/*",
+        "https://www.rapidvideo.com/e/*"
+      ],
+      "js": [
+        "javascript/activate2.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "https://animedao24.stream/*",
+        "https://animedao25.stream/*",
+        "https://animedao26.stream/*",
+        "https://animedao27.stream/*",
+        "https://animedao28.stream/*",
+        "https://animedao29.stream/*"
+      ],
+      "js": [
+        "javascript/videoStream.js"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "https://www.rapidvideo.com/e/*"
+      ],
+      "js": [
+        "javascript/rapidvideo.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "https://animedao.com/*",
+        "https://animedao24.stream/*",
+        "https://animedao25.stream/*",
+        "https://animedao26.stream/*",
+        "https://animedao27.stream/*",
+        "https://animedao28.stream/*",
+        "https://animedao29.stream/*"
+      ],
+      "js": [
+        "javascript/myscript.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "Lite/AnimeDaoLite.css",
+    "Lite/streamPage.css",
+    "Lite/DisqusEmbed.css",
+    "Lite/rapidplayer.css",
+    "Dark/AnimeDaoDark.css",
+    "Dark/DisqusEmbed.css",
+    "Dark/streamPage.css",
+    "Dark/rapidplayer.css",
+    "javascript/activate.js",
+    "javascript/myscript.js",
+    "javascript/NewFunctions.js",
+    "javascript/videoPlayer_detach.js",
+    "javascript/rapidvideo.js",
+    "javascript/activate2.js"
+  ]
+}

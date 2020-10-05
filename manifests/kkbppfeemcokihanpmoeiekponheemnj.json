@@ -1,0 +1,67 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "EnshieldMe",
+  "short_name": "EnshieldMe",
+  "version": "1.1.7",
+  "description": "Encrypt any webpage editable field with your passphrase (and decrypt of course)",
+  "offline_enabled": true,
+  "incognito": "split",
+  "icons": {
+    "16": "img/16/default.png",
+    "36": "img/36/default.png",
+    "48": "img/48/default.png",
+    "128": "img/128/default.png"
+  },
+  "background": {
+    "scripts": [
+      "js/jquery.js",
+      "background.js"
+    ]
+  },
+  "browser_action": {
+    "default_title": "EnshieldMe - extension",
+    "default_icon": "img/16/inactive.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "background",
+    "contextMenus",
+    "storage",
+    "tabs",
+    "clipboardWrite"
+  ],
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/jquery.js",
+        "js/functions.js",
+        "js/modal.js",
+        "content.js"
+      ],
+      "css": [
+        "content.css"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "nacl_modules": [
+    {
+      "path": "nacl/bin/enshield_p.nmf",
+      "mime_type": "application/x-pnacl"
+    }
+  ],
+  "web_accessible_resources": [
+    "img/*.png",
+    "img/16/*.png",
+    "img/36/*.png",
+    "img/48/*.png",
+    "img/128/*.png",
+    "js/inject.js"
+  ]
+}

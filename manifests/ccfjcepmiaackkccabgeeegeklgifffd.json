@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "百度翻译：网页翻译、海淘神器",
+  "description": "百度翻译官方出品。支持27种语言的翻译，浏览外文网页时可一键网页翻译、双语对照查看、查询单词结果等。特别针对20+家海淘网站进行过翻译优化，让你的海淘过程更加得心应手。",
+  "version": "1.2",
+  "permissions": [
+    "*://*/*",
+    "activeTab",
+    "tabs",
+    "contextMenus",
+    "webRequest",
+    "webRequestBlocking",
+    "storage"
+  ],
+  "icons": {
+    "16": "imgs/map/icon16.png",
+    "48": "imgs/map/icon48.png",
+    "128": "imgs/map/icon128.png"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "exclude_matches": [
+        "https://www.taobao.com/*"
+      ],
+      "css": [
+        "css/trans-src.css",
+        "css/inject-bar.css"
+      ],
+      "js": [
+        "js/jquery-1.11.3.min.js",
+        "js/htmlparser.js",
+        "js/inject-bar.js",
+        "js/trans-lib.js",
+        "js/cs-main.js",
+        "js/trans-src.js",
+        "js/lookup.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "browser_action": {
+    "default_title": "点击进行网页翻译或文字翻译",
+    "default_icon": "imgs/map/icon48.png",
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "web_accessible_resources": [
+    "imgs/map/*.png",
+    "imgs/map/sound.gif"
+  ],
+  "manifest_version": 2
+}

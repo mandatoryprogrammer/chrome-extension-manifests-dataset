@@ -1,0 +1,95 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "background": {
+    "page": "./background/background.html",
+    "persistent": true
+  },
+  "default_locale": "en",
+  "name": "CSS Tab",
+  "version": "2.109.9.35",
+  "manifest_version": 2,
+  "description": "1.use picture as background of newtab and sites easily;\n   2.save tab sessions;\n   3.save html with css and images",
+  "chrome_url_overrides": {
+    "newtab": "./newTab/C.C.Chrome.NewTab.html"
+  },
+  "browser_action": {
+    "default_icon": {
+      "128": "./image/logo-128.png",
+      "16": "./image/logo-128.png",
+      "48": "./image/logo-128.png",
+      "32": "./image/logo-128.png",
+      "64": "./image/logo-128.png"
+    },
+    "default_popup": "./popup/C.C.Chrome.NewTab.popup.html",
+    "default_title": "CSS Tab"
+  },
+  "icons": {
+    "128": "./image/logo-128.png",
+    "16": "./image/logo-128.png",
+    "48": "./image/logo-128.png",
+    "32": "./image/logo-128.png",
+    "64": "./image/logo-128.png"
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "./units/log.js",
+        "./units/ChromeAPI.js",
+        "./units/errorTools.js",
+        "./units/netConnect.js",
+        "./plugins/scrollTopOrBottom.js",
+        "./units/StringUnits.js",
+        "./plugins/inPageSearch.js",
+        "./units/arithmeticUnits.js",
+        "./units/jsFunction.js",
+        "./units/DomTools.js",
+        "./plugins/regexSearch.js",
+        "./content/C.C.CSS.js"
+      ],
+      "css": [
+        "./CSS/C.C.Note.css"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "ftp://*/*",
+        "file:///*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": false,
+      "js": [
+        "./plugins/chromeBookmarks.js",
+        "./plugins/saveFullHtml.js",
+        "./plugins/clockWidget.js"
+      ],
+      "css": [
+        "./plugins/chromeBookmarks.css"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "ftp://*/*",
+        "file:///*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "content_security_policy": "script-src  'self' 'unsafe-eval'  chrome-extension-resource ;  object-src 'self'; frame-src 'self' ; ",
+  "permissions": [
+    "<all_urls>",
+    "file://*/*",
+    "bookmarks",
+    "contextMenus",
+    "idle",
+    "notifications",
+    "tabs",
+    "storage",
+    "unlimitedStorage",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "offline_enabled": true
+}

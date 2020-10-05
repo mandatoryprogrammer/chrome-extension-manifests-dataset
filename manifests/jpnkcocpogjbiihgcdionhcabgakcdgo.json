@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Extension of Our Own",
+  "short_name": "Eo3",
+  "description": "Improved subscription list for Ao3",
+  "version": "0.1.4",
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "browser_action": {
+    "default_icon": "Eo3_icon.png",
+    "default_popup": "Eo3pop.html",
+    "default_title": "Subscriptions Styler"
+  },
+  "icons": {
+    "128": "Eo3_icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://archiveofourown.org/users/*/subscriptions*"
+      ],
+      "css": [
+        "substyle.css",
+        "jquery-ui.css"
+      ],
+      "js": [
+        "jquery.min.js",
+        "subsort.js",
+        "jquery-ui.js",
+        "options.js",
+        "list.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "web_accessible_resources": [
+    "ajax-loader.gif",
+    "reversi-loader.gif",
+    "ribbon_reverse.png",
+    "reversi-ribbon_reverse.png",
+    "bookmarkscreenshot.png",
+    "list.js"
+  ],
+  "permissions": [
+    "activeTab",
+    "https://ajax.googleapis.com/",
+    "storage",
+    "notifications"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  }
+}

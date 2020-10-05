@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Steam ID Finder",
+  "description": "Display Steam users' IDs. One-click to copy.",
+  "manifest_version": 2,
+  "version": "0.1.4",
+  "icons": {
+    "16": "images/icon-16.png",
+    "19": "images/icon-19.png",
+    "24": "images/icon-24.png",
+    "32": "images/icon-32.png",
+    "38": "images/icon-38.png",
+    "48": "images/icon-48.png",
+    "64": "images/icon-64.png",
+    "96": "images/icon-96.png",
+    "128": "images/icon-128.png"
+  },
+  "browser_action": {
+    "default_title": "Steam ID Finder Settings",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://steamcommunity.com/id/*",
+        "https://steamcommunity.com/profiles/*"
+      ],
+      "js": [
+        "lib/bignumber.min.js",
+        "scripts/utilities.js",
+        "scripts/content-script-steam-friends-manager.js",
+        "scripts/content-script-steam-user.js"
+      ],
+      "css": [
+        "css/main.css"
+      ]
+    }
+  ],
+  "background": {
+    "page": "background.html",
+    "persistent": false
+  },
+  "permissions": [
+    "https://api.steampowered.com/ISteamUser/*",
+    "clipboardWrite",
+    "contextMenus",
+    "storage"
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "Steam_ID_Finder@gmail.com"
+    }
+  },
+  "applications": {
+    "gecko": {
+      "id": "Steam_ID_Finder@gmail.com"
+    }
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

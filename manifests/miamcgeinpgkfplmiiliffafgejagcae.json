@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Issues Reactions Finder",
+  "version": "0.0.3",
+  "manifest_version": 2,
+  "description": "Find the most relevant Github comments, by user reactions",
+  "homepage_url": "https://www.issuesreactionsfinder.com",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://github.com/*/issues/*"
+      ],
+      "js": [
+        "src/content/content.js"
+      ],
+      "css": [
+        "css/style.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "src/content/content.html"
+  ],
+  "browser_action": {
+    "default_icon": "icons/icon19.png"
+  },
+  "permissions": [
+    "https://github.com/*/issues/*",
+    "tabs"
+  ]
+}

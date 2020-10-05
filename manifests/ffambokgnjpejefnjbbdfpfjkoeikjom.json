@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Ceev - Linkedin Resume Generator",
+  "short_name": "Ceev",
+  "version": "1.9.0",
+  "manifest_version": 2,
+  "description": "Turn your LinkedIn profile into a stunning resume.",
+  "homepage_url": "http://ceev.io",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "browser_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "ceev",
+    "default_popup": "src/popup/popup.html"
+  },
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "web_accessible_resources": [
+    "src/*"
+  ],
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://linkedin.com/*",
+        "http://linkedin.com/*"
+      ],
+      "js": [
+        "js/jquery/jquery.min.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://ceev.io/"
+      ],
+      "js": [
+        "js/extension.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://ceev.io/create/linkedin"
+      ],
+      "js": [
+        "js/transfer.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

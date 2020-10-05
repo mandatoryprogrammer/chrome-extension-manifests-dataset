@@ -1,0 +1,84 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Mâché Extension",
+  "description": "Companion extension for LiveMâché, a collaborative online curation platform.",
+  "version": "2.6.3",
+  "manifest_version": 2,
+  "icons": {
+    "16": "images/logo_16.png",
+    "128": "images/logo_128.png"
+  },
+  "web_accessible_resources": [
+    "manifest.json",
+    "images/*.png",
+    "images/*.svg"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://ecologylab.net/*",
+      "*://*.ecologylab.net/*",
+      "*://localhost/*",
+      "*://ecoarray0.cse.tamu.edu/*",
+      "*://ecoarray0.cs.tamu.edu/*",
+      "*://ecolive.cse.tamu.edu/*",
+      "*://ecolive.cs.tamu.edu/*",
+      "*://livemache.cs.tamu.edu/*",
+      "*://livemache.cse.tamu.edu/*",
+      "*://*.cse.tamu.edu/*"
+    ]
+  },
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "http://*/*",
+    "https://*/*",
+    "activeTab",
+    "tabs",
+    "storage",
+    "desktopCapture"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*"
+      ],
+      "all_frames": true,
+      "js": [
+        "gen-libs/bigsemantics-core.bundle.js",
+        "gen-libs/bsjsCore/BSUtils.js",
+        "gen-libs/bsjsCore/MetadataViewModel.js",
+        "gen-libs/renderers/RenderingTask.js",
+        "gen-libs/renderers/RendererBase.js",
+        "gen-libs/renderers/interfaceStyle.js",
+        "gen-libs/renderers/VanillaMICE.js",
+        "code/Util.js",
+        "code/contentScript/Main.js",
+        "code/contentScript/SlideOut.js",
+        "code/contentScript/DragEvents.js",
+        "code/contentScript/Clipboard.js",
+        "code/Logger.js"
+      ],
+      "run_at": "document_end",
+      "css": [
+        "code/style.css",
+        "gen-libs/renderers/styles/metadataRenderer.css",
+        "gen-libs/houseMICE/css/prettify.css"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "gen-libs/bigsemantics-core.bundle.js",
+      "code/Util.js",
+      "code/background/MetadataCache.js",
+      "code/background/Background.js",
+      "code/background/ClipboardBackground.js"
+    ]
+  },
+  "page_action": {
+    "default_icon": "button.png"
+  },
+  "options_page": "code/options.html"
+}

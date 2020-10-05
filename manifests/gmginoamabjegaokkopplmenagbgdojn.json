@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Lockmagic Gmail Extension",
+  "short_name": "LmGmail",
+  "description": "Send secure, end to end encrypted email messages to anyone in the world without passwords",
+  "version": "5.4",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*",
+        "https://mail-attachment.googleusercontent.com/*",
+        "https://www.lockmagic.com/*",
+        "https://*.google.com/*"
+      ],
+      "js": [
+        "inboxsdk.js",
+        "loader.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "https://mail.google.com/",
+    "https://inbox.google.com/",
+    "https://mail-attachment.googleusercontent.com/",
+    "https://www.lockmagic.com/",
+    "https://docs.google.com/",
+    "https://drive.google.com/",
+    "https://*.googleusercontent.com/",
+    "https://*.google.com/"
+  ],
+  "web_accessible_resources": [
+    "popup.html",
+    "xlsx.html",
+    "docx.html",
+    "pdf.html",
+    "media.html",
+    "tiff.html",
+    "download.html",
+    "logo.png",
+    "spinwheel.gif"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_security_policy": "script-src 'self' https://www.lockmagic.com; img-src 'self' blob: data:; media-src blob: data:;object-src 'self' blob:;style-src 'self' https://www.lockmagic.com;connect-src https://mail-attachment.googleusercontent.com;",
+  "manifest_version": 2
+}

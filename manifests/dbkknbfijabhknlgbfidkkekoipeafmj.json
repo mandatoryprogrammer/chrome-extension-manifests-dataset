@@ -1,0 +1,113 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Easy Fees",
+  "version": "1.10",
+  "description": "Easy Fees profit calculator.",
+  "icons": {
+    "16": "16.png",
+    "48": "48.png",
+    "128": "128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "notifications",
+    "storage",
+    "https://www.ebay.com/",
+    "https://k2b-bulk.ebay.com/ws/eBayISAPI.dll?*",
+    "https://www.ebay.com/sh/ord",
+    "tabs"
+  ],
+  "options_page": "options.html",
+  "browser_action": {
+    "default_title": "Easy Fees Profit Calculator",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "eBay/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://k2b-bulk.ebay.com/ws/eBayISAPI.dll?SalesRecordConsole&*"
+      ],
+      "js": [
+        "jquery-3.4.0.min.js",
+        "eBay/legacy_inject.js"
+      ],
+      "css": [
+        "misc.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.ebay.com/sh/ord/*",
+        "https://www.ebay.at/sh/ord/*",
+        "https://www.ebay.be/sh/ord/*",
+        "https://www.ebay.ca/sh/ord/*",
+        "https://www.ebay.cn/sh/ord/*",
+        "https://www.ebay.fr/sh/ord/*",
+        "https://www.ebay.de/sh/ord/*",
+        "https://www.ebay.ie/sh/ord/*",
+        "https://www.ebay.it/sh/ord/*",
+        "https://www.ebay.hk/sh/ord/*",
+        "https://www.ebay.my/sh/ord/*",
+        "https://www.ebay.nl/sh/ord/*",
+        "https://www.ebay.ph/sh/ord/*",
+        "https://www.ebay.pl/sh/ord/*",
+        "https://www.ebay.sg/sh/ord/*",
+        "https://www.ebay.es/sh/ord/*",
+        "https://www.ebay.ch/sh/ord/*",
+        "https://www.ebay.tw/sh/ord/*",
+        "https://www.ebay.th/sh/ord/*",
+        "https://www.ebay.uk/sh/ord/*",
+        "https://www.ebay.vn/sh/ord/*"
+      ],
+      "js": [
+        "jquery-3.4.0.min.js",
+        "eBay/new_inject.js",
+        "bootstrap.min.js"
+      ],
+      "css": [
+        "style.css",
+        "bootstrap.min.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://*.ebay.com/*"
+      ],
+      "js": [
+        "eBay/checkEbayAuthStatus.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.easyfees.io/profile"
+      ],
+      "js": [
+        "jquery-3.4.0.min.js",
+        "web/userdata.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'",
+  "web_accessible_resources": [
+    "48.png",
+    "form.html",
+    "test.html",
+    "images/*",
+    "eBay/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://*.ebay.com/*"
+    ]
+  }
+}

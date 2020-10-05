@@ -1,0 +1,121 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "SpotifyTree",
+  "author": "Andrey Shemetov",
+  "description": "__MSG_addonDescChr__",
+  "version": "2.7",
+  "default_locale": "en",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAryHDlstSMFWDzbQuVARQkswdYXKWz7YcXlaa8U3Oa1T2otbSR1sHQzlm/10QNwcExdA0W+f+7K/Vf4FA4+uiX/4ibeTfDKElI22JBSJkwfMPZ04evimW7Knz7Fl0j5AwqSVeRNlyLWTwFK00OKFmvZPLnT8GHFETBoMf+rN4221l81RUn8kXctcESozw+SWvfHFEebwC2gj/Fs+f2pQTxKjXBPLrxvFHsFdtc2WoysQYKCgyN52NNbLZ2jReSLCri0KTwapIWq44/N66ZxWxDt5cUR9C4eFk2rLmV5p2gYcDuYBD103CaVNOyBwO0gicku9zhNri1f9GYn/by9yv4QIDAQAB",
+  "icons": {
+    "16": "icons/SpotifyTree_16.png",
+    "24": "icons/SpotifyTree_24.png",
+    "32": "icons/SpotifyTree_32.png",
+    "48": "icons/SpotifyTree_48.png",
+    "64": "icons/SpotifyTree_64.png",
+    "128": "icons/SpotifyTree_128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/SpotifyTree_16.png",
+      "24": "icons/SpotifyTree_24.png",
+      "32": "icons/SpotifyTree_32.png",
+      "48": "icons/SpotifyTree_48.png",
+      "64": "icons/SpotifyTree_64.png",
+      "128": "icons/SpotifyTree_128.png"
+    },
+    "default_title": "SpotifyTree",
+    "default_popup": "popup/popup.html"
+  },
+  "commands": {
+    "previous": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Left"
+      },
+      "description": "Previous Track",
+      "global": true
+    },
+    "next": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Right"
+      },
+      "description": "Next Track",
+      "global": true
+    },
+    "play_pause": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Down"
+      },
+      "description": "Play/Pause",
+      "global": true
+    },
+    "previous_media": {
+      "suggested_key": {
+        "default": "MediaPrevTrack"
+      },
+      "description": "Media Previous Track",
+      "global": true
+    },
+    "next_media": {
+      "suggested_key": {
+        "default": "MediaNextTrack"
+      },
+      "description": "Media Next Track",
+      "global": true
+    },
+    "play_pause_media": {
+      "suggested_key": {
+        "default": "MediaPlayPause"
+      },
+      "description": "Media Play/Pause",
+      "global": true
+    },
+    "notify": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Up"
+      },
+      "description": "Playback Info",
+      "global": true
+    }
+  },
+  "options_ui": {
+    "page": "prefs/prefs.html",
+    "open_in_tab": true
+  },
+  "background": {
+    "scripts": [
+      "libs/spotify-web-api.js",
+      "common.js",
+      "utils.js",
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "https://*.spotify.com/*",
+    "https://i.scdn.co/image/*",
+    "tabs",
+    "identity",
+    "alarms",
+    "contextMenus",
+    "notifications",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://open.spotify.com/*"
+      ],
+      "js": [
+        "libs/spotify-web-api.js",
+        "common.js",
+        "utils.js",
+        "content.js"
+      ],
+      "all_frames": false,
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "icons/*"
+  ]
+}

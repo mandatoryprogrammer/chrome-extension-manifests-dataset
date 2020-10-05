@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Searchello - Safe Search Engine",
+  "short_name": "Searchello",
+  "description": "Adds a search engine that searches searchello.com",
+  "version": "1.3.8",
+  "author": "Microsoft Corporation",
+  "icons": {
+    "128": "icon.png"
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://localhost/*",
+      "*://127.0.0.1/*",
+      "*://searchello.com/*"
+    ]
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>",
+        "*://localhost/*",
+        "*://127.0.0.1/*",
+        "*://searchello.com/*"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "<all_urls>",
+    "management",
+    "background",
+    "https://*.searchello.com/"
+  ],
+  "chrome_settings_overrides": {
+    "search_provider": {
+      "name": "searchello",
+      "search_url": "https://www.searchello.com/search?q={searchTerms}",
+      "keyword": "searchello",
+      "favicon_url": "https://www.searchello.com/favicon/favicon.ico",
+      "is_default": true,
+      "encoding": "UTF-8"
+    }
+  }
+}

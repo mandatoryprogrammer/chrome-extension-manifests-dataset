@@ -1,0 +1,85 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Crunchyroll Enhanced",
+  "version": "0.4.2",
+  "description": "Improves your Crunchyroll experience",
+  "icons": {
+    "128": "logo128.png",
+    "64": "logo64.png"
+  },
+  "author": "David Mulder",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.crunchyroll.com/*",
+        "*://*.crunchyroll.co.uk/*",
+        "*://*.crunchyroll.fr/*",
+        "*://*.crunchyroll.ca/*"
+      ],
+      "js": [
+        "global.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*.crunchyroll.com/?comingsoon",
+        "*://*.crunchyroll.co.uk/?comingsoon",
+        "*://*.crunchyroll.fr/?comingsoon",
+        "*://*.crunchyroll.ca/?comingsoon"
+      ],
+      "js": [
+        "comingsoon.js"
+      ],
+      "css": [
+        "comingsoon.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "http://*.crunchyroll.com/home/queue*",
+        "http://*.crunchyroll.co.uk/home/queue*",
+        "http://*.crunchyroll.fr/home/queue*",
+        "http://*.crunchyroll.ca/home/queue*"
+      ],
+      "js": [
+        "queue.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://www.crunchyroll.com/*/episode*"
+      ],
+      "js": [
+        "episode.js"
+      ],
+      "css": [
+        "episode.css"
+      ]
+    }
+  ],
+  "page_action": {
+    "default_title": "Coming Soon section on Crunchyroll",
+    "default_popup": "comingsoon.html",
+    "default_icon": {
+      "19": "logo64.png",
+      "38": "logo64.png"
+    }
+  },
+  "options_page": "optionLauncher.html",
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "storage"
+  ]
+}

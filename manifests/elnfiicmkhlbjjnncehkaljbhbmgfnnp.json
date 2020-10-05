@@ -1,0 +1,98 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Sku Grid — eBay. File Exchange Sync",
+  "version": "4.0.18",
+  "minimum_chrome_version": "83.0.4103",
+  "description": "Sync CSVs between eBay and SkuGrid suite. Upload CSV from SG/SF to eBay to list or to update products. Download reports from eBay.",
+  "icons": {
+    "16": "images/sg_logo_16.png",
+    "32": "images/sg_logo_32.png",
+    "48": "images/sg_logo_48.png",
+    "64": "images/sg_logo_64.png",
+    "128": "images/sg_logo_128.png"
+  },
+  "externally_connectable": {
+    "matches": [
+      "https://app.skufetch.com/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "injects/common.js",
+    "injects/eBayConnector.js"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://app.skufetch.com/*",
+        "http://app.skufetch.com/*"
+      ],
+      "js": [
+        "injects/common.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://bulksell.ebay.com/*",
+        "https://k2b-bulk.ebay.com/*",
+        "https://signin.ebay.com/*",
+        "https://my.ebay.com/*",
+        "https://www.ebay.com/signin/*",
+        "https://ebay.com/signin/*"
+      ],
+      "js": [
+        "injects/eBayConnector.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background/asyncSetInterval.js",
+      "libs/lodash.js",
+      "libs/pubsub.js",
+      "background/ExtensionError.js",
+      "background/RefParser.js",
+      "background/utils.js",
+      "common/config.js",
+      "background/StateManager.js",
+      "background/ActionsFacade.js",
+      "background/SettingStorage.js",
+      "background/Scheduler.js",
+      "background/Log.js",
+      "background/MarketplaceAPI.js",
+      "background/Messages.js",
+      "background/sync/SyncRequest.js",
+      "background/sync/SyncSoldRequest.js",
+      "background/sync/SyncEbayRequest.js",
+      "background/sync/Analytics.js",
+      "background/sync/SyncAnalytics.js",
+      "background/sync/SyncStorage.js",
+      "background/sync/SyncEbayStorage.js",
+      "background/sync/SyncSoldStorage.js",
+      "background/sync/SyncBase.js",
+      "background/sync/connect/KeepAliveEbay.js",
+      "background/sync/connect/ManagerConnections.js",
+      "background/sync/connect/PoolTabs.js",
+      "background/sync/connect/TabConnector.js",
+      "background/sync/connect/utils.js",
+      "background/sync/SyncAPI.js",
+      "background/sync/CheckChangesAPI.js",
+      "background/sync/EbayListerFacade.js",
+      "background/sync/EbayLister.js",
+      "background/md5.js",
+      "background/BadgeManager.js",
+      "background/background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "tabs",
+    "storage"
+  ],
+  "browser_action": {
+    "default_title": "Sku Grid — eBay. File Exchange Sync",
+    "default_popup": "popup/popup.html"
+  },
+  "content_security_policy": "default-src 'self' https://www.google.com https://stats.g.doubleclick.net https://www.google-analytics.com; object-src 'self'; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-eval' https://www.google-analytics.com https://stats.g.doubleclick.net https://www.google.com; connect-src 'self' https://skugrid.com https://www.google-analytics.com https://stats.g.doubleclick.net/ https://skufetch.com https://app.skufetch.com;"
+}

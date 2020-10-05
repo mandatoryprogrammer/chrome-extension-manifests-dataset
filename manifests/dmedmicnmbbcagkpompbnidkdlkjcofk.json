@@ -1,0 +1,118 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "启拉助手",
+  "version": "2.7.0",
+  "manifest_version": 2,
+  "description": "启拉助手",
+  "icons": {
+    "16": "images/logo_16.png",
+    "48": "images/logo_48.png",
+    "128": "images/logo_128.png"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "file:///*/*",
+    "file://*/*",
+    "background",
+    "contentSettings",
+    "cookies",
+    "debugger",
+    "notifications",
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "contextMenus"
+  ],
+  "content_scripts": [
+    {
+      "js": [
+        "scripts/moment.js",
+        "scripts/hotkeys.js",
+        "scripts/clipboard.js",
+        "scripts/jquery.js",
+        "scripts/bootstrap.bundle.min.js",
+        "scripts/scrollfix.js",
+        "scripts/content_oauth.js",
+        "scripts/content_new.js"
+      ],
+      "css": [
+        "styles/bootstrap.bundle.css",
+        "styles/content_new.css"
+      ],
+      "matches": [
+        "*://detail.tmall.com/**",
+        "*://detail.tmall.hk/**",
+        "*://chaoshi.detail.tmall.com/**",
+        "*://*.tmall.com/maintaininfo/**",
+        "*://item.taobao.com/**",
+        "*://scportal.taobao.com/quali_show.htm*",
+        "*://zhaoshang.tmall.com/maintaininfo/liangzhao.htm*",
+        "*://detail.yao.95095.com/**",
+        "*://detail.liangxinyao.com/**"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "scripts/jquery.js",
+        "scripts/content_start.js"
+      ],
+      "css": [
+        "styles/content_start.css"
+      ],
+      "matches": [
+        "*://scportal.taobao.com/quali_show.htm*",
+        "*://zhaoshang.tmall.com/maintaininfo/liangzhao.htm*"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    },
+    {
+      "js": [
+        "scripts/jquery.js",
+        "scripts/content_alimama.js"
+      ],
+      "matches": [
+        "*://*.alimama.com/**"
+      ],
+      "all_frames": false,
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "scripts/jquery.js",
+        "scripts/content_oauth.js"
+      ],
+      "matches": [
+        "*://*/spread_pid*",
+        "*://oauth.taobao.com/authorize*",
+        "*://oauth.taobao.com/oauth2*"
+      ],
+      "all_frames": false,
+      "run_at": "document_end"
+    }
+  ],
+  "omnibox": {
+    "keyword": "OMNIBOX-KEYWORD"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/logo.png",
+      "38": "images/logo.png"
+    },
+    "default_title": "启拉助手",
+    "default_popup": "popup.html"
+  },
+  "options_page": "popup.html",
+  "web_accessible_resources": [
+    "images/*.*",
+    "images/**/*.*",
+    "bower_components/**/*.*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

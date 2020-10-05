@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "VOXO Quick Dial",
+  "description": "This extensions allows VOXO customers to quickly dial telephone numbers on websites",
+  "version": "1.1.16",
+  "manifest_version": 2,
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "storage",
+    "<all_urls>"
+  ],
+  "web_accessible_resources": [
+    "ipc-bridge-init.js",
+    "icon.png"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://app.voxo.co/*"
+    ]
+  },
+  "background": {
+    "scripts": [
+      "image-to-grayscale.js",
+      "background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "48": "icon-48.png",
+    "128": "icon-128.png",
+    "512": "icon-512.png",
+    "1024": "icon-1024.png"
+  },
+  "content_scripts": [
+    {
+      "css": [
+        "styles.css"
+      ],
+      "js": [
+        "intercept.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "https://app.voxo.co/*",
+        "https://mail.google.com/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "ipc-bridge.js"
+      ],
+      "matches": [
+        "https://app.voxo.co/*"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

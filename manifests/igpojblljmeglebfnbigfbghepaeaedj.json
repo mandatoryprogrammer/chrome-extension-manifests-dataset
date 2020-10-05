@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Essen Auto Highlight",
+  "version": "0.1.8",
+  "description": "Essen automatically highlights important content in articles.",
+  "minimum_chrome_version": "41",
+  "page_action": {
+    "default_icon": {
+      "19": "src/icons/0highlight19x19.png",
+      "38": "src/icons/0highlight38x38.png"
+    },
+    "default_title": "Command(Mac)/Ctrl(Win) + E to use Essen"
+  },
+  "icons": {
+    "128": "src/icons/128x128.png",
+    "48": "src/icons/48x48.png"
+  },
+  "background": {
+    "page": "src/background.html"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "src/ping.js",
+        "src/prepare.js",
+        "src/lib/readabilitySAX/readabilitySAX.js",
+        "src/lib/Porter-Stemmer/PorterStemmer1980.js",
+        "src/nlp.js",
+        "src/utils.js",
+        "src/content.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
+  "options_page": "src/logout.html",
+  "permissions": [
+    "storage",
+    "tabs",
+    "*://*/*"
+  ],
+  "content_security_policy": "script-src 'self' https://www.gstatic.com/ https://*.firebaseio.com https://apis.google.com; object-src 'self';",
+  "commands": {
+    "_execute_page_action": {
+      "suggested_key": {
+        "windows": "Ctrl+E",
+        "mac": "Command+E",
+        "chromeos": "Ctrl+E",
+        "linux": "Ctrl+E"
+      }
+    }
+  }
+}

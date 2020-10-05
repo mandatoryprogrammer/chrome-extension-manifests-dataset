@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "AmiAmi Enhancement Suite",
+  "version": "1.4",
+  "description": "Introduces new features including infinite scroll, a product list image viewer, and more. I like to think it makes AmiAmi faster.",
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "*://*.amiami.com/*"
+      ],
+      "exclude_matches": [
+        "*://secure.amiami.com/*"
+      ],
+      "js": [
+        "thirdParty/jquery.js",
+        "loadingScript.js"
+      ],
+      "css": [
+        "main.css"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "*://*.amiami.com/*"
+      ],
+      "exclude_matches": [
+        "*://secure.amiami.com/*"
+      ],
+      "js": [
+        "thirdParty/jquery.js",
+        "thirdParty/curry.js",
+        "script.js"
+      ],
+      "css": [
+        "main.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "images/*"
+  ],
+  "manifest_version": 2,
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}

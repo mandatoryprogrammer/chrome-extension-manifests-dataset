@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Trumpify",
+  "description": "This extension replaces pictures, text and more on Facebook to that of the 45th president of the USA.",
+  "version": "1.0.1",
+  "browser_action": {
+    "default_icon": "img/icons/icon_16.png",
+    "default_popup": "html/popup.html",
+    "default_title": "Make Facebook Great Again!"
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "icons": {
+    "16": "img/icons/icon_16.png",
+    "48": "img/icons/icon_48.png",
+    "128": "img/icons/icon_128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.facebook.com/*",
+        "*://*.twitter.com/*",
+        "*://*.google.com/*",
+        "*://*.instagram.com/*"
+      ],
+      "js": [
+        "lib/jquery-3.1.1.min.js",
+        "lib/jquery.facedetection.js",
+        "js/trumpify_avatars.js",
+        "js/trumpify_names.js",
+        "js/trumpify_tweets.js",
+        "js/trumpHairify.js"
+      ],
+      "css": [
+        "css/trumpify_tweets.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "storage"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "web_accessible_resources": [
+    "img/**/*",
+    "json/*"
+  ]
+}

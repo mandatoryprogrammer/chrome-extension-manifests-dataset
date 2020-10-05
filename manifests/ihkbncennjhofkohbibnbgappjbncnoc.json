@@ -1,0 +1,88 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Label Resizer - FBA Labels to Thermal & Avery",
+  "version": "1.4.18",
+  "short_name": "LabelResizer",
+  "description": "Print any Amazon FBA labels (product, shipping, LTL, SPD labels) directly to your thermal printer.",
+  "icons": {
+    "128": "img/logo-small-128.png",
+    "48": "img/logo-small-48.png",
+    "24": "img/logo-small-24.png",
+    "16": "img/logo-small-16.png"
+  },
+  "background": {
+    "scripts": [
+      "js/jquery/jquery.min.js",
+      "js/common.js",
+      "background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "128": "img/logo-small-128.png",
+      "48": "img/logo-small-48.png",
+      "24": "img/logo-small-24.png",
+      "16": "img/logo-small-16.png"
+    },
+    "default_popup": "popup.html",
+    "default_title": "labelresizer.com"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "js/jquery/jquery.min.js",
+        "js/common.js",
+        "labelresizer-extension.js"
+      ],
+      "matches": [
+        "*://www.labelresizer.com/*"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "js": [
+        "js/jquery/jquery.min.js",
+        "js/common.js",
+        "amazon-extension.js"
+      ],
+      "css": [
+        "extension.css"
+      ],
+      "matches": [
+        "*://sellercentral.amazon.com/*",
+        "*://sellercentral.amazon.com.mx/*",
+        "*://sellercentral-europe.amazon.com/*",
+        "*://sellercentral.amazon.ca/*",
+        "*://sellercentral.amazon.co.uk/*",
+        "*://sellercentral.amazon.de/*",
+        "*://sellercentral.amazon.fr/*",
+        "*://sellercentral.amazon.it/*",
+        "*://sellercentral.amazon.es/*",
+        "*://sellercentral.amazon.co.jp/*"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "permissions": [
+    "downloads",
+    "storage",
+    "notifications",
+    "tabs",
+    "*://www.labelresizer.com/*",
+    "*://api.labelresizer.com/*"
+  ],
+  "optional_permissions": [
+    "*://*.supplychainconnect.amazon.com/*",
+    "*://sellercentral.amazon.ae/*",
+    "*://sellercentral.amazon.com.au/*",
+    "*://sellercentral.amazon.sg/*",
+    "*://sellercentral.amazon.in/*",
+    "*://sellercentral-japan.amazon.com/*",
+    "*://sellercentral.amazon.sa/*",
+    "*://*.amazonaws.com/*"
+  ],
+  "web_accessible_resources": [
+    "img/*.png"
+  ]
+}

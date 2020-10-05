@@ -1,0 +1,38 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Deezapper | Deezer Remote Control",
+  "description": "Control your deezer web player from any device.",
+  "version": "0.1.6",
+  "icons": {
+    "128": "deezer_icon.png"
+  },
+  "browser_action": {
+    "default_icon": "deezer_icon.png",
+    "default_popup": "credentials.html"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "identity",
+    "*://*.deezer.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.deezer.com/*"
+      ],
+      "js": [
+        "firebase.js",
+        "deezer.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "play.js"
+  ],
+  "content_security_policy": "script-src 'self' https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com; object-src 'self'"
+}

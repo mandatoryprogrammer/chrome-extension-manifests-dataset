@@ -1,0 +1,43 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Acefone WebPhone",
+  "short_name": "webphone",
+  "description": "Acefone integrated webphone/softphone",
+  "version": "0.2.4",
+  "icons": {
+    "128": "images/favicon.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {},
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*",
+        "*://customer.servetel.in/*",
+        "https://www.google.com/*"
+      ],
+      "exclude_matches": [
+        "https://*/*.pdf"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "notifications",
+    "microphone",
+    "background"
+  ],
+  "web_accessible_resources": [
+    "assets/*"
+  ],
+  "content_security_policy": "script-src 'self' https:/*//*.acefone.co.uk; object-src 'self'"
+}

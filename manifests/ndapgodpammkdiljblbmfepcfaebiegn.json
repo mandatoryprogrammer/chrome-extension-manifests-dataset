@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Shopify Changelog Generator",
+  "description": "This extension shows a simple changelog of files you changed on your Shopify theme in the console.",
+  "version": "1.1.1",
+  "icons": {
+    "16": "icon.png",
+    "128": "icon.png"
+  },
+  "browser_action": {
+    "default_title": "Shopify Changelog Generator",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.myshopify.com/admin/themes/*",
+        "https://*.myshopify.com/admin/themes/*",
+        "https://*.zendesk.com/*"
+      ],
+      "js": [
+        "frontend.js"
+      ],
+      "runat": "document_end"
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "clipboardRead",
+    "clipboardWrite",
+    "storage",
+    "unlimitedStorage"
+  ],
+  "web_accessible_resources": [
+    "/client.js",
+    "/frontend.js",
+    "/zendesk_client.js"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.zendesk.com/*"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'"
+}

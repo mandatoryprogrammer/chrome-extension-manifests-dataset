@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "TelNowEdge Click to Call",
+  "short_name": "Click to call",
+  "author": "Boris Morel",
+  "version": "1.7",
+  "description": "TelNowEdge ClicktoCall adds link to dial on any Web Page that contains a phone number.",
+  "options_ui": {
+    "page": "options.html"
+  },
+  "background": {
+    "scripts": [
+      "lib/libphonenumber-js.js",
+      "Security/md5.js",
+      "Security/sha256.js",
+      "Manager/DataStorage.js",
+      "Helper/NumberHelper.js",
+      "Provider/Connection.js",
+      "Provider/Authenticator.js",
+      "Provider/Command.js",
+      "Background/Listener.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "lib/libphonenumber-js.js",
+        "Security/md5.js",
+        "Security/sha256.js",
+        "Manager/DataStorage.js",
+        "Provider/Authenticator.js",
+        "Provider/Command.js",
+        "Manager/DomWriter.js",
+        "Manager/DomParser.js",
+        "Helper/NumberHelper.js",
+        "ClickToCall.js",
+        "main.js"
+      ],
+      "css": [
+        "css/telnowedge.css"
+      ]
+    }
+  ],
+  "permissions": [
+    "contextMenus",
+    "storage",
+    "*://*/3pcc/GetChallenge",
+    "*://*/3pcc/Auth/*"
+  ],
+  "web_accessible_resources": [
+    "images/phone.png"
+  ],
+  "homepage_url": "https://github.com/TelNowEdge/webkit-clicktocall",
+  "icons": {
+    "48": "images/asterisk_48.png",
+    "96": "images/asterisk_96.png",
+    "128": "images/asterisk_128.png"
+  },
+  "default_locale": "en"
+}

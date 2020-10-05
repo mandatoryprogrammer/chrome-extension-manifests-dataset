@@ -1,0 +1,67 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "President Trump Google Doodles",
+  "version": "1.0.063",
+  "version_name": "20200925181632",
+  "icons": {
+    "16": "icons/iconv3_16.png",
+    "48": "icons/iconv3_48.png",
+    "128": "icons/iconv3_128.png"
+  },
+  "description": "Make Google Doodles Great Again!",
+  "manifest_version": 2,
+  "browser_action": {
+    "default_icon": "icons/iconv3_48.png",
+    "default_popup": "ptgd.html"
+  },
+  "chrome_url_overrides": {
+    "newtab": "ptgd_newtab_google.html"
+  },
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com/; https://www.youtube.com/*; object-src 'self'; child-src https://www.youtube.com/* https://s.ytimg.com",
+  "permissions": [
+    "https://api.flickr.com/",
+    "http://api.flickr.com/",
+    "https://flickr.com/",
+    "http://www.flickr.com/",
+    "file:///*/*",
+    "storage",
+    "activeTab",
+    "tabs",
+    "<all_urls>"
+  ],
+  "web_accessible_resources": [
+    "*.jpg",
+    "*.JPG",
+    "*.png",
+    "*.PNG",
+    "*.woff2",
+    "*.ttf",
+    "*.woff",
+    "ptgd.html",
+    "photos.json",
+    "*.json"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.google.com/*",
+        "*://meet.google.com/*",
+        "*://google.com/*",
+        "*://*/_/chrome/newtab*",
+        "file:///*/ptgd_newtab_google*",
+        "*://*/photos.json",
+        "*://*/ptgd_newtab_google.html"
+      ],
+      "js": [
+        "jquery2.js",
+        "ptgd.js"
+      ],
+      "css": [
+        "ptgd.css",
+        "ptgd_fonts.css"
+      ],
+      "all_frames": false,
+      "run_at": "document_end"
+    }
+  ]
+}

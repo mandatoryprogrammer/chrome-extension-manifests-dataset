@@ -1,0 +1,79 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Quick Capture",
+  "version": "1.2.22",
+  "manifest_version": 2,
+  "description": "Quick capture your current page screen.",
+  "browser_action": {
+    "default_icon": "logo/48x48.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "background.bundle.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "content.bundle.js",
+        "jquery.min.js",
+        "jquery.jcrop.min.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://apis.google.com ;  object-src 'self'",
+  "permissions": [
+    "cookies",
+    "desktopCapture",
+    "storage",
+    "contextMenus",
+    "activeTab",
+    "history",
+    "tabs",
+    "unlimitedStorage",
+    "http://*/*",
+    "https://*/*",
+    "https://apis.google.com/js/client.js",
+    "http://qcapp.demotrt.com/editor",
+    "https://app.quickcapture.co.in/editor",
+    "http://www.wufoo.com/scripts/embed/form.js"
+  ],
+  "icons": {
+    "16": "logo/16x16.png",
+    "48": "logo/48x48.png",
+    "128": "logo/128x128.png"
+  },
+  "commands": {
+    "capture-visible-part": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+1"
+      },
+      "description": "Capture Visible Part"
+    },
+    "capture-entire-page": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+2"
+      },
+      "description": "Capture Entire Page"
+    },
+    "select-local-image": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+3"
+      },
+      "description": "Select Local Image"
+    }
+  },
+  "oauth2": {
+    "client_id": "598101438334-lu7e30b55ej4j8t631mvtlk7091j21c3.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/drive"
+    ]
+  }
+}

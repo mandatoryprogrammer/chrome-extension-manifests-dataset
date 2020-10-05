@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "short_name": "UniBoard",
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com/ https://script.hotjar.com/ https://static.hotjar.com/ 'sha256-5As4+3YpY62+l38PsxCEkjB1R4YtyktBtRScTJ3fyLU='; object-src 'self'",
+  "name": "UniBoard - Let's Get Studying!",
+  "manifest_version": 2,
+  "browser_action": {
+    "default_title": "Uniboard",
+    "default_icon": "appleuniboard.png"
+  },
+  "icons": {
+    "16": "appleuniboard.png",
+    "48": "appleuniboard.png",
+    "128": "appleuniboard.png"
+  },
+  "background": {
+    "scripts": [
+      "js/jquery/jquery.min.js",
+      "backgroundScripts/fb/firebase-app.js",
+      "backgroundScripts/fb/firebase-firestore.js",
+      "backgroundScripts/background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "contentSettings",
+    "notifications",
+    "storage",
+    "unlimitedStorage",
+    "tabs",
+    "downloads",
+    "https://lms.monash.edu/*",
+    "https://*.cloudfront.net/*"
+  ],
+  "web_accessible_resources": [
+    "index.html",
+    "img/*",
+    "https://fonts.googleapis.com/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://lms.monash.edu/my/",
+        "https://lms.monash.edu/my/index.php"
+      ],
+      "js": [
+        "js/jquery/jquery.min.js",
+        "js/select2.min.js",
+        "js/tingle.min.js",
+        "js/moment.js",
+        "inject/expandsubjects.js",
+        "inject/inject.js"
+      ],
+      "css": [
+        "css/select2.min.css",
+        "css/firebaseui.css",
+        "css/tingle.min.css",
+        "css/styles.css"
+      ]
+    }
+  ],
+  "version": "4.0.13"
+}

@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "相談さぽーとコンシェルジュ",
+  "version": "1.0.2",
+  "description": "あなたの悩み事を一括検索。QAサイトの横断検索サービス",
+  "web_accessible_resources": [
+    "resources/*",
+    "qsn/*",
+    "<all_urls>",
+    "getFrameId"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [
+        "contents.css"
+      ],
+      "js": [
+        "jquery-1.11.1.min.js",
+        "contents.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js",
+      "qsn/asconfig.v.js",
+      "qsn/astools.js",
+      "qsn/asdownloader.js",
+      "qsn/asqueue.js",
+      "qsn/chrome.tabs.executeScriptInFrame.js",
+      "qsn/asbackground.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "webNavigation",
+    "https://webextension.link/xbgcijrb/*",
+    "<all_urls>"
+  ],
+  "browser_action": {
+    "default_icon": "resources/icon.png"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "icons": {
+    "128": "icon_128.png"
+  }
+}

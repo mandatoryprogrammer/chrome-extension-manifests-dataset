@@ -1,0 +1,95 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "content_security_policy": "script-src 'self' https://www.cloudhq.net; object-src 'self' https://www.cloudhq.net",
+  "web_accessible_resources": [
+    "javascripts/*",
+    "stylesheets/*",
+    "icons/*"
+  ],
+  "name": "Gmail Screenshot by cloudHQ",
+  "short_name": "Gmail Screenshot by cloudHQ",
+  "icons": {
+    "128": "icons/icon-128x128.png",
+    "48": "icons/icon-48x48.png"
+  },
+  "converted_from_user_script": true,
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "javascripts/jquery-3.3.1.min.js",
+      "javascripts/background.js"
+    ]
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://*.orecons.com/*",
+      "*://*.cloudhq.net/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "exclude_globs": [],
+      "css": [
+        "stylesheets/jquery.dropdown.css",
+        "stylesheets/darkroom.css",
+        "stylesheets/popover.css"
+      ],
+      "include_globs": [],
+      "js": [
+        "javascripts/inboxsdk.js",
+        "javascripts/main_gmail_screenshot_loader.js"
+      ],
+      "matches": [
+        "https://mail.google.com/*"
+      ]
+    }
+  ],
+  "commands": {
+    "start_desktop_screenshot": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+8",
+        "mac": "Command+Shift+8"
+      },
+      "global": true,
+      "description": "Start desktop screenshot"
+    },
+    "start_screenshot": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+9",
+        "mac": "Command+Shift+9"
+      },
+      "description": "Capture page"
+    },
+    "start_delayed_screenshot": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+0",
+        "mac": "Command+Shift+0"
+      },
+      "description": "Timed page capture"
+    },
+    "start_selected_screenshot": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+7",
+        "mac": "Command+Shift+7"
+      },
+      "description": "Capture selected area"
+    }
+  },
+  "browser_action": {
+    "default_icon": "icons/gmail_screenshot.png",
+    "default_popup": "popup.html"
+  },
+  "version": "1.0.0.28",
+  "description": "Take a screenshot, annotate it, and send it directly from Gmail",
+  "permissions": [
+    "storage",
+    "background",
+    "desktopCapture",
+    "tabs",
+    "activeTab",
+    "https://mail.google.com/",
+    "https://mail-attachment.googleusercontent.com/",
+    "https://www.cloudhq.net/"
+  ],
+  "manifest_version": 2
+}

@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Fuzzify.me",
+  "version": "1.1.3",
+  "description": "Cleans out a Facebook user's ad preferences and provides a stream of ads that user receives",
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "media/48.png",
+    "default_title": "Fuzzify.me"
+  },
+  "permissions": [
+    "storage",
+    "webRequest",
+    "alarms",
+    "*://*.facebook.com/*"
+  ],
+  "icons": {
+    "128": "media/128.png",
+    "16": "media/16.png",
+    "48": "media/48.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.facebook.com/ads/preferences",
+        "http://www.facebook.com/ads/preferences"
+      ],
+      "js": [
+        "js/clean.js"
+      ],
+      "css": [
+        "css/ads-overlay.css"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "exclude_matches": [
+        "https://www.facebook.com/ads/preferences",
+        "http://www.facebook.com/ads/preferences"
+      ],
+      "matches": [
+        "*://*.facebook.com/*"
+      ],
+      "js": [
+        "js/content.js"
+      ],
+      "css": [
+        "css/feed-overlay.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "options_ui": {
+    "page": "views/options.html"
+  },
+  "homepage_url": "https://github.com/d4t4x/facebook-cleaner",
+  "manifest_version": 2
+}

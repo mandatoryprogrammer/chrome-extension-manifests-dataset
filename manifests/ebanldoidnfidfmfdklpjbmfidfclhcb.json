@@ -1,0 +1,68 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "author": "Peter Valley",
+  "background": {
+    "page": "src/html/background.html",
+    "content_scripts": [
+      {
+        "js": [
+          "src/js/jquery-3.1.1.min.js",
+          "src/js/buy.js",
+          "src/js/backgroundUtils.js",
+          "src/js/background.js"
+        ]
+      }
+    ],
+    "persistent": true
+  },
+  "icons": {
+    "128": "src/img/tradelogo.png",
+    "64": "src/img/tradelogo.png",
+    "32": "src/img/tradelogo.png"
+  },
+  "browser_action": {
+    "default_popup": "src/html/popup.html",
+    "default_title": "Zen Trade Settings"
+  },
+  "commands": {
+    "advance": {
+      "suggested_key": {
+        "windows": "Ctrl+Shift+Y",
+        "mac": "Command+Shift+Y",
+        "chromeos": "Ctrl+Shift+U",
+        "linux": "Ctrl+Shift+J"
+      },
+      "description": "Move forward one page"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.amazon.com/*"
+      ],
+      "css": [
+        "src/css/swag.css"
+      ],
+      "js": [
+        "src/js/jquery-3.1.1.min.js",
+        "src/js/pageUtils.js",
+        "src/js/priceAlerts.js",
+        "src/js/buy.js",
+        "src/js/asin.js",
+        "src/js/zentrade.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "src/img/*",
+    "src/sound/*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://fonts.googleapis.com/*; object-src 'self'",
+  "description": "Search Amazon's trade-in store for hidden profits.",
+  "manifest_version": 2,
+  "name": "ZenTrade",
+  "permissions": [
+    "storage"
+  ],
+  "version": "0.0.25"
+}

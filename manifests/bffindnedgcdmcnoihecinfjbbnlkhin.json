@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Stock Dig",
+  "version": "1.2",
+  "description": "Highlight a stock symbol and get historical data on its performance.",
+  "background": {
+    "scripts": [
+      "background2.js"
+    ]
+  },
+  "homepage_url": "http://giantmultimedia.com",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>",
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "content_script.js",
+        "jquery.min.js",
+        "firebase.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://cdn.firebase.com https://*.firebaseio.com/* https://*.firebaseio.com; object-src 'self'",
+  "browser_action": {
+    "default_title": "Stock Dig",
+    "default_icon": "icon16.png",
+    "default_popup": "popup.html"
+  },
+  "commands": {
+    "manualSearch": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+5"
+      },
+      "description": "Initiate manual search",
+      "global": true
+    }
+  },
+  "manifest_version": 2
+}

@@ -1,0 +1,83 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "NTHU_ScoreSharing",
+  "description": "A community sharing score distributions in NTHU",
+  "version": "1.4.3",
+  "manifest_version": 2,
+  "permissions": [
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "src/background.js",
+      "src/getScore.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_popup": "src/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.ccxp.nthu.edu.tw/ccxp/INQUIRE/*"
+      ],
+      "js": [
+        "src/login.js",
+        "src/decaptcha.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://www.ccxp.nthu.edu.tw/ccxp/COURSE/JH/7/7.6/7.6.1/JH761004.php*",
+        "https://www.ccxp.nthu.edu.tw/ccxp/COURSE/JH/7/7.1/7.1.3/JH713004.php*"
+      ],
+      "js": [
+        "src/recolor.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://www.ccxp.nthu.edu.tw/ccxp/COURSE/JH/common/Syllabus/*",
+        "https://www.ccxp.nthu.edu.tw/ccxp/INQUIRE/JH/common/Syllabus/*",
+        "https://www.ccxp.nthu.edu.tw/ccxp/INQUIRE/JH/8/8.3/8.3.3/JH83302.php*"
+      ],
+      "js": [
+        "lib/Chart.bundle.min.js",
+        "lib/chartjs-plugin-labels.min.js",
+        "lib/chartjs-plugin-datalabels.js",
+        "lib/swiper.min.js",
+        "src/drawChart.js",
+        "src/insertChart.js"
+      ],
+      "css": [
+        "lib/swiper.min.css"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://www.ccxp.nthu.edu.tw/ccxp/INQUIRE/JH/8/R/6.3/JH8R63002.php*"
+      ],
+      "js": [
+        "lib/jquery.min.js",
+        "lib/jquery.star-rating-svg.js",
+        "src/insertRating.js"
+      ],
+      "css": [
+        "lib/star-rating-svg.css"
+      ],
+      "all_frames": true
+    }
+  ],
+  "icons": {
+    "16": "images/network16.png",
+    "24": "images/network24.png",
+    "32": "images/network32.png",
+    "64": "images/network64.png",
+    "128": "images/network128.png",
+    "512": "images/network512.png"
+  }
+}

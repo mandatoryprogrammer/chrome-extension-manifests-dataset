@@ -1,0 +1,64 @@
+{
+  "manifest_version": 2,
+  "minimum_chrome_version": "47",
+  "name": "Skyroom Screen Sharing and Recording",
+  "short_name": "Skyroom",
+  "description": "Allows to share your entire screen or a specific window in Skyroom application. It also provides tab recording.",
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "tabCapture",
+    "desktopCapture",
+    "storage",
+    "unlimitedStorage",
+    "contextMenus",
+    "downloads",
+    "notifications"
+  ],
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "3.2.2",
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "js/util.js",
+      "js/logger.js",
+      "js/storage.js",
+      "js/record.js",
+      "js/capture.js",
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "js": [
+        "js/content.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "icons": {
+    "16": "icon/skyroom-icon-16.png",
+    "48": "icon/skyroom-icon-48.png",
+    "128": "icon/skyroom-icon-128.png"
+  },
+  "browser_action": {
+    "default_icon": "icon/skyroom-icon-16.png",
+    "default_popup": "popup.html"
+  },
+  "commands": {
+    "start_record": {
+      "description": "Start recording",
+      "suggested_key": {
+        "default": "Ctrl+Shift+R"
+      }
+    }
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Hi-res cover art grabber",
+  "description": "Retrieves larger versions of cover art on various online stores, like App Store.",
+  "manifest_version": 2,
+  "version": "2.0.0",
+  "page_action": {
+    "default_icon": {
+      "19": "icons/button-19.png",
+      "38": "icons/button-38.png"
+    },
+    "default_title": "Get large version of cover"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "declarativeContent",
+    "activeTab"
+  ],
+  "icons": {
+    "128": "icons/icon-128.png",
+    "64": "icons/icon-64.png",
+    "16": "icons/icon-16.png"
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "js": [
+        "includes/googlePlay.js"
+      ],
+      "matches": [
+        "*://play.google.com/store/apps/*",
+        "*://play.google.com/music/*"
+      ]
+    },
+    {
+      "js": [
+        "includes/iTunes.js"
+      ],
+      "matches": [
+        "*://itunes.apple.com/*/*"
+      ]
+    },
+    {
+      "js": [
+        "includes/microsoft.js"
+      ],
+      "matches": [
+        "https://www.microsoft.com/*/store/p/*"
+      ]
+    },
+    {
+      "js": [
+        "includes/playstation.js"
+      ],
+      "matches": [
+        "https://store.playstation.com/*"
+      ]
+    },
+    {
+      "js": [
+        "includes/steam.js"
+      ],
+      "matches": [
+        "*://store.steampowered.com/app/*"
+      ]
+    }
+  ]
+}

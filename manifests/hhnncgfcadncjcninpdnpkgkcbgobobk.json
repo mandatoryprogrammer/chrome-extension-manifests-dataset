@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "EF Writing Check",
+  "description": "Check student's writing using various tools.",
+  "version": "0.4.7",
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "storage",
+    "declarativeContent"
+  ],
+  "externally_connectable": {
+    "ids": "*",
+    "matches": [
+      "*://localhost/*",
+      "*://ef.peex.com/*"
+    ]
+  },
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://axis.englishtown.com/*",
+        "*://axis.englishtown.cn/*",
+        "*://www.google.com/*"
+      ],
+      "all_frames": false,
+      "js": [
+        "scripts/contentaxis.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "browser_action": {
+    "default_icon": "images/EFLogo.png",
+    "default_title": "Show Writing Check",
+    "default_popup": "html/popup.html"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+W",
+        "mac": "MacCtrl+Shift+W"
+      },
+      "description": "Opens popup.html"
+    }
+  },
+  "options_page": "html/options.html",
+  "icons": {
+    "16": "images/EFLogo.png",
+    "48": "images/EFLogo.png",
+    "128": "images/EFLogo.png"
+  }
+}

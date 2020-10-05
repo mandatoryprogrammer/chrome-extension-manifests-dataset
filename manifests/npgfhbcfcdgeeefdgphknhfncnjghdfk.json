@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Just Go Away",
+  "short_name": "justgoaway",
+  "version": "1.0.5",
+  "manifest_version": 2,
+  "description": "This extension quickly gets rid of webpage annoyances that cover content with a right-click.",
+  "homepage_url": "https://chrome.google.com/webstore/detail/npgfhbcfcdgeeefdgphknhfncnjghdfk",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "options_page": "src/options/index.html",
+  "permissions": [
+    "tabs",
+    "contextMenus",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": false
+  },
+  "page_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "Stuff on page has been hidden. Click to reshow everything again.",
+    "default_popup": "src/page_action/page_action.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "src/inject/inject.js"
+      ]
+    }
+  ]
+}

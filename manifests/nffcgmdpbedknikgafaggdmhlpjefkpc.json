@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Kuroko",
+  "version": "0.16",
+  "description": "Automatically clicks, hides and turns off lights!",
+  "manifest_version": 2,
+  "icons": {
+    "128": "icon_128.png"
+  },
+  "browser_action": {
+    "default_icon": "images/icon48.png",
+    "default_popup": "app/ext_popup.html"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "permissions": [
+    "identity",
+    "*://*/*"
+  ],
+  "oauth2": {
+    "client_id": "60490964220-eggtelq7ivutg9qltrmr1nf8cr1eb1nr.apps.googleusercontent.com",
+    "scopes": [
+      "openid",
+      "email"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "lib/jquery-2.0.3.min.js",
+        "lib/underscore-1.5.2.min.js",
+        "lib/knockout-3.1.0.js",
+        "lib/diff_match_patch.js",
+        "lib/dom_prediction_helper.js",
+        "lib/knock.localStorage.js",
+        "app/cs_editor.js"
+      ],
+      "css": [
+        "app/cs_editor.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "app/cs_editor.html",
+    "lib/jquery-2.0.3.min.map",
+    "lib/underscore-min.map"
+  ],
+  "content_security_policy": "script-src 'self' http://localhost:3000 https://zvcx.selfip.com https://sachiko.selfip.com https://ajax.googleapis.com https://ssl.google-analytics.com; object-src 'self'"
+}

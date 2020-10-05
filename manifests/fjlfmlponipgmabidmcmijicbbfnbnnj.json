@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "ThunderTick",
+  "manifest_version": 2,
+  "version": "1.5.0",
+  "omnibox": {
+    "keyword": "`"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "options_page": "pages/settings/index.html",
+  "icons": {
+    "128": "./images/icon128.png"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self';",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "./dist/tickbar.js"
+      ],
+      "css": [
+        "./tickbar/font/OpenSans-Light.css",
+        "./dist/tickbar.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "128": "images/icon128.png"
+    }
+  },
+  "web_accessible_resources": [
+    "images/*.png"
+  ],
+  "permissions": [
+    "tabs",
+    "history",
+    "<all_urls>",
+    "bookmarks",
+    "downloads",
+    "clipboardWrite",
+    "storage"
+  ]
+}

@@ -1,0 +1,171 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_extName__",
+  "short_name": "__MSG_appName__",
+  "version": "2.4.0",
+  "description": "__MSG_extDesc__",
+  "default_locale": "en",
+  "author": "uniqkey LLC",
+  "homepage_url": "https://uniqkey.eu",
+  "icons": {
+    "16": "images/icon16.png",
+    "32": "images/icon32.png",
+    "48": "images/icon48.png",
+    "96": "images/icon96.png",
+    "128": "images/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "browserAPI.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*"
+      ],
+      "exclude_matches": [
+        "https://secure.e-conomic.com/*",
+        "https://*.sellingplatformconnect.amadeus.com/*",
+        "https://wifi.norwegianwifi.com/*",
+        "http://iris/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "content/notificationBar.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*"
+      ],
+      "exclude_matches": [
+        "https://secure.e-conomic.com/*",
+        "https://*.sellingplatformconnect.amadeus.com/*",
+        "https://wifi.norwegianwifi.com/*",
+        "http://iris/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "content/filler.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*"
+      ],
+      "exclude_matches": [
+        "https://secure.e-conomic.com/*",
+        "https://*.sellingplatformconnect.amadeus.com/*",
+        "https://wifi.norwegianwifi.com/*",
+        "http://iris/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "content/autofiller.js"
+      ],
+      "css": [
+        "content/autofill.css"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*"
+      ],
+      "exclude_matches": [
+        "https://secure.e-conomic.com/*",
+        "https://*.sellingplatformconnect.amadeus.com/*",
+        "https://wifi.norwegianwifi.com/*",
+        "http://iris/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "content/imports.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*"
+      ],
+      "exclude_matches": [
+        "https://secure.e-conomic.com/*",
+        "https://*.sellingplatformconnect.amadeus.com/*",
+        "https://wifi.norwegianwifi.com/*",
+        "http://iris/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon19.png",
+      "38": "images/icon38.png"
+    },
+    "default_title": "uniqkey",
+    "default_popup": "popup/index.html"
+  },
+  "permissions": [
+    "<all_urls>",
+    "webRequest",
+    "webRequestBlocking",
+    "tabs",
+    "storage",
+    "unlimitedStorage",
+    "clipboardWrite",
+    "cookies",
+    "privacy",
+    "browsingData",
+    "identity",
+    "identity.email"
+  ],
+  "commands": {
+    "autofill_login": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+L"
+      },
+      "description": "__MSG_commandAutofillDesc__"
+    },
+    "generate_password": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+9"
+      },
+      "description": "__MSG_commandGeneratePasswordDesc__"
+    },
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Y",
+        "linux": "Ctrl+Shift+U"
+      }
+    }
+  },
+  "incognito": "split",
+  "content_security_policy": "script-src 'self' 'wasm-eval' object-src 'self'",
+  "web_accessible_resources": [
+    "password-popup/popup.html",
+    "account-select/index.html",
+    "open-app-banner/index.html",
+    "credit-card-select/index.html",
+    "images/*",
+    "popup/fonts/*",
+    "_locales/*",
+    "content/autofill.css"
+  ]
+}

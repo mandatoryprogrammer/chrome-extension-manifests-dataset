@@ -1,0 +1,79 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "香蕉直播助手",
+  "version": "0.2.0",
+  "description": "一键订阅，全网实时开播监测。",
+  "icons": {
+    "16": "static/img/icon16.png",
+    "48": "static/img/icon48.png",
+    "128": "static/img/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.douyu.com/*",
+        "*://www.huya.com/*",
+        "*://www.panda.tv/*",
+        "*://egame.qq.com/*"
+      ],
+      "js": [
+        "./static/js/libs/jquery.js",
+        "./static/js/libs/vue.js",
+        "./static/js/libs/vue-resource.js",
+        "./static/js/libs/vue-router.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.douyu.com/*",
+        "*://www.huya.com/*",
+        "*://www.panda.tv/*",
+        "*://egame.qq.com/*"
+      ],
+      "js": [
+        "./static/js/content-scripts/dy.entry.js",
+        "./static/js/content-scripts/dy.bundle.js",
+        "./static/js/content-scripts/style.entry.js",
+        "./static/js/content-scripts/style.bundle.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "./static/js/manifest.js",
+      "./static/js/vendor.js",
+      "./static/js/background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "static/img/icon19.png",
+      "38": "static/img/icon38.png"
+    }
+  },
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "storage",
+    "unlimitedStorage",
+    "*://www.douyu.com/*",
+    "*://www.huya.com/*",
+    "*://www.panda.tv/*",
+    "*://egame.qq.com/*",
+    "*://xmt.cn/*",
+    "*://*.xmt.cn/*"
+  ],
+  "web_accessible_resources": [
+    "static/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://xmt.cn/*",
+      "*://*.xmt.cn/*"
+    ]
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

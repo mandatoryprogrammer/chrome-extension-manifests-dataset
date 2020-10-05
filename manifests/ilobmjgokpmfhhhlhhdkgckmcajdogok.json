@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Passive Aggressive Email Translator Extension",
+  "short_name": "passiveAggressiveEmailTranslator",
+  "version": "1.0",
+  "author": "Dima Vishnevetsky <dimshik100@gmail.com>",
+  "description": "Chrome extension that identifies and translates passive aggressive email in Gmail client using Gmail.JS and NodeJS-based bundling.",
+  "page_action": {
+    "default_icon": {
+      "16": "icons/icon_extension_toolbar_16.png",
+      "32": "icons/icon_extension_toolbar_32.png"
+    },
+    "default_title": "Passive Aggressive Email Translator",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "icons/icon_extension_toolbar_16.png",
+    "32": "icons/icon_windows_computers_32.png",
+    "48": "icons/icon_extensions_management_page_48.png",
+    "128": "icons/icon_web_store_icon_128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://mail.google.com/*"
+      ],
+      "js": [
+        "extensionInjector.js"
+      ],
+      "css": [
+        "style-injector.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "extension.js"
+  ],
+  "permissions": [
+    "declarativeContent",
+    "https://mail.google.com/"
+  ]
+}

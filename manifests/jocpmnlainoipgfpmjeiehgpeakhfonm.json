@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Sidekick by DoSelect",
+  "short_name": "Sidekick",
+  "version": "0.2",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "description": "Sidekick helps you win at sourcing developers. Just open someone's GitHub's profile and see more details about their skills.",
+  "homepage_url": "https://doselect.com/sidekick",
+  "author": "DoSelect",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/icon19.png",
+      "38": "icons/icon48.png"
+    },
+    "default_title": "Sidekick by DoSelect",
+    "default_popup": "src/templates/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "src/background/app.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "*://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://github.com/*"
+      ],
+      "css": [
+        "src/inject/css/app.css"
+      ],
+      "js": [
+        "src/vendor/js/lodash.min.js",
+        "src/inject/js/utils.js",
+        "src/inject/js/app.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

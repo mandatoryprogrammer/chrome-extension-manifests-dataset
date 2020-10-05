@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "DictHub",
+  "author": "DictHub",
+  "version": "1.0.5",
+  "description": "__MSG_appDesc__",
+  "homepage_url": "https://github.com/dicthub",
+  "browser_action": {
+    "default_icon": "ico/dicthub-19.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "ico/dicthub-16.png",
+    "24": "ico/dicthub-24.png",
+    "32": "ico/dicthub-32.png",
+    "48": "ico/dicthub-48.png",
+    "128": "ico/dicthub-128.png"
+  },
+  "options_page": "options.html",
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+W"
+      },
+      "description": "Send a 'toggle-feature' event to the extension"
+    }
+  },
+  "default_locale": "en",
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.google-analytics.com https://ssl.google-analytics.com; object-src 'self'",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "tabs",
+    "notifications",
+    "contextMenus",
+    "<all_urls>",
+    "file://*/*"
+  ],
+  "web_accessible_resources": [
+    "overlay.html",
+    "sandbox.html",
+    "lib/*",
+    "js/*",
+    "css/*",
+    "ico/*",
+    "img/*"
+  ],
+  "background": {
+    "scripts": [
+      "js/backgroundContextMenus.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/injectContextMenu.js"
+      ]
+    }
+  ]
+}

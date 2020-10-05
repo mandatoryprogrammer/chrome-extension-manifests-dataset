@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Leap Motion controller",
+  "version": "0.1.3",
+  "author": "Assam Boudjelthia",
+  "description": "Leap Motion Controller extension to control web browser with Leap Motion device.",
+  "minimum_chrome_version": "19.0.1055.1",
+  "options_page": "options.html",
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*",
+        "<all_urls>"
+      ],
+      "js": [
+        "js/leap-0.6.4.min.js",
+        "js/jquery-1.9.0.min.js",
+        "js/leap-plugins-0.1.12.min.js",
+        "js/my_leap.js"
+      ],
+      "css": [
+        "css/content_page.css"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "browser_action": {
+    "default_icon": "images/icons/icon32.png",
+    "default_title": "Leap Motion Controller",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "images/icons/icon16.png",
+    "48": "images/icons/icon48.png",
+    "128": "images/icons/icon128.png"
+  },
+  "web_accessible_resources": [
+    "images/*"
+  ],
+  "content_security_policy": "default-src 'self'",
+  "permissions": [
+    "tabs",
+    "storage",
+    "<all_urls>"
+  ]
+}

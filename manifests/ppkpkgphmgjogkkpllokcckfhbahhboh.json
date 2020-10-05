@@ -1,0 +1,42 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Dwollify",
+  "version": "0.0.2",
+  "manifest_version": 2,
+  "description": "The universal donate button of the web, powered by Dwolla!",
+  "homepage_url": "https://dwollify.herokuapp.com",
+  "icons": {
+    "16": "icons/dwollify16.png",
+    "48": "icons/dwollify48.png",
+    "128": "icons/dwollify128.png"
+  },
+  "background": {
+    "scripts": [
+      "src/third-party/jquery-2.1.1.min.js",
+      "src/bg/background.js"
+    ],
+    "persistent": false
+  },
+  "options_page": "src/options/index.html",
+  "browser_action": {
+    "default_icon": "icons/dwollify128.png",
+    "default_title": "Dwollify",
+    "default_popup": "src/browser_action/browser_action.html"
+  },
+  "permissions": [
+    "https://dwollify.herokuapp.com/*",
+    "storage",
+    "tabs"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://dwollify.herokuapp.com/*"
+      ],
+      "js": [
+        "src/third-party/jquery-2.1.1.min.js",
+        "src/inject/inject.js"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Senso Client",
+  "description": "The Senso.cloud Chromebook extension.",
+  "version": "2.0.1.3",
+  "manifest_version": 2,
+  "minimum_chrome_version": "66",
+  "icons": {
+    "128": "/images/icon.png"
+  },
+  "storage": {
+    "managed_schema": "clientConfig.json"
+  },
+  "options_ui": {
+    "page": "/gui/config.html"
+  },
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "keyWatcher.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "browser_action": {
+    "default_popup": "/gui/popup.html"
+  },
+  "incognito": "spanning",
+  "permissions": [
+    "alarms",
+    "desktopCapture",
+    "cookies",
+    "downloads",
+    "enterprise.deviceAttributes",
+    "management",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>",
+    "system.storage",
+    "identity",
+    "identity.email",
+    "tabs",
+    "storage",
+    "notifications"
+  ],
+  "oauth2": {
+    "client_id": "469012668272-3005m1rujagg04sq6s19fro3urf23sfh.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.profile"
+    ]
+  },
+  "web_accessible_resources": [
+    "gui/*"
+  ]
+}

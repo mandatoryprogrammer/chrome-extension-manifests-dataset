@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Roblox Skin Plugin",
+  "description": "A plugin that allows changing to the old header",
+  "short_name": "Roblox Skins",
+  "version": "0.4.6",
+  "minimum_chrome_version": "32.0.1700.76",
+  "permissions": [
+    "http://roblox.com/*",
+    "storage"
+  ],
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "main.html"
+  },
+  "background": {
+    "scripts": [
+      "messagehandle.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "exclude_matches": [
+        "*://*.roblox.com/Landing/*"
+      ],
+      "js": [
+        "headfix.js",
+        "listenersarebeingmean.js"
+      ],
+      "matches": [
+        "*://*.roblox.com/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "skins/*",
+    "jquery.js",
+    "jquery-1.10.2.min.map",
+    "images/*"
+  ]
+}

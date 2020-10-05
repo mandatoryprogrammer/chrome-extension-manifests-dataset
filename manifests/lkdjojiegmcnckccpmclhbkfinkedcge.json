@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "StarLeaf Scheduler for Google Calendar",
+  "version": "6.0.0.1006",
+  "description": "Schedule and edit StarLeaf meetings in Google Calendar",
+  "background": {
+    "page": "background.html"
+  },
+  "icons": {
+    "16": "src/img/starleaf16.png",
+    "48": "src/img/starleaf48.png",
+    "64": "src/img/starleaf64.png",
+    "128": "src/img/starleaf128.png"
+  },
+  "browser_action": {
+    "default_icon": "src/img/starleaf64.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "activeTab",
+    "identity",
+    "https://google.addin.starleaf.com/google/s"
+  ],
+  "web_accessible_resources": [
+    "src/img/icon_meeting.png",
+    "src/img/starleaf-logo.png"
+  ],
+  "server_url": "https://google.addin.starleaf.com/",
+  "content_security_policy": "script-src 'self' https://google.addin.starleaf.com/; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://calendar.google.com/calendar*"
+      ],
+      "js": [
+        "lib/react/js/react.js",
+        "lib/react-dom/js/react-dom.js",
+        "src/js/calendarstart.js"
+      ]
+    }
+  ]
+}

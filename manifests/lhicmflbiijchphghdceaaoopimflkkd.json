@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Flycrates - International Amazon Shipping",
+  "description": "Amazon won't ship to you? Click 'Add to Flycrates' on Amazon.com, check out, and Flycrates handles the rest.",
+  "version": "0.3.2",
+  "icons": {
+    "16": "/static/images/icon_16.png",
+    "32": "/static/images/icon_32.png",
+    "48": "/static/images/icon_48.png",
+    "128": "/static/images/icon_128.png"
+  },
+  "browser_action": {
+    "default_icon": "/static/images/icon_38.png",
+    "default_popup": "popup.html",
+    "default_title": "Flycrates"
+  },
+  "background": {
+    "scripts": [
+      "/static/js/extension-background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.amazon.com/*dp/*",
+        "https://*.amazon.com/*dp/*",
+        "http://*.amazon.com/*gp/product/*",
+        "https://*.amazon.com/*gp/product/*"
+      ],
+      "js": [
+        "/static/js/jquery-min.js",
+        "/static/js/extension-content-amazon.js"
+      ],
+      "css": [
+        "/static/css/extension-content-amazon.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.flycrates.com/*"
+      ],
+      "js": [
+        "/static/js/extension-content-flycrates.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "/static/images/chevron_down_black_large_2x.png",
+    "/static/images/logotype-flycrates-light.svg",
+    "/static/images/logo-flycrates-orange.svg",
+    "/static/images/check-white.svg",
+    "/static/images/linkout.svg",
+    "/static/images/x.svg"
+  ],
+  "permissions": [
+    "storage",
+    "activeTab",
+    "*://*.flycrates.com/*",
+    "*://*.amazon.com/*"
+  ]
+}

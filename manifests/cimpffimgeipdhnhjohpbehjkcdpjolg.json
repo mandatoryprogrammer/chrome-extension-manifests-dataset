@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Watch2Gether",
+  "short_name": "W2G",
+  "description": "This extensions let's you share content from websites directly into a Watch2gether room.",
+  "homepage_url": "https://w2g.tv",
+  "version": "7.4",
+  "background": {
+    "scripts": [
+      "javascript/browser-polyfill.min.js",
+      "javascript/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://stage.watch2gether.com/rooms/*",
+        "https://www.watch2gether.com/rooms/*",
+        "https://w2g.tv/*",
+        "https://test.w2g.tv/*"
+      ],
+      "js": [
+        "javascript/browser-polyfill.min.js",
+        "javascript/content_w2g.js"
+      ],
+      "all_frames": false,
+      "run_at": "document_end"
+    }
+  ],
+  "browser_action": {
+    "default_icon": "images/icon.png",
+    "default_popup": "popup.html",
+    "default_title": "Share on Watch2Gether"
+  },
+  "icons": {
+    "48": "images/icon_48.png",
+    "128": "images/icon_128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "<all_urls>",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking"
+  ]
+}

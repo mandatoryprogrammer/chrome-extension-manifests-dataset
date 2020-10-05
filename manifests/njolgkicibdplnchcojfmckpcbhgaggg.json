@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "KeyCat",
+  "description": "KeyCat web-extension",
+  "version": "0.0.16",
+  "manifest_version": 2,
+  "icons": {
+    "48": "icons/icon_48-on.png",
+    "128": "icons/icon_128-on.png"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "clipboardWrite",
+    "idle",
+    "http://*/*",
+    "https://*/*",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "browser_action": {
+    "default_title": "KeyCat",
+    "default_popup": "popup/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "background/main.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "content/autofill.js",
+        "content/autofiller.js",
+        "content/notificationBar.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "css": [
+        "content/autofill.css"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "notification/bar.html"
+  ],
+  "applications": {
+    "gecko": {
+      "id": "{fdd2f6f0-0ea5-4abe-8ba9-26cff6dcbf99}"
+    }
+  }
+}

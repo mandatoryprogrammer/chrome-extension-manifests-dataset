@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Random Comments",
+  "short_name": "Random Comments",
+  "version": "1.1.0",
+  "description": "Picks a comment, from an Instagram post, completely at random using the service provided by Random UChile.",
+  "homepage_url": "https://github.com/clcert/beacon-random-comments",
+  "icons": {
+    "128": "assets/icons/dice-128.png"
+  },
+  "permissions": [
+    "https://www.instagram.com/p/*",
+    "https://beacon.clcert.cl/beacon/2.0/pulse/last",
+    "http://ec2-18-219-248-89.us-east-2.compute.amazonaws.com/",
+    "tabs",
+    "storage",
+    "contextMenus"
+  ],
+  "background": {
+    "scripts": [
+      "requester.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.instagram.com/*"
+      ],
+      "js": [
+        "/content_scripts/chacha.js",
+        "/content_scripts/chacha20-generator.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": "assets/icons/dice-128.png",
+    "default_title": "Random Comments",
+    "default_popup": "popup/choose_comment.html"
+  },
+  "web_accessible_resources": [
+    "assets/gif/loading.gif"
+  ]
+}

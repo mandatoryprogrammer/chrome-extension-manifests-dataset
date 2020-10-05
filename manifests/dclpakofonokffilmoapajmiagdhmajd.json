@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Venia Co. Zoho Contact Importer",
+  "description": "Adds a button to tickets on Zoho Support to import contacts to Zoho CRM, should work on desk.zoho.com as well",
+  "version": "1.1",
+  "icons": {
+    "128": "Venia-Zoho-Icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://support.zoho.com/*",
+        "https://desk.zoho.com/*"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://crm.zoho.com/*"
+      ],
+      "js": [
+        "crm.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "eventPage.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "webNavigation",
+    "https://support.zoho.com/*"
+  ]
+}

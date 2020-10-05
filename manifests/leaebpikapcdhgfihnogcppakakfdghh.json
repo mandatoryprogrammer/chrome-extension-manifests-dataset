@@ -1,0 +1,68 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Vibby",
+  "description": "",
+  "version": "2.8",
+  "background": {
+    "scripts": [
+      "dist/js/require.js",
+      "dist/constants.js",
+      "dist/backgroundScripts/background.js",
+      "dist/backgroundScripts/browserActions.js",
+      "dist/backgroundScripts/btnCounterActions.js",
+      "dist/provider/backgroundProvider.js",
+      "dist/provider/backgroundYouTubeProvider.js",
+      "dist/provider/backgroundTwitchProvider.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "dist/js/require.js",
+        "dist/js/jquery.min.js",
+        "dist/constants.js",
+        "dist/provider/provider.js",
+        "dist/provider/twitchProvider.js",
+        "dist/provider/youTubeProvider.js",
+        "dist/contentScripts/content.js",
+        "dist/contentScripts/createBtn.js",
+        "dist/contentScripts/divActions.js",
+        "dist/contentScripts/highlightsActions.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "icons": {
+    "16": "images/vibby-logo-enabled-19.png",
+    "48": "images/vibby-logo-enabled-38.png",
+    "128": "images/vibby-logo-enabled-38.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/vibby-logo-enabled-19.png",
+      "38": "images/vibby-logo-enabled-38.png"
+    },
+    "default_popup": "dist/popup/popup.html"
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://*.vibby.com/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "dist/js/*",
+    "dist/provider/*",
+    "dist/contentScripts/*"
+  ],
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "storage"
+  ]
+}

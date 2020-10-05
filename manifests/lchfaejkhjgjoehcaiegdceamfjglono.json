@@ -1,0 +1,75 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Movon",
+  "version": "0.3.5",
+  "description": "Movon installers' extension",
+  "permissions": [
+    "activeTab",
+    "cookies",
+    "webRequest",
+    "webRequestBlocking",
+    "activeTab",
+    "http://setup.movon.co.il/*",
+    "http://10.0.0.1/*"
+  ],
+  "background": {
+    "scripts": [
+      "JS/background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "Popup/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://setup.movon.co.il/",
+        "http://setup.movon.co.il/index.php"
+      ],
+      "js": [
+        "Libraries/logger.js",
+        "Libraries/jquery-3.1.1.js",
+        "Libraries/react.js",
+        "Libraries/react-dom.js",
+        "JS/Consts.js",
+        "JS/Classes/Lang.js",
+        "JS/Classes/DashCam.js",
+        "JS/Classes/React.js",
+        "JS/index.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://setup.movon.co.il/setup.php"
+      ],
+      "js": [
+        "Libraries/logger.js",
+        "Libraries/jquery-3.1.1.js",
+        "Libraries/react.js",
+        "Libraries/react-dom.js",
+        "JS/Consts.js",
+        "JS/Classes/Lang.js",
+        "JS/Classes/DashCam.js",
+        "JS/Classes/React.js",
+        "JS/setup.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://setup.movon.co.il/can.php"
+      ],
+      "js": [
+        "Libraries/logger.js",
+        "Libraries/jquery-3.1.1.js",
+        "JS/Consts.js",
+        "JS/reset_can_cookie.js"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

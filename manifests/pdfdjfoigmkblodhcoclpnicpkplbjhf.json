@@ -1,0 +1,95 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Elements.cloud Catalyst",
+  "short_name": "Elements",
+  "description": "This Chrome Extension allows the Elements Catalyst documentation and analytics to be displayed inside Salesforce and Jira.",
+  "version": "1.17.0",
+  "icons": {
+    "16": "assets/images/elements_extension_boxed_16.png",
+    "32": "assets/images/elements_extension_boxed_32.png",
+    "48": "assets/images/elements_extension_boxed_48.png",
+    "128": "assets/images/elements_extension_boxed_128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "page_action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "assets/images/elements_extension_boxed_16.png",
+      "32": "assets/images/elements_extension_boxed_32.png",
+      "48": "assets/images/elements_extension_boxed_48.png",
+      "128": "assets/images/elements_extension_boxed_128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.salesforce.com/*",
+        "https://*.lightning.force.com/*",
+        "https://*.atlassian.net/*"
+      ],
+      "css": [
+        "assets/styles/font-awesome.css",
+        "assets/styles/refmodel.css",
+        "assets/styles/refmodel-overwrite.css",
+        "styles.css"
+      ],
+      "js": [
+        "assets/js/wc.js",
+        "q9ext-page.js",
+        "assets/js/refmodel.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://*/*"
+      ],
+      "css": [
+        "assets/styles/font-awesome.css",
+        "assets/styles/refmodel.css",
+        "styles.css"
+      ],
+      "js": [
+        "assets/js/wc.js",
+        "q9ext-page.js",
+        "assets/js/refmodel.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "default-src 'self' 'unsafe-eval' https://api.q9elements.com https://upload.q9elements.com https://gateway.q9elements.com; style-src 'self' 'unsafe-inline'; img-src https://q9elements-content.s3-eu-west-1.amazonaws.com 'self'; object-src 'none'",
+  "permissions": [
+    "declarativeContent",
+    "storage",
+    "cookies",
+    "history",
+    "tabs",
+    "https://api.q9elements.com/*",
+    "https://gateway.q9elements.com/*",
+    "https://*.q9elements.com/*",
+    "https://*.visual.force.com/*",
+    "https://*.amazonaws.com/q9elements-content%2Frefmodel/*",
+    "https://upload.q9elements.com/*",
+    "https://*.atlassian.net/*"
+  ],
+  "web_accessible_resources": [
+    "assets/icons/*",
+    "assets/images/*",
+    "assets/translations/*",
+    "assets/translations-app/*",
+    "assets/fonts/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://*.salesforce.com/*",
+      "https://*.lightning.force.com/*",
+      "https://*.atlassian.net/*"
+    ]
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "short_name": "A02",
+  "name": "Amazon 02",
+  "description": "show keywords by date on amazon seller cententral dashboard",
+  "version": "3.0.1",
+  "icons": {
+    "72": "icons/icon-72x72.png",
+    "96": "icons/icon-96x96.png"
+  },
+  "manifest_version": 2,
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "tabs",
+    "storage",
+    "debugger",
+    "activeTab",
+    "https://sellercentral.amazon.com/cm/sp/campaigns/*/ad-groups/*/targeting?entityId=*"
+  ],
+  "background": {
+    "scripts": [
+      "app/axios.min.js",
+      "app/background.js"
+    ]
+  },
+  "browser_action": {},
+  "content_scripts": [
+    {
+      "matches": [
+        "https://sellercentral.amazon.com/cm/sp/campaigns/*/ad-groups/*/targeting?entityId=*"
+      ],
+      "css": [
+        "/static/css/app.css"
+      ],
+      "js": [
+        "/static/js/content.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "/static/css/content.css"
+  ],
+  "content_security_policy": "script-src 'self' 'sha256-GgRxrVOKNdB4LrRsVPDSbzvfdV4UqglmviH9GoBJ5jk='; object-src 'self'"
+}

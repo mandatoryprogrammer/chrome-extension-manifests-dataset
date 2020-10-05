@@ -1,0 +1,133 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Alipapa Logistics - Express Order Tool",
+  "description": "Hỗ trợ đặt hàng order TAOBAO, TMALL, 1688",
+  "manifest_version": 2,
+  "version": "1.0.20",
+  "icons": {
+    "128": "images/logo Ali 40x40.png",
+    "16": "images/logo Ali 40x40.png",
+    "32": "images/logo Ali 40x40.png",
+    "64": "images/logo Ali 40x40.png"
+  },
+  "author": "VuDung",
+  "browser_action": {
+    "default_title": "Công cụ đặt hàng của Nhập hàng Ali",
+    "default_popup": "index.html",
+    "default_icon": "images/logo Ali 40x40.png"
+  },
+  "web_accessible_resources": [
+    "images/*"
+  ],
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "data/js/conf/config.js",
+      "data/js/background/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "data/js/plugin/jquery/jquery.min.js",
+        "data/js/plugin/utils/textutils.js",
+        "data/js/conf/config.js",
+        "data/js/conf/action.js",
+        "lib/chrome.js"
+      ],
+      "matches": [
+        "http://*.taobao.com/*",
+        "https://*.taobao.com/*",
+        "http://*.tmall.com/*",
+        "https://*.tmall.com/*",
+        "http://*.1688.com/*",
+        "https://*.1688.com/*",
+        "http://*.jd.com/*",
+        "https://*.jd.com/*",
+        "http://*.aliexpress.com/*",
+        "https://*.aliexpress.com/*",
+        "http://*.dangdang.com/*",
+        "https://*.dangdang.com/*"
+      ],
+      "css": [
+        "/css/bootstrap.css",
+        "/css/extension.css"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "http://*.taobao.com/*",
+        "https://*.taobao.com/*"
+      ],
+      "js": [
+        "data/js/bin/taobao.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://*.tmall.com/*",
+        "https://*.tmall.com/*"
+      ],
+      "js": [
+        "data/js/bin/tmall.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://*.1688.com/*",
+        "https://*.1688.com/*"
+      ],
+      "js": [
+        "data/js/bin/web1688.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://*.jd.com/*",
+        "http://jd.com/*"
+      ],
+      "js": [
+        "data/js/bin/jd.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://*.aliexpress.com/*",
+        "https://*.aliexpress.com/*"
+      ],
+      "js": [
+        "data/js/bin/aliexpress.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://*.dangdang.com/*",
+        "https://*.dangdang.com/*"
+      ],
+      "js": [
+        "data/js/bin/dangdang.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.nhaphangali.com/*",
+        "http://*.nhaphangali.com/*"
+      ],
+      "js": [
+        "data/js/plugin/jquery/jquery.min.js",
+        "data/js/conf/config.js",
+        "data/js/bin/nhaphangali.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "webNavigation",
+    "https://ajax.googleapis.com/",
+    "cookies",
+    "storage"
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "AnyCrypt",
+  "description": "This extension enables automatic encrypting and decrypting of gpg messages",
+  "version": "0.0.1",
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_page": "anycrypt.html",
+    "default_icon": "images/icon1024.png"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "background": {
+    "scripts": [
+      "js/scrypt.js",
+      "js/hmac-sha512.js",
+      "js/enc-base64-min.js",
+      "js/jquery-1.11.3.min.js",
+      "js/kbpgp.js",
+      "js/enigma.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/jquery-1.11.3.min.js",
+        "js/kbpgp.js",
+        "js/content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "images/*.gif",
+    "images/*.png",
+    "style/*.css",
+    "script/*.js"
+  ],
+  "icons": {
+    "256": "images/icon256.png",
+    "1024": "images/icon1024.png"
+  },
+  "permissions": [
+    "contextMenus",
+    "activeTab",
+    "storage"
+  ]
+}

@@ -1,0 +1,101 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Delivery Trust® for Gmail",
+  "description": "Send and receive encrypted emails right from your Gmail inbox.",
+  "homepage_url": "https://identillect.com",
+  "version": "3.1.2",
+  "options_page": "options/options.html",
+  "permissions": [
+    "https://*.google.com/*",
+    "https://*.identillect.com/*",
+    "https://identillect.auth0.com/*",
+    "https://identillectproduction.s3.amazonaws.com/",
+    "https://www.avatarapi.com/",
+    "https://www.googleapis.com/*",
+    "https://apis.google.com/*",
+    "storage",
+    "identity",
+    "identity.email",
+    "declarativeContent"
+  ],
+  "icons": {
+    "48": "img/icon48.png",
+    "128": "img/icon128.png",
+    "192": "img/icon192.png"
+  },
+  "page_action": {
+    "default_icon": {
+      "48": "img/icon48.png"
+    },
+    "default_title": "Delivery Trust® for Gmail",
+    "default_popup": "login/popup.html"
+  },
+  "sandbox": {},
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "config.js",
+      "scripts/jquery-1.9.1.min.js",
+      "scripts/jsonpath.jquery.min.js",
+      "main/background_9.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*"
+      ],
+      "js": [
+        "scripts/jquery-1.9.1.min.js",
+        "scripts/jsonpath.jquery.min.js",
+        "scripts/bootstrap-3.3.7.min.js",
+        "scripts/inboxsdk.js",
+        "scripts/kendo.core.min.js",
+        "scripts/kendo.custom.min.js",
+        "scripts/kendo.upload.min.js",
+        "scripts/knockout-3.4.2.min.js",
+        "scripts/knockout-kendo.min.js",
+        "scripts/jwt-decode.min.js",
+        "scripts/jquery.mask.js",
+        "config.js",
+        "main/secure-scan.js",
+        "login/popup.js",
+        "options/options.js",
+        "main/recipient-model.js",
+        "main/recipients-model.js",
+        "main/compose-view-model.js",
+        "main/main-view-model.js",
+        "main/main.js"
+      ],
+      "css": [
+        "css/bootstrap-3.3.7-custom.css",
+        "css/fabric.min.css",
+        "css/fabric.components.min.css",
+        "css/kendo.common.min.css",
+        "css/kendo.office365.min.css",
+        "css/app.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "css/*",
+    "img/*",
+    "login/*",
+    "main/*",
+    "options/*",
+    "scripts/*",
+    "utilities/*",
+    "config.js"
+  ],
+  "content_security_policy": "script-src https://apis.google.com https://*.google.com 'self' 'unsafe-eval' https://ssl.google-analytics.com; object-src 'self'",
+  "oauth2": {
+    "client_id": "1070254276836-8fulv5r1puir88k0mf5e3hmbnigpgd0u.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/gmail.readonly",
+      "https://www.googleapis.com/auth/contacts.readonly"
+    ]
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "description": "Read daily horoscopes for all the zodiac signs and get custom web search on your New Tab.",
+  "icons": {
+    "16": "icons/icon128.png",
+    "48": "icons/icon128.png",
+    "128": "icons/icon128.png"
+  },
+  "version": "2.8.27.0",
+  "web_accessible_resources": [
+    "icons/*"
+  ],
+  "browser_action": {
+    "default_icon": "icons/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "optional_permissions": [
+    "management"
+  ],
+  "permissions": [
+    "tabs",
+    "cookies",
+    "storage",
+    "*://*.todaysreadings.live/*"
+  ],
+  "manifest_version": 2,
+  "name": "Todays Horoscope",
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.todaysreadings.live/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "core/content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "chrome_url_overrides": {
+    "newtab": "web_page_home.html"
+  }
+}

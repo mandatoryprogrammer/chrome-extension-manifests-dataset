@@ -1,0 +1,61 @@
+{
+  "background": {
+    "scripts": [
+      "config.js",
+      "ciuvo-background-wex.js",
+      "background.js"
+    ]
+  },
+  "update_url": "http://clients2.google.com/service/update2/crx",
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://ssl.google-analytics.com; object-src https://ciuvo.com 'self'",
+  "default_locale": "de",
+  "description": "Finde automatisch die günstigsten Preise beim online shoppen!",
+  "icons": {
+    "128": "icon.png"
+  },
+  "browser_action": {
+    "default_icon": "icon.png"
+  },
+  "manifest_version": 2,
+  "name": "Shopping Hero",
+  "permissions": [
+    "storage",
+    "webRequest",
+    "tabs",
+    "cookies",
+    "webNavigation",
+    "http://*/*",
+    "https://*/*",
+    "webRequestBlocking"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "js": [
+        "main.js"
+      ],
+      "css": [
+        "style.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://shoppinghero.io/"
+      ],
+      "js": [
+        "installed.js"
+      ]
+    }
+  ],
+  "options_page": "options.html",
+  "version": "1.0.1.6",
+  "web_accessible_resources": [
+    "ciuvo-contentscript-wex.js",
+    "main.js",
+    "icon.png"
+  ]
+}

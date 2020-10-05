@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Pepperword (Beta)",
+  "version": "0.5.0",
+  "description": "Password for Humans",
+  "browser_action": {
+    "default_icon": "images/logo128.png",
+    "default_title": "Pepperword Menu",
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "icons": {
+    "16": "images/logo16.png",
+    "48": "images/logo48.png",
+    "128": "images/logo128.png"
+  },
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "*://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "match_about_blank": true,
+      "exclude_matches": [
+        "https://*.pepperword.com/*"
+      ],
+      "js": [
+        "content_scripts.js"
+      ]
+    }
+  ],
+  "author": "Pepperword Inc",
+  "homepage_url": "https://web.pepperword.com",
+  "manifest_version": 2
+}

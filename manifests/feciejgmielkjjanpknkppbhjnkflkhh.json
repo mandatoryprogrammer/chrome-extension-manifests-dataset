@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "AdAlert",
+  "version": "0.1",
+  "author": "Ben Campbell",
+  "description": "Warns about sponsored content in news articles.",
+  "homepage_url": "https://adalert.org.uk",
+  "icons": {
+    "48": "icons/icon-48.png"
+  },
+  "permissions": [
+    "*://adalert.org.uk/*",
+    "*://localhost/*",
+    "tabs",
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "browser-polyfill.js",
+      "sjcl.js",
+      "util.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "browser-polyfill.js",
+        "rules.js",
+        "content.js"
+      ],
+      "css": [
+        "content.css"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": "icons/icon-grey-48.png",
+    "default_title": "AdAlert - sponsored content detector",
+    "default_popup": "popup.html"
+  },
+  "options_ui": {
+    "page": "options.html"
+  }
+}

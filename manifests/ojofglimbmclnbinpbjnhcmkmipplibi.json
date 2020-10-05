@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Web Content Filter (within your Browser)",
+  "version": "1.6.3",
+  "description": "A content filter for websites, emulating dansguardian’s score-based filter in JavaScript.",
+  "short_name": "Web Content Filter",
+  "author": "serv-inc",
+  "homepage_url": "https://github.com/serv-inc/JSGuardian",
+  "applications": {
+    "gecko": {
+      "id": "@wsf"
+    }
+  },
+  "icons": {
+    "128": "filter.png"
+  },
+  "permissions": [
+    "tabs",
+    "<all_urls>",
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "settings.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "get_text_script.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "options_ui": {
+    "page": "options.html"
+  },
+  "storage": {
+    "managed_schema": "schema.json"
+  }
+}

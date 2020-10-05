@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Palawan Chrome Extension",
+  "version": "1.0",
+  "description": "Send automated emails from your gmail inbox",
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "browser_action": {
+    "default_popup": "index.html"
+  },
+  "permissions": [
+    "activeTab",
+    "<all_urls>",
+    "identity"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "contentScript.js"
+      ],
+      "css": [
+        "index.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "logo.png"
+  ],
+  "oauth2": {
+    "client_id": "538118229758-agrn753prh01cjkh7khl9l6n075n7fqd.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email"
+    ]
+  }
+}

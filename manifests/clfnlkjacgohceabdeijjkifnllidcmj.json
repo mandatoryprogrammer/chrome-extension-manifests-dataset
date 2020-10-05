@@ -1,0 +1,128 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Paydirt Time Tracker",
+  "manifest_version": 2,
+  "version": "2.1.2",
+  "description": "Track your time anywhere on web with Paydirt, the time tracker that automatically determines which client you're working for.",
+  "content_security_policy": "script-src 'self' https://paydirtapp.com https://*.pusher.com/; object-src 'self' https://paydirtapp.com https://*.pusher.com/",
+  "web_accessible_resources": [
+    "notification.css",
+    "assets/spinner.gif",
+    "notifier.html"
+  ],
+  "icons": {
+    "16": "assets/images/paydirt-icon16.png",
+    "48": "assets/images/paydirt-icon48.png",
+    "128": "assets/images/paydirt-icon128.png"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "options_page": "options.html",
+  "browser_action": {
+    "default_icon": "assets/images/icon.png",
+    "default_title": "Paydirt Time Tracker"
+  },
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "*://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://trello.com/*"
+      ],
+      "js": [
+        "vendor/assets/javascripts/jquery-1.8.3.js",
+        "vendor/assets/javascripts/underscore-1.4.4.js",
+        "assets/javascripts/injection.js",
+        "assets/javascripts/integration.js",
+        "assets/javascripts/trello.js"
+      ],
+      "all_frames": false,
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://3.basecamp.com/*"
+      ],
+      "js": [
+        "vendor/assets/javascripts/jquery-1.8.3.js",
+        "vendor/assets/javascripts/underscore-1.4.4.js",
+        "assets/javascripts/injection.js",
+        "assets/javascripts/integration.js",
+        "assets/javascripts/basecamp3.js"
+      ],
+      "css": [
+        "assets/stylesheets/basecamp3-paydirt.css"
+      ],
+      "all_frames": false,
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://basecamp.com/*"
+      ],
+      "js": [
+        "vendor/assets/javascripts/jquery-1.8.3.js",
+        "vendor/assets/javascripts/underscore-1.4.4.js",
+        "assets/javascripts/injection.js",
+        "assets/javascripts/integration.js",
+        "assets/javascripts/basecamp.js"
+      ],
+      "css": [
+        "assets/stylesheets/basecamp-paydirt.css"
+      ],
+      "all_frames": false,
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://redbooth.com/*"
+      ],
+      "js": [
+        "vendor/assets/javascripts/jquery-1.8.3.js",
+        "vendor/assets/javascripts/underscore-1.4.4.js",
+        "assets/javascripts/injection.js",
+        "assets/javascripts/integration.js",
+        "assets/javascripts/redbooth.js"
+      ],
+      "css": [
+        "assets/stylesheets/redbooth-paydirt.css"
+      ],
+      "all_frames": false,
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://paydirtapp.com/*"
+      ],
+      "js": [
+        "vendor/assets/javascripts/jquery-1.8.3.js",
+        "assets/javascripts/paydirt_messenger.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "exclude_globs": [
+        "*://paydirtapp.com/*"
+      ],
+      "js": [
+        "vendor/assets/javascripts/jquery-1.8.3.js",
+        "assets/javascripts/paydirt-keyword-finder.js",
+        "assets/javascripts/paydirt-iframe-handler.js"
+      ],
+      "css": [
+        "assets/stylesheets/paydirt_iframe.css"
+      ],
+      "all_frames": false,
+      "run_at": "document_end"
+    }
+  ]
+}

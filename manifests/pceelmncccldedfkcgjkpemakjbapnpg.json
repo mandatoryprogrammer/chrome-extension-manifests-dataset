@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "OnSIP Call Assistant",
+  "version": "1.8.0.27",
+  "manifest_version": 2,
+  "description": "OnSIP customers can maximize workday efficiency with click-to-call, caller ID popups, and Zendesk & Highrise integration.",
+  "icons": {
+    "16": "images/icon-16.png",
+    "19": "images/icon-19.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
+  },
+  "browser_action": {
+    "default_title": "Disable OnSIP extension",
+    "default_icon": "images/icon-19.png"
+  },
+  "options_ui": {
+    "page": "options/setup/index.html"
+  },
+  "background": {
+    "page": "bg_page.html"
+  },
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "notifications",
+    "idle",
+    "tabs",
+    "https://*.zendesk.com/*",
+    "https://*.highrisehq.com/*",
+    "https://*.onsip.com/*",
+    "file://*/*"
+  ],
+  "content_security_policy": "default-src 'self'; connect-src https: wss:; img-src *; script-src 'self' https://ssl.google-analytics.com https://*.onsip.com https://*.highrisehq.com https://*.zendesk.com;",
+  "web_accessible_resources": [
+    "images/icon-48.png",
+    "images/icon-phone.png",
+    "js/libraries/jquery.js",
+    "js/utils.js",
+    "js/content_page.js",
+    "js/libraries/strophe.js",
+    "js/libraries/ox.js"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file://*/*"
+      ],
+      "js": [
+        "js/libraries/jquery.js",
+        "js/utils.js",
+        "js/content_page.js"
+      ],
+      "css": [
+        "css/content_page.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ]
+}

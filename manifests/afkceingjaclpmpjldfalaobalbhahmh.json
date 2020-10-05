@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "FastBacker Auto-Pledge",
+  "short_name": "FastBacker",
+  "description": "This extension works with your FastBacker account to auto-pledge for subscribed pledge levels on Kickstarter projects.",
+  "version": "0.5.6.1",
+  "version_name": "v0.5.6.1 built on 2018-07-12",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "icon16.png",
+    "default_popup": "popup.html",
+    "default_title": "FastBacker Auto-Pledge"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "jquery-2.1.4.min.js",
+        "crc32.js",
+        "kickstarter.js"
+      ],
+      "matches": [
+        "https://www.kickstarter.com/*"
+      ]
+    },
+    {
+      "js": [
+        "jquery-2.1.4.min.js",
+        "fastbacker.js"
+      ],
+      "matches": [
+        "http://www.fastbacker.com/*",
+        "https://www.fastbacker.com/*"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  },
+  "permissions": [
+    "storage",
+    "https://www.kickstarter.com/",
+    "http://www.fastbacker.com/",
+    "https://www.fastbacker.com/",
+    "tabs"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'"
+}

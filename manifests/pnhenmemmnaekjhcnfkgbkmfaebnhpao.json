@@ -1,0 +1,82 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "version": "1.21",
+  "manifest_version": 2,
+  "description": "__MSG_appDesc__",
+  "icons": {
+    "16": "skin/newsassist16.png",
+    "32": "skin/newsassist32.png",
+    "48": "skin/newsassist48.png",
+    "128": "skin/newsassist128.png"
+  },
+  "default_locale": "en",
+  "page_action": {
+    "default_icon": {
+      "19": "skin/newsassist19-false.png",
+      "38": "skin/newsassist38-false.png"
+    },
+    "default_title": "__MSG_appName__",
+    "default_popup": "content/default_popup.html"
+  },
+  "background": {
+    "scripts": [
+      "content/background.js",
+      "content/storage_engine.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "skin/content_scripts.css"
+      ],
+      "js": [
+        "content/content_scripts.js",
+        "content/storage_engine.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "homepage_url": "http://www.newsassist.org/",
+  "minimum_chrome_version": "24",
+  "permissions": [
+    "webNavigation",
+    "tabs",
+    "storage",
+    "unlimitedStorage",
+    "http://*/*",
+    "https://*/*",
+    "contextMenus",
+    "clipboardWrite",
+    "clipboardRead"
+  ],
+  "web_accessible_resources": [
+    "skin/*",
+    "content/iframe/*",
+    "content/misc/*"
+  ],
+  "commands": {
+    "_execute_page_action": {
+      "suggested_key": {
+        "default": "Shift+Alt+N"
+      }
+    },
+    "toggle-feature-Sidebar": {
+      "suggested_key": {
+        "default": "Shift+Alt+Q"
+      },
+      "description": "Toggle Sidebar"
+    },
+    "toggle-feature-Downbar": {
+      "suggested_key": {
+        "default": "Shift+Alt+M"
+      },
+      "description": "Toggle Downbar"
+    }
+  }
+}

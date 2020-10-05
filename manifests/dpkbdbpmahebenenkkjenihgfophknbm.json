@@ -1,0 +1,131 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Prospect.io",
+  "short_name": "Prospect.io",
+  "version": "3.19.19",
+  "description": "Prospect.io is the sales Automation Platform for modern sales teams.",
+  "homepage_url": "https://prospect.io",
+  "icons": {
+    "16": "assets/img/icon-16.png",
+    "48": "assets/img/icon-48.png",
+    "128": "assets/img/icon-128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "assets/img/icon-16.png",
+      "48": "assets/img/icon-48.png",
+      "128": "assets/img/icon-128.png"
+    }
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "webNavigation",
+    "https://localhost/",
+    "*://*.prospect.io/*"
+  ],
+  "background": {
+    "scripts": [
+      "lib/config.js",
+      "lib/error-notifier.js",
+      "lib/shared/utils.js",
+      "lib/background/main.js",
+      "lib/background/install-hooks.js"
+    ],
+    "persistent": false
+  },
+  "web_accessible_resources": [
+    "*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.prospect.io/*",
+      "*://*.linkedin.com/*",
+      "*://*.lightning.force.com/*"
+    ]
+  },
+  "content_security_policy": "script-src 'self' blob: filesystem: chrome-extension-resource: https://localhost:* https://*.prospect.io https://*.bugsnag.com; img-src 'self' * blob: data:; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.linkedin.com/*"
+      ],
+      "exclude_matches": [
+        "*://*.linkedin.com/sales/*"
+      ],
+      "css": [
+        "assets/css/styles.css"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "lib/shared/init.js",
+        "lib/config.js",
+        "lib/error-notifier.js",
+        "lib/shared/utils.js",
+        "lib/shared/actions.js",
+        "lib/linkedin/common.js",
+        "lib/linkedin/regular.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.linkedin.com/sales/*"
+      ],
+      "run_at": "document_start",
+      "css": [
+        "assets/css/styles.css"
+      ],
+      "js": [
+        "lib/shared/init.js",
+        "lib/config.js",
+        "lib/error-notifier.js",
+        "lib/shared/utils.js",
+        "lib/shared/actions.js",
+        "lib/linkedin/common.js",
+        "lib/linkedin/sales-navigator.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.linkedin.com/*"
+      ],
+      "css": [
+        "assets/css/styles.css"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "lib/linkedin/ui.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.lightning.force.com/*"
+      ],
+      "run_at": "document_start",
+      "css": [
+        "assets/css/styles.css"
+      ],
+      "js": [
+        "lib/shared/init.js",
+        "lib/config.js",
+        "lib/error-notifier.js",
+        "lib/shared/utils.js",
+        "lib/shared/actions.js",
+        "lib/salesforce/common.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.lightning.force.com/*"
+      ],
+      "css": [
+        "assets/css/styles.css"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "lib/salesforce/ui.js"
+      ]
+    }
+  ]
+}

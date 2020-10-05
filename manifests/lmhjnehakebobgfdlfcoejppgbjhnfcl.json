@@ -1,0 +1,72 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzZ29siTL+gpvBh+zT7zyWDYx43gYvGr7x1dCeTOG88ypoR3HUtianzuQye8MfZxbTuWkYbZ/FVkX4oZl2UZRZjNIvOxap1eSH9uVFWpwcwn8lNtIlHcoDIVxenj46S7T7W9uWjhGnQymWcrn56d54JfKkN5HG0r809L32+qUPVXQ7UkI2v0zdxL1WQ2jdyvub5PHPTKW/k1YiyA4Mko6G9mAuQ68cxZAT49S46pbtlf17BpgetV0zQZIdDaLURFTmHqSe1dcIqFp8YcPqyvLch+nV+1b8qS7YaafOUDuvOU5B6bmp6cOvlcUWUbFBjYCEclDigNc3g/5wU0Do1EFoQIDAQAB",
+  "manifest_version": 2,
+  "name": "Chat For Trello",
+  "description": "Adds chat functionality to Trello",
+  "version": "2.6.0",
+  "icons": {
+    "16": "images/logo-16x16.png",
+    "48": "images/logo-48x48.png",
+    "128": "images/logo-128x128.png"
+  },
+  "browser_action": {
+    "default_icon": "images/logo-128x128.png",
+    "default_popup": "browseraction.html"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "options_page": "settings.html",
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "https://trello.com/*",
+        "http://trello.com/*"
+      ],
+      "js": [
+        "libs/websocket-wrapper/injector.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://trello.com/*",
+        "http://trello.com/*"
+      ],
+      "js": [
+        "contentScript-bundle.js"
+      ],
+      "css": [
+        "css/ChatForTrello.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "libs/semantic-ui/semantic.content-script.css",
+    "libs/semantic-ui/icons.svg",
+    "libs/semantic-ui/icons.eot",
+    "libs/semantic-ui/icons.ttf",
+    "libs/semantic-ui/icons.woff",
+    "libs/semantic-ui/icons.woff2",
+    "images/logo-16x16-outline.png",
+    "images/logo-16x16-outline-active.png",
+    "images/logo-16x16.png",
+    "images/logo-16x16-inverted.png"
+  ],
+  "permissions": [
+    "storage",
+    "*://trello.com/*",
+    "notifications",
+    "identity",
+    "https://www.googleapis.com/"
+  ],
+  "oauth2": {
+    "client_id": "1015257965831-0qe5qb8j70odk7o46kqpsdgh8esidr3u.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/chromewebstore.readonly"
+    ]
+  },
+  "content_security_policy": "script-src 'self' http://localhost:35729; object-src 'self'"
+}

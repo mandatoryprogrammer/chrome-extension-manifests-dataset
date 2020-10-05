@@ -1,0 +1,85 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "auto Price App",
+  "description": "auto Price App cuts the sterile time out of your work days and lets you focus on closing deals by automating the quoting process.",
+  "version": "1.0",
+  "permissions": [
+    "storage",
+    "tabs",
+    "activeTab",
+    "https://autopriceapp.com/api.php"
+  ],
+  "options_ui": {
+    "page": "popup.html",
+    "chrome_style": false,
+    "open_in_tab": true
+  },
+  "browser_action": {
+    "default_title": "auto Price App",
+    "default_icon": {
+      "19": "images/icon_128.png"
+    }
+  },
+  "background": {
+    "scripts": [
+      "background.js",
+      "jquery.js",
+      "jquery.xpath.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.jtracker.com/account/lead.php*"
+      ],
+      "js": [
+        "jquery.js",
+        "plugincode.js",
+        "carsdb.jtracker",
+        "jquery.xpath.js"
+      ],
+      "css": [
+        "css.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.jtracker.com/account/login.php*"
+      ],
+      "js": [
+        "scripts/login.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.jtracker.com/"
+      ],
+      "js": [
+        "scripts/login.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "onpage.js",
+    "images/logo.jpeg",
+    "images/header.png",
+    "images/icon_128.png",
+    "images/savewarning.png",
+    "head.html",
+    "carsdb.jtracker",
+    "options.js",
+    "head.js",
+    "images/loading.gif",
+    "images/routeicon.png",
+    "images/save.png",
+    "images/arrowup.png",
+    "images/thumbsup.png",
+    "images/info.png",
+    "popup.html"
+  ],
+  "icons": {
+    "128": "images/icon_128.png"
+  },
+  "manifest_version": 2
+}

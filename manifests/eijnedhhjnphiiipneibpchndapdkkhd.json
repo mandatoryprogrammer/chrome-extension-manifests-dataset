@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Textnote",
+  "version": "0.1.7",
+  "manifest_version": 2,
+  "description": "TextNote allows users to quickly save notes on particular websites for later viewing.",
+  "icons": {
+    "16": "icon-16.png",
+    "19": "icon.png",
+    "38": "icon-38.png",
+    "48": "icon-48.png",
+    "128": "icon-128.png"
+  },
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_title": "TextNote.io",
+    "default_popup": "popup.html"
+  },
+  "externally_connectable": {
+    "matches": [
+      "http://localhost:3000/*",
+      "*://textnote.herokuapp.com/*",
+      "*://www.textnote.io/*"
+    ]
+  },
+  "permissions": [
+    "storage",
+    "tabs"
+  ],
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "*://*/*"
+      ],
+      "css": [
+        "./app/main.css"
+      ],
+      "js": [
+        "./app/main.bundle.js"
+      ],
+      "exclude_matches": [
+        "http://localhost:3000/*",
+        "*://textnote.herokuapp.com/*",
+        "*://www.textnote.io/*"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "matches": [
+        "http://localhost:3000/*",
+        "*://textnote.herokuapp.com/*",
+        "*://www.textnote.io/*"
+      ],
+      "js": [
+        "auth.js"
+      ]
+    }
+  ]
+}

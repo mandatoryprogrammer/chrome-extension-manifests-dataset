@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Robo Chrome Extension",
+  "version": "0.14.6",
+  "description": "Engage your candidates en-masse! Send your candidates chatbot conversations so they can update their profiles for you.",
+  "author": "www.roborecruiter.ai",
+  "short_name": "RoboRecruiter",
+  "manifest_version": 2,
+  "icons": {
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": [
+    "<all_urls>",
+    "activeTab",
+    "tabs",
+    "background",
+    "contextMenus",
+    "https://*/*",
+    "http://*/*",
+    "storage",
+    "unlimitedStorage",
+    "webRequest"
+  ],
+  "browser_action": {
+    "default_icon": "icons/robo-logo-36x25.png",
+    "default_title": "RoboRecruiter"
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "js/content.js"
+      ],
+      "run_at": "document_end",
+      "matches": [
+        "<all_urls>"
+      ],
+      "all_frames": true
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://id.jobadder.com https://api-staging.roborecruiter.ai https://ssl.google-analytics.com https://www.google-analytics.com ; object-src 'self'",
+  "web_accessible_resources": [
+    "pages/panel.html",
+    "pages/jobvetModalWindow.html",
+    "js/content.js"
+  ]
+}

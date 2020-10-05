@@ -1,0 +1,110 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "TF2 Quick Trader",
+  "description": "This extension allows to pre-select the seller's/buyer's item automatically when clicking a trade offer link and match more.",
+  "version": "1.0.0",
+  "permissions": [
+    "tabs",
+    "storage",
+    "*://marketplace.tf/items/*",
+    "*://wiki.teamfortress.com/*",
+    "*://steamcommunity.com/*",
+    "*://backpack.tf/*"
+  ],
+  "icons": {
+    "128": "assets/icon128.png",
+    "16": "assets/icon16.png",
+    "19": "assets/icon19.png",
+    "48": "assets/icon48.png"
+  },
+  "background": {
+    "scripts": [
+      "internal/js/background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "assets/icon19.png",
+      "48": "assets/icon48.png"
+    },
+    "default_title": "TF2 Quick Trader",
+    "default_popup": "internal/html/popup.html"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "internal/js/main.js",
+        "internal/js/trade_offer_main.js"
+      ],
+      "matches": [
+        "*://steamcommunity.com/tradeoffer/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "internal/js/main.js",
+        "internal/js/trade_offers_page_main.js"
+      ],
+      "matches": [
+        "*://steamcommunity.com/*/*/tradeoffers*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "external/jquery/jquery-3.1.1.min.js",
+        "internal/js/main.js",
+        "internal/js/wiki_teamfortress.js"
+      ],
+      "matches": [
+        "*://wiki.teamfortress.com/wiki/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "external/jquery/jquery-3.1.1.min.js",
+        "internal/js/backpack_tf_main.js"
+      ],
+      "matches": [
+        "*://backpack.tf/classifieds?item*",
+        "*://backpack.tf/stats*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "external/jquery/jquery-3.1.1.min.js",
+        "internal/js/main.js",
+        "internal/js/backpack_tf_check_items.js"
+      ],
+      "matches": [
+        "*://backpack.tf/category/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "external/jquery/jquery-3.1.1.min.js",
+        "internal/js/main.js",
+        "internal/js/marketplace_tf_main.js"
+      ],
+      "matches": [
+        "*://marketplace.tf/items/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "internal/js/content/*",
+    "internal/css/*",
+    "external/*"
+  ]
+}

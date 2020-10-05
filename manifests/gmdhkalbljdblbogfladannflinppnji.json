@@ -1,0 +1,76 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_appName__",
+  "short_name": "sl",
+  "description": "__MSG_appDesc__",
+  "default_locale": "lt",
+  "version": "1.1.0",
+  "author": "Tautvydas Derzinskas",
+  "homepage_url": "https://github.com/SlimDogs/super-linkomanija",
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/icon_19x19.png",
+      "38": "icons/icon_38x38.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "icons/icon_16x16.png",
+    "48": "icons/icon_48x48.png",
+    "96": "icons/icon_96x96.png",
+    "128": "icons/icon_128x128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.bundle.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.linkomanija.net/*"
+      ],
+      "css": [],
+      "js": [
+        "content.bundle.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*.linkomanija.net/details*"
+      ],
+      "css": [],
+      "js": [
+        "sceditor.min.js",
+        "bbcode.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*.linkomanija.net/browse.php*"
+      ],
+      "css": [
+        "tippy.css"
+      ],
+      "js": [
+        "tippy.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "bbcode.bundle.js"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "permissions": [
+    "tabs",
+    "storage"
+  ]
+}

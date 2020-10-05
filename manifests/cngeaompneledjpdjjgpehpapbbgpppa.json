@@ -1,0 +1,110 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "SIFT - Automatic Money Back",
+  "version": "1.2.10",
+  "version_name": "1.2.10 prod",
+  "description": "Get money back automatically",
+  "author": "https://www.siftwallet.com",
+  "icons": {
+    "128": "/img/logo.png"
+  },
+  "browser_action": {
+    "default_icon": "/img/sift-extension-inactive_icon.png",
+    "default_popup": "/pages/popup/index.html"
+  },
+  "options_ui": {
+    "chrome_style": true,
+    "open_in_tab": false,
+    "page": "/pages/options/index.html"
+  },
+  "background": {
+    "scripts": [
+      "/lib/jquery.min.js",
+      "/lib/webx.js",
+      "/lib/url.min.js",
+      "/lib/analytics.js",
+      "/lib/mixpanel-jslib-snippet.min.js",
+      "/js/converters/sift_utility_converter.js",
+      "/js/background/modules/api_manager.js",
+      "/js/background/modules/metrics_manager.js",
+      "/js/background/modules/browser_action_manager.js",
+      "/js/background/modules/user_data_manager.js",
+      "/js/background/modules/main_background_module.js",
+      "/js/background/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.amazon.com/*",
+        "http://webx_local_test_page.com:8080/tests/*",
+        "https://www.siftwallet.com/chrome-extension/*"
+      ],
+      "exclude_matches": [
+        "http://webx_local_test_page.com:8080/tests/converter_test_page/",
+        "http://webx_local_test_page.com:8080/tests/webx_report_reader/"
+      ],
+      "js": [
+        "/lib/jquery.min.js",
+        "/lib/webx.js",
+        "/lib/vue.min.js",
+        "/lib/url.min.js",
+        "/lib/fuse.min.js",
+        "/js/modules/injected_components_module.js",
+        "/js/modules/offer_listing_data_module.js",
+        "/js/modules/product_page_main_module.js",
+        "/js/modules/checkout_page_manager.js",
+        "/js/modules/floating_iframe_manager.js",
+        "/js/modules/time_manager.js",
+        "/js/modules/content_script_controller.js",
+        "/js/converters/sift_main_converter.js",
+        "/js/converters/sift_amazon_converter.js",
+        "/js/converters/sift_utility_converter.js",
+        "/js/converters/sift_ebay_converter.js",
+        "/js/content_scripts/main.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.trivago.com/*",
+        "https://www.hotels.com/*",
+        "https://www.orbitz.com/*",
+        "https://www.kayak.com/*",
+        "https://www.expedia.com/*"
+      ],
+      "js": [
+        "/lib/jquery.min.js",
+        "/lib/webx.js",
+        "/js/modules/floating_iframe_manager.js",
+        "/js/converters/sift_utility_converter.js",
+        "/js/content_scripts/travel/controller.js",
+        "/js/content_scripts/travel/main.js"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "matches": [
+        "https://www.siftwallet.com/*"
+      ],
+      "js": [
+        "/lib/jquery.min.js",
+        "/lib/webx.js",
+        "/js/content_scripts/web_app.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "storage",
+    "cookies",
+    "webNavigation",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "web_accessible_resources": [
+    "/*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://connect.facebook.net; object-src 'self'"
+}

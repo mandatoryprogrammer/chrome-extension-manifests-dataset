@@ -1,0 +1,116 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Procurify CheckOut",
+  "version": "1.3.4",
+  "description": "Sync your shopping cart to a Procurify RFO",
+  "author": "Procurify",
+  "manifest_version": 2,
+  "icons": {
+    "48": "icons/48x.png",
+    "128": "icons/128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "background",
+    "storage",
+    "<all_urls>"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://antonio.dev.procurify.xyz/*",
+      "https://*.procurify.com/*",
+      "https://*.procurify-staging.com/*"
+    ]
+  },
+  "browser_action": {
+    "default_title": "Procurify CheckOut",
+    "default_popup": "pages/popup.html"
+  },
+  "background": {
+    "page": "pages/background.html"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "js/fishersci_ca.js"
+      ],
+      "run_at": "document_end",
+      "matches": [
+        "https://www.fishersci.ca/shop/*"
+      ]
+    },
+    {
+      "js": [
+        "js/fishersci_com.js"
+      ],
+      "run_at": "document_end",
+      "matches": [
+        "https://www.fishersci.com/shop/*"
+      ]
+    },
+    {
+      "js": [
+        "js/fishersci_comv2.js"
+      ],
+      "run_at": "document_end",
+      "matches": [
+        "https://www.fishersci.com/store1/*"
+      ]
+    },
+    {
+      "js": [
+        "js/mcmaster_com.js"
+      ],
+      "run_at": "document_end",
+      "matches": [
+        "https://www.mcmaster.com/*"
+      ]
+    },
+    {
+      "js": [
+        "js/cdw_com.js"
+      ],
+      "run_at": "document_end",
+      "matches": [
+        "https://www.cdw.com/cart*"
+      ]
+    },
+    {
+      "js": [
+        "js/parts_cat_com.js"
+      ],
+      "run_at": "document_end",
+      "matches": [
+        "https://parts.cat.com/AjaxOrderItemDisplayView*"
+      ]
+    },
+    {
+      "js": [
+        "js/parts_cat_com_summary.js"
+      ],
+      "run_at": "document_end",
+      "matches": [
+        "https://parts.cat.com/OrderShippingBillingConfirmationView*"
+      ]
+    },
+    {
+      "js": [
+        "js/procurify.js"
+      ],
+      "run_at": "document_end",
+      "matches": [
+        "https://antonio.dev.procurify.xyz/*",
+        "https://*.procurify.com/*",
+        "https://*.procurify-staging.com/*"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "web_accessible_resources": [
+    "inline-loader.svg",
+    "logo.png",
+    "banner.png",
+    "css/*"
+  ]
+}

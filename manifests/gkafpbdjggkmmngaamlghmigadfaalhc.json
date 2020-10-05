@@ -1,0 +1,82 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Clipboardy",
+  "homepage_url": "https://github.com/panzerdp/clipboardy",
+  "version": "0.9.7",
+  "description": "Copy to clipboard posted code from stackoverflow.com, github.com & npmjs.com. Clipboard usage history.",
+  "author": "Dmitri Pavlutin",
+  "icons": {
+    "16": "icons/default16.png",
+    "128": "icons/default128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.stackoverflow.com/*",
+        "*://*.askubuntu.com/*",
+        "*://*.stackexchange.com/*",
+        "*://superuser.com/*",
+        "*://serverfault.com/*"
+      ],
+      "js": [
+        "compile/js/vendors_content_script.js",
+        "compile/js/stackoverflow.js"
+      ],
+      "css": [
+        "compile/css/stackoverflow.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.github.com/*"
+      ],
+      "js": [
+        "compile/js/vendors_content_script.js",
+        "compile/js/github.js"
+      ],
+      "css": [
+        "compile/css/github.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.npmjs.com/*"
+      ],
+      "js": [
+        "compile/js/vendors_content_script.js",
+        "compile/js/npmjs.js"
+      ],
+      "css": [
+        "compile/css/github.css"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "compile/js/vendors_content_script.js",
+      "compile/js/background.js"
+    ],
+    "persistent": false
+  },
+  "options_page": "options.html",
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/default19.png",
+      "38": "icons/default38.png"
+    },
+    "default_title": "Clipboard history",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "clipboardWrite",
+    "contextMenus"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "manifest_version": 2,
+  "web_accessible_resources": [
+    "icons/*",
+    "buttons.html"
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_extName__",
+  "description": "__MSG_extDescription__",
+  "version": "1.0.9",
+  "minimum_chrome_version": "26",
+  "default_locale": "en",
+  "icons": {
+    "128": "img/icon_128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "img/icon_16.png"
+    },
+    "default_popup": "popup.html",
+    "default_title": "__MSG_extName__"
+  },
+  "background": {
+    "scripts": [
+      "js/jquery.js",
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "webRequest",
+    "storage",
+    "tabs",
+    "downloads",
+    "<all_urls>",
+    "management",
+    "cookies"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.vimeo.com/*"
+      ],
+      "js": [
+        "js/jquery.js",
+        "js/vimeo_com.js"
+      ],
+      "css": [
+        "css/content.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://*.vimeo.com 'unsafe-eval'; object-src https://*.vimeo.com 'self'"
+}

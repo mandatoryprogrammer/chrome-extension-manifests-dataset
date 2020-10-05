@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "version": "0.0.202",
+  "manifest_version": 2,
+  "description": "__MSG_appDescription__",
+  "icons": {
+    "16": "images/icon-16.png",
+    "128": "images/icon-128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "libs/jquery/jquery.js",
+      "libs/pepper/js/require.js",
+      "scripts/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "all_frames": true,
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "libs/jquery/jquery.js",
+        "scripts/pepperAugment.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "scripts/pepperAugment.js",
+    "libs/pepper/img/*",
+    "libs/pepper/css/*",
+    "libs/pepper/jplayer/Jplayer.swf",
+    "images/*",
+    "libs/pepper/js/interwindow-messaging-lib.js",
+    "libs/jquery/jquery.min.js",
+    "libs/jquery/jquery.min.map",
+    "unsupported.html"
+  ],
+  "browser_action": {
+    "default_icon": "images/icon-16.png",
+    "default_popup": "popup.html"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://cdn-contentviewer.adobe.com; object-src 'self'",
+  "permissions": [
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "unlimitedStorage",
+    "notifications",
+    "http://cdn-contentviewer.adobe.com/*",
+    "http://contentviewer.adobe.com/*",
+    "http://dps.sc.omtrdc.net/*"
+  ]
+}

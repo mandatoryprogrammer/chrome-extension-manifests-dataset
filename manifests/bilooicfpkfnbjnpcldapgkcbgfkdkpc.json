@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "ClickMask",
+  "version": "1.2.1",
+  "description": "Automatically detect and remove clickbait from the webpages you visit.",
+  "browser_action": {
+    "browser_style": true,
+    "default_popup": "menu/choose_page.html",
+    "default_icon": {
+      "48": "icons/ShadowIcon.png",
+      "96": "icons/ShadowIcon96.png"
+    }
+  },
+  "icons": {
+    "48": "icons/ShadowIcon.png",
+    "96": "icons/ShadowIcon96.png"
+  },
+  "background": {
+    "scripts": [
+      "browser.js",
+      "io.js",
+      "clientjs/client.min.js",
+      "badge.js",
+      "background.js"
+    ]
+  },
+  "options_ui": {
+    "page": "settings/settings.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "browser.js",
+        "io.js",
+        "sidebar.js",
+        "matrix_functions.js",
+        "network_functions.js",
+        "gen_network.js",
+        "domains.js",
+        "link-editor.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "contextMenus",
+    "storage",
+    "unlimitedStorage",
+    "https://clickmask-website.firebaseio.com/*"
+  ]
+}

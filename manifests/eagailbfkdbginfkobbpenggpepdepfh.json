@@ -1,0 +1,67 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "KNOW THE WATER COST",
+  "version": "0.1.0",
+  "description": "See how much clean water it takes to produce ordinary items found on Amazon so that you can make more sustainable decisions.",
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "activeTab",
+    "declarativeContent",
+    "storage",
+    "https://www.amazon.com/"
+  ],
+  "page_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "images/twcx16.png",
+      "32": "images/twcx32.png",
+      "48": "images/twcx48.png",
+      "128": "images/twcx128.png"
+    },
+    "icons": {
+      "16": "images/twcx16.png",
+      "32": "images/twcx32.png",
+      "48": "images/twcx48.png",
+      "128": "images/twcx128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://primenow.amazon.com/dp/*",
+        "https://www.amazon.com/dp/*",
+        "https://www.amazon.com/*/dp/*",
+        "https://www.amazon.com/gp/product/*"
+      ],
+      "include_globs": [
+        "https://????????.amazon.com/dp/*",
+        "https://???.amazon.com/dp/*",
+        "https://???.amazon.com/*/dp/*",
+        "https://???.amazon.com/gp/product/*"
+      ],
+      "js": [
+        "utils.js",
+        "amazon.js",
+        "prime.js"
+      ],
+      "css": [
+        "css/twc.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "images/twc.gif",
+    "images/twcx32.png",
+    "images/x.png",
+    "images/drop.png",
+    "data/data.json",
+    "fonts/IBMPlexSans.woff2",
+    "fonts/IBMPlexMono-Regular.woff"
+  ],
+  "manifest_version": 2
+}

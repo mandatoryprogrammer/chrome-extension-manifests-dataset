@@ -1,0 +1,111 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Shopping Cart Share For Amazon",
+  "version": "2.0.9",
+  "background": {
+    "scripts": [
+      "extension/common/jquery.js",
+      "extension/common/strings.js",
+      "extension/common/utilities.js",
+      "extension/services/background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "pages/static/img/logo-128.png",
+    "default_popup": "pages/popup.html",
+    "default_title": "Shopping Cart Share For Amazon"
+  },
+  "options_ui": {
+    "chrome_style": true,
+    "page": "pages/options.html"
+  },
+  "icons": {
+    "128": "pages/static/img/logo-128.png",
+    "16": "pages/static/img/logo-16.png",
+    "64": "pages/static/img/logo-64.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.amazon.com/gp/cart/view.html*",
+        "https://www.amazon.ca/gp/cart/view.html*",
+        "https://www.amazon.co.uk/gp/cart/view.html*",
+        "https://www.amazon.fr/gp/cart/view.html*",
+        "https://www.amazon.de/gp/cart/view.html*",
+        "https://www.amazon.it/gp/cart/view.html*",
+        "https://www.amazon.nl/gp/cart/view.html*",
+        "https://www.amazon.es/gp/cart/view.html*",
+        "https://www.amazon.cn/gp/cart/view.html*",
+        "https://www.amazon.in/gp/cart/view.html*",
+        "https://www.amazon.co.jp/gp/cart/view.html*",
+        "https://www.amazon.com.mx/gp/cart/view.html*",
+        "https://www.amazon.com.au/gp/cart/view.html*",
+        "https://www.amazon.com.br/gp/cart/view.html*",
+        "https://www.amazon.ae/gp/cart/view.html*"
+      ],
+      "js": [
+        "extension/common/strings.js",
+        "extension/common/utilities.js",
+        "extension/content/amazon/amazonCartClear.js",
+        "extension/content/amazon/amazonCartReader.js"
+      ],
+      "match_about_blank": false,
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://www.amazon.com/hz/wishlist/ls/*",
+        "https://www.amazon.ca/hz/wishlist/ls/*",
+        "https://www.amazon.co.uk/hz/wishlist/ls/*",
+        "https://www.amazon.fr/hz/wishlist/ls/*",
+        "https://www.amazon.de/hz/wishlist/ls/*",
+        "https://www.amazon.it/hz/wishlist/ls/*",
+        "https://www.amazon.nl/hz/wishlist/ls/*",
+        "https://www.amazon.es/hz/wishlist/ls/*",
+        "https://www.amazon.cn/hz/wishlist/ls/*",
+        "https://www.amazon.in/hz/wishlist/ls/*",
+        "https://www.amazon.co.jp/hz/wishlist/ls/*",
+        "https://www.amazon.com.mx/hz/wishlist/ls/*",
+        "https://www.amazon.com.au/hz/wishlist/ls/*",
+        "https://www.amazon.com.br/hz/wishlist/ls/*",
+        "https://www.amazon.ae/hz/wishlist/ls/*",
+        "https://www.amazon.com/gp/registry/wishlist/*",
+        "https://www.amazon.ca/gp/registry/wishlist/*",
+        "https://www.amazon.co.uk/gp/registry/wishlist/*",
+        "https://www.amazon.fr/gp/registry/wishlist/*",
+        "https://www.amazon.de/gp/registry/wishlist/*",
+        "https://www.amazon.it/gp/registry/wishlist/*",
+        "https://www.amazon.nl/gp/registry/wishlist/*",
+        "https://www.amazon.es/gp/registry/wishlist/*",
+        "https://www.amazon.cn/gp/registry/wishlist/*",
+        "https://www.amazon.in/gp/registry/wishlist/*",
+        "https://www.amazon.co.jp/gp/registry/wishlist/*",
+        "https://www.amazon.com.mx/gp/registry/wishlist/*",
+        "https://www.amazon.com.au/gp/registry/wishlist/*",
+        "https://www.amazon.com.br/gp/registry/wishlist/*",
+        "https://www.amazon.ae/gp/registry/wishlist/*"
+      ],
+      "js": [
+        "extension/common/strings.js",
+        "extension/common/utilities.js",
+        "extension/content/amazon/amazonWishlistReader.js"
+      ],
+      "match_about_blank": false,
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "storage",
+    "webRequest",
+    "unlimitedStorage",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "description": "Shopping Cart Share Integration For Amazon"
+}

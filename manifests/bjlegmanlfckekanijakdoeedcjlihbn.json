@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_extName__",
+  "default_locale": "en",
+  "version": "1.28",
+  "manifest_version": 2,
+  "description": "__MSG_extDetail__",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "tracking.js",
+      "background.js"
+    ]
+  },
+  "icons": {
+    "16": "icon-bitty.png",
+    "48": "icon-small.png",
+    "128": "icon-large.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content_script.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://www.kodand.com/*",
+        "*://amp.kodand.com/*",
+        "*://mob.kodand.com/*"
+      ],
+      "js": [
+        "kodand_script.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "permissions": [
+    "tabs",
+    "notifications",
+    "gcm",
+    "storage",
+    "*://*/*",
+    "contextMenus",
+    "unlimitedStorage",
+    "tts"
+  ],
+  "web_accessible_resources": [
+    "imgs/*"
+  ],
+  "short_name": "__MSG_extShortName__",
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

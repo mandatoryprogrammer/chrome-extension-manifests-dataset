@@ -1,0 +1,81 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "YouTube Prefs",
+  "description": "Enable the like bar and exact like counts on YouTube.com - more to come! (Not affiliated with YouTube.com)",
+  "version": "1.0",
+  "manifest_version": 2,
+  "minimum_chrome_version": "25",
+  "icons": {
+    "16": "logo.png",
+    "48": "logo.png",
+    "128": "logo.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "logo.png",
+      "38": "logo.png"
+    },
+    "default_title": "YouTube Prefs",
+    "default_popup": "options.html"
+  },
+  "background": {
+    "scripts": [
+      "js/storage.js",
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.youtube.com/*",
+        "http://www.youtu.be/*",
+        "http://www.yt.be/*",
+        "https://www.youtube.com/*",
+        "https://www.youtu.be/*",
+        "https://www.yt.be/*"
+      ],
+      "css": [
+        "css/content_script.css"
+      ],
+      "js": [
+        "js/jquery-3.1.0.min.js",
+        "js/win-loc-plugin.js",
+        "js/content_script.js"
+      ]
+    }
+  ],
+  "options_page": "options.html",
+  "content_security_policy": "policyString",
+  "nacl_modules": [
+    {
+      "path": "OpenOfficeViewer.nmf",
+      "mime_type": "application/vnd.oasis.opendocument.spreadsheet"
+    }
+  ],
+  "offline_enabled": false,
+  "web_accessible_resources": [
+    "img/ext_icons/16.png"
+  ],
+  "permissions": [
+    "http://*.google.com/*",
+    "background",
+    "chrome://favicon/",
+    "cookies",
+    "debugger",
+    "declarativeContent",
+    "declarativeWebRequest",
+    "identity",
+    "idle",
+    "privacy",
+    "processes",
+    "storage",
+    "system.storage",
+    "tabs",
+    "tts",
+    "ttsEngine",
+    "unlimitedStorage",
+    "webNavigation",
+    "webRequestBlocking"
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_default_title__",
+  "version": "1.3.10",
+  "manifest_version": 2,
+  "description": "__MSG_description__",
+  "icons": {
+    "16": "logos/16.png",
+    "48": "logos/48.png",
+    "128": "logos/128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "logos/19.png",
+      "38": "logos/38.png"
+    },
+    "default_popup": "popup/popup.html",
+    "default_tile": "__MSG_default_title__"
+  },
+  "default_locale": "en",
+  "permissions": [
+    "*://*/*",
+    "webRequest",
+    "webRequestBlocking",
+    "storage",
+    "tabs",
+    "contextMenus",
+    "downloads",
+    "bookmarks",
+    "cookies",
+    "management",
+    "history",
+    "notifications"
+  ],
+  "externally_connectable": {
+    "ids": [
+      "*"
+    ]
+  },
+  "content_security_policy": "script-src 'self'  'unsafe-eval' https://ssl.google-analytics.com; object-src 'self'",
+  "background": {
+    "scripts": [
+      "lib/md5.min.js",
+      "lib/lodash.min.js",
+      "lib/jquery.js",
+      "lib/fingerprint2.min.js",
+      "lib/aliyun-oss-sdk-4.3.0.min.js",
+      "utils.js",
+      "config.js",
+      "batdl/js/common.js",
+      "batdl/js/background.js",
+      "bg.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "lib/jquery.js",
+        "iconfont.js",
+        "config.js",
+        "utils.js",
+        "ct.js"
+      ],
+      "css": [
+        "ct.css"
+      ],
+      "matches": [
+        "*://*/*"
+      ],
+      "exclude_matches": [
+        "*://subway.simba.taobao.com/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "login.js"
+      ],
+      "matches": [
+        "*://yt.tbyuantu.com/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "logos/*",
+    "iconfont.js",
+    "dropPanel.html"
+  ]
+}

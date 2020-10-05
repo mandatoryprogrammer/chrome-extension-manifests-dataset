@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Order notification plugin",
+  "short_name": "Order Notifier",
+  "description": "This plugin notifies the user by a sound about any order that is received through online ordering system",
+  "version": "1.4",
+  "browser_action": {
+    "default_icon": "assets/icon.png",
+    "default_popup": "pages/index.html",
+    "default_title": "Order Notifications"
+  },
+  "icons": {
+    "16": "assets/icons/icon16.png",
+    "48": "assets/icons/icon48.png",
+    "128": "assets/icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*backend*"
+      ],
+      "js": [
+        "js/lib/jquery_3.1.js",
+        "js/content_reader.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "css": [
+        "css/sweetalert.css"
+      ],
+      "js": [
+        "js/lib/jquery_3.1.js",
+        "js/lib/sweetalert.min.js",
+        "js/sweetalert_script.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/lib/jquery_3.1.js",
+      "js/lib/raven.js",
+      "js/lib/sentry.js",
+      "js/lib/pusher.js",
+      "js/pusher_script.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "<all_urls>",
+    "storage"
+  ]
+}

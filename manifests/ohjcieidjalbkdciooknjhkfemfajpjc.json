@@ -1,0 +1,81 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": ".NET Fiddle",
+  "version": "2.5.0",
+  "description": "",
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "tabs",
+    "contextMenus",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "icons": {
+    "16": "images/icon-16.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
+  },
+  "browser_action": {
+    "default_icon": "images/icon-16.png",
+    "default_title": "Open .NET Fiddle in new tab"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://msdn.microsoft.com/*"
+      ],
+      "js": [
+        "contentMSDN.js",
+        "common.js",
+        "langDetect.js",
+        "jquery-1.9.1.min.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://stackoverflow.com/*"
+      ],
+      "js": [
+        "contentSO.js",
+        "common.js",
+        "langDetect.js",
+        "jquery-1.9.1.min.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://gist.github.com/*"
+      ],
+      "js": [
+        "contentGIST.js",
+        "common.js",
+        "langDetect.js",
+        "jquery-1.9.1.min.js"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "http://msdn.microsoft.com/*",
+        "http://stackoverflow.com/*",
+        "https://gist.github.com/*"
+      ],
+      "js": [
+        "content.js",
+        "langDetect.js",
+        "common.js",
+        "jquery-1.9.1.min.js"
+      ]
+    }
+  ],
+  "manifest_version": 2
+}

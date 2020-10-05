@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Fugu Meetings",
+  "description": "A simple extension that allows you to schedule Fugu Conference Meetings.",
+  "version": "0.0.3",
+  "minimum_chrome_version": "34",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "background": {
+    "scripts": []
+  },
+  "permissions": [],
+  "externally_connectable": {
+    "matches": [
+      "*://conferencing.fugu.chat/*",
+      "*://meet.fugu.chat/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://calendar.google.com/calendar/*",
+        "https://outlook.live.com/owa/*"
+      ],
+      "js": [
+        "jquery.js",
+        "RandomUtil.js",
+        "RoomnameGenerator.js",
+        "meet-calendar.js"
+      ],
+      "css": [
+        "/css/all.css"
+      ],
+      "all_frames": false,
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "icon16.png",
+    "icon48.png"
+  ],
+  "browser_action": {
+    "default_title": "Create Fugu Meetings",
+    "default_popup": "popup.html"
+  }
+}

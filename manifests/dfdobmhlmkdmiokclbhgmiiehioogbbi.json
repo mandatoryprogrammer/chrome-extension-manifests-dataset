@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "ソーシャルゲームPCブラウザ",
+  "short_name": "ソシャブラ",
+  "version": "2.7",
+  "manifest_version": 2,
+  "description": "PCからmobage,GREE,mixi,Ameba,DMM等のソーシャルゲームをhttp://socialgamebrowser.com/で快適にプレイできるビューワー拡張です",
+  "icons": {
+    "128": "img/icon-128.png",
+    "48": "img/icon-48.png"
+  },
+  "browser_action": {
+    "default_icon": "img/icon-48.png",
+    "default_popup": "popup.html",
+    "default_title": "ソーシャルゲームPCブラウザ"
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "js": [
+        "scripts/common.js",
+        "scripts/bootstrap.js",
+        "scripts/document_start.js"
+      ],
+      "matches": [
+        "*://*/*"
+      ],
+      "all_frames": true
+    },
+    {
+      "run_at": "document_idle",
+      "js": [
+        "scripts/document_idle.js"
+      ],
+      "matches": [
+        "*://*/*"
+      ],
+      "all_frames": true
+    },
+    {
+      "run_at": "document_end",
+      "js": [
+        "scripts/document_end.js"
+      ],
+      "matches": [
+        "*://*/*"
+      ],
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "scripts/common.js",
+      "scripts/background.js"
+    ]
+  }
+}

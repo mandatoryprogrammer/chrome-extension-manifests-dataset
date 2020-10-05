@@ -1,0 +1,76 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "background": {
+    "scripts": [
+      "vendor/jquery.min.js",
+      "app/js/background.js",
+      "vendor/dojo.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "icons/icon.png",
+    "default_title": "Chrome Is Burning"
+  },
+  "content_scripts": [
+    {
+      "include_globs": [
+        "*client_id=464891386855067*",
+        "*api_key=464891386855067*",
+        "*464891386855067*redirect_uri=fbconnect%3A%2F%2Fsuccess*",
+        "*redirect_uri=fbconnect%3A%2F%2Fsuccess*464891386855067*"
+      ],
+      "js": [
+        "vendor/jquery.min.js",
+        "app/js/facebook.js"
+      ],
+      "matches": [
+        "https://www.facebook.com/v2.0/dialog/oauth*",
+        "https://m.facebook.com/v2.0/dialog/oauth*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "include_globs": [
+        "*"
+      ],
+      "js": [
+        "app/js/burning.js"
+      ],
+      "run_at": "document_end",
+      "matches": [
+        "http://chromeisburning.com/*"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "description": "a Tinder extension",
+  "icons": {
+    "128": "icons/icon128.png",
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png"
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxoEXJ6kFvAtWuiJa1aXVcNtldxUO1u66pNzf8E0E1bnmrDkcbIlEqOvZYH9vHL3oRTOk0YedWeCHm4YR8zAxFRo5H+hLww8LRx7+goH+F2jqYlZMzyA5zyt3MCKWAlsb5780bzKhZ5C31D5msIeVV4QAkryrD4rvE//mY3ftK9KfdL3QLdLQyPzYazACHhThaJoXZpZgO+56Ii7TOGfGhWY9PXcWD5FrFLGV2eAkTEBYolOb6kEd1RZHvaR57G1W0moelqhJG6Tlv+e3f//Pa3CAMGvwLSCZ+5+G9PvN2lL0n6/V4i7k+iC2H78h4C5uKWvsN3APh6eRUgqmuYNZfwIDAQAB",
+  "manifest_version": 2,
+  "name": "Chrome Is Burning",
+  "short_name": "cr.is.burning",
+  "permissions": [
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "*://*.chromeisburning.com/*",
+    "*://*.gotinder.com/*",
+    "unlimitedStorage",
+    "*://*.facebook.com/v2.0/dialog/oauth?*api_key=464891386855067*",
+    "*://*.facebook.com/v2.0/dialog/oauth?*client_id=464891386855067*",
+    "notifications"
+  ],
+  "web_accessible_resources": [
+    "*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.chromeisburning.com/*"
+    ]
+  },
+  "version": "0.99.19"
+}

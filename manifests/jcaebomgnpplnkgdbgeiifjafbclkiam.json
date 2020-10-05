@@ -1,0 +1,74 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Spotty Web Remote Control",
+  "short_name": "Spotty Web Remote",
+  "description": "Spotify notifications, hotkeys and playlists everywhere on your desktop",
+  "version": "1.4.0",
+  "minimum_chrome_version": "30",
+  "permissions": [
+    "*://*.spotify.com/*",
+    "storage",
+    "notifications"
+  ],
+  "background": {
+    "scripts": [
+      "/dist/service.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.spotify.com/*"
+      ],
+      "js": [
+        "/dist/content.js"
+      ],
+      "all_frames": false
+    }
+  ],
+  "commands": {
+    "nextKey": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+9"
+      },
+      "description": "Next",
+      "global": true
+    },
+    "playPauseKey": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+8"
+      },
+      "description": "Play/Pause",
+      "global": true
+    },
+    "prevKey": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+7"
+      },
+      "description": "Prev",
+      "global": true
+    },
+    "addAsFav": {
+      "description": "Add current song as favorite"
+    },
+    "openPopup": {
+      "description": "Open Remote popup",
+      "global": true
+    },
+    "showCurrSong": {
+      "description": "Show current song"
+    },
+    "focusPlayer": {
+      "description": "Focus to the player page"
+    }
+  },
+  "icons": {
+    "128": "/assets/img/web_player_remote_logo.png"
+  },
+  "browser_action": {
+    "default_popup": "/popup.html",
+    "default_title": "Spotify Web Remote"
+  }
+}

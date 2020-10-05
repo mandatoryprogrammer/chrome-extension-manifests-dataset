@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "TwitShot for Chrome",
+  "short_name": "TwitShot",
+  "version": "1.0.6",
+  "manifest_version": 2,
+  "minimum_chrome_version": "35",
+  "description": "Spice up your tweets with an image.",
+  "icons": {
+    "16": "images/icons/icon16.png",
+    "48": "images/icons/icon48.png",
+    "128": "images/icons/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icons/icon19.png",
+      "38": "images/icons/icon128.png"
+    }
+  },
+  "background": {
+    "scripts": [
+      "vendor/jquery-2.1.3.min.js",
+      "background/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.twitter.com/*"
+      ],
+      "js": [
+        "vendor/jquery-2.1.3.min.js",
+        "content_scripts/twitter/twitter.js"
+      ],
+      "css": [
+        "content_scripts/twitter/twitter.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "content_scripts/*"
+  ],
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "activeTab",
+    "contextMenus"
+  ]
+}

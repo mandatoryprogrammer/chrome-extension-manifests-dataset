@@ -1,0 +1,68 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "ACG Videos Detector",
+  "version": "2.0.2",
+  "description": "Detect particular words in web pages based on the given patterns, mostly used to sniff ACG media.",
+  "author": "clouduan",
+  "icons": {
+    "16": "images/icons/icon16.png",
+    "48": "images/icons/icon48.png",
+    "128": "images/icons/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "images/icons/icon16.png",
+      "48": "images/icons/icon48.png",
+      "128": "images/icons/icon128.png"
+    },
+    "default_title": "ACG Videos Detector"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "lib/jquery-3.3.1.min.js",
+        "content.js"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "all_frames": true
+    }
+  ],
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": false
+  },
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "storage",
+    "<all_urls>"
+  ],
+  "commands": {
+    "onKeyDownCheck": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+5",
+        "mac": "Command+Shift+5"
+      },
+      "description": "Show sidebar"
+    },
+    "onKeyDownReplace": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+6",
+        "mac": "Command+Shift+6"
+      },
+      "description": "Show hyperlinks"
+    }
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_extension_name__",
+  "description": "__MSG_extension_description__",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApgYzh735bCw46XakxwDkW6BKPuikM65M3q9Mtsz1UG8vOgpDg5UYEJDdwU0j8ddRDIs96c541HNQAz9dgOWoAW2U9UNs4CUmB4mudu6oKbVdNthBX7nHXsWpft7WwnLPJvy5MaGhNPJd8gj5gsSiW8rsK3s3TeeD+oi3f8K+M2Fa5UqufK7zBzTAoQqLxCMLHmKoKq8KgQyVwmQzZLh+CEMQAR4a9/JP21zhXrKCrBvsxTMMPsn78n5659i9MZfcWu8NldNWN9sJXA+D4I5us4gr4WnYjbgTNy6f8rJZLz6GsWmpuZ36hJFc7Ve7kq/5IL3zE1g6XlWw+FozX2djqQIDAQAB",
+  "version": "3.2.16.3",
+  "default_locale": "en",
+  "icons": {
+    "128": "images/icon.png"
+  },
+  "applications": {
+    "gecko": {
+      "id": "readtheweb@kurzweiledu.com",
+      "update_url": "https://kurzweiledu.com/currentversion/firefox-addons/updates.json"
+    }
+  },
+  "browser_action": {},
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "<all_urls>",
+    "nativeMessaging",
+    "http://*/*",
+    "https://*/*",
+    "identity",
+    "privacy"
+  ],
+  "background": {
+    "scripts": [
+      "js/background.min.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "js/content-script.min.js"
+      ],
+      "matches": [
+        "*://*/*"
+      ],
+      "exclude_matches": [
+        "*://*.fireflybykurzweil.com/*",
+        "*://*.kurzweil3000.com/*",
+        "*://*/_/chrome/newtab*",
+        "*://accounts.google.com/o/oauth2/*",
+        "*://accounts.google.com/signin/*"
+      ],
+      "match_about_blank": false
+    }
+  ],
+  "web_accessible_resources": [
+    "css/*.css",
+    "images/*.png",
+    "images/*.svg",
+    "html/iframe.html",
+    "html/iframe_pdf.html"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://local.kurzweil3000.com:*/*",
+      "https://dev.kurzweil3000.com:*/*",
+      "https://pre.kurzweil3000.com:*/*",
+      "https://www.kurzweil3000.com:*/*",
+      "https://post.kurzweil3000.com:*/*",
+      "*://local.accounts.kurzweil3000.com:*/*",
+      "https://dev.accounts.kurzweil3000.com:*/*",
+      "https://pre.accounts.kurzweil3000.com:*/*",
+      "https://accounts.kurzweil3000.com:*/*",
+      "https://post.accounts.kurzweil3000.com:*/*"
+    ]
+  },
+  "content_security_policy": "script-src 'self'; object-src 'self';"
+}

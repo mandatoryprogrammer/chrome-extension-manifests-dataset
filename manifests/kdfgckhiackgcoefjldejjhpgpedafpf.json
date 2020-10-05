@@ -1,0 +1,75 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "SaleSource Dominus",
+  "description": "Dominate dropshipping & product research with our powerful tool. Master Aliexpress & find winning products.",
+  "version": "6.0.4",
+  "manifest_version": 2,
+  "icons": {
+    "48": "icons/icon_48.png",
+    "128": "icons/icon_128.png"
+  },
+  "browser_action": {
+    "default_title": "ss-dominus",
+    "default_popup": "popup/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "externally_connectable": {
+    "matches": [
+      "https://*.aliexpress.com/*"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "cookies",
+    "downloads",
+    "*://*.aliexpress.com/*",
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "http://*.alicdn.com/*",
+    "https://*.alicdn.com/*",
+    "https://*.salesource.io/*",
+    "https://*.alitools.io/*",
+    "https://*.asify.tools/*"
+  ],
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "matches": [
+        "https://*.aliexpress.com/item*",
+        "https://*.aliexpress.com/store/product*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "css": [
+        "shopifyContent.css"
+      ],
+      "js": [
+        "shopifyContent.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "https://*.aliexpress.com/item*",
+        "https://*.aliexpress.com/store/product*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "options_ui": {
+    "page": "options/options.html",
+    "chrome_style": true
+  }
+}

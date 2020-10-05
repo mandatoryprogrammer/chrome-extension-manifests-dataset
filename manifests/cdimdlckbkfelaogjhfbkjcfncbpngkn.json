@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Octo微博相册批量下载",
+  "version": "0.2.4",
+  "description": "一键下载微博相册的插件",
+  "background": {
+    "scripts": [
+      "jquery/jquery-3.4.1.js",
+      "utils/config.js",
+      "utils/common.js",
+      "utils/util.js",
+      "utils/date.js",
+      "background.js"
+    ]
+  },
+  "icons": {
+    "16": "img/logo.png",
+    "48": "img/logo.png",
+    "128": "img/logo.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "img/logo.png",
+      "38": "img/logo.png"
+    },
+    "default_title": "Octo微博相册批量下载",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "notifications",
+    "downloads",
+    "*://*.weibo.com/*",
+    "*://*.liuguofeng.com/*",
+    "contextMenus",
+    "webRequest",
+    "webRequestBlocking",
+    "storage"
+  ],
+  "options_page": "/options/options.html",
+  "optional_permissions": [],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.weibo.com/*"
+      ],
+      "js": [
+        "jquery/jquery-3.4.1.js",
+        "jquery/jquery.cookie.js",
+        "jquery/jquery.toast.js",
+        "utils/config.js",
+        "utils/date.js",
+        "utils/util.js",
+        "utils/common.js",
+        "content/listener.js"
+      ],
+      "css": [
+        "jquery/jquery.toast.css"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

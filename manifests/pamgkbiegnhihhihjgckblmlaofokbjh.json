@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "From URL to QR",
+  "version": "2.0.0",
+  "description": "__MSG_appDesc__",
+  "default_locale": "en",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "scripts/eventPage.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_title": "From URL to QR",
+    "default_icon": "icon128.png",
+    "default_popup": "popup.html"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": false
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "scripts/mainFunctionality.js",
+        "scripts/options.js",
+        "scripts/customText.js",
+        "vendors/jquery-qrcode-0.14.0.min.js",
+        "vendors/materialize.min.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "storage",
+    "contextMenus",
+    "activeTab"
+  ],
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://code.jquery.com/jquery-3.0.0.min.js; object-src 'self'"
+}

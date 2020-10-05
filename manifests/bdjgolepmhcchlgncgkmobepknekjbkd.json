@@ -1,0 +1,82 @@
+{
+  "name": "Parental Control",
+  "description": "Block adult, porn and other explicit contents from sites and search result pages. Create your custom block list. Protect your family",
+  "version": "1.0.22",
+  "short_name": "parentalcontrol",
+  "incognito": "spanning",
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com https://ajax.googleapis.com; object-src 'self'",
+  "permissions": [
+    "contextMenus",
+    "webNavigation",
+    "storage",
+    "nativeMessaging",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "cookies",
+    "unlimitedStorage",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "chrome_settings_overrides": {
+    "search_provider": {
+      "name": "Parental Control",
+      "keyword": "parentalcontrol.com",
+      "favicon_url": "http://adultfilter.net/extensions/images/128.ico",
+      "encoding": "UTF-8",
+      "is_default": true,
+      "search_url": "https://mystart.com/pcontrolresults.php?pr=vmn&id=pcontrol&v=1_0&q={searchTerms}"
+    }
+  },
+  "icons": {
+    "16": "./images/icons/16.png",
+    "48": "./images/icons/48.png",
+    "128": "./images/icons/128.png"
+  },
+  "browser_action": {
+    "default_icon": "./images/icons/48.png",
+    "default_popup": "./html/popup.html",
+    "default_title": "Parental Control"
+  },
+  "background": {
+    "page": "./html/background.html"
+  },
+  "options_page": "./html/options.html",
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "js/content.js"
+      ],
+      "matches": [
+        "*://*/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": false,
+      "js": [
+        "js/engines.js"
+      ],
+      "matches": [
+        "*://*/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "css/content.css",
+    "css/engines.css",
+    "images/icons/19g.png",
+    "images/icons/19r.png",
+    "images/icons/19y.png"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.adultfilter.net/*",
+      "*://*.mystart.com/*"
+    ]
+  },
+  "manifest_version": 2,
+  "update_url": "https://clients2.google.com/service/update2/crx"
+}

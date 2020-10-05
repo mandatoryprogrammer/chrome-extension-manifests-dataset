@@ -1,0 +1,77 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "IITKGP ERP Auto-login",
+  "description": "A tool that you have to setup just one time, to automatically login to your ERP every time.",
+  "version": "1.9",
+  "browser_action": {
+    "default_icon": "iitkgp.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "iitkgp.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://erp.iitkgp.ac.in/SSOAdministration/login.htm*"
+      ],
+      "js": [
+        "login.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://erp.iitkgp.ac.in/SSOAdministration/auth.htm*"
+      ],
+      "js": [
+        "login.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://erp.iitkgp.ac.in/IIT_ERP3/home.htm*"
+      ],
+      "js": [
+        "logged_in.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://erp.iitkgp.ac.in/SSOAdministration/logoutmsg.htm"
+      ],
+      "js": [
+        "timed_out.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://erp.iitkgp.ac.in/IIT_ERP3/*"
+      ],
+      "js": [
+        "skip-form.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "jquery-3.3.1.min.js",
+      "popup.js"
+    ]
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "contextMenus",
+    "https://ajax.googleapis.com/",
+    "storage"
+  ]
+}

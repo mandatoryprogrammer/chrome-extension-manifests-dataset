@@ -1,0 +1,87 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "author": "DarkYouTube Team",
+  "background": {
+    "scripts": [
+      "lib/jquery.js",
+      "js/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "images/black_youtube_19.png",
+    "default_title": "Toggle the Youtube dark skin",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "exclude_globs": [
+        "*/chrome/newtab*",
+        "*://www.youtube.com/*",
+        "*://www.facebook.com/*"
+      ],
+      "js": [
+        "/content_script/inject.js"
+      ],
+      "match_about_blank": true,
+      "matches": [
+        "<all_urls>"
+      ]
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "lib/jquery.js",
+        "js/content_script_youtube.js"
+      ],
+      "matches": [
+        "*://www.youtube.com/*"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "lib/jquery.js",
+        "js/content_script_facebook.js"
+      ],
+      "matches": [
+        "*://www.facebook.com/*"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "/js/analytics.js"
+      ],
+      "matches": [
+        "*://*/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "description": "__MSG_extDesc__",
+  "icons": {
+    "128": "images/black_youtube.png",
+    "16": "images/black_youtube_16.png",
+    "48": "images/black_youtube_48.png"
+  },
+  "default_locale": "en",
+  "manifest_version": 2,
+  "name": "__MSG_extName__",
+  "permissions": [
+    "*://*/*",
+    "storage",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "short_name": "dark-youtube",
+  "version": "1.3.4",
+  "web_accessible_resources": [
+    "/styles/styles_youtube.css",
+    "/styles/styles_facebook.css",
+    "/images/youtube-logotype.png",
+    "/content_script/*.css"
+  ]
+}

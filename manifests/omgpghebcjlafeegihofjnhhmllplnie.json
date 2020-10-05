@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_extension_name__",
+  "version": "14",
+  "minimum_chrome_version": "29.0.1521.3",
+  "default_locale": "en",
+  "description": "__MSG_extension_description__",
+  "icons": {
+    "48": "autosave48x48.png",
+    "128": "autosave2_128x128.png"
+  },
+  "web_accessible_resources": [
+    "autosave48x48.png",
+    "autosave2_128x128.png"
+  ],
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "storage",
+    "unlimitedStorage"
+  ],
+  "background": {
+    "scripts": [
+      "autosave_bg.js",
+      "toast.js"
+    ]
+  },
+  "commands": {
+    "review_autosaves": {
+      "suggested_key": {
+        "default": "Alt+Shift+A"
+      },
+      "description": "__MSG_review_autosaves__"
+    },
+    "capture_tab": {
+      "suggested_key": {
+        "default": "Alt+Shift+C"
+      },
+      "description": "__MSG_capture_tab__"
+    }
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "autosave.js",
+        "toast.js"
+      ]
+    }
+  ],
+  "options_page": "options.html"
+}

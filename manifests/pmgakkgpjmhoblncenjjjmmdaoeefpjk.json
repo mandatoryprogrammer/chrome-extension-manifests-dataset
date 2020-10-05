@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Vocabulary in Context",
+  "description": "Save vocabulary in its context and review them later. A highly efficient tool to improve vocabulary when learning foreign language.",
+  "version": "1.8",
+  "homepage_url": "http://simbust.com/index.php?c=voc",
+  "icons": {
+    "16": "icon_16.png",
+    "48": "icon_48.png",
+    "128": "icon_128.png"
+  },
+  "background": {
+    "page": "background.html",
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "file://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "vocab_content_script.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "options_page": "vocab_options.html",
+  "content_security_policy": "script-src 'self' https://code.jquery.com https://maxcdn.bootstrapcdn.com https://cdnjs.cloudflare.com; object-src 'self'",
+  "permissions": [
+    "contextMenus",
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "http://localhost/",
+    "http://simbust.com/"
+  ],
+  "browser_action": {
+    "default_icon": "icon_48.png",
+    "default_title": "Show Vocabulary in Context Menu",
+    "default_popup": "popup/popup_menu.html"
+  },
+  "web_accessible_resources": [
+    "icon_16.png",
+    "vocab_content.css"
+  ]
+}

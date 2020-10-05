@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Blitzn",
+  "version": "1.1.0",
+  "description": "A chrome extension that stops children googling something that ruins the mystery of christmas for them.",
+  "icons": {},
+  "background": {
+    "scripts": [
+      "scripts/constants.js",
+      "scripts/helpers.js",
+      "scripts/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "vendor/jquery-3.1.1.min.js",
+        "scripts/constants.js",
+        "scripts/helpers.js",
+        "scripts/blocker.js",
+        "scripts/questions.js"
+      ],
+      "css": [
+        "styles/blocker.css"
+      ]
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "16": "assets/blocker_off_16.png",
+      "48": "assets/blocker_off_48.png",
+      "128": "assets/blocker_off_128.png"
+    },
+    "default_popup": "popup.html",
+    "default_title": "Blitzn"
+  },
+  "manifest_version": 2,
+  "content_security_policy": "default-src 'none'; style-src 'self'; script-src 'self';",
+  "web_accessible_resources": [
+    "blocker.html",
+    "assets/*"
+  ]
+}

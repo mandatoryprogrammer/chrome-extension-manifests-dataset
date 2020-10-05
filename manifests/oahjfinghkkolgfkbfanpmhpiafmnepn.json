@@ -1,0 +1,218 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "default_locale": "en",
+  "manifest_version": 2,
+  "name": "Swordfish: Find Personal Contact Info",
+  "short_name": "Swordfish",
+  "description": "Find Personal Contact Info For Social Profiles!",
+  "version": "2.4.41",
+  "icons": {
+    "16": "icons/icon16.png",
+    "19": "icons/icon19.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/icon16.png",
+    "default_popup": "inject/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "src/_baseUrl.js",
+      "js/jquery.min.js",
+      "src/TokenHandler.js",
+      "src/bg/LinkedInRequestMonitor.js",
+      "src/Parsers/LinkedInParser.js",
+      "src/bg/cache.js",
+      "src/common.js",
+      "src/RequestCache.js",
+      "src/Client.js",
+      "src/ClientBack.js",
+      "src/test.js",
+      "src/GoogleAPI.js",
+      "src/bg/frameInjector.js",
+      "src/bg/bg.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "css": [
+        "css/inject.css",
+        "inject/css/bobble.css"
+      ],
+      "js": [
+        "src/_baseUrl.js",
+        "js/jquery.min.js",
+        "src/tracker.js",
+        "src/utils.js",
+        "src/Client.js",
+        "src/ServerResponseParser.js",
+        "src/Parsers/GoogleParser.js",
+        "src/Parsers/BingParser.js",
+        "src/Parsers/EmailParser.js",
+        "src/Parsers/FacebookParser.js",
+        "src/Parsers/GithubParser.js",
+        "src/Parsers/LinkedInParser.js",
+        "src/Parsers/MeetupParser.js",
+        "src/Parsers/RecuiterParser.js",
+        "src/Parsers/RecuiterProfessionalParser.js",
+        "src/Parsers/SalesNavParser.js",
+        "src/Parsers/StackoverflowParser.js",
+        "src/Parsers/TwitterParser.js",
+        "src/Parsers/XingParser.js",
+        "src/Parsers/DribbbleParser.js",
+        "src/Parsers/TestParser.js",
+        "src/Parsers/Parser.js",
+        "src/ui/UI.js",
+        "src/ui/BusinessEmailUI.js",
+        "src/ui/BaseUI.js",
+        "src/ui/FrameUI.js",
+        "src/common.js",
+        "src/AutoOpenManager.js",
+        "src/TokenHandler.js",
+        "src/DataProcessor.js",
+        "inject/js/common.js",
+        "src/SideTab.js",
+        "src/inject.js",
+        "src/scrollListener.js"
+      ],
+      "matches": [
+        "https://*.linkedin.com/*",
+        "https://*.facebook.com/*",
+        "https://www.twitter.com/*",
+        "https://twitter.com/*",
+        "https://github.com/*",
+        "https://www.github.com/*",
+        "https://*.bing.com/*",
+        "https://www.stackoverflow.com/*",
+        "https://stackoverflow.com/*",
+        "https://meetup.com/*",
+        "https://www.meetup.com/*",
+        "https://*.xing.com/profile/*",
+        "https://*.dribbble.com/*",
+        "http://localhost/BenArega/swordfishTestServer/*",
+        "https://*.google.com/*",
+        "https://*.google.com/search*",
+        "https://*.google.de/search*",
+        "https://*.google.co.uk/search*"
+      ]
+    },
+    {
+      "js": [
+        "src/tracker.js"
+      ],
+      "matches": [
+        "https://*.swordfishapp.com/*",
+        "http://*.swordfishapp.com/*",
+        "https://*.swordfish.ai/*"
+      ]
+    },
+    {
+      "js": [
+        "src/_baseUrl.js",
+        "js/jquery.min.js",
+        "src/inject_gmail.js"
+      ],
+      "matches": [
+        "*://mail.google.com/*"
+      ]
+    },
+    {
+      "js": [
+        "src/Parsers/FacebookParser.js",
+        "src/Parsers/GithubParser.js",
+        "src/Parsers/LinkedInParser.js",
+        "src/Parsers/MeetupParser.js",
+        "src/Parsers/RecuiterParser.js",
+        "src/Parsers/RecuiterProfessionalParser.js",
+        "src/Parsers/SalesNavParser.js",
+        "src/Parsers/StackoverflowParser.js",
+        "src/Parsers/TwitterParser.js",
+        "src/Parsers/XingParser.js",
+        "src/Parsers/DribbbleParser.js",
+        "src/Parsers/TestParser.js",
+        "src/Parsers/Parser.js"
+      ],
+      "matches": [
+        "https://*.bing.com/*",
+        "https://*.google.com/*",
+        "https://*.google.de/*",
+        "https://*.google.co.uk/*",
+        "http://localhost/swordfishTestServer/*"
+      ]
+    },
+    {
+      "js": [
+        "src/inject_google.js",
+        "src/Parsers/GoogleParser.js"
+      ],
+      "matches": [
+        "https://*.google.com/*",
+        "https://*.google.de/*",
+        "https://*.google.co.uk/*"
+      ]
+    },
+    {
+      "js": [
+        "src/inject_bing.js",
+        "src/Parsers/BingParser.js",
+        "src/inject_all.js"
+      ],
+      "matches": [
+        "https://*.bing.com/*",
+        "http://*.bing.com/*"
+      ]
+    }
+  ],
+  "permissions": [
+    "contextMenus",
+    "identity",
+    "cookies",
+    "storage",
+    "activeTab",
+    "webRequest",
+    "https://*.swordfishapp.com/*",
+    "http://*.swordfishapp.com/*",
+    "https://*.swordfish.ai/*",
+    "https://linkedin.com/*",
+    "https://www.linkedin.com/*",
+    "https://github.com/*",
+    "https://www.github.com/*",
+    "https://*.stackoverflow.com/*",
+    "https://*.meetup.com/*",
+    "https://*.facebook.com/*",
+    "https://*.twitter.com/*",
+    "https://*.xing.com/*",
+    "https://*.dribbble.com/*",
+    "http://localhost/BenArega/swordfishTestServer/*",
+    "https://*.google.com/*",
+    "https://*.google.de/*",
+    "https://*.google.co.uk/*"
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true,
+    "open_in_tab": false
+  },
+  "web_accessible_resources": [
+    "icons/*",
+    "inject/*",
+    "inject/css/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://*.swordfishapp.com/*",
+      "http://*.swordfishapp.com/*",
+      "https://*.swordfish.ai/*",
+      "http://localhost/*"
+    ]
+  },
+  "oauth2": {
+    "client_id": "1015952670323-teg0v3c0l58ghh5m6h55hsdctf8tqmlm.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email"
+    ]
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlXrC6ocRu/6QisFyO6DuCVIGKq78lREMFZ5bAQS5kcT/YqZ+Wxi8j2l6LzR/6KBPc8LCJorOs+wrXOV2MArRHepE7/38R/YoJxQBS78/SH01qQAup5BZGQGjiaAd6EQj6Q0BTTV6BHP6EwfUtn+yZsz7OzUMjApCQqTk8ljBroemmHs6S9cdqsLm5SZLI9Dzyd/Qvk03JXwnIli7jE2CVegg7OBxVXYA0dB3URgkWrAZKrstah1UlahI/qC3L9tGjbV5UlWzRGI5r1QgMbmdtDH/MIVx5d/5iWCIVBNnoALNkBCbbgld3Nkmrrso+LTlUO8oXlnfZNkLe+kP+g/0WwIDAQAB"
+}

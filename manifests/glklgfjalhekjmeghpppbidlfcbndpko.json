@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Salesforce Field Analyzer - Admin View",
+  "version": "0.0.8",
+  "manifest_version": 2,
+  "description": "A plugin to help you manage Salesforce Fields in your admin view. View field usage statistics, and much more!",
+  "homepage_url": "http://sfanalyzer.com/",
+  "web_accessible_resources": [
+    "src/page_action/page_action.css"
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": true
+  },
+  "options_page": "src/options/index.html",
+  "browser_action": {
+    "default_icon": "icons/icon19.png",
+    "default_popup": "src/page_action/page_action.html",
+    "css": [
+      "src/page_action/page_action.css"
+    ]
+  },
+  "permissions": [
+    "contentSettings",
+    "tabs",
+    "https://*/*",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [
+        "src/inject/inject.css",
+        "css/bars-1to10.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.salesforce.com/*",
+        "https://*.lightning.force.com/*",
+        "<all_urls>"
+      ],
+      "js": [
+        "src/inject/memory.js",
+        "src/inject/authentication.js",
+        "src/inject/api.js",
+        "src/inject/html_editing.js",
+        "src/inject/inject.js",
+        "js/jquery/jquery.min.js",
+        "js/jquery.barrating.min.js"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "GitHub Compacted",
+  "short_name": "GitHub Compacted",
+  "description": "Provides compact view to your GitHub boards and issues.",
+  "version": "1.0.6",
+  "homepage_url": "https://github.com/everhour/chrome-github-board",
+  "icons": {
+    "128": "logo.png"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "options_ui": {
+    "page": "src/options.html",
+    "open_in_tab": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://github.com/*/projects/*"
+      ],
+      "js": [
+        "lib/dom-observer.js",
+        "lib/storage.js",
+        "src/github-project.js"
+      ],
+      "css": [
+        "src/github-project.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://github.com/*/issues/*"
+      ],
+      "js": [
+        "lib/dom-observer.js",
+        "lib/storage.js",
+        "src/github-issue.js"
+      ],
+      "css": [
+        "src/github-issue.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "src/*.css"
+  ],
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

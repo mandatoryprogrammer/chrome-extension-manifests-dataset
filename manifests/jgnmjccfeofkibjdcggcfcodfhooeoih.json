@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Fundstack Chrome and Gmail Extension",
+  "short_name": "Fundstack",
+  "description": "The Fundstack Chrome plugin puts Fundstack data in Chrome, Gmail and Inbox.",
+  "version": "2.1.1",
+  "author": "Fundstack",
+  "manifest_version": 2,
+  "icons": {
+    "16": "assets/icon-16.png",
+    "32": "assets/icon-32.png",
+    "128": "assets/icon-128.png"
+  },
+  "browser_action": {
+    "default_icon": "assets/icon-32.png",
+    "default_title": "Fundstack"
+  },
+  "background": {
+    "scripts": [
+      "authentication.service.js",
+      "button.action.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*"
+      ],
+      "js": [
+        "inboxsdk.js",
+        "runtime.js",
+        "polyfills.js",
+        "main.js"
+      ],
+      "css": [],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "http://*/",
+    "https://*/",
+    "https://api.fundstack.com/",
+    "https://inbox.google.com/",
+    "https://logo.clearbit.com/",
+    "https://mail.google.com/",
+    "identity",
+    "notifications",
+    "storage"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "http://localhost:4200/*",
+      "https://app.fundstack.casa/*",
+      "https://app.fundstack.com/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "assets/*",
+    "styles.css",
+    "index.html"
+  ]
+}

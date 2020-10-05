@@ -1,0 +1,75 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "description": "Load your website's desktop and mobile views effortlessly in Adobe Target with the VEC helper extension",
+  "version": "0.5.4",
+  "name": "Adobe Target VEC Helper",
+  "manifest_version": 2,
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.adobe.com/content/mac/*/target/activities.html*",
+        "https://*.adobe.com/content/mac/*/target/activities.html*"
+      ],
+      "js": [
+        "content_top.js",
+        "content_main.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "http://*/*mboxEdit=1*",
+        "https://*/*mboxEdit=1*"
+      ],
+      "js": [
+        "content_client.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "http://*/*at_preview_token=*",
+        "https://*/*at_preview_token=*"
+      ],
+      "js": [
+        "content_top.js",
+        "content_client.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "32": "icons/icon32_grayscale.png",
+      "38": "icons/icon38_grayscale.png"
+    },
+    "default_title": "Adobe Target VEC Helper",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "38": "icons/icon38.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "web_accessible_resources": [
+    "ui_components.js"
+  ],
+  "content_security_policy": "script-src 'self' https://use.typekit.net; object-src 'self'",
+  "permissions": [
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "webNavigation",
+    "http://*/*",
+    "https://*/*"
+  ]
+}

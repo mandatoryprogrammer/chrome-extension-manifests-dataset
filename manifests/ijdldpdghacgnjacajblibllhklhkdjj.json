@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "FJ Moderator Extension",
+  "version": "4.6.3",
+  "manifest_version": 2,
+  "description": "Shitty toys and tweaks for moderators and users alike.",
+  "homepage_url": "http://posttwo.pt",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "contextMenus",
+    "webRequest",
+    "webRequestBlocking",
+    "*://*.funnyjunk.com/*, *://fjmod.posttwo.pt/*",
+    "*://fjme.me/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.funnyjunk.com/*"
+      ],
+      "css": [
+        "src/inject/inject.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.funnyjunk.com/*"
+      ],
+      "js": [
+        "src/inject/inject.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "src/js/*.js"
+  ]
+}

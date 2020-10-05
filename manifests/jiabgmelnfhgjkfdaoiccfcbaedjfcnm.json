@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "short_name": "__MSG_appShortName__",
+  "description": "__MSG_appDescription__",
+  "version": "1.1.0",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkEyDR2IJDWUTPLnvUrt+QzvFSnaJmtEGhV6J4PBXJe/2MGl3rBKZzf1Gx1jfieKd6CJbhBttxMO5B6lWK8oZ9K2hgXPOMOR+HXxvPKyWHI9Z7SFkIoa40e0eREVAO/zhFGRSl1B1ChcJAmoGn903nOUJ2I5E2ys6Ax2lFQxzcVt4LG1/aFZrXSzYXddIAVm44gk9T6xpB5kDgMFC0LSr4IMiFOU5oCNaRm7hcq98UG+CzIbGBJufZJC7/o89wFKKYmj0lkateMiTeJG5oDjG/9pbCSvssphFLu/Yjh/TeLlbAXLaDDSV+JVT6sqAxuGMsbhmtmUQIdkKLc+ChFUfCQIDAQAB",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "browser_action": {
+    "default_icon": {
+      "19": "images/browser-action/19.png",
+      "38": "images/browser-action/38.png"
+    }
+  },
+  "icons": {
+    "16": "images/icon/16.png",
+    "32": "images/icon/32.png",
+    "48": "images/icon/48.png",
+    "128": "images/icon/128.png"
+  },
+  "options_page": "pages/options.html",
+  "options_ui": {
+    "chrome_style": true,
+    "page": "pages/options.html",
+    "open_in_tab": false
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "bundles/events.js"
+    ]
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.similartech.com/dashboard/*"
+      ],
+      "js": [
+        "bundles/dashboard.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.similartech.com/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "images/*.*",
+    "styles/*.*",
+    "fonts/*.*",
+    "bundles/*.*"
+  ],
+  "permissions": [
+    "activeTab",
+    "webRequest",
+    "webRequestBlocking",
+    "storage"
+  ]
+}

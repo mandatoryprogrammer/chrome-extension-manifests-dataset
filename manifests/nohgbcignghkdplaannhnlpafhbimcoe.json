@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "xbmc playlist adder",
+  "version": "1.0.8",
+  "description": "The extension to add urls to xbmc",
+  "manifest_version": 2,
+  "browser_action": {
+    "default_icon": "playlist.png",
+    "default_popup": "window.html"
+  },
+  "icons": {
+    "16": "playlist.png",
+    "128": "playlist128.png"
+  },
+  "content_security_policy": "script-src 'self'; object-src 'self';",
+  "permissions": [
+    "contextMenus",
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/shared/jquery.js",
+        "js/contentScript/contentScriptUtils.js",
+        "js/contentScript/main.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://ex.ua/*",
+        "http://www.ex.ua/*"
+      ],
+      "js": [
+        "js/contentScript/plugins/ex.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://fs.to/*",
+        "http://www.fs.to/*"
+      ],
+      "js": [
+        "js/contentScript/plugins/fs.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://vk.com/*",
+        "https://www.vk.com/*"
+      ],
+      "js": [
+        "js/contentScript/plugins/vk.js"
+      ]
+    }
+  ]
+}

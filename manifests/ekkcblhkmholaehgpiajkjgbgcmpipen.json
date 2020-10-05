@@ -1,0 +1,287 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Rectxt",
+  "description": "Rectxt Extension",
+  "author": "Stefan Markovic",
+  "version": "1.0.58",
+  "manifest_version": 2,
+  "icons": {
+    "128": "images/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "config.js",
+      "scripts/vendor/rollbar.min.js",
+      "scripts/vendor/jwt-decode.min.js",
+      "scripts/rollbar-error-tracking.js",
+      "scripts/vendor/axios.js",
+      "scripts/vendor/auth0chrome.min.js",
+      "scripts/api.js",
+      "scripts/vendor/sails.io.js",
+      "scripts/auth.js",
+      "scripts/unreadMessages.js",
+      "scripts/socketListener.js",
+      "scripts/background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "<all_urls>",
+    "storage",
+    "identity",
+    "cookies",
+    "notifications"
+  ],
+  "browser_action": {
+    "default_icon": "images/grayIcon.png",
+    "default_title": "Rectxt"
+  },
+  "web_accessible_resources": [
+    "popup/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "config.js",
+        "scripts/vendor/rollbar.min.js",
+        "scripts/vendor/jwt-decode.min.js",
+        "scripts/rollbar-error-tracking.js",
+        "scripts/vendor/jquery-3.3.1.min.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "*://docs.google.com/*",
+        "*://web-myrecdex-test.azurewebsites.net/*",
+        "*://web-myrecdex-dev.azurewebsites.net/*",
+        "*://*.rectxt.com/*",
+        "*://*.twitter.com/*",
+        "*://mail.google.com/*",
+        "*://*.office365.com/*",
+        "*://*.office.com/*",
+        "*://outlook.live.com/*",
+        "*://*.bcferries.com/*",
+        "*://*.linkedin.com/mjobs/*",
+        "*://*.intercom.io/*",
+        "*://*.clockworkrecruiting.com/*",
+        "*://*.slack.com/*",
+        "*://*.intercom.com/*",
+        "*://*.twilio.com/*",
+        "*://voice.google.com/*",
+        "*://calendar.google.com/*",
+        "*://zoom.us/*",
+        "*://www.tangerine.ca/"
+      ],
+      "js": [
+        "scripts/vendor/libphonenumber-max.js",
+        "scripts/detectPhoneNumbers.js"
+      ],
+      "css": [
+        "css/detectPhoneNumbers.css"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "scripts/vendor/psl.min.js",
+        "scripts/popupInjector.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://web-myrecdex-dev.azurewebsites.net/*",
+        "https://web-myrecdex-test.azurewebsites.net/*",
+        "https://app.rectxt.com/*"
+      ],
+      "js": [
+        "config.js",
+        "scripts/rectxt.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.linkedin.com/*"
+      ],
+      "js": [
+        "scripts/scrapers/linkedin.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://hiring.monster.ca/jcm/resumesearch/ResumeView.aspx*",
+        "https://hiring.monster.ca/jcm/singleResumeView.aspx*",
+        "https://hiring.monster.ca/jcm/singleresumeview.aspx*"
+      ],
+      "js": [
+        "scripts/scrapers/monster.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://swim.mycompas.com/app/*",
+        "https://swim.myavionte.com/app/*"
+      ],
+      "js": [
+        "scripts/scrapers/mycompas.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.smartrecruiters.com/app/people/applications/*"
+      ],
+      "js": [
+        "scripts/scrapers/smartrecruiters.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://recruit.zoho.com/recruit/*"
+      ],
+      "js": [
+        "scripts/scrapers/zoho.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://app.greenhouse.io/people/*"
+      ],
+      "js": [
+        "scripts/scrapers/greenhouse.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.swordfishapp.com/*"
+      ],
+      "js": [
+        "scripts/scrapers/swordfishapp.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://search.amazinghiring.com/profiles/*"
+      ],
+      "js": [
+        "scripts/scrapers/amazinghiring.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.freshteam.com/*"
+      ],
+      "js": [
+        "scripts/scrapers/freshteam.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.clockworkrecruiting.com/*"
+      ],
+      "js": [
+        "scripts/scrapers/clockworkrecruiting.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.ziprecruiter.com/contact/response/*",
+        "https://www.ziprecruiter.com/resume-database/view/*",
+        "https://www.ziprecruiter.com/resume-database/preview/*"
+      ],
+      "js": [
+        "scripts/scrapers/ziprecruiter.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.hiringthing.com/admin/jobs/*"
+      ],
+      "js": [
+        "scripts/scrapers/hiringthing.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.inwork.io/*"
+      ],
+      "js": [
+        "scripts/scrapers/inwork.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.recruiteze.com/*"
+      ],
+      "js": [
+        "scripts/scrapers/recruiteze.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.cnddtid.com/*"
+      ],
+      "js": [
+        "scripts/scrapers/cnddtid.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.recruitee.com/*"
+      ],
+      "js": [
+        "scripts/scrapers/recruitee.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.recruiterflow.com/*"
+      ],
+      "js": [
+        "scripts/scrapers/recruiterflow.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.recooty.com/*"
+      ],
+      "js": [
+        "scripts/scrapers/recooty.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.workable.com/*"
+      ],
+      "js": [
+        "scripts/scrapers/workable.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.indeed.com/*"
+      ],
+      "js": [
+        "scripts/scrapers/indeed.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://app.jobvite.com/*"
+      ],
+      "js": [
+        "scripts/scrapers/jobvite.js"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "SalesSeek CRM for Chrome",
+  "description": "Add SalesSeek CRM functionality across Chrome",
+  "version": "3.7.1",
+  "content_security_policy": "script-src 'unsafe-eval' 'self' https://apis.google.com https://use.typekit.net;  object-src 'self'",
+  "permissions": [
+    "background",
+    "storage",
+    "identity",
+    "notifications",
+    "*://*.linkedin.com/*",
+    "*://mail.google.com/*",
+    "*://*.salesseek.net/*",
+    "*://use.typekit.net/*"
+  ],
+  "optional_permissions": [
+    "cookies"
+  ],
+  "icons": {
+    "16": "images/icons/16.png",
+    "19": "images/icons/19.png",
+    "38": "images/icons/38.png",
+    "48": "images/icons/48.png",
+    "128": "images/icons/128.png"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "libs/jquery-3.2.1.min.js",
+        "libs/require.js",
+        "libs/chrome-extension-async.js",
+        "libs/inboxsdk.js",
+        "libs/require-cs.js",
+        "js/SSUtils.js",
+        "js/main.js",
+        "js/app_gmail.js",
+        "js/inboxUI.js"
+      ],
+      "css": [
+        "css/style.css"
+      ],
+      "matches": [
+        "file:///*testpage.html",
+        "*://mail.google.com/*",
+        "https://inbox.google.com/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.linkedin.com/*"
+      ],
+      "js": [
+        "libs/jquery-3.2.1.min.js",
+        "js/background_scripts/linkedin-background.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://*.salesseek.net/*"
+      ],
+      "js": [
+        "libs/jquery-3.2.1.min.js",
+        "js/background_scripts/theme-backgound.js"
+      ],
+      "exclude_matches": [
+        "https://www.salesseek.net/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "images/*",
+    "libs/*",
+    "templates/*",
+    "js/views/*",
+    "js/*",
+    "themes/*"
+  ],
+  "browser_action": {
+    "default_icon": "images/icon_menu.png",
+    "default_popup": "popup.html",
+    "default_title": "SalesSeek CRM for Chrome",
+    "short_name": "SalesSeek CRM for Chrome"
+  },
+  "oauth2": {
+    "client_id": "291383071221-4bn49pg52rq4k0muglq9viknpina1lj4.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/spreadsheets",
+      "https://www.googleapis.com/auth/drive.readonly",
+      "https://www.googleapis.com/auth/contacts.readonly"
+    ]
+  },
+  "background": {
+    "scripts": [
+      "libs/lodash.js",
+      "js/background_scripts/update-checker.js",
+      "js/background_scripts/message_passer.js",
+      "js/GoogleUtils.js",
+      "js/SSUtils.js",
+      "js/background_scripts/google-contacts-background.js"
+    ],
+    "persistent": false
+  }
+}

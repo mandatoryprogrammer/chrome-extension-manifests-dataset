@@ -1,0 +1,69 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "VK-Pause",
+  "short_name": "vk-pause",
+  "version": "0.7.0",
+  "icons": {
+    "16": "images/icons/playing/16.png",
+    "32": "images/icons/playing/32.png",
+    "48": "images/icons/playing/48.png",
+    "128": "images/icons/playing/128.png"
+  },
+  "options_page": "src/options.min.html",
+  "permissions": [
+    "storage",
+    "tabs",
+    "notifications",
+    "http://vk.com/*",
+    "https://vk.com/*"
+  ],
+  "web_accessible_resources": [
+    "images/*"
+  ],
+  "commands": {
+    "playstop": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+9",
+        "mac": "Ctrl+Shift+9",
+        "windows": "Ctrl+Shift+9",
+        "linux": "Ctrl+Shift+9"
+      },
+      "description": "(global) Start/stop/next(double tap) vk music",
+      "global": true
+    },
+    "localplaystop": {
+      "suggested_key": {
+        "default": "Alt+N",
+        "mac": "Alt+N",
+        "windows": "Alt+N",
+        "linux": "Alt+N"
+      },
+      "description": "(local) Start/stop/next(double tap) vk music",
+      "global": false
+    }
+  },
+  "background": {
+    "scripts": [
+      "src/constants.min.js",
+      "src/background.min.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_title": "VK-Pause"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://vk.com/*",
+        "http://vk.com/*"
+      ],
+      "js": [
+        "src/constants.min.js",
+        "src/content.min.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

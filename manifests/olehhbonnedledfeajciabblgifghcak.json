@@ -1,0 +1,101 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Kūrie",
+  "short_name": "Kurie",
+  "author": "James Anthony Bruno",
+  "description": "Extends the functionality of the Tumblr inbox.",
+  "version": "1.414",
+  "permissions": [
+    "http://*.tumblr.com/*",
+    "storage",
+    "unlimitedStorage",
+    "clipboardRead",
+    "clipboardWrite",
+    "tabs"
+  ],
+  "options_page": "options.html",
+  "homepage_url": "http://www.kurie-extension.tumblr.com/",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.tumblr.com/*"
+      ],
+      "js": [
+        "jquery.js",
+        "jquery.json-2.4.min.js",
+        "serializeObject.js",
+        "phi.outbox.ii.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "http://www.tumblr.com/ask_form*",
+        "http://www.tumblr.com/inbox*",
+        "http://www.tumblr.com/blog/*/messages",
+        "http://www.tumblr.com/send*"
+      ],
+      "exclude_matches": [
+        "http://www.tumblr.com/ask_form*/success",
+        "http://www.tumblr.com/send_confirmation*"
+      ],
+      "js": [
+        "jquery.js",
+        "jquery.json-2.4.min.js",
+        "serializeObject.js",
+        "phi.outbox.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "http://www.tumblr.com/*"
+      ],
+      "js": [
+        "jquery.js",
+        "phi.filterproof.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "http://www.tumblr.com/submit_form*"
+      ],
+      "js": [
+        "jquery.js",
+        "phi.submitSize.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "http://www.tumblr.com/send*"
+      ],
+      "exclude_matched": [
+        "http://www.tumblr.com/send_confirmation*"
+      ],
+      "js": [
+        "jquery.js",
+        "purl.js",
+        "phi.fanmail.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "19": "images/19.png"
+    },
+    "default_title": "Kūrie for tumblr"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "icons": {
+    "16": "images/16.png",
+    "48": "images/new48.png",
+    "128": "images/new128.png"
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Markdown Slides",
+  "description": "View markdown files as a slideshow with one click",
+  "homepage_url": "https://github.com/chrisdavies/markdown-slides",
+  "version": "1.0",
+  "icons": {
+    "16": "icon-16.png",
+    "48": "icon-48.png",
+    "128": "icon.png"
+  },
+  "permissions": [
+    "tabs",
+    "*://*/*.md",
+    "background"
+  ],
+  "page_action": {
+    "default_icon": "icon.png",
+    "default_title": "View as slideshow"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*.md",
+        "file:///*/*.md"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "css/*.css",
+    "fonts/*",
+    "js/*"
+  ],
+  "commands": {
+    "view-as-slideshow": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+M"
+      },
+      "description": "View as slideshow"
+    }
+  },
+  "offline_enabled": true,
+  "manifest_version": 2
+}

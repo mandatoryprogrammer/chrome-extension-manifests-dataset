@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "icons": {
+    "128": "./logos/ipcortex-icon.png"
+  },
+  "name": "IPCortex CRM Connect",
+  "description": "CRM plugin for IPCortex PABX.",
+  "version": "1.1.20",
+  "options_ui": {
+    "page": "options/index.html",
+    "chrome_style": true
+  },
+  "browser_action": {
+    "default_icon": "./logos/ipcortex-icon.png",
+    "default_popup": "popup/index.html"
+  },
+  "web_accessible_resources": [
+    "/content/*",
+    "/background/*",
+    "/popup/*",
+    "/options/*",
+    "/fonts/*",
+    "/logos/*"
+  ],
+  "permissions": [
+    "https://*/*",
+    "webRequest",
+    "storage",
+    "activeTab",
+    "identity"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "css": [
+        "content/style.css"
+      ],
+      "js": [
+        "content/content.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "content2/content2.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background/background.js"
+    ]
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

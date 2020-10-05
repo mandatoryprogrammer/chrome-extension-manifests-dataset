@@ -1,0 +1,85 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Scener – Virtual Movie Theater",
+  "short_name": "Scener",
+  "description": "The watch party platform that puts the theater in your hands.",
+  "version": "5.1.107",
+  "minimum_chrome_version": "66.0.3359",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAn482yZ9C/Ce0QW6DaJVgjzmUBxgl9x7hT2BuegbKeWOLEb2OrWOtVlc6VczGdDxJVdNCwzDWLEB77zhPgwgb9bFXtmJCZrU4/N4zNlVnU7nM1j7CmWByK/DcbrBrMMpty7s9GNgOU9hXfE6IAHYXwFB4tD1Us2LZzvhKTQrWkhPnIswf/pUf3zHzF6RrWAAAWOGrcL570LQhc6ftyhccaeC378wGCZ/gMQWyH3JIXLXzIaLgX1e+9aJx586oTFHo2DmRay6FlX57q0ehzqw8WZ9efbXIhvKGmFqGHZlhCNqLGdO96cB8XJClyFiuJQrdK/klLpb3soWwgVnEibaGewIDAQAB",
+  "homepage_url": "https://scener.com",
+  "icons": {
+    "16": "ScenerIcon_16.png",
+    "32": "ScenerIcon_32.png",
+    "48": "ScenerIcon_48.png",
+    "128": "ScenerIcon_128.png"
+  },
+  "permissions": [
+    "cookies",
+    "https://*.scener.com/*",
+    "activeTab",
+    "https://*.netflix.com/*",
+    "notifications"
+  ],
+  "optional_permissions": [
+    "tabs",
+    "*://*/*",
+    "<all_urls>"
+  ],
+  "content_security_policy": "default-src 'self' https://sentry.io https://*.scener.com https://*.amazonaws.com https://*.googleapis.com;  script-src 'self'  https://www.gstatic.com/firebasejs/  https://cdn4.mxpnl.com/libs/mixpanel-2-latest.min.js https://ssl.google-analytics.com 'unsafe-eval'; object-src 'self'; worker-src blob: 'self'",
+  "browser_action": {
+    "default_icon": {
+      "16": "ScenerIcon_Default_16.png",
+      "32": "ScenerIcon_Default_32.png",
+      "48": "ScenerIcon_Default_48.png",
+      "128": "ScenerIcon_Default_128.png"
+    },
+    "default_title": "Virtual Movie Theater"
+  },
+  "background": {
+    "scripts": [
+      "background/index.js"
+    ],
+    "matches": [
+      "https://*.netflix.com/*",
+      "https://*.scener.com/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "scener_content/index.js"
+      ],
+      "matches": [
+        "https://*.scener.com/*"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "*.html",
+    "*.png",
+    "*.js"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.netflix.com/*",
+      "*://*.disneyplus.com/*",
+      "*://*.crunchyroll.com/*",
+      "*://*.hbogo.com/*",
+      "*://*.hbonow.com/*",
+      "*://*.hbomax.com/*",
+      "*://*.drafthouse.com/*",
+      "*://*.funimation.com/*",
+      "*://*.pluto.tv/*",
+      "*://*.youtube.com/*",
+      "*://*.scener.com/*",
+      "*://*.mixpanel.com/*",
+      "*://*.hulu.com/*",
+      "*://*.amazon.com/*",
+      "*://*.vimeo.com/*",
+      "*://sentry.io/*"
+    ]
+  }
+}

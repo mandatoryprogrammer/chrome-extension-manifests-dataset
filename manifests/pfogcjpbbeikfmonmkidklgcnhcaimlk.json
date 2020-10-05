@@ -1,0 +1,77 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Habanero",
+  "description": "Habanero is a Chrome browser extension built to aid with the making of intelligent financial decisions.",
+  "icons": {
+    "128": "icon128.png",
+    "32": "icon32.png",
+    "48": "icon.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "icon16.png",
+      "32": "icon32.png"
+    },
+    "default_title": "Habanero",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.amazon.com/*",
+        "https://www.ebay.com/*"
+      ],
+      "all frames": true,
+      "run at": "document-idle",
+      "js": [
+        "generalContent.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.target.com/*",
+        "https://www.ae.com/*"
+      ],
+      "all frames": true,
+      "run at": "document-idle",
+      "js": [
+        "clothingContent.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.papajohns.com/*",
+        "https://www.insomnniacookies.com/*"
+      ],
+      "all frames": true,
+      "run at": "document-idle",
+      "js": [
+        "foodContent.js"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "version": "1",
+  "author": "Wackathon",
+  "permissions": [
+    "activeTab",
+    "pageCapture",
+    "tabs",
+    "storage"
+  ]
+}

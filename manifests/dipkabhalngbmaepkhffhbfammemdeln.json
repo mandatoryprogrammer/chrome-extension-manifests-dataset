@@ -1,0 +1,71 @@
+{
+  "description": "Provides anonymity between sessions and allows preview of entire search result page",
+  "name": "Craigslist Ad Preview",
+  "short_name": "CL Preview",
+  "version": "0.0.1.8",
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "homepage_url": "https://www.craigslistsoftware.com/product/craigslist-preview",
+  "manifest_version": 2,
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "cookies",
+    "notifications",
+    "storage",
+    "unlimitedStorage",
+    "*://*.hidemyass.com/*",
+    "*://*.craigslistsoftware.com/*",
+    "*://*.craigslist.org/*"
+  ],
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "/js/jquery-3.4.1.min.js",
+      "/js/background.js",
+      "/js/popup.js"
+    ],
+    "persistent": false
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.craigslist.org/*"
+      ],
+      "exclude_matches": [
+        "https://*.craigslist.org/login?rt=L&rp=%2Flogin%2Ftou",
+        "*://*/*contact*",
+        "*://*/*tou*"
+      ],
+      "css": [
+        "/css/dark.css"
+      ],
+      "js": [
+        "/js/jquery-3.4.1.min.js",
+        "/js/theme.js",
+        "/js/injectads.js",
+        "/js/savepost.js",
+        "/js/toolbar.js",
+        "/js/banished.js",
+        "/js/preview.js",
+        "/js/account_manager.js",
+        "/js/anchorme.js",
+        "/js/linkify.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "/css/light.css",
+    "/images/*.png"
+  ],
+  "icons": {
+    "128": "images/icon-128.png",
+    "48": "images/icon-48.png",
+    "32": "images/icon-32.png",
+    "16": "images/icon-16.png"
+  }
+}

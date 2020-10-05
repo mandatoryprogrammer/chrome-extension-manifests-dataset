@@ -1,0 +1,149 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Emburse",
+  "version": "0.1.35",
+  "manifest_version": 2,
+  "description": "Emburse Chrome Extension",
+  "homepage_url": "https://emburse.com",
+  "icons": {
+    "16": "static/icon_16x16.png",
+    "32": "static/icon_32x32.png",
+    "48": "static/icon_48x48.png",
+    "128": "static/icon_128x128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_popup": "html/popup.html"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "https://qbo.intuit.com/*",
+    "https://*.qbo.intuit.com/*",
+    "https://go.xero.com/*",
+    "https://*.xero.com/*",
+    "https://*.netsuite.com/*",
+    "https://api.emburse.com/*",
+    "https://app.emburse.com/transactions/*",
+    "https://emburse-media.s3.amazonaws.com/receipts/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://qbo.intuit.com/app/*",
+        "https://*.qbo.intuit.com/app/*"
+      ],
+      "js": [
+        "quickbooks.js"
+      ],
+      "css": [
+        "css/emburse-details.css",
+        "css/icons.css",
+        "css/modification-icons.css",
+        "css/popup.css",
+        "css/modal.css",
+        "css/receipt.css",
+        "css/sync-component.css",
+        "css/quickbooks.css"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://go.xero.com/Bank/BankRec.aspx*",
+        "https://go.xero.com/BankRec/BankRec.aspx*",
+        "https://go.xero.com/Bank/BankTransactions.aspx*",
+        "https://go.xero.com/Bank/Statements.aspx*"
+      ],
+      "js": [
+        "xero-reconcile.js"
+      ],
+      "css": [
+        "css/emburse-details.css",
+        "css/popup.css",
+        "css/modal.css",
+        "css/icons.css",
+        "css/xero.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://go.xero.com/Bank/Import.aspx*"
+      ],
+      "js": [
+        "xero-import.js"
+      ],
+      "css": [
+        "css/icons.css",
+        "css/xero.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "https://*.netsuite.com/pages/setup/importolbform.jsp*"
+      ],
+      "js": [
+        "netsuite-import.js"
+      ],
+      "css": [
+        "css/modal.css",
+        "css/icons.css",
+        "css/netsuite.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://*.netsuite.com/app/accounting/transactions/bankrecon.nl*"
+      ],
+      "js": [
+        "netsuite-reconcile.js"
+      ],
+      "css": [
+        "css/emburse-details.css",
+        "css/popup.css",
+        "css/modal.css",
+        "css/icons.css",
+        "css/netsuite.css"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://app.emburse.com/activate*"
+      ],
+      "js": [
+        "redirect.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://app.emburse.com/*"
+      ],
+      "js": [
+        "emburse-webapp.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "static/*",
+    "css/*"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'"
+}

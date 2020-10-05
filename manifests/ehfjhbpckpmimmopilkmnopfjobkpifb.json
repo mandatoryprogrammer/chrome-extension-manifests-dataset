@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Finlex Ex",
+  "version": "0.0.5",
+  "manifest_version": 2,
+  "description": "Tweaks to Finlex UI",
+  "icons": {
+    "48": "icons/icon48.png",
+    "96": "icons/icon96.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ]
+  },
+  "options_ui": {
+    "page": "src/options/index.html"
+  },
+  "permissions": [
+    "*://*.finlex.fi/*",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.finlex.fi/fi/oikeus/foki/tapaus/*"
+      ],
+      "js": [
+        "src/inject/fokiRedirect.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.finlex.fi/fi/oikeus/*"
+      ],
+      "js": [
+        "src/inject/case.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.finlex.fi/fi/laki/ajantasa/*/*",
+        "*://*.finlex.fi/fi/laki/alkup/*/*"
+      ],
+      "js": [
+        "3rdparty/jquery-3.4.1.js",
+        "src/inject/statute.js"
+      ],
+      "css": [
+        "src/inject/statute.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://data.finlex.fi/*"
+      ],
+      "run_at": "document_end",
+      "css": [
+        "src/inject/sf.css"
+      ]
+    }
+  ]
+}

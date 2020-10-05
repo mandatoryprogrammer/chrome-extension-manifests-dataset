@@ -1,0 +1,98 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "CloudApp Screen Recorder, Screenshots",
+  "short_name": "CloudApp",
+  "version": "5.7.12",
+  "minimum_chrome_version": "76",
+  "manifest_version": 2,
+  "homepage_url": "https://www.getcloudapp.com",
+  "description": "The #1 screen recorder for Chrome. Capture your screen, webcam, and instantly share videos and screenshots in seconds.",
+  "browser_action": {
+    "default_icon": {
+      "16": "assets/img/icons/logo-mark-outline-16.png",
+      "19": "assets/img/icons/logo-mark-outline-19.png",
+      "32": "assets/img/icons/logo-mark-outline-32.png",
+      "38": "assets/img/icons/logo-mark-outline-38.png",
+      "48": "assets/img/icons/logo-mark-outline-48.png",
+      "128": "assets/img/icons/logo-mark-outline-128.png",
+      "256": "assets/img/icons/logo-mark-outline-256.png"
+    },
+    "default_title": "CloudApp (Alt+Shift+V)"
+  },
+  "icons": {
+    "16": "assets/img/icons/logo-mark-outline-16.png",
+    "19": "assets/img/icons/logo-mark-outline-19.png",
+    "32": "assets/img/icons/logo-mark-outline-32.png",
+    "38": "assets/img/icons/logo-mark-outline-38.png",
+    "48": "assets/img/icons/logo-mark-outline-48.png",
+    "128": "assets/img/icons/logo-mark-outline-128.png",
+    "256": "assets/img/icons/logo-mark-outline-256.png"
+  },
+  "commands": {
+    "cloudapp-visible-area": {
+      "suggested_key": {
+        "default": "Alt+Shift+V"
+      },
+      "description": "Capture visible area"
+    },
+    "cloudapp-entire-page": {
+      "suggested_key": {
+        "default": "Alt+Shift+F"
+      },
+      "description": "Capture entire page"
+    },
+    "cloudapp-record-screen": {
+      "suggested_key": {
+        "default": "Alt+Shift+L"
+      },
+      "description": "Screen Recording"
+    }
+  },
+  "background": {
+    "scripts": [
+      "bgrollbar.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "toggle_icon.js"
+      ],
+      "run_at": "document_start",
+      "matches": [
+        "<all_urls>"
+      ]
+    },
+    {
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_start",
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "match_about_blank": false,
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "<all_urls>",
+    "notifications",
+    "storage",
+    "unlimitedStorage",
+    "activeTab",
+    "tabCapture",
+    "desktopCapture",
+    "clipboardWrite"
+  ],
+  "web_accessible_resources": [
+    "*.mp3",
+    "assets/*",
+    "popup.html",
+    "settings.html",
+    "displaycamera.html"
+  ],
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAthHs31cwaVQBHRyw28GMUIHt6AK1Z6G8mhuyEsaMWDoEobhMyeacKxhRSyyTLFGDt/0Nvy4igzQkXcjW2bZteoU7XFQpW81PVH7bBOpyWvUAVwem1nV2ly+iMpmXkh6mDhaDBRhG77vRzDBic+rYbJi9ePQq8MKkK2lPVveYOOHKkWjIGvGTQb6DtJkg6vMiYFrQTPTUiRAnxbJASXukHHQaDwj89hCC3q/vi6Q8AJIpQYK+Ll49Q0TgTNemgtmtG94s5+tvToIHUE2CvGc9oMR6DwGN+oqgUSQ4gY2sqH5LEMhk+NnFZ9/CcXUl5jwzsGe/pcB29rIQEda2qsr0YQIDAQAB"
+}

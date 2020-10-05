@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Amazing Salesforce Chrome Extension",
+  "short_name": "Amazing Salesforce Chrome Extension",
+  "description": "This is the most amazing Salesforce Chrome Extension",
+  "version": "0.0.5",
+  "author": {
+    "name": "Enrico Murru",
+    "url": "http://enree.co"
+  },
+  "homepage_url": "http://enree.co",
+  "permissions": [
+    "tabs",
+    "storage",
+    "cookies",
+    "https://*.salesforce.com/*",
+    "https://*.force.com/*"
+  ],
+  "web_accessible_resources": [
+    "options.html",
+    "swissknife.html",
+    "img/*"
+  ],
+  "browser_action": {
+    "default_icon": "img/icon.png",
+    "default_popup": "popup.html",
+    "default_title": "Amazing Salesforce Chrome Extension"
+  },
+  "icons": {
+    "16": "img/icon.png",
+    "48": "img/icon.png",
+    "128": "img/icon.png"
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "https://*.force.com/*",
+        "https://*.salesforce.com/*"
+      ],
+      "all_frames": false,
+      "js": [
+        "libs/constants.js",
+        "libs/utils.js",
+        "libs/content.js"
+      ],
+      "css": [
+        "css/content.css"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "libs/constants.js",
+      "libs/utils.js",
+      "libs/background.js"
+    ],
+    "persistent": true
+  },
+  "options_page": "options.html"
+}

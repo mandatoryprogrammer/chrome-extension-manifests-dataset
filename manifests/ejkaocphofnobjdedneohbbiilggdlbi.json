@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_name__",
+  "short_name": "__MSG_shortName__",
+  "description": "__MSG_description__",
+  "version": "3.4.35",
+  "default_locale": "en",
+  "icons": {
+    "16": "static/assets/icons/logo/16.png",
+    "48": "static/assets/icons/logo/48.png",
+    "128": "static/assets/icons/logo/128.png",
+    "256": "static/assets/icons/logo/256.png",
+    "512": "static/assets/icons/logo/512.png"
+  },
+  "content_security_policy": "script-src 'self'; object-src 'none'",
+  "permissions": [
+    "<all_urls>",
+    "tabs",
+    "storage",
+    "proxy",
+    "webRequest",
+    "webRequestBlocking",
+    "management",
+    "nativeMessaging",
+    "notifications",
+    "unlimitedStorage",
+    "http://*/*",
+    "https://*/*",
+    "privacy"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "static/assets/icons/status/unavailable.png",
+      "38": "static/assets/icons/status/unavailable.png"
+    },
+    "default_title": "__MSG_name__",
+    "default_popup": "panel/index.html"
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "background/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "insertion/insertion.js"
+      ],
+      "css": [
+        "insertion/insertion.css"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "static/assets/*",
+    "static/assets/fonts/*"
+  ]
+}

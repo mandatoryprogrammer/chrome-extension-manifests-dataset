@@ -1,0 +1,67 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Frinser",
+  "description": "Know what your friends like while googling the same thing",
+  "version": "0.0.16",
+  "manifest_version": 2,
+  "permissions": [
+    "webRequest",
+    "contextMenus",
+    "activeTab",
+    "webNavigation",
+    "tabs",
+    "http://*.facebook.com/*",
+    "cookies",
+    "storage",
+    "*://*.google.co.in/*",
+    "https://*/",
+    "webRequestBlocking"
+  ],
+  "background": {
+    "page": "background.html"
+  },
+  "icons": {
+    "16": "images/frinser_full.png",
+    "48": "images/frinser_full.png",
+    "128": "images/frinser96_16padding.png"
+  },
+  "browser_action": {
+    "default_title": "Recommend this page to your friends",
+    "default_icon": "images/unavailable.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "js/jquery-2.1.4.min.js",
+        "js/bootstrap-tour-standalone.js",
+        "js/frinser.js"
+      ],
+      "css": [
+        "css/bootstrap-tour-standalone.css",
+        "css/notifier.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "exclude_globs": [
+        "*google*"
+      ],
+      "js": [
+        "js/jquery-2.1.4.min.js",
+        "js/bootstrap-tour-standalone.js",
+        "js/frinser.js",
+        "js/div.js"
+      ],
+      "css": [
+        "css/bootstrap-tour-standalone.css",
+        "css/notifier.css",
+        "css/div.css"
+      ]
+    }
+  ]
+}

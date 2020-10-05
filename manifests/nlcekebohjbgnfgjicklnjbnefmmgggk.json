@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "巴哈自動簽到",
+  "version": "0.4.1",
+  "description": "當個簽到小達人",
+  "icons": {
+    "128": "assets/img/babi.png"
+  },
+  "permissions": [
+    "background",
+    "tabs",
+    "storage"
+  ],
+  "content_security_policy": "script-src 'self' https://*.google-analytics.com; object-src 'self'",
+  "options_ui": {
+    "chrome_style": true,
+    "page": "options.html#embed"
+  },
+  "browser_action": {
+    "default_icon": "assets/img/babi.png",
+    "default_popup": "options.html#embed",
+    "default_title": "巴哈自動簽到設定"
+  },
+  "background": {
+    "scripts": [
+      "assets/js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "*://*.gamer.com.tw/*"
+      ],
+      "css": [
+        "assets/css/content.css"
+      ],
+      "js": [
+        "vendor/jquery/jquery.min.js",
+        "assets/js/content.js"
+      ]
+    }
+  ]
+}

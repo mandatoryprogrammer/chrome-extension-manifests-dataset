@@ -1,0 +1,74 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "name": "Junify",
+  "description": "__MSG_appDesc__",
+  "version": "1.75.0",
+  "author": "Junify Corporation",
+  "permissions": [
+    "tabs",
+    "cookies",
+    "storage",
+    "webRequest",
+    "webNavigation",
+    "downloads",
+    "http://*/",
+    "https://*/",
+    "nativeMessaging",
+    "management",
+    "idle"
+  ],
+  "icons": {
+    "128": "./assets/images/icon.png"
+  },
+  "web_accessible_resources": [
+    "https://fonts.googleapis.com/css?family=Open+Sans/",
+    "assets/*",
+    "html/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "./js/vendor.js",
+        "./js/content_script.js"
+      ],
+      "css": [
+        "./assets/stylesheets/injected/junify_external_websites.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "include_globs": [
+        "*extLogin=true*"
+      ],
+      "js": [
+        "./js/vendor.js",
+        "./js/popup.js"
+      ],
+      "css": [
+        "./assets/stylesheets/injected/override_login_form.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "./js/vendor.js",
+      "./js/background.js"
+    ]
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "externally_connectable": {
+    "matches": [
+      "https://*.junify.com/*",
+      "https://*.junify.jp/*"
+    ]
+  }
+}

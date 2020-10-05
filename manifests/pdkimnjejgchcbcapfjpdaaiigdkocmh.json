@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Pluto TV – Watch Free TV And Movies",
+  "version": "4.4.6",
+  "manifest_version": 2,
+  "description": "Watch Free TV on your computer! Download now to stream 100+ channels of news, movies, sports, TV shows, and more, completely free.",
+  "homepage_url": "https://pluto.tv/",
+  "icons": {
+    "16": "16.png",
+    "32": "32.png",
+    "48": "48.png",
+    "64": "64.png",
+    "128": "128.png"
+  },
+  "permissions": [
+    "tabs",
+    "http://*.pluto.tv/*",
+    "https://*.pluto.tv/*",
+    "storage",
+    "alarms",
+    "notifications",
+    "idle"
+  ],
+  "background": {
+    "page": "background.html"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "19.png",
+      "38": "38.png"
+    },
+    "default_title": "",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "data.js"
+      ],
+      "matches": [
+        "*://mb.pluto.tv/v/lib/mng-bg.html?t=project-frm*"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "js": [
+        "analytics.js"
+      ],
+      "matches": [
+        "*://pluto.tv/download?utm_source=chr-app&utm_term*"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "pluto-analytics.js"
+  ]
+}

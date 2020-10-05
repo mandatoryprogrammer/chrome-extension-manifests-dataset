@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "FROST - Paypal for the Blockchain",
+  "version": "4.6.1",
+  "manifest_version": 2,
+  "description": "Send and receive crypto easily.",
+  "homepage_url": "https://frostwallet.io",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "scripts/bg-service.min.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "FROST: Built by Satoshi Nakamoto",
+    "default_popup": "index.html"
+  },
+  "permissions": [
+    "clipboardWrite",
+    "storage",
+    "activeTab"
+  ],
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "file://*/*",
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "scripts/ct-phishing-detect.min.js",
+        "scripts/test-slopps.min.js",
+        "scripts/content-scripts.min.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "content-scripts/views/*"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com https://sentry.io 'unsafe-eval'; object-src 'self'"
+}

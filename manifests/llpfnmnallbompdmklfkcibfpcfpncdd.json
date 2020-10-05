@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Tag Assistant for Conversions Beta",
+  "description": "Tag Assistant for Conversions helps validate your website implementation used to measure conversions for Google Ads.",
+  "version": "19.191.3.55",
+  "icons": {
+    "16": "img/icon/icon-blue-16.png",
+    "32": "img/icon/icon-blue-32.png",
+    "48": "img/icon/icon-blue-48.png",
+    "128": "img/icon/icon-blue-128.png"
+  },
+  "background": {
+    "scripts": [
+      "background/background_bin.js"
+    ]
+  },
+  "browser_action": {
+    "default_popup": "popup/app.html",
+    "default_icon": {
+      "16": "img/icon/icon-blue-16.png",
+      "32": "img/icon/icon-blue-32.png",
+      "48": "img/icon/icon-blue-48.png",
+      "128": "img/icon/icon-blue-128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://ads.google.com/aw/*",
+        "https://*.adz.google.com/aw/*",
+        "http://*.corp.google.com/aw/*"
+      ],
+      "js": [
+        "background/mark_dom_bin.js"
+      ]
+    }
+  ],
+  "default_locale": "en",
+  "permissions": [
+    "<all_urls>",
+    "contextMenus",
+    "cookies",
+    "storage",
+    "tabs",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "web_accessible_resources": [
+    "common/styles.css",
+    "inject/app.html",
+    "window_inspection/window_inspection_bin.js"
+  ],
+  "manifest_version": 2
+}

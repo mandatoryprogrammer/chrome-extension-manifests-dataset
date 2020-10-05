@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Requestly: Redirect Url, Modify Headers etc",
+  "version": "20.9.9",
+  "manifest_version": 2,
+  "description": "Chrome Extension to modify HTTP requests (Setup Redirects, Run Custom Javascript, Modify Headers)",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.requestly.in/*",
+        "*://*.requestly.io/*"
+      ],
+      "js": [
+        "generated/pages/main.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "*://*.requestly.in/*",
+        "*://*.requestly.io/*"
+      ],
+      "js": [
+        "generated/client/client.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "devtools_page": "generated/devtools/devtools.html",
+  "content_security_policy": "script-src 'self' https://cdn.firebase.com https://*.firebaseio.com https://ssl.google-analytics.com; object-src 'self'",
+  "background": {
+    "scripts": [
+      "generated/background/background-bundled.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "resources/images/128x128.png",
+    "default_title": "Modify HTTP/HTTPS requests",
+    "default_popup": "generated/popup/popup.html"
+  },
+  "icons": {
+    "16": "resources/images/16x16.png",
+    "128": "resources/images/128x128.png"
+  },
+  "permissions": [
+    "contextMenus",
+    "storage",
+    "unlimitedStorage",
+    "webRequest",
+    "webRequestBlocking",
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "file://*/*"
+  ]
+}

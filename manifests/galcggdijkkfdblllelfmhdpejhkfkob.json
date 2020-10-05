@@ -1,0 +1,43 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Homes.com Quick Search",
+  "version": "1.1.2",
+  "manifest_version": 2,
+  "description": "Homes.com is an inspiring and exciting home search partner, providing a helping hand during the often stressful homebuying process.",
+  "icons": {
+    "16": "resources/icon-48x48.png",
+    "48": "resources/icon-48x48.png",
+    "128": "resources/icon-128x128.png"
+  },
+  "browser_action": {
+    "default_title": "Homes.com Real Estate Quick Search",
+    "default_icon": "resources/icon-128x128.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "omnibox.js"
+    ],
+    "persistent": false
+  },
+  "omnibox": {
+    "keyword": "homes"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "permissions": [
+    "http://*.homes.com/*",
+    "unlimitedStorage",
+    "notifications"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.homes.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

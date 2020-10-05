@@ -1,0 +1,72 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "author": "__MSG_offersAppName__",
+  "name": "__MSG_offersAppName__",
+  "description": "__MSG_offersAppDesc__",
+  "version": "11.51.0",
+  "manifest_version": 2,
+  "default_locale": "de",
+  "icons": {
+    "16": "assets/myoffrz-icon16.png",
+    "25": "assets/myoffrz-icon25.png",
+    "48": "assets/myoffrz-icon48.png",
+    "128": "assets/myoffrz-icon128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "assets/myoffrz-icon16.png",
+      "25": "assets/myoffrz-icon25.png",
+      "48": "assets/myoffrz-icon48.png",
+      "128": "assets/myoffrz-icon128.png"
+    },
+    "default_title": "MyOffrz",
+    "default_popup": "modules/offers-templates/control-center.html?popup#myoffrz"
+  },
+  "permissions": [
+    "<all_urls>",
+    "activeTab",
+    "history",
+    "storage",
+    "tabs",
+    "unlimitedStorage",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "applications": {
+    "gecko": {
+      "id": "eoofgbeobdepdoihpmogabekjddpcbei",
+      "strict_min_version": "57.0"
+    }
+  },
+  "background": {
+    "scripts": [
+      "modules/vendor/dexie.min.js",
+      "modules/offers-banner/app.bundle.js"
+    ],
+    "persistent": true
+  },
+  "options_ui": {
+    "page": "options.html?#myoffrz",
+    "open_in_tab": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "run_at": "document_start",
+      "match_about_blank": false,
+      "js": [
+        "modules/core/content-script.bundle.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "modules/browser-panel/index.html",
+    "modules/offers-templates/reminder.html",
+    "modules/offers-templates/checkout.html",
+    "modules/offers-templates/control-center.html",
+    "modules/onboarding-overlay/index.html"
+  ]
+}

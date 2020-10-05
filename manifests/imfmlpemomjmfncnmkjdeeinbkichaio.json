@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "A11ygator",
+  "description": "Validate the accessibility of your website against W3C's Web Content Accessibility Guidelines.",
+  "manifest_version": 2,
+  "version": "1.12",
+  "minimum_chrome_version": "55",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{72a61bd6-e538-456c-8208-4700b7208f2c}",
+      "strict_min_version": "52.0"
+    }
+  },
+  "icons": {
+    "128": "resources/icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*"
+      ],
+      "js": [
+        "lib/js/HTMLCS.js",
+        "lib/js/runner.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "128": "resources/icon.png"
+    }
+  },
+  "options_ui": {
+    "page": "settings/settings.html",
+    "open_in_tab": false
+  },
+  "background": {
+    "scripts": [
+      "lib/js/helpers.js",
+      "background/background.js"
+    ]
+  },
+  "devtools_page": "/devtools/devtools.html",
+  "permissions": [
+    "storage",
+    "activeTab"
+  ]
+}

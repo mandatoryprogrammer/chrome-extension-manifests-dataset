@@ -1,0 +1,36 @@
+{
+  "update_url": "http://clients2.google.com/service/update2/crx",
+  "name": "Search Chrome Bookmarks On Google",
+  "version": "1.3",
+  "manifest_version": 2,
+  "description": "Search for Chrome bookmarks straight from Google's page",
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "icons": {
+    "128": "logo.gif"
+  },
+  "permissions": [
+    "webRequest",
+    "http://www.google.com/",
+    "https://www.google.com/",
+    "bookmarks"
+  ],
+  "content_scripts": [
+    {
+      "run_at": "document_idle",
+      "matches": [
+        "http://www.google.com/*",
+        "https://www.google.com/*"
+      ],
+      "js": [
+        "jquery.js",
+        "util.js",
+        "EntryPoint.js"
+      ]
+    }
+  ]
+}

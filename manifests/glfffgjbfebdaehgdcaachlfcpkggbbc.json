@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Coverity Test Advisor QA",
+  "description": "__MSG_generalDescription__",
+  "version": "7.6.0",
+  "minimum_chrome_version": "26",
+  "default_locale": "en",
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "images/browser/extension-off.png"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "js/content-scripts/gateway.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "js/page/after-browser-ext.js"
+  ],
+  "background": {
+    "scripts": [
+      "js/thirdparty/jquery-1.10.0.min.js",
+      "js/content-scripts/custom/testadvisor-helper.js",
+      "js/content-scripts/listeners/browser-listeners.js",
+      "js/content-scripts/listeners/message-listeners.js",
+      "js/content-scripts/listeners/storage-listeners.js",
+      "js/content-scripts/listeners/webrequest-listeners.js"
+    ]
+  },
+  "options_page": "html/options.html"
+}

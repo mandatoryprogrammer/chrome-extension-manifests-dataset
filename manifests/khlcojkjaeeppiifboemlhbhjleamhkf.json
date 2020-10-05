@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Griffith Class Schedule Exporter",
+  "description": "A simple app that scrapes your list-view class schedule then places this as entries in your student calendar",
+  "version": "1.1.2",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtNFkqjwzgqz9UwyeGicwy/0iEX9hK9IbrW5Sjh8iCFjmjaxqe726CaewwgvAmSmCBb5JfP1h/GDcUgt/XpyRpgpIsVPzUXSRJn2xQc7EL7ks3wySCUZA4AQ50c0jJSlLcN6qS3bqhkd29/QZAkRB/Xwm9LIYjDl3YUNkjDe16/hN7I+AltZQ1JXuLbd9UpSNtTnxhN6a4zyEnqTlFMpt2EQrXR36IhJs0qyG3zjNpjIWOMM0R6Lx+QoAInFVo0a/xM7w5wM+OYoWlnemTMfxjWNBjoCY8hLBPHjYZwte9gJOrMxKBbaXyymRH5K2YPrO8ScQs+g1MZnm2PyJonr84QIDAQAB",
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "oauth2": {
+    "client_id": "568226963373-1cnd0rit0oshupcnfg6sesk8j6o2ulm6.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/calendar"
+    ]
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://apis.google.com; object-src 'self'",
+  "permissions": [
+    "activeTab",
+    "identity",
+    "https://accounts.google.com/o/oauth2/token",
+    "https://www.googleapis.com/auth/calendar*",
+    "https://www.google.com/accounts/OAuthGetRequestToken",
+    "https://www.google.com/accounts/OAuthAuthorizeToken",
+    "https://www.google.com/accounts/OAuthGetAccessToken"
+  ],
+  "web_accessible_resources": [
+    "script/cal.js",
+    "background.js"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://ps-cs.secure.griffith.edu.au/psc/CS/GUINTRA/*LIST.GBL*"
+      ],
+      "js": [
+        "script/jquery-1.11.3.min.js",
+        "script/cal.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ]
+}

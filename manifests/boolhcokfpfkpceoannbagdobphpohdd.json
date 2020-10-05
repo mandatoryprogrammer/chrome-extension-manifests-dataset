@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "PhantomL0rd TV",
+  "version": "1.0.8",
+  "short_name": "PLTV",
+  "description": "The official PhantomL0rd browser extension, includes all Twitch emotes and showing notifications when PhantomL0rd goes live.",
+  "icons": {
+    "64": "icons/64.png",
+    "128": "icons/128.png"
+  },
+  "permissions": [
+    "storage",
+    "notifications",
+    "background",
+    "http://*.youtube.com/",
+    "http://192.241.248.43/",
+    "https://twitchemotes.com/api_cache/v2/*.json",
+    "https://api.betterttv.net/2/emotes",
+    "https://api.betterttv.net/2/channels/*"
+  ],
+  "options_page": "options/options.html",
+  "options_ui": {
+    "page": "options/options.html"
+  },
+  "background": {
+    "scripts": [
+      "external/jquery.js",
+      "background.js"
+    ]
+  },
+  "manifest_version": 2,
+  "browser_action": {
+    "default_icon": "icons/128.png",
+    "default_title": "PhantomL0rd TV",
+    "default_popup": "popup/popup.html"
+  },
+  "content_security_policy": "script-src 'self' https://*.twitter.com https://*.twimg.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "js": [
+        "external/jquery.js",
+        "content.js"
+      ],
+      "css": [
+        "external/hint.css",
+        "content.css"
+      ],
+      "run_at": "document_end",
+      "matches": [
+        "*://*.gaming.youtube.com/*",
+        "*://*.youtube.com/*"
+      ],
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "external/chat-colors.css",
+    "icons/*.png",
+    "icons/emotes/*.png"
+  ]
+}

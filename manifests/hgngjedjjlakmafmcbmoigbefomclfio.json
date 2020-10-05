@@ -1,0 +1,40 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "YouTube Background Launcher",
+  "description": "Enables launching YouTube videos into the background, allowing you to close the tab and control the video from any other tab/window.",
+  "version": "1.1",
+  "icons": {
+    "1024": "icon_1024.png"
+  },
+  "browser_action": {
+    "default_icon": "toolbar-icon.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "permissions": [
+    "activeTab",
+    "http://youtube.com/*",
+    "https://youtube.com/*",
+    "https://i.ytimg.com/*",
+    "https://*.ytimg.com/*",
+    "notifications"
+  ],
+  "content_security_policy": "script-src 'self' https://s.ytimg.com https://www.youtube.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "js": [
+        "jquery-3.0.0.min.js",
+        "contentscript.js"
+      ],
+      "matches": [
+        "http://youtube.com/*",
+        "https://youtube.com/*",
+        "http://www.youtube.com/*",
+        "https://www.youtube.com/*"
+      ]
+    }
+  ]
+}

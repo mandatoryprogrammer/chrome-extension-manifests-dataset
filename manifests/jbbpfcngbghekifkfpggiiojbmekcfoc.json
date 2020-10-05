@@ -1,0 +1,146 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "description": "__MSG_appDesc__",
+  "version": "4.0.2",
+  "homepage_url": "http://use.clearedin.com",
+  "background": {
+    "scripts": [
+      "jquery-3.3.1.min.js",
+      "auth0chrome.min.js",
+      "extension.js",
+      "background.js"
+    ]
+  },
+  "page_action": {
+    "default_popup": "options.html"
+  },
+  "icons": {
+    "16": "img/Logo-32x32.png",
+    "48": "img/Logo-48x48.png",
+    "128": "img/Logo-128x128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.google.com/*"
+      ],
+      "js": [
+        "inboxsdk.js",
+        "punycode.js",
+        "extension.js",
+        "app.js",
+        "jquery-3.3.1.min.js",
+        "jquery.pagewalkthrough.min.js"
+      ],
+      "css": [
+        "css/styles.css",
+        "css/bootstrap-iso.css",
+        "css/jquery.pagewalkthrough.min.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.google.com/webstore/wall/*"
+      ],
+      "js": [
+        "inboxsdk.js",
+        "extension.js",
+        "app.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://outlook.office.com/owa/*",
+        "*://outlook.office365.com/owa/*"
+      ],
+      "js": [
+        "extension.js",
+        "jquery-3.3.1.min.js",
+        "jquery.pagewalkthrough.min.js",
+        "owa-app.js"
+      ],
+      "css": [
+        "css/styles-owa.css",
+        "css/bootstrap-iso.css",
+        "css/jquery.pagewalkthrough.min.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://outlook.office.com/mail/*",
+        "*://outlook.office365.com/mail/*"
+      ],
+      "js": [
+        "extension.js",
+        "jquery-3.3.1.min.js",
+        "jquery.pagewalkthrough.min.js",
+        "owa-app-new.js"
+      ],
+      "css": [
+        "css/styles-owa-new.css",
+        "css/bootstrap-iso.css",
+        "css/jquery.pagewalkthrough.min.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://outlook.live.com/mail/*"
+      ],
+      "js": [
+        "extension.js",
+        "jquery-3.3.1.min.js",
+        "jquery.pagewalkthrough.min.js",
+        "live-app.js"
+      ],
+      "css": [
+        "css/styles-live.css",
+        "css/bootstrap-iso.css",
+        "css/jquery.pagewalkthrough.min.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": false
+  },
+  "manifest_version": 2,
+  "default_locale": "en",
+  "minimum_chrome_version": "42.0",
+  "permissions": [
+    "cookies",
+    "webRequest",
+    "system",
+    "system.cpu",
+    "webRequestBlocking",
+    "declarativeContent",
+    "management",
+    "*://*.googleusercontent.com/",
+    "*://*.google.com/",
+    "*://*.office.com/",
+    "*://*.office365.com/",
+    "*://*.live.com/",
+    "*://*.clearedin.com/",
+    "*://*.phishtank.com/",
+    "*://*.domaintools.com/",
+    "tabs",
+    "notifications",
+    "storage",
+    "*://*.pro.urlex.org/*"
+  ],
+  "content_security_policy": "script-src 'self' https://*.google.com https://*.live.com https://*.office.com https://*.office365.com https://*.clearedin.com https://*.olark.com; object-src 'self'",
+  "web_accessible_resources": [
+    "olark.js",
+    "conf/configuration.json",
+    "iframe.js",
+    "img/*",
+    "libs/*",
+    "css/*"
+  ]
+}

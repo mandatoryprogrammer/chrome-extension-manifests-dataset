@@ -1,0 +1,43 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "YouTubeHover",
+  "description": "A Chrome Extension that allows you to preview videos when you hover on their thumbnails on YouTube.",
+  "version": "0.1.12",
+  "author": "Sukrit Chhabra",
+  "browser_action": {
+    "default_icon": "imgs/touch/icon_96.png",
+    "default_title": "YouTubeHover"
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "chrome_style": true,
+    "open_in_tab": true
+  },
+  "permissions": [
+    "storage",
+    "notifications"
+  ],
+  "background": {
+    "scripts": [
+      "analytics.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "bower_components/jquery/dist/jquery.min.js",
+        "iframe_api.js",
+        "widgetAPI.js",
+        "options/defaultSettings.js",
+        "content.js",
+        "controllers/controllers.min.js"
+      ],
+      "matches": [
+        "https://*.youtube.com/*"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://ssl.google-analytics.com https://s.ytimg.com/; object-src 'self'"
+}

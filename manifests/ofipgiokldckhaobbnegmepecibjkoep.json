@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "githubprefix",
+  "version": "0.0.24",
+  "manifest_version": 2,
+  "description": "add gitclone prefixatgithub",
+  "icons": {
+    "16": "images/icon-16.png",
+    "128": "images/icon-128.png"
+  },
+  "permissions": [
+    "webNavigation",
+    "tabs",
+    "storage",
+    "*://*.github.com/*"
+  ],
+  "background": {
+    "scripts": [
+      "scripts/chromereload.js",
+      "scripts/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.github.com/*",
+        "https://*.github.com/*"
+      ],
+      "js": [
+        "scripts/vendor/jquery.min.js",
+        "scripts/contentscript.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "default_locale": "en",
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon-19.png",
+      "38": "images/icon-38.png"
+    },
+    "default_title": "addgitcloneprefixatgithub",
+    "default_popup": "popup.html"
+  }
+}

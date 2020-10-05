@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "bugzilla-github-extension",
+  "short_name": "BZ<->GH",
+  "description": "This extension integrates GitHub and Bugzilla",
+  "version": "1.21.7",
+  "background": {
+    "scripts": [
+      "lib/jquery-3.3.1.min.js",
+      "lib/jquery.xmlrpc.min.js",
+      "src/bugzilla.js",
+      "src/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "images/icon48.png",
+    "default_title": "bugzilla-github-extension",
+    "default_popup": "src/browser-action.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "lib/jquery-3.3.1.min.js",
+        "src/globals.js",
+        "src/content-script.js"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "web_accessible_resources": [
+    "src/injected.js",
+    "images/icon48.png"
+  ],
+  "permissions": [
+    "storage",
+    "https://*/",
+    "http://*/"
+  ],
+  "options_ui": {
+    "page": "src/options.html",
+    "chrome_style": true
+  }
+}

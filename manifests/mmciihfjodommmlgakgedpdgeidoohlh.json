@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Security Web page",
+  "version": "1.1.10",
+  "description": "Bảo vệ trang web bạn truy cập",
+  "icon": {
+    "128": "icon128.png",
+    "48": "icon48.png",
+    "16": "icon16.png"
+  },
+  "options_page": "options.html",
+  "background": {
+    "scripts": [
+      "lib/jquery-3.3.1.min.js",
+      "lib/background-helper.js",
+      "eventPage.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icon48.png",
+    "default_popup": "popup.html",
+    "default_title": "Tùy chọn bảo vệ website"
+  },
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "run_at": "document_end",
+      "js": [
+        "lib/jquery-3.3.1.min.js",
+        "ip.js"
+      ],
+      "css": [
+        "css/ip.css"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ]
+    }
+  ],
+  "permissions": [
+    "storage",
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "webRequest",
+    "notifications"
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "SmashPanel",
+  "description": "Quickly generate, share, and replay bug reports and test cases",
+  "version": "0.1.3",
+  "author": "Smashtest, Inc.",
+  "browser_action": {
+    "default_icon": "Blast16.png",
+    "default_popup": "popup.html",
+    "default_title": "SmashPanel"
+  },
+  "icons": {
+    "16": "Blast16.png",
+    "48": "Blast128.png",
+    "128": "Blast128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "content.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "devtools_page": "devtools.html",
+  "permissions": [
+    "<all_urls>",
+    "tabs",
+    "storage",
+    "contextMenus",
+    "clipboardWrite",
+    "browsingData",
+    "cookies",
+    "webNavigation"
+  ],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+A",
+        "mac": "Command+Shift+A"
+      }
+    },
+    "run-step": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+X",
+        "mac": "Command+Shift+X"
+      },
+      "description": "Run Step"
+    },
+    "skip-step": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+S",
+        "mac": "Command+Shift+S"
+      },
+      "description": "Skip Step"
+    }
+  }
+}

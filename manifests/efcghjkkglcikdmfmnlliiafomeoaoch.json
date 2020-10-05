@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Tatyana Ast YouTube Channel",
+  "version": "1.1.2",
+  "description": "Не пропусти новые видео на канале Tatyana Ast!",
+  "author": "Maksim D",
+  "homepage_url": "https://www.youtube.com/user/Astartat87",
+  "icons": {
+    "128": "img/icon128.png"
+  },
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "contextMenus",
+    "webRequest",
+    "webRequestBlocking",
+    "webNavigation",
+    "storage",
+    "unlimitedStorage",
+    "notifications"
+  ],
+  "content_scripts": [
+    {
+      "js": [
+        "js/page_postload.js"
+      ],
+      "match_about_blank": true,
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "js/tap_comment_eval.js"
+      ],
+      "match_about_blank": true,
+      "matches": [
+        "https://www.youtube.com/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "img/icon128.png",
+    "default_popup": "main_popup.html"
+  }
+}

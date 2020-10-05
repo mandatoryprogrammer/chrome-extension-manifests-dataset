@@ -1,0 +1,100 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Ring.io Web Phone",
+  "description": "Click to call from Salesforce, Zoho or any other website. Automatically logs your calls. Free trial.",
+  "icons": {
+    "16": "icon-16.png",
+    "48": "icon-48.png",
+    "128": "icon-128.png"
+  },
+  "version": "2350.817.1813",
+  "content_security_policy": "script-src 'self' https://admin5.ringio.com; object-src 'self'",
+  "permissions": [
+    "tabs",
+    "contextMenus",
+    "https://*/*"
+  ],
+  "background": {
+    "page": "background/background.store-admin5.html"
+  },
+  "externally_connectable": {
+    "ids": [
+      "akccggdgggleflhhinmemopglmnjhkho",
+      "dojkabcgnobldoinfehkcgacdfdjhcdd",
+      "dmapobhlcojobmppjfhcmpjhncclgigl",
+      "mklioalbingcjkeoidhmjciimjejoiim"
+    ],
+    "matches": [
+      "https://*.ringio.com/launcher-app/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.ringio.com/launcher-app/*",
+        "https://admin5.ringio.com/*"
+      ],
+      "all_frames": true,
+      "run_at": "document_end",
+      "js": [
+        "config/config.js",
+        "content-tab/BackgroundBridge.js",
+        "content-tab/TabBridge.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "https://*.ringio.com/*",
+        "https://*.twilio.com/*",
+        "https://localhost:*/*"
+      ],
+      "all_frames": true,
+      "run_at": "document_end",
+      "js": [
+        "content-tab/BackgroundBridge.js",
+        "content-c2c/libphonenumber-js.min.js",
+        "content-c2c/c2c.js"
+      ],
+      "css": [
+        "content-c2c/c2c.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.ringio.com/*?*ringiotest=true*",
+        "https://*.salesforce.com/*?*ringiotest=true*",
+        "https://*.force.com/*?*ringiotest=true*",
+        "https://*.pipedrive.com/*?*ringiotest=true*",
+        "https://*.hubspot.com/*?*ringiotest=true*",
+        "https://*.zoho.com/*?*ringiotest=true*",
+        "https://*.zoho.eu/*?*ringiotest=true*",
+        "https://*.zoho.com.au/*?*ringiotest=true*",
+        "https://*.dynamics.com/*?*ringiotest=true*",
+        "https://*.crm.dynamics.com/form/page.aspx?*"
+      ],
+      "all_frames": true,
+      "run_at": "document_end",
+      "js": [
+        "content-welcome/jquery-2.2.4.min.js",
+        "content-welcome/enjoyhint.min.js",
+        "content-welcome/welcome.js"
+      ],
+      "css": [
+        "content-welcome/enjoyhint.css"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_title": "Ring.io Web Phone",
+    "default_icon": "browser-action-logo.png"
+  },
+  "web_accessible_resources": [
+    "content-c2c/telephone.svg",
+    "content-welcome/Casino_Hand/*",
+    "icon-48.png"
+  ]
+}

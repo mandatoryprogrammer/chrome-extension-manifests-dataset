@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "AutoComplete+ Personal",
+  "version": "1.23.291",
+  "manifest_version": 2,
+  "description": "Autocomplete popular sites search and make your search faster, better, and easier with AutoComplete+ Personal.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "tabs",
+    "cookies",
+    "notifications",
+    "contextMenus",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking",
+    "unlimitedStorage"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/lib/logging.js",
+        "js/lib/reports.js",
+        "js/lib/xhr.js",
+        "js/api/cookie.js",
+        "js/api/message.js",
+        "js/lib/async_api.js",
+        "js/lib/installer.js",
+        "js/lib/app_api.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "crossriderManifest.json"
+  ]
+}

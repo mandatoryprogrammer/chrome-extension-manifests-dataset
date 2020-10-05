@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Evercontact",
+  "version": "2.3.0.3",
+  "permissions": [
+    "tabs",
+    "storage",
+    "http://*/*",
+    "https://*/*",
+    "contextMenus",
+    "alarms"
+  ],
+  "browser_action": {
+    "default_title": "Click to capture contact from selected text",
+    "default_icon": "img/favicon.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "EverContact_16x16.png",
+    "48": "EverContact_48x48.png",
+    "128": "EverContact_128x128.png"
+  },
+  "background": {
+    "scripts": [
+      "lib/jquery-1.8.0.min.js",
+      "lib/jquery.jsonp-2.1.4.min.js",
+      "lib/knockout-2.1.0.js",
+      "lib/knockout.mapping-latest.js",
+      "config.js",
+      "viewModel.js",
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "exclude_globs": [],
+      "include_globs": [],
+      "js": [
+        "inject.js"
+      ],
+      "matches": [
+        "http://mail.google.com/mail*",
+        "https://mail.google.com/mail*",
+        "http://mail.google.com/a/*",
+        "https://mail.google.com/a/*"
+      ]
+    }
+  ],
+  "content_security_policy": "default-src  'self'  https://*.evercontact.com  'unsafe-eval'; script-src 'self' https://*.evercontact.com 'unsafe-eval'; font-src 'self' data: chrome-extension-resource:;",
+  "web_accessible_resources": [
+    "gmail.js",
+    "Icon.png",
+    "img/*.png",
+    "options.html",
+    "onboarding.html",
+    "shake.css",
+    "img/up-arrow.gif",
+    "EverContact_48x48.png"
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "RotoWire DFS Tracker for FanDuel & DraftKings",
+  "short_name": "RotoWire DFS Tracker",
+  "version": "1.0.127",
+  "description": "Import daily fantasy contest history to the RotoWire DFS Tracker.",
+  "icons": {
+    "16": "icons/rw_dark_16x16.png",
+    "48": "icons/rw_dark_128x128.png",
+    "128": "icons/rw_dark_128x128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "32": "icons/rw_dark_32x32.png"
+    },
+    "default_title": "RotoWire DFS Tracker",
+    "default_popup": "popup/left-pad.html",
+    "browser_style": true
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "https://fanduel.com/pg/MyContests/showCSV/*",
+    "https://*.rotowire.com/*",
+    "http://*.rotowire.com/*",
+    "https://draftkings.com/mycontests*",
+    "webRequest",
+    "cookies"
+  ],
+  "background": {
+    "scripts": [
+      "background_scripts/index.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.fanduel.com/p/MyEntryHistory",
+        "https://www.draftkings.com/mycontests",
+        "https://www.rotowire.com/daily/tracker/extension.php"
+      ],
+      "js": [
+        "js/jquery-3.3.1.min.js",
+        "js/jquery.csv.js",
+        "content_scripts/import-fanduel.js",
+        "content_scripts/import-draftkings.js"
+      ],
+      "css": [
+        "css/form.css"
+      ]
+    }
+  ]
+}

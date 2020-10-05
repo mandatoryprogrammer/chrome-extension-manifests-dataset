@@ -1,0 +1,84 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Lifesize Scheduler for Google Calendar",
+  "short_name": "Lifesize",
+  "description": "Schedule Lifesize meetings directly from Google Calendar.",
+  "version": "2.0.72",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAm0ZFRdRuzc2nBpNuH5aJ135xtRud6gp1/3aqXU3ZjZDTebIR7ke8KCEzBrp9KX8stbgO9VhgPvB8lYPy9rvH0+r2o/CAhtyqqIudJEtreSlc8uJKOCRt16+C5d1UvRdH+FSSFqY5+v5wPQ1RKgua3KG9bkaz32yv3PmgJTnaqdKva19ezvKcUH7XUkHHDbfSMSJhsmCzEAS+eNwqt3krHdUgdV6HZzhKGp5vyBEqWcmo4akzf2C/N+7u8/lT7j+gFAneIpTyFRhSd7P8QlvQhS/maD7mZRisaEHIpDf2iQdski/sc1zxjhbULaWkhT4kWETR17tGs22GEQgI6T1hQwIDAQAB",
+  "oauth2": {
+    "client_id": "625313943491-lptpgta64p6s476i0vjojgs9drnq57ls.apps.googleusercontent.com",
+    "project_id": "oceanic-grin-184917",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://accounts.google.com/o/oauth2/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "scopes": [
+      "https://www.googleapis.com/auth/calendar"
+    ]
+  },
+  "icons": {
+    "128": "img/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "static/js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://calendar.google.com/*"
+      ],
+      "js": [
+        "static/js/content-script.js"
+      ],
+      "css": [
+        "static/css/content-script.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://*.lifesizecloudbeta.com/*",
+        "https://*.lifesizeclouddev.com/*",
+        "https://*.lifesizecloud.com/*",
+        "https://*.lifesize.com/*",
+        "https://*.lifesizeshare.net/*",
+        "https://*.lifesizesharedev.com/*"
+      ],
+      "js": [
+        "static/js/screen-share-content.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": "img/icon128.png",
+    "default_title": "",
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "web_accessible_resources": [
+    "img/*",
+    "static/*"
+  ],
+  "permissions": [
+    "tabs",
+    "storage",
+    "identity",
+    "webRequest",
+    "https://*.lifesizecloudbeta.com/*",
+    "https://*.lifesizeclouddev.com/*",
+    "https://*.lifesizecloud.com/*",
+    "https://*.lifesizebeta.com/*",
+    "https://*.lifesize.com/*",
+    "https://*.lifesizeshare.net/*",
+    "https://*.lifesizesharedev.com/*",
+    "https://www.google.com/calendar/*",
+    "https://chrome-extension.lifesizecloud.com/*",
+    "https://chrome-extension.lifesize.com/*",
+    "https://calendar.google.com/*",
+    "activeTab",
+    "desktopCapture"
+  ]
+}

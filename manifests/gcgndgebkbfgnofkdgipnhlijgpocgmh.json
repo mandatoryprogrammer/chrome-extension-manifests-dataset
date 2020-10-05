@@ -1,0 +1,68 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "钉钉助手",
+  "description": "网页版钉钉增强插件",
+  "version": "1.2.2",
+  "short_name": "dingding",
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://im.dingtalk.com/*",
+        "https://im.dingtalk.com/*"
+      ],
+      "js": [
+        "scripts/utils.js",
+        "scripts/snapshot.js",
+        "scripts/generalPageContent.js",
+        "scripts/dingTalkContent.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [
+        "styles/content.css"
+      ],
+      "js": [
+        "scripts/utils.js",
+        "scripts/snapshot.js",
+        "scripts/generalPageContent.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    "assets/imgs/*"
+  ],
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "scripts/utils.js",
+      "scripts/background.js"
+    ]
+  },
+  "permissions": [
+    "<all_urls>",
+    "activeTab",
+    "storage",
+    "tabs",
+    "background",
+    "desktopCapture",
+    "notifications"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

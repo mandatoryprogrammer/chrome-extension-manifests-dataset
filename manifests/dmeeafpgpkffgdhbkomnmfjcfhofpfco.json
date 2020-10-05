@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Play Timer for Kids - Duckie Deck Tools",
+  "version": "0.0.3",
+  "manifest_version": 2,
+  "description": "Limit your child’s screen time and keep them from exceeding the maximum recommended by the American Academy of Pediatrics.",
+  "homepage_url": "http://duckiedeck.com",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "page": "src/bg/background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_title": "Play Timer for Kids - Duckie Deck Parental Tools",
+    "default_popup": "src/browser_action/browser_action.html"
+  },
+  "permissions": [
+    "contentSettings",
+    "idle",
+    "management",
+    "tabs",
+    "background",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "src/inject/inject.js"
+      ],
+      "css": [
+        "src/inject/inject.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "css/images/block.png"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

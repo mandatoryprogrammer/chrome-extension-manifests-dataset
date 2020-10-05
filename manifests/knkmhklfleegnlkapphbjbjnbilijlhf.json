@@ -1,0 +1,74 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "LikeMe – накрутка лайков и просмотров ВК",
+  "version": "3.9.8",
+  "manifest_version": 2,
+  "description": "Автоматическая накрутка лайков и просмотров ВКонтакте",
+  "incognito": "split",
+  "icons": {
+    "16": "icons/icon_16.png",
+    "48": "icons/icon_48.png",
+    "128": "icons/icon_128.png"
+  },
+  "background": {
+    "scripts": [
+      "js/core.js",
+      "js/extension.js",
+      "js/md5.js",
+      "js/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_title": "LikeMe для ВКонтакте",
+    "default_icon": "icons/icon_16.png"
+  },
+  "content_scripts": [
+    {
+      "css": [
+        "css/style.css"
+      ],
+      "js": [
+        "js/extension.js",
+        "js/pages.js"
+      ],
+      "matches": [
+        "*://*.vk.com/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "js": [
+        "js/oauth.js"
+      ],
+      "matches": [
+        "*://*.vk.com/*"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "js": [
+        "js/extension.js",
+        "js/site.js"
+      ],
+      "matches": [
+        "*://*.likemeapp.ru/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "css/*",
+    "pages/*",
+    "sounds/*"
+  ],
+  "permissions": [
+    "storage",
+    "contextMenus",
+    "webRequest",
+    "webRequestBlocking",
+    "notifications",
+    "*://*.vk.com/*",
+    "*://*.likemeapp.ru/*"
+  ]
+}

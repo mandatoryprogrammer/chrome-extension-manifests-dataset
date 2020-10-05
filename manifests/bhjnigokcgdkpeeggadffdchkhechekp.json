@@ -1,0 +1,119 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "VIP看电影",
+  "version": "5.0.0.44",
+  "manifest_version": 2,
+  "description": "《VIP看电影》是一款可以让您看VIP电影及电视剧的扩展软件。安装后即可流畅观看各大视频网站的VIP影视剧，目前VIP看电影已支持各大主流视频网站。",
+  "icons": {
+    "16": "logos/16g.png",
+    "48": "logos/48.png",
+    "128": "logos/128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "logos/19g.png",
+      "38": "logos/38g.png"
+    },
+    "default_title": "VIP看电影",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "ifr.js"
+      ],
+      "all_frames": true,
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "js": [
+        "iconfont.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "DPlayer.min.js"
+      ],
+      "css": [
+        "DPlayer.min.css",
+        "main.css"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "css": [
+        "qq.css"
+      ],
+      "matches": [
+        "*://v.qq.com/*.html*"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "css": [
+        "youku.css"
+      ],
+      "matches": [
+        "*://*.youku.com/*"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "css": [
+        "tudou.css"
+      ],
+      "matches": [
+        "*://*.tudou.com/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "css": [
+        "pptv.css"
+      ],
+      "matches": [
+        "*://*.pptv.com/*.html*"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "permissions": [
+    "*://*/*",
+    "storage",
+    "cookies",
+    "unlimitedStorage",
+    "webRequest",
+    "webRequestBlocking",
+    "tabs",
+    "nativeMessaging",
+    "proxy",
+    "management",
+    "contextMenus",
+    "webNavigation",
+    "browsingData"
+  ],
+  "content_security_policy": "script-src 'self'  'unsafe-eval'; object-src 'self'",
+  "background": {
+    "page": "background.html"
+  },
+  "web_accessible_resources": [
+    "logos/*",
+    "images/*",
+    "page.js",
+    "*-page.js",
+    "ckplayer.js"
+  ]
+}

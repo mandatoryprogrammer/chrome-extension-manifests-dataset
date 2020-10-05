@@ -1,0 +1,28 @@
+{
+  "update_url": "http://clients2.google.com/service/update2/crx",
+  "name": "Post First",
+  "version": "0.2.2",
+  "manifest_version": 2,
+  "description": "Post First checks your social networks to see if someone has already posted your current URL.",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://api.singly.com/robots.txt*"
+      ],
+      "js": [
+        "oauth2/oauth2_inject.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "https://api.singly.com/"
+  ],
+  "content_security_policy": "script-src 'self' https://api.singly.com; object-src 'self'"
+}

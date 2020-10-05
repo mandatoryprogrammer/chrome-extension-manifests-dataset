@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "AutoTatkal - IRCTC Train Ticket Booking",
+  "short_name": "Tatkal Booking Assistant",
+  "version": "1.0",
+  "description": "Best Autofill Assistant (100% Free) for Booking Confirmed Tatkal tickets!",
+  "background": {
+    "scripts": [
+      "./js/jquery.js",
+      "./js/bg.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "./img/logo16.png",
+    "default_popup": "./html/popup.html"
+  },
+  "web_accessible_resources": [
+    "img/logo128.png",
+    "img/booked.svg"
+  ],
+  "icons": {
+    "16": "./img/logo16.png",
+    "32": "./img/logo32.png",
+    "48": "./img/logo48.png",
+    "128": "./img/logo128.png"
+  },
+  "manifest_version": 2,
+  "permissions": [
+    "https://*/*",
+    "http://*/*",
+    "storage",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "js": [
+        "./js/jquery.js",
+        "./js/main.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.irctc.co.in/*/*"
+      ],
+      "js": [
+        "./js/irctc.js"
+      ],
+      "css": [
+        "./css/irctc.css"
+      ]
+    }
+  ]
+}

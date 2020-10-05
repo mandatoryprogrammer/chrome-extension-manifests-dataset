@@ -1,0 +1,73 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Link Research SEO Toolbar",
+  "short_name": "LRT SEO Toolbar",
+  "description": "Enjoy looking at the most advanced SEO metrics while you search the Web.",
+  "version": "0.1.3",
+  "icons": {
+    "128": "/img/icon128.png",
+    "256": "/img/icon128@2x.png"
+  },
+  "browser_action": {
+    "default_icon": "/img/icon128.png",
+    "default_popup": "/html/popup.html"
+  },
+  "options_ui": {
+    "page": "html/options.html"
+  },
+  "background": {
+    "scripts": [
+      "/lib/jquery-2.2.1.min.js",
+      "/lib/mustache.min.js",
+      "/lib/google-analytics-bundle.js",
+      "/js/Cache.js",
+      "/js/lrt/LRT.js",
+      "/js/lrt/LRTIcon.js",
+      "/js/Helpers.js",
+      "/js/XRobots.js",
+      "/js/ChromePlatformAnalytics.js",
+      "/js/App.js",
+      "/js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "/lib/jquery-2.2.1.min.js",
+        "/js/cs-tab.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://ipv4.google.com/sorry/*",
+        "https://ipv4.google.com/sorry/*",
+        "http://ipv6.google.com/sorry/*",
+        "https://ipv6.google.com/sorry/*"
+      ],
+      "js": [
+        "/lib/jquery-2.2.1.min.js",
+        "/js/cs-google-captcha.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "/img/*",
+    "/html/*",
+    "/css/*"
+  ],
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "webRequest",
+    "storage"
+  ]
+}

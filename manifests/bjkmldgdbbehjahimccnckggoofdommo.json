@@ -1,0 +1,38 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "First Paint & Page Load Time",
+  "short_name": "First Paint Time",
+  "version": "1.0.3",
+  "description": "First paint time, page load time, to optimize your webpages",
+  "browser_action": {
+    "default_icon": "icons/timer48.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "icons/timer16.png",
+    "48": "icons/timer48.png",
+    "128": "icons/timer128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "permissions": [
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "domTimes.js"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

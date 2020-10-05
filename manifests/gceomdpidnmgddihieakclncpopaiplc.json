@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_extName__",
+  "default_locale": "en",
+  "description": "This extension allows you to open links with your Keyboard.",
+  "icons": {
+    "128": "icon.png"
+  },
+  "version": "0.1",
+  "options_page": "options.html",
+  "permissions": [
+    "<all_urls>",
+    "tabs",
+    "storage"
+  ],
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "lib/background.js"
+    ]
+  },
+  "commands": {
+    "activate_link_hints": {
+      "suggested_key": {
+        "default": "Ctrl+M",
+        "mac": "Command+M"
+      },
+      "description": "Link Hints anzeigen"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "lib/keyboard_utils.js",
+        "lib/dom_utils.js",
+        "lib/option_utils.js",
+        "link_hints.js",
+        "command.js"
+      ],
+      "css": [
+        "keyboardmode.css"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ]
+}

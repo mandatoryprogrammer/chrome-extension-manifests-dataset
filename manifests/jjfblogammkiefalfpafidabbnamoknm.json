@@ -1,0 +1,83 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "RetailMeNot Deal Finder™️",
+  "version": "3.0.167",
+  "applications": {
+    "gecko": {
+      "id": "retailmenot-genie@rmn.com",
+      "strict_min_version": "53.0"
+    }
+  },
+  "manifest_version": 2,
+  "description": "RetailMeNot Deal Finder™️ automatically applies coupon codes & cash back offers so you can get the biggest savings at checkout.",
+  "homepage_url": "https://retailmenot.com/dealfinder",
+  "icons": {
+    "16": "icons/active-icon-16.png",
+    "48": "icons/active-icon-48.png",
+    "128": "icons/active-icon-128.png"
+  },
+  "background": {
+    "scripts": [
+      "built/background.bundle.js",
+      "built/vendors.bundle.js"
+    ],
+    "persistent": true
+  },
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "browser_action": {
+    "default_icon": "icons/active-icon-38.png",
+    "default_title": "RetailMeNot Deal Finder™️"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "cookies",
+    "*://*.retailmenot.com/",
+    "webRequest",
+    "<all_urls>"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "built/inject.bundle.js",
+        "built/drivers__1-off-drivers.bundle.js",
+        "built/drivers__atgCommerce.bundle.js",
+        "built/drivers__basketdo.bundle.js",
+        "built/drivers__bonton.bundle.js",
+        "built/drivers__champion.bundle.js",
+        "built/drivers__chicos.bundle.js",
+        "built/drivers__demandware.bundle.js",
+        "built/drivers__demandwareAJAX.bundle.js",
+        "built/drivers__famousfootwear.bundle.js",
+        "built/drivers__footlocker.bundle.js",
+        "built/drivers__gap.bundle.js",
+        "built/drivers__hp.bundle.js",
+        "built/drivers__lanebryant.bundle.js",
+        "built/drivers__m-flow.bundle.js",
+        "built/drivers__magento.bundle.js",
+        "built/drivers__progifts.bundle.js",
+        "built/drivers__saks.bundle.js",
+        "built/drivers__sears.bundle.js",
+        "built/drivers__shopify.bundle.js",
+        "built/drivers__toms.bundle.js",
+        "built/drivers__websphere.bundle.js",
+        "built/vendors.bundle.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "built/inject.css",
+    "built/loading-ring.png",
+    "built/deal-finder-both-gray.svg",
+    "built/deal-finder-cash-back-gray.svg",
+    "built/deal-finder-codes-gray.svg",
+    "built/deal-finder-savings-gray.svg",
+    "built/rmn-logo.svg"
+  ],
+  "minimum_chrome_version": "49.0.0"
+}

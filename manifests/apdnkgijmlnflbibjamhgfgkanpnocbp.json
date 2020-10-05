@@ -1,0 +1,68 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "permissions": [
+    "storage",
+    "tabs",
+    "<all_urls>",
+    "contextMenus",
+    "alarms"
+  ],
+  "name": "Avocado Post",
+  "description": "Speed up advertising real estate listings",
+  "version": "2.3.7",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://accounts.craigslist.org/*",
+        "*://post.craigslist.org/*"
+      ],
+      "js": [
+        "js/target.js"
+      ],
+      "css": [
+        "css/target.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.apartments.com/*",
+        "*://*.nestiolistings.com/*",
+        "*://*.streeteasy.com/*",
+        "*://*.trulia.com/*",
+        "*://*.yougotlistings.com/*",
+        "*://*.zillow.com/*"
+      ],
+      "js": [
+        "js/source.js"
+      ]
+    }
+  ],
+  "background": {
+    "page": "html/background.html"
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://*.apartments.com/*",
+      "*://*.nestiolistings.com/*",
+      "*://*.streeteasy.com/*",
+      "*://*.trulia.com/*",
+      "*://*.yougotlistings.com/*",
+      "*://*.zillow.com/*"
+    ]
+  },
+  "options_page": "html/options.html",
+  "icons": {
+    "16": "img/avocado_post_16.png",
+    "48": "img/avocado_post_48.png",
+    "128": "img/avocado_post_128.png"
+  },
+  "web_accessible_resources": [
+    "img/*",
+    "fonts/*"
+  ],
+  "browser_action": {
+    "default_popup": "html/popup.html"
+  },
+  "content_security_policy": "script-src 'self' https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js; object-src 'self'"
+}

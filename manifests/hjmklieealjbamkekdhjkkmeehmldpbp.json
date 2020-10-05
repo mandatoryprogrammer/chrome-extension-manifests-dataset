@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Envoy for Google Calendar",
+  "description": "Help your reception team prepare for your visitors by syncing Google Calendar events with Envoy.",
+  "version": "0.0.27",
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' 'unsafe-eval' 'sha256-6ka/dA4nrErT6xRP8fXrwIfOsH5arPhx5fXcTXwDGMo='; object-src 'self'",
+  "icons": {
+    "16": "images/envoy-logos/envoy-icon-16.png",
+    "48": "images/envoy-logos/envoy-icon-48.png",
+    "128": "images/envoy-logos/envoy-icon-128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js",
+      "dev/hot-reload.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://calendar.google.com/calendar/*"
+      ],
+      "css": [
+        "assets/app.css"
+      ],
+      "js": [
+        "vendor/jquery.min.js",
+        "vendor/bililiteRange.js",
+        "assets/app.js",
+        "vendor/jquery.sendkeys.js",
+        "content-script.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "16": "images/envoy-logos/envoy-icon-16.png",
+      "24": "images/envoy-logos/envoy-icon-24.png",
+      "32": "images/envoy-logos/envoy-icon-32.png"
+    },
+    "default_title": "Envoy for Google Calendar",
+    "default_popup": "popup.html"
+  },
+  "web_accessible_resources": [
+    "images/*"
+  ],
+  "permissions": [
+    "cookies",
+    "tabs",
+    "activeTab",
+    "storage",
+    "management",
+    "https://*.envoy.dev/",
+    "https://*.envoy.com/"
+  ]
+}

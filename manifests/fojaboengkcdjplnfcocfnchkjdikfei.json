@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "1.8.0",
+  "name": "Slack Deleter",
+  "manifest_version": 2,
+  "description": "elegantly delete slack messages",
+  "browser_action": {
+    "default_title": "Slack Deleter",
+    "default_popup": "deleter-popup.html"
+  },
+  "icons": {
+    "16": "img/icon-16.png",
+    "48": "img/icon-48.png",
+    "128": "img/icon-128.png"
+  },
+  "web_accessible_resources": [
+    "inject.html",
+    "css/*",
+    "fonts/*",
+    "img/*",
+    "js/*"
+  ],
+  "background": {
+    "page": "deleter-bg.html"
+  },
+  "content_scripts": [
+    {
+      "persistent": true,
+      "matches": [
+        "https://*.slack.com/*"
+      ],
+      "js": [
+        "js/content.bundle.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "storage",
+    "https://slackext.com/*"
+  ],
+  "content_security_policy": "script-src 'self' https://slackext.com https://ssl.google-analytics.com 'unsafe-eval';   object-src 'self'; connect-src https://slackext.com https://ssl.google-analytics.com/; style-src * 'unsafe-inline' 'self' blob:; img-src * 'self' data: https:;"
+}

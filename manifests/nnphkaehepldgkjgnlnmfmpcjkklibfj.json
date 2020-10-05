@@ -1,0 +1,76 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Saferoom",
+  "description": "This is the Saferoom extension to decrypt Evernote notes on the fly",
+  "version": "2.3",
+  "permissions": [
+    "tabs",
+    "storage",
+    "notifications",
+    "contextMenus",
+    "webRequest",
+    "https://www.evernote.com/*"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistence": true
+  },
+  "icons": {
+    "48": "icon_48.png",
+    "128": "icon_128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.evernote.com/shard/*"
+      ],
+      "css": [
+        "css/bootstrap.min.css"
+      ],
+      "js": [
+        "js/config.js",
+        "js/jquery.js",
+        "js/bootstrap.min.js",
+        "js/saferoom.min.js",
+        "js/sjcl.js",
+        "js/notecrypto.js",
+        "js/md5.min.js",
+        "js/index.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://www.evernote.com/Home.action*"
+      ],
+      "css": [
+        "css/bootstrap.min.css"
+      ],
+      "js": [
+        "js/config.js",
+        "js/jquery.js",
+        "js/bootstrap.min.js",
+        "js/saferoom.min.js",
+        "js/sjcl.js",
+        "js/notecrypto.js",
+        "js/md5.min.js",
+        "js/saferoom_inline.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "icon_48.png",
+      "38": "icon_48.png"
+    },
+    "default_title": "Saferoom"
+  },
+  "web_accessible_resources": [
+    "images/*.gif"
+  ]
+}

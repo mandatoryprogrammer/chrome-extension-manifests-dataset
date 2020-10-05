@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "juzselect",
+  "description": "This extension is used to fetch the meaning of the word which is selected in the webpage",
+  "version": "2.0",
+  "icons": {
+    "128": "image/icon128.png",
+    "48": "image/icon48.png",
+    "16": "image/icon16.png"
+  },
+  "browser_action": {
+    "default_icon": "image/icon16.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "js/dictionary.js",
+      "js/eventPage.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>",
+        "http://*/*",
+        "https://*/*"
+      ],
+      "match_about_blank": true,
+      "all_frames": true,
+      "run_at": "document_start",
+      "js": [
+        "js/lib/jquery.js",
+        "js/content.js",
+        "js/processor.js"
+      ],
+      "css": [
+        "css/content.css"
+      ]
+    }
+  ],
+  "permissions": [
+    "<all_urls>",
+    "http://*/",
+    "https://*/",
+    "tabs",
+    "storage",
+    "notifications"
+  ],
+  "options_page": "options.html"
+}

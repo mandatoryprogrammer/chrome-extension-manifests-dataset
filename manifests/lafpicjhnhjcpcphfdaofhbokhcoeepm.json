@@ -1,0 +1,78 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Histori",
+  "short_name": "Histori",
+  "version": "0.0.1",
+  "description": "Enhance your family history reseach",
+  "author": "Robin Keith",
+  "icons": {
+    "16": "images/logo16.png",
+    "48": "images/logo48.png",
+    "128": "images/logo128.png"
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "declarativeContent",
+    "clipboardRead",
+    "clipboardWrite",
+    "https://www.ancestry.co.uk/",
+    "storage"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "web_accessible_resources": [
+    "css/*.css",
+    "js/*.js",
+    "libs/*.js",
+    "html/*.html",
+    "data/*.json",
+    "images/*.png",
+    "images/*.gif",
+    "images/*.jpg",
+    "images/*.svg",
+    "fonts/*.woff2",
+    "icons/css/*.css",
+    "icons/font/*.*"
+  ],
+  "background": {
+    "scripts": [
+      "js/background/helpers.js",
+      "js/background/file-reader.js",
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.ancestry.com/*",
+        "https://*.ancestry.co.uk/*"
+      ],
+      "css": [
+        "css/content.css"
+      ],
+      "js": [
+        "libs/jquery-3.1.1.min.js",
+        "libs/utils.js",
+        "libs/luxon.min.js",
+        "js/app.js",
+        "js/census.js",
+        "js/family.js",
+        "js/person.js",
+        "js/dataset.js",
+        "js/content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "page_action": {
+    "default_icon": {
+      "19": "images/logo19.png",
+      "38": "images/logo38.png"
+    },
+    "default_title": "Histori",
+    "default_popup": "html/options.html"
+  },
+  "options_page": "html/options.html"
+}

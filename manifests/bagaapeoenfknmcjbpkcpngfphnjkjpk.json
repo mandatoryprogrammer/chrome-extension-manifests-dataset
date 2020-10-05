@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Suppress.it",
+  "short_name": "Suppress.it",
+  "description": "Removes or suppresses content of choice (sports or spoilers?) from webpages and social media.",
+  "version": "0.517",
+  "icons": {
+    "128": "img/icon_128.png",
+    "64": "img/icon_64.png",
+    "19": "img/icon_19.png",
+    "16": "img/icon_16.png"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com https://connect.facebook.net 'unsafe-eval'; object-src 'self'",
+  "web_accessible_resources": [
+    "/addons/*"
+  ],
+  "permissions": [
+    "storage",
+    "tabs",
+    "background",
+    "contextMenus",
+    "http://*/",
+    "https://*/"
+  ],
+  "background": {
+    "scripts": [
+      "3rdparty/jquery.2.1.1.min.js",
+      "core.definitions.js",
+      "core.driver.chrome.js",
+      "content/engine.prototype.js",
+      "background/core.config.migrate.js",
+      "core.prototype.global.js",
+      "addon.definitions.js",
+      "background/core.prototype.js",
+      "background/init.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "64": "img/icon_64.png",
+      "16": "img/icon_16.png",
+      "19": "img/icon_19.png"
+    },
+    "default_popup": "popup/popup.html"
+  },
+  "options_page": "/options/options.html",
+  "content_scripts": [
+    {
+      "run_at": "document_idle",
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "3rdparty/jquery.2.1.1.min.js",
+        "core.definitions.js",
+        "core.driver.chrome.js",
+        "core.prototype.global.js",
+        "addon.definitions.js",
+        "content/engine.prototype.js",
+        "content/init.js"
+      ]
+    }
+  ]
+}

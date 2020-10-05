@@ -1,0 +1,69 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Переключатель музыки ВКонтакте",
+  "description": "Позволит вам управлять музыкой при помощи клавиатуры и получать уведомления о текущих треках.",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "icons": {
+    "16": "assets/logo/16.png",
+    "48": "assets/logo/48.png",
+    "128": "assets/logo/128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "assets/logo/16.png",
+      "24": "assets/logo/24.png",
+      "32": "assets/logo/32.png"
+    },
+    "default_title": "Настройки",
+    "default_popup": "popup/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "<all_urls>",
+    "notifications",
+    "storage"
+  ],
+  "commands": {
+    "play": {
+      "suggested_key": {
+        "default": "MediaPlayPause"
+      },
+      "global": true,
+      "description": "Воспроизведение/Пауза"
+    },
+    "next": {
+      "suggested_key": {
+        "default": "MediaNextTrack"
+      },
+      "global": true,
+      "description": "Следующий трек"
+    },
+    "previous": {
+      "suggested_key": {
+        "default": "MediaPrevTrack"
+      },
+      "global": true,
+      "description": "Предыдущий трек"
+    }
+  }
+}

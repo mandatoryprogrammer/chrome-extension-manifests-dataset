@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "ReadyTalk Google Calendar Integration",
+  "description": "Easily start and schedule ReadyTalk meetings in Google Calendar.",
+  "version": "0.9.8",
+  "browser_action": {
+    "default_icon": "img/icon.png",
+    "default_title": "ReadyTalk Google Calendar Integration",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "permissions": [
+    "https://cc.readytalk.com/",
+    "background",
+    "storage",
+    "tabs",
+    "webNavigation"
+  ],
+  "background": {
+    "scripts": [
+      "js/xhr.js",
+      "js/util.js",
+      "js/vendor/moment/moment.min.js",
+      "js/vendor/moment/moment-round.min.js",
+      "js/vendor/handlebars/handlebars.runtime-v4.0.11.js",
+      "js/vendor/handlebars/helpers.hybrid.js",
+      "js/templates/meetings.js",
+      "js/config.js",
+      "js/model.js",
+      "js/event.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/calendar*"
+      ],
+      "css": [
+        "style/content.css",
+        "style/vendor/mdc-web/material-components-web.min.css"
+      ],
+      "js": [
+        "js/util.js",
+        "js/model.js",
+        "js/config.js",
+        "js/vendor/mdc-web/material-components-web.min.js",
+        "js/content.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com/analytics.js; object-src 'self'",
+  "web_accessible_resources": [
+    "img/*"
+  ]
+}

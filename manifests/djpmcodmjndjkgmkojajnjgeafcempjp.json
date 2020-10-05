@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Seobaz toplu 404 kaldırma",
+  "version": "1.4",
+  "manifest_version": 2,
+  "description": "Seobaz Webmastertools toplu 404 kaldırma eklentisi sayesinde 404 hatalarını uğraşmadan toplu bir şekilde kaldırabileceksiniz.",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "pencere.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.google.com/webmasters/tools/url-removal*"
+      ],
+      "js": [
+        "jquery-1.7.1.min.js",
+        "bulk_url_removal.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.google.com/webmasters/tools/removals-request*"
+      ],
+      "js": [
+        "jquery-1.7.1.min.js",
+        "removals_request.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://localhost:8000/test.html",
+        "https://www.google.com/webmasters/tools/removals-create-ac*"
+      ],
+      "js": [
+        "jquery-1.7.1.min.js",
+        "exceed_quota.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "bg.js"
+    ]
+  },
+  "permissions": [
+    "https://www.google.com/webmasters/*"
+  ]
+}

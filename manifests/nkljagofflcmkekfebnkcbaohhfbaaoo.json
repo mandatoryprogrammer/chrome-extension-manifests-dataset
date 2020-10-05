@@ -1,0 +1,89 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Biba for Google Calendar",
+  "short_name": "Biba",
+  "description": "Easily schedule Biba meetings from your Google Calendar. ",
+  "version": "1.1.157",
+  "icons": {
+    "19": "assets/images/biba-19.png",
+    "48": "assets/images/biba-48.png"
+  },
+  "content_security_policy": "script-src https://*.google.com 'unsafe-eval'; object-src 'self'",
+  "oauth2": {
+    "client_id": "808790265376-e2q7g6hi944jeggus7mie6m4vu5ihr90.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/calendar"
+    ]
+  },
+  "background": {
+    "scripts": [
+      "assets/js/jquery-2.1.4.min.js",
+      "app/util.js",
+      "app/api.js",
+      "app/background_oauth.js",
+      "app/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_title": "Schedule a Biba meeting",
+    "default_icon": {
+      "19": "assets/images/biba-19.png",
+      "38": "assets/images/biba-19-2x.png"
+    },
+    "default_popup": "app/views/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://calendar.google.com/calendar/render*",
+        "*://calendar.google.com/calendar/*/render*",
+        "*://calendar.google.com/calendar/*/*/render*",
+        "*://calendar.google.com/calendar/render?pli=1#eventpage_6",
+        "*://www.google.com/calendar/render*",
+        "*://www.google.com/calendar/*/render*",
+        "*://www.google.com/calendar/*/*/render*",
+        "*://www.google.com/calendar/render?pli=1#eventpage_6"
+      ],
+      "js": [
+        "assets/js/jquery-2.1.4.min.js",
+        "assets/js/jquery.simplemodal.js",
+        "app/util.js",
+        "app/api.js",
+        "app/calendar_api.js",
+        "app/event_page/event_description.js",
+        "app/event_page/biba_button.js",
+        "app/controller/error_dialog.js",
+        "app/controller/schedule_dialog.js",
+        "app/controller/save_dialog.js",
+        "app/event_page/meeting.js"
+      ],
+      "css": [
+        "assets/css/extension.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "cookies",
+    "identity",
+    "*://*.google.com/*",
+    "https://*.biba.com/*",
+    "http://*.biba.com/*",
+    "tabs",
+    "activeTab",
+    "https://www.google.com/calendar/*",
+    "https://calendar.google.com/calendar/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://www.google.com/calendar/render*",
+      "*://calendar.google.com/calendar/render*"
+    ]
+  },
+  "web_accessible_resources": [
+    "app/config.json",
+    "app/views/*",
+    "assets/images/*"
+  ]
+}

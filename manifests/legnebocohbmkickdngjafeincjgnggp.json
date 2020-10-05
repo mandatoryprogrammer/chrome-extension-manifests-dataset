@@ -1,0 +1,42 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Spotify Key and BPM Finder",
+  "description": "Display key and BPM for songs found on spotify",
+  "version": "1.0.8",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html",
+    "default_title": "Click here!"
+  },
+  "permissions": [
+    "identity",
+    "tabs",
+    "webNavigation",
+    "https://*.spotify.com/*",
+    "*://*.google.com/*",
+    "storage",
+    "alarms"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.spotify.com/*"
+      ],
+      "js": [
+        "content_script.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "/oauth2/*"
+  ],
+  "background": {
+    "scripts": [
+      "eventPage.js"
+    ],
+    "persistent": false
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self' https://*.spotify.com/*"
+}

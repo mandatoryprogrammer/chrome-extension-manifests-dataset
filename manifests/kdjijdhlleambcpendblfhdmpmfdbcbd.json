@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "QFeeds",
+  "version": "0.12.0",
+  "short_name": "qfeeds",
+  "description": "Reader of RSS feeds",
+  "oauth2": {
+    "client_id": "1043072112628-tbg2533tg0vts1ihq5c9m12m2b9kk9cs.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/drive"
+    ]
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAoO1iZCU5dZ5caHyxNF/zD7tfLvmoehEu2xMeqDyQM+Fvo4mf2zVTedCQF1QusbwserLP64qij402L29EiUBAk8Qyh/3qUEAvkyD0Ep3L51P9IQdmk77f6SY+kKztxyV3hU269jV7ftzJ5G2qv7D2F/l5HJaOrLRV8ndBvLfAEo8qi8bMCGjV30lmR1zogSgMA92KJwy6DxFME3gPBTycjAkffgNdRdnoIiS8bngNPat+h/QWFnsHaRRXDNkBorfdhM0bptwqAuQ8X1AZBDqS9k7amYw1PRBJlRsOTqJ2ilshKO/OSIF8iPlIOB9tJoVYkv8GnqovcbYV5IGv3mSXVQIDAQAB",
+  "icons": {
+    "128": "chrome/icon_rss.png"
+  },
+  "permissions": [
+    "identity",
+    "identity.email",
+    "storage",
+    "downloads",
+    "tabs",
+    "https://ssl.gstatic.com/",
+    "https://www.googleapis.com/",
+    "https://www.google.com/",
+    "https://accounts.google.com/",
+    "http://*/",
+    "https://*/"
+  ],
+  "content_security_policy": "script-src 'self' https://apis.google.com https://drive.google.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "js": [
+        "chrome/sniff_common.js",
+        "chrome/doc_start.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "js": [
+        "chrome/sniff_common.js",
+        "chrome/feed_finder.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_title": "QFeeds (devel)",
+    "default_icon": "chrome/icon_rss.png"
+  },
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "chrome/background.js"
+    ]
+  }
+}

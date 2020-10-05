@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Zoom Page WE",
+  "version": "17.8",
+  "description": "Zoom web pages (either per-site or per-tab) using full-page zoom, text-only zoom, automatic fit-to-width and minimum font size.",
+  "icons": {
+    "16": "icon16.png",
+    "32": "icon32.png",
+    "48": "icon48.png",
+    "64": "icon64.png",
+    "128": "icon128-96.png"
+  },
+  "minimum_chrome_version": "42",
+  "permissions": [
+    "tabs",
+    "webNavigation",
+    "contextMenus",
+    "notifications",
+    "storage"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "16": "icon16.png"
+    },
+    "default_title": "Zoom Page WE",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js",
+      "publicsuffixlist.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "description": "Show Zoom Popup",
+      "suggested_key": {
+        "default": "Alt+Z"
+      }
+    }
+  }
+}

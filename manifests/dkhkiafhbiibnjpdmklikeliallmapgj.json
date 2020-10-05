@@ -1,0 +1,71 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "TheGuarantors - Chrome Extension",
+  "description": "Mark buildings covered by TheGuarantors on StreetEasy",
+  "version": "1.2.1",
+  "icons": {
+    "128": "assets/img/logo.png"
+  },
+  "permissions": [
+    "https://theguarantors.com/api/v1/buildings/*",
+    "storage"
+  ],
+  "browser_action": {
+    "default_title": "TheGuarantors Actions",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "css": [
+        "assets/css/buildings.css"
+      ],
+      "js": [
+        "node_modules/jquery/dist/jquery.min.js",
+        "node_modules/lodash/lodash.min.js",
+        "dist/building.js"
+      ],
+      "matches": [
+        "*://streeteasy.com/building/*",
+        "*://streeteasy.com/new_jersey/building/*",
+        "*://streeteasy.com/hamptons/building/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "css": [
+        "assets/css/buildings.css"
+      ],
+      "js": [
+        "node_modules/jquery/dist/jquery.min.js",
+        "node_modules/lodash/lodash.min.js",
+        "dist/buildings.js"
+      ],
+      "matches": [
+        "*://streeteasy.com/buildings/*",
+        "*://streeteasy.com/for-rent/*",
+        "*://streeteasy.com/rentals/*",
+        "*://streeteasy.com/new_jersey",
+        "*://streeteasy.com/hamptons"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "node_modules/jquery/dist/jquery.min.js",
+        "node_modules/lodash/lodash.min.js",
+        "dist/installed.js"
+      ],
+      "matches": [
+        "*://*.theguarantors.com/*",
+        "*://theguarantors.com/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "assets/img/logo.png",
+    "assets/fonts/Gilroy-Regular.ttf",
+    "assets/fonts/Gilroy-Bold.ttf"
+  ]
+}

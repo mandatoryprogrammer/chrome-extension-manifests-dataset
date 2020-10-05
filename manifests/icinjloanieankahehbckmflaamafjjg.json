@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Ramadan Filter",
+  "short_name": "RF",
+  "version": "2.0",
+  "description": "Ramadan Filter: an extension that will help get you through the holy month, by blocking all mention of food & drink on your browser.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/icon48.png",
+    "default_popup": "popup/popup.html",
+    "default_title": "Ramadan Filter"
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "js/events.js"
+    ],
+    "persistent": false
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/jquery-2.2.2.min.js",
+        "js/content.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "options_ui": {
+    "page": "options/options.html",
+    "chrome_style": true
+  }
+}

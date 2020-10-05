@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "AWS Cost Companion",
+  "short_name": "aws-cost-companion",
+  "version": "0.0.1",
+  "description": "",
+  "author": "",
+  "icons": {
+    "128": "/icons/logo_128.png"
+  },
+  "permissions": [
+    "*://*.awsstatic.com/*",
+    "tabs",
+    "alarms",
+    "storage",
+    "notifications"
+  ],
+  "background": {
+    "scripts": [
+      "/js/jquery.min.js",
+      "/background.js"
+    ],
+    "styles": [
+      "/css/inject.css"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "/icons/logo_128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.console.aws.amazon.com/ec2/*"
+      ],
+      "js": [
+        "/js/jquery.min.js",
+        "/js/jquery.qtip.js",
+        "/inject_ec2.js"
+      ],
+      "css": [
+        "/css/jquery.qtip.css",
+        "/css/inject.css"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://*.console.aws.amazon.com/rds/*"
+      ],
+      "js": [
+        "/js/jquery.min.js",
+        "/js/jquery.qtip.js",
+        "/inject_rds.js"
+      ],
+      "css": [
+        "/css/jquery.qtip.css",
+        "/css/inject.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    "/*"
+  ]
+}

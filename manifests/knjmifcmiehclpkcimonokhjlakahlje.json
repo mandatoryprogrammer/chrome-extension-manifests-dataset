@@ -1,0 +1,102 @@
+{
+  "update_url": "http://clients2.google.com/service/update2/crx",
+  "name": "__MSG_extName__",
+  "version": "2.9.9.9",
+  "manifest_version": 2,
+  "description": "__MSG_extDescription__",
+  "icons": {
+    "16": "images/logo_16.png",
+    "48": "images/logo_48.png",
+    "128": "images/logo_128.png"
+  },
+  "default_locale": "zh_CN",
+  "background": {
+    "scripts": [
+      "js/utils.js",
+      "js/huaban.js",
+      "js/account.js",
+      "js/background.js",
+      "js/analytics.js",
+      "js/ajax.js"
+    ]
+  },
+  "options_page": "preferences.html",
+  "browser_action": {
+    "default_icon": "images/logo_48.png",
+    "default_title": "__MSG_extName__",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "exclude_globs": [
+        "http://allllll.com*",
+        "http://*.allllll.com*",
+        "http://localhost*",
+        "http://local*",
+        "http://127.0.0.1*"
+      ],
+      "include_globs": [
+        "*"
+      ],
+      "js": [
+        "js/pinmarklet.js",
+        "js/script.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "all_frames": true,
+      "run_at": "document_idle"
+    },
+    {
+      "js": [
+        "js/page.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "js/isload.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "js": [
+        "js/isinstalled.js"
+      ],
+      "matches": [
+        "http://allllll.com/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "css/capture.css",
+    "css/showimage.css",
+    "js/utils.js",
+    "js/editor.js",
+    "js/account.js",
+    "js/huaban.js",
+    "js/ui.js",
+    "js/upload_ui.js",
+    "js/ajax.js",
+    "js/preferences.js"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "permissions": [
+    "contextMenus",
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "minimum_chrome_version": "18"
+}

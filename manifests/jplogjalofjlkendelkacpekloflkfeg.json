@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Add Art",
+  "description": "Replacing ads with art.",
+  "author": "@owise1,Corey Tegeler",
+  "version": "2.4.3",
+  "homepage_url": "http://add-art.org/",
+  "icons": {
+    "16": "images/icon-16.png",
+    "32": "images/icon-32.png",
+    "64": "images/icon-64.png"
+  },
+  "browser_action": {
+    "default_icon": "images/icon-64.png",
+    "default_popup": "interface.html",
+    "default_title": "Add Art!"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "unlimitedStorage",
+    "webNavigation",
+    "notifications",
+    "webRequest",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "web_accessible_resources": [
+    "images/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/lib/jquery-3.2.1.min.js",
+        "js/lib/q.js",
+        "js/lib/ramda.min.js",
+        "js/artAdder.js",
+        "js/document_end.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "page": "background.html"
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Expresso Beans Remote Link / Image Fixer",
+  "version": "1.9",
+  "description": "Now with chart enhancement! [using chart.js (copyright its contributors), and regression-js (Tom Alexander) - see license.txt]",
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_popup": "optionsbrowser.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://forum.expressobeans.com/*",
+        "https://forum.expressobeans.com/*"
+      ],
+      "js": [
+        "EBfixer.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://forum.expressobeans.com/*",
+        "http://forum.expressobeans.com/*"
+      ],
+      "js": [
+        "styleinjectfix.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://expressobeans.com/visual/remoting.php/*"
+      ],
+      "js": [
+        "remotefixer.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://expressobeans.com/public/detail.php/*",
+        "http://www.expressobeans.com/public/detail.php/*"
+      ],
+      "css": [
+        "graphs.css"
+      ],
+      "js": [
+        "setup.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "Tom_Alexander_Regression.js",
+    "graphs.js"
+  ],
+  "options_ui": {
+    "page": "optionsbrowser.html"
+  },
+  "externally_connectable": {}
+}

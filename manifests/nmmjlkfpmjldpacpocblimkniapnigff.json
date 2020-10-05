@@ -1,0 +1,117 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "author": "My1Login",
+  "background": {
+    "page": "background-core/background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/icon-logged-out.png",
+      "16": "icons/icon-logged-out.png",
+      "20": "icons/icon-logged-out.png",
+      "32": "icons/icon-logged-out.png",
+      "40": "icons/icon-logged-out.png",
+      "38": "icons/icon-logged-out.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "all_frames": true,
+      "js": [
+        "browserextensionscontentscript/content-core/Library/underscore.min.js",
+        "browserextensionscontentscript/content-core/Library/jquery-3.2.1.min.js",
+        "browserextensionscontentscript/content-api/content.api.message.event.js",
+        "browserextensionscontentscript/content-api/content.api.message.js",
+        "browserextensionscontentscript/content-api/content.api.utils.js",
+        "browserextensionscontentscript/content-core/api.namespaces.js"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "all_frames": true,
+      "exclude_matches": [
+        "*://*.my1login.com/*",
+        "*://localhost/*"
+      ],
+      "css": [
+        "/browserextensionscontentscript/content-core/style.css"
+      ],
+      "js": [
+        "browserextensionscontentscript/content-core/Library/fuse.min.js",
+        "browserextensionscontentscript/content-core/Library/selectorator.js",
+        "browserextensionscontentscript/content-core/BookmarkDataModel.js",
+        "browserextensionscontentscript/content-core/PasswordPolicyDataModel.js",
+        "browserextensionscontentscript/content-core/PasswordPolicyModel.js",
+        "browserextensionscontentscript/content-core/ContentScriptBookmarkModel.js",
+        "browserextensionscontentscript/formfinder/FormComponentModel.js",
+        "browserextensionscontentscript/formfinder/ContentScriptFormHandler.js",
+        "browserextensionscontentscript/formfinder/FormFinderModel.js",
+        "browserextensionscontentscript/formfinder/FormModel.js",
+        "browserextensionscontentscript/content-core/FrameControlDisplayParametersModel.js",
+        "browserextensionscontentscript/content-core/LoginListViewModel.js",
+        "browserextensionscontentscript/content-core/KeyComponentControlViewModel.js",
+        "browserextensionscontentscript/content-core/SettingsDataModel.js",
+        "browserextensionscontentscript/content-core/LoginListDisplayParametersModel.js",
+        "browserextensionscontentscript/content-core/BookmarksManagerModel.js",
+        "browserextensionscontentscript/content-core/FormsManagerModel.js",
+        "browserextensionscontentscript/content-core/ExceptionsHandlerModel.js",
+        "browserextensionscontentscript/content-core/SettingsModel.js",
+        "browserextensionscontentscript/content-core/My1LoginLookups.js",
+        "browserextensionscontentscript/formfinder/Lookups.FormFinder.js",
+        "browserextensionscontentscript/content-core/My1LoginGlobals.js",
+        "browserextensionscontentscript/content-core/content.js"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "background-core/constants.js",
+        "browserextensionscontentscript/content-core/my1login.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'unsafe-eval' 'self'; object-src 'self'",
+  "description": "My1Login Single Sign On Connector",
+  "icons": {
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "manifest_version": 2,
+  "name": "My1Login SSO Connector",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "storage",
+    "https://*/*",
+    "http://*/*"
+  ],
+  "version": "5.2.2.1",
+  "-ms-preload": {
+    "backgroundScript": "backgroundScriptsAPIBridge.js",
+    "contentScript": "contentScriptsAPIBridge.js"
+  },
+  "applications": {
+    "gecko": {
+      "id": "{09bb4618-94d1-4f5c-ba1f-6cf99054af19}",
+      "update_url": "https://download.my1login.com/deployment/My1LoginSSOConnector/Firefox/firefox_updates.json"
+    }
+  },
+  "web_accessible_resources": [
+    "browserextensionscontentscript/web-accessible-resources/savedCredentials/savedCredentials.html",
+    "browserextensionscontentscript/web-accessible-resources/keyComponentControl/keyComponentControl.html",
+    "browserextensionscontentscript/web-accessible-resources/loginList/loginList.html",
+    "browserextensionscontentscript/web-accessible-resources/overlay/overlay.html",
+    "browserextensionscontentscript/web-accessible-resources/icon-logged-in.png",
+    "browserextensionscontentscript/web-accessible-resources/logo_sm_nb.png"
+  ]
+}

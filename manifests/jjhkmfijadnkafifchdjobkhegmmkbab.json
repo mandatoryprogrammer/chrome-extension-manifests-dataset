@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "1.0.1",
+  "manifest_version": 2,
+  "name": "Adblocker Smart for YouTube™",
+  "short_name": "Adblocker Smart for YouTube™",
+  "background": {
+    "page": "background.html"
+  },
+  "web_accessible_resources": [
+    "data/content_script/*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline' 'unsafe-eval' ; connect-src *; object-src 'self' ",
+  "description": "AdBlocker Smart for YouTube™ is the easiest and fastest blocker, it saves your time without viewing ads.",
+  "options_ui": {
+    "chrome_style": false,
+    "open_in_tab": true,
+    "page": "data/options/options.html"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "webRequest",
+    "webNavigation",
+    "http://*/*",
+    "https://*/*",
+    "webRequestBlocking"
+  ],
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "run_at": "document_start",
+      "matches": [
+        "*://*.youtube.com/*"
+      ],
+      "css": [
+        "data/content_script/inject.css"
+      ],
+      "js": [
+        "data/message_passing.js",
+        "data/content_script/inject.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": "data/icons/16.png",
+    "default_popup": "data/options/options.html"
+  },
+  "icons": {
+    "16": "data/icons/16.png",
+    "32": "data/icons/32.png",
+    "48": "data/icons/48.png",
+    "64": "data/icons/64.png",
+    "128": "data/icons/128.png"
+  }
+}

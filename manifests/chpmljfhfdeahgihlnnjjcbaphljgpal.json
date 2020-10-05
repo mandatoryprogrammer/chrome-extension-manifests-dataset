@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Squelch-Salesforce Browser Integration",
+  "description": "An add-on that gives you all the search awesomeness of Squelch right in your Salesforce environment with no setup pain.",
+  "version": "0.1.2",
+  "icons": {
+    "128": "assets/images/symbol-black-128x128.png",
+    "64": "assets/images/symbol-black-64x64.png",
+    "48": "assets/images/symbol-black-48x48.png",
+    "32": "assets/images/symbol-black-32x32.png",
+    "16": "assets/images/symbol-black-16x16.png"
+  },
+  "permissions": [
+    "<all_urls>",
+    "tabs",
+    "bookmarks"
+  ],
+  "content_scripts": [
+    {
+      "js": [
+        "jquery.min.js",
+        "sq_ext_utils.js",
+        "contentscript.js"
+      ],
+      "matches": [
+        "https://*.salesforce.com/*",
+        "https://*.my.salesforce.com/*"
+      ],
+      "exclude_matches": [
+        "https://login.salesforce.com/*",
+        "*://*/*ui*"
+      ],
+      "include_globs": [
+        "*na*.salesforce.com/*",
+        "*.my.salesforce.com/*"
+      ],
+      "exclude_globs": [
+        "*salesforce.com/setup*",
+        "*salesforce.com/ui/*",
+        "*salesforce.com/_ui/*"
+      ],
+      "all_frames": false,
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "web_accessible_resources": [
+    "https://testing.squelchdev.localhost/doolin/",
+    "https://demo1.squelch.io/doolin/"
+  ],
+  "browser_action": {
+    "default_title": "Squelch Browser Extension"
+  }
+}

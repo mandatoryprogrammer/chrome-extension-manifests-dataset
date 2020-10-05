@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Rotogrinders DFS Analyzer Sync",
+  "description": "This extension allows you to sync your Fanduel contests results to the RotoGrinders DFS Analyzer",
+  "version": "0.9.1",
+  "background": {
+    "scripts": [
+      "js/config.js",
+      "js/lib/requests.js",
+      "js/lib/utils.js",
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.rotogrinders.com/dfs-analyzer",
+        "*://radnor.rotogrinders.dev/dfs-analyzer"
+      ],
+      "js": [
+        "js/content/dfsa.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.fanduel.com/p/MyEntryHistory"
+      ],
+      "js": [
+        "js/content/fanduel.js"
+      ]
+    }
+  ],
+  "page_action": {
+    "default_icon": "img/icon.png",
+    "default_title": "Sync with Rotogrinders DFS Analyzer"
+  },
+  "permissions": [
+    "http://localhost:3000/",
+    "https://www.fanduel.com/",
+    "http://radnor.rotogrinders.dev/",
+    "http://*.rotogrinders.com/",
+    "http://rotogrinders.com/",
+    "declarativeContent"
+  ]
+}

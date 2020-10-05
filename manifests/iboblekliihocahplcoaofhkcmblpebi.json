@@ -1,0 +1,87 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Solve for All",
+  "version": "0.8.1",
+  "description": "Customize your search. Use text highlighting to capture search queries.",
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://solveforall.com https://cdn.jsdelivr.net https://*.noembed.com https://public-api.wordpress.com https://*.google.com https://*.gstatic.com https://cdn.rawgit.com https://dl.dropbox.com https://dl.dropboxusercontent.com https://*.googleapis.com https://netdna.bootstrapcdn.com https://code.jquery.com https://cdnjs.cloudflare.com https://ssl.microsofttranslator.com https://api.microsofttranslator.com https://api.opencnam.com https://backend.deviantart.com https://api.meetup.com https://soundcloud.com https://*.slideshare.net https://*.barchart.com https://*.twitter.com; object-src 'self'",
+  "incognito": "split",
+  "background": {
+    "scripts": [
+      "standalone-libs/underscore/js/underscore.js",
+      "standalone-libs/underscore-string/js/underscore.string.js",
+      "standalone-libs/jscache/js/cache.js",
+      "standalone-libs/lunr/js/lunr.js",
+      "js/local_settings.js",
+      "js/core.js",
+      "js/common.js",
+      "js/omni.js",
+      "js/main.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "css/injected.css"
+      ],
+      "js": [
+        "standalone-libs/underscore/js/underscore.js",
+        "js/local_settings.js",
+        "js/core.js",
+        "js/content_script.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "options.html",
+    "images/*"
+  ],
+  "browser_action": {
+    "default_title": "Turn off Solve for All",
+    "default_icon": "images/solveforall_32x32.png",
+    "default_popup": "popup.html"
+  },
+  "omnibox": {
+    "keyword": "s"
+  },
+  "options_page": "options.html",
+  "permissions": [
+    "notifications",
+    "storage",
+    "contextMenus",
+    "geolocation",
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "icons": {
+    "16": "images/solveforall_16x16.png",
+    "32": "images/solveforall_32x32.png",
+    "48": "images/solveforall_48x48.png",
+    "128": "images/solveforall_128x128.png"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "windows": "Ctrl+Shift+S",
+        "mac": "MacCtrl+Shift+S",
+        "chromeos": "Ctrl+Shift+S",
+        "linux": "Ctrl+Shift+S"
+      },
+      "description": "Show the Solve for All popup"
+    },
+    "send_selection": {
+      "suggested_key": {
+        "windows": "Ctrl+Shift+A",
+        "mac": "MacCtrl+Shift+A",
+        "chromeos": "Ctrl+Shift+A",
+        "linux": "Ctrl+Shift+A"
+      },
+      "description": "Send the current selection to Solve for All"
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "CF-Predictor",
+  "short_name": "CF-Predictor",
+  "version": "1.3.0",
+  "description": "This extension predicts rating changes for Codeforces. It shows approximate deltas during and after the contest.",
+  "manifest_version": 2,
+  "icons": {
+    "48": "static/icon48.png",
+    "64": "static/icon64.png",
+    "128": "static/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "48": "static/icon48.png",
+      "64": "static/icon64.png",
+      "128": "static/icon128.png"
+    },
+    "default_title": "CF-Predictor",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "https://cf-predictor-frontend.herokuapp.com/",
+    "https://cf-predictor.herokuapp.com/"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "third_party/jquery.js",
+        "showDeltas.js"
+      ],
+      "matches": [
+        "http://codeforces.com/contest/*/standings*",
+        "https://codeforces.com/contest/*/standings*"
+      ]
+    }
+  ]
+}

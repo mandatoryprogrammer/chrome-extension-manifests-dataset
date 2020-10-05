@@ -1,0 +1,90 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "LeadMine Prospector",
+  "short_name": "LeadMine",
+  "version": "1.6.0",
+  "manifest_version": 2,
+  "description": "LeadMine Prospector is the simplest and easiest way to find anyone's emails from anywhere on the web.",
+  "homepage_url": "https://www.leadmine.net/",
+  "default_locale": "en",
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "shared/config/config.js",
+      "shared/account/account.js",
+      "background/background.js"
+    ],
+    "persistent": true
+  },
+  "options_page": "options/index.html",
+  "browser_action": {
+    "default_icon": "img/icon32.png",
+    "default_title": "LeadMine",
+    "default_popup": "browser-action/browser-action.html"
+  },
+  "web_accessible_resources": [
+    "options/index.html",
+    "fonts/fontawesome-webfont.eot",
+    "fonts/fontawesome-webfont.svg",
+    "fonts/fontawesome-webfont.ttf",
+    "fonts/fontawesome-webfont.woff",
+    "fonts/fontawesome-webfont.woff2",
+    "fonts/FontAwesome.otf",
+    "img/logo.png",
+    "img/icon16.png",
+    "img/icon32.png",
+    "img/logo16_white.png",
+    "img/logo32_white.png",
+    "img/nopic.png",
+    "img/ajax_loader.gif"
+  ],
+  "permissions": [
+    "https://*/*",
+    "http://*/*",
+    "tabs",
+    "storage",
+    "management"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.leadmine.net/*"
+      ],
+      "js": [
+        "lib/jquery/jquery.min.js",
+        "shared/config/config.js",
+        "shared/account/account.js",
+        "shared/utils/utils.js",
+        "shared/account/authentication.js",
+        "shared/account/install-button.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.google.com/*",
+        "https://www.google.co.in/*",
+        "http://www.google.com/*",
+        "http://www.google.co.in/*"
+      ],
+      "css": [
+        "lib/styles/bootstrap.min.css",
+        "lib/styles/font-awesome.min.css",
+        "content-script/styles/common.css",
+        "content-script/styles/google/search.css"
+      ],
+      "js": [
+        "lib/jquery/jquery.min.js",
+        "lib/jquery/jquery-ui.min.js",
+        "lib/jquery/jquery-highlight.js",
+        "shared/config/config.js",
+        "shared/account/account.js",
+        "shared/utils/utils.js",
+        "content-script/google/search.js"
+      ]
+    }
+  ]
+}

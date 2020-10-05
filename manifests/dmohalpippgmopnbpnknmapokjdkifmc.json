@@ -1,0 +1,68 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "cnblogs",
+  "version": "0.1.4",
+  "manifest_version": 2,
+  "homepage_url": "https://github.com/imgss/cnblogs-mdEditor",
+  "description": "__MSG_appDescription__",
+  "icons": {
+    "16": "images/icon-16.png",
+    "19": "images/icon-19.png",
+    "38": "images/icon-38.png",
+    "128": "images/icon-128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://i.cnblogs.com/*",
+        "https://www.cnblogs.com/"
+      ],
+      "js": [
+        "scripts/lib/jquery.js",
+        "scripts/lib/codemirror.js",
+        "scripts/lib/pangu.js",
+        "scripts/lib/emoji.js",
+        "scripts/mode/markdown.js",
+        "scripts/mode/css.js",
+        "scripts/mode/javascript.js",
+        "scripts/mode/xml.js",
+        "scripts/mode/html.js",
+        "scripts/cnblogs.js",
+        "scripts/sort.js"
+      ],
+      "css": [
+        "styles/3024-night.css",
+        "styles/codemirror.css",
+        "styles/style.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "options_ui": {
+    "chrome_style": true,
+    "page": "options.html"
+  },
+  "permissions": [
+    "storage",
+    "clipboardRead",
+    "clipboardWrite",
+    "activeTab",
+    "webRequest",
+    "*://*.cnblogs.com/"
+  ],
+  "page_action": {
+    "default_icon": {
+      "19": "images/icon-19.png",
+      "38": "images/icon-38.png"
+    },
+    "default_title": "cnblogs",
+    "default_popup": "popup.html"
+  }
+}

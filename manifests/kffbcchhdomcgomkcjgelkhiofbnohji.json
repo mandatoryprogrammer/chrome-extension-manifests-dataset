@@ -1,0 +1,42 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_appName__",
+  "short_name": "__MSG_shortName__",
+  "description": "__MSG_appDesc__",
+  "default_locale": "en",
+  "version": "2.3.0",
+  "browser_action": {
+    "default_icon": "img/pasteMan64.png",
+    "default_popup": "app/components/popup/popup.html"
+  },
+  "icons": {
+    "16": "img/pasteMan16.png",
+    "48": "img/pasteMan64.png",
+    "128": "img/pasteMan128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "libs/jquery.js",
+        "injections/pasteItExtensionInjection.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background/messagesListener.js"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "storage",
+    "contextMenus"
+  ]
+}

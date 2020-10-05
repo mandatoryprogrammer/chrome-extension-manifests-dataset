@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Cherry Queue",
+  "description": "Add soundcloud and youtube links to your queue and control them from any page",
+  "version": "1.2.7",
+  "short_name": "Cherry",
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": "assets/images/icons/16px.png"
+  },
+  "background": {
+    "scripts": [
+      "assets/vendor/js/mixpanel.js",
+      "assets/vendor/js/alertify.min.js",
+      "assets/vendor/js/jquery-1.10.2.min.js",
+      "assets/js/shared.js",
+      "assets/js/storage.js",
+      "assets/js/background.js"
+    ]
+  },
+  "options_page": "options.html",
+  "web_accessible_resources": [
+    "assets/vendor/js/alertify.min.js",
+    "assets/images/*.png"
+  ],
+  "icons": {
+    "16": "assets/images/icons/16px.png",
+    "48": "assets/images/icons/48px.png",
+    "128": "assets/images/icons/128px.png"
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "all_frames": false,
+      "css": [
+        "assets/css/content.css"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "assets/vendor/js/jquery-1.10.2.min.js",
+        "assets/js/shared.js",
+        "assets/js/content_all.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "<all_urls>",
+    "contextMenus",
+    "tabs",
+    "storage",
+    "activeTab",
+    "notifications"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com/analytics.js https://code.jquery.com https://connect.soundcloud.com/ https://w.soundcloud.com https://www.youtube.com  https://platform.twitter.com https://connect.facebook.net https://www.facebook.com https://cdn.mxpnl.com https://s.ytimg.com 'unsafe-eval'; object-src 'self'"
+}

@@ -1,0 +1,68 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Solse",
+  "version": "3.2.3",
+  "description": "__MSG_store_shortdesc_new__",
+  "default_locale": "en",
+  "homepage_url": "https://www.solse.org",
+  "icons": {
+    "16": "img/icon_16.png",
+    "19": "img/icon_19.png",
+    "48": "img/icon_48.png",
+    "76": "img/icon_76.png",
+    "128": "img/icon_128.png"
+  },
+  "manifest_version": 2,
+  "web_accessible_resources": [
+    "img/icon_16.png",
+    "img/icon_19.png",
+    "img/icon_48.png",
+    "img/icon_76.png"
+  ],
+  "browser_action": {
+    "default_title": "__MSG_browser_action_hover__",
+    "default_icon": "img/icon_19.png"
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.solse.org/*"
+      ],
+      "js": [
+        "js/funnel-visibility.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "*://*.solse.org/*",
+    "activeTab",
+    "cookies",
+    "topSites",
+    "chrome://favicon/"
+  ],
+  "chrome_settings_overrides": {
+    "search_provider": {
+      "name": "Solse",
+      "keyword": "solarvillage",
+      "search_url": "https://solse.org/web/?q={searchTerms}&addon=chrome&addonversion=3.1.0",
+      "favicon_url": "https://solse.org/uploads/brand/favicon.png",
+      "encoding": "UTF-8",
+      "is_default": true
+    }
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://*.solse.org/*"
+    ]
+  },
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  }
+}

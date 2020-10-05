@@ -1,0 +1,87 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "艦娘直連 Kancolle Direct Link",
+  "description": "此插件能令你遊玩艦娘不需VPN, 並取得直連連結. This extension can let you playing Kancolle without using VPN, and also getting the direct link.",
+  "version": "2.0.2",
+  "icons": {
+    "32": "logo_32.png",
+    "48": "logo_48.png",
+    "128": "logo_128.png",
+    "512": "logo_512.png"
+  },
+  "browser_action": {
+    "default_icon": "icon_38.png",
+    "default_popup": "popup.html",
+    "default_title": "Kancolle Direct Link"
+  },
+  "permissions": [
+    "tabs",
+    "cookies",
+    "activeTab",
+    "<all_urls>",
+    "storage",
+    "browsingData",
+    "http://*/*",
+    "https://*/*",
+    "downloads",
+    "webRequest"
+  ],
+  "options_page": "options.html",
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.dmm.com/*"
+      ],
+      "js": [
+        "content.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://osapi.dmm.com/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "frame.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://www.dmm.com/netgame/social/-/gadgets/=/app_id=*"
+      ],
+      "js": [
+        "game_page_content.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://www.dmm.co.jp/netgame/social/-/gadgets/=/app_id=*"
+      ],
+      "js": [
+        "game_page_content.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://*/kcs2/index.php?*"
+      ],
+      "all_frames": true,
+      "js": [
+        "inner_frame.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

@@ -1,0 +1,41 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Daily Mail Blocker",
+  "version": "1.2",
+  "manifest_version": 2,
+  "description": "Reduce the risk of reading Daily Mail articles!",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png",
+    "256": "icon256.png"
+  },
+  "background": {
+    "scripts": [
+      "blocker.js",
+      "background.js"
+    ]
+  },
+  "page_action": {
+    "default_icon": "icon128.png",
+    "default_title": "There are Daily Mail links in this page!"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "contentscript.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "http://www.dailymail.co.uk/*"
+  ]
+}

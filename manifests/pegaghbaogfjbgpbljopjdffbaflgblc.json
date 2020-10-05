@@ -1,0 +1,101 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "name": "Magnet Talk Cloud Extension",
+  "short_name": "Magnet Talk",
+  "description": "__MSG_extDescriptionMagnetTalk__",
+  "version": "3.3.0",
+  "version_name": "3.3",
+  "homepage_url": "http://www.magnetnetworks.com",
+  "author": "mailto:chromeextension@amibacom.com?subject=Chrome%20Extension%203.2.0%20Feedback",
+  "icons": {
+    "16": "/dist/magnettalk/logo16.png",
+    "32": "/dist/magnettalk/logo32.png",
+    "48": "/dist/magnettalk/logo48.png",
+    "64": "/dist/magnettalk/logo64.png",
+    "128": "/dist/magnettalk/logo128.png"
+  },
+  "options_page": "options.html",
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": false
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "permissions": [
+    "background",
+    "notifications",
+    "https://*/",
+    "cookies",
+    "contextMenus",
+    "tabs",
+    "idle",
+    "clipboardRead",
+    "downloads"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.magnettalk.com/*"
+      ],
+      "js": [
+        "jquery.js",
+        "content.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "content-click2dial.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "48": "/dist/magnettalk/icon48gray.png"
+    },
+    "default_title": "Magnet Talk Cloud Extension - __MSG_extDefaultTitle__",
+    "default_popup": "popup.html"
+  },
+  "web_accessible_resources": [
+    "/dist/magnettalk/logo.svg"
+  ],
+  "commands": {
+    "Answer": {
+      "suggested_key": {
+        "default": "MediaNextTrack",
+        "mac": "MediaNextTrack"
+      },
+      "global": true,
+      "description": "__MSG_commandsAnswer__"
+    },
+    "Reject": {
+      "suggested_key": {
+        "default": "MediaPrevTrack",
+        "mac": "MediaPrevTrack"
+      },
+      "global": true,
+      "description": "__MSG_commandsReject__"
+    },
+    "Dial": {
+      "suggested_key": {
+        "default": "MediaPlayPause",
+        "mac": "MediaPlayPause"
+      },
+      "global": true,
+      "description": "__MSG_commandsDial__"
+    },
+    "Portal": {
+      "suggested_key": {
+        "default": "MediaStop",
+        "mac": "MediaStop"
+      },
+      "global": true,
+      "description": "__MSG_commandsPortal__"
+    }
+  }
+}

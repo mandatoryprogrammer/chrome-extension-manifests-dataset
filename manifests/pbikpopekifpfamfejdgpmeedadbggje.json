@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "version": "0.11.0",
+  "short_name": "Công cụ đặt hàng của Thiên Mã Logistics",
+  "description": "Công cụ đặt hàng của Thiên Mã Logistics trên trình duyệt Chrome và Cốc Cốc",
+  "name": "Công cụ đặt hàng của Thiên Mã Logistics",
+  "icons": {
+    "128": "./logo.png"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "notifications",
+    "system.display",
+    "system.cpu",
+    "system.memory"
+  ],
+  "background": {
+    "page": "background.html",
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "./content.js"
+      ],
+      "matches": [
+        "*://*.taobao.com/*",
+        "*://taobao.com/",
+        "*://*.1688.com/*",
+        "*://1688.com/*",
+        "*://*.tmall.com/*",
+        "*://tmall.com/*",
+        "http://*.tmall.hk/*",
+        "https://*.tmall.hk/*",
+        "http://*.liangxinyao.com/*",
+        "https://*.liangxinyao.com/*"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "js": [
+        "./content_service.js"
+      ],
+      "matches": [
+        "http://dathang.thienmalogistics.com/*",
+        "https://dathang.thienmalogistics.com/*"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "content.html",
+    "templates/*",
+    "injector.js",
+    "*.png"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://browser.sentry-cdn.com; object-src 'self'"
+}

@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "P2P Trademanager",
+  "version": "0.4.0",
+  "description": "Trade CS:GO skins with ease without worrying about scammers sending duplicate/fake trades.",
+  "manifest_version": 2,
+  "permissions": [
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "background_script.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_popup": "index.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://api.tradeservice.io/p2pExtensionApi/v1/login/redirect*"
+      ],
+      "js": [
+        "login_redirect_content_script.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://steamcommunity.com/*/tradeoffers*"
+      ],
+      "js": [
+        "traderoffers_content_script.js"
+      ],
+      "css": [
+        "tradeoffers_content.css"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "https://*.steamcommunity.com/tradeoffer/*"
+      ],
+      "js": [
+        "tradeoffer_content_script.js"
+      ],
+      "css": [
+        "tradeoffer_content.css"
+      ]
+    }
+  ]
+}

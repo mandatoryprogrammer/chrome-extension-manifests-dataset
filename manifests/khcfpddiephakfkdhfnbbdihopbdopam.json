@@ -1,0 +1,41 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "PinPoint",
+  "description": "bookmark your favorite YouTube video moments",
+  "version": "1.41",
+  "background": {
+    "scripts": [
+      "JSONparser.js",
+      "/popup/popup.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "PP_logo.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.youtube.com/*",
+        "https://www.youtube.com/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "widget/widget.js",
+        "widget/pinpoint-notes-presenter.js"
+      ],
+      "css": [
+        "/widget/widget.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "storage",
+    "tabs",
+    "http://www.youtube.com/*",
+    "https://www.youtube.com/*"
+  ],
+  "options_page": "/dashboard/dashboard.html"
+}

@@ -1,0 +1,37 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "YouTubeVideoHater",
+  "description": "Skips videos You hate",
+  "version": "1.0",
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistence": false
+  },
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html",
+    "default_title": "Hate this Video with me!"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.youtube.com/*",
+        "https://www.youtube.com/*"
+      ],
+      "js": [
+        "external/js/jquery-3.1.1.min.js",
+        "js/skip_it.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "<all_urls>",
+    "webNavigation",
+    "storage"
+  ]
+}

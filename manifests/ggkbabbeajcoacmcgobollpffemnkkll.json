@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Zillow Personal Advisor",
+  "version": "0.6",
+  "description": "Zillow Personal Advisor",
+  "manifest_version": 2,
+  "incognito": "spanning",
+  "icons": {
+    "16": "images/icons/icon16.png",
+    "48": "images/icons/icon48.png",
+    "128": "images/icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "css": [
+        "shared/jquery-ui-1.11.2/jquery-ui.min.css"
+      ],
+      "matches": [
+        "*://*.mint.com/*",
+        "*://*.zillow.com/*"
+      ],
+      "js": [
+        "shared/jquery-1.11.1.min.js",
+        "shared/jquery-ui-1.11.2/jquery-ui.min.js",
+        "contentscripts/mint.js",
+        "contentscripts/zillow.js",
+        "contentscripts/zillowProfile.js",
+        "contentscripts/zillowMap.js",
+        "contentscripts/hackHousingProject.js",
+        "contentscripts/ahcaAPI.js",
+        "contentscripts/hudSearchFilter.js",
+        "contentscripts/mapFilter.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "images/app/*"
+  ],
+  "page_action": {
+    "default_title": "Zillow Personal Advisor"
+  },
+  "background": {
+    "scripts": [
+      "shared/jquery-1.11.1.min.js",
+      "background/background.js",
+      "background/rewriteResponse.js"
+    ]
+  },
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "*://*.zillow.com/*"
+  ]
+}

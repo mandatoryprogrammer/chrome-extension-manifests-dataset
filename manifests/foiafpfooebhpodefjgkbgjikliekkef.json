@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "EndlessVideo",
+  "version": "2.2",
+  "description": "Loop full or partial YouTube videos.",
+  "icons": {
+    "16": "images/icons/16x16.png",
+    "24": "images/icons/24x24.png",
+    "32": "images/icons/32x32.png",
+    "48": "images/icons/48x48.png"
+  },
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "pages/popup.html",
+    "default_title": "EndlessVideo"
+  },
+  "author": "Vitzo.com",
+  "background": {
+    "persistent": true,
+    "page": "pages/background.html"
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "css": [
+        "styles/bootstrap.css",
+        "styles/content.css"
+      ],
+      "js": [
+        "scripts/content.js",
+        "scripts/jquery-1.11.3.js",
+        "scripts/endlessVideo.youtube.js",
+        "scripts/endlessVideo.handler.js",
+        "scripts/endlessVideo.hub.js",
+        "scripts/endlessVideo.main.js",
+        "scripts/inspector.js"
+      ],
+      "matches": [
+        "*://www.youtube.com/*"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "options_page": "pages/options.html",
+  "permissions": [
+    "storage",
+    "https://*/*",
+    "http://*/*",
+    "contextMenus",
+    "tabs"
+  ],
+  "short_name": "EndlessVideo",
+  "web_accessible_resources": [
+    "svg/*",
+    "images/*"
+  ]
+}

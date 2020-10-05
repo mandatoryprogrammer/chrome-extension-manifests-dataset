@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Flinb",
+  "description": "Create a collaborative cart for Amazon.",
+  "version": "1.0.6",
+  "browser_action": {
+    "default_icon": {
+      "16": "icon16.png",
+      "24": "icon24.png",
+      "32": "icon32.png",
+      "128": "icon128.png"
+    },
+    "default_popup": "html/popup.html"
+  },
+  "content_security_policy": "script-src 'self' https://cdn.firebase.com https://*.firebaseio.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.amazon.co.uk/*",
+        "https://www.amazon.com/*",
+        "https://www.amazon.it/*"
+      ],
+      "css": [
+        "style/reset.css",
+        "style/style.css"
+      ],
+      "js": [
+        "js/jquery-3.2.1.min.js",
+        "js/firebase.js",
+        "js/contentscript.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/eventPage.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "storage",
+    "https://www.amazon.co.uk/*",
+    "https://www.amazon.com/*",
+    "https://www.amazon.it/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://flinb.com/*",
+      "http://localhost:63342/*"
+    ]
+  }
+}

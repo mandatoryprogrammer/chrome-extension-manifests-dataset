@@ -1,0 +1,145 @@
+{
+  "manifest_version": 2,
+  "name": "Find anyone's email - Contact Out",
+  "short_name": "Contact Out",
+  "description": "The best & most accurate email finding tool, used by 30% of FORTUNE500 companies",
+  "version": "2.9.3",
+  "browser_action": {
+    "default_icon": "assets/icons/icon.png",
+    "default_title": "Browse to any Linkedin profile and click to use",
+    "default_popup": "assets/pages/app.html"
+  },
+  "icons": {
+    "16": "assets/icons/icon16.png",
+    "32": "assets/icons/icon32.png",
+    "48": "assets/icons/icon48.png",
+    "128": "assets/icons/icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.linkedin.com/*"
+      ],
+      "exclude_matches": [
+        "*://*.linkedin.com/sales/*",
+        "*://*.linkedin.com/recruiter/*",
+        "*://*.linkedin.com/talent/*"
+      ],
+      "js": [
+        "/assets/libs/jquery-3.5.0.min.js",
+        "/app/linkedin_regular.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.linkedin.com/sales/people/*",
+        "*://*.linkedin.com/sales/search/*"
+      ],
+      "js": [
+        "/assets/libs/jquery-3.5.0.min.js",
+        "/app/linkedin_sales.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.linkedin.com/recruiter/*"
+      ],
+      "js": [
+        "/assets/libs/jquery-3.5.0.min.js",
+        "/app/linkedin_recruiter.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.linkedin.com/talent/*"
+      ],
+      "js": [
+        "/assets/libs/jquery-3.5.0.min.js",
+        "/app/linkedin_talent.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.linkedin.com/company/*",
+        "*://*.linkedin.com/sales/company/*",
+        "*://*.linkedin.com/recruiter/company/*"
+      ],
+      "js": [
+        "/assets/libs/jquery-3.5.0.min.js",
+        "/app/linkedin_company.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://contactout.com/login/callback*",
+        "https://contactout.com/thanks"
+      ],
+      "js": [
+        "/app/auth_callback.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://contactout.com/login"
+      ],
+      "js": [
+        "/app/contactout_login.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://contactout.com/profile",
+        "https://contactout.com/integrations/greenhouse/callback*"
+      ],
+      "js": [
+        "/app/greenhouse.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://contactout.com/*"
+      ],
+      "js": [
+        "/app/contactout.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://github.com/*"
+      ],
+      "js": [
+        "/assets/libs/jquery-3.5.0.min.js",
+        "/app/github.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "idle",
+    "background",
+    "cookies",
+    "storage",
+    "system.display",
+    "https://contactout.com/",
+    "https://*.linkedin.com/",
+    "https://github.com/"
+  ],
+  "background": {
+    "scripts": [
+      "/assets/libs/jquery-3.5.0.min.js",
+      "/app/background.js"
+    ],
+    "persistent": true
+  },
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "update_url": "https://clients2.google.com/service/update2/crx"
+}

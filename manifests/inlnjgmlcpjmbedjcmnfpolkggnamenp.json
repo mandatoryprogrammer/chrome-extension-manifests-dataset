@@ -1,0 +1,76 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "TRAVIC-Sign",
+  "description": "Browsererweiterung zur Signaturerstellung",
+  "version": "3.1.12.0",
+  "author": "PPI AG, Hamburg, Germany",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAurtpXkDFnmgtpxtRDJUnifkU1H3sc2c61menoWo09Uc+STwBKFVPZ54QmMAPO5ko0OmJ5OUL4fQ1cmLXsgyeFaWuh36RAiiRN6QZNZYXcFdqlmNKb3QIeIoGHLURUDCUui+Xst2XkkGIMpWRTC33N5sR6LNjHFS65bM93baV0qcrESG7Xa0dQITqfQPrXkzan5cE0Ud+VN772vQpkn/t5SK7/j5916nLEuymJXfMqWllD2gBFUf5KpZl+Sfd3+1BIbQf9l7iKYLdmz8EAcVYKVaAy2Oh7f3822TjTMkYmQHziaGqV/5hkmLNH958ZfQxA1c294b4Ywcqk67fF/u8DwIDAQAB",
+  "permissions": [
+    "nativeMessaging",
+    "clipboardWrite",
+    "storage"
+  ],
+  "page_action": {
+    "default_icon": {
+      "19": "images/ppi19.png",
+      "38": "images/ppi38.png"
+    },
+    "default_title": "TRAVIC-Sign"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "file://*/*",
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "jquery-3.1.1.min.js",
+        "util.js",
+        "OptionsService.js",
+        "ApiConverter.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "file://*/*",
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "jquery-3.1.1.min.js",
+        "util.js",
+        "VersionInfoService.js",
+        "GuiProtocolService.js",
+        "MessageService.js",
+        "ChunkedMessageService.js",
+        "HtmlFragment.js",
+        "gui.js",
+        "MessageAnimation.js"
+      ],
+      "css": [
+        "style.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "scripts": [
+      "jquery-3.1.1.min.js",
+      "util.js",
+      "NativeMessageProxy.js"
+    ]
+  },
+  "options_ui": {
+    "page": "Options/options.html",
+    "chrome_style": true,
+    "open_in_tab": true
+  },
+  "web_accessible_resources": [
+    "gui.html"
+  ]
+}

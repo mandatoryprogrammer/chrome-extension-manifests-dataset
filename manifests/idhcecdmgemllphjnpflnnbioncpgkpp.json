@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "WTFlinks",
+  "version": "1.4.0",
+  "description": "Shows the content of the links without leaving the page. Works in Twitter and Facebook.",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "declarativeContent",
+    "storage",
+    "*://*/*",
+    "<all_urls>"
+  ],
+  "background": {
+    "persistent": false,
+    "page": "background.html"
+  },
+  "page_action": {
+    "default_icon": {
+      "16": "images/icon-128px.png",
+      "32": "images/icon-32px.png",
+      "48": "images/icon-48px.png",
+      "128": "images/icon-128px.png"
+    }
+  },
+  "content_security_policy": "script-src 'self' https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "js": [
+        "js/jquery.js",
+        "js/content/twitter.js"
+      ],
+      "matches": [
+        "https://twitter.com/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": false,
+      "js": [
+        "js/content/facebook.js"
+      ],
+      "matches": [
+        "http://www.facebook.com/*",
+        "https://www.facebook.com/*"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "16": "images/icon-128px.png",
+    "32": "images/icon-32px.png",
+    "48": "images/icon-48px.png",
+    "128": "images/icon-128px.png"
+  },
+  "web_accessible_resources": [
+    "images/icon-128px.png"
+  ],
+  "manifest_version": 2
+}

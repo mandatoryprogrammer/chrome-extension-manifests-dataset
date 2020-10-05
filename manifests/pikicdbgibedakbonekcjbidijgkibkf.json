@@ -1,0 +1,122 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Dooly",
+  "description": "Quickly access Dooly from where you work.",
+  "version": "2.2.7",
+  "browser_action": {
+    "default_title": "",
+    "default_icon": "icon32.png"
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "background-scripts/sessionManager.js",
+      "background-scripts/requestMassager.js",
+      "background-scripts/sidebarManager.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "cleanslate.css",
+    "tachyons.css",
+    "dooly/*",
+    "sidebar/*",
+    "google-calendar/*",
+    "google-drive/*",
+    "salesforce/*",
+    "salesforce-lightning/*",
+    "guru/*",
+    "history-monitor/*"
+  ],
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "https://*.dooly.ai/*",
+    "https://*.dooly-staging.com/*"
+  ],
+  "icons": {
+    "16": "icon16.png",
+    "32": "icon32.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.dooly.ai/*",
+        "https://*.dooly-staging.com/*"
+      ],
+      "js": [
+        "dooly/index.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "sidebar/index.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://calendar.google.com/*"
+      ],
+      "js": [
+        "google-calendar/index.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://drive.google.com/*"
+      ],
+      "js": [
+        "google-drive/index.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.salesforce.com/*"
+      ],
+      "js": [
+        "salesforce/index.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.lightning.force.com/*"
+      ],
+      "js": [
+        "salesforce-lightning/index.js",
+        "history-monitor/content-script.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.outreach.io/*"
+      ],
+      "js": [
+        "outreach/index.js",
+        "history-monitor/content-script.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://app.salesloft.com/*"
+      ],
+      "js": [
+        "salesloft/index.js",
+        "history-monitor/content-script.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.getguru.com/*"
+      ],
+      "js": [
+        "guru/script-injector.js"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Lock It Up: Password Protect Files",
+  "short_name": "Lock It Up",
+  "version": "1.0.2",
+  "manifest_version": 2,
+  "description": "Password protect any file or folder.",
+  "icons": {
+    "16": "static/img/normal/icon-16x16.png",
+    "32": "static/img/normal/icon-32x32.png",
+    "96": "static/img/normal/icon-96x96.png",
+    "128": "static/img/normal/icon-128x128.png",
+    "192": "static/img/normal/icon-192x192.png"
+  },
+  "background": {
+    "scripts": [
+      "static/js/manifest.js",
+      "static/js/vendor.js",
+      "static/js/background.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "background",
+    "unlimitedStorage",
+    "downloads",
+    "clipboardRead",
+    "clipboardWrite",
+    "storage",
+    "webRequest",
+    "*://*.google.com/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "static/css/contentscript.css"
+      ],
+      "js": [
+        "static/js/manifest.js",
+        "static/js/vendor.js",
+        "static/js/contentscript.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "96": "static/img/normal/icon-96x96.png",
+      "32": "static/img/normal/icon-32x32.png"
+    },
+    "default_title": "Lock It Up",
+    "default_popup": "popup.html"
+  },
+  "web_accessible_resources": [
+    "static/img/normal/icon-96x96.png",
+    "inject.html"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.google-analytics.com https://fonts.googleapis.com; object-src 'self'"
+}

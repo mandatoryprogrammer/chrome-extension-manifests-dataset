@@ -1,0 +1,71 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Evergage Visual Editor",
+  "version": "76.0",
+  "manifest_version": 2,
+  "description": "Configure the integration of Evergage into your application",
+  "content_security_policy": "script-src 'self' chrome-extension-resource: https://localtest.apptegic.com:8443 https://*.apptegic.com https://localtest.evergage.com:8443 https://*.evergage.com https://assets.zendesk.com https://www.google-analytics.com https://us.evergage.com 'unsafe-eval'; object-src 'self'",
+  "browser_action": {
+    "default_icon": {
+      "19": "backgroundPage/images/evergage-icon-32-off.png",
+      "38": "backgroundPage/images/evergage-icon-32-off.png"
+    },
+    "default_popup": "browserAction/browserActionPopup.html"
+  },
+  "background": {
+    "page": "backgroundPage/background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file://*/*"
+      ],
+      "js": [
+        "contentScripts/scripts/evergageContentScript.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "sideBars/sideBarTools.html",
+    "contentScripts/html/*.html",
+    "contentScripts/styles/*.css",
+    "contentScripts/css/*.css",
+    "contentScripts/images/*.png",
+    "contentScripts/images/*.svg",
+    "contentScripts/fonts/SF/*.otf",
+    "contentScripts/websiteContextScripts/*",
+    "contentScripts/thirdparty/scripts/*",
+    "contentScripts/fonts/**/*",
+    "firstLaunchIFrame/firstLaunchIFrame.html",
+    "topFrameResources/*",
+    "ui/index.html",
+    "ui/visualEditorTray.html",
+    "ui/styles/main.css.map",
+    "ui/images/*.png",
+    "ui/images/icons/*.png",
+    "ui/bower_components/jquery/dist/jquery.min.map",
+    "ui/bower_components/jquery/dist/jquery.js",
+    "ui/fonts/*"
+  ],
+  "icons": {
+    "16": "backgroundPage/images/evergage-icon-16.png",
+    "48": "backgroundPage/images/EG_VE_Icon_32x32@2x.png",
+    "128": "backgroundPage/images/EG_VE_Icon_128x128@2x.png"
+  },
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "contextMenus",
+    "webRequest",
+    "webRequestBlocking",
+    "clipboardWrite",
+    "webNavigation",
+    "cookies"
+  ],
+  "minimum_chrome_version": "26.0"
+}

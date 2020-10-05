@@ -1,0 +1,60 @@
+{
+  "name": "Jotit - Just Jot it!",
+  "short_name": "Jotit",
+  "version": "1.1.0",
+  "manifest_version": 2,
+  "author": "jotit.click",
+  "description": "Keep your notes and reminders organised, Get your notes when you want them in a hassle free way !",
+  "icons": {
+    "48": "images/icon.png"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "notifications",
+    "*://*/",
+    "alarms",
+    "activeTab",
+    "identity",
+    "identity.email",
+    "webNavigation",
+    "contextMenus"
+  ],
+  "browser_action": {
+    "default_title": "Jotit",
+    "default_icon": "images/50x50.png",
+    "default_popup": "index.html"
+  },
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "background": {
+    "scripts": [
+      "js/bg.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "<all_urls>"
+      ],
+      "js": [
+        "js/cs.js"
+      ]
+    }
+  ],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+I",
+        "windows": "Alt+I",
+        "mac": "Alt+I",
+        "chromeos": "Alt+I",
+        "linux": "Alt+Shift+J"
+      },
+      "description": "Toggle feature foo",
+      "global": true
+    }
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

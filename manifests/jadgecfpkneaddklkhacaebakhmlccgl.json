@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "X Control Filter",
+  "short_name": "XCF",
+  "version": "1.1.10",
+  "version_name": "1.1.10",
+  "description": "X Control Filter removes unwanted content from various websites at your will.",
+  "icons": {
+    "16": "icons/xcontrolfilter16.png",
+    "48": "icons/xcontrolfilter48.png",
+    "128": "icons/xcontrolfilter128.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/xcontrolfilter128.png",
+    "default_popup": "popup/popup.html",
+    "default_title": "X Control Filter"
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "js/events.js"
+    ],
+    "persistent": false
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/jquery-3.3.1.min.js",
+        "js/content.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "options_ui": {
+    "page": "options/options.html",
+    "chrome_style": true
+  }
+}

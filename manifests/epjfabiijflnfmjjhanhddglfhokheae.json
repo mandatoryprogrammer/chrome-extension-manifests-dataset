@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "content_security_policy": "default-src 'none'; script-src 'self'; frame-src https://www.ereaderiq.com/extensions/chrome/ https://uk.ereaderiq.com/extensions/chrome/ https://ca.ereaderiq.com/extensions/chrome/",
+  "version": "0.11.7",
+  "name": "eReaderIQ Integrator",
+  "description": "Integrates eReaderIQ with Amazon for quickly checking Kindle price history & watching for Kindle price drops.",
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "icons": {
+    "128": "images/eReaderIQ_square_128.png",
+    "48": "images/eReaderIQ_square_48.png",
+    "16": "images/eReaderIQ_square_16.png"
+  },
+  "page_action": {
+    "default_icon": "images/eReaderIQ_square_16.png",
+    "default_title": "eReaderIQ"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.amazon.com/*",
+        "http://www.amazon.co.uk/*",
+        "http://www.amazon.ca/*",
+        "http://smile.amazon.com/*",
+        "http://smile.amazon.co.uk/*",
+        "https://www.amazon.com/*",
+        "https://www.amazon.co.uk/*",
+        "https://www.amazon.ca/*",
+        "https://smile.amazon.com/*",
+        "https://smile.amazon.co.uk/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://www.ereaderiq.com/extensions/chrome/*",
+        "https://uk.ereaderiq.com/extensions/chrome/*",
+        "https://ca.ereaderiq.com/extensions/chrome/*"
+      ],
+      "js": [
+        "contentFrame.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_idle"
+    }
+  ]
+}

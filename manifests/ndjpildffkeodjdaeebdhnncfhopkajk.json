@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Network File Share for Chrome OS",
+  "short_name": "Network File Share",
+  "description": "Access your network file shares directly from the Chrome OS files app.",
+  "version": "0.81.18120",
+  "author": "Zentaro Kavanagh",
+  "icons": {
+    "128": "icon128.png"
+  },
+  "app": {
+    "background": {
+      "page": "plugin.html"
+    }
+  },
+  "storage": {
+    "managed_schema": "schema.json"
+  },
+  "permissions": [
+    "fileSystemProvider",
+    "system.network",
+    "storage",
+    "mdns",
+    {
+      "socket": [
+        "tcp-listen:*:*",
+        "tcp-connect",
+        "resolve-host",
+        "udp-bind:*:*",
+        "udp-send-to:*:*",
+        "udp-multicast-membership",
+        "resolve-host"
+      ]
+    }
+  ],
+  "sockets": {
+    "tcp": {
+      "connect": "*"
+    },
+    "udp": {
+      "send": "*",
+      "bind": "*",
+      "multicastMembership": ""
+    }
+  },
+  "file_system_provider_capabilities": {
+    "configurable": false,
+    "multiple_mounts": true,
+    "watchable": false,
+    "source": "network"
+  }
+}

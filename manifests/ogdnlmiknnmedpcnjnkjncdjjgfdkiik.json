@@ -1,0 +1,69 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_ext_name__",
+  "short_name": "__MSG_ext_short_name__",
+  "description": "__MSG_ext_description__",
+  "version": "2.0.14",
+  "author": "Artem Zanin",
+  "default_locale": "en",
+  "icons": {
+    "16": "images/Play.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "https://play.pocketcasts.com/*/"
+  ],
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://play.pocketcasts.com/*/"
+      ],
+      "js": [
+        "action-play.js",
+        "action-skip.js",
+        "log-listener.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_title": "__MSG_Play__",
+    "default_icon": "images/Play.png"
+  },
+  "commands": {
+    "play-pause": {
+      "suggested_key": {
+        "default": "MediaPlayPause"
+      },
+      "description": "__MSG_play_pause__",
+      "global": true
+    },
+    "jump-back": {
+      "suggested_key": {
+        "default": "MediaPrevTrack"
+      },
+      "description": "__MSG_jump_back__",
+      "global": true
+    },
+    "jump-forward": {
+      "suggested_key": {
+        "default": "MediaNextTrack"
+      },
+      "description": "__MSG_jump_forward__",
+      "global": true
+    }
+  }
+}

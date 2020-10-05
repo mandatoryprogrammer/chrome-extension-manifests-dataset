@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "mements.tv",
+  "short_name": "mements.tv",
+  "description": "Mements instantly turns pictures and clips into personalized memes. Your own meme is just one click away!",
+  "version": "19.04.0",
+  "icons": {
+    "128": "images/icon_128x128.png",
+    "96": "images/icon_96x96.png"
+  },
+  "author": "vAudience GmbH",
+  "browser_action": {
+    "default_icon": "images/icon.png",
+    "default_popup": "plugin.html"
+  },
+  "background": {
+    "scripts": [
+      "js/blob.js",
+      "js/background/background.js"
+    ]
+  },
+  "permissions": [
+    "unlimitedStorage",
+    "tabs",
+    "contextMenus",
+    "activeTab",
+    "storage",
+    "alarms",
+    "notifications",
+    "http://*/*",
+    "https://*/*",
+    "https://cdn.jsdelivr.net/*",
+    "https://*.appspot.com/*",
+    "https://unpkg.com/*",
+    "https://www.gstatic.com/*",
+    "https://spect8-server-spect8-orf-dev.e4ff.pro-eu-west-1.openshiftapps.com/*",
+    "https://couchbase-gateway-spect8-orf-dev.e4ff.pro-eu-west-1.openshiftapps.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "js/blob.js",
+        "js/content/content_video_recorder.js",
+        "js/content/content_screenshot.js",
+        "js/content/content_script.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'unsafe-eval' 'self' blob: filesystem: chrome-extension-resource: https://unpkg.com https://apis.google.com https://www.gstatic.com https://cdn.firebase.com https://cdn.jsdelivr.net https://spect8-server-spect8-orf-dev.e4ff.pro-eu-west-1.openshiftapps.com; object-src 'self'"
+}

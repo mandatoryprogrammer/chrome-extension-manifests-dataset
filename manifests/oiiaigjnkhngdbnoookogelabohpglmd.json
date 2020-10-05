@@ -1,0 +1,70 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "HubSpot Sales",
+  "short_name": "HubSpot Sales",
+  "description": "Email tracking, CRM for Gmail, and sales productivity tools in your inbox",
+  "version": "2.9.0.4686",
+  "permissions": [
+    "tabs",
+    "notifications",
+    "cookies",
+    "storage",
+    "background",
+    "webRequest",
+    "webRequestBlocking",
+    "*://*.hubspot.com/*",
+    "*://*.hubspotqa.com/*",
+    "*://*.hubapi.com/*",
+    "*://*.hubapiqa.com/*",
+    "*://mail.google.com/*",
+    "*://*.googleusercontent.com/*"
+  ],
+  "optional_permissions": [
+    "management"
+  ],
+  "icons": {
+    "16": "img/hubspot-logo-16.png",
+    "48": "img/hubspot-logo-48.png",
+    "128": "img/logo-128-webstore.png"
+  },
+  "background": {
+    "page": "pages/background.html"
+  },
+  "incognito": "not_allowed",
+  "browser_action": {
+    "default_icon": "img/hubspot-logo-bg-48.png",
+    "default_popup": "pages/popup.html"
+  },
+  "web_accessible_resources": [
+    "js/*.js.map",
+    "img/*"
+  ],
+  "content_security_policy": "script-src 'self' https://bam.nr-data.net https://js-agent.newrelic.com https://local.hsappstatic.net https://static.hsappstatic.net https://app.hubspot.com https://talkgadget.google.com/talkgadget/channel.js https://cdn.ravenjs.com/1.1.11/jquery/raven.min.js; object-src 'self'; frame-src 'self' https://local.hubspot.com https://app.hubspot.com https://app.hubspotqa.com https://local.hsappstatic.net https://static.hsappstatic.net",
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "all_frames": false,
+      "matches": [
+        "*://*.hubspot.com/*",
+        "*://*.hubspotqa.com/*"
+      ],
+      "exclude_matches": [
+        "*://*/*.xml"
+      ],
+      "js": [
+        "js/sig-ext.js"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "all_frames": false,
+      "matches": [
+        "*://mail.google.com/*"
+      ],
+      "js": [
+        "js/gmail.js"
+      ]
+    }
+  ]
+}

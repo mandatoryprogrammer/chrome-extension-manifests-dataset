@@ -1,0 +1,90 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Accordium",
+  "version": "0.3.3",
+  "manifest_version": 2,
+  "description": "Record, share and track personalised sales videos in an instant, with the Accordium Chrome Extension for Gmail.",
+  "permissions": [
+    "storage",
+    "identity",
+    "desktopCapture",
+    "activeTab",
+    "notifications",
+    "storage",
+    "webNavigation",
+    "tabs",
+    "contentSettings",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "minimum_chrome_version": "23",
+  "icons": {
+    "128": "asset/android-chrome-128x128.png"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "browser_action": {
+    "default_icon": "asset/android-chrome-128x128.png",
+    "default_title": "Accordium",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "inboxsdk.js",
+        "gmail.js"
+      ],
+      "css": [],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://app.accordium.com/*",
+        "http://localhost:3000/*"
+      ],
+      "js": [
+        "accordium.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://app.accordium.com/*"
+      ],
+      "js": [
+        "extapp.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "web_accessible_resources": [
+    "content.css",
+    "gmail.css",
+    "content-frame.html",
+    "asset/android-chrome-128x128.png",
+    "shapes.png",
+    "popup.html"
+  ]
+}

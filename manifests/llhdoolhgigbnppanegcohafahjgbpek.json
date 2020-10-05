@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "迅雷离线Aria2",
+  "short_name": "xta",
+  "description": "这个插件使用迅雷离线作为中转, 加速 Aria2 下载. 现在也可以直接用 Aria2 下载",
+  "version": "1.1.9",
+  "icons": {
+    "128": "image/icon-128.png",
+    "48": "image/icon-48.png",
+    "16": "image/icon-16.png"
+  },
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "cookies",
+    "notifications",
+    "http://dynamic.cloud.vip.xunlei.com/"
+  ],
+  "background": {
+    "scripts": [
+      "js/jquery-3.1.0.min.js",
+      "js/tools.js",
+      "js/aria2.js",
+      "js/xunleiapi.js",
+      "js/task.js",
+      "js/servermanager.js",
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://dynamic.cloud.vip.xunlei.com/*"
+      ],
+      "css": [
+        "css/xunlei-insert.css",
+        "css/insert.css"
+      ],
+      "js": [
+        "js/jquery-3.1.0.min.js",
+        "js/xunlei-insert.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "image/icon-19.png",
+      "38": "image/icon-38.png"
+    },
+    "default_title": "Xunlei To Aria2"
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Dumpert DarkMode",
+  "version": "1.0.2",
+  "author": "Robin van Nunen",
+  "description": "Dumpert met Dark Mode en een werkende video speler.",
+  "icons": {
+    "19": "img/icon-19.png",
+    "48": "img/icon-48.png",
+    "128": "img/icon-128.png"
+  },
+  "background": {
+    "scripts": [
+      "js/intercept.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.dumpert.nl/*"
+      ],
+      "css": [
+        "css/darkmode.css",
+        "css/plyr.css"
+      ],
+      "js": [
+        "js/libs.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://comments.dumpert.nl/*"
+      ],
+      "css": [
+        "css/darkmode-comments.css"
+      ],
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "js/dumpert.js",
+    "img/background.jpg",
+    "lib/plyr/plyr.css",
+    "lib/plyr/plyr.polyfilled.min.js",
+    "lib/plyr/plyr.nl.js",
+    "lib/plyr/plyr.svg"
+  ],
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "*://*.dumpert.nl/*"
+  ]
+}

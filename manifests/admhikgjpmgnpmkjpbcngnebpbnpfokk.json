@@ -1,0 +1,72 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "JotUrl",
+  "short_name": "JotUrl",
+  "version": "1.1.2",
+  "author": "Massimo Poli & Emanuele Barban",
+  "description": "JotUrl Chrome Extension",
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "options_page": "html/options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/libs/validator.min.js",
+        "js/libs/tldjs.js",
+        "js/libs/jquery-3.2.1.min.js",
+        "js/helpers/api-middleware.js"
+      ],
+      "css": [
+        "css/style.css"
+      ],
+      "all_frames": true,
+      "exclude_matches": [
+        "https://*.joturl.com/*"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_title": "Jot this page URL"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+R",
+        "windows": "Alt+R",
+        "mac": "MacCtrl+R",
+        "chromeos": "Alt+R",
+        "linux": "Alt+R"
+      }
+    }
+  },
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "storage",
+    "*://*/*",
+    "bookmarks",
+    "tabs"
+  ],
+  "web_accessible_resources": [
+    "css/select.min.css",
+    "js/libs/tldjs.js",
+    "js/utils/iframe-spinner.js",
+    "html/iframe-spinner.html",
+    "html/spinner-error.html"
+  ],
+  "background": {
+    "scripts": [
+      "js/helpers/api-middleware.js",
+      "js/dashboard/context_menu.js",
+      "entry_dashboard_extension.js",
+      "js/libs/jquery-3.2.1.min.js"
+    ]
+  }
+}

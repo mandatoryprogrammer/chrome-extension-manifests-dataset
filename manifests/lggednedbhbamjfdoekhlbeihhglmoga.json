@@ -1,0 +1,67 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Voiply Call Assistant",
+  "version": "2.1.1.3",
+  "manifest_version": 2,
+  "description": "Voiply customers can maximize workday efficiency with click-to-call and caller ID popups",
+  "icons": {
+    "16": "images/icon-16.png",
+    "19": "images/icon-19.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
+  },
+  "browser_action": {
+    "default_title": "Disable Voiply extension",
+    "default_icon": "images/icon-19.png"
+  },
+  "options_ui": {
+    "page": "options/setup/index.html"
+  },
+  "background": {
+    "page": "bg_page.html"
+  },
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "notifications",
+    "idle",
+    "tabs"
+  ],
+  "content_security_policy": "default-src 'self' https://*.crisp.chat; style-src 'self' 'unsafe-inline' https://*.crisp.chat;font-src *; connect-src https: wss:; img-src * data:; script-src 'self' https://ssl.google-analytics.com https://*.voiply.com https://*.highrisehq.com https://*.zendesk.com https://*.addthis.com https://*.crisp.chat https://www.linkedin.com https://api.pinterest.com; media-src;",
+  "web_accessible_resources": [
+    "images/icon-48.png",
+    "images/icon-19.png",
+    "js/libraries/jquery.js",
+    "js/utils.js",
+    "js/content_page.js",
+    "js/libraries/strophe.js",
+    "js/libraries/ox.js",
+    "images/calling.gif",
+    "js/crsp.js",
+    "https://s7.addthis.com/js/300/addthis_widget.js"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file://*/*"
+      ],
+      "js": [
+        "js/libraries/jquery.js",
+        "js/libraries/jssocials.min.js",
+        "js/utils.js",
+        "js/content_page.js",
+        "js/jssocial.js"
+      ],
+      "css": [
+        "css/content_page.css",
+        "css/jssocials.css",
+        "css/jssocials-theme-minima.css",
+        "css/font-awesome.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Lute",
+  "version": "5.4.0",
+  "short_name": "Lute",
+  "author": "CHergott",
+  "description": "Download music from Pandora.",
+  "icons": {
+    "128": "images/lute-logo128.png"
+  },
+  "offline_enabled": false,
+  "options_ui": {
+    "page": "options/index.html",
+    "chrome_style": true
+  },
+  "browser_action": {
+    "default_title": "Lute"
+  },
+  "permissions": [
+    "*://*.pandora.com/*",
+    "webRequest",
+    "downloads",
+    "tabs",
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "lute.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.pandora.com/*"
+      ],
+      "js": [
+        "services/pandora.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "main/*",
+    "images/*"
+  ]
+}

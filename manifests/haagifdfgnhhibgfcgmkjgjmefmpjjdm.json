@@ -1,0 +1,94 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "React Autofill",
+  "author": "Arevi",
+  "version": "1.0.4",
+  "description": "Automate the filling of checkout forms, increasing your checkout speeds.",
+  "browser_action": {
+    "default_popup": "index.html",
+    "default_title": "React Autofill"
+  },
+  "icons": {
+    "16": "./images/16.png",
+    "24": "./images/24.png",
+    "32": "./images/32.png",
+    "64": "./images/64.png",
+    "128": "./images/128.png"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "js": [
+        "sites/all.js"
+      ],
+      "exclude_matches": [
+        "https://*/*/checkouts/*",
+        "https://*.shopifycs.com/*",
+        "https://js.stripe.com/*",
+        "https://checkout.stripe.com/*",
+        "https://www.supremenewyork.com/checkout"
+      ]
+    },
+    {
+      "matches": [
+        "https://*/*/checkouts/*"
+      ],
+      "js": [
+        "sites/shopify.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.shopifycs.com/*"
+      ],
+      "js": [
+        "sites/shopify-billing.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://js.stripe.com/*",
+        "https://checkout.stripe.com/*"
+      ],
+      "js": [
+        "sites/stripe.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://www.supremenewyork.com/checkout"
+      ],
+      "js": [
+        "sites/supreme.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "fonts/Roboto-Mono.woff2"
+  ],
+  "commands": {
+    "autofill": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+F",
+        "windows": "Ctrl+Shift+F",
+        "mac": "Command+Shift+F",
+        "linux": "Ctrl+Shift+F"
+      },
+      "description": "Initiate autofill on the current page."
+    }
+  }
+}

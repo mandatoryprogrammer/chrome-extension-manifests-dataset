@@ -1,0 +1,69 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_appName__",
+  "version": "1.9.1",
+  "description": "__MSG_appDesc__",
+  "default_locale": "en",
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "/js/bg.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "<all_urls>",
+    "webNavigation",
+    "notifications"
+  ],
+  "browser_action": {
+    "default_title": "Cat Pet",
+    "default_popup": "/html/popup.html"
+  },
+  "web_accessible_resources": [
+    "images/*.png",
+    "js/*.png",
+    "images/*.jpg",
+    "images/*.svg",
+    "js/*.json",
+    "js/*.atlas",
+    "sound/*.mp3"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_globs": [
+        "*://*.meowthecatpet.com:8443/game*",
+        "*://*.meowplayground.com/game*",
+        "*://*.meowplayground.com:8043/game*",
+        "*://localhost*"
+      ],
+      "css": [
+        "/css/dist/catpet.css"
+      ],
+      "js": [
+        "/js/dist/browserLoader.js",
+        "/js/dist/runCat.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.meowthecatpet.com/playground*",
+        "https://www.meowplayground.com/game*",
+        "http://localhost:8008/*"
+      ],
+      "js": [
+        "js/domain-sync.js"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "16.png",
+    "48": "48.png",
+    "128": "128.png"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com https://apis.google.com; object-src 'self'"
+}

@@ -1,0 +1,67 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Cloudphish Anti-Phishing Extension",
+  "short_name": "Cloudphish",
+  "description": "Email Phishing Protection Plugin. Send and receive authenticated emails safely and detect phishing attempts in Gmail or Outlook.",
+  "version": "1.1.14",
+  "author": "Cloudphish, Inc.",
+  "icons": {
+    "128": "assets/logo.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "inboxsdk.js",
+        "jquery-3.3.1.js",
+        "detect-browser.js",
+        "constants.js",
+        "fingerprint2.js",
+        "moment-with-locales.min.js",
+        "moment-timezone-with-data.min.js",
+        "sha256.js",
+        "gmail-content.js"
+      ],
+      "css": [
+        "style.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://outlook.office365.com/*",
+        "https://outlook.office.com/*"
+      ],
+      "js": [
+        "jquery-3.3.1.js",
+        "detect-browser.js",
+        "constants.js",
+        "fingerprint2.js",
+        "moment-with-locales.min.js",
+        "moment-timezone-with-data.min.js",
+        "sha256.js",
+        "outlook-content.js"
+      ],
+      "css": [
+        "style.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "storage",
+    "https://mail.google.com/*",
+    "https://outlook.office365.com/*",
+    "https://outlook.office.com/*"
+  ],
+  "content_security_policy": "script-src 'self' https://api.ipstack.com https://*.cloudphish.com; object-src 'self'",
+  "manifest_version": 2
+}

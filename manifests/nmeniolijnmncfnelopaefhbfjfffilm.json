@@ -1,0 +1,85 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Code Inspector",
+  "version": "1.1",
+  "description": "Chrome Extension for Code Inspector",
+  "permissions": [
+    "activeTab",
+    "declarativeContent",
+    "storage",
+    "tabs",
+    "webNavigation",
+    "*://github.com/*"
+  ],
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "options_page": "options.html",
+  "page_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "images/CodeInspector16.png",
+      "32": "images/CodeInspector32.png",
+      "48": "images/CodeInspector48.png",
+      "128": "images/CodeInspector128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://github.com/*blob*",
+        "https://github.com/*blob*"
+      ],
+      "css": [
+        "css/file.css"
+      ],
+      "js": [
+        "js/file.js",
+        "jquery-3.4.1.min.js"
+      ],
+      "all_frames": false,
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://github.com/*?tab=repositories*",
+        "https://github.com/*?tab=repositories*"
+      ],
+      "js": [
+        "js/repositories.js",
+        "jquery-3.4.1.min.js"
+      ],
+      "all_frames": false,
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://github.com/*",
+        "https://github.com/*"
+      ],
+      "excludes": [
+        "http://github.com/*?tab=repositories*",
+        "https://github.com/*?tab=repositories*",
+        "http://github.com/*blob*",
+        "https://github.com/*blob*"
+      ],
+      "js": [
+        "jquery-3.4.1.min.js",
+        "js/tree.js"
+      ],
+      "all_frames": false,
+      "run_at": "document_end"
+    }
+  ],
+  "icons": {
+    "16": "images/CodeInspector16.png",
+    "32": "images/CodeInspector32.png",
+    "48": "images/CodeInspector48.png",
+    "128": "images/CodeInspector128.png"
+  },
+  "manifest_version": 2,
+  "content_security_policy": "default-src 'self'; script-src 'self' https://api.code-inspector.com/graphql ;connect-src https://api.code-inspector.com/graphql;"
+}

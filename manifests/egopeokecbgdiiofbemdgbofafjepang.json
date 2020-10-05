@@ -1,0 +1,82 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_app_name__",
+  "description": "__MSG_app_description__",
+  "default_locale": "en",
+  "icons": {
+    "16": "public/icons/dr_16.png",
+    "48": "public/icons/dr_48.png",
+    "128": "public/icons/dr_128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "/public/icons/dr_active_19.png",
+      "38": "/public/icons/dr_active_38.png"
+    },
+    "default_popup": "ui/popup/index.html"
+  },
+  "chrome_url_overrides": {
+    "newtab": "/public/html/index.html"
+  },
+  "manifest_version": 2,
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "/background.js",
+      "/dark_sites.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "inject/index.js",
+        "panel.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "match_about_blank": true
+    }
+  ],
+  "web_accessible_resources": [
+    "/public/**/*"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "permissions": [
+    "tabs",
+    "history",
+    "unlimitedStorage",
+    "chrome://favicon/",
+    "contextMenus",
+    "storage",
+    "<all_urls>"
+  ],
+  "optional_permissions": [
+    "bookmarks",
+    "sessions"
+  ],
+  "version": "6.0.6",
+  "commands": {
+    "toggle": {
+      "suggested_key": {
+        "default": "Alt+Shift+D"
+      },
+      "description": "__MSG_toggle_extension__"
+    },
+    "addSite": {
+      "suggested_key": {
+        "default": "Alt+Shift+A"
+      },
+      "description": "__MSG_toggle_current_site__"
+    },
+    "toggle-search-panel": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+U",
+        "mac": "Command+Shift+U"
+      },
+      "description": "Open search pannel"
+    }
+  }
+}

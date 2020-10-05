@@ -1,0 +1,69 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "OnlinePBX",
+  "version": "0.4.19",
+  "manifest_version": 2,
+  "description": "Плагин сервиса Онлайн АТС, позволяет набирать номер и показывает карточку клиента при входящем звонке",
+  "homepage_url": "http://onlinepbx.ru",
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "img/icons/off19.png",
+      "38": "img/icons/off38.png"
+    },
+    "default_popup": "popup.html",
+    "default_title": "OnlinePBX"
+  },
+  "background": {
+    "scripts": [
+      "js/lib/onpbx_http_api.js",
+      "js/lib/loglevel.min.js",
+      "js/lib/socket.io.js",
+      "js/app/onpbxlib2.js",
+      "js/app/contactslib.js",
+      "js/app/getsipuseragent.js",
+      "js/app/ajaxlib.js",
+      "js/app/background.js",
+      "js/app/chromebackground.js"
+    ],
+    "persistent": true
+  },
+  "options_page": "options.html",
+  "permissions": [
+    "storage",
+    "notifications",
+    "contextMenus",
+    "https://addon.onlinepbx.ru/chrome/*",
+    "http://*/"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.amocrm.ru/*",
+      "*://*.amocrm.com/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "js/app/click.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.megaplan.ru/*",
+        "*://*.megaplan.com/*"
+      ],
+      "css": [
+        "css/opbx_megaplan_inject.css"
+      ]
+    }
+  ]
+}

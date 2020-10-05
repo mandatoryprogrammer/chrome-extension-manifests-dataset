@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Wiki Watchlist Notifier",
+  "description": "Notifies you of new items on your watchlist",
+  "version": "0.121",
+  "icons": {
+    "16": "Wikimedia_Community-16.png",
+    "48": "Wikimedia_Community-48.png",
+    "128": "Wikimedia_Community-128.png"
+  },
+  "background": {
+    "scripts": [
+      "functions.js",
+      "background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "icon-48.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "tabs",
+    "notifications",
+    "http://*.wikimedia.org/*",
+    "http://*.wikipedia.org/*"
+  ],
+  "web_accessible_resources": [
+    "icon-48.png"
+  ],
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.wikimedia.com/*",
+        "*://*.wikipedia.org/*"
+      ],
+      "js": [
+        "observer.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

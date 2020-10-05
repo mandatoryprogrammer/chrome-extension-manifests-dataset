@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Adswerve - dataLayer Inspector+",
+  "version": "2019.11.07.2",
+  "description": "DataLayer Tools for Digital Analysts",
+  "icons": {
+    "16": "images/icon16_as.png",
+    "48": "images/icon48_as.png",
+    "128": "images/icon128_as.png"
+  },
+  "browser_action": {
+    "default_icon": "images/icon_as_on.png",
+    "default_title": "Adswerve - dataLayer Inspector+",
+    "default_popup": "Popup_Main.html"
+  },
+  "author": "Jeff Pierce",
+  "background": {
+    "scripts": [
+      "js/background_ctrl.js",
+      "js/background_net.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "css": [
+        "css/Content_GTM_Injector.css"
+      ],
+      "js": [
+        "js/data_adobe.js",
+        "js/data_ga.js",
+        "js/data_gmp.js",
+        "js/GTM_Inserter_Content.js",
+        "js/dlc.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "images/doubleclick-logo.png",
+    "images/icon48_as.png",
+    "images/icon16_as.png",
+    "js/a.js",
+    "js/dls.js",
+    "js/DL_Inspector_Frame.js"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com https://www.googletagmanager.com; object-src 'self'",
+  "permissions": [
+    "tabs",
+    "http://*.google.com/",
+    "storage",
+    "http://*/*",
+    "https://*/*",
+    "webRequest",
+    "webRequestBlocking"
+  ]
+}

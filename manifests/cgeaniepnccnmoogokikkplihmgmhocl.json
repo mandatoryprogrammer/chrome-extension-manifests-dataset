@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "My Rich Presence",
+  "version": "0.1.2",
+  "summary": "Display what you are currently watching, directly in discord.",
+  "description": "Display what you are currently watching, directly in discord.",
+  "permissions": [
+    "http://localhost:69/",
+    "*://www.youtube.com/*",
+    "tabs",
+    "storage",
+    "history"
+  ],
+  "background": {
+    "scripts": [
+      "js/urls.js",
+      "js/socket_connector.js",
+      "js/tab_manager.js"
+    ]
+  },
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "128": "images/my_rich_presence.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/settings.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://www.youtube.com/*"
+      ],
+      "js": [
+        "js/presences/video/youtube.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "icons": {
+    "128": "images/my_rich_presence.png"
+  },
+  "manifest_version": 2,
+  "applications": {
+    "gecko": {
+      "id": "myrichpresence@strukteon.network"
+    }
+  }
+}

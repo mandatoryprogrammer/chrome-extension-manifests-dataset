@@ -1,0 +1,39 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "timeLagReTweet",
+  "version": "0.0.1",
+  "description": "リツイートを時間指定でする",
+  "icons": {
+    "128": "icon128-a.png"
+  },
+  "background": {
+    "scripts": [
+      "dest/oauth/chrome_ex_oauthsimple.js",
+      "dest/oauth/chrome_ex_oauth.js",
+      "dest/js/background.js"
+    ]
+  },
+  "permissions": [
+    "https://twitter.com/oauth/*",
+    "https://api.twitter.com/1.1/*",
+    "https://publish.twitter.com/oembed?url=*",
+    "https://platform.twitter.com/*",
+    "storage"
+  ],
+  "web_accessible_resources": [
+    "dest/html/oauthPage.html*",
+    "dest/html/retweetSet.html"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://twitter.com/*"
+      ],
+      "js": [
+        "dest/js/twitterPageUiController.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://*.twitter.com https://*.twimg.com/; object-src 'self'"
+}

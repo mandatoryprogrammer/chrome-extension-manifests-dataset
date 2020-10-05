@@ -1,0 +1,87 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Growth-X",
+  "short_name": "Growth-X",
+  "description": "Growth-X - Automate Unlimited Growth",
+  "version": "2.9.722",
+  "browser_action": {
+    "default_icon": "common/assets/img/icon.png",
+    "default_popup": "addon/popup.html"
+  },
+  "icons": {
+    "16": "common/assets/img/icon16.png",
+    "48": "common/assets/img/icon48.png",
+    "128": "common/assets/img/icon128.png"
+  },
+  "permissions": [
+    "*://*/*",
+    "tabs",
+    "cookies",
+    "storage",
+    "activeTab"
+  ],
+  "background": {
+    "page": "addon/background/background.html",
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.linkedin.com/sales/search*",
+        "https://www.linkedin.com/in/*",
+        "https://www.linkedin.com/sales/people/*",
+        "https://www.linkedin.com/sales/profile/*",
+        "https://www.linkedin.com/mynetwork/invitation-manager/sent/*"
+      ],
+      "css": [
+        "node_modules/angular/angular-csp.css",
+        "addon/assets/libs/bootstrap.min.css",
+        "common/assets/css/common.css",
+        "addon/assets/css/addon.css"
+      ],
+      "js": [
+        "node_modules/angular/angular.min.js",
+        "common/assets/libs/jquery.min.js",
+        "common/assets/libs/bootstrap.min.js",
+        "common/assets/libs/underscore-min.js",
+        "common/assets/libs/QueryData.js",
+        "common/constants/constants.js",
+        "common/constants/strings.js",
+        "common/services/ChromeServices.js",
+        "common/services/factories/userFactory.js",
+        "common/services/factories/utilsFactories.js",
+        "common/services/factories/factories.js",
+        "common/services/apiServices.js",
+        "extension/services/factories/meetupInjectorFactory.js",
+        "extension/services/factories/injectorFactory.js",
+        "extension/services/selectorsService.js",
+        "addon/controllers/contentController.js",
+        "addon/controllers/urlAssistantController.js",
+        "addon/controllers/profilePanelController.js",
+        "addon/controllers/invitesManagerController.js",
+        "addon/controllers/controllers.js",
+        "addon/directives/directives.js",
+        "addon/services/sharedPropertiesService.js",
+        "addon/content/content.js"
+      ],
+      "html": [
+        "addon/content/content.html",
+        "addon/templates/urlAssistant.html",
+        "addon/templates/profilePanel.html",
+        "addon/templates/invitesManager.html"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "web_accessible_resources": [
+    "common/assets/fonts/*",
+    "common/assets/img/*",
+    "addon/templates/*",
+    "addon/content/content.html",
+    "node_modules/angular/*",
+    "common/assets/libs/bootstrap.min.js"
+  ]
+}

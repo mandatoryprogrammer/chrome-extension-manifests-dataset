@@ -1,0 +1,146 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "GetEmail.io gets the email of anyone on Earth",
+  "short_name": "GetEmail.io regular version",
+  "version": "2.0.155",
+  "description": "GetEmail.io is the easiest way to find email addresses from anywhere on the web, with just one click.",
+  "author": "Nicolas Bahout",
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com https://secure.livechatinc.com https://cdn.livechatinc.com; object-src 'self'",
+  "icons": {
+    "16": "browser_action/shared/img/icone_getemail_16.png",
+    "48": "browser_action/shared/img/icone_getemail_48.png",
+    "128": "browser_action/shared/img/icone_getemail_128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "32": "browser_action/shared/img/icon_32_33_gray.png"
+    },
+    "default_title": "Find email addresses",
+    "default_popup": "browser_action/index.html"
+  },
+  "background": {
+    "scripts": [
+      "background/controllers/bgOnInstalled.js",
+      "browser_action/shared/lib/lodash.core.min.js",
+      "browser_action/shared/lib/jquery-2.1.1.js",
+      "browser_action/shared/lib/browser-polyfill.min.js",
+      "browser_action/shared/js/helpers.js",
+      "browser_action/shared/js/models/Model.js",
+      "browser_action/shared/js/models/BrowserActionIconModel.js",
+      "background/bgGoogleAnalytics.js",
+      "browser_action/shared/js/ExtensionStorage.js",
+      "browser_action/shared/js/googleAnalyticsEvents.js",
+      "background/mustache.js",
+      "browser_action/shared/js/v2_api_request.js",
+      "background/bgMessaging.js",
+      "background/bgGeInterface.js",
+      "browser_action/shared/js/StateReporter.js",
+      "browser_action/shared/js/account.js",
+      "background/controllers/bgController.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "storage",
+    "https://www.linkedin.com/*",
+    "https://getemail.io/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.linkedin.com/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "/browser_action/shared/lib/libphonenumber-max.js",
+        "content_script/models/LinkedinDataExtractorModel.js",
+        "content_script/lib/utils.js",
+        "browser_action/shared/lib/html2canvas.js",
+        "browser_action/shared/lib/canvg.3.0.5.js",
+        "content_script/lib/intlTelInput.js",
+        "content_script/controllers/onDocumentEndController.js",
+        "content_script/models/LinkedinSelectorsLibrary.js",
+        "browser_action/shared/js/views/View.js",
+        "browser_action/shared/js/views/OwnAccountView.js",
+        "browser_action/shared/js/views/ManualBugReportView.js",
+        "browser_action/shared/js/views/NameCompanyDomainView.js",
+        "browser_action/shared/js/views/ProfileView.js",
+        "browser_action/shared/js/views/SearchView.js",
+        "browser_action/shared/js/views/TabsView.js",
+        "content_script/views/ShadowView.js",
+        "content_script/views/ShadowPopupView.js",
+        "content_script/views/GetEmailShadowButtonView.js",
+        "content_script/controllers/mainController.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.linkedin.com/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "content_script/views/shadowCSS.js",
+        "browser_action/shared/lib/jquery-2.1.1.js",
+        "browser_action/shared/lib/jquery-ui.min.js",
+        "browser_action/shared/lib/lodash.core.min.js",
+        "browser_action/shared/js/helpers.js",
+        "browser_action/shared/js/models/Model.js",
+        "content_script/models/LinkedinDataExtractorModel.js",
+        "content_script/controllers/onDocumentStartController.js",
+        "browser_action/shared/lib/browser-polyfill.min.js",
+        "browser_action/shared/js/googleAnalyticsEvents.js",
+        "browser_action/shared/js/ExtensionStorage.js",
+        "browser_action/shared/js/account.js",
+        "browser_action/shared/js/v2_api_request.js",
+        "browser_action/shared/js/models/LinkedinSearchModel.js",
+        "browser_action/shared/js/models/LinkedinProfileModel.js",
+        "browser_action/shared/js/models/BrowserActionIconModel.js",
+        "browser_action/shared/js/views/View.js",
+        "browser_action/shared/js/views/NameCompanyDomainView.js",
+        "browser_action/shared/js/views/ProfileView.js",
+        "browser_action/shared/js/views/SearchView.js",
+        "content_script/views/InPagePopupView.js",
+        "content_script/views/ActivationPopupView.js",
+        "content_script/views/RetentionPopupView.js",
+        "browser_action/shared/js/StateReporter.js",
+        "content_script/functions.js",
+        "content_script/v2_linkedin-company.js",
+        "browser_action/shared/js/v2_linkedin-parse-profile.js",
+        "browser_action/shared/js/detect_page.js",
+        "content_script/v2_linkedin_version.js",
+        "content_script/controllers/onUrlChangeController.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.getemail.io/*"
+      ],
+      "js": [
+        "browser_action/shared/lib/lodash.core.min.js",
+        "browser_action/shared/lib/browser-polyfill.min.js",
+        "browser_action/shared/lib/jquery-2.1.1.js",
+        "browser_action/shared/js/ExtensionStorage.js",
+        "browser_action/shared/js/models/Model.js",
+        "browser_action/shared/js/helpers.js",
+        "browser_action/shared/js/v2_api_request.js",
+        "browser_action/shared/js/account.js",
+        "content_script/controllers/getEmailIoAccountController.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.getemail.io/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "content_script/reveal_extension_existence.js"
+      ]
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.getemail.io/*"
+    ]
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_extension_name__",
+  "version": "1.5",
+  "manifest_version": 2,
+  "description": "__MSG_extension_description__",
+  "homepage_url": "https://atavi.com",
+  "icons": {
+    "128": "icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "page": "background/page.html"
+  },
+  "page_action": {
+    "default_icon": "i/icon19.png",
+    "default_title": "__MSG_pageaction_title__",
+    "default_popup": "create/index.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "AtaviExt.js",
+        "includes/common.js"
+      ],
+      "css": [
+        "c/common.css"
+      ]
+    }
+  ],
+  "omnibox": {
+    "keyword": "atavi"
+  },
+  "options_page": "options/import.html",
+  "web_accessible_resources": [
+    "includes/inject.js",
+    "config.json"
+  ],
+  "commands": {
+    "_execute_page_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+S",
+        "mac": "MacCtrl+Shift+S"
+      }
+    }
+  },
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  "permissions": [
+    "contextMenus",
+    "activeTab",
+    "bookmarks",
+    "history",
+    "topSites",
+    "tabs",
+    "cookies",
+    "storage",
+    "<all_urls>"
+  ],
+  "optional_permissions": [
+    "topSites"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.atavi.com/*",
+      "*://*.atavi.test/*"
+    ]
+  }
+}

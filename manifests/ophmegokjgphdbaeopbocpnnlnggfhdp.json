@@ -1,0 +1,73 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "version": "2.0.2",
+  "name": "Realtime Email for Litmus",
+  "description": "Easily add RealTime Email code to your email templates",
+  "browser_action": {
+    "default_icon": {
+      "16": "assets/images/icon-small.png"
+    },
+    "default_title": "Realtime Email for Litmus",
+    "default_popup": "index.html"
+  },
+  "permissions": [
+    "tabs",
+    "cookies",
+    "https://dev006-app.realtime.email/",
+    "https://app.realtime.email/",
+    "https://app.realtime.email/"
+  ],
+  "background": {
+    "scripts": [
+      "assets/thirdparty-injection/salesforce/background-message-handler.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://litmus.com/builder/documents/*",
+        "https://litmus.com/builder/documents/*/snippets/new"
+      ],
+      "css": [
+        "assets/thirdparty-injection/shared/rte-bootstrap2-modal.css",
+        "assets/thirdparty-injection/litmus/litmus.css"
+      ],
+      "js": [
+        "assets/thirdparty-injection/litmus/litmus.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://mc.s7.exacttarget.com/cloud/*"
+      ],
+      "run_at": "document_end",
+      "css": [
+        "assets/thirdparty-injection/shared/rte-bootstrap2-modal.css",
+        "assets/thirdparty-injection/salesforce/salesforce.css"
+      ],
+      "js": [
+        "assets/thirdparty-injection/salesforce/salesforce-email-studio-main-page.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://email-app.s7.marketingcloudapps.com/*"
+      ],
+      "all_frames": true,
+      "run_at": "document_end",
+      "css": [
+        "assets/thirdparty-injection/shared/rte-bootstrap2-modal.css"
+      ],
+      "js": [
+        "assets/thirdparty-injection/salesforce/salesforce-email-studio-html-block-editor.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://ssl.google-analytics.com https://feed.useriq.com https://app.useriq.com; object-src 'self'"
+}

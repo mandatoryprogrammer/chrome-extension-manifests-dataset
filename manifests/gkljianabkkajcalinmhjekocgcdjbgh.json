@@ -1,0 +1,71 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "RevMD Scraping Tool",
+  "version": "1.0.6",
+  "manifest_version": 2,
+  "description": "Allows you to capture content as you navigate on cignaforhcp.cigna.com",
+  "icons": {
+    "16": "./img/asiss16x16.png",
+    "48": "./img/asiss48x48.png",
+    "128": "./img/asiss128x128.png"
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "js/Base64.js",
+      "js/jquery-1.10.2.min.js",
+      "js/simplePost.js",
+      "js/utils.js",
+      "js/Collections.js",
+      "js/Arrays.js",
+      "js/XmlHttpPostRequest.js",
+      "js/json2.js",
+      "js/date.js",
+      "js/time.js",
+      "js/TreeNode.js",
+      "js/Uri.min.js",
+      "Ticker.js",
+      "MessageType.js",
+      "MessageBuffer.js",
+      "EventLog.js",
+      "IconManager.js",
+      "transport.js",
+      "ServerCheck.js",
+      "ScrappingRules.js",
+      "Scrapper.js",
+      "BGProgressProxy.js",
+      "background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "img/asiss19x19.png",
+    "default_name": "Cigna Scraping Tool",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://localhost:8084/*",
+        "https://*.cigna.com/*"
+      ],
+      "js": [
+        "./js/jquery-1.10.2.min.js",
+        "./js/utils.js",
+        "./js/json2.js",
+        "./ScrappingRules.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "webRequest",
+    "tabs",
+    "webNavigation",
+    "storage",
+    "debugger",
+    "http://localhost:8084/*",
+    "https://*.cigna.com/*",
+    "https://*.healthborg.org/*",
+    "http://*.healthborg.org/*"
+  ],
+  "content_security_policy": "script-src 'self' https://www.protogize.com; object-src 'self'"
+}

@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "DigiPowers DNS Flusher++",
+  "short_name": "DNS Flusher++",
+  "version": "2.0.3",
+  "manifest_version": 2,
+  "description": "Flush the DNS cache, clear any AWS ELB cookies, and get detailed response information with one click.",
+  "browser_action": {
+    "default_title": "DNS Flusher++"
+  },
+  "commands": {
+    "flash-and-reload": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+F",
+        "mac": "Command+Shift+F"
+      },
+      "description": "Flush DNS and reload"
+    }
+  },
+  "options_page": "options.html",
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "css": "css/bulma.min.css"
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "css/style.css"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "cookies",
+    "<all_urls>"
+  ]
+}

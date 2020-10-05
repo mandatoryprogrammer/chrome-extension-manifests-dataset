@@ -1,0 +1,119 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "知乎安卓平板端优化 (for Yandex)",
+  "description": "用于安卓平板Yandex浏览器，对知乎主要页面强制启用PC版，并进行横屏触屏优化",
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "*://*.zhihu.com/",
+    "tabs",
+    "storage"
+  ],
+  "version": "1.1",
+  "background": {
+    "page": "background.html"
+  },
+  "page_action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "js/pretreat.js"
+      ],
+      "matches": [
+        "*://www.zhihu.com/",
+        "*://www.zhihu.com/question/*",
+        "*://www.zhihu.com/search*",
+        "*://www.zhihu.com/people/*",
+        "*://www.zhihu.com/topic/*",
+        "*://zhuanlan.zhihu.com/*"
+      ],
+      "exclude_matches": [
+        "*://www.zhihu.com/topic",
+        "*://zhuanlan.zhihu.com/"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "js": [
+        "js/jquery.min.js",
+        "js/common.js",
+        "js/Topstory.js"
+      ],
+      "matches": [
+        "*://www.zhihu.com/"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "js/jquery.min.js",
+        "js/common.js",
+        "js/QuestionPage.js"
+      ],
+      "matches": [
+        "*://www.zhihu.com/question/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "js/jquery.min.js",
+        "js/common.js",
+        "js/Search.js"
+      ],
+      "matches": [
+        "*://www.zhihu.com/search*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "js/jquery.min.js",
+        "js/common.js",
+        "js/Profile.js"
+      ],
+      "matches": [
+        "*://www.zhihu.com/people/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "js/jquery.min.js",
+        "js/common.js",
+        "js/Topic.js"
+      ],
+      "matches": [
+        "*://www.zhihu.com/topic/*"
+      ],
+      "exclude_matches": [
+        "*://www.zhihu.com/topic"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "js/jquery.min.js",
+        "js/zhuanlan.js"
+      ],
+      "matches": [
+        "*://zhuanlan.zhihu.com/*"
+      ],
+      "exclude_matches": [
+        "*://zhuanlan.zhihu.com/"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "web_accessible_resources": [
+    "zhihutablet.css"
+  ]
+}

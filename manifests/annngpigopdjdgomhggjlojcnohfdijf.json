@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "MathMe",
+  "version": "0.75",
+  "description": "Practice problems from WolframAlpha Problem Generator to receive credit in your mathematics classes.",
+  "options_page": "html/options.html",
+  "permissions": [
+    "storage",
+    "https://www.wolframalpha.com/problem-generator/*",
+    "https://fiu.zjevik.com/*",
+    "tabs"
+  ],
+  "browser_action": {
+    "default_popup": "html/popup.html",
+    "default_icon": "images/icon.png"
+  },
+  "background": {
+    "scripts": [
+      "source/lz-string.min.js",
+      "source/chrome-Storage-largeSync.min.js",
+      "js/source/jquery-3.2.1.min.js",
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.wolframalpha.com/problem-generator/*"
+      ],
+      "js": [
+        "source/lz-string.min.js",
+        "source/chrome-Storage-largeSync.min.js",
+        "js/source/jquery-3.2.1.min.js",
+        "js/source/select2.full.min.js",
+        "js/source/select2-cascade.js",
+        "js/wolfram_generator_entry.js",
+        "js/wolfram_generator_quiz.js",
+        "js/wolfram_generator.js"
+      ],
+      "css": [
+        "source/select2/css/select2.min.css",
+        "html/css/wolframEntry.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "manifest_version": 2,
+  "web_accessible_resources": [
+    "source/images/*",
+    "html/sidePanel.html"
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "KFUPM Course Offering",
+  "short_name": "Course Offering",
+  "version": "0.2.12.3",
+  "version_name": "BETA (0.2.12.3)",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "author": "Mohammed Alobaidi <contact@mohalobaidi.com>",
+  "description": "A tool that will enhance your experience in the Course Offering page.",
+  "web_accessible_resources": [
+    "sounds/*.mp3"
+  ],
+  "offline_enabled": false,
+  "browser_action": {},
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://registrar.kfupm.edu.sa/*"
+      ],
+      "js": [
+        "./router.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://banner9-registration.kfupm.edu.sa/StudentRegistrationSsb/ssb/*"
+      ],
+      "js": [
+        "./banner.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://registrar.kfupm.edu.sa/courseoffering"
+      ],
+      "css": [
+        "./css/main.css"
+      ],
+      "js": [
+        "./main.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://registrar.kfupm.edu.sa/courseoffering?dark"
+      ],
+      "css": [
+        "./css/dark.main.css"
+      ],
+      "js": [
+        "./dark.main.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "identity",
+    "identity.email",
+    "activeTab",
+    "contextMenus",
+    "notifications",
+    "cookies",
+    "https://registrar.kfupm.edu.sa/courseoffering",
+    "https://banner9-registration.kfupm.edu.sa/StudentRegistrationSsb"
+  ],
+  "content_security_policy": "script-src 'self' https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com 'unsafe-eval'; object-src 'self'",
+  "manifest_version": 2
+}

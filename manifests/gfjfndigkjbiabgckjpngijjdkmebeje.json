@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Twitch Compakt",
+  "short_name": "Compakt",
+  "description": "Condense Twitch Chat",
+  "version": "1.1.1",
+  "icons": {
+    "128": "./assets/icon_128.png"
+  },
+  "background": {
+    "scripts": [
+      "checkIfTwitch.js"
+    ],
+    "persistent": false
+  },
+  "page_action": {
+    "default_icon": {
+      "19": "./assets/icon19.png",
+      "38": "./assets/icon38.png"
+    },
+    "default_title": "Compakt"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.twitch.tv/*"
+      ],
+      "js": [
+        "jquery.min.js",
+        "compakt.js"
+      ],
+      "css": [
+        "compaktstyles.css"
+      ],
+      "exclude_globs": [
+        "https://www.twitch.tv/directory/*",
+        "https://www.twitch.tv/p/*",
+        "https://www.twitch.tv/products/*",
+        "https://www.twitch.tv/*/manager*",
+        "https://www.twitch.tv/*/dashboard",
+        "https://www.twitch.tv/broadcast",
+        "https://www.twitch.tv/messages/*",
+        "https://www.twitch.tv/settings"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "activeTab"
+  ]
+}

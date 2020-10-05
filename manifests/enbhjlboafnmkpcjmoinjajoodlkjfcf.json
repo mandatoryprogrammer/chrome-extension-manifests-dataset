@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "minimum_chrome_version": "31",
+  "name": "MyFilter",
+  "version": "0.9.3",
+  "offline_enabled": false,
+  "description": "__MSG_extDesc__",
+  "author": "Belousov Alexandr",
+  "default_locale": "en",
+  "options_page": "options.html",
+  "icons": {
+    "16": "img/search16.png",
+    "48": "img/search48.png",
+    "128": "img/search128.png"
+  },
+  "permissions": [
+    "tabs",
+    "activeTab"
+  ],
+  "background": {
+    "scripts": [
+      "js/background.js",
+      "js/indb.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "all_frames": true,
+      "run_at": "document_end",
+      "js": [
+        "js/module.js",
+        "js/communication.js",
+        "js/rules.js",
+        "js/elements.js",
+        "js/filterPanel.js",
+        "js/script_in_content.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "panel.html",
+    "css/inner.css",
+    "img/wheel.png",
+    "img/wheelUp.png",
+    "img/wheelDown.png",
+    "img/wheelDownDis.png"
+  ],
+  "browser_action": {
+    "default_title": "__MSG_butTitle__",
+    "default_icon": "img/search48.png",
+    "default_popup": "popup.html"
+  }
+}

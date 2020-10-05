@@ -1,0 +1,124 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Capti Voice",
+  "short_name": "Capti",
+  "version": "3.26",
+  "description": "__MSG_description__",
+  "author": "Charmtech Labs LLC",
+  "default_locale": "en",
+  "icons": {
+    "19": "assets/icon19.png",
+    "38": "assets/icon38.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "44": "assets/capti-add-44.png"
+    },
+    "default_title": "Capti Voice",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "variables_ext.js",
+      "config.js",
+      "article.js",
+      "command.js",
+      "online.js",
+      "tab_handler.js",
+      "playList.js",
+      "login_handler.js",
+      "dictionary_extractor.js",
+      "context_menu_handler.js",
+      "toolbox_handler.js",
+      "content_handler.js",
+      "option_handler.js",
+      "installation_handler.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "storage",
+    "notifications",
+    "cookies",
+    "contextMenus",
+    "*://*/*"
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "exclude_matches": [
+        "*://mail.google.com/*"
+      ],
+      "js": [
+        "injection_element.js",
+        "externalInjectMenuItem.js",
+        "small_menu.js"
+      ],
+      "all_frames": true,
+      "css": [
+        "assets/capti-style.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "assets/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.captivoice.com/*"
+    ]
+  },
+  "commands": {
+    "open_playlist": {
+      "suggested_key": {
+        "default": "Alt+C",
+        "windows": "Alt+C",
+        "mac": "Alt+C",
+        "chromeos": "Alt+C",
+        "linux": "Alt+C"
+      },
+      "description": "__MSG_keyOpenPlaylist__"
+    },
+    "add_webpage": {
+      "suggested_key": {
+        "default": "Alt+A",
+        "windows": "Alt+A",
+        "mac": "Alt+A",
+        "chromeos": "Alt+A",
+        "linux": "Alt+A"
+      },
+      "description": "__MSG_keyAddToCapti__"
+    },
+    "capti_toolbox": {
+      "suggested_key": {
+        "default": "Alt+X",
+        "windows": "Alt+X",
+        "mac": "Alt+X",
+        "chromeos": "Alt+X",
+        "linux": "Alt+X"
+      },
+      "description": "__MSG_keyCaptiToolBox__"
+    },
+    "capti_play_selected": {
+      "suggested_key": {
+        "default": "Alt+Q",
+        "windows": "Alt+Q",
+        "mac": "Alt+Q",
+        "chromeos": "Alt+Q",
+        "linux": "Alt+Q"
+      },
+      "description": "__MSG_keyCaptiPlaySelected__"
+    }
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "AdLimiter",
+  "version": "3.1.1",
+  "description": "Reduces the number of ads on search result pages.",
+  "icons": {
+    "48": "images/sitetruthicon-48.png"
+  },
+  "permissions": [
+    "*://*.sitetruth.com/*",
+    "webRequest",
+    "storage",
+    "notifications"
+  ],
+  "options_ui": {
+    "page": "options.html"
+  },
+  "background": {
+    "scripts": [
+      "browser-polyfill.js",
+      "notifier.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "images/*.png",
+    "images/*.gif",
+    "images/*.png",
+    "images/*.svg"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.bing.com/*",
+        "*://*.duckduckgo.com/*",
+        "*://*.google.com/*",
+        "*://*.yandex.com/*",
+        "*://*.search.yahoo.com/*"
+      ],
+      "js": [
+        "browser-polyfill.js",
+        "contentscript/sitetruthconfig.js",
+        "contentscript/urlutillib.js",
+        "contentscript/urlparserlib.js",
+        "contentscript/urlutillib.js",
+        "contentscript/specialdomains.js",
+        "contentscript/searchrating.js",
+        "contentscript/sitetruthclient.js",
+        "contentscript/resultlink.js",
+        "contentscript/domdump.js",
+        "contentscript/balloonmgr.js",
+        "contentscript/companyballoon.js",
+        "contentscript/sitetruthcache.js",
+        "contentscript/main.js"
+      ]
+    }
+  ],
+  "applications": {
+    "gecko": {
+      "id": "551f2920-3c19-11e1-b86c-0800200c9a66@jetpack"
+    }
+  }
+}

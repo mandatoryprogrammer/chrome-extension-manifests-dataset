@@ -1,0 +1,70 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_web2pdfExtnName__",
+  "description": "__MSG_web2pdfExtnDescription__",
+  "version": "15.1.2.3",
+  "options_page": "data/js/options.html",
+  "default_locale": "en",
+  "permissions": [
+    "contextMenus",
+    "http://*/*",
+    "https://*/*",
+    "tabs",
+    "downloads",
+    "nativeMessaging"
+  ],
+  "background": {
+    "scripts": [
+      "lib/libs/require-2.1.15.js",
+      "main.js",
+      "lib/settings.js",
+      "lib/ch-context-menu.js"
+    ]
+  },
+  "externally_connectable": {
+    "ids": [
+      "bngnhmnppadfcmpggglniifohlkmddfc"
+    ]
+  },
+  "icons": {
+    "16": "data/images/acrobat_dc_appicon_16.png",
+    "48": "data/images/acrobat_dc_appicon_48.png",
+    "128": "data/images/acrobat_dc_appicon_128.png"
+  },
+  "browser_action": {
+    "default_title": "__MSG_web2pdfConvertButtonToolTip__",
+    "default_icon": "data/images/acrobat_dc_appicon_20x19_translucent.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "data/js/libs/jquery-3.1.1.min.js",
+        "data/js/content-script-utils.js",
+        "data/js/ch-content-script.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "data/js/ch-content-script-dend.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "minimum_chrome_version": "41.0",
+  "manifest_version": 2,
+  "web_accessible_resources": [
+    "data/js/frame.html",
+    "data/js/frameUI.html",
+    "data/js/extn-utils.html"
+  ],
+  "content_security_policy": "script-src 'self' https://use.typekit.net/; object-src 'self'"
+}

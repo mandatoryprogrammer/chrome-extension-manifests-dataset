@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "OpenTouch Click2Call",
+  "short_name": "OT Click2Call",
+  "version": "2.20.5903",
+  "description": "OpenTouch Click2Call extension for Gmail and Google Contacts using OTC PC or OTC One",
+  "manifest_version": 2,
+  "icons": {
+    "16": "resources/c2c_18.png",
+    "128": "resources/icon_c2c.png"
+  },
+  "permissions": [
+    "tabs",
+    "cookies",
+    "http://*/*",
+    "https://*/*",
+    "<all_urls>",
+    "management",
+    "nativeMessaging",
+    "identity",
+    "contextMenus",
+    "notifications"
+  ],
+  "background": {
+    "scripts": [
+      "js/tools.js",
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://apis.google.com/*",
+        "https://contacts.google.com/*",
+        "https://mail.google.com/*",
+        "*://*/*"
+      ],
+      "js": [
+        "js/tools.js",
+        "js/hovercard.js",
+        "js/searchcard.js",
+        "js/contactList.js",
+        "js/key2call.js"
+      ],
+      "css": [
+        "styles/style.css"
+      ],
+      "all_frames": true
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.google.com/; object-src 'self'",
+  "web_accessible_resources": [
+    "resources/c2c_18.png"
+  ],
+  "oauth2": {
+    "client_id": "93889133101-drp7bckcfa4v0bjpgeub1lsgiqn0ne3t.apps.googleusercontent.com",
+    "project_id": "opentouch-click2call",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://accounts.google.com/o/oauth2/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "scopes": [
+      "https://www.google.com/m8/feeds",
+      "https://www.googleapis.com/auth/contacts.readonly"
+    ]
+  }
+}

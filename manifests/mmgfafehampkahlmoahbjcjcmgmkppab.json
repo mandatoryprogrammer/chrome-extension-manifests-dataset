@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "RedOrbit HbbTV Emulator",
+  "description": "Emulator for HbbTV applications",
+  "version": "0.6",
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "icons": {
+    "48": "img/hbbtv_emulator_logo_48x48.png"
+  },
+  "page_action": {
+    "default_icon": {
+      "16": "img/hbbtv_emulator_logo_16x16_off.png",
+      "32": "img/hbbtv_emulator_logo_32x32_off.png"
+    },
+    "default_title": "HbbTV Emulator"
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "js/content_patched.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "js/hbbtv.js",
+    "dummy.mp4",
+    "img/broadcast.png",
+    "img/savearea.png"
+  ],
+  "permissions": [
+    "tabs",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>"
+  ]
+}

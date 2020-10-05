@@ -1,0 +1,150 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "author": "Toke & Ghaith",
+  "description": "Gør studielivet en del lettere med en række nye funktioner til Lectio!",
+  "manifest_version": 2,
+  "version": "20182.1.5",
+  "version_name": "2.8.7",
+  "name": "Lectio Expert",
+  "permissions": [
+    "https://www.lectio.dk/*",
+    "storage"
+  ],
+  "background": {
+    "page": "html/background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_popup": "html/popup/popup.html",
+    "default_icons": {
+      "128": "icons/icon128.png",
+      "64": "icons/icon64.png",
+      "16": "icons/icon16.png"
+    }
+  },
+  "icons": {
+    "128": "icons/icon128.png",
+    "64": "icons/icon64.png",
+    "16": "icons/icon16.png"
+  },
+  "options_page": "html/popup/settings.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.lectio.dk/*"
+      ],
+      "js": [
+        "js/openGame.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.lectio.dk/*"
+      ],
+      "js": [
+        "js/changeColor.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.lectio.dk/*"
+      ],
+      "js": [
+        "js/notification/hint.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.lectio.dk/*"
+      ],
+      "js": [
+        "js/Google_Analytics.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.lectio.dk/lectio/*"
+      ],
+      "js": [
+        "js/footer/footer.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://www.lectio.dk/*"
+      ],
+      "js": [
+        "js/master.js"
+      ],
+      "css": [
+        "css/stylesheet-DOM.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.lectio.dk/*"
+      ],
+      "js": [
+        "js/loadTheme.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://www.lectio.dk/lectio/*/login.aspx*"
+      ],
+      "js": [
+        "js/autoLogin.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.lectio.dk/lectio/*/default.aspx"
+      ],
+      "js": [
+        "js/newUpdate.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.lectio.dk/lectio/*/SkemaNy.aspx*"
+      ],
+      "js": [
+        "js/setID.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.lectio.dk/lectio/*/SkemaNy.aspx*"
+      ],
+      "js": [
+        "js/dayNote.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.lectio.dk/lectio/*/OpgaverElev.aspx*"
+      ],
+      "js": [
+        "js/opgaver.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "icons/*",
+    "css/*",
+    "html/*",
+    "changelog.json",
+    "images/*",
+    "js/absenceChart.js",
+    "js/skemaChart.js",
+    "js/absence.js",
+    "js/schemeAbsence.js",
+    "js/lib.js"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

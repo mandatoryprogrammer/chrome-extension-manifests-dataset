@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Searchberry Home Page",
+  "version": "1.0.0",
+  "description": "Find What You're Looking For In a Berry Way! This extension sets your New Tab to SearchBerry links, updates and more...",
+  "homepage_url": "http://searchberry.co/",
+  "manifest_version": 2,
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "storage",
+    "<all_urls>",
+    "notifications"
+  ],
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "js": [
+        "ci.content.pack.js",
+        "content/new_tab_url_injector.js",
+        "libs/jquery.min.js",
+        "libs/handlebars.runtime.min.js",
+        "libs/underscore-min.js",
+        "libs/backbone-min.js",
+        "libs/urls.js",
+        "content/style.js",
+        "content/templates.js",
+        "content/interface.js",
+        "content/new_tab_url_injector.js",
+        "content/content.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": false,
+      "js": [
+        "ci.browser.helper.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "page": "background.html"
+  },
+  "browser_action": {
+    "default_icon": "images/18x18.png",
+    "default_title": "Searchberry"
+  },
+  "icons": {
+    "24": "images/24x24.png",
+    "48": "images/48x48.png",
+    "128": "images/128x128.png"
+  },
+  "chrome_url_overrides": {
+    "newtab": "searchberry.html"
+  }
+}

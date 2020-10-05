@@ -1,0 +1,67 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{81fad042-d4c7-478b-853c-ecc21537cae1}",
+      "strict_min_version": "65.0"
+    }
+  },
+  "manifest_version": 2,
+  "name": "My Dictionary",
+  "description": "Get definition or translation of the selected word(s) in popup (multiple choices)",
+  "version": "1.0.00",
+  "permissions": [
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>"
+  ],
+  "background": {
+    "scripts": [
+      "data/internal_libs/dictionaries_data.js",
+      "data/background/background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "data/icons/icon16.png",
+    "default_title": "My Dictionary",
+    "default_popup": "data/options/dictionary_for_menu_bar/dictionary_for_menu_bar.html"
+  },
+  "options_ui": {
+    "page": "data/options/options.html",
+    "open_in_tab": true
+  },
+  "icons": {
+    "16": "data/icons/icon16.png",
+    "48": "data/icons/icon48.png",
+    "128": "data/icons/icon128.png"
+  },
+  "web_accessible_resources": [
+    "data/icons/icon_original.png",
+    "data/iframe/iframe.html",
+    "data/icons/loading.gif"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "data/content_scripts/index.js"
+      ],
+      "css": [
+        "data/content_scripts/index.css"
+      ],
+      "all_frames": true
+    }
+  ],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+M"
+      },
+      "description": "Activate the extension"
+    }
+  }
+}

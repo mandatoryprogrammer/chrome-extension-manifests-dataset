@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Adnosco (beta)",
+  "description": "__MSG_extension_descrption__",
+  "version": "1.0.3",
+  "default_locale": "en",
+  "icons": {
+    "128": "icon.png"
+  },
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "src/popup/popup.html"
+  },
+  "options_page": "src/options/settings/settings.html",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "webNavigation",
+    "webRequest",
+    "<all_urls>"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*"
+      ],
+      "js": [
+        "src/contentscripts/HTMLInput.js",
+        "src/contentscripts/scraping.js",
+        "src/messages.js",
+        "lib/jquery/jquery-3.2.1.min.js",
+        "lib/html2canvas/html2canvas.min.js",
+        "src/contentscripts/index.js"
+      ],
+      "css": [
+        "src/contentscripts/cs-style.css",
+        "lib/materialize/materialize-all.css"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "lib/forerunnerdb/fdb-all.min.js",
+      "src/data/db.js",
+      "src/background.js",
+      "src/messages.js"
+    ]
+  }
+}

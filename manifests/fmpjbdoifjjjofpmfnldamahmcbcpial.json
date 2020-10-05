@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Kenteken Check",
+  "description": "Kenteken Check",
+  "version": "0.0.2",
+  "manifest_version": 2,
+  "icons": {
+    "19": "resources/images/19.png",
+    "38": "resources/images/38.png",
+    "128": "resources/images/128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "resources/images/19.png",
+      "38": "resources/images/38.png",
+      "128": "resources/images/128.png"
+    },
+    "default_title": "Kenteken Check"
+  },
+  "permissions": [
+    "identity",
+    "tabs",
+    "storage",
+    "notifications",
+    "<all_urls>",
+    "https://*/*",
+    "activeTab"
+  ],
+  "background": {
+    "scripts": [
+      "scripts/vendor/jquery-3.2.1.min.js",
+      "scripts/background/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "js": [
+        "scripts/vendor/jquery-3.2.1.min.js",
+        "scripts/contentscript/contentscript.js"
+      ],
+      "css": [
+        "css/popup.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    "resources/images/*",
+    "html/*",
+    "css/*"
+  ]
+}

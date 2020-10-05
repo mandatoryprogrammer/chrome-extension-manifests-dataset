@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Gmail Multi-Print",
+  "description": "Print Multiple Emails at once from the Inbox screen.",
+  "icons": {
+    "128": "icons/print-128x128.png",
+    "48": "icons/print-48x48.png",
+    "16": "icons/print-16x16.png"
+  },
+  "version": "2.0",
+  "manifest_version": 2,
+  "minimum_chrome_version": "36",
+  "background": {
+    "scripts": [
+      "/background/base64.js",
+      "/background/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*"
+      ],
+      "js": [
+        "/libs/inboxsdk.js",
+        "/contentScript/Multi-Print.js",
+        "/libs/alertify/alertify.min.js"
+      ],
+      "css": [
+        "/libs/alertify/alertify.default.css",
+        "/libs/alertify/alertify.core.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "/icons/print.png",
+    "*"
+  ],
+  "permissions": [
+    "tabs",
+    "https://mail.google.com/",
+    "https://inbox.google.com/"
+  ],
+  "oauth2": {
+    "client_id": "504451976354-0d3mvjed670f44luk3ol6h0p0r8r8o38.apps.googleusercontent.com",
+    "scopes": [
+      "https://mail.google.com/"
+    ]
+  }
+}

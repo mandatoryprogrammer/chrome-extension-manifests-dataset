@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "签到宝",
+  "description": "帮助你自动签到各大网站",
+  "version": "1.0.0",
+  "options_page": "options.html",
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "background": {
+    "scripts": [
+      "eventPage.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "cookies",
+    "background",
+    "tabs",
+    "unlimitedStorage",
+    "storage",
+    "notifications",
+    "webRequest",
+    "webRequestBlocking",
+    "alarms",
+    "*://*.v2ex.com/*",
+    "*://*.mytoken.io/*",
+    "*://api.mytokenapi.com/*",
+    "*://*.bilibili.com/*",
+    "*://api.live.bilibili.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.v2ex.com/*",
+        "*://*.bilibili.com/*",
+        "*://api.live.bilibili.com/*"
+      ],
+      "js": [
+        "jquery.min.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "icons": {
+    "16": "static/images/16.png",
+    "48": "static/images/48.png",
+    "128": "static/images/128.png"
+  }
+}

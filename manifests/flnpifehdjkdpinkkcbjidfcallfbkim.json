@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Rocket Map",
+  "version": "0.1.12",
+  "manifest_version": 2,
+  "description": "Helps to read article with geographical titles by placing those objects on map without leaving the page",
+  "icons": {
+    "16": "images/icon-16.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
+  },
+  "browser_action": {
+    "default_title": "Rocket Map"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://maps.googleapis.com/maps-api-v3/api/js/22/2/main.js; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "http://*.google.com/*",
+        "http://*.facebook.com/*",
+        "https://*.google.com/*",
+        "https://*.facebook.com/*"
+      ],
+      "css": [
+        "styles/popup.css"
+      ],
+      "js": [
+        "scripts/contentscript.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "scripts/script.js"
+  ],
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "tabs",
+    "contextMenus",
+    "https://maps.googleapis.com/",
+    "http://*.google.com/"
+  ]
+}

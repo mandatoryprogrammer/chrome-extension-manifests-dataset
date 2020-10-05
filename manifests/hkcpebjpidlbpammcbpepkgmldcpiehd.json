@@ -1,0 +1,35 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "TFS Chat Notifier",
+  "description": "This extension notifies when you are called in a chat.",
+  "version": "1.2",
+  "browser_action": {
+    "default_icon": "tfschatalert.png"
+  },
+  "permissions": [
+    "tabs",
+    "pageCapture",
+    "activeTab",
+    "storage",
+    "notifications"
+  ],
+  "background": {
+    "scripts": [
+      "tfschatalert_bg.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/tfs/_rooms*"
+      ],
+      "js": [
+        "jquery-1.11.0.js",
+        "tfschatalert.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "options_page": "options.html"
+}

@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "VOIQ for Hubspot",
+  "short_name": "VOIQ",
+  "version": "0.5.2",
+  "homepage_url": "https://www.voiq.com/",
+  "description": "With VOIQ, you can automate and outsource your sales calls with our professional agents directly from Hubspot.",
+  "icons": {
+    "48": "icons/icon.png",
+    "128": "icons/icon.png"
+  },
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "libs/jquery.min.js",
+      "libs/lodash.js",
+      "libs/URI.js",
+      "js/consts.js",
+      "js/background/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "css": [
+        "css/inject.css"
+      ],
+      "js": [
+        "libs/jquery.min.js",
+        "libs/lodash.js",
+        "libs/URI.js",
+        "js/consts.js",
+        "js/content-scripts/panel.js",
+        "js/content-scripts/main.js",
+        "js/content-scripts/providers/hubspot.js"
+      ],
+      "matches": [
+        "https://*.hubspot.com/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "css/fonts/*.ttf",
+    "css/fonts/*.otf"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://api.voiq.com/*"
+    ]
+  },
+  "browser_action": {
+    "default_title": "VOIQ",
+    "default_icon": "icons/icon.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "tabs",
+    "identity",
+    "storage",
+    "https://api.voiq.com/"
+  ]
+}

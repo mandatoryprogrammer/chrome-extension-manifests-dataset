@@ -1,0 +1,79 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "/watch (Video Responder)",
+  "description": "/watch (Video Responder) grabs YouTube video links from comments and makes them clickable.",
+  "version": "0.3.4",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "page_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "tabs",
+    "http://www.youtube.com/*",
+    "https://www.youtube.com/*",
+    "http://gdata.youtube.com/*",
+    "https://gdata.youtube.com/*",
+    "http://vimeo.com/*",
+    "https://vimeo.com/*",
+    "clipboardWrite",
+    "clipboardRead"
+  ],
+  "background": {
+    "scripts": [
+      "jquery-2.0.3.min.js",
+      "background.js",
+      "linkpreparer.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.youtube.com/*"
+      ],
+      "js": [
+        "jquery-2.0.3.min.js",
+        "insertlinks.js"
+      ],
+      "css": [
+        "insertlinks.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.youtube.com/inbox*"
+      ],
+      "js": [
+        "jquery-2.0.3.min.js",
+        "inbox.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.youtube.com/all_comments*"
+      ],
+      "js": [
+        "jquery-2.0.3.min.js",
+        "findcomment.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "ajax-loader.gif",
+    "icon48.png",
+    "icon.png",
+    "arrowUp.png",
+    "arrowDown.png",
+    "little_watch_banner.png",
+    "comment_menu_icon.png",
+    "vimeo_logo.png",
+    "dailymotion_logo.png",
+    "link.png"
+  ],
+  "content_security_policy": "script-src 'self' https://vimeo.com https://ssl.google-analytics.com; object-src 'self'"
+}

@@ -1,0 +1,164 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_extNameJabber__",
+  "description": "__MSG_extNameJabber__",
+  "default_locale": "en",
+  "version": "10.1.20.1415",
+  "icons": {
+    "16": "img/jabber/16.png",
+    "32": "img/jabber/32.png",
+    "128": "img/jabber/128.png"
+  },
+  "permissions": [
+    "notifications",
+    "geolocation",
+    "background",
+    "management",
+    "tabs",
+    "idle",
+    "http://*/*",
+    "https://*/*",
+    "https://esna.communications/*",
+    "https://esna.communications.jabber/*"
+  ],
+  "background": {
+    "page": "app/jabber/background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://manage1.esna.com/oauth/token.redirect*",
+        "https://sso.apps.avaya.com/clients/jabber/token.redirect*"
+      ],
+      "js": [
+        "app/chrome/jsc.oauth2.inject.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "file://*/*",
+        "https://*/*"
+      ],
+      "all_frames": true,
+      "run_at": "document_end",
+      "js": [
+        "app/chrome/jsc.clicktodial.js"
+      ],
+      "css": [
+        "css/clicktodial.css"
+      ]
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "file://*/*",
+        "https://*/*"
+      ],
+      "all_frames": true,
+      "run_at": "document_end",
+      "js": [
+        "app/chrome/jsc.tags.js"
+      ],
+      "css": [
+        "css/tags.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://*/sfcti/cti.bridge*.html*"
+      ],
+      "all_frames": true,
+      "run_at": "document_end",
+      "js": [
+        "app/chrome/jsc.salesforce.js"
+      ],
+      "css": [
+        "css/salesforce.css"
+      ]
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "file://*/*",
+        "https://*/*"
+      ],
+      "all_frames": false,
+      "run_at": "document_end",
+      "js": [
+        "app/chrome/jsc.popout.js"
+      ],
+      "css": [
+        "css/popout.css",
+        "css3/inject.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.google.com/*/hovercard*"
+      ],
+      "all_frames": true,
+      "run_at": "document_start",
+      "js": [
+        "app/chrome/jsc.gmail.js"
+      ],
+      "css": [
+        "css3/inject.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.ciscowebex.com/webim/*"
+      ],
+      "all_frames": true,
+      "run_at": "document_start",
+      "js": [
+        "app/chrome/jsc.webexim.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://teams.microsoft.com/*"
+      ],
+      "all_frames": false,
+      "run_at": "document_start",
+      "js": [
+        "app/chrome/jsc.teams.js"
+      ],
+      "css": [
+        "css3/teams.css"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": "img/jabber/19d.png"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com chrome-extension://ppbllmlcmhfnfflbkbinnhacecaankdh; object-src 'self'; style-src 'self' 'unsafe-inline' https://static.apps.avaya.com; img-src 'self' 'unsafe-inline' data: http: https:;",
+  "web_accessible_resources": [
+    "img/jabber/32.png",
+    "img/jabber/19.png",
+    "img/jabber/p16.png",
+    "img/jabber/p16h.png",
+    "img/jabber/p16v.png",
+    "img/common/event16.png",
+    "img/common/esna.png",
+    "app/jabber/app.html",
+    "app/jabber/app3.html",
+    "app/common/ntf.html",
+    "jsc/chrome/jsc.popout.js",
+    "css/popout.css",
+    "css3/inject.css"
+  ],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "windows": "Ctrl+Shift+I",
+        "mac": "Ctrl+Shift+I",
+        "chromeos": "Ctrl+Shift+I",
+        "linux": "Ctrl+Shift+I"
+      }
+    }
+  }
+}

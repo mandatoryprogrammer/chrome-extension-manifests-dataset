@@ -1,0 +1,69 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "TF2Center Tools",
+  "description": "Matchmaking tools for TF2Center and logs.tf.",
+  "permissions": [
+    "https://tf2metrics.azurewebsites.net/*",
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "applications": {
+    "gecko": {
+      "id": "{30decbe8-46b4-47be-8a39-2b1cc7307a30}",
+      "strict_min_version": "70.0"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.tf2center.com/lobbies",
+        "https://*.tf2center.com/lobbies?*"
+      ],
+      "js": [
+        "lobbies.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://*.tf2center.com/lobbies/*"
+      ],
+      "js": [
+        "assets/js/jquery-3.5.1.min.js",
+        "lobby.js"
+      ],
+      "css": [
+        "rainbow.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.logs.tf/*"
+      ],
+      "js": [
+        "assets/js/jquery-3.5.1.min.js",
+        "assets/js/jquery.tablesorter.min.js",
+        "logs.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": "icon.png"
+  },
+  "homepage_url": "https://pepperonisoft.com/tf2",
+  "manifest_version": 2,
+  "version": "8.0"
+}

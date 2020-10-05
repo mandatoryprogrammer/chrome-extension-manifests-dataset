@@ -1,0 +1,88 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "WebDriver Scripting Assistant",
+  "version": "1.0.3",
+  "manifest_version": 2,
+  "description": "__MSG_appDescription__",
+  "icons": {
+    "16": "images/icon-16.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "page": "background.html"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon-19.png",
+      "38": "images/icon-38.png"
+    },
+    "default_title": "WebDriver Scripting Assistant",
+    "default_popup": "extension.html"
+  },
+  "permissions": [
+    "activeTab",
+    "<all_urls>",
+    "http://*/*",
+    "https://*/*",
+    "contextMenus",
+    "storage",
+    "unlimitedStorage",
+    "notifications",
+    "webNavigation",
+    "webRequest",
+    "clipboardRead",
+    "clipboardWrite",
+    "unlimitedStorage",
+    "tabs",
+    "cookies"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "web_accessible_resources": [
+    "bower_components/jquery/dist/jquery.min.map",
+    "http://fonts.googleapis.com/",
+    "css/*",
+    "videos/*",
+    "images/*",
+    "bower_components/font-awesome/**/*",
+    "https://*.google-analytics.com/**/*",
+    "contentscript_confirm-pack.js"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [],
+      "css": [
+        "css/selector.css",
+        "css/injected.css"
+      ],
+      "js": [
+        "contentscript_start-pack.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "match_about_blank": true
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [],
+      "css": [
+        "css/selector.css",
+        "css/injected.css"
+      ],
+      "js": [
+        "contentscript_end-pack.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true,
+      "match_about_blank": true
+    }
+  ]
+}

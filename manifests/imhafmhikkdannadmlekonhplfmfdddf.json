@@ -1,0 +1,43 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Salesforce Dashboards on TV",
+  "description": "This extension will display and refresh your SalesForce dashboards in a fullscreen scrolling window.",
+  "version": "1.5",
+  "author": "Paul van Brouwershaven",
+  "options_page": "options.html",
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "icons": {
+    "16": "icon16.png",
+    "24": "icon24.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "page_action": {
+    "default_icon": "icon.png"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "https://*.force.com/",
+    "https://*.salesforce.com/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.salesforce.com/*",
+        "https://*.cloudforce.com/*",
+        "https://*.force.com/*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "script.js"
+      ],
+      "all_frames": true
+    }
+  ]
+}

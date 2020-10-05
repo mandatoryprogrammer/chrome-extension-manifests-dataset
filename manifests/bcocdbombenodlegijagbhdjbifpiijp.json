@@ -1,0 +1,80 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_ext_name_production__",
+  "description": "__MSG_ext_description__",
+  "version": "10.0.14",
+  "default_locale": "en",
+  "icons": {
+    "16": "img/icon-16.png",
+    "128": "img/icon-128.png",
+    "500": "img/icon-500.png"
+  },
+  "background": {
+    "page": "/background.html",
+    "persistent": true
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://ssl.google-analytics.com/ https://www.google-analytics.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.instagram.com/*"
+      ],
+      "js": [
+        "/js/emoji-regex.min.js",
+        "/ig-content-script/index.js",
+        "/theme-content-script/index.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://*.facebook.com/*"
+      ],
+      "js": [
+        "/js/emoji-regex.min.js",
+        "/fb-content-script/index.js",
+        "/theme-content-script/index.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://inssist.com/pro"
+      ],
+      "js": [
+        "/igs-content-script/index.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "alarms",
+    "background",
+    "cookies",
+    "downloads",
+    "webRequest",
+    "webRequestBlocking",
+    "*://*.instagram.com/*",
+    "*://*.facebook.com/*",
+    "*://*.inssist.com/*"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "48": "img/icon-badge-48-normal.png"
+    },
+    "default_title": "INSSIST | Instagram Assistant",
+    "default_popup": "/inssist.html?popup"
+  },
+  "web_accessible_resources": [
+    "/ig-injection/index.js",
+    "/fb-injection/index.js",
+    "/igs-injection/index.js",
+    "/background/index.js",
+    "/manifest.json",
+    "/img/icon-128.png"
+  ]
+}

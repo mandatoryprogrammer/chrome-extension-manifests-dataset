@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Make GitHub Great Again",
+  "version": "2.0.1",
+  "description": "Extension to make GitHub great again!",
+  "minimum_chrome_version": "26",
+  "icons": {
+    "16": "assets/icon_16.png",
+    "48": "assets/icon_48.png",
+    "128": "assets/icon_128.png"
+  },
+  "page_action": {
+    "default_title": "Toggle light/dark header"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "src/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://github.com/*",
+        "*://*.github.com/*"
+      ],
+      "js": [
+        "src/content_script.js"
+      ],
+      "css": [
+        "src/header.css",
+        "src/links.css",
+        "src/save-the-colors.css",
+        "src/fonts.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "options_ui": {
+    "page": "src/options.html",
+    "chrome_style": true
+  }
+}

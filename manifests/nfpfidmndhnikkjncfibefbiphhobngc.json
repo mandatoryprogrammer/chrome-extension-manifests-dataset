@@ -1,0 +1,97 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "2.4.6",
+  "name": "Rambl",
+  "description": "Rambl - Calls That Connect",
+  "background": {
+    "page": "index.html?page=background",
+    "persistent": false
+  },
+  "browser_action": {
+    "default_popup": "index.html",
+    "default_title": "Rambl - v2.4.6",
+    "default_icon": {
+      "19": "assets/call_19x19.png",
+      "38": "assets/call_38x38.png"
+    }
+  },
+  "icons": {
+    "48": "assets/call_48x48.png",
+    "128": "assets/call_128x128.png"
+  },
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "permissions": [
+    "cookies",
+    "*://*.rambl-api.localhost/",
+    "https://*.rambl-stg.com/",
+    "https://*.rambl.ai/",
+    "storage",
+    "tabs",
+    "https://api.mixpanel.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "exclude_matches": [
+        "https://app.rambl.ai/*",
+        "https://app.rambl-stg.com/*",
+        "*://app.rambl-api.test/*",
+        "*://app.rambl-api.localhost/*",
+        "*://app.rambl-api.dev/*",
+        "https://github.com/*",
+        "https://papertrailapp.com/systems/*",
+        "https://rollbar.com/Aftercode/rambl-api/*",
+        "https://www.twilio.com/console/*",
+        "https://stackoverflow.com/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "assets/content-script/utils.js",
+        "assets/content-script/rambl-icon-injector.js",
+        "assets/content-script/rambl-iframe-injector.js",
+        "assets/content-script/rambl-core.js"
+      ],
+      "css": [
+        "assets/content-script/rambl-core.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://app.hubspot.com/*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "assets/content-script/rambl-hubspot-contacts.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://global.gotomeeting.com/public/prelogin.html/*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "assets/content-script/rambl-gotomeeting-prelogin.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://app.rambl.ai/dialer/extension*",
+        "https://app.rambl-stg.com/dialer/extension*",
+        "*://app.rambl-api.test/dialer/extension*",
+        "*://app.rambl-api.localhost/dialer/extension*",
+        "*://app.rambl-api.dev/dialer/extension*"
+      ],
+      "all_frames": true,
+      "run_at": "document_idle",
+      "js": [
+        "assets/content-script/rambl-bridge.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "assets/content-script/dial-wrapper.html"
+  ]
+}

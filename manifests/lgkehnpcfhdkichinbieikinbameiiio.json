@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "description": "A boilerplate to chrome extension with webpack",
+  "version": "0.3",
+  "name": "Scrape the World",
+  "options_page": "options.html",
+  "background": {
+    "page": "background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.facebook.com/groups/*"
+      ],
+      "js": [
+        "heartbeat.js",
+        "getPageSource.js",
+        "facebookGroupQuery.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.facebook.com/events/*"
+      ],
+      "js": [
+        "heartbeat.js",
+        "getPageSource.js",
+        "facebookEventQuery.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": "128.png"
+  },
+  "icons": {
+    "128": "128.png"
+  },
+  "manifest_version": 2,
+  "permissions": [
+    "identity",
+    "tabs",
+    "activeTab",
+    "storage",
+    "notifications"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com https://ssl.google-analytics.com; object-src 'self'",
+  "oauth2": {
+    "client_id": "809763600343-lil0ldk1scn8o7p1v97ncs3jhe6vrlhs.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/userinfo.profile",
+      "https://www.googleapis.com/auth/drive",
+      "https://www.googleapis.com/auth/spreadsheets",
+      "https://www.googleapis.com/auth/chromewebstore.readonly"
+    ]
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAiYnAk0y5qvTRTU/R24wEda9ZD5nzq0ug41/JAogOs71Nq7OU/fXoGrGgUbyYtjAca4LtEQkZQ2pIrLDbFhtZMfk8HGr8Vr0XOb016DuGQ+15j0jN6L/+yUfM23riSU+iHuCru/K8V7xt6hxEtd1mZVMg9TyyiX7rbMTrZy+laIevuQwCB11cqGLYs6uwsH5mJ9vHZHwL1bavA6mIFmBiEYvG3wx4s5ltMJXlEsNRYOGG3roK1QDJcl6VpIY+poReyLA9cEDvG6ImTJAgwZl3aGX8ZigIBH0lY2n/RGw/hSx/R3uk6tJkRqrnJzlE7e4EjBLWLaWS8XIMbJ9syR2TFQIDAQAB"
+}

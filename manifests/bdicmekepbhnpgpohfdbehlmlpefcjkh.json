@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_application_title__",
+  "short_name": "Aster",
+  "description": "__MSG_application_description__",
+  "version": "2.2.17",
+  "default_locale": "en",
+  "browser_action": {
+    "default_icon": "favicon.png",
+    "default_popup": "index.html#/messages/create"
+  },
+  "offline_enabled": false,
+  "permissions": [
+    "https://*.asterapp.io/*",
+    "tabs",
+    "identity",
+    "storage"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "web_accessible_resources": [
+    "assets/css/*",
+    "assets/js/*",
+    "assets/fonts/*",
+    "assets/img/*",
+    "en/*",
+    "index.html"
+  ],
+  "icons": {
+    "16": "assets/icons/icon16.png",
+    "48": "assets/icons/icon48.png",
+    "128": "assets/icons/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "assets/js/chrome-extension/background.js"
+    ],
+    "pesistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://calendar.google.com/calendar/r*",
+        "https://calendar.google.com/calendar/b/*/r*",
+        "https://calendar.google.com/calendar/u/*/r*"
+      ],
+      "js": [
+        "assets/js/chrome-extension/googleCalendarSidePanel.js",
+        "assets/js/chrome-extension/googleCalendarButton.js"
+      ],
+      "css": [
+        "assets/css/chrome-extension/googleCalendarSidePanel.css",
+        "assets/css/chrome-extension/googleCalendarButton.css"
+      ]
+    }
+  ]
+}

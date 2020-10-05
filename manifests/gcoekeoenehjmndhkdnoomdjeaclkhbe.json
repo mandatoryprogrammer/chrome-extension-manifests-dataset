@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Nearpod for Classroom",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA1kAyo+ElcjY79HJpwUL/d0L+zvMsH0F+Q66ITyruw50Tzp5WrOyEee9dAGuV0dQ/GzkNfenfhwVHjQqyfW+EpZeXq/d2Uqdr5PVC9UQ7nn3Pu6QRrUohu58bzFwF68wh/y8ps79NedKM4DjMsiES3k1gHe1M3gMCb+8mp9F7G5Dpp3K/TMfRPdvgcYv/6+0Z2eqycxf+Cviisb7LfSwHclQ+OPdWBVEuk0oOncKE+sWOUdZcC4qOYKUe77tAKU46xGZwviVspae7y4XBt/smtojVuIhjq+haiM3fXmYl0hC/BOPxZzYyZoT+ck72CfE7Oka9ZTwr7+4f5h/b7jDorwIDAQAB",
+  "description": "Access your Nearpod Library and assign Live and Student-Paced lessons directly to Google Classroom.",
+  "version": "0.0.4",
+  "author": "Nearpod",
+  "short_name": "Nearpod",
+  "browser_action": {
+    "default_title": "Nearpod"
+  },
+  "icons": {
+    "128": "assets/nearpod_logo_small.png",
+    "48": "assets/nearpod_logo_small.png",
+    "16": "assets/nearpod_logo_small.png"
+  },
+  "background": {
+    "scripts": [
+      "config.js",
+      "enums.js",
+      "scripts/background.js"
+    ]
+  },
+  "permissions": [
+    "identity"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://classroom.google.com/*"
+      ],
+      "css": [
+        "scripts/classroom/styles.css"
+      ],
+      "js": [
+        "config.js",
+        "enums.js",
+        "scripts/classroom/content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "assets/*"
+  ],
+  "oauth2": {
+    "client_id": "898994559274-vd50hfpirf3r2g9ott3v4en1njr0g886.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/classroom.coursework.students",
+      "https://www.googleapis.com/auth/classroom.courses.readonly"
+    ]
+  }
+}

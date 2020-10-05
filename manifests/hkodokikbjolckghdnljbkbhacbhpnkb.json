@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "SAML, WS-Federation and OAuth 2.0 tracer",
+  "short_name": "rcFed tracer",
+  "description": "Trace and decode all SAML, WS-Federation and OAuth 2.0 (OIDC) messages",
+  "author": "Rasmus Christiansen (rcfed.com)",
+  "homepage_url": "https://rcfed.com/Browser/Tracer",
+  "version": "3.6.4",
+  "browser_action": {
+    "default_icon": "icon57.png",
+    "default_popup": "popup.html",
+    "default_title": "rcFederation SAML, WS-Federation and OAuth 2.0 tracer"
+  },
+  "permissions": [
+    "contextMenus",
+    "webRequest",
+    "*://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "eventPage.js",
+      "common.js",
+      "zipInflate.js",
+      "ajaxIntercept.js"
+    ],
+    "persistent": true
+  },
+  "icons": {
+    "57": "icon57.png",
+    "96": "icon96.png",
+    "128": "icon128.png",
+    "192": "icon192.png"
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "ajaxInterceptInjector.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "web_accessible_resources": [
+    "ajaxIntercept.js"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'"
+}

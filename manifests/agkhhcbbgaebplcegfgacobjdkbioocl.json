@@ -1,0 +1,73 @@
+{
+  "update_url": "http://clients2.google.com/service/update2/crx",
+  "name": "亚马逊价格表",
+  "version": "1.9.4",
+  "manifest_version": 2,
+  "description": "在亚马逊网站（amazon），自动算出可直邮的商品到手价（暂支持衣服、鞋靴品类，别的品类完善中），提示运费与关税情况。在一张表中，看所有亚马逊自营商品：尺码、颜色、价格、库存情况。买鞋子、衣服等尺码颜色多的商品会很方便。支持各国亚马逊",
+  "icons": {
+    "16": "lightning_icon16.png",
+    "128": "lightning_icon128.png"
+  },
+  "externally_connectable": {
+    "ids": [
+      "pkkmkjohbpadekenfidhbfihlcdmkodc",
+      "fdgjimbakkheplhdeplfmdhnoeinalhe"
+    ],
+    "matches": [
+      "http://*.amazon.com/*",
+      "http://*.amazon.cn/*",
+      "http://z.cn/*"
+    ]
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "homepage_url": "http://www.amazon.com",
+  "content_scripts": [
+    {
+      "core_type": "webkit",
+      "matches": [
+        "*://*.amazon.com/*",
+        "*://*.amazon.cn/*",
+        "*://*.z.cn/*",
+        "*://*.amazon.co.jp/*",
+        "*://*.amazon.de/*",
+        "*://*.amazon.co.uk/*",
+        "*://*.amazon.fr/*",
+        "*://*.amazon.es/*",
+        "*://*.amazon.it/*"
+      ],
+      "js": [
+        "js/jquery-1.10.1.js",
+        "js/util.js",
+        "js/size.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "contextMenus",
+    "tabs",
+    "notifications",
+    "management",
+    "http://*.good.cc/",
+    "https://www.google-analytics.com/",
+    "storage",
+    "*://*.amazon.com/",
+    "*://*.amazon.cn/",
+    "*://*.z.cn/",
+    "*://*.amazon.co.jp/",
+    "*://*.amazon.de/",
+    "*://*.amazon.co.uk/",
+    "*://*.amazon.fr/",
+    "*://*.amazon.es/",
+    "*://*.amazon.it/"
+  ],
+  "browser_action": {
+    "default_title": "亚马逊价格表",
+    "default_icon": "lightning_icon16.png",
+    "homepage_url": "http://www.amazon.com",
+    "default_popup": "pop.html"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

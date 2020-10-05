@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Timely",
+  "description": "Reminds you to fill your time sheet timely",
+  "version": "1.2",
+  "icons": {
+    "128": "app/images/tw128x128.png",
+    "16": "app/images/tw16x16.png",
+    "48": "app/images/tw48x48.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://pse.na32.visual.force.com/apex/PSATimecardEntry",
+        "https://pse.na32.visual.force.com/apex/*"
+      ],
+      "js": [
+        "jquery.min.js",
+        "autofill.js"
+      ],
+      "css": []
+    }
+  ],
+  "page_action": {
+    "default_icon": "app/images/tw128x128.png",
+    "default_popup": "app/index.html",
+    "default_title": "Timely"
+  },
+  "options_ui": {
+    "page": "app/index.html",
+    "chrome_style": true,
+    "open_in_tab": true
+  },
+  "background": {
+    "scripts": [
+      "context.js"
+    ]
+  },
+  "permissions": [
+    "contextMenus",
+    "storage",
+    "tabs",
+    "activeTab",
+    "alarms",
+    "notifications",
+    "windows",
+    "http://*/",
+    "https://*/",
+    "*://timely-d13ef.firebaseio.com/*",
+    "https://timely-d13ef.firebaseio.com/.lp?start=t&ser=1653466&cb=15&v=5"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval';  object-src 'self'"
+}

@@ -1,0 +1,41 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Chatterino Native Host",
+  "version": "1.3",
+  "description": "Replaces the chat on Twitch.tv with Chatterino.",
+  "permissions": [
+    "tabs",
+    "nativeMessaging",
+    "storage"
+  ],
+  "icons": {
+    "256": "icon.png"
+  },
+  "applications": {
+    "gecko": {
+      "id": "chatterino_native@chatterino.com",
+      "strict_min_version": "50.0"
+    }
+  },
+  "manifest_version": 2,
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "https://www.twitch.tv/*"
+      ],
+      "js": [
+        "inject.js"
+      ]
+    }
+  ]
+}

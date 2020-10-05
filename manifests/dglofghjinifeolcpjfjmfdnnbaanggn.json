@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "id": "module-linker",
+  "applications": {
+    "gecko": {
+      "id": "{fd697d8c-616c-4f6e-8509-0ed4a69e544e}",
+      "strict_min_version": "53.0"
+    }
+  },
+  "manifest_version": 2,
+  "name": "Module Linker",
+  "description": "Add direct links to imported modules on GitHub source code.",
+  "version": "2.3.0",
+  "author": "fiatjaf",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "64": "icon64.png",
+    "128": "icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://github.com/*/*"
+      ],
+      "js": [
+        "vendor/jquery.js",
+        "vendor/jquery.pjax.js",
+        "dist/full.js"
+      ],
+      "css": [
+        "root.css",
+        "links.css"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "dist/background.js"
+    ]
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true,
+    "open_in_tab": true
+  },
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "https://github.com/*/*",
+    "https://api.github.com/repos/*",
+    "https://raw.githubusercontent.com/*",
+    "https://pypi.python.org/pypi/*/json",
+    "https://registry.npmjs.org/*",
+    "https://hackage.haskell.org/package/*",
+    "https://pkg.julialang.org/",
+    "http://pub.dartlang.org/api/packages/*",
+    "https://crates.io/api/v1/crates/*",
+    "https://rubygems.org/api/v1/gems/*",
+    "https://packagist.org/packages/*",
+    "https://jsonbin.org/fiatjaf/crystal/*",
+    "activeTab",
+    "webNavigation",
+    "storage"
+  ]
+}

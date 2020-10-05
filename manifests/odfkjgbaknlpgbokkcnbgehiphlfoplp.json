@@ -1,0 +1,73 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Traktivity Helper",
+  "description": "A Chrome extension to aid Traktivity users in acquiring contact information.",
+  "version": "0.4.0",
+  "browser_action": {
+    "default_icon": {
+      "16": "icon16.png",
+      "32": "icon32.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
+    },
+    "default_title": "Traktivity",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "js/eventPage.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.facebook.com/*"
+      ],
+      "js": [
+        "js/facebook.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.traktivity.com/*"
+      ],
+      "js": [
+        "js/traktivity.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://localhost:8181/*"
+      ],
+      "js": [
+        "js/traktivity.js"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "icon16.png",
+    "32": "icon32.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "notifications",
+    "storage",
+    "tabs",
+    "webRequest",
+    "declarativeContent",
+    "*://*.facebook.com/*",
+    "*://*.traktivity.com/*",
+    "http://localhost:8181/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "http://localhost:8181/*",
+      "*://*.traktivity.com/*"
+    ]
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

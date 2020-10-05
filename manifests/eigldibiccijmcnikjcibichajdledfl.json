@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Fuzzy Tab Search",
+  "description": "Fuzzy search the title and contents of every tab.",
+  "version": "0.0.0.4",
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_title": "Fuzzy search all tabs"
+  },
+  "icons": {
+    "16": "icon16.png",
+    "32": "icon32.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js",
+      "fuzzySearch.js"
+    ],
+    "persistent": true
+  },
+  "options_page": "options.html",
+  "permissions": [
+    "activeTab",
+    "tabs"
+  ],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+F",
+        "mac": "MacCtrl+Shift+F"
+      }
+    }
+  }
+}

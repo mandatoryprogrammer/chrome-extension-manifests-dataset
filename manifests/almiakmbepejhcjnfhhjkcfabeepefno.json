@@ -1,0 +1,196 @@
+{
+  "description": "Productor for Merch by Amazon is a toolkit that improves your Merch by Amazon product management and research.",
+  "version": "6.59.11",
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Productor for Merch by Amazon",
+  "short_name": "PRDMBA",
+  "author": "Thimo Grauerholz",
+  "browser_action": {
+    "default_icon": "assets/icons/icon128.png",
+    "default_title": "Productor for Merch by Amazon",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "assets/icons/icon16.png",
+    "32": "assets/icons/icon32.png",
+    "48": "assets/icons/icon48.png",
+    "128": "assets/icons/icon128.png"
+  },
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "commands": {
+    "publish-listing": {
+      "suggested_key": {
+        "default": "Alt+P",
+        "windows": "Alt+P",
+        "mac": "Alt+P"
+      },
+      "description": "Publish Listing"
+    },
+    "draft-listing": {
+      "suggested_key": {
+        "default": "Alt+D",
+        "windows": "Alt+D",
+        "mac": "Alt+D"
+      },
+      "description": "Save Listing as Draft"
+    },
+    "research-selection-1": {
+      "suggested_key": {
+        "default": "Alt+Shift+1",
+        "windows": "Alt+Shift+1",
+        "mac": "Alt+Shift+1"
+      },
+      "description": "Research US marketplace"
+    },
+    "research-selection-2": {
+      "description": "Research GB marketplace"
+    },
+    "research-selection-3": {
+      "suggested_key": {
+        "default": "Alt+Shift+3",
+        "windows": "Alt+Shift+3",
+        "mac": "Alt+Shift+3"
+      },
+      "description": "Research DE marketplace"
+    },
+    "research-selection-4": {
+      "description": "Research FR marketplace"
+    },
+    "research-selection-5": {
+      "description": "Research IT marketplace"
+    },
+    "research-selection-6": {
+      "description": "Research ES marketplace"
+    },
+    "research-selection-7": {
+      "description": "Research JP marketplace"
+    },
+    "create-open-products": {
+      "description": "Open \"Select Products\" on Create"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.amazon.de/*",
+        "*://www.amazon.com/*",
+        "*://www.amazon.co.uk/*",
+        "*://www.amazon.fr/*",
+        "*://www.amazon.com.au/*",
+        "*://www.amazon.com.br/*",
+        "*://www.amazon.ca/*",
+        "*://www.amazon.cn/*",
+        "*://www.amazon.in/*",
+        "*://www.amazon.it/*",
+        "*://www.amazon.co.jp/*",
+        "*://www.amazon.com.mx/*",
+        "*://www.amazon.nl/*",
+        "*://www.amazon.es/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "content-research.bundle.js"
+      ],
+      "css": [
+        "content-research.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://merch.amazon.com/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "content-menu.bundle.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://www.amazon.com/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "content-relogin.bundle.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://merch.amazon.com/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "content-mba.bundle.js"
+      ],
+      "css": [
+        "content-mba.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://www.amazon.de/report/infringement*",
+        "*://www.amazon.com/report/infringement*",
+        "*://www.amazon.co.uk/report/infringement*",
+        "*://www.amazon.fr/report/infringement*",
+        "*://www.amazon.com.au/report/infringement*",
+        "*://www.amazon.com.br/report/infringement*",
+        "*://www.amazon.ca/report/infringement*",
+        "*://www.amazon.cn/report/infringement*",
+        "*://www.amazon.in/report/infringement*",
+        "*://www.amazon.it/report/infringement*",
+        "*://www.amazon.co.jp/report/infringement*",
+        "*://www.amazon.com.mx/report/infringement*",
+        "*://www.amazon.nl/report/infringement*",
+        "*://www.amazon.es/report/infringement*"
+      ],
+      "all_frames": true,
+      "js": [
+        "content-infringement.bundle.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "*://*.amazon.de/*",
+    "*://*.amazon.com/*",
+    "*://*.amazon.co.uk/*",
+    "*://*.amazon.fr/*",
+    "*://*.amazon.com.au/*",
+    "*://*.amazon.com.br/*",
+    "*://*.amazon.ca/*",
+    "*://*.amazon.cn/*",
+    "*://*.amazon.in/*",
+    "*://*.amazon.it/*",
+    "*://*.amazon.co.jp/*",
+    "*://*.amazon.com.mx/*",
+    "*://*.amazon.nl/*",
+    "*://*.amazon.es/*",
+    "*://*.amazonaws.com/*",
+    "*://translate.googleapis.com/*",
+    "*://tmsearch.uspto.gov/*",
+    "*://members.merchinformer.com/*",
+    "*://api.markinformer.com/*",
+    "*://*.productor.io/*",
+    "https://api.deepl.com/*",
+    "https://www.ecb.europa.eu/*",
+    "https://trends.google.com/*",
+    "https://suggestqueries.google.com/*",
+    "activeTab",
+    "downloads",
+    "contextMenus",
+    "background",
+    "notifications",
+    "alarms"
+  ],
+  "web_accessible_resources": [
+    "assets/*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "version": "2017.6.26",
+  "name": "RedditAccessible",
+  "description": "Add accessibility features for switch users and the visually impaired to reddit.com",
+  "icons": {
+    "16": "/img/icon16.png",
+    "48": "/img/icon48.png",
+    "128": "/img/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.reddit.com/",
+        "https://www.reddit.com/r/*",
+        "https://www.reddit.com/subreddits*"
+      ],
+      "js": [
+        "/lib/jquery.js",
+        "/lib/reddit.js",
+        "/lib/spin.min.js",
+        "content_script.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "page": "bg/background.html"
+  },
+  "browser_action": {
+    "default_icon": "/img/popup.png",
+    "default_popup": "/popup/popup.html",
+    "default_title": "Toggle RedditAccessible"
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "storage",
+    "https://www.reddit.com/r/*",
+    "https://www.reddit.com/subreddits*",
+    "https://www.reddit.com/"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://www.reddit.com/r/*",
+      "https://www.reddit.com/subreddits*",
+      "https://www.reddit.com/"
+    ]
+  },
+  "web_accessible_resources": [
+    "/css/content.css",
+    "/css/choose.css"
+  ]
+}

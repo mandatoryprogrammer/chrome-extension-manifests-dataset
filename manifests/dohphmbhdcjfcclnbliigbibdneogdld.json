@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "关关聚交",
+  "description": "实时获得您所关心的人的多个社交平台更新。",
+  "version": "1.0.2",
+  "icons": {
+    "16": "img/icon-16.png",
+    "48": "img/icon-48.png",
+    "128": "img/icon-128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "img/icon-19.png",
+      "38": "img/icon-38.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "js/jquery.js",
+      "js/jquery.json.js",
+      "js/background.js"
+    ]
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://graph.renren.com/oauth/login_success.html?code=*"
+      ],
+      "js": [
+        "js/jquery.js",
+        "js/content.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://yuzhang-lille.farbox.com/?code=*"
+      ],
+      "js": [
+        "js/jquery.js",
+        "js/content-douban.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "tabs",
+    "storage"
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Stock Ticker for Chrome",
+  "short_name": "Stock Ticker",
+  "description": "Scans current page for any ticker symbols and if found will display associated stock information in ticker bar.",
+  "version": "0.9.9",
+  "author": "Bryan Hazelbaker",
+  "homepage_url": "http://www.automatonsofmisery.com/applications/stock-ticker-chrome/",
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "notifications",
+    "storage",
+    "tabs"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "web_accessible_resources": [
+    "libs/external/bootstrap/bootstrap-3.0.3/dist/js/bootstrap.min.js",
+    "libs/external/angular/angular.min.js",
+    "libs/external/bower_components/angular-ui-utils/ui-utils.min.js",
+    "libs/CSTResource.js",
+    "js/cstApp.js",
+    "js/resource/resourceFactory.js",
+    "js/resource/resourceDirective.js",
+    "js/resource/resourceCtrl.js",
+    "js/links/linksFactory.js",
+    "js/links/linksCtrl.js",
+    "js/links/linksDirective.js",
+    "js/variable/variableCtrl.js",
+    "js/variable/variableDirective.js",
+    "js/variable/variableFactory.js",
+    "js/bar/barCtrl.js",
+    "js/bar/barDirective.js",
+    "js/pattern/patternFactory.js",
+    "js/pattern/patternCtrl.js",
+    "js/pattern/patternDirective.js",
+    "js/bootstrap/bootstrapCtrl.js",
+    "js/bootstrap/bootstrapDirective.js",
+    "libs/cst-bootstrap.css",
+    "http://www.automatonsofmisery.com/chrome-stock-ticker/server/comments/index.php",
+    "data/resource.json",
+    "data/patterns.json",
+    "data/links.json",
+    "js/variable/template/variable.html",
+    "js/variable/template/variable-config.html",
+    "js/variable/template/metric.html",
+    "js/bar/template/bar.html",
+    "js/bar/template/bar-vertical.html",
+    "js/pattern/template/pattern-config.html",
+    "js/resource/template/resource-config.html",
+    "js/links/template/links-config.html",
+    "js/links/template/links-button.html",
+    "js/bootstrap/template/bootstrap.html"
+  ],
+  "commands": {
+    "cst_show_ticker_bar": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+O",
+        "mac": "Command+Shift+O",
+        "windows": "Ctrl+Shift+O"
+      },
+      "description": "Show the ticker bar"
+    }
+  },
+  "options_page": "options/options.html",
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon-19.png",
+      "38": "images/icon-38.png"
+    },
+    "default_title": "Stock Ticker for Chrome",
+    "default_popup": "popup/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "libs/external/jquery/jquery.min.js",
+        "content/find-symbols.js"
+      ],
+      "css": [
+        "libs/cst-bootstrap.css",
+        "js/variable/css/variable.css",
+        "js/resource/css/resource.css",
+        "js/bar/css/bar.css",
+        "js/bar/css/bar-vertical.css",
+        "js/pattern/css/pattern.css"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "images/icon-16.png",
+    "19": "images/icon-19.png",
+    "38": "images/icon-38.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
+  },
+  "background": {
+    "page": "background/background.html"
+  }
+}

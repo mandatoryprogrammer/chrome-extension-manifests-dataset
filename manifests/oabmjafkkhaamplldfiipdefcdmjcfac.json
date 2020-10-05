@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "GQueues for Gmail",
+  "version": "1.2.1",
+  "description": "Turn emails into actionable tasks with GQueues - the leading Google-integrated task management system for people and teams.",
+  "icons": {
+    "16": "gqIcon16.png",
+    "48": "gqIcon48.png",
+    "128": "gqIcon128.png"
+  },
+  "background": {
+    "scripts": [
+      "jquery-2.1.1.min.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "https://*.googleusercontent.com/*"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "web_accessible_resources": [
+    "images/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "run_at": "document_end",
+      "css": [
+        "gqueuesGmailExt-min.css"
+      ],
+      "js": [
+        "jquery-2.1.1.min.js",
+        "jquery-ui-1.11.2.min.js",
+        "gqueuesGmailExt-min.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.gqueues.com/gmailext?*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "jquery-2.1.1.min.js",
+        "loginContentScript.js"
+      ]
+    }
+  ]
+}

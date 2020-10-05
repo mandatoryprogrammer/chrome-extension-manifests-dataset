@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Safe 2 EAT",
+  "version": "2.0.1",
+  "manifest_version": 2,
+  "options_page": "options.html",
+  "description": "We display hygiene ratings next to JustEat and HungryHouse take aways",
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icons/take-away-32.png",
+      "38": "images/icons/take-away-64.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "images/icons/take-away-32.png",
+    "128": "images/icons/take-away-64.png"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://*.pusher.com; object-src 'self'",
+  "permissions": [
+    "contextMenus",
+    "activeTab",
+    "webRequest",
+    "storage",
+    "https://*.pusher.com/*",
+    "*://pusher.com/*",
+    "*://*.pusher.com/",
+    "http://getcouper.com:8000/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/vendors/jquery.js"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/content.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "images/fhrs_0_en-gb.jpg",
+    "images/fhrs_1_en-gb.jpg",
+    "images/fhrs_2_en-gb.jpg",
+    "images/fhrs_3_en-gb.jpg",
+    "images/fhrs_4_en-gb.jpg",
+    "images/fhrs_5_en-gb.jpg",
+    "images/fhrs_awaitinginspection_en-gb.jpg"
+  ],
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ]
+  }
+}

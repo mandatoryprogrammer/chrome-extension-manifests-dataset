@@ -1,0 +1,85 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Open End",
+  "version": "0.5.1",
+  "version_name": "0.5.1 (BETA)",
+  "default_locale": "en",
+  "description": "__MSG_manifest_description__",
+  "icons": {
+    "16": "img/icon_twitch-purple_16.png",
+    "32": "img/icon_twitch-purple_32.png",
+    "64": "img/icon_twitch-purple_64.png",
+    "128": "img/icon_twitch-purple_128.png"
+  },
+  "author": "snowwits@gmail.com",
+  "homepage_url": "https://github.com/snowwits/openend",
+  "background": {
+    "scripts": [
+      "common/common.js",
+      "background/background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "img/icon_grey_16.png",
+      "32": "img/icon_grey_32.png",
+      "64": "img/icon_grey_64.png",
+      "128": "img/icon_grey_128.png"
+    },
+    "default_popup": "popup/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.twitch.tv/*"
+      ],
+      "css": [
+        "common/common.css",
+        "content_scripts/twitch.tv.css"
+      ],
+      "js": [
+        "common/common.js",
+        "content_scripts/twitch.tv.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.mlg.com/*",
+        "*://*.majorleaguegaming.com/*",
+        "*://*.overwatchleague.com/*"
+      ],
+      "all_frames": true,
+      "css": [
+        "common/common.css",
+        "content_scripts/mlg.com.css"
+      ],
+      "js": [
+        "common/common.js",
+        "content_scripts/mlg.com.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "options_ui": {
+    "page": "options/options.html",
+    "browser_style": true,
+    "chrome_style": true
+  },
+  "permissions": [
+    "storage",
+    "tabs"
+  ],
+  "web_accessible_resources": [
+    "img/*",
+    "options/options.html"
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "openend@snowwits.github.com"
+    }
+  },
+  "minimum_chrome_version": "58.0"
+}

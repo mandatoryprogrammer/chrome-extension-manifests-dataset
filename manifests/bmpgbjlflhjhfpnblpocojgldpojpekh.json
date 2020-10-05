@@ -1,0 +1,38 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Download Box Integration",
+  "version": "1.0.1",
+  "manifest_version": 2,
+  "description": "Send your download url to Download Box application.",
+  "icons": {
+    "128": "icon-128.png"
+  },
+  "permissions": [
+    "tabs",
+    "nativeMessaging",
+    "downloads",
+    "downloads.shelf",
+    "http://*/",
+    "https://*/"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "jquery-2.1.4.min.js",
+        "content.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' chrome-extension-resource: 'unsafe-eval'; default-src 'none'; connect-src *"
+}

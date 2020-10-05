@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Qurate Button",
+  "version": "1.1.2",
+  "manifest_version": 2,
+  "description": "Qurate Button for Chrome",
+  "homepage_url": "http://quratos.com",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "page": "src/bg/background.html",
+    "persistent": true
+  },
+  "options_page": "src/options_custom/index.html",
+  "options_ui": {
+    "page": "src/options_custom/index.html",
+    "chrome_style": true
+  },
+  "browser_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "Qurate Button"
+  },
+  "permissions": [
+    "contextMenus",
+    "notifications",
+    "storage",
+    "https://*/*",
+    "http://*/*"
+  ],
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "css": [
+        "src/inject/inject.css"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "js": [
+        "js/jquery/jquery.min.js",
+        "js/masonry.min.js",
+        "src/inject/inject.js"
+      ]
+    }
+  ]
+}

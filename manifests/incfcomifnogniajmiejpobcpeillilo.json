@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "SweDic (Swedish - English Dictionary)",
+  "description": "Swedish - English Dictionary by look up at The People's Dictionary.",
+  "version": "1.2",
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png"
+  },
+  "permissions": [
+    "contextMenus"
+  ],
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "analytics.js",
+      "script_util.js",
+      "jquery.1.6.3.min.js",
+      "bg.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "css": [
+        "style.css"
+      ],
+      "js": [
+        "jquery.1.6.3.min.js",
+        "script.js",
+        "jquery.hotkeys-0.7.9.min.js",
+        "script_util.js",
+        "analytics.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "http://folkets-lexikon.csc.kth.se/folkets/folkets.en.html/*"
+      ]
+    },
+    {
+      "js": [
+        "jquery.1.6.3.min.js",
+        "script_for_people_dic.js",
+        "script_util.js"
+      ],
+      "matches": [
+        "http://folkets-lexikon.csc.kth.se/folkets/folkets.en.html*"
+      ],
+      "all_frames": true
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com/ga.js; object-src 'self'"
+}

@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "WriteOn",
+  "author": "Untold Ventures",
+  "homepage_url": "https://writeon.io",
+  "icons": {
+    "96": "ui/resources/rewrite.png"
+  },
+  "version": "1.0.5",
+  "minimum_chrome_version": "49",
+  "incognito": "split",
+  "description": "WriteOn any webpage",
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "scripts/content/jquery-3.3.1.min.js",
+        "scripts/content/vendor.js",
+        "scripts/content/content.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "html/overlay-loader.html",
+    "html/overlay-error.html"
+  ],
+  "background": {
+    "scripts": [
+      "scripts/tools/jszip.js",
+      "scripts/tools/mime.js",
+      "scripts/tools/sha_dev.js",
+      "scripts/tools/polyfill.js",
+      "scripts/background/firebase.js",
+      "scripts/tools/core-common.js",
+      "scripts/tools/capturer-common.js",
+      "scripts/background/vendor.js",
+      "scripts/background/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "ui/resources/rewrite.png",
+    "default_title": "WriteOn"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "windows": "Ctrl+Shift+R",
+        "mac": "Command+Shift+R",
+        "linux": "Ctrl+Shift+R"
+      }
+    }
+  },
+  "permissions": [
+    "activeTab",
+    "downloads",
+    "storage",
+    "unlimitedStorage",
+    "webNavigation"
+  ],
+  "manifest_version": 2
+}

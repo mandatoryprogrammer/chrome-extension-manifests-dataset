@@ -1,0 +1,67 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "PinLoft",
+  "description": "Bookmark manager",
+  "version": "0.1.3",
+  "manifest_version": 2,
+  "minimum_chrome_version": "32",
+  "icons": {
+    "16": "icons/16x16.png",
+    "19": "icons/19x19.png",
+    "32": "icons/32x32.png",
+    "38": "icons/38x38.png",
+    "48": "icons/48x48.png",
+    "128": "icons/128x128.png",
+    "256": "icons/128x128.png"
+  },
+  "page_action": {
+    "default_title": "PinLoft",
+    "default_icon": {
+      "16": "icons/16x16.png",
+      "19": "icons/19x19.png",
+      "32": "icons/32x32.png",
+      "38": "icons/38x38.png",
+      "48": "icons/48x48.png",
+      "128": "icons/128x128.png",
+      "256": "icons/128x128.png"
+    }
+  },
+  "permissions": [
+    "tabs",
+    "bookmarks",
+    "<all_urls>"
+  ],
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "*://pinloft.com/*",
+        "*://dev.pinloft.com/*"
+      ],
+      "js": [
+        "js/app.js"
+      ],
+      "css": [
+        "css/style.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "js": [
+        "js/web.js"
+      ],
+      "matches": [
+        "*://pinloft.com/*",
+        "*://dev.pinloft.com/*"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

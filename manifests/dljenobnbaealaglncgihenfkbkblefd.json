@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Qikipedia",
+  "version": "0.1.2",
+  "manifest_version": 2,
+  "description": "Brings Wikipedia anywhere on the web. Highlight text to see its Wikipedia summary.",
+  "homepage_url": "https://gitlab.com/bitspice/qikipedia",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "default_locale": "en",
+  "options_page": "src/options/index.html",
+  "permissions": [
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "contextMenus",
+    "https://*/*",
+    "http://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "src/inject/options.js",
+      "src/inject/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "js": [
+        "src/inject/options.js",
+        "src/inject/inject.js",
+        "src/inject/card.js",
+        "js/mustache.min.js"
+      ],
+      "css": [
+        "css/card.css"
+      ]
+    }
+  ]
+}

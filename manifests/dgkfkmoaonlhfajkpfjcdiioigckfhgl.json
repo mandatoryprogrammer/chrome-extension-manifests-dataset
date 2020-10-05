@@ -1,0 +1,104 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "EADashboardHelper",
+  "description": "Enables SAQL Editor on queries within Einstein Analytics Dashboards, from the JSON editor. Useful for editing SAQL with bindings.",
+  "version": "1.0.11",
+  "author": "Mathew Horvath",
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  },
+  "page_action": {
+    "default_icon": {
+      "48": "icon@48.png",
+      "96": "icon@128.png"
+    },
+    "default_title": "EADashboardHelper",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "48": "icon@48.png",
+    "96": "icon@128.png"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "pageContent.js"
+      ],
+      "matches": [
+        "https://*.salesforce.com/analytics/wave/*",
+        "https://*.lightning.force.com/wave/*",
+        "https://*.lightning.force.com/analytics/*"
+      ]
+    }
+  ],
+  "commands": {
+    "ShowSAQLSidebar": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+S",
+        "mac": "Command+Shift+S"
+      },
+      "description": "Toggle SAQL Sidebar"
+    },
+    "SaveDataflowLayout": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+K",
+        "mac": "Command+Shift+K"
+      },
+      "description": "Save the Dataflow Layout to local storage"
+    },
+    "LoadDataflowLayout": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+L",
+        "mac": "Command+Shift+L"
+      },
+      "description": "Load the Dataflow Layout from local storage"
+    }
+  },
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "*://*.salesforce.com/",
+    "*://*.lightning.force.com/",
+    "storage"
+  ],
+  "web_accessible_resources": [
+    "pageScript.js",
+    "pageScript_df.js",
+    "jsTree/jstree.min.js",
+    "jsTree/themes/default/style.min.css",
+    "jsTree/themes/default/32px.png",
+    "jsTree/themes/default/40px.png",
+    "jsTree/themes/default/throbber.gif",
+    "jsTree/themes/default/table.png",
+    "jsTree/themes/default/chart.png",
+    "jsTree/themes/default/dateselector.png",
+    "jsTree/themes/default/globalfilters.png",
+    "jsTree/themes/default/image.png",
+    "jsTree/themes/default/listselector.png",
+    "jsTree/themes/default/number.png",
+    "jsTree/themes/default/text.png",
+    "jsTree/themes/default/query.png",
+    "jsTree/themes/default/link.png",
+    "jsTree/themes/default/refresh.png",
+    "jsTree/themes/default/pillbox.png",
+    "jsTree/themes/default/delete.png",
+    "jsTree/themes/default/dimension.png",
+    "jsTree/themes/default/function.png",
+    "jsTree/themes/default/dataset.png",
+    "jsTree/themes/default/reorder.png",
+    "jsTree/themes/default/redArrow.png",
+    "functionDefs.js",
+    "dist/selection.min.js",
+    "dist/selection.css",
+    "dist/jquery-sortable-min.js",
+    "dist/clipboard.min.js",
+    "dist/dagre.min.js"
+  ]
+}

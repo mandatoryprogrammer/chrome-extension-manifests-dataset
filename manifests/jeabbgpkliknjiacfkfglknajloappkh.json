@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "YeahAp",
+  "externally_connectable": {
+    "matches": [
+      "https://yeahap.com/*",
+      "http://yeahap.com/*",
+      "https://yeahap.net/*",
+      "http://test.yeahap.net/*",
+      "http://localhost:3000/*"
+    ]
+  },
+  "description": "You can get all links of the world",
+  "version": "1.2.11",
+  "icons": {
+    "128": "asset/images/icon.png"
+  },
+  "background": {
+    "scripts": [
+      "jquery-3.2.1.min.js",
+      "config/api.js",
+      "background/resetToken.js",
+      "background/exploreCollection.js",
+      "background/exploreYeahap.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "css": [
+        "asset/css/contents.css"
+      ],
+      "js": [
+        "jquery-3.2.1.min.js",
+        "config/api.js",
+        "contents/waitForKeyElements.js",
+        "contents/createComponents.js",
+        "contents/actions.js",
+        "contents.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": "asset/images/icon.png",
+    "default_popup": "popup.html"
+  },
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "https://*/*",
+    "http://*/*",
+    "bookmarks",
+    "downloads",
+    "cookies"
+  ]
+}

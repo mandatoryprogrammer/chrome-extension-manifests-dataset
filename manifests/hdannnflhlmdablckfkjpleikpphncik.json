@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Youtube Playback Speed Control",
+  "version": "0.0.6",
+  "manifest_version": 2,
+  "description": "Control speed of the youtube playback using keyboard. Press '+' to increase and '-' to decrease the playback speed.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "webRequest"
+  ],
+  "options_page": "src/option/options.html",
+  "background": {
+    "scripts": [
+      "src/background.js"
+    ]
+  },
+  "page_action": {
+    "default_title": "Control speed of the youtube playback using keyboard or single mouse click.",
+    "default_icon": {
+      "19": "icons/icon19.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": [
+        "http://www.youtube.com/*",
+        "https://www.youtube.com/*"
+      ],
+      "css": [
+        "css/inject.css"
+      ],
+      "js": [
+        "src/inject/inject.js"
+      ]
+    }
+  ]
+}

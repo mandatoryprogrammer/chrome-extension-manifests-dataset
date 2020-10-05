@@ -1,0 +1,39 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Shopify reSKU",
+  "version": "1.2.1",
+  "manifest_version": 2,
+  "description": "Makes SKU required in Shopify Products",
+  "homepage_url": "https://chrome.google.com/webstore/detail/shopify-resku/fhkippjdgfnnajipfcapeofclonpojob",
+  "icons": {
+    "16": "icons/resku-icon-16.png",
+    "48": "icons/resku-icon-48.png",
+    "128": "icons/resku-icon-128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": true
+  },
+  "page_action": {
+    "default_icon": "icons/resku-icon-19.png",
+    "default_title": "Shopify reSKU",
+    "default_popup": "src/page_action/page_action.html"
+  },
+  "permissions": [
+    "https://*.myshopify.com/admin*",
+    "notifications"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.myshopify.com/admin*"
+      ],
+      "js": [
+        "src/inject/inject.js"
+      ]
+    }
+  ]
+}

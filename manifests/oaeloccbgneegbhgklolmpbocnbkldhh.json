@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Robo Gist",
+  "description": "userscript/userstyle manager based on gist",
+  "version": "0.3.0",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "injector.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://robogist.rlemon.ca/*"
+      ],
+      "js": [
+        "runtimeidentity.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://robogist.rlemon.ca/*"
+    ]
+  },
+  "options_page": "options.html",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "https://gist.githubusercontent.com/*"
+  ]
+}

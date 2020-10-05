@@ -1,0 +1,109 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Asana2Go",
+  "short_name": "Asana2Go",
+  "description": "Copy, export, and print from Asana flexibly",
+  "version": "1.6.20",
+  "version_name": "1.6.20",
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "offline_enabled": false,
+  "icons": {
+    "16": "img/a2g_logo_16.png",
+    "32": "img/a2g_logo_32.png",
+    "48": "img/a2g_logo_48.png",
+    "128": "img/a2g_logo_128.png"
+  },
+  "background": {
+    "scripts": [
+      "lib/jquery/jquery-3.3.1.min.js",
+      "lib/moment/moment-with-locales.min.js",
+      "lib/sugar/sugar.min.js",
+      "lib/marked/marked.min.js",
+      "lib/lzstring/lz-string.min.js",
+      "app.js",
+      "asana.js",
+      "api_bridge.js",
+      "extension_server.js",
+      "server_model.js",
+      "options.js",
+      "context.js",
+      "formats.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "web_accessible_resources": [
+    "img/*.png",
+    "img/*.gif",
+    "content.html"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.asana.com/*"
+      ],
+      "js": [
+        "lib/jquery/jquery-3.3.1.min.js",
+        "lib/bootstrap/js/bootstrap.bundle.min.js",
+        "lib/bootstrapdatepicker/js/bootstrap-datepicker.min.js",
+        "lib/sugar/sugar.min.js",
+        "content_script.js"
+      ],
+      "css": [
+        "lib/bootstrap_namespaced/bootstrapcustom.min.css",
+        "lib/bootstrap_namespaced/bootstrapcustom_overrides.css",
+        "lib/bootstrapdatepicker/css/bootstrap-datepicker.css",
+        "content_script.css"
+      ],
+      "all_frames": true
+    }
+  ],
+  "page_action": {
+    "default_icon": {
+      "16": "img/a2g_logo_16.png",
+      "24": "img/a2g_logo_24.png",
+      "32": "img/a2g_logo_32.png"
+    },
+    "default_title": "Asana2Go",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "declarativeContent",
+    "cookies",
+    "https://*.asana.com/*"
+  ],
+  "sandbox": {
+    "pages": [
+      "sandbox.html"
+    ]
+  },
+  "options_page": "options.html",
+  "commands": {
+    "copy": {
+      "suggested_key": {
+        "default": "Alt+Shift+C"
+      },
+      "description": "Copy selected tasks/subtasks"
+    },
+    "print": {
+      "description": "Print selected tasks/subtasks"
+    },
+    "puppyAdd": {
+      "suggested_key": {
+        "default": "Alt+Shift+PageUp"
+      },
+      "description": "Add a puppy"
+    },
+    "dateShnoozeShow": {
+      "description": "Enter Date(s)/Time/Shnooze"
+    },
+    "_execute_page_action": {
+      "suggested_key": {
+        "default": "Alt+Shift+G"
+      }
+    }
+  }
+}

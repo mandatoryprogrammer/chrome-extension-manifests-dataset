@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Tubeit",
+  "manifest_version": 2,
+  "version": "1.0.2",
+  "description": "Search and play YouTube videos without leaving your current tab. Tube it.",
+  "icons": {
+    "16": "img/icon/tubeit-16.png",
+    "48": "img/icon/tubeit-48.png",
+    "128": "img/icon/tubeit-128.png"
+  },
+  "permissions": [
+    "tabs",
+    "*://*.google.com/*",
+    "*://*.youtube.com/*"
+  ],
+  "background": {
+    "persistent": true,
+    "page": "background.html"
+  },
+  "browser_action": {
+    "default_icon": "img/icon/tubeit-48.png",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.youtube.com/*"
+      ],
+      "js": [
+        "js/lib/jquery-2.1.1.js",
+        "js/popup/popup.js",
+        "js/background/background.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://www.youtube.com/player_api https://www.youtube.com 'unsafe-eval' https://www.youtube.com/player_api https://www.youtube.com https://www.youtube.com/iframe_api https://s.ytimg.com https://apis.google.com; object-src 'self' https://www.youtube.com",
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+I",
+        "windows": "Ctrl+I",
+        "mac": "Command+I"
+      }
+    }
+  }
+}

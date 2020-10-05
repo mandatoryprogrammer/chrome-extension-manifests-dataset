@@ -1,0 +1,69 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "iKnow! ポップアップ辞書",
+  "short_name": "ポップアップ辞書",
+  "author": "Cerego Japan",
+  "description": "WEBサイトに出てくる英単語の意味をマウスオーバーするだけで簡単に調べられる、iKnow! 公式のポップアップ英和辞書です。",
+  "version": "1.1.6",
+  "homepage_url": "http://www.iknow.jp/",
+  "icons": {
+    "19": "images/owl-19-19.png",
+    "38": "images/owl-38-38.png",
+    "128": "images/owl-full-128-128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/owl-19-19-gray.png",
+      "38": "images/owl-38-38-gray.png"
+    }
+  },
+  "options_page": "pages/options.html",
+  "background": {
+    "scripts": [
+      "vendor/javascripts/underscore.js",
+      "javascripts/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "vendor/javascripts/jquery.js",
+        "vendor/javascripts/underscore.js",
+        "vendor/javascripts/jquery.qtip.js",
+        "javascripts/contentScript.js"
+      ],
+      "css": [
+        "stylesheets/application.css"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file://*"
+      ],
+      "exclude_matches": [
+        "http://*.iknow.jp/*",
+        "https://*.iknow.jp/*",
+        "http://testing.iknow.jp/*",
+        "http://stable.iknow.jp/*",
+        "http://admin.iknow.jp/*",
+        "https://www.iknow.jp/*",
+        "https://iknow.jp/*",
+        "https://testing.iknow.jp/*",
+        "https://stable.iknow.jp/*",
+        "https://admin.iknow.jp/*",
+        "http://localhost:3000/*"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "/*"
+  ],
+  "permissions": [
+    "tts",
+    "storage"
+  ]
+}

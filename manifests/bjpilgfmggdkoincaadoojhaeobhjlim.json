@@ -1,0 +1,77 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Salesforce Id CopyPasteGo",
+  "version": "1.8.0",
+  "description": "Copy the current Salesforce record's ID to the clipboard, or paste your way to the record's page from where you are!",
+  "background": {
+    "scripts": [
+      "shared.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.force.com/*",
+        "https://*.salesforce.com/*",
+        "https://*.cloudforce.com/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "shared.js",
+        "page.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "page_action": {
+    "default_icon": "images/sf-copypaste16.png",
+    "default_title": "Salesforce ID CopyPasteGo"
+  },
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "clipboardWrite",
+    "clipboardRead",
+    "https://*.force.com/*",
+    "https://*.salesforce.com/*",
+    "https://*.cloudforce.com/*"
+  ],
+  "web_accessible_resources": [
+    "images/sf-copypaste128.png",
+    "images/sf-copypaste48.png",
+    "images/sf-copypaste16.png"
+  ],
+  "icons": {
+    "128": "images/sf-copypaste128.png",
+    "48": "images/sf-copypaste48.png",
+    "16": "images/sf-copypaste16.png"
+  },
+  "commands": {
+    "copyRecordId": {
+      "description": "Copy the record ID",
+      "suggested_key": {
+        "default": "Alt+C"
+      }
+    },
+    "copyCleanUrl": {
+      "description": "Copy a clean URL",
+      "suggested_key": {
+        "default": "Shift+Alt+C"
+      }
+    },
+    "pasteRecordId": {
+      "description": "Paste the record ID",
+      "suggested_key": {
+        "default": "Alt+V"
+      }
+    },
+    "pasteRecordIdToNewTab": {
+      "description": "Paste the record ID to a new Tab",
+      "suggested_key": {
+        "default": "Alt+B"
+      }
+    }
+  }
+}

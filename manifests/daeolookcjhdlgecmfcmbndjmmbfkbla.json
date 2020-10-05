@@ -1,0 +1,257 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "ヤフオク!出品オプティマイザー",
+  "short_name": "ヤフオク optimizer",
+  "version": "3.0.18",
+  "minimum_chrome_version": "59",
+  "description": "ヤフオク出品者ライフに役立つ便利機能が詰まった拡張機能です(リンクリスト,自動再出品,出品補助入力,評価簡略化,取引進行状況管理チェックリスト,簡易メモ,サムネイル画像表示,取引ナビ用雛形・定型文,都道府県ドラッグ選択→右クリックで送料検索,統計)",
+  "icons": {
+    "16": "img/a16.png",
+    "32": "img/a32.png",
+    "48": "img/a48.png",
+    "128": "img/a128.png"
+  },
+  "homepage_url": "https://allis.jp/",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "https://*.auctions.yahoo.co.jp/*",
+    "http://*.auctions.yahoo.co.jp/*",
+    "*://auctions.yahoo.co.jp/*",
+    "contextMenus",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking",
+    "unlimitedStorage"
+  ],
+  "web_accessible_resources": [
+    "img/a16.png",
+    "img/a32.png",
+    "css/cs_auction.css",
+    "css/aucinfo.css",
+    "http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "img/a16.png",
+      "38": "img/a32.png"
+    },
+    "default_title": "設定",
+    "default_popup": "options/options.html"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": [
+        "*://closeduser.auctions.yahoo.co.jp/jp/show/mystatus?*select=closed&*hasWinner=0*",
+        "*://*.auctions.yahoo.co.jp/*jp/show/mystatus?*select=closed&*hasWinner=0*",
+        "*://auctions.yahoo.co.jp/closeduser/jp/show/mystatus?*select=closed&*hasWinner=0*"
+      ],
+      "css": [
+        "css/cs_auction.css",
+        "css/aucinfo.css"
+      ],
+      "js": [
+        "js/jquery.js",
+        "js/jquery-ui.js",
+        "func.js",
+        "func_cs.js",
+        "cs_auction_resubmit_step1.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "*://*.auctions.yahoo.co.jp/jp/show/resubmit?aID=*",
+        "*://auctions.yahoo.co.jp/sell/jp/show/resubmit?aID=*"
+      ],
+      "css": [
+        "css/cs_auction.css"
+      ],
+      "js": [
+        "js/jquery.js",
+        "func.js",
+        "func_cs.js",
+        "cs_auction_resubmit_step2.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "*://*.auctions.yahoo.co.jp/jp/show/preview",
+        "*://auctions.yahoo.co.jp/jp/show/preview"
+      ],
+      "css": [
+        "css/cs_auction.css"
+      ],
+      "js": [
+        "js/jquery.js",
+        "func.js",
+        "func_cs.js",
+        "cs_auction_resubmit_step3.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "*://*.auctions.yahoo.co.jp/jp/config/submit",
+        "*://*.auctions.yahoo.co.jp/config/submit*",
+        "*://auctions.yahoo.co.jp/config/submit*"
+      ],
+      "css": [
+        "css/cs_auction.css"
+      ],
+      "js": [
+        "js/jquery.js",
+        "func.js",
+        "func_cs.js",
+        "cs_auction_resubmit_step4.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "*://*.auctions.yahoo.co.jp/jp/show/submit",
+        "*://auctions.yahoo.co.jp/jp/show/submit",
+        "*://auctions.yahoo.co.jp/sell/jp/show/submit"
+      ],
+      "css": [
+        "css/cs_auction.css"
+      ],
+      "js": [
+        "js/jquery.js",
+        "func.js",
+        "func_cs.js",
+        "cs_auction_submit.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "*://closeduser.auctions.yahoo.co.jp/jp/show/mystatus?*select=closed&*hasWinner=1*",
+        "*://user.auctions.yahoo.co.jp/jp/show/mystatus?*select=closed&*hasWinner=1*",
+        "*://auctions.yahoo.co.jp/closeduser/jp/show/mystatus?*select=closed&*hasWinner=1*"
+      ],
+      "css": [
+        "css/cs_auction.css",
+        "css/aucinfo.css"
+      ],
+      "js": [
+        "js/jquery.js",
+        "js/jquery-ui.js",
+        "func.js",
+        "func_cs.js",
+        "cs_auction_myclosedwinner1.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "*://*.auctions.yahoo.co.jp/jp/rconfig/leavefeedback?t=*",
+        "*://auctions.yahoo.co.jp/jp/rconfig/leavefeedback?t=*"
+      ],
+      "css": [
+        "css/cs_auction.css"
+      ],
+      "js": [
+        "js/jquery.js",
+        "func.js",
+        "func_cs.js",
+        "cs_auction_feedback_step2.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "*://redit.auctions.yahoo.co.jp/jp/rconfig/leavefeedback"
+      ],
+      "css": [
+        "css/cs_auction.css"
+      ],
+      "js": [
+        "js/jquery.js",
+        "func.js",
+        "func_cs.js",
+        "cs_auction_feedback_step3.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "*://openuser.auctions.yahoo.co.jp/jp/show/mystatus?*select=selling*",
+        "*://auctions.yahoo.co.jp/openuser/jp/show/mystatus?select=selling*"
+      ],
+      "css": [
+        "css/cs_auction.css",
+        "css/aucinfo.css"
+      ],
+      "js": [
+        "js/jquery.js",
+        "js/jquery-ui.js",
+        "func.js",
+        "func_cs.js",
+        "cs_auction_selling.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "*://contact.auctions.yahoo.co.jp/top*",
+        "*://contact.auctions.yahoo.co.jp/edit*"
+      ],
+      "css": [
+        "css/cs_auction.css",
+        "css/aucinfo.css"
+      ],
+      "js": [
+        "js/jquery.js",
+        "js/jquery-ui.js",
+        "js/autosize.js",
+        "func.js",
+        "func_cs.js",
+        "cs_auction_contact.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "*://contact.auctions.yahoo.co.jp/seller/top*"
+      ],
+      "css": [
+        "css/cs_auction.css",
+        "css/aucinfo.css"
+      ],
+      "js": [
+        "js/jquery.js",
+        "js/jquery-ui.js",
+        "js/autosize.js",
+        "func.js",
+        "func_cs.js",
+        "cs_auction_contact_seller.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/jquery.js",
+      "func.js",
+      "func_cs.js",
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "options_page": "options/options.html"
+}

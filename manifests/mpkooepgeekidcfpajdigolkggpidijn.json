@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "applications": {
+    "gecko": {
+      "id": "{35e44a87-e293-4404-b6af-a475b7cc2ff0}",
+      "update_url": "https://crm.soluno.se/firefox.json"
+    }
+  },
+  "manifest_version": 2,
+  "name": "__MSG_extensionName__",
+  "description": "__MSG_extensionDescription__",
+  "version": "1.3.5",
+  "default_locale": "en",
+  "icons": {
+    "48": "images/icon-48.png"
+  },
+  "browser_action": {
+    "default_icon": "images/phone-call-icon-16-terminated.png",
+    "default_title": "SolunoBC",
+    "browser_style": true
+  },
+  "options_ui": {
+    "page": "config.html"
+  },
+  "web_accessible_resources": [
+    "js/*.js",
+    "css/*.css",
+    "images/*.png",
+    "iframe.html"
+  ],
+  "content_scripts": [
+    {
+      "js": [
+        "js/popup.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_globs": [
+        "*.pdf",
+        "*.PDF"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "https://crm.soluno.se/",
+    "https://crmtest.pbxaddons.se/",
+    "storage",
+    "notifications"
+  ],
+  "background": {
+    "scripts": [
+      "js/socket.io.js",
+      "js/background.js"
+    ]
+  }
+}

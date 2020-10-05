@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Yello TRMx",
+  "version": "1.0.45",
+  "manifest_version": 2,
+  "description": "__MSG_appDescription__",
+  "icons": {
+    "16": "images/yello-favicon.png",
+    "128": "images/yello128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "temp/scripts/chromereload.js",
+      "temp/scripts/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.linkedin.com/*"
+      ],
+      "js": [
+        "bower_components/jquery/dist/jquery.js",
+        "temp/scripts/parsers/linked_in.js",
+        "temp/scripts/parsers/linked_in_recruiter.js",
+        "temp/scripts/parsers/linked_in_talent.js",
+        "temp/scripts/content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com 'unsafe-eval' ; object-src 'self'",
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "background",
+    "storage",
+    "declarativeContent",
+    "cookies",
+    "*://*.recsolu.com/",
+    "*://*.yello.co/"
+  ],
+  "page_action": {
+    "default_icon": {
+      "19": "images/yello-favicon.png",
+      "38": "images/yello-favicon.png",
+      "128": "images/yello128.png"
+    },
+    "default_title": "Yello TRMx",
+    "default_popup": "popup.html"
+  }
+}

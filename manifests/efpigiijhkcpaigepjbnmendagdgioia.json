@@ -1,0 +1,43 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Denison Course Calendar Event Generator",
+  "short_name": "Denison Course Event Generator",
+  "version": "0.3",
+  "content_security_policy": "script-src 'self'; object-src 'self' https://denison.edu/",
+  "manifest_version": 2,
+  "author": "Orpheus Peng",
+  "offline_enabled": false,
+  "description": "A Chrome Extension that generates calendar events based on Student Detail Schedule in Self-Service Banner of Denison University.",
+  "icons": {
+    "32": "icon32.png",
+    "64": "icon64.png",
+    "128": "icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "page_action": {
+    "default_icon": "icon19.png",
+    "default_title": "Student Detail Schedule detected."
+  },
+  "permissions": [
+    "declarativeContent",
+    "https://denison.edu/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://web4prod.denison.edu/pls/web4prod/bwskfshd.P_CrseSchdDetl"
+      ],
+      "js": [
+        "course-event-iCal-generator.js",
+        "course-event-CSV-generator.js",
+        "course-final-iCal-generator.js",
+        "main.js"
+      ]
+    }
+  ]
+}

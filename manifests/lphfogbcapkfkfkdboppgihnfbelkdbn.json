@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Link'Vit, mass invits and messages Linkedin",
+  "description": "Make a search and send mass invitations with customs messages within minutes. Delete invitation older than 'your criteria' day(s).",
+  "version": "0.0.0.8",
+  "manifest_version": 2,
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "webNavigation",
+    "notifications",
+    "webRequestBlocking",
+    "webRequest"
+  ],
+  "background": {
+    "page": "background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.linkedin.com/search/*",
+        "https://www.linkedin.com/mynetwork/invitation-manager/sent/*"
+      ],
+      "js": [
+        "/libs/jquery.min.js",
+        "script.js",
+        "removeOldScript.js",
+        "/libs/jquery-ui.min.js"
+      ],
+      "css": [
+        "/css/fontawesome.css",
+        "/css/main.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "web_accessible_resources": [
+    "*.png",
+    "*.ttf",
+    "*.png",
+    "*.eot",
+    "*.otf",
+    "*.woff",
+    "/css/fonts/.*",
+    "/css/*.*",
+    ""
+  ],
+  "browser_action": {
+    "default_title": "Link'Vit"
+  },
+  "icons": {
+    "16": "/icons/icon16.png",
+    "48": "/icons/icon48.png",
+    "128": "/icons/icon128.png"
+  }
+}

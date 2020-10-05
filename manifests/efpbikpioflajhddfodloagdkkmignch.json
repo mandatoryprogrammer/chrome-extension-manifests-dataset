@@ -1,0 +1,89 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "CataHub Content Parser",
+  "description": "Используйте плагин CataHub для переноса данных о товарах с любых сайтов.",
+  "version": "0.0.0.46",
+  "icons": {
+    "128": "icon128.png"
+  },
+  "browser_action": {
+    "default_title": "Нажмите для начала работы"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "*://*.primepix.ru/user/products/*"
+      ],
+      "js": [
+        "jquery-3.1.1.min.js",
+        "CssSelector.js",
+        "imagesloaded.pkgd.min.js",
+        "sweetalert2.min.js",
+        "sanitize-html.min.js",
+        "mustache.min.js",
+        "jquery.xpath.js",
+        "content.js"
+      ],
+      "css": [
+        "sweetalert2.min.css",
+        "css/page.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "*://*.catahub.com/user/products/*",
+    "*://*.primepix.ru/user/products/*",
+    "http://grabber3.primepix.ru/chrome_ext/*",
+    "http://grabber3.primepix.ru/api/*"
+  ],
+  "web_accessible_resources": [
+    "pricereporter_form.html",
+    "css/style.css",
+    "css/shortcuts.css",
+    "css/bootstrap.css",
+    "css/bootstrap-select.css",
+    "css/panel.css",
+    "version.txt"
+  ],
+  "commands": {
+    "toggle-panel": {
+      "suggested_key": {
+        "default": "Ctrl+M",
+        "mac": "Command+M"
+      },
+      "description": "Toggle panel"
+    },
+    "select-photo": {
+      "suggested_key": {
+        "default": "Ctrl+I",
+        "mac": "Command+I"
+      },
+      "description": "Select photo"
+    },
+    "addition-field": {
+      "suggested_key": {
+        "default": "Ctrl+B",
+        "mac": "Command+B"
+      },
+      "description": "Add text to field"
+    },
+    "submit-form": {
+      "suggested_key": {
+        "default": "Ctrl+Space",
+        "mac": "Command+Space"
+      },
+      "description": "Submit and send data"
+    }
+  }
+}

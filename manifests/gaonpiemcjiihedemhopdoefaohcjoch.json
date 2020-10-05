@@ -1,0 +1,91 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "GoToMeeting for Google Calendar",
+  "manifest_version": 2,
+  "description": "Easily schedule GoToMeeting sessions from your Google Calendar.",
+  "homepage_url": "https://chrome.google.com/webstore/detail/gotomeeting-for-google-ca/gaonpiemcjiihedemhopdoefaohcjoch",
+  "icons": {
+    "128": "g2m/images/icon128.png",
+    "16": "g2m/images/icon16.png",
+    "48": "g2m/images/icon48.png"
+  },
+  "page_action": {
+    "default_icon": {
+      "16": "g2m/images/icon16.png",
+      "48": "g2m/images/icon48.png"
+    },
+    "default_title": "GoToMeeting for Google Calendar"
+  },
+  "background": {
+    "scripts": [
+      "lib/sentry-browser-5.11.0.min.js",
+      "g2m/config.js",
+      "g2m/logging.js",
+      "background_oauth.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "options_page": "options.html",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://calendar.google.com/*",
+        "https://calendar.google.com/*"
+      ],
+      "js": [
+        "lib/sentry-browser-5.11.0.min.js",
+        "lib/jquery-2.1.1.min.js",
+        "lib/moment-with-locales.min.js",
+        "lib/moment-timezone-with-data.min.js",
+        "lib/bootstrap.min.js",
+        "lib/angular.min.js",
+        "lib/angular-resource.min.js",
+        "lib/select.min.js",
+        "lib/ui-bootstrap.min.js",
+        "lib/ui-bootstrap-tpls.min.js",
+        "g2m/config.js",
+        "g2m_chrome.js",
+        "g2m/logging.js",
+        "g2m/api_calls_v2.js",
+        "g2m/analytics.js",
+        "g2m/audio_settings.js",
+        "g2m/country.js",
+        "g2m/main_sign_in.js",
+        "g2m/view_new.js",
+        "g2m/view_selector.js",
+        "g2m/view_dialog.js",
+        "g2m/main.js",
+        "g2m/meetingEditor/dist/app.js"
+      ],
+      "css": [
+        "g2m/css/main.css",
+        "g2m/css/font-face.css",
+        "g2m/css/lib/select.min.css",
+        "g2m/meetingEditor/css/main.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "default_locale": "en_US",
+  "permissions": [
+    "cookies",
+    "storage",
+    "https://api.getgo.com/*",
+    "https://api-test.getgo.com/*",
+    "https://*.logmein.com/*",
+    "identity"
+  ],
+  "web_accessible_resources": [
+    "g2m/fonts/*.woff",
+    "g2m/fonts/*.ttf",
+    "g2m/fonts/*.eot",
+    "g2m/fonts/*.svg",
+    "g2m/css/font-face.css",
+    "g2m/images/*.png",
+    "g2m/images/*.svg",
+    "*.html"
+  ],
+  "version": "4.8.3.0"
+}

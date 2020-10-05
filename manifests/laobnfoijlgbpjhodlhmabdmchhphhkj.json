@@ -1,0 +1,123 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Foundit! - searchable bookmarks",
+  "description": "✓ Your bookmarks integrated in your search results",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhW3Mt/Cp8KpiptqnulFbdOndCkfMTgvugC/yLircjvhR3P19lT5bLbVVjhpwFzMl5L0ZWNYwM1EYzpKQCG0Drjcl7N87IQy0rE3ANmr59WvdaqnVs0utWfFygk7WywxzHvVTmAJm7oH6FmI+o5lZshYTr2mwNQPjbtRsq7X9IGfnCYAMaaTxff4DZiS5vieZErZg/h4UUWa/PWPSp42wHMIcm/c5D72YxuPQxTNmNPljme+eS4fZ8IJQ4fgxibLrgR7KyHhALHxDJMvvk73jVaRokQzMCvUpYpbLo0qbw2JfdpMg5MQPyvmFm3urq+gjTXjDIkA/ki+vTlC49Y7tyQIDAQAB",
+  "version": "0.0.62",
+  "applications": {
+    "gecko": {
+      "id": "extension@foundit.at",
+      "strict_min_version": "48.0"
+    }
+  },
+  "icons": {
+    "16": "icons/icon_16.png",
+    "48": "icons/icon_48.png",
+    "96": "icons/icon_96.png",
+    "128": "icons/icon_128.png"
+  },
+  "browser_action": {
+    "default_title": "Foundit!",
+    "default_icon": "icons/icon_48.png"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "windows": "Alt+S",
+        "mac": "Alt+S",
+        "chromeos": "Alt+S",
+        "linux": "Alt+S"
+      }
+    }
+  },
+  "omnibox": {
+    "keyword": "f!"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content_search.js"
+      ],
+      "css": [
+        "content_search.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content_all.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content_insert_tab.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*.stackoverflow.com/questions/*",
+        "*://forums.xilinx.com/*"
+      ],
+      "js": [
+        "content_integration.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "popup/popup.html",
+    "icons/icon_16.png",
+    "icons/icon_48.png",
+    "icons/icon_96.png",
+    "icons/icon_96_128.png",
+    "icons/icon_128.png",
+    "icons/icon_white_16.png",
+    "icons/icon_white_48.png",
+    "icons/icon_white_96.png",
+    "icons/icon_white_96_128.png",
+    "icons/icon_white_128.png",
+    "icons/icon_background_16.png",
+    "icons/icon_background_48.png",
+    "icons/icon_background_96.png",
+    "icons/icon_background_96_128.png",
+    "icons/icon_background_128.png",
+    "icons/misc/subject.png"
+  ],
+  "options_ui": {
+    "page": "webapp/index.html#/Settings",
+    "open_in_tab": true
+  },
+  "permissions": [
+    "tabs",
+    "contextMenus",
+    "storage",
+    "identity"
+  ],
+  "oauth2": {
+    "client_id": "631987309722-rpc0pflrliljve9cioq7bc2ssa86b5uc.apps.googleusercontent.com",
+    "scopes": [
+      "openid",
+      "email",
+      "profile"
+    ]
+  }
+}

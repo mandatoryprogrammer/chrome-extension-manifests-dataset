@@ -1,0 +1,68 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Your Cloud Accessories",
+  "version": "1.5.3",
+  "description": "Your Cloud Accessories extension.",
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "page_action": {
+    "default_icon": "icon-19.png",
+    "default_title": "navigate to invoice generator",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "declarativeContent",
+    "tabs",
+    "activeTab",
+    "identity",
+    "storage",
+    "cookies",
+    "http://localhost/xero/public/*",
+    "http://yourcloudaccessories.com/*",
+    "https://yourcloudaccessories.com/*"
+  ],
+  "icons": {
+    "19": "icon-19.png"
+  },
+  "manifest_version": 2,
+  "content_scripts": [
+    {
+      "matches": [
+        "http://go.xero.com/AccountsReceivable/Edit.aspx?InvoiceID=*",
+        "http://go.xero.com/AccountsReceivable/Edit.aspx?invoiceID=*",
+        "https://go.xero.com/AccountsReceivable/Edit.aspx?InvoiceID=*",
+        "https://go.xero.com/AccountsReceivable/Edit.aspx?invoiceID=*",
+        "https://go.xero.com/AccountsReceivable/View.aspx?InvoiceID=*",
+        "https://go.xero.com/AccountsReceivable/View.aspx?invoiceID=*",
+        "http://go.xero.com/AccountsReceivable/View.aspx?InvoiceID=*",
+        "http://go.xero.com/AccountsReceivable/View.aspx?invoiceID=*"
+      ],
+      "js": [
+        "contentScript.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.xero.com/*",
+        "https://go.xero.com/*"
+      ],
+      "js": [
+        "jquery-3.3.1.min.js",
+        "plugins/fta/contentChart.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://eservices.tax.gov.ae/*"
+      ],
+      "js": [
+        "jquery-3.3.1.min.js",
+        "plugins/fta/contentFTA.js"
+      ]
+    }
+  ]
+}

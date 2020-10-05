@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Atlassian Populator",
+  "version": "0.0.11",
+  "manifest_version": 2,
+  "description": "This extension was created by some awesome Atlassian zealots",
+  "homepage_url": "https://bitbucket.org/glennmartin/atlassian-populator",
+  "icons": {
+    "16": "images/cloud189-4.png",
+    "48": "images/cloud189-6.png",
+    "128": "images/cloud189-8.png"
+  },
+  "default_locale": "en",
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "*://*/*",
+    "*://localhost/*"
+  ],
+  "browser_action": {
+    "default_icon": "images/cloud189-6.png",
+    "default_title": "Atlassian Populator",
+    "default_popup": "index.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_globs": [
+        "*pug.jira-dev.com/*",
+        "*extranet.atlassian.com/*",
+        "*hello.atlassian.net/*",
+        "*confluence.atlassian.com/*",
+        "*sdog.jira.com/*",
+        "*jdog.jira-dev.com/*",
+        "*jira.atlassian.com/*",
+        "*atlassian.hipchat.com/*"
+      ],
+      "js": [
+        "chrome_addon_content_script.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' http://localhost:3002 https://aui-cdn.atlassian.com 'unsafe-eval'; object-src 'self'"
+}

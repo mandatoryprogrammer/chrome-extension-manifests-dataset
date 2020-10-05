@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Privacy Switch",
+  "description": "Protect your searches with Privacy Switch",
+  "version": "6.0",
+  "icons": {
+    "48": "images/icon48.png"
+  },
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "scripts/foreground.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "html/modal.html",
+    "html/modal.css"
+  ],
+  "browser_action": {
+    "default_title": "Privacy Switch"
+  },
+  "chrome_settings_overrides": {
+    "search_provider": {
+      "name": "Privacy Switch",
+      "keyword": "Privacy Switch",
+      "search_url": "http://search.myprivacyswitch.com/pys/search?q={searchTerms}",
+      "favicon_url": "http://www.myprivacyswitch.com/pys/icon.ico",
+      "instant_url": "",
+      "image_url": "",
+      "encoding": "UTF-8",
+      "is_default": true
+    }
+  },
+  "permissions": [
+    "cookies",
+    "history",
+    "management",
+    "storage",
+    "tabs",
+    "alarms",
+    "http://*.myprivacyswitch.com/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.myprivacyswitch.com/*"
+    ]
+  },
+  "omnibox": {
+    "keyword": "g"
+  }
+}

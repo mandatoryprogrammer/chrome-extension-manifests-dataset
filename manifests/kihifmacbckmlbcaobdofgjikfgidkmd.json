@@ -1,0 +1,92 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Free mailtrack extension for Gmail MailerPlex",
+  "description": "MailerPlex free mailTrack extension tracks email opens and clicks in real-time. Helps do better follow-ups.",
+  "version": "1.0.2.7",
+  "version_name": "1.0.2.7",
+  "short_name": "mailerplex",
+  "permissions": [
+    "https://mail.google.com/",
+    "https://inbox.google.com/",
+    "storage",
+    "webRequest",
+    "background",
+    "alarms",
+    "webRequestBlocking",
+    "notifications",
+    "*://*.googleusercontent.com/*",
+    "*://click.mailerplex.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*"
+      ],
+      "js": [
+        "common/js/lib/jquery-3.3.1.min.js",
+        "common/js/lib/inboxsdk.js",
+        "common/js/ext-util.js",
+        "common/js/emt.js",
+        "common/js/emt-threadview.js",
+        "common/js/emt-compose.js",
+        "common/js/emt-gmail.js",
+        "common/js/account-extn.js",
+        "common/js/lib/kefir.min.js",
+        "common/js/lib/underscore-min.js",
+        "common/js/lib/moment.min.js",
+        "common/js/lib/jstz.min.js"
+      ],
+      "css": [
+        "common/css/emt.css",
+        "common/css/scroll_toggle.css",
+        "common/css/font-awesome.min.css"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "16": "common/images/emt16.png",
+      "32": "common/images/emt32.png",
+      "48": "common/images/emt48.png",
+      "128": "common/images/emt128.png"
+    },
+    "default_popup": "emt-popup/index.html",
+    "default_title": "MailerPlex"
+  },
+  "background": {
+    "scripts": [
+      "firebase.js",
+      "fcm-messaging.js",
+      "firebase-messaging-sw.js",
+      "common/js/account-extn.js",
+      "common/js/background.js"
+    ],
+    "persistent": true
+  },
+  "icons": {
+    "16": "common/images/emt16.png",
+    "32": "common/images/emt32.png",
+    "48": "common/images/emt48.png",
+    "128": "common/images/emt128.png"
+  },
+  "web_accessible_resources": [
+    "common/images/*",
+    "common/fonts/*",
+    "enablepopup.html",
+    "option-popup.html",
+    "threadview-sidebar.html",
+    "disableddropdown.html",
+    "installftupopup.html",
+    "*.ttf",
+    "*.png"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "externally_connectable": {
+    "matches": [
+      "*://*.mailerplex.com/*",
+      "http://localhost/*"
+    ]
+  }
+}

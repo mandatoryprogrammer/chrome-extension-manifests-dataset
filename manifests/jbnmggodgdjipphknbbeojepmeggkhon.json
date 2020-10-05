@@ -1,0 +1,73 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "UW Course Guide+",
+  "description": "View additional information in the UW-Madison Course Guide, like Rate My Professor data and historical grade distributions.",
+  "version": "1.0.1",
+  "icons": {
+    "16": "img/uw_course_guide_logo_16.png",
+    "48": "img/uw_course_guide_logo_48.png",
+    "128": "img/uw_course_guide_logo_128.png"
+  },
+  "browser_action": {
+    "default_icon": "img/uw_course_guide_logo_128.png",
+    "default_title": "Go to UW Course Guide"
+  },
+  "background": {
+    "scripts": [
+      "js/lib/sql.js",
+      "js/data_access.js",
+      "js/model.js",
+      "js/browser_action.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://my.wisc.edu/portal/f/u360303l1s4/p/CourseGuide-Browse-Courses*pP_action=advancedSearch*"
+      ],
+      "css": [
+        "css/main.css",
+        "css/RMP_popup.css",
+        "css/tipped.css"
+      ],
+      "js": [
+        "js/lib/jquery-3.1.1.js",
+        "js/lib/jquery.initialize.min.js",
+        "js/course_list.js",
+        "js/lib/tipped.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://my.wisc.edu/portal/f/u360303l1s4/p/CourseGuide-Browse-Courses*pP_action=courseDetail*"
+      ],
+      "css": [
+        "css/main.css",
+        "css/RMP_popup.css",
+        "css/tipped.css"
+      ],
+      "js": [
+        "js/lib/jquery-3.1.1.js",
+        "js/lib/jquery.canvasjs.min.js",
+        "js/lib/jquery-ui.min.js",
+        "js/course_page.js",
+        "js/lib/tipped.js",
+        "js/lib/Chart.bundle.min.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "https://www.ratemyprofessors.com/*",
+    "http://*.map.wisc.edu/*",
+    "https://ajax.googleapis.com/"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "web_accessible_resources": [
+    "img/*.png",
+    "img/Map_Crops/*.png"
+  ]
+}

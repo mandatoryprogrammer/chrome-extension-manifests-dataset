@@ -1,0 +1,72 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Guglit",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "A chrome extension that allows you to google easily!",
+  "icons": {
+    "16": "images/guglit_icon_48x48.png",
+    "128": "images/guglit_icon_48x48.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "scripts.babel/chromereload.js",
+      "scripts.babel/background.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "background",
+    "bookmarks",
+    "clipboardRead",
+    "clipboardWrite",
+    "contentSettings",
+    "cookies",
+    "*://*.google.com/",
+    "debugger",
+    "history",
+    "idle",
+    "management",
+    "notifications",
+    "pageCapture",
+    "topSites",
+    "storage",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "scripts.babel/contentscript.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "omnibox": {
+    "keyword": "OMNIBOX-KEYWORD"
+  },
+  "page_action": {
+    "default_icon": {
+      "19": "images/guglit_icon_48x48.png",
+      "38": "images/guglit_icon_48x48.png"
+    },
+    "default_title": "Guglit",
+    "default_popup": "popup.html"
+  },
+  "web_accessible_resources": [
+    "images/guglit_icon_48x48.png"
+  ]
+}

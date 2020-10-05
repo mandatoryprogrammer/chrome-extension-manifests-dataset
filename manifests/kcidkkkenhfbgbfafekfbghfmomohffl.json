@@ -1,0 +1,82 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Kreeder - speed reader for Kindle",
+  "short_name": "Kreeder",
+  "description": "The one and only speed reading chrome extension for the Kindle Cloud Reader. Love speedreading? Love Kindle? Now you can have both.",
+  "version": "0.0.0.7",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "32": "icons/icon32.png",
+    "128": "icons/icon128.png"
+  },
+  "browser_action": {
+    "name": "Kreeder: speed reader for Kindle",
+    "icons": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "32": "icons/icon32.png",
+      "128": "icons/icon128.png"
+    },
+    "default_icon": "icons/icon.png",
+    "default_popup": "menus/kreedExtMenu.html"
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs"
+  ],
+  "minimum_chrome_version": "42",
+  "content_scripts": [
+    {
+      "js": [
+        "js/contentscript.js"
+      ],
+      "matches": [
+        "*://*.amazon.com/*"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.amazon.com/*"
+    ]
+  },
+  "background": {
+    "scripts": [
+      "js/jquery-2.1.4.min.js",
+      "js/background.js"
+    ],
+    "matches": [
+      "*://*.amazon.com/*"
+    ],
+    "persistent": false
+  },
+  "web_accessible_resources": [
+    "js/contentExtractor.js"
+  ],
+  "options_page": "menus/options.html",
+  "commands": {
+    "kreed-speed-UP": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Up"
+      },
+      "description": "Increase reading speed"
+    },
+    "kreed-speed-Down": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Down"
+      },
+      "description": "Decrease reading speed"
+    },
+    "kreed-read-this-page": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Space"
+      },
+      "description": "Speed read this "
+    }
+  }
+}

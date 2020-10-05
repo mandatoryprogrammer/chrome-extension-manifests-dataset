@@ -1,0 +1,98 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "bebop",
+  "version": "0.1.8",
+  "manifest_version": 2,
+  "description": "Offer emacs key-bindings and command line interface like helm",
+  "author": "Hiroki Kumamoto",
+  "applications": {
+    "gecko": {
+      "id": "bebop@kumabook",
+      "strict_min_version": "45.0"
+    }
+  },
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "64": "icons/icon-64.png"
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "history",
+    "bookmarks",
+    "storage",
+    "cookies",
+    "sessions",
+    "system.display",
+    "search",
+    "<all_urls>"
+  ],
+  "background": {
+    "scripts": [
+      "background/bundle.js"
+    ]
+  },
+  "default_locale": "en",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content_scripts/bundle.js"
+      ],
+      "run_at": "document_start",
+      "match_about_blank": true
+    }
+  ],
+  "browser_action": {
+    "browser_style": true,
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png",
+      "64": "icons/icon-64.png"
+    },
+    "theme_icons": [
+      {
+        "light": "icons/icon-dark-16.png",
+        "dark": "icons/icon-16.png",
+        "size": 16
+      },
+      {
+        "light": "icons/icon-dark-32.png",
+        "dark": "icons/icon-32.png",
+        "size": 32
+      },
+      {
+        "light": "icons/icon-dark-64.png",
+        "dark": "icons/icon-64.png",
+        "size": 64
+      }
+    ],
+    "default_title": "button label",
+    "default_popup": "popup/index.html"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Comma",
+        "mac": "MacCtrl+Comma",
+        "linux": "Ctrl+Comma"
+      }
+    },
+    "toggle_popup_window": {
+      "description": "Toggle popup window"
+    },
+    "toggle_content_popup": {
+      "description": "Toggle popup in current content"
+    }
+  },
+  "options_ui": {
+    "page": "options_ui/index.html"
+  },
+  "web_accessible_resources": [
+    "images/*.png",
+    "popup/*"
+  ]
+}

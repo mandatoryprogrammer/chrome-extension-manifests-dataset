@@ -1,0 +1,114 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "author": "Martin Ricky Holan",
+  "manifest_version": 2,
+  "name": "AgileSNOW Extension",
+  "short_name": "ASE",
+  "version": "0.8",
+  "description": "AgileSNOW Extension enhances experience with Service Now",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.service-now.com/*"
+      ],
+      "js": [
+        "browser.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://*.service-now.com/*"
+      ],
+      "js": [
+        "instance.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://*.service-now.com/incident.*"
+      ],
+      "js": [
+        "modules/wip.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://*.service-now.com/incident.*",
+        "https://*.service-now.com/sc_task.*",
+        "https://*.service-now.com/sc_req_item.*"
+      ],
+      "js": [
+        "modules/unassign.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://*.service-now.com/change_request.*"
+      ],
+      "js": [
+        "modules/getci.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://*.service-now.com/problem_task.*",
+        "https://*.service-now.com/problem.*",
+        "https://*.service-now.com/sc_task.*",
+        "https://*.service-now.com/sc_req_item.*",
+        "https://*.service-now.com/change_task.*",
+        "https://*.service-now.com/change_request.*",
+        "https://*.service-now.com/incident.*"
+      ],
+      "js": [
+        "modules/activity/activity.js"
+      ],
+      "css": [
+        "modules/activity/activity.css"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "settings/*",
+    "icons/*",
+    "dashboard/*"
+  ],
+  "icons": {
+    "16": "icons/ASE16.png",
+    "32": "icons/ASE32.png",
+    "64": "icons/ASE64.png",
+    "128": "icons/ASE128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "32": "icons/ASE32.png"
+    },
+    "default_title": "Agile SNOW Extension",
+    "default_popup": "action/action.html"
+  },
+  "permissions": [
+    "contextMenus",
+    "storage",
+    "notifications",
+    "tabs",
+    "https://*.service-now.com/"
+  ],
+  "background": {
+    "scripts": [
+      "background/background.js"
+    ]
+  },
+  "omnibox": {
+    "keyword": "snow"
+  }
+}

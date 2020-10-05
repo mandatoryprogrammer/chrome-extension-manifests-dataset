@@ -1,0 +1,96 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "description": "Вывод от 1 рубля (в любой валюте). Лучшая поддержка. Любим Вас! :)",
+  "manifest_version": 2,
+  "name": "КэшФоБрендс - кэшбэк-сервис №1",
+  "permissions": [
+    "https://cash4brands.ru/*",
+    "activeTab",
+    "tabs",
+    "webRequest",
+    "<all_urls>",
+    "notifications",
+    "management"
+  ],
+  "version": "2.9.38",
+  "web_accessible_resources": [
+    "img/ic_ext_2.png",
+    "css/content.css"
+  ],
+  "homepage_url": "https://cash4brands.ru",
+  "background": {
+    "page": "background.html"
+  },
+  "browser_action": {
+    "default_icon": "/img/ic_ext_1.png",
+    "default_title": "Cash4brands - кэшбэк сервис",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "js": [
+        "lib/jquery-3.1.1.min.js",
+        "content.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [
+        "css/content.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": false,
+      "js": [
+        "lib/jquery-3.1.1.min.js",
+        "funcs.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://*.aliexpress.com/*"
+      ],
+      "all_frames": false,
+      "js": [
+        "lib/cash4brand_ali.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://market.yandex.ru/*",
+        "https://www.google.ru/*",
+        "https://www.google.com/*",
+        "https://*/search*"
+      ],
+      "all_frames": false,
+      "css": [
+        "css/cash4brand_search.css"
+      ],
+      "js": [
+        "lib/cash4brand_search.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://cash4brands.ru/*"
+      ],
+      "all_frames": false,
+      "js": [
+        "extension.js"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "/img/ic_ext_1.png",
+    "32": "/img/ic_ext_1@2x.png",
+    "48": "/img/ic_ext_1@3x.png",
+    "128": "/img/ic_ext_1@8x.png"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

@@ -1,0 +1,67 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "NetRex POS add-on",
+  "version": "0.5.0",
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "https://system.netrex.cz/*",
+    "https://api.dotykacka.cz/*"
+  ],
+  "background": {
+    "scripts": [
+      "background.js",
+      "/src/api/api_client_netrex.js",
+      "/src/api/api_client_dotykacka.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://admin.dotykacka.cz/cloud/repos/sales/by-order-id/*"
+      ],
+      "js": [
+        "/libs/jquery-3.3.1.slim.min.js",
+        "/src/api/api_client_netrex.js",
+        "/src/api/api_client_dotykacka.js",
+        "/src/Conf.js",
+        "/src/inject.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://system.netrex.cz/portal/robots.txt?*"
+      ],
+      "js": [
+        "/src/api/api_client_netrex.js",
+        "/src/api/api_client_dotykacka.js",
+        "/src/api/oauth2_injection.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://system.netrex.cz/portal/favicon.ico?*"
+      ],
+      "js": [
+        "/src/api/api_client_netrex.js",
+        "/src/api/api_client_dotykacka.js",
+        "/src/api/oauth2_injection.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "browser_action": {
+    "default_title": "NetRex integrace s pokladnou Dotykačka",
+    "default_icon": "img/icon16inactive.png",
+    "default_popup": "popup.html"
+  }
+}

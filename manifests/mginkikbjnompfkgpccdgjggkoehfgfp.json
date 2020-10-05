@@ -1,0 +1,74 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "uips-isyft",
+  "description": "User Intent Prediction System",
+  "version": "0.0.2.2",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "alarms",
+    "tabs",
+    "identity",
+    "https://accounts.google.com/*",
+    "https://www.googleapis.com/*",
+    "<all_urls>"
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/icon.png"
+  },
+  "background": {
+    "scripts": [
+      "contrib/CryptoJS.js",
+      "contrib/jquery.min.js",
+      "config.js",
+      "utils.js",
+      "background.js"
+    ]
+  },
+  "oauth2": {
+    "client_id": "17850738737-btlu8i5291pj3sar3spakskn5klp7ubs.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email"
+    ]
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.businessinsider.com/*"
+      ],
+      "exclude_matches": [
+        "*://*.google.com/*",
+        "*://*.linkedin.com/*",
+        "*://*.facebook.com/*",
+        "*://*.192.168.2.108/*",
+        "*://*.twitter.com/*"
+      ],
+      "css": [
+        "contrib/jquery-ui.css",
+        "content.css"
+      ],
+      "js": [
+        "contrib/jquery.min.js",
+        "contrib/jquery-ui.min.js",
+        "contrib/CryptoJS.js",
+        "config.js",
+        "utils.js",
+        "content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "popup.html",
+    "content.html",
+    "icons/*"
+  ],
+  "manifest_version": 2
+}

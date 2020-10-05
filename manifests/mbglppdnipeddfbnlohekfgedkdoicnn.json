@@ -1,0 +1,82 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "version": "1.0.5",
+  "manifest_version": 2,
+  "description": "__MSG_appDescription__",
+  "icons": {
+    "16": "images/icon-16.png",
+    "128": "images/icon-128.png"
+  },
+  "short_name": "Family Movie Filter",
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "scripts/injected/mainNew.js",
+    "bower_components/aes-js/index.js",
+    "bower_components/jquery/dist/jquery.js",
+    "bower_components/bootstrap/dist/css/bootstrap.min.css",
+    "html/controls/controls.html",
+    "images/**"
+  ],
+  "permissions": [
+    "tabs",
+    "*://*.netflix.com/watch/*",
+    "*://*.amazon.com/*",
+    "*://*.disneyplus.com/*",
+    "*://*.nflxvideo.net/?o=*",
+    "*://*.assetshuluimcom-a.akamaihd.net/captions/*",
+    "*://*.cloudfront.net/*.dfxp",
+    "*://*.cloudfront.net/*.ttml2",
+    "*://*.youtube.com/*",
+    "*://*.hulu.com/*",
+    "storage",
+    "unlimitedStorage",
+    "webRequest"
+  ],
+  "options_ui": {
+    "page": "popup.html",
+    "chrome_style": false
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://*.netflix.com/watch/*",
+      "*://*.amazon.com/*",
+      "*://*.hulu.com/*",
+      "*://*.disneyplus.com/*",
+      "*://*.youtube.com/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.netflix.com/*",
+        "*://*.amazon.com/*",
+        "*://*.hulu.com/*",
+        "*://*.youtube.com/*",
+        "*://*.disneyplus.com/*"
+      ],
+      "js": [
+        "bower_components/jquery/dist/jquery.js",
+        "bower_components/aes-js/index.js",
+        "scripts/contentscript.js"
+      ],
+      "css": [
+        "styles/injected.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon-19.png",
+      "38": "images/icon-38.png"
+    },
+    "default_title": "Family Movie Filter",
+    "default_popup": "popup.html"
+  }
+}

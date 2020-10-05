@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Reddit Find",
+  "description": "Find the reddit comment threads for any website.",
+  "author": "Shivam Sarodia",
+  "version": "1.0.3",
+  "permissions": [
+    "<all_urls>",
+    "tabs"
+  ],
+  "icons": {
+    "16": "img/icon_main_16.png",
+    "48": "img/icon_main_48.png",
+    "128": "img/icon_main_128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "img/icon_inactive_small.png",
+      "38": "img/icon_inactive_big.png"
+    },
+    "default_title": "Click to view threads"
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/moment.min.js",
+        "js/templateengine.js",
+        "js/searchthreads.js",
+        "js/panel.js",
+        "js/contentscript.js"
+      ],
+      "css": [
+        "css/index.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "img/*",
+    "html/templates.html"
+  ]
+}

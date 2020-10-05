@@ -1,0 +1,76 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Urban Abodes Posting Tool",
+  "short_name": "Urban Abodes Posting Tool",
+  "version": "3.7.3",
+  "background": {
+    "scripts": [
+      "js/hot-reload.js"
+    ]
+  },
+  "manifest_version": 2,
+  "description": "Extension that allows for an effortless and rapid method to post apartments to various websites.",
+  "icons": {
+    "16": "img/icon.png",
+    "48": "img/icon.png",
+    "128": "img/icon.png"
+  },
+  "browser_action": {
+    "default_icon": "img/icon.png",
+    "default_title": "Urban Abodes Posting Tool"
+  },
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "storage"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.zumper.com/*",
+      "*://*.hotpads.com/*",
+      "*://*.apartments.com/*",
+      "*://*.zillow.com/*",
+      "*://*.domu.com/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "angularinjects/location_inject.js",
+    "angularinjects/location_inject_apartments.js",
+    "angularinjects/photos_inject.js",
+    "angularinjects/photos_inject_zillow.js",
+    "angularinjects/photos_inject_hotpads.js",
+    "angularinjects/photos_inject_apartments.js",
+    "angularinjects/photos_inject_facebook.js",
+    "angularinjects/photos_inject_domu.js"
+  ],
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "run_at": "document_idle",
+      "matches": [
+        "*://*.urbanabodes.com/agent/generate/*",
+        "*://*.urbanabodes.isrv.tech/agent/generate/*",
+        "*://*.urbanabodes.com/app_dev.php/agent/generate/*",
+        "*://*.urbanabodes.isrv.tech/app_dev.php/agent/generate/*",
+        "*://*.zumper.com/*",
+        "*://*.zillow.com/*",
+        "*://*.hotpads.com/*",
+        "*://*.apartments.com/*",
+        "*://*.facebook.com/marketplace/*",
+        "*://*.domu.com/*",
+        "*://*.ua-dev.xoho.tools/app_dev.php/agent/generate/*"
+      ],
+      "js": [
+        "js/jqueryui-min.js",
+        "js/blockui.js",
+        "js/selector-listeners.js",
+        "lib/facebook.js",
+        "lib/zillow.js",
+        "lib/hotpads.js",
+        "lib/zumper.js",
+        "lib/domu.js",
+        "lib/apartmentcom.js"
+      ]
+    }
+  ]
+}

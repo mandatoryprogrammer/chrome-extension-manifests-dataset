@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "description": "Filtrowanie ofert, wyszukiwanie niepromowanych, usuwanie duplikatów na Allegro",
+  "version": "1.4.1",
+  "name": "Pomocnik Allegro",
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "alarms"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://allegro.pl/listing*",
+        "https://allegro.pl/kategoria/*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "scrollToElem.bundle.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://allegro.pl/listing*",
+        "https://allegro.pl/kategoria/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "filter.bundle.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "images/icons/*.png",
+    "public/**/*.png",
+    "public/**/*.jpg",
+    "public/*.woff2"
+  ],
+  "browser_action": {
+    "default_title": "Pomocnik Allegro",
+    "default_icon": {
+      "16": "public/images/regular_16.png",
+      "48": "public/images/regular_48.png"
+    }
+  },
+  "icons": {
+    "16": "public/images/regular_16.png",
+    "48": "public/images/regular_48.png",
+    "128": "public/images/regular_128.png"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "manifest_version": 2
+}

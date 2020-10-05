@@ -1,0 +1,40 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Berman Wifi Auto-Login",
+  "short_name": "Berman Login",
+  "description": "Automatically logs you into the MJBHA wifi.",
+  "version": "613.18",
+  "browser_action": {
+    "default_icon": "icon128.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs",
+    "https://auth.mjbha.org:4100/*",
+    "http://auth.mjbha.org:4100/*"
+  ],
+  "icons": {
+    "64": "icon64.png",
+    "128": "icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://auth.mjbha.org:4100/logon.shtml*",
+        "https://auth.mjbha.org:4100/logon.shtml*"
+      ],
+      "js": [
+        "content script.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  }
+}

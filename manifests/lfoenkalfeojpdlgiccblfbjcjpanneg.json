@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "SnooNotes",
+  "description": "Usernotes plus a whole lot more!",
+  "version": "2.6.0",
+  "manifest_version": 2,
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "fonts/*.woff2"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.reddit.com/*"
+      ],
+      "css": [
+        "styles/contentscript.css"
+      ],
+      "js": [
+        "scripts/contentscript.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "https://snoonotes.com/Auth/redux*"
+      ],
+      "js": [
+        "scripts/signinCallback.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "externally_connectable": {
+    "ids": []
+  },
+  "permissions": [
+    "storage",
+    "http://fonts.googleapis.com/",
+    "https://fonts.googleapis.com/",
+    "https://*.reddit.com/*",
+    "https://*.snoonotes.com/*"
+  ]
+}

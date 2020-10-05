@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Polyglot",
+  "description": "Enable users to use multi-language in webpages.",
+  "version": "1.0",
+  "icons": {
+    "128": "images/icon.png"
+  },
+  "browser_action": {
+    "default_icon": "images/icon.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "activeTab",
+    "tabs",
+    "storage",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "js/guesslanguage/_languageData.js",
+      "js/guesslanguage/guessLanguage.js",
+      "js/translator.js",
+      "js/background.js",
+      "js/jquery-2.1.4.min.js",
+      "js/tabconfig.js",
+      "js/polyglot.js",
+      "js/headers.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/translator.js",
+        "js/jquery-2.1.4.min.js",
+        "js/content.js",
+        "js/tabconfig.js",
+        "js/polyglot.js"
+      ],
+      "css": [
+        "css/translator.css"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "WikiCraftPro",
+  "short_name": "WikiCraftPro",
+  "manifest_version": 2,
+  "version": "1.1.0.8",
+  "description": "With WikiCraftPro extension you can find the answers for all your Minecraft questions easily!",
+  "chrome_settings_overrides": {
+    "search_provider": {
+      "is_default": true,
+      "encoding": "UTF-8",
+      "keyword": "WikiCraftPro.com",
+      "favicon_url": "http://www.wikicraftpro.com/lp/images/favicon.ico",
+      "name": "WikiCraftPro",
+      "search_url": "http://www.wikicraftpro.com/default?gd=EX1000004&ISID=ISID_ID&SearchSource=58&CUI=SB_CUI&UM=6&q={searchTerms}&PCSF=SU_DEFAULT",
+      "suggest_url": "http://www.wikicraftpro.com/suggest/CSuggestJson.ashx?prefix={searchTerms}&PCSF=SU_SUGGEST"
+    }
+  },
+  "chrome_url_overrides": {
+    "newtab": "html\\newTab.html"
+  },
+  "browser_action": {
+    "default_icon": {
+      "128": "icons/128.png",
+      "16": "icons/16.png",
+      "48": "icons/48.png"
+    }
+  },
+  "icons": {
+    "128": "icons/128.png",
+    "16": "icons/16.png",
+    "48": "icons/48.png"
+  },
+  "background": {
+    "scripts": [
+      "js/jquery.js",
+      "js/background.js",
+      "js/searchUtil.js"
+    ]
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "chrome://favicon/*",
+    "webRequest",
+    "webRequestBlocking",
+    "cookies",
+    "*://*.Switch2Search.com/*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "web_accessible_resources": [
+    "js/generalSearchPage.js",
+    "html/NewTab.html",
+    "servicemap.json"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*index.html?extid*"
+      ],
+      "js": [
+        "js/injectExtID.js"
+      ]
+    }
+  ]
+}

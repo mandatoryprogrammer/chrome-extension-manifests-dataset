@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "価格比較 PRICLE",
+  "short_name": "価格比較 PRICLE",
+  "description": "Amazon,楽天，Yahooショッピングなど45以上のサイトで閲覧ページの商品の最安値を一覧で表示します。キーワードによる検索機能や価格推移グラフを搭載。送料やポイントを含めて価格比較",
+  "version": "2.2.6",
+  "icons": {
+    "16": "images/icon/logo16.gif",
+    "48": "images/icon/logo48.gif",
+    "128": "images/icon/logo128.gif"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon/logo19.gif",
+      "38": "images/icon/logo38.gif"
+    },
+    "default_title": "価格比較 PRICLE"
+  },
+  "options_page": "option.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "css/content_scripts.css"
+      ],
+      "js": [
+        "js/popular/jquery-3.0.0.min.js",
+        "js/com/common_define.js",
+        "js/content_scripts.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "option.html",
+    "css/content_scripts.css",
+    "images/*",
+    "firebase-messaging-sw.js"
+  ],
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "contextMenus",
+    "identity",
+    "notifications",
+    "webRequest",
+    "webRequestBlocking",
+    "*://*/*"
+  ],
+  "content_security_policy": "script-src 'self' https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com; object-src 'self'"
+}

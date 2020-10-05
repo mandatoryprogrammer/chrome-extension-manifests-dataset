@@ -1,0 +1,108 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "CS.Money Antiscam",
+  "description": "This extension alarms the user when he's interacting with the phishing sites.",
+  "version": "1.14",
+  "author": "Cdewe",
+  "short_name": "CS.Money official portal verifier",
+  "permissions": [
+    "background",
+    "storage",
+    "tabs",
+    "alarms",
+    "webNavigation",
+    "cookies",
+    "https://steamcommunity.com/*",
+    "https://csgo.agency/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://new.cs.money/*",
+        "https://cs.money/*"
+      ],
+      "js": [
+        "analysis/Detect.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://steamcommunity.com/tradeoffer/*"
+      ],
+      "css": [
+        "css/tradeoffer.css"
+      ],
+      "js": [
+        "analysis/TradeOfferAnalysis.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://steamcommunity.com/profiles/*",
+        "https://steamcommunity.com/id/*"
+      ],
+      "css": [
+        "css/steamrep.css",
+        "css/livealert.css"
+      ],
+      "js": [
+        "analysis/SteamrepAnalysis.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "https://cs.money/",
+        "https://cs.money/*",
+        "https://*.cs.money/",
+        "https://*.cs.money/*"
+      ],
+      "css": [
+        "css/livealert.css",
+        "css/scampage.css"
+      ],
+      "js": [
+        "analysis/LiveAnalysis.js",
+        "analysis/ScamSiteAnalysis.js",
+        "js/translator.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": "images/icon_default.png",
+    "default_popup": "frame.html"
+  },
+  "background": {
+    "scripts": [
+      "config.js",
+      "libs/amplitude.js",
+      "background.js",
+      "localize.js"
+    ],
+    "persistent": false
+  },
+  "content_security_policy": "script-src 'self' https://cs.money; object-src 'self'",
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "web_accessible_resources": [
+    "images/icon48.png",
+    "images/icon_rejected.png",
+    "images/icon_default.png",
+    "images/videocam.svg",
+    "views/*.html",
+    "alerts/*.html",
+    "analysis/*.js",
+    "css/*.css",
+    "js/.js",
+    "localization/*.json",
+    "assets/security.mov",
+    "assets/devices.mp4"
+  ]
+}

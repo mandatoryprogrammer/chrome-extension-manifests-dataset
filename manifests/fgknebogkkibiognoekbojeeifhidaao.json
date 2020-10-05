@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "UnSeeIt",
+  "version": "2.0",
+  "icons": {
+    "16": "images/logo64.png",
+    "128": "images/logo128.png"
+  },
+  "background": {
+    "scripts": [
+      "eventPage.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.facebook.com/*",
+        "https://www.twitter.com/*",
+        "https://www.instagram.com/*",
+        "<all_urls>"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'",
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": "images/logo.png"
+  },
+  "options_ui": {
+    "page": "options.html"
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "unlimitedStorage",
+    "tabs"
+  ],
+  "incognito": "split"
+}

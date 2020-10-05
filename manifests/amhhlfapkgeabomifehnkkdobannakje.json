@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Check Cosmetic Ingredients | Curious Chloride",
+  "description": "Avoid harmful chemicals in your products with this Ingredient Scanner. Curious Chloride helps you sort out clean beauty.",
+  "version": "1.05",
+  "icons": {
+    "100": "img/100.png",
+    "128": "img/128.png",
+    "19": "img/19.png",
+    "48": "img/48.png"
+  },
+  "permissions": [
+    "tabs",
+    "<all_urls>",
+    "storage"
+  ],
+  "browser_action": {
+    "default_icon": "img/19.png",
+    "default_popup": "popup.html"
+  },
+  "commands": {
+    "scan-page": {
+      "suggested_key": {
+        "default": "Alt+Shift+C",
+        "windows": "Alt+Shift+C",
+        "mac": "Alt+Shift+C"
+      },
+      "description": "Scan the page for harmful chemicals in your products"
+    }
+  },
+  "background": {
+    "scripts": [
+      "./libs/lodash.js",
+      "./libs/papaparse.min.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "./libs/popper.js",
+        "./libs/tippy.js",
+        "./libs/toastify.js",
+        "./libs/lodash.js",
+        "./libs/arrive.min.js",
+        "./libs/findAndReplaceDOMText.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "ext_substances.csv",
+    "ext_categories.csv",
+    "ext_belongs_to.csv"
+  ]
+}

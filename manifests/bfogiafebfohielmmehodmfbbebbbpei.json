@@ -1,0 +1,125 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_name__",
+  "author": "Keeper Security, Inc.",
+  "description": "__MSG_description__",
+  "homepage_url": "https://keepersecurity.com",
+  "default_locale": "en_US",
+  "manifest_version": 2,
+  "permissions": [
+    "clipboardWrite",
+    "contextMenus",
+    "storage",
+    "tabs",
+    "browsingData",
+    "activeTab",
+    "https://keepersecurity.com/vault/*",
+    "https://*.keepersecurity.com/vault/*",
+    "https://keepersecurity.eu/vault/*",
+    "https://*.keepersecurity.eu/vault/*"
+  ],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "windows": "Alt+K",
+        "mac": "Command+Shift+K",
+        "chromeos": "Alt+K",
+        "linux": "Alt+K"
+      }
+    }
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "javascript/translation.js",
+        "javascript/countries.js",
+        "javascript/sandblaster.min.js",
+        "content_scripts/KeeperFill-var.js",
+        "content_scripts/libphonenumber.js",
+        "content_scripts/messaging.js",
+        "content_scripts/misc_functions.js",
+        "content_scripts/custom_elements/dist/outer.bundle.js",
+        "content_scripts/password_functions.js",
+        "content_scripts/injected_script.js",
+        "content_scripts/prompt.js",
+        "content_scripts/sso.js"
+      ],
+      "css": [
+        "content_scripts/custom_elements/custom_elements.css",
+        "content_scripts/custom_elements/custom_elements_themes.css",
+        "content_scripts/custom_elements/keeper-tooltips.css",
+        "content_scripts/custom_elements/sso.css"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "content_scripts/messaging.js",
+        "content_scripts/vault.js"
+      ],
+      "matches": [
+        "https://keepersecurity.com/vault/*",
+        "https://*.keepersecurity.com/vault/*",
+        "https://keepersecurity.eu/vault/*",
+        "https://*.keepersecurity.eu/vault/*",
+        "http://localhost:8000/vault/"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "content_scripts/console.js"
+      ],
+      "matches": [
+        "https://keepersecurity.com/console/*",
+        "https://*.keepersecurity.com/console/*",
+        "https://keepersecurity.eu/console/*",
+        "https://*.keepersecurity.eu/console/*",
+        "http://localhost:8000/console/"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "19-inactive.png",
+      "38": "38-inactive.png"
+    },
+    "default_title": "Keeper",
+    "default_popup": "browser_action/browser_action.html"
+  },
+  "icons": {
+    "16": "16x16_black.png",
+    "32": "32x32.png",
+    "48": "48x48.png",
+    "64": "64x64.png",
+    "96": "96x96.png",
+    "128": "128x128.png"
+  },
+  "web_accessible_resources": [
+    "images/*",
+    "content_scripts/prompt.html",
+    "content_scripts/contextMenuConfirmation.html",
+    "content_scripts/custom_elements/*",
+    "content_scripts/*.js",
+    "extension_loaded.json"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://keepersecurity.com/vault/*",
+      "https://*.keepersecurity.com/vault/*",
+      "https://keepersecurity.eu/vault/*",
+      "https://*.keepersecurity.eu/vault/*"
+    ]
+  },
+  "version": "14.4.0",
+  "version_name": "14.4.0"
+}

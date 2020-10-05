@@ -1,0 +1,45 @@
+{
+  "update_url": "http://clients2.google.com/service/update2/crx",
+  "name": "Buffer Status",
+  "version": "2.0.5",
+  "description": "Yet another extension for Buffer app.",
+  "manifest_version": 2,
+  "browser_action": {
+    "default_icon": "images/buffer16.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "images/buffer16.png",
+    "48": "images/buffer48.png",
+    "128": "images/buffer128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://bufferstatus.herokuapp.com/auth/buffer/callback*"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "js/contentscript.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "https://api.bufferapp.com/*"
+  ],
+  "background": {
+    "scripts": [
+      "js/jquery.min.js",
+      "js/underscore-min.js",
+      "js/backbone-min.js",
+      "js/backbone/buffer.js",
+      "js/backbone/models/user.js",
+      "js/backbone/models/profile.js",
+      "js/backbone/views/auth_view.js",
+      "js/buffer.js"
+    ],
+    "persistent": false
+  }
+}

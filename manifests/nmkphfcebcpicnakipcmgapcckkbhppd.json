@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "DocSend Extension",
+  "description": "Say goodbye to clunky email attachments and hello to secure document sharing with DocSend links.",
+  "version": "2.1.4",
+  "permissions": [
+    "storage",
+    "tabs",
+    "clipboardWrite",
+    "*://d2qvtfnm75xrxf.cloudfront.net/*",
+    "*://docsend.com/*"
+  ],
+  "background": {
+    "scripts": [
+      "jquery.js",
+      "contentApi.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*"
+      ],
+      "js": [
+        "inboxsdk.js",
+        "contentApi.js",
+        "content.js",
+        "jquery.js",
+        "gmail.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_title": "Insert DocSend link",
+    "default_popup": "browser.html"
+  },
+  "web_accessible_resources": [
+    "images/*.*",
+    "blank.png",
+    "gmail.html"
+  ],
+  "icons": {
+    "16": "images/icon-16x16.png",
+    "32": "images/icon-32x32.png",
+    "48": "images/icon-48x48.png",
+    "128": "images/icon-128.png"
+  },
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://docsend.com https://*.google.com https://ssl.google-analytics.com https://d2qvtfnm75xrxf.cloudfront.net https://doug1izaerwt3.cloudfront.net https://plus.google.com https://www.google-analytics.com; object-src 'self'; child-src 'self' https://docsend.com;"
+}

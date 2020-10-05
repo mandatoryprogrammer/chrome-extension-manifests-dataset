@@ -1,0 +1,72 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Get It Local",
+  "description": "Best Price for on-line purchase in India",
+  "version": "31.0",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "tabs",
+    "*://*/*",
+    "storage"
+  ],
+  "optional_permissions": [
+    "tabs",
+    "cookies",
+    "*://*/",
+    "notifications",
+    "<all_urls>",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.zopnow.com/*",
+        "*://*.mymorestore.com/*",
+        "*://*.hypercitydelivery.com/*",
+        "*://*.bigbasket.com/*",
+        "*://*.amazon.in/*",
+        "*://*.flipkart.com/*",
+        "*://*.snapdeal.com/*",
+        "*://*.aaramshop.com/*",
+        "*://*.heritagefreshonline.com/*",
+        "*://*.sparindia.com/*",
+        "*://*.zip.in/*",
+        "*://*.spencers.in/*",
+        "*://*.reliancefreshdirect.com/*",
+        "*://*.infibeam.com/*"
+      ],
+      "js": [
+        "contentScript.js",
+        "jquery-1.10.2.js",
+        "displayItems.js",
+        "defaultOffers.js",
+        "ajaxResponse.js"
+      ],
+      "css": [
+        "popup.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "jquery-1.10.2.js",
+      "background.js",
+      "ajaxResponse.js",
+      "ajaxCorsRequest.js",
+      "defaultOffers.js",
+      "parsingRules.js"
+    ],
+    "persistent": false
+  },
+  "web_accessible_resources": [
+    "icon.png",
+    "icon_75x75.png"
+  ]
+}

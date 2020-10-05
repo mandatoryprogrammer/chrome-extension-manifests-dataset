@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "VSTS Wiki Editor",
+  "description": "This extension will provide WYSIWYG editor for VSTS Wiki",
+  "version": "1.0.1",
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "page_action": {
+    "default_icon": "icon.png",
+    "default_title": "Wiki Editor"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.visualstudio.com/*",
+        "*://dev.azure.com/*",
+        "*://tfs/*"
+      ],
+      "js": [
+        "jquery-3.2.1.slim.min.js",
+        "markdown-it.js",
+        "to-mark.js",
+        "tui-code-snippet.js",
+        "codemirror.js",
+        "highlight.pack.js",
+        "squire-raw.js",
+        "tui-editor-Editor.js",
+        "main.js"
+      ],
+      "css": [
+        "codemirror.css",
+        "github.css",
+        "tui-editor.css",
+        "tui-editor-contents.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "*.png",
+    "*.css"
+  ],
+  "permissions": [
+    "activeTab",
+    "declarativeContent"
+  ]
+}

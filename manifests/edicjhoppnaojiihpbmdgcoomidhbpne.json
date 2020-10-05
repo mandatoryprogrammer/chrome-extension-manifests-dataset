@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "NewLifeOutlook - NewTab",
+  "short_name": "NLO - NewTab",
+  "description": "NewLifeOutlook NewTab Chrome Browser Extension",
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com https://www.googletagmanager.com; object-src 'self'",
+  "version": "1.0.1",
+  "icons": {
+    "16": "img/icon-16.png",
+    "32": "img/icon-32.png",
+    "48": "img/icon-48.png",
+    "64": "img/icon-64.png"
+  },
+  "browser_action": {
+    "default_icon": "img/icon-128.png",
+    "default_title": "NewLifeOutlook - NewTab"
+  },
+  "chrome_url_overrides": {
+    "newtab": "newTab.html"
+  },
+  "permissions": [
+    "cookies",
+    "tabs",
+    "activeTab",
+    "https://www.google-analytics.com/",
+    "https://ajax.googleapis.com/",
+    "*://*.newlifeoutlook.com/",
+    "topSites",
+    "storage",
+    "geolocation"
+  ],
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.newlifeoutlook.com/newtab*"
+      ],
+      "js": [
+        "js/installer_script.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.newlifeoutlook.com/newtab*"
+    ]
+  }
+}

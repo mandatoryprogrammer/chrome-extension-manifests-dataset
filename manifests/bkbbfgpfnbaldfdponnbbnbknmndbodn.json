@@ -1,0 +1,67 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_extName__",
+  "short_name": "__MSG_extShortName__",
+  "version": "1.0.0",
+  "description": "__MSG_extDescription__",
+  "default_locale": "en",
+  "permissions": [
+    "tabs",
+    "storage",
+    "cookies",
+    "webRequest",
+    "webRequestBlocking",
+    "https://*/*",
+    "http://*/*"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "background": {
+    "scripts": [
+      "js/browser.js",
+      "js/config.js",
+      "js/utls.js",
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.youtube.com/*",
+        "*://apis.google.com/*/hovercard/internalcard*"
+      ],
+      "js": [
+        "js/dark.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://apis.google.com/*/widget/render/comments*",
+        "*://plus.googleapis.com/*/widget/render/comments*",
+        "*://apis.google.com/*/widget/render/ytshare*"
+      ],
+      "js": [
+        "js/dark_yt_comments.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "browser_action": {
+    "default_icon": "images/icon-dark-19.png",
+    "default_title": "Activate dark mode"
+  },
+  "icons": {
+    "16": "images/icon-dark-16.png",
+    "48": "images/icon-dark-48.png",
+    "128": "images/icon-dark-128.png"
+  },
+  "web_accessible_resources": [
+    "css/dark.css",
+    "css/dark_comments.css",
+    "images/icon-light-128.png"
+  ]
+}

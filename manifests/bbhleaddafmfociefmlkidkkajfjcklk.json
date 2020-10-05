@@ -1,0 +1,67 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Propel - The First Smart CRM for PR",
+  "short_name": "Propel PR",
+  "version": "3.0.54",
+  "browser_action": {
+    "default_icon": "icon128.png",
+    "icons": {
+      "16": "icon16.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
+    }
+  },
+  "permissions": [
+    "downloads",
+    "cookies",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "storage",
+    "identity",
+    "*://*.propelmypr.com/",
+    "*://*.googleusercontent.com/",
+    "https://mail.google.com/",
+    "https://apis.google.com/",
+    "https://www.googleapis.com/"
+  ],
+  "content_security_policy": "script-src 'self' https://apis.google.com 'unsafe-eval'; object-src 'self'",
+  "background": {
+    "scripts": [
+      "background.bundle.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "exclude_globs": [
+        "https://mail.google.com/*view=om*",
+        "https://mail.google.com/*view=pt*"
+      ],
+      "js": [
+        "inboxsdk.js",
+        "content.bundle.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "*.png",
+    "*.svg"
+  ],
+  "oauth2": {
+    "client_id": "530990875193-n1sc32r5n9nqgroe97he3d32d21vhemj.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/gmail.compose",
+      "https://www.googleapis.com/auth/gmail.gmail.readonly"
+    ]
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}

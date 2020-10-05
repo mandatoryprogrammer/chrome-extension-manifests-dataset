@@ -1,0 +1,148 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAon0G6rKYEhjrN/MbH9gnanVnog6/4pUISO47XiGOz4CbEoKnogW8mEKBBzSKHSjQ2CWibx4olCod6a+Od8XtIdvyR3Ma4gqFA+cQjUbIHHkiWjhKG6ssZWkgXIgL/GFmvW4Ui4gfsnwveZRROmOEiw9NpqrLpNVna4qKd/vV9wA5rEWt1U3Vev3PHy1md+rstVUT2oYa1fM6bsH2KGM0ImqGuFCoDIsFv/9p1/jXBTyiF27eo3o509USiHDMWhQ5HDUf9/bjbqKYzR747HLZmCE/Yy8MMmB3jhA4be+B1eZ2zMCDTq4eoyLO3cqHh+LpyCE5Tg1ywovg+3fbXwuULwIDAQAB",
+  "name": "Super Dispatch Importer",
+  "author": "Super Dispatch",
+  "homepage_url": "https://mysuperdispatch.com/",
+  "description": "Import Dispatch Sheet to Super Dispatch",
+  "version": "1.9.5",
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "js/lib/sentry.min.js",
+      "js/lib/jquery-3.2.1.min.js",
+      "js/shipper-api-client.js",
+      "js/env.js",
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.centraldispatch.com/protected/dispatch/view?dsid=*",
+        "http://www.centraldispatch.com/protected/dispatch/view?dsid=*",
+        "https://www.centraldispatch.com/protected/cargo/dispatched-to-me*",
+        "http://www.centraldispatch.com/protected/cargo/dispatched-to-me*",
+        "https://www.carsarrive.com/tab/Transport/ViewLoadComplete.asp?nload_id=*",
+        "https://www.carsarrive.com/tab/Transport/ViewLoadShort.asp?nload_id=*",
+        "https://transportation.carmax.com/Carrier/*"
+      ],
+      "js": [
+        "js/lib/jquery-3.2.1.min.js",
+        "js/carmax.js",
+        "js/lib/sweetalert2.all.js",
+        "js/content.js"
+      ],
+      "css": [
+        "css/styles.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://can.drivetime-carsarrive.com/tab/Transport/ViewLoadComplete.asp?nload_id=*"
+      ],
+      "js": [
+        "js/lib/jquery-3.2.1.min.js",
+        "js/carmax.js",
+        "js/lib/sweetalert2.all.js",
+        "js/content.js"
+      ],
+      "css": [
+        "css/styles.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.centraldispatch.com/protected/listing/post-listing?id=*"
+      ],
+      "js": [
+        "js/lib/jquery-3.2.1.min.js",
+        "js/lib/sweetalert2.all.js",
+        "js/lib/moment.js",
+        "js/centraldispatch-listing-import.js"
+      ],
+      "css": [
+        "css/styles.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.jtracker.com/account/order/*lqo_id=*"
+      ],
+      "js": [
+        "js/lib/jquery-3.2.1.min.js",
+        "js/lib/jquery.modal.min.js",
+        "js/lib/intlTelInput.min.js",
+        "js/lib/sweetalert2.all.js",
+        "js/lib/jquery.validate.min.js",
+        "js/lib/jquery.autocomplete.js",
+        "js/lib/jquery.typeahead.min.js",
+        "js/lib/additional-methods.min.js",
+        "js/lib/utils.js",
+        "js/lib/moment.js",
+        "js/env.js",
+        "js/jtracker-widget.js",
+        "js/jtracker-form.js",
+        "js/jtracker.js"
+      ],
+      "css": [
+        "css/jquery.modal.min.css",
+        "css/jquery.typeahead.min.css",
+        "css/intlTelInput.css",
+        "css/styles.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://staging.broker.superdispatch.org/*",
+        "https://broker.superdispatch.com/*"
+      ],
+      "js": [
+        "js/lib/jquery-3.2.1.min.js",
+        "js/tms.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "icons": {
+    "128": "icons/128.png",
+    "48": "icons/48.png",
+    "16": "icons/16.png"
+  },
+  "web_accessible_resources": [
+    "icons/128.png",
+    "css/styles.css",
+    "html/send-to-sd-modal.html",
+    "img/*.png",
+    "js/lib/utils.js"
+  ],
+  "permissions": [
+    "tabs",
+    "storage",
+    "identity",
+    "notifications",
+    "https://api.mysuperdispatch.com/*",
+    "https://staging.superdispatch.org/*",
+    "https://dashboard.mysuperdispatch.com/*",
+    "https://broker.superdispatch.com/*",
+    "https://www.carsarrive.com/*",
+    "https://modules.carsarrive.com/*",
+    "https://canserv.drivetime-carsarrive.com/*",
+    "https://carrier.superdispatch.com/*"
+  ],
+  "browser_action": {
+    "default_icon": "icons/48.png",
+    "default_popup": "popup.html"
+  },
+  "oauth2": {
+    "client_id": "909133020380-ser17kncg2egcg8ikltuplti4evdori2.apps.googleusercontent.com",
+    "scopes": [
+      "profile"
+    ]
+  }
+}

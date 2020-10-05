@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Scan email",
+  "description": "Tiện ích lọc email trên bài viết Facebook",
+  "version": "1.0.19",
+  "author": "Nguyễn Ngọc Quý",
+  "homepage_url": "https://goo.gl/tyuBva?utm_source=chrome",
+  "options_page": "email.html",
+  "browser_action": {
+    "default_icon": "images/email.png"
+  },
+  "permissions": [
+    "tabs",
+    "notifications",
+    "cookies",
+    "storage",
+    "webRequest",
+    "contextMenus",
+    "activeTab",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "icons": {
+    "16": "images/email.png",
+    "48": "images/email.png",
+    "128": "images/email.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.facebook.com/*",
+        "https://*.facebook.com/*"
+      ],
+      "exclude_matches": [
+        "https://m.facebook.com/*",
+        "https://touch.facebook.com/*",
+        "https://mobile.facebook.com/*",
+        "https://mbasic.facebook.com/*",
+        "https://graph.facebook.com/*",
+        "https://developers.facebook.com/*",
+        "https://code.facebook.com/*"
+      ],
+      "js": [
+        "scripts/jquery-3.2.1.min.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://cdnjs.cloudflare.com 'unsafe-eval'; object-src 'self'"
+}

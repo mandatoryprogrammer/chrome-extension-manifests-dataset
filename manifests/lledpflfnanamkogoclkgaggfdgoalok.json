@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Go away MDA - Bypass MDA blocked sites",
+  "short_name": "Gom",
+  "description": "Quickly access MDA blocked sites securely",
+  "version": "7.3.3",
+  "permissions": [
+    "proxy",
+    "storage",
+    "notifications",
+    "tabs",
+    "cookies",
+    "webRequest",
+    "webRequestBlocking",
+    "http://*/*",
+    "https://*/*",
+    "identity"
+  ],
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "vendor/bower/moment/min/moment.min.js",
+      "vendor/aes.js",
+      "vendor/bower/jquery/dist/jquery.min.js",
+      "vendor/analytics.js",
+      "pcurl.js",
+      "gom.js"
+    ]
+  },
+  "manifest_version": 2,
+  "icons": {
+    "128": "assets/images/icon128.png"
+  },
+  "options_page": "pages/options.html",
+  "browser_action": {
+    "default_icon": {
+      "19": "assets/images/icon-19.png",
+      "38": "assets/images/icon-38.png"
+    },
+    "default_title": "Toggle Gom VPN"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.google.com/robots.txt*",
+        "https://www.google.com/robots.txt*"
+      ],
+      "js": [
+        "/vendor/oauth2/oauth2_inject.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "/vendor/oauth2/oauth2.html"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'; ",
+  "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCbo6SDetG9z5LOSJyOT+B2nvKmMxc4DnpTUTWd13iefw6e4cw/PPY8p5aLuQsILklLTh+KqOFDg4vpmeaxGI7HusS/UI85TEc9jRmvj4s4K9C0UxyxvP5nwWen+ctLZVhfYL0oxZTmy+E+qsYmTCS1K6XYVAhZAYACjxH2EQyLJQIDAQAB",
+  "oauth2": {
+    "client_id": "456898273658-4hrcj9o44vuoqa0rgglhmhi2pal6ektj.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email"
+    ]
+  }
+}

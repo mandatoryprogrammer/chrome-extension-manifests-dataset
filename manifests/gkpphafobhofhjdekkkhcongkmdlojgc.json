@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "SEMSTORM Content assistant",
+  "description": "SEMSTORM: content is a free content tool which validates the content quality in real time.",
+  "version": "0.5.0",
+  "homepage_url": "https://app.semstorm.com",
+  "icons": {
+    "128": "img/semstorm-128.png",
+    "48": "img/semstorm-48.png",
+    "24": "img/semstorm-24.png",
+    "16": "img/semstorm-16.png"
+  },
+  "default_locale": "en",
+  "browser_action": {
+    "default_icon": {
+      "32": "img/semstorm-32.png"
+    },
+    "default_title": "SEMSTORM content",
+    "default_popup": "popup/popup.html"
+  },
+  "permissions": [
+    "<all_urls>",
+    "storage",
+    "activeTab",
+    "tabs"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "util.js",
+        "cache.js",
+        "common.js",
+        "content/floating-panel.class.js",
+        "content/textarea-boxes.js"
+      ],
+      "css": [
+        "common.css",
+        "icons.css",
+        "content/floating-panel.css",
+        "content/textarea-boxes.css"
+      ],
+      "match_about_blank": true,
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "scripts": [
+      "cache.js",
+      "background/api_requests.js",
+      "background/events.js",
+      "background/text-validation.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "img/*.png",
+    "img/*.jpg",
+    "data/*.json",
+    "pages/*"
+  ]
+}

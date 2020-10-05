@@ -1,0 +1,52 @@
+{
+  "update_url": "http://clients2.google.com/service/update2/crx",
+  "name": "Watchdog",
+  "version": "2.1",
+  "manifest_version": 2,
+  "description": "A watchdog that checks analytics and trafic codes on every page you visit",
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "storage",
+    "tts"
+  ],
+  "browser_action": {
+    "default_title": "Watchdog",
+    "default_icon": "app/resources/img/icon.png",
+    "default_popup": "src/options/views/browseractionpopup.html"
+  },
+  "options_page": "src/options/views/index.html",
+  "background": {
+    "scripts": [
+      "vendor/framework/jquery/jquery.js",
+      "vendor/framework/config/config.js",
+      "vendor/framework/dependecyInjection/js/background/container.js",
+      "src/analyzers/js/background/analyzers.js",
+      "app/appBackground.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "vendor/framework/jquery/jquery.js",
+        "vendor/framework/autoloader/js/content/embedAutoloader.js",
+        "src/analyzers/js/content/analyzerFilter.js",
+        "app/appContent.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "vendor/framework/jquery/jquery.js",
+    "src/analyzers/js/embeded/analyzers/google-analytics.js",
+    "src/analyzers/js/embeded/analyzers/google-remarketing.js",
+    "src/analyzers/js/embeded/analyzers/brat.js",
+    "src/analyzers/js/embeded/analyzers/trafic.js",
+    "src/analyzers/js/embeded/analyzers/tradeads.js"
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "新浪微博时区助手 Timezone Helper for Weibo.com",
+  "version": "0.5",
+  "author": "Zhenfei Nie<youyis2fox@gmail.com>",
+  "description": "以任意时区显示微博发布的时间，方便在海外使用新浪微博。Show timestamps at Weibo.com according to your local timezone. ",
+  "short_name": "请选择时区/Please choose a timezone",
+  "icons": {
+    "16": "static/img/icon16.png",
+    "24": "static/img/icon24.png",
+    "64": "static/img/icon64.png",
+    "128": "static/img/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "static/img/icon.png",
+    "default_popup": "popup/popup.build.html"
+  },
+  "background": {
+    "persistent": false,
+    "page": "background/background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.weibo.com/*"
+      ],
+      "css": [
+        "logic/client.css",
+        "static/css/bootstrap.min.css"
+      ],
+      "js": [
+        "static/js/moment-with-locales.min.js",
+        "static/js/moment-timezone-with-data-2010-2020.min.js",
+        "static/js/jquery.min.js",
+        "static/js/bootstrap.min.js",
+        "logic/client.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "http://*.weibo.com/*",
+    "storage"
+  ]
+}

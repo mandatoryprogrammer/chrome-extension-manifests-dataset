@@ -1,0 +1,107 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Instant Leads",
+  "short_name": "instantleads",
+  "version": "0.16",
+  "manifest_version": 2,
+  "description": "Automatically get emails from any local business target market.",
+  "homepage_url": "https://instantleads.io",
+  "options_ui": {
+    "page": "options/options.html",
+    "chrome_style": true
+  },
+  "icons": {
+    "16": "shared/img/icon16.png",
+    "48": "shared/img/icon48.png",
+    "128": "shared/img/icon128.png"
+  },
+  "default_locale": "en",
+  "browser_action": {
+    "default_icon": {
+      "19": "shared/img/icon19.png",
+      "38": "shared/img/icon38.png"
+    },
+    "default_title": "Import Leads",
+    "default_popup": "browser_action/popup.html"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "clipboardWrite",
+    "activeTab",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "shared/js/lib/jquery.min.js",
+      "background/install-check.js",
+      "background/icon-color.js",
+      "background/webstats.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.instantleads.io/*"
+      ],
+      "js": [
+        "shared/js/lib/jquery.min.js",
+        "shared/js/account.js",
+        "content_script/js/authentication.js",
+        "content_script/js/install-buttons.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.yelp.com/*"
+      ],
+      "css": [
+        "shared/css/fonts.css",
+        "shared/css/font-awesome.min.css",
+        "shared/css/bootstrap-tooltip.min.css",
+        "content_script/css/linkedin-common.css",
+        "content_script/css/linkedin-usage-warning.css",
+        "content_script/css/linkedin-search-checkboxes.css",
+        "content_script/css/linkedin-search-popup.css",
+        "content_script/css/linkedin-profile-button.css",
+        "content_script/css/linkedin-profile-popup.css"
+      ],
+      "js": [
+        "shared/js/lib/jquery.min.js",
+        "shared/js/lib/jquery-ui.min.js",
+        "shared/js/lib/bootstrap-tooltip.min.js",
+        "shared/js/use-counter.js",
+        "shared/js/utilities.js",
+        "shared/js/api.js",
+        "shared/js/account.js",
+        "shared/js/analytics.js",
+        "shared/js/list-selection.js",
+        "shared/js/lead-existence.js",
+        "content_script/js/messaging.js",
+        "content_script/js/linkedin-company.js",
+        "content_script/js/linkedin-debug.js",
+        "content_script/js/linkedin-parse-profile.js",
+        "content_script/js/linkedin-parse-company.js",
+        "content_script/js/linkedin-parse-search-results.js",
+        "content_script/js/linkedin-version.js",
+        "content_script/js/linkedin-usage-warning.js",
+        "content_script/js/linkedin-search-save.js",
+        "content_script/js/linkedin-search-checkboxes.js",
+        "content_script/js/linkedin-search-popup.js",
+        "content_script/js/linkedin-profile-button.js",
+        "content_script/js/linkedin-profile-popup.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "shared/img/*",
+    "shared/fonts/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.instantleads.io/*"
+    ]
+  }
+}

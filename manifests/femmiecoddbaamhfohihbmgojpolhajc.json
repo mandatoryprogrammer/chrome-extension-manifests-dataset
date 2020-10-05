@@ -1,0 +1,80 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Questia Research Tools",
+  "short_name": "QuestiaExt",
+  "description": "Use Questia's research tools for any book or article.",
+  "author": "Questia",
+  "version": "1.0.2.1",
+  "icons": {
+    "16": "img/icon-16.png",
+    "32": "img/icon-32.png",
+    "48": "img/icon-48.png",
+    "128": "img/icon-128.png"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "options_page": "html/questia-extension-options.html",
+  "browser_action": {
+    "default_icon": {
+      "19": "img/icon-19.png",
+      "38": "img/icon-38.png"
+    },
+    "default_title": "Questia Research Tools"
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "https://www.questia.com/*",
+        "https://www.questiaschool.com/*",
+        "https://mindtap.questia.ng.cengage.com/*"
+      ],
+      "css": [
+        "css/questia-extension-common.css",
+        "css/questia-extension-capture.css"
+      ],
+      "js": [
+        "js/questia-extension-capture.js",
+        "js/questia-extension-browser.js",
+        "lib/jquery.min.js",
+        "lib/jquery-ui.min.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.questia.com/*",
+        "https://www.questiaschool.com/*",
+        "https://mindtap.questia.ng.cengage.com/*"
+      ],
+      "css": [
+        "css/questia-extension-common.css",
+        "css/questia-extension-native.css"
+      ],
+      "js": [
+        "js/questia-extension-native.js",
+        "js/questia-extension-browser.js",
+        "lib/jquery.min.js",
+        "lib/jquery-ui.min.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "img/*.*",
+    "js/*.*",
+    "css/*.*",
+    "html/*.*"
+  ]
+}

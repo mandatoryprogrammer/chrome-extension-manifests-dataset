@@ -1,0 +1,100 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Pear Deck Power-Up",
+  "version": "2020.08.12.00847",
+  "version_name": "2020.08.12.00847-32476244786da25cead2e8c3c9e03802e470ba76",
+  "background": {
+    "scripts": [
+      "BackgroundApp.js",
+      "NewContentBadgeApp.js",
+      "TrackingApp.js",
+      "hot-reload.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_popup": "static/pages/popup.html",
+    "default_icon": {
+      "16": "static/images/icon_square_16x16.png",
+      "32": "static/images/icon_square_32x32.png",
+      "48": "static/images/icon_square_48x48.png",
+      "96": "static/images/icon_square_96x96.png",
+      "128": "static/images/icon_square_128x128.png"
+    }
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com https://www.youtube.com https://s.ytimg.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://docs.google.com/presentation/*/present*"
+      ],
+      "include_globs": [
+        "https://docs.google.com/presentation/*/present*peardeck=1*"
+      ],
+      "js": [
+        "GSlidesInitialLoadingPresentationApp.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://docs.google.com/presentation/*/present*"
+      ],
+      "include_globs": [
+        "https://docs.google.com/presentation/*/present*peardeck=1*"
+      ],
+      "js": [
+        "GSlidesPresentationApp.js"
+      ],
+      "css": [
+        "styles.css"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://docs.google.com/presentation/*/edit*"
+      ],
+      "js": [
+        "GSlidesEditorApp.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.googleusercontent.com/blank"
+      ],
+      "include_globs": [
+        "https://n-a3tsvzdu5h56prcfwou7ukzwortqi5mke2rqnvy*script.googleusercontent.com/blank"
+      ],
+      "js": [
+        "GSlidesAddonApp.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "description": "Ensures that videos, animations, and GIFs embedded in your Pear Deck slides play at full resolution—exactly the way they should!",
+  "externally_connectable": {
+    "matches": [
+      "https://*.googleusercontent.com/blank"
+    ]
+  },
+  "icons": {
+    "16": "static/images/icon_square_16x16.png",
+    "32": "static/images/icon_square_32x32.png",
+    "48": "static/images/icon_square_48x48.png",
+    "96": "static/images/icon_square_96x96.png",
+    "128": "static/images/icon_square_128x128.png"
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArqUHT+YihqAJuqUjBiBayAf1cE/ZoWwl8d5v/BAgBUBqctbfBwfIraChv0KyeUSE8INGzB1UHsF5HtdXxxRHzY5QnKMeC7SJ6fsJOQIPBjPZiVnpY/Mg4wTCpmVqqH6nCGeeyc7wrxin7NUNiUpcQVi0A25j0IzJNvJKDFpDGBeLsk5JtidQDJEfzvq9sOdlJ/nM1fdIeB2ZtkEAdfXg2PNyKNPMRnrWtxkI605GyTd8H9sgs6KiksRERzcWXWBElURxhSwJMPRWroyphQYOrOG4TQn/qXIWURIq9VgVK0N8ub576tGgiZ130zsouNi/R93VFK9eDQyJWLsmhBaI6QIDAQAB",
+  "manifest_version": 2,
+  "permissions": [
+    "<all_urls>",
+    "activeTab",
+    "tabs",
+    "storage"
+  ],
+  "web_accessible_resources": [
+    "static/*"
+  ]
+}

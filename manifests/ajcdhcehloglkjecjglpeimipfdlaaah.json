@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "ニコ補助 - Nama",
+  "version": "0.68.13",
+  "description": "ニコニコ動画用 ニコ生アラート、自動枠移動、コメントビューア：assistant script for nicovideo.jp ",
+  "manifest_version": 2,
+  "background": {
+    "page": "background.html"
+  },
+  "browser_action": {
+    "default_icon": "./img/na128.png",
+    "default_popup": "/html/popup.html",
+    "default_title": "NicoHojo - Nama"
+  },
+  "icons": {
+    "128": "./img/na128.png"
+  },
+  "options_page": "html/options.html",
+  "permissions": [
+    "webRequest",
+    "notifications",
+    "webRequestBlocking",
+    "tabs",
+    "storage",
+    "unlimitedStorage",
+    "clipboardWrite",
+    "*://*.nicovideo.jp/*",
+    "http://*.nicogs.net/*",
+    "background",
+    "management",
+    "tts",
+    "ttsEngine"
+  ],
+  "content_security_policy": "default-src 'self'; connect-src 'self' http://live.nicovideo.jp/api/ http://icon.nimg.jp/ http://com.nicovideo.jp/ http://ch.nicovideo.jp/ ; object-src 'self'; script-src 'self' https://www.google-analytics.com/ https://ssl.google-analytics.com/ https://ir-jp.amazon-adsystem.com/ https://platform.twitter.com/ https://cdn.syndication.twimg.com/; style-src 'self' 'unsafe-inline' https://platform.twitter.com/ https://ton.twimg.com/ ; img-src 'self' data: https://ton.twimg.com/ https://secure-dcdn.cdn.nimg.jp/ https://platform.twitter.com/ http://nl.simg.jp/ https://pbs.twimg.com/ http://icon.nimg.jp/ http://www.google-analytics.com/ https://syndication.twitter.com/; media-src 'self' data: ; frame-src 'self' http://rcm-fe.amazon-adsystem.com/ https://syndication.twitter.com/ ;",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://live.nicovideo.jp/*",
+        "http://com.nicovideo.jp/*",
+        "https://com.nicovideo.jp/*",
+        "http://ch.nicovideo.jp/*",
+        "http://live2.nicovideo.jp/*"
+      ],
+      "css": [
+        "/css/contentscript.css",
+        "/css/contents_btn.css"
+      ],
+      "js": [
+        "/js/lib/jquery-1.7.1.min.js",
+        "/js/nh.contentscript.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "minimum_chrome_version": "30",
+  "web_accessible_resources": [
+    "img/comment.png",
+    "img/plus.png",
+    "img/plus_active2.png",
+    "img/na.png"
+  ]
+}

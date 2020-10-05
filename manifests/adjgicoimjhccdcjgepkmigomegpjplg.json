@@ -1,0 +1,447 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Talkdesk Click-to-Call Extension",
+  "version": "0.6.2",
+  "manifest_version": 2,
+  "description": "Click-to-Call Directly from Your Helpdesk, CRM, Sales Software and Any Website.",
+  "homepage_url": "http://www.talkdesk.com",
+  "icons": {
+    "16": "icons/Talkdesk_16x16t.png",
+    "48": "icons/Talkdesk_48x48b.png",
+    "128": "icons/Talkdesk_128x128b.png"
+  },
+  "default_locale": "en",
+  "incognito": "split",
+  "background": {
+    "scripts": [
+      "vendor/jquery/jquery.js",
+      "vendor/libphonenumber-old/phoneformat.min.js",
+      "vendor/libphonenumber-js@1.7.49/umd/libphonenumber-max.js",
+      "vendor/URI.js",
+      "js/bg/background.js",
+      "js/talkdesk.js",
+      "js/talkforce.js",
+      "js/bg/right.click.js"
+    ],
+    "persistent": true
+  },
+  "options_page": "html/options.html",
+  "externally_connectable": {
+    "matches": [
+      "*://polar-lowlands-9873.herokuapp.com/*",
+      "*://td-p-talkforce.herokuapp.com/*"
+    ],
+    "ids": [
+      "idbejgmlldkhoiogoknpihhhbimbikdo"
+    ]
+  },
+  "permissions": [
+    "contextMenus",
+    "tabs",
+    "storage",
+    "https://*.mytalkdesk.com/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.salesforce.com/003*",
+        "*://*.salesforce.com/00Q*",
+        "*://*.salesforce.com/001*"
+      ],
+      "js": [
+        "vendor/jquery/jquery.js",
+        "js/talkdesk.js",
+        "js/inject/salesforce_injector.js",
+        "js/inject/right.click.js"
+      ],
+      "css": [
+        "css/talkdesk.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.localtunnel.me/*",
+        "*://*.ngrok.com/*",
+        "*://*.ngrok.io/*",
+        "https://s3.amazonaws.com/td-*-azores-cti/*"
+      ],
+      "js": [
+        "js/inject/callbar_injector.js",
+        "js/inject/right.click.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*.weskill.com/*",
+        "*://*.weskill.co/*"
+      ],
+      "js": [
+        "js/inject/callbar_injector.js",
+        "js/inject/right.click.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*.desk.com/agent*"
+      ],
+      "js": [
+        "vendor/jquery/jquery.js",
+        "js/talkdesk.js",
+        "js/inject/desk_injector.js",
+        "js/inject/right.click.js"
+      ],
+      "css": [
+        "css/talkdesk.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.desk.com/web/agent*"
+      ],
+      "js": [
+        "vendor/jquery/jquery.js",
+        "vendor/jquery/jquery-replace.js",
+        "js/talkdesk.js",
+        "js/inject/new_desk_injector.js",
+        "js/inject/right.click.js"
+      ],
+      "css": [
+        "css/talkdesk.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.sugarcrm.eu/*",
+        "*://*.sugarcrm.com/*"
+      ],
+      "js": [
+        "vendor/jquery/jquery.js",
+        "vendor/jquery/jquery-replace.js",
+        "js/talkdesk.js",
+        "js/inject/bruteforce_injector.js",
+        "js/inject/right.click.js"
+      ],
+      "css": [
+        "css/talkdesk.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.zendesk.com/agent*"
+      ],
+      "js": [
+        "vendor/jquery/jquery.js",
+        "js/talkdesk.js",
+        "js/inject/zendesk_injector.js",
+        "js/inject/right.click.js"
+      ],
+      "css": [
+        "css/talkdesk.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.nimble.com/*"
+      ],
+      "js": [
+        "vendor/jquery/jquery.js",
+        "js/talkdesk.js",
+        "js/inject/nimble_injector.js",
+        "js/inject/right.click.js"
+      ],
+      "css": [
+        "css/talkdesk.css"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://crm.seniormarketadvisors.com/*"
+      ],
+      "js": [
+        "vendor/jquery/jquery.js",
+        "vendor/jquery/jquery-replace.js",
+        "js/talkdesk.js",
+        "js/inject/sma_injector.js",
+        "js/inject/right.click.js"
+      ],
+      "css": [
+        "css/talkdesk.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://app.onepagecrm.com/*"
+      ],
+      "js": [
+        "vendor/jquery/jquery.js",
+        "vendor/jquery/jquery-replace.js",
+        "js/talkdesk.js",
+        "js/inject/opc_injector.js",
+        "js/inject/right.click.js"
+      ],
+      "css": [
+        "css/talkdesk.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.helpscout.net/*"
+      ],
+      "js": [
+        "vendor/jquery/jquery.js",
+        "vendor/jquery/jquery-replace.js",
+        "js/talkdesk.js",
+        "js/inject/helpscout_injector.js",
+        "js/inject/bruteforce_injector.js",
+        "js/inject/right.click.js"
+      ],
+      "css": [
+        "css/talkdesk.css",
+        "css/helpscout.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.freshdesk.com/*",
+        "*://*.freshservice.com/*"
+      ],
+      "js": [
+        "vendor/jquery/jquery.js",
+        "vendor/jquery/jquery-replace.js",
+        "js/talkdesk.js",
+        "js/inject/freshdesk_injector.js",
+        "js/inject/right.click.js"
+      ],
+      "css": [
+        "css/talkdesk.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.infusionsoft.com/*"
+      ],
+      "js": [
+        "vendor/jquery/jquery.js",
+        "vendor/jquery/jquery-replace.js",
+        "js/talkdesk.js",
+        "js/inject/infusionsoft_injector.js",
+        "js/inject/right.click.js"
+      ],
+      "css": [
+        "css/talkdesk.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.contactually.com/*"
+      ],
+      "js": [
+        "vendor/jquery/jquery.js",
+        "vendor/jquery/jquery-replace.js",
+        "js/talkdesk.js",
+        "js/inject/contactually_injector.js",
+        "js/inject/right.click.js"
+      ],
+      "css": [
+        "css/talkdesk.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.kustomerapp.com/*"
+      ],
+      "js": [
+        "vendor/jquery/jquery.js",
+        "js/talkdesk.js",
+        "js/inject/kustomerapp_injector.js",
+        "js/inject/right.click.js"
+      ],
+      "css": []
+    },
+    {
+      "matches": [
+        "*://app.salesforceiq.com/*",
+        "*://app.relateiq.com/*"
+      ],
+      "js": [
+        "vendor/jquery/jquery.js",
+        "vendor/jquery/jquery-replace.js",
+        "js/talkdesk.js",
+        "js/inject/relateiq_injector.js",
+        "js/inject/right.click.js"
+      ],
+      "css": [
+        "css/talkdesk.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.uservoice.com/*"
+      ],
+      "js": [
+        "vendor/jquery/jquery.js",
+        "js/talkdesk.js",
+        "js/inject/uservoice_injector.js",
+        "js/inject/right.click.js"
+      ],
+      "css": [
+        "css/talkdesk.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.highrisehq.com/people/*"
+      ],
+      "js": [
+        "vendor/jquery/jquery.js",
+        "vendor/jquery/jquery-replace.js",
+        "js/talkdesk.js",
+        "js/inject/highrise_injector.js",
+        "js/inject/right.click.js"
+      ],
+      "css": [
+        "css/talkdesk.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.groovehq.com/*"
+      ],
+      "js": [
+        "vendor/jquery/jquery.js",
+        "js/talkdesk.js",
+        "js/inject/groove_injector.js",
+        "js/inject/right.click.js"
+      ],
+      "css": [
+        "css/talkdesk.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.pipedrive.com/*"
+      ],
+      "js": [
+        "vendor/jquery/jquery.js",
+        "vendor/jquery/jquery-replace.js",
+        "js/talkdesk.js",
+        "js/inject/pipedrive_injector.js",
+        "js/inject/periodic_wildcard_injector.js",
+        "js/inject/right.click.js"
+      ],
+      "css": [
+        "css/talkdesk.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.zoho.com/*"
+      ],
+      "js": [
+        "vendor/jquery/jquery.js",
+        "vendor/jquery/jquery-replace.js",
+        "js/talkdesk.js",
+        "js/inject/zoho_injector.js",
+        "js/inject/right.click.js"
+      ],
+      "css": [
+        "css/talkdesk.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.google.com/*",
+        "*://*.gettimely.com/*",
+        "*://*.moveline.com/*"
+      ],
+      "js": [
+        "vendor/jquery/jquery.js",
+        "js/talkdesk.js",
+        "js/inject/wildcard_injector.js",
+        "js/inject/periodic_wildcard_injector.js",
+        "js/inject/right.click.js"
+      ],
+      "css": [
+        "css/talkdesk.css"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*.radiusbob.com/*",
+        "*://*.medicaresalesengine.com/*",
+        "*://*.intercom.io/*"
+      ],
+      "js": [
+        "vendor/jquery/jquery.js",
+        "vendor/jquery/jquery-replace.js",
+        "js/talkdesk.js",
+        "js/inject/bruteforce_injector.js",
+        "js/inject/right.click.js"
+      ],
+      "css": [
+        "css/talkdesk.css"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "*://*.highrisehq.com/people/*",
+        "*://*.pipedrive.com/*",
+        "*://*.google.com/*",
+        "*://*.gettimely.com/*",
+        "*://*.moveline.com/*",
+        "*://*.uservoice.com/*",
+        "*://app.relateiq.com/*",
+        "*://app.salesforceiq.com/*",
+        "*://*.contactually.com/*",
+        "*://*.infusionsoft.com/*",
+        "*://*.freshdesk.com/*",
+        "*://*.freshservice.com/*",
+        "*://*.radiusbob.com/*",
+        "*://*.zoho.com/*",
+        "*://*.medicaresalesengine.com/*",
+        "*://*.intercom.io/*",
+        "*://*.helpscout.net/*",
+        "*://app.onepagecrm.com/*",
+        "*://crm.seniormarketadvisors.com/*",
+        "*://*.nimble.com/*",
+        "*://*.zendesk.com/agent*",
+        "*://*.sugarcrm.eu/*",
+        "*://*.sugarcrm.com/*",
+        "*://*.desk.com/web/agent*",
+        "*://*.salesforce.com/003*",
+        "*://*.salesforce.com/00Q*",
+        "*://*.salesforce.com/001*",
+        "*://*.groovehq.com/*",
+        "*://*.mytalkdesk.com/*",
+        "*://*.lightning.force.com/*",
+        "*://*.kustomerapp.com/*",
+        "*://*.salesforce.com/console*",
+        "*://*.talkdesk.com/*"
+      ],
+      "js": [
+        "vendor/jquery/jquery.js",
+        "vendor/jquery/jquery-replace.js",
+        "js/talkdesk.js",
+        "js/inject/wildcard_injector.js",
+        "js/inject/all_websites_bruteforce_injector.js",
+        "vendor/libphonenumber-old/phoneformat.min.js",
+        "js/inject/right.click.js"
+      ],
+      "css": [
+        "css/talkdesk.css"
+      ],
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "img/favicon.png",
+    "extension-info.json"
+  ]
+}

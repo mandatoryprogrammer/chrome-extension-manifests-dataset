@@ -1,0 +1,73 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "CloudMask",
+  "short_name": "CloudMask",
+  "description": "CloudMask, a Common Criteria certified data security engine, transparently protects your private emails, files, and cloud data",
+  "version": "2.0.993",
+  "icons": {
+    "16": "icon16.png",
+    "32": "icon32.png",
+    "48": "icon48.png",
+    "64": "icon64.png",
+    "128": "icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "deps.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "js": [
+        "sandbox-closure.js",
+        "sandbox-injector.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "browser_action": {
+    "default_icon": {
+      "16": "icon16.png",
+      "32": "icon32.png",
+      "48": "icon48.png",
+      "64": "icon64.png",
+      "128": "icon128.png"
+    },
+    "default_popup": "pages/popup.html",
+    "default_title": "CloudMask Security Add-On"
+  },
+  "externally_connectable": {
+    "matches": [
+      "https://*.cloudmask.com/*",
+      "http://localhost:4200/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "pages/*",
+    "css/*",
+    "images/*"
+  ],
+  "permissions": [
+    "https://*/*",
+    "http://*/*",
+    "webNavigation",
+    "activeTab",
+    "storage",
+    "tabs",
+    "notifications",
+    "cookies",
+    "downloads",
+    "idle",
+    "unlimitedStorage",
+    "nativeMessaging",
+    "identity"
+  ]
+}

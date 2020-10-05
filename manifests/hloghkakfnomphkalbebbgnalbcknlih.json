@@ -1,0 +1,112 @@
+{
+  "manifest_version": 2,
+  "name": "MintOil™ for use with Intuit® Mint™",
+  "short_name": "__MSG_extName__",
+  "version": "0.1.11",
+  "version_name": "0.1-alpha",
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "default_locale": "en",
+  "description": "__MSG_extDesc__",
+  "minimum_chrome_version": "72",
+  "icons": {
+    "16": "images/icons/16.png",
+    "48": "images/icons/48.png",
+    "128": "images/icons/128-store.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "images/icons/16.png",
+      "24": "images/icons/24.png",
+      "32": "images/icons/32.png",
+      "48": "images/icons/48.png",
+      "128": "images/icons/128.png"
+    },
+    "default_title": "MintOil"
+  },
+  "author": "CaelusMinds",
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "js/constants.min.js",
+      "js/lib/logger.min.js",
+      "models/mintoil.min.js",
+      "src/bg/background.min.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://mint.intuit.com/*"
+      ],
+      "js": [
+        "js/lib/google.api.min.js",
+        "js/constants.min.js",
+        "js/lib/logger.min.js",
+        "src/inject/mint-injection.min.js"
+      ],
+      "css": [
+        "src/inject/mint-injection.min.css"
+      ],
+      "all_frames": false,
+      "run_at": "document_start"
+    }
+  ],
+  "content_security_policy": "default-src 'self' https://mint.images.com https://www.googleapis.com ;script-src 'self' https://images.mint.com; connect-src 'self' https://www.googleapis.com https://images.mint.com data:; style-src 'unsafe-inline'; img-src * 'self' data: https: chrome-extension-resource:;",
+  "web_accessible_resources": [
+    "js/lib/*.js",
+    "js/constants.min.js",
+    "models/mintoil.min.js",
+    "images/*.png",
+    "images/*.svg",
+    "images/logos/*.png",
+    "images/logos/*.svg",
+    "images/icons/*.png",
+    "images/icons/*.svg",
+    "css/**/*.css",
+    "css/**/*.png",
+    "css/fonts/fontawesome-webfont.eot",
+    "css/fonts/fontawesome-webfont.svg",
+    "css/fonts/fontawesome-webfont.ttf",
+    "css/fonts/fontawesome-webfont.woff",
+    "css/fonts/fontawesome-webfont.woff2",
+    "src/inject/mint-extended.min.js",
+    "src/inject/*.js",
+    "src/inject/*.css",
+    "src/inject/custom-page/custom-page.*",
+    "src/inject/monthly-calc/monthly-calc.*",
+    "src/inject/date-searches/date-searches.*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://mint.intuit.com/*",
+      "*://images.mint.com/*"
+    ]
+  },
+  "homepage_url": "https://mintoil.caelusminds.com",
+  "incognito": "split",
+  "offline_enabled": false,
+  "oauth2": {
+    "client_id": "922894448117-8a5gg4r94b28k4lc08vke9e6hamkepia.apps.googleusercontent.com",
+    "scopes": [
+      "profile",
+      "email",
+      "openid",
+      "https://www.googleapis.com/auth/chromewebstore.readonly"
+    ]
+  },
+  "permissions": [
+    "webNavigation",
+    "tabs",
+    "contextMenus",
+    "declarativeContent",
+    "identity",
+    "identity.email",
+    "notifications",
+    "storage",
+    "unlimitedStorage",
+    "*://mint.intuit.com/*",
+    "*://images.mint.com/*",
+    "https://www.googleapis.com/"
+  ],
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmZpgg8TkMDcPMQANUecx9y96YdHtoLisLcgY042pEiCnNhWSC1KSzr9B/ryAFrTiAQ34Suikzs+DP9aDcstPZ9TUyUYyMm1fREbPdCqrrcSb1QeK+vJVBu6/wTc0p1EL2drf2HNGeKNMv2wgKY5wQUsojKjztvQ+dpD8yLypf2PuM/h1qMmb9aNkkpt4NvJZvSHcdW4rc6nZVOOiAVIgEDJfxCau0wVa/IUE+qFuSEdlfT0avBwyfdVGwdm5+mseAU637L82y5qY1C749EutpSXhOFCrqnKNzTh07AyWvam8wzpaR2ZpVh2o21wDRGZi1QVIhsB8pQVDeLacn0zpKwIDAQAB"
+}

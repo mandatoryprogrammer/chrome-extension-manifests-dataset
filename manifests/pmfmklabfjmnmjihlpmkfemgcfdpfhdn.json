@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Connector",
+  "short_name": "Connector",
+  "description": "Connector",
+  "version": "0.0.5",
+  "minimum_chrome_version": "38",
+  "browser_action": {
+    "default_icon": "/icons/icon_16.png",
+    "default_title": "connector"
+  },
+  "icons": {
+    "16": "/icons/icon_16.png",
+    "32": "/icons/icon_32.png",
+    "48": "/icons/icon_48.png",
+    "128": "/icons/icon_128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "contentscriptPreload.js"
+      ],
+      "run_at": "document_start",
+      "matches": [
+        "<all_urls>"
+      ],
+      "all_frames": true
+    },
+    {
+      "js": [
+        "contentscript.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "connectorExtension.js"
+  ],
+  "permissions": [
+    "nativeMessaging"
+  ]
+}

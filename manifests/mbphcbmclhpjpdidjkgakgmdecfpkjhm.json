@@ -1,0 +1,82 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "description": "Help developers organize and structure information related to programming decisions.",
+  "version": "2.2.1",
+  "name": "Unakite",
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_popup": "browserTooltip.html",
+    "default_icon": "icon-128.png"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "windows": "Ctrl+Shift+K",
+        "mac": "Command+Shift+K",
+        "chromeos": "Ctrl+Shift+K",
+        "linux": "Ctrl+Shift+K"
+      }
+    }
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "*://localhost/*",
+        "*://*.facebook.com/*",
+        "*://*.qualtrics.com/*",
+        "*://*.overleaf.com/*",
+        "*://*.google.com/signin/oauth/*",
+        "*://kap-project-nsh-2504.firebaseapp.com/*",
+        "*://unakite-v2.firebaseapp.com/*"
+      ],
+      "js": [
+        "contentAnnotation.bundle.js"
+      ],
+      "css": [
+        "content.styles.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "popup.html",
+    "inject.js",
+    "content.styles.css",
+    "info-100.png",
+    "thumb-down-100.png",
+    "thumb-up-100.png",
+    "icon-128.png",
+    "icon-34.png",
+    "icon-inactive-128.png"
+  ],
+  "icons": {
+    "128": "icon-128.png"
+  },
+  "permissions": [
+    "https://*/*",
+    "http://*/*",
+    "https://www.google-analytics.com/",
+    "downloads",
+    "contextMenus",
+    "tabs",
+    "storage",
+    "unlimitedStorage",
+    "activeTab",
+    "<all_urls>",
+    "background",
+    "chrome://favicon/",
+    "clipboardRead",
+    "clipboardWrite"
+  ],
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAoKT+gdJ2p51k/Hz+EdDAFqm2W6DQIQTq8UurRmg8tWC92j5GkPt1Qz806i/VKks2nGigQDR/rtJmKIeMF695nKc/IRleXYRgE62cLPaBRvu5ni9wQ85IpNNCuHQeC+vJtUGdJTyvDa5rx6Wqz0SFDEVgVgn1o4pvZS3mlwHcmhCF7YlucakQoAF2Uo2LQKj+uXChDED/Tjg++fWveNlv5pfa0QvtNMX8UciK5EuElooqr9NYzb2yX+DP7+7IesIr8bcuVptVJWMqzNz2DXUh1ys4QN5CaIbDiqnGK96JcDKMosd7AWzIa3yXIReoOWN1CXBoO0UOv42G7L8P+/Ia9QIDAQAB",
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' 'unsafe-eval' http://localhost:3000 http://localhost:3001 http://localhost:3002 https://gstatic.com https://*.google.com https://*.firebaseio.com https://cdn.firebase.com https://kap-project-nsh-2504.firebaseapp.com  https://project-kap-dev.firebaseapp.com https://ssl.google-analytics.com; object-src 'self'"
+}

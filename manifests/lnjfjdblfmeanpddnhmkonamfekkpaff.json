@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "PugChamp Helper",
+  "description": "PugChamp ETF2L and RGL division integration.",
+  "version": "1.43",
+  "permissions": [
+    "storage",
+    "http://api.etf2l.org/*",
+    "https://api.etf2l.org/*",
+    "https://rgl.gg/Public/API/v1/*",
+    "https://raw.githubusercontent.com/*"
+  ],
+  "web_accessible_resources": [
+    "res/css/divTag.css"
+  ],
+  "background": {
+    "scripts": [
+      "background.js",
+      "bgrequests.js",
+      "websocket.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.pug.champ.gg/",
+        "http://*.pug.champ.gg/"
+      ],
+      "js": [
+        "src/contentscripts/main.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://*.pug.champ.gg/player/*",
+        "http://*.pug.champ.gg/player/*"
+      ],
+      "js": [
+        "src/contentscripts/profile.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "browser_action": {
+    "default_popup": "src/popup/popup.html",
+    "default_icon": {}
+  },
+  "content_security_policy": "script-src 'self' https://maxcdn.bootstrapcdn.com/ https://ajax.googleapis.com/; object-src 'self'",
+  "icons": {
+    "16": "/res/images/icon16.png",
+    "48": "/res/images/icon48.png",
+    "128": "/res/images/icon128.png"
+  }
+}

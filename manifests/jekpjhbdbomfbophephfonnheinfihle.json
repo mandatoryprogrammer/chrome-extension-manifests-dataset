@@ -1,0 +1,78 @@
+{
+  "manifest_version": 2,
+  "name": "FinderKit",
+  "description": "__MSG_extDesc__",
+  "version": "1.0.1",
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "icons": {
+    "128": "img/128x128.png",
+    "16": "img/16x16.png",
+    "19": "img/19x19.png",
+    "32": "img/32x32.png",
+    "48": "img/48x48.png"
+  },
+  "browser_action": {
+    "default_icon": "img/19x19.png",
+    "default_popup": "popup.html",
+    "default_title": "__MSG_extDesc__"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+Shift+F"
+      }
+    }
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "clipboardRead",
+    "background",
+    "contextMenus",
+    "<all_urls>",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "default_locale": "en_US",
+  "externally_connectable": {
+    "matches": [
+      "https://simiula.com/*",
+      "https://finderkit.com/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "img/*.png",
+    "vendor/*.js",
+    "js/*.js"
+  ],
+  "background": {
+    "scripts": [
+      "js/google.js",
+      "js/smapp.min.js",
+      "js/smapp-plugins.min.js",
+      "vendor/dexie.min.js",
+      "js/finderkit.min.js",
+      "rightClickHandler.js",
+      "background.min.js"
+    ],
+    "persistent": false
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/smapp.min.js",
+        "js/smapp-plugins.min.js",
+        "js/finderkit-contents.min.js",
+        "contents.min.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

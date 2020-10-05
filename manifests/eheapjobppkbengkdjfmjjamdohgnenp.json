@@ -1,0 +1,75 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Meu Cupom Alerta",
+  "version": "2.1.1",
+  "manifest_version": 2,
+  "description": "Encontre os melhores cupons de descontos, promoções e ofertas em tempo real, enquanto navega nas suas lojas favoritas online!",
+  "homepage_url": "http://meucupom.com",
+  "icons": {
+    "19": "icons/icon38-active.png",
+    "38": "icons/icon76-active.png",
+    "48": "icons/icon96-active.png"
+  },
+  "default_locale": "en",
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/icon38-inactive.png",
+      "38": "icons/icon76-inactive.png",
+      "48": "icons/icon96-inactive.png"
+    }
+  },
+  "permissions": [
+    "http://pbwoffer.info/*"
+  ],
+  "externally_connectable": {
+    "ids": [
+      "*"
+    ],
+    "matches": [
+      "*://www.meucupom.com/*",
+      "http://dev.meucupom.com/*",
+      "*://homolog.meucupom.com/*"
+    ]
+  },
+  "background": {
+    "scripts": [
+      "lib/jquery/jquery.min.js",
+      "options_custom/lib/store.js",
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "lib/jquery/jquery.min.js",
+        "js/app-bundle.js",
+        "js/content.js"
+      ],
+      "css": [
+        "css/extension.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "lib/reactivate-parent.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    "icons/*.png",
+    "images/*",
+    "fonts/*"
+  ]
+}

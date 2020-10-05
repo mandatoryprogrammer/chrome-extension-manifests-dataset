@@ -1,0 +1,32 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Merge Guardian",
+  "version": "1.0.1",
+  "description": "Disables the merge button when certain keyword is missing in the comment on bitbucket PR's commit message",
+  "permissions": [
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "icons": {
+    "256": "images/icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://bitbucket.org/*/*/pull-requests/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "jquery-3.3.1.min.js",
+        "contentScript.js"
+      ]
+    }
+  ],
+  "options_page": "options.html",
+  "manifest_version": 2
+}

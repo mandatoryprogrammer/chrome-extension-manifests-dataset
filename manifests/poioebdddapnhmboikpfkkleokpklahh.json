@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "KSS-Admin",
+  "version": "6.1.5",
+  "description": "Extension for updating KSS Home-page Elements",
+  "manifest_version": 2,
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs",
+    "http://localhost:8000/*",
+    "https://test.stage.kidsuperstore.in/*",
+    "https://www.kidsuperstore.in/*",
+    "https://pre-prod.stage.kidsuperstore.in/*"
+  ],
+  "browser_action": {
+    "default_title": "KSS",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://localhost:8000/*/buy*",
+        "https://www.kidsuperstore.in/*/buy*",
+        "https://test.stage.kidsuperstore.in/*/buy*",
+        "https://pre-prod.stage.kidsuperstore.in/*/buy*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "copy_product_id_script.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "web_accessible_resources": [
+    "form_popup.html",
+    "form_validation.js",
+    "edit-enabled-section.html",
+    "publish_section.html",
+    "confirmation_popup.html",
+    "injected.js"
+  ]
+}

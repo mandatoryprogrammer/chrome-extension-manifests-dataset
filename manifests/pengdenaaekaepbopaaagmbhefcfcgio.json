@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "MapPost",
+  "description": "Save the locations you want to visit and the articles that made you want to visit there in the first place, on your very own map.",
+  "version": "1.0.5",
+  "icons": {
+    "128": "icon128.png",
+    "48": "icon48.png",
+    "16": "icon16.png"
+  },
+  "browser_action": {
+    "default_title": "Save To MapPost",
+    "default_icon": "icon16.png"
+  },
+  "background": {
+    "scripts": [
+      "jquery-3.2.1.min.js",
+      "eventPage.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "jquery-3.2.1.min.js",
+        "login.js"
+      ],
+      "matches": [
+        "*://*.mappostit.com/dashboard/"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "jquery-3.2.1.min.js",
+        "logout.js"
+      ],
+      "matches": [
+        "*://*.mappostit.com/login/?p=1"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "webNavigation",
+    "activeTab",
+    "contextMenus",
+    "cookies",
+    "notifications",
+    "http://*/*",
+    "https://*/*"
+  ]
+}

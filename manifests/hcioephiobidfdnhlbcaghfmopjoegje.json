@@ -1,0 +1,73 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "电商黑匣子",
+  "version": "1.0.0",
+  "description": "__MSG_pluginDesc__",
+  "icons": {
+    "16": "img/icon.png",
+    "48": "img/icon.png",
+    "128": "img/icon.png"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "browser_action": {
+    "default_icon": "img/icon.png",
+    "default_title": "电商黑匣子",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/jquery-1.8.3.js",
+        "js/content-script.js"
+      ],
+      "css": [
+        "css/custom.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*/*.png",
+        "*://*/*.jpg",
+        "*://*/*.gif",
+        "*://*/*.bmp"
+      ],
+      "js": [
+        "js/show-image-content-size.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "contextMenus",
+    "tabs",
+    "notifications",
+    "webRequest",
+    "webRequestBlocking",
+    "storage",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "web_accessible_resources": [
+    "js/inject.js"
+  ],
+  "homepage_url": "https://www.baidu.com",
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  "options_page": "options.html",
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "omnibox": {
+    "keyword": "go"
+  },
+  "default_locale": "zh_CN",
+  "devtools_page": "devtools.html"
+}

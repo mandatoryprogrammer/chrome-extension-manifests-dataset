@@ -1,0 +1,173 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_extension_name__",
+  "description": "__MSG_extension_description__",
+  "version": "1.15.3",
+  "manifest_version": 2,
+  "minimum_chrome_version": "38",
+  "default_locale": "zh_TW",
+  "icons": {
+    "128": "img/icon-128.png",
+    "48": "img/icon-48.png",
+    "16": "img/icon-16.png"
+  },
+  "permissions": [
+    "contextMenus",
+    "tabs",
+    "tts",
+    "storage",
+    "unlimitedStorage",
+    "<all_urls>",
+    "webRequest",
+    "alarms",
+    "webRequestBlocking",
+    "webNavigation",
+    "fileBrowserHandler"
+  ],
+  "options_page": "options.html",
+  "options_ui": {
+    "chrome_style": false,
+    "page": "options.html?embedded"
+  },
+  "file_browser_handlers": [
+    {
+      "default_title": "用ParrotTalks抄筆記開啟",
+      "file_filters": [
+        "filesystem:*.pdf"
+      ],
+      "id": "open-as-pdf"
+    }
+  ],
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": [
+        "*://*.parrottalks.com/*",
+        "*://parrottalks.com/*",
+        "*://www.parrottalks.com/*",
+        "*://localhost/*"
+      ],
+      "js": [
+        "js/global_constants.js",
+        "content/installed.js"
+      ]
+    },
+    {
+      "all_frames": true,
+      "run_at": "document_start",
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "ftp://*/*",
+        "file://*/*"
+      ],
+      "css": [
+        "content/content_script.css"
+      ],
+      "js": [
+        "js/libs/mousetrap-1.5.3.js",
+        "js/libs/setImmediate.js",
+        "js/libs/jquery-2.1.0.js",
+        "js/libs/jquery.css-mahoro.js",
+        "js/global_constants.js",
+        "content/shared.js",
+        "content/frame_command.js",
+        "content/app_runner.js",
+        "content/shortcuts.js"
+      ]
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "js/global_constants.js",
+        "pdf_viewer/contentscript.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "ftp://*/*",
+        "file://*/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "img/icon-19.png",
+      "38": "img/icon-38.png"
+    },
+    "default_title": "ParrotTalks抄筆記"
+  },
+  "background": {
+    "scripts": [
+      "js/global_constants.js",
+      "js/libs/tongwen/tongwen_core.js",
+      "js/libs/tongwen/tongwen_table_s2t.js",
+      "js/libs/tongwen/tongwen_table_ss2t.js",
+      "js/libs/tongwen/tongwen_table_ps2t.js",
+      "js/libs/Math.uuid.js",
+      "js/libs/idb.filesystem.js",
+      "js/libs/jquery-2.1.0.js",
+      "js/libs/analytics-node-2.0.0.js",
+      "js/libs/local-storage.js",
+      "js/libs/responsivevoice.src.js",
+      "js/background.js",
+      "js/pdf_viewer_bg.js"
+    ],
+    "persistent": true
+  },
+  "incognito": "split",
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://ssl.google-analytics.com https://www.google-analytics.com https://www.googleapis.com https://graph.facebook.com https://stats.g.doubleclick.net; object-src 'self'",
+  "web_accessible_resources": [
+    "js/libs/mousetrap-1.5.3.js",
+    "js/libs/mousetrap-record-1.5.3-modified.js",
+    "js/libs/setImmediate.js",
+    "js/libs/jquery-2.1.0.js",
+    "js/libs/angular-1.3.15.js",
+    "js/libs/angular-resource-1.3.15.js",
+    "js/libs/angular-animate-1.3.15.js",
+    "js/libs/angular-route-1.3.15.js",
+    "css/libs/animate.css",
+    "css/libs/bootstrap.min.css",
+    "css/libs/reset.css",
+    "font-awesome/css/font-awesome.min.css",
+    "font-awesome/font/fontawesome-webfont.eot",
+    "font-awesome/font/fontawesome-webfont.svg",
+    "font-awesome/font/fontawesome-webfont.ttf",
+    "font-awesome/font/fontawesome-webfont.woff",
+    "font-awesome/font/FontAwesome.otf",
+    "img/icon-128.png",
+    "options.html",
+    "content/index.html",
+    "content/content_fontawesome.css",
+    "content/content_animate.css",
+    "content/css/index.css",
+    "content/css/index.css.map",
+    "js/global_constants",
+    "content/js/app.js",
+    "content/img/parrot-head.png",
+    "content/img/sprite-loading.png",
+    "content/img/link-snipper.png",
+    "content/img/range-capture-icon.png",
+    "content/img/range-capture-icon-active.png",
+    "content/img/cursor-activated.png",
+    "content/img/cursor-range-capture.png",
+    "content/img/icon-help.png",
+    "content/img/icon-help@2x.png",
+    "content/img/range-bubble-up.png",
+    "content/img/range-bubble-down.png",
+    "js/global_constants.js",
+    "content/app_runner.js",
+    "content/frame_command.js",
+    "content/shortcuts.js",
+    "getFrameId",
+    "pdf_viewer/content/web/viewer.html",
+    "http:/*",
+    "https:/*",
+    "ftp:/*",
+    "file:/*",
+    "chrome-extension:/*",
+    "filesystem:/*",
+    "drive:*"
+  ]
+}

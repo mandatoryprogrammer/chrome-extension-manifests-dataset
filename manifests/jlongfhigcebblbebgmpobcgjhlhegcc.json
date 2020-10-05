@@ -1,0 +1,73 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_extName__",
+  "description": "__MSG_extDesc__",
+  "version": "1.5.5",
+  "default_locale": "en",
+  "icons": {
+    "16": "icons/logo/logo16.png",
+    "19": "icons/logo/logo19.png",
+    "32": "icons/logo/logo32.png",
+    "38": "icons/logo/logo38.png",
+    "48": "icons/logo/logo48.png",
+    "64": "icons/logo/logo64.png",
+    "128": "icons/logo/logo128.png",
+    "256": "icons/logo/logo256.png",
+    "512": "icons/logo/logo512.png"
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "chrome_style": true
+  },
+  "commands": {
+    "insert-link-shortcut": {
+      "suggested_key": {
+        "default": "Alt+Shift+G",
+        "mac": "MacCtrl+Shift+G"
+      },
+      "description": "__MSG_contextTitle__"
+    }
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "informator.js"
+      ],
+      "run_at": "document_idle",
+      "matches": [
+        "https://*.gruveo.com/*"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background-script.js",
+      "ring-notification-background-script.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/logo/logo19.png",
+      "38": "icons/logo/logo38.png"
+    },
+    "default_title": "__MSG_browserActionTitle__",
+    "default_popup": "popup/popup.html"
+  },
+  "permissions": [
+    "clipboardWrite",
+    "activeTab",
+    "storage",
+    "contextMenus",
+    "https://*.gruveo.com/",
+    "webRequest",
+    "background"
+  ],
+  "applications": {
+    "gecko": {
+      "id": "@gruveo-instant-connect",
+      "strict_min_version": "57.0"
+    }
+  }
+}

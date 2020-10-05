@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "MightyHive Site Tools",
+  "description": "Displays active trackers, tagging containers, and network activity present on the page.",
+  "version": "1.1.0",
+  "icons": {
+    "16": "./assets/img/icon16.png",
+    "48": "./assets/img/icon48.png",
+    "128": "./assets/img/icon128.png",
+    "256": "./assets/img/icon256.png"
+  },
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "./assets/img/icon16.png",
+      "48": "./assets/img/icon48.png",
+      "128": "./assets/img/icon128.png",
+      "256": "./assets/img/icon256.png"
+    }
+  },
+  "background": {
+    "scripts": [
+      "backgroundScript.js"
+    ]
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": false
+  },
+  "permissions": [
+    "downloads",
+    "tabs",
+    "webRequest",
+    "storage",
+    "*://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "contentScript.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "injectedScript.js"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

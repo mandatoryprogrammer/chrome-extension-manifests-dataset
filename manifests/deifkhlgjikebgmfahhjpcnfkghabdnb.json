@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Επισκέψεις Ιατρείου ΕΟΠΥΥ beta",
+  "version": "0.1.23",
+  "manifest_version": 2,
+  "description": "Βοηθητικό πρόγραμμα καταχώρησης των επισκέψεων ασθενών στα συμβεβλημένα με τον ΕΟΠΥΥ ιατρεία",
+  "homepage_url": "http://www.test.gr",
+  "icons": {
+    "16": "icons/eopyy16.png",
+    "48": "icons/eopyy48.png",
+    "128": "icons/eopyy128.png"
+  },
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": "icons/eopyy19.png",
+    "default_title": "Kαταχώρηση ΕΟΠΥΥ",
+    "default_popup": "src/browser_action/popup.html"
+  },
+  "permissions": [
+    "contentSettings",
+    "contextMenus",
+    "notifications",
+    "tabs",
+    "storage",
+    "*://*.e-syntagografisi.gr/*",
+    "*://apps.ika.gr/eEOPYY/faces/secureUser/newReferral2*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.e-syntagografisi.gr/e-pre/faces/mainDoctorFlow/DoctorVisit*"
+      ],
+      "js": [
+        "src/inject/syntag.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://apps.ika.gr/eEOPYY/faces/secureUser/newReferral2*"
+      ],
+      "js": [
+        "src/inject/tameia.js",
+        "src/inject/ikagr.js"
+      ]
+    }
+  ]
+}

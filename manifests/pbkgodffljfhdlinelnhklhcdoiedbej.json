@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "getYourCrayon (beta)",
+  "description": "Draw on the web.",
+  "version": "0.2.0",
+  "icons": {
+    "19": "icon19.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "permissions": [
+    "activeTab"
+  ],
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "https://twitter.com/intent/tweet*",
+        "https://www.google.com/webhp?sourceid=chrome-instant&espv=*"
+      ],
+      "js": [
+        "jquery.js",
+        "jquery-ui.js",
+        "paper.js",
+        "farbtastic.js",
+        "colorpicker.js",
+        "contentscript.js"
+      ],
+      "css": [
+        "contentscript.css",
+        "farbtastic.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "drawController.js",
+    "wheel.png",
+    "marker.png",
+    "mask.png",
+    "gyc-badgeicon.png"
+  ],
+  "browser_action": {
+    "default_icon": "icon19.png",
+    "default_title": "getYourCrayon"
+  },
+  "commands": {
+    "Undo": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Z",
+        "mac": "Command+MacCtrl+Z"
+      },
+      "description": "Undo"
+    }
+  },
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "background.js"
+    ]
+  }
+}

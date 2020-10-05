@@ -1,0 +1,86 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "name": "Sauce for Strava™",
+  "short_name": "Sauce",
+  "description": "__MSG_app_desc__",
+  "author": "Sauce, LLC",
+  "version": "6.2.0",
+  "permissions": [
+    "storage",
+    "declarativeContent"
+  ],
+  "icons": {
+    "16": "images/icon16.png",
+    "32": "images/icon32.png",
+    "48": "images/icon48.png",
+    "64": "images/icon64.png",
+    "128": "images/icon128.png",
+    "256": "images/icon256.png"
+  },
+  "background": {
+    "scripts": [
+      "src/ext/webext.js",
+      "src/ext/ga.js",
+      "src/ext/storage.js",
+      "src/ext/rpc_hooks.js",
+      "src/bg/rpc.js",
+      "src/bg/migrate.js",
+      "src/bg/main_declaritive.js"
+    ],
+    "persistent": false
+  },
+  "page_action": {
+    "default_icon": {
+      "19": "images/icon19.png",
+      "38": "images/icon38.png",
+      "48": "images/icon48.png",
+      "64": "images/icon64.png",
+      "128": "images/icon128.png",
+      "256": "images/icon256.png"
+    },
+    "default_title": "Sauce for Strava™",
+    "default_popup": "pages/options.html?popup"
+  },
+  "options_ui": {
+    "page": "pages/options.html",
+    "open_in_tab": true
+  },
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "https://www.strava.com/*"
+      ],
+      "css": [
+        "css/site/common.css"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "matches": [
+        "https://www.strava.com/*"
+      ],
+      "js": [
+        "src/ext/webext.js",
+        "src/ext/storage.js",
+        "src/ext/rpc_hooks.js",
+        "src/ext/rpc_proxy.js",
+        "src/ext/patron.js",
+        "src/ext/boot.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "build.json",
+    "src/common/*",
+    "src/site/*",
+    "css/site/*",
+    "templates/*",
+    "images/*"
+  ],
+  "version_name": "6.2.0 [release]",
+  "minimum_chrome_version": "67"
+}

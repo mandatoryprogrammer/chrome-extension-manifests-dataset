@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "AutoCaptcha for VtopBeta",
+  "version": "1.0.1",
+  "author": "Abhishek Kankani",
+  "description": "Autofills captcha in VIT Academics Page (vtopbeta.vit.ac.in)",
+  "browser_action": {
+    "default_icon": "icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://vtopbeta.vit.ac.in/vtop/executeApp/*",
+        "*://vtopbeta.vit.ac.in/vtop/parentLogin",
+        "*://vtopbeta.vit.ac.in/vtop/processLogin"
+      ],
+      "js": [
+        "jquery.min.js",
+        "captcha.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://vtop2.vit.ac.in/*"
+      ],
+      "js": [
+        "captcha2.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "128": "icon.png"
+  },
+  "permissions": [
+    "*://vtopbeta.vit.ac.in/vtop/*",
+    "webRequest",
+    "webRequestBlocking",
+    "webNavigation"
+  ],
+  "background": {
+    "scripts": [
+      "bg.js"
+    ],
+    "persistent": true
+  },
+  "manifest_version": 2
+}

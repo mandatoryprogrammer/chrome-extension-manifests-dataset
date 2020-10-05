@@ -1,0 +1,71 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "background": {
+    "scripts": [
+      "js/chrome/const.js",
+      "js/common/uid/uid.js",
+      "js/common/ga/ga-common.js",
+      "js/common/transpiled/retention/swStorageInstance.js",
+      "js/common/transpiled/retention/swStorageSync.js",
+      "js/common/transpiled/retention/swRetention.js",
+      "js/all-browsers/jquery-3.2.1.min.js",
+      "js/all-browsers/main.js",
+      "js/all-browsers/request.js",
+      "js/all-browsers/ranger.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "images/icon128.png",
+    "default_popup": "sw.html",
+    "default_title": "Commerce Detective"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "js/all-browsers/content.js"
+      ],
+      "matches": [
+        "*://www.commercedetective.com/website/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "js": [
+        "js/all-browsers/appInfo.js"
+      ],
+      "matches": [
+        "https://play.google.com/store/apps/details?id=*",
+        "https://itunes.apple.com/*/app/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "default_locale": "en",
+  "description": "__MSG_descriptionjson__",
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "manifest_version": 2,
+  "name": "__MSG_name__",
+  "permissions": [
+    "*://*/*",
+    "tabs",
+    "webRequest",
+    "webNavigation",
+    "webRequestBlocking",
+    "storage",
+    "storage"
+  ],
+  "version": "0.0.5",
+  "web_accessible_resources": [
+    "pixel.png"
+  ],
+  "options_ui": {
+    "chrome_style": true,
+    "page": "options.html"
+  },
+  "options_page": "options.html",
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'"
+}

@@ -1,0 +1,67 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Datasprout",
+  "short_name": "Datasprout",
+  "version": "1.2.13",
+  "description": "Transform your Amazon KDP sales reports.",
+  "content_security_policy": "default-src 'self' https://kdp.amazon.com https://datasprout.co https://api.datasprout.co https://www.w3.org https://kdp-monthly-reports.s3.us-west-2.amazonaws.com/ https://kdp-export-pmr.s3.amazonaws.com/",
+  "browser_action": {
+    "default_icon": "src/images/logo512.png"
+  },
+  "icons": {
+    "16": "src/images/logo16.png",
+    "32": "src/images/logo32.png",
+    "48": "src/images/logo48.png",
+    "128": "src/images/logo128.png",
+    "192": "src/images/logo192.png",
+    "512": "src/images/logo512.png"
+  },
+  "permissions": [
+    "activeTab",
+    "https://kdp.amazon.com/*",
+    "https://kdp-export-pmr.s3.amazonaws.com/*",
+    "https://kdp-monthly-reports.s3.us-west-2.amazonaws.com/*",
+    "https://datasprout.co/*",
+    "https://*.datasprout.co/*",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://kdp.amazon.com/*/bookshelf*",
+        "https://kdp.amazon.com/bookshelf*",
+        "https://kdp.amazon.com/*/reports-new*",
+        "https://kdp.amazon.com/reports-new*",
+        "https://kdp.amazon.com/*/select*",
+        "https://kdp.amazon.com/select*"
+      ],
+      "js": [
+        "libs.js",
+        "datasprout.min.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "web_accessible_resources": [
+    "src/images/logo16.png",
+    "src/images/logo32.png",
+    "src/images/logo48.png",
+    "src/images/logo128.png",
+    "src/images/logo192.png",
+    "src/images/logo512.png",
+    "src/layout/accountError.html",
+    "src/layout/main.html",
+    "src/fonts/Overpass-Light.ttf",
+    "src/fonts/Overpass-LightItalic.ttf",
+    "src/fonts/Overpass-SemiBold.ttf",
+    "src/fonts/fa-light-300.ttf",
+    "src/fonts/fa-regular-400.ttf",
+    "src/fonts/fa-solid-900.ttf"
+  ],
+  "manifest_version": 2
+}

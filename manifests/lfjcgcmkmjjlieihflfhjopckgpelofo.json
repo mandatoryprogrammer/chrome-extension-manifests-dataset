@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "4.0.7",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "name": "__MSG_appName__",
+  "short_name": "gas-github",
+  "author": "leonhartx.k@gmail.com",
+  "description": "__MSG_appDesc__",
+  "icons": {
+    "16": "icon/icon.png",
+    "48": "icon/icon.png",
+    "128": "icon/icon.png"
+  },
+  "background": {
+    "scripts": [
+      "background/background.js"
+    ]
+  },
+  "options_ui": {
+    "page": "options/options.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://script.google.com/*"
+      ],
+      "js": [
+        "lib/jquery.min.js",
+        "lib/diff.min.js",
+        "lib/diff2html.min.js",
+        "lib/diff2html-ui.min.js",
+        "lib/highlight.min.js",
+        "src/util.js",
+        "src/scm/github.js",
+        "src/scm/bitbucket.js",
+        "src/scm/gitlab.js",
+        "src/gas-api.js",
+        "src/gas-hub.js"
+      ],
+      "css": [
+        "lib/diff2html.css",
+        "lib/github.css"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://apis.google.com; object-src 'self'",
+  "web_accessible_resources": [
+    "gas-hub.js",
+    "options/options.html",
+    "content/alert.html",
+    "content/button.html",
+    "content/modal.html",
+    "content/menu.html",
+    "content/login.html"
+  ],
+  "permissions": [
+    "https://script.google.com/*",
+    "storage",
+    "declarativeContent",
+    "webRequest",
+    "https://gitlab.com/*"
+  ]
+}

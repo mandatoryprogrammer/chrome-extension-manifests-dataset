@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Disqus Auto Expander",
+  "version": "1.1.2",
+  "description": "Automatically shows replies and new comments in Disqus discussions. Stops autoplay media and opens URLs in a new tab/window.",
+  "permissions": [
+    "activeTab",
+    "declarativeContent",
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "dax-defaultConfig.js",
+      "dax-background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://disqus.com/embed/comments/*",
+        "*://disqus.com/home/discussion/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "dax-defaultConfig.js",
+        "dax-content.js"
+      ],
+      "css": [
+        "dax-content.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://cdn.embedly.com/widgets/media.html*"
+      ],
+      "all_frames": true,
+      "js": [
+        "dax-defaultConfig.js",
+        "dax-stopAutoPlay.js"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "images/disqus_eye_16.png",
+    "32": "images/disqus_eye_32.png",
+    "48": "images/disqus_eye_48.png"
+  },
+  "options_ui": {
+    "page": "dax-config.html"
+  },
+  "page_action": {
+    "default_icon": {
+      "16": "images/disqus_eye_16.png",
+      "32": "images/disqus_eye_32.png"
+    },
+    "default_popup": "dax-config.html",
+    "default_title": "Disqus Auto Expander v1.1"
+  }
+}

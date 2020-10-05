@@ -1,0 +1,69 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Free Email Finder - AroundDeal",
+  "short_name": "AroundDeal",
+  "description": "Find targeted email addresses on LinkedIn and web domains in 1 click.",
+  "version": "5.4.3",
+  "icons": {
+    "16": "assets/imgs/icon-16.png",
+    "32": "assets/imgs/icon-32.png",
+    "48": "assets/imgs/icon-48.png",
+    "64": "assets/imgs/icon-64.png",
+    "128": "assets/imgs/icon-128.png"
+  },
+  "browser_action": {
+    "default_title": "Free Email Finder - AroundDeal",
+    "default_icon": "assets/imgs/icon-64.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "app/vendor.js",
+      "app/background-bundle.js"
+    ],
+    "persistent": true
+  },
+  "web_accessible_resources": [
+    "iframe.html"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.linkedin.com/*",
+        "https://www.linkedin.com/*"
+      ],
+      "js": [
+        "app/vendor.js",
+        "app/content-linkedin-bundle.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://www.arounddeal.com/*",
+        "https://www.arounddeal.com/*"
+      ],
+      "js": [
+        "app/vendor.js",
+        "app/content-arounddeal-bundle.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "background",
+    "cookies",
+    "storage",
+    "downloads",
+    "webRequest",
+    "webRequestBlocking",
+    "contextMenus",
+    "notifications",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "manifest_version": 2
+}

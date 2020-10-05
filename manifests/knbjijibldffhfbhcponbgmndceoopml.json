@@ -1,0 +1,67 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Genie History Search",
+  "short_name": "Genie",
+  "description": "Always find the page you are looking for, like magic.",
+  "version": "0.4.2",
+  "icons": {
+    "128": "images/genie-lamp-transparent-bg-128.png"
+  },
+  "browser_action": {
+    "default_icon": "images/genie-lamp-transparent-bg-128.png",
+    "default_popup": "app.html"
+  },
+  "optional_permissions": [
+    "https://*.google.com/*"
+  ],
+  "permissions": [
+    "tabs",
+    "storage",
+    "history",
+    "bookmarks"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.google.com/*"
+      ],
+      "js": [
+        "content.bundle.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "offline_enabled": true,
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.google-analytics.com https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js; object-src 'self'",
+  "web_accessible_resources": [
+    "images/*",
+    "new-tab.html",
+    "app.html",
+    "google.html"
+  ],
+  "commands": {
+    "toggle-popup": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+K",
+        "windows": "Ctrl+Shift+K",
+        "mac": "Ctrl+Shift+K",
+        "chromeos": "Ctrl+Shift+K",
+        "linux": "Ctrl+Shift+K"
+      },
+      "description": "Toggle Popup"
+    },
+    "_execute_browser_action": {
+      "suggested_key": {
+        "windows": "Ctrl+K",
+        "mac": "Ctrl+K",
+        "chromeos": "Ctrl+K",
+        "linux": "Ctrl+K"
+      }
+    }
+  }
+}

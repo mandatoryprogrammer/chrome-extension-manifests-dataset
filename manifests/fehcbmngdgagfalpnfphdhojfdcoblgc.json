@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Airtable web clipper",
+  "version": "1.9.3",
+  "description": "Clip web content to your Airtable bases.",
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://*.airtableblocks.com/*",
+      "https://*.development-airtableblocks.com:4300/*",
+      "https://*.staging-airtableblocks.com/*"
+    ]
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "./static/js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "./static/js/contentScript.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "ftp://*/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "browser_action": {
+    "default_title": "Save to Airtable",
+    "default_icon": {
+      "128": "icon128.png"
+    }
+  },
+  "icons": {
+    "128": "icon128.png"
+  },
+  "manifest_version": 2,
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzjlnCmVYDAMkx/988dB2IseK+g5Xd3oGPm0oEDlkls55XChV8R7pjmPAxY2CX8Ftw55AkBz5dgbYPawqv4zGcSAUYFdTDjEflF0yxI842/tmBg1PsZkce5IWcrtFb0EcXt81VIfjtyjfX20llpMRTZgwM4/Z3XU/z1E7+0ypkkQvQXB3h4dEGM1SVJ5wu5dgKJct8YzJd7SazxENYgLrlbfC1+E1sRMBaXGrukvr/hZrbxDc2LAAcV1B3x7DpDhZnDS83APFm07H/Q+KKgcRujuMvhJxV4OEax9dw7CsvPMVtjTlm6S5n5VvN/jGUOOsfjSOi/1UQw/g+njU4QSVEwIDAQAB",
+  "content_security_policy": "script-src 'self' 'sha256-GgRxrVOKNdB4LrRsVPDSbzvfdV4UqglmviH9GoBJ5jk='; object-src 'self'",
+  "web_accessible_resources": [
+    "index.html",
+    "oauth_callback.html",
+    "static/js/*.js",
+    "static/js/*.js.map",
+    "static/css/*.css",
+    "static/css/*.css.map"
+  ]
+}

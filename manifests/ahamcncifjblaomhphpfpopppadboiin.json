@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Github Side-by-Side Diffs",
+  "version": "0.0.11",
+  "description": "Support side-by-side diffs in Github, and other improvements to Github's diff viewer.",
+  "manifest_version": 2,
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png",
+    "256": "img/icon256.png"
+  },
+  "background": {
+    "scripts": [
+      "js/build/background.js"
+    ],
+    "matches": [
+      "https://github.com/*"
+    ],
+    "run_at": "document_end"
+  },
+  "content_scripts": [
+    {
+      "css": [
+        "ext/highlight/styles/solarized_light.css",
+        "css/styles.css"
+      ],
+      "matches": [
+        "https://github.com/*/pull/*/files",
+        "https://github.com/*/commit/*",
+        "https://github.com/*/compare/*"
+      ],
+      "js": [
+        "ext/highlight/highlight.pack.js",
+        "ext/jquery/jquery-2.0.3.js",
+        "ext/react/react-0.6.0a.js",
+        "ext/underscore/underscore-1.5.2.js",
+        "ext/backbone/backbone-1.1.0.js",
+        "js/build/init.js",
+        "js/build/utils.js",
+        "js/build/models/init.js",
+        "js/build/models/row.js",
+        "js/build/models/row_group.js",
+        "js/build/models/file_diff.js",
+        "js/build/models/diff_viewer.js",
+        "js/build/views/init.js",
+        "js/build/views/file_diff_view.js",
+        "js/build/views/checkboxes_view.js",
+        "js/build/main.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "storage",
+    "tabs",
+    "webNavigation",
+    "https://github.com/*",
+    "https://raw.github.com/*",
+    "https://raw2.github.com/*"
+  ]
+}

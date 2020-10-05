@@ -1,0 +1,81 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Opus Web Recorder",
+  "version": "1.100.101",
+  "manifest_version": 2,
+  "description": "Document websites within chrome",
+  "package_name": "opus-Web-Recorder",
+  "browser_action": {
+    "default_icon": "extension/epilogue.png",
+    "default_popup": "index.html"
+  },
+  "icons": {
+    "16": "extension/epilogue16.png",
+    "48": "extension/epilogue48.png"
+  },
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "match_about_blank": true,
+      "js": [
+        "monitorEvents.js",
+        "BootstrapTraining.js",
+        "FoundationTraining.js",
+        "MaterialTraining.js",
+        "GwtTraining.js",
+        "MappingRules.js",
+        "findControlType.js",
+        "findLabel.js",
+        "peopleSoftTraining.js",
+        "opusManualTraining.js",
+        "manualTraining.js"
+      ],
+      "all_frames": true,
+      "css": [
+        "opusManualTraining.css"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "<all_urls>",
+    "storage",
+    "unlimitedStorage",
+    "alarms",
+    "desktopCapture",
+    "notifications",
+    "system.memory",
+    "system.cpu",
+    "system.display"
+  ],
+  "offline_enabled": true,
+  "externally_connectable": {
+    "matches": [
+      "https://opuseps.com/*",
+      "https://*.dev-opuseps.com/*",
+      "https://dev-opuseps.com/*",
+      "https://*.qa-opuseps.com/*",
+      "https://qa-opuseps.com/*",
+      "https://*.test-opuseps.com/*",
+      "https://test-opuseps.com/*",
+      "https://*.opuseps.com/*"
+    ],
+    "accept_tls_channel_id": true
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "web_accessible_resources": [
+    "assets/BootstrapRules.json",
+    "assets/FoundationRules.json",
+    "assets/PeopleSoftRules.json",
+    "assets/MaterialRules.json",
+    "assets/GwtRules.json",
+    "app/host/add-rule/index.html"
+  ]
+}

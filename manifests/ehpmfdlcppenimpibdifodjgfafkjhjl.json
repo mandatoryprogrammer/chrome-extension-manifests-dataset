@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Lost Circles - Social Network",
+  "short_name": "Lost Circles",
+  "description": "Visualize the hidden structure of your social network.",
+  "version": "2.3.1",
+  "browser_action": {
+    "default_icon": "extension/icon.png",
+    "default_popup": "extension/popup.html",
+    "default_title": "Visualize the hidden structure of your social network."
+  },
+  "icons": {
+    "48": "extension/favicon-64.png",
+    "128": "extension/favicon-128.png",
+    "256": "extension/favicon-256.png"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "unlimitedStorage"
+  ],
+  "content_scripts": [
+    {
+      "match_about_blank": true,
+      "matches": [
+        "https://*.facebook.com/*",
+        "http://*.facebook.com/*"
+      ],
+      "js": [
+        "static/vendors/jquery/jquery-2.2.0.min.js",
+        "extension/circles.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "static/vendors/jquery/jquery-2.2.0.min.js",
+      "extension/eventPage.js"
+    ],
+    "persistent": true
+  },
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

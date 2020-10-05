@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Armageddon-Salesforce LinkedIn Checker",
+  "description": "Check if LinkedIn user is already present in Salesforce",
+  "version": "1.1.2",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://login.salesforce.com/services/oauth2/success*data_explorer_test*"
+      ],
+      "js": [
+        "/oauth2/oauth2_inject.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "jquery-1.12.1.min.js",
+        "contentscript.js"
+      ]
+    }
+  ],
+  "background": {
+    "page": "background.html"
+  },
+  "icons": {
+    "48": "icon.png"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "permissions": [
+    "tabs",
+    "https://*.salesforce.com/",
+    "https://mail.google.com/*"
+  ],
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "explorer.html"
+  },
+  "web_accessible_resources": [
+    "oauth2/oauth2.html",
+    "Lead.png",
+    "Contact.png",
+    "icon.png"
+  ]
+}

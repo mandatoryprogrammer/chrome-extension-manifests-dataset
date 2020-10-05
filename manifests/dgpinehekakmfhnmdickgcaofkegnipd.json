@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "RunQuestRun",
+  "description": "Shortcuts to RunQuestRun",
+  "icons": {
+    "48": "icon.png",
+    "128": "icon128.png"
+  },
+  "version": "1.0.11",
+  "permissions": [
+    "tabs",
+    "topSites",
+    "storage",
+    "*://*.runquestrun.com/*"
+  ],
+  "browser_action": {
+    "default_title": "RunQuestRun",
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "chrome_url_overrides": {
+    "newtab": "newtab/index.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://runquestrun.com/*",
+        "*://www.runquestrun.com/*"
+      ],
+      "js": [
+        "injectTopSites.js"
+      ],
+      "css": [
+        "topsites.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.runquestrun.com/*"
+      ],
+      "js": [
+        "noextwarning.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "style.css",
+    "*.png"
+  ],
+  "default_locale": "en",
+  "manifest_version": 2,
+  "applications": {
+    "gecko": {
+      "id": "runquestrun@ffextension.com",
+      "strict_min_version": "57.0"
+    }
+  }
+}

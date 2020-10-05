@@ -1,0 +1,41 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Toastmasters - Pathways Keyboard Navigation",
+  "short_name": "TM-P Nav",
+  "version": "0.1",
+  "description": "No more clicking on the right arrows and no more small popup!",
+  "permissions": [
+    "activeTab"
+  ],
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "https://toastmasters.csod.com/LMS/scorm/LaunchLo.aspx*"
+      ],
+      "js": [
+        "openInTab/injectScript.js"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "https://toastmasters.csod.com/content/toastmasters/publications/*/index.html"
+      ],
+      "all_frames": true,
+      "js": [
+        "keyboardNav/injectScript.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "openInTab/contentScript.js",
+    "keyboardNav/contentScript.js"
+  ],
+  "icons": {
+    "16": "images/logo16.png",
+    "48": "images/logo48.png",
+    "128": "images/logo128.png"
+  },
+  "manifest_version": 2
+}

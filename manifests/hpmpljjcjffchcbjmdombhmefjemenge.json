@@ -1,0 +1,70 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Jiimba Private Search Engine",
+  "short_name": "Jiimba",
+  "description": "Keep your searches private by redirecting searches that may be tracked to Jiimba, a privacy-focused search engine.",
+  "version": "0.0.9",
+  "icons": {
+    "16": "/img/se/favicon-16x16.png",
+    "48": "/img/se/android-icon-48x48.png",
+    "128": "/img/se/apple-icon-120x120.png"
+  },
+  "permissions": [
+    "activeTab",
+    "webRequest",
+    "webRequestBlocking",
+    "*://*.jiimba.com/",
+    "http://*/*",
+    "https://*/*",
+    "storage",
+    "tabs",
+    "privacy",
+    "webNavigation",
+    "contextMenus",
+    "management",
+    "cookies"
+  ],
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "lib/page-protection.js"
+      ],
+      "css": [
+        "css/tooltip.css"
+      ]
+    }
+  ],
+  "background": {
+    "persistent": true,
+    "page": "background.html"
+  },
+  "homepage_url": "https://jiimba.com",
+  "chrome_settings_overrides": {
+    "search_provider": {
+      "name": "Jiimba",
+      "keyword": "jiimba",
+      "search_url": "https://jiimba.com/?q={searchTerms}&time_range=&safesearch=0&categories=general",
+      "favicon_url": "https://jiimba.com/static/themes/simple/img/favicon.png",
+      "image_url": "https://jiimba.com/?q={searchTerms}&time_range=&safesearch=0&categories=image",
+      "encoding": "UTF-8",
+      "is_default": true
+    },
+    "homepage": "https://jiimba.com"
+  },
+  "browser_action": {
+    "default_title": "Jiimba",
+    "default_icon": "/img/se/android-icon-48x48.png",
+    "default_popup": "panel.html"
+  },
+  "options_page": "settings.html",
+  "web_accessible_resources": [
+    "settings.html",
+    "img/se/favicon.ico"
+  ]
+}

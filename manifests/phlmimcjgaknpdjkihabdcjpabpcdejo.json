@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "PrimeVOX Click-to-Call",
+  "version": "1.1",
+  "description": "Click-to-call extension for the PrimeVOX Communications VoIP Phone System",
+  "manifest_version": 2,
+  "permissions": [
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "pv-logo-16x16.png",
+    "48": "pv-logo-48x48.png",
+    "128": "pv-logo-128x128.png"
+  },
+  "options_ui": {
+    "page": "options.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "jquery-3.4.1.min.js",
+        "findAndReplaceDOMText.js",
+        "content.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "dialscript.js"
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Flinkhub",
+  "description": "Get warm introductions to people through the right connections in your network.",
+  "version": "1.2.2",
+  "browser_action": {
+    "default_icon": "icons/icon32.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "activeTab"
+  ],
+  "background": {
+    "scripts": [
+      "config.js",
+      "libraries/jquery-3.4.1.min.js",
+      "libraries/sha1.min.js",
+      "libraries/moment.min.js",
+      "libraries/helpers.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "onPageLoad.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://app.flinkhub.com/*"
+    ]
+  }
+}

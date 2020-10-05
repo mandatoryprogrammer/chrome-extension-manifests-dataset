@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "FUTBIN Updater",
+  "description": "FUTBIN Lowest BIN Updater",
+  "version": "1.0.8",
+  "manifest_version": 2,
+  "background": {
+    "page": "background/background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": {
+      "128": "icons/inactive_logo.png"
+    },
+    "default_title": "FUTBIN Updater",
+    "default_popup": "popup/popup.html"
+  },
+  "icons": {
+    "128": "icons/futbin_ext_icon.png",
+    "48": "icons/futbin_ext_icon_48.png",
+    "16": "icons/futbin_ext_icon_16.png"
+  },
+  "web_accessible_resources": [
+    "content/hook.js"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.futbin.com/updater*"
+      ],
+      "js": [
+        "content/futbin_content.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.ea.com/*fifa/ultimate-team/web-app/*"
+      ],
+      "js": [
+        "content/proxy.js",
+        "content/load_hook.js",
+        "content/ea_content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "https://www.futbin.com/*",
+    "notifications",
+    "storage"
+  ],
+  "content_security_policy": "script-src 'self' https://www.gstatic.com/ https://www.googleapis.com; object-src 'self'"
+}

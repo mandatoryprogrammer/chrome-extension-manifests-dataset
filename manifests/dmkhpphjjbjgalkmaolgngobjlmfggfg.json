@@ -1,0 +1,68 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "WebMemex",
+  "version": "0.3.3",
+  "icons": {
+    "48": "assets/webmemex-48.png",
+    "96": "assets/webmemex-96.png"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "browser_style": true,
+    "chrome_style": true
+  },
+  "background": {
+    "scripts": [
+      "lib/browser-polyfill.js",
+      "main/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "lib/browser-polyfill.js",
+        "main/content_script.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "browser_action": {
+    "default_icon": "assets/webmemex-32.png",
+    "default_title": "WebMemex",
+    "default_popup": "/popup.html"
+  },
+  "commands": {
+    "openOverview": {
+      "suggested_key": {
+        "default": "Ctrl+Y"
+      },
+      "description": "Open memory overview"
+    },
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+M"
+      },
+      "description": "Store this page"
+    }
+  },
+  "applications": {
+    "gecko": {
+      "id": "{37e031df-9c74-412e-b933-e847443ad005}"
+    }
+  },
+  "permissions": [
+    "<all_urls>",
+    "contextMenus",
+    "downloads",
+    "history",
+    "notifications",
+    "storage",
+    "tabs",
+    "unlimitedStorage",
+    "webNavigation"
+  ],
+  "manifest_version": 2
+}

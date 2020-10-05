@@ -1,0 +1,78 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "OMG SEO Plugin",
+  "version": "3.6",
+  "manifest_version": 2,
+  "description": "OMG CC Chrome extension allows you to check metrics and backlinks, find keyword ideas and analyze competition on the fly.",
+  "icons": {
+    "48": "images/icon-128.png",
+    "128": "images/icon-128.png"
+  },
+  "browser_action": {
+    "default_icon": "images/icon-128.png",
+    "default_title": "OMG Plugin",
+    "default_popup": "action/index.html"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self' 'unsafe-eval'",
+  "permissions": [
+    "notifications",
+    "activeTab",
+    "contextMenus",
+    "storage",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "scripts/jquery.min.js",
+      "background.js",
+      "scripts/popup.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "include_globs": [
+        "*://www.google.*/*"
+      ],
+      "css": [
+        "css/contentcss.css"
+      ],
+      "js": [
+        "scripts/jquery.min.js",
+        "content_script_forgooglresult.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "css/contentcss.css"
+      ],
+      "js": [
+        "scripts/jquery.min.js",
+        "scripts/eventHandler.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+F",
+        "mac": "MacCtrl+Shift+F"
+      },
+      "description": "OMG Plugin"
+    }
+  },
+  "web_accessible_resources": [
+    "images/*.png",
+    "images/*.svg"
+  ]
+}

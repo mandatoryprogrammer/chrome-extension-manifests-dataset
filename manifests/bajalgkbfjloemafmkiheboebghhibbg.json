@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "minimum_chrome_version": "40",
+  "default_locale": "en_US",
+  "name": "__MSG_name__",
+  "description": "__MSG_description__",
+  "version": "0.1.3",
+  "short_name": "PTM youtube.com",
+  "author": "PoziWorld",
+  "homepage_url": "https://pozitone.com/",
+  "icons": {
+    "16": "modules/com_youtube/img/youtube-embed-pozitone-module-icon-16.png",
+    "48": "modules/com_youtube/img/youtube-embed-pozitone-module-icon-48.png",
+    "128": "modules/com_youtube/img/youtube-embed-pozitone-module-icon-128.png"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "global/js/polyfill-Object.assign.js",
+        "global/js/bowser.js",
+        "global/js/const.js",
+        "global/js/utils.js",
+        "global/js/pozitone-module-sdk.js",
+        "modules/com_youtube/js/page-watcher.js",
+        "modules/com_youtube/js/iframe_api.js",
+        "modules/com_youtube/js/www-widgetapi.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "global/js/bowser.js",
+      "global/js/const.js",
+      "global/js/utils.js",
+      "global/js/background.js",
+      "global/js/pozitone-module-sdk.js"
+    ]
+  },
+  "options_ui": {
+    "page": "options/index.html",
+    "chrome_style": true
+  },
+  "web_accessible_resources": [
+    "*.png",
+    "*.svg"
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_manifestName__",
+  "version": "0.0.24",
+  "default_locale": "en",
+  "description": "__MSG_manifestDesc__",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "options_page": "options/options.html",
+  "input_components": [
+    {
+      "name": "__MSG_manifestImeName__",
+      "description": "__MSG_manifestImeDesc__",
+      "type": "ime",
+      "id": "cros_cin",
+      "language": "zh-TW",
+      "layouts": [
+        "us"
+      ]
+    }
+  ],
+  "page_action": {
+    "default_icon": {
+      "19": "icons/page_icon19.png"
+    },
+    "default_title": "__MSG_manifestName__",
+    "default_popup": "input_api/menu.html"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "jquery/jquery.js",
+        "input_api/ipc.js",
+        "input_api/ime_event.js",
+        "input_api/impl_chromeext.js",
+        "jscin/jscin.js",
+        "content.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true,
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "jscin.ext/*",
+    "jquery/*",
+    "input_api/*"
+  ],
+  "permissions": [
+    "http://*/",
+    "https://*/",
+    "input",
+    "unlimitedStorage",
+    "tabs",
+    "https://docs.google.com/feeds/*",
+    "https://www.google.com/accounts/OAuthGetRequestToken",
+    "https://www.google.com/accounts/OAuthAuthorizeToken",
+    "https://www.google.com/accounts/OAuthGetAccessToken"
+  ]
+}

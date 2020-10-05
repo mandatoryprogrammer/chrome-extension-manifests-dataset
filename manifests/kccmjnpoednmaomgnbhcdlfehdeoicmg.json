@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Usabili.me Researcher Extension",
+  "author": "Agility Feat, Inc.",
+  "version": "1.4",
+  "description": "Extension for Usabili.me Researchers, allows ScreenSharing and Notification functionality",
+  "homepage_url": "https://www.usabili.me/",
+  "minimum_chrome_version": "34",
+  "manifest_version": 2,
+  "permissions": [
+    "notifications",
+    "tabs",
+    "activeTab",
+    "https://cdn.pubnub.com/",
+    "desktopCapture"
+  ],
+  "background": {
+    "scripts": [
+      "thirdParty/pubnub.4.2.5.min.js",
+      "notification.js",
+      "pubnub_controller.js",
+      "background-script.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "content-script.js"
+      ],
+      "all_frames": true,
+      "matches": [
+        "*://*/*"
+      ]
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "http://localhost:3000/*",
+      "https://usabilime.dev/*",
+      "https://usabilime-staging.herokuapp.com/*",
+      "https://usabilime-testing.herokuapp.com/*",
+      "https://www.usabili.me/*",
+      "https://testing.usabili.me/*",
+      "https://staging.usabili.me/*",
+      "https://usabili.me/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "notification-icon.png"
+  ],
+  "icons": {
+    "16": "logo16.png",
+    "48": "logo48.png",
+    "128": "logo128.png"
+  }
+}

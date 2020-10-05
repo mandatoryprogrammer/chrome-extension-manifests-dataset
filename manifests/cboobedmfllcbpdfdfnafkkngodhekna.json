@@ -1,0 +1,99 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "CalvinStudent",
+  "description": "Useful student links, images in people search, and Amazon prices on the bookstore page.",
+  "version": "2.5.2",
+  "permissions": [
+    "storage",
+    "tabs"
+  ],
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "web_accessible_resources": [
+    "images/peoplesearch-1.png",
+    "images/peoplesearch-2.png",
+    "images/icons/cs-tiny.svg"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.bkstr.com/*",
+        "https://*.bkstr.com/*"
+      ],
+      "js": [
+        "augment-store.js"
+      ],
+      "css": [
+        "augment-store.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.calvin.edu/cgi-bin/people.pl*"
+      ],
+      "js": [
+        "augment-people.js"
+      ],
+      "css": [
+        "augment-people.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.calvin.edu/cgi-bin/auth/login.pl*",
+        "https://kvcdata.calvin.edu/cgi-bin/wwizsc/wwizsc4.asp*",
+        "https://resources.calvin.edu/selfservice/WebAdvisor?*SS=LGRQ*",
+        "https://lib-proxy.calvin.edu/login*",
+        "https://moodle.calvin.edu/login/index.php*",
+        "https://lib-schedule.calvin.edu/Web/*",
+        "https://adfs.calvin.edu/adfs/ls/*",
+        "https://ulysses.calvin.edu/eg/opac/login*"
+      ],
+      "js": [
+        "augment-login.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://moodle.calvin.edu/*"
+      ],
+      "css": [
+        "augment-moodle.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.calvin.edu/*",
+        "http://*.calvin.edu/*",
+        "https://*.calvin.edu/",
+        "https://calvin.edu/*"
+      ],
+      "js": [
+        "augment-calvin.js"
+      ],
+      "css": [
+        "augment-calvin.css"
+      ]
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://localhost/*",
+      "*://slatepermuate.org/*"
+    ]
+  },
+  "background": {
+    "page": "popup.html"
+  },
+  "browser_action": {
+    "default_title": "Click for CalvinStudent Guide",
+    "default_icon": "images/icons/calvinstudent-icon-notext4-01.png",
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html"
+}

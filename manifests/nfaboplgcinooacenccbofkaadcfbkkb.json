@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "GQueues Chrome Extension",
+  "version": "1.1.3",
+  "manifest_version": 2,
+  "description": "Easily create tasks for GQueues - the leading Google-integrated task management system for people and teams.",
+  "icons": {
+    "16": "gqIcon16.png",
+    "48": "gqIcon48.png",
+    "128": "gqIcon128.png"
+  },
+  "background": {
+    "scripts": [
+      "jquery-1.5.2.min.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/chromeIcon19.png",
+      "38": "images/chromeIcon38.png"
+    },
+    "default_popup": "gqueues.html"
+  },
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "options_page": "options.html",
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.gqueues.com/chromeext?*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "jquery-1.5.2.min.js",
+        "loginContentScript.js"
+      ]
+    }
+  ]
+}

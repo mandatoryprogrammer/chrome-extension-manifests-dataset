@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Cocos Creator Devtool",
+  "version": "1.0.5",
+  "description": "Chrome and DevTools extension for debugging Cocos Creator games",
+  "manifest_version": 2,
+  "browser_action": {
+    "default_title": "Cocos Creator Devtool",
+    "default_icon": "img/48.png",
+    "default_popup": "html/popup-not-found.html"
+  },
+  "icons": {
+    "16": "img/16.png",
+    "48": "img/48.png",
+    "128": "img/128.png"
+  },
+  "devtools_page": "html/devtool.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/cc-devtool-contentScript.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/cc-devtool-backgroundScript.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "*/*",
+    "*"
+  ],
+  "permissions": [
+    "tabs",
+    "storage",
+    "nativeMessaging",
+    "webNavigation",
+    "http://*/*",
+    "https://*/*",
+    "file:///*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval';  object-src 'self'"
+}

@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Ethereum",
+  "description": "Ethereum Gateway",
+  "version": "0.0.3",
+  "icons": {
+    "19": "images/ethereum_logo19.png",
+    "38": "images/ethereum_logo38.png",
+    "128": "images/ethereum_logo128.png"
+  },
+  "background": {
+    "scripts": [
+      "js/bg_bundle.js"
+    ],
+    "persistent": true
+  },
+  "options_ui": {
+    "page": "templates/options.html",
+    "chrome_style": true
+  },
+  "page_action": {
+    "default_icon": {
+      "19": "images/ethereum_logo19.png",
+      "38": "images/ethereum_logo38.png"
+    },
+    "default_title": "Ethereum",
+    "default_popup": "templates/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/page_bundle_str.js",
+        "js/web3_str.js",
+        "js/page_str.js",
+        "js/content.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    "js/bundle.js",
+    "js/page.js"
+  ],
+  "permissions": [
+    "background",
+    "tabs",
+    "activeTab",
+    "*://*/*",
+    "<all_urls>"
+  ]
+}

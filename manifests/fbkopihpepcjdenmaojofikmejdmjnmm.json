@@ -1,0 +1,73 @@
+{
+  "name": "__MSG_extName__",
+  "version": "0.0.7",
+  "manifest_version": 2,
+  "default_locale": "zh_CN",
+  "description": "__MSG_extDescription__",
+  "icons": {
+    "128": "common/static/images/icons/icon128.png",
+    "64": "common/static/images/icons/icon64.png",
+    "48": "common/static/images/icons/icon48.png",
+    "32": "common/static/images/icons/icon32.png",
+    "16": "common/static/images/icons/icon16.png"
+  },
+  "browser_action": {
+    "default_icon": "common/static/images/icons/icon32.png",
+    "default_popup": "project/popup/popup.html",
+    "default_title": "__MSG_extPopupTitle__"
+  },
+  "background": {
+    "scripts": [
+      "common/static/js/import.js",
+      "project/background/background.js",
+      "project/background/chromeEventListen.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "js": [
+        "common/static/js/import.js",
+        "project/dragSearch/dragSearch.js",
+        "project/extSearch/extSearch.js"
+      ],
+      "css": [
+        "project/dragSearch/dragSearch.css",
+        "project/extSearch/extSearch.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.baidu.com/*"
+      ],
+      "js": [
+        "common/static/js/import.js",
+        "project/extBaidu/extBaidu.js"
+      ],
+      "css": [
+        "project/extBaidu/extBaidu.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "/common/*",
+    "/project/*"
+  ],
+  "options_page": "project/options/options.html",
+  "omnibox": {
+    "keyword": "xx"
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "http://*/*",
+    "http://*/",
+    "https://*/",
+    "contextMenus",
+    "management"
+  ],
+  "update_url": "http://clients2.google.com/service/update2/crx"
+}

@@ -1,0 +1,94 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "ADSimples.com.br",
+  "short_name": "ADSimples",
+  "description": "Publique anúncios com facilidade.",
+  "version": "1.0.1",
+  "offline_enabled": true,
+  "permissions": [
+    "alarms",
+    "tabs",
+    "bookmarks",
+    "cookies",
+    "webRequest",
+    "webRequestBlocking",
+    "webNavigation",
+    "*://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.telexfree.com/bo/ad/setup3/*"
+      ],
+      "js": [
+        "js/onload_adcentral.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "http://www.telexfree.com/bo/ad/setup3/redirect/*"
+      ],
+      "js": [
+        "js/onload_redirect_save.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "http://www.telexfree.com/bo/ad/save/*"
+      ],
+      "js": [
+        "js/onload_save.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://www.telexfree.com/bloqueio_judicial.html"
+      ],
+      "js": [
+        "js/onload_bloqueio.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://www.telexfree.com/bo/adcentral/redirect/"
+      ],
+      "js": [
+        "js/onload_redirect_adcentral.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "http://www.telexfree.com/bo/adcentralad/?adsimples=true"
+      ],
+      "js": [
+        "js/onload_status_adcentral.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "browser_action": {
+    "default_title": "ADSimples.com.br",
+    "default_icon": "img/icon48.png",
+    "default_popup": "src/popup/popup.html"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

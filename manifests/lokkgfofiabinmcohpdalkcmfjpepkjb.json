@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Supreme Auto-Checkout bot",
+  "description": "Supreme Open-Source add to cart bot",
+  "version": "2.10.1",
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "browser_action": {
+    "default_popup": "index.html?popup=true",
+    "default_icon": "assets/img/icon.png"
+  },
+  "icons": {
+    "16": "assets/img/icon16.png",
+    "48": "assets/img/icon48.png",
+    "128": "assets/img/icon128.png"
+  },
+  "options_page": "index.html",
+  "permissions": [
+    "activeTab",
+    "contentSettings",
+    "cookies",
+    "storage",
+    "webNavigation",
+    "background",
+    "notifications",
+    "webRequest",
+    "webRequestBlocking",
+    "*://*.supremenewyork.com/*",
+    "https://www.supremenewyork.com/mobile_stock.json",
+    "downloads"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.supremenewyork.com/*"
+      ],
+      "js": [
+        "extension.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.supremenewyork.com/*"
+      ],
+      "js": [
+        "preload.js"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

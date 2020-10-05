@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "description": "Reads chess move names aloud after moves are played.",
+  "version": "1.0",
+  "name": "Chess Move Say",
+  "background": {
+    "scripts": [
+      "background.bundle.js"
+    ],
+    "persistent": false
+  },
+  "icons": {
+    "32": "icon-32.png",
+    "64": "icon-64.png",
+    "128": "icon-128.png",
+    "256": "icon-256.png",
+    "512": "icon-512.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "32": "icon-32.png",
+      "64": "icon-64.png",
+      "128": "icon-128.png",
+      "256": "icon-256.png",
+      "512": "icon-512.png"
+    }
+  },
+  "permissions": [
+    "declarativeContent",
+    "storage",
+    "https://lichess.org/*"
+  ],
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://lichess.org/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "cs.bundle.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "direct_script.bundle.js",
+    "*.wav"
+  ]
+}

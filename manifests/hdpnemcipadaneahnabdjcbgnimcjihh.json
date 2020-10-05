@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "淘诚品-购物优惠助手",
+  "version": "1.5.2",
+  "author": "诚品城",
+  "description": "淘宝、天猫单品立减优惠券提示，领券下单立减。同款宝贝展示，货比多家，选择更多！",
+  "browser_action": {
+    "default_icon": "icons/icon_48.png",
+    "default_title": "淘诚品-购物优惠助手"
+  },
+  "icons": {
+    "16": "icons/icon_16.png",
+    "48": "icons/icon_48.png",
+    "128": "icons/icon_128.png"
+  },
+  "background": {
+    "scripts": [
+      "jq.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://s.taobao.com/*"
+      ],
+      "js": [
+        "jq.js",
+        "tbs.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://list.tmall.com/*"
+      ],
+      "js": [
+        "jq.js",
+        "tms.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://detail.tmall.com/*",
+        "*://item.taobao.com/*"
+      ],
+      "js": [
+        "jq.js",
+        "detail.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "background",
+    "*://*/*",
+    "management"
+  ]
+}

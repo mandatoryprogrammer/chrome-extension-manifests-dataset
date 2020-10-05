@@ -1,0 +1,123 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_extName__",
+  "description": "Make more sales in less time. Free and unlimited real-time email tracking, email scheduling, and automated email follow-up (Pings).",
+  "version": "2020.8.10536",
+  "icons": {
+    "16": "images/read-16.png",
+    "48": "images/read-48.png",
+    "128": "images/read-128.png"
+  },
+  "default_locale": "en",
+  "browser_action": {
+    "default_icon": {
+      "16": "images/read-16.png",
+      "48": "images/read-48.png",
+      "128": "images/read-128.png"
+    },
+    "default_title": "MailTag for Gmail"
+  },
+  "web_accessible_resources": [
+    "images/*",
+    "webfonts/*",
+    "signin.html",
+    "tutorials.html"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "vendor/inboxsdk.js",
+        "js/aws-sdk.min.js",
+        "vendor/jquery.min.js",
+        "vendor/bootstrap.min.js",
+        "vendor/base64.min.js",
+        "js/config.js",
+        "js/common.js",
+        "js/message-event-handler.js",
+        "vendor/uuid.min.js",
+        "vendor/moment-with-locales.min.js",
+        "vendor/progressbar.js",
+        "vendor/moment-timezone-with-data.js",
+        "vendor/datepicker.js",
+        "vendor/jquery.nice-select.js",
+        "vendor/list.min.js",
+        "js/countries.js",
+        "vendor/stripe.min.js",
+        "js/content.js",
+        "js/ping-send.js",
+        "js/toolbar-button.js",
+        "js/thread-view-handler.js",
+        "js/message-view-handler.js",
+        "js/compose-view-handler.js",
+        "js/expired-user-compose-view-handler.js"
+      ],
+      "css": [
+        "css/datepicker.css",
+        "css/nice-select.css",
+        "css/mailtag.css",
+        "css/content.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://app.mailtag.io/*"
+      ],
+      "js": [
+        "js/logout.js",
+        "js/message-event-handler.js",
+        "js/upgrade-popup-clicked.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://app.mailtag.io/*"
+      ],
+      "js": [
+        "js/installed.js",
+        "js/message-event-handler.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://app.mailtag.io/dashboard/scheduled-emails/*"
+      ],
+      "js": [
+        "vendor/jquery.min.js",
+        "js/message-event-handler.js",
+        "js/scheduled-email-sync-with-dashboard.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "https://mail.google.com/",
+    "https://inbox.google.com/",
+    "https://app.mailtag.io/",
+    "cookies",
+    "tabs",
+    "gcm",
+    "storage",
+    "notifications",
+    "webRequest",
+    "webRequestBlocking",
+    "*://*.googleusercontent.com/*"
+  ],
+  "background": {
+    "scripts": [
+      "js/config.js",
+      "js/common.js",
+      "vendor/base64.min.js",
+      "vendor/moment-with-locales.min.js",
+      "vendor/moment-timezone-with-data.js",
+      "vendor/jquery.min.js",
+      "js/background.js"
+    ]
+  },
+  "manifest_version": 2
+}

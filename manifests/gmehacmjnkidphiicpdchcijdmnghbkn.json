@@ -1,0 +1,69 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_extname__",
+  "version": "1.1.4",
+  "description": "__MSG_extdescription__",
+  "default_locale": "en",
+  "options_page": "options.html",
+  "homepage_url": "https://www.colaborando.org",
+  "icons": {
+    "16": "img/favicon16.png",
+    "48": "img/logo_square_transparent48.png",
+    "128": "img/logo_square_transparent128.png"
+  },
+  "manifest_version": 2,
+  "web_accessible_resources": [
+    "img/favicon16.png",
+    "img/logo_square_transparent_100.png",
+    "img/logo.png"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "browser_action": {
+    "default_title": "__MSG_search_string__",
+    "default_icon": "img/icon19.png"
+  },
+  "background": {
+    "scripts": [
+      "js/google-analytics-bundle.js",
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.google.com/webhp*sourceid=chrome-instant*"
+      ],
+      "js": [
+        "js/instant.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.colaborando.org/*"
+      ],
+      "js": [
+        "js/funnel-visibility.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://www.colaborando.org/search*"
+      ],
+      "js": [
+        "js/colaborando.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "history",
+    "<all_urls>",
+    "storage",
+    "https://www.google-analytics.com/"
+  ]
+}

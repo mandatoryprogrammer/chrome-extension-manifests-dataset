@@ -1,0 +1,40 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Trello Card Printer",
+  "description": "This extension populates print-ready cards for use with Agile sprint boards.",
+  "version": "2.4",
+  "short_name": "Trello Card Printer",
+  "browser_action": {
+    "default_icon": "src/img/icon.png",
+    "default_popup": "src/popup.html",
+    "default_title": "Print Trello Cards"
+  },
+  "icons": {
+    "128": "src/img/extension-icon.png"
+  },
+  "permissions": [
+    "activeTab"
+  ],
+  "web_accessible_resources": [
+    "src/settings.html",
+    "src/popup.html"
+  ],
+  "options_page": "src/settings.html",
+  "content_scripts": [
+    {
+      "js": [
+        "lib/jquery.min.js"
+      ],
+      "matches": [
+        "https://trello.com/b/*"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "src/scripts/background.js"
+    ]
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Testifyme",
+  "description": "Testifyme Context-Menus and Markup Plugin",
+  "version": "1.0.5",
+  "permissions": [
+    "tabs",
+    "history",
+    "contextMenus",
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "icons": {
+    "16": "img/iconlogo_img_png_tm.png",
+    "48": "img/iconlogo_img_png_tm.png",
+    "128": "img/fullLogo_img_png_tm.png"
+  },
+  "manifest_version": 2,
+  "browser_action": {
+    "default_icon": "img/iconlogo_img_png_tm.png",
+    "default_popup": "popup/popup.html"
+  },
+  "web_accessible_resources": [
+    "manifest.json",
+    "injectCode/contentPage.html",
+    "img/fullLogo_img_png_tm.png",
+    "img/close_img_png_tm.png",
+    "annotate/annotator.map",
+    "img/throbber_img_gif_tm.gif",
+    "img/40px_img_png_tm.png",
+    "img/32px_img_png_tm.png",
+    "img/addTopic_img_png_tm.png"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "lib/jquery.js",
+        "lib/jquery-ui.js",
+        "lib/jstree.js",
+        "injectCode/contentScript.js",
+        "injectCode/sweetalert.js"
+      ],
+      "css": [
+        "injectCode/sweetalert.css",
+        "lib/jstree.css"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_globs": [
+        "*mail*",
+        "*drive*",
+        "*hangout*",
+        "*plus*"
+      ],
+      "js": [
+        "annotate/annotator.js"
+      ],
+      "css": [
+        "annotate/annotator.css"
+      ]
+    }
+  ]
+}

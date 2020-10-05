@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "TestRail Helper",
+  "description": "Expands all Actual Results and adds As Expected and a comment with expected details, if required",
+  "version": "2.5.1",
+  "permissions": [
+    "tabs",
+    "<all_urls>",
+    "storage"
+  ],
+  "icons": {
+    "128": "icon.png"
+  },
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://testrail.suvoda.com/testrail/index.php?/cases/edit/*"
+      ],
+      "js": [
+        "jquery.min.js",
+        "jquery-ui.min.js",
+        "preventclosepage_edit.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://testrail.suvoda.com/testrail/index.php?/tests/view*"
+      ],
+      "js": [
+        "jquery.min.js",
+        "jquery-ui.min.js",
+        "preventclosepage_viewtests.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

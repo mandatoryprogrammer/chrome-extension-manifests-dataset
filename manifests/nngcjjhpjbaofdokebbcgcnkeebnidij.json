@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "VBot Recorder",
+  "short_name": "vbot",
+  "version": "1.1",
+  "manifest_version": 2,
+  "description": "Automatically record UI interactions and quickly generate playbook JSON for VBot to do visual regression tests.",
+  "icons": {
+    "48": "./res/image/icon.png",
+    "128": "./res/image/icon.png"
+  },
+  "browser_action": {
+    "default_icon": "./res/image/icon.png",
+    "default_popup": "./html/control.html",
+    "default_title": "vbot recorder"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "tabs",
+    "background",
+    "http://*/*",
+    "https://*/*",
+    "activeTab"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "content.min.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "**.css",
+    "**.html",
+    "**.js",
+    "**.png",
+    "**.gif",
+    "**.map"
+  ],
+  "offline_enabled": true,
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

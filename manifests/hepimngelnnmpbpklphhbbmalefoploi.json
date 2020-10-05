@@ -1,0 +1,71 @@
+{
+  "version": "3.2.5",
+  "name": "Choicy - find better prices",
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "description": "A free extension for your browser that will easily find the best prices for the products you are browsing.",
+  "default_locale": "en",
+  "manifest_version": 2,
+  "icons": {
+    "128": "icons/icon128.png"
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhX+OIq/v1fRZ8bc5/lMc/ZevWsB1Qpb2pp8Xg8H/uC2fbTwrByLb+m+oHeCstxT8dlJnCsGWF6w4uMQDiFZ5drkl5C83e12C+ky4/WQm94TbLm2kF9XpuZhtUEuMqyH7qMCzXttRme4zFcaqUWftp0CXhdqNCIs2Imb5RFWHLscrcGjq6fQbK4CeawLa+g97Osx44Awsk/NkKsj3L5zCZlEm1Uexf6chgWUU96amad1UFtmPt+6w8iFFGjij5jHXxOT4wy0hF/irH15kq/YlYH3s2HfS+/R2lfCsmmwNx7s6MuUm1WzqOMmF0Vf32xJmTbAkkTbI6XUGUV4DRFIOiwIDAQAB",
+  "browser_action": {
+    "default_icon": "icons/icon128.png",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "scripts/libs/jquery.min.js",
+        "scripts/content/amazon.js"
+      ],
+      "matches": [
+        "*://www.amazon.com/*",
+        "*://smile.amazon.com/*",
+        "*://www.amazon.co.uk/*",
+        "*://www.amazon.ca/*",
+        "*://www.amazon.de/*",
+        "*://www.amazon.it/*",
+        "*://www.amazon.es/*",
+        "*://www.amazon.fr/*",
+        "*://www.amazon.com.br/*",
+        "*://www.amazon.in/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "scripts/background/browserLib.js",
+        "scripts/content/contentscript.js",
+        "scripts/content/extbutton.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "background": {
+    "scripts": [
+      "scripts/background/browserLib.js",
+      "scripts/background/defaultParser.js",
+      "scripts/background/background.js",
+      "scripts/background/aliexpress_bg.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "*://*/*",
+    "storage",
+    "cookies",
+    "activeTab",
+    "webRequest",
+    "webRequestBlocking",
+    "tabs"
+  ],
+  "optional_permissions": [
+    "notifications"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://*.google-analytics.com; object-src 'self'"
+}

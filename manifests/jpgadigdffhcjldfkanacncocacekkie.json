@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Netflix Subtitles Automatic (beta)",
+  "description": "Upgrade your Netflix with perfectly-synced subtitles in many languages! No more searching for files or manually syncing.",
+  "version": "1.1.35",
+  "author": "Cliff Wong",
+  "short_name": "MSFN",
+  "permissions": [
+    "https://www.netflix.com/",
+    "storage",
+    "activeTab",
+    "declarativeContent",
+    "tabs",
+    "webNavigation"
+  ],
+  "background": {
+    "scripts": [
+      "js/background.bundle.js"
+    ]
+  },
+  "page_action": {
+    "default_icon": "img/icon64.png",
+    "default_title": "Help",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "img/icon16.png",
+    "64": "img/icon64.png",
+    "128": "img/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.netflix.com/watch/*"
+      ],
+      "js": [
+        "js/injector.bundle.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "web_accessible_resources": [
+    "img/icon*.png",
+    "js/content.bundle.js",
+    "js/jquery-3.1.min.js",
+    "js/jquery.rateit.min.js",
+    "css/content.css",
+    "css/rateit.css",
+    "img/star.png",
+    "img/delete.gif"
+  ]
+}

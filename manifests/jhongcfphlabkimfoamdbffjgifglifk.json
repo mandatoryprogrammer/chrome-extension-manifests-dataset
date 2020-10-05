@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "short_name": "Kanjidex",
+  "name": "Kanjidex",
+  "version": "3.1",
+  "manifest_version": 2,
+  "description": "A simple extension for looking up kanji characters.",
+  "author": "hisekai",
+  "icons": {
+    "16": "icons/icon_16.png",
+    "32": "icons/icon_32.png",
+    "48": "icons/icon_48.png",
+    "128": "icons/icon_128.png"
+  },
+  "browser_action": {
+    "default_icon": "./icons/browser_icon.png",
+    "default_title": "Kanjidex",
+    "default_popup": "index.html"
+  },
+  "background": {
+    "scripts": [
+      "./background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "./content.js",
+        "./static/tooltip/tippy-bundle.umd.js",
+        "./static/tooltip/popper.min.js"
+      ],
+      "css": [
+        "./static/tooltip/tippy.css",
+        "./static/tooltip/kanjidex.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "static/tooltip/tippy-bundle.umd.js",
+    "static/tooltip/tippy.css",
+    "static/tooltip/popper.min.js"
+  ],
+  "permissions": [
+    "<all_urls>",
+    "*://*.jisho.org/*",
+    "activeTab",
+    "contextMenus",
+    "storage",
+    "notifications",
+    "downloads"
+  ]
+}

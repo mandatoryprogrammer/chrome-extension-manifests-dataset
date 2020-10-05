@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Amazon Ship Copy",
+  "short_name": "ShipCopy",
+  "version": "1.3.0",
+  "manifest_version": 2,
+  "permissions": [
+    "storage",
+    "tabs",
+    "*://*.amazon.com/*",
+    "*://*.newegg.com/*",
+    "*://*.sustainablesupply.com/*",
+    "*://*.rakuten.com/*",
+    "*://*.zoro.com/*",
+    "*://*.homedepot.com/*",
+    "*://*.grainger.com/*",
+    "*://*.paypal.com/*"
+  ],
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "js": [
+        "jquery-1.11.3.min.js",
+        "scrape.js"
+      ],
+      "matches": [
+        "*://*.amazon.com/*",
+        "file://*"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "all_frames": false,
+      "js": [
+        "jquery-1.11.3.min.js",
+        "paste.js"
+      ],
+      "matches": [
+        "*://*.newegg.com/*",
+        "*://*.rakuten.com/*",
+        "*://*.zoro.com/*",
+        "*://*.homedepot.com/*",
+        "*://*.sustainablesupply.com/*",
+        "*://*.grainger.com/*",
+        "*://*.paypal.com/*",
+        "file://*"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "icon19.png",
+      "38": "icon76.png"
+    },
+    "default_title": "ShipCopy"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}

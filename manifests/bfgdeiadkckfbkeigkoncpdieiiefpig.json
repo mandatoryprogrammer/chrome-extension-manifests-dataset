@@ -1,0 +1,76 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Bitmoji",
+  "short_name": "Bitmoji",
+  "description": "Use Bitmoji anywhere on web!",
+  "version": "10.31.1013",
+  "icons": {
+    "48": "images/bitmoji-logo-48.png",
+    "128": "images/bitmoji-logo-128.png"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "cookies",
+    "clipboardWrite",
+    "notifications",
+    "webRequest",
+    "webRequestBlocking",
+    "webNavigation",
+    "*://mail.google.com/*",
+    "*://inbox.google.com/*",
+    "*://*.bitbucket.org/*",
+    "*://*.github.com/*",
+    "*://*.atlassian.net/*",
+    "*://*.bitmoji.com/*"
+  ],
+  "background": {
+    "scripts": [
+      "dist/chrome-extension-background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/bitmoji-icon-19.png",
+      "38": "images/bitmoji-icon-38.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "externally_connectable": {
+    "matches": [
+      "https://test.bitmoji.com/account_v2/*",
+      "https://www.bitmoji.com/account_v2/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "static/media/*.svg",
+    "static/media/*.png"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*",
+        "https://bitbucket.org/*",
+        "https://*.github.com/*",
+        "https://*.atlassian.net/*",
+        "*://*.bitmoji.com/*"
+      ],
+      "js": [
+        "thirdparty/inbox-sdk.js",
+        "thirdparty/jquery.min.js",
+        "thirdparty/sweetalert.min.js",
+        "thirdparty/webpicker-sdk.js",
+        "dist/bitmoji-chrome-extension.js",
+        "dist/chrome-extension-page-detector.js"
+      ],
+      "css": [
+        "thirdparty/webpicker-sdk.css",
+        "dist/chrome-extension.css"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

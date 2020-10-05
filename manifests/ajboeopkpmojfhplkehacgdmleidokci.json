@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Steam Backlog",
+  "description": "Extension to enhance the Steam library experience.",
+  "version": "1.1.0.1",
+  "icons": {
+    "16": "assets/img/logo-alt2.png",
+    "48": "assets/img/logo-alt2.png",
+    "128": "assets/img/logo-alt2.png"
+  },
+  "options_page": "sb.html#/settings",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.steamcommunity.com/*",
+        "*://*.steampowered.com/*"
+      ],
+      "js": [
+        "lib/jquery.backlog.min.js",
+        "lib/nprogress.js",
+        "sb.main.js",
+        "modules/sb.module.ajax.js",
+        "modules/sb.module.user.js"
+      ],
+      "css": []
+    }
+  ],
+  "browser_action": {
+    "default_icon": "assets/img/icon.png"
+  },
+  "background": {
+    "scripts": [
+      "modules/sb.module.notifications.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "sb.html",
+    "/partials/*",
+    "/assets/*"
+  ],
+  "permissions": [
+    "unlimitedStorage",
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "notifications",
+    "*://*.howlongtobeatsteam.com/*",
+    "*://*.steam-backlog.com/*"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'"
+}

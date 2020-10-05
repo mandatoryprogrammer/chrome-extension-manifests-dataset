@@ -1,0 +1,95 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Trollscan",
+  "description": "Detect Lithuanian State Infrastructure IP addresses appearing on any webpage.",
+  "version": "2.7.2",
+  "browser_action": {
+    "default_icon": "images/icon_off.png",
+    "default_title": "ON/OFF"
+  },
+  "background": {
+    "scripts": [
+      "libraries/economy.js",
+      "libraries/jquery.js",
+      "modules/crawlers/IPHunter.js",
+      "modules/helper.js",
+      "modules/background/MetaData.js",
+      "modules/crawlers/Delfi/DelfiCrawler.js",
+      "modules/crawlers/Lrytas/LrytasCrawler.js",
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "icons": {
+    "16": "images/icon.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "js": [
+        "libraries/jquery.js",
+        "libraries/economy.js",
+        "libraries/pubsub.js",
+        "modules/content/UI/Linker.js",
+        "modules/content/UI/IPMarker.js",
+        "modules/content/UI/ShareButton.js",
+        "modules/content/UI/Tooltip.js",
+        "modules/content/UI/MinistryBadge.js",
+        "modules/content/UI/widgets/Message.js",
+        "modules/content/UI/widgets/PageIPList.js",
+        "modules/content/UI/widgets/ArticleIPList.js",
+        "modules/content/UI/Sidebar.js",
+        "modules/content/UI.js",
+        "modules/content/MetaDataModel.js",
+        "modules/content/Gotcha.js",
+        "modules/crawlers/Delfi/DelfiCommentParser.js",
+        "modules/crawlers/Delfi/DelfiCrawler.js",
+        "modules/crawlers/Delfi.js",
+        "modules/crawlers/Lrytas/LrytasCommentParser.js",
+        "modules/crawlers/Lrytas/LrytasCrawler.js",
+        "modules/crawlers/Lrytas.js",
+        "modules/crawlers/IPHunter.js",
+        "modules/helper.js",
+        "content.js"
+      ],
+      "run_at": "document_idle",
+      "exclude_matches": [
+        "http://hatespeech.herokuapp.com/*",
+        "http://trollscan.herokuapp.com/*",
+        "http://localhost:*/*",
+        "http://localhost/*",
+        "http://trollscan.com/*",
+        "http://www.trollscan.com/*",
+        "http://www.freedata.com/*",
+        "http://www.facebook.com/*"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "css/content.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "images/tile.png",
+    "images/loader_14.gif",
+    "images/loader_30.gif",
+    "images/share_loader.gif",
+    "assets/state_ips.json",
+    "images/header.png"
+  ],
+  "permissions": [
+    "storage",
+    "tabs",
+    "activeTab",
+    "http://who.is/*",
+    "http://www.delfi.lt/*",
+    "http://www.lrytas.lt/*",
+    "http://www.freedata.lt/*"
+  ]
+}

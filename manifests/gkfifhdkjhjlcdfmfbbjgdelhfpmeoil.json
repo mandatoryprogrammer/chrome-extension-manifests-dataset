@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Screen Dimmer Extension",
+  "homepage_url": "https://www.screendimmerextension.com/",
+  "description": "Inverted display mode for less eye strain in dark or dim lighting",
+  "background": {
+    "scripts": [
+      "js/underscore-min.js",
+      "js/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "images/bd-16.png",
+      "32": "images/bd-32.png",
+      "48": "images/bd-48.png",
+      "128": "images/bd-128.png"
+    },
+    "default_title": "Toggle night mode"
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "js/content_script_start.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "js/content_script_idle.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "16": "images/bd-16.png",
+    "32": "images/bd-32.png",
+    "48": "images/bd-48.png",
+    "128": "images/bd-128.png"
+  },
+  "permissions": [
+    "declarativeContent",
+    "storage",
+    "contextMenus",
+    "activeTab",
+    "tabs",
+    "https://www.renaissancebeautyllc.com/screendimmer/*"
+  ],
+  "version": "1.5",
+  "content_security_policy": "script-src 'self' https://www.renaissancebeautyllc.com/screendimmer/custom.js https://www.renaissancebeautyllc.com/screendimmer/background.js https://ssl.google-analytics.com; object-src 'self';style-src 'self' 'unsafe-inline' *;media-src *;",
+  "chrome_url_overrides": {
+    "newtab": "landing.html"
+  }
+}

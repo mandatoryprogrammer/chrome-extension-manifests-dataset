@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Visual Testing",
+  "short_name": "Layout",
+  "version": "1.20",
+  "description": "Test how your web pages look to the human eye. Full integration with Selenium and CI/CD. Easy creation of tests based on Galen.",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "<all_urls>",
+    "storage",
+    "https://www.google-analytics.com/*",
+    "webRequest",
+    "webRequestBlocking",
+    "cookies"
+  ],
+  "browser_action": {
+    "default_title": "Layout and Visual testing",
+    "default_icon": "icons/logo.png"
+  },
+  "icons": {
+    "128": "icons/icon-128.png",
+    "48": "icons/icon-48.png",
+    "38": "icons/icon-38.png",
+    "24": "icons/icon-24.png",
+    "16": "icons/logo.png"
+  },
+  "background": {
+    "scripts": [
+      "libs/jquery-3.3.1.min.js",
+      "libs/jquery.base64.min.js",
+      "background.js",
+      "live_background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "libs/jquery-3.3.1.min.js",
+        "contents.js"
+      ],
+      "css": [
+        "css/content.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    "js/*",
+    "html/*",
+    "images/*"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "manifest_version": 2
+}

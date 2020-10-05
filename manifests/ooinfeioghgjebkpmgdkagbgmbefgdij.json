@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "version": "0.2.0",
+  "manifest_version": 2,
+  "description": "__MSG_appDescription__",
+  "icons": {
+    "16": "icons/icon-16x16.png",
+    "32": "icons/icon-32x32.png",
+    "128": "icons/icon-128x128.png"
+  },
+  "default_locale": "pl",
+  "permissions": [
+    "tabs",
+    "storage",
+    "https://allegro.pl/listing*",
+    "https://allegro.pl/kategoria/*",
+    "https://allegro.pl/uzytkownik/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://allegro.pl/listing*",
+        "https://allegro.pl/kategoria/*",
+        "https://allegro.pl/uzytkownik/*"
+      ],
+      "js": [
+        "scripts/contentscript.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "background": {
+    "scripts": [
+      "scripts/icon-changer.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/icon-16x16.png",
+      "32": "icons/icon-32x32.png"
+    },
+    "default_title": "Allegro znajdź niepromowane",
+    "default_popup": "popup.html"
+  }
+}

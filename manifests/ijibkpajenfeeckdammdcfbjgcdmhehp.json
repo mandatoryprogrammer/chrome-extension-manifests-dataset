@@ -1,0 +1,38 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Form Data Copy-Paster",
+  "description": "This extension helps to save and restore form data",
+  "version": "0.0.0.28",
+  "manifest_version": 2,
+  "icons": {
+    "128": "content/images/copy-paste-128.png"
+  },
+  "browser_action": {
+    "default_icon": "content/images/icon-19.png",
+    "default_popup": "App/popup/popup.html",
+    "default_title": "Save/Restore Page Data"
+  },
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "contextMenus",
+    "storage",
+    "unlimitedStorage",
+    "tabs"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "app/content.js"
+      ]
+    }
+  ],
+  "background": {
+    "page": "app/background/background.html"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com 'unsafe-eval'; object-src 'self'"
+}

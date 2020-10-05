@@ -1,0 +1,98 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "七色",
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "description": "这个扩展程序可以让你方便地从任意视频网站上添加喜欢的节目到你在七色（7se.com）上的节目单，实时提醒你节目单内视频的更新，智能记录你的观看进度。",
+  "version": "1.12",
+  "author": "haovei",
+  "permissions": [
+    "tabs",
+    "contextMenus",
+    "cookies",
+    "notifications",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "browser_action": {
+    "default_icon": "img/icon16.png",
+    "default_title": "七色"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*"
+      ],
+      "js": [
+        "js/jquery.js",
+        "js/common.js",
+        "js/page.js"
+      ]
+    },
+    {
+      "js": [
+        "js/jquery.js",
+        "js/common.js",
+        "js/login_back.js"
+      ],
+      "matches": [
+        "http://resource.7se.com/user/qqCallBack*",
+        "http://resource.7se.com/user/sinaCallBack*"
+      ],
+      "all_frames": true
+    },
+    {
+      "js": [
+        "js/jquery.js",
+        "js/common.js",
+        "js/page_detail.js"
+      ],
+      "matches": [
+        "http://www.7se.com/waterfall/detail*",
+        "http://7se.com/waterfall/detail*"
+      ]
+    },
+    {
+      "js": [
+        "js/jquery.js",
+        "js/common.js",
+        "js/page_common.js"
+      ],
+      "css": [
+        "css/style.css"
+      ],
+      "matches": [
+        "http://www.7se.com/*",
+        "http://7se.com/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "js": [
+        "js/jquery.js",
+        "js/common.js",
+        "js/popup.js"
+      ],
+      "matches": [
+        "http://ui.7se.com/plugin/popup.html"
+      ],
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/jquery.js",
+      "js/common.js",
+      "js/websocket.js",
+      "js/bg_config.js",
+      "js/bg_main.js",
+      "js/bg_event.js",
+      "js/bg_init.js"
+    ],
+    "persistent": true
+  }
+}

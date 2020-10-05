@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "FejoaAuth",
+  "description": "Secure Authentication and Password Manager",
+  "version": "0.1.4",
+  "browser_action": {
+    "default_icon": "images/icon.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "js/libs/base64-arraybuffer.js",
+      "js/libs/BigInteger.min.js",
+      "js/libs/require.js",
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "notifications",
+    "storage",
+    "unlimitedStorage",
+    "downloads"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "file:///*",
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "password_detector.js",
+        "content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "StorePasswordNotification.html"
+  ]
+}

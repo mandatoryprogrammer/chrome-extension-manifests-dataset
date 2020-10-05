@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "NAVER 동영상 플러그인",
+  "short_name": "NAVER 동영상 플러그인",
+  "version": "1.4.0",
+  "description": "네이버 동영상 서비스 이용을 위한 확장 프로그램",
+  "chrome_url_overrides": {
+    "newtab": "dist/tab.html"
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "nativeMessaging",
+    "http://*.naver.com/*",
+    "http://*.nhncorp.com/*",
+    "http://*.navercorp.com/*",
+    "https://*.naver.com/*",
+    "https://*.nhncorp.com/*",
+    "https://*.navercorp.com/*"
+  ],
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "naver/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.naver.com/*",
+        "http://*.nhncorp.com/*",
+        "http://*.navercorp.com/*",
+        "https://*.naver.com/*",
+        "https://*.nhncorp.com/*",
+        "https://*.navercorp.com/*"
+      ],
+      "js": [
+        "naver/content.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "options_page": "dist/options.html",
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "icons": {
+    "16": "icons/logo-16.png",
+    "48": "icons/logo-48.png",
+    "128": "icons/logo-128.png"
+  },
+  "incognito": "split",
+  "offline_enabled": true,
+  "manifest_version": 2,
+  "externally_connectable": {
+    "matches": [
+      "http://*.naver.com/*",
+      "http://*.nhncorp.com/*",
+      "http://*.navercorp.com/*",
+      "https://*.naver.com/*",
+      "https://*.nhncorp.com/*",
+      "https://*.navercorp.com/*"
+    ]
+  }
+}

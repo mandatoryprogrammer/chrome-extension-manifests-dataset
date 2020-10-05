@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_extName__",
+  "short_name": "__MSG_shortName__",
+  "version": "0.0.8",
+  "author": "operator",
+  "default_locale": "en",
+  "description": "__MSG_extDesc__",
+  "incognito": "spanning",
+  "permissions": [
+    "tabs"
+  ],
+  "icons": {
+    "16": "images/16x16.png",
+    "32": "images/32x32.png",
+    "48": "images/48x48.png",
+    "128": "images/128x128.png"
+  },
+  "page_action": {
+    "default_title": "Stay Signed Out",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://accounts.google.com/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "uncheck.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "include_globs": [
+        "http://www.google.*/*",
+        "https://www.google.*/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "hide_popup.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://staysignedout.com/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "installCheck.js"
+      ]
+    }
+  ],
+  "manifest_version": 2
+}

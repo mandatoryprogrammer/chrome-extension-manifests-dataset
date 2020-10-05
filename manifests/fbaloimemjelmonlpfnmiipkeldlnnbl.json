@@ -1,0 +1,99 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "CloudExtend Gmail for NetSuite",
+  "description": "CloudExtend for NetSuite enables true cloud-to-cloud synchronization of your Gmail with NetSuite.",
+  "short_name": "CloudExtend",
+  "version": "4.0.2.0",
+  "page_action": {
+    "default_icon": "assets/src/styles/CloudExtend_GA.png",
+    "default_title": "Celigo"
+  },
+  "background": {
+    "scripts": [
+      "assets/src/scripts/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.netsuite.com/*"
+      ],
+      "exclude_matches": [
+        "https://*.netsuite.com/core/media/media.nl*"
+      ],
+      "js": [
+        "assets/src/scripts/netsuite/injectToNetsuite.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "assets/vendor/scripts/inboxsdk.js",
+        "assets/vendor/scripts/jquery.min.js",
+        "assets/vendor/scripts/jquery-ui.min.js",
+        "assets/src/scripts/gmail/gmailDOMApi.js",
+        "assets/src/scripts/gmail/injectCegaMainApp.js",
+        "assets/vendor/scripts/notify.min.js",
+        "assets/src/scripts/gmail/onLoad.js",
+        "assets/src/scripts/gmail/getGlobals.js"
+      ],
+      "css": [
+        "assets/src/styles/main.css",
+        "assets/vendor/styles/jquery-ui.min.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://inbox.google.com/*"
+      ],
+      "js": [
+        "assets/vendor/scripts/inboxsdk.js",
+        "assets/vendor/scripts/jquery.min.js",
+        "assets/vendor/scripts/jquery-ui.min.js",
+        "assets/src/scripts/inbox/injectCegaMainApp.js",
+        "assets/vendor/scripts/notify.min.js",
+        "assets/src/scripts/inbox/onLoad.js"
+      ],
+      "css": [
+        "assets/src/styles/main.css",
+        "assets/vendor/styles/jquery-ui.min.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "webRequest",
+    "https://*.netsuite.com/*",
+    "https://mail.google.com/*",
+    "https://inbox.google.com/*",
+    "https://celigo-secure-resources.s3.amazonaws.com/*",
+    "webRequestBlocking",
+    "tabs",
+    "storage"
+  ],
+  "icons": {
+    "48": "assets/src/styles/CloudExtend_GA.png",
+    "128": "assets/src/styles/CloudExtend_GA.png"
+  },
+  "web_accessible_resources": [
+    "assets/src/scripts/netsuite/nsIframeFix.js",
+    "assets/src/scripts/netsuite/detectNSUser.js",
+    "assets/src/scripts/netsuite/netsuite.js",
+    "assets/src/styles/celigo-17x17.png",
+    "assets/src/styles/CloudExtend_GA.png",
+    "assets/src/styles/logo-circle-white.png",
+    "assets/src/styles/windowCloseIcon.png",
+    "assets/src/styles/arrowdown.png"
+  ],
+  "options_ui": {
+    "page": "assets/src/views/options.html",
+    "chrome_style": true
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "The 15-Minute SEO Audit",
+  "short_name": "RankSense",
+  "version": "2.0.0.43",
+  "description": "This extension looks for common SEO issues in the current web page.",
+  "author": "Hamlet Batista",
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "devtools_page": "devtools.html",
+  "manifest_version": 2,
+  "permissions": [
+    "tabs",
+    "*://*/*",
+    "webRequest",
+    "webRequestBlocking",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "libs/jquery/jquery.min.js",
+        "libs/jquery-ui/jquery-ui.min.js",
+        "js/inject/ranksense_content.js",
+        "js/inject/ranksense_helper.js",
+        "js/inject/rich_snippet_helper.js"
+      ],
+      "css": [
+        "css/inject/ranksense_styles.css"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://ssl.google-analytics.com; object-src 'self'",
+  "minimum_chrome_version": "21.0.1180.57",
+  "icons": {
+    "16": "ranksense_logo_16.png",
+    "48": "ranksense_logo_48.png",
+    "128": "ranksense_logo_128.png"
+  }
+}

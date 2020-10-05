@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Teacher Discounts",
+  "description": "Notifies Teachers and Educators about available Teacher discounts, coupons, and promo codes as they shop online.",
+  "browser_action": {
+    "default_title": "Teacher Discounts",
+    "default_icon": {
+      "32": "images/inactive-32.png",
+      "38": "images/inactive-38.png",
+      "64": "images/extension-64.png",
+      "128": "images/extension-128.png",
+      "256": "images/extension-256.png"
+    }
+  },
+  "icons": {
+    "32": "images/inactive-32.png",
+    "38": "images/inactive-38.png",
+    "64": "images/extension-64.png",
+    "128": "images/extension-128.png",
+    "256": "images/extension-256.png"
+  },
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "background": {
+    "scripts": [
+      "scripts/vendor/polyfill.min.js",
+      "scripts/vendor/fetch.js",
+      "scripts/vendor/tldjs.min.js",
+      "scripts/api/extensionApi.js",
+      "scripts/background/urlConfig.js",
+      "scripts/background/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "css/vendor/normalize.css",
+        "css/vendor/animate.css",
+        "css/contentscript/iframeHandler.css"
+      ],
+      "js": [
+        "scripts/vendor/tldjs.min.js",
+        "scripts/contentscript/isCart.js",
+        "scripts/api/contentApi.js",
+        "scripts/contentscript/iframeHandler.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "html/contentscript/iframe.html"
+  ],
+  "permissions": [
+    "tabs",
+    "storage",
+    "http://*/*",
+    "https://*/*"
+  ]
+}

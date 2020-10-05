@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "EGANY Tools",
+  "version": "1.9.1",
+  "manifest_version": 2,
+  "description": "EGANY Tools là bộ tiện ích mở rộng cho quản trị website trên các nền tảng Haravan, Sapo và Shopify",
+  "browser_action": {
+    "default_popup": "./popup/index.html",
+    "default_icon": "./icon.png"
+  },
+  "icons": {
+    "16": "./icon.png",
+    "48": "./icon.png",
+    "128": "./icon.png"
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs",
+    "https://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "./background/index.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*"
+      ],
+      "js": [
+        "./content/init-menu.js",
+        "./content/init-set-addon-position.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://localhost:3000/*",
+        "https://*.egany.com/*"
+      ],
+      "js": [
+        "./content/init-auth.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.facebook.com/"
+      ],
+      "js": [
+        "./plugins/30-days-of-content/facebook-reminder.js"
+      ]
+    }
+  ]
+}

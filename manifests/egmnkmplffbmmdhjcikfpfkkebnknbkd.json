@@ -1,0 +1,76 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_extName__",
+  "version": "6.0.1",
+  "description": "__MSG_extDesc__",
+  "icons": {
+    "256": "images/app-icon@256x256.png",
+    "128": "images/app-icon@128x128.png",
+    "48": "images/app-icon@48x48.png",
+    "32": "images/app-icon@32x32.png",
+    "16": "images/app-icon@16x16.png"
+  },
+  "minimum_chrome_version": "66.0",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "mushit@mymushin.com",
+      "strict_min_version": "63.0"
+    }
+  },
+  "browser_action": {
+    "default_icon": "images/app-icon@16x16.png",
+    "default_popup": "popup.html"
+  },
+  "externally_connectable": {
+    "matches": [
+      "https://dev-web.mymushin.com/*",
+      "https://app.mymushin.com/*",
+      "https://pre-prod.mymushin.com/*"
+    ]
+  },
+  "background": {
+    "scripts": [
+      "jquery-3.1.1.min.js",
+      "sentry-4.2.4.min.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "exclude_globs": [
+        "https://www.youtube.com/*",
+        "mymushin.com/*",
+        "*.mymushin.com/*",
+        "localhost/*",
+        "*.deezer.com/*",
+        "*.clxeurope.com/*",
+        "https://mail.google.com/*"
+      ],
+      "matches": [
+        "*://*/*"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "js": [
+        "jquery-3.1.1.min.js",
+        "content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "default_locale": "en",
+  "permissions": [
+    "storage",
+    "notifications",
+    "contextMenus",
+    "tabs",
+    "<all_urls>"
+  ],
+  "web_accessible_resources": [
+    "fonts/*.*",
+    "images/*.*"
+  ]
+}

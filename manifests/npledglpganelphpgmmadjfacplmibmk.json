@@ -1,0 +1,79 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Awesome Click",
+  "description": "Perform actions in one click!",
+  "version": "1.0.9",
+  "browser_action": {
+    "default_icon": "icon19.png",
+    "default_title": "Awesome Click settings"
+  },
+  "icons": {
+    "16": "icon16.png",
+    "19": "icon19.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "browsingData",
+    "tabs",
+    "*://*/*",
+    "notifications",
+    "tabCapture"
+  ],
+  "commands": {
+    "Q": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Q",
+        "mac": "Command+Shift+Q"
+      },
+      "description": "run background.js"
+    },
+    "Z": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Z",
+        "mac": "Command+Shift+Z"
+      },
+      "description": "run background.js"
+    },
+    "A": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+A",
+        "mac": "Command+Shift+A"
+      },
+      "description": "run background.js"
+    },
+    "_execute_browser_action": {
+      "suggested_key": {
+        "windows": "Ctrl+Shift+E",
+        "mac": "Command+Shift+E",
+        "chromeos": "Ctrl+Shift+E",
+        "linux": "Ctrl+Shift+E"
+      }
+    }
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "jquery-min.js",
+        "drag_to_download.js",
+        "highlight.js",
+        "drag_to_open_new_tab.js"
+      ],
+      "css": [
+        "highlight.css"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

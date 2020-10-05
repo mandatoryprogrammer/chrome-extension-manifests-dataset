@@ -1,0 +1,226 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Dialer for Google Chrome™ - Broadsoft",
+  "short_name": "Chrome Dialer",
+  "version": "3.5.7",
+  "minimum_chrome_version": "26",
+  "description": "A Google Chrome™ extension that provides Broadsoft Broadworks telephony integration.",
+  "manifest_version": 2,
+  "devtools_page": "devtools.html",
+  "omnibox": {
+    "keyword": "-call"
+  },
+  "options_page": "options.html?token=1EonxL#dashboard",
+  "browser_action": {
+    "default_icon": {
+      "19": "assets/branding/badges/19/gray.png"
+    },
+    "default_title": "Dialer"
+  },
+  "icons": {
+    "16": "assets/branding/16x16.png",
+    "48": "assets/branding/48x48.png",
+    "128": "assets/branding/128x128.png"
+  },
+  "web_accessible_resources": [
+    "*"
+  ],
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "file://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "assets/core/ping.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "https://login.microsoftonline.com/*"
+      ],
+      "js": [
+        "assets/apis/Office365/public/js/injected.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://login.salesforce.com/services/oauth2/success*data_explorer_test*",
+        "https://www.bluip.io/access*"
+      ],
+      "js": [
+        "assets/vendor/oauth2/oauth2_inject.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://login.salesforce.com/?ec=302*",
+        "*://*.salesforce.com/setup/secur/RemoteAccessAuthorizationPage*",
+        "*://*.force.com/servlet/servlet.ImageServer*"
+      ],
+      "css": [
+        "assets/apis/Salesforce/public/css/injected.css"
+      ],
+      "js": [
+        "assets/apis/Salesforce/public/js/injected.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "http://*.redial.io/*",
+        "https://*.redial.io/*"
+      ],
+      "js": [
+        "assets/core/redial.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "http://*.masteraccessD.com/*",
+        "https://*.masteraccessD.com/*"
+      ],
+      "js": [
+        "assets/vendor/jquery-1.11.1.min.js",
+        "assets/masteraccess/script.js"
+      ],
+      "css": [
+        "assets/masteraccess/style.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://*.masteraccess.com/Help/*",
+        "https://*.masteraccess.com/Help/*"
+      ],
+      "css": [
+        "assets/masteraccess/help.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://*.masteraccess.com/Login/*",
+        "https://*.masteraccess.com/Login/*",
+        "http://*.masteraccess.com/manualLogin.jsp",
+        "https://*.masteraccess.com/manualLogin.jsp"
+      ],
+      "js": [
+        "assets/masteraccess/login.js"
+      ],
+      "css": [
+        "assets/vendor/bootstrap-3.3.4-dist/css/bootstrap.min.css",
+        "assets/masteraccess/login.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://*.masteraccess.com/Logout/*",
+        "https://*.masteraccess.com/Logout/*"
+      ],
+      "js": [
+        "assets/vendor/jquery-1.11.1.min.js",
+        "assets/masteraccess/script.js",
+        "assets/masteraccess/logout.js"
+      ],
+      "css": [
+        "assets/vendor/bootstrap-3.3.4-dist/css/bootstrap.min.css",
+        "assets/masteraccess/login.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "file://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "assets/vendor/jquery-1.11.1.min.js",
+        "assets/apis/Click-to-Dial/injected.js"
+      ],
+      "css": [
+        "assets/apis/Click-to-Dial/public/stylesheets/style.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "http://redial.uservoice.com/clients/widgets/*",
+        "https://redial.uservoice.com/clients/widgets/*",
+        "http://voice.redial.io/clients/widgets/*",
+        "https://voice.redial.io/clients/widgets/*"
+      ],
+      "js": [
+        "assets/js/uservoice.js"
+      ],
+      "css": [
+        "assets/css/uservoice.css",
+        "assets/css/scroll-bars.css"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://*.uservoice.com https://ssl.google-analytics.com https://www.google.com/jsapi https://www.google.com https://cdn.bluip.io https://hangoutsapi.talkgadget.google.com https://plus.google.com  https://*.wimzel.com  https://suckit.bluip.io https://suckit.bluip.io:444; object-src 'self'",
+  "permissions": [
+    "http://*/*",
+    "file://*/*",
+    "https://*/*",
+    "notifications",
+    "identity",
+    "tabs",
+    "tts",
+    "contextMenus",
+    "downloads",
+    "storage",
+    "background",
+    "alarms",
+    "clipboardWrite",
+    "desktopCapture",
+    "idle"
+  ],
+  "commands": {
+    "toggle-feature-foo": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+1",
+        "windows": "Ctrl+Shift+1",
+        "mac": "Command+Shift+1",
+        "chromeos": "Ctrl+Shift+1",
+        "linux": "Ctrl+Shift+1"
+      },
+      "description": "Toggle the Dialer from anywhere.",
+      "global": true
+    }
+  },
+  "oauth2": {
+    "client_id": "734766912685-tkpntl09dbfc086vahtadtqkfhcenjik.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.google.com/m8/feeds/",
+      "https://mail.google.com/",
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://mail.google.com/mail/feed/atom",
+      "https://www.googleapis.com/auth/gmail.readonly",
+      "https://www.googleapis.com/auth/calendar"
+    ]
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://*.redial.io/*"
+    ]
+  }
+}

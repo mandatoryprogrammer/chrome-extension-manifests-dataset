@@ -1,0 +1,71 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Tandoo",
+  "version": "19.5.0.4",
+  "manifest_version": 2,
+  "description": "Tandoo is an online courses tool for social interaction and knowledge sharing.",
+  "homepage_url": "https://www.tan-doo.com/",
+  "icons": {
+    "16": "assets/icons/tandoo/icon_16.png",
+    "48": "assets/icons/tandoo/icon_48.png",
+    "128": "assets/icons/tandoo/icon_128.png"
+  },
+  "default_locale": "en",
+  "options_page": "views/options.html",
+  "browser_action": {
+    "default_icon": "assets/icons/tandoo/icon_48.png",
+    "default_title": "Tandoo",
+    "default_popup": "views/popup.html"
+  },
+  "permissions": [
+    "https://server.tandooapp.com/",
+    "clipboardRead",
+    "clipboardWrite",
+    "contentSettings",
+    "cookies",
+    "notifications",
+    "tabs",
+    "storage",
+    "activeTab"
+  ],
+  "background": {
+    "scripts": [
+      "js/background/globalConfig.js",
+      "js/background/dataService.js",
+      "js/background/apiService.js",
+      "js/background/appService.js",
+      "js/background/eventService.js",
+      "js/background/userService.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://localhost:8080/*",
+        "https://*.campus.gov.il/*",
+        "https://*.edx.org/*",
+        "https://*.coursera.org/*",
+        "https://*.udemy.com/*",
+        "https://openedxcon2019.opencraft.hosting/*",
+        "https://demo.edunext.io/*"
+      ],
+      "css": [
+        "inject/tandoo.inject.css"
+      ],
+      "js": [
+        "js/content/edxscrapper.js",
+        "js/content/campusScrapper.js",
+        "js/content/opencraftScrapper.js",
+        "js/content/edunextScrapper.js",
+        "js/content/content.js",
+        "inject/tandoo.inject.js",
+        "assets/plugins/jquery/jquery.min.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "/inject/*"
+  ]
+}

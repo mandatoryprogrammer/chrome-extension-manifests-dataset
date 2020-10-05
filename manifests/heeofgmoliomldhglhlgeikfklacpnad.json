@@ -1,0 +1,38 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Save BigQuery to GitHub",
+  "description": "Adds a button to the BigQuery UI to save a query directly to a GitHub repository",
+  "version": "0.7",
+  "icons": {
+    "48": "exticon.png",
+    "96": "exticon96.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://bigquery.cloud.google.com/*"
+      ],
+      "js": [
+        "jquery-1.11.2.min.js",
+        "bigquery_content.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "jquery-1.11.2.min.js",
+      "secrets.js",
+      "save_event.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "https://*.github.com/*"
+  ],
+  "web_accessible_resources": [
+    "auth.html"
+  ]
+}

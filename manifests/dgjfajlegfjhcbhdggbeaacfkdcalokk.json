@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "FFBE Preview",
+  "short_name": "FFBE Preview",
+  "manifest_version": 2,
+  "description": "View FFBE Builds inline from FFBE Equip.",
+  "version": "0.4",
+  "homepage_url": "https://github.com/NullParameter/ffbebuilds",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_title": "FFBE Preview"
+  },
+  "icons": {
+    "128": "icon.png"
+  },
+  "background": {
+    "scripts": [
+      "app/lib/jquery-3.2.1.min.js",
+      "app/lib/browser-polyfill.min.js",
+      "app/scripts/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.reddit.com/*"
+      ],
+      "js": [
+        "app/lib/jquery-3.2.1.min.js",
+        "app/lib/browser-polyfill.min.js",
+        "app/lib/exportBuildAsImage.js",
+        "app/scripts/ffbebuilds.js"
+      ],
+      "css": [
+        "app/styles/ffbebuilds.css"
+      ]
+    }
+  ],
+  "permissions": [
+    "storage",
+    "https://*/*",
+    "unlimitedStorage"
+  ],
+  "web_accessible_resources": [
+    "app/scripts/*"
+  ]
+}

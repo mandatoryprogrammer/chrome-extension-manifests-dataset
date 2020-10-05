@@ -1,0 +1,33 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "BodyPassport",
+  "version": "1.5.0",
+  "manifest_version": 2,
+  "description": "BodyPassport Chrome Extension",
+  "icons": {
+    "19": "images/icon_19.png",
+    "128": "images/icon_128.png"
+  },
+  "browser_action": {
+    "default_title": "My BodyPassport",
+    "default_icon": "images/icon_19.png",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.bodypassport.net/facebook-auth-callback*"
+      ],
+      "js": [
+        "content-login.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "permissions": [
+    "http://www.bodypassport.net/*",
+    "tabs"
+  ]
+}

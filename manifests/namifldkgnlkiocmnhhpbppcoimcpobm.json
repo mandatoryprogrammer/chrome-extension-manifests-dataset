@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "9GAG Lite",
+  "version": "1.1.3",
+  "description": "Change 9gag as you want to work like it should",
+  "minimum_chrome_version": "53",
+  "icons": {
+    "16": "assets/icon16.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "contextMenus",
+    "downloads"
+  ],
+  "options_page": "options/options.html",
+  "browser_action": {
+    "default_title": "9Gag Lite Options",
+    "default_popup": "options/options_popup.html"
+  },
+  "background": {
+    "scripts": [
+      "global.js",
+      "scripts/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "global.js",
+        "scripts/setup.js"
+      ],
+      "run_at": "document_start",
+      "matches": [
+        "*://*.9gag.com/*"
+      ]
+    },
+    {
+      "js": [
+        "scripts/content.js"
+      ],
+      "run_at": "document_end",
+      "matches": [
+        "*://*.9gag.com/*"
+      ]
+    },
+    {
+      "js": [
+        "scripts/fixup.js"
+      ],
+      "matches": [
+        "*://*.9gag.com/*"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "styles/*"
+  ]
+}

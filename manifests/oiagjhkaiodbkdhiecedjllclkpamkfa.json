@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "YourTab",
+  "version": "0.9.0",
+  "description": "Keeping Tabs on them Tabs",
+  "browser_action": {
+    "default_popup": "src/popup/popup.html",
+    "default_title": "YourTab",
+    "default_icon": "icons/icon48.png"
+  },
+  "background": {
+    "page": "src/background/background.html",
+    "persistent": false
+  },
+  "commands": {
+    "save-current": {
+      "suggested_key": {
+        "default": "Alt+Q"
+      },
+      "description": "Save current tab."
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "src/modal/modal.js",
+        "assets/jquery.min.js",
+        "assets/mithril.min.js"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "options_page": "src/options/options.html",
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "storage",
+    "unlimitedStorage",
+    "contextMenus"
+  ]
+}

@@ -1,0 +1,130 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Jiminny Sidekick",
+  "short_name": "Jiminny Sidekick",
+  "description": "The Jiminny Sidekick is your own personal sales assistant, supporting you and your team whenever you need it.",
+  "version": "2.19.0",
+  "icons": {
+    "16": "icons/jiminny_16x16.png",
+    "48": "icons/jiminny_48x48.png",
+    "128": "icons/jiminny_128x128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/jiminny_19x19.png",
+      "38": "icons/jiminny_38x38.png"
+    },
+    "default_title": "Jiminny Sidekick"
+  },
+  "permissions": [
+    "https://app.jiminny.com/*",
+    "https://www.google.com/calendar/*",
+    "https://calendar.google.com/*",
+    "storage",
+    "tabs",
+    "activeTab",
+    "system.display",
+    "contextMenus"
+  ],
+  "background": {
+    "page": "background/background.html",
+    "persistent": true
+  },
+  "options_ui": {
+    "page": "options/options.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://app.jiminny.com/*"
+      ],
+      "js": [
+        "env.js",
+        "content-scripts/extension-app-loader.js",
+        "content-scripts/trigger-login-check.js"
+      ],
+      "css": [
+        "content-scripts/extension-app-loader.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://*.salesforce.com/*",
+        "https://*.force.com/*",
+        "https://*.lightning.force.com/*",
+        "https://*.cloudforce.com/*",
+        "https://*.database.com/*"
+      ],
+      "js": [
+        "content-scripts/lib/uri.js",
+        "content-scripts/lib/libphonenumber-3.2.10.js",
+        "content-scripts/lib/underscore.js",
+        "content-scripts/lib/selector-set.js",
+        "content-scripts/lib/delegated-events.js",
+        "content-scripts/lib/phone-number-validator.js",
+        "content-scripts/lib/jquery-v1.11.0.js",
+        "env.js",
+        "content-scripts/extension-app-loader.js",
+        "content-scripts/trigger-login-check.js",
+        "content-scripts/salesforce.js"
+      ],
+      "css": [
+        "content-scripts/extension-app-loader.css",
+        "content-scripts/salesforce.css"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://app.hubspot.com/*"
+      ],
+      "js": [
+        "content-scripts/lib/uri.js",
+        "content-scripts/lib/underscore.js",
+        "content-scripts/lib/libphonenumber-3.2.10.js",
+        "content-scripts/lib/phone-number-validator.js",
+        "env.js",
+        "content-scripts/extension-app-loader.js",
+        "content-scripts/trigger-login-check.js",
+        "content-scripts/hubspot.js"
+      ],
+      "css": [
+        "content-scripts/extension-app-loader.css",
+        "content-scripts/hubspot.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.google.com/calendar/*",
+        "https://calendar.google.com/*"
+      ],
+      "js": [
+        "content-scripts/lib/jquery-v2.1.3.js",
+        "content-scripts/lib/underscore.js",
+        "env.js",
+        "content-scripts/extension-app-loader.js",
+        "content-scripts/trigger-login-check.js",
+        "content-scripts/google-calendar-old.js",
+        "content-scripts/google-calendar.js"
+      ],
+      "css": [
+        "content-scripts/extension-app-loader.css",
+        "content-scripts/google-calendar.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://app.jiminny.com/*",
+      "https://ext.jiminny.com/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "icons/*"
+  ]
+}

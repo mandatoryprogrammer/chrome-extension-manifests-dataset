@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "short_name": "NNCA",
+  "name": "NaverNewsCommentAnalyzer",
+  "version": "1.2.0.3",
+  "description": "Analyze inclination of politics in 'Naver news comment'",
+  "icons": {
+    "16": "/statics/images/icons/popup/popup_16.png",
+    "48": "/statics/images/icons/popup/popup_48.png",
+    "128": "/statics/images/icons/popup/popup_128.png"
+  },
+  "background": {
+    "scripts": [
+      "/statics/javascript/model/model.js",
+      "/statics/javascript/model/background_renderer.js",
+      "/statics/javascript/background.js",
+      "/lib/jquery.min.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://news.naver.com/main*read.nhn?*oid=*aid=*"
+      ],
+      "all_frames": true,
+      "js": [
+        "/statics/javascript/contentscript.js",
+        "/statics/javascript/model/model.js"
+      ],
+      "css": [
+        "/statics/css/contentscript.css"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icons": {
+      "16": "/statics/images/icons/popup/popup_16.png",
+      "48": "/statics/images/icons/popup/popup_48.png",
+      "128": "/statics/images/icons/popup/popup_128.png"
+    },
+    "default_title": "NaverNewsCommentAnalyzer"
+  },
+  "permissions": [
+    "tabs",
+    "<all_urls>",
+    "http://*/*",
+    "https://*/*",
+    "storage",
+    "activeTab"
+  ],
+  "web_accessible_resources": [
+    "/statics/images/icons/*"
+  ],
+  "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'"
+}

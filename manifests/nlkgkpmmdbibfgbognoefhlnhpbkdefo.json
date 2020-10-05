@@ -1,0 +1,38 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "version": "0.5.3",
+  "name": "pixiv-download-image-with-name",
+  "description": "pixivの画像を、良い感じに名前を付けてダウンロードできるようにします。",
+  "icons": {
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": [
+    "downloads",
+    "webRequest",
+    "webRequestBlocking",
+    "http://*.pixiv.net/",
+    "https://*.pixiv.net/",
+    "*://*.pximg.net/"
+  ],
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "js": [
+        "includes/main.js"
+      ],
+      "matches": [
+        "http://www.pixiv.net/member_illust.php?*",
+        "https://www.pixiv.net/member_illust.php?*"
+      ]
+    }
+  ],
+  "options_page": "options.html",
+  "background": {
+    "scripts": [
+      "lib/backgrounds.js"
+    ]
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Line Numbers for Google Docs",
+  "short_name": "Line Numbers",
+  "description": "The simplest way to add line numbers to any Google Docs document",
+  "author": "Pablo Gamito",
+  "version": "2.1.2",
+  "content_security_policy": "script-src 'self' https://www.googletagmanager.com https://ssl.google-analytics.com https://www.google-analytics.com https://apis.google.com https://www.gstatic.com/ https://*.firebaseio.com; object-src 'self'",
+  "icons": {
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/icon128.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://docs.google.com/document/d/*"
+      ],
+      "js": [
+        "js/content.js"
+      ],
+      "all_frames": false
+    }
+  ],
+  "permissions": [
+    "https://docs.google.com/document/d/*",
+    "https://linenumbers.app/api/v1/*",
+    "storage",
+    "notifications"
+  ],
+  "web_accessible_resources": [
+    "css/linenumbering.css",
+    "js/linenumbering.js",
+    "js/metrics.js",
+    "js/storage.js",
+    "js/menu.js",
+    "js/utils.js",
+    "js/auth.js"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://linenumbers.app/auth/google*"
+    ]
+  }
+}

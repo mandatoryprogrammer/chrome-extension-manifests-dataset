@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAgC3ibFeUKMS+L+f1WAL7X6U85+mV3at5WJG8zGSUaEIByrudT5Hi7tP+2xaV7komEIid4X02RPez/ovzU5K1A5Bdrzmje5EDTj0x1VhrqDuc+12DpFCeAB9vSHwRawGHr+mDPrQZR/fNP1H8+DB3izIp0SrlS9L9AmGFFYI7ccpKmmvNHE9fOhajQi92Rn9mdZ3lmMRceGCe5DJj5anSm3hvE4O66rV6lgLBvUgRyCLnqCJ6BHfzWz/GjCECI//TSSNhQRk1UwuEEz2qHv8L1bboEUtqPJ1KpLSzj9F7iFw9eRO8WVVTSvdMIa5mrjAh4yS2aov15ZmkUgXvNfzgFwIDAQAB",
+  "name": "OmniDefend MFA Extension",
+  "short_name": "OD MFA",
+  "description": "Use OmniDefend's multi-factor authentication (MFA) features (non-FIDO device).",
+  "version": "2.0.0.19335",
+  "manifest_version": 2,
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "icon16.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
+    }
+  },
+  "background": {
+    "scripts": [
+      "common.js",
+      "extApi.js",
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "nativeMessaging",
+    "tabs",
+    "https://*/*",
+    "http://*/*",
+    "file:///*"
+  ],
+  "web_accessible_resources": [
+    "communication.html",
+    "common.js",
+    "communication.js",
+    "extApi.js"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*",
+        "file:///*"
+      ],
+      "js": [
+        "common.js",
+        "extApi.js",
+        "contentscript.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ]
+}

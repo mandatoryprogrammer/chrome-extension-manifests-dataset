@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "version": "1.0.0",
+  "name": "Task Sender",
+  "description": "Chrome extension for send new task from selected text to most popular task managers.",
+  "permissions": [
+    "contextMenus",
+    "notifications",
+    "<all_urls>"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "icons": {
+    "16": "img/icons/16.png",
+    "48": "img/icons/48.png",
+    "128": "img/icons/128.png"
+  },
+  "background": {
+    "page": "html/background.html"
+  },
+  "options_page": "html/settings.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://todoist.com/robots.txt*",
+        "*://app.asana.com/robots.txt*"
+      ],
+      "js": [
+        "js/content/robots.js"
+      ]
+    }
+  ],
+  "commands": {
+    "todoistTask": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+1"
+      },
+      "description": "Send task to Todoist"
+    },
+    "asanaTask": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+2"
+      },
+      "description": "Send task to Asana"
+    }
+  }
+}

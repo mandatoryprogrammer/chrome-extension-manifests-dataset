@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Automatic Currency Converter",
+  "description": "Automatically convert currencies using rates provided by the European Central Bank",
+  "version": "1.0.18",
+  "browser_action": {
+    "default_icon": "images/icon_small.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "images/icon_small.png",
+    "48": "images/icon.png",
+    "128": "images/icon.png"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "contextMenus",
+    "webRequest",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "blacklist.js",
+      "bgp.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "style.css"
+      ],
+      "js": [
+        "thirdparty/money.min.js",
+        "thirdparty/accounting.min.js",
+        "thirdparty/jquery.min.js",
+        "thirdparty/xml2json.min.js",
+        "thirdparty/dompath.min.js",
+        "generic_data.js",
+        "blacklist.js",
+        "conversion.js"
+      ]
+    }
+  ]
+}

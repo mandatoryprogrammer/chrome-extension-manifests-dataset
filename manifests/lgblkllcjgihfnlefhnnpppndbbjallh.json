@@ -1,0 +1,124 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "author": "Abhayam",
+  "version": "2.6.2",
+  "manifest_version": 2,
+  "description": "__MSG_appDescription__",
+  "default_locale": "en",
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "scripts/vendor/browser-polyfill.js",
+      "scripts/vendor/hyperapp.min.js",
+      "scripts/background.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "bookmarks",
+    "storage",
+    "contextMenus"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "scripts/vendor/browser-polyfill.js",
+        "scripts/vendor/hyperapp.min.js",
+        "scripts/vendor/Readability.js",
+        "scripts/contentscript.js"
+      ],
+      "css": [
+        "styles/popup.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "http://news.ycombinator.com/*",
+        "https://news.ycombinator.com/*"
+      ],
+      "js": [
+        "scripts/content/modifiers/hn.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "http://twitter.com/*",
+        "https://twitter.com/*"
+      ],
+      "js": [
+        "scripts/content/modifiers/twitter.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "https://www.reddit.com/*",
+        "http://www.reddit.com/*"
+      ],
+      "js": [
+        "scripts/content/modifiers/reddit.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "https://*.wikipedia.org/*",
+        "http://*.wikipedia.org/*",
+        "https://*.m.wikipedia.org/*",
+        "http://*.m.wikipedia.org/*"
+      ],
+      "js": [
+        "scripts/content/modifiers/wikipedia.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    "images/save.png",
+    "images/save-success.png",
+    "images/save-failure.png",
+    "images/extract.png",
+    "images/note-bg.png",
+    "images/checkmark.gif",
+    "images/lock.png",
+    "options.html"
+  ],
+  "commands": {
+    "save-page-shortcut": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+U",
+        "windows": "Ctrl+Shift+U",
+        "mac": "Ctrl+Shift+U",
+        "chromeos": "Ctrl+Shift+U",
+        "linux": "Ctrl+Shift+U"
+      },
+      "description": "Email This Page"
+    }
+  },
+  "icons": {
+    "16": "icons/icon-16.png",
+    "128": "icons/icon-128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/icon-19.png",
+      "38": "icons/icon-38.png"
+    },
+    "default_title": "__MSG_btnTooltip__"
+  },
+  "options_page": "options.html"
+}

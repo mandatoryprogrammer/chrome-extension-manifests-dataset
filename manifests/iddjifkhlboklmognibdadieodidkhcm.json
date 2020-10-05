@@ -1,0 +1,204 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Ali Invoice",
+  "version": "0.7.7.5",
+  "manifest_version": 2,
+  "description": "Converts AliExpress order details into an invoice ready to print",
+  "author": "Ivan Matic",
+  "background": {
+    "scripts": [
+      "./lib/jquery.min.js",
+      "./js/background.js"
+    ],
+    "persistent": true
+  },
+  "icons": {
+    "16": "./img/icon16.png",
+    "32": "./img/icon32.png",
+    "48": "./img/icon48.png",
+    "64": "./img/icon64.png",
+    "128": "./img/icon128.png"
+  },
+  "browser_action": {
+    "default_title": "Ali Invoice",
+    "default_icon": "./img/icon128.png",
+    "default_popup": "./html/popup.html",
+    "scripts": "./js/popup.js"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "./lib/jquery.min.js",
+        "./js/refunds.js",
+        "./lib/JsBarcode.all.min.js"
+      ],
+      "css": [
+        "./css/custom.css",
+        "./css/refunds.css"
+      ],
+      "matches": [
+        "http://trade.aliexpress.com/issue/issue_list.htm*",
+        "https://trade.aliexpress.com/issue/issue_list.htm*",
+        "http://trade1.aliexpress.com/issue/issue_list.htm*",
+        "https://trade1.aliexpress.com/issue/issue_list.htm*",
+        "http://trade.aliexpress.com/issue/fastissue/Detail.htm*",
+        "https://trade.aliexpress.com/issue/fastissue/Detail.htm*",
+        "http://trade1.aliexpress.com/issue/fastissue/Detail.htm*",
+        "https://trade1.aliexpress.com/issue/fastissue/Detail.htm*"
+      ]
+    },
+    {
+      "js": [
+        "./lib/jquery.min.js"
+      ],
+      "css": [
+        "./css/custom.css"
+      ],
+      "matches": [
+        "http://trade.aliexpress.com/order_detail.htm*",
+        "http://trade1.aliexpress.com/order_detail.htm*",
+        "https://trade.aliexpress.com/order_detail.htm*",
+        "https://trade1.aliexpress.com/order_detail.htm*",
+        "https://trade.aliexpress.com/*",
+        "https://trade1.aliexpress.com/*"
+      ]
+    },
+    {
+      "js": [
+        "./lib/jquery.min.js",
+        "./js/orders-page.js",
+        "./lib/JsBarcode.all.min.js"
+      ],
+      "css": [
+        "./css/custom.css"
+      ],
+      "matches": [
+        "http://trade.aliexpress.com/order_list.htm*",
+        "http://trade1.aliexpress.com/order_list.htm*",
+        "https://trade.aliexpress.com/order_list.htm*",
+        "https://trade1.aliexpress.com/order_list.htm*",
+        "http://trade.aliexpress.com/orderList.htm*",
+        "http://trade1.aliexpress.com/orderList.htm*",
+        "https://trade.aliexpress.com/orderList.htm*",
+        "https://trade1.aliexpress.com/orderList.htm*",
+        "http://trade.aliexpress.com/ordertrash/orderTrash.htm*",
+        "http://trade1.aliexpress.com/ordertrash/orderTrash.htm*",
+        "https://trade.aliexpress.com/ordertrash/orderTrash.htm*",
+        "https://trade1.aliexpress.com/ordertrash/orderTrash.htm*"
+      ]
+    },
+    {
+      "js": [
+        "./lib/jquery.min.js",
+        "./js/aliinvoice.js",
+        "./lib/JsBarcode.all.min.js"
+      ],
+      "css": [
+        "./css/custom.css"
+      ],
+      "matches": [
+        "http://trade.aliexpress.com/order_detail.htm*&inv=1",
+        "https://trade.aliexpress.com/order_detail.htm*&inv=1",
+        "http://trade1.aliexpress.com/order_detail.htm*&inv=1",
+        "https://trade1.aliexpress.com/order_detail.htm*&inv=1",
+        "http://trade.aliexpress.com/order_detail.htm?inv=1*",
+        "https://trade.aliexpress.com/order_detail.htm?inv=1*",
+        "http://trade1.aliexpress.com/order_detail.htm?inv=1*",
+        "https://trade1.aliexpress.com/order_detail.htm?inv=1*"
+      ]
+    },
+    {
+      "js": [
+        "./lib/jquery.min.js",
+        "./js/aliinvoice2.js",
+        "./lib/download.min.js",
+        "./lib/JsBarcode.all.min.js",
+        "./lib/html2canvas.min.js",
+        "./lib/jspdf.min.js"
+      ],
+      "css": [
+        "./css/custom.css"
+      ],
+      "matches": [
+        "http://trade.aliexpress.com/order_detail.htm*&inv=2",
+        "https://trade.aliexpress.com/order_detail.htm*&inv=2",
+        "http://trade1.aliexpress.com/order_detail.htm*&inv=2",
+        "https://trade1.aliexpress.com/order_detail.htm*&inv=2",
+        "http://trade.aliexpress.com/order_detail.htm?inv=2*",
+        "https://trade.aliexpress.com/order_detail.htm?inv=2*",
+        "http://trade1.aliexpress.com/order_detail.htm?inv=2*",
+        "https://trade1.aliexpress.com/order_detail.htm?inv=2*"
+      ]
+    },
+    {
+      "js": [
+        "./lib/jquery.min.js",
+        "./js/activate.js"
+      ],
+      "css": [
+        "./css/custom.css"
+      ],
+      "matches": [
+        "https://www.dropshipping.store/checkout/order-received/*"
+      ]
+    },
+    {
+      "js": [
+        "./lib/jquery.min.js",
+        "./js/error.js"
+      ],
+      "matches": [
+        "https://trade.aliexpress.com/error.htm*",
+        "http://trade.aliexpress.com/error.htm*",
+        "https://trade.aliexpress.com/noPrivilege.htm*",
+        "http://trade.aliexpress.com/noPrivilege.htm*"
+      ]
+    },
+    {
+      "js": [
+        "./lib/jquery.min.js",
+        "./js/shipping.js"
+      ],
+      "css": [
+        "./css/custom.css"
+      ],
+      "matches": [
+        "https://www.dropshipping.store/my-account/edit-address/shipping/*",
+        "https://www.dropshipping.store/my-account/edit-address/*"
+      ]
+    },
+    {
+      "js": [
+        "./lib/jquery.min.js",
+        "./js/aliexpress.js"
+      ],
+      "matches": [
+        "https://*.aliexpress.com/*"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "/*.png",
+    "/img/*.png",
+    "/*.gif",
+    "/img/*.gif",
+    "/options.html"
+  ],
+  "permissions": [
+    "https://trade.aliexpress.com/*",
+    "https://trade1.aliexpress.com/*",
+    "https://*.aliexpress.com/*",
+    "http://my.dropshipping.store/*",
+    "https://my.dropshipping.store/*",
+    "https://www.dropshipping.store/*",
+    "activeTab",
+    "contextMenus",
+    "cookies",
+    "notifications",
+    "storage"
+  ]
+}

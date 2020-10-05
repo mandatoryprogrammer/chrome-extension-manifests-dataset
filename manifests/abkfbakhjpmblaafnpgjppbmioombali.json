@@ -1,0 +1,79 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "WorldBrain's Memex",
+  "short_name": "Memex",
+  "version": "2.7.3",
+  "description": "Search, annotate and organize what you've read online.",
+  "background": {
+    "scripts": [
+      "lib/browser-polyfill.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "lib/browser-polyfill.js",
+        "content_script.js"
+      ],
+      "css": [
+        "/content_script.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "browser_action": {
+    "default_title": "WorldBrain's Memex",
+    "default_popup": "./popup.html"
+  },
+  "commands": {
+    "openOverview": {
+      "description": "Open Search Overview"
+    }
+  },
+  "applications": {
+    "gecko": {
+      "id": "info@worldbrain.io"
+    }
+  },
+  "icons": {
+    "16": "./img/worldbrain-logo-narrow-bw-16.png",
+    "48": "./img/worldbrain-logo-narrow-bw-48.png",
+    "128": "./img/worldbrain-logo-narrow-bw.png"
+  },
+  "permissions": [
+    "<all_urls>",
+    "alarms",
+    "idle",
+    "bookmarks",
+    "downloads",
+    "history",
+    "contextMenus",
+    "tabs",
+    "webNavigation",
+    "notifications",
+    "unlimitedStorage",
+    "storage",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "web_accessible_resources": [
+    "/lib/pdf.worker.min.js",
+    "/img/*",
+    "/content_script*.css",
+    "/fonts/*",
+    "content_script_*.js",
+    "sidebar.html"
+  ],
+  "omnibox": {
+    "keyword": "m"
+  },
+  "options_ui": {
+    "page": "./options.html#/settings",
+    "open_in_tab": true
+  },
+  "manifest_version": 2
+}

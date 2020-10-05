@@ -1,0 +1,87 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_appName__",
+  "description": "__MSG_appDesc__",
+  "default_locale": "en",
+  "version": "1.1.1",
+  "options_page": "/html/options.html",
+  "icons": {
+    "16": "/icons/systran-ico-chrome-active-16.png",
+    "48": "/icons/systran-ico-chrome-active-48.png",
+    "128": "/icons/systran-ico-chrome-active-128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "/icons/systran-ico-chrome-inactive-16.png",
+      "19": "/icons/systran-ico-chrome-inactive-19.png",
+      "38": "/icons/systran-ico-chrome-inactive-38.png",
+      "48": "/icons/systran-ico-chrome-inactive-48.png",
+      "128": "/icons/systran-ico-chrome-inactive-128.png"
+    },
+    "default_popup": "/html/index.html",
+    "default_title": "SYSTRAN Extension"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "/javascript/systran.js",
+        "/javascript/contentScript.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "/javascript/systran.js",
+      "/javascript/background/background.js",
+      "/javascript/background/requester.js",
+      "/javascript/background/params.js",
+      "/javascript/background/webpages.js",
+      "/javascript/langs.js",
+      "/javascript/widget/widget.js",
+      "/lib/lodash/lodash.min.js"
+    ],
+    "persistent": true
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "tts_engine": {
+    "voices": [
+      {
+        "voice_name": "Alice",
+        "lang": "en-US",
+        "event_types": [
+          "start",
+          "marker",
+          "end"
+        ]
+      },
+      {
+        "voice_name": "Pat",
+        "lang": "en-US",
+        "event_types": [
+          "end"
+        ]
+      }
+    ]
+  },
+  "permissions": [
+    "tts",
+    "ttsEngine",
+    "contextMenus",
+    "tabs",
+    "activeTab",
+    "storage",
+    "webNavigation",
+    "notifications",
+    "alarms",
+    "https://ajax.googleapis.com/",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "web_accessible_resources": [
+    "logo.png"
+  ]
+}

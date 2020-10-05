@@ -1,0 +1,80 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "author": "Guilherme Nascimento",
+  "name": "StackExchangeNotifications",
+  "description": "Show recent achievements and inbox messages from Stack Exchange",
+  "version": "1.3.0",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "icons": {
+    "128": "images/icon-128px.png",
+    "48": "images/icon-48px.png",
+    "32": "images/icon-32px.png",
+    "16": "images/icon.png"
+  },
+  "browser_action": {
+    "default_icon": "images/icon.png",
+    "default_popup": "views/popup.html"
+  },
+  "options_ui": {
+    "page": "views/options.html#config"
+  },
+  "background": {
+    "scripts": [
+      "js/stackexchangenotifications.js",
+      "js/extends.js",
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://stackapps.com/*",
+        "*://askubuntu.com/*",
+        "*://superuser.com/*",
+        "*://serverfault.com/*",
+        "*://stackoverflow.com/*",
+        "*://stackexchange.com/*",
+        "*://*.stackapps.com/*",
+        "*://*.askubuntu.com/*",
+        "*://*.superuser.com/*",
+        "*://*.serverfault.com/*",
+        "*://*.stackoverflow.com/*",
+        "*://*.stackexchange.com/*",
+        "*://mathoverflow.net/*",
+        "*://mathoverflow.com/*",
+        "*://*.mathoverflow.net/*",
+        "*://*.mathoverflow.com/*"
+      ],
+      "js": [
+        "js/extends.js",
+        "js/detectchanges.js",
+        "js/gallery.js",
+        "js/editor.js",
+        "js/extras.js",
+        "js/comments.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://chat.stackexchange.com/*",
+        "*://chat.stackoverflow.com/*",
+        "*://chat.meta.stackoverflow.com/*",
+        "*://chat.meta.stackexchange.com/*"
+      ],
+      "js": [
+        "js/pinchat.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "views/*",
+    "css/*",
+    "images/*"
+  ],
+  "permissions": [
+    "*://stackexchange.com/*",
+    "*://*.sstatic.net/*",
+    "tabs"
+  ]
+}

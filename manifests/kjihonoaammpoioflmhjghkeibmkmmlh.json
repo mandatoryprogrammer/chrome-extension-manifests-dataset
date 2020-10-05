@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Reddit Time Tracker - Monitor Your Usage",
+  "version": "0.3.4",
+  "description": "Track how much time you're spending on Reddit.",
+  "manifest_version": 2,
+  "author": "Justin Ho",
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_title": "Reddit Time Tracker",
+    "default_icon": "img/icon_reddit.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.reddit.com/*"
+      ],
+      "js": [
+        "js/app.js"
+      ],
+      "css": [
+        "css/app.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com; object-src 'self'; connect-src 'self' wss://*.firebaseio.com;",
+  "icons": {
+    "16": "img/icon_reddit.png",
+    "32": "img/icon_reddit.png",
+    "64": "img/icon_reddit.png",
+    "128": "img/icon_reddit.png"
+  },
+  "options_ui": {
+    "page": "templates/options.html",
+    "open_in_tab": true
+  },
+  "permissions": [
+    "alarms",
+    "*://*.reddit.com/*",
+    "storage",
+    "tabs"
+  ],
+  "short_name": "RTT",
+  "web_accessible_resources": [
+    "css/app.css",
+    "img/*.svg"
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "AnswerDash Administrator Extension",
+  "description": "Injects the AnswerDash script into a site without requiring it to be installed, allowing preview before AnswerDash launch.",
+  "version": "1.0.13",
+  "default_locale": "en",
+  "permissions": [
+    "storage",
+    "*://p1.answerdash.com/*",
+    "*://p1.test.answerdash.com/*",
+    "*://tools.answerdash.com/*",
+    "*://tools.test.answerdash.com/*"
+  ],
+  "icons": {
+    "128": "logo.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "inject.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "events.js"
+    ],
+    "persistent": false
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "content_security_policy": "script-src 'self' https://*.answerdash.com https://*.test.answerdash.com 'unsafe-eval'; object-src 'self'; style-src https://fonts.googleapis.com"
+}

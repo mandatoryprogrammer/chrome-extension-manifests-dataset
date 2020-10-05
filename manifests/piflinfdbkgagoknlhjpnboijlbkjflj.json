@@ -1,0 +1,72 @@
+{
+  "background": {
+    "page": "background/index.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_title": "SearchFX New Tab"
+  },
+  "chrome_url_overrides": {
+    "newtab": "newtab/index.html"
+  },
+  "chrome_settings_overrides": {
+    "search_provider": {
+      "name": "SearchFX",
+      "keyword": "SearchFX.net",
+      "favicon_url": "https://searchfx.net/new-tab/newtab/img/favicon.ico",
+      "encoding": "UTF-8",
+      "is_default": true,
+      "search_url": "https://searchfx.net/?prod=exnt&pr=msext&pid=searchfx&v={version}&acp={source}&campaignID={campaignID}&q={searchTerms}"
+    }
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "content-scripts/installed.js",
+        "content-scripts/event-handler.js"
+      ],
+      "matches": [
+        "*://*.mystart.com/*",
+        "*://*.searchfx.net/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.mystart.com/*",
+      "*://*.searchfx.net/*"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com https://*.ytimg.com  https://www.googleapis.com https://*.ytimg.com https://*.mystart.com https://*.mystartcdn.com https://*.vmn.net https://api.facebook.com https://*.twitter.com; object-src 'self'",
+  "description": "Bring your screen to life! Experience the best collection of free live wallpapers to make your new tab alive and interesting.",
+  "icons": {
+    "16": "icons/16.png",
+    "19": "icons/19.png",
+    "38": "icons/38.png",
+    "48": "icons/48.png",
+    "64": "icons/64.png",
+    "128": "icons/128.png"
+  },
+  "manifest_version": 2,
+  "name": "SearchFX New Tab",
+  "offline_enabled": true,
+  "permissions": [
+    "alarms",
+    "bookmarks",
+    "management",
+    "chrome://favicon/",
+    "nativeMessaging",
+    "storage",
+    "tabs",
+    "topSites",
+    "unlimitedStorage",
+    "webRequest",
+    "webRequestBlocking",
+    "*://*.mystart.com/*",
+    "*://*.searchfx.net/*"
+  ],
+  "short_name": "SearchFX",
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "2.17.0"
+}

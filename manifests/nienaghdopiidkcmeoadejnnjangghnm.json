@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Play Movies Fullscreen",
+  "description": "This extension will play movies on play.google.com/movies in the full window.",
+  "version": "1.0.12",
+  "icons": {
+    "16": "logos/16_video.png",
+    "48": "logos/48_video.png",
+    "128": "logos/128_video.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "https://www.google-analytics.com/",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://play.google.com/*"
+      ],
+      "css": [
+        "outerstyles.css"
+      ],
+      "js": [
+        "libs/google-analytics-bundle.js",
+        "ga.js",
+        "libs/jquery.min.js",
+        "outer.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://play.google.com/video*"
+      ],
+      "css": [
+        "playerstyles.css"
+      ],
+      "js": [
+        "libs/google-analytics-bundle.js",
+        "ga.js",
+        "libs/jquery.min.js",
+        "player.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'"
+}

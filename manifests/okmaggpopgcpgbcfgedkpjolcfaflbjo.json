@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Peace Without Politics for Facebook",
+  "short_name": "PWP",
+  "description": "Hides any reference to currently relevant political terms when using Facebook.",
+  "version": "1.8",
+  "browser_action": {
+    "default_icon": "assets/icons/icon128.png",
+    "default_popup": "popup.html",
+    "default_title": "Peace Without Politics"
+  },
+  "icons": {
+    "16": "assets/icons/icon16.png",
+    "48": "assets/icons/icon48.png",
+    "128": "assets/icons/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "scripts/constants.js",
+      "scripts/helpers.js",
+      "scripts/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.facebook.com/*"
+      ],
+      "css": [
+        "styles/content.css"
+      ],
+      "js": [
+        "scripts/vendor/jquery.min.js",
+        "scripts/constants.js",
+        "scripts/helpers.js",
+        "scripts/content.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

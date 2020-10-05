@@ -1,0 +1,42 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "AppScan Activity Recorder",
+  "description": "Record traffic and actions to use in an AppScan Dynamic Analysis scan",
+  "version": "1.0.6",
+  "browser_action": {},
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "options_page": "options.html",
+  "icons": {
+    "16": "images/appscan16.png",
+    "32": "images/appscan32.png",
+    "64": "images/appscan64.png",
+    "128": "images/appscan128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "debugger",
+    "downloads",
+    "cookies",
+    "*://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "domEvent.js",
+        "collectDomElementData.js",
+        "appScanBrowserAction.js"
+      ]
+    }
+  ]
+}

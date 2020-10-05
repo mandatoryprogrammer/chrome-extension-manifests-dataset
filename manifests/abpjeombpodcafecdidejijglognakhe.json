@@ -1,0 +1,81 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "version": "4.0.27",
+  "name": "LinkedIn Email Finder - Adapt Prospector",
+  "short_name": "LinkedIn Email Finder",
+  "description": "LinkedIn Email Finder - Find Email from any LinkedIn profile and Website",
+  "browser_action": {
+    "default_icon": "img/ico_128.png",
+    "default_title": "LinkedIn Email Finder - Adapt Prospector"
+  },
+  "icons": {
+    "16": "img/ico_16.png",
+    "48": "img/ico_48.png",
+    "128": "img/ico_128.png"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.linkedin.com/*"
+      ],
+      "css": [
+        "commons/css/style.css",
+        "linkedin/css/linkedin.css"
+      ],
+      "all_frames": true,
+      "js": [
+        "linkedin-bundle.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://prospector.adapt.io/*"
+      ],
+      "css": [
+        "commons/css/web.css"
+      ],
+      "js": [
+        "webMsgReceiver-bundle.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.adapt.io/*"
+      ],
+      "js": [
+        "googleAuth-bundle.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://*.salesforce.com/*",
+        "https://*.adapt.io/*"
+      ],
+      "css": [
+        "commons/css/slider.css"
+      ],
+      "js": [
+        "default-bundle.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background-bundle.js"
+    ]
+  },
+  "permissions": [
+    "https://*.adapt.io/",
+    "https://*.salesforce.com/",
+    "https://www.linkedin.com/",
+    "gcm",
+    "tabs",
+    "notifications",
+    "storage",
+    "contextMenus"
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Lesson Book",
+  "version": "1.12",
+  "description": "This tool formats class data for easy copy paste for both gogokid and vipkid into a teachers database or spreadsheet.",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtTt9seFDY5IjP1iraARrLF5gSwSYJke948teU45s0kJ38PWGZ/XjSXu50pPgpHSLyo2NgS3kbloZE1qH2IxADbVesD22UAvQZBcSNCQ2y6rPUFDDH9hM297uT/pcIfUiP9URdfKBFdBRC5l6fbRNYmJeDc25v3hWO8GKYOIV5ZypSBFfRLwHS/bS2Y3Eq2T6PeS8IxYhEgIENHZtQOmX7hk/CrF1MgulpMtt7bLAd2DqiQdYpg6k8xG+5ZhiJYtatWlkLa3PQ1II8PNQyUjGjxsUNalE7z54CCHCjubZ7jtUrtfWlOn0uVfv40zA+6maiDHcSc46tsb/FF34AOyWvwIDAQAB",
+  "manifest_version": 2,
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "identity",
+    "identity.email",
+    "activeTab",
+    "webRequest",
+    "*://*.vipkid.com.cn/*",
+    "*://*.vipkid.com/*",
+    "*://*.vipkidteachers.com/*",
+    "*://*.gogokid.com/*",
+    "https://www.googleapis.com/"
+  ],
+  "oauth2": {
+    "client_id": "665859454684-s6nmohpktccl2srxvc67thbmpclpa36v.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/plus.login",
+      "https://www.googleapis.com/auth/chromewebstore.readonly"
+    ]
+  },
+  "web_accessible_resources": [
+    "embedScript.js"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.vipkid.com.cn/tc/list",
+        "*://*.vipkid.com.cn/tc/list",
+        "*://*.vipkid.com/tc/list",
+        "*://*.vipkidteachers.com/tc/list",
+        "*://*.gogokid.com/classes*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "md5.min.js",
+        "contentScript.js"
+      ],
+      "css": [
+        "style.css"
+      ]
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.vipkid.com.cn/*",
+      "*://*.vipkid.com/*",
+      "*://*.vipkid.com/*",
+      "*://*.vipkidteachers.com/*",
+      "*://*.gogokid.com/*"
+    ]
+  },
+  "icons": {
+    "128": "teacher_data_icon128.png"
+  }
+}

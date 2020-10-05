@@ -1,0 +1,74 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Synap for Gmail",
+  "short_name": "Synap",
+  "description": "Your contacts and customer activity in Gmail",
+  "version": "0.2.14",
+  "manifest_version": 2,
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*"
+      ],
+      "js": [
+        "lib/lodash.min.js",
+        "lib/moment.min.js",
+        "lib/last-result.js",
+        "inboxsdk.js",
+        "lib/api-client.js",
+        "lib/urls.js",
+        "lib/icons.js",
+        "lib/subdomain.js",
+        "lib/templates.js",
+        "lib/session.js",
+        "lib/honeybadger.min.js",
+        "content.js"
+      ],
+      "css": [
+        "stylesheet.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "https://mail.google.com/",
+    "https://inbox.google.com/",
+    "https://*.getsynap.com/",
+    "https://localhost:3000/",
+    "https://localhost:3443/",
+    "cookies",
+    "tabs",
+    "identity",
+    "storage"
+  ],
+  "icons": {
+    "16": "images/icon16.png",
+    "32": "images/icon32.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "lib/subdomain.js",
+      "lib/honeybadger.min.js",
+      "lib/segment.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": "images/app.png",
+    "default_title": "Synap"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "web_accessible_resources": [
+    "images/*",
+    "templates/*",
+    "sidebar.html"
+  ],
+  "content_security_policy": "script-src 'self' https://cdn.segment.com https://cdn.mxpnl.com; object-src 'self'"
+}

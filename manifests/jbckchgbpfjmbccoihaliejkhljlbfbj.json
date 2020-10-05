@@ -1,0 +1,92 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "艦これ資源ウオッチャ+α",
+  "short_name": "KSW",
+  "version": "2.0.10",
+  "manifest_version": 2,
+  "description": "資源データの自動読み取り＆グラフ化や各種スクリーンショット．内部データへのアクセスやプロキシは利用していません．",
+  "browser_action": {
+    "default_icon": "masudaeru.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/"
+      ],
+      "js": [
+        "/js/jquery.min.js",
+        "content_scripts.js",
+        "constant.js",
+        "/js/tesseract.js"
+      ],
+      "run_at": "document_end",
+      "css": [
+        "/css/style.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://kankore.masudaeru.com/html/mygraph.html"
+      ],
+      "js": [
+        "/js/jquery.min.js",
+        "content_script_graph.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "/js/jquery.min.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "<all_urls>",
+    "downloads",
+    "cookies",
+    "storage",
+    "tabs",
+    "tabCapture",
+    "alarms",
+    "activeTab",
+    "unlimitedStorage"
+  ],
+  "commands": {
+    "command1": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Z",
+        "mac": "MacCtrl+Shift+Z"
+      },
+      "description": "ゲーム画面全体のスクリーンショットを撮る"
+    },
+    "command2": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+A",
+        "mac": "MacCtrl+Shift+A"
+      },
+      "description": "基地航空隊の画像を内部に一時保存する"
+    },
+    "command3": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+S",
+        "mac": "MacCtrl+Shift+S"
+      },
+      "description": "艦娘の詳細画像を内部に一時保存する"
+    },
+    "command4": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+X",
+        "mac": "MacCtrl+Shift+X"
+      },
+      "description": "艦娘編成画面のスクリーンショットを撮る"
+    }
+  }
+}

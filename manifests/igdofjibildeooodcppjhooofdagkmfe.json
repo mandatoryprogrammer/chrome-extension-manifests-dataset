@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "callstats monitoring for Amazon Connect",
+  "version": "1.0.3",
+  "description": "A chrome extension solution for monitoring amazon connect CCP from callstats.io.",
+  "manifest_version": 2,
+  "icons": {
+    "16": "images/callstats.png",
+    "24": "images/callstats@2x.png",
+    "32": "images/callstats@3x.png",
+    "48": "images/callstats@3x.png",
+    "128": "images/callstats@3x.png"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "match_about_blank": false,
+      "run_at": "document_end",
+      "all_frames": true,
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js.core/content.script.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js.core/background.js"
+    ],
+    "persistent": false
+  },
+  "web_accessible_resources": [
+    "js.core/*.js",
+    "js.lib/*.js",
+    "css/*.css",
+    "images/*.png"
+  ],
+  "permissions": [
+    "tabs",
+    "activeTab"
+  ]
+}

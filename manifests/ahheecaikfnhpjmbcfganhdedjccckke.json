@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "图片标签页",
+  "version": "0.1.0",
+  "manifest_version": 2,
+  "description": "使用自定义的图片作为新标签页",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "index.html"
+  },
+  "options_page": "index.html",
+  "icons": {
+    "16": "icon.png"
+  },
+  "permissions": [
+    "tabs",
+    "management",
+    "storage",
+    "<all_urls>",
+    "contextMenus"
+  ],
+  "chrome_url_overrides": {
+    "newtab": "image.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.google.com/*"
+      ],
+      "css": [
+        "css/image.css"
+      ],
+      "js": [
+        "js/jquery-1.12.3.min.js",
+        "js/image.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/context.js"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://example.com; object-src 'self'"
+}

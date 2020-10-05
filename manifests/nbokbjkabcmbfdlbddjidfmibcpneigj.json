@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "background": {
+    "scripts": [
+      "pages/background.js",
+      "promo/mac_promo_bg.js",
+      "promo/win_promo_bg.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "src/sscr.js",
+        "src/middlemouse.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "ftp://*/*"
+      ],
+      "exclude_globs": [
+        "*.pdf*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "js": [
+        "promo/mac_promo.js"
+      ],
+      "matches": [
+        "*://www.smoothscroll.net/*",
+        "*://www.smoothscroll.net.s3-website-us-east-1.amazonaws.com/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "description": "Scroll smoothly on all websites with your mouse and keyboard.",
+  "icons": {
+    "128": "img/128n.png",
+    "16": "img/16n.png",
+    "32": "img/32n.png",
+    "48": "img/48n.png"
+  },
+  "name": "SmoothScroll",
+  "options_page": "pages/options.html",
+  "version": "1.6.32",
+  "manifest_version": 2,
+  "permissions": [
+    "storage",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "web_accessible_resources": [
+    "img/cursor.png"
+  ]
+}

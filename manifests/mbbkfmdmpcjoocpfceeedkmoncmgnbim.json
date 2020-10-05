@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "author": "Pierre Péronnet",
+  "version": "1.9.3",
+  "description": "__MSG_appDescription__",
+  "default_locale": "en",
+  "manifest_version": 2,
+  "icons": {
+    "512": "images/icon512.png",
+    "128": "images/icon128.png",
+    "96": "images/icon96.png",
+    "64": "images/icon64.png",
+    "32": "images/icon32.png",
+    "16": "images/icon16.png"
+  },
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_idle",
+      "css": [
+        "printQrcodes.css"
+      ],
+      "js": [
+        "libraries/qrcodes/qrcode.min.js",
+        "settings.js",
+        "addQrcodes.js"
+      ]
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://coffeepot.fr/*"
+    ]
+  },
+  "options_page": "options.html",
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "browser_action": {
+    "default_title": "__MSG_displayQrcodeLabel__",
+    "default_icon": "images/iconAction.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "incognito": "split",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "<all_urls>"
+  ],
+  "homepage_url": "http://projects.coffeepot.fr/qrcodes/?from=chrome",
+  "offline_enabled": true
+}

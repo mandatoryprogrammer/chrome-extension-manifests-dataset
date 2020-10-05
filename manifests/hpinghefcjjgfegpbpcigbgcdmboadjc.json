@@ -1,0 +1,102 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "short_name": "CovideoPlay",
+  "name": "Covideo - Video and Screen Recorder",
+  "description": " ",
+  "manifest_version": 2,
+  "browser_action": {
+    "default_icon": "icon/favicon.png",
+    "default_popup": "index.html",
+    "default_title": "Covideo"
+  },
+  "icons": {
+    "16": "icon/favicon.png",
+    "48": "icon/favicon.png",
+    "128": "icon/favicon.png"
+  },
+  "background": {
+    "scripts": [
+      "faviconManager.js",
+      "desktopCapture.js",
+      "db.js",
+      "backgroundController.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "inboxsdk.js",
+        "gmailWindow.js"
+      ],
+      "css": [
+        "gmailWindow.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "permissions": [
+    "https://eiy0talp86.execute-api.us-east-1.amazonaws.com/dev/*",
+    "https://3atmfp4on1.execute-api.us-east-1.amazonaws.com/prod/*",
+    "https://www.inboxsdk.com/*",
+    "tabs",
+    "activeTab",
+    "notifications",
+    "clipboardWrite",
+    "desktopCapture",
+    "storage",
+    "unlimitedStorage",
+    "https://covideo.com/",
+    "https://www.covideo.com/",
+    "https://dev.covideo.com/",
+    "https://mail.google.com/*",
+    "https://www.googleapis.com/*"
+  ],
+  "options_ui": {
+    "page": "./options_window.html",
+    "chrome_style": false,
+    "open_in_tab": true
+  },
+  "web_accessible_resources": [
+    "options_window.html",
+    "cameraStream.html",
+    "cameraStream.js",
+    "cameraNoSound.html",
+    "cameraNoSound.js",
+    "gmail.js",
+    "gmailNotify.js",
+    "gmailInjector.js",
+    "extension_button.js",
+    "pageLeaveAlert.js",
+    "options.js",
+    "icon/*",
+    "static/*",
+    "sso-signin.html"
+  ],
+  "commands": {
+    "start-stop-recording": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+1",
+        "mac": "MacCtrl+Shift+1",
+        "chromeos": "Ctrl+Shift+1",
+        "linux": "Ctrl+Shift+1"
+      },
+      "description": "Start/Stop recording",
+      "global": true
+    },
+    "_execute_browser_action": {
+      "suggested_key": {
+        "windows": "Ctrl+Shift+Y",
+        "mac": "MacCtrl+Shift+Y",
+        "chromeos": "Ctrl+Shift+Y",
+        "linux": "Ctrl+Shift+Y"
+      },
+      "global": false
+    }
+  },
+  "version": "2.1.1",
+  "content_security_policy": "script-src 'self' https://apis.google.com https://js.intercomcdn.com https://widget.intercom.io/widget/bqokc38u ; object-src 'self'"
+}

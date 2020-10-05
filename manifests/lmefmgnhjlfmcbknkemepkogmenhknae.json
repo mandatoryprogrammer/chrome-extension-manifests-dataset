@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Explain to Chrome",
+  "version": "1.0",
+  "manifest_version": 2,
+  "description": "Article shortener using ExplainToMe",
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "background/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "38": "logo.png"
+    },
+    "default_popup": "browser_action/main.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "js": [
+        "content_script/explainer.js",
+        "content_script/popup.js",
+        "content_script/positioner.js",
+        "content_script/intent_loader.js",
+        "content_script/utils.js",
+        "content_script/main.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "https://*/*",
+    "http://*/*",
+    "activeTab",
+    "storage",
+    "contextMenus"
+  ],
+  "icons": {
+    "16": "logo.png",
+    "48": "logo.png",
+    "128": "logo.png"
+  }
+}

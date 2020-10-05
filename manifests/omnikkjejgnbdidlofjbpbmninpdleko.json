@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "ProTemplates™ - Templates Anywhere!",
+  "short_name": "ProTemplates™",
+  "version": "0.0.2",
+  "description": "Professional templates for Email, Websites, Signatures, ebay, Gmail, Posts, Newsletters and more, in just a few clicks!",
+  "browser_action": {
+    "default_icon": "icons/browser_action_icon.png",
+    "default_popup": "popup.html",
+    "default_title": "ProTemplates™ - Templates Anywhere!"
+  },
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://mail.google.com/*",
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*"
+      ],
+      "css": [],
+      "js": [
+        "scripts/libs/jquery.min.js",
+        "scripts/libs/inboxsdk.js",
+        "scripts/content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "clipboardRead",
+    "clipboardWrite",
+    "activeTab",
+    "storage",
+    "*://*.protemplates.io/"
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "web_accessible_resources": [
+    "icons/*",
+    "plugins/*"
+  ],
+  "content_security_policy": "script-src 'self' 'sha256-ampccPxBH8F7v0asnFHBurs425SrjATm5VvrTeXgF+w='; object-src 'self'"
+}

@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Majestic Backlink Analyzer",
+  "version": "2.3.0",
+  "default_locale": "en",
+  "description": "Majestic backlink analysis straight into your browser.",
+  "icons": {
+    "16": "majestic-star.bmp",
+    "48": "majestic_logo_black_48x48.png",
+    "128": "majestic_logo_black_128x128.png"
+  },
+  "browser_action": {
+    "default_icon": "majestic-star.bmp",
+    "default_title": "Majestic Backlink Analyzer",
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "permissions": [
+    "activeTab",
+    "identity",
+    "https://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "js/jquery-1.8.2.js",
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/jquery-1.8.2.js",
+        "js/options.js",
+        "js/background.js",
+        "js/getlinks.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "default-src 'self'; connect-src https://api.majestic.com/api/json https://majestic.com http://simpleapi.majestic.com/sapi/GetBacklinkStats; script-src 'self' https://ssl.google-analytics.com https://analytics.majestic.com/piwik.js; img-src 'self' http://majestic.com/ https://majestic.com/;",
+  "manifest_version": 2
+}

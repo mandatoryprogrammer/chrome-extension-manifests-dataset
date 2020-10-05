@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Listly - Web Scraping in seconds",
+  "short_name": "Listly",
+  "version": "0.2.0",
+  "manifest_version": 2,
+  "description": "Web pages into Excel data in seconds.",
+  "homepage_url": "https://www.listly.io",
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "js/lib/jquery/jquery-2.1.4.js",
+      "js/common.js",
+      "js/background/oauth.js",
+      "js/background/detail.js",
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": "img/icon19.png",
+    "default_title": "Web to Excel in seconds.",
+    "default_popup": "html/popup.html"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "identity"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "css/content_script.css"
+      ],
+      "js": [
+        "js/lib/jquery/jquery-2.1.4.js",
+        "js/lib/selector/optimal-select.min.js",
+        "js/common.js",
+        "js/data_selector.js",
+        "js/content/selector/geometry.js",
+        "js/content/selector/txtimg_nodes.js",
+        "js/content/selector/init_listlypick.js",
+        "js/content_script.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "html/sidepanel/iframe.html",
+    "html/loading/iframe.html"
+  ]
+}

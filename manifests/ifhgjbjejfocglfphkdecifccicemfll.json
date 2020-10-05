@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "version": "0.1.4",
+  "manifest_version": 2,
+  "description": "__MSG_appDescription__",
+  "permissions": [
+    "contextMenus",
+    "https://accounts.google.com/o/oauth2/token",
+    "https://www.googleapis.com/"
+  ],
+  "web_accessible_resources": [
+    "oauth2/oauth2.html"
+  ],
+  "icons": {
+    "16": "images/icon-16.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon-19.png",
+      "38": "images/icon-38.png"
+    },
+    "default_title": "Send to Google Glass",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.google.com/robots.txt*"
+      ],
+      "js": [
+        "oauth2/oauth2_inject.js"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

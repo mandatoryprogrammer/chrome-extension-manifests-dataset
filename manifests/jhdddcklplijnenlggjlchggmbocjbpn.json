@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Deckard Intelligence",
+  "version": "1.4.9",
+  "description": "This extension add the prediction delivered by Deckard to various Issue Tracking system such as Jira, Github, ...",
+  "icons": {
+    "16": "icons/deckard_16x16.png",
+    "19": "icons/deckard_19x19.png",
+    "32": "icons/deckard_32x32.png",
+    "38": "icons/deckard_38x38.png",
+    "48": "icons/deckard_48x48.png",
+    "64": "icons/deckard_64x64.png",
+    "96": "icons/deckard_96x96.png",
+    "128": "icons/deckard_128x128.png",
+    "256": "icons/deckard_256x256.png"
+  },
+  "background": {
+    "scripts": [
+      "lib/lodash-4.17.4.min.js",
+      "crossbrowser.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/deckard_16x16.png",
+      "19": "icons/deckard_19x19.png",
+      "32": "icons/deckard_32x32.png",
+      "38": "icons/deckard_38x38.png"
+    },
+    "default_title": "Click here to connect to Deckard Intelligence if not done already."
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.atlassian.net/*",
+        "*://*/secure/*",
+        "*://*/projects/*",
+        "*://*/browse/*"
+      ],
+      "js": [
+        "lib/jquery-3.2.1.min.js",
+        "lib/insQ-1.0.4.js",
+        "crossbrowser.js",
+        "contentscript.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "cookies",
+    "declarativeContent",
+    "storage",
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "applications": {
+    "gecko": {
+      "id": "intelligence@deckard.ai"
+    }
+  }
+}

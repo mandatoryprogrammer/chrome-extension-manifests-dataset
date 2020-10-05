@@ -1,0 +1,79 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Кэшбэк-сервис Aunite",
+  "short_name": "Кэшбэк-сервис Aunite",
+  "description": "Кэшбэк-сервис Aunite",
+  "version": "1.1.3",
+  "author": "aunite",
+  "options_page": "content/options.html",
+  "options_ui": {
+    "page": "content/options.html"
+  },
+  "icons": {
+    "16": "img/new_icon/16x16_bw.png",
+    "48": "img/new_icon/48x48_bw.png",
+    "128": "img/new_icon/128x128_bw.png"
+  },
+  "browser_action": {
+    "default_icon": "img/new_icon/16x16_bw.png",
+    "default_popup": "content/index.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://google.com/*",
+        "*://www.google.com/*",
+        "*://google.ru/*",
+        "*://www.google.ru/*"
+      ],
+      "js": [
+        "./public/vendor.min.js",
+        "./public/au_goo_inject.min.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://ya.ru/*",
+        "*://www.ya.ru/*",
+        "*://yandex.ru/*",
+        "*://www.yandex.ru/*"
+      ],
+      "js": [
+        "./public/vendor.min.js",
+        "./public/au_ya_inject.min.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*/*",
+        "*://*/"
+      ],
+      "css": [
+        "./css/inject_styles.min.css"
+      ],
+      "js": [
+        "./public/vendor.min.js",
+        "./public/au_icon_inject.min.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "./public/vendor.min.js",
+      "./public/au_background.min.js"
+    ],
+    "persistent": false
+  },
+  "content_security_policy": "script-src 'self' https://*.yandex.ru/ https://*.firebase.com; object-src 'self';",
+  "permissions": [
+    "cookies",
+    "activeTab",
+    "<all_urls>",
+    "storage",
+    "notifications"
+  ]
+}

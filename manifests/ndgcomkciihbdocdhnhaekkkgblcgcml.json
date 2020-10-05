@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "MIT Textbooks",
+  "short_name": "MIT Textbooks",
+  "version": "1.5.19",
+  "manifest_version": 2,
+  "description": "Clickable class names on any website!",
+  "author": "Yasyf Mohamedali",
+  "homepage_url": "http://textbooksearch.mit.edu/",
+  "permissions": [
+    "*://*/*"
+  ],
+  "omnibox": {
+    "keyword": "tb"
+  },
+  "icons": {
+    "16": "assets/icons/16.png",
+    "48": "assets/icons/48.png",
+    "128": "assets/icons/128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://textbooksearch.mit.edu/*"
+      ],
+      "js": [
+        "assets/js/hide_button.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "exclude_matches": [
+        "*://*.mit.edu/*",
+        "*://*.google.com/*",
+        "*://*/owa/*",
+        "*://0.0.0.0:*/*",
+        "*://localhost:*/*"
+      ],
+      "js": [
+        "assets/js/jquery-2.1.1.min.js",
+        "assets/js/jquery.qtip.min.js",
+        "assets/js/inject.js"
+      ],
+      "css": [
+        "assets/css/jquery.qtip.min.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "assets/js/background.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "assets/img/*.png"
+  ]
+}

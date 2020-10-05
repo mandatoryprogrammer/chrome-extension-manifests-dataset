@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Tillid",
+  "description": "Tillid is a new kind of password manager, focusing on collaboration. Our mission is to eradicate password copy pasting",
+  "version": "1.2",
+  "browser_action": {
+    "default_icon": "tillid-svg-connected-resized-128.png",
+    "default_popup": "popup.html",
+    "default_title": "Click to Login!"
+  },
+  "icons": {
+    "16": "tillid-svg-connected-resized-16.png",
+    "48": "tillid-svg-connected-resized-48.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "./dist/content_script.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "./dist/background.js"
+    ]
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-inline'; object-src 'self'",
+  "web_accessible_resources": [
+    "*.png",
+    "*.svg"
+  ],
+  "permissions": [
+    "activeTab",
+    "cookies",
+    "identity",
+    "webRequest",
+    "https://ajax.googleapis.com/",
+    "http://*/*",
+    "https://*/*",
+    "contextMenus"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "http://127.0.0.1:5000/*",
+      "http://localhost:8080/*",
+      "http://127.0.0.1:8080/*",
+      "http://*.tillid.io/*",
+      "https://*.tillid.io/*"
+    ]
+  },
+  "oauth2": {
+    "client_id": "486515591138-uopg4pv9lnp7632h8qhdnr1hc0f835ik.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email"
+    ]
+  }
+}

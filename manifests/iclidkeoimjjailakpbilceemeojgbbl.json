@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "LEAPmeet",
+  "description": "LEAPmeet Video Conference System",
+  "version": "0.0.2",
+  "manifest_version": 2,
+  "minimum_chrome_version": "49",
+  "incognito": "not_allowed",
+  "icons": {},
+  "permissions": [
+    "desktopCapture",
+    "system.cpu",
+    "system.memory",
+    "storage",
+    "contextMenus",
+    "tabs",
+    "tabCapture",
+    "activeTab"
+  ],
+  "background": {
+    "scripts": [
+      "background.js",
+      "RecordRTC.min.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "content.js",
+        "content-script.js"
+      ],
+      "matches": [
+        "https://demo.leapmeet.com/*",
+        "https://dev.leapmeet.com/*",
+        "http://dev.leapmeet.com/*",
+        "https://dev2.leapmeet.com/*",
+        "http://dev2.leapmeet.com/*"
+      ]
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://demo.leapmeet.com/*",
+      "https://dev.leapmeet.com/*",
+      "http://dev.leapmeet.com/*",
+      "https://dev2.leapmeet.com/*",
+      "http://dev2.leapmeet.com/*"
+    ],
+    "ids": [
+      "*"
+    ]
+  },
+  "browser_action": {
+    "default_title": "Record Video Conference"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+L",
+        "mac": "MacCtrl+Shift+L"
+      }
+    }
+  }
+}

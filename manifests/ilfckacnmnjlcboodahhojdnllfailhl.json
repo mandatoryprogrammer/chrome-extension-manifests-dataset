@@ -1,0 +1,77 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAgh1FIQV+VJXLMdRFLuHjlo2iZStWZo5pEiLAxRCj3HRMFS9m43qj2jo3i+syt8KVOqEwol0M0MdcJLxCIi1sysRHkqdohz86Nrfol15PCVssSO7s/liaJHh8qjhuePuycDVWPMiof+69lDZnJ3S5hwwj+pmL2Nj64UJCrG+RPSUoL5etqTe6PWSmnH8YgQAnjPmgAkvkni7e1Gp5OE8u1UNGeItE5dux7iDBVoN0/6gcdkZ+AlBb7+wwouKXS9OIFyKwkgJOXDm+oT3iTQzJDs2cGuuaXlDTajSFzVCorchC6SAJUA6baBDpeZ/0nKeV0UtV91/BHNWaiuSYQNR+uwIDAQAB",
+  "name": "SEMrush Social Media Poster",
+  "version": "1.1.5",
+  "default_locale": "en",
+  "description": "Share content on social media with just one click while you browse the web",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "background/index.js"
+    ]
+  },
+  "browser_action": {},
+  "permissions": [
+    "storage",
+    "contextMenus",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://oauth.semrush.com/oauth2/smp/success*"
+      ],
+      "js": [
+        "oauth.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "integration/images/index.js"
+      ],
+      "css": [
+        "integration/images.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.facebook.com/*",
+        "*://*.twitter.com/*"
+      ],
+      "js": [
+        "integration/network/index.js"
+      ],
+      "css": [
+        "integration/network.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "scheduleForm/index.html",
+    "landing/index.html"
+  ],
+  "options_ui": {
+    "page": "options/index.html"
+  },
+  "commands": {
+    "openForm": {
+      "suggested_key": {
+        "default": "Alt+S",
+        "mac": "Alt+S"
+      },
+      "description": "Open poster form"
+    }
+  },
+  "content_security_policy": "script-src 'self' https://*.photoeditorsdk.com; object-src 'self'"
+}

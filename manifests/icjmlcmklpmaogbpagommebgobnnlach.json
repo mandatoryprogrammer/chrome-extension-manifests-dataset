@@ -1,0 +1,67 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqRtk8UBa66vXY61Z4YYuLYmhZsvXbmOex1vMXy6SL9FZX03+fdBTFRN+DYafGXVby89CSOXpnLB8qJYE+r6/vTq0jnmXm7LJGcEkYBs3B98qqycHLWn5wQw2HmWXy/WDyU+8k3MljePvg8GA5XvYE/2IDmlXXHU0xxBIZyHR2jsIEo/jvF6SryOIQbS+1xjDWWylVUPobOymf+HMFVGUpaqIjNvAi+upUx1zXXucWiNuwLNw5RApomfjAiQfGz+LDwZ4KCXHixy47uDell+FfBGMVn4+d2CWJkLHnRNVt+fSRKWBH7w8PzUrwvqnYU6+8GxNxxlstWYKLENcpusykwIDAQAB",
+  "name": "SLM - CRM для Управления продажами в ВК",
+  "short_name": "SLM - CRM",
+  "description": "SLM-CRM расширение для Управления Продажами прямо в ВК.",
+  "version": "1.0.19",
+  "icons": {
+    "128": "assets/logo.png"
+  },
+  "externally_connectable": {
+    "matches": [
+      "http://localhost:3000/*",
+      "https://*.slm-crm.com.ua:*/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://vk.com/*",
+        "http://localhost:3000/*",
+        "https://*.slm-crm.com.ua/*",
+        "https://web.telegram.org/*"
+      ],
+      "exclude_matches": [],
+      "css": [
+        "lib/lib.css",
+        "app/allCss.min.css"
+      ],
+      "js": [
+        "lib/lib.min.js",
+        "templates.min.js",
+        "app/appJS.min.js",
+        "script/content.js"
+      ],
+      "html": [
+        "index.html"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "script/background.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "https://*.vk.com/*",
+    "https://*.slm-crm.com.ua/*",
+    "https://web.telegram.org/*"
+  ],
+  "browser_action": {
+    "default_title": "SLM CRM",
+    "default_icon": "assets/logo.png",
+    "default_popup": "popup_default.html"
+  },
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "web_accessible_resources": [
+    "index.html",
+    "app/**",
+    "assets/**",
+    "script/telegram.js"
+  ]
+}

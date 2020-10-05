@@ -1,0 +1,39 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "WikiThat",
+  "description": "Takes your currently highlighted text and opens the most relevant Wikipedia article in a pop out window",
+  "version": "1.1",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js",
+      "jquery.js",
+      "popup.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "http://*/*/*",
+        "https://*/*/*"
+      ],
+      "js": [
+        "content.js",
+        "jquery.js",
+        "popup.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "https://en.wikipedia.org/w/*"
+  ],
+  "content_security_policy": "script-src 'self' https://en.wikipedia.org/w/; object-src 'self'"
+}

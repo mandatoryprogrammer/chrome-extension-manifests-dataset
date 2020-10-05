@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Cloudpath Certificate Generator",
+  "short_name": "Cloudpath ",
+  "description": "Online certificate generator that works with the Chrome's TPM and Cloudpath ES.  For more information, visit www.cloudpath.net.",
+  "version": "1.371",
+  "background": {
+    "scripts": [
+      "popup.js",
+      "require.js",
+      "biginteger.js",
+      "background.js",
+      "contentscript.js",
+      "startup.js",
+      "util.js"
+    ],
+    "persistent": false
+  },
+  "storage": {
+    "managed_schema": "schema.json"
+  },
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_title": "Cloudpath",
+    "default_popup": "popup.html"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*/page4_download.html"
+      ],
+      "js": [
+        "contentscript.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "permissions": [
+    "enterprise.platformKeys",
+    "identity",
+    "identity.email",
+    "notifications",
+    "declarativeContent",
+    "storage",
+    "tabs",
+    "alarms"
+  ],
+  "icons": {
+    "16": "icon-16.png",
+    "48": "icon-48.png",
+    "128": "icon-128.png"
+  }
+}

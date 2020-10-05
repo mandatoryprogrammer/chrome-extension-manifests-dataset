@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Pulsedive Threat Intelligence",
+  "short_name": "Pulsedive",
+  "version": "2.0",
+  "applications": {
+    "gecko": {
+      "id": "{8f7593a5-a5fd-40b1-8e02-7e62c37bcf61}"
+    }
+  },
+  "description": "Highlight IPs, domains, and URLs on any website to enrich them using Pulsedive's free threat intelligence data set.",
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "web_accessible_resources": [
+    "options.html"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "https://pulsedive.com/*",
+        "https://*.pulsedive.com/*"
+      ],
+      "js": [
+        "content.js",
+        "analysis.js"
+      ],
+      "css": [
+        "style.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "browser_action": {
+    "default_icon": "img/icon.png",
+    "default_popup": "popup.html",
+    "default_title": "Highlight an IOC to enrich."
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "https://pulsedive.com/"
+  ]
+}

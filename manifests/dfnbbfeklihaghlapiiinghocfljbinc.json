@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Browserstack Device Info",
+  "description": "Extract device information from Browserstacks emulators",
+  "version": "1.0.3",
+  "offline_enabled": true,
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "permissions": [
+    "tabs",
+    "<all_urls>"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.browserstack.com/*"
+      ],
+      "css": [
+        "assets/css/main.css"
+      ],
+      "js": [
+        "assets/js/vendor/jquery-2.2.3.min.js",
+        "assets/js/vendor/moment-2.18.1.min.js",
+        "assets/js/vendor/clipboard.min.js",
+        "assets/js/contentScript.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "assets/js/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "assets/images/icon128.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "assets/images/icon16.png",
+    "48": "assets/images/icon48.png",
+    "128": "assets/images/icon128.png"
+  }
+}

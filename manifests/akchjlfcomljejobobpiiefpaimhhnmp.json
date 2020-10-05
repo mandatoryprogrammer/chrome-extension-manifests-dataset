@@ -1,0 +1,42 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "short_name": "Github History",
+  "content_security_policy": "script-src 'self' 'sha256-A2p5ajD3NJiLtkkgT53bfVQCprSfIyekAyKQNpTMfqk='; object-src 'self'",
+  "name": "Github History",
+  "manifest_version": 2,
+  "icons": {
+    "16": "logo.png",
+    "48": "logo.png",
+    "128": "logo.png"
+  },
+  "browser_action": {
+    "default_title": "Github History",
+    "default_icon": "logo.png"
+  },
+  "background": {
+    "scripts": [
+      "backgroundScripts/background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "storage",
+    "tabs"
+  ],
+  "web_accessible_resources": [
+    "index.html"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://github.com/*"
+      ],
+      "js": [
+        "plugins/jquery.min.js",
+        "inject/inject.js"
+      ]
+    }
+  ],
+  "debug": true,
+  "version": "1.1"
+}

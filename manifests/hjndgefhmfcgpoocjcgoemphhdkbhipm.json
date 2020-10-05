@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "companion for reddit",
+  "version": "2.0.4",
+  "manifest_version": 2,
+  "description": "Turn your browser into a redditor's best friend.",
+  "options_page": "options.html",
+  "permissions": [
+    "tabs",
+    "notifications",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_security_policy": "default-src 'self'; connect-src 'self' https://*.reddit.com; connect-src 'self' http://*.reddit.com; style-src 'self' 'unsafe-inline'; script-src 'self'",
+  "icons": {
+    "16": "images/shine-16.png",
+    "48": "images/shine-48.png",
+    "128": "images/shine-128.png"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "page_action": {
+    "default_icon": "images/reddit.png",
+    "default_title": "Show reddit information"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "debug.js",
+        "redditContent.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "debug.js",
+        "pageOverlay.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "pageOverlay.css",
+    "bar.html",
+    "submit.html",
+    "images/reddit-mail.svg",
+    "images/reddit-modmail.svg"
+  ]
+}

@@ -1,0 +1,139 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjaMV8Dj7XKvF9aCKjlCd8tlb1uF0xgp3yHM5IAhj4iBN695/PWqtVmBZgej2E5tXGqa+RkKgP+fty+x4l1wKJqVlrY342qhNx9rSxNHQ6GkXWa77odEqV8e/RxdVgAGz8A1aEMPJn9xch2T+3roq/VRkBmn8P9bt7/3aRmsIIxQT5mdlKZq03i560xFyF6LyjdH1A5B4sELM0uyJ8z3WC3YrfIu+dQ+nhauQdXCJbC1fipcWInVRQGrNEm0vm8WDQrq6/ffs4TGcS2tM4pa6wNtOgmlsRBCaDRJuKI91FU59tfHupZgWxVKCeR6Ay0d0iMErv/YNL1pcOxdIuDzZAQIDAQAB",
+  "manifest_version": 2,
+  "name": "qTest Web Explorer",
+  "short_name": "qTest Web Explorer",
+  "description": "Exploratory testing sessions on browser while automatically documenting test enviroment data and user interactions.",
+  "homepage_url": "https://chrome.google.com/webstore/detail/qtest-web-explorer/ihoajedonhepnplmfgdkdjohbmadckdk",
+  "background": {
+    "page": "extension/html/background.html"
+  },
+  "browser_action": {
+    "default_icon": "common/assets/icons/icon_19.png",
+    "default_popup": "extension/html/login.html",
+    "default_title": "qTest Web Explorer"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "common/contentscripts/contentScript.js",
+        "extension/js/contentscripts/sessionStarter.js"
+      ],
+      "matches": [
+        "file://*/*",
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "js": [
+        "common/contentscripts/captureAngularApp.js",
+        "common/contentscripts/kendoUI.js",
+        "common/contentscripts/senchaTouch.js",
+        "common/contentscripts/dojo.js",
+        "common/contentscripts/jdedwards.js",
+        "common/contentscripts/jquery.js",
+        "extension/js/contentscripts/eXplorerFullPageCaptureHelper.js",
+        "extension/js/contentscripts/messenger.js",
+        "extension/js/contentscripts/browser.js",
+        "common/contentscripts/plugin/recognizeControl.js",
+        "common/contentscripts/plugin/plugin.js",
+        "common/contentscripts/capture/editModeParam.js",
+        "common/contentscripts/capture/capture.js"
+      ],
+      "matches": [
+        "file://*/*",
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "commands": {
+    "stopRecording": {
+      "suggested_key": {
+        "default": "Alt+Shift+S",
+        "windows": "Alt+Shift+S",
+        "mac": "Alt+Shift+S",
+        "chromeos": "Alt+Shift+S",
+        "linux": "Alt+Shift+S"
+      },
+      "description": "Stop/Complete Recording Session"
+    },
+    "pauseResumeRecording": {
+      "suggested_key": {
+        "default": "Alt+Shift+R",
+        "windows": "Alt+Shift+R",
+        "mac": "Alt+Shift+R",
+        "chromeos": "Alt+Shift+R",
+        "linux": "Alt+Shift+R"
+      },
+      "description": "Pause/Resume Recording Session"
+    },
+    "recordAudio": {
+      "suggested_key": {
+        "default": "Alt+Shift+A",
+        "windows": "Alt+Shift+A",
+        "mac": "Alt+Shift+A",
+        "chromeos": "Alt+Shift+A",
+        "linux": "Alt+Shift+A"
+      },
+      "description": "Record Audio"
+    },
+    "recordVideo": {
+      "suggested_key": {
+        "default": "Alt+Shift+V",
+        "windows": "Alt+Shift+V",
+        "mac": "Alt+Shift+V",
+        "chromeos": "Alt+Shift+V",
+        "linux": "Alt+Shift+V"
+      },
+      "description": "Record Video"
+    }
+  },
+  "web_accessible_resources": [
+    "common/context.js",
+    "common/contentscripts/captureAngularApp.js",
+    "common/contentscripts/kendoUI.js",
+    "common/contentscripts/senchaTouch.js",
+    "common/contentscripts/dojo.js",
+    "common/contentscripts/jdedwards.js",
+    "common/contentscripts/jquery.js",
+    "extension/js/contentscripts/eXplorerFullPageCaptureHelper.js",
+    "common/contentscripts/plugin/recognizeControl.js",
+    "common/contentscripts/plugin/plugin.js",
+    "extension/js/contentscripts/messenger.js",
+    "extension/js/contentscripts/browser.js",
+    "extension/js/contentscripts/sessionStarter.js",
+    "common/contentscripts/capture/editModeParam.js",
+    "common/contentscripts/capture/capture.js",
+    "common/contentscripts/contentScript.js",
+    "common/contentscripts/frame/injectRegisterFrame.js",
+    "common/contentscripts/frame/injectUnregisterFrame.js",
+    "extension/html/startSessionFromqTest.html",
+    "extension/html/showAutoStartConfirm.html"
+  ],
+  "icons": {
+    "16": "common/assets/icons/icon_16.png",
+    "19": "common/assets/icons/icon_19.png",
+    "32": "common/assets/icons/icon_32.png",
+    "48": "common/assets/icons/icon_48.png",
+    "64": "common/assets/icons/icon_64.png",
+    "128": "common/assets/icons/icon_128.png"
+  },
+  "incognito": "spanning",
+  "permissions": [
+    "desktopCapture",
+    "activeTab",
+    "tabs",
+    "cookies",
+    "storage",
+    "<all_urls>"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "version": "1.1.24"
+}

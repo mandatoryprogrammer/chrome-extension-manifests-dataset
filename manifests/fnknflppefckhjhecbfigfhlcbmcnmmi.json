@@ -1,0 +1,71 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_extensionName__",
+  "short_name": "FbTREX",
+  "description": "__MSG_extensionDescription__",
+  "version": "2.0.0",
+  "version_name": "2.0.0",
+  "author": "Alberto Granzotto, Claudio Agosti, and the contributors in https://github.com/tracking-exposed/web-extension",
+  "default_locale": "en",
+  "icons": {
+    "16": "images/trex-logo-16.png",
+    "48": "images/trex-logo-48.png",
+    "128": "images/trex-logo-128.png"
+  },
+  "permissions": [
+    "alarms",
+    "storage",
+    "unlimitedStorage",
+    "cookies",
+    "https://*.facebook.com/",
+    "https://*.fbcdn.net/",
+    "https://*.tracking.exposed/"
+  ],
+  "background": {
+    "scripts": [
+      "browser-polyfill.js",
+      "background/bundle.js"
+    ]
+  },
+  "browser_action": {
+    "default_popup": "default_popup/index.html",
+    "default_icon": {
+      "16": "images/trex-logo-16.png",
+      "32": "images/trex-logo-32.png",
+      "48": "images/trex-logo-48.png",
+      "64": "images/trex-logo-64.png",
+      "128": "images/trex-logo-128.png",
+      "256": "images/trex-logo-256.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.facebook.com/*"
+      ],
+      "js": [
+        "browser-polyfill.js",
+        "content_scripts/facebook.com/bundle.js"
+      ],
+      "css": [
+        "styles/theme/main.css",
+        "content_scripts/facebook.com/bundle.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "*.png",
+    "*.svg",
+    "*.eot",
+    "*.woff",
+    "*.svg",
+    "*.ttf"
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{a6e6d9fd-020e-47a3-94e2-77e38a37b603}",
+      "strict_min_version": "57.0"
+    }
+  }
+}

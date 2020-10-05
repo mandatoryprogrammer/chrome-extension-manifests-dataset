@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "MemoRISE",
+  "version": "0.4.15",
+  "manifest_version": 2,
+  "description": "__MSG_extDescription__",
+  "default_locale": "en",
+  "icons": {
+    "16": "icons/logo_memorise2.png",
+    "48": "icons/logo_memorise-small.png",
+    "128": "icons/logo_memorise2.png"
+  },
+  "background": {
+    "page": "src/bg/background.html",
+    "persistent": true
+  },
+  "options_page": "dist/options/index.html",
+  "permissions": [
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.google.com/search*"
+      ],
+      "css": [
+        "src/inject/inject.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.google.com/search*"
+      ],
+      "js": [
+        "dist/inject.bundle.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_title": "MemoRISE",
+    "default_popup": "src/popup/dist/index.html"
+  },
+  "content_security_policy": "script-src-elem 'self' https://www.google-analytics.com/analytics.js 'unsafe-eval'; object-src 'self'; script-src 'self';",
+  "web_accessible_resources": [
+    "/dist/options/index.html",
+    "dist/*.png"
+  ]
+}

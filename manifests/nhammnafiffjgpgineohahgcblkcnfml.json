@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Darknet",
+  "version": "1.5.11",
+  "description": "A web interface for the Deluge torrent client",
+  "permissions": [
+    "http://*/",
+    "https://*/*",
+    "contextMenus",
+    "notifications",
+    "tabs",
+    "webNavigation",
+    "cookies",
+    "downloads",
+    "storage",
+    "webRequest"
+  ],
+  "background": {
+    "scripts": [
+      "js/vendor/jquery.js",
+      "js/common.js",
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "ftp://*/*",
+        "file://*/*"
+      ],
+      "js": [
+        "js/vendor/jquery.js",
+        "js/link_handler.js"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "img/logo-16.png",
+    "48": "img/logo-48.png"
+  },
+  "browser_action": {
+    "default_popup": "html/popup_torrent_list.html"
+  },
+  "manifest_version": 2
+}

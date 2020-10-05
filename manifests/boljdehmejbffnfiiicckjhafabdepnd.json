@@ -1,0 +1,87 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Forecastfox (fix version)",
+  "short_name": "Forecastfox (fix version)",
+  "description": "Get international weather forecasts with this highly customizable extension",
+  "author": "Oleksandr Popov",
+  "homepage_url": "http://www.s3blog.org/forecastfox.html",
+  "version": "4.25",
+  "minimum_chrome_version": "45",
+  "offline_enabled": false,
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA7+PzqK3ZN4UvbVN0nt5wn2iPOh9qIb9eyVo+5dKY6r530xj/SXzxPDgJedYHJgKB6G6TCjedxagUALQ/5P2NqeDnxuK5v6LYvt4np96NpRVYkffeLXzusL4UkcdRcmI7v6IXt7bNvk96e7Z6pGIFGSF0trcmNJDDioy0udHZ4D1M524V6NFoX2zYyuGb7zYlg5Maw9gH/LBSNWgi82jZqEw9uraGCKePALeozKA27G2D+9qNed0dPB1S2OWf7tEXZNmW1eokmvkRYRbtJxzL61pS79V0kJ5nZ931C4YAWLXotfwBvD6Zfsz0GOFkkfzXecYqObfgizRWFvg5GWGcNwIDAQAB",
+  "applications": {
+    "gecko": {
+      "id": "forecastfox@s3_fix_version",
+      "strict_min_version": "51.0"
+    }
+  },
+  "icons": {
+    "16": "skin/images/logo16.png",
+    "32": "skin/images/logo32.png",
+    "48": "skin/images/logo48.png",
+    "128": "skin/images/logo128.png"
+  },
+  "browser_action": {
+    "default_title": "Forecastfox (fix version)",
+    "default_icon": "skin/images/logo16.png",
+    "default_popup": "content/popup.html"
+  },
+  "background": {
+    "page": "content/background.html"
+  },
+  "options_ui": {
+    "page": "content/options.html",
+    "chrome_style": false,
+    "open_in_tab": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.s3blog.org/geolocation.html*"
+      ],
+      "all_frames": true,
+      "js": [
+        "/content/geolocation.js",
+        "/content/utils.js",
+        "/content/prefs.js",
+        "/content/geolocation_init.js"
+      ]
+    },
+    {
+      "js": [
+        "/content/tab_loader.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://embed.windy.com/embed2.html*"
+      ],
+      "all_frames": true,
+      "js": [
+        "/content/windy.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "/skin/*",
+    "/locale/*"
+  ],
+  "optional_permissions": [
+    "clipboardWrite",
+    "downloads"
+  ],
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "background",
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>"
+  ]
+}

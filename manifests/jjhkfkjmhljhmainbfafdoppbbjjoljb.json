@@ -1,0 +1,86 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Dibs Lab Auto Scheduling",
+  "version": "1.2.1.11",
+  "permissions": [
+    "background",
+    "identity",
+    "identity.email",
+    "tabs",
+    "clipboardWrite",
+    "https://www.googleapis.com/*",
+    "https://*.googleusercontent.com/*",
+    "https://mail.google.com/",
+    "storage",
+    "activeTab",
+    "https://ucdevbase.uchicago.edu//index.php",
+    "https://calendar.google.com/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://ucdevbase.uchicago.edu//index.php"
+      ],
+      "css": [
+        "media/bootstrap/dist/css/bootstrap.css",
+        "/media/select2/dist/css/select2.min.css",
+        "css/modal.css"
+      ],
+      "js": [
+        "media/js/vendor/jquery.min.js",
+        "js/database.js",
+        "media/bootstrap/dist/js/bootstrap.min.js",
+        "media/select2/dist/js/select2.min.js",
+        "media/summernote/summernote.js",
+        "/media/moment/moment.js",
+        "media/moment/moment-timezone-with-data-2012-2022.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://calendar.google.com/calendar/render"
+      ],
+      "js": [
+        "media/js/vendor/jquery.min.js",
+        "js/calendar.js"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "img/icon.png",
+    "48": "img/icon.png",
+    "128": "img/icon.png"
+  },
+  "browser_action": {
+    "default_icon": "img/icon.png",
+    "default_popup": "html/options.html"
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkKCThNyGWhyC7QXdZCdnU9B+GGPo+rX8Z/123Q/9jLihs5Fx2ijn2vT7tUDq9bw7ASlK78wKeoe6HgiQiUnKrV9r+TXGCKDNs0bJEfI4g6rwz2HCmM4UixzLwI0eJZsWNKfsdBB6ALw3+i4qzA6Gz298Y/HhwLsu8U3Q0vlViVHvj2kcGbxaeAVlcv+YcnvneHs/j3901l/EoWCgZbwz3S5NIxkNed6iNyz4A66pSiKA8C9ZTveFgyG+zbcdMU3u3ybLEtUVjaYCGGHhWxT1s86pLqLf2tyfMM3Exe41O7UFLnhBBYnAOJl680IY5MWnRPsEhkAJOv5BHngsoYmz5wIDAQAB",
+  "background": {
+    "scripts": [
+      "js/background.js",
+      "js/gmail.js",
+      "media/moment/moment.js",
+      "media/js/vendor/jquery.min.js",
+      "js/calendar_bg.js"
+    ]
+  },
+  "content_security_policy": "script-src https://*.google.com 'unsafe-eval';   object-src 'self'",
+  "oauth2": {
+    "client_id": "874612665261-8c5s79bbqft2akct08hv3v8c90hp1peb.apps.googleusercontent.com",
+    "scopes": [
+      "https://mail.google.com/",
+      "https://www.googleapis.com/auth/calendar"
+    ]
+  },
+  "options_ui": {
+    "page": "html/options.html",
+    "chrome_style": false,
+    "open_in_tab": false
+  },
+  "web_accessible_resources": [
+    "html/modal.html",
+    "/media/summernote/*"
+  ]
+}

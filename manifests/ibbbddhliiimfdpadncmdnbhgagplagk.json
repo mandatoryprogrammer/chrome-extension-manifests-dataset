@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Auroracoin Browser Wallet",
+  "author": "Andrew Toth, modifed by Joseph Lee and SkateFish",
+  "description": "Auroracoin wallet in the browser. Send and receive instantly on any web page.",
+  "version": "2.0.3",
+  "icons": {
+    "16": "data/auroracoin16.png",
+    "48": "data/auroracoin48.png",
+    "128": "data/auroracoin128.png"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self';",
+  "permissions": [
+    "contextMenus",
+    "activeTab",
+    "<all_urls>",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "data/js/libs/jquery.min.js",
+        "data/js/libs/cryptojs.min.js",
+        "data/js/libs/bitcoinjs-lib.min.js",
+        "data/js/util.js",
+        "data/js/preferences.js",
+        "data/js/currency-manager.js",
+        "data/js/wallet.js",
+        "data/js/paypopup.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "scripts": [
+      "data/js/background.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "data/*"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "data/auroracoin19.png",
+      "38": "data/auroracoin38.png"
+    },
+    "default_title": "Auroracoin Wallet",
+    "default_popup": "data/index.html"
+  }
+}

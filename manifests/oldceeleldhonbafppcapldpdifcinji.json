@@ -1,0 +1,138 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_appName__",
+  "short_name": "LanguageTool",
+  "description": "__MSG_appDesc__",
+  "version": "3.1.11",
+  "default_locale": "en",
+  "author": "LanguageTooler GmbH",
+  "homepage_url": "https://languagetoolplus.com",
+  "offline_enabled": false,
+  "minimum_chrome_version": "67.0.0",
+  "icons": {
+    "16": "assets/images/icons/icon16.png",
+    "32": "assets/images/icons/icon32.png",
+    "48": "assets/images/icons/icon48.png",
+    "64": "assets/images/icons/icon64.png",
+    "128": "assets/images/icons/icon128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "contextMenus"
+  ],
+  "storage": {
+    "managed_schema": "managed_settings.json"
+  },
+  "background": {
+    "scripts": [
+      "common/browser-polyfill.min.js",
+      "common/purify.min.js",
+      "config/config.js",
+      "common/browserDetector.js",
+      "common/utils.js",
+      "common/eventBus.js",
+      "common/messages.js",
+      "common/i18nManager.js",
+      "common/extensioni18nManager.js",
+      "common/languageManager.js",
+      "common/storageController.js",
+      "common/extensionStorageController.js",
+      "common/environmentAdapter.js",
+      "common/extensionEnvironmentAdapter.js",
+      "common/extension-init.js",
+      "common/tracker.js",
+      "background/graphemeSplitter.js",
+      "background/validator.js",
+      "background/dictionarySync.js",
+      "background/synonyms.js",
+      "background/extension-main.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "match_about_blank": true,
+      "js": [
+        "common/browser-polyfill.min.js",
+        "common/purify.min.js",
+        "config/config.js",
+        "common/browserDetector.js",
+        "common/utils.js",
+        "common/eventBus.js",
+        "common/messages.js",
+        "common/domMeasurement.js",
+        "common/i18nManager.js",
+        "common/extensioni18nManager.js",
+        "common/languageManager.js",
+        "common/storageController.js",
+        "common/extensionStorageController.js",
+        "common/environmentAdapter.js",
+        "common/extensionEnvironmentAdapter.js",
+        "common/extension-init.js",
+        "common/localStorageWrapper.js",
+        "common/tracker.js",
+        "common/googleDocs.js",
+        "common/overleaf.js",
+        "common/dictionary.js",
+        "common/tweaksManager.js",
+        "content/debounce.js",
+        "content/domWalker.js",
+        "content/validationStatus.js",
+        "content/ceElementInspector.js",
+        "content/inputAreaWrapper.js",
+        "content/mirror.js",
+        "content/highlighter.js",
+        "content/toolbar.js",
+        "content/dialog.js",
+        "content/errorCard.js",
+        "content/synonymsCard.js",
+        "content/ltAssistant.js",
+        "content/extension-main.js",
+        "privacyConfirmationDialog/privacyConfirmationDialog.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": true,
+      "match_about_blank": true,
+      "css": [
+        "common/fonts.css",
+        "content/styles.css"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "options_ui": {
+    "page": "options/options.html",
+    "chrome_style": false,
+    "open_in_tab": true
+  },
+  "browser_action": {
+    "default_icon": "assets/images/icons/icon16.png",
+    "default_title": "LanguageTool",
+    "default_popup": "popup/popup.html"
+  },
+  "web_accessible_resources": [
+    "assets/fonts/*.woff2",
+    "assets/styles/*",
+    "common/*.css",
+    "common/*.js",
+    "content/*.css",
+    "content/*.js",
+    "config/*.js",
+    "privacyConfirmationDialog/*.js",
+    "privacyConfirmationDialog/managedLoginRedirectUri.html",
+    "content/iframes/rating/*.html",
+    "content/iframes/premiumErrors/*.html",
+    "content/iframes/historicPremiumErrors/*.html",
+    "assets/images/*"
+  ]
+}

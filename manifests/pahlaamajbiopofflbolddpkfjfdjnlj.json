@@ -1,0 +1,106 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "1.0.75",
+  "name": "Drop Ship Supplier Scraper & Lister",
+  "manifest_version": 2,
+  "minimum_chrome_version": "60.0.3112",
+  "description": "Drop Ship Supplier Scraper & Lister",
+  "browser_action": {
+    "default_title": "Drop Ship Supplier Scraper & Lister",
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "icons": {
+    "16": "img/ChromeLister16.png",
+    "48": "img/ChromeLister48.png",
+    "128": "img/ChromeLister128.png"
+  },
+  "externally_connectable": {
+    "matches": [
+      "http://skufetch.com/*",
+      "https://skufetch.com/*",
+      "http://*.skufetch.com/*",
+      "https://*.skufetch.com/*",
+      "http://skufetch.test.skuio.com/*",
+      "https://skufetch.test.skuio.com/*",
+      "http://*.skufetch.test.skuio.com/*",
+      "https://*.skufetch.test.skuio.com/*",
+      "http://skufetch.loc/*",
+      "https://skufetch.loc/*",
+      "http://*.skufetch.loc/*",
+      "https://*.skufetch.loc/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "js/injectInkfrog.bundle.js",
+    "js/injectESM/step1_init.bundle.js",
+    "js/injectESM/step2_setTitle.bundle.js",
+    "js/injectESM/step3_waitFrames.bundle.js",
+    "js/injectESM/step4_setData.bundle.js",
+    "js/injectCrazy.bundle.js"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/injectCommon.bundle.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://skufetch.com/*",
+        "https://skufetch.com/*",
+        "http://*.skufetch.com/*",
+        "https://*.skufetch.com/*",
+        "http://skufetch.test.skuio.com/*",
+        "https://skufetch.test.skuio.com/*",
+        "http://*.skufetch.test.skuio.com/*",
+        "https://*.skufetch.test.skuio.com/*",
+        "http://skufetch.loc/*",
+        "https://skufetch.loc/*",
+        "http://*.skufetch.loc/*",
+        "https://*.skufetch.loc/*"
+      ],
+      "js": [
+        "js/injectSkuFetch.bundle.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "include_globs": [
+        "http://bulksell.*ebay.*/ws/eBayISAPI.dll*",
+        "https://bulksell.*ebay.*/ws/eBayISAPI.dll*"
+      ],
+      "js": [
+        "js/injectCommonESM.bundle.js"
+      ]
+    }
+  ],
+  "background": {
+    "page": "background.html"
+  },
+  "permissions": [
+    "contextMenus",
+    "management",
+    "tabs",
+    "activeTab",
+    "storage",
+    "unlimitedStorage",
+    "http://*/*",
+    "https://*/*",
+    "cookies",
+    "webNavigation"
+  ],
+  "content_security_policy": "default-src 'self'; object-src 'self'; font-src 'self' data:; style-src 'self' 'unsafe-inline'; img-src 'self' https://httpproxy.skuio.com https://www.google-analytics.com https://stats.g.doubleclick.net https://www.google.com https://www.google.ru data:; script-src 'self'; connect-src 'self' https://skugrid.com https://www.google-analytics.com https://httpproxy.skuio.com https://skufetch.com https://app.skufetch.com https://bcache-0.skuio.com/ https://bcache-1.skuio.com/ https://bcache-2.skuio.com/ https://bcache-3.skuio.com/ https://bcache-4.skuio.com/ https://bcache-5.skuio.com/ https://bcache-6.skuio.com/ https://bcache-7.skuio.com/ https://bcache-8.skuio.com/ https://bcache-9.skuio.com/ https://bcache-a.skuio.com/ https://bcache-b.skuio.com/ https://bcache-c.skuio.com/ https://bcache-d.skuio.com/ https://bcache-e.skuio.com/ https://bcache-f.skuio.com/ https://ppid.skuio.com https://whichstore.skuio.com;",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{abc6838f-6032-4e64-9b6e-3132efc1c95c}",
+      "strict_min_version": "60.0"
+    }
+  }
+}

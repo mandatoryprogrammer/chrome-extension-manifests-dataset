@@ -1,0 +1,72 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Beyond Help",
+  "version": "0.17.2",
+  "description": "Chrome extension with helpers to https://www.dndbeyond.com/.",
+  "background": {
+    "scripts": [
+      "extensionbackground.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "icon-16.png",
+      "48": "icon-48.png",
+      "128": "icon-128.png"
+    },
+    "default_title": "Beyond Help",
+    "default_popup": "extensionpopup.html"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+Shift+D"
+      }
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.dndbeyond.com/*"
+      ],
+      "js": [
+        "extensioncontentscript.js"
+      ],
+      "css": [
+        "extensioncontentstyle.css"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "externally_connectable": {
+    "matches": [
+      "*://*.dndbeyond.com/*"
+    ]
+  },
+  "icons": {
+    "16": "icon-16.png",
+    "48": "icon-48.png",
+    "128": "icon-128.png"
+  },
+  "incognito": "split",
+  "options_ui": {
+    "page": "optionspage.html",
+    "open_in_tab": true
+  },
+  "permissions": [
+    "activeTab",
+    "commands",
+    "cookies",
+    "downloads",
+    "notifications",
+    "storage",
+    "tabs",
+    "webRequest",
+    "*://*.dndbeyond.com/*"
+  ],
+  "web_accessible_resources": [
+    "webaccessible/*"
+  ],
+  "manifest_version": 2
+}

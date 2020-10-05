@@ -1,0 +1,181 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Kiva Lender Assistant",
+  "description": "KLA shows repayment graphs, partner religious affiliation, lets you set up custom buttons in Kiva's header, and more!",
+  "version": "2.0.2",
+  "manifest_version": 2,
+  "homepage_url": "https://github.com/nuclearspike/lenderassist",
+  "background": {
+    "page": "background.html"
+  },
+  "options_page": "options_custom/index.html",
+  "icons": {
+    "16": "icons/icon16.png",
+    "38": "icons/icon38.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "page_action": {
+    "default_icon": {
+      "19": "icons/icon19.png",
+      "38": "icons/icon38.png"
+    },
+    "default_title": "Kiva Lender Assistant (click to view options)"
+  },
+  "permissions": [
+    "tts",
+    "storage",
+    "notifications",
+    "http://www.kiva.org/",
+    "https://www.kiva.org/",
+    "http://api.kivaws.org/",
+    "https://api.kivaws.org/",
+    "http://www.kivalens.org/",
+    "https://kivalens.herokuapp.com"
+  ],
+  "omnibox": {
+    "keyword": "kiva"
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://www.kivalens.org/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.kiva.org/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "js_lib/jquery/jquery.min.js",
+        "js_lib/jquery/jquery.sparkline.min.js",
+        "js_lib/linq.min.js",
+        "js_lib/highcharts.js",
+        "js_lib/date.js",
+        "inject/all_common_start.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.kiva.org/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "inject/all_start.js"
+      ],
+      "css": [
+        "inject/all.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.kiva.org/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "inject/all_end.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.kiva.org/*"
+      ],
+      "js": [
+        "inject/all_idle.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.kiva.org/lend*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "inject/lend.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.kiva.org/about/where-kiva-works/partners/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "inject/partner.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.kiva.org/live*"
+      ],
+      "run_at": "document_end",
+      "css": [
+        "inject/live.css"
+      ],
+      "js": [
+        "inject/live.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.kiva.org/live",
+        "*://www.kiva.org/live?v=2"
+      ],
+      "run_at": "document_end",
+      "css": [
+        "inject/live_globe.css"
+      ],
+      "js": [
+        "inject/live_globe.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.kiva.org/live?v=1"
+      ],
+      "run_at": "document_end",
+      "css": [
+        "inject/live_map.css"
+      ],
+      "js": [
+        "inject/live_map.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.kiva.org/myLenderId*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "inject/my_lender_id.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.kiva.org/settings/credit?kla=true&*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "inject/set_auto_lending_options.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.kiva.org/lender/*"
+      ],
+      "js": [
+        "inject/lender.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.kiva.org/team/*"
+      ],
+      "css": [
+        "inject/team.css"
+      ],
+      "js": [
+        "inject/team.js"
+      ]
+    }
+  ]
+}

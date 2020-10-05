@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "ServiceClicked",
+  "description": "ServiceClicked is Amazon sellers' all-in-one productive toolset, which utilizes browser automation to get work done in one click.",
+  "version": "1.0.3",
+  "manifest_version": 2,
+  "minimum_chrome_version": "54",
+  "permissions": [
+    "debugger",
+    "downloads",
+    "tabs",
+    "storage",
+    "https://www.serviceclicked.com/*",
+    "http://serviceclicked/*"
+  ],
+  "background": {
+    "scripts": [
+      "core/background/boot.js",
+      "core/background/bundle.js"
+    ],
+    "persistent": true
+  },
+  "icons": {
+    "16": "favicon-16x16.png",
+    "48": "favicon-48x48.png",
+    "128": "favicon-128x128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.serviceclicked.com/*"
+      ],
+      "js": [
+        "core/content/contentscript.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "browser_action": {
+    "default_popup": "core/popup/popup.html",
+    "default_icon": {
+      "16": "favicon-16x16.png",
+      "48": "favicon-48x48.png",
+      "128": "favicon-128x128.png"
+    }
+  },
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com 'unsafe-eval'; object-src 'self';"
+}

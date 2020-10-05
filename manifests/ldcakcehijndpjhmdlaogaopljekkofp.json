@@ -1,0 +1,42 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "OkHighlight",
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "description": "A Profile Keyword Highlighter for OkCupid.",
+  "icons": {
+    "128": "images/icon-128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "node_modules/jquery/dist/jquery.min.js",
+      "scripts/background.js",
+      "scripts/popup.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "webNavigation",
+    "webRequest",
+    "*://*.google.com/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.okcupid.com/*",
+        "https://www.okcupid.com/*"
+      ],
+      "js": [
+        "node_modules/jquery/dist/jquery.min.js",
+        "scripts/main.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_title": "OkHighlight",
+    "default_popup": "popup.html"
+  }
+}

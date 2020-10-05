@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Duffel",
+  "description": "Duffel: Add a button to your Gmail to download email messages as a PDF (or set of PDFs) in one-click",
+  "version": "1.6.15",
+  "author": "Duffel",
+  "manifest_version": 2,
+  "permissions": [
+    "https://mail.google.com/",
+    "https://inbox.google.com/",
+    "https://local.getduffel.com/",
+    "https://dev.getduffel.com/",
+    "https://getduffel.com/",
+    "notifications"
+  ],
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*"
+      ],
+      "js": [
+        "js/inboxsdk.js",
+        "js/loader.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*"
+      ],
+      "css": [
+        "css/extension.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "js/proxy.js"
+  ],
+  "icons": {
+    "16": "images/duffel-16x16.png",
+    "48": "images/duffel-48x48.png",
+    "128": "images/duffel-128x128.png"
+  }
+}

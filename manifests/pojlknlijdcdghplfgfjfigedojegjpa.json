@@ -1,0 +1,41 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Windesheim rooster downloader",
+  "version": "2.0",
+  "description": "Exporteer je Windesheim rooster naar je favo agenda applicatie. Voegt een download knop toe aan de rooster instellingen pagina.",
+  "browser_action": {
+    "default_title": "Download je rooster",
+    "default_icon": "imgs/logo.png"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "http://liveadminwindesheim.sharepoint.com/*",
+    "https://liveadminwindesheim.sharepoint.com/*",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "icons": {
+    "16": "imgs/logo2.png",
+    "48": "imgs/logo2.png",
+    "128": "imgs/logo2.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://liveadminwindesheim.sharepoint.com/*",
+        "https://liveadminwindesheim.sharepoint.com/*"
+      ],
+      "js": [
+        "js/jquery-1.11.2.min.js",
+        "js/ics.min.js",
+        "js/background.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "js/injected.js"
+  ]
+}

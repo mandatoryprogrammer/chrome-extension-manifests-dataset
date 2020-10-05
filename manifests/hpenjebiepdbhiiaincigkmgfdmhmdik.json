@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Recommend on WeGoOut",
+  "version": "2.0",
+  "manifest_version": 2,
+  "description": "Recommend your events directly from Facebook",
+  "icons": {
+    "16": "recommend_16.png",
+    "48": "recommend_48.png",
+    "128": "recommend_128.png"
+  },
+  "permissions": [
+    "tabs",
+    "cookies",
+    "https://*.wegoout.com/",
+    "http://*.wegoout.com/",
+    "storage"
+  ],
+  "page_action": {
+    "default_icon": {
+      "19": "page_action_19.png",
+      "28": "page_action_38.png"
+    },
+    "default_title": "Recommend event",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.facebook.com/events/*",
+        "https://*.facebook.com/events/*"
+      ],
+      "css": [
+        "recommend.css"
+      ],
+      "js": [
+        "jquery-1.7.1.min.js",
+        "recommend.js"
+      ],
+      "images": [
+        "wegoout.png"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'"
+}

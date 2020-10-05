@@ -1,0 +1,41 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "MS KB English Only",
+  "short_name": "MS KB ENG",
+  "description": "Redirects from automatically translated page of Microsoft/Mozilla Knowledge Base to original EN-US text",
+  "version": "1.2.0.5",
+  "author": "DmitriyH",
+  "icons": {
+    "128": "images/ms_kb_icon128.png"
+  },
+  "permissions": [
+    "tabs",
+    "*://*.microsoft.com/*",
+    "*://developer.mozilla.org/*"
+  ],
+  "page_action": {
+    "default_icon": {
+      "19": "images/ms_kb_icon19_enabled.png",
+      "38": "images/ms_kb_icon38_enabled.png"
+    },
+    "default_title": "MS KB English Only"
+  },
+  "background": {
+    "persistent": true,
+    "page": "background/mskb_backround.html"
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "*://*.microsoft.com/*",
+        "*://developer.mozilla.org/*"
+      ],
+      "js": [
+        "content_scripts/mskb_content_script.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'"
+}

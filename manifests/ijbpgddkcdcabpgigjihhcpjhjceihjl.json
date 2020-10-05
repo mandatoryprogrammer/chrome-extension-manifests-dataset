@@ -1,0 +1,39 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Autologout customer notifier",
+  "description": "This extension shows a popup and logs user out when inactive.",
+  "version": "1.1",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "activeTab",
+    "https://ajax.googleapis.com/",
+    "cookies",
+    "*://*.anttila.com/*",
+    "background",
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.anttila.com/*",
+        "*://*.kodin1.com/*"
+      ],
+      "js": [
+        "contentscript.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "injectscript.js",
+    "inject.css"
+  ]
+}

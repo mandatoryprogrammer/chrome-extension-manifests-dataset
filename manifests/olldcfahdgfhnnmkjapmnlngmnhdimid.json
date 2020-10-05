@@ -1,0 +1,85 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "src/inject/inject.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png"
+    },
+    "default_popup": "src/inject/app/index.html",
+    "default_title": "Urdu for Chrome"
+  },
+  "content_scripts": [
+    {
+      "css": [
+        "src/inject/inject.css"
+      ],
+      "exclude_matches": [
+        "*://www.bbc.com/*",
+        "*://www.bbc.co.uk/urdu/*",
+        "*://twitter.com/*",
+        "*://ur.wikipedia.org/*",
+        "*://pnb.wikipedia.org/*",
+        "*://quran.com/*"
+      ],
+      "matches": [
+        "*://*/*"
+      ]
+    },
+    {
+      "css": [
+        "src/inject/twitter.css"
+      ],
+      "matches": [
+        "*://twitter.com/*"
+      ]
+    },
+    {
+      "css": [
+        "src/inject/wiki.css"
+      ],
+      "matches": [
+        "*://pnb.wikipedia.org/*",
+        "*://web.whatsapp.com/*"
+      ]
+    },
+    {
+      "css": [
+        "src/inject/google.css"
+      ],
+      "matches": [
+        "*://*.google.com/*",
+        "*://*.google.com.pk/*",
+        "*://*/search?*",
+        "*://google.com.pk/*",
+        "*://*/#q*"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://www.google.com/; object-src 'self'",
+  "default_locale": "en",
+  "description": "Urdu for Chrome | Nastaleeq Font For Web - Supports Google, Facebook, Twitter, Whatsapp , Wiki and Many More ",
+  "homepage_url": "http://github.com/fahadyousafmahar/chromeurdu/",
+  "icons": {
+    "128": "icons/icon128.png",
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png"
+  },
+  "manifest_version": 2,
+  "name": "Urdu for Chrome",
+  "short_name": "Urdu",
+  "permissions": [
+    "contentSettings",
+    "*://*/*"
+  ],
+  "version": "2.1",
+  "web_accessible_resources": [
+    "src/inject/*.ttf"
+  ],
+  "incognito": "not_allowed"
+}

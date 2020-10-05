@@ -1,0 +1,159 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Juris-M Connector",
+  "manifest_version": 2,
+  "version": "5.0.66.1",
+  "description": "Save references to Zotero from your web browser",
+  "default_locale": "en",
+  "browser_action": {
+    "default_icon": {
+      "16": "images/treeitem-webpage-gray.png",
+      "32": "images/treeitem-webpage-gray@2x.png",
+      "48": "images/treeitem-webpage-gray@48px.png"
+    },
+    "default_title": "Save to Juris-M"
+  },
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "tabs",
+    "contextMenus",
+    "cookies",
+    "webRequest",
+    "webRequestBlocking",
+    "webNavigation",
+    "storage"
+  ],
+  "optional_permissions": [
+    "management"
+  ],
+  "background": {
+    "scripts": [
+      "browser-polyfill.js",
+      "node_modules.js",
+      "zotero_config.js",
+      "zotero.js",
+      "i18n.js",
+      "promise.js",
+      "prefs.js",
+      "api.js",
+      "http.js",
+      "oauthsimple.js",
+      "proxy.js",
+      "connector.js",
+      "cachedTypes.js",
+      "zotero/date.js",
+      "zotero/debug.js",
+      "errors_webkit.js",
+      "zotero/xregexp/xregexp.js",
+      "zotero/xregexp/addons/build.js",
+      "zotero/xregexp/addons/matchrecursive.js",
+      "zotero/xregexp/addons/unicode/unicode-base.js",
+      "zotero/xregexp/addons/unicode/unicode-categories.js",
+      "zotero/xregexp/addons/unicode/unicode-zotero.js",
+      "zotero/openurl.js",
+      "repo.js",
+      "zotero/translation/tlds.js",
+      "zotero/translation/translator.js",
+      "translators.js",
+      "zotero/connectorTypeSchemaData.js",
+      "zotero/utilities.js",
+      "utilities.js",
+      "zotero-google-docs-integration/api.js",
+      "messages.js",
+      "messaging.js",
+      "webRequestIntercept.js",
+      "contentTypeHandler.js",
+      "firefoxPDF.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "browser-polyfill.js",
+        "node_modules.js",
+        "zotero_config.js",
+        "zotero.js",
+        "promise.js",
+        "http.js",
+        "proxy.js",
+        "cachedTypes.js",
+        "zotero/date.js",
+        "zotero/debug.js",
+        "zotero/openurl.js",
+        "zotero/xregexp/xregexp.js",
+        "zotero/xregexp/addons/build.js",
+        "zotero/xregexp/addons/matchrecursive.js",
+        "zotero/xregexp/addons/unicode/unicode-base.js",
+        "zotero/xregexp/addons/unicode/unicode-categories.js",
+        "zotero/xregexp/addons/unicode/unicode-zotero.js",
+        "zotero/rdf/init.js",
+        "zotero/rdf/uri.js",
+        "zotero/rdf/term.js",
+        "zotero/rdf/identity.js",
+        "zotero/rdf/match.js",
+        "zotero/rdf/rdfparser.js",
+        "zotero/translation/translate.js",
+        "zotero/translation/translator.js",
+        "translate_item.js",
+        "zotero/connectorTypeSchemaData.js",
+        "zotero/dateparser.js",
+        "zotero/utilities.js",
+        "zotero/utilities_translate.js",
+        "utilities.js",
+        "inject/http.js",
+        "inject/translate_inject.js",
+        "integration/connectorIntegration.js",
+        "messages.js",
+        "messaging_inject.js",
+        "inject/progressWindow_inject.js",
+        "inject/modalPrompt_inject.js",
+        "i18n.js",
+        "api.js",
+        "inject/inject.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://docs.google.com/document/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "zotero-google-docs-integration/kixAddZoteroMenu.js",
+        "zotero-google-docs-integration/client.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "images/*",
+    "progressWindow/progressWindow.html",
+    "modalPrompt/modalPrompt.html",
+    "test/data/journalArticle-single.html"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "homepage_url": "https://www.zotero.org/",
+  "icons": {
+    "16": "Icon-16.png",
+    "48": "Icon-48.png",
+    "96": "Icon-96.png",
+    "128": "Icon-128.png"
+  },
+  "options_ui": {
+    "page": "preferences/preferences.html",
+    "open_in_tab": true
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+S"
+      }
+    }
+  },
+  "minimum_chrome_version": "55"
+}

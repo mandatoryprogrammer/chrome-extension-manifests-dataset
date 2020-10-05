@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "BlueJeans for Google Calendar",
+  "short_name": "BJ for GCal",
+  "version": "3.3.0.56",
+  "manifest_version": 2,
+  "description": "Schedule BlueJeans video meetings directly from Google Calendar",
+  "options_page": "options.html",
+  "browser_action": {
+    "default_title": "BlueJeans for Google Calendar",
+    "default_icon": "/images/bjn_icon_19.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "/js/analytics.js",
+      "/js/bg.min.js"
+    ]
+  },
+  "permissions": [
+    "storage",
+    "unlimitedStorage",
+    "tabs",
+    "background",
+    "https://*.google.com/*",
+    "https://*.bluejeans.com/*",
+    "http://*.bluejeans.com/*"
+  ],
+  "content_security_policy": "script-src 'self' https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js https://bluejeans.com https://z2.bluejeans.com; object-src 'self'",
+  "icons": {
+    "16": "/images/bjn_icon_16.png",
+    "19": "/images/bjn_icon_19.png",
+    "48": "/images/bjn_icon_48.png",
+    "128": "/images/bjn_icon_128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.google.com/*",
+        "https://*.bluejeans.com/*",
+        "http://*.bluejeans.com/*"
+      ],
+      "js": [
+        "/js/content.min.js"
+      ],
+      "css": [
+        "/css/content_gc.css"
+      ],
+      "all_frames": false,
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "manifest.json",
+    "images/ic_down_arrow_white.png",
+    "images/button_spinner.gif",
+    "images/arrow_drop_down.svg",
+    "images/bjn-logo.svg",
+    "images/settings.svg",
+    "images/close_icon.svg",
+    "css/dropdown.css",
+    "dropdown.html"
+  ]
+}

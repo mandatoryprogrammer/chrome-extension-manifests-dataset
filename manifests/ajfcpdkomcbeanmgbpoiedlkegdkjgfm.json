@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Crunchysync",
+  "version": "3.0.5",
+  "manifest_version": 2,
+  "description": "Sync the Crunchyroll queue properly",
+  "browser_action": {
+    "default_icon": "assets/images/crunchysync.png",
+    "default_title": "Crunchysync",
+    "default_popup": "index.html"
+  },
+  "icons": {
+    "16": "assets/images/crunchysync16.png",
+    "48": "assets/images/crunchysync48.png",
+    "128": "assets/images/crunchysync.png"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.crunchyroll.com/*"
+      ],
+      "js": [
+        "queuescript.min.js"
+      ],
+      "css": [
+        "queuescript.min.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "page": "backgroundscript.html"
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "storage",
+    "alarms",
+    "notifications",
+    "contextMenus",
+    "*://*.crunchyroll.com/*"
+  ],
+  "web_accessible_resources": [
+    "index.html"
+  ]
+}

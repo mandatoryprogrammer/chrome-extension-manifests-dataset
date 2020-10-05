@@ -1,0 +1,119 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_extName__",
+  "short_name": "__MSG_appName__",
+  "version": "1.46.2",
+  "description": "__MSG_extDesc__",
+  "default_locale": "en",
+  "author": "Bitwarden Inc.",
+  "homepage_url": "https://bitwarden.com",
+  "icons": {
+    "16": "images/icon16.png",
+    "32": "images/icon32.png",
+    "48": "images/icon48.png",
+    "96": "images/icon96.png",
+    "128": "images/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "content/autofill.js",
+        "content/autofiller.js",
+        "content/notificationBar.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": false,
+      "js": [
+        "content/shortcuts.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": false,
+      "js": [
+        "content/sso.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "css": [
+        "content/autofill.css"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon19.png",
+      "38": "images/icon38.png"
+    },
+    "default_title": "Bitwarden",
+    "default_popup": "popup/index.html"
+  },
+  "permissions": [
+    "tabs",
+    "contextMenus",
+    "storage",
+    "unlimitedStorage",
+    "clipboardRead",
+    "clipboardWrite",
+    "idle",
+    "http://*/*",
+    "https://*/*",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Y",
+        "linux": "Ctrl+Shift+U"
+      },
+      "description": "__MSG_commandOpenPopup__"
+    },
+    "autofill_login": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+L"
+      },
+      "description": "__MSG_commandAutofillDesc__"
+    },
+    "generate_password": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+9"
+      },
+      "description": "__MSG_commandGeneratePasswordDesc__"
+    }
+  },
+  "web_accessible_resources": [
+    "notification/bar.html"
+  ]
+}

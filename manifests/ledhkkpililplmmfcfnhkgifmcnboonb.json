@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Flickr Fixr",
+  "short_name": "Flickr Fixr",
+  "description": "Makes Flickr almost awesome - while waiting for SmugMug to fully fix it ;-)",
+  "version": "1.10.1",
+  "author": "Stig Nygaard",
+  "homepage_url": "https://github.com/StigNygaard/Stigs_Flickr_Fixr",
+  "permissions": [
+    "https://*.flickr.com/*",
+    "storage"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'none'",
+  "icons": {
+    "16": "icons/fr16.png",
+    "32": "icons/fixr32.png",
+    "48": "icons/fixr48.png",
+    "64": "icons/fixr64.png",
+    "96": "icons/fixr96.png",
+    "128": "icons/fixr128.png",
+    "256": "icons/fixr256.png"
+  },
+  "applications": {
+    "gecko": {
+      "strict_min_version": "52.0"
+    }
+  },
+  "minimum_chrome_version": "67.0",
+  "minimum_opera_version": "56.0",
+  "minimum_edge_version": "79.0",
+  "background": {
+    "scripts": [
+      "lib/mozilla/browser-polyfill.js",
+      "background/flickr_fixr.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.flickr.com/*",
+        "*://*.flickr.net/*"
+      ],
+      "exclude_matches": [
+        "*://api.flickr.com/*",
+        "*://identity.flickr.com/*",
+        "*://*.flickr.com/signin/*",
+        "*://*.flickr.com/signup/*",
+        "*://*.flickr.com/account/*"
+      ],
+      "js": [
+        "lib/mozilla/browser-polyfill.js",
+        "options/options.js",
+        "Stigs_Flickr_Fixr.user.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "options_ui": {
+    "page": "options/options.html",
+    "browser_style": true,
+    "chrome_style": true,
+    "open_in_tab": true
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Z Crypter",
+  "manifest_version": 2,
+  "version": "4.1",
+  "description": "Share Data Securely",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "iconOff16.png",
+    "default_popup": "encrypt.html"
+  },
+  "background": {
+    "scripts": [
+      "AES.js",
+      "encrypter.js",
+      "encryptBG.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "*://*/*",
+    "contextMenus",
+    "unlimitedStorage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "AES.js",
+        "encrypter.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

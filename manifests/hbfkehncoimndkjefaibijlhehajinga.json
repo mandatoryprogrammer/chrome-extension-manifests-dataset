@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Conciser",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "An extension to summarize a selecte3d paragraph",
+  "homepage_url": "https://github.com/cardwizard",
+  "short_name": "Create summary on the fly",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": true
+  },
+  "options_page": "src/options_custom/index.html",
+  "browser_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "browser action demo",
+    "default_popup": "src/browser_action/browser_action.html"
+  },
+  "permissions": [
+    "notifications",
+    "tabs",
+    "https://*/*",
+    "http://*/*",
+    "downloads",
+    "nativeMessaging"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "css": [
+        "src/inject/inject.css"
+      ],
+      "js": [
+        "js/jquery/jquery.min.js",
+        "src/inject/summarizer.js",
+        "src/inject/lodash.js",
+        "src/inject/tokenizer.js",
+        "src/inject/inject.js"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "minimum_chrome_version": "46",
+  "name": "TOPER",
+  "description": "__MSG_description__",
+  "permissions": [
+    "<all_urls>",
+    "chrome://favicon/",
+    "http://*/*",
+    "https://*/*",
+    "tabs",
+    "storage",
+    "bookmarks"
+  ],
+  "default_locale": "ru",
+  "version": "1.0",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "19": "icons/icon-19.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "browser_action": {
+    "default_title": "Ты онлайн",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "19": "icons/icon-19.png",
+      "32": "icons/icon-32.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    }
+  },
+  "web_accessible_resources": [
+    "main.html"
+  ],
+  "chrome_url_overrides": {
+    "newtab": "main.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "modules/content/application.js",
+        "jquery-3.4.1.min.js",
+        "main.js"
+      ],
+      "all_frames": false,
+      "run_at": "document_start"
+    }
+  ],
+  "options_ui": {
+    "page": "main.html?#settings",
+    "open_in_tab": true
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' blob: https://nova.rambler.ru https://toper.club 'sha256-Kuc4kTUXHFXygcdhisGvqvC6NqyvpqDJbs0wL3fmmS4=' 'sha256-mm8IuLqLHlz931hL2fkFfFMn13/udR3R7+P2GF3gkME='; object-src 'self'"
+}

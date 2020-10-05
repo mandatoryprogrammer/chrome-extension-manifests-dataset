@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Cuponomia - Cupom e Cashback",
+  "description": "O Cuponomia te avisa sempre que existir Cupons ou Cashback para a loja que estiver comprando. Economia em apenas um clique!",
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "manifest_version": 2,
+  "homepage_url": "https://www.cuponomia.com.br",
+  "icons": {
+    "128": "assets/img/icons/main-icon.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "128": "assets/img/icons/main-icon.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "content-scripts/check-website.js",
+        "content-scripts/inject-store-scrapers.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "js": [
+        "content-scripts/cuponomia.js"
+      ],
+      "matches": [
+        "*://*.cuponomia.com.br/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "cookies",
+    "webRequest",
+    "<all_urls>"
+  ],
+  "web_accessible_resources": [
+    "*.json",
+    "*.css",
+    "*.html",
+    "*.png",
+    "*.svg",
+    "*.js",
+    "*.woff",
+    "*.woff2",
+    "*.mp4"
+  ],
+  "version": "3.5.7"
+}

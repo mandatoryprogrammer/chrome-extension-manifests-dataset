@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Hunt Club",
+  "version": "2.1",
+  "description": "The official Hunt Club extension for Google Chrome™.",
+  "permissions": [
+    "cookies",
+    "declarativeContent",
+    "tabs",
+    "webNavigation",
+    "*://*.huntclub.com/*",
+    "*://localhost/*"
+  ],
+  "background": {
+    "scripts": [
+      "extension.js"
+    ],
+    "persistent": false
+  },
+  "page_action": {
+    "default_popup": "extension.config.html",
+    "default_icon": {
+      "48": "image/icon48.png",
+      "96": "image/icon96.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.linkedin.com/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "page.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.huntclub.com/*",
+        "*://localhost/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "app.js"
+      ]
+    }
+  ],
+  "icons": {
+    "48": "image/icon48.png",
+    "96": "image/icon96.png"
+  },
+  "web_accessible_resources": [
+    "font/futura/*",
+    "page.css",
+    "page.scrape.js"
+  ],
+  "manifest_version": 2
+}

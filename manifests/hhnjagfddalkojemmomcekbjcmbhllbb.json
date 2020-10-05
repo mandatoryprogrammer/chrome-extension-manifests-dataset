@@ -1,0 +1,77 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Streamlet Share",
+  "description": "Share image to media.",
+  "short_name": "Streamlet",
+  "version": "4.4.24",
+  "browser_action": {
+    "default_icon": "logo.png"
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "icons": {
+    "16": "logo.png",
+    "48": "logo.png",
+    "128": "logo.png"
+  },
+  "permissions": [
+    "debugger",
+    "storage",
+    "http://*/*",
+    "https://*/*",
+    "contextMenus",
+    "tabs"
+  ],
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "js": [
+        "js/jquery-1.11.2.min.js",
+        "preload.js"
+      ],
+      "match_about_blank": true,
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start",
+      "icons": {
+        "128": "facebook.png",
+        "16": "facebook.png",
+        "48": "facebook.png"
+      }
+    },
+    {
+      "all_frames": false,
+      "js": [
+        "postload.js"
+      ],
+      "match_about_blank": true,
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end",
+      "icons": {
+        "128": "facebook.png",
+        "16": "facebook.png",
+        "48": "facebook.png"
+      }
+    }
+  ],
+  "web_accessible_resources": [
+    "images/*.png",
+    "index.html",
+    "lib/*",
+    "css/*",
+    "app/*",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://ssl.google-analytics.com; object-src 'self'"
+}

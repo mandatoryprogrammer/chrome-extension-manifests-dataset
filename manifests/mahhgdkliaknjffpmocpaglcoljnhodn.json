@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Memrise Button",
+  "version": "2.0.10",
+  "manifest_version": 2,
+  "description": "An unofficial Memrise extension to help you take care of your plants",
+  "options_page": "options/index.html",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "page": "main.html",
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/icon19.png",
+      "38": "icons/icon38.png"
+    }
+  },
+  "permissions": [
+    "http://www.memrise.com/",
+    "alarms",
+    "notifications",
+    "storage",
+    "unlimitedStorage",
+    "activeTab"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://cdn.mxpnl.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.memrise.com/*"
+      ],
+      "js": [
+        "page.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "icons/icon48.png",
+    "lib/idle-timer.min.js"
+  ],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+M"
+      }
+    },
+    "plant-previous-course": {
+      "suggested_key": {
+        "default": "Alt+P"
+      },
+      "description": "Open the course level that was previously grown"
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Vrijeme",
+  "description": "Imaj najtačniju vremensku prognozu uvijek ispred sebe!",
+  "version": "1.5",
+  "icons": {
+    "16": "icon16.png",
+    "32": "icon32.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "geolocation",
+    "alarms",
+    "<all_urls>",
+    "https://api.forecast.io/*",
+    "https://maps.googleapis.com/*",
+    "https://ajax.googleapis.com/*",
+    "https://maps.googleapis.com/*",
+    "storage",
+    "topSites",
+    "https://vrijeme.ba/",
+    "tabs",
+    "notifications"
+  ],
+  "background": {
+    "scripts": [
+      "js/jquery-3.2.1.min.js",
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "js/jquery-3.2.1.min.js",
+        "js/jquery.geocomplete.min.js",
+        "js/content.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://maps.googleapis.com/; object-src 'self'"
+}

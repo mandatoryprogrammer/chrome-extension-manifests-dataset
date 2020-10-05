@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Aparecium Salários",
+  "description": "Use a extensão Aparecium Salários para desvendar os salários dos funcionários das casas legislativas de São Paulo.",
+  "version": "0.0.3",
+  "permissions": [
+    "activeTab",
+    "http://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon19.png",
+      "38": "images/icon38.png"
+    },
+    "default_title": "Revela Salários [Ligado]"
+  },
+  "content_scripts": [
+    {
+      "css": [],
+      "js": [
+        "lib/jquery-2.1.0.min.js",
+        "lib/jquery.typist.min.js",
+        "lib/csv.js",
+        "script.js"
+      ],
+      "matches": [
+        "http://www.camara.sp.gov.br/transparencia/salarios-abertos/remuneracao-dos-servidores-e-comissionados/",
+        "https://www.al.sp.gov.br/repositorio/folha-de-pagamento/*"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    "worker.js",
+    "data/*.csv"
+  ],
+  "icons": {
+    "128": "images/icon128.png"
+  },
+  "manifest_version": 2
+}

@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "chipi",
+  "short_name": "chipi",
+  "description": "Build your personal knowledge base with Chipi.",
+  "version": "0.5.2",
+  "author": "chipi ltd",
+  "default_locale": "en",
+  "browser_action": {
+    "default_icon": "logos/16x16.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "assets/js/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://web.chipi.io/?externalRedirect=chromeExt*"
+      ],
+      "js": [
+        "assets/js/codeBackInjection.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "icons": {
+    "16": "logos/16x16.png",
+    "48": "logos/48x48.png",
+    "96": "logos/96x96.png",
+    "128": "logos/128x128.png"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+C",
+        "mac": "Command+Shift+C"
+      }
+    }
+  },
+  "permissions": [
+    "history",
+    "tabs",
+    "identity",
+    "activeTab"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'"
+}

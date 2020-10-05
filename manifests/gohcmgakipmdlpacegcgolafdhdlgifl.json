@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "author": "The Master",
+  "name": "Steam Web Filter Bypasser",
+  "description": "Provides automatic functionality to Steam's web filter pages",
+  "manifest_version": 2,
+  "version": "1.5.2",
+  "icons": {
+    "128": "thumbnail-128.png"
+  },
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "*://steamcommunity.com/*"
+  ],
+  "background": {
+    "scripts": [
+      "background-min.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "*://steamcommunity.com/linkfilter/*"
+      ],
+      "js": [
+        "linkfilter-min.js"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "*://steamcommunity.com/sharedfiles/*",
+        "*://steamcommunity.com/app/*"
+      ],
+      "js": [
+        "agegate-min.js"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "*://steamcommunity.com/market/*"
+      ],
+      "js": [
+        "marketssa-min.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "background-min.js",
+    "linkfilter-min.js",
+    "agegate-min.js",
+    "thumbnail-128.png"
+  ]
+}

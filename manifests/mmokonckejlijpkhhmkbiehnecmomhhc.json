@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "ConSearcher",
+  "version": "2.0.1",
+  "description": "No Description",
+  "icons": {
+    "16": "img/icon16.png",
+    "128": "img/icon128.png"
+  },
+  "page_action": {
+    "default_icon": {
+      "16": "img/icon16.png",
+      "24": "img/icon24.png",
+      "32": "img/icon32.png"
+    },
+    "default_title": "ConSearcher",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.google.com/*",
+        "https://*.baidu.com/*"
+      ],
+      "js": [
+        "js/jquery-3.4.1.min.js",
+        "js/keyword.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "permissions": [
+    "webRequest",
+    "contextMenus",
+    "tabs",
+    "activeTab",
+    "storage",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "commands": {
+    "do-consearch": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+S",
+        "mac": "Command+Shift+S"
+      },
+      "description": "Do the consearch"
+    }
+  }
+}

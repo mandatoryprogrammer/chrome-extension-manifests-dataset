@@ -1,0 +1,68 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "browser-playerctl",
+  "description": "Implements the MPRIS2 interface for Chrome and Firefox",
+  "version": "0.2",
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.youtube.com/*",
+        "*://youtube.com/*"
+      ],
+      "js": [
+        "jquery.min.js",
+        "providers/youtube.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.play.google.com/*",
+        "*://play.google.com/*"
+      ],
+      "js": [
+        "jquery.min.js",
+        "lodash.js",
+        "providers/base.js",
+        "providers/play-music.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.open.spotify.com/*",
+        "*://open.spotify.com/*"
+      ],
+      "js": [
+        "jquery.min.js",
+        "lodash.js",
+        "providers/base.js",
+        "providers/spotify.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.music.youtube.com/*",
+        "*://music.youtube.com/*"
+      ],
+      "js": [
+        "jquery.min.js",
+        "lodash.js",
+        "providers/base.js",
+        "providers/youtube-music.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "nativeMessaging"
+  ]
+}

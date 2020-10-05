@@ -1,0 +1,93 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Airstack for Chrome",
+  "version": "1.45.3",
+  "manifest_version": 2,
+  "minimum_chrome_version": "53",
+  "description": "Airstack for Chrome",
+  "default_locale": "en",
+  "icons": {
+    "48": "assets/icons/Lenovo_Airstack_icon-for-extension_fullcolor_48x48.png",
+    "96": "assets/icons/Lenovo_Airstack_icon-for-extension_fullcolor_96x96.png",
+    "128": "assets/icons/Lenovo_Airstack_icon-for-extension_fullcolor_128x128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "assets/icons/Lenovo_Airstack_icon-for-extension_fullcolor_16x16.png",
+      "19": "assets/icons/Lenovo_Airstack_icon-for-extension_fullcolor_19x19.png",
+      "20": "assets/icons/Lenovo_Airstack_icon-for-extension_fullcolor_20x20.png",
+      "24": "assets/icons/Lenovo_Airstack_icon-for-extension_fullcolor_24x24.png",
+      "25": "assets/icons/Lenovo_Airstack_icon-for-extension_fullcolor_25x25.png",
+      "30": "assets/icons/Lenovo_Airstack_icon-for-extension_fullcolor_30x30.png",
+      "32": "assets/icons/Lenovo_Airstack_icon-for-extension_fullcolor_32x32.png",
+      "38": "assets/icons/Lenovo_Airstack_icon-for-extension_fullcolor_38x38.png",
+      "40": "assets/icons/Lenovo_Airstack_icon-for-extension_fullcolor_40x40.png",
+      "64": "assets/icons/Lenovo_Airstack_icon-for-extension_fullcolor_64x64.png"
+    },
+    "default_title": "Lenovo Airstack for Chrome"
+  },
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "vendor-253ae210.js",
+        "vendor-65993762.js",
+        "vendor-9c5b28f6.js",
+        "vendor-cfbf0a2e.js",
+        "common-f71cff67.js",
+        "scripts/shared/polyfills.js",
+        "lib/xbrowser-polyfill.js",
+        "scripts/content-script.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "run_at": "document_start",
+      "matches": [
+        "*://*.lenovosoftware.com/*",
+        "*://*.airclass-sandbox.com/*",
+        "*://*.airstack.com/*"
+      ],
+      "js": [
+        "vendor-253ae210.js",
+        "vendor-65993762.js",
+        "vendor-9c5b28f6.js",
+        "vendor-cfbf0a2e.js",
+        "common-f71cff67.js",
+        "scripts/shared/polyfills.js",
+        "lib/xbrowser-polyfill.js",
+        "scripts/workspace-bridge-service.js"
+      ],
+      "all_frames": false
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "storage",
+    "idle",
+    "contextMenus",
+    "*://*.lenovosoftware.com/*"
+  ],
+  "incognito": "split",
+  "web_accessible_resources": [
+    "pending-passport-dialog.html",
+    "account-selection-dialog.html",
+    "page-notification.html",
+    "assets/airstack-logo.svg",
+    "assets/airstack-logo-white.svg",
+    "assets/gradient-bg.jpg"
+  ]
+}

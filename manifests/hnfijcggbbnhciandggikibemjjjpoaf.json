@@ -1,0 +1,87 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Engagio",
+  "description": "Engagio Scout is an all-in-one Chrome Extension for B2B Account Based Marketing Teams.",
+  "version": "6.18.0.0",
+  "icons": {
+    "16": "images/icon16.png",
+    "32": "images/icon32.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "images/icon32.png",
+    "default_title": "Demandbase",
+    "default_popup": "popup.html"
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlErD6eCWGPp0KFfeoO2XRDt5lXEUsZ8EEt9UwAzMvynEty+vCGEOf0I2a8jw04iS0PybEeHe/S7AaCK7zDuMiVT8oLajh3H6ukzJA2jaHf9cmVyBl+DQBaWSmuJDqTD0xbkwf/ELR7TxgJ4wLEHyDdZb2snGcnRYzsD6jgnYtFtt6Er/n6GAJ08idDoHPNNbbgf0qpyiMMOerDjFRhABBcO0aZd9+W+IeECD2WF5BPxTI1oWJpK99UO5UwFeIK1rE7XCwQWwWNtS90eqW9BZWXnB4vOggwuSi9df7XyG0MbarsqqUceZ+bojZWLJU6B5vtI8TaTwrd6dLf5dOk5ijQIDAQAB",
+  "background": {
+    "page": "background.html"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "externally_connectable": {
+    "matches": [
+      "https://mail.google.com/*",
+      "https://*.demandbase.com/*",
+      "https://*.engagio.com/*",
+      "http://localdev.engagio.com/*"
+    ]
+  },
+  "permissions": [
+    "<all_urls>",
+    "identity",
+    "identity.email",
+    "idle",
+    "storage",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "cookies",
+    "https://*.demandbase.com/*"
+  ],
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "css": [
+        "styles/content.css"
+      ],
+      "js": [
+        "js/jquery.js",
+        "js/vendor.js",
+        "js/content.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "https://web.gdpr-dev.demandbase.com/*",
+        "https://web.stg.demandbase.com/*",
+        "https://web.demandbase.com/*",
+        "https://engagio-ui.engagio.com/*",
+        "https://staging.engagio.com/o/*",
+        "https://app.engagio.com/o/*",
+        "https://demandbase.gitlab.io/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "../node_modules/jquery/dist/jquery.min.js",
+    "images/*",
+    "js/content.js",
+    "js/jquery.js",
+    "js/main.js",
+    "js/options.js",
+    "js/popup.js",
+    "js/vendor.js",
+    "styles/content.css",
+    "styles/options.css",
+    "styles/popup.css",
+    "engagio_frame.html",
+    "demandbase_frame.html"
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "JarMind",
+  "description": "simple, convenient password hints...trust yourself, your secrets are in your mind",
+  "version": "1.0",
+  "icons": {
+    "16": "jm-icon-app-16.png",
+    "48": "jm-icon-app-48.png",
+    "128": "jm-icon-app-128.png"
+  },
+  "browser_action": {
+    "default_icon": "jm-icon-app-128.png",
+    "default_popup": "jar.html"
+  },
+  "permissions": [
+    "https://www.jarmind.com/",
+    "http://www.jarmind.com/",
+    "http://localhost:7977/",
+    "activeTab"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "checkForLogin.js"
+      ],
+      "css": [
+        "inlineJarDisplay.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

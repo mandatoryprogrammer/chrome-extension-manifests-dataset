@@ -1,0 +1,738 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Keyata Media Keys",
+  "version": "1.0.8",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "description": "Control your favorite web-based music player with your keyboard's media keys",
+  "homepage_url": "https://github.com/keyata/keyata",
+  "permissions": [
+    "tabs",
+    "contextMenus"
+  ],
+  "manifest_version": 2,
+  "commands": {
+    "prev": {
+      "suggested_key": {
+        "default": "MediaPrevTrack",
+        "mac": "MediaPrevTrack"
+      },
+      "description": "Play Previous Track",
+      "global": true
+    },
+    "play-pause": {
+      "suggested_key": {
+        "default": "MediaPlayPause",
+        "mac": "MediaPlayPause"
+      },
+      "description": "Play/Pause Active Audio",
+      "global": true
+    },
+    "next": {
+      "suggested_key": {
+        "default": "MediaNextTrack",
+        "mac": "MediaNextTrack"
+      },
+      "description": "Play Next Track",
+      "global": true
+    },
+    "stop": {
+      "suggested_key": {
+        "default": "MediaStop",
+        "mac": "MediaStop"
+      },
+      "description": "Stop Audio",
+      "global": true
+    }
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "page_action": {
+    "default_title": "Keyata Media Keys extension",
+    "default_icon": {
+      "19": "icons/icon19.png",
+      "38": "icons/icon38.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "media-control-api.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://mp3.zing.vn/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-zing-mp3.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://beta.mp3.zing.vn/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-zing-mp3-beta.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://8tracks.com/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-eighttracks.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://music.amazon.com/*",
+        "*://music.amazon.com.au/*",
+        "*://music.amazon.co.uk/*",
+        "*://music.amazon.de/*",
+        "*://music.amazon.es/*",
+        "*://music.amazon.fr/*",
+        "*://music.amazon.co.jp/*",
+        "*://music.amazon.in/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-amazon-music.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.amazon.co.uk/gp/video/*",
+        "*://www.amazon.com/gp/video/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-amazon-video.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://developer.apple.com/videos*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-apple-developer.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.bandcamp.com/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-bandcamp.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.birp.fm/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-birp.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://music.bugs.co.kr/newPlayer*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-bugs.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*/*.mp3",
+        "*://*/*.mp3?*",
+        "file:///*.mp3"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-builtin-player.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.deezer.com/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-deezer.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.di.fm/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-digitallyimported.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.gaana.com/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-gaana.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://play.google.com/music/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-google-music.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.happyon.jp/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-hulu-jp.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://hearthis.at/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-hearthis.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://hypem.com/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-hypem.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.iloveradio.de/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-iloveradio.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://jamstash.com/*",
+        "*://*.jamstash.com/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-jamstash.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.jango.com/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-jango.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.linkedin.com/learning/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-linkedin-learning.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.mixcloud.com/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-mixcloud.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.musicchoice.com/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-musicchoice.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://myspace.com/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-myspace.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.myzuka.me/*",
+        "*://*.myzcloud.org/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-myzcloud.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.naxosmusiclibrary.com/mediaplayer/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-nml.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.netflix.com/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-netflix.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.nhk.or.jp/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-nhk.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://noonpacific.com/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-noon-pacific.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://radio.nrk.no/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-nrkradio.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://ok.ru/*",
+        "*://www.ok.ru/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-ok.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://overcast.fm/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-overcast.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.pandora.com/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-pandora.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.phishtracks.com/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-phishtracks.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://picarto.tv/*",
+        "*://*.picarto.tv/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-picartotv.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://plex.tv/web/*",
+        "*://app.plex.tv/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-plex.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://play.pocketcasts.com/*",
+        "*://playbeta.pocketcasts.com/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-pocketcasts.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.qobuz.com/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-qobuz.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.saavn.com/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-saavn.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.siriusxm.com/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-siriusxm.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.slacker.com/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-slacker.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://somafm.com/player/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-somafm.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://soundcloud.com/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-soundcloud.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://sowndhaus.com/*",
+        "*://sowndhaus.audio/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-sowndhaus.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.spotify.com/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-spotify.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.spreaker.com/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-spreaker.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.streamsquid.com/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-streamsquid.js"
+      ]
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "*://*/playQueue.view",
+        "*://*/playQueue.view?",
+        "*://*/playQueue.view?*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-subsonic.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.superplayer.fm/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-superplayer.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*/webman/*",
+        "*://*/audio/"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-synology.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://listen.tidalhifi.com/*",
+        "*://listen.tidal.com/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-tidal.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.tunein.com/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-tunein.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://tver.jp/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-tver.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.twitch.tv/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-twitch.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.ustream.tv/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-ustream.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://vk.com/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-vkontakte.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://tv.xfinity.com/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-xfinity.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://www.xiami.com/play*",
+        "https://emumo.xiami.com/play*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-xiami.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://music.yandex.ru/*",
+        "*://music.yandex.by/*",
+        "*://music.yandex.ua/*",
+        "*://music.yandex.kz/*",
+        "*://music.yandex.tr/*",
+        "*://music.yandex.com/*",
+        "*://radio.yandex.ru/*",
+        "*://radio.yandex.by/*",
+        "*://radio.yandex.ua/*",
+        "*://radio.yandex.kz/*",
+        "*://radio.yandex.tr/*",
+        "*://radio.yandex.com/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-yandex-music-and-radio.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://music.youtube.com/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-youtube-music.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.youtube.com/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-youtube.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://zvooq.com/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-zvooq.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://music.163.com/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-163.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.crunchyroll.com/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-crunchyroll.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.vimeo.com/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-vimeo.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.supersport.com/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-supersport.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.showmax.com/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-showmax.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://app.napster.com/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-napster.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://app.pluralsight.com/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-pluralsight.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.metopera.org/Season/On-Demand/opera/*"
+      ],
+      "js": [
+        "plugin-api.js",
+        "keysocket-metopera.js"
+      ]
+    }
+  ]
+}

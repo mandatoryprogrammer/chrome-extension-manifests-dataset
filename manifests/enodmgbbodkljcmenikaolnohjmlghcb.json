@@ -1,0 +1,39 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Utopian",
+  "version": "1.1.2",
+  "description": "An easy solution for posting to Utopian from the steemit interface.",
+  "web_accessible_resources": [
+    "src/*"
+  ],
+  "content_security_policy": "connect-src 'self' *; script-src 'self' 'unsafe-eval' https://widget.blocktrades.us/ ; object-src 'self'; child-src 'unsafe-eval' 'self' https://widget.blocktrades.us/",
+  "permissions": [
+    "tabs",
+    "storage"
+  ],
+  "icons": {
+    "16": "src/icons/icon16.png",
+    "48": "src/icons/icon48.png",
+    "128": "src/icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "src/third_party/jquery.js",
+        "src/third_party/steemconnect.js",
+        "src/ext/main.js"
+      ],
+      "matches": [
+        "https://steemit.com/*",
+        "https://join.utopian.io/?access_token=*"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "src/ext/background.js",
+      "src/third_party/jquery.js"
+    ]
+  }
+}

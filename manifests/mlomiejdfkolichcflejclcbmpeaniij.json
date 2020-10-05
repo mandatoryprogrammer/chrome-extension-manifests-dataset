@@ -1,0 +1,109 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "author": "Ghostery",
+  "name": "__MSG_name__",
+  "short_name": "Ghostery",
+  "version": "8.5.2.1",
+  "version_name": "8.5.2.1",
+  "default_locale": "en",
+  "description": "__MSG_short_description__",
+  "icons": {
+    "16": "app/images/icon16.png",
+    "48": "app/images/icon48.png",
+    "128": "app/images/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "app/images/icon19_off.png",
+      "38": "app/images/icon38_off.png"
+    },
+    "default_title": "Ghostery"
+  },
+  "options_ui": {
+    "page": "app/templates/hub.html",
+    "open_in_tab": true
+  },
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "js": [
+        "dist/ghostery_dot_com.js"
+      ],
+      "css": [
+        "dist/css/ghostery_dot_com_css.css"
+      ],
+      "matches": [
+        "https://www.ghostery.com/*",
+        "https://apps.ghostery.com/*",
+        "https://staging-apps.ghostery.com/*",
+        "https://gcache.ghostery.com/*",
+        "https://staging-gcache.ghostery.com/*"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "all_frames": false,
+      "js": [
+        "dist/account_pages.js"
+      ],
+      "matches": [
+        "https://account.ghostery.com/*",
+        "https://account.ghosterystage.com/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": false,
+      "js": [
+        "dist/checkout_pages.js"
+      ],
+      "matches": [
+        "https://checkout.ghostery.com/*",
+        "https://checkout.ghosterystage.com/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "dist/content_script_bundle.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "*://*/_/chrome/newtab*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "permissions": [
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking",
+    "cookies",
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "ws://*/*",
+    "wss://*/*",
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "dist/background.js"
+    ],
+    "persistent": true
+  },
+  "minimum_chrome_version": "69",
+  "web_accessible_resources": [
+    "app/images/*",
+    "dist/css/rewards_styles.css",
+    "cliqz/offers-templates/reminder.html",
+    "cliqz/offers-templates/checkout.html",
+    "cliqz/offers-templates/control-center.html"
+  ]
+}

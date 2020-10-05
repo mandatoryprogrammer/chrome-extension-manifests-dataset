@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "券大师",
+  "version": "1.0.1.7",
+  "manifest_version": 2,
+  "description": "券大师是网购省钱利器，能自动查询淘宝内部隐藏优惠券的好助手，具体功能如在宝贝详情页自动显示优惠券详情，可以点击领取优惠券。宝贝详情页有优惠券自动提醒用户领取，自动计算券后价。在用户打开有优惠券的商品时，提醒用户会转为淘客链接，用户允许后才会跳转。",
+  "icons": {
+    "16": "logos/16.png",
+    "48": "logos/48.png",
+    "128": "logos/128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "logos/19.png",
+      "38": "logos/38.png"
+    },
+    "default_title": "券大师",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "jquery.js",
+        "contentScript.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "css": [
+        "css/ext-main.css"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "storage",
+    "unlimitedStorage",
+    "webRequest",
+    "webRequestBlocking",
+    "tabs",
+    "management",
+    "nativeMessaging"
+  ],
+  "content_security_policy": "script-src 'self'  'unsafe-eval'; object-src 'self'",
+  "background": {
+    "page": "background.html"
+  },
+  "web_accessible_resources": [
+    "*"
+  ]
+}

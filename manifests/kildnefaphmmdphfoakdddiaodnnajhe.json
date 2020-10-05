@@ -1,0 +1,104 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Renovador anuncios",
+  "short_name": "Renovador anuncios",
+  "version": "2.0.3",
+  "manifest_version": 2,
+  "description": "__MSG_extDescription__",
+  "author": "Fran Roldán",
+  "offline_enabled": false,
+  "homepage_url": "https://www.renovador.es",
+  "content_security_policy": "script-src 'self' https://renovador.es; object-src 'self'",
+  "default_locale": "es",
+  "background": {
+    "scripts": [
+      "js/jquery.js",
+      "js/globals.js",
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "icons": {
+    "16": "img/icon-128.png",
+    "48": "img/icon-128.png",
+    "128": "img/icon-128.png",
+    "256": "img/icon-256.png"
+  },
+  "browser_action": {
+    "default_icon": "img/icon-256.png",
+    "default_popup": "popup.html",
+    "default_title": "RenovadorES\nRenueva anuncios automáticamente"
+  },
+  "web_accessible_resources": [
+    "assets/error.mp3"
+  ],
+  "permissions": [
+    "storage",
+    "tabs"
+  ],
+  "optional_permissions": [
+    "notifications",
+    "power",
+    "background"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://*.renovador.es/apì/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.milanuncios.com/mis-anuncios",
+        "https://www.milanuncios.com/mis-anuncios/"
+      ],
+      "js": [
+        "js/jquery.js",
+        "js/toasts/toast.js",
+        "js/globals.js",
+        "js/milanuncios/alerts.js",
+        "js/milanuncios/milanuncios.js"
+      ],
+      "css": [
+        "js/toasts/toast.css"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://www.milanuncios.com/renovar/?id=*"
+      ],
+      "js": [
+        "js/milanuncios/alerts.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://*.custojusto.pt/user/myads?tab=3"
+      ],
+      "js": [
+        "js/jquery.js",
+        "js/toasts/toast.js",
+        "js/globals.js",
+        "js/custojusto/custojusto.js"
+      ],
+      "css": [
+        "js/toasts/toast.css"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://*.custojusto.pt/ai/form*"
+      ],
+      "js": [
+        "js/jquery.js",
+        "js/globals.js",
+        "js/custojusto/inserir.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

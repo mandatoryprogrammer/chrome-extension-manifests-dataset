@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Lyrics Masti Extension",
+  "version": "0.0.2",
+  "manifest_version": 2,
+  "description": "Lyrics Masti Extension",
+  "homepage_url": "http://www.lyricsmasti.com",
+  "icons": {
+    "16": "icons/icon16.png",
+    "19": "icons/icon19.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "webNavigation",
+    "https://www.youtube.com/",
+    "https://www.youtube.com/*",
+    "https://www.lyricsmasti.com/api/v1/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/*"
+      ],
+      "js": [
+        "js/jquery-1.12.4.min.js",
+        "src/inject/inject.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "templates/*",
+    "js/*"
+  ]
+}

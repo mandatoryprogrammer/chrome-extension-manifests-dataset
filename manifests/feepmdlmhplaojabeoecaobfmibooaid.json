@@ -1,0 +1,150 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Texthelp PDF Reader",
+  "description": "Experience PDFs in a whole new way with Texthelp’s new PDF Reader.",
+  "homepage_url": "https://pdf.texthelp.com",
+  "version": "5.1.226",
+  "": "",
+  "icons": {
+    "128": "icon_128x128.png",
+    "48": "icon_favicon_48x48.png",
+    "16": "icon_favicon_16x16.png"
+  },
+  "permissions": [
+    "https://www.google-analytics.com/",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>",
+    "tabs",
+    "gcm",
+    "idle",
+    "alarms",
+    "webNavigation",
+    "storage",
+    "management",
+    "identity",
+    "identity.email",
+    "activeTab"
+  ],
+  "content_scripts": [
+    {
+      "css": [
+        "classroom/styles.css"
+      ],
+      "js": [
+        "classroom/contentScript.js"
+      ],
+      "matches": [
+        "https://classroom.google.com/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "css": [
+        "pdf/styles.css"
+      ],
+      "js": [
+        "pdf/contentScript.js"
+      ],
+      "matches": [
+        "https://*/*.pdf",
+        "http://*/*.pdf",
+        "https://*/*.PDF",
+        "http://*/*.PDF",
+        "https://*/*.Pdf",
+        "http://*/*.Pdf",
+        "http://*/*.Pdf?*",
+        "https://*/*.Pdf?*",
+        "http://*/*.pdf?*",
+        "https://*/*.pdf?*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "Schoology/contentScript.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "ftp://*/*",
+        "file://*/*",
+        "https://*.firebaseio.com/*"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "css": [
+        "contentstyle.css"
+      ],
+      "js": [
+        "contentscript.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.gstatic.com https://cdn.firebase.com https://*.firebaseio.com https://www.google-analytics.com https://www.googleapis.com https://apis.google.com chrome-extension://ckanlcmoklgdobgbkebohpficpiogcif chrome-extension://hjngolefdpdnooamgdldlkjgmdcmcjnc; object-src 'self'",
+  "storage": {
+    "managed_schema": "preferences_schema.json"
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "chrome_style": true
+  },
+  "options_page": "options/options.html",
+  "background": {
+    "page": "pdfHandler.html"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "icon_favicon_16x16.png",
+      "38": "icon_favicon_32x32.png"
+    },
+    "default_title": "Texthelp PDF Reader"
+  },
+  "incognito": "split",
+  "web_accessible_resources": [
+    "content/web/viewer.html",
+    "Schoology/texthelpschoology.js",
+    "Schoology/css/stylesTh.css",
+    "Schoology/js/devHeader.js",
+    "Schoology/js/prodHeader.js",
+    "Schoology/js/axios.js",
+    "content/web/Schoology/thIntegration.html",
+    "src/options/options.html",
+    "content/web/assets/js/extensionverify.js",
+    "http:/*",
+    "https:/*",
+    "ftp:/*",
+    "file:/*",
+    "chrome-extension:/*",
+    "filesystem:/*",
+    "https://texthelp-pdf-reader.firebaseio.com/*",
+    "https://pdfviewer-9152a.firebaseio.com/*",
+    "https://*.firebaseio.com/*",
+    "https://apis.google.com/js/platform.js",
+    "drive:*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://pdf.texthelp.com/*"
+    ],
+    "ids": [
+      "*"
+    ]
+  },
+  "oauth2": {
+    "client_id": "243341882805-fav9vbuf7c132v7lkvav10h32o5gds7q.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.profile",
+      "https://www.googleapis.com/auth/firebase",
+      "https://www.googleapis.com/auth/drive",
+      "https://www.googleapis.com/auth/classroom.courses"
+    ]
+  }
+}

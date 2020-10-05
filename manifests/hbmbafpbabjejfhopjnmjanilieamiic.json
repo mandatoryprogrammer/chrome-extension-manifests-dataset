@@ -1,0 +1,51 @@
+{
+  "update_url": "http://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Download Link Checker",
+  "description": "Checks if download URLs and links are still active, displays indicators on them and only for the URLs you customise.",
+  "version": "1.1.0.0",
+  "icons": {
+    "128": "img/icon.png"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "http://*/*",
+    "clipboardWrite"
+  ],
+  "options_page": "htm/options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "css/content.css"
+      ],
+      "js": [
+        "lib/jquery.js",
+        "js/Uris.js",
+        "js/ExtensionContext.js",
+        "js/ContentScript.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "page_action": {
+    "default_icon": "img/page-action.png",
+    "default_title": "Download Link Checker",
+    "default_popup": "htm/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "lib/knockout.js",
+      "lib/knockout.mapping.js",
+      "js/Uris.js",
+      "js/ExtensionContext.js",
+      "js/BackgroundScript.js"
+    ],
+    "persistent": false
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self';"
+}

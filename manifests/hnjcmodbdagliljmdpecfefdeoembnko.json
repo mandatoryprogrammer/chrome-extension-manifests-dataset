@@ -1,0 +1,76 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "SCCD Tools",
+  "version": "0.6.3",
+  "description": "Adds helpful features to SCCD",
+  "options_ui": {
+    "page": "options/options.html",
+    "chrome_style": true
+  },
+  "icons": {
+    "16": "theme/icon16.png",
+    "48": "theme/icon48.png",
+    "128": "theme/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "theme/icon16.png"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "*://*/maximo/ui/*"
+  ],
+  "web_accessible_resources": [
+    "modules/change_calendar/calendar.png",
+    "modules/sccd_email/email.png",
+    "modules/sccd_ticket_attachment/add_attachment.png",
+    "modules/sccd_ticket_copy/copy.png"
+  ],
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "modules/chrome_browserAction_onClicked/GoToSCCD.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/maximo/ui/*"
+      ],
+      "js": [
+        "SharedFunctions.js",
+        "modules/chrome_browserAction_onClicked/set_sccd_url.js",
+        "modules/sccd_search/sccd_search.js",
+        "modules/sccd_search/OnLoad.js",
+        "modules/sccd_new_ticket/sccd_new_ticket.js",
+        "modules/sccd_new_ticket/OnLoad.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*/maximo/ui/?event=loadapp*"
+      ],
+      "js": [
+        "modules/sccd_ticket_attachment/sccd_attachment.js",
+        "modules/sccd_ticket_attachment/OnLoad.js",
+        "modules/sccd_ticket_copy/sccd_ticket_copy.js",
+        "modules/sccd_ticket_copy/OnLoad.js",
+        "modules/sccd_email/sccd_email.js",
+        "modules/sccd_email/OnLoad.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*/maximo/ui/?event=loadapp&value=change*"
+      ],
+      "js": [
+        "modules/change_Calendar/ICS/ics.js",
+        "modules/change_Calendar/ICS/FileSaver.min.js",
+        "modules/change_Calendar/ICS/Blob.js",
+        "modules/change_Calendar/change_calendar.js",
+        "modules/change_Calendar/OnLoad.js"
+      ]
+    }
+  ]
+}

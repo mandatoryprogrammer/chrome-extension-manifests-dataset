@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Raven Points Chrome Extension",
+  "author": "Chris Dolinski",
+  "version": "1.0.42",
+  "description": "Sparknotes for Youtube -- Timestamps and Summaries for any Youtube video.",
+  "homepage_url": "https://ravenpoints.com/",
+  "incognito": "split",
+  "icons": {
+    "128": "icon-128.png"
+  },
+  "browser_action": {
+    "default_popup": "index.html",
+    "decault_icon": "icon-34.png"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.youtube.com/*",
+        "https://*.youtu.be/*",
+        "http://*.youtube.com/*",
+        "http://*.youtu.be/*"
+      ],
+      "js": [
+        "content.bundle.js"
+      ],
+      "css": [
+        "content-styles.css"
+      ]
+    }
+  ],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+K",
+        "mac": "Command+Shift+K"
+      }
+    }
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.google-analytics.com; object-src 'self'",
+  "permissions": [
+    "tabs",
+    "identity",
+    "notifications",
+    "storage"
+  ],
+  "web_accessible_resources": [
+    "spotlight.html"
+  ]
+}

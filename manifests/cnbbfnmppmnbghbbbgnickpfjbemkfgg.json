@@ -1,0 +1,278 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_name__",
+  "manifest_version": 2,
+  "version": "1.18",
+  "description": "__MSG_description__",
+  "background": {
+    "scripts": [
+      "js/extensions/objectext.js",
+      "js/extensions/regexpext.js",
+      "js/extensions/browserext.js",
+      "js/commands/command.js",
+      "js/commands/commandlogin.js",
+      "js/commands/commandNightMode.js",
+      "js/commands/commandloggedin.js",
+      "js/commands/commandconnected.js",
+      "js/commands/commandset.js",
+      "js/commands/commandget.js",
+      "js/commands/commandbookmark.js",
+      "js/commands/commanddontofferset.js",
+      "js/commands/commandstatus.js",
+      "js/commands/commandunlocksite.js",
+      "js/commands/commandupdatecontainersettings.js",
+      "js/commands/commandupdatepassword.js",
+      "js/background/cache.js",
+      "js/background/formdatacache.js",
+      "js/commands/commandrunner.js",
+      "js/background/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "images/bw.gif",
+    "default_title": "LoginByCall.com",
+    "default_popup": "login_form.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "all_frames": true,
+      "js": [
+        "js/extensions/browserext.js",
+        "js/content_script/bg_request.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://loginbycall.com/plugin/set.html"
+      ],
+      "js": [
+        "js/content_script/line/close_top.js",
+        "js/content_script/line/set_script.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://loginbycall.com/plugin/bookmark.html"
+      ],
+      "js": [
+        "js/content_script/line/close_top.js",
+        "js/content_script/line/bookmark_script.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://loginbycall.com/plugin/select_account.html"
+      ],
+      "js": [
+        "js/content_script/line/close_top.js",
+        "js/content_script/line/select_account_script.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://loginbycall.com/plugin/change_password.html"
+      ],
+      "js": [
+        "js/content_script/line/close_top.js",
+        "js/content_script/line/change_password_script.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://loginbycall.com/plugin/save_login.html"
+      ],
+      "js": [
+        "js/content_script/line/close_top_five_seconds.js",
+        "js/content_script/line/save_login.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://loginbycall.com/plugin/save_pass.html"
+      ],
+      "js": [
+        "js/content_script/line/close_top_five_seconds.js",
+        "js/content_script/line/save_password.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://loginbycall.com/plugin/no_save_login.html"
+      ],
+      "js": [
+        "js/content_script/line/close_top_five_seconds.js",
+        "js/content_script/line/no_save_login.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://loginbycall.com/plugin/field_is_not_filled.html"
+      ],
+      "js": [
+        "js/content_script/line/close_top_five_seconds.js",
+        "js/content_script/line/field_is_not_filled.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_globs": [
+        "http://localhost/chrome_plugin/tests/html/*",
+        "http://localhost:81/chrome_plugin/tests/html/*",
+        "https://loginbycall.com/plugin/set.html",
+        "https://loginbycall.com/plugin/bookmark.html",
+        "https://loginbycall.com/plugin/select_account.html"
+      ],
+      "css": [
+        "css/content.css"
+      ],
+      "js": [
+        "js/content_script/messenger.js",
+        "js/content_script/form.js",
+        "js/content_script/app.js",
+        "js/content_script/run.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://loginbycall.com/users/home*",
+        "https://www.id4tel.com/users/home*",
+        "http://localhost/chrome_plugin/tests/html/profile*"
+      ],
+      "js": [
+        "js/content_script/profile.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://localhost/chrome_plugin/tests/html/*"
+      ],
+      "css": [
+        "tests/css/jasmine.css"
+      ],
+      "js": [
+        "tests/js/jasmine.js",
+        "tests/js/jasmine-html.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://localhost/chrome_plugin/tests/html/profile*"
+      ],
+      "js": [
+        "tests/js/content_script/profile.test.js",
+        "tests/js/jasmine-exec-delayed.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://localhost/chrome_plugin/tests/html/authorized.html*"
+      ],
+      "js": [
+        "js/content_script/form.js",
+        "tests/js/content_script/authorized.test.js",
+        "tests/js/jasmine-exec-delayed.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://localhost/chrome_plugin/tests/html/authorized_frames.html"
+      ],
+      "js": [
+        "js/content_script/form.js",
+        "tests/js/jasmine.console_reporter.js",
+        "tests/js/content_script/authorized_frames.test.js",
+        "tests/js/jasmine-exec-delayed_10sec.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://localhost/chrome_plugin/tests/html/extensions.html"
+      ],
+      "js": [
+        "js/extensions/objectext.js",
+        "tests/js/jasmine.console_reporter.js",
+        "tests/js/content_script/extensions.test.js",
+        "tests/js/jasmine-exec-delayed.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://localhost/chrome_plugin/tests/html/forms.html"
+      ],
+      "js": [
+        "js/content_script/form.js",
+        "tests/js/content_script/form_detect.js",
+        "tests/js/jasmine-exec-delayed.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://localhost/chrome_plugin/tests/html/forms_fill.html"
+      ],
+      "js": [
+        "js/extensions/utils.js",
+        "js/content_script/form.js",
+        "tests/js/content_script/form_filling.js",
+        "tests/js/jasmine-exec-delayed.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://localhost/chrome_plugin/tests/html/magic_selectors.html"
+      ],
+      "js": [
+        "js/content_script/form.js",
+        "tests/js/content_script/magic_selectors.js",
+        "tests/js/jasmine-exec-delayed.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://localhost/chrome_plugin/tests/html/magic_selectors2.html"
+      ],
+      "js": [
+        "js/extensions/utils.js",
+        "js/content_script/form.js",
+        "tests/js/content_script/magic_selectors2.js",
+        "tests/js/jasmine-exec-delayed.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://localhost/chrome_plugin/tests/html/utils.html"
+      ],
+      "js": [
+        "js/extensions/utils.js",
+        "tests/js/content_script/utils.js",
+        "tests/js/jasmine-exec-delayed.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://loginbycall.com:4443; object-src 'self'",
+  "default_locale": "ru",
+  "icons": {
+    "128": "images/128.png",
+    "48": "images/48.png",
+    "16": "images/16.png"
+  },
+  "permissions": [
+    "storage",
+    "contextMenus",
+    "tabs",
+    "<all_urls>",
+    "background"
+  ]
+}

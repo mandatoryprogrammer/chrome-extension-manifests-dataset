@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Dupbit Extension",
+  "version": "2.1.0",
+  "manifest_version": 2,
+  "description": "Interact with Dupbit",
+  "icons": {
+    "64": "assets/images/favicon@64px.png",
+    "128": "assets/images/favicon@128px.png",
+    "256": "assets/images/favicon@256px.png"
+  },
+  "background": {
+    "scripts": [
+      "assets/js/UAParser.js",
+      "assets/js/dupbit-api.js",
+      "src/actions.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.youtube.com/*"
+      ],
+      "js": [
+        "src/inject/youtube.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.soundcloud.com/*"
+      ],
+      "js": [
+        "src/inject/soundcloud.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": "assets/images/favicon@64px.png",
+    "default_title": "Dupbit Extension",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "*://*/*",
+    "tabs",
+    "downloads",
+    "activeTab",
+    "webRequest",
+    "storage"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

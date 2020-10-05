@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "minimum_chrome_version": "40",
+  "default_locale": "en_US",
+  "name": "__MSG_name__",
+  "description": "__MSG_description__",
+  "version": "0.3.2",
+  "short_name": "PTM sovyatnik.ru",
+  "author": "PoziWorld",
+  "homepage_url": "https://pozitone.com/",
+  "icons": {
+    "16": "modules/ru_sovyatnik/img/sovyatnik-logo-16.png",
+    "48": "modules/ru_sovyatnik/img/sovyatnik-logo-48.png",
+    "128": "modules/ru_sovyatnik/img/sovyatnik-logo-128.png"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.sovyatnik.ru/summary/index/*",
+        "*://*.w.soundcloud.com/*"
+      ],
+      "js": [
+        "modules/ru_sovyatnik/js/api.js",
+        "global/js/bowser.js",
+        "global/js/const.js",
+        "global/js/utils.js",
+        "global/js/pozitone-module-sdk.js",
+        "modules/ru_sovyatnik/js/page-watcher.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "global/js/bowser.js",
+      "global/js/const.js",
+      "global/js/utils.js",
+      "global/js/background.js",
+      "global/js/pozitone-module-sdk.js"
+    ]
+  },
+  "options_ui": {
+    "page": "options/index.html",
+    "chrome_style": true
+  },
+  "web_accessible_resources": [
+    "*.png",
+    "*.svg"
+  ]
+}

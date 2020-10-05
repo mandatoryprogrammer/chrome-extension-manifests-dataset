@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Updoots Adder",
+  "description": "This extension lets you add to your favorites, on Updoots.com",
+  "version": "1.0.71",
+  "manifest_version": 2,
+  "homepage_url": "https://updoots.com/",
+  "browser_action": {
+    "default_icon": "icons/favicon.png",
+    "default_title": "Updoots Adder: Add this!",
+    "default_popup": "src/browser_action/browser_action.html"
+  },
+  "icons": {
+    "16": "icons/favicon.png",
+    "48": "icons/favicon.png",
+    "128": "icons/favicon.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "page": "src/bg/background.html",
+    "persistent": true
+  },
+  "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'",
+  "permissions": [
+    "activeTab",
+    "cookies",
+    "tabs",
+    "https://ajax.googleapis.com/",
+    "http://ajax.googleapis.com/",
+    "http://updoots.com/",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.updoots.com/*"
+      ],
+      "js": [
+        "src/browser_action/content.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "src/browser_action/content.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "html/htmlFileName.html",
+    "styles/*",
+    "fonts/*"
+  ]
+}

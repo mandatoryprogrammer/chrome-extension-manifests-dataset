@@ -1,0 +1,100 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "IndieGala Helper",
+  "version": "5.0.9",
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true,
+    "open_in_tab": true
+  },
+  "icons": {
+    "16": "icons/icon_16.png",
+    "32": "icons/icon_32.png",
+    "48": "icons/icon_48.png",
+    "64": "icons/icon_64.png",
+    "96": "icons/icon_96.png",
+    "128": "icons/icon_128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.indiegala.com/*"
+      ],
+      "js": [
+        "/include/js/jquery-3.5.1.min.js",
+        "settings.js"
+      ],
+      "css": [
+        "indiegala.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://www.indiegala.com/*"
+      ],
+      "js": [
+        "indiegala.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.indiegala.com/profile*",
+        "https://www.indiegala.com/library*"
+      ],
+      "js": [
+        "indiegala_profile.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.indiegala.com/giveaways*"
+      ],
+      "exclude_matches": [
+        "https://www.indiegala.com/giveaways/card*"
+      ],
+      "js": [
+        "indiegala_giveaways.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.indiegala.com/bundle/*"
+      ],
+      "js": [
+        "indiegala_bundles.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.indiegala.com/trades*"
+      ],
+      "js": [
+        "indiegala_trades.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "index.js",
+      "updates.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "icon.png"
+  },
+  "permissions": [
+    "https://indiegala.redsparr0w.com/",
+    "*://store.steampowered.com/",
+    "storage",
+    "cookies",
+    "notifications"
+  ],
+  "web_accessible_resources": [
+    "options.html"
+  ]
+}

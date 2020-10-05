@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "ReStyle for Allo",
+  "version": "0.1.9",
+  "description": "A Chrome Extension aimed at modifying and improving on Allo for Web's user-interface.",
+  "icons": {
+    "16": "images/icon-32.png",
+    "48": "images/icon-64.png",
+    "128": "images/icon-128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "images/icon-32.png",
+      "48": "images/icon-64.png",
+      "128": "images/icon-128.png"
+    },
+    "default_title": "ReStyle for Allo",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "commands": {
+    "open-window": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+A"
+      },
+      "description": "Open Allo in new window",
+      "global": true
+    }
+  },
+  "permissions": [
+    "https://allo.google.com/web",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://allo.google.com/web"
+      ],
+      "css": [
+        "style.css"
+      ],
+      "js": [
+        "popup.js",
+        "darkMode.js",
+        "vanilla.js",
+        "background.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

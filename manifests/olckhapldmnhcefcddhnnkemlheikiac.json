@@ -1,0 +1,172 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Huzhop Product Exporter",
+  "short_name": "Huzhop",
+  "version": "1.4.2",
+  "description": "Import AliExpress products to your store, automated order fulfillment and more!",
+  "manifest_version": 2,
+  "icons": {
+    "16": "images/logo.png",
+    "48": "images/logo.png",
+    "128": "images/logo.png"
+  },
+  "permissions": [
+    "clipboardRead",
+    "clipboardWrite",
+    "tabs",
+    "storage",
+    "https://*.aliexpress.com/*",
+    "https://*.aliexpress.ru/*",
+    "https://*.huzhop.com/*",
+    "*://*.aliexpress.com/store/product/*",
+    "*://*.aliexpress.com/item/*",
+    "*://*.aliexpress.com/w/*",
+    "*://*.aliexpress.ru/store/product/*",
+    "*://*.aliexpress.ru/item/*",
+    "*://*.aliexpress.ru/w/*",
+    "*://*.aliexpress.com/category/*",
+    "*://*.aliexpress.com/af/category/*",
+    "*://*.aliexpress.com/*SearchText*",
+    "*://*.aliexpress.com/*store*",
+    "*://*.aliexpress.com/store/*",
+    "*://*.aliexpress.ru/category/*",
+    "*://*.aliexpress.ru/af/category/*",
+    "*://*.aliexpress.ru/*SearchText*",
+    "*://*.aliexpress.ru/*store*",
+    "*://*.aliexpress.ru/store/*",
+    "*://*.shoppingcart.aliexpress.com/order/*",
+    "*://*.shoppingcart.aliexpress.com/*",
+    "*://*.shoppingcart.aliexpress.ru/order/*",
+    "*://*.shoppingcart.aliexpress.ru/*",
+    "*://*.aliexpress.com/order/payOnlineSuccess.*",
+    "*://*.aliexpress.ru/order/payOnlineSuccess.*",
+    "*://*.aliexpress.com/addressList.htm*",
+    "*://*.aliexpress.ru/addressList.htm*"
+  ],
+  "background": {
+    "scripts": [
+      "js/jquery-3.3.1.min.js",
+      "js/lodash.min.js",
+      "js/CryptoJS/rollups/md5.js",
+      "js/CryptoJS/rollups/aes.js",
+      "js/hz-core.js",
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_title": "Huzhop Product Importer",
+    "default_icon": "images/logo-disabled.png"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "js/jquery-3.3.1.min.js",
+        "js/lodash.min.js",
+        "js/notify.min.js",
+        "js/app.js"
+      ],
+      "css": [],
+      "matches": [
+        "*://app.huzhop.com/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "js/jquery-3.3.1.min.js",
+        "js/lodash.min.js",
+        "js/notify.min.js",
+        "js/hz-libs.js",
+        "js/product.js"
+      ],
+      "css": [
+        "css/product.css"
+      ],
+      "matches": [
+        "*://*.aliexpress.com/store/product/*",
+        "*://*.aliexpress.com/item/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "js/jquery-3.3.1.min.js",
+        "js/mutation-observer.min.js",
+        "js/lodash.min.js",
+        "js/notify.min.js",
+        "js/hz-libs.js",
+        "js/category.js"
+      ],
+      "css": [
+        "css/category.css"
+      ],
+      "matches": [
+        "*://*.aliexpress.com/category/*",
+        "*://*.aliexpress.com/af/*",
+        "*://*.aliexpress.com/*SearchText*",
+        "*://*.aliexpress.com/*store*",
+        "*://*.aliexpress.com/store/group*",
+        "*://*.aliexpress.com/wholesale*",
+        "*://*.aliexpress.com/w/wholesale*",
+        "*://*.aliexpress.com/store/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "js/jquery-3.3.1.min.js",
+        "js/lodash.min.js",
+        "js/notify.min.js",
+        "js/hz-libs.js",
+        "js/cart.js"
+      ],
+      "css": [
+        "css/cart.css"
+      ],
+      "matches": [
+        "*://*.shoppingcart.aliexpress.com/shopcart/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "js/jquery-3.3.1.min.js",
+        "js/lodash.min.js",
+        "js/notify.min.js",
+        "js/hz-libs.js",
+        "js/orders.js"
+      ],
+      "css": [
+        "css/cart.css"
+      ],
+      "matches": [
+        "*://*.shoppingcart.aliexpress.com/orders*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "js/jquery-3.3.1.min.js",
+        "js/lodash.min.js",
+        "js/notify.min.js",
+        "js/hz-libs.js",
+        "js/order-detail.js"
+      ],
+      "css": [
+        "css/cart.css"
+      ],
+      "matches": [
+        "*://trade.aliexpress.com/order_detail*",
+        "*://shoppingcart.aliexpress.com/order/payOnlineSuccess.htm*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "web_accessible_resources": [
+    "images/*",
+    "css/*.css",
+    "resources/*"
+  ]
+}

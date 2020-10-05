@@ -1,0 +1,45 @@
+{
+  "update_url": "http://clients2.google.com/service/update2/crx",
+  "name": "Map Helper",
+  "version": "1.5",
+  "default_locale": "en",
+  "manifest_version": 2,
+  "description": "A Chrome extension making the work with maps much easier",
+  "homepage_url": "https://bestmaps.ru/map-helper",
+  "page_action": {
+    "default_icon": "icon.png",
+    "default_title": "Map Helper",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "bg.js"
+    ]
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "downloads",
+    "<all_urls>"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.bing.com/maps*",
+        "*://loadmap.net/*",
+        "*://xn--e1aaps0bc.net/*",
+        "*://maps.navitel.su/*",
+        "*://www.waze.com/*"
+      ],
+      "js": [
+        "content_script.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

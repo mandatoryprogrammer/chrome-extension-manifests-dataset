@@ -1,0 +1,41 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Matrix42 MyWorkspace",
+  "short_name": "MyWorkspace",
+  "description": "This extension interacts with the Matrix42 MyWorkspace login to provide single sign on also for legacy web applications.",
+  "version": "0.15.11",
+  "icons": {
+    "16": "Icons/mws-icon-16.png",
+    "48": "Icons/mws-icon-48.png",
+    "96": "Icons/mws-icon-96.png",
+    "128": "Icons/mws-icon-128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "Icons/mws-icon-16.png",
+      "32": "Icons/mws-icon-32.png"
+    },
+    "default_popup": "PopupApplication/app/index.html"
+  },
+  "background": {
+    "page": "PopupApplication/app/index.html?background=1",
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*",
+        "file://*/*"
+      ],
+      "js": [
+        "ContentScripts/app/communicationBridge.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "storage"
+  ]
+}

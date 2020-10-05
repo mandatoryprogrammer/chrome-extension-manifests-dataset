@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "version": "1.0.0",
+  "name": "Lembrador CashPlus",
+  "short_name": "Lembrador CashPlus",
+  "description": "O plugin Lembrador CashPlus avisa você de todas as oportunidades de obter descontos e CashBack em nossas lojas parceiras.",
+  "icons": {
+    "16": "img/icon-16.png",
+    "32": "img/icon-32.png",
+    "24": "img/icon-24.png",
+    "48": "img/icon-48.png",
+    "96": "img/icon-96.png",
+    "128": "img/icon-128.png"
+  },
+  "browser_action": {
+    "browser_style": false,
+    "default_title": "Lembrador CashPlus",
+    "default_popup": "pages/banner/index.html",
+    "default_icon": {
+      "16": "img/icon-16.png",
+      "24": "img/icon-24.png",
+      "32": "img/icon-32.png"
+    }
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "main.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://google.com/*",
+        "*://*.google.com/*",
+        "*://google.com.br/*",
+        "*://*.google.com.br/*"
+      ],
+      "js": [
+        "serp.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "modal_message.html",
+    "pages/banner.css",
+    "serp-style.css"
+  ],
+  "permissions": []
+}

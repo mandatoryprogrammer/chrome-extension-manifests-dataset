@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "PreVeil for Gmail",
+  "version": "1.0.0",
+  "description": "PreVeil browser extension for Gmail",
+  "author": "PreVeil",
+  "homepage_url": "https://github.com/PreVeil/gmail-plugin#readme",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "icons": {
+    "16": "static/images/icon_encryption_16.png",
+    "48": "static/images/icon_encryption_48.png",
+    "128": "static/images/icon_encryption_128.png"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "static/vendor/inboxsdk.js",
+        "scripts/inject.js"
+      ],
+      "matches": [
+        "https://mail.google.com/*"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "static/vendor/handle-xhr.js",
+    "static/vendor/inboxsdk.js",
+    "static/images/*"
+  ],
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "static/images/icon_encryption_32.png",
+    "default_title": "PreVeil for Gmail",
+    "default_popup": "views/popup.html"
+  },
+  "devtools_page": "views/devtools.html",
+  "options_page": "views/options.html",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "permissions": [
+    "http://127.0.0.1:4002/",
+    "https://collections.preveil.com/",
+    "https://mail-attachment.googleusercontent.com/",
+    "https://mail.google.com/*"
+  ]
+}

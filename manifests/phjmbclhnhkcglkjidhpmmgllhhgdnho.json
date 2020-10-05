@@ -1,0 +1,42 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "MyAnimeListVA",
+  "version": "2.0.4",
+  "description": "When viewing a voice actor/actress's page on MAL, roles for anime you have seen will be highlighted.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "page_action": {
+    "default_title": "MyAnimeListVA",
+    "default_icon": "icons/icon.png"
+  },
+  "permissions": [
+    "tabs",
+    "http://myanimelist.net/people/*",
+    "https://myanimelist.net/people/*",
+    "*://*.myanimelist.net/people/*"
+  ],
+  "background": {
+    "scripts": [
+      "jquery-3.1.0.min.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.myanimelist.net/people/*"
+      ],
+      "js": [
+        "jquery-3.1.0.min.js",
+        "content.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

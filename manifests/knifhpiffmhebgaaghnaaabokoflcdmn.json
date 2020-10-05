@@ -1,0 +1,40 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Kattis Hint Giver",
+  "version": "1.1.2",
+  "description": "Adds hints to problems on Kattis. Hint source: http://cpbook.net/methodstosolve",
+  "icons": {
+    "128": "icon128.png"
+  },
+  "permissions": [
+    "storage",
+    "https://cpbook.net/"
+  ],
+  "background": {
+    "scripts": [
+      "jquery.min.js",
+      "data.js",
+      "firstRun.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://open.kattis.com/problems*"
+      ],
+      "exclude_matches": [
+        "https://open.kattis.com/problems/*/statistics",
+        "https://open.kattis.com/problems/*/submit"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "jquery.min.js",
+        "tooltip.js",
+        "data.js",
+        "addHint.js"
+      ]
+    }
+  ],
+  "manifest_version": 2
+}

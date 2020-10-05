@@ -1,0 +1,68 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "short_name": "Digitile",
+  "name": "Digitile: File Tag, Search & Share",
+  "version": "2.04",
+  "manifest_version": 2,
+  "author": "Michael Hillebrand",
+  "description": "Universal File Search",
+  "homepage_url": "https://console.digitile.io",
+  "permissions": [
+    "tabs",
+    "identity",
+    "storage",
+    "cookies",
+    "webRequest",
+    "webRequestBlocking",
+    "*://*.digitile.io/*",
+    "*://*.google.com/*",
+    "*://*.dropbox.com/*",
+    "*://*.salesforce.com/*",
+    "*://*.slack.com/*",
+    "*://*.trello.com/*",
+    "*://*.office365.com/*"
+  ],
+  "icons": {
+    "16": "favicon/icon_16.png",
+    "32": "favicon/icon_32.png",
+    "48": "favicon/icon_48.png",
+    "64": "favicon/icon_64.png",
+    "128": "favicon/icon_128.png"
+  },
+  "browser_action": {},
+  "content_scripts": [
+    {
+      "matches": [
+        "*://mail.google.com/*"
+      ],
+      "js": [
+        "/static/js/main.js",
+        "/static/js/1.chunk.js"
+      ],
+      "css": [
+        "/static/css/main.css",
+        "/static/css/1.chunk.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "/static/media/*",
+    "/static/css/main.css",
+    "/static/css/1.chunk.css"
+  ],
+  "content_security_policy": "script-src 'self' 'sha256-GgRxrVOKNdB4LrRsVPDSbzvfdV4UqglmviH9GoBJ5jk='; object-src 'self'",
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://*.digitile.io/*",
+      "*://digitile-qa.firebaseapp.com/*",
+      "*://constant-falcon-168501.firebaseapp.com/*"
+    ]
+  }
+}

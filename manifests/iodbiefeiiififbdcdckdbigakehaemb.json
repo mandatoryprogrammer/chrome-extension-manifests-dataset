@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "CRM in Gmail",
+  "version": "5.1.2",
+  "description": "Salesflare for Gmail chrome extension",
+  "manifest_version": 2,
+  "icons": {
+    "16": "images/salesflare-icon-16.png",
+    "48": "images/salesflare-icon-48.png",
+    "128": "images/salesflare-icon-128.png"
+  },
+  "page_action": {
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "https://mail.google.com/*",
+    "https://*.googleusercontent.com/proxy/*"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "inboxsdk.js",
+        "main.js",
+        "node_modules/split.js/split.min.js",
+        "node_modules/handlebars/dist/handlebars.min.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "images/*.png",
+    "images/*.gif",
+    "images/*.jpg",
+    "node_modules/split.js/grips/vertical.png",
+    "iframe.html",
+    "iframe.js"
+  ]
+}

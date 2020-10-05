@@ -1,0 +1,70 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Save to Collect",
+  "version": "1.2.18",
+  "description": "Save content from across your apps and bring it together for your friends, your team, or just for yourself.",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "contextMenus",
+    "https://*/*",
+    "http://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "background.bundle.js"
+    ],
+    "persistent": false
+  },
+  "commands": {
+    "toggle-feature-save-page": {
+      "suggested_key": {
+        "windows": "Ctrl+Shift+S",
+        "mac": "Ctrl+Shift+S",
+        "chromeos": "Ctrl+Shift+S",
+        "linux": "Ctrl+Shift+S"
+      },
+      "description": "Save current page to Collect"
+    }
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "content.bundle.js"
+      ],
+      "css": [
+        "content.css"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "16": "images/logo16.png",
+      "32": "images/logo32.png",
+      "48": "images/logo48.png",
+      "128": "images/logo128.png"
+    }
+  },
+  "icons": {
+    "16": "images/logo_border16.png",
+    "32": "images/logo_border32.png",
+    "48": "images/logo_border48.png",
+    "128": "images/logo_border128.png"
+  },
+  "web_accessible_resources": [
+    "notification.html",
+    "onboarding.html",
+    "fonts/*"
+  ],
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://d19ptbnuzhibkh.cloudfront.net/bWqOLA69nu2fsMi45LjA.js; object-src 'self'"
+}

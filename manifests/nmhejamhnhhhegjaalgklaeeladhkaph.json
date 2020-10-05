@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "GitHub to Code",
+  "version": "0.0.4",
+  "description": "Allows developers to open GitHub repositories locally within Visual Studio Code.",
+  "icons": {
+    "48": "icons/code-logo.png"
+  },
+  "applications": {
+    "gecko": {
+      "id": "{b58eb207-8f2e-41ce-a28e-3046f1e92a5f}"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.github.com/*"
+      ],
+      "js": [
+        "./common/utils/polyfill.util.js",
+        "./extension/content.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "storage",
+    "tabs",
+    "<all_urls>"
+  ],
+  "web_accessible_resources": [
+    "icons/code-logo.png",
+    "next/out/*"
+  ],
+  "background": {
+    "scripts": [
+      "./common/utils/polyfill.util.js",
+      "./extension/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "icons/code-logo.png",
+    "default_title": "Github to Code",
+    "default_popup": "next/out/index.html",
+    "browser_style": true
+  },
+  "commands": {
+    "open-repo-or-file": {
+      "suggested_key": {
+        "default": "Ctrl+G",
+        "mac": "MacCtrl+G"
+      },
+      "description": "Open current repository or file."
+    }
+  }
+}

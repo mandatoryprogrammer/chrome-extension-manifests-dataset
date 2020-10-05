@@ -1,0 +1,69 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Baboom.Audio Beta",
+  "short_name": "Baboom.Audio Beta",
+  "manifest_version": 2,
+  "version": "4.3.1",
+  "description": "Listen to live radio stations directly from your browser while surfing the web with Baboom",
+  "icons": {
+    "16": "16.png",
+    "48": "48.png",
+    "128": "128.png"
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "chrome_url_overrides": {
+    "newtab": "SearchPage.html"
+  },
+  "permissions": [
+    "storage",
+    "http://*/*",
+    "https://*/*",
+    "unlimitedStorage",
+    "chrome://favicon/*",
+    "webRequest",
+    "webRequestBlocking",
+    "cookies",
+    "tabs",
+    "history",
+    "notifications",
+    "background",
+    "contextMenus"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://youtube.com/*",
+        "*://www.youtube.com/*"
+      ],
+      "js": [
+        "js/content.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://localhost/*",
+        "*://baboom.audio/*"
+      ],
+      "js": [
+        "js/sitecontent.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://youtube.com/*",
+      "*://www.youtube.com/*",
+      "*://*.baboom.audio/*"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "16.png"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://ssl.google-analytics.com https://ajax.googleapis.com; object-src 'self'"
+}

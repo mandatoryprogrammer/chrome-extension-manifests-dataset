@@ -1,0 +1,74 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "VOICIS Conference Extension",
+  "description": "Create VOICIS conferences, schedule Meeting Rooms on Google Calendar and allows Screen Share in chrome browsers.",
+  "version": "0.0.7",
+  "version_name": "Early Access",
+  "minimum_chrome_version": "34",
+  "icons": {
+    "16": "images/extension_icon.png",
+    "48": "images/extension_icon.png",
+    "128": "images/extension_icon.png"
+  },
+  "background": {
+    "scripts": [
+      "js/calendar/background-calendar-schedule.js",
+      "js/screenShare/background-screen-share.js"
+    ],
+    "persistent": true
+  },
+  "externally_connectable": {
+    "matches": [
+      "https://conference-api.itcenter.com.pt/*",
+      "https://conference.itcenter.com.pt/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://calendar.google.com/calendar/*",
+        "https://outlook.live.com/owa/*"
+      ],
+      "js": [
+        "js/utils/jquery.js",
+        "js/utils/moment.min.js",
+        "js/utils/RandomUtil.js",
+        "js/utils/RoomnameGenerator.js",
+        "js/calendar/content-calendar-schedule.js"
+      ],
+      "css": [
+        "/css/all.css"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://conference.itcenter.com.pt/*"
+      ],
+      "js": [
+        "js/screenShare/content-screen-share.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "images/logo_full.svg",
+    "images/logo_min.svg",
+    "images/account-circle.svg",
+    "images/extension_icon.svg",
+    "images/extension_icon.png"
+  ],
+  "browser_action": {
+    "default_title": "VOICIS Conference Extension",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "https://conference-api.itcenter.com.pt/*",
+    "https://conference.itcenter.com.pt/*",
+    "storage",
+    "desktopCapture"
+  ]
+}

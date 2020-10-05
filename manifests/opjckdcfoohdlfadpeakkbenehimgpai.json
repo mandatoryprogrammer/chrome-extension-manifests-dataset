@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Marco DevTools",
+  "description": "Tools to debug and change marco schemas and marco state.",
+  "version": "0.0.0.2",
+  "icons": {
+    "16": "./static/icon16.png",
+    "48": "./static/icon48.png",
+    "128": "./static/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "event.js"
+    ],
+    "persistent": true
+  },
+  "devtools_page": "devtools.html",
+  "web_accessible_resources": [
+    "inject.js"
+  ],
+  "externally_connectable": {
+    "ids": [
+      "*"
+    ],
+    "matches": [
+      "*://temando.dev/*",
+      "*://*.temando.dev/*",
+      "*://temando.io/*",
+      "*://*.temando.io/*",
+      "*://temando.test/*",
+      "*://*.temando.test/*"
+    ]
+  },
+  "permissions": [
+    "notifications",
+    "contextMenus",
+    "tabs",
+    "storage",
+    "<all_urls>"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'; style-src * 'unsafe-inline'; img-src 'self' data:;",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "css": [],
+      "js": [
+        "content.js"
+      ]
+    }
+  ]
+}

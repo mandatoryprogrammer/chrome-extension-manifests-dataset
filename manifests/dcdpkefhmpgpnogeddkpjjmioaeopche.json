@@ -1,0 +1,86 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Nimble Prospector",
+  "description": "Lead Capture, Data Discovery, and CRM that works on every web page",
+  "version": "7.0.26",
+  "browser_action": {
+    "default_icon": "assets/images/icon38.png"
+  },
+  "icons": {
+    "16": "assets/images/icon16.png",
+    "48": "assets/images/icon48.png",
+    "128": "assets/images/icon128.png"
+  },
+  "permissions": [
+    "notifications",
+    "tabs",
+    "activeTab",
+    "storage",
+    "contextMenus",
+    "<all_urls>"
+  ],
+  "background": {
+    "scripts": [
+      "libs/jquery.js",
+      "libs/microevent.js",
+      "config.js",
+      "apiAdapters/chrome/adapterBackground.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [
+        "assets/styles/widget.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.mail.google.com/*",
+        "*://*.inbox.google.com/*"
+      ],
+      "css": [
+        "assets/styles/widget.css"
+      ],
+      "js": [
+        "libs/jquery.js",
+        "libs/inboxsdk.js",
+        "libs/moment.min.js",
+        "config.js",
+        "apiAdapters/chrome/adapterForeground.js",
+        "foreground/circleback.js",
+        "foreground/inbox.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.twitter.com/*"
+      ],
+      "css": [
+        "assets/styles/widget.css"
+      ],
+      "js": [
+        "libs/jquery.js",
+        "config.js",
+        "apiAdapters/chrome/adapterForeground.js",
+        "foreground/twitter-list-import.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "frame/frame.html",
+    "frame/frame.js",
+    "assets/*"
+  ],
+  "options_ui": {
+    "page": "options/options.html",
+    "chrome_style": true
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Buy For Less Club",
+  "short_name": "buyforless",
+  "author": "buyforlessclub",
+  "version": "1.0.2",
+  "description": "The most popular service for providing cashback purchases from amazon.com",
+  "permissions": [
+    "storage",
+    "cookies",
+    "https://buyforless.club/",
+    "http://buyforless.club/"
+  ],
+  "browser_action": {
+    "default_icon": "icons/default-icon.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.amazon.com/*",
+        "https://www.amazon.com/*",
+        "http://amazon.com/*",
+        "https://amazon.com/*"
+      ],
+      "css": [
+        "css/compare.css",
+        "css/confirm.css",
+        "css/page.css"
+      ],
+      "js": [
+        "js/jquery-3.0.0.min.js",
+        "js/addCartSript.js",
+        "js/confirmPurchase.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "http://www.buyforless.club/*",
+        "https://www.buyforless.club/*",
+        "http://buyforless.club/*",
+        "https://buyforless.club/*"
+      ],
+      "js": [
+        "js/jquery-3.0.0.min.js",
+        "js/authentication.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/jquery-3.0.0.min.js",
+      "js/eventPage.js"
+    ],
+    "persistent": false
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

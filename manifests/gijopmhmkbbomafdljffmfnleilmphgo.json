@@ -1,0 +1,85 @@
+{
+  "name": "MrPinku",
+  "short_name": "MrPinku",
+  "version": "1.3",
+  "manifest_version": 2,
+  "description": "__MSG_appDescription__",
+  "icons": {
+    "16": "images/icon-16.png",
+    "128": "images/icon-128.png"
+  },
+  "default_locale": "en",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAl+miLjXmMJtxc+kgv9vgWGGFe/Z0yNkZm0GEBd7AE5R4bSvrTTuCYMibgSsjoNgcRvRoXhXBjtHFpn8eK6S8IHpe0yck1A6zVNrgjg/EXflTCVVeduuyPTuwrfrrgBRY+41L3vBlDv8IIY2fa42mlf71edSnZAhRVxQPP2/rHqxkBlQVUSpYgwtZiv8MoPwn53cbaDgThqjQRvVjm/sanHQuUxxp1kKz/GtHYW8gXtwDXVL9S6cx03H5iOlJ99GIb9+DKCGxp+CRsLvmTIGs3VrFM2YcDBxQLKLl1j908QypJEcWbQlubXOqxgoMj7G7xUUdr7+GCRn0/4lRG4B+SQIDAQAB",
+  "background": {
+    "page": "background.html"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon-19.png",
+      "38": "images/icon-48.png"
+    },
+    "default_title": "MrPinku",
+    "default_popup": "popup.html"
+  },
+  "omnibox": {
+    "keyword": "MrPinku"
+  },
+  "commands": {
+    "next": {
+      "suggested_key": {
+        "default": "Alt+N"
+      },
+      "description": "Play the next track"
+    },
+    "previous": {
+      "suggested_key": {
+        "default": "Alt+Shift+N"
+      },
+      "description": "Play the previous track"
+    },
+    "playpause": {
+      "suggested_key": {
+        "default": "Alt+P"
+      },
+      "description": "Play/Pause the playing track"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.youtube.com/*",
+        "*://*.soundcloud.com/*",
+        "*://suggestqueries.google.com/*"
+      ],
+      "css": [],
+      "js": [
+        "scripts/contentscript.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.google-analytics.com https://api-v2.soundcloud.com; object-src 'self'",
+  "permissions": [
+    "identity",
+    "identity.email",
+    "webRequest",
+    "webRequestBlocking",
+    "storage",
+    "notifications",
+    "dns",
+    "*://*.youtube.com/*",
+    "*://*.ytimg.com/*",
+    "*://*.sndcdn.com/*"
+  ],
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "oauth2": {
+    "client_id": "658775590889-kc4189a8rtchr972tm7glk5gmc0ffcsc.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/drive"
+    ]
+  },
+  "web_accessible_resources": [
+    "images/*"
+  ]
+}

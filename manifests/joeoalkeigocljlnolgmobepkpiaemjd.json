@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Zajel TimeTable",
+  "description": "Zajel Timetable is an extension that is designed to help people plan there table",
+  "version": "1.28.0",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_security_policy": "script-src 'self' https://connect.facebook.net; object-src 'self'",
+  "background": {
+    "page": "background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://zajellb.najah.edu/servlet/UniCurricula"
+      ],
+      "js": [
+        "jquery.js",
+        "curicula.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://zajellb.najah.edu/servlet/materials"
+      ],
+      "js": [
+        "jquery.js",
+        "materials.js",
+        "html2canvas.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.facebook.com/connect/login_success.html"
+      ],
+      "js": [
+        "interrupt.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": "zajelLogo.png",
+    "default_title": "click to open curricula page"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "http://*/*",
+    "https://*/*",
+    "storage",
+    "alarms",
+    "notifications"
+  ]
+}

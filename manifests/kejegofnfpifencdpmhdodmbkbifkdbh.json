@@ -1,0 +1,43 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Auto Prime.Date",
+  "description": "An extension for Prime.Date that simplifies work with site.",
+  "version": "1.06",
+  "author": "Bogdan",
+  "icons": {
+    "128": "/assets/128.png",
+    "48": "/assets/48.png",
+    "16": "/assets/16.png"
+  },
+  "permissions": [
+    "https://api.prime.date/",
+    "https://beta.prime.date/",
+    "https://prime.date/",
+    "https://unko.space/"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "background-prod.js"
+    ]
+  },
+  "browser_action": {
+    "default_title": "Prime-date"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://beta.prime.date/*",
+        "https://beta.prime.date/",
+        "https://prime.date/",
+        "https://prime.date/*"
+      ],
+      "js": [
+        "build-content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

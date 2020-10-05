@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{864b65c6-19b9-4954-ab17-a4805be8690e}",
+      "strict_min_version": "57.0"
+    }
+  },
+  "manifest_version": 2,
+  "name": "VK Panel Plugin",
+  "version": "1.1.1",
+  "description": "VK.com - фильтр контента в ваших группах. Реальная помощь для SMM -щиков",
+  "icons": {
+    "128": "128.png"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "web_accessible_resources": [
+    "lib/icons/*.woff2",
+    "lib/icons/icons.css",
+    "*.png"
+  ],
+  "browser_action": {
+    "default_title": "VK Panel Plugin",
+    "default_icon": "128.png",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://vk.com/*",
+        "https://*.vk.com/*"
+      ],
+      "css": [
+        "lib/flatpickr/flatpickr.min.css",
+        "content.css"
+      ],
+      "js": [
+        "lib/jquery-3.3.1.js",
+        "lib/flatpickr/flatpickr.js",
+        "lib/flatpickr/ru.js",
+        "content.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://vk-panel.ru/groups",
+        "https://vk-panel.ru/account/profil/security"
+      ],
+      "js": [
+        "vkPanel.injected.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "https://api.vk-panel.ru/*",
+    "activeTab",
+    "tabs",
+    "notifications",
+    "storage",
+    "unlimitedStorage",
+    "webNavigation"
+  ]
+}

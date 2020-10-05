@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Extra Life Donate Buttons",
+  "version": "0.0.2",
+  "manifest_version": 2,
+  "description": "This extension was created to give quicker donation access to extra-life.org",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": true
+  },
+  "page_action": {
+    "default_icon": "icons/icon.png",
+    "default_title": "page action demo"
+  },
+  "permissions": [
+    "tabs",
+    "https://*/*, http://*/*"
+  ],
+  "web_accessible_resources": [
+    "node_modules/jquery/dist/jquery.min.map"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.extra-life.org/index.cfm?fuseaction=donorDrive.teamParticipants&teamID=*",
+        "http://www.extra-life.org/index.cfm?fuseaction=donorDrive.teamParticipants&teamID=*",
+        "https://www.extra-life.org/index.cfm?fuseaction=donordrive.teamParticipants&teamID=*",
+        "http://www.extra-life.org/index.cfm?fuseaction=donordrive.teamParticipants&teamID=*"
+      ],
+      "css": [
+        "src/inject/inject.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.extra-life.org/index.cfm?fuseaction=donorDrive.teamParticipants&teamID=*",
+        "http://www.extra-life.org/index.cfm?fuseaction=donorDrive.teamParticipants&teamID=*",
+        "https://www.extra-life.org/index.cfm?fuseaction=donordrive.teamParticipants&teamID=*",
+        "http://www.extra-life.org/index.cfm?fuseaction=donordrive.teamParticipants&teamID=*"
+      ],
+      "js": [
+        "node_modules/jquery/dist/jquery.min.js",
+        "src/inject/inject.js"
+      ]
+    }
+  ]
+}

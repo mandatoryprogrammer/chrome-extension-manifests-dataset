@@ -1,0 +1,70 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Mobile PBX Click-to-Call",
+  "description": "Make calls by clicking on any phone number or selecting from text.",
+  "version": "0.91",
+  "icons": {
+    "16": "img/icon-16.png",
+    "48": "img/icon-48.png",
+    "128": "img/icon-128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "img/icon-19.png",
+      "38": "img/icon-38.png"
+    },
+    "default_title": "Open Mobile PBX"
+  },
+  "permissions": [
+    "management",
+    "contextMenus",
+    "tabs",
+    "cookies",
+    "storage",
+    "*://*.mobilepbx.co/*",
+    "*://localhost/*"
+  ],
+  "background": {
+    "scripts": [
+      "js/jquery.js",
+      "js/underscore.js",
+      "js/background.js"
+    ]
+  },
+  "options_ui": {
+    "page": "html/options.html",
+    "chrome_style": true
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/jquery.js",
+        "js/underscore.js",
+        "js/contentScript.js"
+      ],
+      "css": [
+        "css/contentScript.css"
+      ]
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://app.mobilepbx.co/*",
+      "*://localhost/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "img/*.png"
+  ],
+  "applications": {
+    "gecko": {
+      "id": "extension@bettervoice.com"
+    }
+  }
+}

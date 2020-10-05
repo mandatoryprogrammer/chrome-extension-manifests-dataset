@@ -1,0 +1,87 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Backgroundit",
+  "description": "Wallpapers everywhere!!",
+  "version": "3.6",
+  "permissions": [
+    "tabs",
+    "storage",
+    "http://*.wallhaven.cc/",
+    "https://*.wallhaven.cc/"
+  ],
+  "icons": {
+    "16": "backgroundit-icon16.png",
+    "48": "backgroundit-icon48.png",
+    "128": "backgroundit-icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "lib/jquery.js",
+      "common.js",
+      "background.js"
+    ]
+  },
+  "browser_action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "38": "backgroundit-icon38.png",
+      "19": "backgroundit-icon19.png"
+    }
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "content_security_policy": "default-src 'unsafe-eval'; script-src 'self' 'unsafe-eval'; style-src 'unsafe-inline'; img-src blob: data: https://alpha.wallhaven.cc; connect-src https://alpha.wallhaven.cc; object-src https://alpha.wallhaven.cc https://wallpapers.wallhaven.cc",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "lib/jquery.js",
+        "common.js",
+        "content_scripts/js/main.js"
+      ],
+      "css": [
+        "content_scripts/css/main.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://alpha.wallhaven.cc/*",
+        "*://wallhaven.cc/*"
+      ],
+      "css": [
+        "content_scripts/css/wallhaven_index.css"
+      ],
+      "js": [
+        "lib/jquery.js",
+        "content_scripts/js/common.js",
+        "content_scripts/wallhaven/index.js"
+      ],
+      "exclude_matches": [
+        "*://alpha.wallhaven.cc/wallpaper/*",
+        "*://wallhaven.cc/wallpaper/*",
+        "*://alpha.wallhaven.cc/forums/*",
+        "*://wallhaven.cc/forums/*",
+        "*://alpha.wallhaven.cc/settings/*"
+      ]
+    },
+    {
+      "matches": [
+        "*://alpha.wallhaven.cc/wallpaper/*",
+        "*://wallhaven.cc/wallpaper/*"
+      ],
+      "css": [
+        "content_scripts/css/wallhaven_view.css"
+      ],
+      "js": [
+        "lib/jquery.js",
+        "content_scripts/js/common.js",
+        "content_scripts/wallhaven/view.js"
+      ]
+    }
+  ]
+}

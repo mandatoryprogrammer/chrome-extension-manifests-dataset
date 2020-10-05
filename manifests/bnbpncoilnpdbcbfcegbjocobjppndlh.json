@@ -1,0 +1,100 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Check Point SandBlast Agent for Browsers",
+  "short_name": "SandBlast",
+  "version": "990.78.13",
+  "manifest_version": 2,
+  "homepage_url": "https://www.checkpoint.com/products-solutions/zero-day-protection",
+  "description": "Protects users from advanced malware, phishing and zero-day attacks by performing real-time analysis",
+  "icons": {
+    "16": "data/icons/CheckPointLogo_16.png",
+    "48": "data/icons/CheckPointLogo_48.png",
+    "128": "data/icons/CheckPointLogo_128.png"
+  },
+  "background": {
+    "scripts": [
+      "data/homoglyph.js",
+      "data/psl.min.js",
+      "data/common.js",
+      "data/cryptoJS-sha1.js",
+      "data/cryptoJS-lib-typedarrays-min.js",
+      "data/cryptoJS-hmac-sha256.js",
+      "data/cryptoJS-pbkdf2.js",
+      "data/cryptoJS-aes.js",
+      "data/lib/jsrsasign/jsrsasign-all-min.js",
+      "data/utils.js",
+      "data/caching.js",
+      "data/cloud_auth.js",
+      "data/fetch_wrapper.js",
+      "data/telemetry.js",
+      "data/cp_cloud_service.js",
+      "data/storage_schema.js",
+      "data/eventlog.js",
+      "data/management.js",
+      "data/web_reputation.js",
+      "data/web_reputation_zp.js",
+      "data/web_reputation_urlf.js",
+      "data/leaked_credentials_background.js",
+      "data/hooks.js",
+      "data/web_reputation_feedback.js",
+      "urlf.js",
+      "background.js",
+      "data/js_ml/background/background.js",
+      "data/js_ml/js_ml/background.js"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com 'unsafe-eval' blob:; object-src 'self'",
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "downloads",
+    "downloads.open",
+    "storage",
+    "unlimitedStorage",
+    "notifications",
+    "tabs",
+    "activeTab",
+    "history",
+    "webNavigation",
+    "contextMenus",
+    "background",
+    "<all_urls>",
+    "identity"
+  ],
+  "default_locale": "en",
+  "browser_action": {
+    "default_icon": {
+      "19": "data/icons/CheckPointLogo_19.png"
+    },
+    "default_title": "Check Point SandBlast Agent for Browsers",
+    "default_popup": "data/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "data/cryptoJS-sha1.js",
+        "data/cryptoJS-sha256.js",
+        "data/cryptoJS-md5.js",
+        "data/homoglyph.js",
+        "data/utils.js",
+        "data/leaked_credentials_contentscript.js",
+        "data/common.js",
+        "data/hooks.js",
+        "data/content_script.js",
+        "data/js_ml/content_script/content_script.js",
+        "data/js_ml/js_ml/feature_extraction.js",
+        "data/js_ml/js_ml/content_script.js"
+      ],
+      "match_about_blank": false,
+      "all_frames": true,
+      "run_at": "document_end"
+    }
+  ],
+  "storage": {
+    "managed_schema": "schema.json"
+  },
+  "incognito": "split"
+}

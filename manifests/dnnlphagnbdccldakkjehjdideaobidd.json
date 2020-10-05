@@ -1,0 +1,75 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "TAYL - Let me read that for you",
+  "version": "2.1.1",
+  "description": "Listen to any website using Podcasts, now or later.",
+  "manifest_version": 2,
+  "permissions": [
+    "storage",
+    "contextMenus",
+    "activeTab",
+    "https://*.googleapis.com/*",
+    "https://x--dev.tayl.app/*",
+    "https://x.tayl.app/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://localhost/*",
+      "https://my--dev.tayl.app/*",
+      "https://my.tayl.app/*"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/tayl-icon-dog-gray-48.png",
+      "38": "icons/tayl-icon-dog-gray-48.png"
+    },
+    "theme_icons": [
+      {
+        "light": "icons/tayl-icon-dog-gray-light-16.png",
+        "dark": "icons/tayl-icon-dog-gray-16.png",
+        "size": 16
+      },
+      {
+        "light": "icons/tayl-icon-dog-gray-light-32.png",
+        "dark": "icons/tayl-icon-dog-gray-32.png",
+        "size": 32
+      }
+    ],
+    "browser_style": true
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "common/browser-polyfill.min.js",
+        "static/js/main.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "common/browser-polyfill.min.js",
+      "chrome/background.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "static/js/*.js",
+    "static/css/*.css"
+  ],
+  "content_security_policy": "script-src 'self' 'sha256-GgRxrVOKNdB4LrRsVPDSbzvfdV4UqglmviH9GoBJ5jk='; object-src 'self'",
+  "icons": {
+    "16": "icons/tayl-icon-dog-16.png",
+    "48": "icons/tayl-icon-dog-48.png",
+    "128": "icons/tayl-icon-dog-128.png"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "firefox-addon@tayl.app",
+      "strict_min_version": "56.0"
+    }
+  }
+}

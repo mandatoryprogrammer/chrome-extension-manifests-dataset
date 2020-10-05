@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Block Youtube Channels",
+  "description": "Blocks Youtube channels and hides their videos.",
+  "version": "2.2.1",
+  "browser_action": {
+    "default_icon": {
+      "32": "icon32.png"
+    },
+    "default_title": "Block Youtube Channels",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "storage",
+    "webNavigation",
+    "tabs",
+    "declarativeContent",
+    "activeTab",
+    "*://*.youtube.com/*",
+    "*://youtube.com/*"
+  ],
+  "background": {
+    "scripts": [
+      "jquery.js",
+      "events.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.youtube.com/*",
+        "*://youtube.com/*"
+      ],
+      "js": [
+        "jquery.js",
+        "utils.js",
+        "trie.js",
+        "db.js",
+        "content_script.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

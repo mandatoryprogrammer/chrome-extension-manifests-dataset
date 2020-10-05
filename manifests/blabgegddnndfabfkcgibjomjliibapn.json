@@ -1,0 +1,85 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "StreetEasy Plus",
+  "version": "0.2.3",
+  "default_locale": "en",
+  "description": "StreetEasy Plus is a third-party plugin providing additional features to StreetEasy.com",
+  "homepage_url": "https://www.polymermallard.com",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "https://streeteasy.com/",
+    "https://www.streeteasy.com/"
+  ],
+  "web_accessible_resources": [
+    "shared/image/*",
+    "panels/crime-map/*",
+    "panels/map/*"
+  ],
+  "content_security_policy": "script-src 'self' https://*.googleapis.com; object-src 'self'",
+  "browser_action": {
+    "default_popup": "panels/popup/index.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://streeteasy.com/*",
+        "*://www.streeteasy.com/*"
+      ],
+      "css": [
+        "active/style/app/header.css",
+        "active/style/app/building.css",
+        "active/style/app/listings.css",
+        "active/style/app/single.css",
+        "active/style/app/screen.css"
+      ],
+      "js": [
+        "shared/script/vendor/jquery/jquery.js",
+        "shared/script/app/state.js",
+        "shared/script/app/config.js",
+        "shared/script/app/global.js",
+        "shared/script/app/util.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://streeteasy.com/*for-rent*",
+        "*://www.streeteasy.com/*for-rent*",
+        "*://streeteasy.com/*for-sale*",
+        "*://www.streeteasy.com/*for-sale*"
+      ],
+      "js": [
+        "active/script/app/listings.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://streeteasy.com/building/*/*",
+        "*://streeteasy.com/rental/*",
+        "*://www.streeteasy.com/building/*/*"
+      ],
+      "js": [
+        "active/script/app/single.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://streeteasy.com/building/*",
+        "*://www.streeteasy.com/building/*"
+      ],
+      "js": [
+        "active/script/app/building.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Free Gmail Email Tracking - MailFly",
+  "description": "Track unlimited emails for free, no conditions!",
+  "version": "1.1",
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "OneSignal.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "OneSignal.js",
+        "notification.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*"
+      ],
+      "css": [
+        "css/app.min.css",
+        "style.css"
+      ],
+      "js": [
+        "inboxsdk.js",
+        "jquery.min.js",
+        "select.min.js",
+        "content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "icons": {
+    "16": "images/logo.png",
+    "48": "images/logo.png",
+    "128": "images/logo.png"
+  },
+  "browser_action": {
+    "default_icon": "images/gmail_logged_in.png"
+  },
+  "permissions": [
+    "https://mail.google.com/",
+    "https://inbox.google.com/",
+    "https://mailfly.io/",
+    "*://*.googleusercontent.com/proxy/*",
+    "storage",
+    "gcm",
+    "identity",
+    "notifications",
+    "webRequest",
+    "webRequestBlocking",
+    "tabs"
+  ],
+  "manifest_version": 2
+}

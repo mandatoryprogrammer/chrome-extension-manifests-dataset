@@ -1,0 +1,31 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "PTScrape",
+  "description": "Scrapes data from a PT location finder",
+  "version": "1.30",
+  "page_action": {
+    "default_icon": "icon.png"
+  },
+  "permissions": [
+    "http://aptaapps.apta.org/*",
+    "tabs"
+  ],
+  "background": {
+    "scripts": [
+      "eventPage.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://aptaapps.apta.org/findapt/index*"
+      ],
+      "js": [
+        "scrape.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Netflix Controller",
+  "version": "1.0.4",
+  "description": "Control Netflix in your browser with a gamepad or controller.",
+  "manifest_version": 2,
+  "permissions": [
+    "*://*.netflix.com/*",
+    "declarativeContent",
+    "tabs",
+    "debugger",
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "static/js/live-storage@1.0.2.js",
+      "app/options/settings.js",
+      "app/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.netflix.com/*"
+      ],
+      "exclude_matches": [
+        "*://help.netflix.com/*"
+      ],
+      "js": [
+        "static/js/live-storage@1.0.2.js",
+        "static/js/gamepads@1.2.2.js",
+        "static/js/gamepad-icons@1.2.2.js",
+        "static/js/pseudostyler@1.0.8.js",
+        "app/content/components/direction.js",
+        "app/content/components/navigatable.js",
+        "app/content/components/static-navigatable.js",
+        "app/content/components/title-panel.js",
+        "app/content/components/slider.js",
+        "app/content/components/billboard.js",
+        "app/content/components/menu.js",
+        "app/content/components/profiles.js",
+        "app/content/components/choices.js",
+        "app/content/components/jawbone.js",
+        "app/content/ui/virtual-keyboard.js",
+        "app/content/ui/bottom-bar.js",
+        "app/content/ui/notice-bar.js",
+        "app/content/ui/actions.js",
+        "app/content/ui/connection-hint.js",
+        "app/content/ui/compatibility-warning.js",
+        "app/content/ui/error-bar.js",
+        "app/content/pages/page.js",
+        "app/content/pages/choose-profile.js",
+        "app/content/pages/slider-browse.js",
+        "app/content/pages/pure-slider-browse.js",
+        "app/content/pages/featureless-browse.js",
+        "app/content/pages/featured-browse.js",
+        "app/content/pages/latest-browse.js",
+        "app/content/pages/title-browse.js",
+        "app/content/pages/watch.js",
+        "app/content/pages/search.js",
+        "app/content/content.js"
+      ],
+      "css": [
+        "static/styles/content.css"
+      ]
+    }
+  ],
+  "options_page": "app/options/options.html",
+  "page_action": {
+    "default_popup": "app/popups/popup.html",
+    "default_icon": {
+      "16": "static/icon16.png",
+      "32": "static/icon32.png",
+      "48": "static/icon48.png",
+      "128": "static/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "static/icon16.png",
+    "32": "static/icon32.png",
+    "48": "static/icon48.png",
+    "128": "static/icon128.png"
+  },
+  "web_accessible_resources": [
+    "static/buttons/*/*.png",
+    "static/styles/content.css"
+  ]
+}

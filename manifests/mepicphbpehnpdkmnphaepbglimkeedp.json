@@ -1,0 +1,41 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Auto Replay YouTube™ Videos",
+  "version": "0.0.3",
+  "manifest_version": 2,
+  "description": "Auto replay your favorite youtube videos in a loop with zero clicks!",
+  "icons": {
+    "48": "icon-48.png",
+    "128": "icon-128.png"
+  },
+  "page_action": {
+    "default_icon": "icon-19.png",
+    "default_title": "Toggle YouTube replay"
+  },
+  "background": {
+    "scripts": [
+      "jquery-1.7.1.min.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "declarativeContent",
+    "activeTab",
+    "notifications"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.youtube.com/*"
+      ],
+      "js": [
+        "jquery-1.7.1.min.js",
+        "waitForKeyElements.js",
+        "contentscript.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "update_url": "http://clients2.google.com/service/update2/crx",
+  "name": "iWish",
+  "version": "0.4.2",
+  "manifest_version": 2,
+  "description": "iWish* 나만의 쇼핑 기술",
+  "options_page": "options.html",
+  "background": {
+    "scripts": [
+      "libs/jquery.1.8.1.min.js",
+      "oauth2/oauth2.js",
+      "scripts/urlparser.js",
+      "scripts/auth.js",
+      "scripts/lifetime.js",
+      "scripts/settings.js",
+      "scripts/eventhandler.js"
+    ],
+    "persistent": false
+  },
+  "icons": {
+    "128": "img/iwish_icon_128x128.png"
+  },
+  "browser_action": {
+    "default_icon": "img/myfav_i19.png",
+    "default_title": "iWish",
+    "default_popup": "wvpopup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.google.com/robots.txt*"
+      ],
+      "js": [
+        "oauth2/oauth2_inject.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://www.google.co.kr/*"
+      ],
+      "js": [
+        "scripts/auth_inject.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://www.facebook.com/robots.txt*"
+      ],
+      "js": [
+        "oauth2/oauth2_inject.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "exclude_matches": [
+        "*://promotion.gmarket.co.kr/*"
+      ],
+      "matches": [
+        "*://*.auction.co.kr/*",
+        "*://*.gmarket.co.kr/*",
+        "*://*.interpark.com/*",
+        "*://*.11st.co.kr/*",
+        "*://*.cjmall.com/*",
+        "*://*.lotte.com/*",
+        "*://*.lotteimall.com/*",
+        "*://*.hyundaihmall.com/*",
+        "*://*.shinsegae.com/*",
+        "*://*.gsshop.com/*",
+        "*://*.dnshop.com/*",
+        "*://*.akmall.com/*"
+      ],
+      "js": [
+        "libs/jquery.1.8.1.min.js",
+        "scripts/urlparser.js",
+        "scripts/markets.js",
+        "scripts/addToWishlist.js",
+        "scripts/pagescraper.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "background",
+    "storage",
+    "notifications",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "web_accessible_resources": [
+    "img/myfav_i19.png"
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "short_name": "Voicepen",
+  "name": "Voicepen",
+  "browser_action": {
+    "default_title": "Open the popup"
+  },
+  "permissions": [
+    "storage",
+    "activeTab"
+  ],
+  "background": {
+    "scripts": [
+      "background/index.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "foreground/index.js"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "assets/voicepen-logo.png",
+    "48": "assets/voicepen-logo.png",
+    "128": "assets/voicepen-logo.png"
+  },
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "externally_connectable": {
+    "ids": [
+      "*"
+    ],
+    "matches": [
+      "*://*.chrome.com/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "index.html"
+  ],
+  "content_security_policy": "script-src 'self' 'sha256-+8iv6wZJoT56JzOLcCa7gcgt0+Ypd26z4CFrxPZ6il0='; object-src 'self'"
+}

@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Builder",
+  "version": "0.2.0",
+  "manifest_version": 2,
+  "description": "Builder chrome extension",
+  "homepage_url": "https://builder.io",
+  "icons": {
+    "16": "icons/builder-icon-small.png",
+    "48": "icons/builder-icon-medium.png",
+    "128": "icons/builder-icon-large.png"
+  },
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "permissions": [
+    "https://*/*",
+    "http://*/*",
+    "*://*/*",
+    "webRequest",
+    "webRequestBlocking",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "js": [
+        "src/inject/inject.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.builder.io/*",
+      "*://localhost:*/*"
+    ]
+  }
+}

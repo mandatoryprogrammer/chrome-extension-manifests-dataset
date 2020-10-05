@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_name__",
+  "description": "__MSG_description__",
+  "version": "1.0.4",
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.google.com ; object-src 'self'",
+  "homepage_url": "https://github.com/AlexVangelov/plunker-web-extension",
+  "default_locale": "en",
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "http://plnkr.co/*",
+        "https://plnkr.co/*",
+        "http://*.plnkr.co/*",
+        "https://*.plnkr.co/*"
+      ],
+      "js": [
+        "plunker.content.bundle.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "run_at": "document_start",
+      "matches": [
+        "http://plnkr.co/*",
+        "https://plnkr.co/*"
+      ],
+      "js": [
+        "plunker.content.www.bundle.js"
+      ],
+      "all_frames": false
+    }
+  ],
+  "browser_action": {
+    "default_title": "__MSG_default_title__",
+    "default_icon": "img/48.png",
+    "default_popup": "popup.html"
+  },
+  "web_accessible_resources": [
+    "popup.html"
+  ],
+  "background": {
+    "page": "background.html"
+  },
+  "icons": {
+    "48": "img/48.png",
+    "128": "img/128.png"
+  },
+  "permissions": [
+    "contextMenus",
+    "background",
+    "activeTab",
+    "storage",
+    "cookies",
+    "notifications",
+    "tabs",
+    "tts",
+    "webRequest",
+    "https://*.plnkr.co/*",
+    "http://*.plnkr.co/*"
+  ],
+  "manifest_version": 2
+}

@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "description": "__MSG_appDesc__",
+  "version": "1.3.4",
+  "default_locale": "en",
+  "icons": {
+    "16": "icons/workato_admin16.png",
+    "48": "icons/workato_admin48.png",
+    "128": "icons/workato_admin128.png"
+  },
+  "author": "Venn Technology",
+  "minimum_chrome_version": "16.0.884",
+  "permissions": [
+    "storage"
+  ],
+  "options_page": "options.html",
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.workato.com/*",
+        "https://workato.com/*"
+      ],
+      "css": [
+        "awesomplete-gh-pages/awesomplete.css",
+        "workato_admin.css"
+      ],
+      "js": [
+        "awesomplete-gh-pages/awesomplete.min.js",
+        "workato_inject.js"
+      ],
+      "exclude_matches": [
+        "https://*.workato.com/users/support_session*",
+        "https://workato.com/users/support_session*"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.workato.com/users/support_session*",
+        "https://workato.com/users/support_session*"
+      ],
+      "js": [
+        "password_inject.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.workato.com/recipes/*/job/*",
+        "https://workato.com/recipes/*/job/*"
+      ],
+      "js": [
+        "calling_job.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "workato_injection.html"
+  ],
+  "manifest_version": 2
+}

@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "MCAST Attendance Helper",
+  "version": "0.7.0",
+  "description": "Assists MCAST lecturers in filling their attendance.",
+  "author": "Robert Abela",
+  "icons": {
+    "16": "img/icon16.png",
+    "24": "img/icon24.png",
+    "32": "img/icon32.png",
+    "64": "img/icon64.png",
+    "128": "img/icon128.png",
+    "256": "img/icon256.png",
+    "512": "img/icon512.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://attendance.mcast.edu.mt/Home/Create?Length=4",
+        "*://attendance.mcast.edu.mt/Home/Edit*"
+      ],
+      "js": [
+        "jquery-3.2.1.min.js",
+        "content-script.js",
+        "basic.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://attendance.mcast.edu.mt/Home/Create*autofill"
+      ],
+      "js": [
+        "jquery-3.2.1.min.js",
+        "content-script.js",
+        "advanced.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://attendance.mcast.edu.mt/Home/Pending*"
+      ],
+      "js": [
+        "jquery-3.2.1.min.js",
+        "inject-link.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": "img/icon64.png",
+    "default_popup": "popup.html",
+    "default_title": "MCAST Attendance Helper"
+  },
+  "permissions": [
+    "*://attendance.mcast.edu.mt/Home/*",
+    "storage"
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "homepage_url": "https://github.com/robert-abela/mcast-attendance-extension",
+  "short_name": "MCAST Attendance"
+}

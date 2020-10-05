@@ -1,0 +1,88 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "LINER - Private Web/PDF Highlighter",
+  "short_name": "Highlighter",
+  "version": "0.9.2",
+  "description": "\"LINER\" helps you highlight sentences on the web. Highlight your favorite texts.",
+  "author": "LINER Chrome",
+  "icons": {
+    "16": "res/icon16.png",
+    "48": "res/icon48.png",
+    "128": "res/icon128.png"
+  },
+  "container": [
+    "DOMAIN_INSTALLABLE",
+    "GOOGLE_DRIVE"
+  ],
+  "api_console_project_id": "703047349878",
+  "app": {
+    "launch": {
+      "web_url": "http://getliner.com/"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "*://*/*",
+        "http://getliner.com/",
+        "https://ajax.googleapis.com/",
+        "https://www.google-analytics.com/*",
+        "file://*/*"
+      ],
+      "js": [
+        "/scripts/global.js",
+        "/scripts/content/contentLib.js",
+        "/scripts/content/content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "/scripts/global.js",
+      "/scripts/util.js",
+      "/scripts/common.js",
+      "/scripts/type/gaType.js",
+      "/scripts/background/backgroundLib.js",
+      "/scripts/background/background.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "/scripts/type/gaType.js",
+    "/scripts/lib/lighter.js",
+    "/scripts/lib/liner-jquery.js",
+    "/scripts/lib/liner-tooltip.js",
+    "/scripts/lib/liner-social.js",
+    "/scripts/lib/liner-highlight-switch.js",
+    "/scripts/inject/main.js",
+    "/scripts/inject/modeon.js",
+    "/scripts/inject/tooltip.js",
+    "/scripts/inject/pdf.js",
+    "/scripts/global.js",
+    "/styles/inject.css",
+    "/frames/upgrade.html",
+    "*.png",
+    "*.gif",
+    "*.ttf",
+    "*.woff",
+    "*.woff2",
+    "*.eot"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "permissions": [
+    "cookies",
+    "clipboardWrite",
+    "activeTab",
+    "storage",
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "*://*/*",
+    "http://getliner.com/",
+    "https://ajax.googleapis.com/"
+  ]
+}

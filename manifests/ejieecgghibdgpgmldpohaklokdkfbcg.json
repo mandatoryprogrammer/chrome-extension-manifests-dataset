@@ -1,0 +1,92 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Fast autoreg",
+  "short_name": "Fast registration",
+  "version": "2.6.2.1",
+  "description": "Autoreg form",
+  "icons": {
+    "16": "images/icon-16.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
+  },
+  "options_page": "pages/options.html",
+  "permissions": [
+    "contextMenus",
+    "activeTab",
+    "https://www.google-analytics.com/",
+    "storage",
+    "identity",
+    "identity.email",
+    "tabs"
+  ],
+  "browser_action": {
+    "default_icon": "images/icon-48.png",
+    "default_title": "Быстрая регистрация на любом сайте"
+  },
+  "commands": {
+    "fill_this_form": {
+      "description": "Заполнить все активные поля",
+      "suggested_key": {
+        "default": "Ctrl+Shift+A",
+        "mac": "Command+Shift+A"
+      }
+    },
+    "fill_this_input": {
+      "description": "Заполнить активное поле",
+      "suggested_key": {
+        "default": "Ctrl+Shift+S",
+        "mac": "Command+Shift+S"
+      }
+    },
+    "fill_all_inputs": {
+      "description": "Заполнить все поля",
+      "suggested_key": {
+        "default": "Ctrl+Shift+F",
+        "mac": "Command+Shift+F"
+      }
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "lib/jquery-3.0.0.min.js",
+        "lib/moment.min.js",
+        "lib/randexp.min.js",
+        "lib/google-analytics-bundle.js",
+        "js-chrome/content.js",
+        "bundles/bundled_formfiller.js",
+        "/js/config.js",
+        "/js/code.js",
+        "/js/jquery.min.js",
+        "/js/methods.js",
+        "/js/content_script/recaptcha.js",
+        "/js/anticaptcha/anticaptcha.js",
+        "/js/content_script/image_captcha.js",
+        "/js/content_script/tainted_image.js",
+        "/js/content_script/representative_marker.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "scripts": [
+      "bundles/bundled_background.js",
+      "js-chrome/form-filler-functions.js",
+      "js-chrome/background.js",
+      "/js/config.js",
+      "/js/methods.js",
+      "/js/background/index.js",
+      "/js/background/context_menu.js",
+      "/js/background/image_captcha.js",
+      "/js/background/tainted_image.js",
+      "/js/jquery.min.js",
+      "/js/anticaptcha/anticaptcha.js"
+    ],
+    "persistent": false
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

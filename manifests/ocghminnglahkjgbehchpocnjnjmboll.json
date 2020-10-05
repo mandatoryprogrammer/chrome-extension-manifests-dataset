@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "background": {
+    "scripts": [
+      "image-to-grayscale.js",
+      "background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "css": [
+        "styles.css"
+      ],
+      "js": [
+        "intercept.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "ipc-bridge.js"
+      ],
+      "matches": [
+        "https://101voice.cloudsoftphone.com/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "description": "voice101.com.mobile.app",
+  "icons": {
+    "128": "icon.png"
+  },
+  "manifest_version": 2,
+  "name": "101VOICE",
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "storage"
+  ],
+  "version": "4.0.991",
+  "web_accessible_resources": [
+    "ipc-bridge-init.js",
+    "icon.png"
+  ]
+}

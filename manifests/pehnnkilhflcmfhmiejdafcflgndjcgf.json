@@ -1,0 +1,40 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Verbling A/B Tests Manager",
+  "version": "1.3",
+  "description": "Toggle between active A/B tests' variations",
+  "web_accessible_resources": [
+    "/injected_brain.js"
+  ],
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs"
+  ],
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "icons": {
+    "16": "/icons/ab_icon_16.png",
+    "48": "/icons/ab_icon_48.png",
+    "128": "/icons/ab_icon_128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.verbling.com/*"
+      ],
+      "js": [
+        "contentscripts.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "manifest_version": 2
+}

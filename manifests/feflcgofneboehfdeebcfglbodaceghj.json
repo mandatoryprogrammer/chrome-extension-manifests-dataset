@@ -1,0 +1,71 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "description": "__MSG_appDesc__",
+  "default_locale": "en",
+  "version": "1.16.0",
+  "homepage_url": "https://www.urban-vpn.com/",
+  "manifest_version": 2,
+  "background": {
+    "scripts": [
+      "bg/build.js",
+      "ad-blocker/background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icons/icon.png",
+    "default_title": "Urban Ad blocker",
+    "default_popup": "popup/index.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "js": [
+        "ad-blocker/content.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "match_about_blank": true
+    },
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "css": [
+        "content/style.css"
+      ],
+      "js": [
+        "content/build.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "match_about_blank": true
+    }
+  ],
+  "icons": {
+    "16": "icons/icon.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "permissions": [
+    "tabs",
+    "webNavigation",
+    "storage",
+    "alarms",
+    "https://*.urban-vpn.com/*",
+    "https://*.bugsnag.com/*",
+    "https://www.google-analytics.com/collect",
+    "https://www.facebook.com/*",
+    "https://api.twitter.com/*",
+    "https://config-toolbar.urban-vpn.com/*"
+  ],
+  "web_accessible_resources": [
+    "icons/*",
+    "popup/fonts/*"
+  ]
+}

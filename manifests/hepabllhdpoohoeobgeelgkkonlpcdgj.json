@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Stashword",
+  "description": "Passwords made easy",
+  "version": "2.6",
+  "permissions": [
+    "activeTab",
+    "https://stashword.com/",
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "lib/jquery/jquery-2.1.1.js",
+      "lib/cryptoJS/hmac-sha256.js",
+      "lib/cryptoJS/pbkdf2.js",
+      "lib/cryptoJS/enc-base64-min.js",
+      "lib/cryptoJS/aes.js",
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "lib/jquery/jquery-2.1.1.js",
+        "content.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "facebookReturn.html*"
+  ],
+  "browser_action": {
+    "default_title": "Passwords made easy",
+    "default_icon": "icon.png",
+    "default_popup": "stashword.html"
+  },
+  "manifest_version": 2,
+  "externally_connectable": {
+    "matches": [
+      "*://*.stashword.com/*",
+      "*://10.0.1.49:*/*",
+      "*://localhost:*/*"
+    ]
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "darkify",
+  "version": "0.2.1",
+  "description": "darkify modifies all websites to a dark version. You can run it over a period of time, exclude pages or manually start and stop it.",
+  "author": "Gabriel Heiler",
+  "homepage_url": "https://www.gabrielheiler.com",
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "tabs",
+    "activeTab",
+    "declarativeContent",
+    "storage",
+    "webNavigation"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "css/basics.css"
+      ],
+      "js": [
+        "js/startscript.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "css/basics.css"
+      ],
+      "js": [
+        "js/contentscript.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "matches": [
+      "http://*/*",
+      "https://*/*",
+      "*"
+    ],
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "img/darkify-16.png",
+      "32": "img/darkify-32.png",
+      "48": "img/darkify.png",
+      "128": "img/darkify-128.png"
+    }
+  },
+  "options_page": "options.html",
+  "icons": {
+    "16": "img/darkify-16.png",
+    "32": "img/darkify-32.png",
+    "48": "img/darkify-48.png",
+    "128": "img/darkify-128.png"
+  },
+  "web_accessible_resources": [
+    "css/basics.css",
+    "css/extras.css"
+  ],
+  "manifest_version": 2
+}

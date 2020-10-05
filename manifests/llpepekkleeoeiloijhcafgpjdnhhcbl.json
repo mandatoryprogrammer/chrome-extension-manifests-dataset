@@ -1,0 +1,104 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "YouTube Music Last.fm Scrobbler",
+  "description": "Scrobbles songs from YouTube Music or Google Play to Last.fm",
+  "version": "2.0.0",
+  "manifest_version": 2,
+  "permissions": [
+    "tabs",
+    "http://ws.audioscrobbler.com/",
+    "http://play.google.com/",
+    "https://play.google.com/",
+    "https://music.youtube.com/"
+  ],
+  "background": {
+    "scripts": [
+      "js/md5.js",
+      "js/lastfm.js",
+      "js/settings.js",
+      "js/util.js",
+      "js/logging.js",
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "icons": {
+    "128": "img/icon128.png",
+    "64": "img/icon64.png",
+    "16": "img/icon16.png",
+    "48": "img/icon48.png"
+  },
+  "browser_action": {
+    "default_popup": "html/popup.html",
+    "default_icon": "img/main-icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://play.google.com/music/listen*"
+      ],
+      "js": [
+        "js/inject.js",
+        "js/settings.js",
+        "js/contentscript.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://music.youtube.com/*"
+      ],
+      "js": [
+        "js/inject.js",
+        "js/settings.js",
+        "js/ytm_contentscript.js"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "matches": [
+        "*://play.google.com/music/listen*",
+        "*://music.youtube.com/*"
+      ],
+      "js": [
+        "js/jquery-1.7.min.js"
+      ]
+    }
+  ],
+  "options_page": "html/options.html",
+  "web_accessible_resources": [
+    "html/lastfm_callback.html"
+  ],
+  "commands": {
+    "toggle_play": {
+      "suggested_key": {
+        "default": "MediaPlayPause",
+        "linux": "Ctrl+Shift+8"
+      },
+      "description": "Toggle play/pause",
+      "global": true
+    },
+    "prev_song": {
+      "suggested_key": {
+        "default": "MediaPrevTrack",
+        "linux": "Ctrl+Shift+7"
+      },
+      "description": "Previous song",
+      "global": true
+    },
+    "next_song": {
+      "suggested_key": {
+        "default": "MediaNextTrack",
+        "linux": "Ctrl+Shift+9"
+      },
+      "description": "Next song",
+      "global": true
+    },
+    "goto_play_tab": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+0"
+      },
+      "description": "Go to YT Music/Google Music tab",
+      "global": true
+    }
+  }
+}

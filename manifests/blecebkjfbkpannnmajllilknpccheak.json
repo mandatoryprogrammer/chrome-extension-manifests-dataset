@@ -1,0 +1,111 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Super Focus Tabs",
+  "version": "1.2.8.2",
+  "manifest_version": 2,
+  "description": "Quickly find out tab/page. Reduce much more time while working with multiple tabs/pages.",
+  "short_name": "SFocus",
+  "icons": {
+    "16": "sfocus16.png",
+    "24": "sfocus24.png",
+    "48": "sfocus48.png",
+    "128": "sfocus128.png"
+  },
+  "background": {
+    "scripts": [
+      "scripts/track.js",
+      "scripts/mySuperFocus.js",
+      "scripts/constants.min.js",
+      "scripts/storage.min.js",
+      "scripts/html2canvas.min.js",
+      "scripts/common.min.js",
+      "scripts/background.min.js"
+    ],
+    "persistent": true
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "permissions": [
+    "tabs",
+    "storage",
+    "alarms",
+    "contextMenus",
+    "<all_urls>",
+    "history",
+    "bookmarks",
+    "unlimitedStorage",
+    "chrome://favicon/"
+  ],
+  "web_accessible_resources": [
+    "css/images/*.*"
+  ],
+  "browser_action": {
+    "default_title": "Quick view tabs"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [
+        "css/style.min.css",
+        "css/tree.css",
+        "css/inlineDialog.css"
+      ],
+      "js": [
+        "scripts/mySuperFocus.js",
+        "scripts/constants.min.js",
+        "scripts/hotKeys.min.js",
+        "scripts/common.min.js",
+        "scripts/inlineDialog.min.js",
+        "scripts/table.min.js",
+        "scripts/tree.min.js",
+        "scripts/page.min.js",
+        "scripts/tabs.min.js",
+        "scripts/swaps.min.js",
+        "scripts/bookmark.min.js",
+        "scripts/history.min.js",
+        "scripts/Interface.min.js",
+        "scripts/html2canvas.min.js",
+        "scripts/intercept_session.min.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "commands": {
+    "save-page": {
+      "suggested_key": {
+        "default": "Ctrl + Shift + S",
+        "mac": "Command + Shift + S"
+      },
+      "global": false,
+      "description": "save this page"
+    },
+    "last-created-tabs": {
+      "suggested_key": {
+        "default": "Ctrl + Shift + X",
+        "mac": "Ctrl + Shift + X"
+      },
+      "global": false,
+      "description": "Activate the last created tab"
+    },
+    "backward-tabs": {
+      "suggested_key": {
+        "default": "Ctrl + Shift + Z",
+        "mac": "Ctrl + Shift + Z"
+      },
+      "global": false,
+      "description": "Go to previous ative tabs"
+    },
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl + Shift + F",
+        "windows": "Ctrl + Shift + F",
+        "mac": "Ctrl + Shift + F",
+        "linux": "Ctrl + Shift + F"
+      },
+      "global": false,
+      "description": "Open Sfocus"
+    }
+  },
+  "options_page": "options.html"
+}

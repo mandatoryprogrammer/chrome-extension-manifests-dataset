@@ -1,0 +1,80 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "author": "아하실",
+  "short_name": "OU Hasil?",
+  "name": "오유 하실?",
+  "version": "1.0.8.0",
+  "description": "오늘의유머 전용 노업뎃",
+  "homepage_url": "https://www.google.co.kr/search?q=%EC%98%A4%EC%9C%A0",
+  "applications": {
+    "gecko": {
+      "id": "{55a29774-23cf-4911-94f7-c44ffa483d7f}",
+      "strict_min_version": "58.0"
+    }
+  },
+  "icons": {
+    "32": "icons/ou-hasil-logo-32.png",
+    "48": "icons/ou-hasil-logo-48.png",
+    "96": "icons/ou-hasil-logo-96.png"
+  },
+  "permissions": [
+    "activeTab",
+    "alarms",
+    "clipboardRead",
+    "contextMenus",
+    "storage",
+    "tabs",
+    "*://*.todayhumor.co.kr/*"
+  ],
+  "background": {
+    "scripts": [
+      "polyfill/browser-polyfill.js",
+      "ou-hasil-hotkeys-data.js",
+      "ou-hasil-settings-data.js",
+      "ou-hasil-background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.todayhumor.co.kr/*"
+      ],
+      "js": [
+        "polyfill/browser-polyfill.js",
+        "content/hammer.min.js",
+        "content/shortcut.js",
+        "content/ou-hasil-basis.js",
+        "ou-hasil-hotkeys-data.js",
+        "content/ou-hasil-hotkeys-basis.js",
+        "content/ou-hasil-hotkeys.js",
+        "content/ou-hasil.js"
+      ],
+      "css": [
+        "content/ou-hasil.css",
+        "content/ou-hasil-deep-dark.css",
+        "ou-hasil-hotkeys-icon.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "options_ui": {
+    "page": "options/ou-hasil-options.html"
+  },
+  "page_action": {
+    "browser_style": true,
+    "default_icon": {
+      "19": "icons/ou-hasil-logo-19.png",
+      "32": "icons/ou-hasil-logo-32.png",
+      "38": "icons/ou-hasil-logo-38.png",
+      "48": "icons/ou-hasil-logo-48.png",
+      "96": "icons/ou-hasil-logo-96.png"
+    },
+    "default_title": "오유 하실?"
+  },
+  "web_accessible_resources": [
+    "content/ou-hasil-chrome*.js",
+    "content/images/*",
+    "icons/*"
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "name": "__MSG_extName__",
+  "short_name": "Night Eye",
+  "description": "__MSG_extDescription__",
+  "homepage_url": "https://nighteye.app/",
+  "author": "RAZORlabs",
+  "icons": {
+    "16": "res/icon/16.png",
+    "48": "res/icon/48.png",
+    "128": "res/icon/128.png"
+  },
+  "permissions": [
+    "contextMenus",
+    "activeTab",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "*://*/*"
+  ],
+  "web_accessible_resources": [
+    "images/*",
+    "css/*",
+    "_locales/*",
+    "js/browser-action/*"
+  ],
+  "commands": {
+    "toggle-current-website": {
+      "suggested_key": {
+        "default": "Alt+Shift+2",
+        "mac": "Command+Shift+2"
+      },
+      "description": "__MSG_extToggleButton__"
+    },
+    "toggle-power-extension": {
+      "suggested_key": {
+        "default": "Alt+Shift+3",
+        "mac": "Command+Shift+3"
+      },
+      "description": "Toggle on and off the extension"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [
+        "css/loading.css"
+      ],
+      "js": [
+        "js/content/content.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "offline_enabled": true,
+  "content_security_policy": "script-src 'self' 'sha256-iFQqEQOE+73K+zzD6AOo8l3XTc/xh9rAqvi2Cigd2pQ=' 'sha256-uy8D2ip29CkJtS9XwyNKoaLIiSY8XL2rfa9TwKhhK4o='; object-src 'self'",
+  "browser_action": {
+    "default_icon": "res/icon/48.png",
+    "default_popup": "html/browser-action/home.html",
+    "default_title": "Night Eye"
+  },
+  "background": {
+    "scripts": [
+      "js/background/background.js"
+    ]
+  },
+  "version": "4.3.3"
+}

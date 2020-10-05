@@ -1,0 +1,71 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "KEYNTO Team Password Manager",
+  "version": "1.5.0",
+  "icons": {
+    "16": "img/icon16.png",
+    "32": "img/icon32.png",
+    "48": "img/icon48.png",
+    "64": "img/icon64.png",
+    "96": "img/icon96.png",
+    "128": "img/icon128.png"
+  },
+  "permissions": [
+    "contextMenus",
+    "storage",
+    "tabs",
+    "alarms",
+    "https://my.keynto.com/data.php",
+    "http://keynto.tiz/data.php"
+  ],
+  "web_accessible_resources": [
+    "img/*"
+  ],
+  "browser_action": {
+    "default_popup": "html/popup.html",
+    "default_icon": "img/icon16.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "https://my.keynto.com/*",
+        "*://keynto.tiz/*"
+      ],
+      "css": [
+        "css/main.css"
+      ],
+      "js": [
+        "js/jquery-3.3.1.min.js",
+        "js/common.js",
+        "js/content_general.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://my.keynto.com/*",
+        "http://keynto.tiz/*"
+      ],
+      "js": [
+        "js/jquery-3.3.1.min.js",
+        "js/common.js",
+        "js/content_plugin.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/jquery-3.3.1.min.js",
+      "js/common.js",
+      "js/background.js"
+    ],
+    "persistent": true
+  }
+}

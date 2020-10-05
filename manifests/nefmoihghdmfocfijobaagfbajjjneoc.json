@@ -1,0 +1,59 @@
+{
+  "version": "1.6",
+  "name": "Mensis - Suivi de prix Amazon",
+  "short_name": "Mensis - Suivi prix Amazon",
+  "author": "Mensis",
+  "default_locale": "fr",
+  "description": "Suivi de prix Amazon",
+  "homepage_url": "http://www.mensis.fr",
+  "background": {
+    "scripts": [
+      "chrome/background.js"
+    ],
+    "persistent": true
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "browser_action": {
+    "default_icon": {
+      "32": "icons/32.png",
+      "48": "icons/48.png"
+    },
+    "default_title": "Mensis s'intègre automatiquement sur les pages produits d'Amazon."
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "script/jquery.min.js",
+        "script/bootstrap.min.js",
+        "chrome/content.js"
+      ],
+      "matches": [
+        "*://*.amazon.fr/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "icons": {
+    "128": "icons/128.png",
+    "16": "icons/16.png",
+    "32": "icons/32.png",
+    "48": "icons/48.png"
+  },
+  "web_accessible_resources": [
+    "loader.gif",
+    "script/*"
+  ],
+  "manifest_version": 2,
+  "options_page": "chrome/options.html",
+  "permissions": [
+    "tabs",
+    "notifications",
+    "webRequest",
+    "webRequestBlocking",
+    "storage",
+    "contextMenus",
+    "*://*.amazon.fr/*"
+  ],
+  "update_url": "https://clients2.google.com/service/update2/crx"
+}

@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "MyWeb New Tab with Search",
+  "version": "3.0",
+  "description": "Use one of hundreds of unique new tab page experiences brought to you by Brand Thunder, now with convenient default search.",
+  "author": "Brand Thunder",
+  "icons": {
+    "16": "icon16.png",
+    "32": "icon32.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "icon16.png",
+      "32": "icon32.png"
+    },
+    "default_title": "MyWeb"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.brandthunder.com/*"
+      ],
+      "js": [
+        "contentscript.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  "chrome_settings_overrides": {
+    "search_provider": {
+      "name": "MyWeb Search",
+      "keyword": "myweb",
+      "search_url": "http://search.brandthunder.com?type=myweb_vc&q={searchTerms}",
+      "favicon_url": "http://brandthunder.com/wp/wp-content/uploads/2016/08/cropped-bt-logo-square-150x150.png",
+      "encoding": "UTF-8",
+      "is_default": true
+    }
+  },
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "tabs",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking",
+    "cookies",
+    "storage",
+    "unlimitedStorage",
+    "contextMenus"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

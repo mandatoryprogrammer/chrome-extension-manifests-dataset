@@ -1,0 +1,73 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Kijiji+ Site Enhancer",
+  "short_name": "Kijiji+ Site Enhancer",
+  "version": "1.1.0",
+  "description": "Enhance your Kijiji browsing with image rotation, CAPTCHA solver, infinite-scroll, ad-blocking, and much more!",
+  "author": "André Fortin",
+  "default_locale": "en",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "webNavigation",
+    "http://*/*",
+    "https://*/*",
+    "https://maps.googleapis.com/maps/api/*"
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "browser_action": {
+    "default_icon": "icons/icon32.png"
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "*://www.kijiji.ca/*"
+      ],
+      "css": [
+        "css/style.css"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "*://www.kijiji.ca/*"
+      ],
+      "js": [
+        "js/jquery-3.1.1.min.js",
+        "js/bootstrap.min.js",
+        "js/jquery.infinitescroll-2.2.1.min.js",
+        "js/captcha-solver.js",
+        "js/infinitescroll.js",
+        "js/mapify.js",
+        "js/messaging.js",
+        "js/rotation.js",
+        "js/toggle-elements.js",
+        "js/utils.js",
+        "js/kijiji-plus.js"
+      ],
+      "css": [
+        "css/bootstrap.min.css"
+      ]
+    }
+  ],
+  "options_page": "options.html",
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com https://maps.googleapis.com https://maps.gstatic.com; object-src 'self'",
+  "web_accessible_resources": [
+    "kijiji/js/filter.js",
+    "kijiji/css/style.css",
+    "img/*.png",
+    "img/*.gif"
+  ]
+}

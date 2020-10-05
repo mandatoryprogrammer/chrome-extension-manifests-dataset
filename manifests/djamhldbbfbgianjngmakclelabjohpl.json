@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "GroovifyWhat for Google Chrome™",
+  "version": "1.1.1",
+  "manifest_version": 2,
+  "description": "A chrome extension that adds spotify and grooveshark enhancements to what.cd pages.",
+  "web_accessible_resources": [
+    "/img/spotify.png",
+    "/img/grooveshark.png",
+    "fade.js"
+  ],
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "options_page": "options.html",
+  "permissions": [
+    "storage",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "http://ws.spotify.com/search/1/*"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://what.cd/artist.php?id=*",
+        "https://what.cd/torrents.php?id=*",
+        "https://ssl.what.cd/artist.php?id=*",
+        "https://ssl.what.cd/torrents.php?id=*"
+      ],
+      "js": [
+        "SpotifyWhat.js",
+        "jq.js"
+      ]
+    }
+  ]
+}

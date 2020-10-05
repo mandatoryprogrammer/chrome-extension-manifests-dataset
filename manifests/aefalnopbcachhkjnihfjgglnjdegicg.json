@@ -1,0 +1,85 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "description": "uPerform® by ANCILE helps you master applications while you work.",
+  "manifest_version": 2,
+  "name": "uPerform® In-application Help",
+  "short_name": "uPerform",
+  "version": "5.43.67.1258",
+  "homepage_url": "https://www.ancile.com",
+  "icons": {
+    "19": "icons/19.png",
+    "38": "icons/38.png",
+    "64": "icons/64.png",
+    "128": "icons/128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/19.png",
+      "38": "icons/38.png",
+      "64": "icons/64.png",
+      "128": "icons/128.png"
+    },
+    "default_popup": "popup.html",
+    "default_title": "uPerform® In-application Help"
+  },
+  "permissions": [
+    "webNavigation",
+    "tabs",
+    "storage",
+    "http://*/",
+    "https://*/",
+    "nativeMessaging"
+  ],
+  "background": {
+    "page": "background.html",
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "./lib/jquery-2.2.4.min.js",
+        "./lib/jquery-ui-1.12.1.min.js",
+        "./InAppCsh/script/console.js",
+        "./contentscript.js",
+        "./InAppCsh/script/csh-all.js"
+      ],
+      "css": [
+        "./InAppCsh/style/csh/jquery.ancile.messageribbon.css",
+        "./InAppCsh/style/csh/jquery.ancile.sidebar.css",
+        "./InAppCsh/style/csh/jquery.ancile.toolbar.css"
+      ],
+      "run_at": "document_end",
+      "matches": [
+        "<all_urls>"
+      ]
+    },
+    {
+      "js": [
+        "./configext.js"
+      ],
+      "css": [
+        "./InAppCsh/style/font-awesome/css/font-awesome.min.css",
+        "./InAppCsh/style/open-sans/css/open-sans.min.css",
+        "./InAppCsh/style/jqueryui/jquery-ui-1.12.1.min.css",
+        "./InAppCsh/style/jqueryui/jquery-ui-1.12.1.structure.min.css",
+        "./InAppCsh/style/jqueryui/jquery-ui-1.12.1.theme.min.css",
+        "./InAppCsh/style/csh/csh.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": true,
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
+  "options_ui": {
+    "open_in_tab": true,
+    "page": "options.html"
+  },
+  "web_accessible_resources": [
+    "InAppCsh/style/open-sans/fonts/**",
+    "InAppCsh/style/font-awesome/fonts/*",
+    "InAppCsh/style/jqueryui/images/*"
+  ],
+  "content_security_policy": "script-src 'self' blob: filesystem:; object-src 'self'; child-src 'self';"
+}

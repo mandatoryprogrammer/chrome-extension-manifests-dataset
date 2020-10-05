@@ -1,0 +1,69 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "xatAlert Tools",
+  "description": "A collection of tools that enhances your experience on xat.",
+  "version": "2.2.8",
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "page_action": {
+    "default_icon": {
+      "19": "images/CSS.png"
+    },
+    "default_title": "Disable CSS"
+  },
+  "web_accessible_resources": [
+    "images/*.png",
+    "options.html"
+  ],
+  "incognito": "split",
+  "options_page": "options.html",
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://xat.com/*"
+      ],
+      "js": [
+        "iframejs.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://xat.com/*",
+        "http://xat.me/*"
+      ],
+      "js": [
+        "checkcss.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://linkvalidator.net/warn.php?p=*"
+      ],
+      "js": [
+        "lvbypass.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "http://xat.com/*",
+    "http://xat.me/*",
+    "http://linkvalidator.net/warn.php?p=*",
+    "http://xatalert.com/*",
+    "tabs",
+    "unlimitedStorage",
+    "storage"
+  ]
+}

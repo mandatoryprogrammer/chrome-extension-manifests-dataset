@@ -1,0 +1,123 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Chili Piper Chrome Extension",
+  "short_name": "Chili Piper",
+  "version": "2.27588",
+  "description": "The fastest way to schedule meetings and collaborate on emails. One-click booking from anywhere. Commenting on threads in Gmail.",
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "app.js"
+    ]
+  },
+  "icons": {
+    "16": "images/beta/48x48.png",
+    "48": "images/beta/48x48.png",
+    "128": "images/beta/128x128.png"
+  },
+  "browser_action": {
+    "default_title": "Chili Piper: Scheduling and Inbox Collaboration",
+    "default_icon": "images/beta/48x48.png",
+    "default_popup": "popup.html"
+  },
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://instant-booker-development-a6llso2ukq-uc.a.run.app https://fonts.googleapis.com https://ajax.googleapis.com https://accounts.google.com https://*.lightning.force.com; object-src 'self' https://accounts.google.com; frame-src 'self' https://ajax.googleapis.com https://accounts.google.com https://*.salesforce.com https://*.chilipiper.com https://*.chilipiper.io https://*.chilipiper.team https://*.chilipiper.cool;",
+  "permissions": [
+    "notifications"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "css": [
+        "app.css"
+      ],
+      "js": [
+        "js/inboxsdk.js",
+        "gmailContentScript.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://localhost:4001/query*",
+        "https://localhost:4001/raw-sf-query*",
+        "https://x.chilipiper.io/query*",
+        "https://x.chilipiper.io/raw-sf-query*",
+        "https://x.chilipiper.cool/query*",
+        "https://x.chilipiper.cool/raw-sf-query*",
+        "https://x.chilipiper.com/query*",
+        "https://x.chilipiper.com/raw-sf-query*",
+        "https://x.chilipiper.team/query*",
+        "https://x.chilipiper.team/raw-sf-query*",
+        "https://x.chilipiper.cool/query*",
+        "https://x.chilipiper.cool/raw-sf-query*"
+      ],
+      "js": [
+        "dashboard.js"
+      ],
+      "css": [
+        "fonts/roboto/styles.css",
+        "fonts/fontawesome/css/font-awesome.css",
+        "app.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://calendar.google.com/*",
+        "https://*.salesforce.com/*",
+        "https://*.lightning.force.com/*",
+        "https://*.salesloft.com/app/*",
+        "https://*.qasalesloft.com/app/*",
+        "https://*.salesloft.com:9999/app/*",
+        "https://*.outreach.io/*",
+        "https://app.frontspin.com/*",
+        "https://appng.frontspin.com/*"
+      ],
+      "js": [
+        "app.js"
+      ],
+      "css": [
+        "fonts/roboto/styles.css",
+        "fonts/fontawesome/css/font-awesome.css",
+        "app.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://*.chilipiper.com/*",
+        "https://*.chilipiper.io/*",
+        "https://chilipiper.io/*",
+        "https://*.chilipiper.team/*",
+        "https://chilipiper.team/*",
+        "https://*.chilipiper.cool/*",
+        "https://chilipiper.cool/*"
+      ],
+      "css": [
+        "be.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "app.js",
+    "salesforce.js",
+    "done.js",
+    "google.js",
+    "emojione.json",
+    "fonts/roboto/*.woff2",
+    "fonts/roboto/*.ttf",
+    "fonts/roboto/*.css",
+    "fonts/fontawesome/fonts/*.*",
+    "fonts/fontawesome/css/*.css",
+    "images/*.*",
+    "*.ttf",
+    "*.css",
+    "*.html",
+    "*.png"
+  ]
+}

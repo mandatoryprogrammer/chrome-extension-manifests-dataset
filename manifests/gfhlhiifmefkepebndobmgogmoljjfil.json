@@ -1,0 +1,101 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "CheckMyProf",
+  "version": "1.2.3",
+  "manifest_version": 2,
+  "author": "Tejbir Singh Sodhan",
+  "description": "RateMyProfessors.com ratings directly on the course selection page. UBC, opensfu.ca, Kwantlen, UFV",
+  "icons": {
+    "16": "icons/16x16.png",
+    "48": "icons/48x48.png",
+    "128": "icons/128x128.png"
+  },
+  "page_action": {
+    "default_icon": {
+      "19": "icons/19x19.png",
+      "38": "icons/38x38.png"
+    },
+    "default_title": "CheckMyProf"
+  },
+  "background": {
+    "scripts": [
+      "js/eventPage.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://courses.students.ubc.ca/cs/main?pname=subjarea&tname=subjareas*"
+      ],
+      "css": [
+        "bootstrap.min.css",
+        "display.css"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "js/bootstrap.min.js",
+        "js/popoverHelpers.js",
+        "js/helpers.js",
+        "institutions/ubc.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "http://www.opensfu.ca/course/*"
+      ],
+      "css": [
+        "bootstrap.min.css",
+        "display.css"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "js/bootstrap.min.js",
+        "js/popoverHelpers.js",
+        "js/helpers.js",
+        "institutions/opensfu.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://bweb.kwantlen.ca/jade_prod/bwskfcls.P_GetCrse*",
+        "https://bweb.kwantlen.ca/pls/prodss/*"
+      ],
+      "css": [
+        "bootstrap.min.css",
+        "display.css"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "js/bootstrap.min.js",
+        "js/popoverHelpers.js",
+        "js/helpers.js",
+        "institutions/kwantlen.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "https://farnham.ufv.ca/prod/bwskfcls.P_GetCrse*"
+      ],
+      "css": [
+        "bootstrap.min.css",
+        "display.css"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "js/bootstrap.min.js",
+        "js/popoverHelpers.js",
+        "js/helpers.js",
+        "institutions/ufv.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "permissions": [
+    "http://www.ratemyprofessors.com/*"
+  ]
+}

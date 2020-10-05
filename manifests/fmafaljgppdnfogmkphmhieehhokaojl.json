@@ -1,0 +1,143 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Slickiss",
+  "version": "2.9.0",
+  "manifest_version": 2,
+  "description": "Hides ads and Captcha in Kissanime and offers many other functionalities like notifications for Anime, quick download, and more",
+  "browser_action": {
+    "default_name": "Slickiss",
+    "default_popup": "html/popup.html",
+    "default_icon": "icons/128.png"
+  },
+  "icons": {
+    "128": "icons/128.png"
+  },
+  "permissions": [
+    "*://*.googleusercontent.com/*",
+    "*://*.googlevideo.com/*",
+    "*://img.novelplanet.com/*",
+    "cookies",
+    "storage",
+    "notifications",
+    "webRequest",
+    "webRequestBlocking",
+    "https://native.propellerclick.com/*",
+    "https://inservinea.com/*",
+    "https://ads.2mdnsys.com/*",
+    "https://koindut.com/*",
+    "https://arejoysew.com/*",
+    "https://kissanime.ru/ads/*",
+    "https://kissanime.ru/AGBXSKCSYWBSDAPOLA",
+    "https://kissanime.ru/Scripts/video-js/video.js",
+    "https://kissanime.ru/Scripts/video-js/video5.min.js"
+  ],
+  "background": {
+    "scripts": [
+      "src/libs/jquery-2.1.4.min.js",
+      "src/libs/md5.js",
+      "src/libs/hls.js",
+      "src/Chrome.js",
+      "src/kickout.js",
+      "src/background.js"
+    ],
+    "persistent": true
+  },
+  "web_accessible_resources": [
+    "imgs/*",
+    "webfonts/*",
+    "html/*.html",
+    "css/*.css",
+    "data.json"
+  ],
+  "content_scripts": [
+    {
+      "js": [
+        "src/libs/jquery-2.1.4.min.js",
+        "src/libs/ocrad.min.js",
+        "src/libs/md5.js",
+        "src/libs/loader.js",
+        "src/libs/hls.js",
+        "src/custom.js",
+        "src/Tooltip.js",
+        "src/LocalStorage.js",
+        "src/Prompt.js",
+        "src/Assets.js",
+        "src/ImgProc.js",
+        "src/Chrome.js",
+        "src/Notifier.js",
+        "src/VideoRecorder.js",
+        "src/Captcha.js",
+        "src/DlGrabber.js",
+        "src/EpisodeListing.js",
+        "src/Thumbnail.js",
+        "src/Player.js",
+        "src/Slickiss.js",
+        "src/Bookmark.js",
+        "src/Anime.js",
+        "src/Episode.js",
+        "src/MessageManager.js"
+      ],
+      "css": [
+        "css/custom-style.css",
+        "css/fontawesome.min.css"
+      ],
+      "matches": [
+        "*://kissanime.ru/*",
+        "*://playhydrax.com/*",
+        "*://hydrax.net/*",
+        "*://play.p2ps.io/*",
+        "*://www.mp4upload.com/*",
+        "*://9sr4g3q37i9f0vh6k1srncmoetol5la4-a-sites-opensocial.googleusercontent.com/*",
+        "*://www.novelplanet.me/*"
+      ],
+      "include_globs": [
+        "*://kissanime.ru/*",
+        "*://kissanime.ru/#batch",
+        "*://playhydrax.com/*",
+        "*://hydrax.net/watch?v=*",
+        "*://play.p2ps.io/play/*",
+        "*://www.mp4upload.com/embed-*",
+        "*://9sr4g3q37i9f0vh6k1srncmoetol5la4-a-sites-opensocial.googleusercontent.com/gadgets/*",
+        "*://www.novelplanet.me/v/*"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    },
+    {
+      "js": [
+        "src/sendUpdates.js"
+      ],
+      "matches": [
+        "*://kissanime.ru/"
+      ],
+      "include_globs": [
+        "*://kissanime.ru/#sendUpdates"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    },
+    {
+      "js": [
+        "src/BatchManager.js"
+      ],
+      "matches": [
+        "*://kissanime.ru/"
+      ],
+      "include_globs": [
+        "*://kissanime.ru/#batch"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    },
+    {
+      "js": [
+        "src/CaptchaDisplay.js"
+      ],
+      "matches": [
+        "*://kissanime.ru/Special/*"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    }
+  ]
+}

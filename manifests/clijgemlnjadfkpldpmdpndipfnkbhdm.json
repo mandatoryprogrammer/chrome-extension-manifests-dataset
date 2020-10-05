@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_voltocheck_name__",
+  "short_name": "Volto",
+  "version": "0.0.0.5",
+  "default_locale": "en",
+  "description": "__MSG_voltocheck_description__",
+  "icons": {
+    "128": "icon_128.png"
+  },
+  "browser_action": {
+    "default_icon": "img/icon_not_logged_in.png"
+  },
+  "background": {
+    "persistent": false,
+    "page": "background.html"
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "*://*.volto.io/*"
+      ],
+      "js": [
+        "installed.js"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content_script.js",
+        "jquery-3.0.0.min.js"
+      ],
+      "css": [
+        "aliases.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "img/icon_input.png",
+    "aliases.html"
+  ],
+  "minimum_chrome_version": "23.0.1271",
+  "permissions": [
+    "alarms",
+    "tabs",
+    "webNavigation",
+    "cookies",
+    "*://*.volto.io/"
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Stacker",
+  "version": "1.29",
+  "manifest_version": 2,
+  "commands": {
+    "toggle-feature-foo": {
+      "suggested_key": {
+        "default": "Alt+S",
+        "mac": "Alt+S"
+      },
+      "description": "Toggle feature foo"
+    }
+  },
+  "description": "Share links, videos, photos and content from anywhere on the web with the Stacker Browser Plugin.",
+  "background": {
+    "scripts": [
+      "jquery.min.js",
+      "checker.js",
+      "background.js",
+      "popup.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "apple-touch-icon.png",
+    "default_title": "Stacker",
+    "default_popup": "background.html"
+  },
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "contextMenus",
+    "activeTab",
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "webNavigation",
+    "background",
+    "management"
+  ],
+  "icons": {
+    "128": "apple-touch-icon.png"
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://www.getstacker.com/*",
+      "*://www.strikebooks.com/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [
+        "main.css"
+      ],
+      "js": [
+        "jquery.min.js",
+        "checker.js",
+        "script.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'",
+  "web_accessible_resources": [
+    "st-button.png",
+    "st-button_hover.png"
+  ]
+}

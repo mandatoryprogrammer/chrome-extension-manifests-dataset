@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Read rate done",
+  "description": "Click stars on Kindle Cloud Reader to rate and set finished on Goodreads.",
+  "version": "1.2",
+  "background": {
+    "scripts": [
+      "lib/jquery-3.2.1.min.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://read.amazon.com/*"
+      ],
+      "js": [
+        "lib/jquery-3.2.1.min.js",
+        "lib/arrive.min.js",
+        "kindle.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.goodreads.com/search?q=*",
+        "https://www.goodreads.com/review/new/*"
+      ],
+      "js": [
+        "goodreads.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "stars.css"
+  ],
+  "page_action": {
+    "default_icon": "icon-gray-16.png",
+    "default_title": "Read and rate"
+  },
+  "icons": {
+    "16": "icon-gray-16.png",
+    "128": "icon-gray-128.png"
+  },
+  "permissions": [
+    "tabs"
+  ]
+}

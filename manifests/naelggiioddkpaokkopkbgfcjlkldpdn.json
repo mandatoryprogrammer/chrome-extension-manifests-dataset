@@ -1,0 +1,38 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Custom Gmail™ Favicons",
+  "version": "1.0.1",
+  "manifest_version": 2,
+  "author": "Evan Carothers",
+  "description": "Customize your Gmail™ favicon",
+  "homepage_url": "https://github.com/ecaroth/gmail-favicon-customizer-chrome-extension",
+  "icons": {
+    "16": "src/images/icon-16.png",
+    "128": "src/images/icon-128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/mail/*"
+      ],
+      "js": [
+        "src/shared/message-relay/message_relay.js",
+        "src/shared/favico/favico.js",
+        "src/content/content.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "/src/*"
+  ],
+  "permissions": [
+    "storage",
+    "unlimitedStorage",
+    "https://mail.google.com/mail/"
+  ],
+  "options_ui": {
+    "page": "src/options/options.html",
+    "chrome_style": true
+  },
+  "content_security_policy": "script-src 'self'; object-src 'self'"
+}

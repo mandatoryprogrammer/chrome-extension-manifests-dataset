@@ -1,0 +1,73 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Zipwhip Extension",
+  "short_name": "Zipwhip",
+  "description": "Text from any CRM or web app without disrupting your workflow",
+  "version": "1.0.1.0",
+  "permissions": [
+    "contextMenus",
+    "activeTab",
+    "storage",
+    "notifications"
+  ],
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "jquery-3.4.1.min.js",
+      "config.js",
+      "background.js"
+    ]
+  },
+  "browser_action": {
+    "default_title": "Zipwhip",
+    "default_icon": "icons/icon128-unauth.png"
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "jquery-3.4.1.min.js",
+        "rotate.js",
+        "config.js",
+        "libphonenumber-min.js",
+        "content.js"
+      ],
+      "css": [
+        "content.css"
+      ]
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "config.js",
+        "self-script.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self';",
+  "web_accessible_resources": [
+    "*.png",
+    "*.css",
+    "*.js",
+    "*.html"
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "browser-extension@zipwhip.com",
+      "strict_min_version": "42.0"
+    }
+  },
+  "manifest_version": 2
+}

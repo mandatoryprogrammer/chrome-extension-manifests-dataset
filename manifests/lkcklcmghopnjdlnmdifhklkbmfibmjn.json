@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "GIS Monitor",
+  "manifest_version": 2,
+  "version": "1.1",
+  "description": "Moniteur du GIS pour Chrome",
+  "browser_action": {
+    "default_title": "GIS Monitor\n(Moniteur du Gestionnaire d'Infrastructures de SITEC)",
+    "default_icon": {
+      "38": "images/iconeNuage_gris.png"
+    },
+    "default_popup": "index.html"
+  },
+  "icons": {
+    "38": "images/iconeNuage_gris.png",
+    "139": "images/iconeNuage_vert.png",
+    "140": "images/iconeNuage_orange.png",
+    "141": "images/iconeNuage_rouge.png"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "events.js",
+        "divers.js",
+        "jquery-1.11.2.min.js"
+      ],
+      "matches": [
+        "http://*/"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "jquery-1.11.2.min.js",
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "cookies",
+    "webRequest",
+    "tabs",
+    "background",
+    "https://gis-ext.sitec.fr/",
+    "https://gis-dev-ext.sitec.fr/",
+    "https://*.sitec.fr/*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://gis-dev-ext.sitec.fr; object-src 'self'"
+}

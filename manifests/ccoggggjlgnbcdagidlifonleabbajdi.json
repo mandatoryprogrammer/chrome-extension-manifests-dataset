@@ -1,0 +1,87 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Paperly",
+  "version": "1.0.2",
+  "description": "Check references of your papers in a WYSIWYG (What You See Is What You Get) way.",
+  "browser_action": {
+    "default_icon": {
+      "128": "extension/icon128.png",
+      "48": "extension/icon48.png",
+      "16": "extension/icon16.png"
+    },
+    "default_popup": "extension/popup.html"
+  },
+  "icons": {
+    "128": "extension/icon128.png",
+    "48": "extension/icon48.png",
+    "16": "extension/icon16.png"
+  },
+  "permissions": [
+    "contextMenus",
+    "notifications",
+    "fileBrowserHandler",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>",
+    "tabs",
+    "webNavigation",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "ftp://*/*",
+        "file://*/*"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "css": [
+        "extension/contentstyle.css"
+      ],
+      "js": [
+        "extension/contentscript.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'unsafe-eval' 'sha256-8VWEfV1MHXcCbi/lcOneF2oDbPdYwskZilS/Xih/+zc=' 'sha256-iHzLbQ/l3ApSsGFHa7HlcL6ClmFFDjQsgRixIF260Ac=' 'sha256-Y2lO5tt+svVihsaCIpiCS3KEVz09Im2CvqzTXF42bZc=' 'sha256-tWxzDeT4jAihaUhFsxtnyfDYjflG7TXa8mDMx677yF0=' 'sha256-0ugw9ps90jXTST1OXrBXbSZTOjPmpU9NzwQnrl6R8E8=' 'self'; object-src 'self'",
+  "file_browser_handlers": [
+    {
+      "id": "open-as-pdf",
+      "default_title": "Open with Paperly",
+      "file_filters": [
+        "filesystem:*.pdf"
+      ]
+    }
+  ],
+  "storage": {
+    "managed_schema": "extension/preferences_schema.json"
+  },
+  "background": {
+    "page": "extension/background.html"
+  },
+  "incognito": "split",
+  "web_accessible_resources": [
+    "./dist/index.html",
+    "http:/*",
+    "https:/*",
+    "ftp:/*",
+    "file:/*",
+    "chrome-extension:/*",
+    "blob:*",
+    "data:*",
+    "filesystem:/*",
+    "drive:*"
+  ],
+  "sandbox": {
+    "pages": [
+      "sandbox.html"
+    ]
+  },
+  "homepage_url": "https://paperly.app",
+  "options_ui": {
+    "chrome_style": true
+  }
+}

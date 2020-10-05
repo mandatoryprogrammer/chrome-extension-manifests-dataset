@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "iMonitoring",
+  "version": "1.4",
+  "description": "Schedule & Share articles to all your social platforms.",
+  "author": "Peter van Mourik",
+  "homepage_url": "https://www.internetmonitoring.nl",
+  "icons": {
+    "16": "iMonitoring16.png",
+    "48": "iMonitoring48.png",
+    "128": "iMonitoring128.png"
+  },
+  "permissions": [
+    "cookies",
+    "*://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "extension.js",
+        "jquery-1.11.0.min.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://*/scheduler.html*",
+        "https://*/scheduler.html*"
+      ],
+      "js": [
+        "frame.js",
+        "jquery-1.11.0.min.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "browser_action": {
+    "default_icon": "iMonitoring.png",
+    "default_title": "iMonitoring"
+  }
+}

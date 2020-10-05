@@ -1,0 +1,70 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "name": "Ali Hunter - AliExpress Product Tracker",
+  "version": "2.6.3.40",
+  "default_locale": "en",
+  "description": "AliExpress tool for price tracking, seller rating & order listing. Must have for dropship & online shopping.",
+  "author": "Giang Nguyen",
+  "externally_connectable": {
+    "matches": [
+      "https://*.alitools.io/*",
+      "https://*.aliexpress.com/*",
+      "https://*.alihunter.io/*"
+    ]
+  },
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "assets/js/vendors.js",
+      "assets/js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.aliexpress.com/item*",
+        "https://*.aliexpress.com/store/product*"
+      ],
+      "js": [
+        "assets/js/vendors.js",
+        "assets/js/content_script.js"
+      ],
+      "css": [
+        "assets/css/content_script.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "assets/js/vendors.js",
+        "assets/js/content_script_shopify.js"
+      ],
+      "css": [
+        "assets/css/content_script_shopify.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "browser_action": {
+    "default_title": "Ali Hunter",
+    "default_popup": "browser_action.html"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": [
+    "tabs",
+    "*://*.aliexpress.com/*",
+    "https://*.alitools.io/*",
+    "https://*.alihunter.io/*",
+    "storage"
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Worldview Exchange",
+  "description": "A new platform for creating and sharing your own views on the latest news and for discovering the views and ideas of others.",
+  "version": "0.0.9",
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  },
+  "icons": {
+    "16": "icons/logo.png",
+    "48": "icons/logo.png",
+    "128": "icons/logo.png"
+  },
+  "page_action": {
+    "default_popup": "options.html",
+    "default_title": "Worldview Exchange"
+  },
+  "background": {
+    "scripts": [
+      "js/jquery.min.js",
+      "js/oAuth.js",
+      "js/sha1.js",
+      "js/twitter.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "web_accessible_resources": [
+    "images/*",
+    "icons/*"
+  ],
+  "content_scripts": [
+    {
+      "css": [
+        "css/style.css",
+        "css/bootstrap.min.css",
+        "css/tooltipster.bundle.min.css",
+        "css/tooltipster-sideTip-borderless.min.css"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "js/jquery.mark.min.js",
+        "js/popper.min.js",
+        "js/bootstrap.min.js",
+        "js/tooltipster.bundle.min.js",
+        "js/tooltipster-selectableText.js",
+        "content.js"
+      ],
+      "matches": [
+        "*://www.abc.net.au/news/*",
+        "*://www.news.com.au/*",
+        "*://www.theguardian.com/*",
+        "*://www.9news.com.au/*",
+        "*://*.nine.com.au/*",
+        "*://www.sbs.com.au/news/*",
+        "*://theconversation.com/*"
+      ],
+      "exclude_globs": [
+        "*://www.abc.net.au/news/",
+        "*://www.news.com.au/",
+        "*://www.theguardian.com/",
+        "*://www.9news.com.au/",
+        "*://*.nine.com.au/",
+        "*://www.sbs.com.au/news/",
+        "*://theconversation.com/",
+        "*://theconversation.com/au/"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.worldview.exchange/*"
+      ],
+      "js": [
+        "session.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "declarativeContent",
+    "tabs",
+    "storage",
+    "https://api.twitter.com/*",
+    "https://upload.twitter.com/*",
+    "https://use.fontawesome.com/*",
+    "cookies",
+    "*://*.worldview.exchange/*",
+    "*://worldview.exchange/*",
+    "http://localhost:8000/*"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'"
+}

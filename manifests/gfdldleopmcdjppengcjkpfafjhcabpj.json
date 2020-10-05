@@ -1,0 +1,184 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Trackerbot V2",
+  "short_name": "Trackerbot",
+  "version": "0.0.5.1",
+  "manifest_version": 2,
+  "description": "Extends the functionality of your Trackerbot account!",
+  "icons": {
+    "16": "images/icon16.png",
+    "32": "images/icon32.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "management",
+    "https://k2b-bulk.ebay.com/*",
+    "https://k2b-bulk.ebay.co.uk/*",
+    "https://k2b-bulk.ebay.de/*",
+    "https://k2b-bulk.ebay.fr/*",
+    "https://k2b-bulk.ebay.es/*",
+    "https://k2b-bulk.ebay.it/*",
+    "https://www.ebay.com/ship/tr/update",
+    "https://www.ebay.co.uk/ship/tr/update",
+    "https://www.ebay.de/ship/tr/update",
+    "https://www.ebay.fr/ship/tr/update",
+    "https://www.ebay.es/ship/tr/update",
+    "https://www.ebay.it/ship/tr/update",
+    "https://www.ebay.com/sh/ord/*",
+    "https://www.ebay.co.uk/sh/ord/*",
+    "https://www.ebay.de/sh/ord/*",
+    "https://www.ebay.fr/sh/ord/*",
+    "https://www.ebay.es/sh/ord/*",
+    "https://www.ebay.it/sh/ord/*",
+    "https://payments.ebay.com/ws/*",
+    "https://payments.ebay.co.uk/ws/*",
+    "https://payments.ebay.de/ws/*",
+    "https://payments.ebay.fr/ws/*",
+    "https://payments.ebay.es/ws/*",
+    "https://payments.ebay.it/ws/*",
+    "https://app.trackerbot.me/*",
+    "https://tracker-bot-odd-jobs-queue.herokuapp.com/*",
+    "http://trade.aliexpress.com/*",
+    "https://trade.aliexpress.com/*",
+    "http://trade.alibaba.com/*",
+    "https://trade.alibaba.com/*",
+    "http://d.aliexpress.com/*",
+    "https://d.aliexpress.com/*",
+    "http://login.aliexpress.com/*",
+    "https://login.aliexpress.com/*",
+    "https://www.amazon.com/*",
+    "https://www.amazon.co.uk/*",
+    "https://www.amazon.de/*",
+    "https://www.amazon.fr/*",
+    "https://www.amazon.it/*",
+    "https://www.amazon.es/*",
+    "https://www.amazon.com.au/*",
+    "https://bulksell.ebay.com/*",
+    "https://bulksell.ebay.it/*"
+  ],
+  "browser_action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "TrackerBot"
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "/light-bootstrap-dashboard-pro/assets/js/core/jquery.3.2.1.min.js",
+      "/common/config.js",
+      "/content/Amazon/AmazonParser.js",
+      "/content/Amazon/AmazonAuth.js",
+      "/background/Amazon/AmazonAuth.js",
+      "/background/Amazon/AmazonBackfiller.js",
+      "/background/Amazon/AmazonChecker.js",
+      "/background/AliExpress.js",
+      "/background/Backfiller.js",
+      "/background/Scheduler.js",
+      "/background/Uploader.js",
+      "/background/ManualV2.js",
+      "/background/FullyAuto.js",
+      "/background/Messages.js",
+      "/background/utils.js",
+      "/background/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://k2b-bulk.ebay.com/*",
+        "*://k2b-bulk.ebay.co.uk/*",
+        "*://k2b-bulk.ebay.de/*",
+        "*://k2b-bulk.ebay.fr/*",
+        "*://k2b-bulk.ebay.es/*",
+        "*://k2b-bulk.ebay.it/*"
+      ],
+      "js": [
+        "/light-bootstrap-dashboard-pro/assets/js/core/jquery.3.2.1.min.js",
+        "/content/selectPhaseSharedFunctions.js",
+        "/content/selectPhase.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.ebay.com/sh/ord/*",
+        "*://*.ebay.co.uk/sh/ord/*",
+        "*://*.ebay.de/sh/ord/*",
+        "*://*.ebay.fr/sh/ord/*",
+        "*://*.ebay.it/sh/ord/*",
+        "*://*.ebay.es/sh/ord/*"
+      ],
+      "js": [
+        "/light-bootstrap-dashboard-pro/assets/js/core/jquery.3.2.1.min.js",
+        "/content/selectPhaseSharedFunctions.js",
+        "/content/selectPhaseNoStore.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.ebay.com/ship/tr/update",
+        "*://www.ebay.co.uk/ship/tr/update",
+        "*://www.ebay.de/ship/tr/update",
+        "*://www.ebay.fr/ship/tr/update",
+        "*://www.ebay.es/ship/tr/update",
+        "*://www.ebay.it/ship/tr/update"
+      ],
+      "js": [
+        "/light-bootstrap-dashboard-pro/assets/js/core/jquery.3.2.1.min.js",
+        "/content/uploadPhaseSharedFunctions.js",
+        "/content/uploadPhase.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://payments.ebay.com/ws/*",
+        "*://payments.ebay.co.uk/ws/*",
+        "*://payments.ebay.de/ws/*",
+        "*://payments.ebay.fr/ws/*",
+        "*://payments.ebay.es/ws/*",
+        "*://payments.ebay.it/ws/*"
+      ],
+      "js": [
+        "/light-bootstrap-dashboard-pro/assets/js/core/jquery.3.2.1.min.js",
+        "/content/uploadPhaseSharedFunctions.js",
+        "/content/uploadPhaseNoStore.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://app.trackerbot.me/welcome/chrome",
+        "https://app.trackerbot.me/onboarding/semiauto/chrome",
+        "https://app.trackerbot.me/onboarding/semiautoV2/chrome"
+      ],
+      "js": [
+        "/light-bootstrap-dashboard-pro/assets/js/core/jquery.3.2.1.min.js",
+        "/common/config.js",
+        "/content/trackerbot/onboard.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://app.trackerbot.me/profile",
+        "http://localhost:3000/profile"
+      ],
+      "js": [
+        "/light-bootstrap-dashboard-pro/assets/js/core/jquery.3.2.1.min.js",
+        "/common/config.js",
+        "/content/trackerbot/profile.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://app.trackerbot.me/home",
+        "https://app.trackerbot.me/manual/home"
+      ],
+      "js": [
+        "/light-bootstrap-dashboard-pro/assets/js/core/jquery.3.2.1.min.js",
+        "/common/config.js",
+        "/content/trackerbot/home.js"
+      ]
+    }
+  ]
+}

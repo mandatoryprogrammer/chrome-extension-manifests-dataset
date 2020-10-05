@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "+AutoSave",
+  "version": "3.4.0.0",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "description": "__MSG_extensiondescription__",
+  "icons": {
+    "128": "icon.png"
+  },
+  "background": {
+    "scripts": [
+      "background-storage.js",
+      "background.js"
+    ]
+  },
+  "page_action": {
+    "default_icon": "icon.png",
+    "default_title": "AutoSave"
+  },
+  "options_page": "options.html",
+  "permissions": [
+    "http://*.google.com/"
+  ],
+  "content_security_policy": "script-src 'self' https://plusone.google.com https://apis.google.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://plus.google.com/*",
+        "https://plus.google.com/*",
+        "https://apis.google.com/wm/*",
+        "https://plusone.google.com/*"
+      ],
+      "js": [
+        "jquery.js",
+        "script-storage.js",
+        "script-min.js"
+      ],
+      "css": [
+        "style.css"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "jquery.min.map"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Snowplow Tracking Extension",
+  "description": "This unpacks snowplow tracking events and displays them nicely",
+  "version": "1.0",
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "*://*/com.snowplowanalytics.snowplow/tp2*"
+  ],
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "listen_to_tracking_events.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "write_tracking_events.js"
+      ]
+    }
+  ]
+}

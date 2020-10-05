@@ -1,0 +1,87 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Gauchocal",
+  "version": "1.0.12",
+  "description": "Easily synchronize courses you want from UCSB GOLD with Google Calendar and finds schedule conflicts. May the course be with you.",
+  "manifest_version": 2,
+  "background": {
+    "scripts": [
+      "bower_components/async/dist/async.min.js",
+      "bower_components/moment/min/moment.min.js",
+      "3rdparty/gapiclient.js",
+      "js/shared/time_utils.js",
+      "js/background_scripts/background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "storage",
+    "identity",
+    "https://apis.google.com/js/api.js",
+    "https://calendar.google.com/calendar/*",
+    "https://my.sa.ucsb.edu/gold/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://my.sa.ucsb.edu/gold/ResultsFindCourses.aspx"
+      ],
+      "js": [
+        "bower_components/async/dist/async.min.js",
+        "bower_components/moment/min/moment.min.js",
+        "bower_components/jquery/dist/jquery.min.js",
+        "3rdparty/md5.js",
+        "js/shared/time_utils.js",
+        "js/shared/misc_utils.js",
+        "js/content_scripts/results_find_courses.js",
+        "3rdparty/uikit/js/uikit.min.js"
+      ],
+      "css": [
+        "/3rdparty/uikit/css/uikit.min.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://my.sa.ucsb.edu/gold/StudentSchedule.aspx"
+      ],
+      "js": [
+        "bower_components/async/dist/async.min.js",
+        "bower_components/moment/min/moment.min.js",
+        "bower_components/jquery/dist/jquery.min.js",
+        "3rdparty/md5.js",
+        "js/shared/time_utils.js",
+        "js/shared/misc_utils.js",
+        "js/content_scripts/schedule_copy.js",
+        "3rdparty/uikit/js/uikit.min.js"
+      ],
+      "css": [
+        "/3rdparty/uikit/css/uikit.min.css"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "16": "images/icons/gauchocal16.png",
+      "32": "images/icons/gauchocal32.png",
+      "48": "images/icons/gauchocal48.png",
+      "128": "images/icons/gauchocal128.png"
+    },
+    "default_popup": "html/popup_course_list.html"
+  },
+  "icons": {
+    "16": "images/icons/gauchocal16.png",
+    "32": "images/icons/gauchocal32.png",
+    "48": "images/icons/gauchocal48.png",
+    "128": "images/icons/gauchocal128.png"
+  },
+  "oauth2": {
+    "client_id": "165006810126-lm1qfhii5jq1pdrig4vng57ivj9t0ue0.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/calendar"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://apis.google.com; object-src 'self'",
+  "web_accessible_resources": [
+    "images/**/*.png"
+  ]
+}

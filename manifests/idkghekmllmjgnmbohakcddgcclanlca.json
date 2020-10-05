@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "ln/",
+  "short_name": "ln/",
+  "description": "Short, memorable links everyone on your team can remember.",
+  "version": "1.13",
+  "author": "Anthony Bishopric (t@ln.io)",
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://ln.io/*",
+        "http://localhost:8899/*"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "js/dashboard.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "omnibox": {
+    "keyword": "ln"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+L",
+        "mac": "Command+Shift+L"
+      },
+      "description": "Link to the current page"
+    }
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "img/ln-arrow-16x16.png",
+      "32": "img/ln-arrow-32x32.png"
+    },
+    "default_title": "Create ln/ shortcut",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "<all_urls>",
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "history",
+    "tabs",
+    "alarms",
+    "cookies",
+    "pageCapture"
+  ],
+  "background": {
+    "scripts": [
+      "js/jquery.min.js",
+      "js/background.js"
+    ]
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://ln.io/*",
+      "*://localhost/*"
+    ]
+  }
+}

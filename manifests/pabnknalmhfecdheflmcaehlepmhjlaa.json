@@ -1,0 +1,69 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "version": "0.6.2",
+  "name": "Turbo Download Manager (3rd edition)",
+  "description": "A download manager with the ability to pause and resume downloads, download remote files, and more.",
+  "permissions": [
+    "storage",
+    "downloads",
+    "downloads.open",
+    "notifications",
+    "clipboardRead",
+    "contextMenus",
+    "unlimitedStorage",
+    "*://*/*",
+    "power",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "optional_permissions": [],
+  "icons": {
+    "16": "data/icons/16.png",
+    "19": "data/icons/19.png",
+    "32": "data/icons/32.png",
+    "38": "data/icons/38.png",
+    "48": "data/icons/48.png",
+    "64": "data/icons/64.png",
+    "128": "data/icons/128.png",
+    "256": "data/icons/256.png",
+    "512": "data/icons/512.png"
+  },
+  "homepage_url": "https://www.add0n.com/turbo-download-manager-v2.html",
+  "background": {
+    "scripts": [
+      "downloads/file.js",
+      "downloads/get.js",
+      "downloads/manager.js",
+      "background.js"
+    ]
+  },
+  "browser_action": {
+    "default_popup": "data/manager/index.html?popup"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "exclude_matches": [
+        "*://*.youtube.com/*"
+      ],
+      "all_frames": true,
+      "match_about_blank": true,
+      "run_at": "document_start",
+      "js": [
+        "data/scripts/inject.js"
+      ]
+    }
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "strict_min_version": "65.0"
+    }
+  },
+  "options_ui": {
+    "page": "data/options/index.html",
+    "chrome_style": true
+  }
+}

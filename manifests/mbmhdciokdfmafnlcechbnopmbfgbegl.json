@@ -1,0 +1,42 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Beyond Enhancement Suite",
+  "version": "0.1.0",
+  "manifest_version": 2,
+  "description": " A suite of modules that make your D&D Beyond browsing experience better",
+  "homepage_url": "https://github.com/josephwegner/bes",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "page": "src/background/background.html",
+    "persistent": false
+  },
+  "permissions": [
+    "https://www.dndbeyond.com/*",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.dndbeyond.com/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "src/inject/preinject.js",
+        "src/inject/features/characterLinks.js",
+        "src/inject/features/mySources.js",
+        "src/inject/features/sourceURL.js",
+        "src/inject/features/backToTop.js",
+        "src/inject/features/lazyLoad.js",
+        "src/inject/inject.js"
+      ],
+      "css": [
+        "src/inject/inject.css"
+      ]
+    }
+  ]
+}

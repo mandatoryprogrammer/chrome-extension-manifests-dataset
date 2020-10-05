@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "JIRA FilterXport",
+  "version": "1.0.6",
+  "manifest_version": 2,
+  "description": "__MSG_extDescription__",
+  "homepage_url": "https://github.com/patrick-blom/jira-filterxport",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "src/bg/background.min.js",
+      "js/sha256.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "__MSG_extShowSaved__",
+    "default_popup": "src/browser_action/browser_action.html"
+  },
+  "permissions": [
+    "clipboardRead",
+    "clipboardWrite",
+    "contextMenus",
+    "<all_urls>",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "css": [
+        "src/inject/inject.min.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "js": [
+        "src/inject/inject.min.js"
+      ]
+    }
+  ]
+}

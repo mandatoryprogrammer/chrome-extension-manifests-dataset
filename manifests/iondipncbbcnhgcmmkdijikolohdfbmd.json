@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": ".taoEXPRESS таобао на русском - НОВОЕ",
+  "version": "7.1",
+  "description": "Поиск и покупка товаров на TAOBAO",
+  "homepage_url": "http://tb.taoexpress.ru",
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "tabs"
+  ],
+  "icons": {
+    "128": "images/icons/tbN128.png",
+    "48": "images/icons/tbN48.png",
+    "19": "images/icons/tbN19.png"
+  },
+  "browser_action": {
+    "default_title": "TaoExpress - система заказов c сайта  ТАОБАО",
+    "default_icon": "images/icons/tbN19.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.taobao.com/*",
+        "http://*.tmall.com/*"
+      ],
+      "css": [
+        "css/font-awesome.min.css",
+        "css/bootstrap.min.css",
+        "css/inject.css"
+      ],
+      "js": [
+        "js/libs/jquery.min.js",
+        "js/libs/bootstrap.min.js",
+        "js/config.js",
+        "js/parser.js",
+        "js/contentScript.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://*.taoexpress.ru/*"
+      ],
+      "js": [
+        "js/libs/jquery.min.js",
+        "js/config.js",
+        "js/cabinet.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "fonts/FontAwesome.otf",
+    "fonts/fontawesome-webfont.eot",
+    "fonts/fontawesome-webfont.svg",
+    "fonts/fontawesome-webfont.ttf",
+    "fonts/fontawesome-webfont.woff"
+  ],
+  "content_security_policy": "script-src 'unsafe-eval'; object-src 'self'"
+}

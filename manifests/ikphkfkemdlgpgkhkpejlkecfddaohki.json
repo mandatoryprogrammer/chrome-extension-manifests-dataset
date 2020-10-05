@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Save to Kindle",
+  "version": "0.10.5",
+  "description": "Saves web page or any text to your Kindle",
+  "icons": {
+    "16": "img/icon-16.png",
+    "48": "img/icon-48.png",
+    "128": "img/icon-128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "img/icon-19.png",
+      "38": "img/icon-38.png"
+    },
+    "popup": "index.html",
+    "default_popup": "index.html",
+    "default_title": "Save to Kindle",
+    "homepage_url": "http://app.leoplay.com/stk"
+  },
+  "background": {
+    "scripts": [
+      "js/app-build.js",
+      "js/app-shared.js",
+      "crx/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "crx/zepto.min.js",
+        "crx/stk-sci-rules.js",
+        "crx/stk-sci-decorator.js",
+        "crx/content.js"
+      ],
+      "css": [
+        "crx/content.css"
+      ]
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.leoplay.com:*/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "crx/img/crop.png",
+    "crx/img/cut.png"
+  ],
+  "options_page": "options.html",
+  "permissions": [
+    "tabs",
+    "storage",
+    "activeTab",
+    "*://*/*"
+  ]
+}

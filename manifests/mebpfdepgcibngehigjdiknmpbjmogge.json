@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "SCREENish Time Tracker",
+  "description": "SCREENish Time Tracking Chrome extension",
+  "version": "1.15",
+  "offline_enabled": true,
+  "icons": {
+    "16": "icons/icon.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "node_modules/crypto-js/crypto-js.js",
+      "js/moment.js",
+      "js/jquery-3.1.1.min.js",
+      "js/helpers.js",
+      "js/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "icons/icon.png",
+    "default_popup": "popup.html",
+    "default_title": "Open SCREENish Time Tracking"
+  },
+  "content_scripts": [
+    {
+      "css": [
+        "styles/style.css"
+      ],
+      "js": [
+        "js/popup.js",
+        "js/jquery-3.1.1.min.js",
+        "js/bootstrap.min.js",
+        "js/moment.js",
+        "js/helpers.js"
+      ],
+      "matches": [
+        "https://www.google.com/*",
+        "https://www.screenish.com/*"
+      ]
+    }
+  ],
+  "permissions": [
+    "cookies",
+    "storage",
+    "notifications",
+    "alarms",
+    "webRequest",
+    "webRequestBlocking",
+    "https://www.screenish.com/*"
+  ],
+  "web_accessible_resources": [
+    "icons/icon128.png",
+    "icons/screenish.jpg"
+  ],
+  "content_security_policy": "script-src 'self'  https://www.gstatic.com/ 'unsafe-eval'; object-src 'self'"
+}

@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Metastream Remote",
+  "short_name": "Metastream",
+  "version": "0.6.0",
+  "description": "Watch streaming media with friends.",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "icon48.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://app.getmetastream.com/*",
+        "http://local.getmetastream.com/*",
+        "http://localhost:8080/*"
+      ],
+      "js": [
+        "app.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "first.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://app.getmetastream.com/*",
+      "http://local.getmetastream.com/*",
+      "http://localhost:8080/*"
+    ]
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "manifest_version": 2,
+  "permissions": [
+    "tabs",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking",
+    "contextMenus",
+    "<all_urls>"
+  ],
+  "optional_permissions": [
+    "contentSettings"
+  ]
+}

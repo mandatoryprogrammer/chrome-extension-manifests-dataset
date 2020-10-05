@@ -1,0 +1,93 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "AJ Tutoring Helper (internal)",
+  "short_name": "AJ",
+  "description": "Streamlines logging hours to bigtime",
+  "version": "1.0.15",
+  "version_name": "beta_1.0.15",
+  "manifest_version": 2,
+  "author": "Ian Hovander",
+  "icons": {
+    "16": "resources/images/ajIcon_16.png",
+    "48": "resources/images/ajIcon_48.png",
+    "128": "resources/images/ajIcon_128.png"
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhzXdMfkrGAJzin3jeCp8zzbgXXfqDGPoo6B7lLnsxeLDxFrvi954RWNCRFQ6WcURczyr/EmraUfZeqP1AJwAUS2ntS1I5bKc5oRpz8brqLDePbr6j+Z9WJOcCI3aCAl+6T0gcV6xIbIW8qwjn06rDlq3YfmIErAxZ15DEq7QNFclcBj3p7cM+IHiZIcWpGOPKOvkrIYHdznwxSqFclx4HYinvGNkGPLT9T7RCbsWHAYWQMR7G6PsmtC3bkfaSBAA6Fg4ruuqTKy5QVjNBTuNu3U+u1oH6aZnQBmmeuM/IqeWilXvP0BwghOacWazC/JzbPz0SCGQcTozYuUJuMZyqwIDAQAB",
+  "browser_action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "AJ Tutoring"
+  },
+  "background": {
+    "scripts": [
+      "resources/js/fuse.min.js",
+      "resources/js/moment.min.js",
+      "background/generalUtils.js",
+      "classes/Utils.js",
+      "classes/OfficeEnum.js",
+      "classes/officeTravelTimes.js",
+      "classes/StopWatch.js",
+      "classes/subjectEnum.js",
+      "classes/subjectHierarchy.js",
+      "background/eventClassificationUtils.js",
+      "background/apis/apiHelper.js",
+      "background/apis/bigtimeApiHelper.js",
+      "background/apis/googleApiHelper.js",
+      "background/apis/gCalendarApiHelper.js",
+      "background/apis/gTestApiHelper.js",
+      "background/apis/gDirectoryApiHelper.js",
+      "background/apis/gMapApiHelper.js",
+      "background/apis/gDriveApiHelper.js",
+      "background/apis/gSheetsApiHelper.js",
+      "background/apis/solveApiHelper.js",
+      "background/buy.js",
+      "background/background.js"
+    ],
+    "persistent": false
+  },
+  "content_security_policy": "script-src 'self' https://apis.google.com https://www.google.com https://ajax.apisgoogle.com; object-src 'self'",
+  "oauth2": {
+    "client_id": "682507206490-i5ksk6u8vag9nhf7780n32to9cvlh1o8.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/calendar",
+      "https://www.googleapis.com/auth/admin.directory.user.readonly",
+      "https://www.googleapis.com/auth/gmail.modify",
+      "https://www.googleapis.com/auth/drive",
+      "https://www.googleapis.com/auth/drive.file",
+      "https://www.googleapis.com/auth/spreadsheets",
+      "https://www.googleapis.com/auth/chromewebstore.readonly"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "identity",
+    "identity.email",
+    "history",
+    "*://*.google.com/*",
+    "https://secure.solve360.com/*",
+    "*://*.bigtime.net/*",
+    "*://*.googleapis.com/*"
+  ],
+  "web_accessible_resources": [
+    "resources/images/*.png"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.google.com/*",
+        "https://*.google.com/*",
+        "http://*.bigtime.net/*",
+        "https://*.bigtime.net/*",
+        "http://*.solve360.com/*",
+        "https://*.solve360.com/*"
+      ],
+      "js": [
+        "resources/js/jquery-3.1.1.min.js",
+        "contentScripts/contentScript.js",
+        "contentScripts/solve.js",
+        "contentScripts/bigTime.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

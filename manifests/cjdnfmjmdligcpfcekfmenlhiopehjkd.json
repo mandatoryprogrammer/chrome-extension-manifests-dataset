@@ -1,0 +1,548 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "TwoSeven Extension",
+  "version": "2.1.5.32",
+  "description": "Opens up exciting new possibilities of watching together on twoseven.xyz",
+  "icons": {
+    "64": "icons/icon-64x64.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/icon-16x16.png"
+    },
+    "default_popup": "web_resources/browser-action/index.html"
+  },
+  "options_ui": {
+    "page": "web_resources/options/index.html",
+    "open_in_tab": true
+  },
+  "permissions": [
+    "tabs",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking",
+    "http://*/*",
+    "https://*/*",
+    "identity",
+    "storage",
+    "notifications",
+    "cookies"
+  ],
+  "web_accessible_resources": [
+    "node_modules/vue/dist/vue.runtime.js",
+    "node_modules/xml-js/dist/xml-js.js",
+    "node_modules/plyr/dist/plyr.js",
+    "node_modules/plyr/dist/plyr.css",
+    "node_modules/plyr/dist/plyr.svg",
+    "node_modules/screenfull/dist/screenfull.js",
+    "web_resources/browser-action/browser-action.js",
+    "web_resources/browser-action/index.html",
+    "web_resources/browser-action/",
+    "web_resources/browser-action/component/dist/browserAction.css",
+    "web_resources/browser-action/component/dist/browserAction.umd.min.js",
+    "web_resources/js/vimeo/player.js",
+    "web_resources/modal/index.html",
+    "web_resources/modal/modal.css",
+    "web_resources/modal/modal.js",
+    "web_resources/modal/component/dist/modal.css",
+    "web_resources/modal/component/dist/modal.umd.min.js",
+    "web_resources/options/index.html",
+    "web_resources/options/main.js",
+    "web_resources/options/component/dist/options.css",
+    "web_resources/options/component/dist/options.umd.min.js",
+    "web_resources/js/amazon/ATVWebPlayer.js",
+    "web_resources/js/amazon/WebPlayerSDK.js",
+    "web_resources/js/amazon/ATVWebPlayerSDK.js",
+    "web_resources/js/youtube/iframe_api.js",
+    "web_resources/js/youtube/www-widgetapi.js",
+    "web_resources/js/vimeo/player.js",
+    "web_resources/js/apple-mediakit.js",
+    "js/redist/**",
+    "js/webpage-iframe/*.css",
+    "js/utils/logging.js",
+    "js/utils/ttml-to-vtt.js",
+    "js/utils/deferred.js",
+    "js/websites/hulu/dummy_load_player_build.js",
+    "js/websites/mega.nz/secureboot.js"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self';",
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "js/utils/global-state.js",
+        "js/redist/md5.umd.js",
+        "js/utils/deferred.js",
+        "js/redist/emittery.umd.js",
+        "js/redist/on-change.umd.js",
+        "js/redist/throttle.umd.js",
+        "js/redist/debounce.umd.js",
+        "js/utils/proxy-object.js",
+        "node_modules/axios/dist/axios.js",
+        "node_modules/xregexp/xregexp-all.js",
+        "node_modules/moment/min/moment.min.js",
+        "node_modules/keymaster/keymaster.js",
+        "node_modules/urijs/src/URI.min.js",
+        "node_modules/js-cookie/src/js.cookie.js",
+        "js/utils/logging.js",
+        "js/utils/xregexp-extensions.js",
+        "js/utils/utils-common.js",
+        "js/redist/is.umd.js",
+        "js/utils/utils-cs.js",
+        "js/base/media-finder-blacklist.js",
+        "js/base/cs/pause.js",
+        "js/base/cs/frame-identity.js",
+        "js/utils/idle-detector.js",
+        "js/utils/cache-buster-cs.js",
+        "js/utils/service-worker-remover.js",
+        "js/utils/script-modifier.js",
+        "js/base/cs/shortcuts-cs.js",
+        "js/utils/drm-message-handler-cs.js",
+        "js/iframe-element/cs/apply-samesite-cookies.js",
+        "js/webpage-iframe/modules.js",
+        "js/webpage-iframe/plex.js",
+        "js/shudder/cs/common.js",
+        "js/webpage-iframe/shudder.com.js",
+        "js/amazon-video/common.js",
+        "js/amazon-video/cs/samesite-detector.js",
+        "js/amazon-video/cs/media-finder.js",
+        "js/amazon-video/cs/script-blocker-chrome.js",
+        "js/webpage-iframe/amazon.js",
+        "js/websites/hulu/common.js",
+        "js/webpage-iframe/hulu.com.js",
+        "js/webpage-iframe/mega.nz.js",
+        "js/webpage-iframe/vrv.co.js",
+        "js/webpage-iframe/viaplay.no.js",
+        "js/webpage-iframe/disneyplus.com.js",
+        "js/webpage-iframe/tv.youtube.com.js",
+        "js/webpage-iframe/vlive.tv.js",
+        "js/webpage-iframe/headspace.com.js",
+        "js/websites/tv.apple.com/common.js",
+        "js/webpage-iframe/tv.apple.com.js",
+        "js/websites/hotstar.com/common.js",
+        "js/webpage-iframe/hotstar.com.js",
+        "js/webpage-iframe/generic-fallback.js",
+        "js/websites/generic-fallback/amazon.js",
+        "js/websites/generic-fallback/hotstar.com.js",
+        "js/websites/generic-fallback.js",
+        "js/base/cs/watch-iframe.js",
+        "js/videoshare-watch-iframe.js"
+      ]
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "js/base/strategies/cs/iframe-strategy-cs.js",
+        "js/iframe-element/cs/iframe-cs.js",
+        "js/base/cs/tab-media.js"
+      ]
+    },
+    {
+      "all_frames": false,
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "js/base/cs/tab-media-modal.js"
+      ]
+    },
+    {
+      "all_frames": true,
+      "run_at": "document_start",
+      "matches": [
+        "*://*.twoseven.xyz/**",
+        "http://162.243.227.41:8201/**"
+      ],
+      "js": [
+        "js/base/cs/ext-media-cs.js",
+        "js/base/cs/base-cs.js",
+        "js/base/cs/extension-detect.js",
+        "js/base/modules/modules.js",
+        "js/base/modules/crunchyroll/cs.js",
+        "js/youtube/cs/hide-captions.js",
+        "js/videoshare-drm.js",
+        "js/base/cs/strategy-iframe.js"
+      ]
+    },
+    {
+      "all_frames": true,
+      "run_at": "document_start",
+      "matches": [
+        "*://*.youtube.com/**"
+      ],
+      "js": [
+        "js/youtube/cs/rental.js"
+      ]
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "*://*.twoseven.xyz/**",
+        "http://162.243.227.41:8201/**"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "node_modules/screenfull/dist/screenfull.js",
+        "js/iframe-element/cs/twoseven-iframe-element.js"
+      ]
+    },
+    {
+      "all_frames": false,
+      "matches": [
+        "*://blog.twoseven.xyz/**"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "js/base/cs/update-handler.js"
+      ]
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "*://player.vimeo.com/**"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "js/vimeo/cs/hide-controls.js"
+      ]
+    },
+    {
+      "all_frames": true,
+      "run_at": "document_end",
+      "matches": [
+        "*://*.crunchyroll.com/**"
+      ],
+      "js": [
+        "js/redist/is.umd.js",
+        "node_modules/crunchyroll-api/dist/bundle.js",
+        "js/websites/crunchyroll/fallback-media-detector-cs.js"
+      ]
+    },
+    {
+      "all_frames": true,
+      "run_at": "document_start",
+      "matches": [
+        "*://einthusan.tv/**",
+        "*://*.einthusan.tv/**",
+        "*://tvfplay.com/**",
+        "*://*.brightcove.com/**"
+      ],
+      "js": [
+        "js/websites/einthusan/block-scripts.js"
+      ]
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "*://*.netflix.com/**"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "js/netflix/cs/common.js",
+        "js/netflix/cs/better-netflix.js",
+        "js/netflix/cs/media-finder.js"
+      ]
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "*://*.hbonow.com/**",
+        "*://*.hbogo.com/**",
+        "*://*.hbomax.com/**"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "js/hbo-now/cs/common.js",
+        "js/hbo-now/cs/block-scripts.js",
+        "js/hbo-now/cs/new-video-detector.js",
+        "js/hbo-now/modify-script.js",
+        "js/hbo-now/cs/script-replacement.js"
+      ]
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "*://*.hbonow.com/**",
+        "*://*.hbogo.com/**",
+        "*://*.hbomax.com/**"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "js/hbo-now/cs/sync.js"
+      ]
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "*://*.facebook.com/**"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "js/facebook/cs/media-finder.js"
+      ]
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "*://*.oload.services/**",
+        "*://*.openload.co/**",
+        "*://*.oload.best/**",
+        "*://*.oload.tv/**",
+        "*://*.oload.ph/**",
+        "*://*.oload.pw/**",
+        "*://*.oload.site/**",
+        "*://*.oload.vip/**"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "js/base/strategies/cs/openload-strategy-cs.js"
+      ]
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "*://*.funimation.com/**"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "js/funimation/cs/script-replacement.js"
+      ]
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "*://*.funimation.com/**"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "js/funimation/cs/video-detect.js"
+      ]
+    },
+    {
+      "all_frames": false,
+      "matches": [
+        "*://app.plex.tv/**"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "js/plex/cs/video-detect.js"
+      ]
+    },
+    {
+      "all_frames": false,
+      "matches": [
+        "*://*.shudder.com/**"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "js/shudder/cs/common.js",
+        "js/shudder/cs/video-detect.js"
+      ]
+    },
+    {
+      "all_frames": false,
+      "matches": [
+        "*://*.vrv.co/**"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "js/websites/vrv.co/common.js",
+        "js/websites/vrv.co/video-detect.js"
+      ]
+    },
+    {
+      "all_frames": false,
+      "matches": [
+        "*://*.hulu.com/**"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "js/websites/hulu/cs/video-detect-cs.js"
+      ]
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "*://drive.google.com/**"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "js/base/strategies/cs/google-drive-strategy-cs.js"
+      ]
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "*://mega.nz/**",
+        "*://mega.co.nz/**"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "js/websites/mega.nz/video-detect.js"
+      ]
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "*://*.viaplay.no/**",
+        "*://viaplay.no/**"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "js/websites/viaplay.no/video-detect.js"
+      ]
+    },
+    {
+      "all_frames": false,
+      "matches": [
+        "*://*.disneyplus.com/**"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "js/websites/disneyplus.com/cs/video-detect.js"
+      ]
+    },
+    {
+      "all_frames": false,
+      "matches": [
+        "*://tv.youtube.com/**"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "js/websites/tv.youtube.com/cs/video-detect.js",
+        "js/websites/tv.youtube.com/cs/debug.js"
+      ]
+    },
+    {
+      "all_frames": false,
+      "matches": [
+        "*://*.vlive.tv/**"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "js/vlive.tv/cs/detect-premium.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/utils/global-state.js",
+      "node_modules/socket.io-client/dist/socket.io.js",
+      "node_modules/axios/dist/axios.js",
+      "node_modules/urijs/src/URI.min.js",
+      "node_modules/m3u8-parser/dist/m3u8-parser.js",
+      "node_modules/deepmerge/dist/umd.js",
+      "node_modules/jwt-decode/build/jwt-decode.js",
+      "node_modules/auth0-chrome/dist/auth0chrome.min.js",
+      "node_modules/crunchyroll-api/dist/bundle.js",
+      "node_modules/xregexp/xregexp-all.js",
+      "node_modules/xml-js/dist/xml-js.js",
+      "js/redist/uuid.umd.js",
+      "js/redist/emittery.umd.js",
+      "js/redist/semver.umd.js",
+      "js/redist/md5.umd.js",
+      "js/redist/on-change.umd.js",
+      "js/redist/ip.umd.js",
+      "js/redist/debounce.umd.js",
+      "js/redist/throttle.umd.js",
+      "js/redist/dot-prop.umd.js",
+      "js/redist/polyfilled-storage.umd.js",
+      "js/redist/default-settings.umd.js",
+      "js/redist/is.umd.js",
+      "js/redist/cookie.umd.js",
+      "js/redist/set-cookie-parser.umd.js",
+      "js/redist/querystringify.umd.js",
+      "js/redist/mpd-parser.umd.js",
+      "js/redist/flat.umd.js",
+      "js/redist/subsrt.umd.js",
+      "js/redist/lru-cache.umd.js",
+      "js/utils/subsrt-extend.js",
+      "js/utils/crypto.js",
+      "js/utils/logging.js",
+      "js/utils/xregexp-extensions.js",
+      "js/utils/utils-common.js",
+      "js/utils/deferred.js",
+      "js/utils/utils-bg.js",
+      "js/utils/per-tab-data.js",
+      "js/utils/proxy-object.js",
+      "js/utils/script-modifier.js",
+      "js/utils/ttml-to-vtt.js",
+      "js/utils/xml-to-srt.js",
+      "js/base/bg/settings.js",
+      "js/base/bg/auth.js",
+      "js/base/bg/update-handler.js",
+      "js/base/bg/script-blocker.js",
+      "js/base/bg/pause.js",
+      "js/base/bg/shortcuts-bg.js",
+      "js/utils/cache-buster-bg.js",
+      "js/base/videoshare-events.js",
+      "js/base/videoshare-common.js",
+      "js/base/media-finder-blacklist.js",
+      "js/base/bg/base-bg.js",
+      "js/base/strategies/bg/strategies.js",
+      "js/base/modules/modules.js",
+      "js/base/modules/crunchyroll/bg.js",
+      "js/base/modules/generic/bg.js",
+      "js/base/bg/ext-media-bg.js",
+      "js/base/bg/tab-media.js",
+      "js/iframe-element/bg/iframe-bg.js",
+      "js/iframe-element/bg/common-iframe-bg.js",
+      "js/netflix/bg/common-bg.js",
+      "js/base/bg/media-finder/build-media-entry.js",
+      "js/base/bg/media-finder/websites/crunchyroll.js",
+      "js/base/bg/media-finder/websites/einthusan.js",
+      "js/base/bg/media-finder/websites/ted.js",
+      "js/base/bg/media-finder/websites/drive.google.com.js",
+      "js/base/bg/media-finder/websites/headspace.com.js",
+      "js/base/bg/media-finder/websites/onedrive.live.com.js",
+      "js/base/bg/media-finder/common-media-finder.js",
+      "js/base/bg/media-finder/common-media-header-modifier.js",
+      "js/base/bg/media-finder/caption-finder.js",
+      "js/amazon-video/common.js",
+      "js/amazon-video/bg/modifiers.js",
+      "js/amazon-video/bg/modifiers-chrome.js",
+      "js/amazon-video/bg/video-url-finder.js",
+      "js/amazon-video/bg/media-finder-bg.js",
+      "js/youtube/bg/contextmenu.js",
+      "js/vimeo/bg/contextmenu.js",
+      "js/facebook/bg/media-finder-bg.js",
+      "js/hbo-now/bg/common-bg.js",
+      "js/hbo-now/bg/script-blocker-chrome.js",
+      "js/hbo-now/bg/new-video-detector.js",
+      "js/vlive.tv/bg/video-detect.js",
+      "js/webpage-iframe/bg/header-modifier.js",
+      "js/websites/hulu/common.js",
+      "js/websites/hulu/bg/index-script-detector.js",
+      "js/websites/hulu/bg/script-blocker-chrome.js",
+      "js/websites/hulu/bg/player-event.js",
+      "js/webpage-iframe/bg/mega.nz-bg.js",
+      "js/plex/bg/header-modifier.js",
+      "js/plex/bg/video-detect.js",
+      "js/shudder/bg/script-blocker.js",
+      "js/websites/vrv.co/common.js",
+      "js/websites/vrv.co/video-detect-bg.js",
+      "js/websites/viaplay.no/video-detect-bg.js",
+      "js/websites/disneyplus.com/common-script-modifier.js",
+      "js/websites/disneyplus.com/bg/script-modify-common.js",
+      "js/websites/disneyplus.com/bg/script-redirect-chrome.js",
+      "js/websites/disneyplus.com/bg/video-detect.js",
+      "js/websites/tv.apple.com/common.js",
+      "js/websites/tv.apple.com/bg/script-blocker-chrome.js",
+      "js/websites/tv.apple.com/bg/video-detect.js",
+      "js/websites/hotstar.com/common.js",
+      "js/websites/hotstar.com/bg/script-blocker-chrome.js",
+      "js/websites/hotstar.com/bg/video-detect.js",
+      "js/utils/secure-samesite-cookies.js"
+    ]
+  }
+}

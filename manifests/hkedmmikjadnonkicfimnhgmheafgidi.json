@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "description": "Privacy flag plugin",
+  "manifest_version": 2,
+  "name": "Privacy Flag Plugin",
+  "version": "1.5",
+  "icons": {
+    "48": "icons/plugin-icon.png"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "cookies",
+    "history",
+    "<all_urls>",
+    "http://news247.gr/",
+    "storage",
+    "webRequest",
+    "http://*/*",
+    "https://*/*",
+    "proxy",
+    "webNavigation"
+  ],
+  "browser_action": {
+    "default_icon": "icons/plugin-icon.png",
+    "default_title": "Privacy Flag Plugin",
+    "default_popup": "popup/privacy-flag.html"
+  },
+  "background": {
+    "scripts": [
+      "js/app.js"
+    ]
+  },
+  "externally_connectable": {
+    "ids": [
+      "*"
+    ],
+    "matches": [
+      "*://10.20.252.200/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "js/clientScripts/client-main.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

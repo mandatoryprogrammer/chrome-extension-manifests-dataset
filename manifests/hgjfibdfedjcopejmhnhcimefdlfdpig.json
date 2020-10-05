@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Comments to Cats",
+  "short_name": "C2C",
+  "description": "Comments to Cats blocks comments from top websites and literally, transforms them to cute, chubby cats.",
+  "version": "4.2.9",
+  "content_security_policy": "script-src 'self' https://s3-us-west-2.amazonaws.com https://ssl.google-analytics.com; object-src 'self';",
+  "browser_action": {
+    "default_icon": "/images/main_logo_trans_128.png",
+    "default_popup": "popup/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "contentScripts/style.css"
+      ],
+      "js": [
+        "scriptResources/jquery-1.11.3.min.js",
+        "scriptResources/async.js",
+        "contentScripts/onSiteFuncs.js",
+        "contentScripts/onSite.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    }
+  ],
+  "icons": {
+    "128": "/images/main_logo_trans_128.png",
+    "16": "/images/main_logo_trans_128.png",
+    "48": "/images/main_logo_trans_128.png"
+  },
+  "options_page": "options/options.html",
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "background/backgroundFuncs.js",
+      "scriptResources/jquery-1.11.3.min.js",
+      "scriptResources/async.js",
+      "scriptResources/googleAnalytics.js",
+      "scriptResources/sites.js",
+      "background/background.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "/images/*",
+    "/contentScripts/resources/catInner.html"
+  ]
+}

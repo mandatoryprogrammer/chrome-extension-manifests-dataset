@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "short_name": "Consumer Reports",
+  "name": "Consumer Reports",
+  "description": "See CR product ratings and recommendations",
+  "manifest_version": 2,
+  "icons": {
+    "16": "icons/toolbar-icon-loggedin.png",
+    "36": "icons/toolbar-icon-loggedin.png",
+    "48": "icons/toolbar-icon-loggedin.png",
+    "128": "icons/toolbar-icon-loggedin.png"
+  },
+  "permissions": [
+    "https://*.consumerreports.org/*",
+    "https://*.cr.org/*",
+    "activeTab",
+    "background",
+    "cookies",
+    "storage",
+    "tabs",
+    "notifications"
+  ],
+  "incognito": "spanning",
+  "background": {
+    "scripts": [
+      "static/js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.consumerreports.org/*",
+        "*://*.cr.org/*",
+        "*://*.amazon.com/*",
+        "*://*.google.com/*",
+        "*://*.bestbuy.com/*",
+        "*://*.homedepot.com/*",
+        "*://*.lowes.com/*",
+        "*://*.yahoo.com/*",
+        "*://duckduckgo.com/*",
+        "*://*.walmart.com/*"
+      ],
+      "js": [
+        "static/js/content.js"
+      ],
+      "css": [
+        "static/css/content.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "static/fonts/*",
+    "static/img/*"
+  ],
+  "browser_action": {
+    "default_icon": "icons/toolbar-icon-loggedin.png",
+    "default_popup": "index.html",
+    "default_title": "Consumer Reports Browser Add-On"
+  },
+  "version": "1.5.2"
+}

@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "カラフル英語品詞分類",
+  "version": "1.0.3",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "description": "英語を品詞分類して色分けすることで、ウェブサイトを読みやすくします。",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "src/jquery-3.0.0.min.js",
+        "src/pos-bundle.js",
+        "src/change-color.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "src/background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": "icons/icon_before.png",
+    "default_title": "カラフル英語品詞分類"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "<all_urls>"
+  ],
+  "options_ui": {
+    "page": "src/options.html",
+    "chrome_style": true
+  }
+}

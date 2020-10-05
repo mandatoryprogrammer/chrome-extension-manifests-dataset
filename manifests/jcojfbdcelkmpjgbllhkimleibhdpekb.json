@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "The Broom",
+  "version": "1.2",
+  "description": "Easier work with images",
+  "icons": {
+    "96": "main/res/icons/broom_logo.png"
+  },
+  "background": {
+    "scripts": [
+      "main/src/background.js"
+    ],
+    "persistent": false
+  },
+  "page_action": {
+    "default_icon": {
+      "19": "main/res/icons/broom_logo.png",
+      "38": "main/res/icons/broom_logo.png"
+    },
+    "default_title": "Possible options.",
+    "default_popup": "main/res/html/popup_menu.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "main/src/manipulate_content.js",
+        "main/src/jquery-3.2.1.min.js"
+      ],
+      "css": [
+        "main/res/styles/broom.css"
+      ]
+    }
+  ],
+  "options_page": "main/res/html/options.html",
+  "permissions": [
+    "storage",
+    "declarativeContent",
+    "*://*/*",
+    "file://*/*",
+    "tabs"
+  ]
+}

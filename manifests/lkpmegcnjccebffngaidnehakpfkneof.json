@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Copymaker",
+  "description": "Copymaker - inline website copywriting and translation.",
+  "version": "0.4.3",
+  "icons": {
+    "128": "img/icon128.png",
+    "256": "img/icon256.png"
+  },
+  "browser_action": {
+    "default_icon": "img/icon.png",
+    "default_popup": "html/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "lib/vendor/requirejs/require.js",
+      "lib/require-cs.js",
+      "app/background.js"
+    ]
+  },
+  "permissions": [
+    "<all_urls>",
+    "webNavigation"
+  ],
+  "web_accessible_resources": [
+    "app/*",
+    "lib/*",
+    "html/*",
+    "css/*",
+    "img/*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://ssl.google-analytics.com; object-src 'self' ",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "lib/vendor/requirejs/require.js",
+        "lib/require-cs.js",
+        "app/content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

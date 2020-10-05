@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "0.2.2",
+  "manifest_version": 2,
+  "offline_enabled": true,
+  "short_name": "text-to-speech",
+  "name": "Text to Speech (TTS)",
+  "permissions": [
+    "storage",
+    "notifications"
+  ],
+  "background": {
+    "page": "lib/chrome/background.html"
+  },
+  "homepage_url": "https://mybrowseraddon.com/text-to-speech.html",
+  "description": "A text to speech tool with natural sounding voices.",
+  "options_ui": {
+    "chrome_style": true,
+    "page": "data/options/options.html"
+  },
+  "web_accessible_resources": [
+    "data/content_script/icons/*.png",
+    "data/content_script/icons/loading.gif"
+  ],
+  "browser_action": {
+    "default_title": "Text to Speech",
+    "default_icon": {
+      "16": "data/icons/16.png",
+      "32": "data/icons/32.png",
+      "48": "data/icons/48.png",
+      "64": "data/icons/64.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "run_at": "document_start",
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "data/content_script/inject.css"
+      ],
+      "js": [
+        "data/content_script/resources/getboundingbox.js",
+        "data/content_script/resources/config.js",
+        "data/content_script/inject.js",
+        "data/interface/resources/audio.js",
+        "data/interface/resources/tts.js"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "data/icons/16.png",
+    "32": "data/icons/32.png",
+    "48": "data/icons/48.png",
+    "64": "data/icons/64.png",
+    "128": "data/icons/128.png"
+  }
+}

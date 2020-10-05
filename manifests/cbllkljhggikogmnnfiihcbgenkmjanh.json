@@ -1,0 +1,87 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "author": "Amndeep Singh Mann",
+  "name": "PTW Extender",
+  "version": "2.2.2",
+  "description": "Adds titles to your MyAnimeList, AniList, or Kitsu plan-to-watch/read list with the url of where you found it added as a comment.",
+  "applications": {
+    "gecko": {
+      "id": "{c4d3fb11-c300-4eed-a904-144fba03fb61}"
+    }
+  },
+  "icons": {
+    "16": "icons/icon_16.png",
+    "32": "icons/icon_32.png",
+    "48": "icons/icon_48.png",
+    "64": "icons/icon_64.png",
+    "96": "icons/icon_96.png",
+    "128": "icons/icon_128.png"
+  },
+  "permissions": [
+    "https://myanimelist.net/*",
+    "contextMenus",
+    "identity",
+    "notifications",
+    "storage",
+    "tabs",
+    "webNavigation"
+  ],
+  "background": {
+    "scripts": [
+      "lib/browser-polyfill.js",
+      "lib/umd.js",
+      "options/options-defaults.js",
+      "generic/generic.js",
+      "mal/mal.js",
+      "anilist/query.js",
+      "anilist/anilist.js",
+      "kitsu/kitsu.js",
+      "menu.js"
+    ],
+    "persistent": false
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://anilist.co/*"
+      ],
+      "js": [
+        "lib/browser-polyfill.js",
+        "lib/linkify.js",
+        "lib/linkify-element.js",
+        "anilist/prettified.js",
+        "generic/prettified.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://kitsu.io/*"
+      ],
+      "js": [
+        "lib/browser-polyfill.js",
+        "lib/linkify.js",
+        "lib/linkify-element.js",
+        "kitsu/prettified.js",
+        "generic/prettified.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://myanimelist.net/ownlist/*"
+      ],
+      "js": [
+        "lib/browser-polyfill.js",
+        "lib/linkify.js",
+        "lib/linkify-element.js",
+        "mal/prettified.js",
+        "generic/prettified.js"
+      ],
+      "all_frames": true
+    }
+  ]
+}

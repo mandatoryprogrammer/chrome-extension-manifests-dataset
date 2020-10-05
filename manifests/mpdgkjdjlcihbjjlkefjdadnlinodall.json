@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Upskip",
+  "description": "Skip uninteresting jobs when browsing Upwork feed and search results.",
+  "version": "0.9",
+  "page_action": {
+    "default_icon": {
+      "16": "images/icon16.png",
+      "32": "images/icon32.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "images/icon16.png",
+    "32": "images/icon32.png",
+    "128": "images/icon128.png"
+  },
+  "permissions": [
+    "https://www.upwork.com/*",
+    "storage",
+    "declarativeContent"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.upwork.com/ab/find-work/",
+        "https://www.upwork.com/o/jobs/browse*",
+        "https://www.upwork.com/ab/jobs/search*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "upskip.js"
+      ],
+      "css": [
+        "upskip.css"
+      ]
+    }
+  ]
+}

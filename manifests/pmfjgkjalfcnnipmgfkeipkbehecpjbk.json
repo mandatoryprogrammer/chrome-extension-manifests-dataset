@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Extension for P2P",
+  "short_name": "P2P Steam",
+  "description": "Extension that makes P2P possible",
+  "version": "1.6.8",
+  "icons": {
+    "128": "icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "scripts/config.js",
+      "scripts/jquery.min.js",
+      "scripts/background.js",
+      "scripts/extension.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_title": "P2P Launcher",
+    "default_icon": "icon16.png",
+    "default_popup": "popup.html"
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://*.steampowered.com/*",
+      "*://steamcommunity.com/*"
+    ]
+  },
+  "permissions": [
+    "notifications",
+    "alarms",
+    "storage",
+    "background",
+    "webRequest",
+    "webRequestBlocking",
+    "*://*.steampowered.com/*",
+    "*://steamcommunity.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://steamcommunity.com/tradeoffer/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "scripts/jquery.min.js",
+        "./scripts/trade.js"
+      ],
+      "css": [
+        "style/trade.css"
+      ]
+    }
+  ]
+}

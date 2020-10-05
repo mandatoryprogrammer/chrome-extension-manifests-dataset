@@ -1,0 +1,82 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "MiniPlay",
+  "short_name": "MiniPlay",
+  "description": "Control Google Music, Pandora, and Spotify with a popup and keyboard shortcuts.",
+  "version": "0.7.2",
+  "icons": {
+    "16": "img/icon-16.png",
+    "48": "img/icon-48.png",
+    "128": "img/icon-128.png"
+  },
+  "author": "Jeff Chen",
+  "homepage_url": "https://github.com/iambald/MiniPlay",
+  "background": {
+    "page": "background.html"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "browser_action": {
+    "default_icon": {
+      "19": "img/icon-19.png",
+      "38": "img/icon-38.png"
+    },
+    "default_title": "MiniPlay",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "notifications",
+    "storage",
+    "tabs",
+    "*://*/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://play.google.com/music*",
+        "*://*.pandora.com/*",
+        "*://songza.com/*",
+        "*://play.spotify.com/*"
+      ],
+      "js": [
+        "scripts/loader.js"
+      ]
+    }
+  ],
+  "options_page": "options.html",
+  "commands": {
+    "play": {
+      "suggested_key": {
+        "default": "MediaPlayPause"
+      },
+      "description": "Play/Pause",
+      "global": true
+    },
+    "ff": {
+      "suggested_key": {
+        "default": "MediaNextTrack"
+      },
+      "description": "Play next song",
+      "global": true
+    },
+    "rew": {
+      "suggested_key": {
+        "default": "MediaPrevTrack"
+      },
+      "description": "Play previous song",
+      "global": true
+    },
+    "up": {
+      "description": "Thumbs up"
+    },
+    "down": {
+      "description": "Thumbs down"
+    },
+    "shuffle": {
+      "description": "Shuffle songs"
+    },
+    "repeat": {
+      "description": "Repeat songs"
+    }
+  }
+}

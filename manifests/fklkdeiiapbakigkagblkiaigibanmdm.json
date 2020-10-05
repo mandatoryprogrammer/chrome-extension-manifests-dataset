@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Amazon AWS Quick Links",
+  "short_name": "AWS Quick Links",
+  "version": "1",
+  "manifest_version": 2,
+  "description": "Quickly and conveniently open AWS Services from here",
+  "author": "stefanXO",
+  "icons": {
+    "16": "icons/General_AWScloud.png",
+    "48": "icons/General_AWScloud.png",
+    "64": "icons/General_AWScloud.png",
+    "128": "icons/General_AWScloud.png",
+    "256": "icons/General_AWScloud.png"
+  },
+  "permissions": [
+    "activeTab",
+    "https://*.aws.amazon.com/",
+    "tabs",
+    "storage"
+  ],
+  "incognito": "spanning",
+  "background": {
+    "scripts": [
+      "lib/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.aws.amazon.com/*"
+      ],
+      "js": [
+        "lib/worker.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/General_AWScloud.png",
+      "48": "icons/General_AWScloud.png",
+      "64": "icons/General_AWScloud.png",
+      "128": "icons/General_AWScloud.png",
+      "256": "icons/General_AWScloud.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+A",
+        "windows": "Ctrl+Shift+A",
+        "mac": "Command+Shift+A"
+      }
+    }
+  }
+}

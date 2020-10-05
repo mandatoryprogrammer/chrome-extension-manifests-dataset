@@ -1,0 +1,43 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "YouTrack Issue Cards Printer",
+  "description": "Print issues from JetBrains YouTrack as cards for physical scrum board",
+  "version": "0.4.1",
+  "author": "Maciej Radzikowski",
+  "homepage_url": "https://github.com/m-radzikowski/youtrack-issue-cards-printer",
+  "icons": {
+    "16": "resources/icon/icon16.png",
+    "32": "resources/icon/icon32.png",
+    "48": "resources/icon/icon48.png",
+    "128": "resources/icon/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "gtm.js",
+      "background/show-page-action.js",
+      "background/singleton.js",
+      "background/page-action.js"
+    ],
+    "persistent": false
+  },
+  "page_action": {},
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content/replace-print-button.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "<all_urls>",
+    "storage",
+    "declarativeContent"
+  ],
+  "options_page": "options.html",
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://code.jquery.com https://cdnjs.cloudflare.com https://stackpath.bootstrapcdn.com https://www.googletagmanager.com https://www.google-analytics.com; object-src 'self'"
+}

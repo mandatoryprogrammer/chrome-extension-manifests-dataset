@@ -1,0 +1,69 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Deviant Love",
+  "version": "2.10",
+  "description": "__MSG_extDesc__",
+  "author": "Pixievolt No. 1",
+  "homepage_url": "https://www.deviantart.com/deviantlovesoftware",
+  "icons": {
+    "16": "images/heart/16.png",
+    "48": "images/heart/48.png",
+    "128": "images/heart/128Starred.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "versionCheck.js",
+      "background.js",
+      "syncByBrowser.js",
+      "contextMenu.js"
+    ],
+    "persistent": false
+  },
+  "page_action": {
+    "default_icon": {
+      "32": "images/heart/32.png"
+    },
+    "default_title": "Deviant Love"
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "chrome_style": true,
+    "browser_style": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.deviantart.com/*"
+      ],
+      "js": [
+        "contentScript/findLove.js",
+        "contentScript/panel.js",
+        "contentScript/artistNames.js",
+        "contentScript/favesPages.js",
+        "contentScript/contentScriptCore.js"
+      ],
+      "css": [
+        "contentScript/panel.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "report/popup.html",
+    "images/heart/*"
+  ],
+  "permissions": [
+    "contextMenus",
+    "storage",
+    "*://*.deviantart.com/"
+  ],
+  "minimum_chrome_version": "66",
+  "applications": {
+    "gecko": {
+      "id": "deviantlove@pikadudeno1.com",
+      "strict_min_version": "58.0"
+    }
+  },
+  "manifest_version": 2
+}

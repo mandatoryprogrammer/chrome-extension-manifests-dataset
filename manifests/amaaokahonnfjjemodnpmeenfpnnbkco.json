@@ -1,0 +1,170 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Grepper",
+  "description": "The Query & Answer System for the Coder Community",
+  "version": "0.0.4.6",
+  "browser_action": {
+    "default_icon": {
+      "16": "icon128.png",
+      "24": "icon128.png",
+      "32": "icon128.png"
+    },
+    "default_title": "Grepper",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "identity",
+    "identity.email",
+    "storage",
+    "activeTab",
+    "<all_urls>",
+    "alarms"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "icons": {
+    "16": "img/icon128_hand.png",
+    "48": "img/icon128_hand.png",
+    "128": "img/icon128_hand.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.google.com/*",
+        "https://www.google.co.uk/*",
+        "https://www.google.co.za/*",
+        "https://www.google.co.th/*",
+        "https://www.google.co.jp/*",
+        "https://www.google.co.il/*",
+        "https://www.google.es/*",
+        "https://www.google.ca/*",
+        "https://www.google.de/*",
+        "https://www.google.it/*",
+        "https://www.google.fr/*",
+        "https://www.google.com.au/*",
+        "https://www.google.com.ph/*",
+        "https://www.google.com.tw/*",
+        "https://www.google.com.br/*",
+        "https://www.google.com.ua/*",
+        "https://www.google.com.my/*",
+        "https://www.google.ru/*",
+        "https://www.google.com.tr/*",
+        "https://www.google.be/*",
+        "https://www.google.com.gr/*",
+        "https://www.google.co.in/*",
+        "https://www.google.com.mx/*",
+        "https://www.google.dk/*",
+        "https://www.google.com.ar/*",
+        "https://www.google.ch/*",
+        "https://www.google.cl/*",
+        "https://www.google.co.kr/*",
+        "https://www.google.com.co/*",
+        "https://www.google.pl/*",
+        "https://www.google.pt/*",
+        "https://www.google.com.pk/*",
+        "https://www.google.co.id/*",
+        "https://www.google.com.vn/*",
+        "https://www.google.nl/*",
+        "https://www.google.se/*",
+        "https://www.google.com.sg/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "content.js",
+        "prism/prism.js"
+      ],
+      "css": [
+        "prism/prism.css",
+        "codemirror/lib/codemirror.css",
+        "codemirror/theme/prism-okaidia.css",
+        "codemirror/theme/midnight.css",
+        "main.css"
+      ]
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "https://www.google.com/*",
+        "https://www.google.co.uk/*",
+        "https://www.google.co.za/*",
+        "https://www.google.co.th/*",
+        "https://www.google.co.jp/*",
+        "https://www.google.co.il/*",
+        "https://www.google.es/*",
+        "https://www.google.ca/*",
+        "https://www.google.de/*",
+        "https://www.google.it/*",
+        "https://www.google.fr/*",
+        "https://www.google.com.au/*",
+        "https://www.google.com.ph/*",
+        "https://www.google.com.tw/*",
+        "https://www.google.com.br/*",
+        "https://www.google.com.ua/*",
+        "https://www.google.com.my/*",
+        "https://www.google.ru/*",
+        "https://www.google.com.tr/*",
+        "https://www.google.be/*",
+        "https://www.google.com.gr/*",
+        "https://www.google.co.in/*",
+        "https://www.google.com.mx/*",
+        "https://www.google.dk/*",
+        "https://www.google.com.ar/*",
+        "https://www.google.ch/*",
+        "https://www.google.cl/*",
+        "https://www.google.co.kr/*",
+        "https://www.google.com.co/*",
+        "https://www.google.pl/*",
+        "https://www.google.pt/*",
+        "https://www.google.com.pk/*",
+        "https://www.google.co.id/*",
+        "https://www.google.com.vn/*",
+        "https://www.google.nl/*",
+        "https://www.google.se/*",
+        "https://www.google.com.sg/*"
+      ],
+      "all_frames": false,
+      "run_at": "document_idle",
+      "js": [
+        "content_page2.js"
+      ],
+      "css": [
+        "codemirror/lib/codemirror.css",
+        "codemirror/theme/prism-okaidia.css",
+        "page2.css"
+      ]
+    },
+    {
+      "matches": [
+        "http://localhost:8888/grepper_app/*",
+        "https://www.codegrepper.com/*",
+        "https://staging.codegrepper.com/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "grepper_app.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.codegrepper.com/app/notifications.php"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "grepper_notifications.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "codemirror/*",
+    "img/*.png",
+    "js/*.js"
+  ]
+}

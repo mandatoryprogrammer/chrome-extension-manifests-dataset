@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Podio Power Tools",
+  "description": "Enhances Podio with bulk edit, exports, doubles and more",
+  "version": "1.4.84",
+  "content_security_policy": "script-src 'self' https://cdnjs.cloudflare.com; object-src 'self'",
+  "icons": {
+    "128": "images/icon.png"
+  },
+  "background": {
+    "scripts": [
+      "event.js"
+    ],
+    "matches": [
+      "http://*/*",
+      "https://*/*"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_title": "Power Tools for Podio",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.podio.com/*",
+        "https://podio.com/*"
+      ],
+      "css": [
+        "css/react-select.css"
+      ],
+      "js": [
+        "content.js",
+        "toolbox_menu.js",
+        "kampadmin_toolbox_menu.js",
+        "powertools.js",
+        "kampadmin_tools_item.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://localhost:8000/oauth/*",
+        "https://momentumtools.io/oauth/*",
+        "http://momentum-podio-api.herokuapp.com/oauth/*",
+        "https://momentum-podio-api.herokuapp.com/oauth/*",
+        "https://b4bit.eu.ngrok.io/oauth/*"
+      ],
+      "js": [
+        "oauth.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "storage"
+  ]
+}

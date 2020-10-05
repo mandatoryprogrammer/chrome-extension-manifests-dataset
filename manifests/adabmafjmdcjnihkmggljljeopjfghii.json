@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "short_name": "Glowforge Materials",
+  "name": "Glowforge Material Manager",
+  "manifest_version": 2,
+  "description": "Browser extension that allows users to save and modify their own materials for use in the Glowforge web interface.",
+  "default_locale": "en",
+  "browser_action": {
+    "default_popup": "index.html",
+    "default_title": "Glowforge Material Manager"
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "*://app.glowforge.com/*"
+  ],
+  "background": {
+    "page": "background.html"
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://app.glowforge.com/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://app.glowforge.com/*"
+      ],
+      "js": [
+        "inject.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "content.js",
+    "custom-material.png"
+  ],
+  "version": "0.4.10"
+}

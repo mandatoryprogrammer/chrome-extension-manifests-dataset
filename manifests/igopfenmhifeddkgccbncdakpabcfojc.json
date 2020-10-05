@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_name__",
+  "short_name": "__MSG_shortname__",
+  "description": "__MSG_description__",
+  "version": "2.0",
+  "icons": {
+    "16": "./img/logo/logo-active-16.png",
+    "48": "./img/logo/logo-active-48.png",
+    "128": "./img/logo/logo-active-128.png"
+  },
+  "homepage_url": "https://sendmeapp.link/",
+  "browser_action": {
+    "default_title": "__MSG_name__"
+  },
+  "background": {
+    "scripts": [
+      "./scripts/jquery.js",
+      "background.js"
+    ]
+  },
+  "default_locale": "en",
+  "options_ui": {
+    "page": "./welcome-page/index.html",
+    "open_in_tab": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "css": [
+        "./styles/card.css",
+        "./styles/panel.css"
+      ],
+      "js": [
+        "./scripts/jquery.js",
+        "./scripts/content_script.js",
+        "./scripts/mask.js",
+        "./scripts/panel.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "alarms",
+    "activeTab",
+    "tabs",
+    "*://*/*",
+    "notifications",
+    "<all_urls>",
+    "storage"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "web_accessible_resources": [
+    "img/*.*",
+    "welcome-page/index.html",
+    "fonts/*.ttf"
+  ]
+}

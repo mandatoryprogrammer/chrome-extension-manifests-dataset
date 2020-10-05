@@ -1,0 +1,71 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Canned Replies",
+  "version": "1.1.14",
+  "author": "Tinacious Design",
+  "description": "Helps you manage canned replies in Gmail and everywhere else on the web",
+  "content_security_policy": "default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' https://www.google-analytics.com https://cdn.rollbar.com/rollbarjs/refs/tags/v2.15.1/rollbar.min.js; connect-src 'self' https://api.rollbar.com https://www.google-analytics.com https://my.cannedreplies.com",
+  "options_ui": {
+    "open_in_tab": true,
+    "page": "index.html"
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "clipboardWrite",
+    "contextMenus",
+    "https://mail.google.com/*"
+  ],
+  "optional_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "page": "background.html"
+  },
+  "icons": {
+    "48": "img/canned-replies-icon-48.png",
+    "128": "img/canned-replies-icon-128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "38": "img/canned-replies-icon-38.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "web_accessible_resources": [
+    "img/*.png",
+    "angular.min.js.map",
+    "index.html"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "vendor-angular.js",
+        "vendor-web.js",
+        "insert-text-at-cursor.js",
+        "bundle.js"
+      ],
+      "css": [
+        "css/canned-replies.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "insert-text-at-cursor.js",
+        "context-menu.js",
+        "bundle.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "TrackingDoc",
+  "description": "__MSG_plugin_description__",
+  "version": "2.0.0",
+  "author": "mba",
+  "icons": {
+    "48": "images/icon-plugin.png"
+  },
+  "default_locale": "en",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*"
+      ],
+      "js": [
+        "js/inboxsdk.js",
+        "js/postMessage.js",
+        "js/utils.js",
+        "js/jquery-3.3.1.js",
+        "js/app-chrome-gmail_inbox.js"
+      ],
+      "css": [
+        "css/app-chrome-gmail_inbox.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "browser_action": {
+    "default_title": "TrackingDoc",
+    "default_icon": "images/chrome-browser-toolbar.png",
+    "default_popup": "app-chrome-toolbar.html"
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "js/utils.js",
+      "js/jquery-3.3.1.js",
+      "js/analytics.js",
+      "js/app-chrome-background.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "images/gmail-compose-toolbar.png",
+    "iframeProxy.html"
+  ],
+  "permissions": [
+    "storage",
+    "clipboardWrite",
+    "https://trackingdoc.com/plugins/chrome_2.0.0/",
+    "https://plugin.trackingdoc.com/"
+  ],
+  "content_security_policy": "script-src 'self' https://trackingdoc.com/plugins/chrome_2.0.0/ https://plugin.trackingdoc.com/ https://assets.customer.io/assets/ https://d24n15hnbwhuhn.cloudfront.net/libs/ https://www.googletagmanager.com/ https://www.google-analytics.com/ ; frame-src 'self' https://trackingdoc.com/plugins/chrome_2.0.0/ https://plugin.trackingdoc.com/ https://www.googletagmanager.com/ ; object-src 'self'"
+}

@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Zendesk / Zopim / Tawk.to Visitor Alert",
+  "description": "Get instant alert notification when a customer came to your Website.",
+  "version": "1.1.0",
+  "browser_action": {
+    "default_icon": "images/zopim.png",
+    "default_title": "Zendesk / Zopim / Tawk.to Visitor Alert",
+    "default_popup": "html/action.html"
+  },
+  "permissions": [
+    "unlimitedStorage",
+    "downloads",
+    "activeTab",
+    "storage",
+    "notifications",
+    "tabs",
+    "cookies",
+    "https://www.tawk.to/*",
+    "https://dashboard.tawk.to/*"
+  ],
+  "background": {
+    "page": "html/bana.html",
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://dashboard.zopim.com/*",
+        "*://dashboard.zopim.com/#visitors/*"
+      ],
+      "js": [
+        "content-script/jquery-3.2.1.min.js",
+        "content-script/visitor.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://dashboard.tawk.to/*"
+      ],
+      "js": [
+        "content-script/jquery-3.2.1.min.js",
+        "content-script/tawkto.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    }
+  ]
+}

@@ -1,0 +1,123 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "name": "Procoser Extensión en la Nube",
+  "short_name": "Procoser",
+  "description": "__MSG_extDescriptionProcoser__",
+  "version": "5.0.0",
+  "version_name": "5.0",
+  "homepage_url": "http://www.procosercomunicaciones.com",
+  "author": "mailto:info@procosercomunicaciones.com?subject=Chrome%20Extension%205.0.0%20retroinformación",
+  "icons": {
+    "16": "/dist/procoser/logo16.png",
+    "32": "/dist/procoser/logo32.png",
+    "48": "/dist/procoser/logo48.png",
+    "64": "/dist/procoser/logo64.png",
+    "128": "/dist/procoser/logo128.png"
+  },
+  "options_page": "options.html",
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": false
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "content_security_policy": "script-src 'self' 'sha256-l9jyTiBA1gxK49AAMA74GFI6uY8SDI9W2eUh1sZyzQ0=' https://*.mdspbx.com; object-src 'self'; child-src 'self';",
+  "permissions": [
+    "background",
+    "notifications",
+    "*://*/*",
+    "file://*/*",
+    "contextMenus",
+    "tabs",
+    "idle",
+    "clipboardRead",
+    "downloads",
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "privacy"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*",
+        "file://*/*"
+      ],
+      "exclude_matches": [
+        "https://*.mdspbx.com/*"
+      ],
+      "js": [
+        "jquery.js",
+        "jsFrame.js",
+        "libphonenumber/libphonenumber-max.js",
+        "popper/popper.js",
+        "popper/popper-utils.js",
+        "popper/tooltip.js",
+        "contentScript.js"
+      ],
+      "css": [
+        "content.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.mdspbx.com/*"
+      ],
+      "js": [
+        "jquery.js",
+        "newTabContent.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "48": "/dist/procoser/icon48gray.png"
+    },
+    "default_title": "Procoser Extensión en la Nube - __MSG_extDefaultTitle__",
+    "default_popup": "popup.html"
+  },
+  "web_accessible_resources": [
+    "/dist/procoser/logo.svg",
+    "images/icons/SVG/call-button.svg",
+    "jsFrame.js",
+    "dist.js",
+    "content-click2dial.js"
+  ],
+  "commands": {
+    "Answer": {
+      "suggested_key": {
+        "default": "MediaNextTrack",
+        "mac": "MediaNextTrack"
+      },
+      "global": true,
+      "description": "__MSG_commandsAnswer__"
+    },
+    "Reject": {
+      "suggested_key": {
+        "default": "MediaPrevTrack",
+        "mac": "MediaPrevTrack"
+      },
+      "global": true,
+      "description": "__MSG_commandsReject__"
+    },
+    "Dial": {
+      "suggested_key": {
+        "default": "MediaPlayPause",
+        "mac": "MediaPlayPause"
+      },
+      "global": true,
+      "description": "__MSG_commandsDial__"
+    },
+    "Portal": {
+      "suggested_key": {
+        "default": "MediaStop",
+        "mac": "MediaStop"
+      },
+      "global": true,
+      "description": "__MSG_commandsPortal__"
+    }
+  }
+}

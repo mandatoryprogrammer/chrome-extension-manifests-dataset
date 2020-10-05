@@ -1,0 +1,70 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "CA Service Management Extension for Chrome",
+  "version": "2.0.0",
+  "description": "Demonstrate screenshot functionality in the chrome.tabs api.",
+  "icons": {
+    "16": "images/web-search16.png",
+    "32": "images/web-search64.png",
+    "128": "images/web-search128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "images/web-search16.png"
+    },
+    "default_title": "CA Service Management Extension for Chrome",
+    "default_popup": "html/popup.html"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "windows": "Alt+Shift+X",
+        "mac": "Alt+Shift+X",
+        "chromeos": "Alt+Shift+X",
+        "linux": "Alt+Shift+R"
+      }
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "scripts/contentscripts/ResearchToolContentUtil.js",
+        "scripts/contentscripts/ContentScriptAuth.js",
+        "scripts/contentscripts/DispatchContentScript.js",
+        "scripts/contentscripts/Notifer.js",
+        "scripts/contentscripts/EULANotifer.js",
+        "scripts/contentscripts/ScreenShotClient.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "scripts/backgroundscripts/DispatchBackGround.js",
+      "scripts/backgroundscripts/BackgroundAuth.js",
+      "scripts/backgroundscripts/BackgroundUtil.js",
+      "scripts/backgroundscripts/ScreenShotBackGround.js",
+      "scripts/backgroundscripts/UploadUtil.js"
+    ]
+  },
+  "permissions": [
+    "storage",
+    "cookies",
+    "tabs",
+    "http://*/",
+    "https://*/",
+    "activeTab",
+    "contextMenus",
+    "desktopCapture",
+    "tabCapture",
+    "tts",
+    "notifications",
+    "<all_urls>"
+  ],
+  "web_accessible_resources": [
+    "images/web-search16.png"
+  ],
+  "manifest_version": 2
+}

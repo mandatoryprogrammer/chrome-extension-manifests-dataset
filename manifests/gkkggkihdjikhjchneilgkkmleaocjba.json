@@ -1,0 +1,85 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Peerbelt for Chrome",
+  "short_name": "Peerbelt",
+  "description": "Find everything. Your personal search engine.",
+  "icons": {
+    "128": "pb_128.png",
+    "16": "pb_16.png"
+  },
+  "browser_action": {
+    "default_icon": "pb_19.png",
+    "default_title": "View Peerbelt",
+    "default_popup": "noted.html"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "omnibox": {
+    "keyword": "pb"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+P",
+        "mac": "Command+Shift+P"
+      }
+    },
+    "show_library": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+L",
+        "mac": "Command+Shift+L"
+      },
+      "description": "View library"
+    }
+  },
+  "permissions": [
+    "bookmarks",
+    "nativeMessaging",
+    "contextMenus",
+    "<all_urls>",
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "https://www.google.com/*",
+    "https://duckduckgo.com/*",
+    "https://twitter.com/*",
+    "https://api.twitter.com/*",
+    "https://www.linkedin.com/*",
+    "https://api.linkedin.com/*",
+    "https://graph.facebook.com/*"
+  ],
+  "web_accessible_resources": [
+    "filter.js",
+    "pb_19.png",
+    "noted.html",
+    "noted.js",
+    "bootstrap.js",
+    "bar-hide.js",
+    "proxy.html",
+    "settings.html",
+    "complete_setup.html",
+    "complete_setup.js"
+  ],
+  "homepage_url": "http://www.peerbelt.com/",
+  "options_page": "settings.html",
+  "chrome_url_overrides": {
+    "history": "history-director.html"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "httphelper.js",
+        "proxy.js"
+      ],
+      "matches": [
+        "https://www.peerbelt.com/social2/oauth/*",
+        "http://www.peerbelt.com/social2/oauth/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "minimum_chrome_version": "30",
+  "version": "5.55",
+  "manifest_version": 2
+}

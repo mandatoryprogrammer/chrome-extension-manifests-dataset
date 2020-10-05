@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "0.7.7",
+  "name": "Shopbuddy",
+  "manifest_version": 2,
+  "description": "You shop, we deliver",
+  "browser_action": {
+    "default_title": "Shopbuddy",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "img/logo-16.png",
+    "48": "img/logo-48.png",
+    "128": "img/logo-128.png"
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAn4Lj2KONeW5GF1BpYUlBXc32x39kXkKLBGvpptohoNZYKrbQu+HBGuAJ1XdCxKzBgFrLQVqb6s4y03bpAoAYCEE8mB1vLXgEB6UfbKuik9fQ08d5iKzxrmqiimC0MMwzfkZHNwbmYw2b/eo/pqDUoDUnSZAyXiz3CoFUgcvSgzFqfXf2jL8Zj6FF0YDzvxaPNudxsI7JIcZRtv1y1DhD6wA+BD6Je2aU9UBQWnxsZ9mKnbCcidfnrxzFuGAKpoaNMpz0pqfv3/DhxmD2DIUuMhbqbTZj+6jUPVafu0B8X727BeBnmXChoAKy4YdTlkFx0gX5DfTXUXXMODH0m9+AawIDAQAB",
+  "web_accessible_resources": [
+    "inject.html"
+  ],
+  "content_scripts": [
+    {
+      "js": [
+        "libs/jquery-3.0.0.min.js"
+      ],
+      "matches": [
+        "https://www.amazon.com/*"
+      ]
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "chrome-extension://jllbjccoodgjljdmpijpmkhmdkndamho/window.html"
+    ]
+  },
+  "background": {
+    "page": "background.html",
+    "js": [
+      "libs/jquery-3.0.0.min.js"
+    ],
+    "matches": [
+      "https://www.amazon.com/*"
+    ]
+  },
+  "oauth2": {
+    "client_id": "533443841306-ufahtm8dbselgnr543vi509eqs3si8ro.apps.googleusercontent.com",
+    "scopes": [
+      "profile",
+      "email"
+    ]
+  },
+  "permissions": [
+    "identity",
+    "identity.email",
+    "contextMenus",
+    "management",
+    "tabs",
+    "activeTab",
+    "storage",
+    "notifications",
+    "https://www.amazon.com/*",
+    "http://ecs.amazonaws.com/*"
+  ],
+  "content_security_policy": "default-src 'self'; frame-src *; script-src 'self' https://apis.google.com https://webservices.amazon.com https://*.firebaseio.com 'unsafe-eval'; object-src 'self'; connect-src *; style-src * 'unsafe-inline'; img-src * 'self' data:; font-src *;"
+}

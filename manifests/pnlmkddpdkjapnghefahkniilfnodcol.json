@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Tabbr: Tab Manager",
+  "icons": {
+    "16": "favicon.png",
+    "128": "icon128.png"
+  },
+  "description": "Search your tabs.",
+  "version": "0.0.2",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "<all_urls>",
+    "storage",
+    "unlimitedStorage",
+    "history"
+  ],
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": "favicon.png"
+  },
+  "background": {
+    "scripts": [
+      "js/underscore.js",
+      "js/lunr.min.js",
+      "js/repo.js",
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/content.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+T",
+        "mac": "MacCtrl+T"
+      }
+    }
+  }
+}

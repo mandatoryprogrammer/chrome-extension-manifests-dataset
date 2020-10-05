@@ -1,0 +1,68 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "background": {
+    "persistent": true,
+    "page": "background.html"
+  },
+  "minimum_chrome_version": "34",
+  "browser_action": {
+    "default_icon": "icon_not_logged.png"
+  },
+  "description": "Designed to provide convenient notifications for merchants using the VideoEngager product.",
+  "icons": {
+    "128": "icon.png"
+  },
+  "content_security_policy": "script-src 'self' https://192.168.0.104; object-src 'self'",
+  "name": "Genesys ScreenShare Chrome Assistant",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "desktopCapture",
+    "background",
+    "notifications",
+    "storage",
+    "http://localhost/*",
+    "https://192.168.0.104/*",
+    "https://localhost/*",
+    "*://*.leadsecure.com/*/*",
+    "*://*.videoengager.com/*/*",
+    "*://*.zmoticonnect.com/*/*",
+    "https://gws-004.devcloud.genesys.com:18180/ui/ad/v1/*"
+  ],
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "run_at": "document_end",
+      "js": [
+        "content.js"
+      ],
+      "matches": [
+        "http://localhost/*",
+        "https://localhost/*",
+        "https://192.168.0.104/*",
+        "https://gws-004.devcloud.genesys.com:18180/ui/ad/v1/*",
+        "*://*.leadsecure.com/*/*",
+        "*://*.videoengager.com/*/*",
+        "*://*.zmoticonnect.com/*/*",
+        "http://localhost:9000/*",
+        "http://localhost/*"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "version.js"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.leadsecure.com/*/*",
+      "*://*.videoengager.com/*/*",
+      "*://*.zmoticonnect.com/*/*",
+      "https://gws-004.devcloud.genesys.com:18180/ui/ad/v1/*",
+      "http://localhost:9000/*",
+      "http://localhost/*",
+      "https://localhost/*"
+    ]
+  },
+  "version": "0.0.1",
+  "manifest_version": 2
+}

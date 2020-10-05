@@ -1,0 +1,77 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Engage for Gmail",
+  "short_name": "Engage Gmail",
+  "version": "4.0.11",
+  "description": "Track emails and insert templates in Gmail",
+  "icons": {
+    "16": "img/pardot-16.png",
+    "48": "img/pardot-48.png",
+    "128": "img/pardot-128.png"
+  },
+  "web_accessible_resources": [
+    "img/**/*",
+    "img/*",
+    "templates/*",
+    "admin.html",
+    "fonts/*",
+    "icons/*",
+    "icons/**/*"
+  ],
+  "background": {
+    "scripts": [
+      "js/analytics.js",
+      "js/background.js"
+    ]
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://mail.google.com/*"
+      ],
+      "js": [
+        "js/forge.min.js",
+        "js/index.js"
+      ],
+      "css": [
+        "css/index.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://login.salesforce.com/services/oauth2/success*"
+      ],
+      "js": [
+        "js/sfdc-oauth-scraper.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://*.salesforce.com/00Q*",
+        "https://*.salesforce.com/003*"
+      ],
+      "js": [
+        "js/new-sfdc-record-scraper.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.lightning.force.com/one/one.app*",
+        "https://*.lightning.force.com/lightning*"
+      ],
+      "js": [
+        "js/new-ltng-record-scraper.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "*://*/*",
+    "storage",
+    "notifications"
+  ]
+}

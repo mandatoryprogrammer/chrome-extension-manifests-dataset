@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Montville GPA Calculator Schoology",
+  "description": "Calculates Montville High School GPAs for Schoolog",
+  "version": "1.1",
+  "author": "Pepi Martinez",
+  "background": {
+    "scripts": [
+      "./src/lib/jquery.min.js",
+      "./src/background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "declarativeContent"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://schoology.montville.net/grades/grades"
+      ],
+      "css": [
+        "./src/css/main.css"
+      ],
+      "js": [
+        "./src/lib/jquery.min.js",
+        "./src/Helpers.js",
+        "./src/content_script.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "page_action": {
+    "default_popup": "./src/popup/popup.html",
+    "default_icon": "./src/img/icon.png",
+    "default_title": "Mont GPA Calc Schoology"
+  },
+  "icons": {
+    "32": "./src/img/icon.png"
+  },
+  "options_ui": {
+    "page": "./src/options/options.html",
+    "open_in_tab": false
+  }
+}

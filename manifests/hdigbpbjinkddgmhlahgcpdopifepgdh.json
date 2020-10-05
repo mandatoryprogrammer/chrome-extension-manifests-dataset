@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Vcare Click2dial",
+  "short_name": "Vcare Click2dial",
+  "version": "1.1",
+  "description": "Extentie voor de Vcare Operator",
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "permissions": [
+    "tabs"
+  ],
+  "icons": {
+    "16": "images/Icoon-balk-20x20.png",
+    "32": "images/Icoon-balk-40x40.png",
+    "48": "images/Icoon-balk-60x60.png",
+    "128": "images/Icoon-balk-160x160.png"
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": [
+        "*://*/*",
+        "file://*"
+      ],
+      "js": [
+        "scripts/jquery-3.3.1.min.js",
+        "scripts/sendToDialer.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "https://*.vcareconnect.nl/*",
+        "http://localhost/*"
+      ],
+      "js": [
+        "scripts/receiveInDialer.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "manifest_version": 2,
+  "web_accessible_resources": [
+    "images/*.png"
+  ]
+}

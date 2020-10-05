@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Privacy Defense – Fast, private browsing",
+  "short_name": "[P]D",
+  "description": "Block unwanted ads, privacy trackers/scripts, web bugs and online identity threats. Browse faster and reduce usage on data plans.",
+  "version": "2.0.15",
+  "manifest_version": 2,
+  "author": "Privacy Defense",
+  "applications": {
+    "gecko": {
+      "id": "privacydefense@privacydefense.net",
+      "strict_min_version": "45.0"
+    }
+  },
+  "icons": {
+    "32": "images/icon32.png",
+    "64": "images/icon64.png"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking",
+    "activeTab",
+    "<all_urls>",
+    "http://*/",
+    "https://*/"
+  ],
+  "web_accessible_resources": [
+    "sigdb.txt",
+    "scripts/*",
+    "pages/*",
+    "css/*",
+    "images/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "scripts/content_script.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ],
+    "persistent": true
+  },
+  "incognito": "spanning",
+  "browser_action": {
+    "default_title": "[privacy]defense",
+    "default_popup": "pages/popup.html",
+    "default_icon": {
+      "32": "images/icon32.png",
+      "64": "images/icon64.png"
+    }
+  }
+}

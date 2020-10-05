@@ -1,0 +1,83 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Find.Media",
+  "short_name": "Find.Media",
+  "description": "Find.Media shows if a movie is streaming on Netflix, iTunes, Amazon Prime and more while you browse IMDb and Rotten Tomatoes.",
+  "author": "MediaHound",
+  "version": "0.1.1",
+  "omnibox": {
+    "keyword": "fm"
+  },
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "src/background.js"
+    ]
+  },
+  "icons": {
+    "16": "assets/icon16.png",
+    "32": "assets/icon32.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "assets/icon19-off.png",
+      "38": "assets/icon38-off.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.find.media/*"
+      ],
+      "js": [
+        "src/detect-fm.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.imdb.com/*"
+      ],
+      "js": [
+        "src/detect-imdb.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.rottentomatoes.com/*"
+      ],
+      "js": [
+        "src/detect-rt.js"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [
+        "src/sidebar.css"
+      ],
+      "js": [
+        "src/sidebar-host.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "webNavigation",
+    "<all_urls>"
+  ],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "windows": "Ctrl+Shift+M",
+        "mac": "Command+Shift+M",
+        "chromeos": "Ctrl+Shift+M",
+        "linux": "Ctrl+Shift+M"
+      }
+    }
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

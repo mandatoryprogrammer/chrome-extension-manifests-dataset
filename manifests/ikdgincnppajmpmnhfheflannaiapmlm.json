@@ -1,0 +1,68 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "description": "Social navigator for the web",
+  "permissions": [
+    "webNavigation",
+    "tabs",
+    "storage",
+    "cookies",
+    "unlimitedStorage",
+    "https://ampie.s3.amazonaws.com/",
+    "https://hacker-news.firebaseio.com/",
+    "https://*.ampie.app/"
+  ],
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "name": "Ampie",
+  "background": {
+    "scripts": [
+      "out/shared.js",
+      "out/bg-shared.js",
+      "out/background.js"
+    ],
+    "persistent": false
+  },
+  "icons": {
+    "32": "icons/ampie-32.png",
+    "48": "icons/ampie-48.png",
+    "96": "icons/ampie-96.png",
+    "128": "icons/ampie-128.png"
+  },
+  "commands": {
+    "amplify_page": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+A",
+        "mac": "Command+Shift+A"
+      },
+      "description": "Amplify the page you are on"
+    }
+  },
+  "web_accessible_resources": [
+    "assets/*"
+  ],
+  "manifest_version": 2,
+  "content_security_policy": "default-src 'self'; connect-src *; script-src 'self';",
+  "content_scripts": [
+    {
+      "css": [
+        "assets/content-style.css",
+        "assets/fonts-content-style.css"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    },
+    {
+      "js": [
+        "out/shared.js",
+        "out/bg-shared.js",
+        "out/content-script.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
+  "version": "2.2.1"
+}

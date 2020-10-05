@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Github Sequence Diagrams",
+  "version": "0.0.3",
+  "manifest_version": 2,
+  "description": "Allows sequence diagrams to be embedded inside of Github issues.  Based on http://bramp.github.io/js-sequence-diagrams/.",
+  "icons": {
+    "16": "icons/16x16.png",
+    "48": "icons/48x48.png",
+    "128": "icons/128x128.png"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "permissions": [
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.github.com/*/*/issues/*",
+        "*://*.github.com/*/*/pulls/*"
+      ],
+      "css": [
+        "css/jsseq.css"
+      ],
+      "js": [
+        "js/libs/mutation_summary.js",
+        "js/libs/raphael-min.js",
+        "js/libs/underscore-min.js",
+        "js/libs/sequence-diagram-min.js",
+        "js/libs/jquery-2.0.3.min.js",
+        "js/content.js"
+      ]
+    }
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  }
+}

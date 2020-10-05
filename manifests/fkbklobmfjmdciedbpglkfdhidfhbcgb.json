@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com https://www.google-analytics.com/analytics.js https://apis.google.com https://www.google.com https://script.google.com https://script.googleusercontent.com 'unsafe-eval';frame-src https://www.youtube.com; object-src 'self'",
+  "name": "SweetCarts for SweetHoney",
+  "version": "2.7.0",
+  "short_name": "SweetCarts",
+  "manifest_version": 2,
+  "description": "SweetCarts for SweetHoney",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_title": "SweetCarts for SweetHoney",
+    "default_popup": "home1.html"
+  },
+  "icons": {
+    "128": "icon.png"
+  },
+  "permissions": [
+    "https://smallwoodhome.com/*",
+    "https://sweethoneyclothing.com/*",
+    "http://sweetcartsclub.com/*",
+    "https://sweetcartsclub.com/*"
+  ],
+  "web_accessible_resources": [
+    "csv/*.csv"
+  ],
+  "background": {
+    "scripts": [
+      "js/aes.js",
+      "js/pbkdf2.js",
+      "js/localStorage.service.js",
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://sweethoneyclothing.com/*",
+        "https://www.smallwoodhome.com/*",
+        "http://www.smallwoodhome.com/*"
+      ],
+      "js": [
+        "js/jquery-3.1.1.min.js",
+        "js/smallWood.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://checkout.us.shopifycs.com/*",
+        "http://checkout.us.shopifycs.com/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "js/jquery-3.1.1.min.js",
+        "js/paymentPage.js"
+      ]
+    }
+  ],
+  "oauth2": {
+    "client_id": "696763237280-bkfouv0030la6l9t2g1elim04no836fq.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/drive"
+    ]
+  }
+}

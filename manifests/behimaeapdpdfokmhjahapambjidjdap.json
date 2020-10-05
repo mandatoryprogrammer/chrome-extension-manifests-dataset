@@ -1,0 +1,87 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAisJjGJ+T/da6sko5HapXx000Op1XCMU/yUPZY+UdAPLK5e+jm2gVPC6UvcCmCJAmzVD9/p2IKqCiRO3z9qODZZxl60MZF5zO9PT/eGZD8zfPVfbpR/0Hnk/zHRfwoquHjRKtFhYt994i8bWXSS0CrEWnnGkBEZPvchOZwTNpMBQAxzY+sl0nvPEYq/4F1iU1smlmuoKOBC9gBk05gxRg6c+enZ+FjwjhZPpHoybigXMNJ7KLpcxZetK8qfdBjbPxOS7NASr2xJcSMkV0zSl4q/3qct45n0EF27E2FXMISv3TCxZv5mQXWNKs44rhOBxgV0rYwf1VRlMJjUktjGZNMQIDAQAB",
+  "name": "__MSG_appName__",
+  "description": "__MSG_appDesc__",
+  "default_locale": "en",
+  "version": "3.8.5",
+  "content_security_policy": "default-src *;img-src * data:;font-src *;media-src * blob: ;style-src *;connect-src *; script-src 'self'   'unsafe-eval' https://cdn.webrtc-experiment.com/ https://webrtcexperiment-webrtc.netdna-ssl.com https://graph.facebook.com https://static.ak.facebook.com/ https://connect.facebook.net https://ssl.google-analytics.com/ga.js https://www.google-analytics.com/analytics.js; object-src 'self'  blob: ",
+  "icons": {
+    "128": "icons/icon128.png",
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/icon48.png",
+    "default_popup": "app/popup.html"
+  },
+  "web_accessible_resources": [
+    "app/css/juntas.css",
+    "app/sidebar.html",
+    "app/games/pong/index.html",
+    "app/indication.html",
+    "js/config.js",
+    "app/config/config.json"
+  ],
+  "options_ui": {
+    "page": "app/options.html",
+    "chrome_style": true,
+    "open_in_tab": true
+  },
+  "background": {
+    "pages": "app/background.html",
+    "scripts": [
+      "js/socketio.js",
+      "app/js/background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "activeTab",
+    "windows",
+    "storage",
+    "identity.email",
+    "identity",
+    "tabs",
+    "http://*/*",
+    "notifications",
+    "contextMenus",
+    "https://*/*",
+    "https://accounts.google.com/o/oauth2/token"
+  ],
+  "oauth2": {
+    "client_id": "344748236888-a7a88kjeneok3lb56umhfe2ddv855k6r.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.profile",
+      "https://www.googleapis.com/auth/userinfo.email"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.google.com/robots.txt*"
+      ],
+      "js": [
+        "js/oauth2/oauth2_inject.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "match_about_blank": true,
+      "js": [
+        "app/js/scripterQuery.js",
+        "app/js/juntas.js",
+        "app/sites/yt.js"
+      ],
+      "css": [
+        "app/css/juntas.css"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

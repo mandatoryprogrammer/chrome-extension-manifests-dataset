@@ -1,0 +1,43 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Nova",
+  "description": "Customize your browser",
+  "version": "0.4.0",
+  "manifest_version": 2,
+  "permissions": [
+    "storage",
+    "contextMenus",
+    "management",
+    "history",
+    "tabs",
+    "chrome://favicon/*"
+  ],
+  "browser_action": {
+    "default_title": "Nova",
+    "default_popup": "popup.html",
+    "default_icon": "icon.png"
+  },
+  "chrome_url_overrides": {
+    "newtab": "tab.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "icons": {
+    "384": "icon.png"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "page.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

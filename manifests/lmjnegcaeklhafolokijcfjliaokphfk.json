@@ -1,0 +1,76 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Video DownloadHelper",
+  "default_locale": "en_US",
+  "version": "7.3.9.0",
+  "author": "Michel Gutierrez",
+  "description": "Download Videos from the Web",
+  "background": {
+    "scripts": [
+      "background/main.js"
+    ],
+    "persistent": true
+  },
+  "icons": {
+    "32": "content/images/icon-32.png",
+    "40": "content/images/icon-40.png",
+    "48": "content/images/icon-48.png",
+    "128": "content/images/icon-128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "40": "content/images/icon-40.png"
+    },
+    "default_title": "Video DownloadHelper",
+    "default_popup": "content/popup.html?panel=main"
+  },
+  "options_ui": {
+    "page": "content/settings.html?panel=settings",
+    "open_in_tab": true
+  },
+  "commands": {
+    "default-action": {
+      "suggested_key": {
+        "default": "Alt+Down",
+        "mac": "Ctrl+Shift+Down"
+      },
+      "description": "Execute default action"
+    },
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+Up",
+        "mac": "Ctrl+Shift+Up"
+      }
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.downloadhelper.net/*"
+      ],
+      "js": [
+        "content/dwhelper-script.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "contextMenus",
+    "nativeMessaging",
+    "<all_urls>",
+    "webRequest",
+    "webRequestBlocking",
+    "downloads",
+    "clipboardWrite",
+    "webNavigation",
+    "notifications",
+    "storage",
+    "cookies",
+    "contextMenus",
+    "proxy"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqm/Cdcx4ikjVJbadUGpwrgJXdkc6Is8smuMiuAQbzgOg0cETVxuAY55UxgCxsh3lu4Os0RFK11bMBhu79Jbwv8tyml6mFGLLncLU2dFPZwnZWnIt5U+KC+uOvjryOacIPLxS/PeF2sXScNd0QJg/wTyl5WIizFtbcM3ZmFDFsj39FuUoH/OhO1Ux1/4Xn6dbSRb5F6qgkS2CU9ptTPQz0NJNaEmbL7vnWQkl2C8N4SjlDpRf/lC5r72Ow16hmbNmCGRhbxjPF0Dm+EO2uyF6dBw4n9V8BjBXQ7AdL5J3k4dXJk/oIOD2GQJsGyHK6TobNPPjy6W7bpPBtSfesIXS+wIDAQAB"
+}

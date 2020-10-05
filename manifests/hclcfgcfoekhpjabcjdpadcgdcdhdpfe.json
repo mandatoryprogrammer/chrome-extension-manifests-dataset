@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Spiderium Inspector",
+  "description": "Spiderium Inspector component for browser inspect element and interaction",
+  "version": "0.0.4",
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "background": {
+    "scripts": [
+      "./src/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>",
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "./src/locator/tree-builder.js",
+        "./src/locator/classifier.js",
+        "./src/locator/xpath-locator.js",
+        "./src/locator/scanner.js",
+        "./src/content.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "browser_action": {
+    "default_icon": "assets/icon-stop.png"
+  },
+  "icons": {
+    "16": "assets/logo-16.png",
+    "32": "assets/logo-32.png",
+    "48": "assets/logo-48.png",
+    "128": "assets/logo-128.png"
+  },
+  "permissions": [
+    "<all_urls>",
+    "webNavigation",
+    "nativeMessaging"
+  ]
+}

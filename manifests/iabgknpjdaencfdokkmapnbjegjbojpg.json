@@ -1,0 +1,67 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "PriceWaiter",
+  "short_name": "PriceWaiter",
+  "version": "1.5.4",
+  "manifest_version": 2,
+  "minimum_chrome_version": "49",
+  "description": "We negotiate for you.",
+  "author": "PriceWaiter, LLC",
+  "permissions": [
+    "tabs",
+    "<all_urls>",
+    "storage"
+  ],
+  "web_accessible_resources": [
+    "assets/images/*.png",
+    "assets/images/*.svg",
+    "assets/pages/*.html"
+  ],
+  "icons": {
+    "16": "assets/images/pw16.png",
+    "48": "assets/images/pw48.png",
+    "64": "assets/images/pw64.png",
+    "128": "assets/images/pw128.png"
+  },
+  "background": {
+    "scripts": [
+      "lib/browser-polyfill.js",
+      "scripts/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "lib/browser-polyfill.js",
+        "lib/jquery-3.4.1.js",
+        "scripts/all.js"
+      ],
+      "css": [
+        "assets/styles/inject.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://market.pricewaiter.com/*",
+        "https://market-staging.pricewaiter.com/*",
+        "https://pwmkt-bmck.ngrok.io/*",
+        "https://pw-estes-market.ngrok.io/*",
+        "https://pw-market-bain.ngrok.io/*",
+        "http://localhost:9020/*",
+        "http://localhost:10000/*",
+        "http://localhost/*"
+      ],
+      "js": [
+        "lib/browser-polyfill.js",
+        "lib/jquery-3.4.1.js",
+        "scripts/pricewaiter.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

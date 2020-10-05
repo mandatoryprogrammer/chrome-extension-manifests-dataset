@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "MLBoxcard",
+  "description": "Gives daily boxscores for MLB games in a formatted toolbar for anypage.",
+  "version": "1.0",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_title": "MLBoxcard"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*"
+      ],
+      "exclude_matches": [
+        "https://*.google.com/*",
+        "https://*.reddit.com/*",
+        "https://*.youtube.com/*"
+      ],
+      "js": [
+        "toolbar.js",
+        "statsapi.js"
+      ],
+      "css": [
+        "toolbar.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>",
+    "background"
+  ],
+  "manifest_version": 2
+}

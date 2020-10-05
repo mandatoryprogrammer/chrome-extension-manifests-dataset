@@ -1,0 +1,86 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Dark Theme Menu",
+  "description": "a dark theme menu extension",
+  "version": "1.0.3",
+  "manifest_version": 2,
+  "icons": {
+    "48": "assets/icons/icon_48.png",
+    "128": "assets/icons/icon_128.png"
+  },
+  "browser_action": {
+    "default_title": "Dark Theme",
+    "default_popup": "popup/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "background/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.google.com/search?dt=*"
+      ],
+      "css": [
+        "content-script/apps/search/style.css"
+      ],
+      "js": [
+        "content-script/apps/search/index.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://*.youtube.com/results?dt=*",
+        "https://*.youtube.com/?dt=*"
+      ],
+      "css": [
+        "content-script/apps/youtube/style.css"
+      ],
+      "js": [
+        "content-script/apps/youtube/index.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://*.google.com/mail/mu/mp/*mui=bt_mail*"
+      ],
+      "css": [
+        "content-script/apps/gmail/style.css"
+      ],
+      "js": [
+        "content-script/apps/gmail/index.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "contextMenus",
+    "identity",
+    "webRequest",
+    "storage",
+    "notifications",
+    "webRequestBlocking"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://apis.google.com/_/scs/apps-static/_/js/ https://apis.google.com/js/api.js https://apis.google.com https://www.googleapis.com https://notifications.google.com/ https://www.google.com https://*.firebaseio.com https://www.googleapis.com/youtube/v3/videos; object-src 'self'",
+  "oauth2": {
+    "client_id": "213033420751-4pabbc54gn36fbddmqskgjb3lcfusg67.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/calendar",
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/userinfo.profile",
+      "https://mail.google.com/",
+      "https://www.googleapis.com/auth/gmail.labels",
+      "https://www.googleapis.com/auth/gmail.readonly",
+      "https://www.googleapis.com/auth/youtube.readonly"
+    ]
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAk2Pc1h2QD9FQPiEd4lHYcau0zKKsObGuoPNojgTjVyyj/TqYVQ1wYOhUdyetQfozFCB/N74Ygf85XP+t4LJSZeWdBch+1KmnvZAWn50cYBMfy0EQARP8iAzIdr2qd527t8I4QTVAqEDCr5UH2Ii0ZItsfexwKiegDemyuMVSn1c5nCmQFZLMAxEkhuPKvpmm5sVwIzzsXH5SBb/hHyj0z0giJRF5DeyraGNlG7p4u4rlJSmunt4cFQlJPRRxeLjOqmzXUl+j31dsnkwYkKaKhZAjSNIClbriAm06FkLl6gk6X9Hsm6/Eiw+ZvE352AwxjsORkJhyWfxt/wrrIbirUQIDAQAB"
+}

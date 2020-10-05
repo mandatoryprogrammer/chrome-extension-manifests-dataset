@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "WordParty",
+  "description": "WordParty plugin for Chrome.",
+  "version": "1.0.96",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "web_accessible_resources": [
+    "resources/*.woff"
+  ],
+  "background": {
+    "scripts": [
+      "eventPage.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ],
+  "api_host": "https://www.word-party.com",
+  "permissions": [
+    "tabs",
+    "identity",
+    "storage",
+    "activeTab",
+    "http://www.word-party.com/api/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://localhost/*",
+      "*://www.word-party.com/*"
+    ]
+  }
+}

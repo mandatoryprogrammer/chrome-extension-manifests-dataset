@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "TrueAutomation Visual Test Recorder Helper",
+  "short_name": "TrueAutomation.IO Recorder",
+  "description": "This extension is used to support and help Visual Test Recording process in TrueAutomation.io",
+  "version": "1.0.26",
+  "browser_action": {
+    "default_icon": "icon.png"
+  },
+  "permissions": [
+    "nativeMessaging",
+    "debugger",
+    "tabs",
+    "activeTab",
+    "<all_urls>"
+  ],
+  "icons": {
+    "16": "icon-small.png",
+    "128": "icon.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content-script.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "externally_connectable": {
+    "matches": [
+      "*://*.trueautomation.io/*",
+      "http://localhost:3000/*"
+    ]
+  }
+}

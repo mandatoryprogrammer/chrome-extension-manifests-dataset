@@ -1,0 +1,86 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "GIFUR - Send GIFs for Facebook Messenger",
+  "short_name": "GIFUR",
+  "author": "redphx",
+  "description": "Send your own animated GIFs and images on Facebook and Facebook Messenger",
+  "version": "1.1.6",
+  "manifest_version": 2,
+  "icons": {
+    "16": "img/icon-16.png",
+    "48": "img/icon-48.png",
+    "128": "img/icon-128.png"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "options_page": "manage.html",
+  "minimum_chrome_version": "31.0",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.facebook.com/*"
+      ],
+      "run_at": "document_start",
+      "css": [
+        "css/facebook.css"
+      ],
+      "js": [
+        "js/libs/requirejs/require.js",
+        "js/libs/require-cs.js",
+        "js/content-scripts/facebook-cs.config.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.messenger.com/*"
+      ],
+      "run_at": "document_start",
+      "css": [
+        "css/facebook.css"
+      ],
+      "js": [
+        "js/libs/requirejs/require.js",
+        "js/libs/require-cs.js",
+        "js/content-scripts/messenger-cs.config.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.imgur.com/a/*"
+      ],
+      "run_at": "document_start",
+      "css": [
+        "css/imgur.css"
+      ],
+      "js": [
+        "js/libs/requirejs/require.js",
+        "js/libs/require-cs.js",
+        "js/content-scripts/imgur-cs.config.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "img/*",
+    "js/*",
+    "css/*"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "permissions": [
+    "storage",
+    "cookies",
+    "contextMenus",
+    "webRequest",
+    "webRequestBlocking",
+    "notifications",
+    "*://*.facebook.com/*",
+    "*://*.messenger.com/*",
+    "*://*.imgur.com/*",
+    "*://*.gifur.me/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.gifur.me/*"
+    ]
+  }
+}

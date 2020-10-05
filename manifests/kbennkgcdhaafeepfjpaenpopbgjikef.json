@@ -1,0 +1,73 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Blur",
+  "version": "7.8.2431",
+  "description": "Protect your Passwords, Payments, and Privacy.",
+  "browser_action": {
+    "default_icon": "images/Icon.png",
+    "default_title": "Blur v7.8.2431"
+  },
+  "manifest_version": 2,
+  "web_accessible_resources": [
+    "panel.html",
+    "pages/images/dnt-field-icon.png"
+  ],
+  "icons": {
+    "16": "images/Icon-16.png",
+    "48": "images/Icon-48.png",
+    "128": "images/Icon-128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "almond-min.js",
+        "jquery-min.js",
+        "underscore-min.js",
+        "backbone-min.js",
+        "common.js",
+        "common-content.js",
+        "content.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "iframe_content.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "scripts": [
+      "socket-io-min.js",
+      "almond-min.js",
+      "jquery-min.js",
+      "underscore-min.js",
+      "api-background.js",
+      "cognito-min.js",
+      "common.js",
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "tabs",
+    "cookies",
+    "<all_urls>",
+    "contextMenus",
+    "clipboardWrite",
+    "storage",
+    "proxy"
+  ]
+}

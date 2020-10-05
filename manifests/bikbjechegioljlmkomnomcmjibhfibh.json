@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "FBlocker and Timer",
+  "description": "Transform your distracted time on Facebook into focused time. Note: \"FB\" is trademark of Facebook Inc.",
+  "version": "1.0",
+  "icons": {
+    "16": "icons/fblocker_logo_16.png",
+    "48": "icons/fblocker_logo_48_thic.png",
+    "128": "icons/fblocker_logo_128_thic.png"
+  },
+  "background": {
+    "css": [],
+    "scripts": [
+      "background.js",
+      "onFacebookListener.js",
+      "contextMenuBackground.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/fblocker_logo_16.png",
+      "48": "icons/fblocker_logo_48_thic.png",
+      "128": "icons/fblocker_logo_128_thic.png"
+    },
+    "default_title": "Selective Blocker and Timer for Facebook™"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.facebook.com/*",
+        "*://*.messenger.com/*"
+      ],
+      "css": [
+        "thirdParty/jquery-ui-1.12.1.custom/jquery-ui.css",
+        "blockingCSS/chatContent.css",
+        "blockingCSS/notificationsContent.css",
+        "blockingCSS/newsfeedContent.css"
+      ],
+      "js": [
+        "thirdParty/jquery-3.4.1.min.js",
+        "thirdParty/jquery-ui-1.12.1.custom/jquery-ui.js",
+        "onFacebook.js",
+        "onFacebookAlert.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "storage",
+    "declarativeContent",
+    "contextMenus",
+    "idle",
+    "*://*.facebook.com/*",
+    "*://*.facebook.com/",
+    "*://*.messenger.com/*"
+  ]
+}

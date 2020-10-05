@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "author": "Tools4ever",
+  "manifest_version": 2,
+  "name": "HelloID Extension",
+  "version": "4.4.5.0",
+  "description": "HelloID extension",
+  "short_name": "HelloID",
+  "homepage_url": "https://www.tools4ever.com",
+  "minimum_chrome_version": "18.0.1025.142",
+  "browser_action": {
+    "default_icon": {
+      "16": "logo16.png",
+      "48": "logo48.png",
+      "128": "logo128.png"
+    },
+    "default_title": "HelloID",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "logo16.png",
+    "48": "logo48.png",
+    "128": "logo128.png"
+  },
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "http://*/",
+    "https://*/",
+    "background",
+    "storage",
+    "cookies"
+  ],
+  "background": {
+    "scripts": [
+      "Framework/js/sso.min.js",
+      "Background/Ajax.js",
+      "Background/Process.js"
+    ],
+    "persistent": true
+  },
+  "web_accessible_resources": [
+    "Framework/css/SSO.css"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*/*"
+      ],
+      "css": [
+        "Framework/css/SSO.css"
+      ],
+      "js": [
+        "Framework/js/sso.min.js",
+        "Content/ChromeManager.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "options_page": "options.html",
+  "offline_enabled": true,
+  "incognito": "split"
+}

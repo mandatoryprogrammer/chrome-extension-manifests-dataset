@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Salesforce",
+  "short_name": "Salesforce",
+  "description": "Work with Salesforce records directly in your email application with the Gmail integration.",
+  "incognito": "split",
+  "icons": {
+    "16": "common/img/cloud_logo_16.png",
+    "48": "common/img/cloud_logo_48.png",
+    "128": "common/img/cloud_logo_128.png"
+  },
+  "browser_action": {
+    "default_icon": "common/img/cloud_logo_256.png"
+  },
+  "background": {
+    "scripts": [
+      "common/js/background.bundle.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "gmail/js/bootstrap.bundle.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://calendar.google.com/*"
+      ],
+      "js": [
+        "gcal/js/bootstrap.bundle.js"
+      ]
+    }
+  ],
+  "options_ui": {
+    "page": "options/html/options.html",
+    "chrome_style": true
+  },
+  "permissions": [
+    "management",
+    "storage",
+    "webRequest",
+    "https://mail.google.com/",
+    "https://calendar.google.com/",
+    "webRequestBlocking",
+    "https://test.salesforce.com/",
+    "https://login.salesforce.com/",
+    "*://*.googleusercontent.com/*",
+    "*://*.salesforceiq.com/*"
+  ],
+  "web_accessible_resources": [
+    "common/fonts/SalesforceSans-Regular.woff2",
+    "common/fonts/SalesforceSans-Regular.woff",
+    "common/img/SFLogo.svg",
+    "common/img/chevronright.svg",
+    "gmail/js/embedded.bundle.js",
+    "gmail/css/embedded.css",
+    "gcal/js/embedded.bundle.js",
+    "gcal/css/embedded.css"
+  ],
+  "version": "2.228.0"
+}

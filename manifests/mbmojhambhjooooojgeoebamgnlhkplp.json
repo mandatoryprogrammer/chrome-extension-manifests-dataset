@@ -1,0 +1,67 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Ratsit Find",
+  "short_name": "Ratsit Find - Din genväg till Ratsit",
+  "author": "Ratsit AB",
+  "version": "1.0.2",
+  "manifest_version": 2,
+  "description": "Ratsit Find hittar organisationsnummer på alla sidor och ger dig en direktlänk till företagets rapport på ratsit.se",
+  "homepage_url": "https://www.ratsit.se/",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "sv",
+  "background": {
+    "scripts": [
+      "src/bg/background.js",
+      "src/inject/inject.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_title": "Sök på Ratsit",
+    "default_icon": "icons/icon48.png",
+    "default_popup": "src/browser_action/browser_action.html"
+  },
+  "permissions": [
+    "contextMenus",
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.ratsit.se/*"
+      ],
+      "css": [
+        "src/inject/inject.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.se/*",
+        "*://*.nu/*",
+        "*://*.klarna.com/*",
+        "*://*.salesforce.com/*",
+        "*://*.limego.com/*",
+        "*://*.limego.de/*",
+        "*://*.wikipedia.com/*",
+        "*://*.wikipedia.se/*",
+        "*://*.wikipedia.org/*",
+        "*://*.farm/*",
+        "*://*.google.se/*",
+        "*://*.google.com/*"
+      ],
+      "exclude_matches": [
+        "*://*.ratsit.se/*"
+      ],
+      "js": [
+        "js/jquery/jquery.js",
+        "src/inject/inject.js"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Demandware Log Tracer",
+  "description": "Trace Demandware Logs",
+  "version": "5.0.5",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "http://*/",
+    "https://*/"
+  ],
+  "background": {
+    "scripts": [
+      "/bundles/background.js"
+    ]
+  },
+  "page_action": {
+    "default_icon": {
+      "19": "/img/icons/icon19.png",
+      "38": "/img/icons/icon38.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "/bundles/vendor-cs.js",
+        "/bundles/contentscript.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "icons": {
+    "48": "/img/icons/icon48.png",
+    "128": "/img/icons/icon128.png"
+  },
+  "options_page": "/pages/options/build/index.html",
+  "devtools_page": "/pages/devtools/build/panel.html",
+  "content_security_policy": "script-src 'self' 'sha256-WTBvxfH4KNe4lwprPdiT4hG1dZF0LHlFQCAJ+2y6iAg=' 'sha256-uLNNDmEm4LVqn0731EGJsgKLvRVbA7z4lhRMT1hIKm8='"
+}

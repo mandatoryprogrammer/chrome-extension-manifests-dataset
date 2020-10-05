@@ -1,0 +1,127 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_AppName__",
+  "description": "__MSG_Description__",
+  "version": "2.0.2",
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "./background/background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_popup": "./popup/popup.html",
+    "default_icon": {
+      "16": "icon/icon16.png",
+      "48": "icon/icon48.png",
+      "128": "icon/icon128.png"
+    }
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+Q"
+      }
+    },
+    "change_language_setting": {
+      "description": "__MSG_ChangeLanguageSetting__"
+    },
+    "translate_selected": {
+      "description": "__MSG_TranslateSelectedText__"
+    },
+    "fix_result_frame": {
+      "suggested_key": {
+        "default": "Alt+X"
+      },
+      "description": "__MSG_FixResultFrame__"
+    },
+    "close_result_frame": {
+      "suggested_key": {
+        "default": "Alt+C"
+      },
+      "description": "__MSG_CloseResultFrame__"
+    },
+    "exchange_source_target_lang": {
+      "suggested_key": {
+        "default": "Alt+S"
+      },
+      "description": "__MSG_ExchangeSourceAndTargetLanguage__"
+    },
+    "pronounce_selected": {
+      "description": "__MSG_PronounceSelected__"
+    },
+    "pronounce_original": {
+      "description": "__MSG_PronounceOriginal__"
+    },
+    "pronounce_translated": {
+      "description": "__MSG_PronounceTranslated__"
+    },
+    "copy_result": {
+      "description": "__MSG_CopyResult__"
+    },
+    "change_mutual_translate": {
+      "description": "__MSG_MutualTranslation__"
+    },
+    "translate_page": {
+      "description": "__MSG_TranslatePage__"
+    },
+    "cancel_page_translate": {
+      "description": "__MSG_CancelPageTranslate__"
+    }
+  },
+  "web_accessible_resources": [
+    "content/display/style/display.css",
+    "youdao/*",
+    "google/*"
+  ],
+  "icons": {
+    "16": "icon/icon16.png",
+    "48": "icon/icon48.png",
+    "128": "icon/icon128.png"
+  },
+  "options_ui": {
+    "page": "./options/options.html",
+    "open_in_tab": true,
+    "chrome_style": false
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "manifest_version": 2,
+  "permissions": [
+    "notifications",
+    "contextMenus",
+    "storage",
+    "cookies",
+    "tabs",
+    "activeTab",
+    "*://fanyi.qq.com/*",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "./content/display/display.js",
+        "./content/pdf.js"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "./content/select/select.js"
+      ],
+      "css": [
+        "./content/select/select.css"
+      ],
+      "all_frames": true
+    }
+  ],
+  "minimum_chrome_version": "55",
+  "homepage_url": "https://github.com/EdgeTranslate/EdgeTranslate/wiki"
+}

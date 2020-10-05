@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "description": "Used with ONE, this Extension enables you to configure both listening and orchestrations on your web touchpoints.",
+  "version": "37.0.2",
+  "name": "ONE Extension",
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "minimum_chrome_version": "49",
+  "icons": {
+    "16": "icon-16.png",
+    "48": "icon-48.png",
+    "128": "icon-128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "icon-bw-16.png",
+      "24": "icon-bw-24.png",
+      "32": "icon-bw-32.png"
+    },
+    "default_popup": "popup.html",
+    "default_title": "Select a Domain"
+  },
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "contentscript.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": false,
+    "open_in_tab": true
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "cookies",
+    "https://*.thunderhead.com/",
+    "https://*.thxcloud.com/"
+  ]
+}

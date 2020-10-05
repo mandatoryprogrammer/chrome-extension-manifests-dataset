@@ -1,0 +1,71 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "UCR MFA Helper",
+  "version": "2.1.0",
+  "description": "A chrome extension for auto-filling UCR MFA",
+  "icons": {
+    "16": "img/icon.png",
+    "48": "img/icon.png",
+    "128": "img/icon.png"
+  },
+  "browser_action": {
+    "default_icon": "img/icon.png",
+    "default_title": "UCR MFA",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "js/jquery-3.4.1.min.js",
+      "js/daemon.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://api-24ed243a.duosecurity.com/frame/prompt*"
+      ],
+      "js": [
+        "js/handler.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://auth.ucr.edu/cas/login?service=*"
+      ],
+      "js": [
+        "js/login.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://myaccount.ucr.edu/app*"
+      ],
+      "js": [
+        "js/jquery-3.4.1.min.js",
+        "js/passcode_handler/getPasscodes.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "webRequest",
+    "storage",
+    "https://auth.ucr.edu/cas/login?*",
+    "https://myaccount.ucr.edu/app*",
+    "https://api-24ed243a.duosecurity.com/frame/web/v1/auth?*",
+    "notifications"
+  ],
+  "web_accessible_resources": [
+    "js/inject.js",
+    "js/login_inject.js",
+    "js/duo_inject.js"
+  ],
+  "homepage_url": "https://github.com/mingjun97/ucr_mfa_crx",
+  "devtools_page": "devtools.html"
+}

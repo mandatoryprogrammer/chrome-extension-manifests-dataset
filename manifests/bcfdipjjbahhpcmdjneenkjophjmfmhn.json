@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Zoom to Fit",
+  "version": "1.2.0",
+  "description": "スクリーンのサイズに合わせてブラウザのズーム倍率を自動的に変更します。",
+  "minimum_chrome_version": "42",
+  "permissions": [
+    "tabs",
+    "storage",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "icons": {
+    "128": "icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "zoom.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "size_checker.js"
+      ]
+    }
+  ],
+  "options_page": "options.html",
+  "commands": {
+    "zoom_to_fit": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+0",
+        "mac": "Command+Shift+0"
+      },
+      "description": "Zoom to Fit"
+    }
+  }
+}

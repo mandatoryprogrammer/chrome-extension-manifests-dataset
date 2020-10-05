@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Detect Zero-Width Characters",
+  "version": "0.0.3",
+  "manifest_version": 2,
+  "description": "Detects zero-width characters, highlights the characters and containing DOM element, and allows sanitization and copying of text.",
+  "homepage_url": "https://github.com/roymckenzie/detect-zero-width-characters-chrome-extension",
+  "permissions": [
+    "contextMenus",
+    "clipboardWrite"
+  ],
+  "background": {
+    "scripts": [
+      "src/constants.js",
+      "src/utils.js",
+      "src/background/background.js"
+    ]
+  },
+  "icons": {
+    "16": "src/icon/16x16.png",
+    "48": "src/icon/48x48.png",
+    "128": "src/icon/128x128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "src/inject/inject.css"
+      ]
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "src/constants.js",
+        "src/inject/inject.js"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "manifest_version": 2,
+  "name": "__MSG_appName__",
+  "description": "__MSG_appDesc__",
+  "default_locale": "en",
+  "version": "2.3.0",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAiERutmQk/+wyCTH2cXH0G5HTi2F4Wi9LUgUJlv/onpO/MS1vSU4OIxcu+kwiDJ2dIChPzijOd9L/4kpMo6T+YoI4saYityu/iTuv7aRnQFKKn0iF1F+wWKmqXKLzxuCShUic0QaYLUa+FlMRAHN37l4Cmqm38BL/2iNZYtkMqk1uldYzjV3+wbtuvj9/rKKFK3R69Jms94OUmIw8VFtSLSWNGcKLDP++vG31dVV+W6oPeFtO2T3jtaw7k3Ea5BOqi6m0aVUb3AlgGue8O/EVeUOv20hpO35aJxUAsXstw+VdP2iMbhlZORKyYWQqjaZ4dpXVOdmWVeqHft3pRqseKwIDAQAB",
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "permissions": [
+    "desktopCapture",
+    "storage",
+    "*://*/*",
+    "tabs",
+    "notifications",
+    "cookies",
+    "downloads",
+    "unlimitedStorage"
+  ],
+  "icons": {
+    "128": "flat_clapboard_128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "128": "flat_clapboard_128.png"
+    },
+    "default_popup": "index.html",
+    "default_title": "StoryXpress Screen Recorder"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "chromeos": "Alt+C",
+        "linux": "Alt+C",
+        "mac": "Alt+C",
+        "windows": "Alt+C"
+      }
+    },
+    "cancel-recording": {
+      "suggested_key": {
+        "chromeos": "Alt+X",
+        "linux": "Alt+X",
+        "mac": "Alt+X",
+        "windows": "Alt+X"
+      },
+      "description": "Cancel a Recording"
+    }
+  },
+  "background": {
+    "scripts": [
+      "background.bundle.js",
+      "socket.io.js"
+    ],
+    "persistent": false
+  },
+  "web_accessible_resources": [
+    "cameraOnly.html",
+    "cameraOnly.bundle.js",
+    "camBox.html",
+    "camBox.bundle.js",
+    "timerBox.html",
+    "timerBox.bundle.js",
+    "countDown.html",
+    "countDown.bundle.js",
+    "tour.html",
+    "tour.bundle.js",
+    "permission.html",
+    "permission.bundle.js",
+    "rejected-permissions.html",
+    "permissionTab.bundle.js",
+    "error-modal.html",
+    "toolScript.bundle.js",
+    "assets/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://*.storyxpress.co/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*"
+      ],
+      "js": [
+        "inboxsdk.js",
+        "gmailScript.bundle.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'"
+}

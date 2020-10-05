@@ -1,0 +1,70 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Publicate Chrome extension",
+  "version": "2.4.0",
+  "manifest_version": 2,
+  "description": "Publicate - Create Beautiful Email Newsletters and Web Roundups in minutes, from content you find online.",
+  "homepage_url": "https://publicate.it",
+  "icons": {
+    "16": "icons/publicate_16.png",
+    "48": "icons/publicate_48.png",
+    "128": "icons/publicate_128.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/publicate_48.png",
+    "default_title": "Publicate"
+  },
+  "background": {
+    "scripts": [
+      "src/jquery-3.4.1.min.js",
+      "dist/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://mail.google.com/*"
+      ],
+      "js": [
+        "src/extensionInjector_gmail.js"
+      ],
+      "css": [
+        "css/gmail.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://outlook.live.com/*",
+        "*://outlook.office.com/*",
+        "*://outlook.office365.com/mail",
+        "*://outlook.office365.com/mail/*"
+      ],
+      "css": [
+        "css/gmail.css"
+      ],
+      "js": [
+        "src/outlook.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "src/jquery-3.4.1.min.js",
+        "src/extensionInjector_save.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "dist/extension_gmail.js"
+  ],
+  "permissions": [
+    "https://*/*",
+    "storage"
+  ]
+}

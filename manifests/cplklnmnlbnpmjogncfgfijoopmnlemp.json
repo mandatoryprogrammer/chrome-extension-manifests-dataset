@@ -1,0 +1,87 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "content_scripts": [
+    {
+      "js": [
+        "content_scripts/bookmarks_handler.js",
+        "content_scripts/si_listener.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file://*"
+      ],
+      "run_at": "document_start",
+      "all_frames": false
+    },
+    {
+      "js": [
+        "utils.js",
+        "content_scripts/connector.js",
+        "content_scripts/recorder.js",
+        "content_scripts/player.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file://*"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "description": "Automate your web browser. Record and replay repetitious work",
+  "name": "iMacros for Chrome",
+  "version": "10.1.0",
+  "minimum_chrome_version": "51",
+  "homepage_url": "http://imacros.net",
+  "browser_action": {
+    "default_title": "iMacros for Chrome",
+    "default_icon": {
+      "19": "skin/logo19.png",
+      "38": "skin/logo38.png"
+    }
+  },
+  "background": {
+    "page": "bg.html"
+  },
+  "options_page": "options.html",
+  "permissions": [
+    "tabs",
+    "bookmarks",
+    "proxy",
+    "cookies",
+    "pageCapture",
+    "webNavigation",
+    "notifications",
+    "webRequest",
+    "webRequestBlocking",
+    "nativeMessaging",
+    "downloads",
+    "contextMenus",
+    "debugger",
+    "<all_urls>"
+  ],
+  "icons": {
+    "16": "skin/logo16.png",
+    "48": "skin/logo48.png",
+    "128": "skin/logo128.png"
+  },
+  "web_accessible_resources": [
+    "skin/logo24.png"
+  ],
+  "sandbox": {
+    "pages": [
+      "sandbox.html"
+    ]
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+8",
+        "mac": "Command+8"
+      }
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "QR-it",
+  "description": "Generate a QR code for every reddit page. Good for transferring a page to mobile.",
+  "icons": {
+    "38": "icon_38.png"
+  },
+  "version": "1.0",
+  "permissions": [
+    "http://www.reddit.com/",
+    "https://www.reddit.com/",
+    "https://api.qrserver.com/",
+    "tabs"
+  ],
+  "page_action": {
+    "default_title": "QR-it",
+    "default_icon": "icon_38.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.reddit.com/*",
+        "https://*.reddit.com/*"
+      ],
+      "include_globs": [
+        "*/r/*/comments/*"
+      ],
+      "js": [
+        "insert_qr.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

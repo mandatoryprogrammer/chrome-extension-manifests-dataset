@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Evil Jenkins",
+  "version": "1.0",
+  "description": "This extension helps identify buggy specs in recent Jenkins build failures",
+  "icons": {
+    "128": "images/evil-jenkins.png"
+  },
+  "background": {
+    "scripts": [
+      "app/background.js"
+    ],
+    "persistent": false
+  },
+  "page_action": {
+    "default_icon": {
+      "48": "images/evil-jenkins.png"
+    },
+    "default_title": "Failing Tests"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.com/view/*/job/*/",
+        "https://*.com/job/*/"
+      ],
+      "include_globs": [
+        "*https://jenkins.*"
+      ],
+      "exclude_globs": [
+        "https://*.com/view/*/job/*/*/",
+        "*/HTML_Report/*"
+      ],
+      "js": [
+        "app/content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "author": "Bryan Finlayson",
+  "offline_enabled": false,
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "debugger",
+    "storage",
+    "declarativeContent"
+  ]
+}

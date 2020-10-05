@@ -1,0 +1,43 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Porter Plug",
+  "short_name": "Porter Plug",
+  "version": "1.0.2",
+  "minimum_chrome_version": "28",
+  "description": "Power up your Github experience with embedded repo news and charts from Porter.io",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "homepage_url": "https://porter.io/plug/",
+  "background": {
+    "scripts": [
+      "scripts/chrome_bg.js"
+    ]
+  },
+  "icons": {
+    "128": "images/porter-logo128.png",
+    "64": "images/porter-logo64.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://github.com/*"
+      ],
+      "js": [
+        "scripts/chrome_fg.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "externally_connectable": {
+    "matches": [
+      "https://porter.io/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "scripts/jquery.min.js"
+  ],
+  "permissions": [
+    "https://github.com/*",
+    "https://porter.io/*"
+  ]
+}

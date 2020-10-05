@@ -1,0 +1,42 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "VidReader",
+  "short_name": "VidReader",
+  "version": "0.0.3",
+  "manifest_version": 2,
+  "description": "The very first smart reader for videos. Now you can read, search, and locate a segment within any videos in seconds.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "VidReader",
+    "default_popup": "src/browser_action/browser_action.html"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "*://*.youtube.com/*",
+    "*://*.vidreader.com/*"
+  ],
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": [
+        "*://*.youtube.com/*"
+      ],
+      "js": [
+        "src/inject/content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

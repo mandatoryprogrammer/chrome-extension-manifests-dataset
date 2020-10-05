@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Audio Focus",
+  "version": "0.3.2",
+  "description": "Focus on audio from the current tab by blurring distracting sounds from other tabs",
+  "icons": {
+    "16": "icons/icon_main_16x16.png",
+    "48": "icons/icon_main_48x48.png",
+    "128": "icons/icon_main_128x128.png",
+    "256": "icons/icon_main_256x256.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_title": "Audio Focus",
+    "default_icon": {
+      "16": "icons/icon_browser_action_active_16x16.png",
+      "48": "icons/icon_browser_action_active_48x48.png",
+      "128": "icons/icon_browser_action_active_128x128.png",
+      "256": "icons/icon_browser_action_active_256x256.png"
+    }
+  },
+  "options_page": "options/options.html",
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "contentScript.js"
+      ]
+    }
+  ],
+  "commands": {
+    "toggle-audiofocus": {
+      "suggested_key": {
+        "default": "Alt+A",
+        "mac": "Alt+A"
+      },
+      "description": "Toggle audio focus"
+    }
+  },
+  "minimum_chrome_version": "32.0.0",
+  "web_accessible_resources": [
+    "pageScript.js"
+  ]
+}

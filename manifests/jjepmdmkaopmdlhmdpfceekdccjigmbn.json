@@ -1,0 +1,96 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Always On Chrome Extension",
+  "version": "0.2.12.1",
+  "description": "The AOP chrome extension provides tools to capture information from various 3rd party websites and store that data within AOP.",
+  "icons": {
+    "16": "aop-16.png",
+    "32": "aop-32.png",
+    "48": "aop-48.png",
+    "128": "aop-128.png"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "activeTab",
+    "cookies",
+    "http://*.aop.bradc.arkitech.net/*",
+    "http://*.aop.sutter.arkitech.net/*",
+    "http://*.sandbox.retailtxt.com/*",
+    "https://*.aop.retailtxt.com/*",
+    "https://*.epayworldwide.com/*",
+    "http://*.aop.staging.arkideas.com/*"
+  ],
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "comms.js",
+      "aes.js",
+      "cipher-core-min.js",
+      "underscore-min.js",
+      "xor.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.sandbox.retailtxt.com/*",
+        "https://*.aop.retailtxt.com/*",
+        "http://*.aop.bradc.arkitech.net/*",
+        "http://*.aop.staging.arkideas.com/*",
+        "http://*.aop.sutter.arkitech.net/*"
+      ],
+      "js": [
+        "jquery.min.js",
+        "aop.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://*.epayworldwide.com/*",
+        "https://*.epayworldwide.com/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "jquery.min.js",
+        "epay.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.boostmobilesales.com/*",
+        "https://myaccount.boostmobile.com/*",
+        "https://apps.boostmobile.com/*",
+        "http://www.boostmobilesales.com/*",
+        "http://myaccount.boostmobile.com/*",
+        "http://apps.boostmobile.com/*",
+        "https://sales.prepaid.sprint.com/*",
+        "https://sales2.prepaid.sprint.com/*",
+        "http://sales2.prepaid.sprint.com/*",
+        "http://sales.prepaid.sprint.com/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "jquery.min.js",
+        "boost.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "script.js"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.aop.bradc.arkitech.net/*",
+      "https://*.epayworldwide.com/*",
+      "*://*.sandbox.retailtxt.com/*",
+      "*://*.aop.retailtxt.com/*",
+      "*://*.aop.staging.arkideas.com/*",
+      "*://*.aop.sutter.arkitech.net/*"
+    ]
+  }
+}

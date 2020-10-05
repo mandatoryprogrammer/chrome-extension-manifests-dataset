@@ -1,0 +1,43 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Snappy Cash",
+  "description": "Enhances Bitcoin Cash addresses and Cash Accounts with QR codes for tipping via mobile wallets and Badger Wallet widgets.",
+  "version": "0.1.0",
+  "homepage_url": "https://github.com/sterlingbeason/SnappyCash",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "content_script.bundle.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.bundle.js"
+    ]
+  },
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": "icons/icon.png"
+  },
+  "icons": {
+    "128": "icons/icon.png"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "*://*.bitcoin.com/*"
+  ],
+  "web_accessible_resources": [
+    "badger/*.js",
+    "icons/*.png"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

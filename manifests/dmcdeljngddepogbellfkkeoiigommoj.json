@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Message Protector",
+  "version": "3.4",
+  "manifest_version": 2,
+  "description": "Message Protector (MP)",
+  "icons": {
+    "128": "icons/icon-128.png",
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png"
+  },
+  "homepage_url": "https://mp.isrl.byu.edu",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": "icons/button.png",
+    "default_title": "Message Protector"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "permissions": [
+    "identity",
+    "https://accounts.google.com/*",
+    "https://www.googleapis.com/*",
+    "clipboardRead",
+    "clipboardWrite"
+  ],
+  "web_accessible_resources": [
+    "oauth2/oauth2.html",
+    "icon-48.png"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.google.com/robots.txt*"
+      ],
+      "js": [
+        "oauth2/oauth2_inject.js",
+        "copytoclipboard.js"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

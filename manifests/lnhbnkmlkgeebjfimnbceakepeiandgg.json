@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Ivy Clipper",
+  "version": "3.0",
+  "description": "Clip images from the web and use them in your projects",
+  "permissions": [
+    "tabs",
+    "storage",
+    "contextMenus"
+  ],
+  "background": {
+    "scripts": [
+      "background.bundle.js"
+    ],
+    "persistent": false
+  },
+  "web_accessible_resources": [
+    "ivy-thumbnail.svg",
+    "ivy-smart-sourcing.svg",
+    "clipper-grab-cursor.svg"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "exclude_matches": [
+        "*://*/*.pdf*"
+      ],
+      "css": [
+        "clipperIframe.css"
+      ],
+      "js": [
+        "content.bundle.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "manifest_version": 2,
+  "browser_action": {
+    "default_icon": "icon.png"
+  },
+  "icons": {
+    "128": "icon.png"
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://pro.houzz.com/*",
+      "*://pro.stghouzz.com/*",
+      "*://members.lvh.me/*",
+      "*://members-clipper.ivyco.net/*",
+      "*://members.ivyco.net/*"
+    ]
+  }
+}

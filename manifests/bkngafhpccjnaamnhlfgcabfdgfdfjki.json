@@ -1,0 +1,172 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_application_title__",
+  "description": "__MSG_application_description__",
+  "version": "1.0.1",
+  "default_locale": "en",
+  "permissions": [
+    "storage",
+    "idle",
+    "tabs",
+    "file:///*",
+    "http://*/",
+    "activeTab",
+    "background",
+    "https://*/*",
+    "notifications",
+    "*://*/scripts/*",
+    "*://*.website.com/*",
+    "webNavigation",
+    "identity",
+    "identity.email",
+    "contentSettings",
+    "management",
+    "<all_urls>"
+  ],
+  "optional_permissions": [
+    "nativeMessaging",
+    "history",
+    "privacy"
+  ],
+  "browser_action": {
+    "default_icon": "Images/createaccount_logo_disable1.png",
+    "default_title": "ITL Identity Protector",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "./Images/icon-16.png",
+    "32": "./Images/icon-32.png",
+    "64": "./Images/icon-64.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*",
+        "*://*/scripts/*"
+      ],
+      "js": [
+        "scripts/Lib/jquery.min.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "match_about_blank": true
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*",
+        "*://*/scripts/*"
+      ],
+      "js": [
+        "scripts/Lib/jquery-ui.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "match_about_blank": true
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*"
+      ],
+      "js": [
+        "scripts/Core.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*"
+      ],
+      "js": [
+        "scripts/Constant.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*"
+      ],
+      "js": [
+        "scripts/Service.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*"
+      ],
+      "js": [
+        "scripts/SearchHelper.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "match_about_blank": true
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*"
+      ],
+      "js": [
+        "scripts/detectUser.js"
+      ],
+      "all_frames": false,
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*"
+      ],
+      "js": [
+        "scripts/notify.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "matches": [
+      "file:///scripts*",
+      "http://*/*",
+      "*://*/*",
+      "*://*/scripts/*",
+      "https://*/"
+    ],
+    "scripts": [
+      "scripts/Lib/jquery.min.js",
+      "scripts/Core.js",
+      "scripts/Constant.js",
+      "scripts/Service.js",
+      "scripts/Background.js",
+      "scripts/Background2.js",
+      "scripts/Lib/aes.js",
+      "scripts/CryptoLocal.js",
+      "scripts/SearchHelper.js"
+    ],
+    "persistent": false
+  },
+  "web_accessible_resources": [
+    "/PopupTab.html",
+    "/Images",
+    "/DetectUser.html",
+    "/scripts"
+  ]
+}

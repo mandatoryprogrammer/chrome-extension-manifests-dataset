@@ -1,0 +1,93 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Kaspr - Find Email Addresses",
+  "description": "Find email addresses of your prospect with just one click. Search it by Name, Company, School, Job title...",
+  "version": "0.1.30",
+  "icons": {
+    "16": "assets/imgs/kasprLogoSquare.png",
+    "48": "assets/imgs/kasprLogoSquare.png",
+    "128": "assets/imgs/kasprLogoSquare.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "assets/imgs/kasprLogoSquare.png",
+      "48": "assets/imgs/kasprLogoSquare.png",
+      "128": "assets/imgs/kasprLogoSquare.png"
+    },
+    "default_title": "Kaspr Plugin",
+    "default_popup": "./index.html"
+  },
+  "permissions": [
+    "storage",
+    "cookies",
+    "activeTab",
+    "<all_urls>"
+  ],
+  "manifest_version": 2,
+  "externally_connectable": {
+    "matches": [
+      "http://localhost:3000/*",
+      "https://app.preprod.kaspr.io/*",
+      "https://app.kaspr.io/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.linkedin.com/*",
+        "https://*.kaspr.io/*"
+      ],
+      "css": [
+        "/static/css/content.css",
+        "/static/css/linkedinAutomation.css"
+      ],
+      "js": [
+        "/static/js/0.chunk.js",
+        "/static/js/content.js",
+        "/static/js/linkedinAutomation.js",
+        "/static/js/1.chunk.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "/static/css/dataWidget.css"
+      ],
+      "js": [
+        "/static/js/0.chunk.js",
+        "/static/js/1.chunk.js",
+        "/static/js/dataWidget.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "csrf.js",
+      "background.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "assets/imgs/check.svg",
+    "assets/imgs/close-icon.svg",
+    "assets/imgs/close.png",
+    "assets/imgs/danger-icon.svg",
+    "assets/imgs/kaspr-btn-icon.png",
+    "assets/imgs/verified-icon.svg",
+    "assets/imgs/kaspr_content.png",
+    "assets/imgs/icon-profile.svg",
+    "assets/imgs/noresult-icon.svg",
+    "assets/imgs/salesforce.png",
+    "assets/imgs/hubspot.png",
+    "assets/imgs/copy.png",
+    "assets/imgs/sort-down-solid.svg",
+    "assets/imgs/triangle.svg",
+    "assets/imgs/warning.png",
+    "assets/imgs/closeWhite.png",
+    "assets/imgs/loader.gif"
+  ]
+}

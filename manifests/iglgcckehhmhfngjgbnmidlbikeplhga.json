@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "ClearPlan",
+  "version": "0.0.41",
+  "manifest_version": 2,
+  "description": "Import Data into Clear plan from RDN and other sources with just one click",
+  "icons": {
+    "16": "images/icon-16.png",
+    "128": "images/icon-128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "contextMenus"
+  ],
+  "page_action": {
+    "default_icon": {
+      "19": "images/icon-19.png",
+      "38": "images/icon-38.png"
+    },
+    "default_title": "clearplan",
+    "default_popup": "popup.html"
+  },
+  "omnibox": {
+    "keyword": "clearplan"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.recoverydatabase.net/alpha_rdn/module/default/*",
+        "https://*.recoverydatabase.net/alpha_rdn/module/default/*"
+      ],
+      "css": [
+        "styles/main.css"
+      ],
+      "js": [
+        "scripts/jquery.min.js",
+        "scripts/contentscript.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ]
+}

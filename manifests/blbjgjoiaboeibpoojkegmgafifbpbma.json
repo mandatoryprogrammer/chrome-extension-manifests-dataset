@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "FaindOl - Search everything",
+  "version": "1.3.1",
+  "manifest_version": 2,
+  "description": "Enhance your search, simple, easy",
+  "homepage_url": "http://search.faindol.com/",
+  "icons": {
+    "128": "images/icons/icon128.png",
+    "48": "images/icons/icon48.png"
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "storage",
+    "*://*/*"
+  ],
+  "chrome_settings_overrides": {
+    "search_provider": {
+      "name": "Seekit",
+      "keyword": "seekit.com",
+      "favicon_url": "http://search.faindol.com/favicon.ico",
+      "search_url": "http://search.faindol.com/search.php?q={searchTerms}",
+      "suggest_url": "http://search.faindol.com/suggest.php?query={searchTerms}",
+      "image_url": "http://search.faindol.com/search.php?cat=images&q={searchTerms}",
+      "encoding": "UTF-8",
+      "is_default": true
+    }
+  },
+  "chrome_url_overrides": {
+    "newtab": "html/newtab.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.faindol.com/*",
+        "https://*.seekit.com/*"
+      ],
+      "js": [
+        "js/start.js"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

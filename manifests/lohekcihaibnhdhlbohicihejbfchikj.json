@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "GitHub Searchlite",
+  "short_name": "Git Search",
+  "author": "Piyush Santwani",
+  "version": "0.0.7",
+  "manifest_version": 2,
+  "description": "Search, navigate and download files from any git repository.",
+  "icons": {
+    "16": "icons/github_300.png",
+    "48": "icons/github_300.png",
+    "128": "icons/github_300.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": true
+  },
+  "page_action": {
+    "default_icon": "icons/github_300.png",
+    "default_title": "Github Searchlite"
+  },
+  "permissions": [
+    "tabs",
+    "webNavigation",
+    "storage",
+    "https://github.com/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://github.com/*/*"
+      ],
+      "css": [
+        "src/inject/inject.css",
+        "src/css/easy-autocomplete.min.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://github.com/*/*"
+      ],
+      "js": [
+        "src/js/jquery.min.js",
+        "src/js/jquery.easy-autocomplete.min.js",
+        "src/inject/inject.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "src/js/jquery.min.js",
+    "src/js/jquery.easy-autocomplete.min.js",
+    "src/css/easy-autocomplete.min.css"
+  ]
+}

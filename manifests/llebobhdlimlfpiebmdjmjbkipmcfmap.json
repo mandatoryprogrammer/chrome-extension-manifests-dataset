@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Steam Game Covers",
+  "version": "2.2",
+  "author": "Dominik Hitschmann",
+  "description": "Burn your Steam game backups to a CD that's as great as the game itself. This add-on adds a Covers-area to the Steam games page.",
+  "icons": {
+    "48": "img/icon.png"
+  },
+  "web_accessible_resources": [
+    "img/*.png",
+    "img/*.jpg"
+  ],
+  "permissions": [
+    "storage",
+    "webRequest",
+    "<all_urls>"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://store.steampowered.com/app/*"
+      ],
+      "exclude_matches": [
+        "*://*/*agecheck*"
+      ],
+      "css": [
+        "css/steamgamecovers.css"
+      ],
+      "js": [
+        "src/settings.js",
+        "src/textPool.js",
+        "src/steamScrollBarController.js",
+        "src/steamDOM.js",
+        "src/coversManager.js",
+        "src/boot.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "src/installed/installed.js"
+    ]
+  },
+  "options_ui": {
+    "page": "src/settings/index.html",
+    "open_in_tab": true
+  }
+}

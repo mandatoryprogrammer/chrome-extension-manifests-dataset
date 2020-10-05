@@ -1,0 +1,86 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Hamstoo",
+  "description": "Hamstoo Extension for Chrome - Experience the web in a new way with tools to help you think",
+  "version": "0.5.6",
+  "browser_action": {
+    "default_icon": {
+      "16": "assets/img/icons/ext-icon-gray-16.png",
+      "19": "assets/img/icons/ext-icon-gray-19.png",
+      "32": "assets/img/icons/ext-icon-gray-32.png",
+      "48": "assets/img/icons/ext-icon-gray-48.png"
+    },
+    "default_title": "Mark with Hamstoo"
+  },
+  "background": {
+    "scripts": [
+      "background/api.js",
+      "background/background.js",
+      "background/timeTracker.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "content-scripts/shared/jquery-3.2.1.min.js",
+        "content-scripts/shared/jquery-ui-draggable.min.js",
+        "content-scripts/shared/selectize.js",
+        "content-scripts/annotations/sidebar.js"
+      ],
+      "css": [
+        "content-scripts/shared/selectize.css"
+      ]
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "content-scripts/shared/jquery-3.2.1.min.js",
+        "content-scripts/shared/jquery-ui-draggable.min.js",
+        "content-scripts/annotations/annotations.js"
+      ],
+      "css": [
+        "content-scripts/annotations/annotations.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://hamstoo.com/*"
+      ],
+      "js": [
+        "content-scripts/hamstoo/auth.js"
+      ]
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "http://localhost:3000/*",
+      "http://localhost/*",
+      "https://hamstoo.com/*"
+    ]
+  },
+  "icons": {
+    "16": "assets/img/icons/extension_icon_16px.png",
+    "48": "assets/img/icons/extension_icon_48px.png",
+    "128": "assets/img/icons/extension_icon_128x128.png"
+  },
+  "options_page": "options.html",
+  "permissions": [
+    "bookmarks",
+    "contextMenus",
+    "idle",
+    "storage",
+    "tabs",
+    "<all_urls>"
+  ],
+  "web_accessible_resources": [
+    "assets/img/**/*",
+    "assets/fonts/*"
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "PowerSchool Grade Calculator",
+  "short_name": "Show Grade",
+  "version": "1.7",
+  "author": "Kyle Into",
+  "description": "An extension that will automatically calculate your grades for powerschool and print them on the page next to your letter grade. ",
+  "icons": {
+    "128": "image.png"
+  },
+  "page_action": {
+    "default_title": "Get PowerSchool Grades",
+    "default_popup": "options.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*"
+      ],
+      "include_globs": [
+        "*powerschool.*",
+        "*ps.*",
+        "*scores.html*",
+        "portal",
+        "k12"
+      ],
+      "exclude_globs": [
+        "*home*",
+        "*attendance*",
+        "*requestform*",
+        "*schoolinformation*",
+        "*termgrades*"
+      ],
+      "js": [
+        "jquery-2.2.2.min.js",
+        "getGrade.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*/*"
+      ],
+      "include_globs": [
+        "*powerschool.*",
+        "*ps.*",
+        "*home.html*",
+        "portal",
+        "k12"
+      ],
+      "exclude_globs": [
+        "*scores*",
+        "*attendance*",
+        "*requestform*",
+        "*schoolinformation*",
+        "*termgrades*"
+      ],
+      "js": [
+        "jquery-2.2.2.min.js",
+        "getGPA.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*/*"
+      ],
+      "include_globs": [
+        "*powerschool.*",
+        "*ps.*",
+        "*termgrades*",
+        "portal",
+        "k12"
+      ],
+      "exclude_globs": [
+        "*scores*",
+        "*attendance*",
+        "*requestform*",
+        "*schoolinformation*",
+        "*home*"
+      ],
+      "js": [
+        "jquery-2.2.2.min.js",
+        "getPastGPA.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "jquery-2.2.2.min.js",
+    "getGPA.js",
+    "getGrade.js"
+  ],
+  "options_page": "options.html",
+  "options_ui": {
+    "chrome_style": true,
+    "page": "options.html"
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Manage your Accounts Receivable - Hummingbill",
+  "version": "2.0.0",
+  "manifest_version": 2,
+  "description": "Get paid faster with Hummingbill! Automate your Accounts Receivable from invoice tracking to follow-ups.",
+  "homepage_url": "https://hummingbill.com/",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "page": "src/bg/background.html",
+    "persistent": true
+  },
+  "content_security_policy": "script-src 'self' https://whatfix.com; object-src 'self'",
+  "web_accessible_resources": [
+    "fonts/Material-Design-Iconic-Font.eot",
+    "fonts/Material-Design-Iconic-Font.svg",
+    "fonts/Material-Design-Iconic-Font.ttf",
+    "fonts/Material-Design-Iconic-Font.woff",
+    "fonts/Material-Design-Iconic-Font.woff2",
+    "icons/icon128.png",
+    "/img/logo/logo_bw.png",
+    "/img/logo/hb-logo.png",
+    "img/intro/intro01.png",
+    "img/intro/intro02.png",
+    "img/intro/intro03.png",
+    "img/calendar/images/ui-icons_444444_256x240.png",
+    "img/calendar/images/ui-icons_555555_256x240.png",
+    "img/calendar/images/ui-icons_777620_256x240.png",
+    "img/calendar/images/ui-icons_777777_256x240.png",
+    "img/calendar/images/ui-icons_cc0000_256x240.png",
+    "img/calendar/images/ui-icons_ffffff_256x240.png",
+    "img/toolbar/hbill_toolbar_icon.png",
+    "img/toolbar/hbill_toolbar_icon_not.png",
+    "img/toolbar/hbill_invite_team.png",
+    "img/toolbar/hbill_reminders.png",
+    "img/toolbar/hbill_invoice_trash.png",
+    "img/toolbar/hbill_settings.png",
+    "img/hopscotch/sprite-green.png",
+    "img/logo/loading.gif"
+  ],
+  "permissions": [
+    "clipboardRead",
+    "clipboardWrite",
+    "https://*/*",
+    "http://*/*",
+    "tabs",
+    "storage",
+    "management",
+    "notifications"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "http://mail.google.com/*"
+      ],
+      "css": [
+        "css/boot.css",
+        "css/calendar/default.css",
+        "css/material-design-iconic-font.min.css",
+        "js/jquery/jquery-ui.min.css",
+        "js/jquery/jquery-ui.theme.min.css",
+        "src/invoice/generate_invoice.css",
+        "src/invoice/bills.css",
+        "src/inject/inject.css",
+        "src/inject/navMenu.css",
+        "src/inject/tour.css",
+        "src/invoice/generate_invoice.css",
+        "src/inject/toolbar.css",
+        "src/inject/mailmerge.css",
+        "src/inject/upload/upload.css",
+        "css/hopscotch/hopscotch.min.css"
+      ],
+      "js": [
+        "js/whatfix/whatfix.js",
+        "js/inboxsdk/inboxsdk.js",
+        "js/jquery/jquery.min.js",
+        "js/jquery/jquery.serializejson.min.js",
+        "js/jquery/jquery-ui.min.js",
+        "js/calendar/zebra_datepicker.js",
+        "js/jquery/jquery-waituntilexists.js",
+        "js/localstorage/jquery.storageapi.min.js",
+        "js/happy/happy.js",
+        "js/hopscotch/hopscotch.min.js",
+        "js/copy/clipboard.min.js",
+        "src/inject/app/constants.js",
+        "src/inject/drafts/template.js",
+        "src/inject/drafts/functions.js",
+        "src/invoice/generate_invoice.js",
+        "src/invoice/bill.js",
+        "src/inject/upload/template.js",
+        "src/inject/upload/functions.js",
+        "src/inject/inject.js",
+        "src/inject/mailmerge.js",
+        "src/inject/navMenu.js",
+        "src/inject/client/client_template.js",
+        "src/inject/tour.js",
+        "src/inject/drafts.js",
+        "src/inject/toolbar.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://app.hummingbill.com/outbound_reminders",
+        "https://app.hummingbill.com/users/edit*"
+      ],
+      "css": [
+        "src/inject/tour.css",
+        "css/hopscotch/hopscotch.min.css"
+      ],
+      "js": [
+        "js/jquery/jquery.min.js",
+        "js/inboxsdk/inboxsdk.js",
+        "js/localstorage/jquery.storageapi.min.js",
+        "js/hopscotch/hopscotch.min.js",
+        "src/inject/site_tour.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://app.hummingbill.com/onboard/install"
+      ],
+      "js": [
+        "js/jquery/jquery.min.js",
+        "src/website/onboard.js"
+      ]
+    }
+  ]
+}

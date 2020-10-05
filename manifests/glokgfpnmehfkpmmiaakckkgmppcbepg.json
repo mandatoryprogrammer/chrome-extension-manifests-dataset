@@ -1,0 +1,73 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "EOLium",
+  "description": "Enable new features on ElOtroLado.net forums like live filtering, hide read threads or compact mode",
+  "version": "1.3.0",
+  "author": "Nauzet Hernandez <nauzethc@gmail.com>",
+  "icons": {
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "options_ui": {
+    "page": "options.html"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon19.png",
+      "38": "images/icon38.png"
+    },
+    "default_title": "EOLium",
+    "default_popup": "options.html"
+  },
+  "permissions": [
+    "declarativeContent",
+    "tabs",
+    "https://www.elotrolado.net/",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "*://www.elotrolado.net/*"
+      ],
+      "js": [
+        "js/browser-polyfill.js",
+        "js/global.js"
+      ],
+      "css": [
+        "styles/global.css"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "*://www.elotrolado.net/foro_*"
+      ],
+      "js": [
+        "js/browser-polyfill.js",
+        "js/forums.js"
+      ],
+      "css": [
+        "styles/forums.css"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "*://www.elotrolado.net/hilo_*"
+      ],
+      "js": [
+        "js/browser-polyfill.js",
+        "js/threads.js"
+      ],
+      "css": [
+        "styles/threads.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "images/eollogo.svg"
+  ]
+}

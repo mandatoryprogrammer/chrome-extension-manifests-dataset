@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "CKey",
+  "description": "A Chrome Extension that emulates a Hardware Authentication Device",
+  "version": "1.0.2",
+  "minimum_chrome_version": "36.0.1985.18",
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": [
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "https://*/*.xml"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "js/content_script.js"
+      ]
+    }
+  ],
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "js/babel_polyfill.js",
+      "js/background.js"
+    ]
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "page_action": {
+    "default_icon": {
+      "16": "images/lock-16.png",
+      "32": "images/lock-32.png",
+      "48": "images/lock-48.png",
+      "128": "images/lock-128.png"
+    }
+  },
+  "icons": {
+    "16": "images/lock-16.png",
+    "32": "images/lock-32.png",
+    "48": "images/lock-48.png",
+    "128": "images/lock-128.png"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "https://*/*",
+    "http://*/*"
+  ],
+  "web_accessible_resources": [
+    "js/inject_webauthn.js",
+    "img/*"
+  ]
+}

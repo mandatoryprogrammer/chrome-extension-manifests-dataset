@@ -1,0 +1,148 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Omni - tabs, history and bookmarks by Tefter",
+  "version": "1.5.8",
+  "description": "Boost your  productivity by quickly navigating through your open tabs, history and Tefter.io bookmarks.",
+  "manifest_version": 2,
+  "short_name": "tefter",
+  "background": {
+    "scripts": [
+      "background/background.js",
+      "background/link.js",
+      "background/alias.js",
+      "background/link_noise_gate.js",
+      "background/message_router.js",
+      "background/history.js",
+      "background/database.js",
+      "background/indexeddb.js",
+      "background/browser_history.js",
+      "background/core.js",
+      "background/personalization.js",
+      "background/tab.js",
+      "background/navigator.js",
+      "background/search.js",
+      "background/search/base_search.js",
+      "background/search/short_search.js",
+      "background/action.js",
+      "background/site.js",
+      "background/fallback_favicon.js",
+      "background/settings.js",
+      "background/link_type.js",
+      "background/organization.js",
+      "background/group.js",
+      "vendor/dexie.js"
+    ],
+    "persistent": true
+  },
+  "omnibox": {
+    "keyword": "t"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [
+        "content/tefter_container.css"
+      ],
+      "js": [
+        "vendor/mousetrap.js",
+        "content/content_script.js",
+        "content/container.js",
+        "content/onboarding.js",
+        "content/menu.js",
+        "content/omni.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "16": "images/tefter_16.png",
+      "32": "images/tefter_32.png",
+      "48": "images/tefter_48.png",
+      "128": "images/tefter_128.png"
+    }
+  },
+  "icons": {
+    "16": "images/tefter_16.png",
+    "32": "images/tefter_32.png",
+    "48": "images/tefter_48.png",
+    "128": "images/tefter_128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "*://*/*",
+    "*://go/*",
+    "history",
+    "alarms",
+    "storage"
+  ],
+  "commands": {
+    "omni-open": {
+      "suggested_key": {
+        "default": "Alt+K",
+        "mac": "Alt+K"
+      },
+      "description": "Display omnisearch"
+    },
+    "show-aliases": {
+      "suggested_key": {
+        "default": "Alt+A",
+        "mac": "Alt+A"
+      },
+      "description": "Show aliases"
+    },
+    "add-bookmark": {
+      "suggested_key": {
+        "default": "Alt+B",
+        "mac": "Alt+B"
+      },
+      "description": "Bookmark current page"
+    }
+  },
+  "web_accessible_resources": [
+    "content/omni.html",
+    "content/menu.html",
+    "content/onboarding.html",
+    "content/options.html",
+    "content/omni_frame.js",
+    "content/menu_frame.js",
+    "content/onboarding_frame.js",
+    "content/tefter_command.js",
+    "content/options.js",
+    "content/omni.css",
+    "content/menu.css",
+    "content/onboarding.css",
+    "content/options.css",
+    "content/onboarding_tab.html",
+    "icons/loader.gif",
+    "icons/tefter_128.png",
+    "icons/logo.svg",
+    "icons/magnifier.svg",
+    "icons/person.svg",
+    "icons/cog.svg",
+    "icons/unlock_power.svg",
+    "icons/bookmark.svg",
+    "icons/basic_usage.svg",
+    "icons/getting_started.svg",
+    "icons/tab.svg",
+    "icons/external_link.svg",
+    "icons/collaboration.svg",
+    "icons/omni_demo.webp",
+    "icons/onboarding_omni_demo.webp",
+    "icons/thank_you.svg"
+  ],
+  "options_ui": {
+    "page": "content/options.html",
+    "open_in_tab": true
+  },
+  "optional_permissions": [
+    "bookmarks"
+  ],
+  "incognito": "not_allowed"
+}

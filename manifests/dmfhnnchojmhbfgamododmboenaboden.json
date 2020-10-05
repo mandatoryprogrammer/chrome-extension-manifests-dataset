@@ -1,0 +1,40 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "CHP Coordinate Map Link",
+  "description": "Adds a link to popup a google map to the coordinates on http://cad.chp.ca.gov/",
+  "version": "1.1",
+  "icons": {
+    "16": "icon.png",
+    "48": "icon_48.png",
+    "128": "icon_128.png"
+  },
+  "permissions": [
+    "tabs",
+    "http://cad.chp.ca.gov/*",
+    "https://cad.chp.ca.gov/*"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://cad.chp.ca.gov/*"
+      ],
+      "css": [
+        "cad.css"
+      ],
+      "js": [
+        "jquery.min.js",
+        "inject.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "map.htm"
+  ],
+  "content_security_policy": "script-src 'self' https://*.googleapis.com; object-src 'self'"
+}

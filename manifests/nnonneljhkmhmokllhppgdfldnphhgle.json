@@ -1,0 +1,81 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "background": {
+    "page": "background/background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_title": "You're Welcome"
+  },
+  "options_page": "popup/popup.html",
+  "content_scripts": [
+    {
+      "css": [
+        "content/content.css"
+      ],
+      "js": [
+        "lib/jquery.min.js",
+        "lib/underscore.min.js",
+        "content/content.js"
+      ],
+      "matches": [
+        "https://twitter.com/*",
+        "https://twitter.com/"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": true,
+      "run_at": "document_end",
+      "matches": [
+        "https://www.xrptipbot.com/donate/*"
+      ],
+      "js": [
+        "content/tip.js"
+      ]
+    },
+    {
+      "all_frames": true,
+      "run_at": "document_start",
+      "matches": [
+        "https://www.xrptipbot.com/donate/button*"
+      ],
+      "js": [
+        "content/buttonFix.js"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "https://www.xrptipbot.com/account/app?manually=true&client=EnterBillions&purpose=Chrome%20Client"
+      ],
+      "js": [
+        "content/tokenizer.js"
+      ]
+    }
+  ],
+  "description": "A Twitter spam blocker to encourage and enable wider blockchain acceptance.",
+  "icons": {
+    "128": "img/icons/icon128.png",
+    "48": "img/icons/icon48.png",
+    "16": "img/icons/icon16.png"
+  },
+  "manifest_version": 2,
+  "name": "You're Welcome",
+  "permissions": [
+    "https://twitter.com/",
+    "https://twitter.com/*",
+    "https://www.xrptipbot.com/*",
+    "storage",
+    "alarms",
+    "activeTab",
+    "notifications"
+  ],
+  "web_accessible_resources": [
+    "content/*",
+    "lib/*"
+  ],
+  "short_name": "YW",
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://*.xrptipbot.com https://xrptipbot.com; object-src 'self'",
+  "version": "1.0.3"
+}

@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Picket",
+  "version": "0.0.3",
+  "description": "Collective bargaining for netizens",
+  "manifest_version": 2,
+  "background": {
+    "scripts": [
+      "picket.js"
+    ],
+    "persistent": true
+  },
+  "applications": {
+    "gecko": {
+      "id": "picket@izens.net"
+    }
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "picket@izens.net"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "banner.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://izens.net/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "campaignLinks.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>",
+    "alarms"
+  ],
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "web_accessible_resources": [
+    "blocked.html",
+    "custom.css",
+    "normalize.css",
+    "skeleton.css"
+  ]
+}

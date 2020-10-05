@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Rocketrip",
+  "description": "Seamlessly create a Rocketrip Price to Beat while you book your business travel.",
+  "version": "3.4.33",
+  "icons": {
+    "128": "assets/icon-webstore.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "assets/icon-orange-19.png",
+      "38": "assets/icon-orange-38.png"
+    },
+    "default_title": "Rocketrip"
+  },
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "assets/browser-polyfill.js",
+      "assets/background.js"
+    ]
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://*.concursolutions.com/*",
+      "*://*.cnqr-cn.com/*",
+      "*://*.outtask.com/*",
+      "*://*.rocketrip.com/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.concursolutions.com/*",
+        "*://*.cnqr-cn.com/*",
+        "*://*.outtask.com/*",
+        "*://*.rocketrip.com/*"
+      ],
+      "exclude_matches": [
+        "*://www.rocketrip.com/*",
+        "*://rocketrip.com/*"
+      ],
+      "js": [
+        "assets/chromeBootstrap.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "storage",
+    "activeTab"
+  ],
+  "web_accessible_resources": [
+    "assets/*"
+  ]
+}

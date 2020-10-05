@@ -1,0 +1,117 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_extName__",
+  "version": "1.0.7",
+  "manifest_version": 2,
+  "description": "__MSG_extDescription__",
+  "default_locale": "ja",
+  "homepage_url": "https://www.mellow-fellows.com/",
+  "permissions": [
+    "https://www.mellow-fellows.com/",
+    "storage",
+    "tabs"
+  ],
+  "background": {
+    "scripts": [
+      "js/socket.io-1.2.0.js",
+      "js/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": "icons/48r.png"
+  },
+  "icons": {
+    "16": "icons/48r.png",
+    "48": "icons/48r.png",
+    "128": "icons/128r.png"
+  },
+  "web_accessible_resources": [
+    "css/dolphin_through.css"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/dolphin_through.js",
+        "js/check_upsn_exists.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://accounts.google.com/signin/v2/identifier?*",
+        "https://accounts.google.com/signin/v2/sl/pwd?*"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "js/dolphin_through.js",
+        "sites/Google.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://www.dropbox.com/*/login",
+        "https://www.dropbox.com/login*"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "js/dolphin_through.js",
+        "sites/Dropbox.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://www.evernote.com/Login.action*",
+        "https://www.evernote.com/LoggedOut.action"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "js/dolphin_through.js",
+        "sites/Evernote.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://www.facebook.com/",
+        "https://www.facebook.com/?*",
+        "https://www.facebook.com/login.php*"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "js/dolphin_through.js",
+        "sites/facebook.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://login.microsoftonline.com/common/reprocess?*",
+        "https://login.microsoftonline.com/common/oauth2/authorize?*"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "js/dolphin_through.js",
+        "sites/Office365.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://mixi.jp/"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "js/dolphin_through.js",
+        "sites/mixi.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

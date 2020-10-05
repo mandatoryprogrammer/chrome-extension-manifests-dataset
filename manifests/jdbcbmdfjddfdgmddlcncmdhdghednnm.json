@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Messenger Cleaner",
+  "short_name": "Delete all Facebook messages",
+  "description": "Delete all Facebook messages at once (or) Choose and Delete multiple messages at once",
+  "version": "0.0.6",
+  "icons": {
+    "16": "icons/fb_message_cleaner16.png",
+    "48": "icons/fb_message_cleaner48.png",
+    "128": "icons/fb_message_cleaner128.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/fb_message_cleaner16.png",
+    "default_title": "Messenger Cleaner(Message Cleaner)",
+    "default_popup": "screens/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*"
+      ],
+      "js": [
+        "js/constants.js",
+        "js/utils.js",
+        "js/content.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/ga.js",
+      "js/bg.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "tabs",
+    "http://*/",
+    "https://*/"
+  ],
+  "web_accessible_resources": [
+    "screens/fb_cleaner.html",
+    "screens/index.html",
+    "img/analyze.png",
+    "img/brush.png"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.google-analytics.com/; object-src 'self' "
+}

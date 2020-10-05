@@ -1,0 +1,178 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Essentials for KissAnime",
+  "description": "Adds various options to enhance the user experience.",
+  "minimum_chrome_version": "60.0.3112",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "ke@pilar.moe",
+      "strict_min_version": "57.0"
+    }
+  },
+  "options_ui": {
+    "page": "pages/options.html",
+    "chrome_style": false,
+    "open_in_tab": true
+  },
+  "icons": {
+    "128": "icon128.png"
+  },
+  "permissions": [
+    "*://*.kissanime.ru/*",
+    "*://*.novelplanet.me/*",
+    "*://*.mp4upload.com/*",
+    "https://ke.pilar.moe/graphql",
+    "alarms",
+    "notifications",
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "webNavigation"
+  ],
+  "optional_permissions": [
+    "https://graphql.anilist.co/",
+    "https://kitsu.io/api/*",
+    "https://api.jikan.moe/*"
+  ],
+  "browser_action": {
+    "default_icon": "icon128.png",
+    "default_popup": "pages/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "libs/webextension-polyfill/browser-polyfill.min.js",
+      "libs/jquery/jquery.min.js",
+      "libs/lz-string/lz-string.min.js",
+      "libs/leven/leven.js",
+      "config.js",
+      "migrate.js",
+      "js/helpers.js",
+      "js/background/storage.js",
+      "js/background/notifications.js",
+      "js/background/onInstalled.js",
+      "js/background/alarms.js",
+      "js/background/messagePassing.js",
+      "js/background/webRequest.js",
+      "js/background/webNavigation.js",
+      "js/background/integrations/knownMatches.js",
+      "js/background/integrations/anilist.js",
+      "js/background/integrations/kitsu.js",
+      "js/background/integrations/myanimelist.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.kissanime.ru/*"
+      ],
+      "js": [
+        "libs/webextension-polyfill/browser-polyfill.min.js",
+        "libs/jquery/jquery.min.js",
+        "libs/lz-string/lz-string.min.js",
+        "libs/izitoast/iziToast.min.js",
+        "libs/dompurify/purify.min.js",
+        "libs/vue/vue.min.js",
+        "config.js",
+        "js/helpers.js",
+        "js/cloudflare.js",
+        "js/global.js"
+      ],
+      "css": [
+        "assets/fonts/FontAwesome/font.css",
+        "libs/izitoast/iziToast.min.css",
+        "css/colors.css",
+        "css/scrollbars.css",
+        "css/global.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.kissanime.ru/"
+      ],
+      "js": [
+        "libs/sortablejs/Sortable.min.js",
+        "libs/sortablejs/Sortable.fix.js",
+        "libs/vuedraggable/vuedraggable.umd.min.js",
+        "js/home.js"
+      ],
+      "css": [
+        "css/home.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.kissanime.ru/Login",
+        "*://*.kissanime.ru/Register"
+      ],
+      "js": [
+        "js/loginNotice.js"
+      ],
+      "css": [
+        "css/loginNotice.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.kissanime.ru/Anime/*"
+      ],
+      "js": [
+        "js/animeLists.js",
+        "js/anime.js"
+      ],
+      "css": [
+        "css/anime.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.kissanime.ru/Anime/*/*"
+      ],
+      "js": [
+        "libs/hls-js/hls.min.js",
+        "libs/plyr/plyr.min.js",
+        "libs/mousetrap/mousetrap.min.js",
+        "libs/mousetrap/mousetrap-pause.min.js",
+        "libs/mousetrap/mousetrap-record.js",
+        "libs/inputmask/jquery.inputmask.min.js",
+        "js/watch.js"
+      ],
+      "css": [
+        "libs/plyr/plyr.css",
+        "css/watch.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.kissanime.ru/BookmarkList",
+        "*://*.kissanime.ru/MyList/*"
+      ],
+      "js": [
+        "js/bookmarks.js"
+      ],
+      "css": [
+        "css/bookmarks.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.mp4upload.com/embed-*"
+      ],
+      "js": [
+        "js/helpers.js",
+        "js/hosts/mp4upload.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "version": "2020.5.17.0",
+  "version_name": "3.5"
+}

@@ -1,0 +1,52 @@
+{
+  "manifest_version": 2,
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Stream Video Downloader",
+  "default_locale": "en",
+  "version": "10.0.1",
+  "description": "Stream Video downloader that really works! Downloads most popular media formats, videos",
+  "browser_action": {
+    "default_title": "Click to download media",
+    "default_popup": "pages/popup.html",
+    "default_icon": "images/icons/stream-off-32x32.png"
+  },
+  "background": {
+    "scripts": [
+      "pages/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "libs/EBML.js",
+        "pages/content.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "downloads"
+  ],
+  "icons": {
+    "128": "images/icons/stream-on-128x128.png",
+    "16": "images/icons/stream-on-16x16.png",
+    "24": "images/icons/stream-on-24x24.png",
+    "32": "images/icons/stream-on-32x32.png",
+    "48": "images/icons/stream-on-48x48.png",
+    "64": "images/icons/stream-on-64x64.png"
+  },
+  "web_accessible_resources": [
+    "*"
+  ],
+  "minimum_chrome_version": "60",
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://ssl.google-analytics.com https://www.google-analytics.com https://static.trckpath.com; object-src 'self'"
+}

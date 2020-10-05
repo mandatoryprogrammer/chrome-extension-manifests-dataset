@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Micefy Presentations",
+  "description": "This extension allows users to use the Micefy sync presentation features.",
+  "version": "0.0.3",
+  "background": {
+    "scripts": [
+      "jquery.min.js",
+      "slides_notifications.js"
+    ],
+    "persistent": false
+  },
+  "icons": {
+    "96": "icon_96.png",
+    "128": "icon_128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://docs.google.com/presentation/*",
+        "http://micefy.dev:3000/*",
+        "http://micefy.com/*",
+        "http://www.micefy.com/*",
+        "https://micefy.com/*",
+        "https://www.micefy.com/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "jquery.min.js",
+        "pusher.min.js",
+        "micefyaddon.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "https://docs.google.com/*",
+    "http://*/",
+    "https://*/",
+    "management"
+  ],
+  "web_accessible_resources": [
+    "jquery.min.map"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://micefy.com/*",
+      "*://micefy.dev/*",
+      "*://micefy.com/*"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://docs.google.com; object-src 'self'"
+}

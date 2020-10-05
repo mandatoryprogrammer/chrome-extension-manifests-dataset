@@ -1,0 +1,42 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Betoven",
+  "version": "1.0.0.0",
+  "manifest_version": 2,
+  "description": "Sports tips, statistics & analysis, best prices and special offers!",
+  "homepage_url": "http://www.betoven.co",
+  "default_locale": "en",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon.png",
+    "64": "icon64.png",
+    "128": "icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "button.png",
+    "default_title": "Betoven"
+  },
+  "permissions": [
+    "<all_urls>",
+    "tabs",
+    "webRequest",
+    "storage"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "background": {
+    "page": "src/background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "js": [
+        "src/api.js",
+        "src/extension.js"
+      ]
+    }
+  ]
+}

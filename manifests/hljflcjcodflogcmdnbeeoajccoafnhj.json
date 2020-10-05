@@ -1,0 +1,69 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "ISOM Canvas Tools",
+  "short_name": "ICanTools",
+  "description": "Provides extra functions on University of Auckland's Canvas environment.",
+  "version": "0.95",
+  "icons": {
+    "128": "images/icon.png"
+  },
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://canvas.auckland.ac.nz/courses/*/users",
+        "https://canvas.auckland.ac.nz/courses/*/users/",
+        "https://auckland.instructure.com/courses/*/users",
+        "https://auckland.instructure.com/courses/*/users/",
+        "https://auckland.test.instructure.com/courses/*/users",
+        "https://auckland.test.instructure.com/courses/*/users/",
+        "https://auckland.beta.instructure.com/courses/*/users",
+        "https://auckland.beta.instructure.com/courses/*/users/"
+      ],
+      "js": [
+        "scripts/jquery-2.2.0.min.js",
+        "scripts/excel-builder.compiled.min.js",
+        "scripts/util.js",
+        "scripts/users-content-script.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://canvas.auckland.ac.nz/courses/*/modules",
+        "https://canvas.auckland.ac.nz/courses/*/modules/",
+        "https://auckland.instructure.com/courses/*/modules",
+        "https://auckland.instructure.com/courses/*/modules/",
+        "https://auckland.test.instructure.com/courses/*/modules",
+        "https://auckland.test.instructure.com/courses/*/modules/",
+        "https://auckland.beta.instructure.com/courses/*/modules",
+        "https://auckland.beta.instructure.com/courses/*/modules/"
+      ],
+      "js": [
+        "scripts/modules-content-script.js"
+      ]
+    }
+  ],
+  "page_action": {
+    "default_icon": {
+      "38": "images/icon.png"
+    },
+    "default_title": "Click to show ISOM Canvas Tools functions",
+    "default_popup": "studentListPopup.html"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "permissions": [
+    "declarativeContent",
+    "activeTab",
+    "storage"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'"
+}

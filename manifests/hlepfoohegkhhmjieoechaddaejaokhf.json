@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Refined GitHub",
+  "version": "20.10.1",
+  "description": "Simplifies the GitHub interface and adds useful features",
+  "homepage_url": "https://github.com/sindresorhus/refined-github",
+  "manifest_version": 2,
+  "minimum_chrome_version": "80",
+  "applications": {
+    "gecko": {
+      "id": "{a4c4eda4-fb84-4a84-b4a1-f7c1cbf2a1ad}",
+      "strict_min_version": "78.0"
+    }
+  },
+  "permissions": [
+    "storage",
+    "contextMenus",
+    "activeTab",
+    "alarms",
+    "https://github.com/*",
+    "https://api.github.com/*"
+  ],
+  "browser_action": {
+    "default_icon": "icon.png"
+  },
+  "optional_permissions": [
+    "*://*/*"
+  ],
+  "icons": {
+    "128": "icon.png"
+  },
+  "options_ui": {
+    "chrome_style": true,
+    "page": "options.html"
+  },
+  "background": {
+    "scripts": [
+      "browser-polyfill.min.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "https://github.com/*",
+        "https://gist.github.com/*"
+      ],
+      "css": [
+        "refined-github.css"
+      ],
+      "js": [
+        "browser-polyfill.min.js",
+        "refined-github.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "resolve-conflicts.js"
+  ]
+}

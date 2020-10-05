@@ -1,0 +1,77 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Tildes Extended",
+  "description": "Browsers extension to improve Tildes.net UI/UX",
+  "version": "0.9.3",
+  "homepage_url": "https://github.com/theCrius/tildes-extended",
+  "permissions": [
+    "tabs",
+    "storage",
+    "*://tildes.net/*",
+    "*://*.tildes.net/*"
+  ],
+  "icons": {
+    "48": "images/tildes-extended.png"
+  },
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "web_accessible_resources": [
+    "data/*.json",
+    "manifest.json"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://tildes.net/*",
+        "*://*.tildes.net/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "scripts/vendors/jquery.min.js",
+        "scripts/custom-styles.js",
+        "scripts/miscellaneous.js"
+      ],
+      "css": [
+        "styles/miscellaneous.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://tildes.net/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "scripts/vendors/marked.min.js",
+        "scripts/link-new-tab.js",
+        "scripts/jump-to-new-comment.js",
+        "scripts/markdown-preview.js",
+        "scripts/users-label.js",
+        "scripts/sticky-header.js"
+      ],
+      "css": [
+        "styles/jump-to-new-comment.css",
+        "styles/users-label.css",
+        "styles/sticky-header.css"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "32": "images/tildes-extended.png"
+    }
+  },
+  "applications": {
+    "gecko": {
+      "id": "{457ce14b-ebe6-432a-a9c5-0212c747e074}"
+    }
+  },
+  "content_security_policy": "script-src 'self'; object-src 'self'; style-src 'unsafe-inline'"
+}

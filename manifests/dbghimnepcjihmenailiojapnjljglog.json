@@ -1,0 +1,85 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Atcoder++",
+  "version": "0.60",
+  "manifest_version": 2,
+  "description": "問題: 各問題へのリンク, サンプル入力コピー用ボタン / 結果: 各問題へのリンク / 順位表: 国別順位, フレンド順位, 1ページに全員表示する順位表追加 / β版へのリンク",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.contest.atcoder.jp/*"
+      ],
+      "js": [
+        "lib/jquery-2.1.0.min.js",
+        "lib/jquery.cookie.js",
+        "lib/jquery.url.js",
+        "all.js"
+      ],
+      "css": [
+        "all.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.contest.atcoder.jp/standings?*",
+        "*://*.contest.atcoder.jp/standings/*"
+      ],
+      "js": [
+        "friend.js",
+        "standings.js"
+      ],
+      "css": [
+        "standings.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://*.contest.atcoder.jp/submissions/*"
+      ],
+      "js": [
+        "lib/jquery.xdomainajax.js",
+        "submissions.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.contest.atcoder.jp/submit/*",
+        "*://*.contest.atcoder.jp/submit?*"
+      ],
+      "js": [
+        "submit.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.contest.atcoder.jp/tasks/*"
+      ],
+      "js": [
+        "tasks.js",
+        "lib/clipboard.min.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "image/beta.png"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "storage"
+  ],
+  "icons": {
+    "16": "image/icon.png",
+    "48": "image/icon.png",
+    "128": "image/icon.png"
+  }
+}

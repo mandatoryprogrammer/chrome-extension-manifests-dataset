@@ -1,0 +1,185 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "My Apps Secure Sign-in Extension",
+  "icons": {
+    "16": "images/icon_16px.png",
+    "32": "images/icon_32px.png",
+    "48": "images/icon_48px.png",
+    "128": "images/icon_128px.png"
+  },
+  "browser_action": {
+    "default_icon": "images/badgedIcon.png",
+    "default_popup": "popup/html/NotLoggedInPopup.html"
+  },
+  "description": "My Apps Secure Sign-in Extension",
+  "version": "5.6",
+  "author": "APSSO Team",
+  "background": {
+    "page": "Background.html",
+    "persistent": true
+  },
+  "web_accessible_resources": [
+    "images/notLoggedInIcon.png"
+  ],
+  "permissions": [
+    "tabs",
+    "contextMenus",
+    "https://*/*",
+    "http://*/*",
+    "unlimitedStorage",
+    "webNavigation",
+    "storage",
+    "activeTab",
+    "webRequest",
+    "webRequestBlocking",
+    "cookies"
+  ],
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/SignIn.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": false,
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/NewPage.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://account.activedirectory.windowsazure.com/*",
+        "https://account.activedirectory.microsoftazure.de/*",
+        "https://account.activedirectory.windowsazure.us/*",
+        "https://account.activedirectory.windowsazure.cn/*",
+        "https://myapplications.microsoft.com/*",
+        "https://myapplications.microsoft.de/*",
+        "https://myapplications.microsoft.us/*",
+        "https://myapplications.microsoft.cn/*"
+      ],
+      "js": [
+        "js/ExtensionIdentifier.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "https://account.activedirectory.windowsazure.com/*",
+        "https://account.activedirectory.microsoftazure.de/*",
+        "https://account.activedirectory.windowsazure.us/*",
+        "https://account.activedirectory.windowsazure.cn/*",
+        "https://myapplications.microsoft.com/*",
+        "https://myapplications.microsoft.de/*",
+        "https://myapplications.microsoft.us/*",
+        "https://myapplications.microsoft.cn/*",
+        "https://*.hosting.portal.azure.net/*/Listener.html?*",
+        "https://*.hosting.azure-api.de/*/Listener.html?*",
+        "https://*.hosting.azureportal.usgovcloudapi.net/*/Listener.html?*",
+        "https://*.azureportal.chinacloudapi.cn/*/Listener.html?*",
+        "https://ssotools.azurewebsites.net/*"
+      ],
+      "js": [
+        "js/ExtensionIdentifier.js",
+        "js/UserTenantIdentifier.js",
+        "js/ListenPortalPage.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://account.activedirectory.windowsazure.com/applications/metadatacapture/captureapplicationmetadata.aspx?*",
+        "https://account.activedirectory.microsoftazure.de/applications/metadatacapture/captureapplicationmetadata.aspx?*",
+        "https://account.activedirectory.windowsazure.us/applications/metadatacapture/captureapplicationmetadata.aspx?*",
+        "https://account.activedirectory.windowsazure.cn/applications/metadatacapture/captureapplicationmetadata.aspx?*"
+      ],
+      "js": [
+        "js/CaptureApplicationLoginControls.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://account.activedirectory.windowsazure.com/applications/redirecttoapplication.aspx?*",
+        "https://account.activedirectory.microsoftazure.de/applications/redirecttoapplication.aspx?*",
+        "https://account.activedirectory.windowsazure.us/applications/redirecttoapplication.aspx?*",
+        "https://account.activedirectory.windowsazure.cn/applications/redirecttoapplication.aspx?*"
+      ],
+      "js": [
+        "js/Redirection.js",
+        "common/Log.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://account.activedirectory.windowsazure.com/applications/default.aspx*",
+        "https://account.activedirectory.windowsazure.com/r/*",
+        "https://account.activedirectory.microsoftazure.de/applications/default.aspx*",
+        "https://account.activedirectory.microsoftazure.de/r/*",
+        "https://account.activedirectory.windowsazure.us/applications/default.aspx*",
+        "https://account.activedirectory.windowsazure.us/r/*",
+        "https://account.activedirectory.windowsazure.cn/applications/default.aspx*",
+        "https://account.activedirectory.windowsazure.cn/r/*"
+      ],
+      "js": [
+        "js/SendLogs.js",
+        "common/Log.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://account.activedirectory.windowsazure.com/applications/ssoextensionlandingpage.aspx",
+        "https://account.activedirectory.windowsazure.com/applications/ssoextensionlandingpage.aspx?*",
+        "https://account.activedirectory.microsoftazure.de/applications/ssoextensionlandingpage.aspx",
+        "https://account.activedirectory.microsoftazure.de/applications/ssoextensionlandingpage.aspx?*",
+        "https://account.activedirectory.windowsazure.us/applications/ssoextensionlandingpage.aspx",
+        "https://account.activedirectory.windowsazure.us/applications/ssoextensionlandingpage.aspx?*",
+        "https://account.activedirectory.windowsazure.cn/applications/ssoextensionlandingpage.aspx",
+        "https://account.activedirectory.windowsazure.cn/applications/ssoextensionlandingpage.aspx?*"
+      ],
+      "js": [
+        "js/CaptureListOfApps.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://account.activedirectory.windowsazure.com/applications/testfedaratedapplication.aspx?*",
+        "https://account.activedirectory.microsoftazure.de/applications/testfedaratedapplication.aspx?*",
+        "https://account.activedirectory.windowsazure.us/applications/testfedaratedapplication.aspx?*",
+        "https://account.activedirectory.windowsazure.cn/applications/testfedaratedapplication.aspx?*"
+      ],
+      "js": [
+        "js/TamperSaml.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": false,
+      "matches": [
+        "https://login.microsoftonline.com/*",
+        "https://login.microsoftonline.de/*",
+        "https://login.microsoftonline.us/*",
+        "https://login.partner.microsoftonline.cn/*"
+      ],
+      "js": [
+        "js/ListenSamlResponse.js"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Speechyard for Netflix",
+  "description": "Learn English watching TV shows and movies on Netflix",
+  "version": "1.0.7",
+  "icons": {
+    "16": "images/no-active.png"
+  },
+  "homepage_url": "http://speechyard.com",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.netflix.com/*"
+      ],
+      "js": [
+        "js/content-scripts/lib/jquery-3.1.1.min.js",
+        "js/lib/require.min.js",
+        "js/modules/codeInjector.js",
+        "js/modules/config.js",
+        "js/modules/translations.js",
+        "js/content-scripts/init_metadata.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/modules/config.js",
+      "js/modules/translations.js",
+      "js/lib/require.min.js",
+      "js/backend-scripts/main.js",
+      "js/backend-scripts/subtitles.js",
+      "js/backend-scripts/facebook.js",
+      "js/backend-scripts/request_hijacking.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "webNavigation",
+    "webRequestBlocking",
+    "*://*.nflximg.com/*",
+    "*://*.nflxvideo.net/*",
+    "*://*.nflxext.com/*",
+    "*://*.netflix.com/*",
+    "*://*.nflximg.net/*",
+    "*://speechyard.com/*"
+  ],
+  "browser_action": {
+    "default_title": "Speechyard Netflix"
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Jog.ai",
+  "version": "2018.7.28070",
+  "manifest_version": 2,
+  "description": "Focus on your call - we'll Jog your memory later.",
+  "homepage_url": "https://jog.ai",
+  "icons": {
+    "400": "icons/icon400.png"
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_title": "Jog.ai",
+    "default_icon": {
+      "400": "icons/icon400.png"
+    },
+    "default_popup": "src/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://calendar.google.com/calendar/*",
+        "https://*.app.jog.ai/*",
+        "https://calendly.com/*event_types/*/edit",
+        "https://*.join.me/*",
+        "https://www.screenleap.com/*",
+        "https://zoom.us/s/*",
+        "https://mail.google.com/mail/*",
+        "https://*.jog.ai/*",
+        "https://app.hubspot.com/*",
+        "https://app.intercom.io/a/apps/*/users/*"
+      ],
+      "css": [
+        "css/jog.css"
+      ],
+      "all_frames": true,
+      "js": [
+        "js/jquery/jquery.min.js",
+        "js/arrive.js",
+        "src/content/content.js"
+      ]
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.jog.ai/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "js/screenleap.js"
+  ],
+  "options_ui": {
+    "page": "src/options.html",
+    "chrome_style": true
+  },
+  "permissions": [
+    "storage",
+    "tabs"
+  ]
+}

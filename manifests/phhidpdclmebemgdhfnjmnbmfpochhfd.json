@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "1.1.3",
+  "name": "秘迹",
+  "manifest_version": 2,
+  "description": "在 Chrome 浏览器中开启互联登录功能，实现手机电脑跨屏浏览和安全登录。",
+  "default_locale": "zh_CN",
+  "browser_action": {
+    "default_title": "秘迹",
+    "default_popup": "popup/index.html"
+  },
+  "icons": {
+    "16": "img/icon_white.png",
+    "48": "img/icon_white144_144.png"
+  },
+  "web_accessible_resources": [
+    "popup/style.css",
+    "img/miji-logo.png",
+    "img/close.png",
+    "img/nourl_ic_vault.png",
+    "img/url-ic.png"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content_script.bundle.js"
+      ],
+      "css": [
+        "content_script.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "background.bundle.js"
+    ]
+  },
+  "permissions": [
+    "contextMenus",
+    "management",
+    "activeTab",
+    "tabs",
+    "storage",
+    "unlimitedStorage",
+    "<all_urls>",
+    "nativeMessaging",
+    "cookies",
+    "http://*/*",
+    "https://*/*",
+    "privacy"
+  ],
+  "options_page": "options/index.html",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'; "
+}

@@ -1,0 +1,145 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "LastPass: Free Password Manager",
+  "short_name": "LastPass: Free Password Manager",
+  "author": "LastPass",
+  "version": "4.57.1.2",
+  "version_name": "4.57.1",
+  "minimum_chrome_version": "18.0",
+  "description": "__MSG_app_Desc__",
+  "icons": {
+    "16": "icon2.png",
+    "32": "icon2_2x.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "default_locale": "en_US",
+  "omnibox": {
+    "keyword": "lp"
+  },
+  "permissions": [
+    "tabs",
+    "idle",
+    "notifications",
+    "contextMenus",
+    "unlimitedStorage",
+    "webRequest",
+    "webNavigation",
+    "webRequestBlocking",
+    "http://*/*",
+    "https://*/*",
+    "chrome://favicon/*"
+  ],
+  "optional_permissions": [
+    "nativeMessaging",
+    "privacy"
+  ],
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "content_security_policy": "default-src 'self'; frame-src 'self' https://*.duosecurity.com https://lastpass.com/ https://lastpass.eu https://cdn.lmiutil.com/; connect-src 'self' https://lastpass.com/ https://accounts.lastpass.com wss://*.lastpass.com wss://*.lastpass.eu https://*.lastpass.com https://lastpass.com https://lastpass.eu https://login.microsoftonline.com https://graph.microsoft.com https://*.oktapreview.com https://*.okta.com https://*.okta-emea.com; img-src 'self' data: blob: https://lastpass.com/ chrome://favicon ; style-src 'self' 'unsafe-inline' https://lastpass.com/ ;",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*"
+      ],
+      "js": [
+        "onloadwff.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://lastpass.com/acctsiframe.php*",
+        "https://lastpass.eu/acctsiframe.php*"
+      ],
+      "js": [
+        "acctsiframe-content-script.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://lastpass.com/",
+        "https://www.lastpass.com/",
+        "https://www.lastpass.com/*"
+      ],
+      "js": [
+        "extension-detection-content-script.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://lastpass.com/acctsiframe.php*",
+        "https://lastpass.com/update_phone.php*",
+        "https://lastpass.com/misc_challenge.php*",
+        "https://lastpass.com/?securitychallenge=1*",
+        "https://lastpass.com/delete_account.php*",
+        "https://lastpass.com/otp.php*",
+        "https://lastpass.com/enterprise_options.php*",
+        "https://lastpass.com/?&ac=1*",
+        "https://lastpass.com/?ac=1*",
+        "https://lastpass.com/enterprise_users.php*",
+        "https://lastpass.com/misc_login.php*",
+        "https://lastpass.eu/acctsiframe.php*",
+        "https://lastpass.eu/update_phone.php*",
+        "https://lastpass.eu/misc_challenge.php*",
+        "https://lastpass.eu/?securitychallenge=1*",
+        "https://lastpass.eu/delete_account.php*",
+        "https://lastpass.eu/otp.php*",
+        "https://lastpass.eu/enterprise_options.php*",
+        "https://lastpass.eu/?&ac=1*",
+        "https://lastpass.eu/?ac=1*",
+        "https://lastpass.eu/enterprise_users.php*",
+        "https://lastpass.eu/misc_login.php*"
+      ],
+      "js": [
+        "fedlogin-content-script.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "icon_gray2.png",
+      "38": "icon_gray2_2x.png"
+    },
+    "default_title": "LastPass",
+    "default_popup": "extensionLogin.html"
+  },
+  "options_ui": {
+    "page": "tabDialog.html?dialog=preferences&cmd=open",
+    "open_in_tab": true
+  },
+  "manifest_version": 2,
+  "web_accessible_resources": [
+    "overlay.html",
+    "contentScriptDialog.html",
+    "backgroundFrame.html",
+    "contentScriptPopup.html",
+    "betterContentScriptPopup.html",
+    "general.css",
+    "tip_context.html",
+    "images/icon48.png",
+    "images/formfill16x16.png",
+    "images/generate16x16.png",
+    "images/sites16x16.png",
+    "images/close16x16.png",
+    "1minsignup/doNotCloseOverlay.html",
+    "xhrExtension.js",
+    "migrationPopup.html",
+    "content-script/views/basic-auth/basic-auth.html",
+    "content-script/views/basic-auth/style.css",
+    "images/basic-auth-image.png",
+    "images/LP-Logo.png",
+    "images/lp-dots.png"
+  ]
+}

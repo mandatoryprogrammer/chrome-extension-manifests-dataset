@@ -1,0 +1,87 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Find Email",
+  "short_name": "getprospect",
+  "version": "4.4.17",
+  "manifest_version": 2,
+  "description": "Find Email in seconds – Free Email Finder for LinkedIn",
+  "homepage_url": "https://getprospect.io",
+  "options_ui": {
+    "page": "options/options.html",
+    "chrome_style": true
+  },
+  "icons": {
+    "16": "shared/img/icon16.png",
+    "48": "shared/img/icon48.png",
+    "128": "shared/img/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "shared/img/icon19.png",
+      "38": "shared/img/icon38.png"
+    },
+    "default_title": "GetProspect",
+    "default_popup": "browser_action/popup.html"
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "contextMenus",
+    "https://*.getprospect.io/*",
+    "https://*.linkedin.com/"
+  ],
+  "background": {
+    "scripts": [
+      "js/lib/jquery.min.js",
+      "js/background.min.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.getprospect.io/*"
+      ],
+      "js": [
+        "js/lib/jquery.min.js",
+        "js/lib/underscore.min.js",
+        "js/lib/raven.min.js",
+        "js/account.min.js",
+        "js/lib/intro.min.js",
+        "js/lib/driver.min.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.linkedin.com/*"
+      ],
+      "css": [
+        "css/styles.min.css",
+        "css/fonts.min.css"
+      ],
+      "js": [
+        "js/lib/jquery.min.js",
+        "js/lib/jquery-ui.min.js",
+        "js/lib/underscore.min.js",
+        "js/lib/raven.min.js",
+        "js/lib/xml-entities.js",
+        "js/lib/switchery.js",
+        "js/account.min.js",
+        "js/shared.min.js",
+        "js/linkedin_content_script.min.js",
+        "js/lib/intro.min.js",
+        "js/lib/driver.min.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "config.json"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "externally_connectable": {
+    "matches": [
+      "*://*.getprospect.io/*",
+      "*://localhost/*"
+    ]
+  }
+}

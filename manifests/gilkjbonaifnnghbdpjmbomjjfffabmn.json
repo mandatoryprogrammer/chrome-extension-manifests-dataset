@@ -1,0 +1,67 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Quick 'A' - Tabs Switch",
+  "manifest_version": 2,
+  "icons": {
+    "48": "img/quick-a-48.png",
+    "128": "img/quick-a-128.png"
+  },
+  "version": "1.0.0",
+  "description": "Quick Access to all browser tabs",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "*://*/* ",
+    "storage"
+  ],
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "img/quick-a.png",
+      "32": "img/quick-a-32.png",
+      "48": "img/quick-a-48.png",
+      "128": "img/quick-a-128.png"
+    },
+    "default_title": "Quick 'A' - Quick access to your tabs"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file://*/*"
+      ],
+      "js": [
+        "js/vue.js",
+        "js/quick.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "web_accessible_resources": [
+    "quick.css",
+    "img/close.svg",
+    "img/close-dark.svg",
+    "img/pop-bg.svg",
+    "img/arrows.svg",
+    "img/search.svg",
+    "img/search-close.svg"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "commands": {
+    "quick": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+A",
+        "linux": "Ctrl+Shift+A",
+        "windows": "Ctrl+Shift+A",
+        "mac": "Command+Shift+A"
+      },
+      "description": "Show Quick 'A'"
+    }
+  }
+}

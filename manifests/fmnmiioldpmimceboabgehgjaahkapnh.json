@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "BTC machines Commerce",
+  "description": "This extension enables Bitcoin shopping on any supported site.",
+  "version": "0.1.6",
+  "page_action": {
+    "default_icon": "btcmc_logo2_on.png",
+    "default_title": "BTC machines Commerce",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "tabs",
+    "cookies",
+    "storage",
+    "http://commerce.btcmachin.es/*",
+    "https://bitpay.com/api/rates",
+    "http://www.verkkokauppa.com/*",
+    "https://www.verkkokauppa.com/*"
+  ],
+  "web_accessible_resources": [
+    "error.html"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "jquery.js",
+        "global.js",
+        "verkkokauppa.js",
+        "amazon.js",
+        "contentscript.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'"
+}

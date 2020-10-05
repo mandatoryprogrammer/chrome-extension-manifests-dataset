@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "SearchDateLen: 검색 기간 확장",
+  "description": "구글, 네이버, 다음 PC 검색 페이지의 검색 기간을 더 세분화시켜줍니다. Get finer control over search date range.",
+  "version": "0.3",
+  "icons": {
+    "48": "icon.png"
+  },
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://search.naver.com/*",
+        "https://search.naver.com/*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "common.js",
+        "utils.js",
+        "storage.js",
+        "inject_common.js",
+        "naver.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://search.daum.net/*",
+        "https://search.daum.net/*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "common.js",
+        "utils.js",
+        "storage.js",
+        "inject_common.js",
+        "daum.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "include_globs": [
+        "*://*.google.*/search*",
+        "*://google.*/search*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "common.js",
+        "utils.js",
+        "storage.js",
+        "inject_common.js",
+        "google.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "storage"
+  ]
+}

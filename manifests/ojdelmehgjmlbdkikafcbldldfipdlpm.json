@@ -1,0 +1,36 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Better Task Names for JIRA",
+  "short_name": "Better Task Names",
+  "description": "Suggests best practice task names inline in JIRA based on task type. Better names, better team performance.",
+  "version": "1.1.5",
+  "icons": {
+    "16": "assets/images/icon16.png",
+    "32": "assets/images/icon32.png",
+    "48": "assets/images/icon48.png",
+    "128": "assets/images/icon128.png"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "src/suggestionCounter.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.atlassian.net/*"
+      ],
+      "js": [
+        "src/jira/issue_summary_input_helper.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "assets/images/*"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

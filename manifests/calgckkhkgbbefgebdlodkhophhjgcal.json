@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Pegasus",
+  "short_name": "pegasus",
+  "description": "Meet 'the Tangle' from your browser",
+  "version": "0.12.0",
+  "content_security_policy": "script-src 'self' 'unsafe-eval' 'sha256-GgRxrVOKNdB4LrRsVPDSbzvfdV4UqglmviH9GoBJ5jk=' 'sha256-IThiKMnsg0UHaLmP7sJxZpd/ohvINImwjxFJyxGFSlk='; object-src 'self'",
+  "browser_action": {
+    "default_popup": "packages/popup/build/index.html",
+    "default_title": "Pegasus"
+  },
+  "author": "Alessandro Manfredi",
+  "permissions": [
+    "notifications",
+    "storage",
+    "unlimitedStorage"
+  ],
+  "icons": {
+    "64": "packages/popup/build/material/logo/pegasus-64.png",
+    "128": "packages/popup/build/material/logo/pegasus-128.png"
+  },
+  "background": {
+    "scripts": [
+      "dist/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "file://*/*",
+        "http://*/*"
+      ],
+      "js": [
+        "dist/injection.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    "dist/inpage-client.js"
+  ],
+  "externally_connectable": {
+    "ids": [
+      "*"
+    ]
+  }
+}

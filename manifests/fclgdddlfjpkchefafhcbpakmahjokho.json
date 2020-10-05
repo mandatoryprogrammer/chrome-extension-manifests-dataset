@@ -1,0 +1,86 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "FlexBlock",
+  "short_name": "__MSG_name__",
+  "version": "0.9.0",
+  "default_locale": "en_US",
+  "description": "A free ad blocker for Chrome that can interact with other extensions.",
+  "icons": {
+    "128": "icons/icon-128.png",
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/icon-19.png",
+      "38": "icons/icon-38.png"
+    },
+    "default_popup": "popup.html",
+    "default_title": "__MSG_name__"
+  },
+  "background": {
+    "scripts": [
+      "ext/common.js",
+      "ext/background.js",
+      "lib/compat.js",
+      "lib/info.js",
+      "lib/io.js",
+      "lib/adblockplus.js",
+      "lib/punycode.js",
+      "lib/publicSuffixList.js",
+      "lib/basedomain.js",
+      "lib/sha1.js",
+      "lib/jsbn.js",
+      "lib/rsa.js",
+      "webrequest.js",
+      "popupBlocker.js",
+      "iconAnimation.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "ext/common.js",
+        "ext/content.js",
+        "include.preload.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "include.postload.js",
+        "installed_extension.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "minimum_chrome_version": "28.0",
+  "options_page": "options.html",
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "contextMenus",
+    "webRequest",
+    "webRequestBlocking",
+    "webNavigation",
+    "unlimitedStorage",
+    "notifications"
+  ],
+  "web_accessible_resources": [
+    "block.html"
+  ]
+}

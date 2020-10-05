@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "RosterBuster",
+  "description": "This extension allows you to upload your airline roster directly from the airline crew portal.",
+  "version": "3.0.1",
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "options_page": "options.html",
+  "icons": {
+    "16": "rb_small.png",
+    "48": "rb_small.png",
+    "128": "rb_small.png"
+  },
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "contextMenus",
+    "background"
+  ],
+  "content_security_policy": "script-src 'self' https://rosterbuster.com/ https://www.google-analytics.com/analytics.js; object-src 'self'",
+  "content_scripts": [
+    {
+      "js": [
+        "functions.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "https://rosterbuster.com/*",
+        "https://www.google-analytics.com/analytics.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_title": "Send to RosterBuster.com",
+    "default_icon": "rb_tiny.png",
+    "default_popup": "popup.html"
+  },
+  "homepage_url": "http://rosterbuster.com"
+}

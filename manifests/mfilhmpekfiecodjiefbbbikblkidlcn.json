@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Sipiko WebRTCPhone",
+  "short_name": "WebRTC phone",
+  "minimum_chrome_version": "24.0.1307.0",
+  "version": "1.0.2",
+  "homepage_url": "http://sipiko.net",
+  "icons": {
+    "16": "phone16.png",
+    "48": "phone48.png",
+    "128": "phone128.png"
+  },
+  "options_page": "options.html",
+  "background": {
+    "scripts": [
+      "firebase.js",
+      "rtc1.6.js",
+      "mainw.js"
+    ],
+    "persistent": true
+  },
+  "externally_connectable": {
+    "ids": [
+      "*"
+    ],
+    "matches": [
+      "*://callme.sipiko.net/*"
+    ]
+  },
+  "permissions": [
+    "background",
+    "notifications",
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "storage"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "phone19.png",
+      "38": "phone38.png"
+    },
+    "default_title": "RTCphone"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "rtcphonestyles.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "phone48.png"
+  ],
+  "content_security_policy": "script-src 'self' https://cdn.firebase.com https://*.firebaseio.com; object-src 'self'"
+}

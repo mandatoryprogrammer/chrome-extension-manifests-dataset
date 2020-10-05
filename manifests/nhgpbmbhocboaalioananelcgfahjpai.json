@@ -1,0 +1,90 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_extName__",
+  "version": "2.0.33",
+  "description": "__MSG_extDescription__",
+  "icons": {
+    "16": "images/citelighter_logo.png",
+    "128": "images/install_icon128.png"
+  },
+  "default_locale": "en",
+  "browser_action": {
+    "default_icon": "images/tiny_logo19.png",
+    "default_title": "Toggle Citelighter Toolbar"
+  },
+  "background": {
+    "page": "content/background.html"
+  },
+  "permissions": [
+    "activeTab",
+    "<all_urls>",
+    "cookies",
+    "tabs",
+    "management",
+    "webRequest",
+    "webRequestBlocking",
+    "webNavigation",
+    "storage",
+    "notifications",
+    "downloads"
+  ],
+  "incognito": "split",
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com https://ws.sylvanpaper.sylvanlearning.com/socket.io/socket.io.js; object-src 'self'",
+  "file_browser_handlers": [
+    {
+      "default_title": "Open with PDF Viewer",
+      "file_filters": [
+        "filesystem:*.pdf"
+      ],
+      "id": "open-as-pdf"
+    }
+  ],
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*/*.pdf",
+        "*://*/*.pdf*"
+      ],
+      "exclude_globs": [
+        "https://*.citelighter.com/export/*",
+        "https://*.sylvanpaper.sylvanlearning.com/export/*",
+        "chrome-devtools://*"
+      ],
+      "js": [
+        "js/lib/jquery-2.1.1.min.js",
+        "js/lib/jquery-ui.min.js",
+        "js/citelighter_chrome_extension.js",
+        "js/pdfjs/contentscript.js"
+      ],
+      "css": [
+        "css/citelighter_chrome_extension.css",
+        "css/pdf_content_style.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "content/background.html",
+    "content/hide_toolbar_notification.html",
+    "content/update_toolbar_notification.html",
+    "content/iframe.html",
+    "content/options.html",
+    "content/capture.html",
+    "content/email.html",
+    "content/gdocs_clipboard.html",
+    "css/citelighter_chrome_extension.css",
+    "images/*",
+    "fonts/*.*",
+    "getFrameId",
+    "content/pdfjs/web/*",
+    "http:/*",
+    "https:/*",
+    "ftp:/*",
+    "file:/*",
+    "filesystem:/*",
+    "drive:*"
+  ]
+}

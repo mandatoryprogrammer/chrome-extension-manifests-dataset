@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "What The Music",
+  "author": "Emre Tekince",
+  "description": "WTM lets your Facebook friends know what are you listening to on Youtube.",
+  "version": "0.1.3",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_title": "What The Music!?",
+    "default_popup": "popup/login/login.html"
+  },
+  "permissions": [
+    "storage",
+    "tabs"
+  ],
+  "background": {
+    "scripts": [
+      "bg.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/*"
+      ],
+      "run_at": "document_end",
+      "css": [
+        "css/yt.css"
+      ],
+      "js": [
+        "controllers/Youtube.js",
+        "content.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.facebook.com/*"
+      ],
+      "run_at": "document_end",
+      "css": [
+        "css/fb.css"
+      ],
+      "js": [
+        "controllers/Facebook.js",
+        "content.js"
+      ]
+    }
+  ],
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjBkgoY7BAL8fEM72y210sHNIyn3dG1kwdyAW+HSCXs8jm8sav5U66WrZriae0kJSXDvGYQGfkN2Nu5891CU4f3iTLcmCIJ9n3DaoYJ/WRq5Sy07PFvXUFNv1wN3NP5B8sYpPeCxR78MZoGwChbU/o8nyeAas/CzVIOIdZVRQJ32bEt6stSSn0k7DFPJpMPZlucQ1Ku6vRxG8hK9IHje7QLyTXyfHdkpbAxwCBTzHAyxELxRQOeApvaLkZ5q+sNcrfDREqbRKAnw6XOhvmiyAb7SWtQap7LbOpANS6d3aUDqV+W37k0Qly3huOKKFE6U1ToQlq9M9e3LtK5pY9ucTrQIDAQAB",
+  "minimum_chrome_version": "29.0",
+  "icons": {
+    "128": "icons/icon.png"
+  },
+  "externally_connectable": {
+    "matches": [
+      "https://wtm.emretekince.com/*"
+    ]
+  }
+}

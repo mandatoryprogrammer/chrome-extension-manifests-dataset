@@ -1,0 +1,75 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "MDbrain",
+  "version": "0.0.1.1",
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "description": "MDbrain chrome extension.",
+  "web_accessible_resources": [
+    "js/allowTextSelection.js",
+    "js/editSelectedText.js",
+    "js/jQueries.js",
+    "js/jquery-3.3.1.min.js",
+    "js/googleAnalytics.js",
+    "js/fontawesome.js",
+    "images/MDbrain-icon.png",
+    "images/mdbrain-logo.png",
+    "images/messenger-logo.png"
+  ],
+  "icons": {
+    "128": "images/mdbrain-icon-128px.png",
+    "48": "images/mdbrain-icon-48px.png"
+  },
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": "images/mdbrain-icon-128px.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://medexams.co.il/student/exam/solvingExam/*/exam_id/*",
+        "*://www.medexams.co.il/student/exam/solvingExam/*/exam_id/*"
+      ],
+      "js": [
+        "js/content-medexams.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://medexams.co.il/student/exam/details/package_id/*",
+        "*://www.medexams.co.il/student/exam/details/package_id/*"
+      ],
+      "js": [
+        "js/content-medexams-new_exam_details.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "https://www.mdbrain.co.il/"
+  ],
+  "homepage_url": "https://www.mdbrain.co.il",
+  "externally_connectable": {
+    "matches": [
+      "https://www.mdbrain.co.il/*"
+    ]
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Y",
+        "mac": "MacCtrl+Shift+Y"
+      },
+      "description": "Opens MDbrain"
+    }
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Vz G-Suite Assistant",
+  "description": "Gmail top Settings update, VzNews Integration, VzAssistant Integration",
+  "version": "1.1.0.6",
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "https://*.verizon.com/*",
+    "https://*.google.com/*",
+    "https://www.google.com/*",
+    "cookies",
+    "identity",
+    "notifications",
+    "storage",
+    "https://accounts.google.com/*",
+    "https://calendar.google.com/*",
+    "https://www.googleapis.com/*",
+    "https://app.elastica.net/*",
+    "https://contacts.google.com/*",
+    "https://vzassistant.verizon.com/chatbot/*",
+    "https://vzweb.verizon.com/news/*",
+    "https://oneprofile.verizon.com/*"
+  ],
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "https://vzweb.verizon.com/news/*",
+        "*://mail.google.com/*"
+      ],
+      "js": [
+        "js/jquery-2.1.3.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "https://vzweb.verizon.com/news/*"
+      ],
+      "js": [
+        "js/jquery-2.1.3.js",
+        "js/hidecontent.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "https://accounts.google.com/*",
+        "https://mail.google.com/*",
+        "https://contacts.google.com/*"
+      ],
+      "js": [
+        "js/jquery-2.1.3.js",
+        "js/content.js",
+        "js/materialize.min.js",
+        "js/arrive.min.js"
+      ],
+      "css": [
+        "css/custom.css",
+        "css/common.css"
+      ],
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    "modal.html",
+    "sidebar_nav.html",
+    "news.html",
+    "js/gmail-reverse-conversation.js",
+    "js/news.js",
+    "css/gmail-reverse-conversation.css",
+    "js/custom.js",
+    "imgs/*",
+    "<all_urls>",
+    "./sounds/Ringer.wav"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "externally_connectable": {
+    "accepts_tls_channel_id": false,
+    "ids": [
+      "*"
+    ]
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "icons": {
+    "16": "logo/logoOn.png",
+    "48": "logo/logoOn2.png",
+    "128": "logo/logoOn3.png"
+  },
+  "browser_action": {
+    "name": "Click to open assistant"
+  }
+}

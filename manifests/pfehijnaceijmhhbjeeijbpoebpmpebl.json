@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "LionTrail Leaflet",
+  "version": "1.0.0",
+  "description": "A Chrome extension to help Penn State students optimize their class schedules by mapping their classes.",
+  "manifest_version": 2,
+  "permissions": [
+    "storage",
+    "declarativeContent",
+    "activeTab",
+    "webNavigation",
+    "tabs",
+    "<all_urls>",
+    "https://maps.googleapis.com/maps/api/*"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "page_action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://pennstate.collegescheduler.com/*"
+      ],
+      "js": [
+        "class-scraper.js",
+        "js/bootstrap.min.js",
+        "js/jquery-3.2.1.min.js",
+        "js/ol.js"
+      ],
+      "css": [
+        "css/ol.css"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "map_viewer.html"
+  ],
+  "content_security_policy": "script-src 'self' https://maps.googleapis.com; object-src 'self'"
+}

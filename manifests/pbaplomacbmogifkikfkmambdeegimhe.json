@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "数据工厂代码高亮",
+  "version": "1.0.3",
+  "description": "给数据平台任务详情页和作业详情页增加代码高亮",
+  "icons": {
+    "128": "icon.png"
+  },
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://dp.pt.xiaomi.com/task/*"
+      ],
+      "css": [
+        "highlight/styles/atelier-seaside-dark.css",
+        "highlight/styles/linenumber.css"
+      ],
+      "js": [
+        "js/jquery-1.11.1.min.js",
+        "highlight/highlight.pack.js",
+        "highlight/highlightjs-line-numbers.min.js",
+        "js/taskpage.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "*://dp.pt.xiaomi.com/job/job_details/*"
+      ],
+      "css": [
+        "highlight/styles/atelier-seaside-dark.css",
+        "highlight/styles/linenumber.css"
+      ],
+      "js": [
+        "js/jquery-1.11.1.min.js",
+        "highlight/highlight.pack.js",
+        "highlight/highlightjs-line-numbers.min.js",
+        "js/detailpage.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "manifest_version": 2,
+  "permissions": [
+    "*://dp.pt.xiaomi.com/*",
+    "tabs",
+    "activeTab",
+    "webNavigation"
+  ]
+}

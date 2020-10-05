@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "favoritext",
+  "description": "favoritext - Save any text from the web",
+  "version": "1.8",
+  "permissions": [
+    "contextMenus",
+    "storage",
+    "unlimitedStorage",
+    "http://www.favoritext.com/"
+  ],
+  "homepage_url": "http://www.favoritext.com",
+  "offline_enabled": true,
+  "icons": {
+    "16": "resources/images/icon16.png",
+    "48": "resources/images/icon48.png",
+    "128": "resources/images/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "favApi.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": "resources/images/icon128.png",
+    "default_popup": "popup.html"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "run_at": "document_end",
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "resources/js/jquery-2.0.2.min.js",
+        "favApi.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "resources/js/jquery.min.map"
+  ]
+}

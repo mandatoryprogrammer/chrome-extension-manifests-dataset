@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Video Screenshot",
+  "version": "4.0.7",
+  "description": "Capture full frame screenshots of video from YouTube, Netflix, Vimeo, Hulu, etc. No player controls or watermarks.",
+  "icons": {
+    "128": "icons/icon128.png",
+    "48": "icons/icon48.png",
+    "16": "icons/icon16.png"
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "js/page.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "all_frames": true,
+      "match_about_blank": true
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "web_accessible_resources": [
+    "icons/*",
+    "js/*",
+    "css/*"
+  ],
+  "browser_action": {
+    "default_title": "Video Screenshot settings",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "48": "icons/BrowserIcon48.png"
+    }
+  },
+  "permissions": [
+    "storage",
+    "<all_urls>",
+    "downloads"
+  ],
+  "commands": {
+    "screenshot-keyboard-shortcut": {
+      "suggested_key": {
+        "default": "Ctrl+5",
+        "mac": "Command+5"
+      },
+      "description": "Take a screenshot",
+      "global": false
+    }
+  }
+}

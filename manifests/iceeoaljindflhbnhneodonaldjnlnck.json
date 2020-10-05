@@ -1,0 +1,67 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "PassFORT | Online Password Manager",
+  "description": "PassFORT allows you to manage passwords without fear of a compromise on security. Auto-fill login forms to boost your productivity",
+  "version": "0.9.5",
+  "browser_action": {
+    "default_icon": {
+      "16": "assets/icon-16.png",
+      "32": "assets/icon-32.png",
+      "48": "assets/icon-48.png",
+      "128": "assets/icon-128.png"
+    },
+    "default_title": "Open PassFORT",
+    "default_popup": "index.html#/popup"
+  },
+  "background": {
+    "scripts": [
+      "background-script.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [
+        "fill-manager.css"
+      ],
+      "js": [
+        "fill-manager.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://passfort-dev.fortresslab.uk/*",
+        "https://passfort-prd.fortresslab.uk/*",
+        "https://pass-old.fortresslab.co.uk/*",
+        "https://pass.fortresslab.co.uk/*",
+        "http://localhost/*"
+      ],
+      "js": [
+        "site-bridge.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "icons": {
+    "16": "assets/icon-16.png",
+    "32": "assets/icon-32.png",
+    "48": "assets/icon-48.png",
+    "128": "assets/icon-128.png"
+  },
+  "permissions": [
+    "https://win.fortresslab.uk/passfort/*",
+    "https://passfort.herokuapp.com/*",
+    "storage",
+    "tabs"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "web_accessible_resources": [
+    "index.html*"
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "海运宝·扩展版（三七海淘出品）",
+  "description": "海运宝，提供国内，转运，以及国外，百家主流快递单号查询，实时推送最新运单信息，助您全程跟踪海淘宝贝转运状态不再难；此外，海运宝还提供了Amazon，iherb，6pm等国外知名电商的快捷导航，海淘之旅从这里开始！海运宝更多功能即将推出，敬请期待!",
+  "version": "2.74",
+  "homepage_url": "http://www.haizhebar.com/",
+  "manifest_version": 2,
+  "icons": {
+    "128": "icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*"
+      ],
+      "all_frames": false,
+      "js": [
+        "res/config.js",
+        "res/lib/apifix.js",
+        "res/lib/jquery-2.1.1.min.js",
+        "res/content.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://*.sinaapp.com/*"
+      ],
+      "js": [
+        "js/ana_boot.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "http://*/*"
+      ],
+      "js": [
+        "js/ana_config.js",
+        "js/ana.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "http://*.example.com/*"
+      ],
+      "js": [
+        "js/ana_config.js",
+        "js/ga.js",
+        "js/example.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "page": "background.html"
+  },
+  "browser_action": {
+    "default_title": "海运宝·扩展版",
+    "default_icon": "icon16.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "notifications",
+    "cookies",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking",
+    "unlimitedStorage",
+    "storage",
+    "alarms",
+    "proxy"
+  ],
+  "web_accessible_resources": [
+    "res/content.css",
+    "res/img/shandiangou.png",
+    "res/img/shandiangou-guide.png"
+  ],
+  "content_security_policy": "default-src * 'unsafe-inline'; script-src 'self' https://; object-src 'self'; frame-src about: http:// https://"
+}

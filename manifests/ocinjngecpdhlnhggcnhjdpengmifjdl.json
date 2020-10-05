@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "background": {
+    "scripts": [
+      "js/utils.js",
+      "js/prefs.js",
+      "js/dn.js",
+      "js/errors.js",
+      "js/difi.js",
+      "js/main.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "img/dan_logo2_19_grey.png",
+    "default_popup": "popup.html"
+  },
+  "description": "A notifier for deviantART messages. Keep track of your dA inbox!",
+  "homepage_url": "https://danotifier.deviantart.com/",
+  "icons": {
+    "128": "img/dan_logo2_128_padded.png",
+    "48": "img/dan_logo2_48.png",
+    "16": "img/dan_logo2_16_crisp.png"
+  },
+  "name": "dA Message Notifier",
+  "short_name": "dA Notifier",
+  "minimum_chrome_version": "80",
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "permissions": [
+    "notifications",
+    "tabs",
+    "*://*.deviantart.com/",
+    "clipboardWrite"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.deviantart.com/notifications/*"
+      ],
+      "js": [
+        "js/utils.js",
+        "js/lib/jquery.js",
+        "js/inject.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "js/colorize.js",
+    "js/lib/mutation-summary.js"
+  ],
+  "version": "0.8.1.3",
+  "manifest_version": 2
+}

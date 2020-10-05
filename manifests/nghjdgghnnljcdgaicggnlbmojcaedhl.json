@@ -1,0 +1,67 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "StashPop",
+  "author": "David Poeschl",
+  "description": "Adds Email and Test Failure Management Features to GitHub",
+  "version": "1.1.3",
+  "manifest_version": 2,
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "applications": {
+    "gecko": {
+      "id": "stashpop@dpoeschl.com"
+    }
+  },
+  "web_accessible_resources": [
+    "scripts/injectedcode.js",
+    "images/loading.gif"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://github.com/*"
+      ],
+      "css": [
+        "style.css",
+        "jquery-ui.theme.min.css"
+      ],
+      "js": [
+        "jquery-2.1.4.min.js",
+        "jquery.color-2.1.2.js",
+        "moment.min.js",
+        "content.js",
+        "jquery-ui.min.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "icons": {
+    "16": "images/stashpop_16.png",
+    "48": "images/stashpop2_48.png",
+    "128": "images/stashpop2_128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "48": "images/stashpop_48.png"
+    }
+  },
+  "permissions": [
+    "storage",
+    "https://github.com/*",
+    "http://dotnet-ci.cloudapp.net/*",
+    "http://ci.roslyn.io/",
+    "https://ci.roslyn.io/"
+  ],
+  "optional_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ]
+}

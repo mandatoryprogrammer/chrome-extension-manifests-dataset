@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Seternity Mail",
+  "short_name": "Get email address from LinkedIn.",
+  "version": "1.3.1",
+  "description": "Get email address from LinkedIn.",
+  "icons": {
+    "32": "logo/logo-32.png",
+    "64": "logo/logo-64.png",
+    "128": "logo/logo128.png"
+  },
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "storage",
+    "background",
+    "https://*/*"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "32": "logo/logo-32.png",
+      "64": "logo/logo-64.png",
+      "128": "logo/logo128.png"
+    },
+    "default_title": "Click here to get email address!",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "shared.js",
+      "jquery-3.3.1.min.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.linkedin.com/*"
+      ],
+      "js": [
+        "shared.js",
+        "content.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.linkedin.com/*"
+      ],
+      "js": [
+        "start.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "xhr.js"
+  ]
+}

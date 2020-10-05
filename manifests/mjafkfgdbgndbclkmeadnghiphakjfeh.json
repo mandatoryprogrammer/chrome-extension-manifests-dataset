@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Exelare LinkedIn Integration",
+  "version": "1.8.7",
+  "manifest_version": 2,
+  "minimum_chrome_version": "27",
+  "description": "Exelare LinkedIn extension is a bridge between Exelare and LinkedIn. It allows users to easily add/update candidates from LinkedIn",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "loginForm.html"
+  },
+  "icons": {
+    "64": "icon.png",
+    "128": "icon_big.png"
+  },
+  "background": {
+    "scripts": [
+      "libs/jquery.min.js",
+      "libs/jquery.cookie.js",
+      "libs/lodash.min.js",
+      "newVersion/scraper.js",
+      "utils/helpers.js",
+      "newVersion/NewBackground.js"
+    ]
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://cbiz-srv2.network80.com/; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.linkedin.com/*"
+      ],
+      "exclude_matches": [
+        "*://*.linkedin.com/recruiter/smartsearch*",
+        "*://*.linkedin.com/recruiter/hiring-dashboard*"
+      ],
+      "css": [
+        "css/ExelareStyles.css"
+      ],
+      "js": [
+        "libs/jquery-3.2.1.min.js",
+        "libs/jquery.cookie.js",
+        "libs/lodash.min.js",
+        "utils/helpers.js",
+        "newVersion/newContentScript.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "options_page": "options.html",
+  "permissions": [
+    "*://*.linkedin.com/*",
+    "tabs",
+    "cookies",
+    "storage"
+  ]
+}

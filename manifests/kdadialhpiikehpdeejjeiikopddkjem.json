@@ -1,0 +1,80 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Any.do Extension",
+  "version": "3.1.3.28",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "description": "__MSG_extension_description__",
+  "browser_action": {
+    "default_icon": "icons/anydo-local.png"
+  },
+  "icons": {
+    "16": "icons/anydo-local.png",
+    "48": "icons/anydo-48-local.png",
+    "128": "icons/anydo-128-local.png"
+  },
+  "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDWZI1aBzUpUQVtA5dwIjrAUiS3STNyqBbizO1aWIyMuSl8xjoCpf6Wzf++HKc/N86YnUGTA5n7DQR9ZN3uhlQVPzz0wFefpt7fAyKtaR5HX/oIGKI/avvHcDo5k6JHQEjIUQvKdFtZI1i9b9s76EkQMDXe9pzaUh45o4+8n40K5wIDAQAB",
+  "oauth2": {
+    "client_id": "543675644531-l83r5i5jo595i4d8o5v52pajt1uif095.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/plus.login",
+      "https://www.googleapis.com/auth/userinfo.profile",
+      "https://www.googleapis.com/auth/userinfo.email"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "homepage_url": "http://www.any.do",
+  "permissions": [
+    "identity",
+    "notifications",
+    "cookies",
+    "tabs",
+    "alarms",
+    "contextMenus",
+    "http://sm-dev2.any.do/*/",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.any.do/facebook_proxy/*"
+      ],
+      "js": [
+        "js/chrome/intercept.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://mail.google.com/*"
+      ],
+      "js": [
+        "js/libs/require/require.js",
+        "js/libs/sha1.js",
+        "js/libs/jquery/jquery-min.js",
+        "js/libs/jquery.transition.min.js",
+        "js/gmail/task_extractor.js",
+        "js/gmail/gmail.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "index.html",
+    "icons/anydo-gmail-local.png",
+    "images/alert_blue.png",
+    "images/button_back.png",
+    "images/button_next.png",
+    "images/anydo-profile.png",
+    "images/logo-full.png",
+    "images/popup-edge-top.png",
+    "images/popup-edge-left.png",
+    "images/exec_mail.png",
+    "images/exec_mail_big.png",
+    "calendar.html",
+    "css/pfdindisplaypro-inline.css",
+    "css/gmail.css"
+  ],
+  "background": {
+    "page": "js/chrome/background.html"
+  }
+}

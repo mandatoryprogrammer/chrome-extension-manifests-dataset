@@ -1,0 +1,85 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Universal Suspender",
+  "description": "New Automatically suspends unused tabs to free up system resources",
+  "version": "1.1.0",
+  "permissions": [
+    "tabs",
+    "storage",
+    "management",
+    "history",
+    "unlimitedStorage",
+    "http://*/*",
+    "https://*/*",
+    "chrome://favicon/*",
+    "https://greatsuspender.github.io/",
+    "contextMenus"
+  ],
+  "background": {
+    "scripts": [
+      "js/db.js",
+      "js/gsUtils.js",
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/contentscript.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_title": "The Great Suspender",
+    "default_icon": "img/icon19.png",
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "web_accessible_resources": [
+    "suspended.html",
+    "history.html",
+    "clean.html",
+    "css/style.css",
+    "css/suspended.css"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "incognito": "split",
+  "manifest_version": 2,
+  "minimum_chrome_version": "24",
+  "commands": {
+    "1-suspend-tab": {
+      "description": "Suspend active tab",
+      "suggested_key": {
+        "default": "Ctrl+Shift+S"
+      }
+    },
+    "2-unsuspend-tab": {
+      "description": "Unsuspend active tab",
+      "suggested_key": {
+        "default": "Ctrl+Shift+U"
+      }
+    },
+    "3-suspend-active-window": {
+      "description": "Suspend all tabs in active window"
+    },
+    "4-unsuspend-active-window": {
+      "description": "Unsuspend all tabs in active window"
+    },
+    "5-suspend-all-windows": {
+      "description": "Suspend all tabs in all windows"
+    },
+    "6-unsuspend-all-windows": {
+      "description": "Unsuspend all tabs in all windows"
+    }
+  }
+}

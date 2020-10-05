@@ -1,0 +1,74 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "x.ai: Meeting Scheduling Tool",
+  "short_name": "x.ai",
+  "version": "2.1.1",
+  "description": "x.ai is a free tool to share ideal availability and schedule meetings.",
+  "web_accessible_resources": [
+    "entry.js",
+    "calendar.js",
+    "index.html",
+    "tunnel.html",
+    "images/*",
+    "style.css",
+    "analytics.js",
+    "icons.js",
+    "ionicons/*"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com https://my.x.ai; object-src 'self'",
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*"
+      ],
+      "js": [
+        "inboxsdk.js",
+        "myapp.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://calendar.google.com/*"
+      ],
+      "js": [
+        "calendar.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://outlook.live.com/calendar/*",
+        "https://outlook.office.com/calendar/*"
+      ],
+      "js": [
+        "calendar-outlook.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "16": "images/xdotai-logo-transparent.png",
+      "24": "images/xdotai-logo-transparent.png",
+      "32": "images/xdotai-logo-transparent.png"
+    },
+    "default_title": "x.ai"
+  },
+  "manifest_version": 2,
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "activeTab"
+  ],
+  "icons": {
+    "16": "images/xdotai-logo-transparent.png",
+    "48": "images/xdotai-logo-transparent.png",
+    "128": "images/xdotai-logo-transparent.png"
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Pamtree Social Automation",
+  "version": "1.2",
+  "description": "Pamtree Social Automation Desc",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "*://*.instagram.com/*",
+    "*://.linkedin.com/*",
+    "*://.facebook.com/*",
+    "storage"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "16": "images/icon.png",
+      "24": "images/icon.png",
+      "32": "images/icon.png",
+      "48": "images/icon.png",
+      "128": "images/icon.png"
+    },
+    "default_title": "Pamtree Social Automation Title"
+  },
+  "icons": {
+    "16": "images/icon.png",
+    "24": "images/icon.png",
+    "32": "images/icon.png",
+    "48": "images/icon.png",
+    "128": "images/icon.png"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "background": {
+    "scripts": [
+      "libs/jquery.js",
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "web/key.js"
+      ],
+      "matches": [
+        "*://app.pamtree.com/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.instagram.com/*"
+      ],
+      "js": [
+        "libs/jquery.js",
+        "contentscript/button.js",
+        "contentscript/pamtree_parser.js",
+        "contentscript/pamtree_urlaction.js",
+        "libs/jquery-ui.js",
+        "contentscript/content.js"
+      ],
+      "css": [
+        "css/button.css",
+        "css/content.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://www.linkedin.com/*",
+        "*://www.facebook.com/*"
+      ],
+      "include_globs": [
+        "*://www.linkedin.com/*",
+        "*://www.facebook.com/*"
+      ],
+      "css": [
+        "css/button.css"
+      ],
+      "js": [
+        "libs/jquery.js",
+        "contentscript/button.js",
+        "contentscript/pamtree_parser.js",
+        "contentscript/pamtree_urlaction.js",
+        "libs/jquery-ui.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    "images/*",
+    "html/*",
+    "contentscript/*"
+  ],
+  "manifest_version": 2
+}

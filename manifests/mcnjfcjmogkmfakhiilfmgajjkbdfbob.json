@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Coursera Video Helper",
+  "version": "1.0.4",
+  "manifest_version": 2,
+  "description": "Display Original and Translated subtitles at the same time. No Cover!",
+  "browser_action": {
+    "default_title": "Coursera Video Helper",
+    "default_icon": "icon.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "chromeos": "Ctrl+Shift+C",
+        "linux": "Ctrl+Shift+C",
+        "mac": "Ctrl+Shift+C",
+        "windows": "Ctrl+Shift+C"
+      }
+    }
+  },
+  "options_ui": {
+    "page": "options.html"
+  },
+  "icons": {
+    "16": "icon1.png",
+    "48": "icon1.png",
+    "128": "icon1.png"
+  },
+  "homepage_url": "https://cvh.xfav.org",
+  "permissions": [
+    "https://www.coursera.org/*",
+    "unlimitedStorage",
+    "contextMenus",
+    "cookies"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.coursera.org/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "jquery.min.js",
+        "ga.js",
+        "main.js"
+      ]
+    }
+  ]
+}

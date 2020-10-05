@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Friendly GitHub",
+  "short_name": "FGH",
+  "version": "18.9.13.2209",
+  "description": "Makes GitHub a better Social Network",
+  "homepage_url": "https://github.com/hermanya/friendly-github",
+  "manifest_version": 2,
+  "minimum_chrome_version": "58",
+  "applications": {
+    "gecko": {
+      "id": "{073711a2-ea6d-49f2-98b6-0d7ea340c06f}",
+      "strict_min_version": "55.0"
+    }
+  },
+  "permissions": [
+    "storage",
+    "contextMenus",
+    "activeTab",
+    "https://api.github.com/*"
+  ],
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "options.html",
+    "browser_style": true
+  },
+  "optional_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "icons": {
+    "128": "icon.png"
+  },
+  "options_ui": {
+    "chrome_style": true,
+    "page": "options.html"
+  },
+  "background": {
+    "scripts": [
+      "browser-polyfill.min.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "https://github.com/*",
+        "https://gist.github.com/*"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "js": [
+        "browser-polyfill.min.js",
+        "content.js"
+      ]
+    }
+  ]
+}

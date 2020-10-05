@@ -1,0 +1,75 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Boldly",
+  "short_name": "Boldly",
+  "version": "2.2.0",
+  "description": "Boldy, the intelligent browser extension, makes it easy to shop with your values and be heard",
+  "author": "myboldly.com",
+  "icons": {
+    "128": "/img/logo.png"
+  },
+  "options_ui": {
+    "chrome_style": true,
+    "open_in_tab": false,
+    "page": "/pages/options/index.html"
+  },
+  "browser_action": {
+    "default_icon": "/img/logo_grey_16.png"
+  },
+  "background": {
+    "scripts": [
+      "/lib/jquery.min.js",
+      "/lib/url.min.js",
+      "/lib/webx.js",
+      "/js/background/modules/version_upgrade_module.js",
+      "/js/background/modules/api_manager.js",
+      "/js/background/modules/auth_manager.js",
+      "/js/background/modules/browser_action_manager.js",
+      "/js/background/modules/main_background_module.js",
+      "/js/background/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "exclude_matches": [
+        "https://myboldly.com/*"
+      ],
+      "js": [
+        "/lib/jquery.min.js",
+        "/lib/webx.js",
+        "/js/content_scripts/main/modules/store_detection_module.js",
+        "/js/content_scripts/main/modules/injected_compoment_module.js",
+        "/js/content_scripts/main/modules/content_script_controller.js",
+        "/js/content_scripts/main/main.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://myboldly.com/*"
+      ],
+      "js": [
+        "/lib/jquery.min.js",
+        "/lib/webx.js",
+        "/js/content_scripts/web_app.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "storage",
+    "cookies",
+    "notifications",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "web_accessible_resources": [
+    "/*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.google-analytics.com https://www.googletagmanager.com https://apis.google.com https://www.gstatic.com/ https://cdn.firebase.com; object-src 'self'"
+}

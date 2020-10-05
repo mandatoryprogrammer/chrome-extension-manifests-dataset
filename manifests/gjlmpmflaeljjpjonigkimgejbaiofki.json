@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Kudos - Crowdfunding Campaign Verifier",
+  "short_name": "Kudos",
+  "version": "1.0.1",
+  "description": "Campaign verifier for Kickstarter and Indiegogo crowdfunding platforms.",
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "page_action": {
+    "default_icon": {
+      "16": "icon-gray-16.png",
+      "48": "icon-gray-48.png"
+    },
+    "default_title": "Open Kickstarter or Indiegogo project page to activate"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.kickstarter.com/projects*",
+        "https://*.indiegogo.com/projects*"
+      ],
+      "js": [
+        "page_script.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "permissions": [
+    "*://*.kickstarter.com/*",
+    "*://*.indiegogo.com/*",
+    "*://*.gokudos.xyz/*",
+    "*://*.httpbin.org/*",
+    "tabs"
+  ],
+  "web_accessible_resources": [
+    "popup.html",
+    "icon-rate-bad-48.png",
+    "icon-rate-bad-80.png",
+    "icon-rate-medium-48.png",
+    "icon-rate-medium-80.png",
+    "icon-rate-ok-48.png",
+    "icon-rate-ok-80.png",
+    "icon-rate-user-48.png",
+    "icon-rate-user-80.png"
+  ],
+  "icons": {
+    "16": "icon-rate-ok-16.png",
+    "48": "icon-rate-ok-48.png",
+    "128": "icon-rate-ok-128.png"
+  },
+  "manifest_version": 2
+}

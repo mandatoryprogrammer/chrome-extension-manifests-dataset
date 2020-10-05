@@ -1,0 +1,74 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Lexi",
+  "description": "Simplifies difficult words, learning each user's personal needs.",
+  "version": "0.5.0",
+  "default_locale": "da",
+  "icons": {
+    "16": "img/l16.png",
+    "48": "img/lexi48.png",
+    "128": "img/lexi128.png"
+  },
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "img/l.png",
+    "default_title": "Launch Lexi extension.",
+    "default_popup": "pages/main_menu.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "css/lexi.css"
+      ],
+      "js": [
+        "lib/jquery-3.1.1.js",
+        "config.js",
+        "lib/md5.js",
+        "lib/_languageData.js",
+        "lib/guessLanguage.js",
+        "scripts/simplify.js"
+      ],
+      "all_frames": false
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs",
+    "notifications",
+    "contextMenus"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "web_accessible_resources": [
+    "img/loading.gif",
+    "img/*png",
+    "pages/terms.html",
+    "pages/*",
+    "pages/login_form.html",
+    "pages/feedback_form.html",
+    "config.js",
+    "pages/notifier.html",
+    "pages/feedback_reminder.html",
+    "scripts/*",
+    "css/*"
+  ],
+  "commands": {
+    "run-lexi": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+L",
+        "mac": "Command+Shift+L"
+      },
+      "description": "Run Lexi"
+    }
+  }
+}

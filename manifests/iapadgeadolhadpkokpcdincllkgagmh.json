@@ -1,0 +1,77 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "MyContacts for Gmail",
+  "description": "Smarter interactions and deeper insights within your inbox.",
+  "version": "1.1.32",
+  "icons": {
+    "32": "icons/logo32.png",
+    "48": "icons/logo48.png",
+    "96": "icons/logo96.png",
+    "128": "icons/logo128.png"
+  },
+  "background": {
+    "page": "pages/background.html"
+  },
+  "web_accessible_resources": [
+    "img/*.png",
+    "img/interact_type/*.png",
+    "img/social/*.png",
+    "fonts/*.ttf",
+    "pages/*.html",
+    "views/utils/*",
+    "angular/fonts/*",
+    "/*.png"
+  ],
+  "oauth2": {
+    "client_id": "371595913454-ojcgm2ba3ir2q7o4h98r9646e4qkc5rg.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/plus.login",
+      "https://www.googleapis.com/auth/plus.profile.emails.read",
+      "https://www.googleapis.com/auth/userinfo.email"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://*.google.com https://*.facebook.com https://*.facebook.net; object-src 'self';",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "http://mail.google.com/*",
+        "https://inbox.google.com/*"
+      ],
+      "css": [
+        "angular/interact-io-common-prefixed.css",
+        "dist/main.css"
+      ],
+      "js": [
+        "dist/lib.js",
+        "jquery.base64.min.js",
+        "inboxsdk.js",
+        "content.js",
+        "dist/app.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "js": [
+        "dist/frame.js"
+      ],
+      "matches": [
+        "https://mail.google.com/*",
+        "http://mail.google.com/*"
+      ],
+      "all_frames": true,
+      "run_at": "document_idle"
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "https://www.facebook.com/",
+    "https://*.mycontacts.io/",
+    "https://*.google.com/",
+    "https://apis.google.com/js/client.js",
+    "cookies",
+    "storage",
+    "tabs"
+  ]
+}

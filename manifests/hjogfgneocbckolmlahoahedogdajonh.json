@@ -1,0 +1,82 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "CS:GO Inventory Pricer",
+  "description": "A simple utility to price individual items in a users CS:GO inventory.",
+  "version": "0.6.5",
+  "icons": {
+    "128": "logo.png"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "app/bg/background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icons/128.png"
+  },
+  "options_page": "settings/options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://steamcommunity.com/*/*/inventory/",
+        "*://steamcommunity.com/*/*/inventory"
+      ],
+      "js": [
+        "libs/jquery-2.1.1.min.js",
+        "app/update_checker.js",
+        "app/CLogger.js",
+        "app/CItem.js",
+        "app/CInventory.js",
+        "app/CData.js",
+        "app/main.js"
+      ],
+      "css": [
+        "app/css/update.css",
+        "app/css/item.css",
+        "app/css/menu.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://steamcommunity.com/*/*/tradeoffers/",
+        "*://steamcommunity.com/*/*/tradeoffers/?history=*",
+        "*://steamcommunity.com/*/*/tradeoffers"
+      ],
+      "js": [
+        "libs/jquery-2.1.1.min.js",
+        "app/update_checker.js",
+        "app/CLogger.js",
+        "app/CItem.js",
+        "app/CInventory.js",
+        "app/CData.js",
+        "app/CPartner.js",
+        "app/offers.js"
+      ],
+      "css": [
+        "app/css/update.css",
+        "app/css/item.css",
+        "app/css/menu.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://steamcommunity.com/market/listings/730/*"
+      ],
+      "js": [
+        "libs/jquery-2.1.1.min.js",
+        "app/update_checker.js",
+        "app/market.js"
+      ],
+      "css": [
+        "app/css/update.css"
+      ]
+    }
+  ]
+}

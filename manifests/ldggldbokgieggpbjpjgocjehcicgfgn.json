@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Brightpearl Extension",
+  "version": "2.15",
+  "manifest_version": 2,
+  "description": "A range of modifications to Brightpearl which extend it's existing functionality. ",
+  "homepage_url": "http://www.tamperevident.com.au/brightpearl-extension/",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "src/options_custom/lib/store.js",
+      "src/bg/background.js"
+    ],
+    "persistent": true
+  },
+  "options_page": "src/options_custom/index.html",
+  "browser_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "browser action demo",
+    "default_popup": "src/browser_action/browser_action.html"
+  },
+  "permissions": [
+    "clipboardRead",
+    "clipboardWrite",
+    "contentSettings",
+    "contextMenus"
+  ],
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": [
+        "https://*.brightpearl.com/*",
+        "https://*.brightpearlapp.com/*"
+      ],
+      "js": [
+        "src/inject/jquery-1.11.0.min.js",
+        "src/inject/inject.js",
+        "src/inject/scripts.js"
+      ],
+      "css": [
+        "css/content.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "src/inject/date-en-AU.js",
+    "src/inject/scripts.js"
+  ]
+}

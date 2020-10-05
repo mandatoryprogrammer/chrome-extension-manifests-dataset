@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_name__",
+  "description": "__MSG_description__",
+  "version": "1.3.2",
+  "minimum_chrome_version": "40",
+  "default_locale": "en",
+  "icons": {
+    "128": "icon_128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "128": "icon_128.png"
+    }
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "downloads",
+    "<all_urls>",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.tiktok.com/*"
+      ],
+      "js": [
+        "inject/utils.js",
+        "inject/inject-mobilify.js",
+        "inject/inject.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "*://*.tiktok.com/*"
+      ],
+      "js": [
+        "inject/utils.js",
+        "inject/inject-redirectToTikTok.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "web_accessible_resources": [
+    "*.css",
+    "*.js"
+  ]
+}

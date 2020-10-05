@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "disCTord",
+  "version": "1.1.4",
+  "manifest_version": 2,
+  "description": "disCTord is dedicated Discord + Christmas Town Events",
+  "homepage_url": "http://tx.glitch.me",
+  "icons": {
+    "16": "icons/iconct.png",
+    "48": "icons/iconct.png",
+    "128": "icons/iconct.png"
+  },
+  "default_locale": "en",
+  "permissions": [
+    "notifications",
+    "https://www.torn.com/*"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://*.torn.com/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.torn.com/christmas_town.php*"
+      ],
+      "css": [
+        "css/ct.css"
+      ],
+      "js": [
+        "js/jquery.js",
+        "js/moment.min.js",
+        "js/tornlib.js",
+        "js/socket.io.js",
+        "js/isMobile.js",
+        "js/ct.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://www.torn.com/item.php*"
+      ],
+      "js": [
+        "js/socket.io.js",
+        "js/test.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "listener/interceptor.js"
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "PIE (Literacy Edition)",
+  "version": "8.3.79",
+  "description": "Show English word pronunciation by diacritics to American children learning to read. Only a one-page scheme to learn.",
+  "minimum_chrome_version": "18",
+  "homepage_url": "https://sites.google.com/site/phoneticallyintuitiveenglish/",
+  "options_page": "options.html",
+  "web_accessible_resources": [
+    "fonts/CherryPIE-R.woff",
+    "fonts/CherryPIE-I.woff",
+    "fonts/CherryPIE-B.woff",
+    "fonts/CherryPIE-BI.woff",
+    "scheme/PIE_Literacy_Chart.pdf"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "<all_urls>",
+    "contextMenus"
+  ],
+  "optional_permissions": [
+    "clipboardWrite"
+  ],
+  "browser_action": {
+    "name": "PIE Transformer",
+    "default_icon": "pie0.png"
+  },
+  "icons": {
+    "48": "pie_48.png",
+    "128": "pie_128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "startscript.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "mutation_summary.js",
+        "contentscript.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "manifest_version": 2
+}

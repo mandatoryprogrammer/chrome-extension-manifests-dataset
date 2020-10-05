@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "short_name": "__MSG_appShortName__",
+  "description": "__MSG_appDescription__",
+  "version": "2008.0.0.388",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "browser_action": {
+    "default_icon": {
+      "16": "images/icon_action_16.png",
+      "24": "images/icon_action_24.png",
+      "32": "images/icon_action_32.png"
+    },
+    "default_popup": "views/popup.html"
+  },
+  "icons": {
+    "16": "images/icon_16.png",
+    "48": "images/icon_48.png",
+    "128": "images/icon_128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://mail.google.com/*",
+        "https://mail.google.com/*",
+        "https://calendar.google.com/*",
+        "https://www.google.com/calendar/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "scripts/contentscript.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "scripts/vendor/jquery-2.1.4.js",
+      "scripts/background.js"
+    ]
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' 'sha256-EjHRdP6XCVTUHhagNrBY9Isjim2e0CmKW/Mu+v5+yhA=' https://az416426.vo.msecnd.net; object-src 'self'",
+  "permissions": [
+    "storage",
+    "https://calendar.google.com/*",
+    "https://mail.google.com/*",
+    "https://az416426.vo.msecnd.net/*"
+  ],
+  "web_accessible_resources": [
+    "scripts/vendor/ai.0.js",
+    "scripts/popup.js",
+    "scripts/vendor/jquery-2.1.4.js",
+    "scripts/vendor/underscore.js",
+    "scripts/vendor/gmail.js",
+    "scripts/chrome.bundle.js",
+    "images/icon_128.png",
+    "views/main.html"
+  ]
+}

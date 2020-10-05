@@ -1,0 +1,94 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_extension_name__",
+  "version": "6.3.0.0",
+  "version_name": "Explorer 34",
+  "description": "__MSG_extension_description__",
+  "permissions": [
+    "tabs",
+    "contextMenus",
+    "storage",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "background": {
+    "scripts": [
+      "vendor/jquery.js",
+      "vendor/jquery.shortcuts.js",
+      "shortener.js",
+      "lib/quicky.js",
+      "lib/shrservices.js",
+      "SocialHistory.js",
+      "background.js",
+      "context_menu.js"
+    ]
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "content_script_install_keybindings.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "app/content_script_always.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "*://*.shareaholic.com/*",
+        "*://*.stageaholic.com/*",
+        "*://*.spreadaholic.com/*"
+      ],
+      "js": [
+        "content_script_backend.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "css/quicky.css"
+      ],
+      "js": [
+        "vendor/jquery.js",
+        "app/quick_share.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    "images/shareaholic_button_230_bw.png",
+    "explorer/guest.js"
+  ],
+  "icons": {
+    "16": "images/shareaholic_16x16.png",
+    "32": "images/shareaholic_32x32.png",
+    "48": "images/shareaholic_48x48.png",
+    "128": "images/shareaholic_128x128.png"
+  },
+  "browser_action": {
+    "default_title": "Shareaholic",
+    "default_icon": "images/shareaholic_16x16_bw.png",
+    "default_popup": "popup.html"
+  },
+  "default_locale": "en"
+}

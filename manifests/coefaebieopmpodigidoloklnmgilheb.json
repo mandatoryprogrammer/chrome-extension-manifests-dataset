@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "WTR for World of Warships Forum",
+  "version": "0.1.7",
+  "manifest_version": 2,
+  "description": "Colors players' nicknames based on their WRT or ProAlfa ranking. Displays the name of the clan of the player",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "64": "icons/icon64.png",
+    "128": "icons/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon64.png",
+      "64": "icons/icon64.png",
+      "128": "icons/icon128.png"
+    },
+    "default_popup": "background/popup.html"
+  },
+  "settings": {
+    "remoteCache": "",
+    "minimalCacheVersion": "0.0.10"
+  },
+  "applications": {
+    "gecko": {
+      "id": "{1a8ac391-09a6-4526-b18c-55d84001791f}"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.forum.worldofwarships.ru/topic/*",
+        "*://*.forum.worldofwarships.eu/topic/*",
+        "*://*.forum.worldofwarships.com/topic/*",
+        "*://*.forum.worldofwarships.asia/topic/*"
+      ],
+      "js": [
+        "js/zepto.min.js",
+        "content/WTR.js",
+        "content/ProAlfa.js",
+        "content/content.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "storage",
+    "*://*.forum.worldofwarships.ru/topic/*",
+    "*://*.forum.worldofwarships.eu/topic/*",
+    "*://*.forum.worldofwarships.com/topic/*",
+    "*://*.forum.worldofwarships.asia/topic/*",
+    "*://*.warships.today/*",
+    "https://cors-anywhere.herokuapp.com/*",
+    "https://api.worldofwarships.ru/wows/*",
+    "https://api.worldofwarships.eu/wows/*",
+    "https://api.worldofwarships.com/wows/*",
+    "https://api.worldofwarships.asia/wows/*"
+  ]
+}

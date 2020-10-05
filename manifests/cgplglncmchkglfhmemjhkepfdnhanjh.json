@@ -1,0 +1,80 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_extName__",
+  "version": "0.24",
+  "description": "Personalize Google Chrome and store your preferences in the Cloud",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "<all_urls>"
+      ],
+      "js": [
+        "lib/jquery-1.9.1.min.js",
+        "js/simplifier.js",
+        "js/synonyms_en.js",
+        "js/sinonimos_es.js",
+        "lib/socket.io.js",
+        "content.js"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon19.png",
+      "38": "images/icon38.png"
+    },
+    "default_title": "__MSG_popupDefaultTitle__",
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "windows": "Ctrl+Shift+4",
+        "mac": "Command+4",
+        "chromeos": "Ctrl+4",
+        "linux": "Ctrl+4"
+      }
+    }
+  },
+  "permissions": [
+    "tabs",
+    "tts",
+    "storage",
+    "management",
+    "notifications",
+    "http://preferences.gpii.net/",
+    "http://127.0.0.1:8081/",
+    "http://flowmanager.gpii.net/",
+    "http://en.wikipedia.org/",
+    "http://*/*",
+    "https://*/*",
+    "<all_urls>"
+  ],
+  "web_accessible_resources": [
+    "lib/jquery-1.9.1.min.js",
+    "js/simplifier.js",
+    "images/arrow_icon_large.png",
+    "images/arrow_icon_x_large.png",
+    "images/hand_icon_large.png",
+    "images/hand_icon_x_large.png"
+  ],
+  "content_security_policy": "script-src 'self' http://localhost:8081; object-src 'self'"
+}

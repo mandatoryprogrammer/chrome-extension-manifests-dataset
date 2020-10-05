@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "TorGuard VPN Extension",
+  "description": "Hide your IP, block ads and override HTML5 Geolocation using Torguard Proxy",
+  "version": "1.4.1",
+  "manifest_version": 2,
+  "homepage_url": "https://torguard.net",
+  "background": {
+    "scripts": [
+      "lib/jquery-3.2.1.min.js",
+      "tools.js",
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "proxy",
+    "privacy",
+    "<all_urls>",
+    "webRequest",
+    "geolocation",
+    "webNavigation",
+    "webRequestBlocking"
+  ],
+  "icons": {
+    "128": "images/icon/120.png",
+    "16": "images/icon/120.png"
+  },
+  "browser_action": {
+    "default_icon": "images/icon/disconnected.png",
+    "default_title": "TorGuard VPN Extension",
+    "default_popup": "popup/popup.html"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "geo_override.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "lib/*",
+    "images/*"
+  ]
+}

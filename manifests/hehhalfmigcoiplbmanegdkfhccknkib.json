@@ -1,0 +1,41 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Rizzoma Research Sidebar",
+  "version": "0.176",
+  "manifest_version": 2,
+  "description": "Write down immediately what matters to you while you're reading on the net. Easily organize and improve your findings with others.",
+  "icons": {
+    "48": "sidebar-icon-48x48.png",
+    "128": "sidebar-icon.png"
+  },
+  "browser_action": {
+    "default_icon": "sidebar-icon.png"
+  },
+  "background": {
+    "page": "rizzoma-background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://rizzoma.com/*",
+        "https://rizzoma.com/*"
+      ],
+      "js": [
+        "js/lib/jquery-1.8.2.js",
+        "js/rizzoma-iframe/remember-last-url.js",
+        "js/rizzoma-iframe/style-desktop-iframe.js",
+        "js/rizzoma-iframe/google-analytics-track-pageview.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "css/current-page/rizzoma-i-frame.css"
+  ],
+  "permissions": [
+    "storage",
+    "tabs",
+    "<all_urls>"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

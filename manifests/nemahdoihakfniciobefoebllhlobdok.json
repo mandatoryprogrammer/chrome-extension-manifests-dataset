@@ -1,0 +1,68 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "author": "https://secure.join.me/",
+  "manifest_version": 2,
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyu82P+WjkpbodlycN9rJSM4vVIRNHKLNzAiQ1zYv/KyhRzW93+3nfYLPCd8zJQNqrlDoBMgD4FMFDMO0hKdalya+jk7okXH/orbA4oBriMZDFwRNUVZtgdP+vsiBg1mmyjSkCr+9WFZ7o9vom5RoSvLU4ZAsT2YPztUSlXoS+ZN+Kbvk66tSbgLdjF5FOoiUJQKQJQ7dmvolYZEJaaWVpLlWQfeTUTTtKnmwOMF3Il4/ySFvfwrb1rLtpmn0ENT1Ij1ebO8MrxXULK1IsrTmjGTZbTScYPCdgX7/l/8UOR7eaV/0vQubGfx1sVQweJShRznyS+LmjHYPG0Vq6Aoi6wIDAQAB",
+  "name": "join.me for Google Calendar",
+  "description": "Schedule join.me meetings in Google Calendar",
+  "version": "2.0.1261",
+  "icons": {
+    "16": "img/jm-logomark-16.png",
+    "48": "img/jm-logomark-48.png",
+    "128": "img/jm-logo-128.png"
+  },
+  "web_accessible_resources": [
+    "callback.html",
+    "img/*"
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.calendar.google.com/calendar/render*",
+        "*://www.calendar.google.com/calendar/*/render*",
+        "*://www.calendar.google.com/calendar/*/*/render*",
+        "*://calendar.google.com/render*",
+        "*://calendar.google.com/*/render*",
+        "*://calendar.google.com/*/*/render*",
+        "*://www.calendar.google.com/calendar/*",
+        "*://calendar.google.com/calendar/*"
+      ],
+      "js": [
+        "js/content.js"
+      ],
+      "css": [
+        "css/content.css"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "img/jm-icon.png",
+      "38": "img/jm-icon.png"
+    },
+    "default_popup": "launchpad.html"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://cdn.segment.io https://*.join.me https://*.google-analytics.com https://cdn.mxpnl.com https://*.3amlabs.net; object-src 'self'",
+  "permissions": [
+    "cookies",
+    "tabs",
+    "storage",
+    "webRequest",
+    "https://accounts.google.com/o/oauth2/auth",
+    "https://*.3amlabs.net/",
+    "https://*.join.me/",
+    "https://*.logme.in/",
+    "https://cdn.segment.io/",
+    "https://calendar.google.com/",
+    "https://*.calendar.google.com/"
+  ]
+}

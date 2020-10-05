@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "background": {
+    "page": "background.html"
+  },
+  "manifest_version": 2,
+  "name": "Manilla - Auto Login ",
+  "version": "2.0.28",
+  "description": "Manilla Auto Login",
+  "icons": {
+    "16": "images/icon16.png",
+    "32": "images/icon32.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "default_locale": "en_US",
+  "permissions": [
+    "tabs",
+    "http://*.manilla.com/*",
+    "https://*.manilla.com/*",
+    "http://*.lastpass.com/*",
+    "https://*.lastpass.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*"
+      ],
+      "js": [
+        "onloadwff.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "csp.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    }
+  ]
+}

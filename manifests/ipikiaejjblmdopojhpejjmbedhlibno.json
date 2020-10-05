@@ -1,0 +1,104 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_app_name__",
+  "description": "__MSG_app_description__",
+  "default_locale": "en",
+  "version": "3.4.2.2",
+  "permissions": [
+    "contextMenus",
+    "activeTab",
+    "storage"
+  ],
+  "optional_permissions": [
+    "tabs",
+    "https://read.amazon.com/",
+    "https://read.amazon.co.uk/",
+    "https://read.amazon.ca/",
+    "https://read.amazon.de/",
+    "https://read.amazon.fr/",
+    "https://read.amazon.co.jp/",
+    "https://read.amazon.br/",
+    "https://read.amazon.at/",
+    "https://read.amazon.it/",
+    "https://read.amazon.es/",
+    "https://read.amazon.cn/",
+    "https://read.amazon.com.mx/",
+    "https://read.amazon.com.au/",
+    "https://read.amazon.nl/",
+    "https://read.amazon.in/",
+    "https://leer.amazon.es/",
+    "https://lire.amazon.fr/",
+    "https://lesen.amazon.de/",
+    "https://leggi.amazon.it/",
+    "https://leer.amazon.com.mx/"
+  ],
+  "background": {
+    "scripts": [
+      "jquery.js",
+      "js/settings_store.js",
+      "background.js",
+      "identify.js"
+    ]
+  },
+  "commands": {
+    "open-spreed": {
+      "suggested_key": {
+        "default": "Alt+V"
+      },
+      "description": "Open Spreed, auto extract content"
+    }
+  },
+  "browser_action": {
+    "default_icon": "book128.png",
+    "default_popup": "spreedMenu.html"
+  },
+  "icons": {
+    "16": "book16.png",
+    "48": "book48.png",
+    "128": "book128.png"
+  },
+  "web_accessible_resources": [
+    "close_icon.png",
+    "book24.png"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://read.amazon.com/",
+        "https://read.amazon.co.uk/",
+        "https://read.amazon.ca/",
+        "https://read.amazon.de/",
+        "https://read.amazon.fr/",
+        "https://read.amazon.co.jp/",
+        "https://read.amazon.br/",
+        "https://read.amazon.at/",
+        "https://read.amazon.it/",
+        "https://read.amazon.es/",
+        "https://read.amazon.cn/",
+        "https://read.amazon.com.mx/",
+        "https://read.amazon.com.au/",
+        "https://read.amazon.nl/",
+        "https://read.amazon.in/",
+        "https://leer.amazon.es/",
+        "https://lire.amazon.fr/",
+        "https://lesen.amazon.de/",
+        "https://leggi.amazon.it/",
+        "https://leer.amazon.com.mx/"
+      ],
+      "js": [
+        "js/spreed_button_overlay.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://js.stripe.com https://ssl.google-analytics.com https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net https://*.uservoice.com https://cdn.firebase.com https://*.firebaseio.com; object-src 'self'",
+  "file_browser_handlers": [
+    {
+      "id": "open-as-pdf",
+      "default_title": "Open PDF with Spreed",
+      "file_filters": [
+        "filesystem:*.pdf"
+      ]
+    }
+  ],
+  "manifest_version": 2
+}

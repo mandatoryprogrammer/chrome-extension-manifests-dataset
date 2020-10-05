@@ -1,0 +1,120 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "vCS Click-to-Call Extension",
+  "short_name": "vCS",
+  "version": "1.4",
+  "description": "vCS - Cloud Call Center",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "declarativeContent",
+    "storage",
+    "contextMenus",
+    "notifications"
+  ],
+  "icons": {
+    "16": "images/icon-16.png",
+    "19": "images/icon-19.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
+  },
+  "background": {
+    "scripts": [
+      "js/libraries/jquery.js",
+      "js/libraries/socket.io.js",
+      "js/constant.js",
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "images/icon-16.png",
+      "32": "images/icon-32.png"
+    },
+    "default_title": "vCS Click To Call",
+    "default_popup": "html/popup.html"
+  },
+  "web_accessible_resources": [
+    "js/libraries/*",
+    "html/popup.html",
+    "images/icon-phone.png",
+    "images/icon-48.jpg",
+    "images/icon-22.jpg",
+    "images/hubspot/contact.svg",
+    "images/hubspot/phone.svg",
+    "images/hubspot/view.svg",
+    "images/hubspot/newtab.svg",
+    "images/hubspot/create.svg",
+    "images/hubspot/mail.svg",
+    "images/hubspot/job.svg",
+    "images/hubspot/lastcontacted.svg",
+    "images/hubspot/life.svg",
+    "images/pipedrive/contact.svg",
+    "images/pipedrive/phone.svg",
+    "images/pipedrive/view.svg",
+    "images/pipedrive/newtab.svg",
+    "images/pipedrive/create.svg",
+    "images/pipedrive/mail.svg",
+    "images/pipedrive/job.svg",
+    "images/pipedrive/lastcontacted.svg",
+    "images/pipedrive/life.svg"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://o365-vcs.herokuapp.com/*"
+      ],
+      "js": [
+        "js/libraries/chrome-ex-oauth2/injection.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://app.hubspot.com/*"
+      ],
+      "js": [
+        "js/libraries/jquery.js",
+        "js/hubspot/hubspot.js"
+      ],
+      "css": [
+        "css/libraries/bootstrap.min.css",
+        "css/hubspot/hubspot.css"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*.pipedrive.com/*"
+      ],
+      "js": [
+        "js/libraries/jquery.js",
+        "js/pipedrive/pipedrive.js"
+      ],
+      "css": [
+        "css/pipedrive/pipedrive.css"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/libraries/jquery.js",
+        "js/utils.js",
+        "js/libraries/libphonenumber.js",
+        "js/content_page.js"
+      ],
+      "css": [
+        "css/content_page.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "manifest_version": 2
+}

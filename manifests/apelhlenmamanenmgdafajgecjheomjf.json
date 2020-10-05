@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Lightning Admin Menu",
+  "version": "1.0",
+  "description": "A simple drop-down to make navigating Lightning a bit easier.",
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.lightning.force.com/*"
+      ],
+      "js": [
+        "thirdParty/jquery-3.3.1.min.js",
+        "lightningContentScript.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://workbench.developerforce.com/login.php*"
+      ],
+      "js": [
+        "thirdParty/jquery-3.3.1.min.js",
+        "workbenchContentScript.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "icons": {
+    "16": "images/icon_16.png",
+    "32": "images/icon_32.png",
+    "48": "images/icon_48.png",
+    "128": "images/icon_128.png"
+  },
+  "page_action": {
+    "default_icon": {
+      "16": "images/icon_16.png",
+      "32": "images/icon_32.png",
+      "48": "images/icon_48.png",
+      "128": "images/icon_128.png"
+    }
+  },
+  "manifest_version": 2
+}

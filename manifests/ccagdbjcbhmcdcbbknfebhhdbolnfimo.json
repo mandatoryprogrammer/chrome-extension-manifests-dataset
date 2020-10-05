@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Coin-Hive Blocker",
+  "description": "Save your computer from CryptoJackers",
+  "version": "0.18",
+  "permissions": [
+    "tabs",
+    "storage",
+    "<all_urls>",
+    "webRequest",
+    "webRequestBlocking",
+    "https://raw.githubusercontent.com/andreas0607/CoinHive-blocker/master/*",
+    "system.cpu",
+    "notifications",
+    "https://nor.app/*"
+  ],
+  "optional_permissions": [
+    "identity",
+    "identity.email"
+  ],
+  "icons": {
+    "128": "128.png"
+  },
+  "browser_action": {
+    "default_icon": "128.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "bg.js"
+    ],
+    "persistent": true
+  },
+  "web_accessible_resources": [
+    "popup.js",
+    "popup.html",
+    "upgrade.svg",
+    "blacklist.json",
+    "patterns.js"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://nor.app/blockguide"
+      ],
+      "js": [
+        "patterns.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "manifest_version": 2
+}

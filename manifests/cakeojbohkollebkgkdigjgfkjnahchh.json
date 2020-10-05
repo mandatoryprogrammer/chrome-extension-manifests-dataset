@@ -1,0 +1,74 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "lama",
+  "short_name": "lama",
+  "description": "Accès en 1 clic aux ressources des bibliothèques de l'Université d'Aix-Marseille.",
+  "version": "0.8",
+  "icons": {
+    "16": "img/1x.png",
+    "32": "img/1x.png",
+    "48": "img/1x.png",
+    "64": "img/1x.png",
+    "128": "img/2x.png"
+  },
+  "browser_action": {
+    "default_title": "lama",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "js/vendors/jquery.min.js",
+      "js/lama/geturls.js",
+      "js/lama/eventPage.js",
+      "js/lama/notificationbackground.js",
+      "js/smash/tabBootstrapbackgroud.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>",
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/vendors/jquery.min.js",
+        "js/smash/tabBootstrapcontent.js"
+      ],
+      "css": [
+        "css/main.css",
+        "css/fontawesome.css",
+        "css/solid.css"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>",
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/vendors/jquery.min.js"
+      ]
+    }
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "permissions": [
+    "alarms",
+    "webNavigation",
+    "notifications",
+    "tabs",
+    "storage",
+    "*://*/*"
+  ],
+  "web_accessible_resources": [
+    "notification.html",
+    "notification.html",
+    "suggestedsites.html",
+    "webfonts/*.woff*"
+  ]
+}

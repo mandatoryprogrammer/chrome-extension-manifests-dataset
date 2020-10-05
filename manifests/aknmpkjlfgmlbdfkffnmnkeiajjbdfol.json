@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Shadow Legion",
+  "version": "2.4.0",
+  "description": "Augments the player's experience of the Shadow Legion event in the PBBG, Bloodletting.",
+  "icons": {
+    "16": "images/logo-16.png",
+    "32": "images/logo-32.png",
+    "48": "images/logo-48.png",
+    "128": "images/logo-128.png"
+  },
+  "permissions": [
+    "storage",
+    "http://bloodletting.mordentware.com/"
+  ],
+  "web_accessible_resources": [
+    "images/*.png"
+  ],
+  "background": {
+    "scripts": [
+      "env.js",
+      "common.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://bloodletting.org/*",
+        "http://*.bloodletting.org/*"
+      ],
+      "exclude_matches": [
+        "http://damnation.bloodletting.org/",
+        "http://damnation.bloodletting.org/*",
+        "http://m.bloodletting.org/",
+        "http://m.bloodletting.org/*"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "js": [
+        "env.js",
+        "common.js",
+        "content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

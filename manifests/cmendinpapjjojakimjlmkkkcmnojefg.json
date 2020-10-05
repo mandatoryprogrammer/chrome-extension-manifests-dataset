@@ -1,0 +1,77 @@
+{
+  "name": "McAfee SiteAdvisor Enterprise",
+  "version": "3.5.0.1275",
+  "manifest_version": 2,
+  "description": "McAfee SiteAdvisor Enterprise",
+  "icons": {
+    "128": "Resources/128.png"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "page_action": {
+    "default_icon": "Resources/nb_button_grey.gif",
+    "default_popup": "popup.html",
+    "default_title": "McAfee SiteAdvisor Enterprise"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "ContentScript.js"
+      ],
+      "exclude_matches": [
+        "*://www.mcafee.com/SAE*",
+        "*://www.mcafee.com/SAE*"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "ContentOnDocStart.js"
+      ],
+      "exclude_matches": [
+        "*://www.mcafee.com/SAE*",
+        "*://www.mcafee.com/SAE*"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "WarnBlockContentScript.js"
+      ],
+      "matches": [
+        "*://www.mcafee.com/SAE*",
+        "*://www.mcafee.com/SAE*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "chrome://*",
+    "nativeMessaging"
+  ],
+  "web_accessible_resources": [
+    "Resources/mcafee.gif"
+  ]
+}

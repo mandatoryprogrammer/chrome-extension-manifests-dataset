@@ -1,0 +1,85 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Prospector by Growlabs",
+  "version": "3.2.2",
+  "description": "Easily prospect, find email addresses, and research companies on any website. Also works directly in Salesforce, or in Hubspot CRM.",
+  "icons": {
+    "16": "img/favicon-16x16.png",
+    "32": "img/favicon-32x32.png",
+    "128": "img/favicon-128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "img/favicon-16x16.png",
+      "32": "img/favicon-32x32.png"
+    },
+    "default_title": "Prospector by Growlabs"
+  },
+  "options_page": "settings.html",
+  "author": "Growlabs/Brandon Thomas <brandon@growlabs.com>",
+  "background": {
+    "scripts": [
+      "./vendors.js",
+      "./background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/**/*",
+        "https://inbox.google.com/**/*"
+      ],
+      "run_at": "document_end",
+      "all_frames": false,
+      "js": [
+        "./inboxsdk.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end",
+      "all_frames": false,
+      "js": [
+        "./vendors.js",
+        "./frame.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.linkedin.com/*",
+        "https://mail.google.com/mail/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "vendors.js",
+        "./inspector.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "storage",
+    "tabs",
+    "*://*.growlabs.com/*",
+    "clipboardWrite",
+    "*://*.clearbit.com/*",
+    "webNavigation"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.growlabs.com/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "img/*",
+    "font/*",
+    "fonts/*",
+    "popup.html",
+    "web.html",
+    "vendors.js"
+  ]
+}

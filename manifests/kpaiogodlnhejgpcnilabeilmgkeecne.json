@@ -1,0 +1,85 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_name__",
+  "description": "__MSG_description__",
+  "default_locale": "en",
+  "icons": {
+    "128": "img/128.png",
+    "64": "img/64.png",
+    "32": "img/32.png"
+  },
+  "browser_action": {
+    "default_icon": "img/64.png",
+    "default_title": "__MSG_name__"
+  },
+  "background": {
+    "scripts": [
+      "js/lib/jquery.min.js",
+      "js/storage.js",
+      "js/background.js",
+      "js/ga.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "js": [
+        "js/ua.js"
+      ],
+      "matches": [
+        "*://www.instagram.com/*"
+      ]
+    },
+    {
+      "js": [
+        "js/rate.js"
+      ],
+      "css": [
+        "css/rate.css"
+      ],
+      "matches": [
+        "*://www.instagram.com/*"
+      ]
+    },
+    {
+      "css": [
+        "css/content.css"
+      ],
+      "js": [
+        "js/lib/jquery.min.js",
+        "js/storage.js",
+        "js/content.js"
+      ],
+      "matches": [
+        "*://www.instagram.com/*"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "all_frames": true,
+      "js": [
+        "js/instaLinkListener.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "<all_urls>",
+    "tabs",
+    "storage",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "optional_permissions": [
+    "notifications"
+  ],
+  "options_page": "options.html",
+  "web_accessible_resources": [
+    "img/*",
+    "css/*"
+  ],
+  "manifest_version": 2,
+  "version": "2.0.16",
+  "content_security_policy": "script-src 'self' http://localhost:3000 https://ssl.google-analytics.com; object-src 'self'"
+}

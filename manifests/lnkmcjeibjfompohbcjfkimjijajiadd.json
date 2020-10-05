@@ -1,0 +1,42 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "TFS Chat Extensions",
+  "version": "0.1.5",
+  "manifest_version": 2,
+  "background": {
+    "scripts": [
+      "/src/store.js",
+      "/src/main.js"
+    ]
+  },
+  "description": "Add-ons to the TFS Team Rooms (code syntax highlighting, pop-up noticiations, etc.)",
+  "homepage_url": "https://github.com/nuts4dotnet/TFSChatExtensions",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/_rooms*",
+        "*://*/*/_rooms*"
+      ],
+      "js": [
+        "src/bg/background.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "/src/bg/TeamRoomScript.js"
+  ],
+  "options_page": "src/options_custom/index.html",
+  "permissions": [
+    "contentSettings",
+    "tts",
+    "ttsEngine",
+    "notifications",
+    "https://*.visualstudio.com/_rooms*"
+  ]
+}

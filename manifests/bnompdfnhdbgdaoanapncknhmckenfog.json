@@ -1,0 +1,71 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Email Tracker",
+  "version": "4.0.57",
+  "description": "Find out if your Emails get Read. Email Tracking for Gmail, Outlook / Hotmail, Google Inbox, G Suite, Office 365, & Yahoo Mail.",
+  "manifest_version": 2,
+  "icons": {
+    "128": "image/icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.mail.google.com/*",
+        "*://*.inbox.google.com/*",
+        "*://*.mail.live.com/*",
+        "*://*.outlook.live.com/*",
+        "*://*.outlook.office.com/*",
+        "*://*.outlook.office365.com/*",
+        "*://*.mail.yahoo.com/*"
+      ],
+      "js": [
+        "lib/global.js",
+        "lib/xtion.js",
+        "lib/moment/moment.min.js",
+        "lib/moment/moment-timezone-with-data.min.js",
+        "lib/gmailsdk.js",
+        "content.js"
+      ],
+      "css": [
+        "css/content.css"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "page": "background.html"
+  },
+  "permissions": [
+    "<all_urls>",
+    "tabs",
+    "storage",
+    "cookies",
+    "webRequest",
+    "webRequestBlocking",
+    "gcm",
+    "notifications",
+    "unlimitedStorage"
+  ],
+  "web_accessible_resources": [
+    "image/loading.gif",
+    "image/loading_white.gif",
+    "image/upgrade.jpg",
+    "image/icon/desktop.png",
+    "image/icon/phone.png",
+    "image/icon/tablet.png",
+    "image/icon/tv.png",
+    "lib/gmail.js",
+    "lib/outlook.js",
+    "lib/outlook2.js",
+    "lib/yahoo.js",
+    "lib/yahoo2.js"
+  ],
+  "browser_action": {
+    "default_icon": "image/icon_inactive.38.png",
+    "default_title": "Email Tracker",
+    "default_popup": "popup.html"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.gstatic.com https://www.google-analytics.com/analytics.js; object-src 'self'",
+  "default_locale": "en"
+}

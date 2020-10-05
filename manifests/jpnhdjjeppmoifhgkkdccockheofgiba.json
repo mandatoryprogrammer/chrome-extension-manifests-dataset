@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "short_name": "Salesmsg",
+  "name": "Salesmsg - Business Text Messaging",
+  "author": "Salesmsg",
+  "version": "1.2.8",
+  "description": "Salesmsg makes it easy to send, receive, and manage SMS text and MMS picture message conversations using real local phone numbers.",
+  "browser_action": {
+    "default_popup": "index.html"
+  },
+  "content_security_policy": "script-src 'self' 'sha256-GgRxrVOKNdB4LrRsVPDSbzvfdV4UqglmviH9GoBJ5jk='; object-src 'self'",
+  "icons": {
+    "16": "img/logo.png",
+    "48": "img/logo@2x.png",
+    "128": "img/logo@3x.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "oauth2": {
+    "auth_url": "https://app.salesmessage.com/auth/oauth",
+    "redirect_url": "https://app.salesmessage.com/redirect",
+    "number_url": "https://app.salesmessage.com/extension?phone=",
+    "client_id": "10",
+    "scopes": [
+      "user",
+      "contact",
+      "message"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://app.salesmessage.com/redirect"
+      ],
+      "js": [
+        "auth.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://app.hubspot.com/*"
+      ],
+      "js": [
+        "highlight.js"
+      ],
+      "css": [
+        "highlight.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "permissions": [
+    "identity",
+    "storage",
+    "tabs",
+    "https://*.salesmessage.com/*"
+  ]
+}

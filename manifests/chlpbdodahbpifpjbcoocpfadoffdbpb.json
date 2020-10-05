@@ -1,0 +1,77 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Slope Unblocked Game <",
+  "description": "Slope is a popular running 3D game. Enjoy endless Slope unblocked and test your reflection skills",
+  "icons": {
+    "128": "img/128.png",
+    "48": "img/48.png"
+  },
+  "version": "1.1",
+  "background": {
+    "scripts": [
+      "urls.js",
+      "background.js",
+      "events.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "unlimitedStorage",
+    "https://*/*",
+    "http://*/*",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "web_accessible_resources": [
+    "img/*",
+    "unity.css"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://search.yahoo.com/*",
+        "https://us.search.yahoo.com/*"
+      ],
+      "js": [
+        "search/engine.js"
+      ],
+      "include_globs": [
+        "*unblocked*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.google.com/*",
+        "https://www.google.us/*"
+      ],
+      "js": [
+        "search/engine.js"
+      ],
+      "include_globs": [
+        "*unblocked*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://bitbucket.org/slooope/game/raw/473ed691287d2b257560788c22703c4967143522/index.html"
+      ],
+      "js": [
+        "urls.js",
+        "unity.js"
+      ],
+      "css": [
+        "unity.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "browser_action": {
+    "default_title": "Slope 3D Game"
+  },
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "QUT Timetable Planner",
+  "version": "2.1.0",
+  "description": "Plan your perfect timetable with this free open-source utility for QUT students.",
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "notifications",
+    "https://qutvirtual3.qut.edu.au/*"
+  ],
+  "background": {
+    "scripts": [
+      "js/launch.js"
+    ]
+  },
+  "browser_action": {
+    "default_title": "QUT Timetable Planner"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://qutvirtual3.qut.edu.au/qv/ttab_student_p.show",
+        "https://qutvirtual3.qut.edu.au/*/ttab_unit_search_p.process_search*"
+      ],
+      "css": [
+        "css/inject.css"
+      ],
+      "js": [
+        "lib/jquery/dist/jquery.min.js",
+        "lib/crel/crel.min.js",
+        "js/inject.js",
+        "js/extract.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://estudent.qut.edu.au/T1SMSAMSPRD/WebApps/eStudent/SM/StuTtable10.aspx*"
+      ],
+      "css": [
+        "css/inject.css"
+      ],
+      "js": [
+        "lib/jquery/dist/jquery.min.js",
+        "lib/crel/crel.min.js",
+        "js/estudent.js",
+        "js/extract.js"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com https://query.yahooapis.com/; object-src 'self'",
+  "manifest_version": 2,
+  "minimum_chrome_version": "46"
+}

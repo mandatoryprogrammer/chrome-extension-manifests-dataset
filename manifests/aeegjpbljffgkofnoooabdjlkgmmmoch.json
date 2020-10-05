@@ -1,0 +1,98 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Preview app",
+  "description": "L'extension Preview permet de créer des tickets sur n'importe quelle page existante en quelques secondes seulement.",
+  "version": "2.1.6",
+  "author": "Preview.team",
+  "browser_action": {
+    "default_icon": "/public/img/icon16-faded.png",
+    "default_popup": "/popup/index.html",
+    "default_title": "Preview",
+    "browser_style": true
+  },
+  "default_locale": "fr",
+  "icons": {
+    "128": "/public/img/icon128.png",
+    "32": "/public/img/icon32.png",
+    "48": "/public/img/icon48.png",
+    "16": "/public/img/icon16.png"
+  },
+  "options_ui": {
+    "page": "/options/index.html"
+  },
+  "background": {
+    "scripts": [
+      "/node_modules/recordrtc/RecordRTC.min.js",
+      "/node_modules/ua-parser-js/dist/ua-parser.min.js",
+      "/config.js",
+      "/config-chrome.js",
+      "/background/bg/bg-device.js",
+      "/background/bg/bg-issue.js",
+      "/background/bg/bg-pimages.js",
+      "/background/bg/bg-login.js",
+      "/background/bg/bg-preview.js",
+      "/background/bg/bg-projects.js",
+      "/background/bg/bg-video.js",
+      "/background/bg/bg-xmlHttp.js",
+      "/background/function_cs.js",
+      "/background/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [
+        "/public/css/style-content-tab.css",
+        "/public/css/font-face/preview-custom-fontello.css",
+        "/public/css/font-face/open-sans.css"
+      ],
+      "js": [
+        "/config.js",
+        "/config-chrome.js",
+        "/tabs/content_script.js",
+        "/tabs/cs/cs-issue.js",
+        "/tabs/cs/issue-actions/cs-issue-init.js",
+        "/tabs/cs/issue-actions/cs-issue-save.js",
+        "/tabs/cs/issue-actions/cs-issue-paint.js",
+        "/tabs/cs/issue-actions/cs-issue-screenshot.js",
+        "/tabs/cs/issue-actions/cs-issue-select.js",
+        "/tabs/cs/issue-actions/cs-issue-show.js",
+        "/tabs/cs/issue-actions/cs-issue-video.js",
+        "/tabs/cs/cs-device.js",
+        "/tabs/cs/cs-video.js",
+        "/tabs/cs/cs-pages.js",
+        "/tabs/cs/cs-issuelist.js",
+        "/tabs/cs/cs-screenshot.js",
+        "/tabs/cs/cs-newissue.js",
+        "/tabs/cs/cs-issuePaint.js",
+        "/tabs/cs/cs-logs.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "public/*",
+    "public/*/*",
+    "node_modules/*",
+    "tabs/ng/js/*/*",
+    "tabs/*/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.shou.lan/*",
+      "*://*.picathena.com/*",
+      "*://*.fides.io/*",
+      "*://*.preview.team/*"
+    ]
+  },
+  "permissions": [
+    "notifications",
+    "storage",
+    "desktopCapture",
+    "activeTab",
+    "tabs",
+    "<all_urls>"
+  ]
+}

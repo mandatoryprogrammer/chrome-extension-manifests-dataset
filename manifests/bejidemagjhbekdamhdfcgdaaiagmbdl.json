@@ -1,0 +1,84 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Tanke Insights",
+  "description": "Tanke Instagram and Youtube Insights - Engagement rates and other KPIs displayed right on every Instagram and Youtube Profile",
+  "version": "2.4",
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "tanke-16.png",
+      "32": "tanke-32.png",
+      "64": "tanke-64.png",
+      "128": "tanke-128.png"
+    },
+    "default_title": "Tanke Instagram Insights"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com https://script.google.com; object-src 'self'",
+  "manifest_version": 2,
+  "permissions": [
+    "storage",
+    "declarativeContent",
+    "https://www.instagram.com/*",
+    "https://www.tanke.fr/*",
+    "https://www.youtube.com/*"
+  ],
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "js": [
+        "init-tanke.js"
+      ],
+      "matches": [
+        "*://www.instagram.com/*",
+        "*://instagram.com/*"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "js": [
+        "instagram.js"
+      ],
+      "matches": [
+        "*://www.instagram.com/*",
+        "*://instagram.com/*"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.instagram.com/*",
+        "*://instagram.com/*"
+      ],
+      "js": [
+        "tools/xhook.min.js"
+      ],
+      "css": [
+        "style.css"
+      ]
+    },
+    {
+      "js": [
+        "youtube.js"
+      ],
+      "matches": [
+        "https://www.youtube.com/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "tools/xhook.min.js",
+    "tanke_script.js"
+  ],
+  "icons": {
+    "16": "tanke-16.png",
+    "32": "tanke-32.png",
+    "64": "tanke-64.png",
+    "128": "tanke-128.png"
+  }
+}

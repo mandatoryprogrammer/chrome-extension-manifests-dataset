@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "author": "FUTBIN",
+  "name": "FUTBIN",
+  "description": "FUTBIN Import",
+  "version": "3.6",
+  "manifest_version": 2,
+  "background": {
+    "scripts": [
+      "js/lib/jquery-2.2.4.min.js",
+      "js/bg.js",
+      "js/lib/lz-string.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "js/hook.js"
+  ],
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "matches": [
+        "*://*.ea.com/*"
+      ],
+      "js": [
+        "js/proxy.js",
+        "js/loader_hook.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": false,
+      "matches": [
+        "*://www.futbin.com/user/club/*"
+      ],
+      "js": [
+        "js/lib/jquery-2.2.4.min.js",
+        "js/site.js",
+        "js/lib/lz-string.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "128": "/images/logo_green.png",
+    "48": "/images/logo_green48.png",
+    "16": "/images/logo_green16.png"
+  },
+  "browser_action": {
+    "default_icon": "/images/logo_grey.png",
+    "default_title": "FUTBIN"
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://www.futbin.com/user/club/*"
+    ]
+  },
+  "permissions": [],
+  "content_security_policy": "script-src 'self' https://www.gstatic.com/ https://www.googleapis.com; object-src 'self'"
+}

@@ -1,0 +1,44 @@
+{
+  "background": {
+    "scripts": [
+      "js/eventPage.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "content_scripts/OauthBlockEvent.js"
+      ],
+      "matches": [
+        "*://accounts.google.com/signin/oauth/error*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "content_scripts/OauthConsentEvent.js"
+      ],
+      "matches": [
+        "*://accounts.google.com/signin/oauth/oauthchooseaccount*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "manifest_version": 2,
+  "name": "AppSentinel",
+  "permissions": [
+    "https://us-central1-appsentinel.cloudfunctions.net/report_block_event",
+    "https://us-central1-appsentinel.cloudfunctions.net/update_context_db",
+    "*://accounts.google.com/signin/oauth/error*",
+    "*://accounts.google.com/signin/oauth/oauthchooseaccount*",
+    "identity",
+    "identity.email"
+  ],
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "0.0.9"
+}

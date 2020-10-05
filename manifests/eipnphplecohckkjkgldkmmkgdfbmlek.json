@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Pocket Casts Voodoo",
+  "short_name": "Pocket Casts Voodoo",
+  "author": "Alfonso Gómez-Arzola",
+  "version": "0.2.0",
+  "manifest_version": 2,
+  "description": "Allows Pocket Casts’ web app to play episodes without subscribing to a podcast.",
+  "homepage_url": "http://github.com/agarzola/pocket-casts-voodoo",
+  "permissions": [
+    "tabs",
+    "http://play.pocketcasts.com/"
+  ],
+  "icons": {
+    "16": "images/icon16.png",
+    "32": "images/icon32.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png",
+    "300": "images/icon300.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://play.pocketcasts.com/*"
+      ],
+      "js": [
+        "scripts/voodoo.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ],
+    "persistent": false
+  },
+  "commands": {
+    "play_pause_toggle": {
+      "suggested_key": {
+        "default": "MediaPlayPause"
+      },
+      "description": "Toggle between playing and pausing the current podcast.",
+      "global": true
+    }
+  }
+}

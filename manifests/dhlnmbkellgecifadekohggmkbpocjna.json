@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Make Works Extension",
+  "version": "1.0.3",
+  "manifest_version": 2,
+  "description": "A tool for exploring methods of redistributed manufacturing",
+  "homepage_url": "https://extension.make.works",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "src/bg/browser-polyfill.js",
+      "src/bg/background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "*://*.ikea.com/*",
+    "*://*.make.works/*",
+    "tabs",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.ikea.com/*"
+      ],
+      "js": [
+        "src/inject/inject.js",
+        "js/jquery/jquery.min.js",
+        "js/handlebars/handlebars.min-latest.js",
+        "js/jquery/jquery-resizable.js"
+      ],
+      "css": [
+        "src/inject/inject.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "templates/templates.html",
+    "images/*"
+  ]
+}

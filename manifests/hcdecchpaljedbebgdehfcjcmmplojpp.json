@@ -1,0 +1,126 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "TeamPass-Browser",
+  "version": "0.1.4",
+  "version_name": "0.1.4",
+  "description": "__MSG_extensionDescription__",
+  "author": "yoyokko@gmail.com",
+  "icons": {
+    "16": "icons/teampass_16x16.png",
+    "48": "icons/teampass_48x48.png",
+    "64": "icons/teampass_64x64.png",
+    "96": "icons/teampass_96x96.png",
+    "128": "icons/teampass_128x128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/teampass_16x16.png",
+      "18": "icons/teampass_18x18.png",
+      "19": "icons/teampass_19x19.png",
+      "32": "icons/teampass_32x32.png",
+      "36": "icons/teampass_36x36.png",
+      "38": "icons/teampass_38x38.png",
+      "64": "icons/teampass_64x64.png"
+    },
+    "default_title": "TeamPass-Browser",
+    "default_popup": "popups/popup.html"
+  },
+  "commands": {
+    "fill_username_password": {
+      "description": "__MSG_contextMenuFillUsernameAndPassword__",
+      "suggested_key": {
+        "default": "Alt+Shift+U",
+        "mac": "MacCtrl+Shift+U"
+      }
+    },
+    "fill_password": {
+      "description": "__MSG_contextMenuFillPassword__",
+      "suggested_key": {
+        "default": "Alt+Shift+I",
+        "mac": "MacCtrl+Shift+I"
+      }
+    },
+    "fill_totp": {
+      "description": "__MSG_contextMenuFillTOTP__",
+      "suggested_key": {
+        "default": "Alt+Shift+T",
+        "mac": "MacCtrl+Shift+T"
+      }
+    },
+    "show_password_generator": {
+      "description": "__MSG_contextMenuShowPasswordGenerator__",
+      "suggested_key": {
+        "default": "Alt+Shift+G",
+        "mac": "MacCtrl+Shift+G"
+      }
+    }
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true
+  },
+  "background": {
+    "scripts": [
+      "browser-polyfill.js",
+      "jquery-3.3.1.min.js",
+      "global.js",
+      "background/nacl.min.js",
+      "background/nacl-util.min.js",
+      "background/teampass.js",
+      "background/httpauth.js",
+      "background/browserAction.js",
+      "background/page.js",
+      "background/event.js",
+      "background/init.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "*://*/*.xml",
+        "*://*/*.xsd"
+      ],
+      "js": [
+        "jquery-3.3.1.min.js",
+        "browser-polyfill.js",
+        "content/autocomplete.js",
+        "content/define.js",
+        "content/teampass-browser.js",
+        "content/pwgen.js",
+        "content/ui.js",
+        "global.js"
+      ],
+      "css": [
+        "css/autocomplete.css",
+        "css/button.css",
+        "css/define.css",
+        "css/pwgen.css"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "icons/key.svg",
+    "icons/teampass.svg",
+    "popups/popup_remember.html"
+  ],
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "clipboardWrite",
+    "nativeMessaging",
+    "notifications",
+    "storage",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "https://*/*",
+    "http://*/*"
+  ],
+  "default_locale": "zh_CN"
+}

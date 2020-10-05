@@ -1,0 +1,72 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "author": "Voys",
+  "manifest_version": 2,
+  "description": "__MSG_extDescription__",
+  "icons": {
+    "16": "img/icon-contextmenu.png",
+    "32": "img/logo-32.png",
+    "64": "img/logo-64.png",
+    "128": "img/logo-128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "22": "img/icon-menubar-inactive.png"
+    },
+    "default_popup": "index.html",
+    "default_title": "Voys plugin"
+  },
+  "background": {
+    "scripts": [
+      "js/vendor.js",
+      "js/webext_bg.js"
+    ]
+  },
+  "permissions": [
+    "*://*/*",
+    "contextMenus",
+    "notifications",
+    "storage",
+    "tabs",
+    "https://freedom.voys.nl/"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/vendor.js",
+        "js/webext_tab.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/vendor.js",
+        "js/webext_observer.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "options_ui": {
+    "page": "webext_options.html",
+    "chrome_style": false
+  },
+  "web_accessible_resources": [
+    "img/*.png",
+    "css/*.css",
+    "webext_callstatus.html",
+    "js/*.map"
+  ],
+  "default_locale": "en",
+  "name": "Voys plugin",
+  "homepage_url": "https://www.voys.nl/hulp/features/browser_plugins/",
+  "version": "2.2.6"
+}

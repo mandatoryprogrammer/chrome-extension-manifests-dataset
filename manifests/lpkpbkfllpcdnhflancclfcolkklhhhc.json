@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "EvonSys - Pega Automation Gmail Integration",
+  "manifest_version": 2,
+  "description": "Bring Pega Automation features into Gmail side bar",
+  "version": "0.0.0.1",
+  "homepage_url": "http://evonsys.com",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "permissions": [
+    "tabs",
+    "https://*/*",
+    "http://*/*",
+    "activeTab"
+  ],
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "icon128.png",
+    "default_title": "EvonSys - Pega Sale Automation Gmail Integration"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://ajax.googleapis.com http://pegatest.westeurope.cloudapp.azure.com https://ecsinitiative.pegadev.com:8443 *; object-src 'self' http://pegatest.westeurope.cloudapp.azure.com:8080;frame-ancestors http://pegatest.westeurope.cloudapp.azure.com:8080 *",
+  "content_scripts": [
+    {
+      "js": [
+        "jquery.min.js",
+        "jquery.easing.1.3.js",
+        "gmail.js",
+        "contentscript.js"
+      ],
+      "matches": [
+        "*://mail.google.com/*",
+        "*://inbox.google.com/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "frame.html",
+    "toggleSidebar.js",
+    "jquery.min.js",
+    "pegamashup.js",
+    "PegaInternetApplicationComposer.js"
+  ]
+}

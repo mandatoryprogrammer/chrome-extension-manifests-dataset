@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "sfs-moe",
+  "version": "0.0.6",
+  "browser_action": {
+    "default_popup": "index.html"
+  },
+  "icons": {
+    "128": "/static/logo128.png",
+    "512": "/static/logo.png"
+  },
+  "permissions": [
+    "notifications",
+    "storage",
+    "https://vu.sfc.keio.ac.jp/",
+    "https://vu5.sfc.keio.ac.jp/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://vu5.sfc.keio.ac.jp/slide/*"
+      ],
+      "js": [
+        "injection/slider.js"
+      ],
+      "css": [
+        "injection/slider.css"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://vu.sfc.keio.ac.jp/sfc-sfs/*"
+      ],
+      "js": [
+        "injection/sfs.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "page": "background.html"
+  },
+  "applications": {
+    "gecko": {
+      "update_url": "https://sfs.keio.moe/updates.json"
+    }
+  }
+}

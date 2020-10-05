@@ -1,0 +1,43 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "DuckDuckGo !bangs",
+  "description": "Add DuckDuckGo bang buttons to search results and search links in the context menu.",
+  "version": "0.6.1",
+  "author": "Simon Engwerda",
+  "manifest_version": 2,
+  "icons": {
+    "16": "images/duckduckgo-16.png",
+    "48": "images/duckduckgo-48.png",
+    "128": "images/duckduckgo-128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "contextMenus",
+    "storage"
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.duckduckgo.com/*"
+      ],
+      "js": [
+        "scripts/contentscript.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "omnibox": {
+    "keyword": "dd"
+  }
+}

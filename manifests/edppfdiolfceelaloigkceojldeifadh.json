@@ -1,0 +1,102 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "version": "0.1.82",
+  "manifest_version": 2,
+  "description": "__MSG_appDescription__",
+  "icons": {
+    "16": "images/icon-16.png",
+    "128": "images/icon-128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon-19.png",
+      "38": "images/icon-38.png"
+    },
+    "default_popup": "popup.html#/search?popup=1",
+    "default_title": "OP-Chrome Extension for ONTRAPORT"
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://mail.google.com/*",
+        "https://mail.google.com/*"
+      ],
+      "css": [
+        "styles/contentscript.css"
+      ],
+      "js": [
+        "bower_components/angular/angular.js",
+        "bower_components/moment/moment.js",
+        "bower_components/lodash/lodash.js",
+        "scripts/config.js",
+        "scripts/contentscript.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "https://app.ontraport.com/*"
+      ],
+      "js": [
+        "scripts/contentscript-ontraport.js"
+      ],
+      "css": [
+        "styles/contentscript-ontraport.css"
+      ]
+    },
+    {
+      "matches": [
+        "http://localhost:9000/*",
+        "https://acbackend.herokuapp.com/*",
+        "https://*.automationplugins.com/*"
+      ],
+      "js": [
+        "scripts/automationplugins.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "scripts/contentscript-selection.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "contextMenus",
+    "tabs",
+    "cookies",
+    "storage",
+    "unlimitedStorage",
+    "http://*/*",
+    "https://*.intercom.io/*",
+    "https://*.intercomcdn.com/*",
+    "https://*/*"
+  ],
+  "web_accessible_resources": [
+    "images/*",
+    "views/overlay/*",
+    "*.html"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "http://localhost:9000/*",
+      "https://acbackend.herokuapp.com/*",
+      "https://*.automationplugins.com/*"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://*.intercom.io https://*.intercomcdn.com; object-src 'self'",
+  "version_name": "0.1-82-g7d3d15e"
+}

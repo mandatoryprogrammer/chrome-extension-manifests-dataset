@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Xdebug helper",
+  "description": "Easy debugging, profiling and tracing extension for Xdebug",
+  "version": "1.6.1",
+  "author": "Mathijs Kadijk",
+  "manifest_version": 2,
+  "minimum_chrome_version": "20",
+  "permissions": [
+    "tabs",
+    "*://*/*"
+  ],
+  "icons": {
+    "16": "images/icon--16.png",
+    "48": "images/icon--48.png",
+    "128": "images/icon--128.png",
+    "256": "images/icon--256.png",
+    "512": "images/icon--256.png"
+  },
+  "options_page": "options.html",
+  "browser_action": {
+    "default_icon": "images/bug-gray.png",
+    "default_title": "Debugging, profiling & tracing disabled",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "content.js"
+      ],
+      "matches": [
+        "*://*/*"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+X",
+        "windows": "Ctrl+Shift+X",
+        "mac": "Command+Shift+X"
+      },
+      "description": "Open popup to toggle state"
+    },
+    "toggle_debug_action": {
+      "suggested_key": {
+        "default": "Alt+Shift+X",
+        "windows": "Alt+Shift+X",
+        "mac": "Alt+Shift+X"
+      },
+      "description": "Toggle between the debug states"
+    }
+  }
+}

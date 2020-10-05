@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Signed Pages",
+  "description": "Verifies PGP signed pages for extra security against malicious or breached servers.",
+  "version": "0.4.2",
+  "homepage_url": "https://github.com/tasn/webext-signed-pages",
+  "icons": {
+    "48": "images/icon.png",
+    "96": "images/icon-96.png",
+    "128": "images/icon-128.png"
+  },
+  "page_action": {
+    "browser_style": true,
+    "default_icon": {
+      "48": "images/icon.png"
+    }
+  },
+  "background": {
+    "scripts": [
+      "dist/background.js"
+    ]
+  },
+  "options_ui": {
+    "page": "options.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "dist/content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "storage",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>"
+  ],
+  "applications": {
+    "gecko": {
+      "strict_min_version": "57.0a1"
+    }
+  }
+}

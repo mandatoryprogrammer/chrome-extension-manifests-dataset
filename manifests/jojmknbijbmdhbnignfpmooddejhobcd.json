@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "shopAround",
+  "short_name": "shopAround",
+  "author": "Michael Mehl",
+  "version": "1.0",
+  "description": "Adds a button to Craigslist, Ebay, and Amazon to allow for easy cross-searching. Open a search for each website with one click.",
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "page_action": {
+    "default_icon": "img/icon.png",
+    "default_title": "shopAround",
+    "default_popup": "options.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.craigslist.org/*",
+        "https://www.amazon.com/*",
+        "http://www.ebay.com/*",
+        "http://www.ebay.com/sch/*",
+        "http://www.ebay.com/itm/*"
+      ],
+      "js": [
+        "js/findTerms.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs",
+    "http://*.craigslist.org/*",
+    "https://www.amazon.com/*",
+    "http://www.ebay.com/*",
+    "http://www.ebay.com/sch/*",
+    "http://www.ebay.com/itm/*",
+    "storage"
+  ],
+  "options_page": "options.html",
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  }
+}

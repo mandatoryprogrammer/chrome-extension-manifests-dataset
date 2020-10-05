@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "2.0.14",
+  "background": {
+    "scripts": [
+      "background/main.js"
+    ]
+  },
+  "description": "ShipIt2IL - השוואת עליות שילוח לישראל",
+  "homepage_url": "https://www.facebook.com/ShipIt2IL-140499143223923/",
+  "manifest_version": 2,
+  "minimum_chrome_version": "21.0",
+  "name": "ShipIt2IL",
+  "browser_action": {
+    "default_title": "ShipIt2IL - השוואת עליות שילוח לישראל",
+    "default_popup": "preferences/preferences.html"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "icons": {
+    "16": "/images/favicon-16x16.png",
+    "32": "/images/favicon-32x32.png",
+    "64": "/images/favicon-64x64.png"
+  },
+  "content_security_policy": "script-src 'self'  https://www.googletagmanager.com https://www.google-analytics.com; object-src 'self'",
+  "web_accessible_resources": [
+    "content/*",
+    "content/web/images/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.amazon.com/*",
+        "https://*.amazon.com/*"
+      ],
+      "js": [
+        "content/web/lib/angular.min.js",
+        "content/js/insertUpperFrame.js",
+        "content/web/js/messenger.js",
+        "content/web/js/shipit2ilApp.js",
+        "content/web/js/analytics.js"
+      ],
+      "css": [
+        "content/css/emmbedingPage.css",
+        "content/web/css/bootstrap.css",
+        "content/web/css/font-awesome-4.7.0/css/font-awesome.css",
+        "content/web/css/googleFonts.css",
+        "content/web/css/main.css"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

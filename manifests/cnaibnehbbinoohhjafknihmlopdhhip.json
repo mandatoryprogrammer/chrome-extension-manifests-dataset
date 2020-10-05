@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Contacts+ for Gmail",
+  "version": "20.9.1",
+  "description": "Enriched context about your contacts, without leaving your inbox.",
+  "author": "Contacts+",
+  "icons": {
+    "16": "images/cplus/icon16.png",
+    "48": "images/cplus/icon48.png",
+    "128": "images/cplus/icon128.png"
+  },
+  "browser_action": {
+    "default_title": "Contacts+ for Gmail",
+    "default_popup": "popup.html"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "id": "main",
+      "run_at": "document_idle",
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*"
+      ],
+      "css": [
+        "css/lib.css",
+        "css/style.min.css"
+      ],
+      "js": [
+        "inboxsdk.js",
+        "compiled/content.js",
+        "revision.js",
+        "rollbar.js"
+      ]
+    }
+  ],
+  "background": {
+    "page": "bg.html",
+    "persistent": false
+  },
+  "web_accessible_resources": [
+    "images/*"
+  ],
+  "homepage_url": "https://www.contactsplus.com",
+  "incognito": "spanning",
+  "offline_enabled": false,
+  "permissions": [
+    "background",
+    "storage",
+    "activeTab",
+    "https://mail.google.com/",
+    "https://inbox.google.com/"
+  ],
+  "manifest_version": 2
+}

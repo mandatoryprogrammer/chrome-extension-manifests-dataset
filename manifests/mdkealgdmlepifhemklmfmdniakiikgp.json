@@ -1,0 +1,135 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Act-On Anywhere",
+  "description": "Sales and Marketing Acceleration.",
+  "version": "2.71",
+  "icons": {
+    "16": "img/logo/logo16.png",
+    "48": "img/logo/logo.png",
+    "128": "img/logo/logo128.png"
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "<all_urls>",
+    "http://*/*",
+    "https://*/*",
+    "clipboardWrite",
+    "storage",
+    "unlimitedStorage",
+    "notifications",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "web_accessible_resources": [
+    "hbs/*",
+    "img/*",
+    "css/*",
+    "js/*",
+    "fonts/*.*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "js/lib/jquery/jquery-1.11.0.min.js",
+        "js/lib/handlebars.js",
+        "js/lib/jquery/jquery.endless-scroll.js",
+        "js/HandlebarHelpers.js",
+        "js/constants.js",
+        "js/contentscript/aolibrary/contentDialogUI.js",
+        "js/utils.js",
+        "js/contentscript/aolibrary/contentscript.js"
+      ],
+      "css": [
+        "css/lib/google.font.css",
+        "css/lib/bootstrap.min.css",
+        "css/lib/font-awesome.min.css",
+        "css/aologo.css",
+        "css/act-on_style_folder.css"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "js/lib/lru.js",
+        "js/contentscript/timeline/timeline.js"
+      ],
+      "css": [
+        "css/main.css",
+        "css/lib/font-awesome.min.css",
+        "css/aologo.css"
+      ],
+      "all_frames": false,
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://mail.google.com/*"
+      ],
+      "js": [
+        "js/lib/jquery/jquery-1.11.0.min.js",
+        "js/lib/jquery/jquery.ba-bbq.min.js",
+        "js/lib/gmailr.js",
+        "js/contentscript/gmail/event_monitor.js",
+        "js/lib/yepnope.1.5.4-min.js",
+        "js/lib/bootstrap.js",
+        "js/lib/jquery/jquery.visible.js",
+        "js/lib/dialog.js",
+        "js/lib/css_inliner.js",
+        "js/contentscript/gmail/gmail_compose.js",
+        "js/contentscript/templateUtil.js"
+      ],
+      "css": [
+        "css/lib/dialog.css",
+        "css/lib/font-awesome.min.css"
+      ],
+      "all_frames": false,
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://outlook.office.com/*"
+      ],
+      "js": [
+        "js/lib/yepnope.1.5.4-min.js",
+        "js/utils.js",
+        "js/lib/dialog.js",
+        "js/lib/css_inliner.js",
+        "js/contentscript/office365/load.js",
+        "js/lib/jquery/jquery.visible.js",
+        "js/contentscript/office365/compose.js",
+        "js/contentscript/templateUtil.js"
+      ],
+      "css": [
+        "css/lib/dialog.css"
+      ],
+      "all_frames": false,
+      "run_at": "document_end"
+    }
+  ],
+  "browser_action": {
+    "default_icon": "img/logo/acton-disabled.png",
+    "default_title": "Act-On",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "js/lib/jquery/jquery-1.11.0.min.js",
+      "js/lib/socket.io.js",
+      "js/constants.js",
+      "js/common.js",
+      "js/background/background.js",
+      "js/utils.js"
+    ]
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self';",
+  "options_page": "options.html"
+}

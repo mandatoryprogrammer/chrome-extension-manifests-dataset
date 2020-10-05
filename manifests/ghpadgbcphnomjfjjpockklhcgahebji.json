@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "PARQR",
+  "description": "Piazza Automated Related Question Recommender. PARQR recommends similar posts on Piazza to save you time!",
+  "version": "2.0.3",
+  "browser_action": {
+    "default_icon": {
+      "19": "media/parqr.png",
+      "128": "media/parqr_128x128.png",
+      "512": "media/parqr_512x512.png"
+    },
+    "default_popup": "parqr.html"
+  },
+  "icons": {
+    "16": "media/parqr_16x16.png",
+    "128": "media/parqr_128x128.png",
+    "256": "media/parqr_256x256.png"
+  },
+  "permissions": [
+    "activeTab",
+    "http://*.parqr.io/*",
+    "http://*.piazza.com/*"
+  ],
+  "background": {
+    "scripts": [
+      "src/background.js",
+      "src/http-common.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.piazza.com/*"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "js/chartist.min.js",
+        "js/datatables.js",
+        "js/md5.min.js",
+        "src/parqrLib.js",
+        "src/homescreenSuggestions.js",
+        "src/searchSuggestions.js",
+        "src/dashboard.js",
+        "src/observer.js"
+      ],
+      "css": [
+        "css/bootstrap-scope.css",
+        "css/buttons.css",
+        "css/dashboard.css",
+        "css/datatables.css",
+        "css/fonts.css",
+        "css/homescreenSuggestions.css",
+        "css/parqr.css",
+        "css/searchSuggestion.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "media/*",
+    "fonts/*"
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "GitHub Browser Extension",
+  "description": "Make GitHub more usable for project management",
+  "manifest_version": 2,
+  "version": "1.360",
+  "icons": {
+    "128": "Images/gitHub.png"
+  },
+  "browser_action": {
+    "default_icon": "Images/gitHub.png",
+    "default_text": "GitHub Browser Extension",
+    "default_popup": "Views/GitHubLoginScreen.html"
+  },
+  "background": {
+    "scripts": [
+      "ContentScripts/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://github.com/*",
+        "*://github.ibm.com/*",
+        "*://github.ibm.com/?code=*",
+        "*://github.com/?code=*"
+      ],
+      "css": [
+        "css/ContentSite.css",
+        "css/sweetalert.css"
+      ],
+      "js": [
+        "js/jquery-3.1.1.min.js",
+        "js/sweetalert.min.js",
+        "js/alertify.min.js",
+        "js/GitOperations.js",
+        "js/Cookies.js",
+        "ContentScripts/EstimatesAndPipelines.js",
+        "ContentScripts/CookieInsert.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "Images/openIssue.PNG",
+    "Images/closedIssue.PNG"
+  ],
+  "permissions": [
+    "tabs",
+    "cookies",
+    "*://github.ibm.com/?code=*",
+    "*://github.com/?code=*",
+    "https://github.com/login/oauth/access_token",
+    "https://github.ibm.com/login/oauth/access_token",
+    "https://testdeployment2017.azurewebsites.net/*",
+    "webNavigation"
+  ],
+  "content_security_policy": "script-src 'self' https://js.stripe.com/v2/stripe.js; object-src 'self'",
+  "author": "Daniel Buckley"
+}

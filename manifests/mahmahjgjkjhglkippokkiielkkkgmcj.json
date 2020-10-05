@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "web2flickr",
+  "version": "0.2",
+  "minimum_chrome_version": "20",
+  "icons": {
+    "48": "images/icon48.png",
+    "64": "images/icon64.png",
+    "128": "images/icon128.png"
+  },
+  "description": "web2flickr by archify stores screenshots of every non https-page in your flickr account",
+  "homepage_url": "https://www.archify.com/",
+  "browser_action": {
+    "default_icon": "images/toolbar.png",
+    "default_title": "web2flickr by archify",
+    "default_popup": "html/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "js/oauth/chrome_ex_oauth.js",
+      "js/oauth/chrome_ex_oauthsimple.js",
+      "js/define.js",
+      "js/config.js",
+      "js/browser/tabs.js",
+      "js/libs/geolocation.js",
+      "js/core.js",
+      "js/loader.js"
+    ]
+  },
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "tabs",
+    "geolocation"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/content/content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "manifest_version": 2
+}

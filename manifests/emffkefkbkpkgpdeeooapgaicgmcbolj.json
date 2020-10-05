@@ -1,0 +1,68 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "8.2.13",
+  "homepage_url": "https://www.wikiwand.com",
+  "manifest_version": 2,
+  "name": "Wikiwand: Wikipedia Modernized",
+  "short_name": "Wikiwand",
+  "description": "Good old Wikipedia gets a great new look",
+  "background": {
+    "page": "html/background.html",
+    "persistent": true
+  },
+  "icons": {
+    "128": "images/icon128.png"
+  },
+  "web_accessible_resources": [
+    "*.png",
+    "*.gif",
+    "*.jpg",
+    "*.svg",
+    "*.woff2"
+  ],
+  "content_security_policy": "img-src 'self' https://*.doubleclick.net https://www.google-analytics.com https://www.wikiwand.com/ ; script-src 'self' https://www.google-analytics.com ; object-src 'self'",
+  "permissions": [
+    "https://*.wikipedia.org/*",
+    "https://www.wikiwand.com/*",
+    "https://wikiwand.com/*",
+    "webRequestBlocking",
+    "webRequest",
+    "cookies",
+    "storage",
+    "tabs"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "css/autowand.css",
+        "css/cards.css"
+      ],
+      "js": [
+        "lib/jquery.js",
+        "js/namespaces.js",
+        "js/url-tests.js",
+        "js/content-script.js",
+        "js/cards-click.js",
+        "js/cards-display.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon19.png",
+      "38": "images/icon38.png"
+    },
+    "default_title": "Wikiwand",
+    "default_popup": "html/popup.html"
+  },
+  "options_page": "html/options.html",
+  "options_ui": {
+    "page": "html/options.html",
+    "chrome_style": false
+  }
+}

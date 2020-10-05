@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Chip Shield Chrome Extension",
+  "description": "Interact with your Chip Shield Reader for secure online payments and 2-factor authentication.",
+  "version": "2.0.2",
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "nativeMessaging"
+  ],
+  "browser_action": {
+    "default_title": "Chip Shield Assistant",
+    "default_icon": "chipShieldIcon.png",
+    "default_popup": "chipShieldBrowserUI/chipShield.html"
+  },
+  "icons": {
+    "16": "chipShieldIcon16.png",
+    "48": "chipShieldIcon48.png",
+    "128": "chipShieldIcon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "chipShieldInjector/chipShieldFieldMatch.js",
+        "chipShieldInjector/chipShieldPassword.js",
+        "chipShieldInjector/chipShieldInjector.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "chipShieldInjector/chipShieldBackground.js"
+    ]
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "windows": "Ctrl+Shift+9",
+        "mac": "MacCtrl+Shift+9"
+      }
+    }
+  },
+  "manifest_version": 2
+}

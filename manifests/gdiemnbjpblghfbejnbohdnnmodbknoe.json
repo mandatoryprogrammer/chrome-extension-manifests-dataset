@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Test Observer - The Observatron",
+  "version": "0.92",
+  "description": "The Observatron observes things in the browser",
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "javascript/observatron_options.js",
+      "javascript/context_menu.js",
+      "javascript/filenames.js",
+      "javascript/background.js"
+    ]
+  },
+  "commands": {
+    "log-a-note": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+L",
+        "mac": "Command+Shift+L"
+      },
+      "description": "log a note"
+    }
+  },
+  "browser_action": {
+    "default_icon": "icons/red.png",
+    "default_title": "Engage The Observatron"
+  },
+  "icons": {
+    "16": "icons/red-16x16.png",
+    "48": "icons/red-48x48.png",
+    "128": "icons/red-128x128.png"
+  },
+  "options_page": "options/options_page.html",
+  "content_scripts": [
+    {
+      "js": [
+        "javascript/screenshotter.js"
+      ],
+      "run_at": "document_start",
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ]
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "downloads",
+    "webNavigation",
+    "pageCapture",
+    "<all_urls>",
+    "storage",
+    "webRequest",
+    "contextMenus"
+  ],
+  "manifest_version": 2
+}

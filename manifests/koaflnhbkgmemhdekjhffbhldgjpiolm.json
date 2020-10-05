@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Markdown Formatter",
+  "version": "1.2014.12.20",
+  "description": "Formats Markdown files as HTML.",
+  "homepage_url": "https://github.com/petere/markdown-formatter-for-chrome",
+  "icons": {
+    "16": "icon-16.png",
+    "48": "icon-48.png",
+    "128": "icon-128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "commands": {
+    "toggle-markdown": {
+      "suggested_key": {
+        "default": "Ctrl+M",
+        "mac": "MacCtrl+M"
+      },
+      "description": "Toggle between Markdown and HTML"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*.md",
+        "*://*/*.markdown",
+        "*://*/*.text",
+        "*://*/*.txt",
+        "file://*.md",
+        "file://*.markdown",
+        "file://*.text",
+        "file://*.txt"
+      ],
+      "js": [
+        "commonmark.js",
+        "content.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    }
+  ],
+  "page_action": {
+    "default_icon": {
+      "19": "icon-19.png",
+      "38": "icon-38.png"
+    },
+    "default_title": "Markdown"
+  }
+}

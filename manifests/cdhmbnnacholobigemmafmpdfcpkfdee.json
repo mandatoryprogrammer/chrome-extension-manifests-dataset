@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "version": "0.0.110",
+  "manifest_version": 2,
+  "description": "__MSG_appDescription__",
+  "minimum_chrome_version": "42.0",
+  "icons": {
+    "16": "images/icon-16.png",
+    "128": "images/icon-128.png"
+  },
+  "default_locale": "ru",
+  "background": {
+    "page": "background.html"
+  },
+  "permissions": [
+    "webRequest",
+    "cookies",
+    "tabs",
+    "storage",
+    "alarms",
+    "identity",
+    "http://backly.ru/*",
+    "http://localhost:3000/*",
+    "http://fonts.googleapis.com/*",
+    "<all_urls>"
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://backly.ru/*",
+        "http://localhost:3000/*",
+        "http://fonts.googleapis.com/*",
+        "<all_urls>"
+      ],
+      "js": [
+        "bower_components/jquery/dist/jquery.min.js",
+        "bower_components/underscore/underscore-min.js",
+        "bower_components/vue/dist/vue.min.js",
+        "scripts/vue_components.js",
+        "scripts/backly/environment.js",
+        "scripts/backly/core.js",
+        "scripts/contentscript.js"
+      ],
+      "css": [
+        "styles/main.css"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon-19.png",
+      "38": "images/icon-38.png"
+    },
+    "default_title": "Backly",
+    "default_popup": "popup.html"
+  },
+  "web_accessible_resources": [
+    "images/*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://fonts.googleapis.com; object-src 'self'"
+}

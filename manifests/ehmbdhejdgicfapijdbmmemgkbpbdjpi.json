@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Agite",
+  "version": "1.0.0",
+  "description": "Intercept XHR and fetch calls and then change the requesting URL",
+  "manifest_version": 2,
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs",
+    "http://*/",
+    "https://*/"
+  ],
+  "devtools_page": "frontend/entrypoint.html",
+  "background": {
+    "scripts": [
+      "backend/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "backend/content-script.js"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "asset/16.png",
+    "19": "asset/19.png",
+    "32": "asset/32.png",
+    "38": "asset/38.png",
+    "48": "asset/48.png",
+    "128": "asset/128.png",
+    "512": "asset/512.png"
+  },
+  "web_accessible_resources": [
+    "backend/page-script.js"
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4L4YfaOZadjm/bF3QXOeDawYvDQgjCsb7DqZSEJ/zHp5U2poe9vINIf/ef0JlS2O/obJ444FuruWbtsBmOA4pP1+g2QG5QJtTyOgj2g8VTDaYIIbwe8wfUo+8C0i1f10A3u3LXPfAoPRCB8ecvyeJ/YqR3mAWYm+e7rw5hGu+FV87JJlBY2YRu0U2A4cT/cazK5Z2I5iHct0N3wkZ0ZbuXxMMtbYxmtU/MW2GLpYGgUOemUlQPatDwdedWz5KLD8Tgf4xedavZd2vO7EQJz5qkrK2KTxJbce0U1k+RsuD+cT8R1FKVogWidsV77qUPiRlFVa9IfoS/yiQCkX4sJBSQIDAQAB",
+  "version": "4.3.0.56315",
+  "name": "DealCloud",
+  "description": "DealCloud Chrome extension for Google Mail.",
+  "homepage_url": "https://www.dealcloud.com",
+  "icons": {
+    "16": "assets/img/dc_16x16.png",
+    "32": "assets/img/dc_32x32.png",
+    "48": "assets/img/dc_48x48.png",
+    "64": "assets/img/dc_64x64.png",
+    "128": "assets/img/dc_128x128.png",
+    "256": "assets/img/dc_256x256.png"
+  },
+  "browser_action": {
+    "default_title": "DealCloud",
+    "default_icon": {
+      "16": "assets/img/dc_16x16.png",
+      "32": "assets/img/dc_32x32.png"
+    },
+    "default_popup": "html/popup.html"
+  },
+  "background": {
+    "page": "html/background.html",
+    "persistent": true
+  },
+  "options_ui": {
+    "page": "html/options.html",
+    "open_in_tab": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://mail.google.com/*"
+      ],
+      "js": [
+        "js/gmail_content_script.bundle.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://mail.google.com/*",
+      "https://*.dealcloud.com/*",
+      "https://*.dealcloud.eu/*",
+      "https://*.dealclouddev.com/*",
+      "https://*.dealclouduat.com/*",
+      "https://*.dcodev.com/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "js/gmail_injection_script.bundle.js",
+    "html/gmail_infopane_proxy.html",
+    "assets/img/dc_32x32.png",
+    "environments.js"
+  ],
+  "permissions": [
+    "https://*.dealcloud.com/*",
+    "https://*.dealcloud.eu/*",
+    "https://*.dealclouddev.com/*",
+    "https://*.dealclouduat.com/*",
+    "https://*.dcodev.com/*",
+    "storage",
+    "webRequest",
+    "tabs",
+    "identity"
+  ],
+  "content_security_policy": "default-src 'self'; connect-src https://*.googleapis.com https://*.dealcloud.com https://*.dealcloud.eu https://*.dealclouddev.com https://*.dealclouduat.com https://*.dcodev.com; frame-src 'self' https://*.dealcloud.com https://*.dealcloud.eu https://*.dealclouddev.com https://*.dealclouduat.com https://*.dcodev.com; script-src 'self'; style-src * 'unsafe-inline'; img-src 'self' data:;"
+}

@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_appName__",
+  "version": "3.12.0",
+  "description": "__MSG_appDesc__",
+  "author": "Danny Lin",
+  "default_locale": "en",
+  "minimum_chrome_version": "49",
+  "homepage_url": "https://github.com/danny0838/content-farm-terminator",
+  "incognito": "split",
+  "icons": {
+    "48": "img/content-farm-marker_48.png"
+  },
+  "permissions": [
+    "contextMenus",
+    "tabs",
+    "unlimitedStorage",
+    "webRequest",
+    "webRequestBlocking",
+    "storage",
+    "http://*/",
+    "https://*/"
+  ],
+  "optional_permissions": [
+    "history"
+  ],
+  "background": {
+    "scripts": [
+      "lib/punycode.js",
+      "utils.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*"
+      ],
+      "js": [
+        "utils.js",
+        "content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "options_ui": {
+    "chrome_style": false,
+    "open_in_tab": true,
+    "page": "options.html"
+  },
+  "web_accessible_resources": [
+    "blacklist.txt",
+    "blocked.html",
+    "sandbox.html",
+    "img/*"
+  ],
+  "browser_action": {
+    "default_icon": "img/content-farm-marker_48.png",
+    "default_title": "__MSG_appName__"
+  }
+}

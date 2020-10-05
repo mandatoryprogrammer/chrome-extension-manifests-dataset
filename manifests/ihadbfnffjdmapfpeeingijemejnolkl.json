@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "위트랜드 헬퍼",
+  "description": "위트랜드 사용을 편하게 해주는 헬퍼 플러그인 입니다.",
+  "version": "1.1",
+  "browser_action": {
+    "default_icon": "img/icon.png",
+    "default_title": "위트랜드 헬퍼"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "*://*.witland.xyz/*",
+    "file:///*",
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.witland.xyz/*"
+      ],
+      "css": [
+        "./css/runner.css",
+        "./css/filtered-materialized.css"
+      ],
+      "js": [
+        "./libs/jquery-3.3.1.min.js",
+        "./libs/materialize.min.js",
+        "./js/runner.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.witland.xyz/bbs/board.php?bo_table=*&wr_id=*"
+      ],
+      "js": [
+        "./js/runner-board.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.witland.xyz/bbs/write.php?bo_table*"
+      ],
+      "js": [
+        "./js/runner-write.js"
+      ]
+    }
+  ],
+  "options_page": "settings.html",
+  "icons": {
+    "16": "./img/icon.png",
+    "48": "./img/icon.png",
+    "128": "./img/icon.png"
+  }
+}

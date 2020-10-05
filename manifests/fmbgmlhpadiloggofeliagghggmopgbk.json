@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Sneaky Spanish",
+  "description": "Designed for those wanting to learn Spanish but unable to invest the time required to do so.",
+  "version": "1.0.2",
+  "browser_action": {
+    "default_icon": "icons/SS16.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "icons/SS16.png",
+    "48": "icons/SS48.png",
+    "128": "icons/SS128.png"
+  },
+  "permissions": [
+    "tabs",
+    "<all_urls>",
+    "storage",
+    "https://query.yahooapis.com/v1/public/yql/*"
+  ],
+  "background": {
+    "scripts": [
+      "js/eventPage.js"
+    ],
+    "persistent": false
+  },
+  "web_accessible_resources": [
+    "js/resources/easydictionary.json",
+    "js/resources/dictionary.json",
+    "js/resources/jquery-1.10.2.js",
+    "js/popbox.js",
+    "icons/listen.png"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/resources/jquery-1.10.2.js",
+        "js/resources/bootstrap.min.js",
+        "js/content.js",
+        "js/popbox.js",
+        "js/fileUtil.js",
+        "js/resources/findAndReplaceDOMText.js"
+      ],
+      "css": [
+        "css/popover.css"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

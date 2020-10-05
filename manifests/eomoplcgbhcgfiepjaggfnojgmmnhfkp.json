@@ -1,0 +1,39 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Moodle Monkey",
+  "short_name": "MoodleMonkey",
+  "description": "Adds highlighting to Moodle assignment areas, allowing teachers to check for new submissions at-a-glance.",
+  "author": "John King",
+  "version": "3.2",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "permissions": [
+    "tabs",
+    "*://*/mod/"
+  ],
+  "browser_action": {
+    "default_title": "MoodleMonkey",
+    "default_icon": {
+      "19": "icon19.png",
+      "38": "icon38.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/mod/assignment/view.php*",
+        "*://*/mod/assign/view.php*",
+        "*://*/mod/assignment/submissions.php*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "HighlightNewSubmissions.js"
+      ]
+    }
+  ]
+}

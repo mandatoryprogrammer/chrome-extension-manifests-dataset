@@ -1,0 +1,84 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Channel Blocker",
+  "version": "2.2.1",
+  "description": "Allows you to block YouTube™ videos and comments by blacklisting users and/or by using regular expressions.",
+  "icons": {
+    "16": "/images/CB_icon_16.png",
+    "32": "/images/CB_icon_32.png",
+    "48": "/images/CB_icon_48.png",
+    "96": "/images/CB_icon_96.png",
+    "128": "/images/CB_icon_128.png"
+  },
+  "permissions": [
+    "storage",
+    "unlimitedStorage",
+    "tabs",
+    "contextMenus",
+    "*://www.youtube.com/*"
+  ],
+  "browser_action": {
+    "default_title": "Channel Blocker (Configuration)",
+    "default_icon": {
+      "16": "/images/CB_icon_16.png",
+      "32": "/images/CB_icon_32.png",
+      "48": "/images/CB_icon_48.png",
+      "96": "/images/CB_icon_96.png",
+      "128": "/images/CB_icon_128.png"
+    }
+  },
+  "options_ui": {
+    "page": "/ui/config/html/config.html",
+    "open_in_tab": true
+  },
+  "background": {
+    "scripts": [
+      "shared/browser-polyfill.min.js",
+      "shared/shared.js",
+      "background/HashSet.js",
+      "background/FilterStorageManager.js",
+      "background/browser_action.js",
+      "background/url_update.js",
+      "background/config_storage.js",
+      "background/filter_storage.js",
+      "background/savefile_export.js",
+      "background/bug_report.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.youtube.com/*"
+      ],
+      "js": [
+        "shared/browser-polyfill.min.js",
+        "shared/jquery-3.4.1.min.js",
+        "shared/shared.js",
+        "content/libs/mutation-summary.js",
+        "content/libs/is_blocked_lib.js",
+        "content/libs/block_button_lib.js",
+        "content/libs/display_lib.js",
+        "content/config.js",
+        "content/observer_components/shared/shared.js",
+        "content/observer_components/home/home_video.js",
+        "content/observer_components/home/post.js",
+        "content/observer_components/home/video_in_container.js",
+        "content/observer_components/trending/expanded_video.js",
+        "content/observer_components/trending/horizontal_video.js",
+        "content/observer_components/trending/horizontal_video_container.js",
+        "content/observer_components/search/search_video.js",
+        "content/observer_components/search/vertical_video.js",
+        "content/observer_components/search/playlist.js",
+        "content/observer_components/search/channel.js",
+        "content/observer_components/video/comment.js",
+        "content/observer_components/video/main_video.js",
+        "content/observer_components/video/next.js",
+        "content/observer_components/video/videowall_video.js",
+        "content/Observer.js",
+        "content/observers_creator.js",
+        "content/controller.js"
+      ]
+    }
+  ]
+}

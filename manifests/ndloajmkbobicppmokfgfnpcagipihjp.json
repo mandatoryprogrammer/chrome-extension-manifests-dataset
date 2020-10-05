@@ -1,0 +1,43 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Ditto",
+  "description": "Ditto is a free messaging app for Android, iOS and Google Chrome.",
+  "version": "1.0.434",
+  "browser_action": {
+    "default_popup": "app/index.html",
+    "popup": "app/index.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "document.js"
+      ],
+      "css": [
+        "document.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "content_security_policy": "default-src *; connect-src http://192.168.1.64:8079 ws://192.168.1.64:8079 http://192.168.99.100:8081 ws://192.168.99.100:8081 http://213.52.128.122:8080 http://213.52.128.122 ws://213.52.128.122 http://192.168.1.64:9000 ws://192.168.1.64:9000 http://192.168.99.100:9000 ws://192.168.99.100:9000 http://213.52.128.122:9000 ws://213.52.128.122:9000 http://api.rollbar.com https://api.rollbar.com https://freegeoip.net file:; style-src 'self' 'unsafe-inline' http://platform.twitter.com https://platform.twitter.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://freegeoip.net https://platform.twitter.com https://api.twitter.com https://syndication.twitter.com https://d37gvrvc0wt4s1.cloudfront.net http://d37gvrvc0wt4s1.cloudfront.net blob: filesystem: chrome-extension-resource:; media-src 'self' data: blob: filesystem: chrome-extension-resource:; img-src 'self' data: blob: https://pbs.twimg.com https://syndication.twitter.com https://platform.twitter.com http://ditto-app.s3-eu-west-1.amazonaws.com http://192.168.1.64:8080 http://192.168.99.100:8080 http://213.52.128.122:8080;",
+  "icons": {
+    "128": "img/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "app/static/build.js"
+    ]
+  },
+  "permissions": [
+    "background",
+    "notifications",
+    "audio",
+    "tabs"
+  ],
+  "versionCode": 434
+}

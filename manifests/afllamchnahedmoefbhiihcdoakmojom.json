@@ -1,0 +1,85 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "AtomLinkedInScraper",
+  "version": "0.0.2",
+  "manifest_version": 2,
+  "description": "Socialatom Linkedin Scraper for Profiles",
+  "icons": {
+    "16": "images/sa-ventures-16x16.png",
+    "128": "images/sa-ventures-128x128.png"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "http://*/*",
+    "https://*/*",
+    "background",
+    "bookmarks",
+    "clipboardRead",
+    "clipboardWrite",
+    "contentSettings",
+    "cookies",
+    "*://*.google.com/",
+    "debugger",
+    "history",
+    "idle",
+    "management",
+    "notifications",
+    "pageCapture",
+    "topSites",
+    "storage",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking",
+    "unlimitedStorage"
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.linkedin.com/vsearch/*",
+        "https://www.linkedin.com/in/*"
+      ],
+      "js": [
+        "scripts/jquery.min.js",
+        "scripts/mutation-summary.js",
+        "scripts/moment.min.js",
+        "scripts/jquery.cookie.js",
+        "scripts/contentscript.js"
+      ],
+      "css": [
+        "styles/content.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "omnibox": {
+    "keyword": "Linkedin"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/sa-ventures-19x19.png",
+      "38": "images/sa-ventures-38x38.png"
+    },
+    "default_title": "AtomLinkedInScraper",
+    "default_popup": "popup.html"
+  },
+  "web_accessible_resources": [
+    "images/sa-ventures-16x16.png",
+    "images/sa-ventures-19x19.png",
+    "images/sa-ventures-38-38.png",
+    "images/sa-ventures-64x64.png",
+    "images/sa-ventures-128x128.png"
+  ]
+}

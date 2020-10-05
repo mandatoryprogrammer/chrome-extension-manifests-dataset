@@ -1,0 +1,68 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Nimvelo - Pipedrive Connector for Chrome",
+  "short_name": "Nimvelo - Pipedrive Connector",
+  "description": "This extension displays a Chrome notification when a caller's number is associated with a contact in Pipedrive",
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "version": "1.0.5",
+  "icons": {
+    "16": "/assets/vt-16.png",
+    "32": "/assets/vt-32.png",
+    "48": "/assets/vt-48.png",
+    "128": "/assets/vt-128.png"
+  },
+  "permissions": [
+    "https://pbx.sipcentric.com/*",
+    "https://ssl.google-analytics.com/*",
+    "*://*/*",
+    "tabs",
+    "notifications",
+    "storage",
+    "contextMenus"
+  ],
+  "background": {
+    "scripts": [
+      "/components/jquery/dist/jquery.js",
+      "/components/js-md5/js/md5.min.js",
+      "/components/bootstrap/dist/js/bootstrap.js",
+      "/components/jquery-atmosphere/jquery.atmosphere.js",
+      "/dist/background.js",
+      "/dist/call.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "/assets/vt-128.png",
+    "default_popup": "/popup.html",
+    "js": [
+      "dist/main.js",
+      "dist/content.js",
+      "dist/background.js",
+      "components/jquery/dist/jquery.min.js",
+      "dist/jquery-ui-1.10.0.custom.min.js",
+      "dist/bootstrap.min.js",
+      "components/jquery-atmosphere/jquery.atmosphere.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "components/jquery/dist/jquery.min.js",
+        "dist/jquery.ba-replacetext.min.js",
+        "dist/jquery.initialize.min.js",
+        "dist/content.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "assets/vt-48.png",
+    "call.html",
+    "components/jquery/dist/jquery.min.js",
+    "components/jquery/dist/jquery.min.map"
+  ]
+}

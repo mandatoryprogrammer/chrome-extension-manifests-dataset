@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Chrome Passwords",
+  "version": "2.2",
+  "default_locale": "en",
+  "minimum_chrome_version": "38",
+  "permissions": [
+    "activeTab",
+    "declarativeContent",
+    "storage"
+  ],
+  "icons": {
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "scripts/jquery.min.js",
+      "scripts/background.min.js",
+      "scripts/lib/setImmediate-polyfill.js",
+      "scripts/lib/pbkdf2.js",
+      "scripts/lib/scrypt.js",
+      "scripts/lib/mpw.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "scripts/jquery.min.js",
+        "scripts/content.min.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "images/*.png",
+    "scripts/*.js.map"
+  ],
+  "options_page": "options.html",
+  "page_action": {
+    "default_title": "Chrome Passwords",
+    "default_popup": "popup.html",
+    "default_icon": "images/icon38.png"
+  },
+  "content_security_policy": "script-src 'self' http://localhost:* 'unsafe-eval'; object-src 'self'",
+  "commands": {
+    "_execute_page_action": {
+      "suggested_key": {
+        "default": "Alt+P",
+        "windows": "Alt+P",
+        "mac": "Alt+P"
+      }
+    }
+  }
+}

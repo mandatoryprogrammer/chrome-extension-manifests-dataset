@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "RKN Alert",
+  "short_name": "RKN Alert",
+  "description": "Показывает цветом иконки, внесён ли сайт в реестр Роскомнадзора.",
+  "version": "0.18.9",
+  "icons": {
+    "16": "images/logo_16.png",
+    "32": "images/logo_32.png",
+    "48": "images/logo_48.png"
+  },
+  "permissions": [
+    "webRequest",
+    "<all_urls>",
+    "tabs"
+  ],
+  "content_scripts": [
+    {
+      "js": [
+        "check.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "init.js",
+      "lib/punycode.js",
+      "lib/is_site_online.js",
+      "lib/dns.js",
+      "lib/domains.js",
+      "lib/icon.js",
+      "lib/indexed_db.js",
+      "lib/get_ip.js",
+      "background.js"
+    ]
+  },
+  "options_ui": {
+    "open_in_tab": true,
+    "chrome_style": true,
+    "page": "options/options.html"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "images/logo_16.png",
+      "32": "images/logo_32.png",
+      "48": "images/logo_48.png"
+    },
+    "default_title": "RKN Alert",
+    "default_popup": "popup/popup.html"
+  }
+}

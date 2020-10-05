@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Dailymotion Publish it!",
+  "description": "Once installed into your browser, the extension will help you find and share any video from Dailymotion.com or other video platforms",
+  "version": "0.1.2",
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "homepage_url": "http://publisher.dailymotion.com/",
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "img/icon19.png",
+      "38": "img/icon38.png"
+    },
+    "default_title": "Publish it!"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.youtube.com/*",
+        "*://vimeo.com/*"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "js/external_platforms.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.dailymotion.com/*"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "js/internal_actions.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "https://api.dailymotion.com/",
+    "activeTab",
+    "tabs",
+    "notifications"
+  ],
+  "web_accessible_resources": [
+    "img/icon48.png"
+  ]
+}

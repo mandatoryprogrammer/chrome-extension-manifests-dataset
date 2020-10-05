@@ -1,0 +1,86 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "超级店长跨境版采集助手",
+  "description": "超级店长跨境版官方指定插件。超级店长跨境版是国内第一家结合跨境电商ERP和数据分析的软件。目前已对接Wish、速卖通、eBay、Amazon等跨境电商平台。可支持淘宝、1688、天猫、速卖通等平台的产品采集，采集后可发布到多平台多店铺。",
+  "version": "1.9.0",
+  "icons": {
+    "16": "images/icons.png",
+    "48": "images/icons.png",
+    "128": "images/icons.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icons.png"
+    },
+    "default_title": "超级店长跨境版采集助手"
+  },
+  "background": {
+    "scripts": [
+      "jquery.js",
+      "background.js"
+    ],
+    "persistent": true,
+    "matches": [
+      "http://*.taobao.com/",
+      "https://*.tmall.com/",
+      "http://*.1688.com/"
+    ]
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://*.superseller.cn/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "jquery.js",
+        "request.js",
+        "content.js"
+      ],
+      "css": [
+        "css/inject.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://lazada.superseller.cn/*",
+        "*://overseas.superseller.cn/*",
+        "*://www.superseller.cn/*"
+      ],
+      "js": [
+        "translate.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "background",
+    "activeTab",
+    "contextMenus",
+    "*://*.superseller.cn/",
+    "*://*.alicdn.com/",
+    "*://*.taobaocdn.com/",
+    "*://*.1688.com/",
+    "*://*.alibaba.com/",
+    "*://*.taobao.com/",
+    "*://*.tmall.com/",
+    "*://*.amazon.cn/",
+    "*://*.amazon.com/",
+    "*://*.ebay.com/",
+    "*://*.wish.com/",
+    "*://*.aliexpress.com/",
+    "*://*.pfhoo.com/",
+    "https://fanyi.baidu.com/langdetect",
+    "https://fanyi.baidu.com/v2transapi",
+    "https://translate.google.cn/",
+    "https://translate.google.cn/translate_a/single",
+    "https://translate.google.com/",
+    "https://translate.google.com/translate_a/single",
+    "http://fanyi.youdao.com/translate_o"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://apis.google.com; object-src 'self'"
+}

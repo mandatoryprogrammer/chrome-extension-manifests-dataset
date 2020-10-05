@@ -1,0 +1,75 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Grd Me",
+  "short_name": "Grd Me",
+  "version": "2.5.6",
+  "manifest_version": 2,
+  "description": "Grd Me (/ɡärd mē/) is an open source browser plugin that provides encrypted communication across any web platform.",
+  "homepage_url": "https://grd.me",
+  "author": "Winston Howes",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "assets/bg/sharedKeyManager.js",
+      "assets/bg/workerManager.js",
+      "assets/bg/clipboard.js",
+      "assets/bg/intercept.js",
+      "assets/bg/background.js",
+      "assets/inject/lib/jquery-2.1.3.js",
+      "assets/inject/lib/ecc.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "Grd Me Key Manager",
+    "default_popup": "assets/browser_action/popup.html"
+  },
+  "permissions": [
+    "clipboardWrite",
+    "clipboardRead",
+    "https://grd.me/",
+    "notifications",
+    "storage",
+    "unlimitedStorage",
+    "webRequest",
+    "webRequestBlocking",
+    "https://decrypt.grd.me/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "all_frames": true,
+      "run_at": "document_end",
+      "css": [
+        "assets/inject/lib/emojify.css"
+      ],
+      "js": [
+        "assets/inject/lib/aes.js",
+        "assets/inject/lib/sha256.js",
+        "assets/inject/lib/ecc.js",
+        "assets/inject/lib/jquery-2.1.3.js",
+        "assets/inject/lib/mousetrap.js",
+        "assets/inject/lib/linkify.js",
+        "assets/inject/lib/emojify.js",
+        "assets/inject/intercept.js",
+        "assets/inject/frameComm.js",
+        "assets/inject/observer.js",
+        "assets/inject/cryptoManager.js",
+        "assets/inject/main.js"
+      ]
+    }
+  ],
+  "options_page": "assets/options/options.html",
+  "options_ui": {
+    "page": "assets/options/options.html",
+    "chrome_style": true
+  }
+}

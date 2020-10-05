@@ -1,0 +1,70 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "ESI Click-to-Call",
+  "description": "ESI Click-to-Call - Communicate Easier",
+  "version": "1.6.2",
+  "icons": {
+    "128": "images/esi-logo-blue-128.png",
+    "48": "images/esi-logo-blue-48.png",
+    "32": "images/esi-logo-blue-32.png",
+    "16": "images/esi-logo-blue-16.png"
+  },
+  "browser_action": {
+    "default_icon": "images/loggedout.png",
+    "default_popup": "popup/popup.html",
+    "default_title": "Not Logged In"
+  },
+  "options_page": "options/options.html",
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file://*/*"
+      ],
+      "exclude_matches": [
+        "https://*.esihs.net/*",
+        "https://nms-01.hs.cs.lax01.esihs.net/",
+        "https://nms-02.hs.cs.lax01.esihs.net/",
+        "https://nms-21.hs.cs.jfk01.esihs.net/",
+        "https://nms-22.hs.cs.jfk01.esihs.net/",
+        "http://ndp-21.hs.cs.jfk01.esihs.net/",
+        "https://lasas.vintalk.com/",
+        "https://nysas.vintalk.com/",
+        "http://50.112.101.114/ ",
+        "http://secure.ipfax.net/",
+        "https://craft.io/"
+      ],
+      "css": [
+        "css/styles.css"
+      ],
+      "js": [
+        "js/jquery-2.1.4.min.js",
+        "js/insQ.min.js",
+        "js/mainPage.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "fonts/*",
+    "images/esi_ewhite_bk_blue.png"
+  ],
+  "background": {
+    "scripts": [
+      "js/socket.io.js",
+      "js/backgroundPage.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "https://ajax.googleapis.com/",
+    "storage",
+    "alarms",
+    "notifications"
+  ]
+}

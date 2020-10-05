@@ -1,0 +1,70 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "CloudQA | The Functional Testing Cloud",
+  "description": "Automate your browser tests in 10 minutes, run them in cloud with CloudQA",
+  "version": "3.2.4",
+  "permissions": [
+    "tabs",
+    "storage",
+    "notifications",
+    "contextMenus",
+    "clipboardWrite"
+  ],
+  "options_page": "options/options.html",
+  "browser_action": {
+    "default_icon": "images/cloudqa16.png",
+    "default_title": "CloudQA",
+    "default_popup": "index.html"
+  },
+  "background": {
+    "scripts": [
+      "lib/jquery.min.js",
+      "js/aqap.js",
+      "js/aqap.background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "lib/jquery.min.js",
+        "lib/cssesc.js",
+        "js/aqap.injected.js",
+        "js/targetSelector.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "icons": {
+    "16": "images/cloudqa16.png",
+    "48": "images/cloudqa48.png",
+    "128": "images/cloudqa128.png",
+    "30": "images/ok.png",
+    "40": "images/cancel.png"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+Shift+C",
+        "windows": "Alt+Shift+C",
+        "mac": "Alt+Shift+C",
+        "chromeos": "Alt+Shift+C",
+        "linux": "Alt+Shift+C"
+      }
+    }
+  },
+  "web_accessible_resources": [
+    "info/info.html"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://localhost/*",
+      "*://*.cloudqa.io/*"
+    ]
+  }
+}

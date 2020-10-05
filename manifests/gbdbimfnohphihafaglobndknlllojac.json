@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Always Recent for Facebook©",
+  "short_name": "∞ Recent: FB",
+  "description": "Forces Facebook© to always show \"Most Recent\" instead of \"Top Stories\".",
+  "version": "1.5",
+  "icons": {
+    "16": "/icons/16.png",
+    "48": "/icons/48.png",
+    "128": "/icons/128.png",
+    "256": "/icons/256.png"
+  },
+  "browser_action": {
+    "default_icon": "/icons/128.png",
+    "default_title": "Always Recent for Facebook©"
+  },
+  "permissions": [
+    "tabs",
+    "webNavigation",
+    "*://web.facebook.com/*",
+    "*://www.facebook.com/*"
+  ],
+  "background": {
+    "scripts": [
+      "./src/utils.js",
+      "./src/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://web.facebook.com/*",
+        "*://www.facebook.com/*"
+      ],
+      "js": [
+        "./src/utils.js",
+        "./src/content.js"
+      ],
+      "css": [
+        "./src/remove-stuff.css"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

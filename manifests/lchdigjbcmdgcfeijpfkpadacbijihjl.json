@@ -1,0 +1,100 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "SafeInCloud Password Manager",
+  "short_name": "SafeInCloud",
+  "default_locale": "en",
+  "version": "20.5.0",
+  "author": "Andrey Shcherbakov",
+  "homepage_url": "https://www.safe-in-cloud.com",
+  "description": "__MSG_extension_description__",
+  "icons": {
+    "16": "images/icon_16.png",
+    "48": "images/icon_48.png",
+    "96": "images/icon_96.png",
+    "128": "images/icon_128.png"
+  },
+  "permissions": [
+    "contextMenus",
+    "clipboardWrite",
+    "notifications",
+    "http://localhost/"
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*"
+      ],
+      "js": [
+        "d.js",
+        "findhelper.js",
+        "labelguesser.js",
+        "inputguesser.js",
+        "accountfinder.js",
+        "cardfinder.js",
+        "inputfiller.js",
+        "selectfiller.js",
+        "formsubmit.js",
+        "autofill.js",
+        "paste.js",
+        "findinputs.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*"
+      ],
+      "js": [
+        "geturl.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon_19.png",
+      "38": "images/icon_38.png"
+    },
+    "default_title": "SafeInCloud",
+    "default_popup": "popup.html"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+1"
+      }
+    },
+    "paste_login": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+8"
+      },
+      "description": "__MSG_paste_login_command__"
+    },
+    "paste_password": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+9"
+      },
+      "description": "__MSG_paste_password_command__"
+    },
+    "paste_one_time_password": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+7"
+      },
+      "description": "__MSG_paste_one_time_password_command__"
+    }
+  }
+}

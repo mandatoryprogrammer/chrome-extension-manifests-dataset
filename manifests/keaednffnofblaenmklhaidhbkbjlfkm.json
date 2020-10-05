@@ -1,0 +1,82 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Free Supreme Bot",
+  "author": "Paulo Warren",
+  "version": "3.43",
+  "description": "Quickly buy items on supremenewyork.com. Select the newest items, fill in your information, and let the extension do the rest.",
+  "options_page": "options/options.html",
+  "icons": {
+    "128": "static/img.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.supremenewyork.com/shop/all"
+      ],
+      "js": [
+        "static/jquery.js",
+        "content_scripts/selection.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://www.supremenewyork.com/shop/*"
+      ],
+      "exclude_globs": [
+        "*all*",
+        "*cart*"
+      ],
+      "js": [
+        "static/jquery.js",
+        "content_scripts/size.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://www.supremenewyork.com/checkout"
+      ],
+      "js": [
+        "static/jquery.js",
+        "content_scripts/cart.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.supremecodes.com/"
+      ],
+      "js": [
+        "static/jquery.js",
+        "content_scripts/codes.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.supremecodes.com/",
+      "*://localhost/*",
+      "http://supremecodes.s3-website.us-east-2.amazonaws.com/"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "activeTab",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "static/jquery.js",
+      "background.js"
+    ]
+  },
+  "browser_action": {
+    "default_popup": "popup/popup.html"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

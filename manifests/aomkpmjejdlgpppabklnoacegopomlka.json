@@ -1,0 +1,40 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Black List Pro",
+  "short_name": "Black List Pro",
+  "version": "2.0",
+  "description": "Filters and removes page content you don't want to see. Never read about Trump, Clinton, the Kardashians ever again!",
+  "browser_action": {
+    "default_title": "Black List Pro",
+    "default_popup": "pages/popup.html"
+  },
+  "author": "John Hartman",
+  "background": {
+    "page": "pages/background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "jquery-1.11.1.min.js",
+        "pages/content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "http://*/*",
+    "https://*/*",
+    "storage"
+  ],
+  "minimum_chrome_version": "60",
+  "icons": {
+    "128": "assets/scissors.png"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

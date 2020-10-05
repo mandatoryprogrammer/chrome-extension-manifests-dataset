@@ -1,0 +1,79 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Mute All",
+  "short_name": "Mute All",
+  "description": "Stops unwanted loud web page sounds by automatically muting your tabs except if you whitelist the domain",
+  "version": "1.3",
+  "minimum_chrome_version": "55",
+  "background": {
+    "scripts": [
+      "mute_tabs.js",
+      "jquery-3.2.1.min.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "./icon/logo.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "128": "./icon/logo.png"
+  },
+  "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/*",
+        "*://vimeo.com/*",
+        "*://player.vimeo.com/*",
+        "https://soundcloud.com/*",
+        "https://www.twitch.tv/*",
+        "https://player.twitch.tv/*",
+        "https://twitter.com/*",
+        "https://vine.co/*",
+        "*://mynoise.net/*",
+        "https://www.kickstarter.com/*",
+        "*://store.steampowered.com/*",
+        "https://vid.me/*",
+        "*://www.dailymotion.com/*",
+        "*://www.vevo.com/*",
+        "*://www.cnn.com/*",
+        "*://edition.cnn.com/*",
+        "*://www.liveleak.com/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "unmute_content.js",
+        "jquery-3.2.1.min.js",
+        "popup.js"
+      ]
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://www.youtube.com/*",
+      "*://vimeo.com/*",
+      "*://player.vimeo.com/*",
+      "https://soundcloud.com/*",
+      "https://www.twitch.tv/*",
+      "https://player.twitch.tv/*",
+      "https://twitter.com/*",
+      "https://vine.co/*",
+      "*://mynoise.net/*",
+      "https://www.kickstarter.com/*",
+      "*://store.steampowered.com/*",
+      "https://vid.me/*",
+      "*://www.dailymotion.com/*",
+      "*://www.vevo.com/*",
+      "*://www.cnn.com/*",
+      "*://edition.cnn.com/*",
+      "*://www.liveleak.com/*"
+    ]
+  },
+  "permissions": [
+    "storage",
+    "webNavigation",
+    "tabs"
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Hands-free Netflix",
+  "description": "Navigate and search using just your voice on Netflix",
+  "version": "1.2",
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "storage",
+    "declarativeContent",
+    "webNavigation"
+  ],
+  "background": {
+    "scripts": [
+      "src/background.js"
+    ],
+    "persistant": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://.netflix.com/*",
+        "*://netflix.com/*",
+        "http://www.netflix.com/*",
+        "https://www.netflix.com/*",
+        "http://netflix.com/*",
+        "https://netflix.com/*"
+      ],
+      "js": [
+        "src/annyang.min.js",
+        "src/scripts.js",
+        "src/nav.js",
+        "src/features.js",
+        "src/selectors.js",
+        "src/commands.js",
+        "src/tests.js",
+        "src/main.js"
+      ],
+      "css": [
+        "src/styles.css"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": "mic.png",
+    "default_popup": "popup.html",
+    "default_title": "Netflix Voice Command"
+  }
+}

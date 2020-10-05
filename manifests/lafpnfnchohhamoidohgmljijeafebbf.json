@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Post To Google Photos™",
+  "description": "One-click posting of images to Google Photos™",
+  "version": "1.15.24",
+  "icons": {
+    "16": "images/logo-16x16.png",
+    "48": "images/logo-48x48.png",
+    "128": "images/logo-128x128.png"
+  },
+  "options_page": "options.html",
+  "browser_action": {
+    "default_icon": "images/logo-128x128.png",
+    "default_popup": "browserAction.html"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "oauth2": {
+    "client_id": "627633095973-uj7amuan3okjfmigd924sdcpdoeu0lhj.apps.googleusercontent.com",
+    "scopes": [
+      "profile",
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/photoslibrary.appendonly"
+    ]
+  },
+  "permissions": [
+    "activeTab",
+    "identity",
+    "storage",
+    "contextMenus",
+    "notifications",
+    "https://*/",
+    "http://*/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "mouseWatcher.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

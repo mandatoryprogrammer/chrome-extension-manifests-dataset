@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Image Download",
+  "description": "This extension allows you to download images with one click, directly to your download folder.",
+  "version": "1.4.0",
+  "icons": {
+    "128": "image_download_128.png"
+  },
+  "author": "Kevin B.",
+  "permissions": [
+    "storage",
+    "downloads"
+  ],
+  "browser_action": {
+    "default_icon": "action-on.png"
+  },
+  "background": {
+    "scripts": [
+      "eventPage.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "*://*.facebook.com/*"
+      ],
+      "js": [
+        "jquery.js",
+        "content.js",
+        "mutation-summary.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "save_64.png",
+    "page.css"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

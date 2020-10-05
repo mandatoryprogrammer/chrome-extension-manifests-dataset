@@ -1,0 +1,70 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Notebook Web Clipper",
+  "description": "Clear the clutter. Clip the web. Save to Notebook.",
+  "version": "2.0.2",
+  "background": {
+    "scripts": [
+      "vendor/babelpolyfill/babel-polyfill-6.26.0.js",
+      "dist/clipper-background.bundle.js",
+      "vendor/sanitize/sanitize.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file://*/*"
+      ],
+      "js": [
+        "vendor/babelpolyfill/babel-polyfill-6.26.0.js",
+        "initial-load.js",
+        "vendor/readability/Readability.js",
+        "vendor/jquery/jquery-3.1.0.min.js",
+        "vendor/zoho/annotator/fcomponents_annotator.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "html/*",
+    "images/icn-success-clipping.png",
+    "images/icn-close-popup.png",
+    "images/*",
+    "css/*",
+    "js/*",
+    "fonts/*",
+    "vendor/*"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "assets/icons/icon.png",
+      "38": "assets/icons/icon@2x.png",
+      "128": "assets/icons/icon-128.png"
+    }
+  },
+  "icons": {
+    "16": "assets/icons/icon-rightmenu.png",
+    "32": "assets/icons/icon-rightmenu@2x.png",
+    "48": "assets/icons/icon-128.png",
+    "128": "assets/icons/icon-128.png"
+  },
+  "content_security_policy": "script-src 'self'; object-src 'self';",
+  "default_locale": "en",
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "storage",
+    "cookies",
+    "http://*/*",
+    "https://*/*",
+    "contextMenus",
+    "geolocation",
+    "unlimitedStorage",
+    "webNavigation",
+    "<all_urls>"
+  ]
+}

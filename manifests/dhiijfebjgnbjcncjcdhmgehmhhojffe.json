@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Freshdesk Developer Extension",
+  "short_name": "FreshdeskSDK",
+  "description": "Test and debug Freshdesk SDK apps",
+  "version": "3.0.0",
+  "icons": {
+    "128": "img/128.png",
+    "96": "img/96.png",
+    "48": "img/48.png",
+    "32": "img/32.png"
+  },
+  "browser_action": {
+    "default_icon": "img/32.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "js/frameworks/prototype-1.6.js",
+      "js/extension/background.js",
+      "js/extension/websocket.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/frameworks/jquery-1.8.3.js",
+        "js/frameworks/prototype-1.6.js",
+        "js/extension/contentscript.js",
+        "js/freshdesk/freshapp.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "homepage_url": "http://developer.freshdesk.com/",
+  "minimum_chrome_version": "28",
+  "permissions": [
+    "http://localhost:10001/",
+    "storage",
+    "tabs",
+    "notifications"
+  ]
+}

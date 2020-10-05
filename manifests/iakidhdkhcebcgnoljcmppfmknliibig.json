@@ -1,0 +1,79 @@
+{
+  "background": {
+    "scripts": [
+      "/assets/lib/polyfill.js",
+      "/background/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_popup": "popup/index.html",
+    "default_title": "Cross List It Trial"
+  },
+  "web_accessible_resources": [
+    "assets/**",
+    "content/**"
+  ],
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "/content/ebayScrape.js"
+      ],
+      "matches": [
+        "https://www.ebay.com/itm/*",
+        "https://www.ebay.com/p/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "/content/fillers/fillShared.js",
+        "/content/fillers/fillPoshmark.js"
+      ],
+      "matches": [
+        "https://poshmark.com/create-listing"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "/content/loginCheck.js"
+      ],
+      "matches": [
+        "https://poshmark.com/login*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "ebayDescriptionScrape.js"
+      ],
+      "matches": [
+        "https://vi.vipr.ebaydesc.com/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "icons": {
+    "128": "/assets/img/arrow128.png"
+  },
+  "short_name": "CLI Trial",
+  "manifest_version": 2,
+  "name": "Cross List It Trial",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAniE4P7kpjCVWv2QYdJ/HcjfQBiLUfp7vAqVPeTWvCcmu/DdvjvV/s8t/zeQ1oN/rf6OPDIqPLo5dBeFdIvY5wrMP0SANBFgP5QJKlX+udMKnk4cduohmv+qn64nBKiUPh+skvl0yRZ3bm9hKH+tB4TORbGZQ0IPAooIZNhFybgY/lkhTR/3Q9nx1d6NXmUdZNASRAeuw7O1b3iey/FiPLHFlZ0PQ4Qx2FOki1JtmH5xpEJbfGMBnzBZuv1a1khkU+7XsX+5L4N3Jgui/ojTEyOcDi/MXVXFuHeGXr8dvNU6IBLAvIgyX2XbjiJ3B7cR8O3vWFHtTgBKsxgGA2G+/9QIDAQAB",
+  "description": "Cross List It Trial provides an easy way to cross list your eBay listings to Poshmark.",
+  "permissions": [
+    "tabs",
+    "downloads",
+    "activeTab",
+    "storage",
+    "notifications",
+    "alarms"
+  ],
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "version": "1.8"
+}

@@ -1,0 +1,77 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "background": {
+    "scripts": [
+      "js/main.js"
+    ]
+  },
+  "chrome_url_overrides": {},
+  "options_page": "options.html",
+  "description": "検索するだけで、毎日楽天スーパーポイントが貯まります！",
+  "icons": {
+    "128": "img/icon128.png",
+    "48": "img/icon48.png",
+    "16": "img/icon16.png"
+  },
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com https://*.rakuten.co.jp; object-src 'self'",
+  "browser_action": {
+    "default_icon": "img/icon19.png",
+    "default_title": "楽天ウェブ検索",
+    "default_popup": "popup.html"
+  },
+  "web_accessible_resources": [
+    "css/toolbar.css",
+    "js/suggest.js",
+    "js/content_suggest.js",
+    "content_searchbar.html",
+    "js/content_searchbar.js",
+    "content_pickupbar.html",
+    "content_affiliatebar.html",
+    "options.html",
+    "js/options.js",
+    "img/*"
+  ],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+R",
+        "mac": "Alt+R"
+      }
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/script.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "js/frames_script.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "all_frames": true
+    }
+  ],
+  "name": "楽天ウェブ検索",
+  "permissions": [
+    "cookies",
+    "tabs",
+    "webRequest",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "version": "4.655",
+  "omnibox": {
+    "keyword": "R"
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_extName__",
+  "description": "__MSG_extDescription__",
+  "version": "1.4.6",
+  "minimum_chrome_version": "40",
+  "default_locale": "en",
+  "icons": {
+    "128": "img/upload_128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "img/upload_16.png"
+    }
+  },
+  "background": {
+    "scripts": [
+      "js/jquery.js",
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "<all_urls>",
+    "cookies",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.instagram.com/*"
+      ],
+      "js": [
+        "js/jquery.js",
+        "js/croppie.min.js",
+        "js/content.js"
+      ],
+      "css": [
+        "css/content.css",
+        "css/croppie.css"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "options_page": "options.html",
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com 'unsafe-eval'; object-src 'self'",
+  "web_accessible_resources": [
+    "css/*",
+    "img/*"
+  ]
+}

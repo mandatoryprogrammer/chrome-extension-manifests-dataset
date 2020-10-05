@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "icons": {
+    "128": "/img/icon.png"
+  },
+  "browser_action": {
+    "default_icon": "/img/icon.png",
+    "default_title": "IRONSCALES IronTraps for Gmail"
+  },
+  "background": {
+    "scripts": [
+      "/worker_proxy/worker_proxy.js",
+      "/background/include-analytics.js",
+      "/background/background.js"
+    ],
+    "persistent": false
+  },
+  "options_page": "/options/options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "css": [
+        "/inject/inject.css"
+      ],
+      "js": [
+        "/lib/inboxsdk.js",
+        "/worker_proxy/worker_proxy.js",
+        "/inject/inject.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://*.google-analytics.com; img-src *; object-src 'self'",
+  "web_accessible_resources": [
+    "worker_proxy/worker_proxy.html",
+    "img/*",
+    "templates/*",
+    "css/*"
+  ],
+  "incognito": "spanning",
+  "permissions": [
+    "tabs",
+    "identity",
+    "storage",
+    "unlimitedStorage",
+    "https://api.ironscales.com/*",
+    "https://mail.google.com/"
+  ],
+  "name": "IRONSCALES IronTraps for Gmail",
+  "short_name": "IronTraps for GMail",
+  "version": "1064",
+  "version_name": "v0.1.15 beta",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhuHfyH3nDTYs/iKW1cxAjAwYDdcvEE+oJcFcky3iwVeZbaudf8x9tG3Qq6RnPsclBLLOAF9yJa753n9nNHCb2VdKWGVVSOm+NFPwX7f30qDoMdbqUwKG2DtSUtYUmF7fKvRkjXb91vF/2OU+natCgca+9ILf6xJ9axr4OAaxIMCVtT2iS313jD0Ebdl6mbQ2RlSzYxrLU9sOCpQHJHO1cEk8VL53QLI7yAVFKDehSyhk4NYrwOpXCec0Ro7jSXHgRX8YirPue6Ao/ovw2QwbKd4OyRRRcDjmn43sOAXdnoyv/dx0NO2TnXDVPFqexYJKyCiIJg4sL7BEVZghrJTtEwIDAQAB"
+}

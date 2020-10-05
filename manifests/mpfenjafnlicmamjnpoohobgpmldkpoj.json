@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_extName__",
+  "description": "__MSG_extDescription__",
+  "default_locale": "en",
+  "version": "2.2",
+  "icons": {
+    "16": "images/Red16.png",
+    "24": "images/Red24.png",
+    "32": "images/Red32.png",
+    "48": "images/Red48.png",
+    "64": "images/Red64.png",
+    "128": "images/Red128.png"
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhgF9shO6V8/Vdwg/dmiNZipEFla05SMQAHsRUB+Zg8s4MmGKfaOWJv1fKrnxYoRyDY+wtV9yky/NoAYxgx21YA/2xNpMrk4Sk0yiPRyIxTJScarkjQd1bn6eYlWTItEZJW2fex8rmAXkrh7u2VhtmOWieljTEi/KA+0mqPm5bpaKzKisdMRX0aJWM9ZqIjGCXi8nSey86tHJqeyhiV/UpfdQvISIvH3WJ52Vo5+PArihnsrOSj3PT3VQspvRerGONteOZjd9UPIVViHdn9gDWGnYA4uSgSaJcqfQpLCiT/TT3S2PqGPrIvFtART4tCUAi1uSoQ+GUvmvxQUS4PkyUwIDAQAB",
+  "browser_action": {
+    "default_popup": "Index.html",
+    "default_icon": "images/Red32.png"
+  },
+  "manifest_version": 2,
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "js": [
+        "Scripts/extn_contentscript.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "js": [
+        "Scripts/lib/to_jquery.min.js",
+        "Scripts/extn_welcome.js"
+      ],
+      "matches": [
+        "https://www.trackoff.com/*/welcome-screen"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "storage",
+    "nativeMessaging",
+    "webRequest",
+    "webRequestBlocking",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  }
+}

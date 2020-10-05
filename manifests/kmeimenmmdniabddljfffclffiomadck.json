@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Uncheck Subscription",
+  "description": "Use AI to automatically uncheck email subscription checkboxes on webpage.",
+  "version": "1.01",
+  "manifest_version": 2,
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs",
+    "<all_urls>"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "29": "32.png",
+      "60": "64.png",
+      "120": "120.png"
+    }
+  },
+  "web_accessible_resources": [
+    "content.js"
+  ],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+F",
+        "mac": "MacCtrl+Shift+F"
+      },
+      "description": "Opens hello.html"
+    }
+  },
+  "background": {
+    "scripts": [
+      "jquery-3.4.1.min.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "jquery-3.4.1.min.js",
+        "content.js"
+      ]
+    }
+  ],
+  "icons": {
+    "32": "32.png",
+    "120": "120.png"
+  }
+}

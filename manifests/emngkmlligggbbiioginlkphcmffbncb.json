@@ -1,0 +1,88 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_name_adblock_on_youtube__",
+  "short_name": "__MSG_name_adblock_on_youtube__",
+  "author": "BetaFish",
+  "version": "1.7.0",
+  "manifest_version": 2,
+  "permissions": [
+    "*://*.youtube.com/*",
+    "unlimitedStorage",
+    "tabs",
+    "idle",
+    "webRequest",
+    "webRequestBlocking",
+    "webNavigation",
+    "storage",
+    "notifications"
+  ],
+  "background": {
+    "scripts": [
+      "punycode.min.js",
+      "jquery/jquery-2.1.1.min.js",
+      "port.js",
+      "functions.js",
+      "settings.js",
+      "stats.js",
+      "survey.js",
+      "filtering/domainset.js",
+      "filtering/filteroptions.js",
+      "filtering/filtertypes.js",
+      "filtering/domaintypes.js",
+      "filtering/filterset.js",
+      "filtering/myfilters.js",
+      "filtering/filternormalizer.js",
+      "idlehandler.js",
+      "servermessages.js",
+      "background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "img/16x16.png",
+      "20": "img/20x20.png",
+      "32": "img/32x32.png",
+      "38": "img/40x40.png",
+      "40": "img/40x40.png",
+      "64": "img/64x64.png"
+    },
+    "default_popup": "button/popup.html",
+    "default_title": "__MSG_name_adblock_on_youtube__"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.getadblock.com/*"
+      ],
+      "js": [
+        "port.js",
+        "functions.js",
+        "bandaids.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*.youtube.com/*"
+      ],
+      "js": [
+        "port.js",
+        "functions.js",
+        "adblock_start_common.js",
+        "adblock_start_chrome.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "default_locale": "en",
+  "description": "__MSG_description_yt__",
+  "icons": {
+    "16": "img/16x16.png",
+    "48": "img/48x48.png",
+    "128": "img/128x128.png"
+  },
+  "minimum_chrome_version": "49.0",
+  "options_page": "options/index.html"
+}

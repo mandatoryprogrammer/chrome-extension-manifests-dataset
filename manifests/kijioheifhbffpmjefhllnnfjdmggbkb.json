@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Merch Database",
+  "description": "Merch by Amazon database tool to provide a revolutionary way to analyze your data.",
+  "version": "1.43",
+  "manifest_version": 2,
+  "background": {
+    "page": "background.html",
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": "icon128.png",
+    "default_popup": "popup.html",
+    "default_title": "Merch Database"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.amazon.com/*",
+        "*://*.amazon.dev/*"
+      ],
+      "js": [
+        "dist/merch-ext/assets/js/libs/jquery-2.1.4.js",
+        "dist/merch-ext/runtime.js",
+        "dist/merch-ext/polyfills.js",
+        "dist/merch-ext/scripts.js",
+        "dist/merch-ext/main.js",
+        "contentScript.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "icons/48.png",
+    "dist/merch-ext/assets/fonts/*",
+    "dist/merch-ext/assets/css/*",
+    "dist/merch-ext/assets/images/*",
+    "dist/merch-ext/*"
+  ],
+  "permissions": [
+    "cookies",
+    "tabs",
+    "notifications",
+    "storage",
+    "*://*.amazon.com/*",
+    "http://104.238.103.112:8080/"
+  ]
+}

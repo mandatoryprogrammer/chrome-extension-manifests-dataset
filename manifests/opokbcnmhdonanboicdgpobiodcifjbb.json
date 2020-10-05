@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Finly",
+  "description": "Add expense to Finly directly from Gmail.",
+  "version": "1.1.1",
+  "browser_action": {
+    "default_icon": "images/finly_icon.png"
+  },
+  "icons": {
+    "128": "images/finly_icon.png"
+  },
+  "background": {
+    "scripts": [
+      "js/jquery.min.js",
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "css": [
+        "assets/app.css"
+      ],
+      "js": [
+        "js/inboxsdk.js",
+        "js/loader.js",
+        "js/jquery.min.js"
+      ],
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*",
+        "https://*.finly.io/*",
+        "https://localhost/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "identity",
+    "cookies",
+    "webRequest",
+    "webRequestBlocking",
+    "*://*.google.com/*",
+    "*://*.googleusercontent.com/*",
+    "https://*.finly.io/*",
+    "http://localhost:8080/*",
+    "downloads",
+    "<all_urls>"
+  ],
+  "web_accessible_resources": [
+    "*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://localhost/* https://*.cloudflare.com https://*.bootstrapcdn.com https://*.maxcdn.bootstrapcdn.com https://*.finly.io; object-src 'self';",
+  "manifest_version": 2
+}

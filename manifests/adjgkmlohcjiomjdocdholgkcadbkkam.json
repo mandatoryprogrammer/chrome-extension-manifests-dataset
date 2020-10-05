@@ -1,0 +1,76 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "applications": {
+    "gecko": {
+      "id": "ubishell@svalorzen.com"
+    }
+  },
+  "name": "UbiShell",
+  "short_name": "UbiShell",
+  "homepage_url": "https://github.com/svalorzen/UbiShell",
+  "author": "svalorzen",
+  "version": "0.1.2",
+  "description": "Revived Ubiquity as a Shell",
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://maps.googleapis.com https://cdnjs.cloudflare.com; object-src 'self'",
+  "manifest_version": 2,
+  "background": {
+    "scripts": [
+      "lib/jquery-3.3.1.min.js",
+      "lib/codemirror-5.37.0/codemirror.js",
+      "lib/codemirror-5.37.0/javascript.js",
+      "lib/codemirror-5.37.0/matchbrackets.js",
+      "lib/codemirror-5.37.0/search.js",
+      "lib/codemirror-5.37.0/searchcursor.js",
+      "lib/codemirror-5.37.0/lint.js",
+      "lib/codemirror-5.37.0/javascript-lint.js",
+      "lib/jshint-2.9.5.js",
+      "utils.js",
+      "cmdutils.js",
+      "commands.js"
+    ]
+  },
+  "browser_action": {
+    "default_title": "UbiShell",
+    "default_popup": "popup.html",
+    "default_icon": "res/icon-128.png",
+    "browser_style": false
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true,
+    "browser_style": true
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "chromeos": "Ctrl+Space",
+        "linux": "Alt+Space",
+        "mac": "Command+Space",
+        "windows": "Ctrl+Space"
+      }
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content_script.js"
+      ]
+    }
+  ],
+  "icons": {
+    "128": "res/icon-128.png"
+  },
+  "permissions": [
+    "http://*/",
+    "https://*/",
+    "activeTab",
+    "tabs",
+    "clipboardRead",
+    "clipboardWrite",
+    "notifications",
+    "storage"
+  ]
+}

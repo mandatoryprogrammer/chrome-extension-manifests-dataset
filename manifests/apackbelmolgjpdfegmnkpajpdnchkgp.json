@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "2020Wallet",
+  "version": "1.1.0.3",
+  "manifest_version": 2,
+  "description": "Automatic login to your websites with single swipe.",
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+  "omnibox": {
+    "keyword": "yeah"
+  },
+  "browser_action": {
+    "default_title": "2020Wallet",
+    "default_popup": "popup.html",
+    "default_icon": "icon.png"
+  },
+  "background": {
+    "scripts": [
+      "jquery-1.11.3.min.js",
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "background",
+    "http://localhost/*",
+    "file:///*",
+    "*://*/",
+    "http://localhost:3002/*",
+    "http://*/*",
+    "https://*/*",
+    "alarms",
+    "storage",
+    "gcm"
+  ],
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "jquery-1.11.3.min.js",
+        "content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "devtools_page": "devtools/devtools.html"
+}

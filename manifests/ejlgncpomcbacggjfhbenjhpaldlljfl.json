@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Scrumpy",
+  "version": "0.3.0",
+  "manifest_version": 2,
+  "description": "Simple Scrum functionality on Trello.com",
+  "icons": {
+    "128": "icon.png"
+  },
+  "permissions": [
+    "tabs",
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "dist/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://trello.com/*"
+      ],
+      "css": [
+        "css/trello.css"
+      ],
+      "js": [
+        "lib/babel-polyfill.min.js",
+        "lib/moment.min.js",
+        "dist/TrelloAgent.js",
+        "dist/trello-bootstrap.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://davidjgoss.github.io/scrumpy/"
+      ],
+      "js": [
+        "dist/website.js"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

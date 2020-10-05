@@ -1,0 +1,79 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "description": "트위터에서 나를 차단한 사람을 표시하고, 맞차단(차단반사)할 수 있는 웹 브라우저용 확장기능입니다.",
+  "manifest_version": 2,
+  "name": "Mirror Block",
+  "author": "Gaeulbyul <aeiou256@gmail.com>",
+  "version": "0.14.4.1",
+  "homepage_url": "https://github.com/gaeulbyul/MirrorBlock",
+  "icons": {
+    "48": "icons/icon-48.png",
+    "64": "icons/icon-64.png",
+    "128": "icons/icon-128.png"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{85e5d0a4-fc52-4d60-8634-7c67239276de}",
+      "strict_min_version": "60.0"
+    }
+  },
+  "permissions": [
+    "https://twitter.com/*",
+    "https://api.twitter.com/*",
+    "https://mobile.twitter.com/*",
+    "storage",
+    "cookies",
+    "contextMenus",
+    "activeTab",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "options_ui": {
+    "page": "options/options.html"
+  },
+  "background": {
+    "scripts": [
+      "vendor/browser-polyfill.min.js",
+      "bundled/background.bun.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://twitter.com/*",
+        "*://mobile.twitter.com/*"
+      ],
+      "css": [
+        "styles/mirrorblock.css",
+        "styles/mob-badge.css",
+        "styles/chainblock.css"
+      ],
+      "js": [
+        "vendor/browser-polyfill.min.js",
+        "bundled/twitter.bun.js",
+        "bundled/chainblock.bun.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://tweetdeck.twitter.com/*"
+      ],
+      "css": [
+        "styles/tweetdeck.css"
+      ],
+      "js": [
+        "vendor/browser-polyfill.min.js",
+        "bundled/tweetdeck.bun.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "bundled/tweetdeck_inject.bun.js",
+    "bundled/twitter_inject.bun.js"
+  ],
+  "browser_action": {
+    "default_icon": "icons/icon-48.png",
+    "default_title": "Mirror Block",
+    "default_popup": "popup/popup.html"
+  }
+}

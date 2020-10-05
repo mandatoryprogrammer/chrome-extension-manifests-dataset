@@ -1,0 +1,84 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Lever Hire Extension",
+  "version": "2.11.0",
+  "manifest_version": 2,
+  "description": "Import data to Lever Hire",
+  "icons": {
+    "16": "icons/lever-chrome-icon-16.png",
+    "48": "icons/lever-chrome-icon-dark-48.png",
+    "128": "icons/lever-chrome-icon-dark-128.png"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "content_security_policy": "default-src 'self' https://*.lever.co; script-src 'self' https://*.lever.co; style-src 'self' 'unsafe-inline'",
+  "permissions": [
+    "cookies",
+    "http://*/*",
+    "https://*/*",
+    "storage",
+    "tabs",
+    "unlimitedStorage",
+    "webNavigation"
+  ],
+  "background": {
+    "scripts": [
+      "SiteConf.js",
+      "background.js"
+    ]
+  },
+  "browser_action": {
+    "default_title": "Lever Hire",
+    "default_icon": {
+      "19": "icons/lever-chrome-icon-dark-19.png",
+      "38": "icons/lever-chrome-icon-dark-38.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://lever.co/*",
+        "https://hire.lever.co/*",
+        "https://hire.stage.lever.co/*"
+      ],
+      "js": [
+        "check_install.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "dragdrop.js",
+        "wrapper.js"
+      ],
+      "css": [
+        "wrapper.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "lib/inboxsdk.min.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "loading.html",
+    "panel.html",
+    "panel.js",
+    "toast.html",
+    "toast.js",
+    "icons/*.png",
+    "fonts/*.woff"
+  ]
+}

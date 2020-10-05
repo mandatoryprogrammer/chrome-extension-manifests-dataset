@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Asana Quick Search",
+  "version": "0.9.9",
+  "description": "Quickly search through Asana. Requires Asana Quick Add + extension to open tasks.",
+  "minimum_chrome_version": "33",
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "vendor/regenerator-runtime.min.js",
+      "lib/chrome.api.async.common.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.asana.com/*"
+      ],
+      "css": [],
+      "js": [
+        "vendor/regenerator-runtime.min.js",
+        "lib/chrome.api.async.common.js",
+        "foreground.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "icons": {
+    "128": "icon128.png",
+    "48": "icon48.png",
+    "16": "icon16.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "icon19.png"
+    },
+    "default_title": "Asana Quick Search",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "*://*.asana.com/*",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "web_accessible_resources": [
+    "foreground.css",
+    "escapeclose.js"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+Shift+Z"
+      }
+    }
+  },
+  "manifest_version": 2
+}

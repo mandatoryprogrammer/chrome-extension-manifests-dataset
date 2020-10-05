@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "RPass",
+  "description": "RPass extension by Rippling",
+  "version": "1.7.0",
+  "icons": {
+    "16": "public/assets/rpass_16.png",
+    "32": "public/assets/rpass_32.png",
+    "48": "public/assets/rpass_48.png",
+    "128": "public/assets/rpass_128.png"
+  },
+  "browser_action": {
+    "default_icon": "public/assets/rpass_32.png",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*"
+      ],
+      "js": [
+        "public/assets/scripts/jquery.min.js",
+        "public/assets/scripts/jqueryKeys.min.js",
+        "content_script.js"
+      ],
+      "css": [
+        "public/extension.css"
+      ],
+      "runAt": "document_end",
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "page": "popup.html"
+  },
+  "permissions": [
+    "tabs",
+    "storage"
+  ],
+  "web_accessible_resources": [
+    "popup.html",
+    "public/assets/*.png",
+    "public/assets/*.svg",
+    "public/extension.css"
+  ],
+  "content_security_policy": "default-src 'self'; font-src 'self' https://* ; script-src 'self' 'unsafe-eval' https://stats.pusher.com; connect-src 'self' * 'unsafe-inline' 'unsafe-eval'; style-src * 'unsafe-inline' 'self' blob:; img-src 'self' https: data:;",
+  "externally_connectable": {
+    "matches": [
+      "https://*.rippling.com/*"
+    ],
+    "ids": [
+      "akcljdkpppokdcbopdcbkokilfdddhoi"
+    ]
+  }
+}

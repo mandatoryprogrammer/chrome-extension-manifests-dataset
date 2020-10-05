@@ -1,0 +1,80 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "description": "__MSG_appDesc__",
+  "manifest_version": 2,
+  "version": "1.0.33",
+  "author": "eBesucher",
+  "homepage_url": "https://ebesucher.de",
+  "icons": {
+    "32": "resources/icons/logo-32x32.png",
+    "64": "resources/icons/logo-64x64.png"
+  },
+  "minimum_chrome_version": "22.0.0.0",
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "lib/js/jquery-3.3.1.min.js",
+      "ads/ads-background.js",
+      "background/surfbar.js",
+      "popup/popupData.js",
+      "util/helper.js",
+      "util/web-ext-helper.js"
+    ]
+  },
+  "browser_action": {
+    "browser_style": true,
+    "default_icon": "resources/icons/logo-64x64.png",
+    "default_title": "__MSG_appName__",
+    "default_popup": "popup/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "lib/js/jquery-3.3.1.min.js",
+        "util/cookie-consent-accepter.js",
+        "ads/jackpot.js",
+        "ads/ads-content-script.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "ads/ads-webpage-listener.js",
+        "util/helper.js",
+        "popup/popup.js",
+        "popup/popupData.js",
+        "util/web-ext-helper.js"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "ads/iframe.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs",
+    "*://ebesucher.de/*",
+    "*://ebesucher.dev.proxy/*",
+    "*://dev.ebesucher.de/*",
+    "*://int.ebesucher.de/*",
+    "*://qa.ebesucher.de/*",
+    "<all_urls>"
+  ],
+  "web_accessible_resources": [
+    "lib/*"
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Secure internet",
+  "description": "This extension secures your browser from phishing attack and unintentionally downloading malicious files",
+  "version": "0.0.9",
+  "author": "Erik Westhovens 3Asecure",
+  "page_action": {
+    "default_icon": "icon-128.png",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/puny.js",
+        "js/content-main.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/background.js",
+      "js/bg.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "activeTab",
+    "downloads",
+    "notifications",
+    "https://ajax.googleapis.com/"
+  ],
+  "content_security_policy": "script-src 'self' chrome-extension-resource: 'unsafe-eval'; default-src 'self'"
+}

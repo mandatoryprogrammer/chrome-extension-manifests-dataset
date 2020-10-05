@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Loop",
+  "version": "1.0.9",
+  "description": "Trigger Zapier workflow and loop back response.",
+  "icons": {
+    "16": "src/img/infinity.png"
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "tabs",
+    "https://*/*",
+    "identity"
+  ],
+  "content_security_policy": "script-src 'self' https://www.gstatic.com/  https://*.firebaseio.com/ https://ssl.google-analytics.com/  https://maxcdn.bootstrapcdn.com/*/* 'unsafe-eval' ; object-src 'self';",
+  "content_scripts": [
+    {
+      "js": [
+        "src/js/jquery.js",
+        "src/js/libphonenumber-max.js"
+      ],
+      "matches": [
+        "https://*/*/"
+      ]
+    }
+  ],
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "src/js/jquery.js",
+      "src/js/firebase.js",
+      "src/js/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_title": "Loop",
+    "default_popup": "main.html"
+  },
+  "author": [
+    "Henri Chabrand"
+  ],
+  "oauth2": {
+    "client_id": "550373075524-oequs0c61n66q8c6d3a985h30hrc1m1r.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.profile",
+      "https://www.googleapis.com/auth/userinfo.email",
+      "openid"
+    ]
+  }
+}

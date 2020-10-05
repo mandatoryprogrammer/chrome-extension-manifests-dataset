@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Giving Jar PayPal Shopper",
+  "version": "0.8.2",
+  "author": "Technical Rex, LLC",
+  "description": "Remind yourself to donate to charity when you shop online. Over 20 Lansing charities to pick from!",
+  "icons": {
+    "960": "giving-jar-960.png"
+  },
+  "browser_action": {
+    "default_popup": "giving_jar/popup/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.paypal.com/fundraiser/*"
+      ],
+      "js": [
+        "giving_jar/paypal_defaults/paypal_defaults.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "css": [
+        "lib/font-awesome-4.6.3/font-awesome-chrome-ext.css",
+        "lib/estrangelo/EstrangeloEdessaRegular.css",
+        "giving_jar/donation_prompt/donation_prompt.css"
+      ],
+      "js": [
+        "google_analytics/google_analytics.js",
+        "lib/mustache-2.2.1/mustache.min.js",
+        "giving_jar/charities/charities.js",
+        "giving_jar/donation_prompt/donation_inspector.js",
+        "giving_jar/donation_prompt/donation_prompt.js",
+        "init.js"
+      ]
+    }
+  ],
+  "minimum_chrome_version": "52",
+  "options_ui": {
+    "page": "giving_jar/options/options.html",
+    "chrome_style": true
+  },
+  "permissions": [
+    "storage",
+    "https://*/*",
+    "http://*/*",
+    "https://ssl.google-analytics.com/"
+  ],
+  "web_accessible_resources": [
+    "google_analytics/ga.js",
+    "lib/font-awesome-4.6.3/fontawesome-webfont.woff",
+    "lib/estrangelo/EstrangeloEdessaRegular.ttf",
+    "giving_jar/charities/charities.json",
+    "giving_jar/donation_prompt/donation_prompt.mst",
+    "giving-jar-960.png"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://ssl.google-analytics.com; object-src 'self'"
+}

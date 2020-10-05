@@ -1,0 +1,40 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "艦これキャスト",
+  "version": "0.0.2",
+  "description": "艦これをChromecastで無理矢理直接遊ぶためのツールです。",
+  "icons": {
+    "128": "src/img/icon128.png"
+  },
+  "manifest_version": 2,
+  "permissions": [
+    "tabs",
+    "<all_urls>"
+  ],
+  "browser_action": {
+    "default_title": "艦これキャスト",
+    "default_icon": "src/img/icon128.png",
+    "default_popup": "src/html/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://osapi.dmm.com/gadgets/ifr?*"
+      ],
+      "js": [
+        "src/lib/jquery.min.js",
+        "src/js/constants.js",
+        "src/js/util.js",
+        "src/js/main.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/?chromecast=true*"
+      ],
+      "js": [
+        "src/js/transfer.js"
+      ]
+    }
+  ]
+}

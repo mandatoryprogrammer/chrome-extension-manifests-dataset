@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Zee Business",
+  "description": "Get the latest business news and updates on India’s most trusted Business site",
+  "short_name": "ZeeBusiness",
+  "manifest_version": 2,
+  "version": "1.0.3",
+  "icons": {
+    "16": "images/icons/16.png",
+    "32": "images/icons/32.png",
+    "128": "images/icons/128.png"
+  },
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "permissions": [
+    "*://*.zeebiz.com/*",
+    "*://*.thezeebusiness.com/*",
+    "*://localhost/*",
+    "cookies",
+    "tabs",
+    "unlimitedStorage",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "js": [
+        "scripts/sitecontent.js"
+      ],
+      "matches": [
+        "*://*.zeebiz.com/*",
+        "*://*.thezeebusiness.com/*",
+        "*://localhost/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "chrome_url_overrides": {
+    "newtab": "redirect.html"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://ssl.google-analytics.com https://ajax.googleapis.com; object-src 'self'",
+  "web_accessible_resources": [
+    "images/reading-list-icon.png",
+    "images/reading-list-text.png"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.zeebiz.com/*",
+      "*://*.thezeebusiness.com/*",
+      "*://localhost/*"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "images/icons/32.png"
+  }
+}

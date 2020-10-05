@@ -1,0 +1,79 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Trudon",
+  "background": {
+    "page": "background.html"
+  },
+  "browser_action": {
+    "default_icon": "assets/icon.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "assets/icon16.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "scriptsInjector.bundle.js"
+      ],
+      "all_frames": false,
+      "run_at": "document_start"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "web_accessible_resources": [
+    "frameMenu.html",
+    "assets/*",
+    "browser-alerts-wrapper.js",
+    "contentScriptStyles.css"
+  ],
+  "permissions": [
+    "storage",
+    "contextMenus",
+    "tabs",
+    "history",
+    "webNavigation",
+    "cookies",
+    "<all_urls>"
+  ],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+1"
+      }
+    },
+    "switch-mode-to-record": {
+      "suggested_key": {
+        "default": "Alt+Shift+R"
+      },
+      "description": "Toggle record mode."
+    },
+    "switch-mode-to-expectations": {
+      "suggested_key": {
+        "default": "Alt+Shift+E"
+      },
+      "description": "Toggle expectations mode."
+    },
+    "request-stop-extension": {
+      "suggested_key": {
+        "default": "Alt+Shift+S"
+      },
+      "description": "Stop extension."
+    }
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://www.trudonapp.com/*",
+      "http://127.0.0.1/*",
+      "*://stag.trudonapp.com/*"
+    ]
+  },
+  "description": "Fast, easy and reliable testing for anything that runs in a browser.",
+  "version": "1.3.0"
+}

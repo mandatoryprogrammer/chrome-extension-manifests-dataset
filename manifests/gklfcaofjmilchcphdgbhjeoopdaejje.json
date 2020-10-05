@@ -1,0 +1,104 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Play.ht: Audio Articles for Medium Writers",
+  "version": "1.9.4",
+  "description": "Play.ht allows Medium writers to add audio to their articles.",
+  "icons": {
+    "16": "assets/images/logo/16x16.png",
+    "48": "assets/images/logo/48x48.png",
+    "128": "assets/images/logo/128x128.png"
+  },
+  "permissions": [
+    "*://*.play.ht/*",
+    "*://medium.com/*",
+    "background",
+    "webRequest",
+    "webRequestBlocking",
+    "storage"
+  ],
+  "browser_action": {},
+  "background": {
+    "scripts": [
+      "src/authors/background/fetcher.js",
+      "src/authors/background/background.js",
+      "src/listeners/background/background.js",
+      "src/listeners/background/utils.js",
+      "src/listeners/background/header-intercept.js",
+      "src/listeners/config.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://medium.com/*"
+      ],
+      "js": [
+        "vendor/socket.io-1.4.5.js",
+        "vendor/firebase.v3.3.0.js",
+        "vendor/wavesurfer.min.js",
+        "src/listeners/config.js",
+        "src/listeners/content/analytics.js",
+        "src/listeners/content/custom-audio.js",
+        "src/listeners/content/waves-audio.js",
+        "src/listeners/content/transcription-manager.js",
+        "src/listeners/content/user-controller.js",
+        "src/listeners/content/settings-controller.js",
+        "src/listeners/content/content-controller.js",
+        "src/listeners/content/updatesNotificationsFactory.js",
+        "src/listeners/content/updatesNotifications-controller.js",
+        "src/listeners/content/utility.js",
+        "src/listeners/content/observer.js"
+      ],
+      "css": [
+        "assets/styles/listeners/custom-audio.css",
+        "assets/styles/authors/jquery.dropdown.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://medium.com/*"
+      ],
+      "js": [
+        "src/authors/deb.js",
+        "vendor/firebase.js",
+        "vendor/jqueryui.js",
+        "vendor/jscolor.js",
+        "vendor/lame.min.js",
+        "vendor/highcharts.js",
+        "src/authors/tour.js",
+        "src/authors/main.js",
+        "src/authors/script.js"
+      ],
+      "css": [
+        "assets/styles/authors/btn-loading.css",
+        "assets/styles/authors/jquery.dropdown.css",
+        "assets/styles/authors/jqueryui.css",
+        "assets/styles/authors/multiselect.css",
+        "assets/styles/authors/dropdown-style.css",
+        "assets/styles/authors/loading-bar.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://play.ht/extension/login/*",
+        "http://localhost:5000/newlanding/*"
+      ],
+      "js": [
+        "vendor/jquery.min.js",
+        "src/authors/login.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "assets/images/*.png",
+    "assets/images/*.svg",
+    "assets/images/*.gif",
+    "vendor/*.js",
+    "src/authors/*.js"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com https://client.crisp.chat https://*.intercom.io/ wss://*.firebaseio.com https://*.firebaseio.com https://a.play.ht; object-src 'self'"
+}

@@ -1,0 +1,72 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "2.5.4",
+  "manifest_version": 2,
+  "name": "CV Timeline for Linkedin",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjoH9gYvkg9FssAzgY4fm8AABR5lDyd+Wt2iVnAU0Q4S98lcHTF15wLXia5I9ko1/OBzX2bvVIgFg3MKKoIdx0OhntYZYJN2LPuW+HZXn7FjOXtH7fVUvU4t/ZmNKXvpSvOqq7XzPLf79N+xOUgJs66WiRrX29MzN4NlKXvSy38G10YT1zVprhIlc33BygFN67DSkoOtaGBSsvx/CRYAr71IcGg2oHGDRPA461opXDKjMELcBWdLKS/onLeHD804QqtBeIYuuJgo1R5pOv1ObJQ17OYNvZOFPofeb29ygzRTujGpl32fisH+YlyXYZ0lWdsM8RCgxv0ggog8LgIMy7wIDAQAB",
+  "short_name": "CV Timeline for Linkedin",
+  "description": "Make your sourcing smarter with a quick glance at a profile's key infopoints in our timeline. Works on Linkedin.",
+  "icons": {
+    "128": "img/cvt128.png"
+  },
+  "oauth2": {
+    "client_id": "191672497525-939pct86elompgchscnudh7b973d7aie.apps.googleusercontent.com",
+    "scopes": [
+      "email"
+    ]
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://*.firebaseio.com https://beta-cvt-app-frontend.firebaseio.com https://fonts.googleapis.com https://apis.google.com https://www.google-analytics.com https://www.gstatic.com https://www.googleadservices.com https://www.gstatic.com https://dc.ads.linkedin.com https://googleads.g.doubleclick.net https://connect.facebook.net https://www.facebook.com; object-src 'self'",
+  "permissions": [
+    "tabs",
+    "storage",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking",
+    "*://*/*",
+    "identity",
+    "identity.email",
+    "alarms",
+    "https://apis.google.com/js/platform.js",
+    "https://www.google-analytics.com/analytics.js",
+    "https://connect.facebook.net/en_US/fbevents.js",
+    "https://www.facebook.com/tr"
+  ],
+  "background": {
+    "page": "background/app/background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.linkedin.com/*"
+      ],
+      "css": [
+        "content/app/app.css"
+      ],
+      "js": [
+        "lib/jquery.min.3.3.1.js",
+        "content/app/app.js"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content/ats/ats.js",
+        "content/ping/ping.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "content/*",
+    "content/fonts/*",
+    "img/*"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "128": "img/cvt128.png"
+    },
+    "default_title": "CV Timeline",
+    "default_popup": "content/popup/index.html"
+  }
+}

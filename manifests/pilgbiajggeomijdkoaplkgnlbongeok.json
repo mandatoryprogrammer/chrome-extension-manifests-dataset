@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Bid view",
+  "description": "bid view by district m",
+  "version": "2.2",
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "event.js"
+    ]
+  },
+  "permissions": [
+    "contextMenus",
+    "tabs",
+    "<all_urls>",
+    "webRequest",
+    "webRequestBlocking",
+    "background",
+    "storage",
+    "activeTab"
+  ],
+  "icons": {
+    "128": "dm-icon.png"
+  },
+  "page_action": {
+    "default_title": "bid view by district m",
+    "default_icon": "dm-icon.png",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "inject.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    "content.js",
+    "dm-icon.png",
+    "bidview-icon-white.png"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self' ; unsafe-inline"
+}

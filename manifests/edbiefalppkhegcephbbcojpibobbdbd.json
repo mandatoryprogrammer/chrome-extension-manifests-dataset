@@ -1,0 +1,86 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "description": "Allows developers and testers to record test cases actions over GeneXus applications and run them back using selenium.",
+  "manifest_version": 2,
+  "name": "GXtest recorder",
+  "version": "4.1.3",
+  "homepage_url": "https://wiki.genexus.com/commwiki/servlet/wiki?40310,Recording+UI+Tests,",
+  "icons": {
+    "48": "icons/gxtestIso_48.png",
+    "96": "icons/gxtestIso_96.png"
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "webRequest",
+    "contextMenus",
+    "downloads",
+    "webNavigation",
+    "notifications",
+    "storage",
+    "background",
+    "file://*/*"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content/atoms.js",
+        "content/utils.js",
+        "content/selenium-browserbot.js",
+        "common/escape.js",
+        "content/selenium-api.js",
+        "content/locatorBuilders.js",
+        "content/recorder.js",
+        "content/recorder-handlers.js",
+        "content/command-receiver.js",
+        "content/targetSelecter.js",
+        "content/sizzle.js"
+      ],
+      "match_about_blank": true,
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "common/browser-polyfill.js",
+        "content/prompt-injecter.js",
+        "content/runScript-injecter.js"
+      ],
+      "match_about_blank": true,
+      "all_frames": true,
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content/gxVar-injecter.js"
+      ],
+      "match_about_blank": true,
+      "all_frames": true,
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "common/browser-polyfill.js",
+      "background/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "icons/gxtestIso_48.png",
+    "default_title": "GXtest Recorder"
+  },
+  "web_accessible_resources": [
+    "page/prompt.js",
+    "page/runScript.js",
+    "page/gxVar.js"
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "2.3.8",
+  "name": "Workomo (Beta)",
+  "manifest_version": 2,
+  "description": "Show up People-Smart.",
+  "short_name": "Workomo",
+  "permissions": [
+    "alarms",
+    "cookies",
+    "storage",
+    "*://*.workomo.com/*",
+    "*://calendar.google.com/*",
+    "https://calendar.google.com/calendar/*",
+    "*://meet.google.com/*",
+    "*://*.zoom.us/*",
+    "idle"
+  ],
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "workomo-icon-16.png",
+      "32": "workomo-icon-32.png",
+      "64": "workomo-icon-64.png",
+      "128": "workomo-icon-128.png"
+    },
+    "default_title": "Workomo - Show up People-Smart.",
+    "default_popup": "popup.html"
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://*.workomo.com/*",
+      "*://workomo.com/*"
+    ]
+  },
+  "icons": {
+    "16": "workomo-icon-16.png",
+    "32": "workomo-icon-32.png",
+    "64": "workomo-icon-64.png",
+    "128": "workomo-icon-128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://meet.google.com/*",
+        "https://zoom.us/*",
+        "https://*.zoom.us/*",
+        "https://calendar.google.com/*",
+        "https://calendar.google.com/calendar/*?onboarding=*",
+        "https://calendar.google.com/calendar/r?onboarding=*",
+        "https://calendar.google.com/calendar/*?*=*",
+        "*://workomo.com/user/*",
+        "*://*.workomo.com/user/*",
+        "*://*.workomo.com/user?token=*",
+        "*://*.workomo.com/user?name=*",
+        "*://*.workomo.com/fake-event",
+        "*://*.workomo.com/fake-event?success=true"
+      ],
+      "css": [
+        "assets/css/placeholder-loading.min.css",
+        "assets/css/inject.css",
+        "assets/css/all.min.css"
+      ],
+      "js": [
+        "web-inject.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.workomo.com/*"
+      ],
+      "js": [
+        "extension-visibility.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "assets/fonts/*",
+    "assets/images/*"
+  ],
+  "content_security_policy": "script-src 'self' https://cdn.amplitude.com; object-src 'self'"
+}

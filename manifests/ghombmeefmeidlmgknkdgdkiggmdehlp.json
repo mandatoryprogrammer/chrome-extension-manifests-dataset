@@ -1,0 +1,52 @@
+{
+  "update_url": "http://clients2.google.com/service/update2/crx",
+  "name": "Yumless",
+  "version": "0.1.1",
+  "manifest_version": 2,
+  "description": "Yumless.com's Chrome extension",
+  "homepage_url": "http://yumless.com",
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "content_security_policy": "script-src 'self' http://127.0.0.1:8000; object-src 'self'",
+  "permissions": [
+    "tabs",
+    "contextMenus",
+    "http://yumless.com/",
+    "http://127.0.0.1:8000/"
+  ],
+  "omnibox": {
+    "keyword": "k"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "browser_action": {
+    "default_icon": "img/icon19.png",
+    "default_title": "Yumless this page",
+    "default_popup": "extension.html"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "js/vendor/jquery.js",
+        "js/yumless_content.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ]
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "js/yumless_extension.js"
+      ],
+      "matches": [
+        "http://yumless.com/extensions*"
+      ]
+    }
+  ]
+}

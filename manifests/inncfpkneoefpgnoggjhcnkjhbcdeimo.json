@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Overlay Blocker",
+  "short_name": "Overlay Block",
+  "description": "Stop annoying overlays from interrupting your web browsing.",
+  "version": "8.3.1",
+  "default_locale": "en",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "webNavigation"
+  ],
+  "background": {
+    "scripts": [
+      "vendor/jquery/jquery-2.1.3.min.js",
+      "background/utils.js",
+      "background/optionsController.js",
+      "background/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "128": "images/enable_128.png"
+    },
+    "default_title": "Overlay Blocker",
+    "default_popup": "popup/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "content/overlayRemover.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "icons": {
+    "128": "images/enable_128.png"
+  },
+  "options_page": "options/options.html",
+  "options_ui": {
+    "page": "options/options.html",
+    "chrome_style": false,
+    "open_in_tab": true
+  },
+  "manifest_version": 2,
+  "web_accessible_resources": [
+    "toolbar/toolbar.html",
+    "expiredMessage/expiredMessage.html"
+  ]
+}

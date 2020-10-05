@@ -1,0 +1,74 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Psono - Free Password Manager",
+  "short_name": "Psono - Free Password Manager",
+  "author": "Psono",
+  "description": "__MSG_appDesc__",
+  "default_locale": "en",
+  "version": "1.18.0",
+  "homepage_url": "https://psono.com/",
+  "browser_action": {
+    "default_icon": "data/img/icon-32.png",
+    "default_popup": "data/default_popup.html"
+  },
+  "permissions": [
+    "identity",
+    "activeTab",
+    "storage",
+    "contextMenus",
+    "unlimitedStorage",
+    "privacy",
+    "notifications",
+    "tabs",
+    "clipboardWrite",
+    "webRequest",
+    "webRequestBlocking",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "storage": {
+    "managed_schema": "managed_storage.json"
+  },
+  "icons": {
+    "16": "data/img/icon-16.png",
+    "32": "data/img/icon-32.png",
+    "48": "data/img/icon-48.png",
+    "64": "data/img/icon-64.png",
+    "128": "data/img/icon-128.png"
+  },
+  "omnibox": {
+    "keyword": "pp"
+  },
+  "background": {
+    "page": "data/background.html",
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "css": [
+        "data/css/lib/cssreset-context-min.css"
+      ],
+      "js": [
+        "data/js/lib/jquery.min.js",
+        "data/js/lib/uuid.js",
+        "data/js/extension/worker-content-script-base.js",
+        "data/js/extension/worker-content-script.js",
+        "data/js/extension/worker-content-script-pgp.js",
+        "data/js/content-script.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "options_page": "data/index.html#!/settings",
+  "web_accessible_resources": [
+    "data/fonts/*.woff2",
+    "data/css/contentscript.css",
+    "data/img/psono-encrypt.png",
+    "data/img/psono-decrypt.png"
+  ]
+}

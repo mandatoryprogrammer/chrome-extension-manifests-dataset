@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Multiple Calendars Selector for Google Cal",
+  "version": "1.9",
+  "default_locale": "en",
+  "description": "Allows you to quickly display just the group of calendars that you want (on Google Calendar).",
+  "author": "Orest Tarasiuk",
+  "icons": {
+    "16": "images/icon16.png",
+    "32": "images/icon32.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "page_action": {
+    "default_popup": "src/popup.html",
+    "default_icon": {
+      "16": "images/icon16.png",
+      "32": "images/icon32.png",
+      "48": "images/icon48.png",
+      "128": "images/icon128.png"
+    }
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "declarativeContent",
+    "storage",
+    "https://www.google-analytics.com/"
+  ],
+  "options_page": "src/options.html",
+  "background": {
+    "scripts": [
+      "libs/google-analytics-bundle.js",
+      "src/utils.js",
+      "src/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://calendar.google.com/*"
+      ],
+      "js": [
+        "libs/jquery-latest.min.js",
+        "libs/google-analytics-bundle.js",
+        "src/utils.js",
+        "src/main.js"
+      ],
+      "css": [
+        "src/stylesCalendar.css"
+      ]
+    }
+  ]
+}

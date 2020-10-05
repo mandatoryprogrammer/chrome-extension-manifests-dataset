@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Switips",
+  "short_name": "Switips",
+  "version": "2.0.7.0",
+  "description": "Искать товары с кэшбэком стало еще легче. Возвращайте кэшбэк, не заходя на сайт!",
+  "homepage_url": "https://switips.com/",
+  "author": "Switips.com",
+  "manifest_version": 2,
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "storage",
+    "<all_urls>",
+    "unlimitedStorage",
+    "cookies",
+    "management"
+  ],
+  "background": {
+    "scripts": [
+      "vendors/bundle.js",
+      "bg/bundle.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "js": [
+        "vendors/bundle.js",
+        "content/bundle.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "browser_action": {
+    "default_icon": "icon-default.png",
+    "default_title": "Switips",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "icon-48.png",
+    "18": "icon-48.png",
+    "32": "icon-48.png",
+    "128": "icon-48.png"
+  },
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "web_accessible_resources": [
+    "content/*.css",
+    "content/*.svg",
+    "icon-32.png"
+  ]
+}

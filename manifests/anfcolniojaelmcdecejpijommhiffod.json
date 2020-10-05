@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "WebSphere Server Affinity",
+  "short_name": "WebSphere Server Affinity manager",
+  "description": "This extension can be used to force affinity to a particular WebSphere Application Server JVM",
+  "version": "1.3.0",
+  "author": "Glen Burson, Salmon Ltd",
+  "background": {
+    "scripts": [
+      "/js/background.js",
+      "/lib/jquery-2.0.3.min.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "cookies",
+    "<all_urls>",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "web_accessible_resources": [
+    "lib/jquery-1.7.2.min.map",
+    "lib/jquery.tools.min.js",
+    "images/close.png",
+    "images/icon.png"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/content.js",
+        "lib/jquery-1.7.2.min.js",
+        "lib/jquery.tools.min.js"
+      ],
+      "css": [
+        "css/content.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "browser_action": {
+    "default_icon": "images/icon.png",
+    "default_popup": "popup.html"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

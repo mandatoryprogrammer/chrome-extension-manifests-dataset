@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "GQueues for Google Calendar",
+  "version": "1.1.5",
+  "description": "Mark GQueues tasks complete directly in Google Calendar",
+  "icons": {
+    "16": "gqIcon16.png",
+    "48": "gqIcon48.png",
+    "128": "gqIcon128.png"
+  },
+  "background": {
+    "scripts": [
+      "jquery-2.1.1.min.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "https://accounts.google.com/"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "web_accessible_resources": [
+    "images/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://calendar.google.com/*"
+      ],
+      "run_at": "document_end",
+      "css": [
+        "gqueuesCalendarExt-min.css"
+      ],
+      "js": [
+        "jquery-2.1.1.min.js",
+        "jquery-ui-1.11.2.min.js",
+        "gqueuesCalendarExt-min.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.gqueues.com/calendarext?*",
+        "https://www.gqueues.com/calendar/createEvents"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "jquery-2.1.1.min.js",
+        "loginContentScript.js"
+      ]
+    }
+  ]
+}

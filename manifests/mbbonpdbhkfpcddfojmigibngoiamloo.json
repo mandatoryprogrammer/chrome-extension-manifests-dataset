@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "VK Charts",
+  "version": "1.1.0",
+  "description": "Показывает статистику на странице профиля вконтакте.",
+  "icons": {
+    "48": "images/icons/icon48.png",
+    "64": "images/icons/icon64.png",
+    "256": "images/icons/icon256.png",
+    "512": "images/icons/icon512.png"
+  },
+  "author": "phil9l",
+  "homepage_url": "https://github.com/Phil9l/vk-charts/",
+  "options_page": "pages/information.html",
+  "permissions": [
+    "tabs",
+    "storage",
+    "http://vk.com/*",
+    "https://vk.com/*",
+    "http://*.vk.com/*",
+    "https://*.vk.com/*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "background": {
+    "scripts": [
+      "js/statistics.js",
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://vk.com/*",
+        "*://new.vk.com/*"
+      ],
+      "js": [
+        "js/libs/Chart.min.js",
+        "js/libs/jquery.min.js",
+        "js/vkinject.js"
+      ],
+      "css": [
+        "css/vkinject.css"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_title": "VK Charts"
+  }
+}

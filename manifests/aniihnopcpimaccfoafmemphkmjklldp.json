@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "CommentShare - Share Comments to Social Media",
+  "short_name": "CommentShare",
+  "version": "0.0.8",
+  "manifest_version": 2,
+  "description": "Share Youtube comments without the hustle of screenshots!",
+  "homepage_url": "http://afomer.me",
+  "permissions": [
+    "tabs",
+    "storage"
+  ],
+  "content_security_policy": "script-src 'self' https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com; object-src 'self'",
+  "icons": {
+    "16": "icons/commentShare2_icon16.png",
+    "48": "icons/commentShare2_icon48.png",
+    "128": "icons/commentShare2_icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/commentShare2_icon38.png",
+    "default_title": "commentShare, share comments !",
+    "default_popup": "src/browser_action/browser_action.html"
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "js/jquery/jquery.js",
+      "js/firebase.js",
+      "src/bg/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/*"
+      ],
+      "js": [
+        "js/jquery/jquery.js",
+        "js/firebase.js",
+        "src/inject/inject.js"
+      ],
+      "css": [
+        "src/inject/inject.css"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

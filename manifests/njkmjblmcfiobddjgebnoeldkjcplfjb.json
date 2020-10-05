@@ -1,0 +1,124 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_addon_name__",
+  "short_name": "Trace",
+  "author": "AbsoluteDouble",
+  "description": "__MSG_addon_description__",
+  "default_locale": "en",
+  "minimum_chrome_version": "41",
+  "version": "3.0.4",
+  "homepage_url": "https://absolutedouble.co.uk/trace/",
+  "options_page": "html/options.html",
+  "options_ui": {
+    "page": "html/options.html",
+    "chrome_style": false,
+    "open_in_tab": true
+  },
+  "incognito": "spanning",
+  "browser_action": {
+    "default_icon": {
+      "32": "icons/trace_32.png",
+      "64": "icons/trace_64.png",
+      "128": "icons/trace_128.png",
+      "256": "icons/trace_256.png"
+    },
+    "default_title": "Trace | Tracking Protection",
+    "default_popup": "html/report.html"
+  },
+  "commands": {
+    "ToggleTraceWeb": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+E",
+        "mac": "Command+Shift+E"
+      },
+      "description": "Toggle Web Controller"
+    },
+    "PauseTrace": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+F",
+        "mac": "Command+Shift+F"
+      },
+      "description": "Pause Trace"
+    },
+    "OpenTraceSettings": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+X",
+        "mac": "Command+Shift+X"
+      },
+      "description": "Open the Trace dashboard"
+    }
+  },
+  "icons": {
+    "32": "icons/trace_32.png",
+    "64": "icons/trace_64.png",
+    "128": "icons/trace_128.png",
+    "256": "icons/trace_256.png"
+  },
+  "permissions": [
+    "alarms",
+    "notifications",
+    "privacy",
+    "storage",
+    "unlimitedStorage",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>"
+  ],
+  "background": {
+    "scripts": [
+      "js/libraries/cookieparse.js",
+      "js/libraries/jquery.js",
+      "js/common/data.js",
+      "js/common/shared.js",
+      "js/background/alarms.js",
+      "js/background/background.js",
+      "js/background/headers.js",
+      "js/background/prefs.js",
+      "js/background/session.js",
+      "js/background/simple.js",
+      "js/background/stats.js",
+      "js/background/tabs.js",
+      "js/background/vars.js",
+      "js/background/web.js",
+      "js/background/whitelist.js",
+      "js/background/trace.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "js/contentscript/page.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "match_about_blank": false,
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "js/contentscript/loaded.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "match_about_blank": false,
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "html/blocked.html",
+    "js/pages/blocked.js",
+    "js/common/ux.js",
+    "js/common/shared.js",
+    "js/libraries/jquery.js"
+  ],
+  "content_security_policy": "default-src 'none'; style-src 'unsafe-inline'; object-src 'self'; script-src 'self'; connect-src https://absolutedouble.co.uk https://trace-extension.absolutedouble.co.uk https://raw.githubusercontent.com"
+}

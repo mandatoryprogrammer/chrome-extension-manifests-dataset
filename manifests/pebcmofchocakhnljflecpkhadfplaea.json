@@ -1,0 +1,277 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_app_title__",
+  "description": "__MSG_app_des__",
+  "short_name": "__MSG_app_name__",
+  "author": "Browserkit",
+  "homepage_url": "http://skyload.io",
+  "version": "7.1.3",
+  "minimum_chrome_version": "46",
+  "default_locale": "en",
+  "incognito": "split",
+  "browser_action": {
+    "default_icon": {
+      "19": "images/skyload-logo-icon-19.png"
+    },
+    "default_title": "__MSG_app_name__",
+    "default_popup": "popup/app.html"
+  },
+  "background": {
+    "scripts": [
+      "js/core/require.js",
+      "js/vendor/fetch/fetch.js",
+      "js/vendor/jquery/dist/jquery.min.js",
+      "js/vendor/underscore/underscore-min.js",
+      "js/vendor/backbone/backbone-min.js",
+      "js/vendor/indexeddb-backbonejs-adapter/backbone-indexeddb.js",
+      "js/vendor/jquery.browser/dist/jquery.browser.min.js",
+      "js/vendor/js-md5/js/md5.js",
+      "js/vendor/browser-id3-writer/dist/browser-id3-writer.js",
+      "js/vendor/deezer-decoder/dist/deezerDecoder.js",
+      "js/utils/meo/meogo.js",
+      "js/utils/urlParse/parser.js",
+      "js/core/config.js",
+      "js/core/common.js",
+      "js/components/lang.js",
+      "js/background/components/tabs.js",
+      "js/background/components/stream.js",
+      "js/components/methods.js",
+      "js/background/components/profile.js",
+      "js/background/models/data-base.js",
+      "js/background/models/content.js",
+      "js/background/models/sound.js",
+      "js/background/models/video.js",
+      "js/background/models/video-item.js",
+      "js/background/models/download.js",
+      "js/background/models/notification.js",
+      "js/background/models/access.js",
+      "js/background/bundle/models.js",
+      "js/background/bundle/collections.js",
+      "js/background/listeners/extension.js",
+      "js/libs/odnoklassniki.js",
+      "js/libs/soundcloud.js",
+      "js/libs/yandex.js",
+      "js/libs/vk.js",
+      "js/background/app.js"
+    ],
+    "persistent": true
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://ssl.google-analytics.com; object-src 'self'",
+  "permissions": [
+    "tabs",
+    "unlimitedStorage",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking",
+    "downloads",
+    "notifications",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "icons": {
+    "16": "images/skyload-logo-16.png",
+    "48": "images/skyload-logo-48.png",
+    "128": "images/skyload-logo-128.png"
+  },
+  "web_accessible_resources": [
+    "images/*",
+    "js/*"
+  ],
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/core/require.js",
+        "js/vendor/jquery/dist/jquery.min.js",
+        "js/vendor/underscore/underscore-min.js",
+        "js/vendor/backbone/backbone-min.js",
+        "js/utils/urlParse/parser.js",
+        "js/core/config.js",
+        "js/core/common.js",
+        "js/components/lang.js",
+        "js/components/methods.js",
+        "js/content/bundle/models.js",
+        "js/content/bundle/collections.js",
+        "js/content/bundle/views.js",
+        "js/content/components/instance.js",
+        "js/content/components/custodian.js",
+        "js/content/app.js",
+        "js/content/views/report.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://skyload.io/*",
+        "*://*.skyload.io/*"
+      ],
+      "js": [
+        "js/content/views/skyload.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://vk.com/*",
+        "*://www.vk.com/*"
+      ],
+      "js": [
+        "js/libs/vk.js",
+        "js/libs/vimeo.js",
+        "js/content/views/vk.js"
+      ],
+      "css": [
+        "css/content/vk.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://www.odnoklassniki.ru/*",
+        "*://ok.ru/*",
+        "*://www.ok.ru/*'"
+      ],
+      "js": [
+        "js/vendor/js-md5/js/md5.js",
+        "js/libs/vimeo.js",
+        "js/libs/odnoklassniki.js",
+        "js/content/views/ok.js"
+      ],
+      "css": [
+        "css/content/ok.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://vimeo.com/*",
+        "*://www.vimeo.com/*"
+      ],
+      "js": [
+        "js/libs/vimeo.js",
+        "js/utils/urlParse/videoParser.js",
+        "js/content/views/vimeo.js"
+      ],
+      "css": [
+        "css/content/vimeo.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "*://player.vimeo.com/video/*"
+      ],
+      "js": [
+        "js/libs/vimeo.js",
+        "js/utils/urlParse/videoParser.js",
+        "js/content/views/gvimeo.js"
+      ],
+      "css": [
+        "css/content/gvimeo.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://music.yandex.ru/*",
+        "*://music.yandex.ua/*",
+        "*://music.yandex.by/*",
+        "*://music.yandex.kz/*"
+      ],
+      "js": [
+        "js/vendor/js-md5/js/md5.js",
+        "js/libs/yandex.js",
+        "js/content/views/mya.js"
+      ],
+      "css": [
+        "css/content/mya.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://radio.yandex.ru/*",
+        "*://radio.yandex.ua/*",
+        "*://radio.yandex.by/*",
+        "*://radio.yandex.kz/*"
+      ],
+      "js": [
+        "js/vendor/js-md5/js/md5.js",
+        "js/libs/yandex.js",
+        "js/content/views/myr.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "*://soundcloud.com/*",
+        "*://*.soundcloud.com/*"
+      ],
+      "js": [
+        "js/libs/soundcloud.js",
+        "js/content/views/sc.js"
+      ],
+      "css": [
+        "css/content/sc.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://facebook.com/*",
+        "*://*.facebook.com/*"
+      ],
+      "js": [
+        "js/libs/facebook.js",
+        "js/content/views/fb.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://tiktok.com/*",
+        "*://*.tiktok.com/*"
+      ],
+      "js": [
+        "js/libs/tiktok.js",
+        "js/content/views/tt.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://play.google.com/music/*"
+      ],
+      "js": [
+        "js/content/views/gm.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://play.wimpmusic.com/*"
+      ],
+      "js": [
+        "js/content/views/wimp.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://deezer.com/*",
+        "*://www.deezer.com/*"
+      ],
+      "js": [
+        "js/content/views/dz.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

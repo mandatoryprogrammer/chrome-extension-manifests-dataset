@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Leap Touch",
+  "description": "Never put down your sandwich.",
+  "version": "2.0.0",
+  "icons": {
+    "16": "Icon-16.png",
+    "48": "Icon-48.png"
+  },
+  "browser_action": {
+    "default_icon": "Icon-16.png",
+    "default_title": "Recalibrate Leap Touch"
+  },
+  "background": {
+    "persistent": true,
+    "page": "background/background.html"
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "common/lib/lodash.custom.js",
+        "common/log.js",
+        "common/lib/leap.custom.js",
+        "common/platform.chrome.js",
+        "common/config.js",
+        "common/leaptouch.js",
+        "handlers/closenotify.js",
+        "handlers/scroll.js",
+        "handlers/highlight.js",
+        "handlers/finetune.js",
+        "handlers/click.js",
+        "handlers/help.js",
+        "handlers/history.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "storage",
+    "http://*/",
+    "https://*/"
+  ],
+  "web_accessible_resources": [
+    "*"
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "AdBusters - AdBlocker plus AdMeter",
+  "short_name": "AdBusters",
+  "description": "Adblocks plus Google search results with adverts pre-warning system.",
+  "version": "1.1.6",
+  "default_locale": "en",
+  "icons": {
+    "16": "icons/ad-busters_16.png",
+    "32": "icons/ad-busters_32.png",
+    "64": "icons/ad-busters_64.png",
+    "96": "icons/ad-busters_96.png",
+    "128": "icons/ad-busters_128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "background",
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "contextMenus"
+  ],
+  "browser_action": {
+    "default_title": "AdBusters - AdBlocker plus Ad-O-Meter",
+    "default_icon": "icons/ad-busters_32.png",
+    "default_popup": "fe/popup/popup.html"
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "/be/lib/Zip.js",
+      "/be/lib/AdMeter.js",
+      "/be/lib/Filters.js",
+      "/be/lib/Whitelists.js",
+      "/be/lib/Requests.js",
+      "/be/lib/Tabs.js",
+      "/be/lib/Updates.js",
+      "/be/lib/Debug.js",
+      "/be/main.js"
+    ]
+  },
+  "options_ui": {
+    "page": "/fe/options/options.html",
+    "chrome_style": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.google.at/*",
+        "https://www.google.ca/*",
+        "https://www.google.ch/*",
+        "https://www.google.co.uk/*",
+        "https://www.google.com/*",
+        "https://www.google.de/*",
+        "https://www.google.dk/*",
+        "https://www.google.es/*",
+        "https://www.google.fi/*",
+        "https://www.google.fr/*",
+        "https://www.google.gr/*",
+        "https://www.google.ie/*",
+        "https://www.google.it/*",
+        "https://www.google.nl/*",
+        "https://www.google.no/*",
+        "https://www.google.pl/*",
+        "https://www.google.pt/*",
+        "https://www.google.se/*"
+      ],
+      "js": [
+        "/fe/scripts/content_script_admeter.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "/fe/img/ad-o-meter_circle_grey.png",
+    "/fe/img/ad-o-meter_circle_red.png",
+    "/fe/img/del_red.png"
+  ]
+}

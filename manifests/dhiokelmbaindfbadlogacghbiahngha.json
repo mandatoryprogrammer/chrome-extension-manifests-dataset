@@ -1,0 +1,82 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "네이버 카페 필터링, 하이라이트",
+  "version": "2.2.3",
+  "description": "네이버 카페 필터링, 하이라이트",
+  "background": {
+    "scripts": [
+      "/js/background/bgContextMenus.js",
+      "/js/background/bgController.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "/js/plugin/jquery-3.2.1.min.js",
+        "/js/article_read.js",
+        "/js/common.js"
+      ],
+      "matches": [
+        "https://cafe.naver.com/ArticleRead.nhn?*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "/js/plugin/jquery-3.2.1.min.js",
+        "/js/article_list_image.js",
+        "/js/common.js"
+      ],
+      "matches": [
+        "https://cafe.naver.com/ArticleList.nhn?*.boardtype=I*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "/js/plugin/jquery-3.2.1.min.js",
+        "/js/article_list.js",
+        "/js/common.js"
+      ],
+      "matches": [
+        "https://cafe.naver.com/*List.nhn*"
+      ],
+      "exclude_matches": [
+        "https://cafe.naver.com/ArticleList.nhn?*.boardtype=I*",
+        "https://cafe.naver.com/CafeMemberNetworkArticleList.nhn*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "commands": {
+    "toggle-filter": {
+      "description": "on/off"
+    },
+    "filter-writer": {
+      "description": "현재 글 작성자 필터링"
+    }
+  },
+  "browser_action": {
+    "default_icon": "/image/on.png",
+    "default_popup": "popup.html"
+  },
+  "options_page": "setting.html",
+  "permissions": [
+    "webRequest",
+    "contextMenus",
+    "tabs",
+    "activeTab",
+    "storage",
+    "https://cafe.naver.com/*"
+  ],
+  "icons": {
+    "16": "/image/icon_16.png",
+    "48": "/image/icon_48.png",
+    "128": "/image/icon_128.png"
+  }
+}

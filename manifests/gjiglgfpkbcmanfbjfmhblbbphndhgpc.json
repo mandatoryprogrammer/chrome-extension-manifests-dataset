@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Memrise Monitor",
+  "description": "Set learning event goals and see review forecasts",
+  "version": "0.0.25",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/icon_day.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "https://www.memrise.com/",
+    "contextMenus",
+    "storage",
+    "unlimitedStorage"
+  ],
+  "background": {
+    "scripts": [
+      "libraries/lodash.min.js",
+      "libraries/jquery-2.1.4.min.js",
+      "libraries/moment-with-locales.min.js",
+      "libraries/chrome-Storage-largeSync.min.js",
+      "js/background/api.js",
+      "js/background/cache.js",
+      "js/background/goalOptions.js",
+      "js/background/contextMenu.js",
+      "js/background/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.memrise.com/course/*/garden/*",
+        "https://www.memrise.com/garden/review/*"
+      ],
+      "js": [
+        "js/content-script.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "js/main-script.js"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://www.memrise.com/course/*/garden/*",
+      "https://www.memrise.com/garden/review/*"
+    ]
+  }
+}

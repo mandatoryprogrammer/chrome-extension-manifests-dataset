@@ -1,0 +1,72 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "TextRecruit Extension",
+  "short_name": "TextRecruit Extension",
+  "homepage_url": "http://www.textrecruit.com",
+  "description": "The TextRecruit Everywhere Extension helps recruiters text candidates from their ATS, job boards, or LinkedIn.",
+  "version": "3.2.2",
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "permissions": [
+    "storage",
+    "https://*/*",
+    "http://*/*"
+  ],
+  "browser_action": {
+    "default_icon": "./img/tr_bubble_grey_48.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "img/*",
+    "iframe.html",
+    "iframe.js",
+    "disabled.html"
+  ],
+  "content_scripts": [
+    {
+      "run_at": "document_idle",
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "https://*.taleo.net/*",
+        "https://hangouts.google.com/*",
+        "*://mail.google.com/*",
+        "https://sso.texasroadhouse.com/*",
+        "https://js.stripe.com/*",
+        "https://login.microsoftonline.com/*",
+        "https://secure.ace.advertising.com/*",
+        "http://127.0.0.1/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "all_frames": true
+    },
+    {
+      "run_at": "document_idle",
+      "matches": [
+        "https://*.taleo.net/*",
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "all_frames": false
+    }
+  ],
+  "icons": {
+    "48": "./img/icon48.png",
+    "128": "./img/icon128.png"
+  }
+}

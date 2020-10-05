@@ -1,0 +1,84 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "VideoSystems.Co",
+  "manifest_version": 2,
+  "version": "1.1",
+  "icons": {
+    "16": "logo.png",
+    "48": "icon48.png"
+  },
+  "background": {
+    "script": [
+      "background.js",
+      "backgroundhelper.js"
+    ],
+    "page": "extension/background.html"
+  },
+  "browser_action": {
+    "default_icon": "logo.png",
+    "default_title": "VideoSystems.Co"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "video/parse_video.js"
+      ],
+      "matches": [
+        "https://www.youtube.com/*",
+        "http://www.youtube.com/*",
+        "http://www.youtube.de/*",
+        "http://www.youtube.fr/*",
+        "http://www.youtube.co.uk/*"
+      ]
+    },
+    {
+      "all_frames": false,
+      "js": [
+        "extension/content.js",
+        "content_script.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "content_script.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://my.startpage24.com https://www.google.com https://www.google.de https://connect.facebook.net/ ; object-src 'self'",
+  "default_locale": "en",
+  "description": "__MSG_appDesc__",
+  "incognito": "split",
+  "options_page": "startpage/index.html?options=1",
+  "permissions": [
+    "http://my.startpage24.com/",
+    "webRequest",
+    "webRequestBlocking",
+    "tabs",
+    "storage",
+    "management",
+    "chrome://favicon/",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "web_accessible_resources": [
+    "startpage/index.html",
+    "startpage/hu/L64P.js",
+    "startpage/hu/helper.js",
+    "startpage/3rd/jquery-min.js",
+    "startpage/addOnVars.js",
+    "startpage/data.js",
+    "startpage/text.js",
+    "startpage/addon.js",
+    "startpage/addon.css"
+  ]
+}

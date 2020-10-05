@@ -1,0 +1,84 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "TotalAdBlock",
+  "author": "Protected.net",
+  "description": "Award-winning antivirus provider, TotalAV, proudly presents it's latest browsing privacy extension, TotalAdblock.",
+  "version": "2.0.8",
+  "web_accessible_resources": [
+    "assets/img/*",
+    "/app/webshield/index.html"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "16": "assets/img/_brand/icon/16px.png",
+      "20": "assets/img/_brand/icon/20px.png",
+      "44": "assets/img/_brand/icon/44px.png",
+      "48": "assets/img/_brand/icon/48px.png",
+      "54": "assets/img/_brand/icon/54px.png"
+    },
+    "default_popup": "app/popup/index.html"
+  },
+  "icons": {
+    "16": "assets/img/_brand/icon/16px.png",
+    "20": "assets/img/_brand/icon/20px.png",
+    "44": "assets/img/_brand/icon/44px.png",
+    "48": "assets/img/_brand/icon/48px.png",
+    "54": "assets/img/_brand/icon/54px.png",
+    "64": "assets/img/_brand/icon/64px.png",
+    "80": "assets/img/_brand/icon/80px.png",
+    "90": "assets/img/_brand/icon/90px.png",
+    "120": "assets/img/_brand/icon/120px.png",
+    "128": "assets/img/_brand/icon/128px.png",
+    "150": "assets/img/_brand/icon/150px.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "assets/js/jquery.js",
+      "adguard/adguard-api.js",
+      "app/vendor/vendor.min.js",
+      "app/shared/shared.min.js",
+      "app/background/background.min.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "adguard/adguard-content.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "match_about_blank": true,
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": false,
+      "js": [
+        "adguard/adguard-assistant.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "browsingData",
+    "contentSettings",
+    "cookies",
+    "notifications",
+    "storage",
+    "tabs",
+    "unlimitedStorage",
+    "webRequest",
+    "webRequestBlocking",
+    "webNavigation",
+    "<all_urls>"
+  ]
+}

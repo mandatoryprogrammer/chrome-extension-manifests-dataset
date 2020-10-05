@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Smilematic",
+  "description": "Automatically redirects Amazon to Amazon Smile ensuring your favorite charity always gets a free donation when you shop Amazon.com",
+  "version": "0.1.2",
+  "manifest_version": 2,
+  "icons": {
+    "32": "resources/images/smilematic-logo-32.png",
+    "38": "resources/images/smilematic-logo-38.png",
+    "64": "resources/images/smilematic-logo-64.png",
+    "128": "resources/images/smilematic-logo-128.png",
+    "256": "resources/images/smilematic-logo-256.png"
+  },
+  "browser_action": {
+    "default_title": "Smilematic",
+    "default_popup": "html/popup/popup.html",
+    "default_icon": {
+      "32": "resources/images/smilematic-logo-32.png",
+      "38": "resources/images/smilematic-logo-38.png",
+      "64": "resources/images/smilematic-logo-64.png",
+      "128": "resources/images/smilematic-logo-128.png",
+      "256": "resources/images/smilematic-logo-256.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://smile.amazon.com/gp/buy/thankyou/*",
+        "*://smile.amazon.co.uk/gp/buy/thankyou/*"
+      ],
+      "js": [
+        "scripts/content/LeaveFeedbackBanner.js",
+        "scripts/content/content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "scripts/background/urlConfig.js",
+      "scripts/background/redirectConfig.js",
+      "scripts/background/redirect.js",
+      "scripts/background/background.js"
+    ]
+  },
+  "permissions": [
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "*://www.amazon.com/*",
+    "*://www.amazon.de/*",
+    "*://www.amazon.co.uk/*"
+  ],
+  "web_accessible_resources": [
+    "resources/fonts/LatoLatin-Regular.woff2",
+    "resources/fonts/LatoLatin-Semibold.woff2",
+    "html/content/leave-feedback-banner.html",
+    "css/content/leave-feedback.css"
+  ]
+}

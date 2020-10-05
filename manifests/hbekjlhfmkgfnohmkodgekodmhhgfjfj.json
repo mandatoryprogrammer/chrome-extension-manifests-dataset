@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Tunnel Focus",
+  "description": "Block distractions like social media feeds and recommendation sections. No configuration needed.",
+  "version": "1.6.5",
+  "applications": {
+    "gecko": {
+      "id": "tunnel-focus@MacroChip.addons.mozilla.org"
+    }
+  },
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "dist/popup.html"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "<all_urls>",
+    "storage"
+  ],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+Shift+F"
+      }
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "dist/jquery-3.1.1.min.js",
+        "dist/main.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    "css/*"
+  ]
+}

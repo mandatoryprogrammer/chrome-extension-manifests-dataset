@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Chute Rights",
+  "version": "1.0.3",
+  "description": "This extension allows Chute customers to post rights messages.",
+  "author": "Chute",
+  "manifest_version": 2,
+  "permissions": [
+    "activeTab",
+    "https://www.instagram.com/*",
+    "https://*.getchute.com/*",
+    "https://*.staging.getchute.com/*",
+    "https://*.dev.getchute.com/*"
+  ],
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_title": "Click to browse",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://workspace.getchute.com/*",
+        "https://workspace.staging.getchute.com/*",
+        "https://workspace.dev.getchute.com/*",
+        "http://chute.com/*"
+      ],
+      "js": [
+        "js/workspace.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.instagram.com/*"
+      ],
+      "js": [
+        "js/instagram.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

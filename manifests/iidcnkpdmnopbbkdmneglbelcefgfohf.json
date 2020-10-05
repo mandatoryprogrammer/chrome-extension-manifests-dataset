@@ -1,0 +1,69 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "RunMyCode Online",
+  "short_name": "RunMyCode",
+  "description": "RunMyCode Online is a free and open-source tool to compile and run code online directly from Github, Gitlab and Bitbucket.",
+  "author": "Shatrughn Gupta",
+  "homepage_url": "https://runmycode.online",
+  "version": "2.0.2",
+  "icons": {
+    "128": "icon128.png"
+  },
+  "manifest_version": 2,
+  "page_action": {
+    "default_icon": "icon128.png",
+    "default_title": "This site is not yet supported by RunMyCode."
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://github.com/*",
+        "https://gist.github.com/*"
+      ],
+      "js": [
+        "browser-polyfill.min.js",
+        "common-utils.js",
+        "platforms/github.js",
+        "runmycode.js"
+      ],
+      "css": [
+        "runmycode-panel.css"
+      ],
+      "run-at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://runmycode.online/dashboard.html*"
+      ],
+      "js": [
+        "browser-polyfill.min.js",
+        "auto-configure.js"
+      ],
+      "run-at": "document_idle"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "browser-polyfill.min.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "options_ui": {
+    "page": "options.html"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "https://api.runmycode.online/"
+  ],
+  "optional_permissions": [
+    "https://gitlab.com/",
+    "https://bitbucket.org/",
+    "https://gobyexample.com/",
+    "*://xahlee.info/",
+    "*://www.learntosolveit.com/",
+    "https://www.geeksforgeeks.org/",
+    "https://www.tutorialspoint.com/"
+  ]
+}

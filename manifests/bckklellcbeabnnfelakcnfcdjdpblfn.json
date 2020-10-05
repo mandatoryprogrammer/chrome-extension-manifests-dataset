@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "BrowserChat",
+  "version": "1.2.3",
+  "description": "Simple chat to talk with user that are viewing the same page with you",
+  "icons": {
+    "32": "img/group-32.png",
+    "64": "img/group-64.png",
+    "128": "img/group-128.png"
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "cookies"
+  ],
+  "background": {
+    "scripts": [
+      "lib/sockjs.min.js",
+      "lib/stomp.min.js",
+      "backgroundscripts/messageListener.js",
+      "backgroundscripts/requestManager.js",
+      "backgroundscripts/chatMessage.js",
+      "backgroundscripts/index.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "contentScripts/contentMain.js"
+      ],
+      "css": [
+        "css/content.css"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": "img/group-32.png",
+    "default_title": "BrowserChat",
+    "default_popup": "popup/mainPopup.html"
+  },
+  "web_accessible_resources": [
+    "img/list-16.png",
+    "img/list-32.png",
+    "img/group-64.png",
+    "img/flags/*.png",
+    "img/MALE.png",
+    "img/FEMALE.png",
+    "css/content.css",
+    "css/msgPopup.css"
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "FFPlayerStatus",
+  "version": "1.1.2",
+  "icons": {
+    "128": "images/ffplayerstatus-large.png"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; https://platform.twitter.com; https://connect.facebook.net; object-src 'self'",
+  "permissions": [
+    "activeTab",
+    "webNavigation",
+    "tabs",
+    "http://*/",
+    "alarms"
+  ],
+  "background": {
+    "page": "background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [
+        "css/main.css",
+        "css/font-awesome.min.css"
+      ],
+      "js": [
+        "lib/jquery-2.0.3.min.js",
+        "lib/replaceText.min.js",
+        "lib/handlebars.js",
+        "lib/underscore-min.js",
+        "templates.js",
+        "parser.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://games.espn.go.com/*"
+      ],
+      "js": [
+        "lib/jquery-2.0.3.min.js",
+        "lib/replaceText.min.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "http://games.espn.go.com/frontpage/football"
+      ],
+      "js": [
+        "lib/jquery-2.0.3.min.js",
+        "lib/underscore-min.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://football.fantasysports.yahoo.com/"
+      ],
+      "js": [
+        "lib/jquery-2.0.3.min.js",
+        "lib/underscore-min.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "font/FontAwesome.otf",
+    "font/fontawesome-webfont.svg",
+    "font/fontawesome-webfont.woff",
+    "font/fontawesome-webfont.woff2",
+    "font/fontawesome-webfont.eot",
+    "font/fontawesome-webfont.ttf",
+    "images/default_profile.png",
+    "images/espn.png",
+    "images/yahoo.png"
+  ],
+  "browser_action": {
+    "default_name": "FF Player Status",
+    "default_popup": "browser_action.html",
+    "default_icon": "images/ffplayerstatus-large.png"
+  }
+}

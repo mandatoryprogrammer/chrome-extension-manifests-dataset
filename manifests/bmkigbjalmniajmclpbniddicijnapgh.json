@@ -1,0 +1,40 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Approve Pull Request with image",
+  "version": "2.0.0",
+  "manifest_version": 2,
+  "description": "Chrome extension to approve pull request with LGTM image",
+  "homepage_url": "https://github.com/mizoguche/approve-pr-with-image",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "dist/background.js"
+    ],
+    "persistent": true
+  },
+  "options_page": "static/option.html",
+  "browser_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "browser action demo",
+    "default_popup": "static/browser_action.html"
+  },
+  "permissions": [
+    "clipboardWrite",
+    "contextMenus",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://github.com/*"
+      ],
+      "js": [
+        "dist/inject.js"
+      ]
+    }
+  ]
+}

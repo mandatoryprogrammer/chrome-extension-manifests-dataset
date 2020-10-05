@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "PassLok for Email",
+  "short_name": "PassLok",
+  "description": "High security encryption for email. PassLok is in no way associated with Gmail, Yahoo, or Outlook.",
+  "version": "0.5.5",
+  "manifest_version": 2,
+  "icons": {
+    "16": "img/passlok-icon16inv.png",
+    "48": "img/passlok-icon48inv.png",
+    "128": "img/passlok-touch-icon128.png"
+  },
+  "content_security_policy": "default-src 'self'; img-src 'self' data:; connect-src 'self' data:; style-src 'self' 'unsafe-inline'",
+  "permissions": [
+    "storage",
+    "https://mail.google.com/*",
+    "http://mail.google.com/*",
+    "https://google.com/*",
+    "http://google.com/*",
+    "http://*.mail.yahoo.com/*",
+    "https://*.mail.yahoo.com/*",
+    "http://*.live.com/*",
+    "https://*.live.com/*"
+  ],
+  "background": {
+    "scripts": [
+      "js-src/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "http://mail.google.com/*",
+        "http://*.mail.yahoo.com/*",
+        "https://*.mail.yahoo.com/*",
+        "http://*.live.com/*",
+        "https://*.live.com/*"
+      ],
+      "css": [
+        "css/content.css"
+      ],
+      "js": [
+        "js-src/content.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "background": {
+    "scripts": [
+      "includes/Utils.js",
+      "includes/Settings.js",
+      "includes/Emitter.js",
+      "main/AdBlockFacade.js",
+      "main/UserManager.js",
+      "main/CustomSiteManager.js",
+      "main/BugreportManager.js",
+      "main/AdBeaver.js",
+      "background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "ui/images/icon-empty.png"
+    },
+    "default_popup": "ui/popup.html",
+    "default_title": "AdBeaver"
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "includes/Utils.js",
+        "includes/AdWrapperCS.js",
+        "main/AdManagerCS.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "main/FrameCheckCS.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": false,
+      "js": [
+        "main/Dealbeaver.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": false,
+      "js": [
+        "ui/InfoBarCS.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "default_locale": "en",
+  "manifest_version": 2,
+  "name": "AdBeaver",
+  "options_page": "ui/options.html",
+  "permissions": [
+    "http://*/",
+    "https://*/",
+    "webRequest",
+    "webRequestBlocking",
+    "webNavigation",
+    "tabs",
+    "management"
+  ],
+  "version": "1.0.3",
+  "web_accessible_resources": [
+    "ui/images/defaulticon.png",
+    "ui/images/gradient_bar.png",
+    "ui/images/button_click.png",
+    "ui/images/button_gradient.png",
+    "ui/images/infoclose.png",
+    "ui/images/infoclose_hover.png"
+  ]
+}

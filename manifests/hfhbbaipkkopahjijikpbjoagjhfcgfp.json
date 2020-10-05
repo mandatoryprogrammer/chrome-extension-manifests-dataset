@@ -1,0 +1,41 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Watch Hacker News",
+  "short_name": "Watch HN",
+  "description": "Watch HN allows you to subscribe to hacker news threads and get informed if new comments pop up.",
+  "version": "0.1.3",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "128": "icon.png"
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "*://news.ycombinator.com/*"
+      ],
+      "js": [
+        "js/content_script.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "storage",
+    "*://news.ycombinator.com/*"
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "hello@atrox.dev"
+    }
+  }
+}

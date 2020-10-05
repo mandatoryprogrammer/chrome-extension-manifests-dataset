@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "description": "Tenable.io Web Application Scanning",
+  "manifest_version": 2,
+  "name": "Tenable.io Web Application Scanning",
+  "short_name": "Tenable.io WAS",
+  "version": "1.1.0",
+  "version_name": "1.1.0",
+  "homepage_url": "https://www.tenable.com/products/tenable-io/web-application-scanning",
+  "icons": {
+    "128": "icons/128.png",
+    "48": "icons/48.png",
+    "32": "icons/32.png",
+    "19": "icons/19.png"
+  },
+  "browser_action": {
+    "default_title": "Tenable.io",
+    "default_icon": "icons/19.png"
+  },
+  "permissions": [
+    "tabs",
+    "contextMenus",
+    "webNavigation",
+    "notifications",
+    "storage",
+    "debugger",
+    "<all_urls>"
+  ],
+  "externally_connectable": {
+    "ids": [
+      "nkmmlnphajhildmnjkjkgkjnggpnhkhk"
+    ],
+    "matches": [
+      "*://cloud.tenable.com/*",
+      "*://*.tenablesecurity.com/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "icons/icon128.png",
+    "assets/prompt.js",
+    "assets/indicator.js",
+    "assets/highlight.css",
+    "assets/fonts.css",
+    "assets/fonts/*",
+    "bootstrap.html",
+    "indicator.html"
+  ],
+  "content_security_policy": "script-src 'self' 'sha256-W7QWmGne6B9hjKtOqoGmUFOPgpFcUo4Nr/yyMqtgXcU=' 'sha256-4cgtnhJWZr038A2+gTGcUgQL2QsJao6c0AiTxYYo6c8=' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://cloud.tenable.com/*",
+        "*://*.tenablesecurity.com/*"
+      ],
+      "js": [
+        "assets/inject_me.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "assets/background.js"
+    ]
+  }
+}

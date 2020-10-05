@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Truly for Chrome",
+  "short_name": "Truly",
+  "manifest_version": 2,
+  "description": "Truly",
+  "icons": {
+    "16": "icons/icon-16x16.png",
+    "48": "icons/icon-48x48.png",
+    "128": "icons/icon-128x128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/icon-16x16.png",
+      "19": "icons/icon-19x19.png",
+      "48": "icons/icon-48x48.png",
+      "128": "icons/icon-128x128.png"
+    },
+    "default_title": "Truly"
+  },
+  "background": {
+    "page": "html/background.html",
+    "persistent": true
+  },
+  "permissions": [
+    "tabs",
+    "windows",
+    "cookies",
+    "management",
+    "https://local-dev.trulywireless.com/*",
+    "https://staging.trulywireless.com/*",
+    "https://dev.trulywireless.com/*",
+    "https://trulywireless.com/*",
+    "http://localhost:3000/*",
+    "https://*.truly.co/*"
+  ],
+  "content_security_policy": "script-src 'self' https://dev.trulywireless.com https://staging.trulywireless.com https://trulywireless.com https://*.segment.com https://*.mxpnl.com 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/content.js"
+      ],
+      "css": [
+        "style/style.css"
+      ],
+      "all_frames": true
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://*.truly.co/*",
+      "https://*.trulywireless.com/*"
+    ]
+  },
+  "devtools_page": "devtools/devtools.html",
+  "web_accessible_resources": [
+    "style/fonts/**",
+    "images/**"
+  ],
+  "version": "3.1.0"
+}

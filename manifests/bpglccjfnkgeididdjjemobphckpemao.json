@@ -1,0 +1,83 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "StreamChat",
+  "short_name": "StreamChat",
+  "version": "1.0.1",
+  "manifest_version": 2,
+  "description": "A simple extension to combine chat from youtube, twitch, and livecoding.",
+  "homepage_url": "http://www.milestonemade.com",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "default_locale": "en",
+  "permissions": [
+    "https://www.youtube.com/*",
+    "https://www.livecoding.tv/*",
+    "http://www.twitch.tv/*",
+    "http://localhost:3000/*"
+  ],
+  "background": {
+    "scripts": [
+      "src/background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_title": "",
+    "default_icon": "icons/icon-16.png",
+    "default_popup": "src/popup/index.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.twitch.tv/*"
+      ],
+      "js": [
+        "src/main.js",
+        "src/adapters/message-data.js",
+        "src/observers/twitch.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.livecoding.tv/*"
+      ],
+      "js": [
+        "src/main.js",
+        "src/adapters/message-data.js",
+        "src/observers/livecoding.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.youtube.com/*"
+      ],
+      "js": [
+        "src/main.js",
+        "src/adapters/message-data.js",
+        "src/observers/youtube.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://www.hitbox.tv/*"
+      ],
+      "js": [
+        "src/main.js",
+        "src/adapters/message-data.js",
+        "src/observers/hitbox.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://*.streamchat.tv/*",
+        "http://localhost:3000/*"
+      ],
+      "js": [
+        "src/streamchat.tv.js"
+      ]
+    }
+  ]
+}

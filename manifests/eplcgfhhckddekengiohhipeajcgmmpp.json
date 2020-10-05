@@ -1,0 +1,72 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "SwifClub",
+  "description": "Swifclub creates regression tests for your site.  Hit record, and use your site as any user would: every click becomes a test.",
+  "version": "1.0.5.0",
+  "browser_action": {
+    "default_icon": "img/tick_19.png",
+    "default_title": "Swif Club",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "cookies",
+    "activeTab",
+    "tabs",
+    "https://ajax.googleapis.com/",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "js/jquery-3.0.0.min.js",
+      "js/system.js",
+      "js/FilmModel.js",
+      "js/background.js",
+      "js/firebase.js"
+    ],
+    "persistent": true
+  },
+  "web_accessible_resources": [
+    "img/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/jquery-3.0.0.min.js",
+        "js/backgroundStorage.js",
+        "js/cookieStorage.js",
+        "js/system.js",
+        "js/OurJQuery.js",
+        "js/EventRecorderCS.js",
+        "js/PlayCS.js",
+        "js/PlayModel.js",
+        "js/SplitterModel.js",
+        "js/firebase.js"
+      ],
+      "css": [
+        "css/ContentScript.css",
+        "css/Shared.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.swif.club/*",
+      "*://swif.club/*",
+      "*://swif.club/",
+      "*://test.com/*"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://cdn.firebase.com https://*.firebaseio.com; object-src 'self'",
+  "icons": {
+    "16": "img/swif_icon_16.png",
+    "48": "img/swif_club_48.png",
+    "128": "img/swif_main_128px.png"
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Bubbles: Video and Screenshot Collaboration",
+  "short_name": "Bubbles",
+  "version": "1.12.4.0",
+  "manifest_version": 2,
+  "description": "Bubbles: capture videos and screenshots, drop comments, and share with your teammates.",
+  "background": {
+    "scripts": [
+      "dist/background-script.min.js"
+    ],
+    "persistent": false
+  },
+  "web_accessible_resources": [
+    "assets/*",
+    "static/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://*.usebubbles.com/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.usebubbles.com/*"
+      ],
+      "js": [
+        "dist/content-scripts/no-install-button.min.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.usebubbles.com/faq-access-microphone",
+        "https://*.usebubbles.webflow.io/faq-access-microphone",
+        "https://*.usebubbles.com/faq-unblock-microphone",
+        "https://*.usebubbles.webflow.io/faq-unblock-microphone"
+      ],
+      "js": [
+        "dist/content-scripts/inject-access-mic-iframe.min.js"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "all_frames": true,
+      "match_about_blank": true,
+      "run_at": "document_start",
+      "js": [
+        "dist/content-scripts/prevent-events-conflict.min.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_title": "Bubbles",
+    "default_popup": "static/popup.html"
+  },
+  "commands": {
+    "record_screen": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+1",
+        "mac": "MacCtrl+Shift+1"
+      },
+      "description": "Record screen"
+    },
+    "capture_visible_page": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+2",
+        "mac": "MacCtrl+Shift+2"
+      },
+      "description": "Capture page"
+    },
+    "capture_full_page": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+3",
+        "mac": "MacCtrl+Shift+3"
+      },
+      "description": "Scroll & capture"
+    }
+  },
+  "permissions": [
+    "<all_urls>",
+    "tabs",
+    "activeTab",
+    "contextMenus",
+    "storage",
+    "desktopCapture"
+  ],
+  "icons": {
+    "16": "assets/icon-thick-16x16@2x.png",
+    "32": "assets/icon-thick-16x16@2x.png",
+    "64": "assets/icon-thick-16x16@4x.png",
+    "48": "assets/icon-thin-48x48@2x.png",
+    "96": "assets/icon-thin-48x48@2x.png",
+    "194": "assets/icon-thin-48x48@4x.png",
+    "128": "assets/icon-thin-128x128@2x.png",
+    "256": "assets/icon-thin-128x128@2x.png",
+    "512": "assets/icon-thin-128x128@4x.png"
+  }
+}

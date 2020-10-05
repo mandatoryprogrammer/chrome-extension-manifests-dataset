@@ -1,0 +1,42 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Lector de facturas mexicanas XML",
+  "short_name": "Leer XMLFacs",
+  "description": "Convierte las facturas mexicanas en formato XML a un formato imprimible sencillo de leer",
+  "version": "4.3.1",
+  "browser_action": {
+    "default_icon": "icon48.png",
+    "default_popup": "index.html"
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "file://*.xml",
+        "file://*.XML"
+      ],
+      "js": [
+        "jquery-3.1.1.min.js",
+        "qrcode.js",
+        "Invoice.js",
+        "xmlparser.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    "/*.html"
+  ],
+  "permissions": [
+    "https://ajax.googleapis.com/",
+    "notifications"
+  ]
+}

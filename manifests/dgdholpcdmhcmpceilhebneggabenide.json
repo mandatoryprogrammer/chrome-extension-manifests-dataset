@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Reddit Enhancements Lite (RELite)",
+  "description": "View/scroll reddit without killing your browser.",
+  "version": "1.11",
+  "manifest_version": 2,
+  "version_name": "1.11",
+  "browser_action": {
+    "default_icon": "Misc/Resources/logo.png",
+    "default_title": "Reddit Enhancements Lite"
+  },
+  "icons": {
+    "128": "Misc/Resources/logo.png"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.reddit.com/*"
+      ],
+      "js": [
+        "Misc/Resources/jquery-2.1.4.min.js",
+        "Helpers.js",
+        "content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "HTTPProcessing/hookRequests.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "*://*.reddit.com/*",
+    "*://*.reddituploads.com/*",
+    "*://*.imgur.com/*",
+    "webRequest",
+    "webRequestBlocking",
+    "storage"
+  ],
+  "web_accessible_resources": [
+    "/Misc/Resources/left.jpg",
+    "/Misc/Resources/right.jpg"
+  ]
+}

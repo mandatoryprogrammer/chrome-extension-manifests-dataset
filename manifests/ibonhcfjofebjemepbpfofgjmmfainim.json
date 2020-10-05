@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Blocker",
+  "description": "Improve your productivity by blocking the websites you find distracting.",
+  "author": "milselarch",
+  "version": "0.1.14",
+  "icons": {
+    "16": "icons/icon-border.png",
+    "128": "icons/icon-border.png"
+  },
+  "permissions": [
+    "<all_urls>",
+    "*://*/*",
+    "activeTab",
+    "tabs",
+    "background",
+    "unlimitedStorage",
+    "storage"
+  ],
+  "browser_action": {
+    "default_title": "title",
+    "default_popup": "pages/popup.html"
+  },
+  "background": {
+    "persistent": false,
+    "page": "pages/background.html"
+  },
+  "devtools_page": "pages/devtools.html",
+  "options_page": "pages/options.html",
+  "content_scripts": [
+    {
+      "js": [
+        "js/content.js"
+      ],
+      "run_at": "document_end",
+      "matches": [
+        "<all_urls>"
+      ],
+      "all_frames": true
+    }
+  ],
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' http://localhost:8098/; object-src 'self'",
+  "web_accessible_resources": [
+    "panel.html",
+    "js/content.js"
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Ext.Net Message Bus Sniffer",
+  "version": "0.1.1",
+  "homepage_url": "http://github.com/onof/Ext.Net.Chrome.Tools",
+  "description": "Shows the events published on the Ext.Net Message Bus in the current page.",
+  "icons": {
+    "128": "icon.png"
+  },
+  "page_action": {
+    "default_name": "Message Bus Events",
+    "default_icon": "marker.png",
+    "default_popup": "popup.html"
+  },
+  "author": "Onofrio Panzarino",
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*"
+      ],
+      "js": [
+        "capturedBusEventsCs.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://*/*"
+      ],
+      "js": [
+        "injectingCs.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "tabs"
+  ],
+  "web_accessible_resources": [
+    "popup.js",
+    "popup.css"
+  ],
+  "content_security_policy": "default-src 'none'; style-src 'self'; script-src 'self';"
+}

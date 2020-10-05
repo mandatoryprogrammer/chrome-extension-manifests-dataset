@@ -1,0 +1,80 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_extension_name__",
+  "short_name": "__MSG_extension_short_name__",
+  "description": "__MSG_extension_desc__",
+  "version": "20.9.15",
+  "default_locale": "en",
+  "browser_action": {
+    "default_icon": {
+      "16": "/img/favicon-16x16.png",
+      "24": "/img/favicon-24x24.png",
+      "32": "/img/favicon-32x32.png",
+      "64": "/img/favicon-64x64.png",
+      "96": "/img/favicon-96x96.png",
+      "128": "/img/favicon-128x128.png",
+      "196": "/img/favicon-196x196.png"
+    },
+    "default_title": "__MSG_extension_short_name__"
+  },
+  "background": {
+    "scripts": [
+      "/lib/jquery-1.10.2.min.js",
+      "/js/tracking.js",
+      "/js/browser.js",
+      "/js/background.js"
+    ]
+  },
+  "icons": {
+    "16": "/img/fav_16.png",
+    "32": "/img/fav_32.png",
+    "48": "/img/fav_48.png",
+    "96": "/img/fav_96.png",
+    "128": "/img/fav_128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.slack.com/*",
+        "*://mail.google.com/*",
+        "*://inbox.google.com/*",
+        "*://*.send-anywhere.com/*",
+        "*://*/*.pdf",
+        "file:///*.pdf"
+      ],
+      "js": [
+        "/lib/jquery-1.10.2.min.js",
+        "/lib/inboxsdk.js",
+        "/js/content-script.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "/lib/jquery-1.10.2.min.js",
+    "/js/inject-iframe.js",
+    "/html/frame.html",
+    "/html/btn.html",
+    "/css/injection.css",
+    "/img/ic_gmail.png",
+    "/img/ic_slack.svg",
+    "/img/ic_slack_hover.svg",
+    "/img/slack_normal.png",
+    "/img/slack_hover.png",
+    "/html/embedded_webapp.html"
+  ],
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "contextMenus",
+    "storage",
+    "cookies",
+    "background",
+    "*://*.send-anywhere.com/"
+  ],
+  "optional_permissions": [
+    "*://*/*.pdf",
+    "file:///*.pdf"
+  ],
+  "content_security_policy": "script-src 'self' https://*.send-anywhere.com/ https://fonts.gstatic.com/ https://www.google-analytics.com/; object-src 'self';"
+}

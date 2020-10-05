@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Linkiomatic",
+  "version": "45.0",
+  "description": "Linkiomatic helps you to automatize your LinkedIn tasks",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'; connect-src *",
+  "browser_action": {
+    "default_popup": "popupDir/index.html",
+    "default_icon": "512.png"
+  },
+  "manifest_version": 2,
+  "permissions": [
+    "storage",
+    "activeTab",
+    "*://linkedin.*/*",
+    "*://linkedin.com",
+    "*://*.linkedin.com",
+    "*://linkedin.*",
+    "*://*.linkiomatic.*/*",
+    "*://*.linkedin.*/*"
+  ],
+  "icons": {
+    "16": "16.png",
+    "48": "48.png",
+    "128": "128.png",
+    "512": "512.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.linkedin.com/feed/*",
+        "*://*.linkedin.com/",
+        "*://*.linkedin.com/in/*",
+        "*://*.linkedin.com/company/*",
+        "*://*.linkedin.com/mynetwork/*",
+        "*://*.linkedin.com/messaging/*",
+        "*://*.linkedin.com/search/*",
+        "*://*.linkedin.com/me/*",
+        "*://*.linkedin.com/groups/*",
+        "*://linkiomatic.com/server/*"
+      ],
+      "js": [
+        "injectSimple.js",
+        "pluginDir/runtime.js",
+        "pluginDir/polyfills.js",
+        "pluginDir/styles.js",
+        "pluginDir/vendor.js",
+        "pluginDir/main.js",
+        "fontawesome.js"
+      ],
+      "css": [
+        "linkautomator.css",
+        "bulma.css"
+      ]
+    }
+  ]
+}

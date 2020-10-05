@@ -1,0 +1,99 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "lib/jquery-2.1.0.min.js",
+      "lib/chai.js",
+      "lib/gmail-helper.js",
+      "lib/account-helper.js",
+      "lib/underscore.js",
+      "lib/notification-progress.js",
+      "lib/image-utils.js",
+      "lib/meteor-ddp.js",
+      "lib/ddp-log.js",
+      "lib/meteorDDP.js",
+      "background.js",
+      "lib/actnotify.js",
+      "lib/moment.min.js"
+    ]
+  },
+  "page_action": {
+    "default_icon": "images/logo.png",
+    "default_title": "ConvergeHub Lead Generator",
+    "default_popup": "/views/browser-action-popup.html"
+  },
+  "content_scripts": [
+    {
+      "css": [],
+      "js": [
+        "lib/jquery-2.1.0.min.js",
+        "lib/jquery.ba-hashchange.js",
+        "content_script.js"
+      ],
+      "matches": [
+        "https://*/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "css": [],
+      "js": [
+        "lib/chai.js",
+        "lib/jquery-2.1.0.min.js",
+        "content_script.js"
+      ],
+      "matches": [
+        "*://staging.knotable.com/*",
+        "*://alpha.knotable.com/*",
+        "*://dev.knotable.com/*",
+        "http://localhost:3000/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "css": [],
+      "js": [
+        "lib/chai.js",
+        "lib/jquery-2.1.0.min.js",
+        "lib/jquery.ba-hashchange.js",
+        "content_script.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "http://localhost:3000/*",
+        "*://mail.google.com/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://apis.google.com; object-src 'self' 'unsafe-eval'",
+  "description": "Lead capture from LinkedIn, Facebook, Twitter, Gmail, Yelp and many more. Free CRM included.",
+  "icons": {
+    "128": "images/icon-128.png",
+    "16": "images/icon-16.png",
+    "48": "images/icon-48.png"
+  },
+  "manifest_version": 2,
+  "short_name": "Lead Generator",
+  "name": "ConvergeHub Lead Generator",
+  "homepage_url": "https://convergehub.com",
+  "permissions": [
+    "storage",
+    "webRequest",
+    "https://*/*"
+  ],
+  "version": "2.3.1",
+  "web_accessible_resources": [
+    "lib/*",
+    "css/*",
+    "fonts/*",
+    "images/*",
+    "views/*",
+    "inline-scripts/*",
+    "content-script-frame.html"
+  ]
+}

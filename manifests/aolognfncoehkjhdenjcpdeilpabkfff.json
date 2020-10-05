@@ -1,0 +1,89 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "YAIR",
+  "version": "0.3.3",
+  "description": "Revamps the Reddit inbox",
+  "icons": {
+    "16": "images/icons/16.png",
+    "48": "images/icons/48.png",
+    "128": "images/icons/128.png"
+  },
+  "permissions": [
+    "cookies",
+    "*://*.reddit.com/*",
+    "https://www.reddit.com/message/unread.json?raw_json=1*",
+    "https://old.reddit.com/message/unread.json?raw_json=1*"
+  ],
+  "web_accessible_resources": [
+    "template/*",
+    "images/*",
+    "images/icons/*",
+    "manifest.json"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.reddit.com/*",
+        "https://*.reddit.com/*"
+      ],
+      "css": [
+        "css/notification_icons.css"
+      ],
+      "js": [
+        "js/global/extension-scanner.js",
+        "js/content-all/notification_icons.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "http://*.reddit.com/message/yair_*",
+        "https://*.reddit.com/message/yair_*"
+      ],
+      "css": [
+        "css/ui.css",
+        "css/quill.core.css",
+        "css/quill.snow.css",
+        "css/alerts.css"
+      ],
+      "js": [
+        "js/content-inbox/jquery-3.4.1.min.js",
+        "js/content-inbox/jquery.autogrow-textarea.min.js",
+        "js/content-inbox/snuownd.min.js",
+        "js/global/constants.js",
+        "js/global/command-events.js",
+        "js/global/extension-scanner.js",
+        "js/content-inbox/global.js",
+        "js/content-inbox/alerts.js",
+        "js/content-inbox/config.js",
+        "js/content-inbox/generic.js",
+        "js/content-inbox/inbox.js",
+        "js/content-inbox/dbhelper.js",
+        "js/content-inbox/quill.min.js",
+        "js/content-inbox/turndown.min.js",
+        "js/notifications/fetch.js",
+        "js/notifications/moment-2.24.0.min.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/global/constants.js",
+      "js/background/bg-global.js",
+      "js/background/bg-config.js",
+      "js/background/bg-indexeddb.js",
+      "js/background/bg-drafts.js",
+      "js/background/bg-proxy.js",
+      "js/content-inbox/jquery-3.4.1.min.js",
+      "js/notifications/moment-2.24.0.min.js",
+      "js/background/bg_fetch.js"
+    ]
+  },
+  "browser_action": {
+    "default_popup": "template/notifications_panel.html"
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Magonote",
+  "version": "0.40",
+  "manifest_version": 2,
+  "homepage_url": "http://magonote.tokyo/",
+  "short_name": "Magonote",
+  "permissions": [
+    "tabs",
+    "contextMenus",
+    "storage",
+    "unlimitedStorage",
+    "activeTab",
+    "cookies",
+    "http://localhost:8000/*",
+    "http://magonote.tokyo/*",
+    "<all_urls>",
+    "sessions",
+    "webNavigation",
+    "fileBrowserHandler",
+    "webRequest",
+    "webRequestBlocking",
+    "streamsPrivate"
+  ],
+  "icons": {
+    "16": "icons/magonote16.png",
+    "48": "icons/magonote48.png",
+    "128": "icons/magonote128.png"
+  },
+  "background": {
+    "page": "pdfHandler.html",
+    "script": "contentScripts/myscript.js"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/magonote19.png",
+      "38": "icons/magonote38.png"
+    },
+    "default_title": "Magonote",
+    "default_popup": "browserAction/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "http://magonote.tokyo/*"
+      ],
+      "js": [
+        "contentScripts/jquery.min.js",
+        "contentScripts/jsrender.min.js",
+        "contentScripts/jquery.bxslider.min.js",
+        "contentScripts/jquery.easing.min.js",
+        "contentScripts/sweetalert.min.js",
+        "contentScripts/noty/packaged/jquery.noty.packaged.min.js",
+        "contentScripts/alert.js"
+      ],
+      "css": [
+        "contentScripts/css/word_style.css",
+        "contentScripts/css/jquery.bxslider.css",
+        "contentScripts/css/sweetalert.css",
+        "contentScripts/css/animate.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "ftp://*/*",
+        "file://*/*"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "css": [
+        "contentstyle.css"
+      ],
+      "js": [
+        "contentscript.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "file_browser_handlers": [
+    {
+      "id": "open-as-pdf",
+      "default_title": "Open with PDF Viewer",
+      "file_filters": [
+        "filesystem:*.pdf"
+      ]
+    }
+  ],
+  "mime_types": [
+    "application/pdf"
+  ],
+  "storage": {
+    "managed_schema": "preferences_schema.json"
+  },
+  "incognito": "split",
+  "options_page": "browserAction/options.html",
+  "web_accessible_resources": [
+    "getFrameId",
+    "content/web/viewer.html",
+    "http:/*",
+    "https:/*",
+    "ftp:/*",
+    "file:/*",
+    "chrome-extension:/*",
+    "filesystem:/*",
+    "drive:*",
+    "contentScripts/sweetalert.min.js",
+    "contentScripts/css/sweetalert.css",
+    "fonts/*",
+    "javascript-lemmatizer/*",
+    "readme.pdf"
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Star JsFiddles",
+  "description": "This extension allows you to star JsFiddles with one click, so you can access it right away",
+  "version": "1.1",
+  "minimum_chrome_version": "20",
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon19.png",
+      "38": "images/icon38.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "http://jsfiddle.net/*",
+    "https://ssl.google-analytics.com/ga.js",
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://jsfiddle.net/*"
+      ],
+      "js": [
+        "jquery-1.9.1.min.js",
+        "crimsond.common.js",
+        "crimsond.star.jsfiddles.common.js",
+        "content_script.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "jquery.min.map",
+    "images/star.png",
+    "images/starred.png",
+    "ga.js"
+  ]
+}

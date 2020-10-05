@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "SenseMap",
+  "description": "SenseMaking with Analytic Provenance",
+  "version": "0.5.9",
+  "browser_action": {
+    "default_icon": {
+      "19": "logo/sm-logo-19.png"
+    },
+    "default_title": "Open SenseMap"
+  },
+  "icons": {
+    "128": "logo/sm-logo-128.png"
+  },
+  "background": {
+    "page": "src/pages/background.html",
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "src/bower_components/jquery/dist/jquery.min.js",
+        "src/bower_components/bootstrap/dist/js/bootstrap.min.js",
+        "src/bower_components/jquery-ui.min.js",
+        "src/js/content-scripts/highlight.js",
+        "src/js/content-scripts/content.js"
+      ],
+      "css": [
+        "src/css/content.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "<all_urls>",
+    "chrome://favicon/",
+    "storage",
+    "history",
+    "tabs",
+    "contextMenus"
+  ],
+  "web_accessible_resources": [
+    "src/css/*.*"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

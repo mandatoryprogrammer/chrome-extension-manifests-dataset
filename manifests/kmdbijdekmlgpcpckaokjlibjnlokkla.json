@@ -1,0 +1,43 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Booking.com hotel price monitor",
+  "description": "Watch a hotels specific room, within specific dates, and get alerts when prices change",
+  "version": "1.1",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.booking.com/*"
+      ],
+      "js": [
+        "jquery.js",
+        "content_script.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ajax.googleapis.com https://www.google-analytics.com; object-src 'self'",
+  "permissions": [
+    "http://*/",
+    "https://*/",
+    "webRequest",
+    "webRequestBlocking",
+    "storage",
+    "tabs",
+    "activeTab",
+    "notifications"
+  ]
+}

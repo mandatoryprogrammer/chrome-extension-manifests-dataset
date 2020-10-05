@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "UdacityMT",
+  "description": "UdacityMT (Udacity Mentor Toolkit) is a private community tool for Udacity mentors and reviewers.",
+  "homepage_url": "https://udacitymt.herokuapp.com",
+  "version": "0.3.2",
+  "icons": {
+    "48": "assets/img/logo-48.png",
+    "96": "assets/img/logo-96.png",
+    "128": "assets/img/logo-128.png"
+  },
+  "background": {
+    "scripts": [
+      "eventPages.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "assets/img/logo-256.png",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://review.udacity.com/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "contentScriptsV1.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://mentor-dashboard.udacity.com/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "contentScripts.js"
+      ]
+    }
+  ],
+  "options_ui": {
+    "page": "popup.html",
+    "open_in_tab": true
+  },
+  "permissions": [
+    "activeTab",
+    "cookies",
+    "storage",
+    "tabs",
+    "unlimitedStorage",
+    "*://review.udacity.com/*",
+    "*://mentor-dashboard.udacity.com/*",
+    "*://udacitymt-backend.herokuapp.com/*"
+  ],
+  "web_accessible_resources": [
+    "injectedScripts.js",
+    "injectedScriptsV1.js",
+    "assets/public/*"
+  ]
+}

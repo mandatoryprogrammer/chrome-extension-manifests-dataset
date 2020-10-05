@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Smart Tab Manager",
+  "version": "0.1.0",
+  "description": "Smart Tab Manager assists users to manage their Chrome tabs efficiently.",
+  "background": {
+    "scripts": [
+      "src/js/jquery.min.js",
+      "background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "resources/favicon.png",
+    "default_title": "Smart Tab Manager",
+    "default_popup": "src/html/manager.html"
+  },
+  "icons": {
+    "128": "resources/favicon.png"
+  },
+  "omnibox": {
+    "keyword": "tabby"
+  },
+  "chrome_url_overrides": {
+    "newtab": "src/html/dashboard.html"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "activeTab",
+    "<all_urls>"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "src/js/contents.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "src/html/command_box.html",
+    "resources/favicon.png"
+  ],
+  "commands": {
+    "show_command_box": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+E",
+        "windows": "Ctrl+Shift+E",
+        "mac": "Command+Shift+E"
+      },
+      "description": "show command box"
+    },
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+H",
+        "windows": "Ctrl+Shift+H",
+        "mac": "Command+Shift+H"
+      }
+    }
+  }
+}

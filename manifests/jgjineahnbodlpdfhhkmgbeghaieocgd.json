@@ -1,0 +1,81 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "SearchSK",
+  "author": "Andrey Shemetov",
+  "description": "__MSG_addonDescChr__",
+  "version": "0.7",
+  "default_locale": "en",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsGf1uWe1RHPENMzQQBSgka0kzQTsmYkKbhVX4O3aUTj87ause1mEWE0yhjsqQAXUbcf5TjAX1FrpqLoeBdfDsDqXmTSLiHHUBTSQqk0DwhfsMbQp2NAjjvZyTdLd5bAt6g58Qpel0M7yW0DXPyQqZwgcLUmmLjIAoVhnLi+dlAYqS5RPzG66ePCOgFJi3YS4P3NBmmVGFXNhC0f07rzycN/fF5CsfR9UeAC44f+JSXGU54z4EHoGFQ5BrSH0g8k6FcoNiyEF0hAwLSfnEQ/CrI9TR2nk7KJJnAy3FTkNiTBK5RK1IgsxwtfSGJAsOGIZ9i2+8wTLPWDVUirXRdNXBQIDAQAB",
+  "icons": {
+    "16": "icons/search_16.png",
+    "24": "icons/search_24.png",
+    "32": "icons/search_32.png",
+    "48": "icons/search_48.png",
+    "64": "icons/search_64.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/search_16.png",
+      "24": "icons/search_24.png",
+      "32": "icons/search_32.png",
+      "48": "icons/search_48.png",
+      "64": "icons/search_64.png"
+    },
+    "default_title": "SearchSK",
+    "default_popup": "popup/popup.html"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+8"
+      },
+      "description": "Open SearchSK"
+    }
+  },
+  "options_ui": {
+    "page": "prefs/prefs.html",
+    "open_in_tab": true
+  },
+  "background": {
+    "scripts": [
+      "common.js",
+      "utils.js",
+      "favicons.js",
+      "opensearch.js",
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "<all_urls>",
+    "alarms",
+    "bookmarks",
+    "contextMenus",
+    "notifications",
+    "storage",
+    "tabs"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "js": [
+        "libs/mark.js",
+        "common.js",
+        "utils.js",
+        "opensearch.js",
+        "content.js"
+      ],
+      "all_frames": true,
+      "match_about_blank": true,
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "icons/*"
+  ]
+}

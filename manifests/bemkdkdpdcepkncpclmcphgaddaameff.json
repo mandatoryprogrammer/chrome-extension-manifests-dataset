@@ -1,0 +1,67 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "GoHyper",
+  "description": "Annotate, highlight and interlink text selections on web pages.",
+  "version": "0.1.2",
+  "homepage_url": "https://github.com/jengeb/gohyper",
+  "icons": {
+    "16": "images/icon-16.png",
+    "19": "images/icon-19.png",
+    "38": "images/icon-38.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
+  },
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "storage",
+    "contextMenus",
+    "webNavigation"
+  ],
+  "background": {
+    "scripts": [
+      "js/storage.js",
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "https://www.google.de/_/chrome/newtab?*"
+      ],
+      "css": [
+        "css/content.css"
+      ],
+      "js": [
+        "bower_components/rangy/rangy-core.min.js",
+        "bower_components/rangy/rangy-classapplier.min.js",
+        "bower_components/rangy/rangy-highlighter.min.js",
+        "bower_components/rangy/rangy-serializer.min.js",
+        "node_modules/dom-position-serializer/index.js",
+        "js/content.js"
+      ],
+      "exclude_globs": [
+        "*.pdf"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "iframe.html",
+    "css/content.css",
+    "bower_components/font-awesome/*"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon-inactive-19.png",
+      "38": "images/icon-inactive-38.png"
+    },
+    "default_title": "GoHyper"
+  }
+}

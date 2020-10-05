@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Bitcointalk Mobile",
+  "short_name": "BCTmobile",
+  "version": "0.3.0",
+  "manifest_version": 2,
+  "description": "Make bitcointalk.org mobile friendly, no server processing all done locally with custom CSS and Javascript",
+  "homepage_url": "https://github.com/ewwink/bitcointalk-mobile",
+  "icons": {
+    "16": "icons/bitcointalkmobile16.png",
+    "19": "icons/bitcointalkmobile19.png",
+    "48": "icons/bitcointalkmobile48.png",
+    "128": "icons/bitcointalkmobile128.png"
+  },
+  "default_locale": "en",
+  "browser_action": {
+    "default_icon": "icons/bitcointalkmobile19.png",
+    "default_title": "Bitcointalk Mobile",
+    "default_popup": "src/browser_action/browser_action.html"
+  },
+  "options_ui": {
+    "page": "src/options/options.html",
+    "open_in_tab": true
+  },
+  "permissions": [
+    "storage",
+    "https://bitcointalk.org/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://bitcointalk.org/*"
+      ],
+      "css": [
+        "css/bitcointalk.org.css"
+      ],
+      "js": [
+        "js/night-mode.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://bitcointalk.org/*"
+      ],
+      "js": [
+        "js/bitcointalkmobile.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

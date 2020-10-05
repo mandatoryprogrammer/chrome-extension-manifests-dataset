@@ -1,0 +1,213 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Agile CRM",
+  "description": "Best All-In-One CRM for Small and Medium Businesses",
+  "version": "3.1.2",
+  "icons": {
+    "16": "images/cloud16x16.png",
+    "48": "images/cloud48x48.png",
+    "128": "images/cloud128x128.png"
+  },
+  "options_page": "html/settings.html",
+  "permissions": [
+    "cookies",
+    "webRequest",
+    "webRequestBlocking",
+    "https://*/",
+    "http://*/",
+    "storage",
+    "notifications",
+    "tabs",
+    "contextMenus",
+    "activeTab"
+  ],
+  "browser_action": {
+    "default_icon": "images/cloud16x16.png",
+    "default_popup": "html/popup_index.html"
+  },
+  "background": {
+    "page": "html/background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "js/lib/jquery.min.js",
+        "js/lib/md5.js",
+        "js/lib/pubnub.min.js",
+        "js/connector.js",
+        "js/content_gmail_binder.js",
+        "js/util.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "/js/lib/jquery.min.js",
+        "/js/lib/handlebars.min.js",
+        "js/lib/md5.js",
+        "js/util.js",
+        "js/xhr_override.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://outlook.office.com/*",
+        "https://outlook.office365.com/*"
+      ],
+      "js": [
+        "js/lib/jquery.min.js",
+        "js/lib/md5.js",
+        "js/lib/pubnub.min.js",
+        "js/connector.js",
+        "js/content_outlook_binder.js",
+        "js/util.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://outlook.office.com/*",
+        "https://outlook.office365.com/*"
+      ],
+      "js": [
+        "/js/lib/jquery.min.js",
+        "/js/lib/handlebars.min.js",
+        "js/lib/md5.js",
+        "js/util.js",
+        "js/xhr_override.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "https://twitter.com/*",
+        "https://docs.google.com/*",
+        "https://drive.google.com/*",
+        "https://github.com/*"
+      ],
+      "js": [
+        "js/lib/jquery.min.js",
+        "js/lib/md5.js",
+        "js/content_generic.js",
+        "js/util.js",
+        "js/connector.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.facebook.com/*"
+      ],
+      "js": [
+        "js/content_country_code.js",
+        "js/content_fb_scrapper.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.linkedin.com/*",
+        "http://*.linkedin.com/*",
+        "https://*.google.co.in/search*",
+        "http://*.google.co.in/search*",
+        "https://*.google.com/search*"
+      ],
+      "js": [
+        "js/content_country_code.js",
+        "js/content_lnk_scrapper.js",
+        "js/linkedin_fetch_single.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.google.co.in/search?num=100*",
+        "http://*.google.co.in/search?num=100*",
+        "https://*.google.com/search?num=100*",
+        "https://www.google.com/search?gws_rd=cr&as_qdr=all&q=*",
+        "https://www.google.co.in/search?gws_rd=cr&as_qdr=all&q=*",
+        "https://*.google.com/search?q=*"
+      ],
+      "js": [
+        "js/lib/jquery.min.js",
+        "js/lib/md5.js",
+        "js/content_linkedin_generic.js",
+        "js/util.js",
+        "js/connector.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://*.linkedin.com/*",
+        "http://*.linkedin.com/*"
+      ],
+      "js": [
+        "js/lib/jquery.min.js",
+        "js/lib/md5.js",
+        "js/content_linkedin_filter.js",
+        "js/util.js",
+        "js/connector.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://*.twitter.com/*"
+      ],
+      "js": [
+        "js/lib/jquery.min.js",
+        "js/lib/md5.js",
+        "js/content_country_code.js",
+        "js/content_twitter_scrapper.js",
+        "js/util.js",
+        "js/connector.js",
+        "js/twitter_fetch_single.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.agilecrm.com/*"
+      ],
+      "js": [
+        "js/lib/jquery.min.js",
+        "js/content.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "js": [
+        "js/lib/jquery.min.js",
+        "js/linkedin-content-widget.js"
+      ],
+      "matches": [
+        "https://*.agilecrm.com/*",
+        "https://*.appspot.com/*",
+        "https://*.linkedin.com/*",
+        "http://*.linkedin.com/*"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://push.agilecrm.com; object-src 'self'",
+  "short_name": "Agile CRM",
+  "web_accessible_resources": [
+    "images/track_test.png",
+    "js/xhr_override.js",
+    "css/font-awesome.min.css",
+    "fonts/fontawesome-webfont.woff",
+    "fonts/fontawesome-webfont.woff2",
+    "fonts/fontawesome-webfont.ttf"
+  ]
+}

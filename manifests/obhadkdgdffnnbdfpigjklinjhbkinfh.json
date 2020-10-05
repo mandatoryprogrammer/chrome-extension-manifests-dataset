@@ -1,0 +1,110 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "icons": {
+    "128": "assets/images/logo.png"
+  },
+  "name": "ShadowPay Trademanager",
+  "version": "0.2.9",
+  "description": "Trade CS:GO skins easy with ShadowPay Trademanager.",
+  "manifest_version": 2,
+  "permissions": [
+    "notifications",
+    "alarms",
+    "storage",
+    "background",
+    "webRequest",
+    "webRequestBlocking",
+    "*://steamcommunity.com/*",
+    "*://*.steampowered.com/*",
+    "http://*.steamstatic.com/*",
+    "*://steamrep.com/*",
+    "*://steamcdn-a.akamaihd.net/*"
+  ],
+  "web_accessible_resources": [
+    "/libs/injected.js"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://shadowpay.io/*",
+      "*://*.steampowered.com/*",
+      "*://steamcommunity.com/*"
+    ],
+    "accepts_tls_channel_id": true
+  },
+  "background": {
+    "scripts": [
+      "third_party/zepto.min.js",
+      "third_party/deferred.js",
+      "third_party/callbacks.js",
+      "libs/config.js",
+      "libs/shadow.js",
+      "libs/ext.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_popup": "index.html"
+  },
+  "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://steamcommunity.com/*/tradeoffers*"
+      ],
+      "js": [
+        "third_party/zepto.min.js",
+        "libs/steam_inject.js"
+      ],
+      "css": [
+        "assets/shadow.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://*.steamcommunity.com/tradeoffer/*"
+      ],
+      "js": [
+        "third_party/zepto.min.js",
+        "libs/steam_inject.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://*.steamcommunity.com/profiles/*"
+      ],
+      "js": [
+        "third_party/zepto.min.js",
+        "libs/steam_inject.js"
+      ],
+      "css": [
+        "assets/shadow.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://*.steamcommunity.com/login*"
+      ],
+      "js": [
+        "third_party/zepto.min.js",
+        "libs/steam_inject.js"
+      ],
+      "css": [
+        "assets/shadow.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://shadowpay.io/*",
+        "https://shadowpay.com/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "libs/inject.js"
+      ]
+    }
+  ]
+}

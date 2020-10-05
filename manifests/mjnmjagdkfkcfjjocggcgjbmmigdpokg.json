@@ -1,0 +1,39 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Mystery Search Data Logger",
+  "version": "0.0.3",
+  "manifest_version": 2,
+  "description": "Logging your Mystery Searches only to populate mysterysearches.com.",
+  "homepage_url": "http://github.com/zachfeldman/mysterysearches",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "permissions": [
+    "tabs",
+    "https://mysterysear.ch/"
+  ],
+  "background": {
+    "scripts": [
+      "src/background/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://mysterysear.ch/*"
+      ],
+      "js": [
+        "src/inject/moment.min.js",
+        "src/inject/jquery-1.11.1.min.js",
+        "src/inject/inject.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": "icons/icon19.png"
+  }
+}

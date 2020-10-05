@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "version": "1.0.2",
+  "short_name": "BA Collection Reminder",
+  "name": "British Airways Avios Collection Reminder",
+  "description": "A Chrome browser plugin that will remind BA customers which retailers they can collect Avios points with.",
+  "incognito": "split",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.google.com/search*",
+        "https://*.google.co.uk/search*"
+      ],
+      "js": [
+        "content.js",
+        "static/js/inject.js",
+        "static/js/vendor.js"
+      ],
+      "css": [
+        "static/css/inject.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "icons": {
+    "16": "images/icon16.png",
+    "32": "images/icon32.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "browser_action": {
+    "default_popup": "index.html",
+    "default_icon": {
+      "16": "images/icon16.png",
+      "32": "images/icon32.png",
+      "48": "images/icon48.png",
+      "128": "images/icon128.png"
+    }
+  },
+  "permissions": [
+    "tabs",
+    "cookies",
+    "*://*.shopping.ba.com/*"
+  ],
+  "web_accessible_resources": [
+    "index.html",
+    "static/js/inject.js",
+    "static/js/vendor.js",
+    "static/css/inject.css"
+  ],
+  "content_security_policy": "script-src 'self' 'sha256-5As4+3YpY62+l38PsxCEkjB1R4YtyktBtRScTJ3fyLU='; object-src 'self'"
+}

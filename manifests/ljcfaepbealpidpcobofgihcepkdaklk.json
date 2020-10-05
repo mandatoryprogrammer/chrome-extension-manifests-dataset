@@ -1,0 +1,89 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "MoneyTime button",
+  "description": "Get paid for your regular internet activity",
+  "version": "1.20",
+  "icons": {
+    "16": "/images/icons/16.png",
+    "48": "/images/icons/48.png",
+    "64": "/images/icons/64.png",
+    "128": "/images/icons/128.png"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "notifications",
+    "http://*/*",
+    "https://*/*",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>"
+  ],
+  "browser_action": {
+    "default_title": "Claim your money",
+    "default_icon": "/images/icons/cow_ic.png",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "*://*/_/chrome/newtab*",
+        "https://adwords.google.com/*",
+        "https://docs.google.com/*",
+        "*://shadow.com/mbb*",
+        "*://*.shadow.com/mbb*",
+        "*://shadow.com/nsmbb*",
+        "*://*.shadow.com/nsmbb*"
+      ],
+      "js": [
+        "/js/main.js"
+      ],
+      "css": [
+        "/css/style.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "*://*/_/chrome/newtab*",
+        "*://shadow.com/*",
+        "*://*.shadow.com/*"
+      ],
+      "js": [
+        "/js/urlTokenizer.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://shadow.com/mbb*",
+        "*://*.shadow.com/mbb*",
+        "*://shadow.com/nsmbb*",
+        "*://*.shadow.com/nsmbb*"
+      ],
+      "js": [
+        "/js/tracker.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "page": "background.html"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com 'unsafe-eval'; object-src 'self'",
+  "web_accessible_resources": [
+    "/images/close.png",
+    "/css/style.css",
+    "dummypage.html"
+  ],
+  "homepage_url": "https://shadow.com",
+  "manifest_version": 2
+}

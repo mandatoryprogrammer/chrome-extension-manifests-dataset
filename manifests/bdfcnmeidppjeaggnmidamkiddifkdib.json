@@ -1,0 +1,90 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "FormSwift PDF Editor",
+  "short_name": "FormSwift PDF Editor",
+  "author": "FormSwift",
+  "description": "FormSwift - PDF Editor for Viewing, Editing and Signing PDF files. Drag-and-drop any PDF to instantly start editing.",
+  "manifest_version": 2,
+  "version": "0.87",
+  "background": {
+    "scripts": [
+      "bg.js"
+    ]
+  },
+  "permissions": [
+    "activeTab",
+    "downloads",
+    "storage",
+    "tabs",
+    "unlimitedStorage",
+    "*://*/",
+    "identity",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "content_security_policy": "script-src 'self' https://formswift.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "*://*.formswift.com/*",
+        "*://formswift.com/*"
+      ],
+      "js": [
+        "common.js",
+        "documentList.js",
+        "lib/jszip.min.js",
+        "lib/jszip-utils.min.js",
+        "lib/sha256.js",
+        "lib/utils.js",
+        "add-formswift-button.js",
+        "add-formswift-document-banner.js",
+        "add-formswift-gmail-button.js",
+        "show-formswift-dialog.js"
+      ],
+      "css": [
+        "formswift-dialog.css",
+        "formswift-button.css",
+        "formswift-document-banner.css",
+        "formswift-gmail-button.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "browser_action": {
+    "default_icon": "images/icon-popup.png"
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://*.formswift.com/sem/edit-pdf*",
+      "*://formswift.com/sem/edit-pdf*"
+    ]
+  },
+  "web_accessible_resources": [
+    "common.js",
+    "documentList.js",
+    "lib/jszip.min.js",
+    "lib/jszip-utils.min.js",
+    "lib/sha256.js",
+    "lib/utils.js",
+    "add-formswift-button.js",
+    "add-formswift-gmail-button.js",
+    "show-formswift-dialog.js"
+  ],
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "oauth2": {
+    "client_id": "1071967238404-n32ninu77jo54nu8lv5f3pvch6nn0f7e.apps.googleusercontent.com",
+    "key": "AIzaSyBDrhnQOAcsPCBVDstSGlpX4F9_cDxet9w",
+    "scopes": [
+      "https://www.googleapis.com/auth/drive.appdata",
+      "https://www.googleapis.com/auth/drive.file"
+    ]
+  }
+}

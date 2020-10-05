@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "CueNotes",
+  "description": "Social Popup Video for YouTube, Vevo, MTV and The Grammys!",
+  "version": "0.108.3",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "permissions": [
+    "*://*.youtube.com/*",
+    "*://*.vevo.com/*",
+    "*://*.mtv.com/*",
+    "*://*.grammyamplifier.com/*",
+    "*://*.facebook.com/*",
+    "*://*.cuenotes.com/*",
+    "tabs",
+    "*://use.typekit.net/*",
+    "webRequest",
+    "webRequestBlocking",
+    "contentSettings"
+  ],
+  "content_security_policy": "script-src 'self' https://use.typekit.net; object-src 'self'",
+  "background": {
+    "scripts": [
+      "jquery.min.js",
+      "background.js",
+      "load-typekit.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.youtube.com/*",
+        "*://*.vevo.com/*",
+        "*://*.mtv.com/*",
+        "*://*.grammyamplifier.com/*",
+        "*://*.cuenotes.com/*"
+      ],
+      "js": [
+        "require.js",
+        "contentscript.js",
+        "main.js"
+      ],
+      "css": [
+        "styles/index.css"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "img/**",
+    "port_mtv.js",
+    "port_grammyamp.js",
+    "port_vevo.js",
+    "extensionctx.js"
+  ]
+}

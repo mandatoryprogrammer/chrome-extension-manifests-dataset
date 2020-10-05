@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "ThreatPinch Lookup",
+  "short_name": "ThreatPinchLookup",
+  "version": "3.0.6",
+  "manifest_version": 2,
+  "description": "Add threat intelligence hover tool tips. IPv4, MD5, SHA2, CVE, FQDN or add your own ThreatIntel IOC. Use any REST API.",
+  "homepage_url": "http://www.ThreatPinch.com",
+  "icons": {
+    "16": "icons/logo-tp16.png",
+    "48": "icons/logo-tp48.png",
+    "128": "icons/logo-tp128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "page": "src/bg/background.html",
+    "persistent": true
+  },
+  "options_page": "src/options/index.html",
+  "browser_action": {
+    "default_icon": "icons/logo-tp48.png",
+    "default_title": "ThreatPinch Lookup",
+    "default_popup": "src/page_action/page_action.html"
+  },
+  "permissions": [
+    "https://*/*",
+    "http://*/*",
+    "contextMenus",
+    "storage",
+    "unlimitedStorage"
+  ],
+  "web_accessible_resources": [
+    "icons/ThreatPinch/*",
+    "icons/*",
+    "src/options/options.html",
+    "src/options/wizard.html",
+    "src/options/index.html",
+    "src/options/actions.html",
+    "src/options/popover.html",
+    "fonts/owf/*"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "js": [
+        "src/inject/inject.js"
+      ],
+      "css": [
+        "src/inject/inject.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ]
+}

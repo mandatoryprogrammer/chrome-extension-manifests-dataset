@@ -1,0 +1,103 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_extension_name__",
+  "short_name": "__MSG_extension_short_name__",
+  "description": "__MSG_extension_description__",
+  "author": "__MSG_extension_author__",
+  "version": "3.0.5",
+  "default_locale": "en",
+  "manifest_version": 2,
+  "minimum_chrome_version": "37",
+  "icons": {
+    "128": "/img/icon128.png"
+  },
+  "omnibox": {
+    "keyword": "call"
+  },
+  "web_accessible_resources": [
+    "img/*",
+    "html/*",
+    "lib/*",
+    "css/*",
+    "js/*",
+    "fonts/*",
+    "fonts/icons/*"
+  ],
+  "browser_action": {
+    "default_icon": "/img/icon.png",
+    "default_title": "__MSG_action_button_title__",
+    "default_popup": "/html/popup/alert.html"
+  },
+  "options_ui": {
+    "page": "/html/options.html",
+    "chrome_style": true,
+    "open_in_tab": false
+  },
+  "background": {
+    "scripts": [
+      "/js/integration/google_analytics.js",
+      "/lib/jquery-1.11.3.min.js",
+      "/lib/state-machine.js",
+      "/lib/jsforce.js",
+      "/lib/handlebars.js",
+      "/js/functions.js",
+      "/js/utils.js",
+      "/js/preferences.js",
+      "/js/scheduler.js",
+      "/js/pbx/client.js",
+      "/js/extension/telephony.js",
+      "/js/extension/telephony/events.js",
+      "/js/extension/contact_sources.js",
+      "/js/extension/configuration.js",
+      "/js/extension/notifications.js",
+      "/js/extension/menu.js",
+      "/js/messages.js",
+      "/js/definitions.js",
+      "/js/tasks.js",
+      "/js/integration/connect.js",
+      "/js/fsm.js",
+      "/js/background.js",
+      "/js/integration/salesforce.js",
+      "/js/integration/zendesk.js",
+      "/js/integration/freshdesk.js",
+      "/js/integration/smartadvocate.js",
+      "/js/integration/pipedrive.js",
+      "/js/integration/zoho.js"
+    ],
+    "persistent": true,
+    "run_at": "document_idle"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file://*"
+      ],
+      "js": [
+        "/js/content/thirdlane_connect_detector.js"
+      ],
+      "css": [],
+      "all_frames": false,
+      "run_at": "document_idle"
+    }
+  ],
+  "offline_enabled": true,
+  "permissions": [
+    "contextMenus",
+    "activeTab",
+    "tabs",
+    "alarms",
+    "idle",
+    "cookies",
+    "notifications",
+    "management",
+    "storage",
+    "http://*/*",
+    "https://*/*",
+    "file://*",
+    "*://*/*"
+  ],
+  "optional_permissions": [],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://ssl.google-analytics.com; object-src 'self'; style-src * 'unsafe-inline';"
+}

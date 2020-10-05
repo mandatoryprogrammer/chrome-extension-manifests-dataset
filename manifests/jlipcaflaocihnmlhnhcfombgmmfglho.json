@@ -1,0 +1,102 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "version": "6.2020.103.123",
+  "manifest_version": 2,
+  "description": "__MSG_appDesc__",
+  "default_locale": "en",
+  "icons": {
+    "16": "icons/skin/logo/16.png",
+    "48": "icons/skin/logo/48.png",
+    "128": "icons/skin/logo/128.png"
+  },
+  "background": {
+    "page": "chrome/main.html"
+  },
+  "options_ui": {
+    "page": "new_options.html",
+    "open_in_tab": true
+  },
+  "browser_action": {
+    "default_icon": "icons/skin/logo/19.png",
+    "default_popup": "chrome/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "run_at": "document_start",
+      "css": [
+        "css/content.css",
+        "css/search_integration.css"
+      ],
+      "js": [
+        "lib/jquery.js",
+        "lib/underscore.js",
+        "lib/backbone.js",
+        "lib/namespaces.js",
+        "content/messenger.js",
+        "content/bar.js",
+        "views/parameters.js",
+        "views/tooltips.js",
+        "views/contextmenu.js",
+        "content/app.js",
+        "includes/punycode.js",
+        "includes/highlighting.js",
+        "content/integrations/search/search_integration.js",
+        "content/integrations/search/yandex.js",
+        "content/integrations/search/yandex_catalog.js",
+        "content/integrations/search/ya.js",
+        "content/integrations/search/google.js",
+        "content/integrations/index.js",
+        "includes/lib.js",
+        "chrome/content.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "cookies",
+    "storage",
+    "unlimitedStorage",
+    "*://*/*",
+    "contextMenus",
+    "clipboardWrite",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "commands": {
+    "get-indexed-pages": {
+      "suggested_key": {
+        "default": "Ctrl+Q"
+      },
+      "description": "Copy all indexed pages from the DB"
+    },
+    "copy-search-urls": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Y"
+      },
+      "description": "Copy all search urls from a search integration page"
+    },
+    "seotags-check-button": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+F"
+      },
+      "description": "Push SEOTags button"
+    },
+    "disable-styles": {
+      "suggested_key": {
+        "default": "Alt+S"
+      },
+      "description": "Disable the styles of the webpage"
+    }
+  },
+  "web_accessible_resources": [
+    "icons/*/*.png",
+    "content/integrations/search/popup.html",
+    "resources/*",
+    "new_options.html",
+    "cookies/cookies_info.html"
+  ]
+}

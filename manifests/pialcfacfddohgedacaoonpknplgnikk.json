@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "HighGround Email Plugin",
+  "version": "1.3.0",
+  "manifest_version": 2,
+  "description": "HighGround inbox plug-in for requesting performance feedback, giving coaching tips and recognizing colleagues for a job well done.",
+  "icons": {
+    "16": "images/icon-16.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
+  },
+  "default_locale": "en",
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon-19.png",
+      "48": "images/icon-48.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://*.google.com https://*.highground.com; object-src 'self';",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "identity",
+    "background",
+    "cookies",
+    "*://*.googleapis.com/*",
+    "*://*.google.com/*",
+    "*://*.highground.com/*"
+  ],
+  "content_scripts": [
+    {
+      "include_globs": [
+        "*://mail.google.*/*"
+      ],
+      "css": [
+        "styles/app.css"
+      ],
+      "js": [
+        "scripts/content.js"
+      ],
+      "run_at": "document_start",
+      "matches": [
+        "*://mail.google.com/*"
+      ],
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    "sidebar.html",
+    "images/*.png",
+    "images/*.gif",
+    "styles/*.css"
+  ]
+}

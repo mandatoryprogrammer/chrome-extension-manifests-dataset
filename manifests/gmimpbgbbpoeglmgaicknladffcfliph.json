@@ -1,0 +1,72 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "InstaForex Toolbar",
+  "short_name": "insta_toolbar_en",
+  "version": "0.0.13",
+  "manifest_version": 2,
+  "icons": {
+    "128": "extension_icons/128.png"
+  },
+  "description": "InstaForex - best broker in Asia",
+  "background": {
+    "scripts": [
+      "libs/moment.min.js",
+      "libs/jquery-2.1.1.js",
+      "chromeexttools.js",
+      "gmail.js",
+      "rss.js",
+      "bg.js"
+    ]
+  },
+  "browser_action": {
+    "default_title": "Enable/Disable toolbar view",
+    "default_icon": {
+      "19": "extension_icons/19.png",
+      "38": "extension_icons/38.png",
+      "128": "extension_icons/128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "css": [
+        "styles/content.css"
+      ],
+      "js": [
+        "libs/jquery-2.1.1.js",
+        "common.js",
+        "content.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "*://maps.yandex.ru/*",
+        "*://*.google.com/maps/*"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "*://www.instaforex.com/*",
+    "*://fx.instaforex.com/*",
+    "http://*/*",
+    "https://*/*",
+    "alarms",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "content_security_policy": "script-src 'self' https://fx.instaforex.com; object-src 'self'",
+  "web_accessible_resources": [
+    "toolbar/*",
+    "styles/*",
+    "icons/*",
+    "toolbar.html",
+    "toolbar.js",
+    "common.js",
+    "table.html",
+    "table.js"
+  ]
+}

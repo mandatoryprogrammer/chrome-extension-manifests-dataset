@@ -1,0 +1,90 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Fantasy Finder",
+  "version": "1.1.4",
+  "icons": {
+    "128": "images/FantasyFinder.png"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; https://platform.twitter.com; https://connect.facebook.net; object-src 'self'",
+  "permissions": [
+    "activeTab",
+    "webNavigation",
+    "tabs",
+    "http://*/"
+  ],
+  "background": {
+    "page": "background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [
+        "main.css"
+      ],
+      "js": [
+        "lib/jquery-2.0.3.min.js",
+        "lib/replaceText.min.js",
+        "lib/handlebars.js",
+        "lib/underscore-min.js",
+        "json/nameDict.js",
+        "templates.js",
+        "parser.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://games.espn.go.com/*"
+      ],
+      "js": [
+        "lib/jquery-2.0.3.min.js",
+        "lib/replaceText.min.js",
+        "iframe_messenger.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "http://games.espn.go.com/frontpage/football"
+      ],
+      "js": [
+        "lib/jquery-2.0.3.min.js",
+        "lib/underscore-min.js",
+        "src/sites/espn_parse_user_id.js",
+        "src/sites/espn_auth.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://football.fantasysports.yahoo.com/"
+      ],
+      "js": [
+        "lib/jquery-2.0.3.min.js",
+        "lib/underscore-min.js",
+        "src/sites/yahoo_parse_user_id.js",
+        "src/sites/yahoo_auth.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "font/FontAwesome.otf",
+    "font/fontawesome-webfont.svg",
+    "font/fontawesome-webfont.woff",
+    "font/fontawesome-webfont.eot",
+    "font/fontawesome-webfont.ttf",
+    "images/default_profile.png",
+    "images/espn.png",
+    "images/yahoo.png"
+  ],
+  "browser_action": {
+    "default_name": "Fantasy Finder",
+    "default_popup": "browser_action.html",
+    "default_icon": "images/FantasyFinder.png"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "froglogic Squish Integration",
+  "description": "Enables froglogic Squish GUI Tester to drive Chrome for performing automated GUI tests.",
+  "version": "2.1.6",
+  "manifest_version": 2,
+  "permissions": [
+    "tabs",
+    "browsingData",
+    "http://*/*",
+    "https://*/*",
+    "webNavigation",
+    "<all_urls>",
+    "storage",
+    "nativeMessaging"
+  ],
+  "icons": {
+    "16": "frog16.png",
+    "32": "frog32.png",
+    "48": "frog48.png",
+    "64": "frog64.png",
+    "128": "frog128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "ispagehooked.js",
+        "runinwebpage.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "all_frames": true,
+      "run_at": "document_start",
+      "js": [
+        "wasmarguments.js"
+      ]
+    }
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "background": {
+    "scripts": [
+      "jsonipc.js",
+      "sharedfunctions.js",
+      "sharedrequests.js",
+      "background.js"
+    ]
+  }
+}

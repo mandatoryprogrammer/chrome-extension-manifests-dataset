@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Unbounce Page Lookup",
+  "description": "Detect any Unbounce page, Popup, or Sticky Bar & get quick access to details, stats, & debug information without leaving your page.",
+  "version": "4.1.0",
+  "icons": {
+    "16": "icons/blue-16.png",
+    "48": "icons/blue-48.png",
+    "128": "icons/blue-128.png"
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "https://api.unbounce.com/*",
+    "storage",
+    "http://fonts.googleapis.com/*",
+    "https://fonts.googleapis.com/*"
+  ],
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "ub_check.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://api.unbounce.com/robots.txt*"
+      ],
+      "js": [
+        "oauth2/oauth2_inject.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/grey-16.png",
+      "32": "icons/grey-32.png",
+      "48": "icons/grey-48.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "web_accessible_resources": [
+    "oauth2/oauth2.html",
+    "popup.css",
+    "access_window.js"
+  ]
+}

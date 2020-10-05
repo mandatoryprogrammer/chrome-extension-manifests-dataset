@@ -1,0 +1,79 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "background": {
+    "page": "background.html"
+  },
+  "web_accessible_resources": [
+    "blocked.html",
+    "img/notify-avatar-blue.png",
+    "img/notify-avatar-red.png",
+    "public.pem"
+  ],
+  "default_locale": "en",
+  "description": "__MSG_appDesc__",
+  "name": "__MSG_appName__",
+  "short_name": "__MSG_appShortName__",
+  "options_page": "options.html",
+  "permissions": [
+    "tabs",
+    "webNavigation",
+    "<all_urls>",
+    "cookies",
+    "notifications",
+    "contextMenus",
+    "webRequest",
+    "webRequestBlocking",
+    "unlimitedStorage",
+    "storage",
+    "gcm"
+  ],
+  "version": "4.3.0.2",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "content.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://api.blocksite.co/*",
+        "http://api.blocksite.co/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "captchaContent.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "optInContent.js"
+      ]
+    }
+  ],
+  "incognito": "split",
+  "content_security_policy": "script-src 'self' https://*.firebaseio.com https://*.facebook.com  https://*.google.com  https://ssl.google-analytics.com https://*.wips.com https://*.facebook.net https://*.twitter.com https://*.doubleclick.net; object-src 'self'",
+  "icons": {
+    "16": "img/icon16.png",
+    "19": "img/icon19.png",
+    "32": "img/icon32.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "img/icon16.png",
+      "32": "img/icon32.png"
+    },
+    "default_popup": "popup.html"
+  }
+}

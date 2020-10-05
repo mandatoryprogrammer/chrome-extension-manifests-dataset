@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "sprinklr-ugc-approval-qa",
+  "description": "Ask approval from user to use their content",
+  "version": "0.0.9",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "https://*.sprinklr.com/*"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.instagram.com/p/*/"
+      ],
+      "js": [
+        "InstagramContentScript.js"
+      ],
+      "css": [
+        "InstagramContentScript.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.sprinklr.com/*"
+      ],
+      "js": [
+        "SprinklrContentScript.js"
+      ]
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://*.sprinklr.com/*"
+    ]
+  }
+}

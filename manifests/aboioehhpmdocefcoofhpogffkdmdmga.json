@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Github Helper: Code review tool",
+  "description": "Help with finding common issues in code review on github",
+  "version": "26",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "webNavigation",
+    "*://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "background.js",
+      "jquery.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_title": "Github Helper"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.github.com/*",
+        "http://www.github.com/*",
+        "https://github.com/*",
+        "http://github.com/*"
+      ],
+      "js": [
+        "jquery.js",
+        "rulesParser.js",
+        "jquery.numberedtextarea.js"
+      ],
+      "css": [
+        "menu.css",
+        "mui.min.css",
+        "jquery.numberedtextarea.css"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "web_accessible_resources": [
+    "rules.json",
+    "simple.rules.json",
+    "menu.template.html",
+    "icon16.png",
+    "icon48.png"
+  ],
+  "manifest_version": 2
+}

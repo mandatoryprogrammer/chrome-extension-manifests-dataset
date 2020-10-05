@@ -1,0 +1,41 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "pinboard-fu",
+  "description": "Quick access to saving Pinboard bookmarks. Customizable keyboard shortcut. Selected text populates your description field.",
+  "version": "0.1.0",
+  "icons": {
+    "48": "pinboard48.png",
+    "128": "pinboard128.png"
+  },
+  "permissions": [
+    "tabs",
+    "http://*/",
+    "https://*/"
+  ],
+  "browser_action": {
+    "default_title": "Post to Pinboard",
+    "default_icon": "pinboard.png",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "js/addPinboard.js",
+        "js/getSelection.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ]
+    }
+  ],
+  "options_page": "options_shortcut.html",
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'"
+}

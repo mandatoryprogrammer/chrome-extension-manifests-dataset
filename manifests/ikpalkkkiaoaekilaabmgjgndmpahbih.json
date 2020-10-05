@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "ITIPIC",
+  "version": "0.2.445",
+  "default_locale": "en",
+  "manifest_version": 2,
+  "offline_enabled": true,
+  "description": "__MSG_appDesc__",
+  "background": {
+    "page": "itipic.html"
+  },
+  "options_page": "options.html",
+  "icons": {
+    "16": "images/i16.png",
+    "48": "images/i48.png",
+    "128": "images/i128.png"
+  },
+  "browser_action": {
+    "default_title": "Click to open/close Itipic Clipper",
+    "default_icon": "images/inactive-icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "https://www.itipic.com/pictures.embed*",
+        "https://www.itipic.com/pictures.embed*",
+        "https://accounts.google.com/ServiceLogin*",
+        "https://accounts.google.com/o/oauth**",
+        "https://www.facebook.com/login*"
+      ],
+      "js": [
+        "uiBridge.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "minimum_chrome_version": "10",
+  "content_security_policy": "script-src 'self' https://www.itipic.com; object-src 'self'",
+  "permissions": [
+    "tabs",
+    "*://*/*",
+    "unlimitedStorage",
+    "notifications",
+    "cookies",
+    "management"
+  ]
+}

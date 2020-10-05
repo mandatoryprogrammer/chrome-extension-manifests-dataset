@@ -1,0 +1,102 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Sortd for Gmail",
+  "short_name": "Sortd",
+  "description": "Organize email & teamwork in Gmail. Team Collaboration around Tasks, Emails, Meetings and Projects made easy with customised boards",
+  "version": "1.7.8.6818",
+  "permissions": [
+    "https://mail.google.com/*",
+    "tabs",
+    "storage",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "optional_permissions": [
+    "notifications",
+    "*://*.googleusercontent.com/*",
+    "*://*.sortd.com/*"
+  ],
+  "content_security_policy": "script-src 'self' https://www.googletagmanager.com https://www.googleadservices.com https://www.google-analytics.com https://googleads.g.doubleclick.net; object-src 'self'",
+  "web_accessible_resources": [
+    "img/*",
+    "templates/*",
+    "css/*",
+    "jsce/*"
+  ],
+  "icons": {
+    "16": "img/icons/sortd_icon_16x16.png",
+    "48": "img/icons/sortd_icon_48x48.png",
+    "128": "img/icons/sortd_icon_128x128.png"
+  },
+  "background": {
+    "scripts": [
+      "conf/config.common.js",
+      "conf/config.js",
+      "scripts/background/sortd-http.js",
+      "scripts/background/sortd-event-page-error-handler.js",
+      "scripts/background/sortd-event-page.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "exclude_matches": [
+        "https://mail.google.com/*&view=*",
+        "https://mail.google.com/*/?view=*",
+        "https://mail.google.com/mail/mu/background*",
+        "https://mail.google.com/mail/u/*/h/*/?*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "conf/config.common.js",
+        "conf/config.js",
+        "conf/constants.js",
+        "scripts/jquery.min.js",
+        "scripts/kefir.min.js",
+        "scripts/objectid.js",
+        "scripts/sortd-common.js",
+        "scripts/sortd-error-handler.js",
+        "scripts/sortd-data.js",
+        "scripts/sortd-http.js",
+        "scripts/sortd-tracker.js",
+        "scripts/sortd-messages.js",
+        "scripts/gmail-api/dom-map.js",
+        "scripts/gmail-api/dom.js",
+        "scripts/gmail-api/notifications.js",
+        "scripts/gmail-api/user.js",
+        "scripts/gmail-api/api.js",
+        "scripts/sortd-loader.js",
+        "scripts/sortd-permissions.js",
+        "scripts/sortd-list-items.js",
+        "scripts/sortd-read-receipts.js",
+        "scripts/sortd-gmail-send-service.js",
+        "scripts/sortd-link-interceptor.js",
+        "scripts/sortd-shortcut-helper.js",
+        "scripts/inboxsdk.js",
+        "scripts/sortd-inboxsdk.js",
+        "scripts/pickadate/picker.js",
+        "scripts/pickadate/picker.date.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://app.sortd.com/su/*/indexce"
+      ],
+      "js": [
+        "scripts/indexce.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://app.sortd.com/login/*"
+      ],
+      "js": [
+        "scripts/authfailure.js"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Legendary Analysis - Lite",
+  "version": "1.0.9",
+  "default_locale": "en",
+  "debug": false,
+  "log": true,
+  "short_name": "Legendary Analysis - Lite",
+  "description": "With Legendary Analysis Lite you will be able to get different fields of information about products in Amazon",
+  "icons": {
+    "16": "app/images/icon16.png",
+    "48": "app/images/icon48.png",
+    "128": "app/images/icon128.png"
+  },
+  "homepage_url": "https://legendaryanalysis.com",
+  "optional_permissions": [
+    "*://www.google.com/*",
+    "*://www.google.ps/*",
+    "*://www.amazon.in/*",
+    "*://www.amazon.com.mx/*",
+    "*://www.amazon.it/*",
+    "*://www.amazon.es/*",
+    "*://*.amazonservices.in/*"
+  ],
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "background",
+    "storage",
+    "unlimitedStorage",
+    "webNavigation",
+    "webRequest",
+    "http://*/*",
+    "https://*/*",
+    "*://www.amazon.com/*",
+    "*://www.amazon.fr/*",
+    "*://www.amazon.de/*",
+    "*://www.amazon.co.uk/*",
+    "*://www.amazon.ca/*",
+    "*://*.amazonservices.com/*",
+    "*://*.amazonservices.ca/*"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "app/images/icon19.png",
+      "38": "app/images/icon38.png"
+    },
+    "default_title": "Legendary Analysis - Lite"
+  },
+  "background": {
+    "scripts": [
+      "dist/background.js"
+    ],
+    "persistent": true
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "web_accessible_resources": [
+    "*"
+  ],
+  "content_scripts": [
+    {
+      "js": [
+        "dist/products.js"
+      ],
+      "css": [
+        "dist/css/products_styles.css"
+      ],
+      "matches": [
+        "*://www.amazon.com/*",
+        "*://www.amazon.co.uk/*",
+        "*://www.amazon.fr/*",
+        "*://www.amazon.de/*",
+        "*://www.amazon.ca/*"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Gmail Quick Links",
+  "short_name": "Gmail Quick Links",
+  "version": "1.4.1",
+  "description": "Use Gmail labels as Quick Links",
+  "icons": {
+    "128": "icon128.png",
+    "16": "icon16.png",
+    "48": "icon48.png"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "https://mail.google.com/*"
+  ],
+  "browser_action": {
+    "default_icon": "icon128.png",
+    "default_popup": "popup.html",
+    "default_title": "Create Gmail Quick Link"
+  },
+  "web_accessible_resources": [
+    "icon128.png",
+    "icon16.png",
+    "icon48.png",
+    "cleanup_labels_menu.js"
+  ],
+  "background": {
+    "scripts": [
+      "eventPage.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "all_frames": false,
+      "js": [
+        "content_document_start.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "all_frames": false,
+      "js": [
+        "content_document_loaded.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "update_url": "http://clients2.google.com/service/update2/crx",
+  "name": "tidyR'",
+  "version": "2.6",
+  "manifest_version": 2,
+  "description": "Pulls class info from classes.ucr.edu and adds it to your Gmail or Rmail calendar.",
+  "icons": {
+    "128": "img/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "background/background.js"
+    ]
+  },
+  "page_action": {
+    "default_icon": {
+      "19": "img/page_icon19.png",
+      "38": "img/page_icon38.png"
+    },
+    "default_title": "tidyR'",
+    "default_popup": "popup/popup.html"
+  },
+  "permissions": [
+    "http://student08.ucr.edu/em/classes/ScheduleNew/Index.aspx",
+    "http://classes.ucr.edu/enrollment/calendar.htm",
+    "https://accounts.google.com/o/oauth2/token",
+    "https://googleapis.com/*",
+    "tabs"
+  ],
+  "content_security_policy": "script-src 'self' https://apis.google.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://student08.ucr.edu/em/classes/ScheduleNew/Index.aspx"
+      ],
+      "js": [
+        "js/lib/jquery.js",
+        "content/inject.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://www.google.com/robots.txt*"
+      ],
+      "js": [
+        "oauth2/oauth2_inject.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "content/content.js"
+  ]
+}

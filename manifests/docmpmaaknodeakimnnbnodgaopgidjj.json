@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "version": "0.5.77",
+  "name": "Moto Key",
+  "description": "__MSG_ExtensionDescription__",
+  "default_locale": "en",
+  "icons": {
+    "128": "resources/moto128.png",
+    "16": "resources/moto16.png",
+    "48": "resources/moto48.png"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "permissions": [
+    "management",
+    "nativeMessaging",
+    "privacy",
+    "tabs",
+    "unlimitedStorage"
+  ],
+  "web_accessible_resources": [
+    "nacl/*",
+    "pages/notification.html"
+  ],
+  "background": {
+    "page": "pages/background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "scripts/contentscript.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "scripts/iframecontentscript.js"
+      ],
+      "all_frames": true
+    }
+  ]
+}

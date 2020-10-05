@@ -1,0 +1,39 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Tinfoil Security - Login Recorder",
+  "version": "0.0.25",
+  "manifest_version": 2,
+  "description": "Record login sequences in your own browser, then submit them to Tinfoil Security to be used by our scanner.",
+  "browser_action": {
+    "default_icon": "frontend/images/icon_blue.png",
+    "default_popup": "frontend/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "scripts/background/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "scripts/contentscript/contentscript.js"
+      ],
+      "css": [
+        "frontend/styles.css"
+      ]
+    }
+  ],
+  "homepage_url": "https://tinfoilsecurity.com",
+  "icons": {
+    "128": "frontend/images/extension-icon-128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "storage"
+  ]
+}

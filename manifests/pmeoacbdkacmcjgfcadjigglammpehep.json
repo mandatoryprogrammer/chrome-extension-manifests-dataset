@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Youtube Collections",
+  "short_name": "ytcollection",
+  "description": "Collections for Youtube. You know, like we used to have until it was removed for no reason.",
+  "version": "0.3",
+  "icons": {
+    "16": "collections-16.png",
+    "48": "collections-48.png",
+    "128": "collections-128.png"
+  },
+  "permissions": [
+    "https://www.youtube.com/",
+    "storage"
+  ],
+  "web_accessible_resources": [
+    "page-request-inject.js",
+    "img/*",
+    "templates/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/*"
+      ],
+      "css": [
+        "collections.css"
+      ],
+      "js": [
+        "hashid.js",
+        "storage.js",
+        "template.js",
+        "page-request.js",
+        "common.js",
+        "guide.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.youtube.com/subscription_manager*"
+      ],
+      "js": [
+        "manager.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

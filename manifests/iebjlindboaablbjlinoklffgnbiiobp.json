@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "The Verge Comments",
+  "version": "0.1.4",
+  "description": "Small tweaks for The Verge.",
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "page_action": {
+    "default_icon": {
+      "19": "img/page-action19.png",
+      "38": "img/page-action38.png"
+    },
+    "default_title": "The Verge Comments is running! Press the keys I or O to give it a spin (or just click this icon)"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com https://apis.google.com; object-src 'self'",
+  "background": {
+    "scripts": [
+      "scripts/lib/analytics.js",
+      "scripts/event_page.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "webNavigation"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.theverge.com/*"
+      ],
+      "js": [
+        "scripts/lib/jquery.js",
+        "scripts/templates/content_script.js",
+        "scripts/content_script.js"
+      ],
+      "run_at": "document_end",
+      "css": [
+        "css/injected.css"
+      ]
+    }
+  ],
+  "options_page": "options.html"
+}

@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Mkutano Meetings",
+  "description": "Schedule Meetings and stream your desktop into conferences.",
+  "version": "1.0.0",
+  "minimum_chrome_version": "34",
+  "icons": {
+    "16": "mkutano-logo-16x16.png",
+    "48": "mkutano-logo-48x48.png",
+    "128": "mkutano-logo-128x128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "desktopCapture",
+    "https://calendar.google.com/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://jitsi.mkutano.info/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://calendar.google.com/calendar/*",
+        "https://outlook.live.com/owa/*"
+      ],
+      "js": [
+        "jquery.js",
+        "RandomUtil.js",
+        "RoomnameGenerator.js",
+        "meet-calendar.js"
+      ],
+      "css": [
+        "/css/all.css"
+      ],
+      "all_frames": false,
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "mkutano-logo-48x48.png",
+    "mkutano-logo-white-48x48.png",
+    "mkutano-logo-blue.svg",
+    "mkutano-logo-grey.svg"
+  ],
+  "browser_action": {
+    "default_title": "Create Mkutano Meetings",
+    "default_popup": "popup.html"
+  }
+}

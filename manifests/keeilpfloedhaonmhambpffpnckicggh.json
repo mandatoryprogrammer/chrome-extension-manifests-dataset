@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Meerkat by Signal7 Labs",
+  "version": "0.1",
+  "author": "Signal7 Labs",
+  "description": "Download Amazon product reviews to Excel.",
+  "icons": {
+    "128": "icons/app-icon-128.png",
+    "48": "icons/app-icon-48.png",
+    "16": "icons/app-icon-16.png"
+  },
+  "permissions": [
+    "tabs",
+    "webNavigation",
+    "*://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "libs/jquery-full/jquery-3.2.1.min.js",
+      "common/config.js",
+      "common/logger.js",
+      "common/commonUtils.js",
+      "background_scripts/main.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.amazon.com/*"
+      ],
+      "js": [
+        "libs/jquery-full/jquery-3.2.1.min.js",
+        "common/logger.js",
+        "common/commonUtils.js",
+        "content_scripts/main.js"
+      ],
+      "css": [
+        "content_scripts/main.css"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

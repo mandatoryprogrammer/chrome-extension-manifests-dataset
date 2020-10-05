@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Infotanica Companion",
+  "version": "1.5",
+  "manifest_version": 2,
+  "description": "The Infotanica extension brings great content from all over the web into wikipedia articles.",
+  "icons": {
+    "16": "Info_logo_16_16.png",
+    "48": "Info_logo_48.png",
+    "128": "Info_logo_128_128.png"
+  },
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "cookies",
+    "webRequestBlocking",
+    "*://en.wikipedia.org/wiki/*",
+    "http://www.infotanica.com/*",
+    "storage",
+    "https://ssl.google-analytics.com/*"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "web_accessible_resources": [
+    "manifest.json",
+    "assets/timeline_bk.jpg",
+    "assets/icon_close_dialog.png",
+    "assets/dashboard_icon.png",
+    "assets/general_icons.png",
+    "ga.js"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://en.wikipedia.org/wiki/*"
+      ],
+      "js": [
+        "jquery-1.9.1.min.js",
+        "infoChromeEx.js",
+        "ga.js",
+        "initialize_cs.js"
+      ],
+      "css": [
+        "infoChromeEx.css"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

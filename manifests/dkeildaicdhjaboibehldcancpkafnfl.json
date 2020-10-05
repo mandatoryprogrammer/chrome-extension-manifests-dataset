@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_appName__",
+  "version": "1.4.8",
+  "default_locale": "en",
+  "description": "__MSG_appDescription__",
+  "icons": {
+    "16": "icons/icon_48.png",
+    "48": "icons/icon_48.png",
+    "128": "icons/icon.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "48": "icons/icon.png"
+    },
+    "default_title": "__MSG_appName__",
+    "default_popup": "pages/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "pages/md5-min.js",
+      "core/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "run_at": "document_start",
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "core/content_script.js"
+      ]
+    }
+  ],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+B",
+        "windows": "Ctrl+B",
+        "mac": "MacCtrl+B"
+      }
+    }
+  },
+  "permissions": [
+    "bookmarks",
+    "storage",
+    "chrome://favicon/",
+    "http://wxtext.sinaapp.com/*",
+    "notifications",
+    "contextMenus"
+  ],
+  "optional_permissions": [
+    "tabs"
+  ]
+}

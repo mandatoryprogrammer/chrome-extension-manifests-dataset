@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Monocle Read Later",
+  "description": "Quickly save urls to Read Later @ monoclereader.com",
+  "version": "1.0.2",
+  "icons": {
+    "16": "assets/img/logo16.png",
+    "32": "assets/img/logo32.png",
+    "48": "assets/img/logo48.png",
+    "128": "assets/img/logo128.png"
+  },
+  "browser_action": {
+    "browser_style": true,
+    "default_icon": "assets/img/logo.png",
+    "default_title": "Save to Monocle",
+    "default_popup": "app.html"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com; object-src 'self'",
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "storage",
+    "identity",
+    "notifications",
+    "*://www.googleapis.com/*",
+    "*://accounts.google.com/*",
+    "declarativeContent"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.monoclereader.com/*"
+      ],
+      "js": [
+        "websiteScript.js"
+      ]
+    }
+  ]
+}

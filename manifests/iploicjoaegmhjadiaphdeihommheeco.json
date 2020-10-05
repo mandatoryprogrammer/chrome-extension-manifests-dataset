@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "The Dejargonizer",
+  "version": "0.0.13",
+  "manifest_version": 2,
+  "short_name": "Browse the web, jargon-free.",
+  "description": "The Dejargonizer",
+  "icons": {
+    "16": "images/icon-16.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "tabs",
+    "storage"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon-19_on.png",
+      "38": "images/icon-38_on.png"
+    },
+    "default_title": "Dejargonizer",
+    "default_popup": "popup.html"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "web_accessible_resources": [
+    "images/icon.png"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "styles/animate.css",
+        "styles/main.css",
+        "bower_components/tooltipster/css/tooltipster.css",
+        "bower_components/tooltipster/css/themes/tooltipster-noir.css"
+      ],
+      "js": [
+        "bower_components/jquery/jquery.js",
+        "bower_components/tooltipster/js/jquery.tooltipster.js",
+        "bower_components/jquery-replacetext/jquery.ba-replacetext.js",
+        "scripts/contentscript.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ]
+}

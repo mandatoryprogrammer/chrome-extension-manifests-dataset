@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "version": "0.0.4",
+  "manifest_version": 2,
+  "description": "__MSG_appDescription__",
+  "icons": {
+    "16": "images/icon-16.png",
+    "128": "images/icon-128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ],
+    "persistent": true
+  },
+  "externally_connectable": {
+    "matches": [
+      "https://repl.it/*",
+      "https://*.youtube.com/*"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "https://www.youtube.com/*",
+    "https://repl.it/*",
+    "background",
+    "storage"
+  ],
+  "web_accessible_resources": [
+    "css/repl.css",
+    "css/youtube.css",
+    "css/repl-button.css",
+    "scripts/libs/jquery.js",
+    "scripts/libs/zoom-and-pan.js",
+    "scripts/libs/utils.js",
+    "scripts/libs/iframe-as-container.js",
+    "scripts/libs/function.prototype.stateful.js",
+    "scripts/yt-event-proxy.js",
+    "scripts/repl-button.js",
+    "scripts/on-installed.js",
+    "scripts/save-repls.js",
+    "scripts/yourepl.js"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/*",
+        "https://repl.it/*"
+      ],
+      "js": [
+        "scripts/inject-start.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ]
+}

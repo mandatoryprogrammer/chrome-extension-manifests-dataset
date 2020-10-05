@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Wonde",
+  "version": "2.3.0",
+  "description": "Wonde makes logging into applications at school a breeze!",
+  "manifest_version": 2,
+  "permissions": [
+    "https://password-retrieval.wonde.com/prod/pass",
+    "webRequest"
+  ],
+  "web_accessible_resources": [
+    "wonde.svg",
+    "waving-hand.png"
+  ],
+  "browser_action": {
+    "default_icon": "icon.png"
+  },
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://127.0.0.1:3000/*"
+      ],
+      "js": [
+        "jquery-3.4.0.min.js",
+        "./lib/Cookie.js",
+        "./lib/Element.js",
+        "./lib/Captcha.js",
+        "./lib/V1.js",
+        "./lib/V2.js",
+        "content.js"
+      ],
+      "css": [
+        "wonde.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "background.js"
+    ]
+  }
+}

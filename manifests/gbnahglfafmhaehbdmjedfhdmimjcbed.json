@@ -1,0 +1,79 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "AutoBuy Flash Sales, Deals, and Coupons",
+  "version": "1.1.25",
+  "description": "Now auto buy any type of flash sale products by using our chrome extension",
+  "homepage_url": "https://autobuyapp.com",
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.google-analytics.com; object-src 'self'",
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "images/icon16.png",
+    "default_popup": "build/index.html",
+    "default_title": "AutoBuy"
+  },
+  "background": {
+    "scripts": [
+      "build/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "inject/sweetalert2@9.js",
+        "inject/flipkartscript.js"
+      ],
+      "matches": [
+        "http://www.flipkart.com/*",
+        "http://flipkart.com/*",
+        "https://www.flipkart.com/*",
+        "https://flipkart.com/*",
+        "http://dl.flipkart.com/*",
+        "http://dl.flipkart.com/*",
+        "https://dl.flipkart.com/*",
+        "https://dl.flipkart.com/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "inject/sweetalert2@9.js",
+        "inject/amazonScript.js"
+      ],
+      "matches": [
+        "https://www.amazon.in/*",
+        "http://www.amazon.in/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "inject/startfetch.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*/*"
+      ],
+      "js": [
+        "inject/findads.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "storage",
+    "tabs",
+    "background",
+    "http://*/*",
+    "https://*/*"
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Avaya Click To Dial",
+  "version": "1.4",
+  "description": "An extension for highlighting phone numbers on web page and initiating a call on Avaya one-X Agent after phone number is clicked.",
+  "background": {
+    "page": "background/background.html"
+  },
+  "permissions": [
+    "tabs",
+    "nativeMessaging",
+    "notifications",
+    "http://*/*",
+    "https://*/*",
+    "file://*/*"
+  ],
+  "browser_action": {
+    "default_title": "Avaya Click To Dial"
+  },
+  "icons": {
+    "48": "images/icon48.png"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "common/string.js",
+        "common/constants.js",
+        "content/contentScript.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file://*/*"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    }
+  ],
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'"
+}

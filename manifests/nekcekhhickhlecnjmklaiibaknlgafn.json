@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "ParisAchats",
+  "description": "Cet extension permet de faire vos courses sur des sites marchand en France et de vous les faire livrer chez vous en Afrique.",
+  "background": {
+    "scripts": [
+      "libs/firebase-app.js",
+      "libs/firebase-firestore.js",
+      "background.init.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.ikea.com/*/catalog/products/*",
+        "https://www.amazon.fr/*",
+        "https://www.zalando.fr/*"
+      ],
+      "css": [],
+      "js": [
+        "webcomponents-sd-ce.js",
+        "bootstrap.js",
+        "parisachats.js"
+      ]
+    }
+  ],
+  "version": "1.2.0",
+  "icons": {
+    "128": "icon_128.png"
+  },
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "notifications",
+    "storage",
+    "activeTab",
+    "declarativeContent",
+    "https://*/"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://firestore.googleapis.com; object-src 'self' https://firestore.googleapis.com",
+  "web_accessible_resources": [
+    "assets/*"
+  ]
+}

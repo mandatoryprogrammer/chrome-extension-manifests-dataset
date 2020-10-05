@@ -1,0 +1,78 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "NewsTab",
+  "short_name": "NewsTab",
+  "version": "3.0.2",
+  "manifest_version": 2,
+  "author": "NewsTab",
+  "description": "Get the news you care about from the publishers you love with every new tab you open. Find any news topic or news source!",
+  "homepage_url": "https://www.newstab.com",
+  "icons": {
+    "16": "/Media/ExtensionImages/emptyIcon.png",
+    "19": "/Media/ExtensionImages/Icons/icon19.png",
+    "48": "/Media/ExtensionImages/Icons/icon48.png",
+    "96": "/Media/ExtensionImages/Icons/icon96.png",
+    "128": "/Media/ExtensionImages/Icons/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "/Media/ExtensionImages/Icons/icon48.png"
+  },
+  "permissions": [
+    "storage",
+    "cookies",
+    "topSites",
+    "https://*.newstab.com/",
+    "https://s2.googleusercontent.com/",
+    "https://feedapi.psccint.com/",
+    "https://api.bing.com/"
+  ],
+  "optional_permissions": [
+    "*://*/*"
+  ],
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "/Scripts/ExtensionShared/NewsTab.js",
+      "/Scripts/ExtensionShared/Helpers.js",
+      "/Scripts/Framework/jquery/jquery-3.4.0.js",
+      "/Scripts/ExtensionOnly/moment.min.js",
+      "/Scripts/ExtensionShared/Models/Article.js",
+      "/Scripts/ExtensionShared/Models/Feed.js",
+      "/Scripts/ExtensionShared/Models/Section.js",
+      "/Scripts/ExtensionShared/Modules/RegionManager.js",
+      "/Scripts/ExtensionShared/Modules/XhrManager.js",
+      "/Scripts/ExtensionShared/Modules/ArticleView.js",
+      "/Scripts/ExtensionShared/Modules/SectionsManager.js",
+      "/Scripts/ExtensionOnly/Modules/TimeAndWeatherWidget.js",
+      "/Scripts/ExtensionOnly/Modules/SportWidget.js",
+      "/Scripts/ExtensionOnly/Modules/Wallpapers.js",
+      "/Scripts/ExtensionShared/Modules/ImageCollage.js",
+      "/Scripts/ExtensionOnly/config.js",
+      "/Scripts/ExtensionOnly/article.js",
+      "/Scripts/ExtensionOnly/common.js",
+      "/Scripts/ExtensionOnly/Extension.js",
+      "/Scripts/ExtensionOnly/Background.js"
+    ],
+    "persistent": false
+  },
+  "chrome_url_overrides": {
+    "newtab": "newtab.html#newTab"
+  },
+  "externally_connectable": {
+    "matches": [
+      "https://*.newstab.com/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.newstab.com/*"
+      ],
+      "js": [
+        "/Scripts/ExtensionOnly/Inject.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://suggestqueries.google.com https://ssl.google-analytics.com https://platform.twitter.com; object-src 'self'"
+}

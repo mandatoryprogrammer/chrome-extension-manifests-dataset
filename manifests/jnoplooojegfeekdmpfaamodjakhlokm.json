@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "description": "Block 500+ trackers and control your data.",
+  "version": "1.1.0",
+  "manifest_version": 2,
+  "name": "Loginhood",
+  "short_name": "Loginhood",
+  "author": "Loginhood",
+  "icons": {
+    "128": "icon-128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.bundle.js"
+    ]
+  },
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": "icon-34.png",
+    "default_title": "Loginhood"
+  },
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "js": [
+        "inject.bundle.js"
+      ],
+      "match_about_blank": false,
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "cookies",
+    "webRequest",
+    "webRequestBlocking",
+    "webNavigation",
+    "*://*/*",
+    "storage"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

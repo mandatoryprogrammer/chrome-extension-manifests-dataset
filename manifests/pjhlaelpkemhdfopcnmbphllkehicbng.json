@@ -1,0 +1,79 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Library download Helper",
+  "version": "3.3.4",
+  "description": "Help the people with impaired vision to find the searching result on USYD online library",
+  "author": "barrier-free",
+  "omnibox": {
+    "keyword": "usyd"
+  },
+  "icons": {
+    "32": "image/icon32.png",
+    "128": "image/icon128.png"
+  },
+  "page_action": {
+    "default_icon": {
+      "32": "image/icon32.png",
+      "64": "image/icon128.png"
+    },
+    "default_title": "Library download Helper"
+  },
+  "background": {
+    "persistent": false,
+    "page": "background.html"
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "<all_urls>",
+    "contextMenus",
+    "tabs"
+  ],
+  "commands": {
+    "toggle-ScreenReaderHelper": {
+      "suggested_key": {
+        "default": "Alt+A"
+      },
+      "description": "Toggle Library download Helper on or off."
+    },
+    "Search-ScreenReaderHelper": {
+      "suggeted_key": {
+        "default": "Alt+S"
+      },
+      "description": "Quick search the available websites or current content."
+    },
+    "download-ScreenReaderHelper": {
+      "suggeted_key": {
+        "default": "Alt+C"
+      },
+      "description": "Quick download the current article or ebook."
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/main.js",
+        "js/JSTOR-adapter.js",
+        "js/Ovid-adapter.js",
+        "js/EBSCO-adapter.js",
+        "js/Springer-adapter.js",
+        "js/ProQ-adapter.js"
+      ],
+      "css": [
+        "css/main.css",
+        "css/Ovid.css",
+        "css/ProQ.css",
+        "css/JSTOR.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": false
+  }
+}

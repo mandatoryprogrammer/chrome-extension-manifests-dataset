@@ -1,0 +1,68 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "WittyParrot",
+  "version": "3.3.1",
+  "manifest_version": 2,
+  "description": "WittyParrot extension provides improved productivity, accuracy and consistency in communication.",
+  "browser_action": {
+    "default_icon": "assets/images/wp_logo_96px.png"
+  },
+  "background": {
+    "scripts": [
+      "inject-script/jquery.min.js",
+      "inject-script/cookies.js",
+      "inject-script/background.js",
+      "popup.js",
+      "external-plugin/chrome-ext/chrome-insertion.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [
+        "inject-script/style.css"
+      ],
+      "js": [
+        "inject-script/jquery.min.js",
+        "inject-script/webclip.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "options_ui": {
+    "page": "inject-script/options/options.html",
+    "open_in_tab": false
+  },
+  "icons": {
+    "16": "assets/images/wp_logo_96px.png",
+    "48": "assets/images/wp_logo_128px.png"
+  },
+  "content_security_policy": "script-src 'self' https://ajax.microsoft.com/ajax/4.0/1/MicrosoftAjax.js 'sha256-V9rGTPjBoHNIyI+J5vfgsGRyO3rcamnp6tmLKfCNBdA=' https://appsforoffice.microsoft.com/lib/1/hosted/Office.js 'sha256-5RSEkXa8cq7CS+NwPc7sBpiX4avw/+EeSs9QPojiuJQ=' https://appsforoffice.microsoft.com/lib/1/hosted/o15apptofilemappingtable.js 'sha256-fV8FgKFnRVmZ4E1Eh0pn6hlbSipVh2Csp4JRhyg+/OE='; object-src 'self'",
+  "minimum_chrome_version": "18",
+  "permissions": [
+    "cookies",
+    "contextMenus",
+    "activeTab",
+    "storage",
+    "notifications"
+  ],
+  "optional_permissions": [
+    "notifications"
+  ],
+  "web_accessible_resources": [
+    "bower_components/*",
+    "app/*",
+    "external-libraries/*",
+    "inject-script/*",
+    "external-plugin/*",
+    "/assets/images/Widget_pointer_right.png"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.google.com/*"
+    ]
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Fireflies Meeting Recorder Transcribe, Search",
+  "version": "1.5.5",
+  "manifest_version": 2,
+  "description": "Adds a button to Google Calendar & Google Meet and enables you to easily transcribe calls.",
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "local-storage.js",
+      "background.js"
+    ]
+  },
+  "externally_connectable": {
+    "matches": [
+      "https://app.fireflies.ai/*"
+    ]
+  },
+  "oauth2": {
+    "client_id": "801027278667-3k4g8bi7jts1a84l46f1b9n158cleu37.apps.googleusercontent.com",
+    "scopes": [
+      "openid",
+      "email",
+      "profile"
+    ]
+  },
+  "content_scripts": [
+    {
+      "css": [
+        "fireflies.css"
+      ],
+      "js": [
+        "jquery-2.2.4.min.js",
+        "local-storage.js",
+        "fireflies.js"
+      ],
+      "matches": [
+        "https://calendar.google.com/*",
+        "https://www.google.com/calendar/*",
+        "https://meet.google.com/*"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon19.png",
+      "38": "images/icon38.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "https://calendar.google.com/calendar/*",
+    "https://app.fireflies.ai/*",
+    "https://accounts.google.com/o/oauth2/token*",
+    "https://www.googleapis.com/",
+    "https://meet.google.com/*",
+    "https://dev.firefliesapp.com/*"
+  ],
+  "web_accessible_resources": [
+    "fireflies.css",
+    "local-storage.js"
+  ]
+}

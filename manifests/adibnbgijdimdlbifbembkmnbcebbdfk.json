@@ -1,0 +1,199 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "KDP Wizard Kindle Direct Publishing Manager",
+  "description": "KDP Wizard is a Kindle Direct Publishing organizer & listing tool that integrates with Airtable to supercharge your KDP business.",
+  "version": "3.7.9",
+  "background": {
+    "scripts": [
+      "jsugly/jquery-3.1.1.min.js",
+      "jsugly/background.js",
+      "contentscriptsugly/contentscriptCommon.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.amazon.com/*",
+        "https://www.amazon.co.uk/*",
+        "https://www.amazon.de/*",
+        "https://kdp.amazon.com/*",
+        "https://kdpwizard.app/*",
+        "https://kdpwizard-app./*",
+        "https://airtable.com/*"
+      ],
+      "js": [
+        "jsugly/jquery-3.1.1.min.js",
+        "jsugly/jquery.lineProgressbar.js",
+        "contentscriptsugly/contentscriptKDP.js",
+        "contentscriptsugly/contentscriptCommon.js",
+        "contentscriptsugly/contentscriptWoo.js",
+        "contentscriptsugly/contentscriptAirtablev2.js",
+        "/jsugly/airtable.browser.js",
+        "/dist/moment.js",
+        "/dist/moment-timezone-with-data.js",
+        "/dist/featherlight.min.js",
+        "/dist/slimselect.min.js",
+        "/dist/cryptojs/core.min.js",
+        "/dist/cryptojs/sha256.min.js"
+      ],
+      "css": [
+        "css/contentPage.css",
+        "css/lulu.css",
+        "css/jquery.lineProgressbar.css",
+        "css/relister.css",
+        "css/slimselect.css",
+        "css/nunito.css",
+        "dist/featherlight.min.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://kdpreports.amazon.com/*"
+      ],
+      "js": [
+        "contentscriptsugly/contentscriptCommon.js",
+        "/dist/moment.js",
+        "/dist/moment-timezone-with-data.js",
+        "jsugly/jquery-3.1.1.min.js",
+        "contentscriptsugly/contentscriptKDPReports.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://press.barnesandnoble.com/*"
+      ],
+      "js": [
+        "jsugly/jquery-3.1.1.min.js",
+        "contentscriptsugly/contentscriptCommon.js",
+        "contentscriptsugly/contentscriptBAN.js"
+      ],
+      "css": [
+        "css/contentPage.css",
+        "css/barnesandnoblesNewBook.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://writinglife.kobo.com/*"
+      ],
+      "js": [
+        "jsugly/jquery-3.1.1.min.js",
+        "contentscriptsugly/contentscriptCommon.js",
+        "contentscriptsugly/contentscriptKobo.js"
+      ],
+      "css": [
+        "css/contentPage.css",
+        "css/kobobook.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://play.google.com/books/*"
+      ],
+      "js": [
+        "jsugly/jquery-3.1.1.min.js",
+        "contentscriptsugly/contentscriptCommon.js",
+        "contentscriptsugly/contentscriptGoogleBooks.js"
+      ],
+      "css": [
+        "css/contentPage.css",
+        "css/googlebooks.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.lulu.com/*",
+        "http://www.lulu.com/*"
+      ],
+      "js": [
+        "jsugly/jquery-3.1.1.min.js",
+        "contentscriptsugly/contentscriptCommon.js",
+        "contentscriptsugly/contentscriptLulu.js"
+      ],
+      "css": [
+        "css/contentPage.css",
+        "css/lulu.css"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "storage",
+    "unlimitedStorage",
+    "downloads",
+    "webNavigation",
+    "notifications",
+    "https://s3.amazonaws.com/*",
+    "https://api.gumroad.com/*",
+    "https://kdpwizard.app/*",
+    "*://kdpreports.amazon.com/*",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "web_accessible_resources": [
+    "images/*.png",
+    "images/*.gif",
+    "images/*.jpg",
+    "/images/*.png",
+    "/images/flags/*.png",
+    "/images/*.gif",
+    "/lib/angular/cat.tmp",
+    "https://use.fontawesome.com/releases/v5.6.3/js/all.js",
+    "fonts/nunito/Nunito-Regular.ttf",
+    "fonts/nunito/Nunito-SemiBold.ttf",
+    "fonts/nunito/Nunito-Bold.ttf",
+    "fonts/nunito/Nunito-ExtraBold.ttf",
+    "fonts/nunito/Nunito-Black.ttf",
+    "/lib/trum/trumbowyg.min.js",
+    "/lib/trum/trumbowyg.min.css",
+    "/lib/trum/icons.svg",
+    "/jsugly/*.js",
+    "jsugly/*.js",
+    "/dist/slimselect.min.js",
+    "/app/*.json",
+    "/appugly/*.json",
+    "appugly/*.json",
+    "/audio/*.mp3",
+    "css/barnesandnoblesNewBook.css"
+  ],
+  "browser_action": {
+    "default_title": "KDP Wizard",
+    "default_icon": "images/KDPWizard128.png",
+    "default_popup": "html/popup.html"
+  },
+  "icons": {
+    "128": "images/KDPWizard128.png",
+    "48": "images/KDPWizard48.png",
+    "16": "images/KDPWizard16.png"
+  },
+  "commands": {
+    "populatepage": {
+      "suggested_key": {
+        "default": "Alt+N",
+        "windows": "Alt+N",
+        "mac": "Alt+N"
+      },
+      "description": "Populate Page"
+    },
+    "submitpage": {
+      "suggested_key": {
+        "default": "Alt+M",
+        "windows": "Alt+M",
+        "mac": "Alt+M"
+      },
+      "description": "Submit Page"
+    },
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+K",
+        "windows": "Alt+K",
+        "mac": "Alt+K"
+      },
+      "description": "Open KDP Wizard"
+    }
+  },
+  "manifest_version": 2
+}

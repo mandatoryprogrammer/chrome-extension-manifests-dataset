@@ -1,0 +1,395 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Litmus",
+  "version": "1.1.51",
+  "minimum_chrome_version": "40",
+  "description": "Test with Litmus wherever you build",
+  "author": "Litmus <hello@litmus.com>",
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "web_accessible_resources": [
+    "globals.js",
+    "startpage/index.html",
+    "sidebar/index.html",
+    "dashboard/index.html",
+    "css/iframe.css",
+    "css/litmusBeacon.css",
+    "inject.js",
+    "nativeMessages.js",
+    "iframeMessages.js",
+    "reloadMessages.js",
+    "images/draggable-icon.png",
+    "images/close-modal.png",
+    "images/arrow-left.png",
+    "images/arrow-right.png",
+    "images/preview-blur-large.jpg",
+    "images/lock-icon.png",
+    "images/icon128.png",
+    "images/icon128-gray.png",
+    "images/beacon.png",
+    "images/allow-access-graphic.png",
+    "fonts/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "file://*",
+        "http://localhost/*.htm",
+        "http://localhost/*.html",
+        "http://127.0.0.1/*.html",
+        "*://*.mailchimp.com/*",
+        "*://*.campaignmonitor.com/*",
+        "*://*.createsend.com/*",
+        "*://*.litmus.com/*",
+        "*://*.constantcontact.com/*",
+        "*://*.exacttarget.com/*",
+        "*://*.sendgrid.com/*",
+        "*://*.pardot.com/*",
+        "*://*.e2ma.net/*",
+        "*://*.typekit.net/*",
+        "*://*.wistia.com/*",
+        "*://*.silverpop.com/*",
+        "*://interact2.responsys.net/emd/c/campaigndesigner/framework/page/launch*",
+        "*://*.marketodesigner.com/*",
+        "*://*.exacttarget.com/cloud/#*",
+        "*://*.marketingcloudapps.com/*",
+        "*://*.eloqua.com/*",
+        "*://*.customer-engagement.ibm.com/*",
+        "*://*.ibm.com/campaign-automation/*",
+        "*://cloud.goacoustic.com/*"
+      ],
+      "include_globs": [
+        "file://*",
+        "http://127.0.0.1/*.html",
+        "http://127.0.0.1:*/*.html",
+        "http://localhost/*.htm",
+        "http://localhost/*.html",
+        "http://localhost:*/*.htm",
+        "http://localhost:*/*.html",
+        "*://*.createsend.com/campaigns/create/*",
+        "*://*.createsend.com/campaigns/design/*",
+        "*://*.createsend.com/campaigns/gallery/*",
+        "*://*.createsend.com/campaigns/send/*",
+        "*://*.createsend.com/campaigns/createSend/*",
+        "*://*.mailchimp.com/campaigns/wizard/recipients*",
+        "*://*.mailchimp.com/campaigns/wizard/setup*",
+        "*://*.mailchimp.com/campaigns/wizard/template*",
+        "*://*.mailchimp.com/campaigns/wizard/html-paste*",
+        "*://*.mailchimp.com/campaigns/wizard/neapolitan*",
+        "*://*.mailchimp.com/campaigns/wizard/confirm*",
+        "*://*.mailchimp.com/templates/edit*",
+        "*://*.mailchimp.com/templates/design*",
+        "*://*.exacttarget.com/cloud/#app/Email/*",
+        "*://*.exacttarget.com/cloud/#app/Campaigns/*",
+        "*://*.silverpop.com/*",
+        "*://*.pardot.com/email/*",
+        "*://interact2.responsys.net/emd/c/campaigndesigner/framework/page/launch*",
+        "*://*.marketodesigner.com/*",
+        "*://*.exacttarget.com/cloud/#*",
+        "*://*.marketingcloudapps.com/*",
+        "*://*.eloqua.com/*",
+        "*://*.customer-engagement.ibm.com/*",
+        "*://*.ibm.com/campaign-automation/*",
+        "*://cloud.goacoustic.com/*"
+      ],
+      "css": [
+        "css/iframe.css"
+      ],
+      "js": [
+        "inject.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://ui.constantcontact.com/rnavmap/em/ecampaign/visualeditor*"
+      ],
+      "js": [
+        "iframeMessages.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.silverpop.com/editor_*",
+        "*://*.customer-engagement.ibm.com/*",
+        "*://*.ibm.com/campaign-automation/*",
+        "*://cloud.goacoustic.com/*"
+      ],
+      "js": [
+        "silverpop-iframeMessages.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_globs": [
+        "file://*",
+        "http://localhost/*.htm",
+        "http://localhost/*.html",
+        "http://localhost:*/*.htm",
+        "http://localhost:*/*.html",
+        "http://127.0.0.1:*/*.html",
+        "*://*.campaignmonitor.com/*",
+        "*://*.litmus.com/*",
+        "*://*.constantcontact.com/*",
+        "*://*.sendgrid.com/*",
+        "*://*.pardot.com/*",
+        "*://*.e2ma.net/*",
+        "*://*.typekit.net/*",
+        "*://*.wistia.com/*",
+        "*://*.createsend.com/campaigns/create/*",
+        "*://*.createsend.com/campaigns/design/*",
+        "*://*.createsend.com/campaigns/gallery/*",
+        "*://*.createsend.com/campaigns/send/*",
+        "*://*.createsend.com/campaigns/createSend/*",
+        "*://*.mailchimp.com/campaigns/wizard/recipients*",
+        "*://*.mailchimp.com/campaigns/wizard/setup*",
+        "*://*.mailchimp.com/campaigns/wizard/template*",
+        "*://*.mailchimp.com/campaigns/wizard/html-paste*",
+        "*://*.mailchimp.com/campaigns/wizard/neapolitan*",
+        "*://*.mailchimp.com/campaigns/wizard/confirm*",
+        "*://*.mailchimp.com/templates/edit*",
+        "*://*.mailchimp.com/templates/design*",
+        "*://*.exacttarget.com/cloud/#app/Email/*",
+        "*://*.exacttarget.com/cloud/#app/Campaigns/*",
+        "*://*.silverpop.com/*",
+        "*://*.customer-engagement.ibm.com/*",
+        "*://*.ibm.com/campaign-automation/*",
+        "*://cloud.goacoustic.com/*",
+        "*://*.pardot.com/email/*",
+        "*://interact2.responsys.net/emd/c/campaigndesigner/framework/page/launch*",
+        "*://*.marketodesigner.com/*",
+        "*://*.exacttarget.com/cloud/#*",
+        "*://*.marketingcloudapps.com/*",
+        "*://*.eloqua.com/*"
+      ],
+      "css": [
+        "css/iframe.css"
+      ],
+      "js": [
+        "nonESPInject.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.mailchimp.com/*"
+      ],
+      "js": [
+        "mailchimpInject.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.createsend.com/*"
+      ],
+      "js": [
+        "createsendInject.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://mc.exacttarget.com/cloud/tools/SSO.aspx?legacy=*",
+        "*://members.exacttarget.com/Content/Email/*",
+        "*://*.exacttarget.com/cloud/tools/SSO.aspx?legacy=*",
+        "*://members.s1.exacttarget.com/Content/Email/*",
+        "*://members.s2.exacttarget.com/Content/Email/*",
+        "*://members.s3.exacttarget.com/Content/Email/*",
+        "*://members.s4.exacttarget.com/Content/Email/*",
+        "*://members.s5.exacttarget.com/Content/Email/*",
+        "*://members.s6.exacttarget.com/Content/Email/*",
+        "*://members.s7.exacttarget.com/Content/Email/*",
+        "*://members.s8.exacttarget.com/Content/Email/*",
+        "*://members.s9.exacttarget.com/Content/Email/*",
+        "*://members.s10.exacttarget.com/Content/Email/*",
+        "*://members.s11.exacttarget.com/Content/Email/*",
+        "*://members.s12.exacttarget.com/Content/Email/*",
+        "*://members.s13.exacttarget.com/Content/Email/*",
+        "*://members.s14.exacttarget.com/Content/Email/*",
+        "*://members.s15.exacttarget.com/Content/Email/*"
+      ],
+      "js": [
+        "exacttarget.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://engage.silverpop.com/*",
+        "*://engage1.silverpop.com/*",
+        "*://engage2.silverpop.com/*",
+        "*://engage3.silverpop.com/*",
+        "*://engage4.silverpop.com/*",
+        "*://engage5.silverpop.com/*",
+        "*://engage6.silverpop.com/*",
+        "*://engage7.silverpop.com/*",
+        "*://engage8.silverpop.com/*",
+        "*://engage9.silverpop.com/*",
+        "*://engage10.silverpop.com/*",
+        "*://engage11.silverpop.com/*",
+        "*://engage12.silverpop.com/*",
+        "*://engage13.silverpop.com/*",
+        "*://engage14.silverpop.com/*",
+        "*://engage15.silverpop.com/*",
+        "*://pod.ibmmarketingcloud.com/*",
+        "*://pod1.ibmmarketingcloud.com/*",
+        "*://pod2.ibmmarketingcloud.com/*",
+        "*://pod3.ibmmarketingcloud.com/*",
+        "*://pod4.ibmmarketingcloud.com/*",
+        "*://pod5.ibmmarketingcloud.com/*",
+        "*://pod6.ibmmarketingcloud.com/*",
+        "*://pod7.ibmmarketingcloud.com/*",
+        "*://pod8.ibmmarketingcloud.com/*",
+        "*://pod9.ibmmarketingcloud.com/*",
+        "*://pod10.ibmmarketingcloud.com/*",
+        "*://pod11.ibmmarketingcloud.com/*",
+        "*://pod12.ibmmarketingcloud.com/*",
+        "*://pod13.ibmmarketingcloud.com/*",
+        "*://pod14.ibmmarketingcloud.com/*",
+        "*://pod15.ibmmarketingcloud.com/*",
+        "*://*.goacoustic.com/ux/*"
+      ],
+      "js": [
+        "ibm-iframe.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://email-app.marketingcloudapps.com/*",
+        "*://content-builder.marketingcloudapps.com/*",
+        "*://*.exacttarget.com/cloud/tools/SSO.aspx?appId=*",
+        "*://*.marketingcloudapps.com/*"
+      ],
+      "js": [
+        "exacttarget-dashboard.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://user-content.s1.sfmc-content.com/*",
+        "*://user-content.s2.sfmc-content.com/*",
+        "*://user-content.s3.sfmc-content.com/*",
+        "*://user-content.s4.sfmc-content.com/*",
+        "*://user-content.s5.sfmc-content.com/*",
+        "*://user-content.s6.sfmc-content.com/*",
+        "*://user-content.s7.sfmc-content.com/*",
+        "*://user-content.s8.sfmc-content.com/*",
+        "*://user-content.s9.sfmc-content.com/*",
+        "*://user-content.s10.sfmc-content.com/*",
+        "*://user-content.s11.sfmc-content.com/*",
+        "*://user-content.s12.sfmc-content.com/*",
+        "*://user-content.s13.sfmc-content.com/*",
+        "*://user-content.s14.sfmc-content.com/*",
+        "*://user-content.s15.sfmc-content.com/*"
+      ],
+      "js": [
+        "exacttarget-preview-and-test.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.eloquaeditors.com/editor.aspx*"
+      ],
+      "js": [
+        "eloqua.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://js-agent.newrelic.com/nr-spa-1044.min.js https://bam.nr-data.net https://rawgit.com https://fast.wistia.com https://fast.wistia.net https://use.typekit.net https://cdn.segment.com https://src.litix.io/core/2/mux.js https://cdn.evergage.com; object-src 'self'",
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon19.png",
+      "38": "images/icon38.png"
+    },
+    "default_title": "Litmus"
+  },
+  "icons": {
+    "16": "images/icon16.png",
+    "32": "images/icon32.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "cookies",
+    "file://*",
+    "http://localhost/*",
+    "http://127.0.0.1/*",
+    "*://*.mailchimp.com/*",
+    "*://*.campaignmonitor.com/*",
+    "*://*.createsend.com/*",
+    "*://*.exacttarget.com/*",
+    "*://*.litmus.com/*",
+    "*://*.master.litmusdev.com/*",
+    "*://*.sync-plans-8219.litmusdev.com/*",
+    "*://*.constantcontact.com/*",
+    "*://*.sendgrid.com/*",
+    "*://*.pardot.com/*",
+    "*://*.e2ma.net/*",
+    "*://*.typekit.net/*",
+    "*://*.wistia.com/*",
+    "*://*.silverpop.com/*",
+    "*://*.ibm.com/*",
+    "*://cloud.goacoustic.com/*",
+    "*://*.marketodesigner.com/*",
+    "*://*.marketingcloudapps.com/*",
+    "*://*.exacttarget.com/cloud/#*",
+    "*://members.exacttarget.com/*",
+    "*://members.s1.exacttarget.com/Content/Email/*",
+    "*://members.s2.exacttarget.com/Content/Email/*",
+    "*://members.s3.exacttarget.com/Content/Email/*",
+    "*://members.s4.exacttarget.com/Content/Email/*",
+    "*://members.s5.exacttarget.com/Content/Email/*",
+    "*://members.s6.exacttarget.com/Content/Email/*",
+    "*://members.s7.exacttarget.com/Content/Email/*",
+    "*://members.s8.exacttarget.com/Content/Email/*",
+    "*://members.s9.exacttarget.com/Content/Email/*",
+    "*://members.s10.exacttarget.com/Content/Email/*",
+    "*://members.s11.exacttarget.com/Content/Email/*",
+    "*://members.s12.exacttarget.com/Content/Email/*",
+    "*://members.s13.exacttarget.com/Content/Email/*",
+    "*://members.s14.exacttarget.com/Content/Email/*",
+    "*://members.s15.exacttarget.com/Content/Email/*",
+    "*://*.eloqua.com/*",
+    "*://*.eloquaeditors.com/*",
+    "*://user-content.s1.sfmc-content.com/*",
+    "*://user-content.s2.sfmc-content.com/*",
+    "*://user-content.s3.sfmc-content.com/*",
+    "*://user-content.s4.sfmc-content.com/*",
+    "*://user-content.s5.sfmc-content.com/*",
+    "*://user-content.s6.sfmc-content.com/*",
+    "*://user-content.s7.sfmc-content.com/*",
+    "*://user-content.s8.sfmc-content.com/*",
+    "*://user-content.s9.sfmc-content.com/*",
+    "*://user-content.s10.sfmc-content.com/*",
+    "*://user-content.s11.sfmc-content.com/*",
+    "*://user-content.s12.sfmc-content.com/*",
+    "*://user-content.s13.sfmc-content.com/*",
+    "*://user-content.s14.sfmc-content.com/*",
+    "*://user-content.s15.sfmc-content.com/*"
+  ]
+}

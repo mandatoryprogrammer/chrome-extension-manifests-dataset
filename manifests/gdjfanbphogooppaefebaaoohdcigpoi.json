@@ -1,0 +1,116 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Salesforce Change Set Helper",
+  "description": "Enhances the Salesforce change set. Adds last changed date and allows sorting, searching, validation and comparison with other orgs.",
+  "version": "3.0.0",
+  "options_page": "options.html",
+  "browser_action": {
+    "default_icon": "braincloudsmall.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "128": "brainbulb128.png",
+    "48": "brainbulb48.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/p/mfpkg/AddToPackageFromChangeMgmtUi*",
+        "https://*/p/mfpkg/AddToPackageUi*"
+      ],
+      "css": [
+        "lib/jquery.dataTables.css",
+        "lib/mergely.css",
+        "lib/codemirror.css",
+        "lib/jquery-ui.min.css",
+        "lib/jquery-ui.structure.min.css",
+        "lib/jquery-ui.theme.min.css",
+        "lib/dataTables.checkboxes.css",
+        "changeset.css"
+      ],
+      "js": [
+        "lib/jquery.min.js",
+        "lib/jquery.dataTables.js",
+        "lib/jquery-ui.min.js",
+        "lib/dataTables.checkboxes.min.js",
+        "lib/codemirror.js",
+        "lib/moment.js",
+        "lib/searchcursor.js",
+        "lib/jsforce.js",
+        "lib/buttons.html5.min.js",
+        "lib/jquery.json-viewer.js",
+        "lib/select2.min.js",
+        "lib/mergely.js",
+        "lib/jszip.js",
+        "common.js",
+        "changeset.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://*/*tab=PackageComponents*"
+      ],
+      "css": [
+        "lib/jquery.dataTables.css",
+        "changeset.css"
+      ],
+      "js": [
+        "lib/jquery.min.js",
+        "lib/jquery.dataTables.js",
+        "lib/moment.js",
+        "changeview.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*/changemgmt/outboundChangeSetDetailPage.apexp*"
+      ],
+      "css": [
+        "lib/jquery.dataTables.css",
+        "lib/jquery.json-viewer.css",
+        "lib/select2.min.css",
+        "lib/codemirror.css",
+        "lib/dataTables.checkboxes.css",
+        "changeset.css"
+      ],
+      "js": [
+        "lib/jquery.min.js",
+        "lib/jquery.dataTables.js",
+        "lib/jquery-ui.min.js",
+        "lib/codemirror.js",
+        "lib/dataTables.checkboxes.min.js",
+        "lib/moment.js",
+        "lib/buttons.html5.min.js",
+        "lib/jquery.json-viewer.js",
+        "lib/select2.min.js",
+        "lib/FileSaver.js",
+        "lib/jszip.js",
+        "common.js",
+        "metadatahelper.js",
+        "deployhelper.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "https://*.com/p/mfpkg/AddToPackageFromChangeMgmtUi*",
+    "https://*.com/p/mfpkg/AddToPackageUi*",
+    "https://*.com/*tab=PackageComponents*",
+    "https://*.com/changemgmt/outboundChangeSetDetailPage.apexp*",
+    "https://*.salesforce.com/services/*",
+    "identity",
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "background.js",
+      "lib/jsforce.js"
+    ],
+    "persistent": false
+  },
+  "web_accessible_resources": [
+    "loading.gif"
+  ]
+}

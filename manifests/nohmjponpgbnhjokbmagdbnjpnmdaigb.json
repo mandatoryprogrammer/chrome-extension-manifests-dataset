@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Target Search",
+  "version": "0.9.16",
+  "manifest_version": 2,
+  "description": "Easily locate the text you searched from google's results page.",
+  "icons": {
+    "16": "assets/media/icons/icon16.png",
+    "48": "assets/media/icons/icon48.png",
+    "128": "assets/media/icons/icon128.png"
+  },
+  "web_accessible_resources": [
+    "assets/*"
+  ],
+  "browser_action": {
+    "default_popup": "assets/pages/popup.html"
+  },
+  "permissions": [
+    "tabs",
+    "<all_urls>",
+    "storage",
+    "identity",
+    "notifications"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "app.js"
+      ],
+      "css": [
+        "assets/css/styles.css",
+        "assets/css/styles-rtl.css"
+      ]
+    }
+  ]
+}

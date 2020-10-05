@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "TeX Math Here",
+  "version": "0.7.11",
+  "description": "Use the TeX markup language to take math here, there, or just about anywhere that images are supported.",
+  "icons": {
+    "128": "images/texhere/texhere.128.png",
+    "48": "images/texhere/texhere.48.png",
+    "32": "images/texhere/texhere.32.png"
+  },
+  "background": {
+    "scripts": [
+      "latex_transport.js"
+    ]
+  },
+  "permissions": [
+    "clipboardWrite"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "128": "images/texhere/texhere.128.png"
+    },
+    "default_title": "TeX Math Here",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://docs.google.com/document/*",
+        "*://docs.google.com/presentation/*"
+      ],
+      "js": [
+        "dblclick_edit.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://mail.google.com/*"
+      ],
+      "js": [
+        "dblclick_gmail_edit.js"
+      ]
+    }
+  ],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Y",
+        "linux": "Ctrl+Shift+U",
+        "mac": "Command+Shift+Y",
+        "chromeos": "Ctrl+Shift+U"
+      }
+    }
+  }
+}

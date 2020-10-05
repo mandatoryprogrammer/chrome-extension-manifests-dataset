@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Vyelp",
+  "version": "0.0.3",
+  "manifest_version": 2,
+  "description": "Now you can see YouTube and Facebook videos direct from Yelp's page",
+  "default_locale": "en",
+  "permissions": [
+    "https://www.yelp.com/biz/*",
+    "http://*.facebook.com/*",
+    "tabs",
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "dist/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_popup": "html/options.html",
+    "default_icon": "icons/icon16.png"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "web_accessible_resources": [
+    "css/inject.css",
+    "icons/icon_play.png",
+    "icons/icon_facebook.png"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.yelp.com/biz/*"
+      ],
+      "css": [
+        "css/inject.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.yelp.com/biz/*"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "dist/inject.js"
+      ]
+    }
+  ]
+}

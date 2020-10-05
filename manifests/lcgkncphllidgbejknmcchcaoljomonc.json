@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "tripstr",
+  "icons": {
+    "16": "images/icon_16.png",
+    "48": "images/icon_48.png",
+    "128": "images/icon_128.png"
+  },
+  "description": "Fly to any picture on Flickr and Instagram",
+  "version": "3.2",
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "cookies",
+    "alarms",
+    "notifications",
+    "tabs",
+    "<all_urls>",
+    "storage"
+  ],
+  "manifest_version": 2,
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon_19.png",
+      "38": "images/icon_38.png"
+    },
+    "default_title": "tripstr",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/content_script.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    "images/*",
+    "airports.dat"
+  ]
+}

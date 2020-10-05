@@ -1,0 +1,187 @@
+{
+  "name": "네이버 툴바",
+  "description": "네이버 툴바 for Chrome. 웹 서핑을 더 스마트하고 편리하게!",
+  "version": "1.0.1.14",
+  "manifest_version": 2,
+  "default_locale": "ko",
+  "homepage_url": "http://tools.naver.com/service/toolbar/index.nhn",
+  "update_url": "http://clients2.google.com/service/update2/crx",
+  "icons": {
+    "128": "img/ico_128.png",
+    "16": "img/ico_16.png",
+    "48": "img/ico_48.png"
+  },
+  "options_page": "options.html",
+  "background": {
+    "page": "background.html"
+  },
+  "browser_action": {
+    "default_icon": "img/ico_32.png",
+    "default_popup": "naver.html",
+    "default_title": "네이버 툴바 "
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "js": [
+        "js/define.js",
+        "js/jquery/jquery.js",
+        "js/content-script/mouseGesture.js"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_end",
+      "all_frames": false,
+      "css": [
+        "style.css"
+      ],
+      "js": [
+        "js/content-script/naver_capPage.js",
+        "js/content-script/shortcut.js"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_end",
+      "all_frames": false,
+      "css": [
+        "css/toolbar1.css"
+      ],
+      "js": [
+        "js/jquery/jquery.js",
+        "js/content-script/contextmenu_content.js"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_end",
+      "all_frames": true,
+      "js": [
+        "js/jquery/jquery.js",
+        "js/content-script/doc_click.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://bookmark.naver.com/toolbar_v2.ajax*"
+      ],
+      "run_at": "document_end",
+      "all_frames": true,
+      "js": [
+        "js/jquery/jquery.js",
+        "js/content-script/bookmark_contentscript.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://memo.me.naver.com/toolbar/*"
+      ],
+      "run_at": "document_end",
+      "all_frames": true,
+      "js": [
+        "js/define.js",
+        "js/jquery/jquery.js",
+        "js/jquery/jquery-ui.js",
+        "js/jquery/jquery.window.js",
+        "js/jquery/alert/jquery.alerts.js",
+        "js/content-script/memo_contentscript.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://nid.naver.com/nidlogin*",
+        "*://nid.naver.com/login/sso/finalize*"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "css": [
+        "css/arrow_box.css",
+        "css/narrow_scrollbar.css"
+      ],
+      "js": [
+        "js/define.js",
+        "js/jquery/jquery.js",
+        "js/extensions/login/rsakey.js",
+        "js/extensions/login/crypto-js/core-min.js",
+        "js/extensions/login/crypto-js/enc-utf16.js",
+        "js/extensions/login/crypto-js/aes.js",
+        "js/Extensions/login/ntbcipher.js",
+        "js/content-script/login_contentscript.js"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_globs": [
+        "*://endic.naver.com*",
+        "*://krdic.naver.com*",
+        "*://hanja.naver.com*",
+        "*.jpdic.naver.com*",
+        "*://cndic.naver.com*",
+        "*://frdic.naver.com*",
+        "*://memo.me.naver.com/toolbar/*",
+        "*://bookmark.naver.com/toolbar_v2.ajax*"
+      ],
+      "run_at": "document_end",
+      "all_frames": true,
+      "css": [
+        "css/naver-dic-blue.css",
+        "js/jquery/jquery.window.css",
+        "js/jquery/alert/jquery.alerts.css"
+      ],
+      "js": [
+        "js/define.js",
+        "js/jquery/jquery.js",
+        "js/jquery/jquery-ui.js",
+        "js/jquery/jquery.window.js",
+        "js/jquery/alert/jquery.alerts.js",
+        "js/jquery/jquery.blockUI.js",
+        "js/content-script/naver_dic.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "windows": "Alt+N",
+        "mac": "MacCtrl+N",
+        "default": "Ctrl+N"
+      }
+    }
+  },
+  "web_accessible_resources": [
+    "js/content-script/page_context.js",
+    "style.css",
+    "js/jquery/alert/info.gif",
+    "js/jquery/alert/title.gif",
+    "img/pronun.png",
+    "css/toolbar1.css",
+    "img/sp_loginpop.png",
+    "img/bg_lpheader.gif",
+    "img/btn_lgsm.png"
+  ],
+  "permissions": [
+    "<all_urls>",
+    "webRequest",
+    "webRequestBlocking",
+    "webNavigation",
+    "tabs",
+    "cookies",
+    "contextMenus",
+    "storage",
+    "downloads"
+  ]
+}

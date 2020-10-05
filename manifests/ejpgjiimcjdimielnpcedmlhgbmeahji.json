@@ -1,0 +1,41 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Google Calendar Events Cloner",
+  "description": "Googleカレンダーのスケジュールを別カレンダーにコピーする拡張機能です。(This extension copies events on the specific day of Google calendar to another calendar.)",
+  "version": "1.0.11",
+  "minimum_chrome_version": "29",
+  "icons": {
+    "128": "images/icon/icon_128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "128": "images/icon/icon_128.png"
+    },
+    "default_title": "Google Calendar Events Cloner",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "http://www.google.com/*",
+    "https://www.google.com/*",
+    "https://www.googleapis.com/*",
+    "https://accounts.google.com/o/oauth2/token",
+    "https://www.googleapis.com/",
+    "http://riatw.me/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://riatw.me/_extension_oauth/gcal_event_cloner.html*"
+      ],
+      "js": [
+        "oauth2/oauth2_inject.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "oauth2/oauth2.html"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

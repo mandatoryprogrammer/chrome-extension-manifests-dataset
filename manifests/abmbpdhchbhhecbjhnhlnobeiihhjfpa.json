@@ -1,0 +1,41 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Fantasy Targets",
+  "version": "0.1.3",
+  "manifest_version": 2,
+  "description": "Enhances the ESPN fantasy football website with additional information, such as player numbers and receiver targets.",
+  "permissions": [
+    "http://www.espn.com/nfl/*",
+    "http://games.espn.com/*",
+    "https://games.espn.com/*",
+    "http://*.fantasypros.com/*",
+    "https://*.fantasypros.com/*",
+    "webRequest",
+    "storage"
+  ],
+  "icons": {
+    "48": "fantasyTargetsLogo-48.png",
+    "128": "fantasyTargetsLogo-128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://games.espn.com/ffl/*",
+        "https://games.espn.com/ffl/*"
+      ],
+      "js": [
+        "lib/ender.min.js",
+        "fantasyProsStatsProvider.js",
+        "espnStatsProvider.js",
+        "nflScheduleUtils.js",
+        "domController.js",
+        "contentscript.js"
+      ]
+    }
+  ]
+}

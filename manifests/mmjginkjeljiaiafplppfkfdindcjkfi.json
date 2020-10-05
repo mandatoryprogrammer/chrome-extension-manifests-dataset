@@ -1,0 +1,42 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Unseenly",
+  "version": "2.0",
+  "manifest_version": 2,
+  "description": "Unseenly for Facebook hides the seen feature in Facebook chat and Messenger. Your friends can't know when you read their message",
+  "background": {
+    "scripts": [
+      "settings/source/lib/store.js",
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.facebook.com/*",
+        "*://*.messenger.com/*"
+      ],
+      "js": [
+        "js/jquery.js",
+        "js/hide_chat_seen.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "*://*.facebook.com/*",
+    "*://*.messenger.com/*",
+    "*://*.unseenly.com/*"
+  ],
+  "browser_action": {
+    "default_icon": "img/icon48.png",
+    "default_popup": "html/popup.html"
+  },
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

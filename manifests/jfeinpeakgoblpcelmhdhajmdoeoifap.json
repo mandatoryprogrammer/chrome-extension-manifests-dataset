@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Word Collector in Chrome Extension",
+  "description": "",
+  "version": "2.0.1",
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/16.png",
+    "default_popup": "popup/popup.html"
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "chrome_style": true
+  },
+  "background": {
+    "scripts": [
+      "lib/jquery.js",
+      "lib/underscore.js",
+      "lib/myconfig.js",
+      "contentScript/backbone/mylib.js",
+      "eventPage/eventPage.js"
+    ],
+    "persistent": false
+  },
+  "web_accessible_resources": [
+    "contentScript/contentScript.html",
+    "fonts/glyphicons-halflings-regular.woff2",
+    "fonts/glyphicons-halflings-regular.woff",
+    "fonts/glyphicons-halflings-regular.ttf"
+  ],
+  "permissions": [
+    "storage",
+    "tabs",
+    "<all_urls>",
+    "activeTab"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [
+        "lib/my_bootstrap_container.css",
+        "contentScript/contentScript.css"
+      ],
+      "js": [
+        "lib/jquery.js",
+        "lib/underscore.js",
+        "lib/backbone.js",
+        "lib/backbone.localStorage.js",
+        "contentScript/backbone/mylib.js",
+        "contentScript/backbone/storage.js",
+        "contentScript/backbone/app.js",
+        "contentScript/contentScript.js"
+      ]
+    }
+  ]
+}

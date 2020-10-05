@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Gmail condensed style",
+  "short_name": "Gmail condensed style",
+  "version": "2.0.11",
+  "description": "Gmail condensed style",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "https://mail.google.com/*"
+  ],
+  "web_accessible_resources": [
+    "style.css"
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  },
+  "browser_action": {
+    "default_popup": "options.html",
+    "default_title": "Gmail condensed options"
+  },
+  "background": {
+    "scripts": [
+      "eventpage.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "exclude_globs": [
+        "https://mail.google.com/*features=-Sapinto*",
+        "https://mail.google.com/*features=*,-Sapinto*",
+        "https://mail.google.com/*sapinto=0*"
+      ],
+      "all_frames": false,
+      "js": [
+        "gen.js",
+        "chrome.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "exclude_globs": [
+        "https://mail.google.com/*features=-Sapinto*",
+        "https://mail.google.com/*features=*,-Sapinto*",
+        "https://mail.google.com/*sapinto=0*"
+      ],
+      "all_frames": false,
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

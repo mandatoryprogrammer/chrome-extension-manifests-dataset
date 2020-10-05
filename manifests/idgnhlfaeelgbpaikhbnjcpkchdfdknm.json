@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "version": "0.18",
+  "name": "LeadExporter.io",
+  "short_name": "LeadExporter.io",
+  "description": "Extract LinkedIn data straight into your CRM",
+  "minimum_chrome_version": "20",
+  "icons": {
+    "128": "icons/icon128.png"
+  },
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_title": "LeadExporter.io - Extract LinkedIn data straight into your CRM"
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "https://ajax.googleapis.com/",
+    "https://use.fontawesome.com/",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "js": [
+        "js/jquery-3.3.1.min.js",
+        "contentscript.js"
+      ],
+      "run_at": "document_start",
+      "matches": [
+        "*://*.linkedin.com/*"
+      ],
+      "exclude_matches": [
+        "*://*.linkedin.com/recruiter/smartsearch*"
+      ],
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    "js/popper.min.js",
+    "js/jquery-3.3.1.min.js",
+    "css/style.css",
+    "css/bootstrap.min.css",
+    "js/bootstrap.min.js",
+    "fonts/font-awesome-4.7.0/css/font-awesome.min.css",
+    "fonts/font-awesome-4.7.0/fonts/fontawesome-webfont.woff2",
+    "fonts/font-awesome-4.7.0/fonts/fontawesome-webfont.woff",
+    "fonts/font-awesome-4.7.0/fonts/fontawesome-webfont.ttf",
+    "contentscript.js",
+    "img/loading.gif",
+    "img/face.png"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_security_policy": "script-src 'self'; object-src 'self'"
+}

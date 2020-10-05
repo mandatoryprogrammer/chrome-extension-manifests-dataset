@@ -1,0 +1,41 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Testissimo",
+  "version": "0.5.5",
+  "manifest_version": 2,
+  "description": "Testissimo, automated e2e testing tool",
+  "homepage_url": "https://testissimo.io",
+  "default_locale": "en",
+  "icons": {
+    "16": "icons/inactive/icon16.png",
+    "19": "icons/inactive/icon19.png",
+    "48": "icons/inactive/icon48.png",
+    "128": "icons/inactive/icon128.png"
+  },
+  "browser_action": {
+    "default_title": "Testissimo - click to activate"
+  },
+  "background": {
+    "page": "src/background-page.html",
+    "persistent": true
+  },
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "debugger",
+    "<all_urls>"
+  ],
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "src/inject.js"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

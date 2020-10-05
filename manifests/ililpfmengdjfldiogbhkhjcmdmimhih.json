@@ -1,0 +1,71 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "ReSendMeLater",
+  "version": "0.9.11",
+  "manifest_version": 2,
+  "description": "メールの管理はもっと楽にできるはず",
+  "homepage_url": "http://loudlyapps.github.io/ReSendMeLater/",
+  "minimum_chrome_version": "37",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "page_action": {
+    "default_icon": {
+      "19": "icons/icon19.png",
+      "38": "icons/icon38.png"
+    },
+    "defaut_title": "ReSendMeLater",
+    "default_popup": "src/page_action/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "js/xdate.js",
+      "src/util.js",
+      "src/bg/background.js"
+    ],
+    "persistent": false
+  },
+  "options_page": "src/options/index.html",
+  "oauth2": {
+    "client_id": "931765178904-2opcjbsevji7t4dplp92f1nboh9jgnc2.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/gmail.modify"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://mail.google.com/*",
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "js/xdate.js",
+        "js/jquery/jquery.min.js",
+        "src/content_scripts/script.js",
+        "src/util.js"
+      ]
+    }
+  ],
+  "commands": {
+    "_execute_page_action": {
+      "suggested_key": {
+        "windows": "Ctrl+Shift+L",
+        "mac": "Ctrl+Shift+L"
+      }
+    }
+  },
+  "permissions": [
+    "notifications",
+    "tabs",
+    "contextMenus",
+    "storage",
+    "alarms",
+    "identity",
+    "https://www.googleapis.com/auth/gmail.modify"
+  ],
+  "web_accessible_resources": [
+    "icons/icon38.png"
+  ]
+}

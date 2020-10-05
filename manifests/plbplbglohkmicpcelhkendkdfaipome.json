@@ -1,0 +1,109 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmRRN4gh2gjWHQFe/nDq43yhU+ydp1addI9WKhQEFxh2ZCHOIRL65SmVNHaEVHdzyZIeORD0Vw3JVKmFRJgNTM2a1paLG5keUrMRtWEUwGIarSMCuBIKHn8mts0cv72R/eBaNlWwMZnoKpbLAzFo5JcYWoNFvW4mxXd6AG3ZXNKqjMKtQvFABMW/mOmVo+VqlW93SjNUEO8x010+VSBP8dXxoBCsKfCK/Yij+vpVq3J+f6ZqPxQBH9dmOa3vXcxws1uKaSS+V5lZ8t8LGHDzPvUyj4vupuyEC5CnmRsknq0VfJkME+O9emiQbcKwanGCudRsgFwMVo4pfgiimzzfVYwIDAQAB",
+  "author": "Girija Goyal, James Akin",
+  "manifest_version": 2,
+  "name": "Refigure",
+  "version": "0.3.33",
+  "description": "ReFigure aggregates and organises different scientific figures amongst users through a backend running on a server and Chrome plugin",
+  "icons": {
+    "100": "/img/refigure_logo_small.png"
+  },
+  "background": {
+    "persistent": true,
+    "page": "/background/background.html"
+  },
+  "browser_action": {
+    "default_icon": "/img/refigure_logo_small.png",
+    "default_popup": "/popup/popup.html",
+    "default_title": "Refigure"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://journals.plos.org/*",
+        "*://collections.plos.org/*"
+      ],
+      "js": [
+        "/content/content.js",
+        "/content/templates.min.js",
+        "/content/parsers/plos.js"
+      ],
+      "css": [
+        "/content/content.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.elifesciences.org/*",
+        "*://elifesciences.org/*"
+      ],
+      "js": [
+        "/content/content.js",
+        "/content/templates.min.js",
+        "/content/parsers/elifesciences.js"
+      ],
+      "css": [
+        "/content/content.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.ncbi.nlm.nih.gov/pmc/articles/*"
+      ],
+      "js": [
+        "/content/content.js",
+        "/content/templates.min.js",
+        "/content/parsers/pmc.js"
+      ],
+      "css": [
+        "/content/content.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.figshare.com/*",
+        "*://figshare.com/*"
+      ],
+      "js": [
+        "/content/content.js",
+        "/content/templates.min.js",
+        "/content/parsers/figshare.js"
+      ],
+      "css": [
+        "/content/content.css"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "/content/content.js",
+        "/content/templates.min.js"
+      ],
+      "css": [
+        "/content/content.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "img/*",
+    "fonts/*"
+  ],
+  "permissions": [
+    "https://api.refigure.org/api/*",
+    "tabs",
+    "storage",
+    "cookies",
+    "*://refigure.org/*",
+    "*://dev.refigure.org/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://refigure.org/*",
+      "*://localhost/*",
+      "*://dev.refigure.org/*"
+    ]
+  }
+}

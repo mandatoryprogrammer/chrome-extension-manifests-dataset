@@ -1,0 +1,146 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_AppName__",
+  "short_name": "__MSG_AppShortName__",
+  "description": "__MSG_AppDescription__",
+  "version": "2.2.1",
+  "author": "Microsoft Corporation",
+  "default_locale": "en",
+  "icons": {
+    "16": "assets/icon_16.png",
+    "32": "assets/icon_32.png",
+    "128": "assets/icon.png"
+  },
+  "browser_action": {
+    "default_popup": "index.html",
+    "default_icon": {
+      "20": "assets/icon_20.png",
+      "40": "assets/icon.png"
+    },
+    "default_title": "__MSG_AppShortName__"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://login.live.com/*",
+        "https://login.microsoftonline.com/*"
+      ],
+      "js": [
+        "content/auth.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://*.live.com/*",
+        "https://*.microsoft.com/*",
+        "https://*.live-int.com/*"
+      ],
+      "js": [
+        "content/wac.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://*/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "content/sso.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://*.sharepoint.com/*",
+        "https://*.sharepoint-df.com/*"
+      ],
+      "js": [
+        "nucleus/nucleus.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    },
+    {
+      "exclude_matches": [
+        "https://outlook-sdf.live.com/*",
+        "https://outlook.live.com/*",
+        "https://outlook.office.com/*",
+        "https://outlook.office365.com/*"
+      ],
+      "js": [
+        "editor/config.js",
+        "editor/content.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "vendors.js",
+      "background/background.js",
+      "nucleus/nucleus.background.js",
+      "editor/config.js",
+      "editor/background.js"
+    ],
+    "persistent": true
+  },
+  "file_browser_handlers": [
+    {
+      "id": "open",
+      "default_title": "__MSG_OfficeOnlineAppName__",
+      "file_filters": [
+        "filesystem:*.doc",
+        "filesystem:*.dot",
+        "filesystem:*.docx",
+        "filesystem:*.dotx",
+        "filesystem:*.odt",
+        "filesystem:*.ppt",
+        "filesystem:*.pot",
+        "filesystem:*.pps",
+        "filesystem:*.pptx",
+        "filesystem:*.ppsx",
+        "filesystem:*.odp",
+        "filesystem:*.xlsx",
+        "filesystem:*.xlsm",
+        "filesystem:*.xlsb",
+        "filesystem:*.ods"
+      ]
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://*.live.com/*",
+      "https://*.microsoft.com/*",
+      "https://*.live-int.com/*"
+    ],
+    "ids": [
+      "gpaiobkfhnonedkhhfjpmhdalgeoebfa",
+      "nhcphhbmofkiafbceklinalkdknleigf"
+    ]
+  },
+  "permissions": [
+    "fileBrowserHandler",
+    "notifications",
+    "storage",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "clipboardWrite",
+    "clipboardRead",
+    "<all_urls>",
+    "nativeMessaging"
+  ],
+  "content_security_policy": "default-src 'self' https://graph.microsoft.com https://static2.sharepointonline.com https://login.microsoftonline.com; connect-src https://graph.microsoft.com https://browser.pipe.aria.microsoft.com https://nleditor.osi.office.net https://nleditor.osi.officeppe.net http://officeonlineextension-office365.msedge.net https://login.microsoftonline.com https://login.live.com https://apis.live.net https://api.onedrive.com https://login.windows.net https://ocws.officeapps.live.com; font-src data: https://static2.sharepointonline.com https://spoprod-a.akamaihd.net; form-action 'none'; frame-src 'self' https://login.microsoftonline.com https://login.live.com; img-src data: https://static2.sharepointonline.com; base-uri 'none'; style-src 'unsafe-inline'; ",
+  "web_accessible_resources": [
+    "images/*",
+    "fonts/*"
+  ]
+}

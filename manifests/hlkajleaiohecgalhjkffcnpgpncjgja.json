@@ -1,0 +1,43 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Leadstash",
+  "version": "0.0.1.1",
+  "description": "Capture and store contact details from anywhere on the web.",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "tabs",
+    "https://www.google-analytics.com/"
+  ],
+  "browser_action": {
+    "default_icon": "images/icon.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "jquery.min.js",
+        "content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "offline_enabled": true,
+  "background": {
+    "persistent": false,
+    "page": "background.html"
+  },
+  "web_accessible_resources": [
+    "collector.html"
+  ],
+  "content_security_policy": "script-src 'self' https://cdn.firebase.com https://*.firebaseio.com https://www.gstatic.com https://www.gstatic.com/accountchooser/client.js; object-src 'self'"
+}

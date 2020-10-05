@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Tixio",
+  "short_name": "tixio",
+  "description": "Organize your online tools and information. Synchronize and standardize your information with your team.",
+  "version": "0.0.0.15",
+  "background": {
+    "scripts": [
+      "events.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "tixo-1.png",
+    "default_popup": "index.html"
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "https://ajax.googleapis.com/",
+    "storage",
+    "cookies",
+    "*://*.tixio.dev/*",
+    "*://*.tixio.io/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "css": [],
+      "js": [
+        "content.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "chrome_url_overrides": {
+    "newtab": "myPage.html"
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://*.tixio.io/*",
+      "*://*.tixio.dev/*",
+      "*://*.localtixio.com/*",
+      "*://*.tixio.dev/*"
+    ]
+  }
+}

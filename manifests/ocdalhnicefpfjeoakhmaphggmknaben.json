@@ -1,0 +1,80 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_extName__",
+  "description": "__MSG_extDescription__",
+  "version": "1.0.4",
+  "default_locale": "en",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "notifications",
+    "declarativeContent",
+    "storage",
+    "unlimitedStorage",
+    "cookies",
+    "http://*/*",
+    "https://*/*",
+    "alarms",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "background": {
+    "scripts": [
+      "constants.js",
+      "env.js",
+      "utils.js",
+      "badge.js",
+      "request.js",
+      "popup.js",
+      "installation.js",
+      "background.js",
+      "affiliate.js",
+      "tracking/background_product.js",
+      "tracking/background_discount.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "env.js",
+        "constants.js",
+        "utils.js",
+        "settings.js",
+        "content.js",
+        "notification.js",
+        "tracking/product.js",
+        "tracking/discount.js"
+      ],
+      "css": [
+        "css/notification.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "images/*"
+  ],
+  "icons": {
+    "16": "images/icons/icon16.png",
+    "48": "images/icons/icon48.png",
+    "64": "images/icons/icon64.png",
+    "128": "images/icons/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "images/icons/icon64.png"
+  },
+  "commands": {
+    "reload_dev_extensions": {
+      "description": "Reload",
+      "suggested_key": {
+        "default": "Alt+Z"
+      }
+    }
+  }
+}

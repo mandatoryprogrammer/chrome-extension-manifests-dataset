@@ -1,0 +1,54 @@
+{
+  "update_url": "http://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Airport Code Finder",
+  "description": "Look up airport name by selecting the 3 letter airport code on the web page. You can also search for the airport code.",
+  "version": "1.0.4",
+  "offline_enabled": false,
+  "permissions": [
+    "http://*/",
+    "geolocation",
+    "tabs",
+    "debugger"
+  ],
+  "background": {
+    "scripts": [
+      "js/xhrproxy-min.js",
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*"
+      ],
+      "js": [
+        "js/jquery-min.js",
+        "js/jquery-ui-1.10.1.custom.min.js",
+        "js/xhrproxy-min.js",
+        "js/jquery.qtip.min.js",
+        "js/content-min.js"
+      ],
+      "css": [
+        "css/jquery-ui-1.10.1.custom.min.css",
+        "css/jquery.qtip.min.css",
+        "css/content.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "icons": {
+    "16": "images/airport.png",
+    "48": "images/airport48.png",
+    "128": "images/airport128.png"
+  },
+  "browser_action": {
+    "default_popup": "airportFinder.html",
+    "default_icon": {
+      "19": "images/airport24.png",
+      "38": "images/airport48.png"
+    }
+  },
+  "content_security_policy": "script-src 'self' https://query.yahooapis.com; object-src 'self'"
+}

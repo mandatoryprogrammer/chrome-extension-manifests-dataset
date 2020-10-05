@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Instant - Instagram™ and TikTok™ Downloader",
+  "short_name": "Instant",
+  "version": "1.2.6",
+  "description": "Save videos and images from Instagram™ and TikTok™ in one click!",
+  "homepage_url": "https://chrome.google.com/webstore/detail/jlbnmcnmjhcgdnbkdlgmibahbffjlnpa",
+  "manifest_version": 2,
+  "options_ui": {
+    "page": "settings.html",
+    "open_in_tab": true
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "unlimitedStorage",
+    "activeTab",
+    "*://*.tiktok.com/*",
+    "downloads",
+    "contextMenus"
+  ],
+  "background": {
+    "scripts": [
+      "browser-polyfill.js",
+      "vendors/bundle.js",
+      "bg/bundle.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.tiktok.com/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "browser-polyfill.js",
+        "vendors/bundle.js",
+        "content/bundle.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": "icon-32.png",
+    "default_title": "Instant"
+  },
+  "icons": {
+    "32": "icon-32.png",
+    "64": "icon-64.png",
+    "128": "icon-128.png"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "web_accessible_resources": [
+    "content/*.svg"
+  ]
+}

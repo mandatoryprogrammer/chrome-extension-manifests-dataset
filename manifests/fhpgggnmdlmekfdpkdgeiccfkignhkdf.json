@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "YiNote",
+  "version": "1.5.3",
+  "description": "Most efficient way to take & share time-stamped notes while watching videos!",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/icon-16.png"
+  },
+  "manifest_version": 2,
+  "default_locale": "en",
+  "permissions": [
+    "identity",
+    "storage",
+    "unlimitedStorage"
+  ],
+  "background": {
+    "scripts": [
+      "vendors/browser-polyfill.js",
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file://*/*"
+      ],
+      "js": [
+        "vendors/youtube-iframe-api.js",
+        "vendors/embedly.js",
+        "vendors/browser-polyfill.js",
+        "content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "installed.png",
+    "images/facebook-48.png",
+    "images/twitter-48.png",
+    "images/copylink-48.png",
+    "assets/fonts/msyh.ttf"
+  ],
+  "options_page": "options.html",
+  "browser": "chromium"
+}

@@ -1,0 +1,107 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Amplemarket",
+  "short_name": "Amplemarket",
+  "description": "Allows Amplemarket to work from within your Gmail account. Reach out to team@amplemarket.com if you have any questions.",
+  "version": "1.5.38",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://amplemarket.com/*",
+      "http://localhost:3000/*",
+      "https://localhost:3000/*"
+    ]
+  },
+  "permissions": [
+    "*://*/linkedin.html",
+    "*://contacts.google.com/*",
+    "https://mail.google.com/",
+    "https://inbox.google.com/",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "cookies",
+    "storage"
+  ],
+  "web_accessible_resources": [
+    "icon.png",
+    "iframe.html",
+    "iframe.js",
+    "error.html",
+    "linkedin_bulk_actions/linkedin.html",
+    "linkedin_bulk_actions/linkedin.js"
+  ],
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "vendor/jquery-3.4.1.js",
+      "shared/linkedin.js",
+      "shared/fetch.js",
+      "linkedin_bulk_actions/background.js",
+      "linkedin_data_fetch/background.js",
+      "linkedin_window/background.js",
+      "emailmatcher/background.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "*://*.mail.google.com/*",
+        "https://inbox.google.com/*"
+      ],
+      "js": [
+        "vendor/jquery-3.4.1.js",
+        "vendor/inboxsdk.js",
+        "vendor/transliteration.js",
+        "extension.js",
+        "emailmatcher/gmail.js"
+      ],
+      "css": [
+        "extension.css",
+        "emailmatcher/style.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.contacts.google.com/*",
+        "https://contacts.google.com/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "vendor/jquery-3.4.1.js",
+        "emailmatcher/contacts.js"
+      ],
+      "css": [
+        "emailmatcher/style.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://linkedin.com/*",
+        "*://*.linkedin.com/*"
+      ],
+      "js": [
+        "vendor/jquery-3.4.1.js",
+        "linkedin_bulk_actions/linkedin-inject.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://linkedin.com/*",
+        "*://*.linkedin.com/*"
+      ],
+      "js": [
+        "linkedin_window/inject.js",
+        "linkedin_window/voice-message-inject.js"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "虎牙HTML5播放器",
+  "version": "0.2.2",
+  "description": "基于 hls.js 的虎牙HTML5播放器",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "icons": {
+    "16": "images/icon32.png",
+    "32": "images/icon48.png",
+    "48": "images/icon64.png",
+    "128": "images/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "images/icon128.png"
+  },
+  "permissions": [
+    "*://*.huya.com/",
+    "*://*/*",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "js/hls.js",
+    "js/jquery.min.js",
+    "css/default.css",
+    "css/DPlayer.min.css",
+    "js/content.js",
+    "js/stream.js",
+    "js/DPlayer.min.js"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.huya.com/*"
+      ],
+      "css": [
+        "css/default.css",
+        "css/DPlayer.min.css"
+      ],
+      "js": [
+        "js/hls.js",
+        "js/jquery.min.js",
+        "js/content.js",
+        "js/DPlayer.min.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

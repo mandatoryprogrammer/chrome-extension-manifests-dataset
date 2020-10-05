@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Amzresearch",
+  "version": "1.3",
+  "icons": {
+    "16": "images/amzresearch_16.png",
+    "32": "images/amzresearch_32.png",
+    "48": "images/amzresearch_48.png",
+    "64": "images/amzresearch_64.png",
+    "128": "images/amzresearch_128.png"
+  },
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "worker_proxy.js",
+      "scripts/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://amzres.com/*"
+      ],
+      "js": [
+        "worker_proxy.js",
+        "content_scripts/jquery.min.js",
+        "content_scripts/main.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "worker_proxy.html"
+  ],
+  "permissions": [
+    "contextMenus",
+    "cookies",
+    "tabs",
+    "https://*.amazon.com/*",
+    "http://*.amazon.com/*",
+    "http://.amazon.com/*",
+    "https://.amazon.com/*",
+    "http://amazon.com/*",
+    "https://amzres.com/*"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "16": "images/amzresearch_16.png",
+      "32": "images/amzresearch_32.png",
+      "48": "images/amzresearch_48.png",
+      "64": "images/amzresearch_64.png",
+      "128": "images/amzresearch_128.png"
+    },
+    "default_title": "Amzresearch"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "HF Live Player",
+  "description": "This extension allows you to have a HFLive web player on all your HackForums tabs",
+  "version": "0.5.7",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "activeTab",
+    "https://ajax.googleapis.com/",
+    "https://hflive.net/*",
+    "http://hflive.net/*",
+    "tabs",
+    "storage",
+    "https://maxcdn.bootstrapcdn.com/*"
+  ],
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "css": [
+        "hflive.css"
+      ],
+      "js": [
+        "jquery-2.1.4.min.js",
+        "frontend.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "all_frames": true,
+    "scripts": [
+      "background.js"
+    ],
+    "js": [
+      "jquery-2.1.4.min.js",
+      "frontend.js"
+    ],
+    "matches": [
+      "<all_urls>"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js; object-src 'self'"
+}

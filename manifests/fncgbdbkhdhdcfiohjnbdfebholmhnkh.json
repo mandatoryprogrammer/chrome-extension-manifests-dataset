@@ -1,0 +1,89 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_extName__",
+  "short_name": "YouGears",
+  "description": "__MSG_extDescription__",
+  "default_locale": "en",
+  "version": "0.0.11",
+  "author": "hadaev.ivan@gmail.com",
+  "icons": {
+    "128": "128x128.png"
+  },
+  "browser_action": {
+    "default_icon": "128x128.png",
+    "default_title": "__MSG_extDefaultTitle__"
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "*://www.youtube.com/*",
+        "*://youtube.com/*",
+        "*://*.youtube-nocookie.com/*"
+      ],
+      "css": [
+        "content-script.css"
+      ],
+      "js": [
+        "worker_proxy.js",
+        "browser-polyfill.js",
+        "content-script.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "commands": {
+    "next": {
+      "suggested_key": {
+        "default": "MediaNextTrack"
+      },
+      "description": "Next",
+      "global": true
+    },
+    "prev": {
+      "suggested_key": {
+        "default": "MediaPrevTrack"
+      },
+      "description": "Previous",
+      "global": true
+    },
+    "pause": {
+      "suggested_key": {
+        "default": "MediaPlayPause"
+      },
+      "description": "Pause",
+      "global": true
+    },
+    "stop": {
+      "suggested_key": {
+        "default": "MediaStop"
+      },
+      "description": "Stop",
+      "global": true
+    }
+  },
+  "permissions": [
+    "*://www.youtube.com/*",
+    "*://youtube.com/*",
+    "*://*.youtube-nocookie.com/*"
+  ],
+  "web_accessible_resources": [
+    "worker_proxy.html",
+    "gif-worker.js",
+    "*.mp3",
+    "*.wav",
+    "*.png",
+    "*.jpg",
+    "*.gif"
+  ],
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "browser-polyfill.js",
+      "background.js",
+      "worker_proxy.js"
+    ]
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsr9CRU7zVKfjF2I0/Dlt2v/9Ct/cXJ0ehU6e8E9hSiIAOzp50q3Fw2r0ypSnzfypPGtoStN+dMq6mqfxmkhgzcQqdFuJd1ZAEvUi2uy+6N0/G6RjBBmstVy5lCAuL/CacEkdPujwJqfjwi55SQhHKe/eIcWqlEvuEC32K0CZ5JTn+5fw7QyPwPD5xajKk7Zi5tECMUSgiIetOaC1VvrKlvcBJBwskVg5Ec0P/uAHBSqkotAsPUKCO7DD2bgbgHyKW9jUFMthHj0hsqV3eC7agaRKSnDOMndFkg/ns9021ceGAdsAQSkAF+kCv3r35Uxs3fkrkLMsA+qBeOmqi3tJSwIDAQAB"
+}

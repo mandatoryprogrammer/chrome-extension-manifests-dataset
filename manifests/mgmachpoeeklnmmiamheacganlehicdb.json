@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "MiaProva",
+  "short_name": "MiaProva",
+  "description": "MiaProva facilitates organizational scale and visibility into optimization programs.  This extension is for Adobe Target end users.",
+  "version": "1.0.0.21",
+  "author": "MiaProva",
+  "icons": {
+    "16": "icons/16.png",
+    "32": "icons/32.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png",
+    "256": "icons/256.png"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "scripts/js.loggers.js",
+        "scripts/js.object.js",
+        "scripts/js.string.js",
+        "scripts/js.messagesBus.js",
+        "content_scripts/setupLoggers.js",
+        "content_scripts/setupMessagesBus.js",
+        "content_scripts/targetRequestsInterceptor.js",
+        "content_scripts/iframeInjector.js",
+        "content_scripts/targetRequestsSimulator.js"
+      ],
+      "css": [
+        "content/content.css"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "options_ui": {
+    "chrome_style": true,
+    "page": "options.html"
+  },
+  "manifest_version": 2,
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/16.png",
+      "32": "icons/32.png",
+      "48": "icons/48.png",
+      "128": "icons/128.png"
+    }
+  },
+  "permissions": [
+    "activeTab",
+    "declarativeContent",
+    "storage",
+    "tabs",
+    "webRequest",
+    "<all_urls>",
+    "webRequestBlocking"
+  ]
+}

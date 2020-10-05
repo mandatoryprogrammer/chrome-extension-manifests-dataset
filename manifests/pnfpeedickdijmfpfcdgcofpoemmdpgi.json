@@ -1,0 +1,76 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Cyclonis Password Manager",
+  "author": "Cyclonis Limited",
+  "default_locale": "en",
+  "description": "Cyclonis Password Manager browser extension",
+  "version": "2.1.0",
+  "homepage_url": "https://www.cyclonis.com",
+  "icons": {
+    "128": "images/logo-blue128.png"
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "exclude_globs": [
+        "*://www.google.*/*sourceid=chrome-instant*",
+        "*://*.google.*/_/chrome/newtab?*",
+        "*://www.google.*/blank.html*"
+      ],
+      "exclude_matches": [
+        "*://googleads.g.doubleclick.net/pagead/ads*",
+        "*://platform.twitter.com/widgets/*",
+        "*://www.facebook.com/plugins/*",
+        "*://googleads.g.doubleclick.net/*",
+        "*://plusone.google.com/u/_/notifications/*",
+        "*://plus.google.com/u/0/_/notifications/*",
+        "*://plusone.google.com/_/+1/*",
+        "*://cm.g.double.click.net/*",
+        "*://staticxx.facebook.com/*"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "scripts/content.js"
+      ],
+      "css": [
+        "styles/content.css"
+      ]
+    }
+  ],
+  "content_security_policy": "default-src 'self'; img-src 'self' data: *; connect-src ws://127.0.0.1:49267 ws://127.0.0.1:51111 ws://127.0.0.1:55555 ws://127.0.0.1:58888  ws://127.0.0.1:62222",
+  "web_accessible_resources": [
+    "views/dialog.html",
+    "views/tooltip.html",
+    "styles/*.css",
+    "images/*"
+  ],
+  "background": {
+    "page": "views/global.html"
+  },
+  "browser_action": {
+    "default_title": "Cyclonis Password Manager",
+    "default_popup": "views/popup.html",
+    "default_icon": {
+      "16": "images/logo-grey16.png",
+      "24": "images/logo-grey24.png",
+      "32": "images/logo-grey32.png",
+      "48": "images/logo-grey48.png",
+      "128": "images/logo-grey128.png"
+    }
+  },
+  "permissions": [
+    "<all_urls>",
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "activeTab",
+    "contextMenus",
+    "management",
+    "privacy"
+  ]
+}

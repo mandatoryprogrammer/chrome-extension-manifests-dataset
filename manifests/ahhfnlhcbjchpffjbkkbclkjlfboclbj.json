@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Yac for Gmail",
+  "icons": {
+    "16": "images/yac_16.png",
+    "19": "images/yac_19.png",
+    "48": "images/yac_48.png",
+    "128": "images/yac_128.png"
+  },
+  "description": "Discover Voice Messaging within your favorite email services",
+  "version": "1.0.8",
+  "permissions": [
+    "<all_urls>",
+    "storage",
+    "tabs",
+    "contextMenus"
+  ],
+  "manifest_version": 2,
+  "web_accessible_resources": [
+    "images/*"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "images/yac_19.png",
+      "38": "images/yac_38.png"
+    }
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/mail/*"
+      ],
+      "js": [
+        "content_script.js"
+      ],
+      "css": [
+        "content_script.css"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content_script2.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ]
+}

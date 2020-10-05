@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Attention",
+  "version": "0.2.12",
+  "manifest_version": 2,
+  "description": "Watch your browsing habits and get reminded when wasting time.",
+  "offline_enabled": true,
+  "icons": {
+    "16": "icons/green-16.png",
+    "48": "icons/app-48.png",
+    "128": "icons/app-128.png"
+  },
+  "background": {
+    "scripts": [
+      "vendor/moment/moment.js",
+      "src/persistence/options.js",
+      "src/persistence/store.js",
+      "src/background/background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/gray-16.png"
+    },
+    "default_title": "Attention"
+  },
+  "options_page": "src/options/index.html",
+  "permissions": [
+    "chrome://favicon/",
+    "storage",
+    "tabs",
+    "http://*/",
+    "https://*/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "src/inject/inject.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "vendor/zepto/zepto.min.js",
+        "src/inject/inject.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "src/popup/*",
+    "test/*",
+    "icons/*",
+    "vendor/*"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'"
+}

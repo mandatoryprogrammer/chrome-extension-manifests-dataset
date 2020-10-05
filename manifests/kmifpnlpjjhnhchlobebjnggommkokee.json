@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "GenMarketplace Chrome Plugin",
+  "short_name": "GenMarketplc",
+  "version": "0.0.0.2",
+  "manifest_version": 2,
+  "description": "This extension allows you to work with the GenMarketplace.com website right from FamilySearch.org family tree.",
+  "homepage_url": "http://genmarketplace.com/",
+  "offline_enabled": true,
+  "icons": {
+    "16": "icons/leaf-logo-16.png",
+    "48": "icons/leaf-logo-48x48.png",
+    "128": "icons/leaf-logo-128x128.png"
+  },
+  "default_locale": "en",
+  "options_page": "src/page_action/settings.html",
+  "background": {
+    "page": "src/bg/background.html",
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.familysearch.org/*"
+      ],
+      "js": [
+        "src/bg/jquery.js",
+        "src/bg/content.js",
+        "src/bg/jobContent.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "browser_action": {
+    "default_icon": "icons/leaf-logo-28x28.png",
+    "default_title": "Job Updates",
+    "default_popup": "src/page_action/initial.html"
+  },
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "webRequest",
+    "webRequestBlocking",
+    "notifications",
+    "tabs"
+  ]
+}

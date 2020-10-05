@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "minimum_chrome_version": "54",
+  "offline_enabled": true,
+  "name": "NoFollow",
+  "version": "5.3.0",
+  "description": "Outline nofollow links, detect nofollow and noindex meta tags on webpages. Features website filtering and custom CSS outline styles.",
+  "homepage_url": "https://www.igorware.com/extensions/nofollow?referrer-ver=chrome-ext-manager",
+  "author": "Igor Jerosimić",
+  "background": {
+    "scripts": [
+      "logger.js",
+      "cross.js",
+      "storage.js",
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true,
+    "open_in_tab": true
+  },
+  "icons": {
+    "16": "images/icon-016.png",
+    "19": "images/icon-019.png",
+    "32": "images/icon-032.png",
+    "38": "images/icon-038.png",
+    "48": "images/icon-048.png",
+    "64": "images/icon-064.png",
+    "128": "images/icon-128.png"
+  },
+  "browser_action": {
+    "default_title": "NoFollow",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "images/icon-016.png",
+      "19": "images/icon-019.png",
+      "32": "images/icon-032.png",
+      "38": "images/icon-038.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "includes/content.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "content_security_policy": "default-src 'self'; connect-src https://api.igorware.com; font-src 'none'; img-src 'self' data:; object-src 'none'; style-src 'unsafe-inline'",
+  "permissions": [
+    "storage",
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ]
+}

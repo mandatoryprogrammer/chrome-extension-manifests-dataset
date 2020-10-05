@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Dark Flow",
+  "description": "A command interface for imageboards",
+  "version": "0.2.2.3",
+  "homepage_url": "https://gchristensen.github.io/dark-flow/",
+  "applications": {
+    "gecko": {
+      "id": "dark-flow@firefox",
+      "strict_min_version": "57.0",
+      "update_url": "https://raw.githubusercontent.com/GChristensen/dark-flow/master/updates.json"
+    }
+  },
+  "icons": {
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "64": "icons/icon-64.png"
+  },
+  "options_ui": {
+    "page": "flow.html?settings",
+    "open_in_tab": true
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "icons/icon-32.png"
+  },
+  "permissions": [
+    "<all_urls>",
+    "storage"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.4chan.org/*"
+      ],
+      "js": [
+        "glue/iframe-listener.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "protocol_handlers": [
+    {
+      "protocol": "news",
+      "name": "Dark Flow URL Listener",
+      "uriTemplate": "flow.html?front&url=%s"
+    },
+    {
+      "protocol": "web+bb",
+      "name": "Dark Flow URL Listener",
+      "uriTemplate": "flow.html?front&url=%s"
+    }
+  ]
+}

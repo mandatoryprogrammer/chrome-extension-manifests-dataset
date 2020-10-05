@@ -1,0 +1,86 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "BetterVRV",
+  "short_name": "BetterVRV",
+  "version": "0.3.13",
+  "description": "A suite of improvements to the VRV player and experience.",
+  "homepage_url": "http://tuckerchap.in/BetterVRV/",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "declarativeContent"
+  ],
+  "icons": {
+    "16": "images/icon16.png",
+    "19": "images/icon19.png",
+    "38": "images/icon38.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png",
+    "256": "images/icon256.png"
+  },
+  "background": {
+    "scripts": [
+      "background/onInstall.js",
+      "background/vrvTabManager.js"
+    ],
+    "persistent": false
+  },
+  "options_page": "index.html",
+  "page_action": {
+    "default_popup": "index.html?popup=true",
+    "default_icon": {
+      "16": "images/icon16.png",
+      "19": "images/icon19.png",
+      "38": "images/icon38.png",
+      "48": "images/icon48.png",
+      "128": "images/icon128.png",
+      "256": "images/icon256.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://vrv.co/*"
+      ],
+      "css": [
+        "content_scripts/top-site/css/vrvStyling.css"
+      ],
+      "js": [
+        "content_scripts/top-site/js/topMessenger.js",
+        "content_scripts/insertScript.js",
+        "content_scripts/defaultOptions.js",
+        "content_scripts/top-site/js/vrvStyling.js"
+      ]
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "https://static.vrv.co/vilos/player.html"
+      ],
+      "css": [
+        "content_scripts/player/css/global.css",
+        "content_scripts/player/css/hideLoadingPoster.css",
+        "content_scripts/player/css/controls.css",
+        "content_scripts/player/css/statusIcons.css",
+        "content_scripts/player/css/skipButtons.css"
+      ],
+      "js": [
+        "content_scripts/player/js/playerMessenger.js",
+        "content_scripts/insertScript.js",
+        "content_scripts/defaultOptions.js",
+        "content_scripts/player/js/injector.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "lib/*",
+    "images/*",
+    "images/status_icons/*",
+    "fonts/*",
+    "content_scripts/*",
+    "index.html"
+  ],
+  "content_security_policy": "script-src 'self' 'sha256-GgRxrVOKNdB4LrRsVPDSbzvfdV4UqglmviH9GoBJ5jk='; object-src 'self'"
+}

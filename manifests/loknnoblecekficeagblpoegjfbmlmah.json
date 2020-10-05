@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Password Monkey",
+  "version": "1.0.0",
+  "description": "Show your password by turning ●●●●●● into plain, readable text.",
+  "icons": {
+    "16": "monkey.png",
+    "48": "monkey.png",
+    "128": "monkey.png"
+  },
+  "browser_action": {
+    "default_title": "Password Monkey",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "in-content.js",
+        "monkey.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+P",
+        "mac": "MacCtrl+Shift+P"
+      },
+      "description": "Opens Password Monkey"
+    }
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'; img-src * data: 'self' 'unsafe-eval'",
+  "offline_enabled": true,
+  "permissions": [
+    "declarativeContent",
+    "storage",
+    "tabs",
+    "<all_urls>",
+    "activeTab"
+  ]
+}

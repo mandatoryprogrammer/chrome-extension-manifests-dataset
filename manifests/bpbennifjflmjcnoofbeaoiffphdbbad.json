@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Github Punchcard",
+  "version": "1.6",
+  "description": "Make Github Punchcard great again!",
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_title": "Github Punchcard",
+    "default_popup": "popup.html"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true,
+    "open_in_tab": true
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "https://api.github.com/*",
+    "https://github.com/*"
+  ],
+  "content_scripts": [
+    {
+      "js": [
+        "content.js",
+        "PunchCard.js"
+      ],
+      "css": [
+        "PunchCard.css"
+      ],
+      "matches": [
+        "https://github.com/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "js": [
+        "intro.js"
+      ],
+      "css": [
+        "introjs.css"
+      ],
+      "matches": [
+        "https://github.com/settings/tokens/new"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "background.png"
+  ]
+}

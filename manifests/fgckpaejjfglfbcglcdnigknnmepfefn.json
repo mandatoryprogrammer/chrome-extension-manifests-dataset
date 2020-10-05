@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Wirecast Rendezvous Screen Sharing",
+  "version": "1.0.1",
+  "description": "Share screen in Wirecast Rendezvous session",
+  "icons": {
+    "16": "icons/icon_16.png",
+    "48": "icons/icon_48.png",
+    "128": "icons/icon_128.png"
+  },
+  "page_action": {
+    "default_icon": {
+      "16": "icons/icon_16.png",
+      "24": "icons/icon_24.png",
+      "32": "icons/icon_32.png"
+    }
+  },
+  "background": {
+    "scripts": [
+      "event_page.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "content_script.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end",
+      "matches": [
+        "https://rendezvous.telestream.net/*",
+        "http://localhost:8080/*"
+      ]
+    }
+  ],
+  "permissions": [
+    "desktopCapture",
+    "declarativeContent",
+    "management",
+    "tabs",
+    "http://localhost:8080/*",
+    "https://rendezvous.telestream.net/*"
+  ]
+}

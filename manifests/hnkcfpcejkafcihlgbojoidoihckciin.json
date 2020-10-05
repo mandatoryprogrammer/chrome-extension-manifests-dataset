@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Referer Control",
+  "version": "1.35",
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "webRequest",
+    "webRequestBlocking",
+    "contextMenus",
+    "storage"
+  ],
+  "background": {
+    "page": "chrome/content/background.html"
+  },
+  "manifest_version": 2,
+  "homepage_url": "https://chrome.google.com/webstore/detail/hnkcfpcejkafcihlgbojoidoihckciin",
+  "options_page": "chrome/content/options.html",
+  "description": "Control the HTTP Referer on a per-site basis.",
+  "minimum_chrome_version": "17.0",
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/icon-16.png",
+      "38": "icons/icon-32.png"
+    },
+    "default_title": "Block Referer for this site"
+  },
+  "externally_connectable": {
+    "ids": [
+      "*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "chrome/content/blockJavascriptReferer.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "icons": {
+    "128": "icons/icon-128.png",
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "SMG music display",
+  "description": "An extension for SMG to show music of browser music players",
+  "version": "1.46",
+  "browser_action": {
+    "default_icon": "resources/icon-60.png",
+    "default_popup": "src/groovemarklet.html"
+  },
+  "background": {
+    "scripts": [
+      "src/for-background/TabAccessOrderArray.js",
+      "src/for-background/SMGCommunicator.js",
+      "src/for-background/MusicPlayer.js",
+      "src/for-background/MusicPlayerManager.js",
+      "src/for-background/PopupCommunicator.js",
+      "src/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "lib/jquery.min.js",
+        "lib/smg-plugin-common/dist/smg_web.js",
+        "src/foreground.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "notifications"
+  ]
+}

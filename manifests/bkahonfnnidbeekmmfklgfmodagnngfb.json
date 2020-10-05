@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Timeneye widget",
+  "description": "Track your time directly from Google Chrome™ in all your favourite tools",
+  "manifest_version": 2,
+  "version": "11.6.4",
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "options_ui": {
+    "page": "html/options.html",
+    "open_in_tab": true
+  },
+  "web_accessible_resources": [
+    "images/*",
+    "fonts/*",
+    "css/*"
+  ],
+  "browser_action": {
+    "default_icon": "images/icon.png",
+    "default_popup": "html/popup.html",
+    "default_title": "Start a Timeneye timer or save an entry on the fly"
+  },
+  "permissions": [
+    "storage",
+    "https://*.timeneye.com/*"
+  ],
+  "background": {
+    "scripts": [
+      "js/platform.js",
+      "js/appkg.js",
+      "js/event.js"
+    ],
+    "persistent": false
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+Shift+T"
+      }
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/platform.js",
+        "js/appkg.js",
+        "js/content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://*.timeneye.com/*",
+      "*://basecamp.com/*"
+    ]
+  }
+}

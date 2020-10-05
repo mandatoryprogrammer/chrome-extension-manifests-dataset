@@ -1,0 +1,77 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "author": "Nick Germaine",
+  "background": {
+    "page": "src/html/background.html",
+    "content_scripts": [
+      {
+        "js": [
+          "src/js/jquery-3.2.1.min.js",
+          "src/js/buy.js",
+          "src/js/background.js"
+        ]
+      }
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_popup": "src/html/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.google.com/robots.txt*"
+      ],
+      "js": [
+        "oauth2/oauth2_inject.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "src/css/swag.css"
+      ],
+      "js": [
+        "src/js/jquery-3.2.1.min.js",
+        "src/js/buy.js",
+        "src/js/gmr.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://fonts.googleapis.com/*; object-src 'self'",
+  "description": "Website screenshots so simple your grandma could do it.",
+  "manifest_version": 2,
+  "name": "Snappy",
+  "permissions": [
+    "tabs",
+    "downloads",
+    "tabCapture",
+    "<all_urls>",
+    "proxy",
+    "identity",
+    "identity.email",
+    "storage",
+    "http://localhost:8080/*",
+    "http://pointybracket.net:17017/*",
+    "https://accounts.google.com/o/oauth2/token",
+    "https://www.googleapis.com/oauth2/v1/userinfo",
+    "https://www.googleapis.com/"
+  ],
+  "oauth2": {
+    "client_id": "795335936390-nd76o8l9727j26mda7g86l3ed2hjbghb.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/plus.login",
+      "https://www.googleapis.com/auth/chromewebstore.readonly"
+    ]
+  },
+  "version": "0.8",
+  "icons": {
+    "16": "src/img/camera.png",
+    "48": "src/img/camera.png",
+    "128": "src/img/camera.png"
+  }
+}

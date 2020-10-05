@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Adwizard",
+  "short_name": "Adwizard",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkOGVSrcWcqtzK0ma4dQFAQDW2P9nx3lB+Bea6REKwLhNBX5WyZ+DEJ2IryXzVQxfqsU4xAEX5B7+NZSjXwcMSE+8o5PS3rrlTAgrVCzHPWI4lGAAEPlBQL78Hv1P5VU8DrRHWQ0QEtr/9rjcr1ygEyaacGDr/5TBk7cdIiFUPywBUNSCddMcf2TI9VPluSqxLCWMoGC5pNjKA5n78vOOipzbPCxMziQjAiJUB4zrLFs8y3KuscgiRNEFGU7DafuuXZZ3mlvHnaak1P1sQ0s3dpIVC4N9zwZ4I5jUelvvne2F35Hd101uWY6Qo+KA5rfuAvSQvKDSQdwHMqZ0e0vm1wIDAQAB",
+  "description": "An industry-leading ad ops extension that allows publishers to view data on their AdExchange and Prebid Ads.",
+  "icons": {
+    "8": "icons/8x8.png",
+    "16": "icons/16x16.png",
+    "24": "icons/24x24.png",
+    "32": "icons/32x32.png",
+    "64": "icons/64x64.png",
+    "128": "icons/128x128.png"
+  },
+  "permissions": [
+    "identity",
+    "activeTab",
+    "webRequest",
+    "debugger",
+    "<all_urls>"
+  ],
+  "oauth2": {
+    "client_id": "569132588429-5618gkgq6hvtve11iuedaqpn4d1l4rve.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email"
+    ]
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "Adwizard by Publift",
+    "default_icon": {
+      "8": "icons/8x8.png",
+      "16": "icons/16x16.png",
+      "24": "icons/24x24.png",
+      "32": "icons/32x32.png",
+      "64": "icons/64x64.png",
+      "128": "icons/128x128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "content-scripts/communicator.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    "content-scripts/injected.js"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.google-analytics.com/; object-src 'self'",
+  "version": "1.1.0",
+  "version_name": "1.1.0"
+}

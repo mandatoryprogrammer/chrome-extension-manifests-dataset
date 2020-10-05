@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Tent Reviewer",
+  "description": "This extension to collect tent reviews",
+  "version": "1.1.0",
+  "web_accessible_resources": [
+    "popup.html",
+    "data.json"
+  ],
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "https://*/*",
+        "http://*/*",
+        "https://rawgit.com/dbrekalo/attire/master/dist/js/build.min.js"
+      ],
+      "js": [
+        "js/custom.min.js",
+        "dist/fastselect.standalone.js",
+        "js/fSelect.js",
+        "content-script.js",
+        "js/tent.js"
+      ],
+      "css": [
+        "dist/fastselect.min.css",
+        "css/custom.css"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": "icon.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "icons": {
+    "16": "16.png",
+    "48": "48.png",
+    "128": "128.png"
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "management",
+    "idle",
+    "identity",
+    "identity.email",
+    "https://ajax.googleapis.com/"
+  ],
+  "content_security_policy": "script-src 'self' https://rawgit.com; object-src 'self'"
+}

@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "NewsGate",
+  "description": "Point out fake news",
+  "version": "1.0",
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "storage",
+    "https://newsgate.herokuapp.com/*",
+    "contextMenus",
+    "alarms"
+  ],
+  "browser_action": {
+    "default_icon": "assets/icon-disabled.png",
+    "default_popup": "popup/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "lib/underscore.min.js",
+      "lib/jquery.min.js",
+      "disableController/disable.js",
+      "storageController/storageController.js",
+      "models/checkForFakes.js",
+      "models/contextMenu.js",
+      "checkAddressBarUrl/checkUrlBackground.js",
+      "alarm/updateBlacklistAlarm.js"
+    ]
+  },
+  "options_page": "options/options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "css": [
+        "styles/clearall.css",
+        "styles/styles.css"
+      ],
+      "js": [
+        "lib/jquery.min.js",
+        "views/alertFakeSite.js",
+        "views/renderBlacklistedDOM.js",
+        "checkAddressBarUrl/checkUrlContentScript.js"
+      ]
+    }
+  ],
+  "manifest_version": 2,
+  "web_accessible_resources": [
+    "styles/themes.css"
+  ]
+}

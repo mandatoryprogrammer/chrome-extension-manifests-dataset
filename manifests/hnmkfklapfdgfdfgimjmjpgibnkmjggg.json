@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "BlackList Checker",
+  "version": "1.0.8",
+  "manifest_version": 2,
+  "description": "Автоматическая проверка веб-страниц на наличие объявлений людей из черного списка мошенников сайта accounts.name",
+  "icons": {
+    "16": "assets/icons/icon_gray_16.png",
+    "32": "assets/icons/icon_red_32.png",
+    "64": "assets/icons/icon_red_64.png",
+    "128": "assets/icons/icon_red_128.png"
+  },
+  "background": {
+    "scripts": [
+      "./background.js"
+    ]
+  },
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "background",
+    "storage",
+    "tabs",
+    "webRequest"
+  ],
+  "options_ui": {
+    "page": "./options.html",
+    "chrome_style": true
+  },
+  "browser_action": {
+    "default_popup": "./popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "https://docs.google.com/*"
+      ],
+      "js": [
+        "./contentScripts/index.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ]
+}

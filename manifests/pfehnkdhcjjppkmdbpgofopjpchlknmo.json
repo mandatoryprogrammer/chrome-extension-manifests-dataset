@@ -1,0 +1,223 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "FreeBusy Scheduling Assistant",
+  "short_name": "FreeBusy",
+  "description": "Coordinate meetings 10x faster with contacts inside and outside your company. Chrome extension for Google Calendar and Gmail.",
+  "version": "2020.9.5",
+  "author": "FreeBusy, Inc.",
+  "icons": {
+    "16": "img/icon-16.png",
+    "48": "img/icon-48.png",
+    "128": "img/icon-128.png"
+  },
+  "background": {
+    "scripts": [
+      "jquery.min.js",
+      "moment.min.js",
+      "moment-timezone-with-data.min.js",
+      "config.js",
+      "background.js",
+      "troubleshooter/errorHandler.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://mail.google.com/*",
+        "https://mail.google.com/*"
+      ],
+      "css": [
+        "gmail.min.css"
+      ],
+      "js": [
+        "jquery.min.js",
+        "moment.min.js",
+        "inboxsdk.js",
+        "config.js",
+        "httpRequest.js",
+        "gmail.js",
+        "iframe.js",
+        "troubleshooter/clientTool.js",
+        "troubleshooter/errorHandler.js",
+        "troubleshooter/analyticsManaged.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "http://calendar.google.com/*",
+        "https://calendar.google.com/*"
+      ],
+      "css": [
+        "gmail.min.css"
+      ],
+      "js": [
+        "jquery.min.js",
+        "moment.min.js",
+        "config.js",
+        "httpRequest.js",
+        "gcal.js",
+        "iframe.js",
+        "troubleshooter/clientTool.js",
+        "troubleshooter/errorHandler.js",
+        "troubleshooter/analyticsManaged.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://*.bluejeans.com/*"
+      ],
+      "css": [],
+      "js": [
+        "jquery.min.js",
+        "moment.min.js",
+        "moment.timezone.data.min.js",
+        "config.js",
+        "picker.js",
+        "picker.date.js",
+        "picker.time.js",
+        "pick-a-time/IInjector.js",
+        "pick-a-time/BlueJeansInjector.js",
+        "iframe.js",
+        "troubleshooter/clientTool.js",
+        "troubleshooter/errorHandler.js",
+        "troubleshooter/analyticsManaged.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://*.gotomeeting.com/*"
+      ],
+      "css": [],
+      "js": [
+        "jquery.min.js",
+        "moment.min.js",
+        "moment.timezone.data.min.js",
+        "config.js",
+        "pick-a-time/IInjector.js",
+        "pick-a-time/GoToMeetingInjector.js",
+        "iframe.js",
+        "troubleshooter/clientTool.js",
+        "troubleshooter/errorHandler.js",
+        "troubleshooter/analyticsManaged.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://*.zoom.us/meeting/schedule"
+      ],
+      "css": [],
+      "js": [
+        "jquery.min.js",
+        "moment.min.js",
+        "moment.timezone.data.min.js",
+        "config.js",
+        "picker.js",
+        "picker.date.js",
+        "picker.time.js",
+        "pick-a-time/IInjector.js",
+        "pick-a-time/ZoomInjector.js",
+        "iframe.js",
+        "troubleshooter/clientTool.js",
+        "troubleshooter/errorHandler.js",
+        "troubleshooter/analyticsManaged.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://*.webex.com/collabs/*"
+      ],
+      "css": [],
+      "js": [
+        "jquery.min.js",
+        "moment.min.js",
+        "moment.timezone.data.min.js",
+        "config.js",
+        "picker.js",
+        "picker.date.js",
+        "picker.time.js",
+        "pick-a-time/IInjector.js",
+        "pick-a-time/WebExInjector.js",
+        "iframe.js",
+        "troubleshooter/clientTool.js",
+        "troubleshooter/errorHandler.js",
+        "troubleshooter/analyticsManaged.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://*.join.me/default.aspx*"
+      ],
+      "css": [],
+      "js": [
+        "jquery.min.js",
+        "moment.min.js",
+        "moment.timezone.data.min.js",
+        "config.js",
+        "picker.js",
+        "picker.date.js",
+        "picker.time.js",
+        "pick-a-time/IInjector.js",
+        "pick-a-time/JoinMeInjector.js",
+        "iframe.js",
+        "troubleshooter/clientTool.js",
+        "troubleshooter/errorHandler.js",
+        "troubleshooter/analyticsManaged.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'sha256-czCgWp2siVVb3/c5/WEEhu3AKUJr7kaVfg6AZD30Crw=' 'sha256-R3VqUS2jBRAROa6gXJopoq2aOINxnPo8IjYsAYLrVx0=' 'sha256-VOhLWgKiNZDsjH3wW212XabQLZKkGIjUvY0whck8oLI=' 'unsafe-eval' https://*.freebusy.io; object-src 'self'",
+  "web_accessible_resources": [
+    "localframe.html",
+    "gmailframe.html",
+    "popupframe.html",
+    "partialDOM/*",
+    "img/*",
+    "stylesheets/*",
+    "troubleshooter/analytics.source.min.js",
+    "https://*.freebusy.io/pick-a-time/*"
+  ],
+  "permissions": [
+    "identity",
+    "identity.email",
+    "activeTab",
+    "storage",
+    "webRequest",
+    "https://calendar.google.com/*",
+    "https://*.freebusy.io/"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.freebusy.io/*"
+    ]
+  },
+  "oauth2": {
+    "client_id": "953143084512-9cm75ks5d1v58itobkn6pftsdm4av48d.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "img/icon-128.png",
+    "default_popup": "popup.html"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true,
+    "open_in_tab": true
+  },
+  "offline_enabled": false,
+  "omnibox": {
+    "keyword": "@freebusy",
+    "icons": {
+      "128": "img/icon-128.png"
+    }
+  }
+}

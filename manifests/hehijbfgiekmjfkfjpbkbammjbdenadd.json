@@ -1,0 +1,72 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "IE Tab",
+  "short_name": "IE Tab",
+  "manifest_version": 2,
+  "version": "13.9.24.1",
+  "description": "__MSG_extDescription__",
+  "options_page": "options.html",
+  "default_locale": "en_US",
+  "storage": {
+    "managed_schema": "managed_schema.json"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com https://www.google-analytics.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.ietab.net/*"
+      ],
+      "js": [
+        "js/extapi_cs.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/ietabapi_cs.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "icons": {
+    "16": "images/chromeie16.png",
+    "32": "images/chromeie32.png",
+    "48": "images/chromeie48.png",
+    "128": "images/chromeie128.png"
+  },
+  "browser_action": {
+    "default_icon": "images/chromeba.png",
+    "default_title": "__MSG_extBrowserActionTooltip__"
+  },
+  "web_accessible_resources": [
+    "js/extapi_wp.js",
+    "js/ietabapi_wp.js",
+    "redir.htm"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.ietab.net/*"
+    ],
+    "ids": [
+      "*"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "contextMenus",
+    "webRequest",
+    "webRequestBlocking",
+    "nativeMessaging",
+    "cookies",
+    "<all_urls>"
+  ],
+  "optional_permissions": [
+    "downloads"
+  ]
+}

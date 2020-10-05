@@ -1,0 +1,39 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Linkjar",
+  "version": "1.1.1",
+  "description": "Add links to Linkjar to read them later",
+  "manifest_version": 2,
+  "icons": {
+    "48": "assets/logo48.png",
+    "128": "assets/logo128.png"
+  },
+  "browser_action": {
+    "default_title": "Add to Linkjar",
+    "default_icon": "assets/logo32.png"
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "*://localhost/",
+    "*://*.linkjar.app/"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://localhost/*",
+        "*://*.linkjar.app/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

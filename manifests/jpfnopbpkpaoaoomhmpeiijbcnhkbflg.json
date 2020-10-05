@@ -1,0 +1,71 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Scrutinizer for GitHub and Bitbucket",
+  "description": "Scrutinizer analysis results inside GitHub and Bitbucket.",
+  "background": {
+    "scripts": [
+      "js/eventPage.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://github.com/*"
+      ],
+      "css": [
+        "css/all_platforms.css",
+        "css/bootstrap.scoped.css",
+        "css/introjs.css"
+      ],
+      "js": [
+        "js/github.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://bitbucket.org/*"
+      ],
+      "css": [
+        "css/all_platforms.css",
+        "css/bootstrap.scoped.css",
+        "css/introjs.css"
+      ],
+      "js": [
+        "js/bitbucket.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://scrutinizer-ci.com/*"
+      ],
+      "js": [
+        "js/extensionCheck.js"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "images/icon.png",
+    "48": "images/icon.png",
+    "128": "images/icon.png"
+  },
+  "browser_action": {
+    "default_icon": "images/icon.png",
+    "default_popup": "html/settings.html",
+    "default_title": "Change Settings"
+  },
+  "permissions": [
+    "https://scrutinizer-ci.com/",
+    "storage",
+    "alarms"
+  ],
+  "optional_permissions": [
+    "tabs",
+    "https://bitbucket.org/"
+  ],
+  "web_accessible_resources": [
+    "images/*.png",
+    "images/*.gif"
+  ],
+  "version": "3.1.5"
+}

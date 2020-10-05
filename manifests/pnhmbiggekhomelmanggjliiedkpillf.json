@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "PrivateQuery for Chrome",
+  "version": "1.0.1",
+  "manifest_version": 2,
+  "description": "PrivateQuery is a browser add-on that lets you browse the web securely and securely by hiding your searches across the web.",
+  "homepage_url": "https://privatequery.com",
+  "background": {
+    "scripts": [
+      "assets/js/bg.js"
+    ],
+    "persistent": true
+  },
+  "icons": {
+    "16": "assets/icons/icon16.png",
+    "64": "assets/icons/icon64.png",
+    "128": "assets/icons/icon128.png"
+  },
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "*://*/",
+    "storage",
+    "privacy",
+    "browsingData"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "assets/js/makePrivate.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://*.privatequery.com/*",
+        "https://*.privatequery.com/*"
+      ],
+      "js": [
+        "assets/js/notify.js",
+        "assets/js/makePrivate.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "assets/js/makePrivate.js",
+    "assets/imgs/*"
+  ],
+  "chrome_settings_overrides": {
+    "search_provider": {
+      "name": "PrivateSearch",
+      "keyword": "privatequery.com",
+      "favicon_url": "https://privatequery.com/images/favicon.png",
+      "search_url": "https://results.privatequery.com/search?q={searchTerms}&sr=def-search",
+      "suggest_url": "https://www.privatequery.com/search/suggest?q={searchTerms}",
+      "image_url": "https://results.privatequery.com/search?q={searchTerms}&sr=def-search&tbm=isch",
+      "encoding": "UTF-8",
+      "is_default": true
+    }
+  }
+}

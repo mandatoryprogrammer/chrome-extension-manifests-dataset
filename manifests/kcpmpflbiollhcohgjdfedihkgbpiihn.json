@@ -1,0 +1,67 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "마루마루 클리너",
+  "version": "1.2.3",
+  "description": "마루마루를 클린하게 만들어 줍니다. 광고를 비롯한 불필요한 정보를 모두 삭제하며 애드블록 탐지기를 무력화 시켜줍니다.",
+  "icons": {
+    "32": "./maru.png",
+    "64": "./maru.png",
+    "128": "./maru.png"
+  },
+  "browser_action": {
+    "default_icon": "./maru.png",
+    "default_popup": "./popup.html",
+    "32": "./maru.png",
+    "64": "./maru.png",
+    "128": "./maru.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://wasabisyrup.com/*",
+        "https://wasabisyrup.com/*"
+      ],
+      "js": [
+        "./ext/js/jquery-3.2.0.min.js",
+        "./ext/js/axios.min.js",
+        "./ext/js/pop.global.min.js",
+        "./ext/js/index.min.js"
+      ],
+      "css": [
+        "./ext/css/tisbe.css",
+        "./ext/css/style.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://marumaru.in/*",
+        "https://marumaru.in/*"
+      ],
+      "js": [
+        "./ext/js/jquery-3.2.0.min.js",
+        "./ext/js/maru.min.js"
+      ],
+      "css": [
+        "./ext/css/maru.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "/ext/js/background.min.js"
+    ]
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "http://wasabisyrup.com/*",
+    "https://wasabisyrup.com/*",
+    "http://marumaru.in/*",
+    "https://marumaru.in/*"
+  ]
+}

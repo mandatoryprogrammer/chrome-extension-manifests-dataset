@@ -1,0 +1,118 @@
+{
+  "name": "Aveeto - AliExpress Importer",
+  "short_name": "Aveeto",
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "description": "Import products from AliExpress to your WooCommerce store via Aveeto in just a few clicks",
+  "homepage_url": "https://aveeto.com",
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "permissions": [
+    "*://fonts.googleapis.com/*",
+    "*://aveeto.test/*",
+    "*://app.aveeto.com/*",
+    "*://aveeto.ngrok.io/*",
+    "alarms",
+    "notifications",
+    "webRequest",
+    "tabs",
+    "storage",
+    "activeTab",
+    "cookies",
+    "*://*/*"
+  ],
+  "icons": {
+    "16": "images/icon.png",
+    "48": "images/icon.png",
+    "128": "images/icon.png"
+  },
+  "web_accessible_resources": [
+    "run.js",
+    "images/import.svg",
+    "images/close.png",
+    "images/checkmark.svg",
+    "images/ship.svg",
+    "images/logo.png",
+    "images/scroll-down-arrow.svg",
+    "images/move.svg",
+    "images/maximize.svg",
+    "images/minimize.svg",
+    "images/alert.svg",
+    "images/syncing.svg"
+  ],
+  "browser_action": {
+    "default_title": "Aveeto - AliExpress Importer",
+    "default_icon": "images/icon.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "js/lib/jquery.js",
+      "js/background.js"
+    ],
+    "persistant": true
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "js/lib/jquery.js",
+        "js/lib/jquery.ui.js",
+        "js/aveeto.js",
+        "js/run.js"
+      ],
+      "css": [
+        "css/aveeto.css"
+      ],
+      "matches": [
+        "*://app.aveeto.com/*",
+        "*://app.aveeto.test/*",
+        "*://aveeto.ngrok.io/*",
+        "*://*.myshopify.com/*",
+        "*://*.aliexpress.com/store/product/*",
+        "*://*.aliexpress.com/item/*"
+      ],
+      "exclude_globs": [
+        "*://m.aliexpress.com/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "js/lib/jquery.js",
+        "js/aveeto.js",
+        "js/list.js"
+      ],
+      "css": [
+        "css/aveeto.css",
+        "css/style.css"
+      ],
+      "matches": [
+        "*://*.aliexpress.com/category/*",
+        "*://*.aliexpress.com/af/category/*",
+        "*://*.aliexpress.com/*SearchText*"
+      ],
+      "exclude_globs": [
+        "*://m.aliexpress.com/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "js/aveeto.js",
+        "js/product.js"
+      ],
+      "css": [
+        "css/aveeto.css",
+        "css/style.css"
+      ],
+      "matches": [
+        "*://*.aliexpress.com/store/product/*",
+        "*://*.aliexpress.com/item/*"
+      ],
+      "exclude_globs": [
+        "*://m.aliexpress.com/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

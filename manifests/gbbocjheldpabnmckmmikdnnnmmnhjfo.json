@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Spot Deceptive Hotel Reviews",
+  "short_name": "DecRevSpot",
+  "description": "Identify deceptive hotel reviews written in English with recurrent neural network",
+  "version": "1.0",
+  "browser_action": {
+    "default_icon": {
+      "16": "images/icon16.png",
+      "32": "images/icon32.png",
+      "48": "images/icon48.png",
+      "128": "images/icon128.png"
+    },
+    "default_title": "DecRevSpot",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "js/background.js",
+      "lib/jquery-3.3.1.js",
+      "lib/keras.min.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "css": [
+        "css/content.css"
+      ],
+      "js": [
+        "js/contentscript.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "icons": {
+    "16": "images/icon16.png",
+    "32": "images/icon32.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "webNavigation",
+    "tabs"
+  ],
+  "web_accessible_resources": [
+    "images/*"
+  ],
+  "content_security_policy": "script-src 'self' https://code.jquery.com/jquery-3.3.1.min.js https://unpkg.com/keras-js 'unsafe-eval'; object-src 'self'",
+  "manifest_version": 2
+}

@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "20.7.31.225",
+  "name": "Sourcegraph",
+  "manifest_version": 2,
+  "description": "Adds code intelligence to GitHub: hovers, definitions, references. Supports 20+ languages and other popular code hosts, too.",
+  "browser_action": {
+    "default_title": "Sourcegraph",
+    "default_icon": {
+      "16": "img/icon-16.png",
+      "48": "img/icon-48.png",
+      "128": "img/icon-128.png"
+    }
+  },
+  "icons": {
+    "16": "img/icon-16.png",
+    "48": "img/icon-48.png",
+    "128": "img/icon-128.png"
+  },
+  "background": {
+    "scripts": [
+      "js/background.bundle.js"
+    ]
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "storage": {
+    "managed_schema": "schema.json"
+  },
+  "optional_permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_security_policy": "script-src 'self' blob:; object-src 'self'",
+  "web_accessible_resources": [
+    "img/*",
+    "css/style.bundle.css",
+    "css/options-style.bundle.css"
+  ],
+  "omnibox": {
+    "keyword": "src"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://github.com/*",
+        "https://sourcegraph.com/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "js/inject.bundle.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "storage",
+    "contextMenus",
+    "https://github.com/*",
+    "https://sourcegraph.com/*"
+  ]
+}

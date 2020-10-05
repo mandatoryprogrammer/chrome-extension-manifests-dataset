@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "CiNii Recommendation Extension",
+  "short_name": "CiNii Recommender",
+  "version": "0.4",
+  "default_locale": "en",
+  "description": "This extension enables the display of information on articles maintained by CiNii drawn from related articles.",
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "page_action": {
+    "default_icon": "images/icon19.png"
+  },
+  "background": {
+    "scripts": [
+      "js/eventpage.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://ci.nii.ac.jp/naid/*"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "js": [
+        "js/lib/jquery-2.1.4.min.js",
+        "js/common.js",
+        "js/content.js"
+      ]
+    }
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "web_accessible_resources": [
+    "_locales/*/messages.json",
+    "images/*"
+  ],
+  "permissions": [
+    "storage",
+    "https://kmcs.nii.ac.jp/cinii_rec_ext/*"
+  ]
+}

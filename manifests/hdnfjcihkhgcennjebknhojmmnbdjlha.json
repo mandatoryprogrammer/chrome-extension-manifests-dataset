@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Block Email Trackers",
+  "short_name": "Block Email Trackers",
+  "description": "Detects trackers in email and blocks them to protect your privacy.",
+  "version": "0.8",
+  "browser_action": {
+    "default_icon": "img/icon128.png",
+    "default_popup": "html/popup.html",
+    "default_title": "Block Email Trackers"
+  },
+  "web_accessible_resources": [
+    "img/*",
+    "js/*",
+    "html/*"
+  ],
+  "icons": {
+    "16": "img/icon16.png",
+    "32": "img/icon32.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "storage",
+    "*://*.googleusercontent.com/*"
+  ],
+  "background": {
+    "scripts": [
+      "js/tracking.js",
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*"
+      ],
+      "js": [
+        "js/inboxsdk.js",
+        "js/content_scripts.js"
+      ],
+      "css": [
+        "css/bootstrap_4.css",
+        "css/custom.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

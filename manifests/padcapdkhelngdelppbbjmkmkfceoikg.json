@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "version": "0.5.12",
+  "manifest_version": 2,
+  "description": "__MSG_appDescription__",
+  "icons": {
+    "16": "images/icon-16.png",
+    "128": "images/icon-128.png"
+  },
+  "default_locale": "en",
+  "externally_connectable": {
+    "matches": [
+      "*://localhost/*",
+      "*://ec2-52-0-98-164.compute-1.amazonaws.com/*",
+      "*://api.ferret.ai/*"
+    ]
+  },
+  "permissions": [
+    "*://*/*",
+    "storage",
+    "tabs",
+    "cookies",
+    "idle",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "background": {
+    "scripts": [
+      "scripts/background.bundle.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "images/icon-nocolor-38.png",
+    "default_title": "Ferret",
+    "default_popup": "content/popup/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file://*/*.pdf"
+      ],
+      "js": [
+        "scripts/contentscript.bundle.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    "getFrameId",
+    "http:/*",
+    "https:/*",
+    "ftp:/*",
+    "file:/*",
+    "chrome-extension:/*",
+    "filesystem:/*",
+    "drive:*",
+    "content/infobar/infobar.html",
+    "*.map",
+    "content/pdf/viewer/viewer.html"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

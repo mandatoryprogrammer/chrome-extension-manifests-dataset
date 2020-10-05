@@ -1,0 +1,79 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Cincopa RecTrace",
+  "short_name": "Screen, Webcam and Mic",
+  "description": "Record your screen, cam or both at the same time. share your video with your audience.",
+  "version": "1.7.16",
+  "manifest_version": 2,
+  "browser_action": {
+    "default_icon": "img/logo.png",
+    "default_title": "Cincopa RecTrace - Easy to use Screen and Webcam Recorder"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+Shift+C"
+      }
+    }
+  },
+  "background": {
+    "scripts": [
+      "js/background.js",
+      "js/RecordRTC.min.js",
+      "js/DetectRTC.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/content.js",
+        "js/inject.js"
+      ],
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "js/inboxsdk.js",
+        "js/gmailContent.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.cincopa.com/*"
+    ]
+  },
+  "icons": {
+    "16": "img/logo_16.png",
+    "128": "img/logo.png"
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "tabCapture",
+    "desktopCapture",
+    "notifications",
+    "tabs",
+    "<all_urls>"
+  ],
+  "web_accessible_resources": [
+    "*.html",
+    "*.ttf",
+    "*.woff",
+    "*.js",
+    "*.css",
+    "*.png",
+    "/main.css",
+    "/inject.js",
+    "/content.js",
+    "/removeHtml.js"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

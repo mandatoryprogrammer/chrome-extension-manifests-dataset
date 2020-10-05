@@ -1,0 +1,79 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Netflix Autoplayer - With System Sleep Timer",
+  "version": "0.8",
+  "manifest_version": 2,
+  "description": "Autoplays Netflix TV Shows - Shuts down computer when done",
+  "author": "Matt Evanoff - RTPMatt+autoplay@gmail.com",
+  "homepage_url": "http://www.mattevanoff.com",
+  "permissions": [
+    "tabs",
+    "nativeMessaging",
+    "background",
+    "http://*.netflix.com/*",
+    "https://*.netflix.com/*"
+  ],
+  "page_action": {
+    "default_icon": "icon38.png",
+    "default_title": "Netflix Autoplay",
+    "default_popup": "options.html"
+  },
+  "icons": {
+    "128": "icon-128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.netflix.com/*",
+        "https://*.netflix.com/*"
+      ],
+      "js": [
+        "netflix.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "options_ui": {
+    "page": "prefs.html",
+    "chrome_style": true
+  },
+  "commands": {
+    "next": {
+      "description": "Play Next Track",
+      "global": true,
+      "suggested_key": {
+        "default": "MediaNextTrack",
+        "mac": "MediaNextTrack"
+      }
+    },
+    "play-pause": {
+      "description": "Play/Pause Active Audio",
+      "global": true,
+      "suggested_key": {
+        "default": "MediaPlayPause",
+        "mac": "MediaPlayPause"
+      }
+    },
+    "prev": {
+      "description": "Play Previous Track",
+      "global": true,
+      "suggested_key": {
+        "default": "MediaPrevTrack",
+        "mac": "MediaPrevTrack"
+      }
+    },
+    "stop": {
+      "description": "Stop Audio",
+      "global": true,
+      "suggested_key": {
+        "default": "MediaStop",
+        "mac": "MediaStop"
+      }
+    }
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Point",
+  "version": "2019.2.0.5",
+  "description": "Point is a quick way to share and discuss what you find online.",
+  "background": {
+    "page": "background/background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "*://*/*.pdf",
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*",
+        "*://localhost/*",
+        "*://tweetdeck.twitter.com/*"
+      ],
+      "css": [
+        "content-script/styles/icons.css"
+      ],
+      "js": [
+        "content-script/scripts/point-cs.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://*.getpoint.co/*"
+      ],
+      "js": [
+        "point-website-cs/main.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_popup": "dropdown/dropdown.html",
+    "default_icon": "assets/icon48.png"
+  },
+  "icons": {
+    "16": "assets/icon16.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png"
+  },
+  "manifest_version": 2,
+  "permissions": [
+    "webNavigation",
+    "contextMenus",
+    "cookies",
+    "tabs",
+    "windows",
+    "storage",
+    "notifications",
+    "<all_urls>",
+    "alarms",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "web_accessible_resources": [
+    "assets/*",
+    "first-time/*",
+    "content-script/styles/*"
+  ]
+}

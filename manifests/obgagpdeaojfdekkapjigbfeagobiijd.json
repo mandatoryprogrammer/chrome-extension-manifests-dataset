@@ -1,0 +1,101 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "GameSites.cz Forum Tools",
+  "description": "Nástroje pre zjednodušenie práce s portálom Gamesites.cz",
+  "version": "3.2",
+  "icons": {
+    "16": "icons/gs16.png",
+    "48": "icons/gs48.png",
+    "128": "icons/gs128.png"
+  },
+  "permissions": [
+    "storage",
+    "contextMenus",
+    "activeTab",
+    "webRequest",
+    "webRequestBlocking",
+    "*://gamesites.cz/*",
+    "*://*.gamesites.cz/*",
+    "*://hlstats.fakaheda.eu/hlxce_*/hlstats.php?mode=search&st=uniqueid&q=*",
+    "*://sourcebans.fakaheda.eu/*",
+    "https://api.steampowered.com/*",
+    "https://dwandy.sdilej.eu/dema/*"
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "web_accessible_resources": [
+    "options.html",
+    "icons/*.svg",
+    "icons/*.png"
+  ],
+  "content_scripts": [
+    {
+      "js": [
+        "sites_config.js",
+        "options.js",
+        "steamapikey.js",
+        "handlesid.js",
+        "forum.js"
+      ],
+      "css": [
+        "display.css"
+      ],
+      "run_at": "document_idle",
+      "matches": [
+        "*://gamesites.cz/*",
+        "*://www.gamesites.cz/*"
+      ]
+    },
+    {
+      "js": [
+        "hlstats_autoredirect.js"
+      ],
+      "run_at": "document_end",
+      "matches": [
+        "*://hlstats.fakaheda.eu/hlxce_*/hlstats.php?mode=search&st=uniqueid&q=*"
+      ]
+    },
+    {
+      "js": [
+        "sites_config.js",
+        "handlesid.js",
+        "hlstats.js"
+      ],
+      "css": [
+        "display.css"
+      ],
+      "run_at": "document_idle",
+      "matches": [
+        "*://hlstats.fakaheda.eu/hlxce_*/*"
+      ]
+    },
+    {
+      "js": [
+        "sites_config.js",
+        "options.js",
+        "steamapikey.js",
+        "handlesid.js",
+        "banlist.js"
+      ],
+      "css": [
+        "display.css",
+        "banlist.css"
+      ],
+      "run_at": "document_idle",
+      "matches": [
+        "*://banlist.gamesites.cz/csgo/*"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "sites_config.js",
+      "background.js",
+      "contextmenus.js"
+    ],
+    "persistent": true
+  },
+  "manifest_version": 2
+}

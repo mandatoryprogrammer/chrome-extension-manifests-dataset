@@ -1,0 +1,120 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "sengokuixa-moko",
+  "version": "0.5.6.2192",
+  "description": "moko",
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "background": {
+    "scripts": [
+      "ixa/background.js"
+    ]
+  },
+  "page_action": {
+    "default_icon": {
+      "19": "icons/19.png"
+    },
+    "default_title": "moko",
+    "default_popup": "popup/popup.html"
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "run_at": "document_start",
+      "matches": [
+        "http://*.sengokuixa.jp/*"
+      ],
+      "exclude_matches": [
+        "http://sengokuixa.jp/*"
+      ],
+      "js": [
+        "contentScripts/sengokuixa-moko.user.js"
+      ],
+      "css": [
+        "css/cardWindow.css"
+      ]
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "http://*.sengokuixa.jp/*",
+        "http://*.app0.mixi-platform.com/*sengokuixa*"
+      ],
+      "exclude_matches": [
+        "http://sengokuixa.jp/*"
+      ],
+      "js": [
+        "plugin/jquery.min.js"
+      ]
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "http://world.sengokuixa.jp/world/select_world.php*",
+        "http://*.app0.mixi-platform.com/*sengokuixa*"
+      ],
+      "js": [
+        "contentScripts/select_world.js"
+      ]
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "http://*.sengokuixa.jp/*"
+      ],
+      "exclude_matches": [
+        "http://world.sengokuixa.jp/*",
+        "http://sengokuixa.jp/*"
+      ],
+      "js": [
+        "contentScripts/soundset.js",
+        "contentScripts/setChapter.js"
+      ]
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "http://*.sengokuixa.jp/facility/facility.php*"
+      ],
+      "js": [
+        "contentScripts/facility.js"
+      ]
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "http://*.sengokuixa.jp/card/deck.php*"
+      ],
+      "css": [
+        "css/cardDeck.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "http://*.sengokuixa.jp/union/additional.php*"
+      ],
+      "css": [
+        "css/unionAdditional.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "notifications",
+    "contextMenus",
+    "storage",
+    "unlimitedStorage",
+    "tabs",
+    "http://*.sengokuixa.jp/*"
+  ],
+  "web_accessible_resources": [
+    "/plugin/jquery-2.0.3.min.map",
+    "sound/*.ogg"
+  ]
+}

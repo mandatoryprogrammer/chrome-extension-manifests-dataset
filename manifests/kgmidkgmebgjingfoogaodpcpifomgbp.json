@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Smart-Read E-book Reader",
+  "short_name": "Smart-Read",
+  "version": "0.0.6",
+  "default_locale": "en_US",
+  "description": "Read in a smart way.",
+  "icons": {
+    "16": "icons/small.png",
+    "48": "icons/medium.png",
+    "128": "icons/large.png"
+  },
+  "minimum_chrome_version": "14",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'  http://localhost https://ssl.google-analytics.com https://www.google.com; object-src 'self';",
+  "app": {
+    "launch": {
+      "local_path": "views/library.html"
+    },
+    "content_scripts": [
+      {
+        "run_at": "document_idle",
+        "matches": [
+          "http://*/*"
+        ],
+        "js": [
+          "lib/jquery-1.7.1.min.js",
+          "background/hijack-ebooks.js"
+        ]
+      }
+    ]
+  },
+  "background": {
+    "page": "background/background.html"
+  },
+  "permissions": [
+    "storage",
+    "contextMenus"
+  ],
+  "options_page": "views/library.html#options",
+  "web_accessible_resources": [
+    "scripts/epub_reading_system.js",
+    "lib/mathjax/MathJax.js",
+    "lib/mathjax/config/readium-iframe.js",
+    "lib/mathjax/extensions/MathMenu.js",
+    "lib/mathjax/extensions/MathZoom.js",
+    "lib/mathjax/jax/input/TeX/config.js",
+    "lib/mathjax/jax/input/MathML/config.js",
+    "lib/mathjax/jax/output/SVG/config.js",
+    "lib/mathjax/extensions/tex2jax.js",
+    "lib/mathjax/extensions/mml2jax.js",
+    "lib/mathjax/extensions/MathEvents.js",
+    "lib/images/MenuArrow-15.png"
+  ]
+}

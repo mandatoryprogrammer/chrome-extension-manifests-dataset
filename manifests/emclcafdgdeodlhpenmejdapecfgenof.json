@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Alzheimer password generator",
+  "description": "Final password is cryptographically derived from web page URL address, salt and user provided secret passphrase.",
+  "version": "0.91",
+  "permissions": [
+    "contextMenus",
+    "storage",
+    "activeTab",
+    "<all_urls>"
+  ],
+  "options_page": "options.html",
+  "background": {
+    "scripts": [
+      "main.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "theme/jquery-ui.css",
+        "custom.css"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "js/jquery-ui.min.js",
+        "js/jquery.imgpreload.min.js",
+        "lib/pbkdf2.js",
+        "crypto_helpers.js",
+        "content_script.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "theme/images/*.png",
+    "theme/jquery-ui.css",
+    "custom.css"
+  ],
+  "icons": {
+    "128": "img/icon.png"
+  },
+  "browser_action": {
+    "default_icon": "img/icon.png"
+  },
+  "manifest_version": 2
+}

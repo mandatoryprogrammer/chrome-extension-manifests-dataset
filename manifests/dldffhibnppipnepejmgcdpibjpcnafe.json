@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Speakeasy Calendar Plugin",
+  "short_name": "Speakeasy",
+  "version": "1.0.15",
+  "manifest_version": 2,
+  "description": "Schedule Speakeasy conference calls in Google Calendar.",
+  "background": {
+    "scripts": [
+      "lib/jquery.min.js",
+      "lib/base64.js",
+      "lib/cookie.js",
+      "lib/phoneparser.min.js",
+      "env/prod.js",
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "icons": {
+    "20": "assets/icon20.png",
+    "128": "assets/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "assets/icon20.png",
+    "default_title": "Speakeasy",
+    "default_popup": "html/popup.html"
+  },
+  "permissions": [
+    "https://www.google.com/calendar/*",
+    "https://calendar.google.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.google.com/calendar/*",
+        "https://calendar.google.com/*"
+      ],
+      "js": [
+        "lib/jquery.min.js",
+        "js/content.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.google.com/robots.txt"
+      ],
+      "js": [
+        "lib/jquery.min.js",
+        "lib/uri.js",
+        "js/auth.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "assets/icon20.png"
+  ]
+}

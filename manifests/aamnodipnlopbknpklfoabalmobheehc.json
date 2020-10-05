@@ -1,0 +1,41 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "XState DevTools",
+  "author": "Amit Novick",
+  "version": "0.5.3",
+  "devtools_page": "devtools/devtools.html",
+  "description": "A Chrome extension for inspecting XState machines running in your app.",
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' 'unsafe-eval' ; object-src 'self'",
+  "background": {
+    "scripts": [
+      "hot-reload.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "icons": {
+    "16": "assets/16x16.png",
+    "48": "assets/48x48.png",
+    "128": "assets/128x128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content/contentCommunicate.js",
+        "content/contentInject.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "injected/injected.js"
+  ],
+  "permissions": [
+    "tabs",
+    "<all_urls>"
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "FxPlus+ for Chrome",
+  "short_name": "FxPlus+",
+  "author": "SilverTuxedo",
+  "description": "מעולם לא היה קל יותר לגלוש ב-FxP.",
+  "version": "1.5.5",
+  "browser": "chrome",
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "images/icon.png",
+    "default_title": "פתח התראות - FxPlus+",
+    "default_popup": "html/popup.html"
+  },
+  "options_page": "html/settings.html",
+  "background": {
+    "page": "html/background.html"
+  },
+  "permissions": [
+    "https://www.fxp.co.il/*",
+    "tabs",
+    "storage",
+    "notifications",
+    "cookies",
+    "alarms"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.fxp.co.il/*"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "js/utils.js",
+        "js/main_fxp.js"
+      ],
+      "css": [
+        "css/main_fxp.css",
+        "css/balloon.css",
+        "fonts/materialdesignicons.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://www.fxp.co.il/private_chat.php*"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "js/utils.js",
+        "js/private_chat_fxp.js"
+      ],
+      "css": [
+        "css/balloon.css",
+        "css/main_fxp.css"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://www.fxp.co.il/forumdisplay.php*&web_fast_fxp=1"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "js/iframes_fxp.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "html/settings.html",
+    "css/nightmode.css",
+    "css/private_chat_nightmode.css",
+    "css/iframes_nightmode.css",
+    "images/*",
+    "fonts/*",
+    "js/disable_typing.js"
+  ],
+  "applications": {
+    "gecko": {
+      "id": "tuxedosilver@gmail.com"
+    }
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Fortnite News Tab",
+  "short_name": "Fortnite News Tab",
+  "version": "2.7.0",
+  "manifest_version": 2,
+  "description": "Get top FORTNITE news on your Chrome new tab page. Add any topic or news source.",
+  "homepage_url": "https://www.newstab.com/",
+  "author": "ane_400277",
+  "icons": {
+    "16": "/Media/ExtensionImages/emptyIcon.png",
+    "19": "/Media/ExtensionImages/Icons/fort_icon19.png",
+    "48": "/Media/ExtensionImages/Icons/fort_icon48.png",
+    "96": "/Media/ExtensionImages/Icons/fort_icon96.png",
+    "128": "/Media/ExtensionImages/Icons/fort_icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "/Media/ExtensionImages/Icons/fort_icon48.png"
+  },
+  "permissions": [
+    "cookies",
+    "topSites",
+    "storage",
+    "chrome://favicon/",
+    "<all_urls>"
+  ],
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "/Scripts/Framework/jquery-3.2.1.js",
+      "/Scripts/ExtensionOnly/moment.min.js",
+      "/Scripts/ExtensionShared/Models/Article.js",
+      "/Scripts/ExtensionShared/Models/Feed.js",
+      "/Scripts/ExtensionShared/Models/Section.js",
+      "/Scripts/ExtensionShared/NewsTab.js",
+      "/Scripts/ExtensionShared/Helpers.js",
+      "/Scripts/ExtensionShared/Modules/RegionManager.js",
+      "/Scripts/ExtensionShared/Modules/XhrManager.js",
+      "/Scripts/ExtensionShared/Modules/ArticleView.js",
+      "/Scripts/ExtensionShared/Modules/SectionsManager.js",
+      "/Scripts/ExtensionShared/Modules/ImageCollage.js",
+      "/Scripts/ExtensionOnly/Modules/TimeAndWeatherWidget.js",
+      "/Scripts/ExtensionOnly/Modules/SportWidget.js",
+      "/Scripts/ExtensionOnly/Modules/Wallpapers.js",
+      "/Scripts/ExtensionOnly/config.js",
+      "/Scripts/ExtensionOnly/article.js",
+      "/Scripts/ExtensionOnly/common.js",
+      "/Scripts/ExtensionOnly/Extension.js",
+      "/Scripts/ExtensionOnly/Background.js"
+    ],
+    "persistent": true
+  },
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://*.newstab.com/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.newstab.com/*"
+      ],
+      "css": [
+        "/Styles/ExtensionOnly/inject.css"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://*.newstab.com/*"
+      ],
+      "js": [
+        "/Scripts/Framework/jquery-3.2.1.js",
+        "/Scripts/ExtensionOnly/config.js",
+        "/Scripts/ExtensionOnly/inject.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://suggestqueries.google.com https://ssl.google-analytics.com; object-src 'self'"
+}

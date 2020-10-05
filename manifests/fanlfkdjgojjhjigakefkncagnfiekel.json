@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "리모콘 for Pooq",
+  "version": "0.11",
+  "default_locale": "ko",
+  "description": "키보드로 Pooq를 편리하게 이용할 수 있습니다. (전체화면, 채널, 재생목록 보기 지원)",
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_title": "리모콘 for Pooq"
+  },
+  "icons": {
+    "16": "assets/icon16.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.pooq.co.kr/player/*",
+        "https://www.pooq.co.kr/player/*"
+      ],
+      "js": [
+        "js/jquery-1.11.2.js",
+        "js/contentscript.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/eventPage.js"
+    ],
+    "persistent": false
+  },
+  "commands": {
+    "goto_pooq_live": {
+      "suggested_key": {
+        "windows": "Alt+Shift+P",
+        "mac": "Alt+Shift+P",
+        "chromeos": "Alt+Shift+P",
+        "linux": "Alt+Shift+P"
+      },
+      "description": "Go to Pooq live"
+    }
+  },
+  "permissions": [
+    "tabs"
+  ],
+  "web_accessible_resources": [
+    "js/remopooq.js"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "http://www.pooq.co.kr/player/*",
+      "https://www.pooq.co.kr/player/*"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self';"
+}

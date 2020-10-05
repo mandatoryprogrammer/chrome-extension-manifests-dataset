@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "PrezzoFelice.it",
+  "version": "1.2.1",
+  "manifest_version": 2,
+  "description": "Estensione che notifica le offerte di PrezzoFelice.it.",
+  "icons": {
+    "128": "images/pf-128.png",
+    "48": "images/pf-48.png",
+    "38": "images/pf-38.png",
+    "32": "images/pf-32.png",
+    "19": "images/pf-19.png",
+    "16": "images/pf-16.png"
+  },
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "storage",
+    "tabs",
+    "cookies",
+    "alarms"
+  ],
+  "browser_action": {
+    "default_icon": "images/pf-38.png",
+    "default_title": "Vai su PrezzoFelice.it"
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/search.js"
+      ],
+      "css": [
+        "css/pf.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://www.google.it/*",
+        "*://www.google.com/*"
+      ],
+      "js": [
+        "js/google.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "js/background.js",
+    "js/popup.js",
+    "images/logo.png",
+    "images/close.png"
+  ]
+}

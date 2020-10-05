@@ -1,0 +1,92 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "The Good Place",
+  "version": "1.0.5",
+  "description": "Replace new tab page with a personalized dashboard that brings your very own version of The Good Place right to your desktop.",
+  "manifest_version": 2,
+  "icons": {
+    "16": "img/icons/icon16.png",
+    "48": "img/icons/icon48.png",
+    "128": "img/icons/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "/js/background.js",
+      "/js/OpenWeatherMap.js",
+      "/js/features/JoyOfMissingOut.js"
+    ],
+    "persistent": false
+  },
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "chrome_url_overrides": {
+    "newtab": "theme.html"
+  },
+  "browser_action": {
+    "default_icon": "img/icons/icon16.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "notifications",
+    "tabs",
+    "alarms",
+    "storage",
+    "http://*/",
+    "https://*/"
+  ],
+  "web_accessible_resources": [
+    "img/GoodPlaceBadPlace/*",
+    "img/SearchWithJanet/*",
+    "fonts/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "/js/features/ObscenitiesCensor.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://www.youtube.com/",
+        "https://www.youtube.com/*"
+      ],
+      "js": [
+        "/js/features/GoodPlaceBadPlace.js",
+        "/js/features/SearchWithJanet.js"
+      ],
+      "css": [
+        "/css/features/GoodPlaceBadPlace.css"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://www.google.com/",
+        "https://www.google.com/*",
+        "https://www.google.ca/",
+        "https://www.google.ca/*",
+        "https://www.google.co.uk/",
+        "https://www.google.co.uk/*",
+        "https://www.google.com.au/",
+        "https://www.google.com.au/*",
+        "https://www.google.com.br/",
+        "https://www.google.com.br/*"
+      ],
+      "exclude_matches": [
+        "https://www.google.com/search*",
+        "https://www.google.ca/search*"
+      ],
+      "js": [
+        "/js/features/SearchWithJanet.js"
+      ],
+      "css": [
+        "/css/features/SearchWithJanet.css"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

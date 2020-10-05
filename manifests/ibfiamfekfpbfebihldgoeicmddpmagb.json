@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "author": "asseco see",
+  "manifest_version": 2,
+  "name": "Asseco Signing Tool",
+  "version": "5.1.1",
+  "description": "Signs documents using personal certificates. Needs native component installed to work.",
+  "browser_action": {
+    "default_icon": {
+      "20": "images/icons8-stamp-20.png",
+      "40": "images/icons8-stamp-40.png",
+      "48": "images/icons8-stamp-48.png",
+      "96": "images/icons8-stamp-96.png"
+    },
+    "default_title": "Asseco Signing Tool",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "dist/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://localhost/*",
+        "https://*.uvmk.gov.mk/*",
+        "*://e-agencija.aek.mk/*",
+        "*://signing.asseco-see.mk/demo/*"
+      ],
+      "js": [
+        "dist/content-script.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "injected-script.js"
+  ],
+  "applications": {
+    "gecko": {
+      "id": "signingcomponent@asseco-see.mk",
+      "strict_min_version": "50.0"
+    }
+  },
+  "permissions": [
+    "*://localhost/*",
+    "https://*.uvmk.gov.mk/*",
+    "*://e-agencija.aek.mk/*",
+    "*://signing.asseco-see.mk/demo/*",
+    "*://*.w3.org/*",
+    "activeTab",
+    "nativeMessaging"
+  ]
+}

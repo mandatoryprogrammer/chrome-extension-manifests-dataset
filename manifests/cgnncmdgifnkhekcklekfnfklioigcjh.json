@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "description": "Latest Significant Earthquakes",
+  "manifest_version": 2,
+  "name": "LastQuake",
+  "version": "1.1.0",
+  "homepage_url": "https://www.emsc-csem.org/",
+  "icons": {
+    "48": "icons/icon48.png"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "nativeMessaging"
+  ],
+  "options_ui": {
+    "page": "options_page.html",
+    "browser_style": true
+  },
+  "browser_action": {
+    "default_icon": "icons/icon32.png",
+    "default_title": "LastQuake",
+    "default_popup": "popup.html",
+    "browser_style": true
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_idle",
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/fredcontents.js",
+        "js/api.js",
+        "js/util.js",
+        "js/contents.js"
+      ],
+      "css": [
+        "css/contents.css"
+      ]
+    }
+  ]
+}

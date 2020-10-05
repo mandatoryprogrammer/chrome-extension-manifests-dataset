@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "PriceGrab",
+  "short_name": "PriceGrab",
+  "description": "The Best Way to Save Products and Track Prices From ANY Store, Apply coupons, get deals and promo codes",
+  "version": "2.0.3",
+  "icons": {
+    "16": "pricegrab/assets/icon16.png",
+    "48": "pricegrab/assets/icon48.png",
+    "128": "pricegrab/assets/icon128.png"
+  },
+  "homepage_url": "https://www.pricegrab.io/",
+  "browser_action": {
+    "default_icon": "pricegrab/assets/icon128.png",
+    "default_title": "PriceGrab"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true,
+    "open_in_tab": true
+  },
+  "permissions": [
+    "webRequestBlocking",
+    "webRequest",
+    "activeTab",
+    "management",
+    "cookies",
+    "storage",
+    "unlimitedStorage",
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "background"
+  ],
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "content_security_policy": "img-src * 'self' data: https:; script-src 'self' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net; object-src 'self'",
+  "web_accessible_resources": [
+    "pricegrab/*",
+    "coupons/index.html",
+    "apply/*",
+    "HTTPFunctions/index.html",
+    "https://www.pricegrab.io/",
+    "getGlobalsVariable.js",
+    "common-spa.js",
+    "script.js"
+  ],
+  "content_scripts": [
+    {
+      "js": [
+        "jquery.js",
+        "bililiteRange.js",
+        "pricegrab-install.js",
+        "coupons.js",
+        "contentScript.js"
+      ],
+      "matches": [
+        "*://*/*"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

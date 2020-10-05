@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "ClickBlocker",
+  "version": "0.0.721",
+  "version_name": "0.0.721 alpha",
+  "manifest_version": 2,
+  "description": "Block links default behavior according to customizable (black)whitelist",
+  "homepage_url": "http://pashog.net",
+  "icons": {
+    "16": "icons/icon16.png",
+    "64": "icons/icon64.png",
+    "128": "icons/icon128.png"
+  },
+  "web_accessible_resources": [
+    "icons/icon24.png"
+  ],
+  "default_locale": "en",
+  "background": {
+    "page": "src/bg/background.html",
+    "persistent": true
+  },
+  "options_ui": {
+    "page": "src/options/options.html",
+    "chrome_style": true
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "notifications",
+    "<all_urls>"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "src/inject/inject.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ]
+}

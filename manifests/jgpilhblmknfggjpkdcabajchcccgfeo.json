@@ -1,0 +1,110 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "EDrop - Drop Shipping Tool",
+  "description": "Import listing content from Ebay, Amazon, Aliexpress to Ebay. Copy buyer address and mange orders details from ebay to Aliexpress",
+  "version": "1.2.5",
+  "icons": {
+    "48": "icon.png",
+    "64": "icon.png",
+    "128": "icon.png",
+    "256": "icon.png"
+  },
+  "permissions": [
+    "downloads",
+    "tabs",
+    "notifications",
+    "gcm",
+    "https://*.aliexpress.com/*",
+    "https://aliexpress.com/*",
+    "https://bulksell.ebay.com/*",
+    "https://bulksell.ebay.co.uk/*",
+    "https://bulksell.ebay.de/*",
+    "https://bulksell.ebay.fr/*",
+    "https://bulksell.ebay.com.au/*",
+    "https://tooldropship.com/*"
+  ],
+  "browser_action": {
+    "default_title": "EDrop - Drop Shipping Tool",
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "default_locale": "en",
+  "background": {
+    "page": "background.html"
+  },
+  "content_scripts": [
+    {
+      "css": [
+        "css/content.css"
+      ],
+      "js": [
+        "js/lib/jquery-3.0.0.min.js",
+        "js/content/content.js",
+        "js/content/auto_content.js"
+      ],
+      "run_at": "document_idle",
+      "matches": [
+        "*://*.aliexpress.com/*"
+      ]
+    },
+    {
+      "css": [
+        "css/content.css"
+      ],
+      "js": [
+        "js/lib/jquery-3.0.0.min.js",
+        "js/content/content.js",
+        "js/content/import.js"
+      ],
+      "matches": [
+        "*://*.aliexpress.com/item/*",
+        "*://*.aliexpress.com/store/product/*",
+        "*://*.dhgate.com/product/*",
+        "*://*.dhgate.com/store/*",
+        "*://*.ebay.com/itm/*",
+        "*://*.ebay.us/itm/*",
+        "*://*.ebay.ca/itm/*",
+        "*://*.ebay.co.uk/itm/*",
+        "*://*.ebay.de/itm/*",
+        "*://*.ebay.fr/itm/*",
+        "*://*.ebay.es/itm/*",
+        "*://*.amazon.com/gp/product/*",
+        "*://*.amazon.com/*/dp/*",
+        "*://*.amazon.com/dp/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "css": [
+        "css/content.css"
+      ],
+      "js": [
+        "js/lib/jquery-3.0.0.min.js",
+        "js/content/content.js",
+        "js/content/ebay_form_listing_complete.js"
+      ],
+      "matches": [
+        "*://bulksell.ebay.com/*",
+        "*://bulksell.ebay.co.uk/*",
+        "*://bulksell.ebay.co.de/*",
+        "*://bulksell.ebay.co.fr/*",
+        "*://bulksell.ebay.co.es/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "homepage_url": "https://crm.tooldropship.com",
+  "web_accessible_resources": [
+    "*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://google.com https://ssl.google-analytics.com https://connect.facebook.net https://facebook.com https://www.google-analytics.com https://www.googletagmanager.com; object-src 'self'",
+  "externally_connectable": {
+    "ids": [
+      "*"
+    ],
+    "matches": [
+      "*://tooldropship.com/*"
+    ]
+  }
+}

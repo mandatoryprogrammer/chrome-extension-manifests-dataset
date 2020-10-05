@@ -1,0 +1,159 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Daxtra Magnet",
+  "short_name": "Daxtra Magnet",
+  "version": "0.0.9915",
+  "manifest_version": 2,
+  "description": "Daxtra Magnet connects the Internet to your recruitment database",
+  "homepage_url": "https://magnet.daxtra.com",
+  "magnet_data": {
+    "minimum_grabber_server_version": "0.0.99.01",
+    "grabber_server_version_old_text": "You server version is too old. Email support@daxtra.com for upgrade"
+  },
+  "icons": {
+    "16": "/magnet/img/icon16.png",
+    "48": "/magnet/img/icon48.png",
+    "128": "/magnet/img/magnet_128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "page": "/magnet/ChromePlugin/bg/background.html",
+    "persistent": true
+  },
+  "options_page": "/magnet/options/options.html",
+  "omnibox": {
+    "keyword": "yeah"
+  },
+  "page_action": {
+    "default_title": "Daxtra Magnet",
+    "default_icon": "/magnet/img/magnet.png",
+    "default_popup": "/magnet/ChromePlugin/popup/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/mail",
+        "https://mail.google.com/mail/*",
+        "https://mail.google.co.uk/mail",
+        "https://mail.google.co.uk/mail/*"
+      ],
+      "js": [
+        "/magnet/js/jquery.min.js",
+        "/magnet/js/dxstd_js_utils.min.js",
+        "/magnet/js/drag-and-drop.min.js",
+        "/magnet/js/base64v1_0.min.js",
+        "/magnet/ChromePlugin/infobar/common.min.js",
+        "/magnet/ChromePlugin/infobar/daxtra_info_api_proxy.min.js",
+        "/magnet/ChromePlugin/infobar/daxtra_info.min.js",
+        "/magnet/ChromePlugin/infobar/daxtra_info_div.min.js"
+      ],
+      "css": [
+        "/magnet/css/font-awesome.min.css",
+        "/magnet/ChromePlugin/infobar/Magnet33/daxtra_info.min.css",
+        "/magnet/ChromePlugin/infobar/Daxtra/daxtra_info.min.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://mail.google.com/mail",
+        "https://mail.google.com/mail/*",
+        "https://mail.google.co.uk/mail",
+        "https://mail.google.co.uk/mail/*"
+      ],
+      "js": [
+        "/magnet/ChromePlugin/inject/inject_gmail.min.js",
+        "/magnet/js/dxstd_js_utils.min.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://www.facebook.comZ/*",
+        "https://www.facebook.comZ/*/about?*",
+        "https://www.facebook.comZ/*/sk=about",
+        "https://www.facebook.comZ/*/sk=about*"
+      ],
+      "js": [
+        "/magnet/ChromePlugin/inject/inject_facebook.min.js",
+        "/magnet/js/dxstd_js_utils.min.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*/WebApp/*"
+      ],
+      "js": [
+        "/magnet/ChromePlugin/inject/inject_adapt.min.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "exclude_matches": [
+        "https://mail.google.com/mail",
+        "https://mail.google.com/mail/*",
+        "https://mail.google.co.uk/mail",
+        "https://mail.google.co.uk/mail/*"
+      ],
+      "js": [
+        "/magnet/js/dxstd_js_utils.min.js",
+        "/magnet/js/base64v1_0.min.js",
+        "/magnet/ChromePlugin/infobar/common.min.js",
+        "/magnet/ChromePlugin/infobar/daxtra_info_api_proxy.min.js",
+        "/magnet/ChromePlugin/infobar/dropper.min.js"
+      ],
+      "css": [
+        "/magnet/ChromePlugin/infobar/Magnet33/dropper.min.css",
+        "/magnet/ChromePlugin/infobar/Daxtra/dropper.min.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "/magnet/ChromePlugin/inject/content.min.js",
+        "/magnet/ChromePlugin/infobar/help.min.js"
+      ],
+      "css": [
+        "/magnet/ChromePlugin/inject/Magnet33/content.min.css",
+        "/magnet/ChromePlugin/inject/Daxtra/content.min.css",
+        "/magnet/ChromePlugin/infobar/Magnet33/dropper.min.css",
+        "/magnet/ChromePlugin/infobar/Daxtra/dropper.min.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "/magnet/ChromePlugin/infobar/daxtra_info.html",
+    "/magnet/help/magnet_help.html",
+    "https://magnet.daxtra.com/magnet/img/magnet.png",
+    "https://magnet.daxtra.com/magnet/img/yellow_icon.png",
+    "https://magnet.daxtra.com/magnet/img/spin_wheel.gif",
+    "https://magnet.daxtra.com/magnet/img/green_icon_active.png",
+    "https://magnet.daxtra.com/magnet/img/red_icon.png"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://localhost/*",
+      "*://*.daxtra.com/*"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "contextMenus"
+  ],
+  "content_security_policy": "script-src 'self' https://*.daxtra.com http://*.daxtra.com; object-src 'self'  https://*.daxtra.com http://*.daxtra.com; frame-src 'self' https://*.daxtra.com http://*.daxtra.com"
+}

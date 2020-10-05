@@ -1,0 +1,42 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Pandora - Copy Song Info To Clipboard",
+  "short_name": "PcpSongInfo",
+  "version": "1.0.0.2",
+  "version_name": "1.0 release",
+  "manifest_version": 2,
+  "description": "Adds a friendly copy button below the song information on Pandora.com which copies the selected song information to your clipboard.",
+  "icons": {
+    "16": "img/clipboard-16x16.png",
+    "48": "img/clipboard-48x48.png",
+    "128": "img/clipboard-128x128.png"
+  },
+  "permissions": [
+    "clipboardWrite",
+    "https://*.pandora.com/*",
+    "http://*.pandora.com/*"
+  ],
+  "browser_action": {
+    "default_icon": "img/clipboard-32x32.png",
+    "default_popup": "iconPopup.html"
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "https://*.pandora.com/*",
+        "http://*.pandora.com/*"
+      ],
+      "js": [
+        "js/classie.js",
+        "js/jquery-3.1.0.min.js",
+        "js/clipboard.min.js",
+        "js/injectMain.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "css/injectedMain.css",
+    "img/*.png"
+  ]
+}

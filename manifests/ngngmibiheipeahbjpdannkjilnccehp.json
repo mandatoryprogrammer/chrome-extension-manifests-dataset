@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "TryThis - Link Sharing for Slack",
+  "short_name": "TryThis",
+  "description": "Instantly post a link to your current page to any of your Slack channels.",
+  "version": "1.0.1",
+  "icons": {
+    "128": "icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://stackoverflow.com/*"
+      ],
+      "js": [
+        "injection.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html",
+    "default_title": "Share to Slack"
+  },
+  "web_accessible_resources": [
+    "slack.png"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "permissions": [
+    "activeTab",
+    "storage"
+  ]
+}

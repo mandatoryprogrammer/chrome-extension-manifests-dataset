@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Extension para hablar subtítulos",
+  "version": "1.1.0",
+  "default_locale": "en",
+  "description": "Reproductor de subtitulos cerrados en videos (Actualmente funcional en PluralSight)",
+  "icons": {
+    "16": "content/img/icon-16.png",
+    "48": "content/img/icon-48.png",
+    "128": "content/img/icon-128.png",
+    "256": "content/img/icon-256.png"
+  },
+  "page_action": {
+    "default_icon": {
+      "16": "content/img/icon-16.png",
+      "24": "content/img/icon-24.png",
+      "32": "content/img/icon-32.png"
+    },
+    "default_title": "__MSG_default_title__",
+    "default_popup": "app/page-action.html"
+  },
+  "background": {
+    "scripts": [
+      "app/background.js",
+      "app/helpers.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "all_frames": false,
+      "js": [
+        "app/content-script.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "minimum_chrome_version": "26",
+  "options_page": "app/page-options.html",
+  "permissions": [
+    "tts",
+    "tabs",
+    "declarativeContent"
+  ]
+}

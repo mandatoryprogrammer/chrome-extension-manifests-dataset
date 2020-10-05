@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "wechatGzh-helper",
+  "manifest_version": 2,
+  "version": "1.0.3",
+  "description": "wechatGzh-helper task lists. split type,source",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_title": "wechatGzh-helper"
+  },
+  "chrome_url_overrides": {
+    "history": "popup.html"
+  },
+  "permissions": [
+    "chrome://favicon/",
+    "history",
+    "tabs",
+    "storage",
+    "contextMenus",
+    "unlimitedStorage",
+    "webNavigation",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "background_script.js",
+      "js/jquery-1.9.1.min.js",
+      "js/jquery.base64.js",
+      "js/base64.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "http://weixin.sogou.com/*",
+        "https://weixin.sogou.com/*",
+        "http://mp.weixin.qq.com/*",
+        "https://mp.weixin.qq.com/*"
+      ],
+      "js": [
+        "wechatgzh_content_event.js"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Fastuna Usability Test",
+  "description": "Расширение для юзабилити-тестирования.",
+  "version": "2.0.0",
+  "default_locale": "ru",
+  "browser_action": {
+    "default_icon": "fastuna-icon-48x48.png"
+  },
+  "icons": {
+    "16": "fastuna-icon-16x16.png",
+    "32": "fastuna-icon-32x32.png",
+    "48": "fastuna-icon-48x48.png",
+    "128": "fastuna-icon-128x128.png"
+  },
+  "background": {
+    "scripts": [
+      "fastunaUsabilityTestExtension/js/backgroundScript.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "fastunaUsabilityTestExtension/js/contentScript.js"
+      ],
+      "css": [
+        "fastunaUsabilityTestExtension/css/contentStyles.css"
+      ],
+      "all_frames": false,
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "fastunaUsabilityTestExtension/images/common/*.png",
+    "fastunaUsabilityTestExtension/images/common/*.svg",
+    "*.svg",
+    "*.png"
+  ],
+  "permissions": [
+    "activeTab",
+    "desktopCapture",
+    "storage",
+    "tabs",
+    "tabCapture",
+    "<all_urls>",
+    "identity",
+    "https://www.googleapis.com/*",
+    "notifications"
+  ]
+}

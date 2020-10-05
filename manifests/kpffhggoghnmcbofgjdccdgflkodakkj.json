@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "readReddit, Readable text posts on reddit",
+  "author": "Creesch",
+  "short_name": "readReddit",
+  "description": "Takes any text post and reformats it to a pleasant to read format.",
+  "version": "0.14.0",
+  "options_ui": {
+    "page": "data/options/options.html",
+    "open_in_tab": true
+  },
+  "applications": {
+    "gecko": {
+      "id": "readReddit@toolbox.team",
+      "strict_min_version": "57.0"
+    }
+  },
+  "permissions": [
+    "https://*.reddit.com/",
+    "storage",
+    "tabs"
+  ],
+  "icons": {
+    "16": "data/images/icon16.png",
+    "48": "data/images/icon48.png",
+    "128": "data/images/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "data/libs/purify.js",
+      "data/libs/jquery-3.3.1.min.js",
+      "data/background/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "https://*.reddit.com/*"
+      ],
+      "css": [
+        "data/styles/global.css",
+        "data/styles/main.css",
+        "data/styles/light.css",
+        "data/styles/dark.css"
+      ],
+      "js": [
+        "data/libs/jquery-3.3.1.min.js",
+        "data/libs/jquery.viewportchecker.js",
+        "data/libs/readingtime.js",
+        "data/libs/purify.js",
+        "data/listener.js",
+        "data/utils.js",
+        "data/ui.js",
+        "data/main.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "/data/images/icon48.png",
+    "/data/images/moon25.png",
+    "/data/images/sun25.png"
+  ]
+}

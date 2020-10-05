@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "WASP.inspector: Analytics Solution Profiler",
+  "short_name": "WASP.inspector",
+  "version": "1.4.2",
+  "manifest_version": 2,
+  "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCNFVU8LS3WNJfgW0HzX0WNMymn4xYHxvfR+frJORmDVYCDeo/if1i2rPpm55Aa8+Z9YX5Z1HQLUmMMJM0c9yxFu/oViovGrG1OjbBjjcDjihH42gZJlOUhvUyIyxQCs1MoCgTonquZMGHf20eo9/g+jTmGrsq3dGjEv+zdMSwt2wIDAQAB",
+  "description": "Digital analytics quality made easy",
+  "minimum_chrome_version": "37",
+  "icons": {
+    "16": "img/WASPicon16.png",
+    "48": "img/WASPicon48.png",
+    "64": "img/WASPicon64.png",
+    "128": "img/WASPicon128.png"
+  },
+  "options_page": "options.html",
+  "devtools_page": "devtools.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/insert.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/CSSql.js",
+      "js/background.friendly.js",
+      "js/analytics.js",
+      "js/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "img/WASPicon16.png",
+      "48": "img/WASPicon48.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "chrome://favicon/",
+    "tabs",
+    "unlimitedStorage",
+    "webRequest",
+    "webRequestBlocking",
+    "http://*/*",
+    "https://*/*",
+    "storage"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com https://*.webanalyticssolutionprofiler.com https://*.cardinalpath.com; object-src 'self'"
+}

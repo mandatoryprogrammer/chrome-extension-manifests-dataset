@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Soroco Scout Browser Extension",
+  "version": "2.3.1",
+  "manifest_version": 2,
+  "author": "Soroco",
+  "short_name": "Scout Extension by Soroco",
+  "description": "Record information about actions taken in a browser.",
+  "icons": {
+    "16": "icons/icon.png",
+    "48": "icons/icon.png",
+    "128": "icons/icon.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "src/bg/background.js",
+      "js/jquery/jquery.min.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "icons/icon.png",
+    "default_title": "Scout Browser Extension",
+    "default_popup": "src/browser_action/browser_action.html"
+  },
+  "permissions": [
+    "nativeMessaging",
+    "<all_urls>",
+    "tabs"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "all_frames": true,
+      "match_about_blank": true,
+      "css": [
+        "src/inject/inject.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "all_frames": true,
+      "match_about_blank": true,
+      "js": [
+        "src/inject/inject.js"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "name": "__MSG_extName__",
+  "version": "1.0.0.8",
+  "manifest_version": 2,
+  "description": "__MSG_extDesc__",
+  "icons": {
+    "128": "Resources/128.png"
+  },
+  "default_locale": "en",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "page_action": {
+    "default_icon": "Resources/nb_button_grey.gif",
+    "default_popup": "popup.html",
+    "default_title": "__MSG_extTooltip__"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "ContentScript.js"
+      ],
+      "exclude_matches": [
+        "*://www.mcafee.com/SAE*",
+        "*://www.mcafee.com/SAE*"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "ContentOnDocStart.js"
+      ],
+      "exclude_matches": [
+        "*://www.mcafee.com/SAE*",
+        "*://www.mcafee.com/SAE*"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "WarnBlockContentScript.js"
+      ],
+      "matches": [
+        "*://www.mcafee.com/SAE*",
+        "*://www.mcafee.com/SAE*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "update_url": "http://clients2.google.com/service/update2/crx",
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "webNavigation",
+    "nativeMessaging"
+  ],
+  "web_accessible_resources": [
+    "Resources/mcafee.gif"
+  ]
+}

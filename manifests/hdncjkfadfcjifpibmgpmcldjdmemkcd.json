@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "YouTube Jukebox",
+  "version": "0.1.0",
+  "manifest_version": 2,
+  "description": "A Lightweight YouTube Jukebox overlay for Chrome",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "permissions": [
+    "storage",
+    "notifications",
+    "tabs",
+    "activeTab"
+  ],
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "web_accessible_resources": [
+    "views/yt-jukebox-main.html",
+    "views/yt-jukebox-single.html",
+    "bower_components/fontawesome/fonts/*.*",
+    "styles/css/yt-jukebox.css",
+    "templates/video-single.html",
+    "templates/parent-template.html"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/*"
+      ],
+      "js": [
+        "bower_components/jquery/dist/jquery.js",
+        "bower_components/underscore/underscore.js",
+        "bower_components/backbone/backbone.js",
+        "bower_components/backbone.localStorage/backbone.localStorage.js",
+        "bower_components/yt-iframe-api/www-widgetapi.js",
+        "js/setup.js",
+        "js/models/video-model.js",
+        "js/collections/videos-collection.js",
+        "js/views/video-model-view.js",
+        "js/views/parent-view.js",
+        "js/utils/async-css.js",
+        "js/content.js"
+      ],
+      "css": [
+        "bower_components/fontawesome/css/font-awesome.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

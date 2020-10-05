@@ -1,0 +1,82 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_ext_name__",
+  "version": "1.1",
+  "description": "Listen to all your favorite radio station and latest hits without leaving the browser.",
+  "browser_action": {
+    "default_icon": "icons/icon19on.png",
+    "default_title": "Open __MSG_ext_name__ New Tab"
+  },
+  "background": {
+    "scripts": [
+      "js/bg.js"
+    ],
+    "persistent": false
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "24": "icons/icon19on.png",
+    "128": "icons/icon128.png"
+  },
+  "chrome_url_overrides": {
+    "newtab": "newtab/wrap.html"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "newtab/newtab_files/tunein.js"
+      ],
+      "matches": [
+        "http://tunein.com/*?extension&*",
+        "https://tunein.com/*?extension&*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "css": [
+        "newtab/newtab_files/tunein.css"
+      ],
+      "matches": [
+        "http://tunein.com/*?extension&*",
+        "https://tunein.com/*?extension&*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "js": [
+        "js/installed.js"
+      ],
+      "matches": [
+        "http://__MSG_website__/",
+        "http://www.__MSG_website__/",
+        "http://__MSG_website__/index.html",
+        "http://www.__MSG_website__/index.html",
+        "https://__MSG_website__/",
+        "https://www.__MSG_website__/",
+        "https://__MSG_website__/index.html",
+        "https://www.__MSG_website__/index.html"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "newtab/newtab_files/tunein.css",
+    "newtab/newtab_files/player-header.png"
+  ],
+  "content_security_policy": "script-src 'self' https://searchfuelsuggest.seccint.com/ https://api.bing.com/ https://*.googleadservices.com/ https://www.googleadservices.com/ https://*.imgfarm.com/ https://*.webfetti.com/ https://*.wdgserv.com/ https://*.optimizely.com/ 'unsafe-eval'; object-src 'self' https://searchfuelsuggest.seccint.com/ https://api.bing.com/ https://*.googleadservices.com/ https://www.googleadservices.com/ https://*.imgfarm.com/ https://*.webfetti.com/ https://*.wdgserv.com/ https://*.optimizely.com/",
+  "permissions": [
+    "tabs",
+    "cookies",
+    "history",
+    "contextMenus",
+    "management",
+    "http://*/*",
+    "https://*/*",
+    "http://127.0.0.1/*",
+    "http://localhost/*",
+    "chrome://favicon/*",
+    "downloads"
+  ],
+  "default_locale": "en"
+}

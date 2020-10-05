@@ -1,0 +1,81 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Xbot",
+  "short_name": "Xbot",
+  "homepage_url": "https://www.getxbot.com/",
+  "version": "2.6",
+  "manifest_version": 2,
+  "description": "XBot is a Chrome extension that performs workarounds in Xero",
+  "icons": {
+    "128": "images/xbot.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "128": "images/icon_images.png"
+    },
+    "default_popup": "Home.html",
+    "default_title": ""
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "cookies",
+    "*://*/*",
+    "notifications",
+    "<all_urls>",
+    "unlimitedStorage",
+    "identity",
+    "https://www.googleapis.com/",
+    "background"
+  ],
+  "oauth2": {
+    "client_id": "590102467350-0m8nrbb05vesoi6mjsakj8tpue09qf0n.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/plus.login",
+      "https://www.googleapis.com/auth/chromewebstore.readonly"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://go.xero.com/AccountsReceivable/*",
+        "*://edge.xero.com/business/contactsautocompleter/*",
+        "*://go.xero.com/*",
+        "<all_urls>",
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "Extensions/jquery-3.2.1.min.js",
+        "Extensions/BlockInvoicing/js/content.js",
+        "Extensions/BulkVoid/script.js",
+        "Extensions/BankStatement/script.js",
+        "Extensions/buy.js",
+        "Extensions/app.js",
+        "Extensions/BulkVoid/jquery.js",
+        "/js/sweetalert.min.js",
+        "/js/jquery.min.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "Extensions/jquery-3.2.1.min.js",
+      "Extensions/BlockInvoicing/src/bg/background.js",
+      "Extensions/BankStatement/background.js",
+      "Extensions/backgroundMaster.js",
+      "Extensions/BulkVoid/background.js",
+      "Extensions/BulkVoid/script.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "Extensions/BlockInvoicing/src/browser_action/*",
+    "Extensions/BulkVoid/browser_Action/*",
+    "Extensions/BankStatement/browser_Action/*"
+  ],
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyI84YM1pt9YE5LtdUNA7A8KpaqxD1kSUcldP4fHx7QE+3VA7Gz4izhLlx697GrgRQKS2jzc8ZltsA1EeTo6XV8+C9jslZmvsPxl1R08/Wwwh6dbEX3wRmMjxnczO1u1PCR01OxAqilwZuUrigshae3SJrW8f86kTUYP7szGQVmXu2mlr3ls2+7AB3Zud3octxgt927YTJ9E3nlK1QMQ4x7oMLaHdBm6wndPkmSMUL+f8nj5RvKBdiAgq7k6zSZ2xizES00W7VriTestJtcooLWjNFNBfvvSRacVAgSUDkZxNKjKPaUDn/y7l3bBQa8YWBCwmrVmiLonR6fUqn+bL2QIDAQAB",
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.xero.com/*; object-src 'self'"
+}

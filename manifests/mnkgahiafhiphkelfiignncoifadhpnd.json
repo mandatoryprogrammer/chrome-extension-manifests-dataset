@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "version": "2.2.0",
+  "manifest_version": 2,
+  "description": "__MSG_appDescription__",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "128": "icons/icon-128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://*.hackerrank.net/*",
+      "*://hackerrank.com/*"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js; object-src 'self'",
+  "permissions": [
+    "tabs",
+    "storage",
+    "activeTab",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "options_ui": {
+    "open_in_tab": true,
+    "page": "options.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "scripts/contentscript.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/icon-19.png",
+      "38": "icons/icon-38.png"
+    },
+    "default_title": "HackerRank Codepair",
+    "default_popup": "popup.html"
+  }
+}

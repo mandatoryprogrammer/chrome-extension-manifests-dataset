@@ -1,0 +1,134 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_appName__",
+  "version": "4.4.2",
+  "short_name": "DocuSign",
+  "default_locale": "en",
+  "description": "__MSG_appDesc__",
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "permissions": [
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "contextMenus",
+    "activeTab",
+    "https://www.dropbox.com/home*",
+    "https://dl-web.dropbox.com/get*",
+    "https://*.docusign.com/*",
+    "https://*.docusign.net/Member/*",
+    "https://*chromeext/*"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/19.inactive.png",
+      "38": "icons/38.png"
+    },
+    "default_title": "DocuSign",
+    "default_popup": "shell.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.dropbox.com/*"
+      ],
+      "js": [
+        "lib/jquery.min.js",
+        "lib/jquery.bpopup.min.js",
+        "scripts/common.js",
+        "scripts/shell.js",
+        "scripts/logging-override.js",
+        "content-scripts/dropbox.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*/*.pdf*",
+        "file://*/*.pdf*"
+      ],
+      "js": [
+        "lib/jquery.min.js",
+        "lib/jquery.bpopup.min.js",
+        "scripts/common.js",
+        "scripts/shell.js",
+        "scripts/logging-override.js",
+        "content-scripts/pdf.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://app.docusign.com/home",
+        "https://appdemo.docusign.com/home",
+        "https://*.docusign.net/Member/Home.aspx"
+      ],
+      "all_frames": true,
+      "js": [
+        "lib/jquery.min.js",
+        "lib/jquery.bpopup.min.js",
+        "scripts/common.js",
+        "scripts/logging-override.js",
+        "content-scripts/post-landing.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*/chromeext/panel"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "content-scripts/social-login.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.docusign.com/username*",
+        "https://*.docusign.net/username*"
+      ],
+      "all_frames": true,
+      "js": [
+        "lib/jquery.min.js",
+        "content-scripts/federated-login.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.docusign.net/Member/MemberForgotPassword.aspx*"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "js": [
+        "content-scripts/forget-password.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://inbox.google.com/*"
+      ],
+      "js": [
+        "lib/jquery.min.js",
+        "lib/jquery.bpopup.min.js",
+        "lib/arrive-2.0.0.min.js",
+        "lib/decimal.min.js",
+        "scripts/common.js",
+        "scripts/shell.js",
+        "scripts/logging-override.js",
+        "content-scripts/inbox.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "shell.html",
+    "lib/*.js",
+    "scripts/*.js",
+    "content-scripts/gmail.inject.js",
+    "icons/*.png"
+  ],
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Reddit to Markdown",
+  "description": "Converts any reddit post to Markdown",
+  "version": "0.1.1",
+  "manifest_version": 2,
+  "page_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "256": "/images/icon256.png"
+    }
+  },
+  "icons": {
+    "128": "/images/icon128.png",
+    "256": "/images/icon256.png"
+  },
+  "permissions": [
+    "activeTab",
+    "clipboardWrite",
+    "declarativeContent"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.reddit.com/*"
+      ],
+      "js": [
+        "/lib/turndown.js",
+        "content.js"
+      ]
+    }
+  ]
+}

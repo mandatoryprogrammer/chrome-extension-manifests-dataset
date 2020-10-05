@@ -1,0 +1,84 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvTa3UZ0bAkhRf4QEvMFE2CvDziDPzr/Y6mjILzNAPM14DzWygwzGoANa44mNZCzuaectcgnK77H176tktnsCre2ZEjAK6EjSEVR8buxYRg6sKJ/kd0Gnwnm5b9eJ/vhO3hSujqVd2y7xbNWeUv/GQm/QgoS02uJX1BYgMCcXRsosl3TBZTWdQXqkDDkQ8yfKTE0mDMe3ANiqyvG4X309S0i61UWkYbWhMhsl7uLNaHfnBnPGLD9qSWD10lbokNhc8ghud1lQN9Ow+a4cOIUfiimLx4NvfUu7Hk0DnG3e9dhgpxs2Ph6z9w/dlCRuzbFllWd95NBnppM94KZqrLWGeQIDAQAB",
+  "manifest_version": 2,
+  "name": "Synereo WildSpark",
+  "description": "Synereo Attention Economy Layer",
+  "version": "3.3.0",
+  "version_name": "Iron 3.3.0",
+  "browser_action": {
+    "default_title": "WildSpark",
+    "default_popup": "assets/options/welcomeNew.html"
+  },
+  "background": {
+    "scripts": [
+      "assets/lib/jquery-3.3.1.min.js",
+      "assets/lib/underscore-min.js",
+      "assets/lib/background.utils.js",
+      "assets/lib/socket.io-2.0.4.js",
+      "assets/lib/wallet-address-validator.min.js",
+      "background/log.js",
+      "background/DAO.js",
+      "background/init.js",
+      "background/events.js",
+      "background/actions.js"
+    ]
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' 'sha256-JSfkMXJiAyWaA6Vo36mK6BYnBxRAsN6nquOCIcgBjc4=' 'sha256-spsm4QyjHtra/Oo8o4m7AmFCFlODQSP7vxrrpACV4nI=' https://www.google-analytics.com https://ssl.google-analytics.com ; object-src 'self'",
+  "permissions": [
+    "*://*/*",
+    "storage",
+    "cookies",
+    "tabs",
+    "identity",
+    "activeTab",
+    "identity.email",
+    "webNavigation"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.youtube.com/*",
+        "*://*.imgur.com/gallery/*",
+        "*://*.medium.com/*"
+      ],
+      "js": [
+        "assets/lib/jquery-3.3.1.min.js",
+        "assets/lib/utils.js",
+        "content/init.js",
+        "content/update-ui.js",
+        "content/events.js",
+        "content/widgetNew.js"
+      ],
+      "css": [
+        "assets/style/animations.css",
+        "assets/style/widgetNew.css",
+        "assets/style/welcome.css",
+        "assets/style/withdraw_deposit.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://wildspark.me/*",
+      "https://www.wildspark.me/*",
+      "https://api.wildspark.me/*",
+      "https://dev.wildspark.me/*",
+      "https://webstage.wildspark.me/*",
+      "https://devapp.wildspark.me/*",
+      "https://stageapp.wildspark.me/*"
+    ]
+  },
+  "icons": {
+    "128": "assets/images/icon.png",
+    "16": "assets/images/icon.png"
+  },
+  "web_accessible_resources": [
+    "assets/options/*",
+    "assets/text/*",
+    "assets/lib/*",
+    "assets/images/*",
+    "content/widget.templateNew.html"
+  ]
+}

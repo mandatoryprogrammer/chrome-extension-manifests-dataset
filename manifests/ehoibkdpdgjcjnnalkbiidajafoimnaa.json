@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Git Kanban Enhanced",
+  "short_name": "GKE",
+  "version": "0.0.7",
+  "description": "Kanban extensions for github, gitlab, gitea, and bitbucket",
+  "author": "http://github.com/lastlink",
+  "manifest_version": 2,
+  "icons": {
+    "16": "icons/16.png",
+    "128": "icons/128.png"
+  },
+  "homepage_url": "https://github.com/funktechno/git-kanban-enhanced-extension",
+  "applications": {
+    "gecko": {
+      "id": "git-kanban-enhanced-extension@funktechno.com"
+    }
+  },
+  "permissions": [
+    "*://github.com/*",
+    "*://bitbucket.org/*",
+    "*://gitlab.com/*",
+    "*://gitea.com/*",
+    "contextMenus",
+    "storage",
+    "webNavigation"
+  ],
+  "browser_action": {
+    "default_title": "Options Button",
+    "default_popup": "popup/popup.html"
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "js/inject.js"
+      ],
+      "exclude_matches": [
+        "*://extensions/*"
+      ],
+      "matches": [
+        "https://github.com/*",
+        "https://gitlab.com/*",
+        "https://bitbucket.org/*",
+        "https://gitea.com/*"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Locket",
+  "description": "Secure communication for the privacy-minded individual",
+  "version": "0.0.3",
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "http://www.messenger.com/",
+    "https://www.messenger.com/",
+    "http://www.facebook.com/",
+    "https://www.facebook.com/",
+    "https://hangouts.google.com/",
+    "http://hangouts.google.com/"
+  ],
+  "background": {
+    "page": "background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.facebook.com/*"
+      ],
+      "js": [
+        "bower_components/jquery/dist/jquery.js",
+        "facebook.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://localhost/*",
+        "https://quiet-shelf-3419.herokuapp.com/*",
+        "*://*.locketchat.com/*"
+      ],
+      "js": [
+        "bower_components/jquery/dist/jquery.js",
+        "main.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://hangouts.google.com/*"
+      ],
+      "js": [
+        "bower_components/jquery/dist/jquery.js",
+        "bower_components/D.js/lib/D.min.js",
+        "hangouts.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ]
+}

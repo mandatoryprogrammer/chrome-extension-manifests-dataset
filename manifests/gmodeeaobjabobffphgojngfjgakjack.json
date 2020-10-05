@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "划词翻译+云端单词本",
+  "description": "支持划词翻译，浏览网页时把生词添加到单词本统一管理和复习。learn-naturally.com 致力于探索最符合学习者心智模式的英语学习系统。",
+  "version": "1.2.0",
+  "icons": {
+    "16": "./icons/icon16.png",
+    "48": "./icons/icon48.png",
+    "128": "./icons/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "./icons/icon48.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "event_page.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content_script.js"
+      ]
+    }
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Q",
+        "mac": "MacCtrl+Q"
+      }
+    }
+  },
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "tabs",
+    "https://www.google-analytics.com/",
+    "http://dict.youdao.com/",
+    "http://learn-naturally.com/"
+  ]
+}

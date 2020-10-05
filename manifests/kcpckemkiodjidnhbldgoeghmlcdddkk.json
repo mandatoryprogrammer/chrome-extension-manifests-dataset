@@ -1,0 +1,56 @@
+{
+  "description": "Тысячи онлайн радиостанций с уникальным механизмом подбора радио именно на Ваш вкус. Долгие поиски радиостанций больше не нужны!",
+  "version": "0.3.91",
+  "manifest_version": 2,
+  "name": "Лучшие онлайн радио - The Radio",
+  "short_name": "Радио онлайн",
+  "homepage_url": "http://the-radio.ru/",
+  "icons": {
+    "16": "img/16.png",
+    "48": "img/48.png",
+    "128": "img/128.png"
+  },
+  "browser_action": {
+    "default_icon": "img/128.png",
+    "default_title": "Онлайн радио",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://the-radio.ru/*"
+      ],
+      "js": [
+        "js/content.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://the-radio.ru/*"
+      ],
+      "js": [
+        "js/start.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "js/inject.js",
+    "themes/*.*"
+  ],
+  "update_url": "http://clients2.google.com/service/update2/crx",
+  "permissions": [
+    "tabs",
+    "storage",
+    "*://the-radio.ru/*",
+    "*://x.the-radio.ru/ext/*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

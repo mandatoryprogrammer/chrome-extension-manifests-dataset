@@ -1,0 +1,42 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Cryptip",
+  "author": "Shawn Tabrizi",
+  "description": "Get cryptocurrency price information everywhere.",
+  "icons": {
+    "48": "icons/icon_48.png",
+    "96": "icons/icon_96.png"
+  },
+  "version": "2.0",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "https://api.coinmarketcap.com/"
+  ],
+  "browser_action": {
+    "default_icon": "icons/icon_48.png",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "./js/findAndReplaceDOMText.js",
+        "./js/browser-polyfill.min.js",
+        "./js/tippy.all.min.js",
+        "content.js"
+      ],
+      "css": [
+        "cryptip.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "options_ui": {
+    "page": "options.html"
+  },
+  "homepage_url": "http://shawntabrizi.com/cryptip/"
+}

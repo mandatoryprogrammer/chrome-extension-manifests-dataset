@@ -1,0 +1,75 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Snap It Button",
+  "short_name": "Snap It",
+  "description": "Discover paint colors from any image on the web.",
+  "version": "1.2.3",
+  "icons": {
+    "16": "icon_16.png",
+    "48": "icon_48.png",
+    "128": "icon_128.png"
+  },
+  "browser_action": {
+    "default_icon": "icon-disabled.png",
+    "default_title": "Snap It Button"
+  },
+  "background": {
+    "scripts": [
+      "js/vendor/jquery-2.1.4.min.js",
+      "js/config.js",
+      "js/service/SWColorSnap/RestAPI.js",
+      "js/service/Google/analyticsTracking.js",
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "http://*.snapyourcolors.com/*",
+        "https://*.snapyourcolors.com/*",
+        "http://*.letschipit.com/*",
+        "https://*.letschipit.com/*"
+      ],
+      "css": [
+        "css/app.css",
+        "css/highCompat.css"
+      ],
+      "js": [
+        "js/vendor/jquery-2.1.4.min.js",
+        "js/vendor/jquery-ui.min.js",
+        "js/vendor/popupwindow.js",
+        "js/vendor/tinysort.min.js",
+        "js/config.js",
+        "js/service/SWColorSnap/template.js",
+        "js/app.js"
+      ],
+      "exclude_matches": [
+        "http://snapyourcolors.com/*",
+        "https://snapyourcolors.com/*",
+        "http://*.snapyourcolors.com/*",
+        "https://*.snapyourcolors.com/*",
+        "http://letschipit.com/*",
+        "https://letschipit.com/*",
+        "http://*.letschipit.com/*",
+        "https://*.letschipit.com/*"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "permissions": [
+    "tabs",
+    "cookies",
+    "storage",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "web_accessible_resources": [
+    "css/img/*",
+    "images/*",
+    "templates/*"
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "TeamSync Bookmarks",
+  "version": "1.419",
+  "manifest_version": 2,
+  "description": "The easiest way to share and manage bookmarks and websites across a team",
+  "icons": {
+    "128": "img/icon128.png"
+  },
+  "author": "TeamSync Bookmarks, LLC",
+  "background": {
+    "page": "html/background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_popup": "html/main.html",
+    "default_icon": "img/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://teamsyncbookmarks.com/*?pickup=1"
+      ],
+      "js": [
+        "js/redirect.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://teamsyncbookmarks.com/pay.html*"
+      ],
+      "all_frames": true,
+      "js": [
+        "payment_cs.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://teamsyncbookmarks.com/updatecard.html*"
+      ],
+      "all_frames": true,
+      "js": [
+        "updatecard_cs.js"
+      ]
+    }
+  ],
+  "options_page": "html/options.html",
+  "web_accessible_resources": [
+    "html/options.html",
+    "payment_inject.js",
+    "updatecard_inject.js"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "permissions": [
+    "*://www.googleapis.com/*",
+    "bookmarks",
+    "notifications",
+    "identity",
+    "identity.email",
+    "contextMenus",
+    "storage"
+  ],
+  "oauth2": {
+    "client_id": "526769061249-4okek0bia63dg2cmj83mnklaplbarnl4.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/userinfo.profile"
+    ]
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhr6mMAgo+RF0BLKzaMcl8wnuSIpI6X47hBB4uf+HUiwRszUjLdLHP+LFng80lpKKXxGNYsf9m5NL5GykEsCSLG05/Z5nLP3+BPUZl3KWW8UEL/uwK3jTe/qmprN3Bx8VWnPnAhaRjaO3xWmzBIFDNamUre9ecPZaAOwecYqHEkxdjLKMW5M1GobeLoK1Xj9X20ereAh57T1zbk0WFVMdexIbWC2AAIKO2Ls3C3Q6u78U8ON0HzM8kop8WHiGDJ2IONBWIS81yoAhLUqqVhCLNMv1DTF3pm0xaLHWYB8jY7qMOEOJssmk4WzUpS9i6mfZD2TDSJDYR+jvIa7TFBIFBQIDAQAB"
+}

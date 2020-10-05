@@ -1,0 +1,75 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Optimize & Compress Images - Tinybeest",
+  "short_name": "Tinybeest",
+  "version": "1.1.1",
+  "author": "Wildebeest",
+  "homepage_url": "http://tinybeest.com",
+  "description": "Tinybeest makes it ridiculously simple to convert, resize, and optimize images",
+  "browser_action": {
+    "default_icon": "icons/icon128.png",
+    "default_popup": "src/popup.html"
+  },
+  "options_ui": {
+    "page": "src/options.html",
+    "open_in_tab": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "jquery-3.0.0.js",
+        "src/content.js",
+        "src/services/content-service.js"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "jquery-3.0.0.js",
+      "src/background.js",
+      "src/notifications.js",
+      "src/services/file-service.js",
+      "src/services/api-service.js",
+      "src/services/local-storage-service.js",
+      "src/services/context-menu-service.js",
+      "src/services/utility-service.js",
+      "src/services/user-service.js",
+      "src/services/processing-service.js"
+    ]
+  },
+  "oauth2": {
+    "client_id": "290195925983-5knjv0kd4e3dn3hr2kajt68ugbt1bbtr.apps.googleusercontent.com",
+    "scopes": [
+      "email"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "http://*.google.com/",
+    "http://googleapis.com/",
+    "contextMenus",
+    "storage",
+    "<all_urls>",
+    "downloads",
+    "identity",
+    "identity.email",
+    "notifications",
+    "*://*/*",
+    "https://tinybeest.com/"
+  ],
+  "web_accessible_resources": [
+    "images/*.png",
+    "images/*.svg"
+  ]
+}

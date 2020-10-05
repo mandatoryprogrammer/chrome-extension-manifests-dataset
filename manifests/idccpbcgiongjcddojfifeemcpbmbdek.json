@@ -1,0 +1,92 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Sixyards: personalised sport news",
+  "short_name": "Sixyards",
+  "description": "Sixyards learns your interests and delivers you personalised sport news on your top sites, including The BBC, Guardian & Sky Sports.",
+  "homepage_url": "http://sixyards.co",
+  "version": "1.0.3",
+  "manifest_version": 2,
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "js/vendor/jquery.js",
+      "environment.js",
+      "src/global.js",
+      "src/background/background.js"
+    ],
+    "persistent": true
+  },
+  "page_action": {
+    "default_icon": {
+      "19": "icons/page19.png",
+      "38": "icons/page38.png"
+    }
+  },
+  "options_page": "src/options/index.html",
+  "permissions": [
+    "storage",
+    "http://api.sixyards.co/*"
+  ],
+  "web_accessible_resources": [
+    "img/sixyards-icon-28.png",
+    "img/sixyards-location-bar.png",
+    "fonts/OpenSans-Light.ttf",
+    "fonts/OpenSans-Regular.ttf",
+    "fonts/OpenSans-Semibold.ttf",
+    "fonts/OpenSans-Bold.ttf"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.bbc.co.uk/sport/*"
+      ],
+      "css": [],
+      "js": [
+        "src/inject/page.js",
+        "src/inject/visits.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://www.bbc.co.uk/sport/0/",
+        "http://www.bbc.co.uk/sport/0/football/"
+      ],
+      "css": [
+        "css/bbcsport.css",
+        "css/tourbus.css"
+      ],
+      "js": [
+        "environment.js",
+        "src/global.js",
+        "js/vendor/jquery.js",
+        "js/vendor/handlebars.js",
+        "js/vendor/jquery.tourbus.js",
+        "js/vendor/jquery.scrollTo.js",
+        "src/inject/templates/tour.js",
+        "src/inject/templates/bbcsport.js",
+        "src/inject/recommendations/bbcsport.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://www.theguardian.com/uk"
+      ],
+      "css": [
+        "css/guardian.css"
+      ],
+      "js": [
+        "environment.js",
+        "src/global.js",
+        "js/vendor/jquery.js",
+        "js/vendor/handlebars.js",
+        "src/inject/templates/guardian.js",
+        "src/inject/recommendations/guardian.js"
+      ]
+    }
+  ]
+}

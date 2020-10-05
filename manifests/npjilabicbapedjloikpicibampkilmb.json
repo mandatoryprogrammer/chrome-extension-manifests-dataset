@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "ESPN Fantasy Tools",
+  "version": "0.7.1",
+  "manifest_version": 2,
+  "description": "This is simple tool to analyze fantasy basketball (and football coming soon) statistics",
+  "icons": {
+    "16": "icon-16.png",
+    "48": "icon-128.png",
+    "128": "icon-128.png"
+  },
+  "browser_action": {
+    "default_icon": "icon-128.png",
+    "default_popup": "popup/index.html"
+  },
+  "permissions": [
+    "<all_urls>"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://games.espn.com/fba/*"
+      ],
+      "css": [
+        "espn_fantasy.css",
+        "espn_fbb.css"
+      ]
+    },
+    {
+      "matches": [
+        "http://games.espn.com/ffl/*"
+      ],
+      "css": [
+        "espn_fantasy.css",
+        "espn_ffl.css"
+      ]
+    },
+    {
+      "js": [
+        "jquery-3.2.1.min.js",
+        "ffb-analyzer.js"
+      ],
+      "matches": [
+        "http://games.espn.com/fba/clubhouse*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ajax.googleapis.com https://cdnjs.cloudflare.com; object-src 'self'"
+}

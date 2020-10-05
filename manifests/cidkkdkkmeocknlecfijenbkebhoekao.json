@@ -1,0 +1,87 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Messenger Message Cleaner",
+  "short_name": "Messenger Message cleaner",
+  "description": "Delete All Messages for Facebook™ (from desktop & smartphone)",
+  "version": "2.3.1.2",
+  "icons": {
+    "16": "icons/fb_message_cleaner16.png",
+    "48": "icons/fb_message_cleaner48.png",
+    "128": "icons/fb_message_cleaner128.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/fb_message_cleaner16.png",
+    "default_title": "Message Cleaner",
+    "default_popup": "screens/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "js/constants.min.js",
+      "js/background.js",
+      "js/utils.min.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.facebook.com/*",
+        "https://facebook.com/*",
+        "http://facebook.com/*",
+        "https://m.facebook.com/*",
+        "http://www.facebook.com/*",
+        "http://m.facebook.com/*",
+        "http://mbasic.facebook.com/*",
+        "https://mbasic.facebook.com/*"
+      ],
+      "js": [
+        "js/constants.min.js",
+        "js/utils.min.js",
+        "js/userinfo.min.js",
+        "js/content.min.js",
+        "js/analytics.min.js"
+      ]
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "js/inject_end.js",
+        "js/ad.js"
+      ],
+      "matches": [
+        "https://www.facebook.com/*",
+        "https://facebook.com/*",
+        "http://facebook.com/*",
+        "https://m.facebook.com/*",
+        "http://www.facebook.com/*",
+        "http://m.facebook.com/*",
+        "http://mbasic.facebook.com/*",
+        "https://mbasic.facebook.com/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "tabs",
+    "storage",
+    "https://www.facebook.com/*",
+    "https://www.fbmessagecleaner.com/*",
+    "https://facebook.com/*",
+    "http://facebook.com/*",
+    "https://m.facebook.com/*",
+    "http://www.facebook.com/*",
+    "http://m.facebook.com/*",
+    "http://mbasic.facebook.com/*",
+    "https://mbasic.facebook.com/*"
+  ],
+  "web_accessible_resources": [
+    "screens/fb_cleaner.html",
+    "screens/index.html",
+    "img/analyze.png",
+    "img/brush.png",
+    "img/ad.gif"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

@@ -1,0 +1,43 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Video Blocker",
+  "description": "Video Blocker",
+  "version": "1.0.4",
+  "permissions": [
+    "tabs",
+    "storage",
+    "contextMenus"
+  ],
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png"
+  },
+  "browser_action": {
+    "default_popup": "popup.html",
+    "title": "test"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.youtube.com/*",
+        "http://*.youtube.com/*"
+      ],
+      "js": [
+        "js/jquery-2.0.3.min.js",
+        "js/analytics.js",
+        "js/custom_content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/jquery-2.0.3.min.js",
+      "js/analytics.js",
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'"
+}

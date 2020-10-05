@@ -1,0 +1,77 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "name": "ApplicantList",
+  "version": "1.2.2",
+  "description": "It's easy to add new hires into your payroll/hris system directly from this extension.",
+  "homepage_url": "https://admin.applicantlist.com/",
+  "author": "ApplicantList",
+  "icons": {
+    "16": "icons/onkocnmcddononljokhdgbbfjkdbihij/16.png",
+    "48": "icons/onkocnmcddononljokhdgbbfjkdbihij/48.png",
+    "128": "icons/onkocnmcddononljokhdgbbfjkdbihij/128.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/onkocnmcddononljokhdgbbfjkdbihij/128.png",
+    "default_title": "ApplicantList",
+    "default_popup": "browser_action/index.html"
+  },
+  "background": {
+    "scripts": [
+      "jquery/jquery-3.3.1.min.js",
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "https://*/*",
+    "http://*/*",
+    "storage",
+    "cookies",
+    "contextMenus"
+  ],
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "jquery/jquery-3.3.1.min.js",
+        "js/content.js"
+      ],
+      "css": [
+        "css/jquery-ui.min.css",
+        "css/jqui_changes.css",
+        "css/popin.css"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "all_frames": true,
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "jquery/jquery-3.3.1.min.js",
+        "jquery/jquery-ui.min.js",
+        "js/portable.js"
+      ],
+      "css": [
+        "css/jquery-ui.min.css",
+        "css/jqui_changes.css",
+        "css/popup_selector.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "web_access/*",
+    "browser_action/person.html",
+    "images/header/*",
+    "css/popin.css",
+    "js/*"
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_extName__",
+  "version": "3.6.8",
+  "manifest_version": 2,
+  "minimum_chrome_version": "62",
+  "default_locale": "ru",
+  "description": "__MSG_extDescription__",
+  "author": "Vadim Bogaiskov",
+  "homepage_url": "https://azbyka.ru/extension",
+  "icons": {
+    "16": "img/av16x16.png",
+    "48": "img/av48x48.png",
+    "128": "img/av128x128.png"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": false,
+    "open_in_tab": false
+  },
+  "background": {
+    "scripts": [
+      "reconnecting-websocket.min.js",
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "tabs",
+    "storage"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "16": "img/av16x16.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "web_accessible_resources": [
+    "img/av48x48.png",
+    "img/expand.png",
+    "bible/*"
+  ],
+  "content_scripts": [
+    {
+      "js": [
+        "jquery-3.3.1.min.js",
+        "general.js",
+        "content.js"
+      ],
+      "css": [
+        "css/tooltip.css"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "http://azbyka.ru/*",
+        "https://azbyka.ru/*"
+      ]
+    },
+    {
+      "js": [
+        "azbyka.js"
+      ],
+      "matches": [
+        "http://azbyka.ru/*",
+        "https://azbyka.ru/*"
+      ]
+    }
+  ],
+  "commands": {
+    "player-on-off": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+0"
+      },
+      "description": "Player On/Off"
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Stackoverflow Likes",
+  "short_name": "Stackoverflow Likes",
+  "version": "0.0.13",
+  "manifest_version": 2,
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAoky/MnmU6ST75/mjJdRGUlSxMVj8SsDKnbc8690aEmE3LKJ3UwCwKZcEnW4bYkSAdwDpwLfKVcH1fqXikgsKH/5AXpWLxsyMq4vc/uhpVYYfam6OYeXyKjP53KBS1u9i0tfCvDL+r6z0Dv7/lchVf/C4tUBHtbh1cVSP2H+tZHFhHsPT3b1WGB36LihFDVrQ0wl9qswPDiyNqcp/cvwvI4+2BHdnZbFVHKWFyChh4Kl90YfNoi2zUOZeyPuojLMzvRCuK11kHPK24e2bMsz0XiGcQtaIcnUL7nPjqyfvkq7lx34iGjruvo26vbo7JEgbJJWsahl52lQ9wZnzm1EgXQIDAQAB",
+  "description": "Collect questions or anwsers on Stack Overflow",
+  "homepage_url": "https://github.com/xralphack/Stackoverflow-Likes",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "page": "src/bg/background.html",
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://stackoverflow.com/questions/*",
+        "http://stackoverflow.com/questions/*"
+      ],
+      "css": [
+        "src/inject/inject.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://stackoverflow.com/questions/*",
+        "http://stackoverflow.com/questions/*"
+      ],
+      "js": [
+        "vendor/jquery/jquery.min.js",
+        "js/helper.js",
+        "src/inject/inject.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "storage",
+    "tabs",
+    "http://stackoverflow.com/questions/*",
+    "https://stackoverflow.com/questions/*"
+  ],
+  "browser_action": {
+    "default_popup": "src/browser_action/browser_action.html"
+  },
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'"
+}

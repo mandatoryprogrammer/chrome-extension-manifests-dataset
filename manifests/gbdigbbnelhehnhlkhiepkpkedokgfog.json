@@ -1,0 +1,43 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "BriskNote: New Tab Notes that Sync with Phone",
+  "description": "Take Quick Notes on Any New Browser Tab and Sync them with your Phone",
+  "version": "0.2.1",
+  "version_name": "0.2.1",
+  "icons": {
+    "128": "media/BriskNote_Icon_128x128.png",
+    "48": "media/BriskNote_Icon_48x48.png",
+    "16": "media/BriskNote_Icon_16x16.png"
+  },
+  "browser_action": {
+    "default_icon": "media/BriskNote_Icon_16x16.png"
+  },
+  "chrome_url_overrides": {
+    "newtab": "notes.html"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "identity"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://localhost:5005/auth/*",
+        "http://localhost:5006/auth/*",
+        "http://brisknote.com/auth/*",
+        "https://brisknote.com/auth/*",
+        "https://api.brisknote.com/auth/*"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ]
+}

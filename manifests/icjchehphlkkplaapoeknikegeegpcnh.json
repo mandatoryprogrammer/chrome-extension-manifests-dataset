@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Skyscanner 旅行APP: 幫助您找到最優惠的機票價格",
+  "version": "1.0.2",
+  "description": "Skyscanner 幫助您找到最優惠的機票價格",
+  "manifest_version": 2,
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "/libraries/jquery-3.3.1.min.js",
+        "libraries/jquery-dateformat.min.js",
+        "content.js"
+      ],
+      "css": [
+        "main.css"
+      ],
+      "matches": [
+        "https://www.google.com/search?*",
+        "https://www.google.com.tw/search?*",
+        "https://www.google.com.hk/search?*"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "web_accessible_resources": [
+    "sky.html",
+    "mapping.csv"
+  ],
+  "background": {
+    "scripts": [
+      "libraries/jquery-3.3.1.min.js",
+      "libraries/jquery-csv.min.js",
+      "libraries/jquery-dateformat.min.js",
+      "libraries/chrome-extension-async.js",
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "storage",
+    "alarms",
+    "tabs",
+    "http://partners.api.skyscanner.net/apiservices/*",
+    "https://docs.google.com/spreadsheets/*"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/16×16.png",
+      "24": "icons/48×48.png",
+      "32": "icons/128×128.png"
+    },
+    "default_title": "Skyscanner Extension"
+  }
+}

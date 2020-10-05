@@ -1,0 +1,73 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "vLex",
+  "version": "4.2",
+  "description": "__MSG_appDesc__",
+  "default_locale": "en",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "webRequest",
+    "<all_urls>"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js; object-src 'self'",
+  "web_accessible_resources": [
+    "resources/q.min.js",
+    "iframe/search.html",
+    "resources/extensionChecker.js",
+    "iframe/stream.html",
+    "webContent/*.png"
+  ],
+  "background": {
+    "scripts": [
+      "env.js",
+      "resources/mixpanel_lib.js",
+      "resources/q.min.js",
+      "resources/cache.js",
+      "background/configs.js",
+      "background/product.js",
+      "background/searcher.js",
+      "background/content_filter.js",
+      "background/session.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "resources/jquery-min.js",
+        "resources/q.min.js",
+        "resources/analytics.js",
+        "webContent/framer.js",
+        "webContent/contentScript.js"
+      ],
+      "css": [
+        "webContent/content.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "webContent/vcite.js",
+        "webContent/vcite_locales.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "browser_action": {
+    "default_icon": "resources/vlex-logo-128.png",
+    "default_popup": "popupContent/popup.html"
+  },
+  "icons": {
+    "16": "resources/vlex-logo-app.png",
+    "48": "resources/vlex-logo-app.png",
+    "128": "resources/vlex-logo-app.png"
+  }
+}

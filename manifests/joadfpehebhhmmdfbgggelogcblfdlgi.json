@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Tweetdeck Gif Extension",
+  "version": "1.3.0",
+  "description": "Tweetdeck Gif Extension desc",
+  "permissions": [
+    "notifications",
+    "activeTab",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "http://*/*",
+    "https://*/*",
+    "storage"
+  ],
+  "browser_action": {
+    "default_popup": "html/popup.html",
+    "default_title": "Tweetdeck Gif Extension",
+    "default_icon": {
+      "128": "icons/icon-128.png",
+      "48": "icons/icon-48.png",
+      "38": "icons/icon-38.png",
+      "24": "icons/icon-19.png",
+      "16": "icons/icon-16.png"
+    }
+  },
+  "icons": {
+    "128": "icons/icon-128.png",
+    "48": "icons/icon-48.png",
+    "38": "icons/icon-38.png",
+    "24": "icons/icon-19.png",
+    "16": "icons/icon-16.png"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "background": {
+    "scripts": [
+      "js/jquery.js",
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://tweetdeck.twitter.com/*"
+      ],
+      "js": [
+        "js/jquery.js",
+        "js/content.js",
+        "js/twitterUpload.js",
+        "js/oauth.js"
+      ],
+      "css": [
+        "css/twitter_more_1.bundle.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    "js/bundle.js",
+    "images/*"
+  ],
+  "manifest_version": 2
+}

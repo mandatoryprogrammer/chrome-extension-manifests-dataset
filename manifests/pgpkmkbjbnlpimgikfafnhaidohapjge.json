@@ -1,0 +1,96 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "we advocacy notification chrome extension",
+  "version": "5.0",
+  "description": "Change the way you communicate within your company",
+  "homepage_url": "https://www.weadvocacy.fr",
+  "author": "we advocacy",
+  "icons": {
+    "16": "images/icons/16.png",
+    "48": "images/icons/48.png",
+    "128": "images/icons/128.png"
+  },
+  "web_accessible_resources": [
+    "images/*.png",
+    "images/**/*.png",
+    "css/*.css",
+    "css/**/*.css",
+    "webfonts/*",
+    "options/*",
+    "frame/*",
+    "gmail/*",
+    "o365/*",
+    "response.json"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "browser_action": {
+    "browser_style": true,
+    "default_icon": {
+      "48": "images/icons/48-grey.png"
+    }
+  },
+  "options_ui": {
+    "page": "options/index.html",
+    "open_in_tab": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "wavars.js",
+        "main.js"
+      ],
+      "all_frames": false,
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://app.weadvocacy.com/userx",
+        "https://app.weadvocacy.fr/userx",
+        "http://localhost/userx",
+        "http://localhost:8080/userx"
+      ],
+      "js": [
+        "userx.js"
+      ],
+      "all_frames": false,
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://mail.google.com/*"
+      ],
+      "js": [
+        "gmail/main.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://outlook.office.com/mail/*"
+      ],
+      "js": [
+        "o365/main.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "cookies",
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "*://localhost/*",
+    "*://app.weadvocacy.com/*",
+    "*://app.weadvocacy.fr/*",
+    "*://outlook.office.com/*"
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "高魔方外贸商家工具",
+  "version": "0.37",
+  "manifest_version": 2,
+  "description": "高魔方外贸商家工具致力于提升外贸卖家在电商平台的选品、营销、物流、客服等各个环节的效率。高魔方，助力高销量。",
+  "browser_action": {
+    "default_icon": "img/icon16.png",
+    "default_popup": "html/popup.html"
+  },
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://trade.aliexpress.com/*"
+      ],
+      "js": [
+        "build/js/tradePage.bundle.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://*.aliexpress.com/item/*/*",
+        "http://*.aliexpress.com/store/product/*"
+      ],
+      "js": [
+        "build/js/itemPage.bundle.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "img/*.png",
+    "img/*.gif",
+    "html/options.html"
+  ],
+  "options_page": "html/options.html",
+  "background": {
+    "scripts": [
+      "build/js/background.bundle.js"
+    ]
+  },
+  "permissions": [
+    "http://127.0.0.1:5000/api/*",
+    "http://gaomofang.com/api/*",
+    "http://*.aliexpress.com/*",
+    "http://www.17track.net/*",
+    "storage",
+    "alarms",
+    "notifications"
+  ]
+}

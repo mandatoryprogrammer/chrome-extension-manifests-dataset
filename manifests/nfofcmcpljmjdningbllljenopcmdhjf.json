@@ -1,0 +1,102 @@
+{
+  "browser_action": {
+    "default_icon": "lightgreen.png",
+    "default_title": "AllBlock"
+  },
+  "description": "__MSG_appDesc__",
+  "default_locale": "en",
+  "manifest_version": 2,
+  "name": "AllBlock",
+  "background": {
+    "scripts": [
+      "bg.js",
+      "js/install_handlers.js"
+    ]
+  },
+  "icons": {
+    "128": "lightgreen.png"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.google-analytics.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.facebook.com/*"
+      ],
+      "js": [
+        "pages/fas.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.facebook.com/view/vs/*"
+      ],
+      "js": [
+        "pages/fvs.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://www.youtube.com/*"
+      ],
+      "js": [
+        "pages/yt.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.facebook.com/*",
+        "*://*.facebookcorewwwi.onion/*"
+      ],
+      "css": [
+        "css/fb2.css"
+      ],
+      "js": [
+        "pages/fb2.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "pages/vk.js"
+      ],
+      "matches": [
+        "https://new.vk.com/*",
+        "http://new.vk.com/*",
+        "https://vk.com/*",
+        "http://vk.com/*"
+      ]
+    },
+    {
+      "all_frames": true,
+      "css": [],
+      "js": [
+        "pages/vk_audio.js"
+      ],
+      "matches": [
+        "*://vk.com/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  },
+  "web_accessible_resources": [
+    "css/style.css"
+  ],
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "tabs",
+    "contentSettings",
+    "<all_urls>",
+    "storage"
+  ],
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "1.55"
+}

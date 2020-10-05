@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "PageProbe - Automatic Page Monitor",
+  "short_name": "PageProbe",
+  "version": "1.27.2",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "description": "Create automatic monitors for detecting and scanning changes on web pages.",
+  "icons": {
+    "16": "images/pageprobe-16.png",
+    "48": "images/pageprobe-48.png",
+    "64": "images/pageprobe-64.png",
+    "128": "images/pageprobe-128.png"
+  },
+  "homepage_url": "https://nodetics.com/pageprobe",
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "permissions": [
+    "tabs",
+    "http://*/",
+    "https://*/",
+    "storage",
+    "unlimitedStorage",
+    "contextMenus",
+    "notifications"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/cssselector.js",
+        "js/content.js",
+        "js/cron.js",
+        "js/inject.js"
+      ],
+      "css": [
+        "css/pageprobe.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "browser_action": {
+    "default_icon": "images/pageprobe-48.png",
+    "default_title": "PageProbe"
+  }
+}

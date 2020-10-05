@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "BBC iPlayer subscription manager",
+  "version": "0.0.2",
+  "manifest_version": 2,
+  "description": "Subscribe to the BBC TV shows, Series, Documentaries, etc. and get notified when a new episode becomes available on the iPlayer",
+  "homepage_url": "http://blog.inadram.com",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "page": "src/bg/background.html",
+    "persistent": true
+  },
+  "options_page": "src/options_custom/index.html",
+  "browser_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "iPlayer subscription",
+    "default_popup": "src/browser_action/browser_action.html"
+  },
+  "permissions": [
+    "chrome://favicon/",
+    "storage",
+    "management",
+    "notifications",
+    "tabs",
+    "http://bbc.co.uk/*",
+    "http://*.bbc.co.uk/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.bbc.co.uk/iplayer/episode/*"
+      ],
+      "js": [
+        "src/inject/inject.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "src/inject/bbc.js",
+    "src/inject/bbc.css"
+  ]
+}

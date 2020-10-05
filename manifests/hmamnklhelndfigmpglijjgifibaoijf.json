@@ -1,0 +1,70 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Agfa JIRA",
+  "version": "0.8.0",
+  "description": "Adds custom actions to JIRA issue pages",
+  "homepage_url": "https://github.com/blairconrad/AgfaJiraChromeExtension",
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "background": {
+    "page": "background.html",
+    "persistent": false
+  },
+  "page_action": {
+    "default_icon": {
+      "16": "icon16.png"
+    },
+    "default_title": "AGFA JIRA",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://jiraprod.agfahealthcare.com/*"
+      ],
+      "js": [
+        "content_script.js"
+      ]
+    }
+  ],
+  "commands": {
+    "copy-title": {
+      "suggested_key": {
+        "default": "Alt+T"
+      },
+      "description": "Copy title"
+    },
+    "copy-link": {
+      "suggested_key": {
+        "default": "Alt+L"
+      },
+      "description": "Copy link as markdown"
+    },
+    "copy-html-link": {
+      "suggested_key": {
+        "default": "Alt+H"
+      },
+      "description": "Copy link as HTML"
+    },
+    "send-email": {
+      "suggested_key": {
+        "default": "Alt+S"
+      },
+      "description": "Email issue"
+    }
+  },
+  "permissions": [
+    "activeTab",
+    "clipboardWrite",
+    "declarativeContent",
+    "storage"
+  ]
+}

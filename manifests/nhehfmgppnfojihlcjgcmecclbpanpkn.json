@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "author": "Fluvius",
+  "name": "Make Cents",
+  "description": "This extension provides the possibility to financially support any kind of content in the Internet media",
+  "version": "1.0.8",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmuxiox4u3wCHgIvf9+mR3EuqUJok+Mv1XcUgTD3ZK3dPKW1DIrybJfymEQgjeqtswzyOV9agxTxZVZ/cIZmoom/Pa7+JnoKArBVYp9QD9KZzqrPiCE0BPqrw/SE7BNF0YQPPgsZ9GK9XuHovxhyqqVmJHGDVglyDhvmhikim1XuhPlc5x0Oo/XlBkUvkEgh56bcSBwPhDfzm5di3It65TV27gO45EvsabaGaxxPSN+SVyrYRUEBSr1xBjd5AUh56n2JIupmKLrQDKNne2IMMMQIq0m+slenAgsMK6Uee1Y6k+cH4jiECMZNVjJFD4rkfni/JAueBsINKq4puiidQtwIDAQAB",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "128": "icon-grey-light.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "js": [
+        "node_modules/systemjs/dist/system.src.js",
+        "systemjs.contentconfig.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "content/*.js",
+    "common/*.js"
+  ],
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "storage",
+    "identity",
+    "https://www.facebook.com/*",
+    "http://localhost:5000/*",
+    "https://makecents.online/*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

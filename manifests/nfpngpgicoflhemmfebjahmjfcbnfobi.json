@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "PageOptimizer Pro",
+  "version": "0.31",
+  "version_name": "0.31",
+  "description": "The PageOptimizer Pro extension syncs with the on page SEO tool, PageOptimizer Pro",
+  "icons": {
+    "128": "/img/logo.png"
+  },
+  "browser_action": {
+    "default_icon": "/img/logo.png",
+    "default_popup": "/pages/popup/index.html"
+  },
+  "background": {
+    "scripts": [
+      "/lib/jquery.min.js",
+      "/lib/jszip.min.js",
+      "/lib/webx.js",
+      "/lib/url.min.js",
+      "/js/chrome_promise.js",
+      "/js/background/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "run_at": "document_start",
+      "matches": [
+        "http://webx_local_test_page.com:8080/pages/demo_page/*",
+        "http://webx_local_test_page.com:8090/pages/demo_page/*",
+        "http://localhost:5500/src/pages/demo_page/*",
+        "https://app.pageoptimizer.pro/*"
+      ],
+      "js": [
+        "/lib/jquery.min.js",
+        "/js/content_scripts/demo_cs.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "storage",
+    "webNavigation",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "web_accessible_resources": [
+    "/*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://connect.facebook.net; object-src 'self'"
+}

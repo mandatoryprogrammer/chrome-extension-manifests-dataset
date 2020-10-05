@@ -1,0 +1,92 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "森果图片采集工具",
+  "version": "1.0.1",
+  "manifest_version": 2,
+  "description": "这个扩展程序可以让你方便地从任意网站上采集喜欢的图片或者网页截图到森果网上。这是森果网官方提供的扩展。",
+  "icons": {
+    "16": "images/logo_16.png",
+    "48": "images/logo_48.png",
+    "128": "images/logo_128.png"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "options_page": "preferences.html",
+  "browser_action": {
+    "default_icon": {
+      "19": "images/logo_19.png",
+      "38": "images/logo_38.png"
+    },
+    "default_title": "森果图片采集工具",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "exclude_globs": [
+        "http://www.sengo.cn/*",
+        "http://www.sengo.cn/*",
+        "http://localhost*",
+        "http://local*",
+        "http://127.0.0.1*"
+      ],
+      "include_globs": [
+        "*"
+      ],
+      "js": [
+        "js/script.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "js/page.js",
+        "js/shortcut.js"
+      ],
+      "css": [
+        "css/capture.css"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "js/isload.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "js": [
+        "js/transmit.js"
+      ],
+      "matches": [
+        "http://www.sengo.cn/*",
+        "https://www.sengo.cn/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "permissions": [
+    "contextMenus",
+    "notifications",
+    "storage",
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "activeTab",
+    "<all_urls>"
+  ],
+  "minimum_chrome_version": "26"
+}

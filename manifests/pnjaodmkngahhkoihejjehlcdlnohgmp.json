@@ -1,0 +1,108 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "RSS Feed Reader",
+  "short_name": "feeder",
+  "version": "7.7.5",
+  "manifest_version": 2,
+  "description": "Get a simple overview of your RSS and Atom feeds in the toolbar",
+  "icons": {
+    "19": "icons/icon-retina.png",
+    "48": "icons/icon48x48.png",
+    "128": "icons/icon128x128.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/icon-retina.png",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "content/content.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "all_frames": true,
+      "run_at": "document_end",
+      "js": [
+        "content/page_plugin.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://feeder.co/*",
+        "http://*.feeder.co/*",
+        "https://feeder.co/*",
+        "https://*.feeder.co/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "content/feeder_api.js"
+      ]
+    }
+  ],
+  "intents": {
+    "http://webintents.org/view": [
+      {
+        "type": [
+          "application/rss+xml",
+          "application/atom+xml"
+        ],
+        "href": "/options.html?with_intent=feed",
+        "title": "Subscribe to feed using Feeder",
+        "disposition": "window"
+      }
+    ],
+    "http://webintents.org/subscribe": [
+      {
+        "type": [
+          "application/rss+xml",
+          "application/atom+xml"
+        ],
+        "href": "/options.html?with_subscribe_intent=subscribe",
+        "title": "Subscribe to feed using Feeder",
+        "disposition": "window"
+      }
+    ]
+  },
+  "background": {
+    "page": "main.html"
+  },
+  "background_page": "main.html",
+  "web_accessible_resources": [
+    "icons/icon48x48.png",
+    "icons/bar-buttons-good_2x.png",
+    "icons/icon-retina.png"
+  ],
+  "options_page": "settings_redirect.html",
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com https://www.google-analytics.com; object-src 'self'",
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+R",
+        "linux": "Ctrl+Shift+R",
+        "windows": "Ctrl+Shift+R",
+        "mac": "Alt+Shift+R"
+      }
+    }
+  },
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "chrome://favicon/",
+    "storage",
+    "notifications",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking",
+    "unlimitedStorage"
+  ]
+}

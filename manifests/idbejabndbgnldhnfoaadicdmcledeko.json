@@ -1,0 +1,67 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Gmail CRM Extension",
+  "version": "1.1.0",
+  "description": "Append email body as a note on the client in a chosen CRM",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAoYGWBH3J/TWfNpBfFLX5ohkqxp7Txr1NJOfMKW+ysKycKLPy1w4a1/nGAjnFAcoyR+5X2QdHJWh9ZZESK4NesYmtz3SCbAuwkFxfj2DxTd9tf98Jp5dvxeM49N40Bu+RbXhdyta/isQdBHA2+NLHipsveC/cFJucr/EbYE8iWXhs6reyrInkfkIgHesmaI8ZRLOgaHuatPcxsUvDjCBaX/cZIX6+LteUthVM7dgrlOWuweI+rtDsBPxP8kP8CBvX1IqIJylxlYcEdrsWOVD1eX7uVh4h8EDyauR+2F9xyYWD+oyyedKtZQF15wHO72IuYcqzdiTvv2e61QshjvNYOwIDAQAB",
+  "permissions": [
+    "identity",
+    "identity.email",
+    "notifications",
+    "tabs",
+    "storage",
+    "https://mail.google.com/",
+    "https://pike13.com/",
+    "https://www.googleapis.com/gmail/"
+  ],
+  "web_accessible_resources": [
+    "app/images/personNote.png",
+    "app/images/pike13_logo-144.png",
+    "app/images/error-96.png",
+    "app/images/warning-96.png",
+    "app/images/ok-96.png",
+    "app/images/settings-26.png"
+  ],
+  "icons": {
+    "16": "app/images/icon16.png",
+    "48": "app/images/icon48.png",
+    "128": "app/images/icon100.png"
+  },
+  "background": {
+    "scripts": [
+      "app/globals/crmGlobals.js",
+      "lib/jquery-3.3.1.min.js",
+      "app/services/pike13.js",
+      "app/services/gmailApi.js",
+      "app/background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_popup": "app/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "lib/jquery-3.3.1.min.js",
+        "lib/inboxsdk.js",
+        "app/content.js"
+      ],
+      "css": [
+        "app/content.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "options_page": "app/options.html",
+  "manifest_version": 2,
+  "oauth2": {
+    "client_id": "862314659714-sct5u5ejcproqe3j18783jf3emnf2q6a.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/gmail.modify"
+    ]
+  }
+}

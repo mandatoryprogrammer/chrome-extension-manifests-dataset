@@ -1,0 +1,205 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Technion Plus",
+  "version": "2.2.0",
+  "description": "Get the Technion's web-experience out of the stone age.",
+  "author": "Maor Levy",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "19": "icons/icon-19.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "96": "icons/icon-96.png",
+    "128": "icons/icon-128.png"
+  },
+  "background": {
+    "page": "background.html",
+    "persistent": false
+  },
+  "browser_action": {
+    "browser_style": false,
+    "default_icon": "icons/icon-16.png",
+    "default_popup": "popup.html",
+    "default_title": "Technion Plus"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://panoptotech.cloud.panopto.eu/*",
+        "https://grades.technion.ac.il/login.aspx",
+        "https://bookme.technion.ac.il/*",
+        "https://mathnet.technion.ac.il/M/mathnet?action=login&course=*",
+        "https://techwww.technion.ac.il/tech_ident/",
+        "https://login.microsoftonline.com/f1502c4c-ee2e-411c-9715-c855f6753b84/*"
+      ],
+      "js": [
+        "scripts/login_script.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://moodle.technion.ac.il/",
+        "https://moodle.technion.ac.il/my/",
+        "https://moodle.technion.ac.il/*.php?*",
+        "https://moodle.technion.ac.il/login/index.php",
+        "https://sason-p.technion.ac.il/*",
+        "https://grades.cs.technion.ac.il/",
+        "https://grades.cs.technion.ac.il/grades.cgi",
+        "https://webcourse.cs.technion.ac.il/23*/*/grades.html",
+        "https://webcourse.cs.technion.ac.il/23*/*/hw_esubmit_*.html",
+        "https://webcourse.cs.technion.ac.il/23*/*/lock_*.html",
+        "https://portalex.technion.ac.il/irj/portal/external*",
+        "https://techwww.technion.ac.il/tech_ident/"
+      ],
+      "js": [
+        "scripts/login_script.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://panoptotech.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?*",
+        "https://panoptotech.cloud.panopto.eu/Panopto/Pages/Sessions/List.aspx*"
+      ],
+      "js": [
+        "scripts/panopto_download.js"
+      ],
+      "css": [
+        "css/maor_download.css",
+        "css/c_panopto.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://webcourse.cs.technion.ac.il/*",
+        "https://grades.cs.technion.ac.il/grades.cgi?*.html"
+      ],
+      "js": [
+        "scripts/webcourse.js"
+      ],
+      "css": [
+        "css/maor_download.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://ug3.technion.ac.il/rishum/*"
+      ],
+      "js": [
+        "scripts/ug.js"
+      ],
+      "css": [
+        "css/c_ug.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://grades.technion.ac.il/*"
+      ],
+      "js": [
+        "scripts/grades_portal.js"
+      ],
+      "css": [
+        "css/maor_download.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://grades.cs.technion.ac.il/grades.cgi"
+      ],
+      "js": [
+        "scripts/gradescs.js"
+      ],
+      "css": [
+        "css/maor_download.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://moodle.technion.ac.il/course/view.php?*",
+        "https://moodle.technion.ac.il/"
+      ],
+      "js": [
+        "scripts/moodle.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://moodle.technion.ac.il/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "scripts/remoodle.js"
+      ],
+      "css": [
+        "css/c_moodle.css",
+        "css/dark_moodle.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://video.technion.ac.il/Courses/"
+      ],
+      "js": [
+        "scripts/old_video_script.js"
+      ],
+      "css": [
+        "css/c_oldserver.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://mathnet.technion.ac.il/M/mathnet?action=getlink&link=6&*",
+        "http://mathnet.technion.ac.il/",
+        "https://mathnet.technion.ac.il/"
+      ],
+      "js": [
+        "scripts/mathnet.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://techwww.technion.ac.il/cgi-bin/newuser/newuser.pl"
+      ],
+      "js": [
+        "scripts/t_manager.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://techmvs.technion.ac.il/cics/wmn/wmngrad?*&ORD=1*"
+      ],
+      "js": [
+        "scripts/grades_sheet.js"
+      ],
+      "css": [
+        "css/c_grades_sheet.css"
+      ]
+    }
+  ],
+  "options_ui": {
+    "page": "options.html"
+  },
+  "permissions": [
+    "downloads",
+    "*://*.technion.ac.il/*",
+    "*://panoptotech.cloud.panopto.eu/*",
+    "https://login.microsoftonline.com/f1502c4c-ee2e-411c-9715-c855f6753b84/*",
+    "storage",
+    "alarms",
+    "notifications"
+  ],
+  "web_accessible_resources": [
+    "icons/icon-*.png",
+    "notification.mp3",
+    "scripts/panopto_new.js",
+    "css/dark_moodle.css",
+    "css/light_moodle.css",
+    "css/sasonp.css",
+    "icons/usable/*",
+    "templates/grades_sheet.html"
+  ],
+  "minimum_chrome_version": "75.0"
+}

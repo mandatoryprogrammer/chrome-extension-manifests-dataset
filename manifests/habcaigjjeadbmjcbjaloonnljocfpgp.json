@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "MCM Species Selector",
+  "author": "Dan Ellis 2017",
+  "description": "Paste lists of species names for extraction using the Master Chemical Mechanism website.",
+  "version": "1.2",
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true,
+    "open_in_tab": true
+  },
+  "background": {
+    "scripts": [
+      "contextmenus.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "wacl_logo.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://mcm.leeds.ac.uk/*/roots.htt",
+        "http://mcm.leeds.ac.uk/*/home.htt",
+        "http://mcm.leeds.ac.uk/*/extract.htt",
+        "http://mcm.ncas.ac.uk/roots.htt",
+        "http://mcm.ncas.ac.uk/home.htt",
+        "http://mcm.ncas.ac.uk/extract.htt"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "getentries.js"
+  ],
+  "permissions": [
+    "contextMenus",
+    "activeTab",
+    "storage"
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "minimum_chrome_version": "32",
+  "name": "Invisy Search",
+  "description": "Secure Your Search & Keep Your Personal Information Private.",
+  "homepage_url": "https://www.invisy.com/",
+  "version": "2.0.1",
+  "icons": {
+    "16": "images/icons/icon-16.png",
+    "32": "images/icons/icon-32.png",
+    "48": "images/icons/icon-48.png",
+    "64": "images/icons/icon-64.png",
+    "128": "images/icons/icon-128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "images/icons/icon-16.png",
+      "32": "images/icons/icon-32.png",
+      "48": "images/icons/icon-48.png",
+      "64": "images/icons/icon-64.png",
+      "128": "images/icons/icon-128.png"
+    }
+  },
+  "chrome_settings_overrides": {
+    "search_provider": {
+      "is_default": true,
+      "encoding": "UTF-8",
+      "keyword": "Invisy",
+      "name": "Invisy",
+      "favicon_url": "https://invisy.com/omnibox/search/icon-16.png",
+      "search_url": "https://invisy.com/omnibox/search?query={searchTerms}",
+      "suggest_url": "https://invisy.com/omnibox/suggest?prefix={searchTerms}"
+    }
+  },
+  "content_security_policy": "script-src 'self' https://query.yahooapis.com/ https://ipinfo.io/; object-src 'self'",
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "libs/jquery.js",
+      "libs/keen.js",
+      "src/config.js",
+      "src/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "src/config.js",
+        "src/content.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "images/logo.png",
+    "images/icons/icon-16.png"
+  ],
+  "permissions": [
+    "*://*/",
+    "storage",
+    "unlimitedStorage",
+    "privacy",
+    "cookies",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "chrome_url_overrides": {}
+}

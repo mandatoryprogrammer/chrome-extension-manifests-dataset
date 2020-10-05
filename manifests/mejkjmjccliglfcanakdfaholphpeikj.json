@@ -1,0 +1,70 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Practice Flix - Aprenda idiomas com o netflix",
+  "short_name": "PracticeFlix",
+  "version": "1.8",
+  "description": "Aprenda, pratique outro idioma assistindo suas séries ou filmes favoritos no Netflix",
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "*://*.netflix.com/*",
+    "tabs",
+    "activeTab",
+    "storage",
+    "*://*.nflxext.com/*",
+    "*://*.nflxvideo.net/*"
+  ],
+  "background": {
+    "scripts": [
+      "languages.js",
+      "global.js",
+      "background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "icon16.png",
+      "24": "icon24.png",
+      "32": "icon32.png",
+      "48": "icon48.png"
+    },
+    "default_title": "Practice Flix",
+    "default_popup": "instructions.html"
+  },
+  "web_accessible_resources": [
+    "options.html",
+    "instructions.html",
+    "propaganda_pt-BR.jpg",
+    "propaganda_en-US.jpg"
+  ],
+  "minimum_chrome_version": "14",
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.netflix.com/*"
+      ],
+      "all_frames": false,
+      "run_at": "document_end",
+      "js": [
+        "languages.js",
+        "global.js",
+        "content_script.js"
+      ],
+      "css": [
+        "content.css"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "icon16.png",
+    "24": "icon24.png",
+    "32": "icon32.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "manifest_version": 2
+}

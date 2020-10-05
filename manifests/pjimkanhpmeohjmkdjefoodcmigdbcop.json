@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Music Bubbles",
+  "manifest_version": 2,
+  "author": "Joseph DeBono",
+  "homepage_url": "https://plus.google.com/communities/114213776133869190328",
+  "version": "1.7.2",
+  "description": "Floating quick controls for Google Play Music",
+  "options_page": "options.html",
+  "content_security_policy": "script-src 'self' https://apis.google.com https://platform.twitter.com; object-src 'self'",
+  "permissions": [
+    "tabs",
+    "storage"
+  ],
+  "icons": {
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
+  },
+  "background": {
+    "scripts": [
+      "/assets/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "assets/content_script.js"
+      ],
+      "run_At": "document_end"
+    },
+    {
+      "matches": [
+        "*://play.google.com/music/*",
+        "*://music.google.com/*"
+      ],
+      "js": [
+        "assets/gm-content-script.js"
+      ]
+    }
+  ]
+}

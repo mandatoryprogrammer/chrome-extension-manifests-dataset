@@ -1,0 +1,68 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_extension_name__",
+  "version": "5.0",
+  "default_locale": "en",
+  "description": "__MSG_extension_description__",
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "images/icon16.png",
+      "24": "images/icon24.png",
+      "32": "images/icon32.png"
+    },
+    "default_title": "__MSG_extension_name__",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.duosecurity.com/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "lib/jquery/jquery.min.js",
+        "lib/otplib/buffer.js",
+        "lib/otplib/index.js",
+        "js/duo_security.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://sis.portal.nyu.edu/*"
+      ],
+      "js": [
+        "js/alive_albert.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://wd5.myworkday.com/nyu/*"
+      ],
+      "js": [
+        "lib/jquery/jquery.min.js",
+        "js/alive_workday.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "js/alive_inject_albert.js"
+  ],
+  "options_page": "options.html",
+  "permissions": [
+    "storage",
+    "*://*.duosecurity.com/",
+    "*://*.baidu.com/"
+  ]
+}

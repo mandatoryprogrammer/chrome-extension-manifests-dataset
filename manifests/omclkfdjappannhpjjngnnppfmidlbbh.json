@@ -1,0 +1,143 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_appname__",
+  "version": "0.6.25",
+  "version_name": "0.6.25β tempus-cafea",
+  "short_name": "__MSG_appshortname__",
+  "description": "__MSG_appdescription__",
+  "author": "Mariano",
+  "default_locale": "en",
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "permissions": [
+    "webNavigation",
+    "storage",
+    "contextMenus",
+    "*://*.stackoverflow.com/questions/*/*",
+    "*://*.stackoverflow.com/review/*/*",
+    "*://*.stackoverflow.com/rooms/*",
+    "*://es.stackoverflow.com/unanswered/*",
+    "*://*.stackexchange.com/questions/*/*",
+    "*://*.stackexchange.com/review/*/*",
+    "*://*.stackexchange.com/rooms/*",
+    "*://*.stackapps.com/questions/*/*",
+    "*://*.stackapps.com/review/*/*",
+    "*://*.superuser.com/questions/*/*",
+    "*://*.superuser.com/review/*/*",
+    "*://*.askubuntu.com/questions/*/*",
+    "*://*.askubuntu.com/review/*/*",
+    "*://*.serverfault.com/questions/*/*",
+    "*://*.serverfault.com/review/*/*",
+    "*://*.area51.com/questions/*/*",
+    "*://*.area51.com/review/*/*",
+    "*://*.mathoverflow.net/questions/*/*",
+    "*://*.mathoverflow.net/review/*/*"
+  ],
+  "web_accessible_resources": [
+    "images/*",
+    "close-red.css",
+    "flag-summary.css",
+    "options.js",
+    "options.html",
+    "whats-new.html"
+  ],
+  "page_action": {
+    "default_icon": {
+      "19": "images/icon19.png",
+      "38": "images/icon38.png"
+    },
+    "default_title": "__MSG_apptooltip__"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.stackoverflow.com/questions/*/*",
+        "*://*.stackoverflow.com/review/*",
+        "*://es.stackoverflow.com/unanswered/*",
+        "*://*.stackexchange.com/questions/*/*",
+        "*://*.stackexchange.com/review/*/*",
+        "*://*.stackapps.com/questions/*/*",
+        "*://*.stackapps.com/review/*/*",
+        "*://*.superuser.com/questions/*/*",
+        "*://*.superuser.com/review/*/*",
+        "*://*.askubuntu.com/questions/*/*",
+        "*://*.askubuntu.com/review/*/*",
+        "*://*.serverfault.com/questions/*/*",
+        "*://*.serverfault.com/review/*/*",
+        "*://*.area51.com/questions/*/*",
+        "*://*.area51.com/review/*/*"
+      ],
+      "js": [
+        "post-menu.js"
+      ],
+      "css": [
+        "post-menu.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://chat.stackexchange.com/*",
+        "*://chat.stackoverflow.com/*"
+      ],
+      "js": [
+        "chat.js"
+      ],
+      "css": [
+        "chat.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.stackexchange.com/rooms/*",
+        "*://*.stackexchange.com/transcript/*",
+        "*://*.stackoverflow.com/rooms/*",
+        "*://*.stackoverflow.com/transcript/*",
+        "*://*.stackoverflow.com/questions/*/*",
+        "*://*.stackexchange.com/questions/*/*",
+        "*://*.stackapps.com/questions/*/*",
+        "*://*.superuser.com/questions/*/*",
+        "*://*.askubuntu.com/questions/*/*",
+        "*://*.serverfault.com/questions/*/*",
+        "*://*.area51.com/questions/*/*"
+      ],
+      "js": [
+        "pause-gifs.js"
+      ],
+      "css": [
+        "pause-gifs.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.stackoverflow.com/users/flag-summary/*",
+        "*://*.stackexchange.com/users/flag-summary/*",
+        "*://*.stackapps.com/users/flag-summary/*",
+        "*://*.superuser.com/users/flag-summary/*",
+        "*://*.askubuntu.com/users/flag-summary/*",
+        "*://*.serverfault.com/users/flag-summary/*",
+        "*://*.area51.com/users/flag-summary/*"
+      ],
+      "js": [
+        "flag-summary.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  }
+}

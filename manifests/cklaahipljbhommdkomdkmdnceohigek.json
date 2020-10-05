@@ -1,0 +1,38 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "The Daily Show's President Florida Man Plugin",
+  "description": "Trump has changed his permanent residence to Florida so we made a browser extension that changes his name to 'Florida Man.'",
+  "version": "1.0.5",
+  "author": "The Daily Show",
+  "browser_action": {
+    "default_popup": "/pages/popup/index.html"
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "exclude_matches": [
+        "https://docs.google.com/*",
+        "https://drive.google.com/*"
+      ],
+      "js": [
+        "/js/content_script.js"
+      ],
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ]
+    }
+  ],
+  "icons": {
+    "128": "/img/logo.png"
+  },
+  "manifest_version": 2,
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "tabs",
+    "storage"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

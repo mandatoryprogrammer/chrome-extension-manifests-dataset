@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Master Property Manager Auth Bridge",
+  "short_name": "SDIAuthBridge",
+  "version": "1.0.2",
+  "description": "This extension enables Adobe Launch Extensions to make Launch API calls using the credentials of the currently logged in user.",
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://launch.adobe.com/*"
+      ],
+      "js": [
+        "launchParentWindow.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://assets.adobedtm.com/extensions/*.html",
+        "http://localhost:3000/extensionViews/*.html",
+        "https://localhost:4000/extensionViews/*.html"
+      ],
+      "js": [
+        "launchExtensionConfig.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    }
+  ],
+  "page_action": {
+    "default_icon": {
+      "16": "images/sdi-ab-16.png",
+      "32": "images/sdi-ab-32.png",
+      "48": "images/sdi-ab-48.png",
+      "128": "images/sdi-ab-128.png"
+    }
+  }
+}

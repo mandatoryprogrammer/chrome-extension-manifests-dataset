@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Jamo Automator",
+  "version": "1.0.5",
+  "description": "Tool to automate test cases running against web content deisplayed in the Chrome browser.",
+  "author": "Jamo Solutions NV",
+  "background": {
+    "page": "index.html"
+  },
+  "permissions": [
+    "<all_urls>",
+    "storage",
+    "tabs",
+    "activeTab",
+    "browsingData"
+  ],
+  "browser_action": {
+    "default_title": "Jamo Automator",
+    "default_icon": "jammo1.png",
+    "default_popup": "agent.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "platform.js",
+        "redefs.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "metaObject.js",
+        "recording.js"
+      ]
+    }
+  ],
+  "manifest_version": 2,
+  "applications": {
+    "gecko": {
+      "id": "jacques.wouters@jamosolutions.com"
+    }
+  }
+}

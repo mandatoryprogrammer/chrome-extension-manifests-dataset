@@ -1,0 +1,127 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "author": "RevNote",
+  "name": "RevNote Highlighter - Web & PDF",
+  "short_name": "RevNote Highlighter",
+  "description": "Keep on top of your reading, notes and citations.",
+  "version": "3.9.30",
+  "icons": {
+    "16": "assets/r-clipper-action--16-blue.png",
+    "32": "assets/r-clipper-action--32-blue.png",
+    "48": "assets/r-clipper-action--48-blue.png",
+    "128": "assets/r-clipper-icon--128.png"
+  },
+  "background": {
+    "scripts": [
+      "services/Auth$.js",
+      "config/CONFIG$.js",
+      "services/Settings$.js",
+      "services/TokenManager$.js",
+      "services/LocalStorage$.js",
+      "services/Tool$.js",
+      "services/Server$.js",
+      "services/Data$.js",
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "assets/r-clipper-action--32-grey.png",
+    "default_popup": "modules/Login/login.html",
+    "default_title": "Save to RevNote"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "https://revnote.io/*",
+        "https://revnote.local/*",
+        "https://alpha.revnote.io/*",
+        "https://insiite.local/*",
+        "https://patents.google.com/*",
+        "https://www.youtube.com/*"
+      ],
+      "js": [
+        "modules/Content/clipper.js",
+        "modules/Content/annotate.js"
+      ],
+      "css": [
+        "modules/Content/content.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "https://revnote.io/*",
+        "https://revnote.local/*",
+        "https://insiite.local/*",
+        "https://alpha.revnote.io/*",
+        "https://www.youtube.com/*"
+      ],
+      "js": [
+        "modules/Content/resources.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://patents.google.com/*"
+      ],
+      "exclude_matches": [],
+      "js": [
+        "modules/Content/googlePatentsClipper.js"
+      ],
+      "css": [
+        "modules/Content/content.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.youtube.com/*"
+      ],
+      "exclude_matches": [],
+      "js": [
+        "modules/Content/youtubeClipper.js"
+      ],
+      "css": [
+        "modules/Content/content.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "webRequest",
+    "webRequestBlocking",
+    "tabs",
+    "contextMenus",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "web_accessible_resources": [
+    "assets/*.woff2",
+    "assets/*.woff",
+    "assets/*.png",
+    "assets/*.svg",
+    "assets/*/*.woff",
+    "assets/*/*.*",
+    "assets/*/*/*.*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://revnote.local/*",
+      "https://alpha.revnote.io/*",
+      "https://revnote.io/*",
+      "https://insiite.local/*"
+    ]
+  }
+}

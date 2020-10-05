@@ -1,0 +1,73 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Passwordstate",
+  "description": "Passwordstate For Chrome is a free form filler extension that obtains credentials from Passwordstate.",
+  "short_name": "PasswordstateChrome",
+  "version": "8.9.6.8",
+  "manifest_version": 2,
+  "icons": {
+    "16": "images/icon_16x16.png",
+    "48": "images/icon_48x48.png",
+    "128": "images/icon_128x128.png"
+  },
+  "commands": {
+    "generate": {
+      "suggested_key": {
+        "default": "Alt+G",
+        "mac": "Command+Shift+G"
+      },
+      "description": "Opens Generate Password screen in new tab"
+    },
+    "passwordstatewebsite": {
+      "suggested_key": {
+        "default": "Alt+P",
+        "mac": "Command+Shift+P"
+      },
+      "description": "Opens Passwordstate website in new tab"
+    },
+    "enableautofill": {
+      "suggested_key": {
+        "default": "Alt+T",
+        "mac": "Command+Shift+T"
+      },
+      "description": "Toggles Auto-Fill"
+    },
+    "autofillform": {
+      "suggested_key": {
+        "default": "Alt+A",
+        "mac": "Command+Shift+A"
+      },
+      "description": "Auto-Fills form"
+    }
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "activeTab",
+    "clipboardRead",
+    "clipboardWrite",
+    "idle",
+    "notifications"
+  ],
+  "background": {
+    "page": "background.html"
+  },
+  "browser_action": {
+    "default_icon": "images/icon.png",
+    "default_popup": "preferences.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/jquery-3.3.1.min.js",
+        "js/password_manager.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ]
+}

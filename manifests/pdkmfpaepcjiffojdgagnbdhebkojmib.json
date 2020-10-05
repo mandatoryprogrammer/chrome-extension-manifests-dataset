@@ -1,0 +1,41 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Pandora Player",
+  "description": "A more integrated way of enjoying pandora.",
+  "version": "1.2.3",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "permissions": [
+    "*://*.pandora.com/*",
+    "webNavigation",
+    "tabs",
+    "storage"
+  ],
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "content_security_policy": "script-src 'self' https://pandora.com; object-src 'self' https://pandora.com",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.pandora.com/",
+        "*://*.pandora.com/account/sign-in",
+        "*://*.pandora.com/station/play/*"
+      ],
+      "js": [
+        "js/lib/jquery.js",
+        "js/app/pandora.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "browser_action": {
+    "default_icon": "icon48.png",
+    "default_popup": "index.html"
+  }
+}

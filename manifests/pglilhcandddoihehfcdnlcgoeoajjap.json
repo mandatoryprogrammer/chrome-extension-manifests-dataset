@@ -1,0 +1,116 @@
+{
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "deployment-config.js",
+      "js/logger.js",
+      "js/windowManager.js",
+      "js/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_popup": "settings/index.html"
+  },
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "js": [
+        "deployment-config.js",
+        "js/logger.js",
+        "js/inject_web_client.js"
+      ],
+      "matches": [
+        "*://*/*3cphone.html*"
+      ],
+      "exclude_matches": [
+        "https://*.service-now.com/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": false,
+      "js": [
+        "js/inject_ccc_prevent_close.js"
+      ],
+      "matches": [
+        "*://*/*3cphone.html*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": false,
+      "matches": [
+        "*://*/*"
+      ],
+      "exclude_matches": [
+        "https://*/*3cphone.html*",
+        "https://*.service-now.com/*"
+      ],
+      "css": [
+        "css/linker.css"
+      ],
+      "js": [
+        "deployment-config.js",
+        "js/logger.js",
+        "js/inject_ccc_script.js",
+        "js/inject_universal_cti.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "description": "Injects 3CLogic WebHooks into the head of configured CRM.",
+  "externally_connectable": {
+    "matches": [
+      "*://*.3ccloud.com/*",
+      "*://*.i3clogic.com/*"
+    ]
+  },
+  "icons": {
+    "24": "images/3cLogicgGradSymbolX24.png",
+    "32": "images/3cLogicgGradSymbolX32.png",
+    "64": "images/3cLogicgGradSymbolX64.png",
+    "128": "images/3cLogicgGradSymbolX128.png",
+    "512": "images/3cLogicgGradSymbolX512.png"
+  },
+  "incognito": "not_allowed",
+  "manifest_version": 2,
+  "name": "3CLogic Universal CTI",
+  "short_name": "3CLCI",
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "0.0.0.34",
+  "permissions": [
+    "*://*/*",
+    "<all_urls>",
+    "audio",
+    "audioCapture",
+    "contextMenus",
+    "declarativeWebRequest",
+    "notifications",
+    "storage",
+    "system.display",
+    "tabs",
+    "videoCapture",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "web_accessible_resources": [
+    "html/phoneMenu.html",
+    "images/dock-left.png",
+    "images/dock-out.png",
+    "images/dock-right.png",
+    "images/logo.png",
+    "images/3cLogicgGradSymbolX128.png",
+    "images/phone-icon.svg",
+    "js/cti_ext_messenger.js",
+    "js/inject_ccc_prevent_close.js",
+    "js/crm_ext_messenger.js",
+    "js/inject_universal_cti.js",
+    "js/inject_web_client.js",
+    "js/interact.min.js",
+    "js/phoneMenu.js",
+    "sounds/*.mp3",
+    "sounds/*.wav"
+  ]
+}

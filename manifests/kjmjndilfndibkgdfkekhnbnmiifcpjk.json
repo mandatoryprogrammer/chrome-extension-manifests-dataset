@@ -1,0 +1,99 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "微小宝公众号助手",
+  "version": "2.2.5",
+  "description": "微小宝开发的专注于提高用户效率的Chrome插件",
+  "manifest_version": 2,
+  "icons": {
+    "16": "resource/image/icon16.png",
+    "32": "resource/image/icon32.png",
+    "48": "resource/image/icon48.png",
+    "64": "resource/image/icon64.png",
+    "128": "resource/image/icon128.png"
+  },
+  "permissions": [
+    "cookies",
+    "tabs",
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "notifications",
+    "<all_urls>"
+  ],
+  "background": {
+    "scripts": [
+      "resource/jsencrypt.min.js",
+      "static/dll.min.js",
+      "static/background.min.js"
+    ]
+  },
+  "browser_action": {
+    "default_title": "微小宝公众号助手",
+    "default_popup": "static/app.html"
+  },
+  "content_scripts": [
+    {
+      "css": [
+        "./static/mp.weixin.qq.com_content.min.css",
+        "./resource/hint.min.css",
+        "./resource/fonts.css"
+      ],
+      "js": [
+        "./static/dll.min.js",
+        "./static/mp.weixin.qq.com_content.min.js"
+      ],
+      "matches": [
+        "http://mp.weixin.qq.com/*",
+        "https://mp.weixin.qq.com/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "./static/dll.min.js",
+        "./static/t.wxb.com_content.min.js"
+      ],
+      "css": [
+        "./static/t.wxb.com_content.min.css"
+      ],
+      "matches": [
+        "http://t.wxb.com/*",
+        "https://t.wxb.com/*",
+        "http://t.beta.wxb.com/*",
+        "https://t.beta.wxb.com/*"
+      ]
+    },
+    {
+      "js": [
+        "./static/inject.min.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    },
+    {
+      "js": [
+        "./static/account.wxb.com_content.min.js"
+      ],
+      "matches": [
+        "http://www.wxb.com/ext/loginsuccess",
+        "https://www.wxb.com/ext/loginsuccess",
+        "http://www.wxb.com/ext/authsuccess",
+        "https://www.wxb.com/ext/authsuccess",
+        "http://account.wxb.com/extauthsuccess",
+        "https://account.wxb.com/extauthsuccess",
+        "http://www.beta.wxb.com/ext/loginsuccess",
+        "https://www.beta.wxb.com/ext/loginsuccess",
+        "http://www.beta.wxb.com/ext/authsuccess",
+        "https://www.beta.wxb.com/ext/authsuccess",
+        "http://account.beta.wxb.com/extauthsuccess",
+        "https://account.beta.wxb.com/extauthsuccess"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "static/*.inject.min.js",
+    "static/*.inject.min.css",
+    "resource/*"
+  ]
+}

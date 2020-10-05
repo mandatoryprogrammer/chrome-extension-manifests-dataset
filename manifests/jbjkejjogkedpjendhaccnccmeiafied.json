@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Chrome Tab Renamer",
+  "version": "1.3",
+  "description": "Chrome Tab Renamer allows you to update the name of tabs in your browser.",
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "storage",
+    "http://*/",
+    "https://*/"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "background": {
+    "scripts": [
+      "./background/background.js"
+    ],
+    "persistent": false
+  },
+  "omnibox": {
+    "keyword": "r"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Shift+Ctrl+E",
+        "mac": "Shift+Command+E"
+      }
+    }
+  },
+  "browser_action": {
+    "default_popup": "./popup/popup.html",
+    "default_icon": {
+      "16": "images/logo_16.png",
+      "32": "images/logo_32.png",
+      "48": "images/logo_48.png",
+      "128": "images/logo_128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "./content/content.js"
+      ]
+    }
+  ],
+  "options_page": "./options/options.html",
+  "icons": {
+    "16": "images/logo_16.png",
+    "32": "images/logo_32.png",
+    "48": "images/logo_48.png",
+    "128": "images/logo_128.png"
+  },
+  "manifest_version": 2
+}

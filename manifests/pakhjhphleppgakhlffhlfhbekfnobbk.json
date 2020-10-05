@@ -1,0 +1,78 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "HoofSounds",
+  "description": "Listen to pony radio stations 24/7!",
+  "version": "1.641",
+  "homepage_url": "https://hoofsounds.little.my",
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "manifest_version": 2,
+  "minimum_chrome_version": "49.0.0.0",
+  "permissions": [
+    "http://*.little.my/*",
+    "https://*.little.my/*",
+    "storage",
+    "unlimitedStorage",
+    "notifications",
+    "clipboardWrite",
+    "contextMenus"
+  ],
+  "content_scripts": [
+    {
+      "include_globs": [
+        "https://hoofsounds.little.my/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "matches": [
+        "https://hoofsounds.little.my/*"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "include_globs": [
+        "http://*.little.my/*",
+        "https://*.little.my/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "matches": [
+        "http://*.little.my/*",
+        "https://*.little.my/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "optional_permissions": [
+    "background"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "38": "icon38.png"
+    },
+    "default_title": "HoofSounds",
+    "default_popup": "popup.htm"
+  },
+  "commands": {
+    "hoofsounds_stopRadio": {
+      "description": "Stop radio"
+    },
+    "hoofsounds_copyTrackInfo": {
+      "description": "Copy song info"
+    }
+  },
+  "icons": {
+    "16": "icon16.png",
+    "32": "icon32.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}

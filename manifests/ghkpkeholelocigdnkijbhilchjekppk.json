@@ -1,0 +1,40 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Cacao CORS Proxy",
+  "version": "1.0.0",
+  "author": "Michael FIG",
+  "description": "Cacao (CORS Access-Control-Allow-Origin) Proxy",
+  "short_name": "Cacao",
+  "homepage_url": "https://github.com/michaelfig/cacao-extension",
+  "icons": {
+    "48": "cacao48.png",
+    "96": "cacao96.png",
+    "128": "cacao128.png"
+  },
+  "permissions": [
+    "*://*/*",
+    "webRequest",
+    "webRequestBlocking",
+    "storage"
+  ],
+  "options_ui": {
+    "page": "options/cacao-options.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.poc.ts.liveblockauctions.com/ms/publish.html",
+        "*://localhost/publish.html"
+      ],
+      "js": [
+        "browser-polyfill.min.js",
+        "cacao-server.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "cacao-client.js"
+  ]
+}

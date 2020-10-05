@@ -1,0 +1,108 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_extension_name__",
+  "description": "__MSG_extension_description__",
+  "default_locale": "en",
+  "version": "0.4.0",
+  "applications": {
+    "gecko": {
+      "id": "adict@krzysztoflament.pl"
+    }
+  },
+  "icons": {
+    "16": "icons/main16.png",
+    "32": "icons/main32.png",
+    "48": "icons/main48.png",
+    "96": "icons/main96.png",
+    "128": "icons/main128.png"
+  },
+  "background": {
+    "scripts": [
+      "lib/browser-polyfill.js",
+      "storage.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "lib/browser-polyfill.js",
+        "storage.js",
+        "popup/popup.js"
+      ],
+      "css": [
+        "popup/popup.css"
+      ]
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "https://www.dictionary.com/*",
+        "https://www.merriam-webster.com/*",
+        "https://www.diki.pl/*",
+        "https://*.bab.la/*"
+      ],
+      "js": [
+        "dictionary.js"
+      ]
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "https://www.dictionary.com/*addon=true*"
+      ],
+      "css": [
+        "popup/styles/dictionary_com.css"
+      ]
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "https://www.merriam-webster.com/*addon=true*"
+      ],
+      "css": [
+        "popup/styles/merriam_webster.css"
+      ]
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "https://www.diki.pl/*addon=true*"
+      ],
+      "css": [
+        "popup/styles/diki.css"
+      ]
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "https://*.bab.la/*addon=true*"
+      ],
+      "css": [
+        "popup/styles/bab_la.css"
+      ]
+    }
+  ],
+  "permissions": [
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/main16.png",
+      "32": "icons/main32.png",
+      "48": "icons/main48.png",
+      "96": "icons/main96.png",
+      "128": "icons/main128.png"
+    },
+    "default_title": "Adict",
+    "default_popup": "menu/menu.html"
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Beam for Chrome",
+  "description": "Fight climate change in a big way with your spare change!",
+  "version": "1.4.6",
+  "author": "Zack Bessler",
+  "browser_action": {
+    "default_icon": "icons/48.png",
+    "default_title": "Beam Project for Chrome",
+    "default_popup": "options/index.html"
+  },
+  "options_page": "options/index.html",
+  "options_ui": {
+    "page": "options/index.html",
+    "open_in_tab": false,
+    "chrome_style": true
+  },
+  "permissions": [
+    "*://*.amazon.com/*",
+    "*://*.beamproject.co/*",
+    "storage"
+  ],
+  "icons": {
+    "128": "icons/128.png",
+    "48": "icons/48.png",
+    "32": "icons/32.png",
+    "16": "icons/16.png"
+  },
+  "background": {
+    "scripts": [
+      "listener.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.amazon.com/gp/buy/spc/handlers/display.html*"
+      ],
+      "js": [
+        "lib/beam-ga.js",
+        "pages/Amazon.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.beamproject.co/*"
+      ],
+      "js": [
+        "lib/beam-ga.js",
+        "pages/Beam.js"
+      ]
+    }
+  ]
+}

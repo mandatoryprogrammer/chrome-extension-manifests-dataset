@@ -1,0 +1,99 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Vocus.io",
+  "description": "Make Gmail your competitive advantage.",
+  "version": "1.94",
+  "permissions": [
+    "activeTab",
+    "notifications",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "storage",
+    "*://*.googleusercontent.com/proxy/*",
+    "*://mail.google.com/*",
+    "https://ajax.googleapis.com/",
+    "*://vocus.io/*"
+  ],
+  "browser_action": {},
+  "externally_connectable": {
+    "matches": [
+      "https://mail.google.com/*",
+      "*://vocus.io/*",
+      "*://*.vocus.io/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "libs/jquery.min.js",
+        "libs/underscore.js",
+        "libs/sugar.js",
+        "libs/inboxsdk.js",
+        "core/constants.js",
+        "core/pubsub.js",
+        "core/popup.js",
+        "core/observer.js",
+        "core/bootstrap.js",
+        "features/alert.js",
+        "features/completion.js",
+        "features/compose_panel.js",
+        "features/compose.js",
+        "features/dashboard.js",
+        "features/followup.js",
+        "features/meeting.js",
+        "features/poll.js",
+        "features/sendlater.js",
+        "features/snippets.js",
+        "features/snooze.js",
+        "features/toast.js",
+        "features/toolbar_panel.js",
+        "features/tracking.js",
+        "features/undo.js",
+        "features/drafts.js",
+        "features/checkmarks.js",
+        "core/features.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://vocus.io/*",
+        "*://*.vocus.io/*"
+      ],
+      "js": [
+        "core/website.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "scripts": [
+      "libs/jquery.min.js",
+      "libs/underscore.js",
+      "libs/faye.js",
+      "core/pubsub.js",
+      "core/constants.js",
+      "core/daemon.js"
+    ],
+    "persistent": true
+  },
+  "web_accessible_resources": [
+    "libs/*.*",
+    "core/*.*",
+    "features/*.*",
+    "css/*.*",
+    "fonts/*.*",
+    "images/*.*",
+    "html/*.*"
+  ],
+  "icons": {
+    "16": "images/logo-icon-16.png",
+    "48": "images/logo-icon-48.png",
+    "128": "images/logo-icon-128.png"
+  },
+  "content_security_policy": "script-src 'self' https://vocus.io; object-src 'self'"
+}

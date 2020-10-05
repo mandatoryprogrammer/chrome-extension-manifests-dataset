@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Perspective Guard: Mind Positivity Protection",
+  "description": "Protect your mindset and worldviews against bad influences on social media, fake news, and manipulation.",
+  "version": "1.30",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.facebook.com/*"
+      ],
+      "js": [
+        "parsers/common.js",
+        "parsers/facebook.js",
+        "background/ssdeep.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.twitter.com/*"
+      ],
+      "js": [
+        "parsers/common.js",
+        "parsers/twitter.js",
+        "background/ssdeep.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.reddit.com/*"
+      ],
+      "js": [
+        "parsers/common.js",
+        "parsers/reddit.js",
+        "background/ssdeep.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background/tensorflow/tfjs.js",
+      "background/common.js",
+      "background/inference.js",
+      "background/background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_title": "PerspectiveGuard",
+    "default_popup": "views/popup.html"
+  },
+  "permissions": [
+    "storage",
+    "notifications"
+  ],
+  "icons": {
+    "48": "views/images/icon_48.png",
+    "128": "views/images/icon_ok.png",
+    "256": "views/images/icon_256.png"
+  }
+}

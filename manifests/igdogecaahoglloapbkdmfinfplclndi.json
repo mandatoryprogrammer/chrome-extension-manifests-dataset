@@ -1,0 +1,40 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Remembereddit",
+  "short_name": "Remembereddit",
+  "version": "1.0.1",
+  "manifest_version": 2,
+  "description": "Remembereddit - remembers which comments are collapsed when viewing reddit posts",
+  "homepage_url": "http://remembereddit.com",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "author": "Peter Rosconi",
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "background",
+    "*://*.reddit.com/"
+  ],
+  "omnibox": {
+    "keyword": "reddit"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.reddit.com/r/*"
+      ],
+      "js": [
+        "js/jquery/jquery.js",
+        "src/inject/redditInject.js"
+      ]
+    }
+  ]
+}

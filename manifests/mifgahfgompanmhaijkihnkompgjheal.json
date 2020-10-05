@@ -1,0 +1,131 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Memrise on Steroids",
+  "short_name": "MoS",
+  "version": "2.10.12",
+  "manifest_version": 2,
+  "description": "",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "js/jquery/jquery.min.js",
+      "js/xregexp-all.js",
+      "js/jquery/jquery.cookie.js",
+      "src/bg/badge.js",
+      "src/bg/db.js",
+      "src/bg/habitica.js",
+      "src/bg/loader.js",
+      "src/bg/notifications.js",
+      "src/bg/times.js",
+      "src/bg/words.js",
+      "src/ignoreLib.js",
+      "src/loaderLib.js",
+      "src/namesLib.js",
+      "src/orderLib.js",
+      "src/settings.js",
+      "src/utils.js",
+      "src/wordsLib.js",
+      "src/bg/script.js"
+    ],
+    "persistent": true
+  },
+  "options_page": "src/options_custom/index.html",
+  "browser_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "",
+    "default_popup": "src/browser_action/popup/index.html"
+  },
+  "permissions": [
+    "*://*.memrise.com/*",
+    "alarms",
+    "cookies",
+    "notifications",
+    "storage",
+    "unlimitedStorage",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.memrise.com/*/garden/*",
+        "*://*.memrise.com/garden/*"
+      ],
+      "js": [
+        "js/jquery/jquery.min.js",
+        "js/xregexp-all.js",
+        "src/inject/actions.js",
+        "src/inject/addID.js",
+        "src/inject/deleteUnreviewed.js",
+        "src/inject/endOfSession.js",
+        "src/inject/pause.js",
+        "src/inject/reviewColorInSpeed.js",
+        "src/inject/sessionStats.js",
+        "src/inject/streak.js",
+        "src/inject/streakPerfect.js",
+        "src/inject/words.js",
+        "src/inject/wrong.js",
+        "src/inject/xhr.js",
+        "src/keys.js",
+        "src/namesLib.js",
+        "src/wordsLib.js",
+        "src/inject/script.js"
+      ],
+      "css": [
+        "src/inject/style.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.memrise.com/*/edit/*"
+      ],
+      "js": [
+        "js/jquery/jquery.min.js",
+        "src/inject/edit/script.js"
+      ],
+      "css": [
+        "src/inject/style.css"
+      ]
+    }
+  ],
+  "commands": {
+    "review": {
+      "suggested_key": {
+        "default": "Alt+M"
+      },
+      "description": "Review one category"
+    },
+    "review_course": {
+      "description": "Review one course"
+    },
+    "learn_course": {
+      "description": "Learn"
+    },
+    "next_level": {
+      "description": "Open next learning level"
+    },
+    "reload": {
+      "suggested_key": {
+        "default": "Alt+Shift+M"
+      },
+      "description": "Reload learning data"
+    },
+    "open_in_tab": {
+      "description": "Open in new tab"
+    },
+    "open_memrise": {
+      "description": "Open Memrise"
+    },
+    "open_memrise_settings_learning": {
+      "description": "Open Memrise learning settings"
+    },
+    "open_chart": {
+      "description": "Open a chart in new tab"
+    }
+  }
+}

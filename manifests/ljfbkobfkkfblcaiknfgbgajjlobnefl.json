@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Social Engagement Engine",
+  "short_name": "uBrand extension for Instagram",
+  "description": "Create followers/following list of IG linked account on ubrand.co, and start engagement process with the recommended users",
+  "version": "0.11",
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://ssl.google-analytics.com; object-src 'self'",
+  "page_action": {
+    "default_icon": "img/icon19.png",
+    "default_title": "Social Engagement Engine",
+    "default_popup": "login.html"
+  },
+  "icons": {
+    "19": "img/icon19.png",
+    "32": "img/icon32.png",
+    "48": "img/icon48.png",
+    "64": "img/icon64.png"
+  },
+  "background": {
+    "scripts": [
+      "js/PromiseChrome.js",
+      "js/background.js",
+      "js/ubrandScript.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.instagram.com/*"
+      ],
+      "js": [
+        "js/instaDefOptions.js",
+        "js/PromiseChrome.js",
+        "js/instaMessages.js",
+        "js/instagramHelper.js",
+        "js/ubrandScript.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "storage",
+    "cookies",
+    "webRequest",
+    "webRequestBlocking",
+    "https://www.instagram.com/*"
+  ],
+  "incognito": "split"
+}

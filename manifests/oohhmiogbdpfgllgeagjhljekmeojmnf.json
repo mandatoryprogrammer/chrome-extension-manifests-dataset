@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "SnappyLink",
+  "version": "1.0.1",
+  "description": "SnappyLink allows you to preview information from pages without clicking",
+  "manifest_version": 2,
+  "icons": {
+    "16": "img/logo1.png",
+    "32": "img/logo1.png",
+    "48": "img/logo1.png",
+    "128": "img/logo1.png"
+  },
+  "default_locale": "en",
+  "minimum_chrome_version": "18",
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "options_page": "html/options.html",
+  "browser_action": {
+    "default_icon": "img/logo1.png",
+    "default_popup": "html/popup.html",
+    "default_title": "SnappyLink"
+  },
+  "permissions": [
+    "*://*/*",
+    "notifications",
+    "unlimitedStorage"
+  ],
+  "optional_permissions": [
+    "history"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "web_accessible_resources": [
+    "lib/gumby.min.js",
+    "lib/jquery-2.1.0.min.js",
+    "lib/jquery.mobile.custom.min.js",
+    "lib/modernizr-2.7.1.min.js",
+    "js/options.js"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "lib/jquery-2.1.0.min.js",
+        "js/preview.js"
+      ],
+      "css": [
+        "css/style.css"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ]
+}

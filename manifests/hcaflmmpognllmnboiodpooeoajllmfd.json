@@ -1,0 +1,39 @@
+{
+  "update_url": "http://clients2.google.com/service/update2/crx",
+  "name": "QMail Add Note to GMail",
+  "version": "0.94",
+  "description": "Notify user of added notes to Gmail",
+  "permissions": [
+    "tabs",
+    "https://mail.google.com/*"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "contentscript.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "icons": {
+    "16": "16.png",
+    "48": "48.png",
+    "128": "128.png"
+  },
+  "browser_action": {
+    "default_title": "QMailNote Notifier",
+    "default_icon": "48.png",
+    "default_popup": "popup.html"
+  },
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'"
+}

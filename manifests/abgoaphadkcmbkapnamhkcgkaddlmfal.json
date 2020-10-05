@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Ampliz Sales Buddy",
+  "version": "1.6.7",
+  "description": "Find B2B Email address, Direct dials & Company Intelligence with just one click",
+  "icons": {
+    "128": "icon128.png",
+    "48": "icon48.png",
+    "16": "icon16.png"
+  },
+  "browser_action": {
+    "default-icon": "icon48.png",
+    "default_popup": "index.html"
+  },
+  "permissions": [
+    "tabs",
+    "cookies",
+    "activeTab",
+    "storage",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "jquery.min.js",
+      "background.js"
+    ]
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://localhost/*",
+      "http://10.10.25.97:443/*",
+      "*://*.ampliz.com/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

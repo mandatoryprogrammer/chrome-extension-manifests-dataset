@@ -1,0 +1,79 @@
+{
+  "update_url": "http://clients2.google.com/service/update2/crx",
+  "name": "Ads4Charity",
+  "version": "1.1",
+  "manifest_version": 2,
+  "description": "Donate to Charities by Surfing the Web",
+  "permissions": [
+    "tabs",
+    "<all_urls>"
+  ],
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": "icons/icon16.png"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [
+        "jquery/jquery-ui-1.8.16.custom.css",
+        "css/custom.css",
+        "css/icons.css",
+        "noty/css/jquery.noty.css",
+        "noty/css/noty_theme_default.css"
+      ],
+      "js": [
+        "jquery/jquery-1.6.2.min.js",
+        "jquery/jquery-ui-1.8.16.custom.min.js",
+        "drag.js",
+        "noty/js/jquery.noty.js",
+        "jquery/jquery-collision-1.0.1.min.js",
+        "jquery/jquery-ui-draggable-collision-1.0.1.min.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://ads4charity.org/*",
+        "*://www.ads4charity.org/*"
+      ],
+      "js": [
+        "site_interactions.js"
+      ],
+      "css": [
+        "css/site_interactions.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://ads4charity.org/dashboard",
+        "*://www.ads4charity.org/dashboard"
+      ],
+      "js": [
+        "dashboard.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "page": "background.html"
+  },
+  "options_page": "fancy-settings/source/index.html",
+  "offline_enabled": false,
+  "web_accessible_resources": [
+    "ads/63855.html",
+    "ads/63856.html",
+    "ads/63858.html",
+    "ads/63859.html",
+    "ads/63860.html"
+  ],
+  "content_security_policy": "script-src 'self' https://projectwonderful.com https://www.projectwonderful.com; object-src 'self'"
+}

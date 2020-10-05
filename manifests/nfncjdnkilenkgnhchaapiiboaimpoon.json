@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "BibSonomy Scholar",
+  "description": "This extensions tightly integrates BibSonomy with your browser.",
+  "version": "1.6.1",
+  "icons": {
+    "16": "res/B_blue.png",
+    "38": "res/B_blue.png",
+    "48": "res/B_blue.png",
+    "128": "res/B_blue.png"
+  },
+  "background": {
+    "scripts": [
+      "lib/md5.js",
+      "bibsonomyUtils.js",
+      "bibsonomy-lib.js",
+      "bg.js"
+    ]
+  },
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "bookmarks",
+    "tabs",
+    "contextMenus"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/scholar*"
+      ],
+      "js": [
+        "lib/handlebars-v4.0.4.js",
+        "lib/md5.js",
+        "scholar.js"
+      ],
+      "css": [
+        "lib/font-awesome-4.4.0/css/font-awesome.min.css",
+        "style.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "res/*",
+    "lib/font-awesome-4.4.0/fonts/*"
+  ],
+  "page_action": {
+    "default_icon": {
+      "19": "res/B_white.png",
+      "38": "res/B_white.png"
+    },
+    "default_title": "BibSonomy Scholar",
+    "default_popup": "action.html"
+  },
+  "commands": {
+    "_execute_page_action": {
+      "suggested_key": {
+        "default": "Ctrl+Space",
+        "windows": "Ctrl+Space",
+        "mac": "Command+Space"
+      }
+    }
+  }
+}

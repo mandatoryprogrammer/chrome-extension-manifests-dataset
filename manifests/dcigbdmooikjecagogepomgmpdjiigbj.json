@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Uberflip Chrome Extension",
+  "short_name": "Uberflip Chrome Extension",
+  "description": "The Uberflip Chrome extension lets you share your Uberflip content experiences in email and on the web.",
+  "version": "2.97.0",
+  "icons": {
+    "16": "img/icon16c.png",
+    "32": "img/icon32c.png",
+    "48": "img/icon48c.png",
+    "128": "img/icon128c.png"
+  },
+  "background": {
+    "scripts": [
+      "js/shout-background.opt.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/shout-common.opt.js"
+      ],
+      "css": [
+        "css/shout-host.opt.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*"
+      ],
+      "js": [
+        "js/shout-gmail.opt.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://app.frontapp.com/*"
+      ],
+      "js": [
+        "js/shout-front.opt.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "js/*",
+    "css/*",
+    "img/*",
+    "shout-container.html"
+  ],
+  "permissions": [
+    "<all_urls>",
+    "contextMenus",
+    "storage"
+  ]
+}

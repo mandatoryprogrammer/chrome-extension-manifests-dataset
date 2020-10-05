@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "McAfee Endpoint Security Web Control",
+  "version": "10.7.0.0",
+  "manifest_version": 2,
+  "description": "McAfee Endpoint Security Web Control",
+  "default_locale": "en",
+  "icons": {
+    "128": "images/128.png"
+  },
+  "browser_action": {
+    "default_popup": "html/popup.html",
+    "default_title": "McAfee® Endpoint Security Web Control",
+    "default_icon": {
+      "19": "images/nb_button_disabled.gif"
+    }
+  },
+  "background": {
+    "scripts": [
+      "mcafee_wa_bkground.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "sizzle.js",
+        "punycode.js",
+        "mcafee_wa_coreengine.js",
+        "mcafee_wa_contentplg.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "html/*.html",
+    "images/*.png",
+    "images/*.gif",
+    "json/*.json"
+  ],
+  "permissions": [
+    "tabs",
+    "<all_urls>",
+    "downloads",
+    "nativeMessaging",
+    "webRequest",
+    "storage"
+  ]
+}

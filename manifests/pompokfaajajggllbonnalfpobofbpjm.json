@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "UAB - Descarrega el CV",
+  "short_name": "Drive CV UAB",
+  "version": "0.0.6",
+  "manifest_version": 2,
+  "description": "Descarrega automàticament i actualitza tots els arxius del CV!",
+  "homepage_url": "http://jaume.dedios.cat",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "page_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "page action demo",
+    "default_popup": "src/page_action/page_action.html"
+  },
+  "permissions": [
+    "tabs",
+    "identity",
+    "background",
+    "declarativeContent",
+    "<all_urls>",
+    "activeTab"
+  ],
+  "oauth2": {
+    "client_id": "1044475337767-o9dbdfh3r4r7hu31h0cmoo55sj0tr49o.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/drive"
+    ]
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA3TtQEYUk9rBUuC3vJYxlPHby8ZdGJZM84QfllcbrcIGUPvmARKPndthqAl5QnHC6FUB4hfuGWgZSfUVx7ZAwlp2L6v+yA9kA1nVp8OzrLOEDwv9e1RYK+wfinYiN/qgSHQ9cj6LAJR8oqpypxrNtQqbudmvZsjLlgVhUoeTnLZOTmEQkxKq1+V5gdlohCOU0AGLuiK+zGhJFTvjuOekU3lZQnyYIk2P0z3vl4zZXaHPd1/CcaTEserpexAMTYfyoZioKR2tgVuynFnKd7nQteQIfkCt+ac2jI+5aVJj47OLQ2QOeVchs6FLk6WhfGSVgZAMR0Pdd1y79YlmwgL1r0wIDAQAB",
+  "background": {
+    "page": "js/background.html",
+    "persistent": false
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://apis.google.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://cv.uab.cat/*",
+        "http://cv.uab.cat/*",
+        "https://cv.uab.es/*",
+        "http://cv.uab.es/*",
+        "http://*.google.es/*"
+      ],
+      "js": [
+        "src/inject/inject.js"
+      ]
+    }
+  ]
+}

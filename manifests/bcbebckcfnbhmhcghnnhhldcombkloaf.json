@@ -1,0 +1,71 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "AMZ India Profit",
+  "description": "Tools to help you sell more",
+  "version": "1.20",
+  "browser_action": {
+    "default_icon": "images/icon.png",
+    "title": "Your Browser Action Name"
+  },
+  "icons": {
+    "128": "images/icon.png"
+  },
+  "permissions": [
+    "gcm",
+    "storage",
+    "notifications",
+    "identity",
+    "tabs",
+    "background",
+    "*://www.amazon.in/*",
+    "https://www.google-analytics.com/",
+    "https://connect.facebook.net/",
+    "storage",
+    "unlimitedStorage",
+    "contextMenus"
+  ],
+  "background": {
+    "scripts": [
+      "js/globals.js",
+      "lib/OneSignal.js",
+      "js/analytics.js",
+      "js/helper.js",
+      "lib/jquery.js",
+      "js/amazon.js",
+      "js/background.js"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com https://connect.facebook.net; object-src 'self'",
+  "content_scripts": [
+    {
+      "css": [
+        "css/aippopup.css"
+      ],
+      "js": [
+        "lib/jquery.js",
+        "lib/handlebar.min.js",
+        "lib/table2csv.js",
+        "js/helper.js",
+        "js/amazon.js",
+        "js/product.js",
+        "js/onpage.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "popup.html",
+    "error.html",
+    "images/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.amzindiaprofit.com/*",
+      "http://localhost/*"
+    ]
+  }
+}

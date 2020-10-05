@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Screensharing",
+  "description": "Chrome extension for screen sharing ",
+  "version": "2.9",
+  "manifest_version": 2,
+  "minimum_chrome_version": "34",
+  "icons": {
+    "16": "logo16.png",
+    "48": "logo48.png",
+    "128": "logo128.png"
+  },
+  "permissions": [
+    "tabCapture",
+    "desktopCapture",
+    "storage",
+    "activeTab"
+  ],
+  "background": {
+    "scripts": [
+      "background.js",
+      "background.common.js",
+      "background.tabCapture.js",
+      "background.badgeText.js",
+      "background.getUserMedia.js",
+      "background.messaging.js",
+      "background.desktopCapture.js",
+      "RecordRTC/MediaStreamRecorder.js",
+      "RecordRTC/MultiStreamRecorder.js",
+      "RecordRTC/StereoAudioRecorder.js",
+      "RecordRTC/DiskStorage.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "content.js",
+        "background.contentScript.js"
+      ],
+      "matches": [
+        "*://*.ofabee.com/*",
+        "*://*.tokbird.com/*"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "icon.png"
+  ],
+  "browser_action": {
+    "default_icon": "icon.png"
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://*.ofabee.com/*",
+      "*://*.tokbird.com/*"
+    ]
+  }
+}

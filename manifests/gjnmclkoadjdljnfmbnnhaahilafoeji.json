@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "TeX for Gmail",
+  "description": "Use LaTeX (a method for rendering mathematical formulas) with Gmail.",
+  "version": "6.7.2",
+  "permissions": [
+    "storage",
+    "contextMenus",
+    "https://mail.google.com/",
+    "https://inbox.google.com/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*"
+      ],
+      "js": [
+        "inboxsdk.js",
+        "options.js",
+        "texforgmail.js",
+        "app.js"
+      ],
+      "css": [
+        "style.css",
+        "popups.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "logo128.png",
+    "compose.png",
+    "view.png"
+  ],
+  "icons": {
+    "128": "logo128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "logo128.png",
+    "default_popup": "popup.html"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true,
+    "chrome_style": true
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Akoma Ntoso Converter",
+  "short_name": "Akoma Ntoso",
+  "description": "Converts US and UK legislative documents to Akoma Ntoso format.",
+  "version": "0.1",
+  "author": "Jim Mangiafico",
+  "permissions": [
+    "http://www.gpo.gov/",
+    "https://www.gpo.gov/",
+    "http://data.parliament.uk/",
+    "tabs",
+    "contextMenus"
+  ],
+  "icons": {
+    "16": "an16.png",
+    "128": "an128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "page_action": {
+    "default_icon": "an16.png",
+    "default_title": "convert to Akoma Ntoso"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.gpo.gov/fdsys/pkg/*/content-detail.html",
+        "http://www.gpo.gov/fdsys/search/pagedetails.action?*"
+      ],
+      "js": [
+        "gpo.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "usan.css",
+    "ukan.css"
+  ]
+}

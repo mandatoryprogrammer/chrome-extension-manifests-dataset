@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "background": {
+    "scripts": [
+      "scripts/core/background.js"
+    ]
+  },
+  "name": "NewsPrompt: Personalized Daily News Summary",
+  "short_name": "Newsprompt",
+  "offline_enabled": true,
+  "icons": {
+    "128": "icons/icon128.png",
+    "32": "icons/icon32.png",
+    "100": "icons/icon100.png",
+    "48": "icons/icon48.png",
+    "16": "icons/icon16.png"
+  },
+  "web_accessible_resources": [
+    "icons/*"
+  ],
+  "description": "Get all news and trending stories from the web every time you open your new tab.",
+  "version": "23.3.10",
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com https://hapi.newsprompt.co/; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end",
+      "all_frames": false,
+      "js": [
+        "scripts/core/content.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.newsprompt.co/*"
+      ],
+      "run_at": "document_end",
+      "all_frames": false,
+      "js": [
+        "scripts/core/distribution-content.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "history",
+    "cookies",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "chrome_url_overrides": {
+    "newtab": "html/new/index.html"
+  }
+}

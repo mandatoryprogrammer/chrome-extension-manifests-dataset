@@ -1,0 +1,74 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "RAD Adblock - Remove Annoying Ads!",
+  "short_name": "RAD Adblock",
+  "version": "0.0.10",
+  "description": "Remove annoying ads, pop-ups and spammy notifications!",
+  "icons": {
+    "16": "images/16.png",
+    "48": "images/48.png",
+    "128": "images/128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "background",
+    "browsingData",
+    "contentSettings",
+    "cookies",
+    "declarativeContent",
+    "fontSettings",
+    "gcm",
+    "identity",
+    "notifications",
+    "storage",
+    "system.cpu",
+    "system.display",
+    "system.memory",
+    "tabCapture",
+    "tabs",
+    "topSites",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "scripts/library.js",
+      "scripts/blocking.js",
+      "scripts/background.js"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "img": [
+        "pixel.gif"
+      ],
+      "css": [
+        "stylesheets/content.css"
+      ],
+      "js": [
+        "scripts/library.js",
+        "scripts/blocking.js",
+        "scripts/hiding.js",
+        "scripts/content.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "images/blocked/19.png",
+      "38": "images/blocked/38.png"
+    },
+    "default_title": "Show ads on this site"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Supernatural Countdown",
+  "version": "1.1.0",
+  "manifest_version": 2,
+  "description": "Shows the countdown status for the upcoming episode of Supernatural",
+  "homepage_url": "http://countdown.teamfreewill.net",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "page": "src/bg/background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "Supernatural Countdown",
+    "default_popup": "src/browser_action/browser_action.html"
+  },
+  "permissions": [
+    "chrome://favicon/",
+    "clipboardRead",
+    "clipboardWrite",
+    "contextMenus",
+    "cookies",
+    "history",
+    "tabs"
+  ],
+  "omnibox": {
+    "keyword": "extensionizr"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.google.com/*",
+        "https://teamfreewill.net/*",
+        "https://widget.teamfreewill.net/*"
+      ],
+      "css": [
+        "src/inject/inject.css",
+        "css/countdown.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.google.com/*",
+        "https://teamfreewill.net/*",
+        "https://widget.teamfreewill.net/*"
+      ],
+      "js": [
+        "src/inject/inject.js"
+      ]
+    }
+  ]
+}

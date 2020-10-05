@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Chime",
+  "version": "0.3.3",
+  "author": "Vitalii Rakovtsii <mfthemon@gmail.com>",
+  "description": "Adds new features to Google Music Web Player",
+  "default_locale": "en",
+  "icons": {
+    "128": "images/icon.png"
+  },
+  "minimum_chrome_version": "35.0.1916.114",
+  "permissions": [
+    "storage",
+    "notifications",
+    "tabs",
+    "https://play.google.com/music/*",
+    "https://*.googleusercontent.com/*",
+    "https://*.ggpht.com/*",
+    "https://play-music.gstatic.com/*",
+    "https://ws.audioscrobbler.com/2.0/*",
+    "https://*.google.com/*"
+  ],
+  "optional_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "page": "pages/background.html",
+    "persistent": false
+  },
+  "sandbox": {
+    "pages": [
+      "pages/sandbox.html"
+    ]
+  },
+  "options_page": "pages/options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://play.google.com/music/*"
+      ],
+      "css": [
+        "styles/flexible.css",
+        "styles/content.css"
+      ],
+      "js": [
+        "vendor/babel-polyfill/browser-polyfill.js",
+        "vendor/system.js/dist/system.src.js",
+        "js/config.raw.js",
+        "js/content.raw.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "js/*.js",
+    "vendor/*.js",
+    "styles/*.css",
+    "images/*.png",
+    "pages/options.html"
+  ],
+  "manifest_version": 2
+}

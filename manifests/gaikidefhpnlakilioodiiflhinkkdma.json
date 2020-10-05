@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "ÉTS courses - Par CEDILLE",
+  "version": "0.1",
+  "description": "Cette extension vous permet de visualiser les cours et leurs dépendances plus facilement.",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.etsmtl.ca/Programmes-Etudes/1er-cycle/Bac/*"
+      ],
+      "js": [
+        "lib/deflate.js",
+        "lib/encoder.js",
+        "script/generate-graph.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "script/chrome-page-action.js"
+    ]
+  },
+  "permissions": [
+    "downloads",
+    "storage",
+    "tabs"
+  ],
+  "icons": {
+    "64": "icon.png"
+  },
+  "page_action": {
+    "show_matches": [
+      "https://www.etsmtl.ca/Programmes-Etudes/1er-cycle/Bac/*"
+    ],
+    "hide_matches": [
+      "https://www.etsmtl.ca/Programmes-Etudes/1er-cycle/Bac/Programmes-bac-genie-electrique"
+    ],
+    "default_title": "Générateur d'arbre des cours de l'ÉTS - Par CEDILLE",
+    "default_icon": {
+      "64": "icon.png"
+    },
+    "default_popup": "popup/display-graph.html"
+  }
+}

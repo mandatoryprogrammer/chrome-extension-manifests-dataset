@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Smart Search",
+  "short_name": "smartsearch",
+  "description": "Your personalized smart search engine for smart users!",
+  "version": "1.0.8",
+  "permissions": [
+    "storage",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "*://smartsearch.top/*"
+  ],
+  "optional_permissions": [
+    "<all_urls>",
+    "cookies",
+    "gcm"
+  ],
+  "chrome_settings_overrides": {
+    "search_provider": {
+      "name": "Smartsearch",
+      "keyword": "smartsearch",
+      "search_url": "https://smartsearch.top/?q={searchTerms}",
+      "favicon_url": "https://smartsearch.top/i/logo.png",
+      "suggest_url": "https://smartsearch.top/autocomplete.php?sugg&q={searchTerms}",
+      "encoding": "UTF-8",
+      "is_default": true
+    }
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://smartsearch.top/*"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "web_accessible_resources": [
+    "icon16.png"
+  ],
+  "browser_action": {}
+}

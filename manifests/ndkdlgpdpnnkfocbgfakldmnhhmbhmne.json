@@ -1,0 +1,90 @@
+{
+  "browser_action": {
+    "default_icon": {
+      "16": "data/icons/instagramdesktop-16.png",
+      "32": "data/icons/instagramdesktop-32.png",
+      "48": "data/icons/instagramdesktop-48.png",
+      "64": "data/icons/instagramdesktop-64.png"
+    },
+    "default_popup": "data/popup/popup.html",
+    "default_title": "Desktop For Instagram"
+  },
+  "commands": {
+    "toggle-default-mode": {
+      "description": "Toggle Default UA Mode",
+      "suggested_key": {
+        "default": "Ctrl+Shift+D",
+        "mac": "Command+Shift+D"
+      }
+    }
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "inject.js"
+      ],
+      "matches": [
+        "https://www.instagram.com/*",
+        "https://instagram.com/*",
+        "http://www.instagram.com/*",
+        "http://m.instagram.com/*"
+      ],
+      "exclude_matches": [
+        "*://*/tv/upload*",
+        "*://*/channel/"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "inject_end.js"
+      ],
+      "css": [
+        "inject_end.css"
+      ],
+      "matches": [
+        "https://www.instagram.com/*",
+        "https://instagram.com/*",
+        "http://www.instagram.com/*",
+        "http://m.instagram.com/*"
+      ],
+      "exclude_matches": [
+        "*://*/tv/upload*",
+        "*://*/channel/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "description": "Tool to post and comment on instagram from your desktop",
+  "homepage_url": "https://www.fbmessagecleaner.com/",
+  "icons": {
+    "128": "data/icons/instagramdesktop-128.png",
+    "16": "data/icons/instagramdesktop-16.png",
+    "32": "data/icons/instagramdesktop-32.png",
+    "48": "data/icons/instagramdesktop-48.png",
+    "64": "data/icons/instagramdesktop-64.png"
+  },
+  "manifest_version": 2,
+  "name": "Desktop For Instagram",
+  "permissions": [
+    "tabs",
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "https://www.instagram.com/*",
+    "https://instagram.com/*",
+    "http://www.instagram.com/*",
+    "http://m.instagram.com/*",
+    "https://www.fbmessagecleaner.com/*"
+  ],
+  "short_name": "Desktop For Instagram",
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "1.58"
+}

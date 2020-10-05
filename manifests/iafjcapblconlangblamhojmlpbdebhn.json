@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Steam Ninja!",
+  "short_name": "Steam Ninja!",
+  "description": "Features for Auto-Purchasing, Popup for Badge Search and Item (backgrounds, emoticons, Trading cards) overview including prices",
+  "version": "2.1.1",
+  "default_locale": "en",
+  "icons": {
+    "48": "icons/steam-ninja-logo-48.png",
+    "128": "icons/steam-ninja-logo-128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/steam-ninja-logo-19.png"
+    },
+    "default_popup": "html/popup.html"
+  },
+  "background": {
+    "page": "html/background.html",
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "css": [
+        "styles/steamninja.main.css"
+      ],
+      "js": [
+        "scripts/steamninja.vendor.js",
+        "scripts/steamninja.main.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "*://aws.steamninja.net/*",
+    "*://steamcommunity.com/*/*/wishlist/*",
+    "storage",
+    "tabs"
+  ],
+  "web_accessible_resources": [
+    "scripts/*",
+    "img/*",
+    "fonts/*",
+    "config/*",
+    "html/*"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

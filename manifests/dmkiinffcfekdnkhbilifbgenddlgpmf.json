@@ -1,0 +1,79 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Pausify",
+  "description": "Press Ctrl+Shift+0 to pause/play video/music tabs",
+  "version": "1.5",
+  "manifest_version": 2,
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "tabs"
+  ],
+  "browser_action": {
+    "default_icon": "pausify.png",
+    "default_popup": "pausify.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.youtube.com/*"
+      ],
+      "js": [
+        "youtube.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://www.pandora.com/*"
+      ],
+      "js": [
+        "pandora.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://soundcloud.com/*"
+      ],
+      "js": [
+        "soundcloud.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://play.spotify.com/*"
+      ],
+      "js": [
+        "spotify.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://www.rdio.com/*"
+      ],
+      "js": [
+        "rdio.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    }
+  ],
+  "commands": {
+    "toggle-play-pause": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+0",
+        "mac": "Command+Shift+0"
+      },
+      "description": "Toggle pause/play",
+      "global": true
+    }
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Script Collider!",
+  "description": "JavaScript & CSS Minifier tool that simplifies the merging and minifying process for multiple file sites",
+  "version": "1.0.2",
+  "permissions": [
+    "tabs",
+    "<all_urls>"
+  ],
+  "background": {
+    "scripts": [
+      "js/jquery-1.9.1.min.js",
+      "js/compressor/jsmin.js",
+      "js/compressor/uglify.js",
+      "js/compressor/beautify-css.js",
+      "js/compressor/beautify.module.js",
+      "js/compressor/cssmin.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/content_script.js"
+      ]
+    },
+    {
+      "css": [
+        "css/content-file.css"
+      ],
+      "js": [
+        "js/jquery-1.9.1.min.js",
+        "js/content-file.js"
+      ],
+      "matches": [
+        "*://*/*js",
+        "*://*/*css"
+      ]
+    }
+  ],
+  "sandbox": {
+    "pages": [
+      "sandbox.html"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "images/icon.png",
+    "default_popup": "compressor.html"
+  },
+  "web_accessible_resources": [
+    "images/check.png",
+    "images/cross.png",
+    "images/loading.gif"
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "AssignTrack@HKU",
+  "description": "Automatically keeps a track of assignments of students at the university of Hong Kong ",
+  "version": "3.1.9",
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://moodle.hku.hk/mod/assign/view.php?*",
+        "http://moodle.hku.hk/mod/assign/view.php?*"
+      ],
+      "js": [
+        "AssignmentScrape.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://moodle.hku.hk/mod/turnitintooltwo/*",
+        "https://moodle.hku.hk/mod/turnitintooltwo/*"
+      ],
+      "js": [
+        "TurnitinAssignmentScrape.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "storage",
+    "notifications"
+  ]
+}

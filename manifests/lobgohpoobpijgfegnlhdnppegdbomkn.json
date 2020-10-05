@@ -1,0 +1,73 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_extName__",
+  "version": "1.6.8",
+  "description": "__MSG_extDescription__",
+  "default_locale": "en",
+  "icons": {
+    "16": "images/icon/16.png",
+    "48": "images/icon/48.png",
+    "128": "images/icon/128.png"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon/19-offline.png",
+      "38": "images/icon/48-offline.png"
+    },
+    "default_title": "__MSG_extName__"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "cookies",
+    "contextMenus",
+    "notifications",
+    "management",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/cticonnect*",
+        "*://*/collaboration*"
+      ],
+      "js": [
+        "js/libs/jquery-2.1.4.min.js",
+        "js/contentScriptCti.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "*://*/cticonnect*",
+        "*://*/collaboration*"
+      ],
+      "js": [
+        "js/libs/jquery-2.1.4.min.js",
+        "js/contentScript.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.wildixin.com/*"
+    ]
+  },
+  "options_page": "options.html",
+  "options_ui": {
+    "chrome_style": true,
+    "page": "options.html"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "manifest_version": 2,
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAo/tiNdalJvFkONisvSunQZZfL4EJ5EH9nP1X5IJW/1Kr2VzGMqIlX2Zr6u9255lKiMwiyUxsT0zFCWvhYnsssXpJlqeE1nal8X8NP/dpmKsITFTBqgSA58tF5HZBNCBIgyx0bo7pUN1F9k2Mjb0bbHHf6yvLIcmK/dfafv+WXZCO9sCR1/C7hZDP8m+OxLSjAOI/33IahiyRQoHPIT9uOZVQwoCVugHLx0UdxKufudDYr+jLVC0xB9Kdt8iHzA2JfRfWvxPDrZDfkZqQ+4Zlrjldh1gwo5MLDxDj8NhkpfddHDGT/CkuK3sbMdIyYCOaWphG6a3mXV3lJqS3NYOGtwIDAQAB"
+}

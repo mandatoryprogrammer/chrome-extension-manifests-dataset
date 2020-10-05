@@ -1,0 +1,110 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "QuickHAC",
+  "description": "Quickly and efficiently check your grades.",
+  "version": "3.2.2",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "permissions": [
+    "https://hacaccess.herokuapp.com/",
+    "https://accesscenter.roundrockisd.org/",
+    "https://my.austinisd.org/",
+    "https://my-teams.austinisd.org/",
+    "notifications",
+    "background",
+    "alarms"
+  ],
+  "icons": {
+    "16": "assets/icon16.png",
+    "38": "assets/icon38.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png",
+    "512": "assets/icon512.png"
+  },
+  "web_accessible_resources": [
+    "assets/background.jpg",
+    "fonts/*.ttf",
+    "assets/logowhite.svg"
+  ],
+  "background": {
+    "page": "html/background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "assets/icon38.png",
+    "default_title": "QuickHAC",
+    "default_popup": "html/popup.html"
+  },
+  "options_page": "html/options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://accesscenter.roundrockisd.org/HomeAccess/Account/LogOn*"
+      ],
+      "css": [
+        "css/open-sans.css",
+        "css/logon.css"
+      ],
+      "js": [
+        "js/vendor/jquery.js",
+        "js/logon.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://accesscenter.roundrockisd.org/HomeAccess/*"
+      ],
+      "exclude_matches": [
+        "https://accesscenter.roundrockisd.org/HomeAccess/Content/*",
+        "https://accesscenter.roundrockisd.org/HomeAccess/Account/LogOn*"
+      ],
+      "css": [
+        "css/open-sans.css",
+        "css/header.css"
+      ],
+      "js": [
+        "js/vendor/jquery.js",
+        "js/vendor/react.js",
+        "js/render/utils.js",
+        "js/render/picker.js",
+        "js/retrieve/utils.js",
+        "js/retrieve/retrieve.js",
+        "js/header.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://accesscenter.roundrockisd.org/HomeAccess/Content/*"
+      ],
+      "exclude_matches": [
+        "https://accesscenter.roundrockisd.org/HomeAccess/Content/Student/Assignments.aspx*"
+      ],
+      "css": [
+        "css/open-sans.css",
+        "css/content.css"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://accesscenter.roundrockisd.org/HomeAccess/Content/Student/Assignments.aspx*"
+      ],
+      "css": [
+        "css/open-sans.css",
+        "css/assignments.css",
+        "css/courseview.css"
+      ],
+      "js": [
+        "js/vendor/jquery.js",
+        "js/vendor/moment.js",
+        "js/vendor/react.js",
+        "js/parse/parse.js",
+        "js/render/utils.js",
+        "js/render/courseview.js",
+        "js/render/render.js",
+        "js/assignments.js"
+      ],
+      "all_frames": true
+    }
+  ]
+}

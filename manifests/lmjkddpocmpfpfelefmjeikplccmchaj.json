@@ -1,0 +1,69 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "ImageRight PDF Import",
+  "version": "1.0.0",
+  "author": "Vertafore, Inc.",
+  "description": "Import PDF files into ImageRight",
+  "permissions": [
+    "contextMenus",
+    "tabs",
+    "background",
+    "storage",
+    "notifications",
+    "file:///*/*",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "Extension/js/platformService.js",
+      "Extension/js/messages.js",
+      "Extension/js/config.js",
+      "Extension/js/utils.js",
+      "Extension/js/background.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "Extension/images/icon150.png"
+  ],
+  "browser_action": {
+    "default_popup": "Extension/html/popup.html",
+    "default_icon": "Extension/images/icon150.png",
+    "default_title": "ImageRight PDF Import"
+  },
+  "options_ui": {
+    "page": "Extension/html/settings.html",
+    "open_in_tab": true
+  },
+  "commands": {
+    "import-pdf": {
+      "suggested_key": {
+        "default": "Alt+I"
+      },
+      "description": "Import PDF files into ImageRight"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "file:///*/*",
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "Extension/js/platformService.js",
+        "Extension/js/contentScript.js"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "Extension/images/icon16.png",
+    "32": "Extension/images/icon32.png",
+    "48": "Extension/images/icon48.png",
+    "128": "Extension/images/icon128.png",
+    "150": "Extension/images/icon150.png"
+  }
+}

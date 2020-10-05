@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Monkey Mamaba",
+  "description": "Change the way you search with the Monkey Mamaba search extension",
+  "version": "1.1",
+  "icons": {
+    "48": "images/icon48.png"
+  },
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "scripts/foreground.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "html/modal.html",
+    "html/modal.css"
+  ],
+  "browser_action": {
+    "default_title": "Monkey Mamaba"
+  },
+  "chrome_url_overrides": {
+    "newtab": "newtab/newtab.html"
+  },
+  "chrome_settings_overrides": {
+    "search_provider": {
+      "name": "Monkey Mamaba",
+      "keyword": "Monkey Mamaba",
+      "search_url": "http://search.monkeymamaba.com/search?q={searchTerms}",
+      "favicon_url": "http://www.monkeymamaba.com/icon.ico",
+      "instant_url": "",
+      "image_url": "",
+      "encoding": "UTF-8",
+      "is_default": true
+    }
+  },
+  "permissions": [
+    "cookies",
+    "history",
+    "management",
+    "storage",
+    "webRequest",
+    "alarms",
+    "http://*.monkeymamaba.com/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.monkeymamaba.com/*"
+    ]
+  }
+}

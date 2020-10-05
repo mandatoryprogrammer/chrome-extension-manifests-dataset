@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_name__",
+  "version": "5.0.1",
+  "default_locale": "en",
+  "description": "__MSG_description__",
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "browser_action": {
+    "browser_style": true,
+    "default_icon": "img/icon48.png",
+    "default_title": "__MSG_name__",
+    "default_popup": "html/welcome.html"
+  },
+  "background": {
+    "page": "html/background.html"
+  },
+  "chrome_settings_overrides": {
+    "homepage": "https://www.qwant.com/?client=ext-chrome-hp",
+    "search_provider": {
+      "name": "Qwant",
+      "keyword": "www.qwant.com",
+      "search_url": "https://www.qwant.com/?q={searchTerms}&client=ext-chrome-sb",
+      "favicon_url": "https://www.qwant.com/favicon.ico",
+      "suggest_url": "https://api.qwant.com/api/suggest/?q={searchTerms}&client=opensearch&lang=__MSG_locale__",
+      "encoding": "UTF-8",
+      "is_default": true
+    }
+  },
+  "omnibox": {
+    "keyword": "q"
+  },
+  "permissions": [
+    "contextMenus",
+    "storage",
+    "activeTab",
+    "privacy",
+    "https://*.qwant.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.qwant.com/*"
+      ],
+      "css": [
+        "css/no-popin.css"
+      ],
+      "js": [
+        "js/events.js",
+        "js/contentScript.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "js/inject_login.js",
+    "js/inject_logout.js"
+  ]
+}

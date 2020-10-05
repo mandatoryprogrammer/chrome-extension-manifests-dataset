@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "PageProof - online review and approval",
+  "short_name": "PageProof",
+  "description": "Extends your experience of PageProof so you can review and approve anything and everything!",
+  "version": "1.4.7",
+  "homepage_url": "https://app.pageproof.com",
+  "icons": {
+    "16": "assets/images/icon16-production.png",
+    "32": "assets/images/icon32-production.png",
+    "48": "assets/images/icon48-production.png",
+    "128": "assets/images/icon128-production.png"
+  },
+  "browser_action": {
+    "default_icon": "assets/images/icon32-production.png"
+  },
+  "web_accessible_resources": [
+    "worker.*.js"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://app.pageproof.com/*"
+      ],
+      "js": [
+        "pageproof.bundle.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.canva.com/design/*/*/edit*"
+      ],
+      "js": [
+        "patch-worker.js",
+        "canva.bundle.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://app.pageproof.com/_private/embed-login/*"
+      ],
+      "js": [
+        "pageproof-embed-login.bundle.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "event.bundle.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "tabs",
+    "webNavigation",
+    "http://*/",
+    "https://*/",
+    "<all_urls>"
+  ]
+}

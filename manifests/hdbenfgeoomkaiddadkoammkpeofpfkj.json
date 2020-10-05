@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "SET-RN Security Module",
+  "description": "This extension allows http://*.set.rn.gov.br/ to access certfications and hardware tokens via a native message host app.",
+  "version": "1.0.2",
+  "permissions": [
+    "nativeMessaging",
+    "cookies",
+    "*://*.set.rn.gov.br/*",
+    "*://localhost/*"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": {
+      "24": "icon24.png",
+      "32": "icon32.png",
+      "128": "icon128.png"
+    },
+    "default_title": "SET-RN-SECURITY"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "injector.js"
+      ],
+      "matches": [
+        "*://*.set.rn.gov.br/*",
+        "*://localhost/*"
+      ]
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.set.rn.gov.br/*",
+      "*://localhost/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "client.js"
+  ],
+  "icons": {
+    "24": "icon24.png",
+    "32": "icon32.png",
+    "128": "icon128.png"
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "CloudCall Unified Communications for CRM",
+  "short_name": "CloudCall",
+  "version": "1.29.9",
+  "version_name": "1.29.9",
+  "description": "Make, record, categorize and replay calls directly in Google Chrome",
+  "browser_action": {
+    "default_icon": "./img/default_icon.png"
+  },
+  "background": {
+    "scripts": [
+      "./background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "./content/handlePortalLogin.js"
+      ],
+      "run_at": "document_end",
+      "matches": [
+        "*://*.cloudcall.com/login"
+      ],
+      "include_globs": [
+        "*#autoLoginChrome"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "img/default_icon_16.png",
+    "48": "img/default_icon_48.png",
+    "96": "img/default_icon_96.png",
+    "128": "img/default_icon_128.png"
+  },
+  "permissions": [
+    "tabs",
+    "*://*.bullhornstaffing.com/*",
+    "*://*.zoho.com/*",
+    "*://*.zoho.eu/*",
+    "*://*.vincere.io/*",
+    "*://*.tracker-rms.com/*",
+    "notifications",
+    "background",
+    "contextMenus",
+    "storage",
+    "webNavigation"
+  ],
+  "optional_permissions": [
+    "http://*/",
+    "https://*/"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.google-analytics.com https://www.googletagmanager.com https://bam.eu01.nr-data.net https://js-agent.newrelic.com https://bam.nr-data.net https://contentdn.staging.cloudcall.com https://contentdn.cloudcall.com/; object-src 'self'",
+  "web_accessible_resources": [
+    "img/logo.svg"
+  ]
+}

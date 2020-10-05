@@ -1,0 +1,41 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Gitviwr",
+  "description": "A lightweight, secure, and real time app that notifies users via email when their Github profile has been viewed.",
+  "version": "0.0.1",
+  "author": "Medi Assumani",
+  "icons": {
+    "128": "src/icon.png"
+  },
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "webRequest",
+    "webNavigation",
+    "https://*.github.com/*",
+    "tabs",
+    "storage",
+    "activeTab",
+    "cookies"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.github.com/*"
+      ],
+      "js": [
+        "/assets/socket.io.js",
+        "content.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "/src/background/background.js",
+      "/assets/socket.io.js"
+    ],
+    "persistent": true
+  }
+}

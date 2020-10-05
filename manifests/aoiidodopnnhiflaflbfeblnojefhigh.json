@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "PriceBlink Coupons and Price Comparison",
+  "short_name": "PriceBlink",
+  "version": "7.6",
+  "description": "Finds Coupons and Compares Prices while you shop. Shows savings when you're shopping, otherwise it stays hidden.",
+  "permissions": [
+    "http://*/",
+    "https://*/",
+    "tabs",
+    "webNavigation",
+    "webRequest",
+    "storage",
+    "alarms"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "js": [
+        "main.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": false,
+      "js": [
+        "early.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "browser_action": {
+    "default_icon": "images/icon_16.png",
+    "default_title": "PriceBlink",
+    "default_popup": "coupons_popup.html"
+  },
+  "icons": {
+    "16": "images/icon_16.png",
+    "48": "images/icon_48.png",
+    "128": "images/icon_128.png"
+  },
+  "options_ui": {
+    "page": "options.html"
+  }
+}

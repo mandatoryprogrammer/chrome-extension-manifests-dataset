@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "MYBEST代购代运助手 / 一键添加包裹",
+  "description": "MYBEST One Click Add Parcel",
+  "version": "2.95",
+  "manifest_version": 2,
+  "homepage_url": "https://www.mybest.com.my/",
+  "background": {
+    "scripts": [
+      "lib/jquery-3.1.0.min.js",
+      "const.js",
+      "background.js",
+      "main.js",
+      "frame.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "tabs",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "*://*.taobao.com/*",
+        "*://seller.shopee.com.my/*"
+      ],
+      "js": [
+        "lib/jquery-3.1.0.min.js",
+        "lib/sweetalert.min.js",
+        "const.js",
+        "main.js"
+      ],
+      "css": [
+        "main.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.mybest.com.my/*"
+      ],
+      "js": [
+        "lib/jquery-3.1.0.min.js",
+        "lib/sweetalert.min.js",
+        "const.js",
+        "frame.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    }
+  ],
+  "icons": {
+    "16": "logo.png",
+    "128": "logo.png"
+  },
+  "browser_action": {
+    "default_icon": "logo.png",
+    "default_title": "MYBEST - 发货快速 服务良好",
+    "default_popup": "popup.html"
+  }
+}

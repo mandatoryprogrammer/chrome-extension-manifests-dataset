@@ -1,0 +1,39 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Snipt",
+  "version": "1.2",
+  "manifest_version": 2,
+  "description": "Save text or code to snipt.net",
+  "permissions": [
+    "https://snipt.net/",
+    "tabs",
+    "contextMenus"
+  ],
+  "icons": {
+    "16": "images/icon-16.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
+  },
+  "browser_action": {
+    "default_icon": "images/icon-16-gs.png",
+    "default_title": "Snipt",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "scripts/snipt.content.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "scripts/snipt.bg.js"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://snipt.net; object-src 'self'"
+}

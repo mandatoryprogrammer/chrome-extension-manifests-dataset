@@ -1,0 +1,68 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "author": "Vertigo Ventures Ltd.",
+  "name": "__MSG_appName__",
+  "short_name": "__MSG_appShortName__",
+  "description": "__MSG_appDescription__",
+  "version": "2.2.1",
+  "manifest_version": 2,
+  "minimum_chrome_version": "40",
+  "default_locale": "en",
+  "incognito": "split",
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com 'unsafe-inline' 'unsafe-eval'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; object-src 'self'",
+  "icons": {
+    "16": "assets/brand/vvit-icon-16.png",
+    "48": "assets/brand/vvit-icon-48.png",
+    "128": "assets/brand/vvit-icon-128.png"
+  },
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_title": "__MSG_browserActionTitle__",
+    "default_icon": {
+      "19": "assets/brand/vvit-icon-19.png",
+      "38": "assets/brand/vvit-icon-38.png",
+      "48": "assets/brand/vvit-icon-48.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "js": [
+        "scripts/contentscript.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "scripts/insthelper.js"
+      ],
+      "matches": [
+        "https://vvimpacttracker.com/*",
+        "https://*.vvimpacttracker.com/*"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "background.html",
+    "index.html",
+    "assets/*",
+    "scripts/*"
+  ],
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "notifications",
+    "storage",
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ]
+}

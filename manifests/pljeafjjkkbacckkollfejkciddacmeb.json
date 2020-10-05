@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Stackoverflow Code Beautify",
+  "version": "1.0",
+  "manifest_version": 2,
+  "description": "Beautify and format selected code as needed.",
+  "minimum_chrome_version": "14",
+  "offline_enabled": true,
+  "options_page": "options.html",
+  "icons": {
+    "16": "Content/Images/CodeBeautify16.png",
+    "48": "Content/Images/CodeBeautify48.png",
+    "128": "Content/Images/CodeBeautify128.png",
+    "256": "Content/Images/CodeBeautify256.png"
+  },
+  "web_accessible_resources": [
+    "Content/Images/CodeBeautify48.png"
+  ],
+  "permissions": [
+    "<all_urls>",
+    "tabs",
+    "contextMenus",
+    "notifications"
+  ],
+  "background": {
+    "scripts": [
+      "Scripts/background.js",
+      "Scripts/beautify.js",
+      "Scripts/beautify-css.js",
+      "Scripts/beautify-html.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "Content/Images/CodeBeautify19.png",
+    "default_title": "Beautify selection"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "all_frames": true,
+      "js": [
+        "Scripts/content_script.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

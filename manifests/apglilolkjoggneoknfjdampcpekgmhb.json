@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "广点通DMP布码工具",
+  "description": "广点通DMP JS布码工具可以帮您在网页中检查是否成功上报DMP行为数据",
+  "version": "1.2.4",
+  "icons": {
+    "16": "img/icon_16.png",
+    "128": "img/icon_128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "img/icon_19.png",
+      "38": "img/icon_38.png"
+    },
+    "default_title": "广点通DMP JS布码工具",
+    "default_popup": "index.html"
+  },
+  "permissions": [
+    "tabs",
+    "webNavigation",
+    "activeTab",
+    "webRequest",
+    "webRequestBlocking",
+    "*://a.gdt.qq.com/*",
+    "<all_urls>"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.qq.com/*",
+      "*://dmp.oa.com/*",
+      "*://dmp.tencent.com/*"
+    ]
+  }
+}

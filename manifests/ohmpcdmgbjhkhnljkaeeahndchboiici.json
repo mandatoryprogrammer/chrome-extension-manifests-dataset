@@ -1,0 +1,76 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "description": "__MSG_appDesc__",
+  "default_locale": "en",
+  "version": "1.6.6",
+  "author": "prospectin.fr",
+  "homepage_url": "https://www.prospectin.fr",
+  "short_name": "The sales prospecting, autopilot, linked helper (linkedhelper), dux soup, Lead generation linkedin, linkedin prospecting tool, and LinkedIn lead generation tool: auto connect, send automated messages and skrapp!",
+  "permissions": [
+    "storage",
+    "cookies",
+    "webRequest",
+    "webRequestBlocking",
+    "https://www.prospectin.fr/*",
+    "https://www.prospectin.link/*",
+    "https://blog.prospectin.fr/*",
+    "https://www.linkedin.com/*"
+  ],
+  "background": {
+    "scripts": [
+      "./extension/background.bundle.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.linkedin.com/*"
+      ],
+      "js": [
+        "./extension/searchRecorder.bundle.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.linkedin.com/*"
+      ],
+      "js": [
+        "./extension/content-script.bundle.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.linkedin.com/feed/*"
+      ],
+      "js": [
+        "./extension/tutorial.bundle.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "options_page": "./back-office/index.html",
+  "browser_action": {
+    "default_popup": "./pop-up/index.html",
+    "default_icon": {
+      "16": "images/logo16.png",
+      "32": "images/logo32.png",
+      "48": "images/logo48.png",
+      "128": "images/logo128.png"
+    }
+  },
+  "icons": {
+    "16": "images/logo16.png",
+    "32": "images/logo32.png",
+    "48": "images/logo48.png",
+    "128": "images/logo128.png"
+  },
+  "web_accessible_resources": [
+    "/*"
+  ],
+  "content_security_policy": "script-src 'self' https://widget.intercom.io https://js.intercomcdn.com 'sha256-YOUGnVwm3VouzuQ7VlDdR375WOBsHQfceJatSk0bwbM=' 'sha256-H8tHkXCVCisCH1cSuF//x8r9TqkUQQUYm/+YLX5cF4U=' 'unsafe-eval'; object-src 'self'",
+  "manifest_version": 2
+}

@@ -1,0 +1,38 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "New Relic Notifier",
+  "short_name": "NRN",
+  "description": "Notifies when new items occur in New Relic RSS feed.",
+  "version": "0.0.0.1",
+  "permissions": [
+    "notifications",
+    "tabs",
+    "http://rpm.newrelic.com/*",
+    "https://rpm.newrelic.com/*"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://rpm.newrelic.com/*",
+        "https://rpm.newrelic.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_end",
+      "css": [
+        "nrn.css"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": "icon-browserbar.png",
+    "default_title": "Click to on/off this extension"
+  }
+}

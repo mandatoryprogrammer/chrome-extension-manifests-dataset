@@ -1,0 +1,36 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "LoginFDU",
+  "version": "0.9.3",
+  "manifest_version": 2,
+  "description": "一个很无聊的用来自动登录复旦UIS的小插件，还有保持elearning在线状态不退出的附加功能",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_title": "LoginFDU",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.fudan.edu.cn/amserver/UI/Login*",
+        "*://uis.fudan.edu.cn/authserver/login*"
+      ],
+      "js": [
+        "loginFDU.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://elearning.fudan.edu.cn/*"
+      ],
+      "js": [
+        "keep_alive.js"
+      ]
+    }
+  ]
+}

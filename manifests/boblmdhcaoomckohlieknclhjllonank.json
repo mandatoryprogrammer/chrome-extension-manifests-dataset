@@ -1,0 +1,225 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "EscapistPlus",
+  "short_name": "EscapistPlus",
+  "version": "1.5.8",
+  "applications": {
+    "gecko": {
+      "id": "escapistPlusSelfPublish@luckymouse.nl",
+      "update_url": "https://luckymouse.nl/escapistplus/updates.json"
+    }
+  },
+  "description": "Improving the Escapist Magazine's website, one byte at a time.",
+  "icons": {
+    "48": "icons/logo-n-48.png",
+    "96": "icons/logo-n-96.png"
+  },
+  "browser_action": {
+    "browser_style": true,
+    "default_popup": "popup/quickmenu.html",
+    "default_icon": {
+      "16": "icons/icon-n-16.png",
+      "32": "icons/icon-n-32.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.escapistmagazine.com/forums/read/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "src/_preload_threads.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.escapistmagazine.com/forums/read/*"
+      ],
+      "js": [
+        "background.messenger.js",
+        "escapistPlus.class.webm.js",
+        "escapistPlus.class.banAvatar.js",
+        "escapistPlus.class.postAssistant.js",
+        "src/class.themeDock.forumThread.js",
+        "src/class.upvote.js",
+        "escapistPlus.page.forumThread.js"
+      ],
+      "css": [
+        "styles/style.forums.read.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.escapistmagazine.com/forums/edit/*"
+      ],
+      "js": [
+        "background.messenger.js",
+        "escapistPlus.class.webm.js",
+        "escapistPlus.class.postAssistant.js"
+      ],
+      "css": [
+        "styles/style.forums.edit.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.escapistmagazine.com/forums/post/*"
+      ],
+      "js": [
+        "background.messenger.js",
+        "escapistPlus.class.webm.js",
+        "escapistPlus.class.postAssistant.js"
+      ],
+      "css": [
+        "styles/style.forums.post.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.escapistmagazine.com/groups/*"
+      ],
+      "js": [
+        "background.messenger.js",
+        "escapistPlus.class.webm.js",
+        "escapistPlus.class.postAssistant.js",
+        "src/class.themeDock.forumThread.js",
+        "escapistPlus.page.groups.js"
+      ],
+      "css": [
+        "escapistPlus.style.groups.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.escapistmagazine.com/profiles/ignore*",
+        "*://*.escapistmagazine.com/profiles/add_ignore*",
+        "*://*.escapistmagazine.com/profiles/process_add_ignore.php*"
+      ],
+      "js": [
+        "background.messenger.js",
+        "escapistPlus.class.ignoreList.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.escapistmagazine.com/*"
+      ],
+      "css": [
+        "styles/style.shadowCreator.css",
+        "styles/style.gradientCreator.css",
+        "styles/style.themeDock.css",
+        "styles/style.notificationDock.css",
+        "styles/style.general.css",
+        "styles/style.authenticator.css"
+      ],
+      "js": [
+        "src/class.shadowCreator.js",
+        "src/class.gradientCreator.js",
+        "src/class.themeDock.js",
+        "src/class.notificationDock.js",
+        "src/_afterload.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.escapistmagazine.com/news/view/*",
+        "*://*.escapistmagazine.com/articles/view/*"
+      ],
+      "css": [
+        "styles/style.article.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.escapistmagazine.com/content/*",
+        "*://*.escapistmagazine.com/contact/*"
+      ],
+      "css": [
+        "styles/style.article.content.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.escapistmagazine.com/content/termsofuse*"
+      ],
+      "css": [
+        "styles/style.article.terms.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.escapistmagazine.com/videos/view/*"
+      ],
+      "css": [
+        "styles/style.article.videos.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.escapistmagazine.com/articles/view/comicsandcosplay/*"
+      ],
+      "css": [
+        "styles/style.article.comics.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.webmshare.com/*"
+      ],
+      "js": [
+        "background.messenger.js",
+        "webshareJs.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.escapistmagazine.com/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "src/_preload.js",
+        "src/class.authenticator.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.facebook.com/plugins/feedback.php?api_key=175973950587&*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "src/_preload.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "cookies",
+    "storage",
+    "unlimitedStorage",
+    "tabs",
+    "http://www.youtube.com/embed/*",
+    "https://www.youtube.com/embed/*",
+    "*://*.escapistmagazine.com/*",
+    "http://www.escapistmagazine.com/profiles/ajax/messages.php",
+    "http://www.escapistmagazine.com/*",
+    "http://www.escapistmagazine.com/ajax/forum_tab_new.php",
+    "http://www.escapistmagazine.com/ajax/forum_tab_new2.php",
+    "https://v1.escapistmagazine.com/profiles/ajax/messages.php",
+    "https://v1.escapistmagazine.com/*",
+    "https://v1.escapistmagazine.com/ajax/forum_tab_new.php",
+    "https://v1.escapistmagazine.com/ajax/forum_tab_new2.php",
+    "https://luckymouse.nl/escapistplus/data/*",
+    "https://luckymouse.nl/escapistplus/*",
+    "https://www.facebook.com/plugins/comments.php?api_key=175973950587&*"
+  ],
+  "background": {
+    "page": "background.html"
+  },
+  "options_ui": {
+    "page": "options/options.html"
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "서핏 - 앞선 디자이너의 시작 페이지",
+  "description": "새 탭에서 받아보는 추천 디자인 콘텐츠",
+  "version": "0.2.18",
+  "icons": {
+    "32": "icons/icon_32.png",
+    "48": "icons/icon_48.png",
+    "128": "icons/icon_128.png"
+  },
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  },
+  "browser_action": {
+    "default_title": "Surfit"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://api.surfit.io/*",
+      "*://www.surfit.io/*",
+      "*://surfit.io/*",
+      "*://*.surfit.io/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://api.surfit.io/*",
+        "*://www.surfit.io/*",
+        "*://surfit.io/*",
+        "*://*.surfit.io/*"
+      ],
+      "include_globs": [
+        "*/auth/oauth/*/callback*"
+      ],
+      "js": [
+        "oauthConnect.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://api.surfit.io/*",
+        "*://www.surfit.io/*",
+        "*://surfit.io/*",
+        "*://*.surfit.io/*"
+      ],
+      "js": [
+        "contentConnect.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' chrome-extension://ipjibgkeofiedbfcfekfggdmjhhljgjn https://www.google-analytics.com https://www.googletagmanager.com https://www.google.com 'unsafe-eval'; object-src 'self'",
+  "permissions": [
+    "storage",
+    "*://*.surfit.io/*"
+  ],
+  "version_name": "0.2.18 open"
+}

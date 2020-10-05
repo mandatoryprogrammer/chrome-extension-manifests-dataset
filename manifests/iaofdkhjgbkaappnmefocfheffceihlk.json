@@ -1,0 +1,42 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "MAD-TS Workslip",
+  "version": "1.6",
+  "author": "Lucas Schneider",
+  "description": "MAD-TS Workslip adds a context menu link to print workslips in GetIt Acquisitions with the Bibliovation ILS.",
+  "homepage_url": "https://lrschneider.com/mad-ts-workslip-chrome",
+  "incognito": "spanning",
+  "icons": {
+    "16": "/img/icon16.png",
+    "32": "/img/icon32.png",
+    "48": "/img/icon48.png",
+    "64": "/img/icon64.png",
+    "128": "/img/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mad.scls.kohalibrary.com/app/staff/acquisitions",
+        "https://mad.scls.kohalibrary.com/getit/app/static/partials/index-dev.html",
+        "https://mad.scls.kohalibrary.com/cgi-bin/koha/acqui/getit.pl"
+      ],
+      "js": [
+        "/ctrlColonPrint.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "tabs",
+    "*://*.kohalibrary.com/*"
+  ]
+}

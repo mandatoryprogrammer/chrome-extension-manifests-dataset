@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "SAVER",
+  "description": "Easiest way to catch up on your interests!",
+  "version": "1.2",
+  "permissions": [
+    "bookmarks",
+    "tabs"
+  ],
+  "browser_action": {
+    "default_title": "SAVER Bookmarks",
+    "default_icon": "icon.png"
+  },
+  "background": {
+    "scripts": [
+      "saverBackground.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "jquery.min.js",
+        "toastr.min.js",
+        "saverToasts.js"
+      ],
+      "css": [
+        "toastr.min.css"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ]
+    }
+  ],
+  "commands": {
+    "save_page": {
+      "suggested_key": {
+        "windows": "Alt+Shift+S",
+        "mac": "MacCtrl+S",
+        "chromeos": "Alt+Shift+S",
+        "linux": "Alt+Shift+S"
+      },
+      "description": "Saves current page to /Saver Bookmarks/"
+    },
+    "delete_page": {
+      "suggested_key": {
+        "windows": "Alt+Shift+D",
+        "mac": "MacCtrl+D",
+        "chromeos": "Alt+Shift+D",
+        "linux": "Alt+Shift+D"
+      },
+      "description": "Deletes current page from /Saver Bookmarks/"
+    }
+  },
+  "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'"
+}

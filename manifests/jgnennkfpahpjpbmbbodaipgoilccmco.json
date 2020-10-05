@@ -1,0 +1,94 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Voblet",
+  "short_name": "Voblet",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "description": "A quick way to save and send links",
+  "version": "0.1.1",
+  "minimum_chrome_version": "23",
+  "background": {
+    "scripts": [
+      "js/ga.js",
+      "js/jquery-2.1.1.min.js",
+      "background.js"
+    ]
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://ssl.google-analytics.com; object-src 'self'",
+  "permissions": [
+    "contextMenus",
+    "cookies",
+    "notifications",
+    "unlimitedStorage",
+    "downloads",
+    "gcm",
+    "management",
+    "storage",
+    "identity",
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "<all_urls>"
+  ],
+  "web_accessible_resources": [
+    "html/*",
+    "css/*",
+    "img/*"
+  ],
+  "browser_action": {
+    "default_title": "Voblet",
+    "default_popup": "html/main.html"
+  },
+  "commands": {
+    "add-to-queue": {
+      "suggested_key": {
+        "default": "Alt+Q",
+        "mac": "Alt+Q"
+      },
+      "description": "Add Current page to Queue"
+    },
+    "add-to-bookmarks": {
+      "suggested_key": {
+        "default": "Alt+B",
+        "mac": "Alt+B"
+      },
+      "description": "Add Current page to Bookmarks"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://github.com/*",
+        "https://gist.github.com/*"
+      ],
+      "css": [
+        "/css/material-icons.css",
+        "css/githubStyle.css",
+        "css/contentScriptStyle.css"
+      ],
+      "js": [
+        "js/jquery-2.1.1.min.js",
+        "js/githubContentScript.js",
+        "contentScript.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [
+        "css/contentScriptStyle.css"
+      ],
+      "js": [
+        "js/jquery-2.1.1.min.js",
+        "contentScript.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

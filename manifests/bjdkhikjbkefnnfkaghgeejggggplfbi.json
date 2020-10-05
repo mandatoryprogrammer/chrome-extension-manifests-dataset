@@ -1,0 +1,72 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Savelist",
+  "short_name": "Savelist",
+  "version": "2.1.3",
+  "description": "__MSG_EXTENSION_DESCRIPTION__",
+  "author": "Savelist",
+  "default_locale": "en",
+  "icons": {
+    "16": "assets/icon/icon_16.png",
+    "32": "assets/icon/icon_32.png",
+    "48": "assets/icon/icon_48.png",
+    "96": "assets/icon/icon_96.png",
+    "128": "assets/icon/icon_128.png",
+    "256": "assets/icon/icon_256.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "assets/icon/icon_16.png",
+      "19": "assets/icon/icon_19.png",
+      "20": "assets/icon/icon_20.png",
+      "25": "assets/icon/icon_25.png",
+      "30": "assets/icon/icon_30.png",
+      "32": "assets/icon/icon_32.png",
+      "38": "assets/icon/icon_38.png",
+      "40": "assets/icon/icon_40.png",
+      "64": "assets/icon/icon_64.png"
+    },
+    "default_title": "__MSG_SAVE_TO_SAVELIST__"
+  },
+  "background": {
+    "page": "assets/background.html",
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "assets/content-script.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://savelist.co/*",
+        "https://beta.savelist.co/*",
+        "http://localhost/*"
+      ],
+      "js": [
+        "assets/activation.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "permissions": [
+    "tabs",
+    "storage",
+    "contextMenus",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "web_accessible_resources": [
+    "index.html",
+    "assets/*",
+    "build/*"
+  ]
+}

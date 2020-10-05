@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Hide YouTube™ Video",
+  "version": "0.1.1",
+  "description": "Hide YouTube video",
+  "background": {
+    "scripts": [
+      "dist/background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "https://www.youtube.com/*",
+    "declarativeContent",
+    "tabs",
+    "activeTab",
+    "storage"
+  ],
+  "page_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "images/image_16.png",
+      "32": "images/image_32.png",
+      "48": "images/image_48.png",
+      "128": "images/image_128.png"
+    }
+  },
+  "icons": {
+    "16": "images/image_16.png",
+    "32": "images/image_32.png",
+    "48": "images/image_48.png",
+    "128": "images/image_128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/*"
+      ],
+      "js": [
+        "dist/insertCSS.js",
+        "dist/removeCSS.js"
+      ],
+      "css": [
+        "styles/default.css"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

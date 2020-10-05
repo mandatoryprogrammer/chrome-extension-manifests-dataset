@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "description": "Add agent of test measurement",
+  "manifest_version": 2,
+  "browser_action": {
+    "default_icon": {
+      "19": "images/tm19.png",
+      "38": "images/tm38.png"
+    }
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "name": "TM Agent",
+  "version": "2.0",
+  "content_scripts": [
+    {
+      "js": [
+        "content-script.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "http://installer.eng.citrite.net:8081/",
+        "http://localhost:8081/",
+        "http://localhost:3000/",
+        "https://hongfei0712.blob.core.windows.net/bridge/*"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>"
+  ],
+  "web_accessible_resources": [
+    "tm-agent.js",
+    "locate-unique-element.js"
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "version": "4.0.0",
+  "name": "__MSG_appName__",
+  "short_name": "MindTheWord",
+  "description": "__MSG_appDesc__",
+  "default_locale": "en",
+  "content_security_policy": "media-src 'self'; object-src 'self'; script-src 'self' https://www.google.com https://ssl.google-analytics.com;",
+  "background": {
+    "scripts": [
+      "eventPage.js"
+    ],
+    "persistent": false
+  },
+  "options_page": "views/options.html",
+  "browser_action": {
+    "default_icon": "assets/img/48.png",
+    "default_title": "Mind the Word!",
+    "default_popup": "views/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "mtw.js",
+        "assets/js/jquery-3.3.1.min.js",
+        "assets/js/jquery.hovercard.min.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    "assets/css/*",
+    "assets/fonts/*",
+    "assets/js/*",
+    "assets/img/*",
+    "common/*",
+    "views/options.html*"
+  ],
+  "icons": {
+    "22": "assets/img/22.png",
+    "24": "assets/img/24.png",
+    "48": "assets/img/48.png",
+    "128": "assets/img/128.png"
+  },
+  "permissions": [
+    "http://google.com/",
+    "tabs",
+    "<all_urls>",
+    "storage",
+    "contextMenus",
+    "notifications",
+    "tts",
+    "unlimitedStorage"
+  ]
+}

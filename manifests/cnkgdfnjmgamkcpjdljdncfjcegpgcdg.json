@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Salesforce Inbox",
+  "description": "Sell Smarter with Salesforce Inbox",
+  "version": "13.4",
+  "icons": {
+    "16": "images/icon_webstore.png",
+    "48": "images/icon_webstore.png",
+    "128": "images/icon_webstore.png"
+  },
+  "permissions": [
+    "management",
+    "storage",
+    "notifications",
+    "background",
+    "gcm",
+    "webRequest",
+    "webRequestBlocking",
+    "*://*.googleusercontent.com/*",
+    "*://mail.google.com/*",
+    "*://*.salesforceiq.com/*",
+    "*://*.salesforce.com/*"
+  ],
+  "content_security_policy": "script-src 'self' https://chrome.salesforceiq.com/ https://mail.google.com/; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://mail.google.com/*"
+      ],
+      "js": [
+        "content_script/content_script_extension_id.js",
+        "content_script/content_script_gmail.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.salesforceiq.com/*"
+      ],
+      "js": [
+        "content_script/content_script_extension_id.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "content_script/lib/jquery.min.js",
+      "content_script/utility.js",
+      "content_script/background.js"
+    ]
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://*.gmail.com/*/*",
+      "*://mail.google.com/*/*",
+      "*://*.salesforceiq.com/*/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "content_script/*"
+  ]
+}

@@ -1,0 +1,129 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Turbo-tillegg for data.norge",
+  "description": "Ekstra funksjonalitet for nettstadane data.norge.no, hotell.difi.no og fellesdatakatalog.brreg.no. Uoffisiell nettlesar-utviding.",
+  "version": "1.0.0",
+  "icons": {
+    "128": "app-icon_128x128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://fellesdatakatalog.brreg.no/datasets/*"
+      ],
+      "js": [
+        "jquery-3.1.1.min.js",
+        "felles.js",
+        "fdk_data.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://data.norge.no/"
+      ],
+      "js": [
+        "jquery-3.1.1.min.js",
+        "felles.js",
+        "datanorge_front.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://data.norge.no/data/*"
+      ],
+      "js": [
+        "jquery-3.1.1.min.js",
+        "felles.js",
+        "datanorge_data.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://data.norge.no/organisasjoner/*",
+        "*://data.norge.no/organization/*"
+      ],
+      "exclude_matches": [
+        "*://data.norge.no/organisasjoner"
+      ],
+      "js": [
+        "jquery-3.1.1.min.js",
+        "felles.js",
+        "datanorge_org.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://data.norge.no/organisasjoner"
+      ],
+      "js": [
+        "jquery-3.1.1.min.js",
+        "felles.js",
+        "datanorge_orgs.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://data.norge.no/app/*"
+      ],
+      "exclude_matches": [
+        "*://data.norge.no/app"
+      ],
+      "js": [
+        "jquery-3.1.1.min.js",
+        "felles.js",
+        "datanorge_app.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://data.norge.no/node/*"
+      ],
+      "js": [
+        "jquery-3.1.1.min.js",
+        "datanorge_node.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://hotell.difi.no/?dataset=*"
+      ],
+      "js": [
+        "jquery-3.1.1.min.js",
+        "felles.js",
+        "datahotell.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://hotell.difi.no/"
+      ],
+      "js": [
+        "jquery-3.1.1.min.js",
+        "jquery.csv.min.js",
+        "Highcharts-6.0.5/code/highcharts.js",
+        "Highcharts-6.0.5/code/modules/series-label.js",
+        "Highcharts-6.0.5/code/modules/exporting.js",
+        "felles.js",
+        "datahotellFrontpage.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "web_accessible_resources": [
+    "Spinner-1.8s-200px.gif"
+  ],
+  "permissions": [
+    "activeTab",
+    "storage",
+    "https://livarbergheim.no/",
+    "https://hotell.difi.no/",
+    "https://www.europeandataportal.eu/"
+  ]
+}

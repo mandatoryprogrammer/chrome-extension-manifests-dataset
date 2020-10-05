@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Collections for Youtube™",
+  "short_name": "Youtuber's Collections",
+  "version": "1.3",
+  "manifest_version": 2,
+  "description": "Keep your collections organized.",
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "storage",
+    "*://*.youtube.com/*"
+  ],
+  "browser_action": {
+    "default_icon": "images/youtube-logo-128.png",
+    "default_popup": "youtuber_collection.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "css/youtuber_collection.css",
+    "js/webpage/youtuber_logger.js",
+    "js/webpage/youtuber_inpage.js",
+    "js/webpage/youtuber_dom.js",
+    "images/message.png",
+    "images/message_white.png"
+  ],
+  "incognito": "split",
+  "icons": {
+    "16": "images/youtube-logo-16.png",
+    "48": "images/youtube-logo-48.png",
+    "128": "images/youtube-logo-128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.youtube.com/*"
+      ],
+      "js": [
+        "js/youtuber_logger.js",
+        "js/youtuber_sanitizer.js",
+        "js/youtuber_main.js",
+        "js/youtuber_storage.js"
+      ]
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.youtube.com/*"
+    ]
+  }
+}

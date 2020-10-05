@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "面向 UP 主的数据下载工具",
+  "version": "1.0.2",
+  "description": "面向 bilibili UP 主的数据下载工具, 用于下载 B 站各种数据",
+  "author": "malei0311",
+  "permissions": [
+    "storage",
+    "declarativeContent",
+    "webRequest",
+    "*://*.bilibili.com/*"
+  ],
+  "background": {
+    "page": "background/background.html"
+  },
+  "web_accessible_resources": [
+    "content/*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.bilibili.com/video/*"
+      ],
+      "css": [
+        "content/pages/video/main.css"
+      ],
+      "js": [
+        "content/pages/video/entry.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "*://member.bilibili.com/*"
+      ],
+      "css": [
+        "content/pages/common/common.css",
+        "content/pages/member/main.css"
+      ],
+      "js": [
+        "content/pages/member/entry.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "page_action": {
+    "default_icon": {
+      "16": "images/favicon.png",
+      "32": "images/favicon.png",
+      "48": "images/favicon.png",
+      "128": "images/favicon.png"
+    }
+  },
+  "icons": {
+    "16": "images/favicon.png",
+    "32": "images/favicon.png",
+    "48": "images/favicon.png",
+    "128": "images/favicon.png"
+  },
+  "manifest_version": 2
+}

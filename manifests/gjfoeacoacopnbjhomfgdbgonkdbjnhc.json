@@ -1,0 +1,73 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "FireConverter",
+  "short_name": "FireConvertr",
+  "description": "Convert DOC to PDF and PDF to DOC using Fire Convertor New Tab.",
+  "version": "1.0.18.1011",
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "32": "icons/32.png",
+    "128": "icons/128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/16.png",
+      "48": "icons/48.png",
+      "32": "icons/32.png",
+      "128": "icons/128.png"
+    },
+    "default_title": "FireConverter"
+  },
+  "chrome_url_overrides": {
+    "newtab": "newtab/index.html"
+  },
+  "background": {
+    "page": "background/index.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.getdownloadfileconverter.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*.pdf.live/*"
+      ],
+      "js": [
+        "pageContent.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://newtab.getdownloadfileconverter.com/*"
+      ],
+      "js": [
+        "tabContent.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "*://*.getdownloadfileconverter.com/*",
+    "cookies",
+    "storage",
+    "tabs",
+    "management",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "manifest_version": 2,
+  "web_accessible_resources": [
+    "/icons/16.png"
+  ]
+}

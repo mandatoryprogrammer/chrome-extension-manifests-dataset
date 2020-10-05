@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "AliAutomator",
+  "short_name": "AliAutomator",
+  "author": "AliAutomator",
+  "version": "1.0",
+  "description": "Scrape shops and products including images from aliexpress.com as JSON or CSV.",
+  "manifest_version": 2,
+  "options_page": "pages/options.html",
+  "icons": {
+    "16": "img/16x16.png",
+    "48": "img/48x48.png",
+    "128": "img/128x128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.aliexpress.com/*"
+      ],
+      "js": [
+        "js/helper.js",
+        "js/content.js"
+      ]
+    }
+  ],
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "js/helper.js",
+      "js/background.js",
+      "js/searchbyimage.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "downloads",
+    "contextMenus",
+    "storage",
+    "https://*.aliexpress.com/*",
+    "https://*/*",
+    "http://*/*"
+  ],
+  "browser_action": {
+    "default_popup": "pages/popup.html"
+  },
+  "web_accessible_resources": [
+    "js/inject.js"
+  ]
+}

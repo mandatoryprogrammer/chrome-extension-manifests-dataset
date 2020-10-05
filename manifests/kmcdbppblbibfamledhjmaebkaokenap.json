@@ -1,0 +1,39 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Stack Search: Know before you go.",
+  "short_name": "Stack Search",
+  "version": "0.0.5",
+  "manifest_version": 2,
+  "description": "Adds an indicator to google search results if a stack overflow result has an accepted answer.",
+  "homepage_url": "http://tangerinepulsar.com",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "permissions": [
+    "https://www.google.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.google.com/*"
+      ],
+      "js": [
+        "src/inject/inject.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://www.google.com/*"
+      ],
+      "js": [
+        "js/jquery/jquery.js",
+        "src/inject/inspect.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "烽火台网络助手",
+  "short_name": "烽火台网络助手",
+  "description": "网络测速，网络异常监测，网络切换。为及时发现网络故障提供数据，为稳定访问配送烽火台保驾护航",
+  "version": "1.3",
+  "manifest_version": 2,
+  "default_locale": "zh_CN",
+  "icons": {
+    "16": "images/icon.png",
+    "128": "images/icon.png"
+  },
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon.png",
+      "38": "images/icon.png"
+    },
+    "default_title": "烽火台网络助手",
+    "default_popup": "pages/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.peisong.meituan.com/*"
+      ],
+      "js": [
+        "scripts/contentscript.js"
+      ],
+      "all_frames": false,
+      "run_at": "document_end"
+    }
+  ],
+  "options_page": "pages/options.html",
+  "minimum_chrome_version": "10.0",
+  "permissions": [
+    "tabs",
+    "storage",
+    "proxy",
+    "alarms",
+    "webRequest",
+    "webRequestBlocking",
+    "cookies",
+    "https://*/*",
+    "http://*/*"
+  ]
+}

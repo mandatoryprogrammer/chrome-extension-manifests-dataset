@@ -1,0 +1,72 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Quarking Password Manager",
+  "description": "Manage all your passwords with this browser extension",
+  "version": "3.1.84",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "permissions": [
+    "webRequestBlocking",
+    "webNavigation",
+    "tabs",
+    "storage",
+    "webRequest",
+    "clipboardWrite",
+    "contextMenus",
+    "alarms",
+    "cookies",
+    "<all_urls>",
+    "downloads"
+  ],
+  "icons": {
+    "16": "img/manifest/16.png",
+    "48": "img/manifest/48.png",
+    "128": "img/manifest/128.png"
+  },
+  "browser_action": {
+    "default_icon": "img/manifest/popup_off.png",
+    "default_title": "Quarking v3.1.84",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "web_accessible_resources": [
+    "img/*",
+    "lib/*",
+    "*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "lib/qtip/qtip.css",
+        "content_script.css"
+      ],
+      "js": [
+        "lib/tld.min.js",
+        "lib/jquery-2.1.0.min.js",
+        "lib/lodash.js",
+        "lib/chance.js",
+        "lib/qtip/qtip.js",
+        "lib/sendKeys/bililiteRange.js",
+        "lib/sendKeys/jquery.sendkeys.js",
+        "content_script.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "file:///*"
+      ],
+      "js": [
+        "content_script.js"
+      ]
+    }
+  ]
+}

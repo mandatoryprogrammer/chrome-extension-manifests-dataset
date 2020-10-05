@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Postfity.com",
+  "version": "2.0.0",
+  "description": "Postfity is faster and easier way to publish great content across multiple social networks including Twitter and Facebook.",
+  "manifest_version": 2,
+  "browser_action": {
+    "default_icon": "postfity_favicon_16.png"
+  },
+  "background": {
+    "scripts": [
+      "data/main.js",
+      "data/chrome/postfity-chrome-port-wrapper.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "contextMenus"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "data/chrome/postfity-chrome-port-wrapper.js",
+        "data/chrome/postfity-chrome-data-wrapper.js",
+        "data/chrome/postfity-chrome-embed.js",
+        "data/shared/postfity-layer.js",
+        "data/chrome/postfity-chrome.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.postfity.com/*",
+        "http://*.postfity.com/*",
+        "http://*.posts.easycovers.dev/*"
+      ],
+      "js": [
+        "data/chrome/postfity-chrome-port-wrapper.js",
+        "data/chrome/postfity-chrome-embed.js",
+        "data/shared/embeds/postfity-layer-scraper.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "icons": {
+    "16": "postfity_favicon_16.png",
+    "48": "postfity_favicon_48.png",
+    "128": "postfity_favicon_128.png"
+  }
+}

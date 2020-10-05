@@ -1,0 +1,68 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Mango Helper",
+  "short_name": "Mango Helper",
+  "description": "Расширение для автоматической настройки телефонов от MANGO OFFICE",
+  "homepage_url": "https://www.mango-office.ru/support/tekhnicheskaya_podderzhka/poleznye_programmy/mango_helper/",
+  "options_page": "/html/options.html",
+  "version": "1.18.0",
+  "icons": {
+    "16": "/images/logo_16.png",
+    "48": "/images/logo_48.png",
+    "128": "/images/logo_128.png"
+  },
+  "permissions": [
+    "tabs",
+    "<all_urls>",
+    "cookies",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "include_globs": [
+        "*://lk.mango-office.ru/*"
+      ],
+      "js": [
+        "/libs/jquery.js",
+        "/sourcecode/lk.js"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "include_globs": [
+        "*://*"
+      ],
+      "js": [
+        "/sourcecode/mark.js"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "include_globs": [
+        "*.mango-office.ru/*"
+      ],
+      "js": [
+        "/sourcecode/push.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_title": "Mango Helper",
+    "default_icon": "/images/logo_48.png",
+    "default_popup": "/html/popup.html"
+  },
+  "background": {
+    "page": "./html/background.html",
+    "persistent": true
+  },
+  "content_security_policy": "script-src 'self' https://ap.mangotele.com:1043 https://www.google-analytics.com https://www.googletagmanager.com https://ssl.google-analytics.com; object-src 'self'"
+}

@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_exName__",
+  "version": "4.2.3",
+  "description": "__MSG_exShortDescription__",
+  "default_locale": "en",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "page_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "js/hmac-sha256.js",
+      "js/enc-base64-min.js",
+      "js/local.storage.js",
+      "js/xml2json.js",
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.amazon.ca/*",
+        "*://www.amazon.de/*",
+        "*://www.amazon.fr/*",
+        "*://www.amazon.co.jp/*",
+        "*://www.amazon.co.uk/*",
+        "*://www.amazon.com/*"
+      ],
+      "js": [
+        "js/content.js"
+      ]
+    }
+  ],
+  "minimum_chrome_version": "51",
+  "options_page": "options.html",
+  "permissions": [
+    "tabs",
+    "*://webservices.amazon.ca/",
+    "*://webservices.amazon.de/",
+    "*://webservices.amazon.fr/",
+    "*://webservices.amazon.co.jp/",
+    "*://webservices.amazon.co.uk/",
+    "*://webservices.amazon.com/"
+  ]
+}

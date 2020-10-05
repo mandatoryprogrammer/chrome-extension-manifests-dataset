@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "epubee-read-free",
+  "description": "This extension can read book free",
+  "version": "1.2",
+  "icons": {
+    "16": "image/logo1.png",
+    "48": "image/logo48.png",
+    "128": "image/logo128.png"
+  },
+  "background": {
+    "scripts": [
+      "js/jquery.min.js",
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "contextMenus",
+    "tabs",
+    "storage",
+    "https://book.douban.com/subject/*",
+    "http://extension.epubee.com/readerFreeEpubee",
+    "https://read.douban.com/ebook/*",
+    "http://192.168.31.111:8000/readerFreeEpubee",
+    "https://www.amazon.cn/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://book.douban.com/subject/*",
+        "https://read.douban.com/ebook/*",
+        "https://www.amazon.cn/dp/*",
+        "https://www.amazon.cn/gp/product/*"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "js/content-script.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "browser_action": {
+    "default_icon": "image/logo1.png",
+    "default_title": "This is a free book plugin",
+    "default_popup": "options.html"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  }
+}

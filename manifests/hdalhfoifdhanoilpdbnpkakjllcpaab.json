@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Yandex Slovari Translation and Pronunciation",
+  "version": "0.3.1",
+  "manifest_version": 2,
+  "description": "Translate from English to Russian using Yandex.Slovari. Pronunciation provided by TheFreeDictionary.",
+  "browser_action": {
+    "default_icon": "images/icon_large.png"
+  },
+  "icons": {
+    "32": "images/icon_32.png",
+    "64": "images/icon_64.png",
+    "128": "images/icon_128.png"
+  },
+  "permissions": [
+    "http://www.thefreedictionary.com/*",
+    "http://slovari.yandex.ru/*",
+    "contextMenus",
+    "tabs",
+    "storage",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "web_accessible_resources": [
+    "reset.css",
+    "show_word.html",
+    "css/ui-lightness/jquery-ui-1.10.2.custom.css",
+    "css/ui-lightness/images/*.gif",
+    "css/ui-lightness/images/*.png"
+  ],
+  "background": {
+    "scripts": [
+      "js/util.js",
+      "js/background_page.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file://*/*"
+      ],
+      "all_frames": true,
+      "css": [
+        "css/ui-lightness/jquery-ui-1.10.2.custom.css"
+      ],
+      "js": [
+        "js/lib/jquery.js",
+        "js/lib/jquery-ui.js",
+        "js/util.js",
+        "js/content_script.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'"
+}

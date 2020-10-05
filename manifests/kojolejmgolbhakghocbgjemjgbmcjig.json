@@ -1,0 +1,125 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "SteamWizard",
+  "short_name": "SW",
+  "description": "SteamWizard is a browser extension that helps loading additional information for CS:GO items on the steam community market.",
+  "version": "2.4.8",
+  "icons": {
+    "16": "images/logo_64.png",
+    "48": "images/logo_192.png",
+    "128": "images/logo_512.png"
+  },
+  "browser_action": {
+    "default_icon": "images/logo_192.png",
+    "default_title": "Options",
+    "default_popup": "html/background/popup.html"
+  },
+  "permissions": [
+    "*://steamcommunity.com/*",
+    "notifications"
+  ],
+  "background": {
+    "scripts": [
+      "js/lib/jquery-3.0.0.min.js",
+      "js/lib/zlib.min.js",
+      "js/lib/require.js",
+      "js/background/config.js",
+      "js/background/background.js"
+    ],
+    "persistant": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://steamcommunity.com/tradeoffer/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "js/lib/jquery-3.0.0.min.js",
+        "js/lib/require.js",
+        "js/content_script/config.js",
+        "js/content_script/trade.js"
+      ],
+      "css": [
+        "css/trade.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://steamcommunity.com/market/listings/730/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "js/lib/jquery-3.0.0.min.js",
+        "js/lib/require.js",
+        "js/content_script/config.js",
+        "js/content_script/market.js"
+      ],
+      "css": [
+        "css/market.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://steamcommunity.com/market",
+        "*://steamcommunity.com/market/"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "js/lib/jquery-3.0.0.min.js",
+        "js/lib/require.js",
+        "js/content_script/config.js",
+        "js/content_script/market-main.js"
+      ],
+      "css": [
+        "css/market-main.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://steamcommunity.com/id/*/tradeoffers*",
+        "*://steamcommunity.com/id/*/tradeoffers/",
+        "*://steamcommunity.com/id/*/tradeoffers/sent",
+        "*://steamcommunity.com/id/*/tradeoffers/sent/",
+        "*://steamcommunity.com/profiles/*/tradeoffer",
+        "*://steamcommunity.com/profiles/*/tradeoffer/",
+        "*://steamcommunity.com/profiles/*/tradeoffers/sent",
+        "*://steamcommunity.com/profiles/*/tradeoffers/sent/"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "js/lib/jquery-3.0.0.min.js",
+        "js/lib/require.js"
+      ],
+      "css": [
+        "css/trade.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://steamcommunity.com/id/*/inventory*",
+        "*://steamcommunity.com/profiles/*/inventory*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "js/lib/jquery-3.0.0.min.js",
+        "js/lib/jquery.mCustomScrollbar.concat.min.js",
+        "js/lib/require.js",
+        "js/content_script/config.js",
+        "js/content_script/inventory.js"
+      ],
+      "css": [
+        "css/lib/jquery.mCustomScrollbar.css",
+        "css/inventory.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "js/*",
+    "images/*",
+    "css/*",
+    "html/*",
+    "font/*"
+  ]
+}

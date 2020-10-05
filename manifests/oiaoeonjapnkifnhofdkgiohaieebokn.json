@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Image Amazon Downloader",
+  "description": "Download Image from Amazon",
+  "version": "1.8.1",
+  "minimum_chrome_version": "31",
+  "manifest_version": 2,
+  "content_security_policy": "script-src style-src img-src media-src object-src 'self' https://www.gstatic.com/ https://*.firebaseio.com https://cdn.firebase.com https://www.googleapis.com https://apis.google.com https://code.getmdl.io",
+  "permissions": [
+    "downloads",
+    "http://localhost:8188/"
+  ],
+  "browser_action": {
+    "default_icon": "/icon_128.png",
+    "default_popup": "/views/popup.html"
+  },
+  "icons": {
+    "16": "/icon_16.png",
+    "48": "/icon_48.png",
+    "128": "/icon_128.png"
+  },
+  "web_accessible_resources": [
+    "/images/open.png",
+    "/images/download.png"
+  ],
+  "background": {
+    "scripts": [
+      "/lib/jquery.js",
+      "/scripts/defaults.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "/lib/jquery.js",
+        "/scripts/send_images.js"
+      ],
+      "matches": [
+        "https://www.amazon.com/*",
+        "https://www.aliexpress.com/*",
+        "https://www.amazon.in/*",
+        "https://www.amazon.es/*",
+        "https://www.amazon.com.au/*",
+        "https://www.amazon.ca/*",
+        "https://www.amazon.de/*",
+        "https://www.amazon.fr/*"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Fame Things",
+  "version": "0.0.8",
+  "description": "You can influence by being yourself!",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "icons": {
+    "16": "images/logo16.png",
+    "32": "images/logo32.png",
+    "48": "images/logo48.png",
+    "64": "images/logo64.png",
+    "128": "images/logo128.png",
+    "256": "images/logo256.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "images/logo16.png",
+      "32": "images/logo32.png",
+      "48": "images/logo48.png",
+      "64": "images/logo64.png",
+      "128": "images/logo128.png",
+      "256": "images/logo256.png"
+    },
+    "default_title": "You can influence by being yourself!",
+    "default_popup": "index.html"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "geolocation",
+    "http://www.youtube.com/*",
+    "https://www.youtube.com/*",
+    "http://youtube.com/*",
+    "https://youtube.com/*",
+    "http://famethings.com/*",
+    "https://famethings.com/*",
+    "http://www.famethings.com/*",
+    "https://www.famethings.com/*",
+    "https://api.famethings.com/api/*",
+    "https://file.famethings.com/*"
+  ],
+  "background": {
+    "scripts": [
+      "background/constants/constants.js",
+      "background/parser/url-parser.js",
+      "background/web/token.js",
+      "background/web/endpoints.js",
+      "background/web/service.js",
+      "background/background.js",
+      "background/events/events.js",
+      "background/events/background-message.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.youtube.com/*",
+        "https://www.youtube.com/*",
+        "http://youtube.com/*",
+        "https://youtube.com/*",
+        "http://famethings.com/*",
+        "https://famethings.com/*",
+        "http://www.famethings.com/*",
+        "https://www.famethings.com/*",
+        "https://api.famethings.com/api/*",
+        "https://file.famethings.com/*"
+      ],
+      "js": [
+        "lib/jquery-3.4.1.min.js",
+        "content/lib/toastr/toastr.min.js",
+        "content/lib/popper/popper.min.js",
+        "content/event/event.js",
+        "content/web/endpoints.js",
+        "content/web/token.js",
+        "content/web/service.js",
+        "content/constants/constants.js",
+        "content/contentScript.js"
+      ],
+      "css": [
+        "content/css/content.css",
+        "content/lib/toastr/toastr.min.css",
+        "content/css/icon.css"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

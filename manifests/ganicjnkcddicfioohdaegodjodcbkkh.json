@@ -1,0 +1,70 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "description": "Curate Facebook with MBFC news categorizations",
+  "version": "2.0.7",
+  "name": "Official Media Bias/Fact Check Extension",
+  "short_name": "MBFCext",
+  "author": "Mike Crowe",
+  "version_name": "Release 2.0.7",
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "background": {
+    "page": "background.html"
+  },
+  "icons": {
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/icon128.png",
+    "default_popup": "popup.html",
+    "default_title": "MBFC"
+  },
+  "permissions": [
+    "*://facebook.com/*",
+    "*://*.facebook.com/*",
+    "*://twitter.com/*",
+    "*://*.twitter.com/*",
+    "storage",
+    "tabs"
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://facebook.com/*",
+        "*://*.facebook.com/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "facebook.bundle.js"
+      ],
+      "css": [
+        "css/svg-with-js.min.css",
+        "css/facebook.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://twitter.com/*",
+        "*://*.twitter.com/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "twitter.bundle.js"
+      ],
+      "css": [
+        "css/svg-with-js.min.css",
+        "css/twitter.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "images/*",
+    "css/*",
+    "icons/*"
+  ]
+}

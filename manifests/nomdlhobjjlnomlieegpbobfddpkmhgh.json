@@ -1,0 +1,39 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "M2 Developer Tools",
+  "description": "Adds Magento 2 debugging tools to the Chrome Developer Tools.",
+  "version": "1.1.1",
+  "minimum_chrome_version": "49",
+  "devtools_page": "main.html",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "web_accessible_resources": [
+    "main.html",
+    "dist/main.js",
+    "dist/panel.css",
+    "dist/panel.js"
+  ],
+  "background": {
+    "scripts": [
+      "dist/background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "tabs",
+    "file:///*",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "dist/inject.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

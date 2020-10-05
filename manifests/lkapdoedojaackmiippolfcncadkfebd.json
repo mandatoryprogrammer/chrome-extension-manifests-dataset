@@ -1,0 +1,36 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "WWU CBE GPA Calculator",
+  "short_name": "CBE GPA Calc",
+  "description": "Western students may view their current CBE or MSCM Foundation GBA and add/remove grades to see how their GPA will be affected.",
+  "version": "1.3.0.5",
+  "author": "CBE GPA Team",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "index.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://admin.wwu.edu/pls/wwis/wwskahst.WWU_ViewTran",
+        "https://admin.wwu.edu/pls/wwis/wwfkfhst.P_FacDispCurrent",
+        "file://*/*"
+      ],
+      "js": [
+        "js/content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "css/print.css",
+    "resources/Western-logo-CBE.jpg"
+  ],
+  "permissions": [
+    "activeTab",
+    "storage",
+    "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js"
+  ],
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'"
+}

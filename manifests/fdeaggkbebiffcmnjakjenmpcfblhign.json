@@ -1,0 +1,76 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Gmail Enhancement Suit",
+  "short_name": "GMES",
+  "description": "Gmail Enhancement Suit",
+  "version": "1.0.3",
+  "icons": {
+    "16": "icons/logo.png",
+    "48": "icons/logo.png",
+    "128": "icons/logo.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/logo.png",
+    "default_popup": "build/popup-entry.html"
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "build/libs/jquery.min.js",
+      "build/backgroundEntry.js"
+    ]
+  },
+  "externally_connectable": {
+    "matches": [
+      "http://localhost/*",
+      "http://localhost:1308/*",
+      "https://gmes.io/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "build/libs/jquery.min.js",
+        "build/libs/datepicker.js",
+        "build/libs/wangEditor.js",
+        "build/libs/highlight.min.js",
+        "build/contentEntry.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "exclude_matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "build/libs/jquery.min.js",
+        "build/contentEntry.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "build/*",
+    "datas/*"
+  ],
+  "permissions": [
+    "tabs",
+    "storage",
+    "unlimitedStorage",
+    "cookies",
+    "notifications",
+    "contextMenus",
+    "webRequest",
+    "webRequestBlocking",
+    "proxy"
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Website AdBlocker+ ",
+  "version": "1.1",
+  "background": {
+    "scripts": [
+      "punycode.min.js",
+      "jquery/jquery.min.js",
+      "port.js",
+      "functions.js",
+      "stats.js",
+      "filtering/domainset.js",
+      "filtering/filteroptions.js",
+      "filtering/filtertypes.js",
+      "filtering/filterset.js",
+      "filtering/myfilters.js",
+      "filtering/filternormalizer.js",
+      "idlehandler.js",
+      "dropbox-datastores.js",
+      "gab_question.js",
+      "background.js",
+      "datacollection.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "img/icon.png",
+      "38": "img/icon.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.youtube.com/*"
+      ],
+      "js": [
+        "bandaids.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "port.js",
+        "functions.js",
+        "filtering/filteroptions.js",
+        "adblock_start_common.js",
+        "adblock_start_chrome.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "notificationoverlay.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "content_security_policy": "default-src 'self'; style-src 'self' 'unsafe-inline' 'unsafe-eval'; connect-src *; frame-src 'self' https://www.dropbox.com/;",
+  "default_locale": "en",
+  "description": "This extension will block ads all over the web.",
+  "icons": {
+    "16": "img/icon.png",
+    "48": "img/icon.png",
+    "128": "img/icon.png"
+  },
+  "incognito": "spanning",
+  "manifest_version": 2,
+  "options_page": "options/index.html",
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "https://*.dropbox.com/*",
+    "contextMenus",
+    "tabs",
+    "idle",
+    "webRequest",
+    "webRequestBlocking",
+    "webNavigation",
+    "alarms",
+    "storage",
+    "notifications"
+  ],
+  "optional_permissions": [
+    "management"
+  ],
+  "web_accessible_resources": [
+    "chrome_oauth_receiver.html"
+  ]
+}

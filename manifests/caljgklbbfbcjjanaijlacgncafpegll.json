@@ -1,0 +1,86 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "author": "Avira Operations GmbH & Co. KG",
+  "default_locale": "en",
+  "name": "Avira Password Manager",
+  "version": "2.15.1.3489",
+  "description": "__MSG_extDescription__",
+  "browser_action": {
+    "default_icon": {
+      "16": "images/icons/16x16.png",
+      "24": "images/icons/24x24.png",
+      "32": "images/icons/32x32.png"
+    },
+    "default_title": "Avira Password Manager"
+  },
+  "manifest_version": 2,
+  "web_accessible_resources": [
+    "panel.html",
+    "html/*.html",
+    "images/icons/*",
+    "images/icons-gray/*"
+  ],
+  "icons": {
+    "16": "images/icons/16x16.png",
+    "48": "images/icons/48x48.png",
+    "128": "images/icons/128x128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/content/common.js",
+        "js/content/content.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/content/iframe_content.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/background/deps.js",
+      "js/background/background.js"
+    ]
+  },
+  "permissions": [
+    "webRequest",
+    "webNavigation",
+    "tabs",
+    "cookies",
+    "<all_urls>",
+    "contextMenus",
+    "storage",
+    "unlimitedStorage",
+    "idle"
+  ],
+  "optional_permissions": [
+    "privacy",
+    "nativeMessaging"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://passwords.avira.com/*"
+    ],
+    "ids": [
+      "flliilndjeohchalpbbcdekjklbdgfkk",
+      "ccbpbkebodcjkknkfkpmfeciinhidaeh",
+      "lfpjfjpklpkigoegkegnpplhlobjolgi",
+      "dalelnnofafalcmkmnhdbigbjjkloabo",
+      "nknfhbemhclggbcbodgchnfbdfhcjmdn"
+    ]
+  }
+}

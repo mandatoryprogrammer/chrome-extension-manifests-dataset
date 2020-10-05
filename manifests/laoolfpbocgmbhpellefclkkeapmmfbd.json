@@ -1,0 +1,85 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "background": {
+    "page": "toolbar.html"
+  },
+  "browser_action": {
+    "default_icon": "icons/icon19on.png",
+    "default_title": "Disable Clinck Toobar"
+  },
+  "chrome_url_overrides": {
+    "newtab": "components/supertab/html/supertab.html"
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "common/js/common.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "css": [
+        "contentScript.css"
+      ],
+      "js": [
+        "common/js/underscore-1.3.1.min.js",
+        "js/messaging.js",
+        "js/scriptInjector.js",
+        "common/adapter/adapterUtil.js",
+        "js/mutation_summary-min.js",
+        "js/reservespacefortoolbar.js",
+        "js/reservespaceifenabled.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "js": [
+        "config.js",
+        "contentScript.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "description": "iCafe Manager Toolbar for Chrome",
+  "homepage_url": "http://www.icafemanager.com/",
+  "icons": {
+    "128": "icons/icon128.png",
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png"
+  },
+  "manifest_version": 2,
+  "name": "iCafe Manager Toolbar",
+  "permissions": [
+    "tabs",
+    "storage",
+    "cookies",
+    "history",
+    "contextMenus",
+    "management",
+    "http://*.icafemanager.com/",
+    "http://*/*",
+    "https://*/*",
+    "http://127.0.0.1/*",
+    "http://localhost/*",
+    "chrome://favicon/*"
+  ],
+  "version": "5.2.1.2",
+  "web_accessible_resources": [
+    "toolbarUI.html",
+    "components/supertab/html/supertab.html"
+  ]
+}

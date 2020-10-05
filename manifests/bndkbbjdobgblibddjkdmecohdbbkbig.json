@@ -1,0 +1,73 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Scrabulizer Importer",
+  "version": "1.5.1",
+  "description": "Imports Lexulous, Words With Friends and Wordscraper games into Scrabulizer.",
+  "icons": {
+    "16": "s_tile_16px.png",
+    "48": "s_tile_48px.png",
+    "128": "s_tile_128px.png"
+  },
+  "permissions": [
+    "activeTab",
+    "webNavigation",
+    "http://emailgame.lexulous.com/*",
+    "http://aws.rjs.in/*"
+  ],
+  "minimum_chrome_version": "39.0.2171.0",
+  "background": {
+    "scripts": [
+      "util.js",
+      "background.js",
+      "lexulous_and_wordscraper_util.js",
+      "lexulous_and_wordscraper_background.js",
+      "words_with_friends_background.js",
+      "background_web_navigation.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://aws.rjs.in/fblexulous*?*action=viewboard*",
+        "https://aws.rjs.in/fblexulous*?*action=viewboard*",
+        "http://aws.rjs.in/wordscraper*?*action=viewboard*",
+        "https://aws.rjs.in/wordscraper*?*action=viewboard*",
+        "http://*.lexulous.com/email/playboard*",
+        "https://*.lexulous.com/email/playboard*"
+      ],
+      "all_frames": true,
+      "js": [
+        "util.js",
+        "content_util.js",
+        "lexulous_and_wordscraper_util.js",
+        "lexulous_and_wordscraper_content.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://wwf-fb.zyngawithfriends.com/*",
+        "https://wwf-fb.zyngawithfriends.com/*",
+        "http://zdnzwf5-a.akamaihd.net/*",
+        "https://zdnzwf5-a.akamaihd.net/*",
+        "http://wwf.zynga.com/*",
+        "https://wwf.zynga.com/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "util.js",
+        "content_util.js",
+        "words_with_friends_content.js"
+      ]
+    }
+  ],
+  "page_action": {
+    "default_icon": {
+      "16": "s_tile_grey_16px.png",
+      "19": "s_tile_grey_19px.png",
+      "32": "s_tile_grey_32px.png",
+      "38": "s_tile_grey_38px.png"
+    },
+    "default_title": "No supported game could be found on this page (refresh to try again)"
+  }
+}

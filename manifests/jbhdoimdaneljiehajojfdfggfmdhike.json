@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Contrast",
+  "description": "Allows the user to get information from Contrast conveniently in a Chrome extension",
+  "version": "0.1.1",
+  "browser_action": {
+    "default_icon": "img/contrast-not-configured.png",
+    "default_popup": "html/index.html"
+  },
+  "background": {
+    "page": "html/background.html",
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/content-scripts/content-utils.js",
+        "js/content-scripts/ContrastForms.js",
+        "js/content-scripts/content-script.js"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "img/contrast16.png",
+    "48": "img/contrast48.png",
+    "128": "img/contrast128.png"
+  },
+  "web_accessible_resources": [
+    "img/*.png",
+    "test/*",
+    "data/*"
+  ],
+  "permissions": [
+    "webRequest",
+    "activeTab",
+    "storage",
+    "http://*/*",
+    "https://*/*",
+    "https://*.contrastsecurity.com/",
+    "tabs",
+    "background",
+    "notifications"
+  ]
+}

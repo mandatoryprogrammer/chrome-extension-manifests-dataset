@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "musery",
+  "short_name": "musery",
+  "version": "2.2.0",
+  "description": "Delivers music from VKontakte to Telegram",
+  "homepage_url": "https://musery.tsellobenok.dev",
+  "icons": {
+    "128": "./img/128x128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "notifications"
+  ],
+  "browser_action": {
+    "default_title": "musery",
+    "default_popup": "index.html"
+  },
+  "web_accessible_resources": [
+    "img/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://vk.com/*",
+        "https://vkmt.eu-4.evennode.com/*",
+        "https://musery.tsellobenok.dev/*"
+      ],
+      "css": [
+        "css/style.css"
+      ],
+      "js": [
+        "js/axios.min.js",
+        "js/hls.js",
+        "js/jquery-3.4.1.slim.min.js",
+        "js/content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/axios.min.js",
+      "js/socket.io.js",
+      "js/background.js"
+    ],
+    "persistent": false
+  }
+}

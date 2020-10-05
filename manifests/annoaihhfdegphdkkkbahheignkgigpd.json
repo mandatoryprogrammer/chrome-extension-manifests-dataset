@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "FollowUp.cc for Gmail",
+  "description": "Lightweight productivity suite for Gmail. The fastest way to organize your professional life.",
+  "version": "7.42",
+  "minimum_chrome_version": "29",
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "background": {
+    "persistent": true,
+    "page": "background/background.html"
+  },
+  "browser_action": {
+    "default_icon": "bookmark/images/fup-chrome-button.png",
+    "default_title": "FollowUp on this page",
+    "default_popup": "bookmark/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "css": [
+        "gmail/gmail.css"
+      ],
+      "js": [
+        "gmail/gmail.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "gmail/preaction/preaction.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "notifications",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "management",
+    "https://*.google.com/*",
+    "https://*.gmail.com/*",
+    "https://*.sentry.io/*",
+    "https://*.followup.cc/*"
+  ],
+  "web_accessible_resources": [
+    "*.png",
+    "*.jpg",
+    "*.gif",
+    "*.svg",
+    "gmail/preaction/preaction_script.js"
+  ],
+  "content_security_policy": "script-src 'self' https://www.googleadservices.com/; object-src 'self'",
+  "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDhy8Dm0T+NJ7dMx2bQ7z+WmRueVAzR8dNijcLqynhug6gmXIwDm3B//Tsp2G20sLZYcFw1aimtYn0ik5PX6nNsngWz8RNPPCo6xNpamxnB7VgpzSAYjHsoeZIbSi3jCG6+JcyVpP7EcmP2ChhqIKLx9Eriw9s5ERbhs+m/rvP+cQIDAQAB"
+}

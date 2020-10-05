@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "XTranslate",
+  "description": "__MSG_description__",
+  "version": "2.52.0",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "minimum_chrome_version": "53",
+  "icons": {
+    "16": "assets/icons/16.png",
+    "48": "assets/icons/48.png",
+    "128": "assets/icons/128.png"
+  },
+  "options_page": "options.html",
+  "browser_action": {
+    "default_popup": "options.html?page=popup",
+    "default_icon": {
+      "19": "assets/icons/48.png",
+      "38": "assets/icons/48.png"
+    }
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+X"
+      }
+    }
+  },
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "all_frames": true,
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file://*/*"
+      ],
+      "js": [
+        "pageScript.js"
+      ],
+      "css": [
+        "pageStyle.css"
+      ]
+    }
+  ],
+  "permissions": [
+    "tts",
+    "storage",
+    "unlimitedStorage"
+  ],
+  "optional_permissions": [
+    "contextMenus"
+  ]
+}

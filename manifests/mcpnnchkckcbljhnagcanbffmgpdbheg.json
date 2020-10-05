@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Write Assistant",
+  "description": "Write Assistant",
+  "version": "1.10.1",
+  "manifest_version": 2,
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAujsuaK2gWeuZVfCarESIjy4t5Qq209LcO8BYYLHxzO7YIZZFfdl3iRJoEagJxbXHWfgehubB3lqd6LTQI2iSJepQaldb4VmFKH1AUyxI9NeV0SE1WX0ZrqOUTMB/s+atd34IUZ8YOqFEpcdt8yoIqyXur9CUWmO5kuNOTsrmjtXP1SM2Isqgg46hccM+pX37JiVYM+VjH8BMCsTfgZizqkNa2tv1nlY4STYQnYuG1eQjtri0PrdnYv/YtMLX0QG1KhswPC0DSKvZ2jo+FUZ/Zhpb+/qTe6kqBMCzxy0oCdCCAbpVcl3E4XvJBWtbatdkjdqlRTgW5AwLTsIv7Q4J2wIDAQAB",
+  "icons": {
+    "128": "writeassistant.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "128": "writeassistant.png"
+    },
+    "default_title": "Write Assistant"
+  },
+  "permissions": [
+    "background",
+    "nativeMessaging",
+    "tabs",
+    "storage",
+    "notifications"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://docs.google.com/document/*/edit*"
+      ],
+      "js": [
+        "GoogleDocsUtils/googleDocsUtil.js",
+        "chromeExtension.js",
+        "carret.js",
+        "jquery-3.3.1.min.js",
+        "scrollbars.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "bridge.js"
+    ]
+  }
+}

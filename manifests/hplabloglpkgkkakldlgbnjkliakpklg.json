@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "LinkMatch For HubSpot",
+  "short_name": "LinkMatch",
+  "description": "Automated LinkedIn sourcing for Hubspot",
+  "version": "2.50",
+  "browser_action": {
+    "default_icon": {
+      "19": "icon48.png",
+      "38": "icon48.png"
+    }
+  },
+  "icons": {
+    "16": "icon48.png",
+    "48": "icon48.png",
+    "128": "icon48.png"
+  },
+  "permissions": [
+    "cookies",
+    "tabs",
+    "https://*.hubapi.com/*",
+    "https://*.hubspot.com/*",
+    "https://*.linkedin.com/*",
+    "https://*.xing.com/*",
+    "https://*.linkmatch.net/*",
+    "https://linkmatch.net/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.linkedin.com/*",
+        "https://*.xing.com/*"
+      ],
+      "js": [
+        "content-script-bundle.js"
+      ],
+      "css": [
+        "content-styles.css",
+        "content-styles1.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://app.hubspot.com/oauth/*"
+      ],
+      "js": [
+        "auth-token-hubspot-bundle.js"
+      ],
+      "css": [
+        "auth-token-hubspot-styles.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background-script-bundle.js"
+    ]
+  },
+  "options_page": "options_page.html"
+}

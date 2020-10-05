@@ -1,0 +1,116 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "FantasyKeep",
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "description": "FantasyPass integration for browsers using KeePassHttp",
+  "icons": {
+    "16": "icons/keepass_16x16.png",
+    "48": "icons/keepass_48x48.png",
+    "128": "icons/keepass_128x128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/19x19/icon_normal_blue_19x19.png",
+      "38": "icons/keepass_38x38.png"
+    },
+    "default_title": "FantasyKeep",
+    "default_popup": "popups/popup.html"
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true
+  },
+  "background": {
+    "scripts": [
+      "browser-polyfill.min.js",
+      "background/aes.js",
+      "background/cryptoHelpers.js",
+      "background/utf8.js",
+      "background/utils.js",
+      "background/keepass.js",
+      "background/httpauth.js",
+      "background/browserAction.js",
+      "background/page.js",
+      "background/event.js",
+      "background/init.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "*://*/*.xml",
+        "*://*/*.xsd"
+      ],
+      "js": [
+        "browser-polyfill.min.js",
+        "jquery-3.2.1.min.js",
+        "jquery-ui.min.js",
+        "kphc.js"
+      ],
+      "css": [
+        "jquery-ui.min.css",
+        "bootstrap-btn.css",
+        "kphc.css"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "commands": {
+    "fill-username-password": {
+      "description": "Insert username + password",
+      "suggested_key": {
+        "default": "Alt+Shift+U",
+        "mac": "Alt+Shift+U"
+      }
+    },
+    "fill-password": {
+      "description": "Insert a password",
+      "suggested_key": {
+        "default": "Alt+Shift+P",
+        "mac": "Alt+Shift+P"
+      }
+    },
+    "fill-otp-password": {
+      "description": "Insert a otp password",
+      "suggested_key": {
+        "default": "Alt+Shift+T",
+        "mac": "Alt+Shift+T"
+      }
+    },
+    "save-credential": {
+      "description": "Save the credentials entry",
+      "suggested_key": {
+        "default": "Alt+Shift+S",
+        "mac": "Alt+Shift+S"
+      }
+    }
+  },
+  "web_accessible_resources": [
+    "jquery.min.map",
+    "icons/key_16x16.png",
+    "icons/key_24x24.png",
+    "images/*"
+  ],
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "clipboardWrite",
+    "storage",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "https://*/*",
+    "http://*/*",
+    "http://localhost:19455/",
+    "http://localhost:32947/",
+    "http://localhost/",
+    "https://raw.github.com/"
+  ]
+}

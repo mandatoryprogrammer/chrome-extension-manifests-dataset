@@ -1,0 +1,41 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "AdCake",
+  "description": "AdCake Extension",
+  "version": "1.0.5",
+  "icons": {
+    "16": "cc_favicon.png",
+    "128": "cc_favicon.png"
+  },
+  "page_action": {
+    "default_icon": "cc_favicon.png"
+  },
+  "background": {
+    "scripts": [
+      "./dist/background-bundle.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "cookies",
+    "webRequest",
+    "webRequestBlocking",
+    "*://www.facebook.com/*",
+    "*://m.facebook.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://adcake.io/*",
+        "https://staging.ad.pages.fm/*",
+        "https://localhost:6600/*"
+      ],
+      "js": [
+        "./dist/content-bundle.js"
+      ]
+    }
+  ]
+}

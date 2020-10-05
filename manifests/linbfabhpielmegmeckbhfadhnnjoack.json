@@ -1,0 +1,73 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Machete for Amazon",
+  "short_name": "Machete",
+  "description": "Make your Amazon Marketing reporting fully rad with campaign history graphs, keyword analytics, and extra awesome.",
+  "version": "2.2.6",
+  "version_name": "2.2 update 6",
+  "icons": {
+    "16": "images/machete-16.png",
+    "48": "images/machete-48.png",
+    "128": "images/machete-128.png"
+  },
+  "page_action": {
+    "default_name": "Machete for Amazon",
+    "default_icon": {
+      "16": "images/machete-16.png",
+      "48": "images/machete-48.png",
+      "128": "images/machete-128.png"
+    }
+  },
+  "permissions": [
+    "background",
+    "https://advertising.amazon.ca/*",
+    "https://advertising.amazon.co.uk/*",
+    "https://advertising.amazon.com/*",
+    "https://advertising.amazon.de/*",
+    "https://advertising.amazon.fr/*",
+    "https://sellercentral.amazon.ca/*",
+    "https://sellercentral.amazon.co.uk/*",
+    "https://sellercentral.amazon.com/*",
+    "https://sellercentral.amazon.de/*",
+    "https://sellercentral.amazon.fr/*",
+    "https://machete-app.com/*"
+  ],
+  "optional_permissions": [
+    "https://kdp.amazon.com/*"
+  ],
+  "background": {
+    "scripts": [
+      "src/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://advertising.amazon.ca/*",
+        "https://advertising.amazon.co.uk/*",
+        "https://advertising.amazon.com/*",
+        "https://advertising.amazon.de/*",
+        "https://advertising.amazon.fr/*"
+      ],
+      "js": [
+        "src/dashboard.js"
+      ],
+      "css": [
+        "css/inject.css"
+      ]
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://machete-app.com/*",
+      "https://beta.machete-app.com/*",
+      "https://www.machete-app.com/*"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "web_accessible_resources": [
+    "images/**"
+  ]
+}

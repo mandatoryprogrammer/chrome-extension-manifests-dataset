@@ -1,0 +1,125 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Optimizely Assistant",
+  "short_name": "Optimizely Assistant",
+  "description": "Debug your Optimizely experiments with useful JavaScript console logging and powerful caching and snippet injection options.",
+  "version": "2.12.0",
+  "permissions": [
+    "activeTab",
+    "cookies",
+    "identity",
+    "storage",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "http://*/*",
+    "https://*/*",
+    "*://*/*"
+  ],
+  "browser_action": {
+    "default_icon": "img/icon-128.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "img/icon-16.png",
+    "48": "img/icon-48.png",
+    "128": "img/icon-128.png"
+  },
+  "web_accessible_resources": [
+    "js/jquery.js",
+    "js/success_plugin.js",
+    "css/pagecss.css",
+    "js/internal/gmail_libraries.js",
+    "js/internal/gmail_functions.js",
+    "pages/oauth2_success.html"
+  ],
+  "background": {
+    "scripts": [
+      "config.js",
+      "js/jquery.js",
+      "js/developer.js",
+      "js/helperFn.js",
+      "js/functions.js",
+      "js/internal/functions.js",
+      "js/internal/results.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "config.js",
+        "js/jquery.js",
+        "js/optimizely.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://mail.google.com/*"
+      ],
+      "js": [
+        "js/internal/gmail_bootstrap.js"
+      ],
+      "css": [
+        "css/internal/gmail_styles.css",
+        "css/internal/animate.min.css",
+        "css/internal/notifications.css",
+        "css/internal/bootstrap-iso.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://optimizely.atlassian.net/*"
+      ],
+      "js": [
+        "js/internal/waitUntilExists.js",
+        "js/internal/jira.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+Shift+O"
+      }
+    },
+    "presets-01": {
+      "description": "Toggle test cookie"
+    },
+    "presets-02": {
+      "description": "Toggle Use Instant Snippet"
+    },
+    "presets-03": {
+      "description": "Toggle Inject snippet"
+    },
+    "presets-04": {
+      "description": "Toggle Swap snippet"
+    },
+    "presets-05": {
+      "description": "Toggle Non-cached snippet"
+    },
+    "presets-06": {
+      "description": "Toggle Strip X-Frame-Options"
+    },
+    "presets-07": {
+      "description": "Toggle Disable console logging"
+    },
+    "presets-08": {
+      "description": "Toggle Disable Optimizely"
+    }
+  },
+  "externally_connectable": {
+    "ids": [
+      "*"
+    ],
+    "matches": [
+      "https://mail.google.com/*"
+    ]
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkCTVJW8Ef0xzHtpYk5d+hSFo4VyqnUhK2T9LRZ88TnwhV0EHH7AeKxyQB/BSRWWfuF0jjaWiG01xKlh/zjIdXtjJfWMiAB45BK6Os7YDJsh1u4f4WXVhPa8FFeXFJY5fj+EF/eqlu3Pr/JhItOn3ondCkOd4aVoEOhoqdkQq+0PaqkxkL9kvKD+XPYFcAuYLGzQrkmZP6NWDqs3ODkmi0TNvLue7jPlsg/JlPTZ7dS1XoFQ1THOQ6ET2uoe3rRj8zZICI5bZzIf9/iB3gbdMJggQWpE4/N8/ZvsWV+lJZunPwC41SsyYftUgkdJAmOP4QTvwMR9ZqA1meCM/CncRAQIDAQAB"
+}

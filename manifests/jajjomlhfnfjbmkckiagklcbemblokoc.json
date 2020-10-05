@@ -1,0 +1,39 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "FastSNOW",
+  "description": "Used to automatically insert values into SNOW Bournemouth and speed up mass error reporting.",
+  "version": "1.9",
+  "permissions": [
+    "activeTab"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "author": "Jonathan Flynn (http://jfdesigner.co.uk)",
+  "browser_action": {
+    "default_title": "Parse the Hash values",
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png",
+    "256": "icon.png"
+  },
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://apis.google.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://bournemouth.service-now.com/*"
+      ],
+      "js": [
+        "parse.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

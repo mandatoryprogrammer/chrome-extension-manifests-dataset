@@ -1,0 +1,98 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Convo",
+  "version": "1.8.1",
+  "manifest_version": 2,
+  "description": "Use the Convo extension to share interesting links and images with your team. Mark up links and start discussions.",
+  "incognito": "split",
+  "icons": {
+    "16": "assets/icons/16x16.png",
+    "48": "assets/icons/48x48.png",
+    "128": "assets/icons/128x128.png"
+  },
+  "background": {
+    "persistent": true,
+    "page": "background.html"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "assets/icons/Offline-19x.png",
+      "38": "assets/icons/Offline-38x.png"
+    },
+    "default_title": "Convo Share",
+    "default_popup": "view/ConvoExt.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.convo.com/app/links/click.php*"
+      ],
+      "js": [
+        "contentScripts/linkRedirect.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.twitter.com/*"
+      ],
+      "css": [
+        "css/contentStyle.css"
+      ],
+      "js": [
+        "libs/jquery.min.js",
+        "libs/arrive.min.js",
+        "contentScripts/twitter.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.youtube.com/*"
+      ],
+      "css": [
+        "css/contentStyle.css"
+      ],
+      "js": [
+        "libs/jquery.min.js",
+        "libs/arrive.min.js",
+        "contentScripts/youtube.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.ted.com/*"
+      ],
+      "css": [
+        "css/contentStyle.css"
+      ],
+      "js": [
+        "libs/jquery.min.js",
+        "contentScripts/TED.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "view/ConvoExt.html",
+    "assets/cross.png",
+    "assets/icons/twitter.png",
+    "assets/icons/twitter_new.png",
+    "assets/icons/youtube.png",
+    "assets/icons/ted.png",
+    "assets/icons/ted_new.png",
+    "assets/icons/ted_new_hover.png"
+  ],
+  "permissions": [
+    "tabs",
+    "contextMenus",
+    "https://app.convo.com/",
+    "https://myssapp.convo.com/",
+    "https://sapp.convo.com/",
+    "http://dev.convo.com/",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_security_policy": "script-src 'self' http://localhost https://*.convo.com; object-src 'self' http://localhost https://*.convo.com"
+}

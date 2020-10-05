@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Notematic - Sticky notes for great ideas",
+  "description": "Add fancy sticky notes to every website you visit. Categorize your notes, use pin boards, unleash your ideas.",
+  "version": "0.0.8",
+  "minimum_chrome_version": "45.0",
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "assets/*",
+    "board.view.html"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [
+        "notes.content-script.css",
+        "menu.content-script.css"
+      ],
+      "js": [
+        "notes.content-script.js",
+        "menu.content-script.js"
+      ],
+      "match_about_blank": true,
+      "run_at": "document_start"
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "96": "assets/images/icon_96.png"
+    },
+    "default_title": "Notematic",
+    "default_popup": "popup.view.html"
+  },
+  "icons": {
+    "128": "assets/images/app_icon_128.png"
+  },
+  "permissions": [
+    "<all_urls>",
+    "storage",
+    "tabs",
+    "desktopCapture",
+    "contextMenus"
+  ],
+  "optional_permissions": [
+    "pageCapture"
+  ],
+  "offline_enabled": true,
+  "externally_connectable": {
+    "matches": [
+      "https://notematic.io/*"
+    ]
+  }
+}

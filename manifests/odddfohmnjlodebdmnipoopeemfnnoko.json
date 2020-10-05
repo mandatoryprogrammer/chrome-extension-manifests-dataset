@@ -1,0 +1,77 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Tabello",
+  "version": "1.7.1",
+  "description": "Convert PDF tables to Excel data",
+  "icons": {
+    "128": "favicon128.png",
+    "48": "favicon48.png",
+    "16": "favicon16.png"
+  },
+  "permissions": [
+    "declarativeContent",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>",
+    "tabs",
+    "webNavigation",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "ftp://*/*",
+        "file://*/*"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "css": [
+        "contentstyle.css"
+      ],
+      "js": [
+        "contentscript.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://tabello-f7424.firebaseio.com https://connect.facebook.net https://checkout.stripe.com/checkout.js https://ssl.google-analytics.com https://www.google-analytics.com; object-src 'self'",
+  "file_browser_handlers": [
+    {
+      "id": "open-as-pdf",
+      "default_title": "Convert PDF table",
+      "file_filters": [
+        "filesystem:*.pdf"
+      ]
+    }
+  ],
+  "storage": {
+    "managed_schema": "preferences_schema.json"
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "chrome_style": true
+  },
+  "options_page": "options/options.html",
+  "background": {
+    "page": "pdfHandler.html"
+  },
+  "page_action": {
+    "default_icon": {},
+    "default_title": "Convert PDF table"
+  },
+  "incognito": "split",
+  "web_accessible_resources": [
+    "content/web/viewer.html",
+    "http:/*",
+    "https:/*",
+    "ftp:/*",
+    "file:/*",
+    "chrome-extension:/*",
+    "blob:*",
+    "data:*",
+    "filesystem:/*",
+    "drive:*"
+  ]
+}

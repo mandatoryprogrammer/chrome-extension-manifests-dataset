@@ -1,0 +1,101 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Tippin Extension (tippin.me)",
+  "short_name": "Tippin",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhoi90jpm2zBWFZxLbyNdE1sWH1/WAcVLemY5+HJ10nmkCd883XSiQN3FsP3zC0CCjv+s1gceQapW64U0wIxiUkdnQ2sbl7dzru/4hY5ncapzYxPLPEBP9aSP/H/tjbp8qnPfIpDU5nK6CFNA/e2LN1wjEK/Ugy6dhEDpImeEeZ/MDcOzaTXPbKDSxJLBlMrnTPSlrDz4Qtr5yfT5UytKMkRcVjeH7maadEKbGtB5S6v+bH+1IuRfyU+qUe8Z7rBOnkqiAN+YyniZAPoqd2UbNo1Mlg/B60fm7tai1x65Gk9W3pcj0ltXh+i8/P1FdeJy/ZzRePlNqRT+AG+7E6zm7wIDAQAB",
+  "version": "1.0.3",
+  "description": "Send and receive Bitcoin tips to Twitter users!",
+  "manifest_version": 2,
+  "icons": {
+    "16": "icon-16.png",
+    "32": "icon-32.png",
+    "64": "icon.png",
+    "128": "icon-128.png"
+  },
+  "browser_action": {
+    "default_popup": "index.html",
+    "default_icon": {
+      "16": "icon-16.png",
+      "32": "icon-32.png",
+      "64": "icon.png",
+      "128": "icon-128.png"
+    }
+  },
+  "content_security_policy": "script-src 'self' 'sha256-GgRxrVOKNdB4LrRsVPDSbzvfdV4UqglmviH9GoBJ5jk='; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://tippin.me/*"
+      ],
+      "js": [
+        "jquery.js",
+        "content-tippin.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://localhost/*"
+      ],
+      "js": [
+        "jquery.js",
+        "content-tippin.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://twitter.com/*"
+      ],
+      "js": [
+        "jquery.js",
+        "content-twitter.js"
+      ],
+      "css": [
+        "style001.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://mobile.twitter.com/*"
+      ],
+      "js": [
+        "jquery.js",
+        "content-twitter.js"
+      ],
+      "css": [
+        "style001.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://tweetdeck.twitter.com/*"
+      ],
+      "js": [
+        "jquery.js",
+        "content-tweetdeck.js"
+      ],
+      "css": [
+        "style001.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "https://twitter.com/*",
+    "https://tweetdeck.twitter.com/*",
+    "https://api.tippin.me/*",
+    "storage"
+  ],
+  "web_accessible_resources": [
+    "images/*.png"
+  ]
+}

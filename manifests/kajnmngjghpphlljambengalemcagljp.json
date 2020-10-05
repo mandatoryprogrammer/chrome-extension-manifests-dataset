@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Smart Secure Shopping",
+  "version": "2.2",
+  "manifest_version": 2,
+  "description": "Safe Shopping Extension.",
+  "author": "Blackswan Security",
+  "background": {
+    "scripts": [
+      "background/background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "shared/css/images/icon128.png"
+  },
+  "icons": {
+    "16": "shared/css/images/icon16.png",
+    "48": "shared/css/images/icon48.png",
+    "128": "shared/css/images/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content/content.js"
+      ],
+      "run_at": "document_start",
+      "exclude_globs": [
+        "https://www.google.*/_/chrome/newtab*"
+      ]
+    }
+  ],
+  "permissions": [
+    "cookies",
+    "<all_urls>",
+    "activeTab",
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "webRequest",
+    "webNavigation",
+    "storage",
+    "unlimitedStorage"
+  ],
+  "web_accessible_resources": [
+    "shared/css/*",
+    "script/script.js"
+  ]
+}

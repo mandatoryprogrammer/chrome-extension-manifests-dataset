@@ -1,0 +1,72 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Detrumpify",
+  "short_name": "Detrumpify",
+  "description": "Replaces references to Donald Trump with more accurate descriptions.",
+  "author": "Dave Jacobowitz",
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "version": "1.2.12",
+  "permissions": [
+    "http://toolsofourtools.org/",
+    "https://toolsofourtools.org/",
+    "http://localhost/",
+    "http://localhost:8000/",
+    "https://localhost/",
+    "https://localhost:8000/",
+    "https://dropbox.com/",
+    "https://www.dropbox.com/",
+    "https://dl.dropboxusercontent.com/",
+    "storage",
+    "tabs"
+  ],
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "event.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "128": "icons/dt-128.png"
+    },
+    "default_title": "Configure Detrumpify",
+    "default_popup": "options.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "defaults.js",
+        "shared.js",
+        "picdb.js",
+        "timers.js",
+        "image_changer.js",
+        "text_changer.js",
+        "ttr.js",
+        "breaking.js",
+        "top.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "icons": {
+    "128": "icons/dt-128.png",
+    "200": "icons/dt-200.png",
+    "400": "icons/dt-400.png"
+  },
+  "applications": {
+    "gecko": {
+      "id": "@detrumpify"
+    }
+  },
+  "web_accessible_resources": [
+    "empty_image.png"
+  ]
+}

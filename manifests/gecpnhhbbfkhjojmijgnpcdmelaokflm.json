@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Air Quality Egg Helper",
+  "description": "Adds useful info to Air Quality Egg page on Xively",
+  "version": "3.1.1",
+  "minimum_chrome_version": "20.0.0.0",
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "permissions": [
+    "https://api.xively.com/",
+    "notifications",
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "options_page": "options.html",
+  "web_accessible_resources": [
+    "js/jquery-2.0.2.min.js",
+    "js/jquery-timeago.js",
+    "js/options.js",
+    "js/aqehelper.js",
+    "css/aqehelper.css",
+    "images/icon48.png",
+    "images/icon128.png",
+    "images/favicon.ico"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://airqualityegg.com/egg/*",
+        "https://airqualityegg.com/egg/*"
+      ],
+      "js": [
+        "js/jquery-2.0.2.min.js",
+        "js/jquery-timeago.js",
+        "js/options.js",
+        "js/aqehelper.js"
+      ],
+      "css": [
+        "css/aqehelper.css"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

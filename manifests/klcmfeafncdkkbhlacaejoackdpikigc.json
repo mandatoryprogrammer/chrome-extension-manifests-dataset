@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Extremerebate Chrome Extension",
+  "version": "1.2.4",
+  "manifest_version": 2,
+  "description": "An extension from ExtremeRebate to help you search and find Amazon product.",
+  "author": "yu",
+  "icons": {
+    "16": "images/icon.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "images/icon.png",
+    "default_title": "Extremerebate",
+    "default_popup": "poupop.html"
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "web_accessible_resources": [
+    "js/go.js"
+  ],
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "storage",
+    "cookies",
+    "https://pre.extremerebate.com/",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "js": [
+        "js/jquery.js",
+        "js/content.js",
+        "js/inject.js"
+      ],
+      "matches": [
+        "http://*.extremerebate.com/request.html*",
+        "https://*.extremerebate.com/request.html*",
+        "https://*.extremerebate.com/member-center.html*",
+        "http://*.amazon.com/*",
+        "https://*.amazon.com/*",
+        "https://*.amazon.fr/*",
+        "https://*.amazon.de/*",
+        "https://*.amazon.ca/*",
+        "https://*.amazon.co.uk/*",
+        "https://*.amazon.cn/*"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

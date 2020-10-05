@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Blind Review",
+  "description": "A browser extension to help perform unbiased reviews of pull requests",
+  "manifest_version": 2,
+  "version": "1.4",
+  "homepage_url": "https://github.com/olore/blind-review",
+  "icons": {
+    "48": "icon-48x48.png"
+  },
+  "permissions": [
+    "activeTab",
+    "declarativeContent",
+    "storage",
+    "tabs"
+  ],
+  "background": {
+    "scripts": [
+      "browser-polyfill.min.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "browser-polyfill.min.js",
+        "content.js"
+      ]
+    }
+  ],
+  "page_action": {
+    "default_title": "Toggle Blind Review",
+    "default_icon": {
+      "16": "icon-48x48.png",
+      "32": "icon-48x48.png"
+    },
+    "show_matches": [
+      "*://*/*/pull/*",
+      "*://*/*/pull-requests/*"
+    ]
+  }
+}

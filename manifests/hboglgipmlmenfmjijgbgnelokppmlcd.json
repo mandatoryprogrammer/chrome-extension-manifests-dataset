@@ -1,0 +1,72 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_extNameDial__",
+  "description": "__MSG_extNameDial__",
+  "default_locale": "en",
+  "version": "9.1.13.2114",
+  "icons": {
+    "16": "uc16.png",
+    "32": "uc32.png",
+    "128": "uc128.png"
+  },
+  "permissions": [
+    "notifications",
+    "geolocation",
+    "background",
+    "management",
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "page": "chrome_bkg.html#bkg"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.google.com/robots.txt*"
+      ],
+      "js": [
+        "oauth2/oauth2_inject.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "file://*/*",
+        "https://*/*"
+      ],
+      "all_frames": true,
+      "run_at": "document_end",
+      "js": [
+        "js/uc.view.dpe.js",
+        "js/uc.view.dynamic.css.js",
+        "js/uc.clicktodial.parser2.js"
+      ],
+      "css": [
+        "css/uc.clicktodial.css"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": "uc19d.png"
+  },
+  "options_page": "chrome_opt.html",
+  "web_accessible_resources": [
+    "img/_dpe16.png",
+    "img/_dpe16a.png",
+    "img/_dpe16v.png"
+  ],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "windows": "Ctrl+Shift+I",
+        "mac": "Ctrl+Shift+I",
+        "chromeos": "Ctrl+Shift+I",
+        "linux": "Ctrl+Shift+I"
+      }
+    }
+  }
+}

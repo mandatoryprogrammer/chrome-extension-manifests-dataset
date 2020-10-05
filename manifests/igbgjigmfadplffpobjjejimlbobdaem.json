@@ -1,0 +1,72 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "武大校园网助手",
+  "manifest_version": 2,
+  "version": "1.1",
+  "description": "自动完成武大校园网认证，提供快速下线等便捷功能。",
+  "permissions": [
+    "storage",
+    "tabs"
+  ],
+  "browser_action": {
+    "default_icon": "logo.png",
+    "default_popup": "/popup/index.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://202.114.64.105:8080/eportal/index.jsp?*",
+        "http://202.114.64.105:8080/eportal/userV2.do?method=toLogin&*"
+      ],
+      "js": [
+        "common.js",
+        "mainVerify.js",
+        "main.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://self-serv.whu.edu.cn:8443/selfservice/module/scgroup/web/login_self.jsf?offline"
+      ],
+      "js": [
+        "commonVerify.js",
+        "offlineVerify.js",
+        "common.js",
+        "offlineLogin.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://self-serv.whu.edu.cn:8443/selfservice/module/scgroup/web/login_self.jsf?login"
+      ],
+      "js": [
+        "commonVerify.js",
+        "offlineVerify.js",
+        "common.js",
+        "offlineLoginOnly.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://self-serv.whu.edu.cn:8443/selfservice/module/webcontent/web/index_self.jsf*"
+      ],
+      "js": [
+        "commonVerify.js",
+        "offlineVerify.js",
+        "common.js",
+        "offlineIndex.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://10.100.0.4:8001/Login/Login?login&ReturnUrl=%2fpay%2fnet_feerj%2f3"
+      ],
+      "js": [
+        "commonVerify.js",
+        "chargeVerify.js",
+        "common.js",
+        "chargeLoginOnly.js"
+      ]
+    }
+  ]
+}

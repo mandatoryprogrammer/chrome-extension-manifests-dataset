@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Amazon European Comparison",
+  "description": "Compare European and International Amazon stores to find the cheapest prices while you shop!",
+  "version": "1.2.5",
+  "background": {
+    "scripts": [
+      "lib/money.min.js",
+      "lib/jquery.min.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "webNavigation",
+    "storage",
+    "activeTab",
+    "tabs"
+  ],
+  "icons": {
+    "16": "img/16.png",
+    "64": "img/64.png",
+    "128": "img/128.png"
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "*://*/*"
+      ],
+      "include_globs": [
+        "*://*.amazon.*/*"
+      ],
+      "js": [
+        "lib/popper.min.js",
+        "lib/tippy.standalone.min.js",
+        "content.js"
+      ],
+      "css": [
+        "css/tippy-content.css"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_title": "Amazon Compare Bot",
+    "default_icon": "img/64.png",
+    "default_popup": "template/popup.html"
+  },
+  "manifest_version": 2,
+  "web_accessible_resources": [
+    "img/*"
+  ]
+}

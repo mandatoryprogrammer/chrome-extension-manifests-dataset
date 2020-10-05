@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Explode the Web!",
+  "description": "Explode web pages that contain data trackers!",
+  "version": "1.1",
+  "manifest_version": 2,
+  "icons": {
+    "48": "assets/img/explode-icon48.png",
+    "128": "assets/img/explode-icon128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "assets/img/explode-icon16.png",
+      "48": "assets/img/explode-icon48.png"
+    },
+    "default_title": "Explode Tracked Web Pages!",
+    "default_popup": "assets/pages/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "assets/libs/hot-reload.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "assets/libs/jquery.min.js",
+        "assets/libs/anime.min.js",
+        "assets/js/analytics.js",
+        "assets/js/disconnect-tracking-services.js",
+        "assets/js/functions.js",
+        "assets/js/keys.js",
+        "assets/js/explode.js",
+        "content.js"
+      ],
+      "css": [
+        "assets/css/styles.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "*://*/*",
+    "activeTab",
+    "tabs"
+  ],
+  "web_accessible_resources": [
+    "*.svg",
+    "*.mp3"
+  ]
+}

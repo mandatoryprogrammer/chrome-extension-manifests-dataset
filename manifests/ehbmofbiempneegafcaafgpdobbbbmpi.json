@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "GakuMei Dictionary",
+  "manifest_version": 2,
+  "version": "1.0.2",
+  "description": "A Japanese-English popup dictionary with flashcard functionality.",
+  "icons": {
+    "16": "img/icon16px.png",
+    "48": "img/icon48px.png",
+    "128": "img/icon128px.png"
+  },
+  "permissions": [
+    "storage",
+    "unlimitedStorage",
+    "tabs",
+    "<all_urls>"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "ftp://*/*",
+        "file:///*"
+      ],
+      "js": [
+        "/content_script.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "browser_action": {
+    "default_icon": "img/icon48px-disabled.png",
+    "default_title": "GakuMei Dictionary",
+    "default_popup": "menu.html"
+  },
+  "web_accessible_resources": [
+    "dicts/*.json",
+    "img/*"
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "robert@gakumei.com"
+    }
+  }
+}

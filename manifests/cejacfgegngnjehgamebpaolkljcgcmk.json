@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "VK Photo Saver",
+  "version": "2.6",
+  "manifest_version": 2,
+  "description": "Позволяет сохранять фотографии и скриншоты со сторонних сайтов в альбомы ВКонтакте.",
+  "icons": {
+    "16": "icon-16.png",
+    "48": "icon-48.png",
+    "128": "icon-128.png"
+  },
+  "permissions": [
+    "tabs",
+    "*://*/*",
+    "<all_urls>",
+    "contextMenus",
+    "notifications",
+    "clipboardWrite"
+  ],
+  "background": {
+    "scripts": [
+      "common.js",
+      "FileSaver.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": [
+        "*://*.tumblr.com/*"
+      ],
+      "js": [
+        "context_listener.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "snap.png"
+    },
+    "default_title": "Сделать скриншот веб-страницы"
+  },
+  "web_accessible_resources": [
+    "capture.html",
+    "vk-inject.js",
+    "css/font-awesome.css",
+    "fonts/fontawesome-webfont.eot",
+    "fonts/fontawesome-webfont.svg",
+    "fonts/fontawesome-webfont.ttf",
+    "fonts/fontawesome-webfont.woff",
+    "fonts/fontawesome-webfont.woff2",
+    "fonts/FontAwesome.otf"
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "options_page": "options.html",
+  "content_security_policy": "script-src 'self' https://login.vk.com https://vk.com; object-src 'self'"
+}

@@ -1,0 +1,68 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Next Home Now",
+  "version": "0.2.3",
+  "description": "Find your next house, apartment, or room on Craigslist easily and efficiently.",
+  "icons": {
+    "16": "icons/home16.png",
+    "48": "icons/home48.png",
+    "128": "icons/home.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.craigslist.org/*"
+      ],
+      "css": [
+        "css/buttons.css",
+        "css/jquery.qtip.css",
+        "css/clapton.css",
+        "css/oboview.css",
+        "css/rendering.css"
+      ],
+      "js": [
+        "js/lib/jquery-2.1.1.min.js",
+        "js/lib/jquery-ui-1.11.1.min.js",
+        "js/lib/jquery.inview.min.js",
+        "js/lib/jquery.qtip.js",
+        "js/lib/jquery.query-object.js",
+        "js/lib/jquery.linkify.min.js",
+        "js/lib/moment.min.js",
+        "js/lib/Queue.js",
+        "js/lib/BinaryHeap.js",
+        "js/src/util.js",
+        "js/src/clapton.js",
+        "js/src/craigslistPost.js",
+        "js/src/rendering.js",
+        "js/src/oboview.js",
+        "js/src/main-srp.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://*.craigslist.org/*.html"
+      ],
+      "css": [
+        "css/clapton.css",
+        "css/postpage.css"
+      ],
+      "js": [
+        "js/lib/jquery-2.1.1.min.js",
+        "js/lib/jquery.linkify.min.js",
+        "js/src/util.js",
+        "js/src/main-post.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "storage"
+  ],
+  "web_accessible_resources": [
+    "icons/*",
+    "html/*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://*.googleapis.com https://*.gstatic.com; object-src 'self';"
+}

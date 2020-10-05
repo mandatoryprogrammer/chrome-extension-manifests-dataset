@@ -1,0 +1,128 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Kassi Share - Send to Kodi",
+  "description": "Send videos to Kodi Media Center",
+  "version": "5.3",
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "storage",
+    "tabs",
+    "contextMenus"
+  ],
+  "icons": {
+    "16": "assets/icon_16.png",
+    "48": "assets/icon_48.png",
+    "128": "assets/icon_128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "assets/icon_19.png",
+      "38": "assets/icon_38.png"
+    },
+    "default_title": "Kassi Share",
+    "default_popup": "action_popup.html"
+  },
+  "background": {
+    "scripts": [
+      "js/sprintf.js",
+      "js/enums.js",
+      "js/shared.js",
+      "js/background_scripts/context_menu.js",
+      "js/background_scripts/player.js",
+      "js/background_scripts/browser_action.js",
+      "js/background_scripts/main.js",
+      "js/background_scripts/message_handlers.js",
+      "js/background_scripts/sites/abstract_site.js",
+      "js/background_scripts/sites/youtube.com.js",
+      "js/background_scripts/sites/vimeo.com.js",
+      "js/background_scripts/sites/err.ee.js",
+      "js/background_scripts/sites/twitch.tv.js",
+      "js/background_scripts/sites/facebook.com.js",
+      "js/background_scripts/sites/postimees.ee.js",
+      "js/background_scripts/sites/crunchyroll.com.js",
+      "js/background_scripts/sites/tv3play.js",
+      "js/background_scripts/sites/ted.com.js",
+      "js/background_scripts/sites/dailymotion.com.js",
+      "js/background_scripts/sites/default.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [
+        "css/iziToast.css"
+      ],
+      "js": [
+        "js/content_scripts/iziToast.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/content_scripts/sites/default.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*.twitch.tv/*"
+      ],
+      "js": [
+        "js/content_scripts/sites/twitch.tv.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*.facebook.com/*"
+      ],
+      "js": [
+        "js/content_scripts/sites/facebook.com.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*.postimees.ee/*"
+      ],
+      "js": [
+        "js/content_scripts/sites/postimees.ee.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*.tv3play.tv3.ee/sisu/*"
+      ],
+      "js": [
+        "js/content_scripts/sites/tv3play.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*.ted.com/talks/*"
+      ],
+      "js": [
+        "js/content_scripts/sites/ted.com.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "options_page": "settings.html",
+  "short_name": "Kassi Share"
+}

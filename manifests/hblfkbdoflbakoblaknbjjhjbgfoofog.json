@@ -1,0 +1,38 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Classroom Plus",
+  "short_name": "Classroom+",
+  "description": "Create your own assignments on Google Classroom.",
+  "version": "2.4.4",
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "icons": {
+    "16": "assets/image/icon16.png",
+    "19": "assets/image/icon19.png",
+    "48": "assets/image/icon48.png",
+    "128": "assets/image/icon128.png"
+  },
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://classroom.google.com/*/not-turned-in/all"
+      ],
+      "js": [
+        "display.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "storage"
+  ]
+}

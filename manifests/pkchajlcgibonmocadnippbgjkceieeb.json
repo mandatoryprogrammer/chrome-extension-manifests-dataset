@@ -1,0 +1,68 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "DevGib",
+  "version": "0.1.7",
+  "manifest_version": 2,
+  "description": "Shows ranking for programming-related resources in the web based on their popularity and quality.",
+  "icons": {
+    "16": "assets/icons/icon16.png",
+    "48": "assets/icons/icon48.png",
+    "128": "assets/icons/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "lib/js/jquery-2.0.3.min.js",
+      "lib/js/underscore-1.5.2.min.js",
+      "lib/js/underscore.ratelimit.js",
+      "lib/js/underscore.string-2.3.0.min.js",
+      "build/js/background/namespaces.js",
+      "build/js/background/sites_controller.js",
+      "build/js/background/abstract_site_model.js",
+      "build/js/background/popup.js",
+      "build/js/background/sites/github.js",
+      "build/js/background/sites/stackoverflow.js",
+      "build/js/background/index.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_title": "DevGib",
+    "default_icon": "assets/icons/icon38.png",
+    "default_popup": "build/html/background/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "lib/js/jquery-2.0.3.min.js",
+        "lib/js/underscore-1.5.2.min.js",
+        "lib/js/underscore.string-2.3.0.min.js",
+        "build/js/content/namespaces.js",
+        "build/js/content/anchor_tagger.js",
+        "build/js/content/cache_service.js",
+        "build/js/content/icons/icon_controller.js",
+        "build/js/content/icons/icon_view.js",
+        "build/js/content/index.js"
+      ],
+      "css": [
+        "build/css/content/index.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "assets/fonts/fontawesome-webfont.eot",
+    "assets/fonts/fontawesome-webfont.svg",
+    "assets/fonts/fontawesome-webfont.ttf",
+    "assets/fonts/fontawesome-webfont.woff",
+    "assets/fonts/FontAwesome.otf"
+  ],
+  "minimum_chrome_version": "15",
+  "permissions": [
+    "tabs",
+    "storage",
+    "<all_urls>"
+  ]
+}

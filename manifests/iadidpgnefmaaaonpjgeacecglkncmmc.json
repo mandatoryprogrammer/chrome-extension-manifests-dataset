@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Linkedin Chrome Extension",
+  "short_name": "Help Recruiters find the right canidate ",
+  "version": "0.0.0.1",
+  "description": "This tool helps recruiters find the best canidate for the job",
+  "browser_action": {
+    "default_title": "Show the list of pinned tabs",
+    "default_popup": "pages/popup.html"
+  },
+  "author": "Lab12 Linkinedin group",
+  "background": {
+    "page": "pages/background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.linkedin.com/in/*",
+        "https://linkedinextension.netlify.com/*"
+      ],
+      "js": [
+        "pages/index.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "http://*/*",
+    "https://*/*",
+    "storage",
+    "alarms"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://oauth.io/*",
+      "https://www.linkedin.com/*",
+      "https://www.google.com/*",
+      "chrome-extension://fajgjcfafoeojlbmhknnhonghielcgbp/*"
+    ]
+  },
+  "minimum_chrome_version": "60",
+  "web_accessible_resources": [
+    "pages/*"
+  ],
+  "content_security_policy": "script-src 'self' https://cdn.rawgit.com/oauth-io/oauth-js/c5af4519/dist/oauth.js; object-src 'self'"
+}

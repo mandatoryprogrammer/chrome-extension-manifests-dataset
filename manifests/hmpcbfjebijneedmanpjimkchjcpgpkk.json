@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "All My Favorites",
+  "short_name": "All My Favorites",
+  "version": "1.0.0",
+  "description": "Sync all your favorited URLs from across the web to your Chrome bookmarks",
+  "permissions": [
+    "bookmarks",
+    "tabs",
+    "storage"
+  ],
+  "browser_action": {
+    "default_popup": "popup/index.html",
+    "default_title": "All My Favorites"
+  },
+  "icons": {
+    "128": "./assets/icon128.png",
+    "48": "./assets/icon48.png",
+    "512": "./assets/icon512.png"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "contentscript.js"
+      ],
+      "css": [
+        "contentscript.css"
+      ],
+      "matches": [
+        "https://twitter.com/*__allmyfavorites",
+        "https://stackoverflow.com/*__allmyfavorites",
+        "https://medium.com/*__allmyfavorites"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' 'sha256-18j9+nErtuKtcSwKvHjJxqQJK1kCjNV0fFqZIbKBDDY='; object-src 'self';",
+  "web_accessible_resources": [
+    "assets/*.png",
+    "assets/*.gif",
+    "assets/*.svg",
+    "popup/js/*"
+  ]
+}

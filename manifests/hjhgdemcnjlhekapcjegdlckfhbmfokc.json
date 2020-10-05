@@ -1,0 +1,121 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "version": "1.2.6",
+  "author": "ReadSpeaker",
+  "description": "ReadSpeaker TextAid Browser Extension",
+  "browser_action": {
+    "default_icon": "icon16.png"
+  },
+  "background": {
+    "scripts": [
+      "compat.js",
+      "config/Messages.js",
+      "utils/Logger.js",
+      "authService.js",
+      "snapshot/SnapshotBackground.js",
+      "onlinePlayback/background_online.js",
+      "pdf/background_pdf.js",
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "compat.js",
+        "utils/Logger.js",
+        "config/Messages.js",
+        "config/ModulesFactory.js",
+        "config/ColorsRepository.js",
+        "config/DocumentType.js",
+        "config/PlaybackStatus.js",
+        "utils/SelectionChunk.js",
+        "utils/SelectionData.js",
+        "documentParser/RectangleGD.js",
+        "documentParser/CaretGD.js",
+        "documentParser/SelectedNodes.js",
+        "utils/RegexRepository.js",
+        "utils/TextUtils.js",
+        "documentParser/GenericDocumentParser.js",
+        "documentParser/WordDocumentParser.js",
+        "documentParser/GDocsDocumentParser.js",
+        "documentParser/PdfDocumentParser.js",
+        "config/SettingService.js",
+        "config/LocaleService.js",
+        "snapshot/SnapshotService.js",
+        "snapshot/ImageRectangle.js",
+        "snapshot/OcrRequest.js",
+        "snapshot/OcrWord.js",
+        "snapshot/SnapshotDocumentParser.js",
+        "writingAssistance/WritingAssistance.js",
+        "writingAssistance/WritingAssistanceService.js",
+        "onlinePlayback/UrlBuilder.js",
+        "config/DomainUtils.js",
+        "documentParser/Highlighter.js",
+        "onlinePlayback/WritingAssistanceOnlinePlayer.js",
+        "onlinePlayback/DataBlobDownloader.js",
+        "onlinePlayback/RsdsDownloader.js",
+        "onlinePlayback/RsdsFetcher.js",
+        "onlinePlayback/RsdsParserModule.js",
+        "toolbar/ErrorDialogBox.js",
+        "toolbar/LanguageDialogBox.js",
+        "toolbar/SettingDialogBox.js",
+        "toolbar/SpeedDialogBox.js",
+        "toolbar/WritingAssistanceOnDialog.js",
+        "toolbar/WritingAssistanceOffDialog.js",
+        "toolbar/TemplateParser.js",
+        "toolbar/TemplateRepository.js",
+        "toolbar/Toolbar.js",
+        "onlinePlayback/Playback.js",
+        "wordPredictor/KeyEventFactory.js",
+        "wordPredictor/GenericElementParser.js",
+        "wordPredictor/WordElementParser.js",
+        "wordPredictor/GdocsElementParser.js",
+        "wordPredictor/InputReplacement.js",
+        "wordPredictor/WordPredictor.js",
+        "wordPredictor/WordProducer.js",
+        "wordPredictor/TextPredictionService.js",
+        "content_script.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true,
+      "match_about_blank": false
+    }
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'; media-src * blob:",
+  "web_accessible_resources": [
+    "/css/style.css",
+    "/pdf/web/**",
+    "/pdf/build/**",
+    "/pdf/rspeaker.js",
+    "/audio/*/*.mp3",
+    "/images/*.png",
+    "/dictionaries/*.txt",
+    "/images/icon_load.gif",
+    "/_locales/*/messages.json",
+    "/templates/*.html"
+  ],
+  "name": "ReadSpeaker® TextAid for Chrome",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "permissions": [
+    "cookies",
+    "file://*/*",
+    "http://*/*",
+    "https://*/*",
+    "activeTab",
+    "tabs",
+    "storage",
+    "contextMenus",
+    "identity",
+    "identity.email"
+  ]
+}

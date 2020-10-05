@@ -1,0 +1,43 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "IBT GPA Calculator",
+  "description": "Modify few STEP's pages to show course name along its code and calculate GPA and CGPA on STEP's result panel.",
+  "author": "Uzair Ali",
+  "short_name": "GPA Calc",
+  "version": "3.01",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "web_accessible_resources": [
+    "style.css",
+    "offlineResult.html"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "browser_action": {
+    "default_icon": "icons/icon128.png",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/step/Student_Result.aspx"
+      ],
+      "js": [
+        "jquery-2.1.1.min.js",
+        "coursesName.js",
+        "content.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  }
+}

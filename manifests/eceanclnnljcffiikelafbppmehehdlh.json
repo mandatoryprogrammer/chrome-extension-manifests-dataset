@@ -1,0 +1,101 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Point.it",
+  "description": "Crea y edita tus apuntes.",
+  "version": "1.0.1",
+  "minimum_chrome_version": "29",
+  "oauth2": {
+    "client_id": "542105562160-oth36bh8r07gof5vgt2b0jggk2up71vv.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/drive"
+    ]
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/icon16.png"
+  },
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "background",
+    "contextMenus",
+    "identity",
+    "https://ssl.gstatic.com/",
+    "https://www.googleapis.com/",
+    "https://accounts.google.com/",
+    "storage",
+    "unlimitedStorage"
+  ],
+  "background": {
+    "page": "background/background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*"
+      ],
+      "exclude_matches": [
+        "https://*.mail.live.com/*",
+        "https://login.live.com/*"
+      ],
+      "css": [
+        "jquery/jquery-ui.css",
+        "content_scripts/style.css"
+      ],
+      "js": [
+        "jquery/jquery.min.js",
+        "jquery/jquery-ui.min.js",
+        "jstree/jstree.js",
+        "content_scripts/inject.js",
+        "jspdf/jspdf.js",
+        "jspdf/jspdf.plugin.standard_fonts_metrics.js",
+        "jspdf/jspdf.plugin.split_text_to_size.js",
+        "jspdf/jspdf.plugin.addimage.js",
+        "jspdf/FileSaver.min.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "jstree/*",
+    "jquery/*",
+    "imagenes/*"
+  ],
+  "commands": {
+    "addSelTextTitleKey": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+A",
+        "mac": "Alt+Shift+T"
+      },
+      "description": "Añade el texto seleccionado como Título"
+    },
+    "addSelTextComentKey": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+S",
+        "mac": "Alt+Shift+C"
+      },
+      "description": "Añade el texto seleccionado al campo Comentarios"
+    },
+    "saveContentKey": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+E",
+        "mac": "Alt+Shift+S"
+      },
+      "description": "Guarda el contenido introducido en el elemento seleccionado"
+    },
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+F",
+        "mac": "Alt+Shift+F"
+      }
+    }
+  }
+}

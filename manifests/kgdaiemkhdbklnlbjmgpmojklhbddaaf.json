@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "secure-cop",
+  "version": "0.0.2",
+  "manifest_version": 2,
+  "description": "Secure-cop LTD , ultimate extension to help you increase your chance to Cop on limited supreme dorp",
+  "permissions": [
+    "gcm",
+    "http://secure-cop.com/",
+    "storage",
+    "*://*.supremenewyork.com/*"
+  ],
+  "homepage_url": "http://secure-cop.com",
+  "icons": {
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "src/bg/jq.js",
+      "src/bg/background.js",
+      "src/browser_action/js/itemQueue.js",
+      "src/options_custom/js/option.js"
+    ]
+  },
+  "options_page": "src/options_custom/index.html",
+  "browser_action": {
+    "default_icon": "icons/icon128.png",
+    "default_title": "browser action demo",
+    "default_popup": "src/browser_action/browser_action.html"
+  },
+  "externally_connectable": {
+    "matches": [
+      "http://www.supremenewyork.com/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.supremenewyork.com/*",
+        "https://www.supremenewyork.com/checkout"
+      ],
+      "css": [
+        "src/inject/inject.css"
+      ]
+    },
+    {
+      "matches": [
+        "http://www.supremenewyork.com/*",
+        "https://www.supremenewyork.com/checkout"
+      ],
+      "js": [
+        "src/inject/jq.js",
+        "src/inject/inject.js"
+      ]
+    }
+  ]
+}

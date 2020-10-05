@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "TripleLift Native Placement Tool",
+  "author": "TripleLift Inc.",
+  "description": "A tool for publishers to generate and test placements for native advertising.",
+  "manifest_version": 2,
+  "browser_action": {
+    "default_title": "Load Existing Placement",
+    "default_icon": "icons/16-alt.png"
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "icons": {
+    "16": "icons/16-alt.png",
+    "64": "icons/64-alt.png",
+    "128": "icons/128.png"
+  },
+  "content_security_policy": "default-src 'self'; script-src 'self' chrome-extension-resource:; style-src 'self' 'unsafe-inline'; connect-src *; img-src *;",
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "lib/jquery.js",
+        "lib/tlapi.js",
+        "js/pre-content.js"
+      ],
+      "css": [
+        "css/main.css"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/post-content.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "contextMenus",
+    "tabs"
+  ],
+  "version": "2.4.6"
+}

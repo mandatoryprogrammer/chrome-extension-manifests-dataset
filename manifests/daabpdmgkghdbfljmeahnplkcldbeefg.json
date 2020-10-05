@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Annotations Restored for YouTube™",
+  "short_name": "Annotations Restored",
+  "version": "0.0.10",
+  "description": "Brings annotation support back to YouTube™!",
+  "permissions": [
+    "https://invidious.snopyta.org/api/v1/annotations/*",
+    "https://gist.githubusercontent.com/*/raw/*",
+    "https://pastebin.com/raw/*"
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "browser_action": {
+    "default_title": "Annotations Restored",
+    "default_popup": "popup/index.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.youtube.com/*"
+      ],
+      "js": [
+        "js/annotationlib/dist/AnnotationParser.js",
+        "js/annotationlib/dist/AnnotationRenderer.js",
+        "js/annotation_sources/description.js",
+        "js/annotation_sources/gist.js",
+        "js/annotation_sources/pastebin.js",
+        "js/content.js"
+      ],
+      "css": [
+        "js/annotationlib/dist/AnnotationRenderer.css"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ]
+  }
+}

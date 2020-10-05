@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "description": "Protect your email from prying eyes, without sacrificing convenience of your favorite email client",
+  "version": "1.0.2",
+  "name": "MxCrypt - Easy and secure email encryption",
+  "options_page": "options.html",
+  "background": {
+    "page": "background.html"
+  },
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": "icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*",
+        "https://outlook.live.com/*",
+        "https://mail.yahoo.com/*"
+      ],
+      "js": [
+        "inboxsdk.bundle.js",
+        "content.bundle.js"
+      ],
+      "css": [
+        "css/styles.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "inject.bundle.js",
+    "img/matrix.gif",
+    "img/lock.png",
+    "img/cog.png",
+    "img/icon.png"
+  ],
+  "permissions": [
+    "https://mail.google.com/",
+    "https://inbox.google.com/",
+    "https://outlook.live.com/*",
+    "https://mail.yahoo.com/*",
+    "tabs",
+    "storage"
+  ],
+  "icons": {
+    "128": "img/icon.png"
+  },
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

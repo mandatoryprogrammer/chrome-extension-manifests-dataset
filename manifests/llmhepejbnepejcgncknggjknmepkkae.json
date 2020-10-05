@@ -1,0 +1,43 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "AGoT LCG 2nd Ed. tournament sheet printer",
+  "version": "1.2",
+  "manifest_version": 2,
+  "description": "Print tournament sheets from deck lists on thronesdb.com, using the service on http://agot.temporaryna.me.",
+  "homepage_url": "http://agot.temporaryna.me",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "64": "icons/icon64.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "js/zepto-1.1.3.min.js",
+      "src/bg/background.js"
+    ],
+    "persistent": false
+  },
+  "page_action": {
+    "default_icon": "icons/icon20.png",
+    "default_title": "Print Tournament Sheet"
+  },
+  "permissions": [
+    "http://*.thronesdb.com/*",
+    "http://agot.temporaryna.me/*",
+    "activeTab"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.thronesdb.com/deck/view/*",
+        "http://*.thronesdb.com/decklist/view/*",
+        "http://agot.temporaryna.me/*"
+      ],
+      "js": [
+        "src/inject/inject.js"
+      ]
+    }
+  ]
+}

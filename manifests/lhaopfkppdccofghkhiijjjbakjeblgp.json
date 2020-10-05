@@ -1,0 +1,69 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_appName__",
+  "description": "__MSG_appDesc__",
+  "default_locale": "en",
+  "version": "1.2.3",
+  "permissions": [
+    "webRequest",
+    "webNavigation",
+    "tabs",
+    "storage",
+    "cookies",
+    "<all_urls>"
+  ],
+  "icons": {
+    "16": "icons/color/airmiles_icon_16x16.png",
+    "48": "icons/color/airmiles_icon_48x48.png",
+    "128": "icons/color/airmiles_icon_128x128.png"
+  },
+  "browser_action": {
+    "default_popup": "index.html",
+    "default_title": "airmilesshops.ca® Assistant"
+  },
+  "background": {
+    "scripts": [
+      "static/js/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "css": [
+        "static/css/content_script.css"
+      ],
+      "js": [
+        "static/js/search_script.js"
+      ],
+      "matches": [
+        "https://www.google.ca/search*",
+        "https://www.google.com/search*"
+      ]
+    },
+    {
+      "css": [
+        "static/css/content_script.css"
+      ],
+      "js": [
+        "static/js/content_script.js"
+      ],
+      "exclude_matches": [
+        "https://www.google.ca/*",
+        "https://www.google.com/*"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "fonts/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.airmilesshops.ca/*"
+    ]
+  },
+  "content_security_policy": "script-src 'self' 'sha256-MTNjMDc1MjlhMDgxYWQ0MDZlNzM2YjNiODE5MjdkZDRiODNkYWU0ZTUzNWQ3NTI0N2QzZTk5MTgwYTE4ZjFhZg==' https://www.google-analytics.com; object-src 'self'"
+}

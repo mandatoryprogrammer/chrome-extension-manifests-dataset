@@ -1,0 +1,220 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "author": "zhaohu@mesoor.com",
+  "applications": {
+    "gecko": {
+      "id": "zhaohu@mesoor.com",
+      "update_url": "https://www.mesoor.com/dist/extension/update.json"
+    }
+  },
+  "manifest_version": 2,
+  "name": "召乎 Zhaohu",
+  "short_name": "Zhaohu",
+  "version": "1.15.7",
+  "permissions": [
+    "storage",
+    "cookies",
+    "notifications",
+    "webRequest",
+    "webRequestBlocking",
+    "webNavigation",
+    "downloads",
+    "*://*.mesoor.com/*",
+    "*://*.nadileaf.com/*",
+    "*://*.51job.com/*",
+    "*://*.lagou.com/*",
+    "*://*.liepin.com/*",
+    "*://*.zhaopin.com/*",
+    "*://*.fplusats.com/*",
+    "*://*.linkedin.com/*",
+    "*://maimai.cn/*",
+    "*://*.highpin.cn/*",
+    "*://*.51jingying.com/*",
+    "*://*.58.com/*",
+    "*://*.jobuy.com/*",
+    "*://*.shixiseng.com/*"
+  ],
+  "description": "招聘不上手，呼叫不开口",
+  "browser_action": {
+    "default_title": "麦穗人工智能",
+    "default_icon": {
+      "32": "logo32.png"
+    },
+    "default_popup": "popup.normal.html"
+  },
+  "icons": {
+    "16": "logo16.png",
+    "48": "logo48.png",
+    "128": "logo128.png"
+  },
+  "background": {
+    "scripts": [
+      "static/background.normal.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://system.mesoor.com/*",
+        "*://system.nadileaf.com/*",
+        "*://system.localtest.me/*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "static/messager.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*.51job.com/*",
+        "*://*.lagou.com/*",
+        "*://*.liepin.com/*",
+        "*://*.zhaopin.com/*",
+        "*://*.linkedin.com/*",
+        "*://maimai.cn/*",
+        "*://*.highpin.cn/*",
+        "*://*.51jingying.com/*",
+        "*://*.58.com/*",
+        "*://*.jobuy.com/*",
+        "*://*.shixiseng.com/"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "static/inject.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.fplusats.com/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "static/inject-handler.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://h.liepin.com/job/gethjobdetail?hjobId=*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "static/sync-receive-job.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://ehire.51job.com/Candidate/ResumeView*",
+        "*://lpt.liepin.com/cvview/showresumedetail*",
+        "*://h.liepin.com/resume/showresumedetail*",
+        "*://maimai.cn/contact/detail/*",
+        "*://h.highpin.cn/SearchResume/SearchZhaopinResumeInfo?data=*",
+        "*://h.highpin.cn/searchresume/searchzhaopinresumeinfo?data=*",
+        "*://h.highpin.cn/ResumeManage/HaveDownLoadResumeDetail?DownLoadID=*",
+        "*://h.highpin.cn/ResumeManage/SelfAcceptResume?acceptJobID=*",
+        "*://h.highpin.cn/ResumeManage/HaveRecommendJobResume?RecommendID=*",
+        "*://h.highpin.cn/ResumeManage/RemarkResumeDetail?remarkId=*",
+        "*://h.highpin.cn/ResumeManage/ResumeCollectDetail?CollectID=*",
+        "*://h.highpin.cn/resumemanage/haverecommendjobresume*",
+        "*://www.51jingying.com/manager/cv.php?act=showCv*",
+        "*://www.51jingying.com/manager/showcv.php?*",
+        "*://jianli.58.com/resumedetail/*",
+        "*://www.jobuy.com/hunter/resume/show?res_id=*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "static/sync-receive-resume.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://rd5.zhaopin.com/resume/detail?*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "static/sync-receive-resume-zhaopin.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://h.liepin.com/resume/showresumedetail*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "static/sync-receive-resume-liepin.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.linkedin.com/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "static/sync-receive-resume-linkedin.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://system.mesoor.com/dashboard/*",
+        "*://system.nadileaf.com/dashboard/*",
+        "*://system.localtest.me/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "static/dashboard-messager.normal.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://system.mesoor.com/extension/*",
+        "*://system.nadileaf.com/extension/*",
+        "*://system.localtest.me/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "static/browser-messager.normal.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://ehire.51job.com/Candidate/ResumeView*",
+        "*://lpt.liepin.com/cvview/showresumedetail*",
+        "*://h.liepin.com/resume/showresumedetail*",
+        "*://maimai.cn/contact/detail/*",
+        "*://maimai.cn/ent/profile/*",
+        "*://h.highpin.cn/SearchResume/SearchZhaopinResumeInfo?data=*",
+        "*://h.highpin.cn/searchresume/searchzhaopinresumeinfo?data=*",
+        "*://h.highpin.cn/ResumeManage/HaveDownLoadResumeDetail?DownLoadID=*",
+        "*://h.highpin.cn/ResumeManage/SelfAcceptResume?acceptJobID=*",
+        "*://h.highpin.cn/ResumeManage/HaveRecommendJobResume?RecommendID=*",
+        "*://h.highpin.cn/ResumeManage/RemarkResumeDetail?remarkId=*",
+        "*://h.highpin.cn/ResumeManage/ResumeCollectDetail?CollectID=*",
+        "*://h.highpin.cn/resumemanage/haverecommendjobresume*",
+        "*://www.51jingying.com/manager/cv.php?act=showCv*",
+        "*://www.51jingying.com/manager/showcv.php?*",
+        "*://rd5.zhaopin.com/resume/detail?*",
+        "*://ihr.zhaopin.com/resume/manage/*",
+        "*://easy.lagou.com/talent/search/list.htm?*",
+        "*://easy.lagou.com/can/new/details.htm?*",
+        "*://easy.lagou.com/can/new/index.htm?*",
+        "*://easy.lagou.com/can/index.htm?*",
+        "*://easy.lagou.com/search/resume/fetchResume.htm?*",
+        "*://easy.lagou.com/v2/resumeDetailSign?*",
+        "*://easy.lagou.com/v2/resumeDetail?*",
+        "*://easy.lagou.com/resume/list.htm?*",
+        "*://easy.lagou.com/talent/index.htm?*",
+        "*://*.linkedin.com/*",
+        "*://jianli.58.com/resumedetail/*",
+        "*://www.jobuy.com/hunter/resume/show?res_id=*",
+        "*://hr.shixiseng.com/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "static/dupe-check.js"
+      ]
+    }
+  ]
+}

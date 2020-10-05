@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "HelperAli — Helper for AliExpress™ Affiliate",
+  "short_name": "HelperAli",
+  "version": "1.1.3",
+  "description": "Get extended country and commission information in your live order tracking reports. Only for AliExpress™ Affiliates.",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "permissions": [
+    "storage",
+    "unlimitedStorage",
+    "https://portals.aliexpress.com/report/liveOrders*.htm",
+    "https://feedback.aliexpress.com/display/evaluationProductDetailAjaxService.htm*"
+  ],
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "options_ui": {
+    "page": "options/index.html",
+    "chrome_style": false
+  },
+  "web_accessible_resources": [
+    "css/style.css",
+    "css/flag.css",
+    "img/countryFlags.png",
+    "img/loading-16x16.gif",
+    "img/tools.png"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://portals.aliexpress.com/report/liveOrders*.htm*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://portals.aliexpress.com/report/liveOrders*.htm*"
+      ],
+      "js": [
+        "content_scripts/liveOrders.js"
+      ],
+      "css": [
+        "css/style.css",
+        "css/flag.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://portals.aliexpress.com/adcenter/generateUrl.htm"
+      ],
+      "js": [
+        "content_scripts/deepali.js"
+      ]
+    }
+  ]
+}

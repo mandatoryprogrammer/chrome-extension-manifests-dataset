@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Otto Pilot",
+  "version": "1.1",
+  "description": "Play Floatplane videos on YouTube",
+  "icons": {
+    "128": "icons/128.png"
+  },
+  "page_action": {
+    "default_icon": {
+      "128": "icons/128.png"
+    }
+  },
+  "author": "Joshua Garde <joshgarde@gmail.com>",
+  "permissions": [
+    "https://www.floatplane.com/*",
+    "https://www.youtube.com/watch?*"
+  ],
+  "background": {
+    "scripts": [
+      "src/lunr.min.js",
+      "src/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/*"
+      ],
+      "js": [
+        "src/syringe.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://www.youtube.com/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "platform_map.json",
+    "assets/floatplane.png",
+    "src/main.js",
+    "dialogs/login.html"
+  ]
+}

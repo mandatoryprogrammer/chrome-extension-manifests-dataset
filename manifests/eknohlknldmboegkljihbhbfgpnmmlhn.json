@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "AEM Chrome Tools",
+  "version": "0.2",
+  "permissions": [
+    "storage",
+    "notifications"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "icons": {
+    "16": "icon16.png",
+    "32": "icon32.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content-environment-display.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://*/*editor.html*",
+        "https://*/*editor.html*"
+      ],
+      "js": [
+        "content-component-detail.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "options_page": "options.html"
+}

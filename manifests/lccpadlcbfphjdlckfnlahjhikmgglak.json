@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Digify for Gmail: Encrypt, track, and unsend",
+  "description": "Automatically encrypt messages & attachments, track file views & opens and revoke access even after sending.",
+  "version": "5.0.3",
+  "short_name": "Digify for Gmail",
+  "icons": {
+    "16": "img/clip16.png",
+    "48": "img/clip48.png",
+    "128": "img/clip128.png"
+  },
+  "content_scripts": [
+    {
+      "css": [
+        "css/main.css"
+      ],
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*",
+        "https://*.digify.com/*"
+      ],
+      "js": [
+        "js/lib/inboxsdk.js",
+        "/js/app/myapp.js",
+        "js/app/config.js",
+        "js/app/content.js"
+      ]
+    }
+  ],
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "js/lib/jquery-3.4.1.min.js",
+      "js/app/config.js",
+      "/js/app/g.js",
+      "js/app/background.js"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://*.google.com https://ssl.google-analytics.com; object-src 'self'",
+  "oauth2": {
+    "client_id": "943199299845-8fuli6kfgmv2hkhkuog51a8u7l6ubdtn.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/userinfo.profile"
+    ]
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqlf5VO+Q4cap7HU7jrhpvLdPjXYGEUCYKMytk4tGoY2aF2L4ewMFAD1djlZ5gbg/65qfNybH6uan+vouZZ62fJoCXibADszNjORuiIk6QEPmKtj99i3MpxDg9YqUtYo0M26qw9pB1UIqUZlnOB65U8+Cw1p7A3UUl07lb484ZNkHVImlTMMzDO45v1IhBWtY36G0czQcRMoGH2zTso7eUlU+0u7iz/8r88rfEINBjVLc5INQnppAU/K6ZjRoe2aeSgzeLH43vSs0P7/xbarDwbi2EiypldiJ8vOf3VmRsXo2pJJXKKZid/vfpAnvSRXdYsMU6j8kZtMEUHoxjz54eQIDAQAB",
+  "permissions": [
+    "identity",
+    "identity.email",
+    "https://*.digify.com/*",
+    "https://mail.google.com/*",
+    "https://www.googleapis.com/*",
+    "storage",
+    "unlimitedStorage",
+    "webRequest",
+    "webRequestBlocking",
+    "https://*.intercom.io/*",
+    "https://*.pusherapp.com/*"
+  ],
+  "web_accessible_resources": [
+    "html/index.html"
+  ]
+}

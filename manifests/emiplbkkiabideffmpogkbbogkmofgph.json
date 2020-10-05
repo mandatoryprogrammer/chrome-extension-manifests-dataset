@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "HTTP Commander",
+  "description": "provide additional functionality for HTTP Commander - web file manager",
+  "version": "1.0.3",
+  "icons": {
+    "16": "images/icon16.png",
+    "32": "images/icon32.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "page_action": {
+    "default_icon": {
+      "16": "images/icon16.png",
+      "32": "images/icon32.png",
+      "48": "images/icon48.png",
+      "128": "images/icon128.png"
+    },
+    "default_title": "HTTP Commander helper extension.",
+    "default_popup": "pages/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "scripts/bg.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "tabs",
+    "downloads",
+    "storage",
+    "declarativeContent",
+    "http://*/",
+    "https://*/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "include_globs": [
+        "*Default.aspx*"
+      ],
+      "js": [
+        "scripts/content.js"
+      ]
+    }
+  ],
+  "options_ui": {
+    "page": "pages/options.html",
+    "chrome_style": true
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "update_url": "http://clients2.google.com/service/update2/crx",
+  "name": "查理检查站(搜索助手)",
+  "version": "0.4",
+  "description": "查理检查站能有效避免Google搜索被重置的错误：『错误 101 (net::ERR_CONNECTION_RESET)：连接已重置』",
+  "page_action": {
+    "default_icon": "icon19.png",
+    "default_title": "查理检查站(搜索助手)运行中..."
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "tabs",
+    "http://www.google.com.hk/*",
+    "http://www.google.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.google.com.hk/*",
+        "*://www.google.com/*"
+      ],
+      "js": [
+        "contentscript.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "icons": {
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "manifest_version": 2
+}

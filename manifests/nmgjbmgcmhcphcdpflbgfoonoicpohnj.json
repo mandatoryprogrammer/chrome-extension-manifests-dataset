@@ -1,0 +1,71 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Truckify Importer",
+  "version": "1.0.11",
+  "author": "Truckify, Inc.",
+  "description": "Import loads into Truckify from various load boards",
+  "homepage_url": "https://truckify.com",
+  "permissions": [
+    "https://dev.truckify.com/*",
+    "https://truckify.com/*",
+    "activeTab",
+    "declarativeContent",
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "js/lib/jquery.min.js",
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "css": [
+        "css/centraldispatch.css"
+      ],
+      "js": [
+        "js/lib/jquery.min.js",
+        "js/lib/sweetalert2.all.js",
+        "js/centraldispatch.js"
+      ],
+      "matches": [
+        "https://www.centraldispatch.com/protected/dispatch/view?dsid=*",
+        "http://www.centraldispatch.com/protected/dispatch/view?dsid=*",
+        "https://www.centraldispatch.com/protected/cargo/dispatched-to-me*",
+        "http://www.centraldispatch.com/protected/cargo/dispatched-to-me*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "css": [
+        "css/carsarrive.css"
+      ],
+      "js": [
+        "js/lib/jquery.min.js",
+        "js/lib/sweetalert2.all.js",
+        "js/carsarrive.js"
+      ],
+      "matches": [
+        "https://www.carsarrive.com/tab/Transport/ViewLoadComplete.asp?nload_id=*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "images/logo16.png",
+      "32": "images/logo32.png",
+      "48": "images/logo48.png",
+      "128": "images/logo128.png"
+    }
+  },
+  "icons": {
+    "16": "images/logo16.png",
+    "32": "images/logo32.png",
+    "48": "images/logo48.png",
+    "128": "images/logo128.png"
+  },
+  "manifest_version": 2
+}

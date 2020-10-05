@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "ShowmaxSubtitleResizer",
+  "description": "Resizes subtitles on Showmax videos",
+  "version": "1.0",
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistence": false
+  },
+  "icons": {
+    "32": "icons/32.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png",
+    "490": "icons/490.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "32": "icons/32.png",
+      "48": "icons/48.png",
+      "128": "icons/128.png",
+      "490": "icons/490.png"
+    },
+    "default_popup": "popup.html",
+    "default_title": "Resize subtitles with me"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.showmax.com/*",
+        "https://www.showmax.com/*"
+      ],
+      "js": [
+        "external/js/jquery-3.1.1.min.js",
+        "js/resize.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "<all_urls>",
+    "webNavigation",
+    "storage"
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "content_security_policy": "script-src 'self' https://cdnjs.cloudflare.com https://www.google-analytics.com; object-src 'self'",
+  "background": {
+    "scripts": [
+      "js/jquery-3.3.1.min.js",
+      "js/jquery.base64.js",
+      "js/uaparser.js",
+      "js/browserUtils.js",
+      "js/topGestures.js",
+      "js/background.js",
+      "js/messaging.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup/popup.html",
+    "default_title": "crxMouse Top Gestures"
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "css": [
+        "css/event.css"
+      ],
+      "js": [
+        "js/jquery-3.3.1.min.js",
+        "model/colorpicker/js/colorpicker.js",
+        "js/event.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_end",
+      "all_frames": true,
+      "js": [
+        "js/frame.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://crxmouse.com/*"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "js": [
+        "js/websiteHandler.js"
+      ]
+    }
+  ],
+  "default_locale": "en",
+  "description": "__MSG_descriptionjson__",
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+  "manifest_version": 2,
+  "minimum_chrome_version": "22",
+  "name": "__MSG_appName__",
+  "options_page": "options.html",
+  "permissions": [
+    "tabs",
+    "<all_urls>",
+    "clipboardRead",
+    "clipboardWrite",
+    "bookmarks",
+    "storage",
+    "unlimitedStorage",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking",
+    "contextMenus"
+  ],
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "web_accessible_resources": [
+    "image/*",
+    "js/*",
+    "icon.png",
+    "html/notifi.html",
+    "options.html",
+    "fonts/*"
+  ],
+  "version": "4.4.4"
+}

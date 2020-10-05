@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Highlights - Highlighter and Web Clipper",
+  "short_name": "Highlights",
+  "description": "Highlight, tag and add notes across the Web.",
+  "version": "0.0.138",
+  "browser_action": {
+    "default_popup": "index.html",
+    "default_title": "Highlights from this page"
+  },
+  "icons": {
+    "16": "icons/icon.png",
+    "48": "icons/icon.png",
+    "128": "icons/icon.png"
+  },
+  "background": {
+    "scripts": [
+      "app/src/background/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "css": [
+        "app/src/css/highlight_create.css",
+        "app/src/css/table_of_content.css",
+        "app/src/css/highlight_edit_pop_up.css"
+      ],
+      "js": [
+        "app/plugins/mark/mark.min.js",
+        "app/src/js/highlight_create.js",
+        "app/src/js/table_of_content.js",
+        "app/src/js/highlight_edit_pop_up.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "identity.email",
+    "storage",
+    "bookmarks",
+    "tabs",
+    "http://*/",
+    "contextMenus",
+    "https://accounts.google.com/o/oauth2/token",
+    "<all_urls>",
+    "notifications"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "oauth2": {
+    "client_id": "307727394206-7i9arhgjl9tbpgbkc9e2hu97ljg44akt.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/plus.login"
+    ]
+  },
+  "web_accessible_resources": [
+    "icons/*.png"
+  ]
+}

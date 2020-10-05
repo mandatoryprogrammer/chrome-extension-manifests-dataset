@@ -1,0 +1,77 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Xpress – immediate translation!",
+  "short_name": "Xpress",
+  "version": "1.3.1",
+  "background": {
+    "page": "background.html",
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "img/logo_48.png",
+      "38": "img/logo_48.png"
+    },
+    "default_popup": "popup.html",
+    "default_title": "Xpress – immediate translation with one click! Exercise! Enjoyment!"
+  },
+  "description": "Quick translation of selected text on each page, full integration with google translate, word saving and enjoyable exercises.",
+  "icons": {
+    "16": "img/logo_16.png",
+    "128": "img/logo_128.png",
+    "48": "img/logo_48.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://translate.google.com/*"
+      ],
+      "css": [
+        "css/gt_content.css"
+      ],
+      "js": [
+        "js/jquery-1.11.1.min.js",
+        "js/tr_inject.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "exclude_matches": [
+        "https://translate.google.com/*"
+      ],
+      "css": [
+        "css/general.css",
+        "css/content.css"
+      ],
+      "js": [
+        "js/jquery-1.11.1.min.js",
+        "js/jquery.slimscroll.min.js",
+        "js/inject.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "options_page": "practice.html",
+  "options_ui": {
+    "page": "practice.html",
+    "chrome_style": true,
+    "open_in_tab": true
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs",
+    "tts",
+    "notifications",
+    "*://*/*"
+  ],
+  "web_accessible_resources": [
+    "img/*"
+  ],
+  "minimum_chrome_version": "10.0"
+}

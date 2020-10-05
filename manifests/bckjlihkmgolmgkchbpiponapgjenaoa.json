@@ -1,0 +1,107 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Jungle Scout: Extension",
+  "version": "5.6.0",
+  "description": "Amazon and FBA product research made easy. Extract rank, sales volume, estimated revenue and more without entering the product page.",
+  "icons": {
+    "16": "images/16-active.png",
+    "48": "images/48.png",
+    "128": "images/128.png"
+  },
+  "options_page": "settings.html",
+  "homepage_url": "https://www.junglescout.com",
+  "optional_permissions": [
+    "*://www.google.com/*",
+    "*://www.google.ps/*",
+    "*://*.amazon.in/*",
+    "*://*.amazon.com.mx/*",
+    "*://*.amazon.es/*",
+    "*://*.amazon.co.uk/*",
+    "*://*.amazon.de/*",
+    "*://*.amazon.fr/*",
+    "*://*.amazon.it/*",
+    "*://*.amazon.com.au/*",
+    "*://*.amazon.com/*",
+    "*://*.amazon.ca/*",
+    "*://*.amazon.co.jp/*",
+    "*://*.amazonservices.in/*"
+  ],
+  "permissions": [
+    "https://*.junglescout.com/*",
+    "tabs",
+    "background",
+    "storage",
+    "unlimitedStorage",
+    "*://www.amazon.com/*",
+    "*://www.amazon.fr/*",
+    "*://www.amazon.de/*",
+    "*://www.amazon.co.uk/*",
+    "*://www.amazon.ca/*",
+    "*://*.amazonservices.com/*",
+    "*://*.amazonservices.ca/*"
+  ],
+  "browser_action": {
+    "default_icon": "images/16-inactive.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "js/libraries/jquery.js",
+      "js/libraries/sentry.js",
+      "js/constants.js",
+      "js/common.js",
+      "js/background/parser.js",
+      "js/background/helpers.js",
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://ssl.google-analytics.com; object-src 'self'",
+  "web_accessible_resources": [
+    "*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.amazon.com/*",
+        "*://www.amazon.co.uk/*",
+        "*://www.amazon.fr/*",
+        "*://www.amazon.de/*",
+        "*://www.amazon.ca/*"
+      ],
+      "css": [
+        "css/jsPopup.css",
+        "css/jquery-ui.css"
+      ],
+      "js": [
+        "js/libraries/jquery.js",
+        "js/libraries/vendors.js",
+        "js/globalExports.js",
+        "js/constants.js",
+        "js/background/parser.js",
+        "js/common.js",
+        "js/filter.js",
+        "js/profit.js",
+        "js/sharePopup.js",
+        "js/currentState.js",
+        "js/wordsCloud.js",
+        "js/jsPopup.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://www.amazon.com/*",
+        "*://www.amazon.co.uk/*",
+        "*://www.amazon.fr/*",
+        "*://www.amazon.de/*",
+        "*://www.amazon.ca/*"
+      ],
+      "js": [
+        "js/libraries/plotly.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

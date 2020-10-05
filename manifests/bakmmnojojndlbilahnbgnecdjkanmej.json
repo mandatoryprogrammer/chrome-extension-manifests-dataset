@@ -1,0 +1,78 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Amazon Seller's Helper",
+  "description": "Best Amazon calculator helper and product comparer.",
+  "version": "0.0.1.9",
+  "browser_action": {
+    "default_icon": "newicon.png",
+    "default_title": "Amazon Seller's Helper",
+    "default_popup": "newpopup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://sellercentral.amazon.com/fba/profitabilitycalculator/index?lang=en_US",
+        "https://sellercentral.amazon.com/fba/profitabilitycalculator/index?lang=en_CA"
+      ],
+      "js": [
+        "jquery-2.2.4.js",
+        "content.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.onlineshoppershelper.com/*"
+      ],
+      "js": [
+        "jquery-2.2.4.js",
+        "sitecontent.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "jquery-2.2.4.js",
+        "amazoninfocontent.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.amazon.com/*"
+      ],
+      "exclude_matches": [
+        "*://sellercentral.amazon.com/*",
+        "*://*.aws.amazon.com/*"
+      ],
+      "css": [
+        "font.css",
+        "bootstrap-3.3.7-dist.css/css/bootstrap.min.css"
+      ],
+      "js": [
+        "jquery-2.2.4.js",
+        "amazonsearchpage.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "bootstrap-3.3.7-dist.css/fonts/*"
+  ],
+  "background": {
+    "scripts": [
+      "jquery-2.2.4.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_security_policy": "script-src 'self' https://fullstory.com/s/fs.js; object-src 'self'",
+  "permissions": [
+    "activeTab",
+    "tabs"
+  ]
+}

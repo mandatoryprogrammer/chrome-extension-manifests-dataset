@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Media Keys & More for Overcast",
+  "version": "1.4",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "description": "Unofficial extension to use your keyboard's media keys with Overcast's web player, plus other optional enhancements.",
+  "homepage_url": "https://github.com/tsmango/overcast-media-keys",
+  "manifest_version": 2,
+  "commands": {
+    "prev": {
+      "suggested_key": {
+        "default": "MediaPrevTrack",
+        "mac": "MediaPrevTrack"
+      },
+      "description": "Rewind",
+      "global": true
+    },
+    "play-pause": {
+      "suggested_key": {
+        "default": "MediaPlayPause",
+        "mac": "MediaPlayPause"
+      },
+      "description": "Play/Pause",
+      "global": true
+    },
+    "next": {
+      "suggested_key": {
+        "default": "MediaNextTrack",
+        "mac": "MediaNextTrack"
+      },
+      "description": "Fast Forward",
+      "global": true
+    }
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://overcast.fm/podcasts",
+        "*://overcast.fm/+*"
+      ],
+      "js": [
+        "jquery-2.1.1.min.js",
+        "overcast-media-keys.js"
+      ]
+    }
+  ],
+  "options_page": "options.html",
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "permissions": [
+    "storage"
+  ]
+}

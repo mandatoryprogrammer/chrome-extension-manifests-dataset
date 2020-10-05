@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "description": "__MSG_appDescription__",
+  "version": "0.3.18",
+  "short_name": "__MSG_appShortName__",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "icons": {
+    "16": "images/ext_kiwi_logo_16.png",
+    "128": "images/ext_kiwi_logo_128.png",
+    "144": "images/ext_kiwi_logo_144.png"
+  },
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_popup": "pages/popup.html",
+    "default_icon": {
+      "19": "images/ext_kiwi_logo_32_enlarged.png",
+      "128": "images/ext_kiwi_logo_128_enlarged.png",
+      "144": "images/ext_kiwi_logo_144_enlarged.png"
+    },
+    "default_title": "__MSG_browserActionTitle__"
+  },
+  "author": "Carsten Meyer",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://app.kiwimydata.com/*",
+        "http://localhost/*"
+      ],
+      "js": [
+        "scripts/content_gettoken.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "unlimitedStorage",
+    "storage",
+    "notifications",
+    "https://app.kiwimydata.com/*"
+  ],
+  "optional_permissions": [
+    "tabs"
+  ],
+  "web_accessible_resources": [
+    "styles/custom.iframe.css",
+    "styles/reactLightbox.css",
+    "src/report.js",
+    "src/settings.js",
+    "styles/reactModalImage.css",
+    "images/ext_kiwi_logo_144_enlarged.png",
+    "scripts/App.js"
+  ],
+  "content_security_policy": "script-src 'self' https://widget.intercom.io https://js.intercomcdn.com; object-src 'self'"
+}

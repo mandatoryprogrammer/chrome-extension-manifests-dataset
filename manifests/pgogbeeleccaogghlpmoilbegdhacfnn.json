@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_extensionTitle__",
+  "description": "__MSG_extensionDescription__",
+  "version": "0.8.2",
+  "icons": {
+    "16": "icons/icon_logo16x16.png",
+    "48": "icons/icon_logo48x48.png",
+    "128": "icons/icon_logo128x128.png"
+  },
+  "default_locale": "en",
+  "author": "OVPN.com",
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/icon_logo19x19.png",
+      "38": "icons/icon_logo38x38.png"
+    },
+    "default_popup": "index.html"
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.ovpn.com/*"
+      ],
+      "js": [
+        "js/ovpn.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*/*ovpncomstorageclearingid*"
+      ],
+      "js": [
+        "js/storage.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    }
+  ],
+  "homepage_url": "https://www.ovpn.com",
+  "permissions": [
+    "tabs",
+    "privacy",
+    "cookies",
+    "notifications",
+    "webRequest",
+    "webRequestBlocking",
+    "webNavigation",
+    "http://*/*",
+    "https://*/*"
+  ]
+}

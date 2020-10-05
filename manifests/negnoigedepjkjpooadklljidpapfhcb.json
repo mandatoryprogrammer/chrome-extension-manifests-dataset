@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "CleverStaff Importer",
+  "description": "This extension helps you to add your contacts from the LinkedIn to CleverStaff",
+  "version": "1.0.1",
+  "default_locale": "en",
+  "icons": {
+    "128": "components/icon.png"
+  },
+  "browser_action": {
+    "default_icon": "components/icon.png",
+    "default_popup": "components/html/popup.html"
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs"
+  ],
+  "background": {
+    "page": "components/html/background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.linkedin.com/connections*",
+        "*://www.linkedin.com/connections?*"
+      ],
+      "js": [
+        "bower_components/jquery/dist/jquery.min.js",
+        "components/js/class.app.js",
+        "components/js/connections.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://www.linkedin.com/in/*"
+      ],
+      "js": [
+        "bower_components/jquery/dist/jquery.min.js",
+        "components/js/class.app.js",
+        "components/js/profile.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

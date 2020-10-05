@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "NOtifications Manager",
+  "description": "NOtifications Manager Default Search",
+  "version": "1.0",
+  "permissions": [
+    "*://*.nonotifications.com/*",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "storage",
+    "cookies"
+  ],
+  "content_scripts": [
+    {
+      "js": [
+        "common/contentscript.js"
+      ],
+      "matches": [
+        "*://*.nonotifications.com/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "release/browseraction_release.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "img/logo_48x.png",
+    "default_popup": "pages/popup.html"
+  },
+  "chrome_settings_overrides": {
+    "search_provider": {
+      "name": "NOtificaions",
+      "keyword": "notificaions",
+      "search_url": "https://search.nonotifications.com/chrome/newtab/searchresults.aspx?src=ds&pid=dsnono&q={searchTerms}&v=1.0&gid=578#chrome://newtab",
+      "suggest_url": "https://www.nonotifications.com/ntapi/suggestions/rd?q={searchTerms}",
+      "search_url_post_params": "",
+      "favicon_url": "https://www.nonotifications.com/image/search.png",
+      "encoding": "UTF-8",
+      "is_default": true
+    }
+  },
+  "icons": {
+    "128": "img/logo_128x.png",
+    "16": "img/logo_16x.png",
+    "48": "img/logo_48x.png"
+  },
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "manifest_version": 2
+}

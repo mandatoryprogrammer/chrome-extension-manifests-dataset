@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Apty Assist Studio",
+  "version": "3.0.1938",
+  "description": "Build real-time, on-screen instructions and data entry validations to embed into your web application in a couple of clicks.",
+  "icons": {
+    "16": "assets/icon/icon16.png",
+    "32": "assets/icon/greyedicon32.png",
+    "48": "assets/icon/icon48.png",
+    "128": "assets/icon/icon128.png"
+  },
+  "permissions": [
+    "<all_urls>",
+    "browsingData",
+    "cookies",
+    "storage",
+    "tabs"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self';",
+  "web_accessible_resources": [
+    "*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_globs": [
+        "*.pdf*"
+      ],
+      "js": [
+        "polyfills.bundle.js",
+        "vendor.bundle.js",
+        "main.bundle.js",
+        "libraries.bundle.js"
+      ],
+      "css": [
+        "styles.bundle.css"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "scripts": [
+      "polyfills.bundle.js",
+      "vendor.bundle.js",
+      "background.bundle.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_title": "Apty Assist Studio",
+    "default_icon": "assets/icon/greyedicon32.png"
+  }
+}

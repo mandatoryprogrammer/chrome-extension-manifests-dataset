@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Sonder Publisher",
+  "version": "0.1.1",
+  "manifest_version": 2,
+  "description": "Publish your content to Sonder",
+  "homepage_url": "http://sonder.news",
+  "icons": {
+    "16": "icons/icon.png",
+    "48": "icons/icon.png",
+    "128": "icons/icon.png"
+  },
+  "background": {
+    "scripts": [
+      "src/bg/background.js",
+      "js/jquery.min.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icons/icon.png",
+    "default_title": "Sonder Publisher",
+    "default_popup": "src/popup/popup.html"
+  },
+  "permissions": [
+    "http://*/",
+    "https://*/",
+    "notifications",
+    "tabs",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.sonder.news/*",
+        "https://www.sonder.news/*",
+        "http://sonder.news/*",
+        "https://sonder.news/*"
+      ],
+      "js": [
+        "src/inject/inject.js"
+      ]
+    }
+  ]
+}

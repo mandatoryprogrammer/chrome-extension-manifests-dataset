@@ -1,0 +1,51 @@
+{
+  "manifest_version": 2,
+  "name": "Video & Music Downloader",
+  "short_name": "MediaLeecher",
+  "version": "1.0.1",
+  "author": "Small Penguin",
+  "description": "Get Video & Music Downloader now: one of the most popular video and music downloaders on the internet.",
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon19.png",
+      "38": "images/icon38.png"
+    },
+    "default_title": "Video & Music Downloader",
+    "default_popup": "browser_action/main.html"
+  },
+  "update_url": "http://clients2.google.com/service/update2/crx",
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "permissions": [
+    "declarativeContent",
+    "<all_urls>",
+    "webRequest",
+    "webRequestBlocking",
+    "tabs",
+    "storage",
+    "downloads"
+  ],
+  "background": {
+    "scripts": [
+      "background/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "content_scripts/video_downloader.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'"
+}

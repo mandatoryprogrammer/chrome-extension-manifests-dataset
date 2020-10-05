@@ -1,0 +1,79 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "溜溜返利",
+  "version": "2.5.1",
+  "manifest_version": 2,
+  "description": "网购的福音，淘宝购物返利神器，省钱的的最佳利器",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_title": "溜溜返利",
+    "default_popup": "front/user_info.html"
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon.png",
+    "128": "default.png"
+  },
+  "permissions": [
+    "notifications",
+    "background",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "*://*/*",
+    "unlimitedStorage",
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "j.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://s.taobao.com/search*"
+      ],
+      "js": [
+        "j.js",
+        "taobao_search_list2.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://detail.tmall.com/item.htm*",
+        "https://item.taobao.com/item.htm*"
+      ],
+      "css": [
+        "shop_info_style.css"
+      ],
+      "js": [
+        "j.js",
+        "taobao_detail_address_trans.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://detail.tmall.com/item.htm*ali_trackid=2*",
+        "https://item.taobao.com/item.htm*ali_trackid=2*"
+      ],
+      "js": [
+        "taobao_detail_address_trans2.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://pub.alimama.com/promo/item/channel/index.htm?*"
+      ],
+      "js": [
+        "j.js",
+        "super_list.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    }
+  ]
+}

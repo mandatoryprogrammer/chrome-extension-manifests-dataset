@@ -1,0 +1,69 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "RobusTest",
+  "version": "2.1",
+  "manifest_version": 2,
+  "description": "RITE - Robustest Integrated Testing Environment",
+  "author": "omnarayan@robustest.com",
+  "options_page": "options.html",
+  "browser_action": {
+    "default_icon": {
+      "19": "imgs/logo-24x24.png"
+    },
+    "default_title": "RITE",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "48": "imgs/logo-48x48.png",
+    "128": "imgs/logo-128x128.png"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "getactioninfo_script.js"
+      ],
+      "matches": [
+        "*://*/*"
+      ],
+      "all_frames": true
+    },
+    {
+      "js": [
+        "content_script.js"
+      ],
+      "matches": [
+        "*://*/*"
+      ],
+      "exclude_globs": [
+        "*://code.google.com/*"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "styles/consoles.css",
+    "imgs/logo-24x24.png",
+    "imgs/bug-icon.png",
+    "imgs/overlay-icon.png",
+    "imgs/bug-active-32.png",
+    "imgs/nav-left.png",
+    "imgs/nav-right.png",
+    "imgs/bug-closed-32.png",
+    "imgs/bug-resolved-32.png"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://d1n0x3qji82z53.cloudfront.net https://ssl.google-analytics.com; object-src 'self'",
+  "incognito": "spanning",
+  "permissions": [
+    "tabs",
+    "debugger",
+    "<all_urls>",
+    "management",
+    "background",
+    "storage",
+    "unlimitedStorage",
+    "http://*.robustest.com/",
+    "https://*.robustest.com/"
+  ]
+}

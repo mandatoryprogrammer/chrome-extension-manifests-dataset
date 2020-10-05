@@ -1,0 +1,80 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Fiyole",
+  "version": "1.0.2",
+  "manifest_version": 2,
+  "description": "Fiyole - Tool for LinkedIn",
+  "icons": {
+    "16": "images/fiyole-icon-16.png",
+    "128": "images/fiyole-icon-128.png"
+  },
+  "short_name": "Fiyole",
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "js/jquery.min.js",
+      "scripts/chromereload.js",
+      "scripts/background.js",
+      "scripts/bootstrap-flash-alert.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "activeTab",
+    "http://www.fiyole.com/*",
+    "https://www.fiyole.com/*",
+    "http://fiyole.com/*",
+    "https://fiyole.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.linkedin.com/*",
+        "https://*.linkedin.com/*"
+      ],
+      "js": [
+        "js/require.js",
+        "js/jquery.min.js",
+        "js/bootstrap.js",
+        "js/main.js",
+        "js/application.js",
+        "scripts/bootstrap-flash-alert.js"
+      ],
+      "css": [
+        "styles/linkedin.css",
+        "styles/bootstrap.min.css",
+        "styles/font-awesome/css/font-awesome.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://ssl.google-analytics.com; object-src 'self'",
+  "externally_connectable": {
+    "matches": [
+      "https://fiyole.com/*",
+      "http://fiyole.com/*",
+      "http://www.fiyole.com/*",
+      "https://www.fiyole.com/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "templates/*",
+    "js/*",
+    "styles/fonts/OpenSans-Regular.ttf",
+    "styles/font-awesome/fonts/*"
+  ],
+  "omnibox": {
+    "keyword": "OMNIBOX-KEYWORD"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/fiyole-icon-19.png",
+      "38": "images/fiyole-icon-38.png"
+    },
+    "default_title": "Fiyole",
+    "default_popup": "popup.html"
+  }
+}

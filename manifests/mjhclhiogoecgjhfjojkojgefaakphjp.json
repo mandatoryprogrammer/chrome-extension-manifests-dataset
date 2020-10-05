@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Meraki dialer",
+  "description": "This extension gives users of the Meraki MC74 cloud managed phone the ability to dial directly from Chrome with a single click.",
+  "version": "0.3",
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "19": "icons/icon19.png",
+      "32": "icons/icon32.png",
+      "38": "icons/icon38.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "19": "icons/icon19.png",
+    "32": "icons/icon32.png",
+    "38": "icons/icon38.png",
+    "48": "icons/icon48.png",
+    "64": "icons/icon64.png",
+    "96": "icons/icon96.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "dist/background.js"
+    ],
+    "presistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "dist/content_script.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "permissions": [
+    "contextMenus",
+    "cookies",
+    "activeTab",
+    "tabs",
+    "*://*.meraki.com/*",
+    "background"
+  ],
+  "web_accessible_resources": [
+    "dist/*.otf"
+  ]
+}

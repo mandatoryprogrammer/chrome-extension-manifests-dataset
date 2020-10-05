@@ -1,0 +1,37 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "ClearPass Onboard",
+  "description": "Managed Device Enrollment",
+  "permissions": [
+    "identity",
+    "tabs",
+    "storage",
+    "enterprise.platformKeys"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/guest/mdps_status.php",
+        "*://*/onboard/mdps_status.php"
+      ],
+      "js": [
+        "content_script.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "forge.bundle.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "icons": {
+    "128": "icon.png"
+  },
+  "version": "6.5.0.31728",
+  "content_security_policy": "default-src 'none'; script-src 'self' ; style-src 'self' ; connect-src * ; frame-src *",
+  "homepage_url": "http://www.arubanetworks.com/"
+}

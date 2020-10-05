@@ -1,0 +1,68 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Openturk",
+  "description": "The Definitive Toolbox for Amazon Mechanical Turk",
+  "version": "0.5.1",
+  "permissions": [
+    "*://*.mturk.com/*",
+    "*://*.openturk.com/*",
+    "*://*.amazon.com/*",
+    "storage",
+    "unlimitedStorage",
+    "contextMenus",
+    "alarms",
+    "tabs"
+  ],
+  "manifest_version": 2,
+  "background": {
+    "persistent": true,
+    "page": "background.html"
+  },
+  "browser_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "OpenTurk",
+    "default_popup": "pages/popup.html"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "pages/scripts/jquery-2.0.3.min.js",
+        "js/mturk.js"
+      ],
+      "matches": [
+        "http://*.mturk.com/*",
+        "https://*.mturk.com/*"
+      ],
+      "css": [
+        "pages/styles/content.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "pages/scripts/jquery-2.0.3.min.js",
+        "js/paste.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "options_page": "pages/options.html",
+  "icons": {
+    "128": "icons/icon128.png",
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png"
+  },
+  "web_accessible_resources": [
+    "pages/scripts/jquery-2.0.3.min.map",
+    "pages/styles/font-awesome/css/font-awesome.min.css",
+    "pages/styles/font-awesome/fonts/fontawesome-webfont.eot",
+    "pages/styles/font-awesome/fonts/fontawesome-webfont.svg",
+    "pages/styles/font-awesome/fonts/fontawesome-webfont.ttf",
+    "pages/styles/font-awesome/fonts/fontawesome-webfont.woff"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

@@ -1,0 +1,75 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "minimum_chrome_version": "22.0.0.0",
+  "name": "Fox Forum Helper",
+  "description": "Add function (and Fun!) to the Fox News Forum.",
+  "version": "2.5.0",
+  "icons": {
+    "128": "images/icon.png"
+  },
+  "page_action": {
+    "default_icon": "images/icon.png",
+    "default_title": "Fox Forum Helper",
+    "default_popup": "pop-up/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "shared/jquery-3.2.1.slim.min.js",
+      "shared/globals.js",
+      "event-page/settings.js",
+      "event-page/event-page.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.foxnews.com/*"
+      ],
+      "js": [
+        "shared/jquery-3.2.1.slim.min.js",
+        "shared/globals.js",
+        "content-scripts/listener.js",
+        "content-scripts/Module_CleanPage.js",
+        "content-scripts/Module_XhrInterceptor.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://spoxy-shard4.spot.im/*"
+      ],
+      "js": [
+        "shared/underscore-1.8.3.min.js",
+        "shared/jquery-3.2.1.slim.min.js",
+        "shared/d3.v3.min.js",
+        "shared/globals.js",
+        "content-scripts2/Module_ActivityGraph.js",
+        "content-scripts2/Module_AvatarSwapper.js",
+        "content-scripts2/Module_CleanComments.js",
+        "content-scripts2/Module_CommentObserver.js",
+        "content-scripts2/Module_Editor.js",
+        "content-scripts2/Module_FilterUsers.js",
+        "content-scripts2/Module_Liker.js",
+        "content-scripts2/Module_Settings.js",
+        "content-scripts2/main.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "storage",
+    "http://foxnews.com/*"
+  ],
+  "web_accessible_resources": [
+    "content-scripts/disable-scrolling.js",
+    "content-scripts/xhr-interceptor.js",
+    "content-scripts2/icons/blank-check-box.svg",
+    "content-scripts2/icons/cancel-button.svg",
+    "content-scripts2/icons/check-box.svg",
+    "content-scripts2/icons/close-arrow.svg",
+    "content-scripts2/icons/open-arrow.svg",
+    "content-scripts2/icons/ok.svg"
+  ]
+}

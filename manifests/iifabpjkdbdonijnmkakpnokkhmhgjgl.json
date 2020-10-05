@@ -1,0 +1,74 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "TouchStream",
+  "version": "1.5",
+  "manifest_version": 2,
+  "description": "TouchStream provides an efficient method of maintaining strong relationships with clients.",
+  "icons": {
+    "16": "images/icon-16.png",
+    "128": "images/icon-128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "scripts/install_and_upgrade.js",
+      "scripts/extension_installed_check.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon.png",
+      "38": "images/icon.png"
+    },
+    "default_title": "TouchStream",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://www.google.com/contacts/*"
+      ],
+      "js": [
+        "scripts/find_emails_in_gmail.js",
+        "scripts/inbox_link.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "https://mail.google.com/*",
+        "https://www.google.com/contacts/*"
+      ],
+      "js": [
+        "scripts/find_emails_on_any_page.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "http://*/",
+    "https://*/",
+    "notifications"
+  ],
+  "web_accessible_resources": [
+    "icon.png"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://touchstreamapp.com/*",
+      "https://touchstream.io/*",
+      "https://staging.touchstreamapp.com/*",
+      "https://staging2.touchstreamapp.com/*",
+      "https://staging.touchstream.io/*",
+      "https://staging2.touchstream.io/*",
+      "http://lvh.me:3000/*",
+      "http://lvh.me:3700/*"
+    ],
+    "accepts_tls_channel_id": false
+  }
+}

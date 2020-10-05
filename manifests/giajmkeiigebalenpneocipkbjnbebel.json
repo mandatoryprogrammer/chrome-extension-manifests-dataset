@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Instance Crossreference plugin",
+  "short_name": "SN Crossreference",
+  "description": "Use this plugin to cross-reference between two instances of ServiceNow.",
+  "version": "2.0.1",
+  "options_page": "html/options.html",
+  "browser_action": {
+    "default_icon": "img/icon48.png",
+    "default_popup": "html/popup.html"
+  },
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.service-now.com/*"
+      ],
+      "js": [
+        "js/jquery-3.2.1.min.js",
+        "js/contentscript.js"
+      ],
+      "css": [
+        "css/crossref_style.css"
+      ],
+      "all_frames": true,
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "permissions": [
+    "activeTab",
+    "*://*.service-now.com/*",
+    "storage",
+    "webNavigation"
+  ]
+}

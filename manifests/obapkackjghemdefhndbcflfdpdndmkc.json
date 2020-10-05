@@ -1,0 +1,73 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Keela Gmail Extension",
+  "version": "2.0.5",
+  "manifest_version": 2,
+  "description": "Gmail Extension to track your emails from Keela",
+  "homepage_url": "http://keela.co",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA9vSsKE0bPmIfKQRHn3CrUEcc+hpIVLIsWCsRUXP7IcpzcTw3ltgv4ccP3QwR88nFyoYabsXx68iO6uVm68GkT2Y1PHIgQkVNkZ3YvnItI/FHB7+bNnF6wwuFagvoQi6XXaCAdeDrYKbHHX6gkXRvAdIjYqbQ6GKR5H9JLe84VD63LULoPgXvou+BPT8Ogs1sO3vtz6UIB5XF3HNXWnUDMeQSWtvq32ZoVojpJa59dDxLyqvRIoNz8uTjTlf9FCTKRUISvqSPufiYb9SD4qJa7l4v3eb2LyG6FpmLIVJe4y8NooRIO4MenvVw2erfRIv1+4/AR8cFI5cSDwXBU5ke3wIDAQAB",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "page": "html/background/background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "img/Keela.png",
+    "default_title": "Keela Gmail Extension",
+    "default_popup": "html/browser_action/browser_action.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "scripts/gmail-inject.js"
+      ],
+      "css": [
+        "css/content_script.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.keela.co/*",
+        "https://dev.keela.co/*"
+      ],
+      "js": [
+        "scripts/keela-script.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "management",
+    "https://accounts.google.com/o/oauth2/token",
+    "https://www.google.com/accounts/OAuthGetRequestToken",
+    "https://www.google.com/accounts/OAuthAuthorizeToken",
+    "https://www.google.com/accounts/OAuthGetAccessToken",
+    "https://mail.google.com/*",
+    "https://www.keela.co/*",
+    "https://mail-attachment.googleusercontent.com/*"
+  ],
+  "web_accessible_resources": [
+    "scripts/lib/jquery.min.js",
+    "scripts/lib/gmail.js",
+    "scripts/background.js",
+    "scripts/browser_action.js",
+    "scripts/content_script.js",
+    "img/Keela_blue.png",
+    "html/content_scripts/sidebar.html"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://*.keela.co/*"
+    ]
+  }
+}

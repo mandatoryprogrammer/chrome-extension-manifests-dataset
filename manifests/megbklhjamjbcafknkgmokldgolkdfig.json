@@ -1,0 +1,121 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "SessionBox - Free multi login to any website",
+  "short_name": "SessionBox",
+  "version": "1.4.4",
+  "minimum_chrome_version": "45",
+  "default_locale": "en",
+  "icons": {
+    "16": "assets/Icon16.png",
+    "48": "assets/Icon48.png",
+    "128": "assets/Icon128.png"
+  },
+  "incognito": "spanning",
+  "background": {
+    "scripts": [
+      "publicsuffixlist.js",
+      "forge.bundle.js",
+      "CookieJar.js",
+      "dll/background.dll.js",
+      "background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "assets/Icon19.png",
+      "38": "assets/Icon38.png"
+    },
+    "default_title": "SessionBox",
+    "default_popup": "assets/PleaseWait.html"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+S"
+      }
+    },
+    "new_session": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+X"
+      },
+      "description": "__MSG_NEW_SESSION_COMMAND__"
+    },
+    "new_temporary_session": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+A"
+      },
+      "description": "__MSG_NEW_TEMPORARY_SESSION_COMMAND__"
+    },
+    "bulk_temporary_session": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+D"
+      },
+      "description": "__MSG_OPEN_BULK_TEMPORARY__"
+    }
+  },
+  "web_accessible_resources": [
+    "assets/VirtualSessionHelper.js",
+    "assets/C6Fix.js",
+    "assets/Icons/box.svg",
+    "views.html",
+    "view.css",
+    "views.js",
+    "Views/NewSessionTutorial.css",
+    "assets/actions/*",
+    "assets/Fonts/*"
+  ],
+  "description": "__MSG_PROMO_SHORT__",
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "idle",
+    "background",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking",
+    "proxy",
+    "cookies",
+    "storage",
+    "contextMenus",
+    "unlimitedStorage",
+    "<all_urls>"
+  ],
+  "optional_permissions": [
+    "bookmarks",
+    "notifications"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://sessionbox.io/*"
+      ],
+      "js": [
+        "website-connector.content-script.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "virtual-session.content-script.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "updater.content-script.js",
+        "overlay.content-script.js",
+        "incognito.content-script.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://*.firebaseio.com https://ssl.google-analytics.com https://apis.google.com https://www.google-analytics.com https://www.googleapis.com; object-src 'self' https://*.firebaseio.com https://www.googleapis.com"
+}

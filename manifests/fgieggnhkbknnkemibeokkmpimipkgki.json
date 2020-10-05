@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Русский Транслит / Russian Translit",
+  "short_name": "Транслит / Translit",
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "description": "Транслит для хрома. This extension converts latin characters to cyrillic phonetically.",
+  "version": "1.1.1",
+  "permissions": [
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "inputhandler.js",
+        "inject.js"
+      ],
+      "all_frames": true,
+      "match_about_blank": true
+    }
+  ],
+  "background": {
+    "scripts": [
+      "libs/lodash.min.js",
+      "TranslitEngine.js",
+      "background.js",
+      "libs/analytics.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "img/icon19.png",
+      "38": "img/icon38.png"
+    },
+    "default_popup": "popup/main.html"
+  },
+  "commands": {
+    "toggleglobal": {
+      "suggested_key": {
+        "default": "Alt+R",
+        "mac": "MacCtrl+R"
+      },
+      "description": "Переключать транслит"
+    }
+  }
+}

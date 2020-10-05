@@ -1,0 +1,67 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "5.7",
+  "name": "Yodiz Grab - Screenshot Capture & Annotate",
+  "description": "Capture screenshot of web pages, annotate and add as attachment to items at Yodiz.",
+  "background": {
+    "page": "background.html",
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": "images/yodiz_fav.png",
+    "default_title": "__MSG_default_title__",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "ftp://*/*",
+        "file://*/*"
+      ],
+      "js": [
+        "js/page.js"
+      ],
+      "css": [
+        "style.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "ftp://*/*",
+        "file://*/*"
+      ],
+      "js": [
+        "js/isLoad.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "default_locale": "en",
+  "icons": {
+    "16": "images/yodiz_fav.png",
+    "19": "images/yodiz_fav.png",
+    "32": "images/yodiz_fav.png",
+    "48": "images/yodiz_fav.png",
+    "128": "images/yodiz_fav.png"
+  },
+  "manifest_version": 2,
+  "incognito": "split",
+  "permissions": [
+    "tabs",
+    "https://*/*",
+    "background",
+    "<all_urls>",
+    "downloads"
+  ],
+  "short_name": "Yodiz Grab",
+  "web_accessible_resources": [
+    "js/page_context.js",
+    "style.css"
+  ]
+}

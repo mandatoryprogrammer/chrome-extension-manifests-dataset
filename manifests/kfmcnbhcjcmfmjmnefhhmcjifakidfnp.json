@@ -1,0 +1,159 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "OnePageCRM Lead Clipper",
+  "homepage_url": "http://www.onepagecrm.com/",
+  "version": "2.13.5",
+  "description": "Clip leads from any webpage directly into your OnePageCRM account!",
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.linkedin.com/*"
+      ],
+      "js": [
+        "compile/vendors_content_script.js",
+        "compile/linkedin.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.xing.com/*"
+      ],
+      "js": [
+        "compile/vendors_content_script.js",
+        "compile/xing.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://mail.google.com/*",
+        "https://www.google.com/s2/u/0/photos/*"
+      ],
+      "js": [
+        "vendors/inboxsdk.js",
+        "compile/vendors_content_script.js",
+        "compile/gmail.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://inbox.google.com/*"
+      ],
+      "js": [
+        "compile/vendors_content_script.js",
+        "compile/google_inbox.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://app.onepagecrm.com/app/chrome_lead_clipper/*"
+      ],
+      "js": [
+        "compile/onepagecrm.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.onepagecrm.com/*"
+      ],
+      "js": [
+        "compile/options.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://twitter.com/*"
+      ],
+      "js": [
+        "compile/vendors_content_script.js",
+        "compile/twitter.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.facebook.com/*"
+      ],
+      "js": [
+        "compile/vendors_content_script.js",
+        "compile/facebook.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://*.outlook.live.com/*",
+        "https://*.outlook.office.com/*",
+        "https://*.outlook.office365.com/*"
+      ],
+      "js": [
+        "compile/vendors_content_script.js",
+        "compile/outlook.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://*.outlook.live.com/*",
+        "https://*.outlook.office.com/*",
+        "https://*.outlook.office365.com/*"
+      ],
+      "js": [
+        "compile/outlook_request.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://*.mail.live.com/*"
+      ],
+      "js": [
+        "compile/vendors_content_script.js",
+        "compile/hotmail.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "page_action": {
+    "default_icon": {
+      "19": "images/icon19.png",
+      "38": "images/icon38.png"
+    },
+    "default_title": "OnePageCRM Lead Clipper",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "compile/vendors_content_script.js",
+      "compile/background.js"
+    ]
+  },
+  "options_page": "options.html",
+  "permissions": [
+    "tabs",
+    "storage",
+    "gcm",
+    "notifications",
+    "activeTab",
+    "https://api.peopledatalabs.com/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.live.com/*",
+      "*://*.office.com/*",
+      "*://*.office365.com/*"
+    ]
+  },
+  "manifest_version": 2,
+  "web_accessible_resources": [
+    "inject.js"
+  ]
+}

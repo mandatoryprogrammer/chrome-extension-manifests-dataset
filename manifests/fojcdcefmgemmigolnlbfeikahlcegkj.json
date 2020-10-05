@@ -1,0 +1,100 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_extName__",
+  "description": "__MSG_extName__",
+  "default_locale": "en",
+  "version": "3.8.0.18",
+  "icons": {
+    "16": "www/img/agenda16.png",
+    "32": "www/img/agenda32.png",
+    "128": "www/img/agenda128.png"
+  },
+  "permissions": [
+    "background",
+    "tabs",
+    "idle",
+    "https://accounts.avayacloud.com/*",
+    "https://spaces.avayacloud.com/*",
+    "https://spacesapis.avayacloud.com/*",
+    "https://meetings.avaya.com/*",
+    "https://avaya.scheduler/*",
+    "https://avaya.scheduler.spaces/*"
+  ],
+  "background": {
+    "scripts": [
+      "www/app/crx-loader.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "www/img/agenda19.png",
+      "32": "www/img/agenda32.png"
+    },
+    "default_popup": "www/app/crx-app.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.google.com/*/hovercard*"
+      ],
+      "js": [
+        "www/app/crx-google-card.js"
+      ],
+      "css": [
+        "www/css/crx-google-card.css"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://mail.google.com/mail/*",
+        "https://manage1.esna.com/interop/spaces2gate0.html*",
+        "https://static.apps.avaya.com/clients/interop/spaces2gate0.html*"
+      ],
+      "js": [
+        "www/app/crx-google-people.js"
+      ],
+      "css": [
+        "www/css/crx-google-people.css"
+      ],
+      "run_at": "document_start",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "https://calendar.google.com/*"
+      ],
+      "js": [
+        "www/app/crx-google-calendar.js"
+      ],
+      "css": [
+        "www/css/crx-google-calendar.css"
+      ],
+      "run_at": "document_start",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "https://teams.microsoft.com/*"
+      ],
+      "js": [
+        "www/app/crx-ms-teams.js"
+      ],
+      "css": [
+        "www/css/crx-ms-teams.css"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "www/app/auth.html",
+    "www/app/crx-app.html",
+    "www/app/crx-meeting-options.html",
+    "www/img/agenda16.png",
+    "www/img/agenda32.png",
+    "www/img/action.svg"
+  ]
+}

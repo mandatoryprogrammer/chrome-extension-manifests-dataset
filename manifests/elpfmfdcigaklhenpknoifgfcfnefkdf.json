@@ -1,0 +1,70 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "veefeed",
+  "version": "0.10.2",
+  "description": "Keep track of your YouTube and Twitch subscriptions",
+  "applications": {
+    "gecko": {
+      "id": "temp@veefeed.com"
+    }
+  },
+  "icons": {
+    "128": "img/icon-128.png"
+  },
+  "permissions": [
+    "https://www.twitch.tv/",
+    "https://api.twitch.tv/",
+    "https://www.youtube.com/",
+    "https://haloruns.com/",
+    "https://www.speedrun.com/",
+    "https://t.co/",
+    "contextMenus",
+    "cookies",
+    "webRequest",
+    "webRequestBlocking",
+    "notifications",
+    "storage"
+  ],
+  "author": "fent (https://github.com/fent)",
+  "background": {
+    "page": "background/background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/watch?v=*"
+      ],
+      "js": [
+        "util/time.js",
+        "util/hyperscript.js",
+        "content/shared.js",
+        "content/youtube.js"
+      ],
+      "css": [
+        "content/style.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.twitch.tv/videos/*"
+      ],
+      "js": [
+        "util/time.js",
+        "util/hyperscript.js",
+        "content/shared.js",
+        "content/twitch.js"
+      ],
+      "css": [
+        "content/style.css"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_popup": "popup/popup.html"
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": false
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Merch Mastermind Toolkit",
+  "description": "Toolkit for Merch by Amazon Mastermind Group",
+  "version": "1.7.4",
+  "browser_action": {
+    "default_icon": {
+      "16": "/img/icon16.png",
+      "32": "/img/icon32.png",
+      "48": "/img/icon48.png"
+    },
+    "default_popup": "popup/index.html",
+    "default_title": "Merch Mastermind Toolkit"
+  },
+  "options_ui": {
+    "open_in_tab": true,
+    "page": "options/index.html"
+  },
+  "commands": {
+    "copy": {
+      "suggested_key": {
+        "default": "Ctrl+Space"
+      },
+      "description": "ASIN Copy"
+    },
+    "copy2": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Space"
+      },
+      "description": "Product URL Copy"
+    }
+  },
+  "background": {
+    "scripts": [
+      "/js/eventPage.min.js"
+    ],
+    "persistent": true
+  },
+  "icons": {
+    "16": "/img/icon16.png",
+    "32": "/img/icon32.png",
+    "48": "/img/icon48.png",
+    "128": "/img/icon128.png",
+    "256": "/img/icon256.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.amazon.com/dp/*",
+        "*://www.amazon.com/*/dp/*",
+        "*://www.amazon.com/*/gp/*"
+      ],
+      "js": [
+        "/js/prodInject.min.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://www.amazon.com/s/*"
+      ],
+      "js": [
+        "/js/searchInject.min.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://merch.amazon.com/manage",
+        "*://merch.amazon.com/merch-*/title-setup/*/add_details"
+      ],
+      "css": [
+        "/assets/lib/dream-admin-theme/css/bootstrap.css",
+        "/assets/lib/dream-admin-theme/css/bootstrap-tagsinput.css",
+        "/css/merch-styles.min.css"
+      ],
+      "js": [
+        "/assets/lib/dream-admin-theme/js/jquery-3.2.1.min.js",
+        "/assets/lib/dream-admin-theme/js/bootstrap-tagsinput.min.js",
+        "/js/merchInject.min.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://ams.amazon.com/*"
+      ],
+      "js": [
+        "/js/amsInject.min.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "notifications",
+    "storage"
+  ],
+  "web_accessible_resources": [
+    "options/index.html"
+  ]
+}

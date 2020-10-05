@@ -1,0 +1,95 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_extensionName__",
+  "description": "__MSG_extensionDescription__",
+  "version": "2.0.2",
+  "default_locale": "en",
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "images/chrome-icon-active.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.kia-hotline.com/hotline/dlrhotline/add.action*",
+        "*://www.kia-hotline.com/hotline/dlrhotline/edit.action*"
+      ],
+      "js": [
+        "vendors/jquery-3.2.1.min.js",
+        "vendors/lodash-4.17.4.min.js",
+        "vendors/moment-2.18.1.min.js",
+        "vendors/aws-cognito-sdk.min.js",
+        "vendors/amazon-cognito-auth.min.js",
+        "vendors/amazon-cognito-identity.min.js",
+        "common_scripts/enums/commands/InjectorCommand.js",
+        "content_scripts/injectors/kiaHotlineInjector.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.kia-hotline.com/hotline/dlrhotline/list.action*"
+      ],
+      "js": [
+        "vendors/jquery-3.2.1.min.js",
+        "vendors/lodash-4.17.4.min.js",
+        "vendors/aws-cognito-sdk.min.js",
+        "vendors/amazon-cognito-auth.min.js",
+        "vendors/amazon-cognito-identity.min.js",
+        "common_scripts/enums/commands/BackgroundCommand.js",
+        "common_scripts/enums/commands/ExtractorCommand.js",
+        "common_scripts/enums/PopupMode.js",
+        "common_scripts/utils/resourceDownloader.js",
+        "content_scripts/extractors/kiaHotlineExtractor.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://gwms.kiacdn.com/jsp_html5/w300_claim_process/w300_0400/W300_0400.jsp*",
+        "*://gwms.kiacdn.com/jsp_html5/w310_claim_screen/w310_2000/W310_2000.jsp*",
+        "*://gwms.kiacdn.com/jsp_html5/w310_claim_screen/w310_2100/W310_2100.jsp*"
+      ],
+      "js": [
+        "vendors/jquery-3.2.1.min.js",
+        "vendors/lodash-4.17.4.min.js",
+        "vendors/aws-cognito-sdk.min.js",
+        "vendors/amazon-cognito-auth.min.js",
+        "vendors/amazon-cognito-identity.min.js",
+        "common_scripts/enums/commands/InjectorCommand.js",
+        "common_scripts/enums/commands/BackgroundCommand.js",
+        "common_scripts/utils/resourceDownloader.js",
+        "content_scripts/injectors/kiaGwmsInjector.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://gwms.kiacdn.com/index_main.jsp*"
+      ],
+      "js": [
+        "vendors/jquery-3.2.1.min.js",
+        "vendors/aws-cognito-sdk.min.js",
+        "vendors/amazon-cognito-auth.min.js",
+        "vendors/amazon-cognito-identity.min.js",
+        "content_scripts/workarounds/kiaGwmsWebLtsMenuItemWorkaround.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "*://www.prod.fleetback.com/*",
+    "storage"
+  ],
+  "web_accessible_resources": [
+    "popup.html",
+    "images/icon-white.png"
+  ]
+}

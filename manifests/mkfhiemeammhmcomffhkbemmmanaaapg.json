@@ -1,0 +1,179 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Merch Wizard - Merch By Amazon Manager",
+  "description": "Merch Wizard is a Merch By Amazon organizer and sales tool that integrates with Airtable to supercharge Merch.",
+  "version": "6.8.2",
+  "background": {
+    "scripts": [
+      "js/jquery-3.4.1.min.js",
+      "jsugly/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.amazon.com/*",
+        "https://www.amazon.co.uk/*",
+        "https://www.amazon.de/*",
+        "https://www.amazon.fr/*",
+        "https://www.amazon.es/*",
+        "https://www.amazon.it/*",
+        "https://merch.amazon.com/*",
+        "https://www.dropbox.com/*"
+      ],
+      "exclude_matches": [
+        "https://merch.amazon.com/dashboard",
+        "https://merch.amazon.com/dashboard?prettyDash"
+      ],
+      "js": [
+        "js/jquery-3.4.1.min.js",
+        "js/jquery.lineProgressbar.js",
+        "contentscriptsugly/contentscriptcommon.js",
+        "contentscriptsugly/contentscriptmerch.js",
+        "contentscriptsugly/contentscriptutils.js",
+        "contentscriptsugly/contentscriptdropbox.js",
+        "contentscriptsugly/contentscriptmanagepage.js",
+        "/js/airtable.browser.js",
+        "/js/aws-sdk.js",
+        "/js/moment-with-locales.js",
+        "/js/fontawesomeall.js",
+        "/dist/slimselect.min.js",
+        "/dist/featherlight.min.js"
+      ],
+      "css": [
+        "css/contentPage.css",
+        "css/jquery.lineProgressbar.css",
+        "css/relister.css",
+        "css/nunito.css",
+        "dist/featherlight.min.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://airtable.com/*"
+      ],
+      "js": [
+        "js/jquery-3.4.1.min.js",
+        "contentscriptsugly/contentscriptcommon.js",
+        "contentscriptsugly/contentscriptairtable.js",
+        "/js/airtable.browser.js",
+        "/js/fontawesomeall.js"
+      ],
+      "css": [
+        "css/contentPage.css",
+        "css/nunito.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://gumroad.com/*",
+        "https://www.gumroad.com/*"
+      ],
+      "js": [
+        "js/jquery-3.4.1.min.js",
+        "contentscriptsugly/contentscriptgumroad.js"
+      ],
+      "css": [
+        "css/gumroadPage.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.dropbox.com/developers/apps/*"
+      ],
+      "js": [
+        "js/jquery-3.4.1.min.js",
+        "contentscriptsugly/contentscriptcommon.js",
+        "contentscriptsugly/contentscriptdropbox.js"
+      ],
+      "css": [
+        "css/contentPage.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "storage",
+    "downloads",
+    "webNavigation",
+    "https://api.gumroad.com/*",
+    "https://api.orbitkit.com/*",
+    "https://*.amazon.com/*",
+    "https://*.amazonaws.com/*",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "web_accessible_resources": [
+    "js/*.js",
+    "jsugly/*.js",
+    "images/*.png",
+    "images/*.gif",
+    "images/*.jpg",
+    "/images/*.png",
+    "/images/*.gif",
+    "https://use.fontawesome.com/releases/v5.6.3/js/all.js",
+    "fonts/nunito/Nunito-Regular.ttf",
+    "fonts/nunito/Nunito-SemiBold.ttf",
+    "fonts/nunito/Nunito-Bold.ttf",
+    "fonts/nunito/Nunito-ExtraBold.ttf",
+    "fonts/nunito/Nunito-Black.ttf",
+    "lib/cropper/cropper.min.js",
+    "lib/cropper/jquery-cropper.min.js",
+    "lib/pickr/pickr.min.css",
+    "lib/pickr/pickr.min.js",
+    "js/jquery-3.4.1.min.js",
+    "css/cropper.min.css",
+    "/app/*.json",
+    "/appugly/*.json"
+  ],
+  "browser_action": {
+    "default_title": "Merch Wizard",
+    "default_icon": "images/MerchWizard128.png",
+    "default_popup": "html/popup.html"
+  },
+  "icons": {
+    "128": "images/MerchWizard128.png",
+    "48": "images/MerchWizard48.png",
+    "16": "images/MerchWizard16.png"
+  },
+  "commands": {
+    "submitpage": {
+      "suggested_key": {
+        "default": "Alt+S",
+        "windows": "Alt+S",
+        "mac": "Alt+S"
+      },
+      "description": "Submit Page"
+    },
+    "submitProductConfirmation": {
+      "suggested_key": {
+        "default": "Alt+C",
+        "windows": "Alt+C",
+        "mac": "Alt+C"
+      },
+      "description": "Submit Product Confirmation"
+    },
+    "relisterPopulateShortcut": {
+      "suggested_key": {
+        "default": "Alt+R",
+        "windows": "Alt+R",
+        "mac": "Alt+R"
+      },
+      "description": "Relister - Populate Controls"
+    },
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+W",
+        "windows": "Alt+W",
+        "mac": "Alt+W"
+      },
+      "description": "Open Merch Wizard"
+    }
+  },
+  "manifest_version": 2
+}

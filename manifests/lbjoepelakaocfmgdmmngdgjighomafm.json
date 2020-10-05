@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "微博RSS高级同步",
+  "description": "设置你的RSS源并同步到新浪微博。由于这是一个本地扩展，所以比其他同步服务更及时(2~5分钟)。同时提供更多设置。",
+  "icons": {
+    "16": "./img/icon16.png",
+    "48": "./img/icon48.png",
+    "128": "./img/icon128.png"
+  },
+  "manifest_version": 2,
+  "browser_action": {
+    "default_icon": {
+      "19": "./img/icon48.png",
+      "38": "./img/icon48.png"
+    },
+    "default_title": "添加feed",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "./js/feed_finder.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://api.weibo.com/oauth2/default.html*"
+      ],
+      "js": [
+        "oauth2/oauth2_inject.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://; object-src 'self'",
+  "options_page": "options.html",
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "oauth2/oauth2.js",
+      "oauth2/adapters/weibo.js",
+      "oauth2/init.js",
+      "./js/analytics.js",
+      "./lib/jquery.1.10.js",
+      "./js/userdata.js",
+      "./js/background.js",
+      "./js/share.background.js"
+    ]
+  },
+  "permissions": [
+    "contextMenus",
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "version": "1.5.3"
+}

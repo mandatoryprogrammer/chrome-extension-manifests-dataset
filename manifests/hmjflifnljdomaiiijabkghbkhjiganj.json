@@ -1,0 +1,86 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Airhead Flight Attendant",
+  "description": "Airhead Flight Attendant lets you quickly open and switch to Airhead. It can also fill in your login details to many websites.",
+  "author": "Airhead Education",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA5Nvim2w/9/hnxFohDS06sSow/WnoaBOk/V6meIvMGV+muK4FSCWUP5e+qx4hIIta46Pd6vcMER7rWMzIX8aoCpffmv4QxOP02xc0gWvkSLUrSjpZKuOxTet6NOyqtuAiufEBZOFB80qg54fLyYl6YLsYHsu/fiKsMMQugBsW6wRdajCL9rsJI9l44sxlm5JCp/TV/oI/jM0ACzQvNRxQwz4JN3KUZm9nGwcpvW9NsIGZrtMj71dpkgMJZr2WysTNNFpw5LilK8xiLaNH8UaqTJ3Buc8CMpaY+MTJmeui9jDD9Wgho4XR8bv1a4/RfaHY71kO693+IvRooopspLCV+QIDAQAB",
+  "version": "1.2.0",
+  "manifest_version": 2,
+  "minimum_chrome_version": "31",
+  "permissions": [
+    "notifications",
+    "storage",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>"
+  ],
+  "background": {
+    "page": "background.html"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "img/icon19-greyedout.png",
+      "38": "img/icon38-greyedout.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://airhead.io/robots.txt*"
+      ],
+      "js": [
+        "js/content/oauth.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.airhead.io/app*"
+      ],
+      "js": [
+        "js/content/app.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.airhead.io/app/redirect/tile*"
+      ],
+      "js": [
+        "js/content/autofill/pre_register.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://login.groupcall.com/NewLogin*",
+        "https://login.me.e2bn.org/NewLogin*",
+        "https://login.ntlp.org.uk/NewLogin*"
+      ],
+      "js": [
+        "js/jquery-2.1.4.js",
+        "js/config.js",
+        "js/content/login/idaas.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "web_accessible_resources": [
+    "sso.html",
+    "img/airhead38x23.png",
+    "js/content/autofill/register.js",
+    "js/content/autofill/status.js"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.airhead.io/*"
+    ]
+  }
+}

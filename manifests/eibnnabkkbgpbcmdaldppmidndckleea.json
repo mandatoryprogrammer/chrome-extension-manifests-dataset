@@ -1,0 +1,86 @@
+{
+  "author": "EdCast",
+  "manifest_version": 2,
+  "name": "MyGuide Player In-A-Box",
+  "description": "MyGuide Player In-A-Box",
+  "version": "5.3.20",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.google.com/*",
+        "https://myguide.org/*"
+      ],
+      "css": [
+        "content_script/dom_selector/css/style.css"
+      ],
+      "js": [
+        "gm_client_iframe.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*.google.com/*",
+        "https://myguide.org/*"
+      ],
+      "css": [
+        "content_script/worker/css/style.css",
+        "common/lib/font-awesome/fontawesome.css"
+      ],
+      "js": [
+        "gm_client.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "common/detect_browser.js",
+      "config.js",
+      "common/lib/jquery/jquery.min.js",
+      "common/functions.util.contentscript.js",
+      "common/functions.util.common.js",
+      "common/features.js",
+      "common/logger.js",
+      "common/storage.js",
+      "content_script/worker/js/http.web.js",
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://www.guideme.io/*"
+    ]
+  },
+  "icons": {
+    "16": "common/img/gicon16.png",
+    "48": "common/img/gicon48.png",
+    "128": "common/img/gicon128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs",
+    "https://api-v3.guideme.io/",
+    "https://api-v1.wagmob.com/",
+    "https://v3-analytics.guideme.io/"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "40": "common/img/qu_icon.png"
+    },
+    "default_popup": "/browser_action/popup.html"
+  },
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "web_accessible_resources": [
+    "side_panel/src/index.html",
+    "content_script/slideshow/slideshow.html",
+    "side_panel/src/app/app.js",
+    "side_panel/src/app/creator/video_preview_iframe/page.html",
+    "common/img/gicon16.png",
+    "common/img/widget_icon.png",
+    "data/api/*",
+    "data/assets/*"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'"
+}

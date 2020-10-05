@@ -1,0 +1,85 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "OpenVoice for Google Calendar",
+  "manifest_version": 2,
+  "description": "Easily schedule OpenVoice Audio Conferences from your Google Calendar.",
+  "homepage_url": "https://chrome.google.com/webstore/detail/openvoice-for-google-ca/tbd",
+  "icons": {
+    "128": "ov/images/icon128.png",
+    "16": "ov/images/icon16.png",
+    "48": "ov/images/icon48.png"
+  },
+  "page_action": {
+    "default_icon": {
+      "16": "ov/images/icon16.png",
+      "48": "ov/images/icon48.png"
+    },
+    "default_title": "OpenVoice for Google Calendar"
+  },
+  "background": {
+    "scripts": [
+      "lib/jquery-2.1.1.min.js",
+      "lib/sentry-browser-5.11.0.min.js",
+      "ov/config.js",
+      "ov/logging.js",
+      "background_oauth.js",
+      "background_common.js",
+      "background_api_calls.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://ssl.google-analytics.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.google.com/calendar/*",
+        "http://www.google.com/calendar/*",
+        "http://calendar.google.com/*",
+        "https://calendar.google.com/*"
+      ],
+      "js": [
+        "lib/jquery-2.1.1.min.js",
+        "lib/sentry-browser-5.11.0.min.js",
+        "ov_chrome.js",
+        "ov/config.js",
+        "ov/logging.js",
+        "ov/analytics.js",
+        "ov/audio_settings.js",
+        "ov/country.js",
+        "ov/dateUtil.js",
+        "ov/view.js",
+        "ov/view_new.js",
+        "ov/view_selector.js",
+        "ov/view_dialog.js",
+        "ov/main.js"
+      ],
+      "css": [
+        "ov/css/main.css",
+        "ov/css/font-face.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "default_locale": "en_US",
+  "permissions": [
+    "cookies",
+    "storage",
+    "https://www.google.com/calendar/*",
+    "https://api.getgo.com/*",
+    "https://*.logmein.com/*",
+    "https://*.logmeininc.com/*",
+    "identity"
+  ],
+  "web_accessible_resources": [
+    "ov/fonts/*.woff",
+    "ov/fonts/*.ttf",
+    "ov/fonts/*.eot",
+    "ov/fonts/*.svg",
+    "ov/css/font-face.css",
+    "ov/images/*.png",
+    "ov/images/*.svg",
+    "*.html"
+  ],
+  "version": "1.8.0.3"
+}

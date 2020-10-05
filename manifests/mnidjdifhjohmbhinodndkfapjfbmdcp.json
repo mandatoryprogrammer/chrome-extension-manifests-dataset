@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Vouch",
+  "short_name": "vouch",
+  "description": "Automatically finds AND applies discount codes directly into to your shopping cart. 100% free, no catches.",
+  "version": "1.4.9",
+  "icons": {
+    "16": "images/icons/icon16.png",
+    "48": "images/icons/icon64.png",
+    "128": "images/icons/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "images/icons/icon32d.png",
+    "default_popup": "html/popup/siteDisabled.html"
+  },
+  "permissions": [
+    "activeTab",
+    "webRequest",
+    "webRequestBlocking",
+    "http://*/*",
+    "https://*/*",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "match_about_blank": false,
+      "run_at": "document_start",
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [],
+      "js": [
+        "js/config.js",
+        "vendor/moment.js",
+        "vendor/jquery-2.1.4.min.js",
+        "vendor/jquery.color-2.1.2.min.js",
+        "js/hashCode.js",
+        "js/helpers.js",
+        "js/voucher.js",
+        "js/content.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "vendor/jquery-2.1.4.min.js",
+      "js/config.js",
+      "js/background.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "images/*",
+    "html/*",
+    "vendor/*"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "options_ui": {
+    "page": "html/options.html",
+    "chrome_style": true
+  },
+  "options_page": "html/options.html"
+}

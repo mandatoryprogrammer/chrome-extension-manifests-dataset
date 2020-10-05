@@ -1,0 +1,40 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "chrepl",
+  "version": "0.5.2",
+  "description": "A tool that injects a ClojureScript Figwheel repl into webpages",
+  "browser_action": {
+    "default_title": "chrepl",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "24": "images/fuel24.png",
+      "48": "images/fuel48.png"
+    }
+  },
+  "icons": {
+    "16": "images/fuel16.png",
+    "48": "images/fuel48.png",
+    "128": "images/fuel128.png"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "permissions": [
+    "storage",
+    "activeTab"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "compiled/content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "manifest_version": 2
+}

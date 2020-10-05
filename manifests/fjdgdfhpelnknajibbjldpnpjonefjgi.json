@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Meeco Launcher for Incognito browsing",
+  "short_name": "Meeco Launcher",
+  "description": "The Meeco launcher plugin is a companion extension for Meeco My Sites that launches websites into Incognito pages.",
+  "version": "0.3.9",
+  "icons": {
+    "128": "icons/meeco128.png"
+  },
+  "background": {
+    "scripts": [
+      "bower_components/URL.js/dist/URL.js",
+      "bower_components/momentjs/moment.js",
+      "bower_components/underscore/underscore.js",
+      "bower_components/q/q.js",
+      "bower_components/q-xhr/q-xhr.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_popup": "panel.html",
+    "default_icon": {
+      "19": "icons/meeco_grey19.png"
+    }
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "tabs",
+    "contentSettings",
+    "*://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "script.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'"
+}

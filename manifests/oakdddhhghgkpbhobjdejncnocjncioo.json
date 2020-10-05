@@ -1,0 +1,158 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "FIU Math Instructor",
+  "version": "0.22",
+  "author": "Ondrej Zjevik",
+  "description": "Grading helper for FIU's math classes.",
+  "permissions": [
+    "storage",
+    "https://myportal.fiu.edu/*",
+    "https://fiu.instructure.com/courses/*",
+    "http://openvellum.ecollege.com/*",
+    "https://mycs.fiu.edu/*",
+    "https://www.mathxl.com/Instructor/Gradebook.aspx*",
+    "https://imathas.rationalreasoning.net/*",
+    "https://imathas.fiu.edu/*",
+    "clipboardRead"
+  ],
+  "icons": {
+    "128": "source/css/icon.png"
+  },
+  "browser_action": {
+    "default_popup": "source/popup.html",
+    "default_icon": "source/css/icon.png"
+  },
+  "background": {
+    "scripts": [
+      "source/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://openvellum.ecollege.com/*"
+      ],
+      "all_frames": false,
+      "js": [
+        "source/jquery-3.2.1.min.js",
+        "source/lz-string.min.js",
+        "source/chrome-Storage-largeSync.min.js",
+        "source/enhancer_MLP_helper.js"
+      ],
+      "css": [],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://www.mathxl.com/Instructor/Gradebook.aspx*"
+      ],
+      "all_frames": true,
+      "js": [
+        "source/jquery-3.2.1.min.js",
+        "source/lz-string.min.js",
+        "source/chrome-Storage-largeSync.min.js",
+        "source/toastr.min.js",
+        "source/enhancer_MLP_gradebook.js"
+      ],
+      "css": [
+        "source/css/style.css",
+        "source/css/toastr.min.css"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://mycs.fiu.edu/psc/stdnt_1/*",
+        "https://mycs.fiu.edu/psc/stdnt_2/*",
+        "https://mycs.fiu.edu/psc/stdnt_3/*",
+        "https://mycs.fiu.edu/psc/stdnt_4/*",
+        "https://mycs.fiu.edu/psc/stdnt_5/*",
+        "https://mycs.fiu.edu/psc/stdnt_6/*",
+        "https://mycs.fiu.edu/psc/stdnt_7/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "source/jquery-3.2.1.min.js",
+        "source/lz-string.min.js",
+        "source/chrome-Storage-largeSync.min.js",
+        "source/enhancer_panthersoft.js"
+      ],
+      "css": [],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://www.mathxl.com/Instructor/EditStudentIDs.aspx*"
+      ],
+      "js": [
+        "source/jquery-3.2.1.min.js",
+        "source/lz-string.min.js",
+        "source/chrome-Storage-largeSync.min.js",
+        "source/enhancer_MLP_studentID.js"
+      ],
+      "css": [],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://fiu.instructure.com/courses/*/gradebook"
+      ],
+      "js": [
+        "source/jquery-3.2.1.min.js",
+        "source/lz-string.min.js",
+        "source/chrome-Storage-largeSync.min.js",
+        "source/toastr.min.js",
+        "source/enhancer_canvas_gradebook.js"
+      ],
+      "css": [
+        "source/css/gradebook.css",
+        "source/css/toastr.min.css"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://fiu.instructure.com/courses/*/users"
+      ],
+      "js": [
+        "source/jquery-3.2.1.min.js",
+        "source/lz-string.min.js",
+        "source/chrome-Storage-largeSync.min.js",
+        "source/enhancer_canvas_users.js"
+      ],
+      "css": [],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://www.mathxl.com/Instructor/AddOfflineItem.aspx?*"
+      ],
+      "all_frames": true,
+      "js": [
+        "source/jquery-3.2.1.min.js",
+        "source/lz-string.min.js",
+        "source/chrome-Storage-largeSync.min.js",
+        "source/enhancer_MLP_assignment.js"
+      ],
+      "css": [],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://imathas.rationalreasoning.net/course/addgrades.php?*",
+        "https://imathas.fiu.edu/course/addgrades.php?*"
+      ],
+      "all_frames": true,
+      "js": [
+        "source/jquery-3.2.1.min.js",
+        "source/enhancer_imathas_copyfromexcel.js"
+      ],
+      "css": [],
+      "run_at": "document_idle"
+    }
+  ],
+  "manifest_version": 2,
+  "web_accessible_resources": [
+    "source/images/*"
+  ]
+}

@@ -1,0 +1,139 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "browser_action": {
+    "default_icon": "data/icons/icon_32x32.png",
+    "default_popup": "data/popup.html"
+  },
+  "icons": {
+    "16": "data/icons/icon_16x16.png",
+    "32": "data/icons/icon_32x32.png",
+    "48": "data/icons/icon_48x48.png",
+    "128": "data/icons/icon_128x128.png"
+  },
+  "manifest_version": 2,
+  "name": "GrooveOrca",
+  "version": "2.0.1.0",
+  "author": "Guillaume Louvigny",
+  "permissions": [
+    "*://*.deezer.com/",
+    "*://*.spotify.com/",
+    "*://*.wikipedia.org/",
+    "*://*.cloudfront.net/",
+    "*://*.amazonaws.com/",
+    "*://*.viewlyrics.com/",
+    "*://*.wikia.com/",
+    "*://*.metrolyrics.com/",
+    "*://*.ggpht.com/",
+    "*://*.audioscrobbler.com/",
+    "*://*.xboxlive.com/",
+    "storage",
+    "notifications",
+    "idle"
+  ],
+  "background": {
+    "scripts": [
+      "lib/ext/caoutchouc/ext/requirejs/require.js",
+      "lib/main-built.js"
+    ],
+    "persistent": false
+  },
+  "web_accessible_resources": [
+    "data/watchers/player/amazon.js",
+    "data/watchers/player/deezer.js",
+    "data/watchers/player/spotify.js",
+    "data/watchers/player/googleplay.js",
+    "data/watchers/player/xboxmusic.js",
+    "data/watchers/bridge-watcher.js"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.deezer.com/*"
+      ],
+      "js": [
+        "data/watchers/messaging-chrome.js",
+        "data/watchers/messaging-firefox.js",
+        "data/watchers/messaging-safari.js",
+        "data/watchers/music-bridge.js",
+        "data/watchers/bridge-watcher.js",
+        "data/watchers/player/deezer.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.spotify.com/*"
+      ],
+      "js": [
+        "data/watchers/messaging-chrome.js",
+        "data/watchers/messaging-firefox.js",
+        "data/watchers/messaging-safari.js",
+        "data/watchers/music-bridge.js",
+        "data/watchers/bridge-watcher.js",
+        "data/watchers/player/spotify.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.amazon.fr/gp/dmusic/cloudplayer/*"
+      ],
+      "js": [
+        "data/watchers/messaging-chrome.js",
+        "data/watchers/messaging-firefox.js",
+        "data/watchers/messaging-safari.js",
+        "data/watchers/music-bridge.js",
+        "data/watchers/bridge-watcher.js",
+        "data/watchers/player/amazon.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://play.google.com/music/*"
+      ],
+      "js": [
+        "data/watchers/messaging-chrome.js",
+        "data/watchers/messaging-firefox.js",
+        "data/watchers/messaging-safari.js",
+        "data/watchers/music-bridge.js",
+        "data/watchers/bridge-watcher.js",
+        "data/watchers/player/googleplay.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://music.microsoft.com/*"
+      ],
+      "js": [
+        "data/watchers/messaging-chrome.js",
+        "data/watchers/messaging-firefox.js",
+        "data/watchers/messaging-safari.js",
+        "data/watchers/music-bridge.js",
+        "data/watchers/bridge-watcher.js",
+        "data/watchers/player/xboxmusic.js"
+      ]
+    }
+  ],
+  "commands": {
+    "previous": {
+      "suggested_key": {
+        "default": "MediaPrevTrack"
+      },
+      "global": true,
+      "description": "Skip to the previous listened track"
+    },
+    "playpause": {
+      "suggested_key": {
+        "default": "MediaPlayPause"
+      },
+      "global": true,
+      "description": "Toggle playback"
+    },
+    "next": {
+      "suggested_key": {
+        "default": "MediaNextTrack"
+      },
+      "global": true,
+      "description": "Skip to the next track in queue"
+    }
+  },
+  "default_locale": "en"
+}

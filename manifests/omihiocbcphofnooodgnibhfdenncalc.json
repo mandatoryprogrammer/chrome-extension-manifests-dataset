@@ -1,0 +1,77 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "BubblesPlanner Visual Task Manager",
+  "version": "1.5.1",
+  "manifest_version": 2,
+  "description": "Simple, visual tasks and bookmarks manager for Freelancers",
+  "icons": {
+    "16": "images/icon-16.png",
+    "128": "images/icon-128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ],
+    "persistent": false
+  },
+  "oauth2": {
+    "client_id": "275075745052-oogta2d5v1pmieh8lul3nr3cjqgq6gul.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/drive"
+    ]
+  },
+  "permissions": [
+    "file:///*",
+    "tabs",
+    "activeTab",
+    "storage",
+    "identity",
+    "*://*.google.com/*",
+    "notifications",
+    "cookies",
+    "http://*/",
+    "https://*/",
+    "https://ajax.googleapis.com/",
+    "http://*/*",
+    "https://*/*",
+    "background",
+    "https://accounts.google.com/o/oauth2/token"
+  ],
+  "content_scripts": [
+    {
+      "js": [
+        "/scripts/jquery-1.12.4.min.js",
+        "/scripts/popup.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ]
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "http://*.chromiumapp.org/*"
+    ],
+    "ids": [
+      "*"
+    ],
+    "accepts_tls_channel_id": true
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon-19.png",
+      "38": "images/icon-38.png"
+    },
+    "default_title": "Bubbles Planner",
+    "default_popup": "pages/popup.html"
+  },
+  "chrome_url_overrides": {
+    "newtab": "pages/bookmarks.html"
+  },
+  "web_accessible_resources": [
+    "pages/bookmarks.html"
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Wombat - EOS & Telos Wallet",
+  "version": "6.2.2",
+  "description": "Blockchain within seconds for everyone",
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com https://apis.google.com; object-src 'self'",
+  "permissions": [
+    "tabs",
+    "storage",
+    "clipboardWrite",
+    "notifications",
+    "identity",
+    "https://www.googleapis.com/*",
+    "https://content.dropboxapi.com/*",
+    "https://api.getwombat.io/*"
+  ],
+  "browser_action": {
+    "default_title": "Wombat Wallet",
+    "default_popup": "ui/popup/popup.html#/",
+    "default_icon": {
+      "16": "icons/16.png",
+      "48": "icons/48.png",
+      "128": "icons/128.png",
+      "256": "icons/256.png"
+    }
+  },
+  "background": {
+    "page": "/background/background.html"
+  },
+  "options_ui": {
+    "page": "/ui/options/options.html#/login",
+    "open_in_tab": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "injected/*",
+    "ui/dropbox/*",
+    "fonts/*"
+  ],
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png",
+    "256": "icons/256.png"
+  }
+}

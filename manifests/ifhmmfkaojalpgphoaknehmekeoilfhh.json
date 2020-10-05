@@ -1,0 +1,37 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Digg New Tab Extension",
+  "version": "1.37",
+  "description": "Replace new tab page with a nice photo, friendly greeting, and some content from Digg.com.",
+  "author": "Digg",
+  "chrome_url_overrides": {
+    "newtab": "dashboard.html"
+  },
+  "icons": {
+    "128": "icon_128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "*://*.digg.com/*",
+    "*://stocksnap.io/*"
+  ],
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "vendor/jquery-3.3.1.min.js",
+      "dist/js/app.min.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.ipinfo.io/"
+      ],
+      "js": [
+        "dist/js/app.min.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://ipinfo.io/; object-src 'self'"
+}

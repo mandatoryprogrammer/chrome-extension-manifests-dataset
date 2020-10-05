@@ -1,0 +1,80 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Zoom.ai Meeting Assistant",
+  "short_name": "Zoom.ai",
+  "version": "0.1.6",
+  "description": "Faster, Smarter Meeting Scheduling for Recruiters and Sales Teams",
+  "web_accessible_resources": [
+    "main.js",
+    "jquery.min.js"
+  ],
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_title": "Zoom.ai",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*"
+      ],
+      "js": [
+        "inboxsdk.js",
+        "content_gmail.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://calendar.google.com/calendar/*"
+      ],
+      "js": [
+        "content_gcal.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://angel.co/*"
+      ],
+      "js": [
+        "content_angelco.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://app.greenhouse.io/people/*",
+        "https://app2.greenhouse.io/people/*"
+      ],
+      "js": [
+        "content_greenhouse.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://medium.com/*"
+      ],
+      "js": [
+        "content_medium.js"
+      ]
+    }
+  ],
+  "manifest_version": 2,
+  "permissions": [
+    "activeTab",
+    "storage",
+    "identity",
+    "identity.email",
+    "https://mail.google.com/*"
+  ]
+}

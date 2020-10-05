@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Bukalapak Helper",
+  "version": "0.0.6",
+  "manifest_version": 2,
+  "description": "Bukalapak browser extension",
+  "icons": {
+    "16": "icons/bukalapak-icon-16.png",
+    "128": "icons/bukalapak-icon-128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "scripts/livereload.js",
+      "scripts/background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "http://*/*",
+    "https://*/*",
+    "contextMenus"
+  ],
+  "options_ui": {
+    "page": "options.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "scripts/contentscript.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "icons/inactive-bukalapak-icon-19.png"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/bukalapak-icon-19.png",
+      "38": "icons/bukalapak-icon-38.png"
+    },
+    "default_title": "Bukalapak Helper",
+    "default_popup": "popup.html"
+  },
+  "content_security_policy": "script-src 'self' https://apis.google.com; object-src 'self'"
+}

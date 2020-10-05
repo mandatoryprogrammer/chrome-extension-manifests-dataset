@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "护心镜",
+  "version": "1.0.1",
+  "description": "可以动态防御XSS攻击，并帮助管理员发现XSS漏洞的扩展",
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "*://*/"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "img/init.png",
+      "38": "img/init.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file://*/*"
+      ],
+      "js": [
+        "js/jhook.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "icons": {
+    "128": "img/logo_128.png",
+    "16": "img/logo_19.png",
+    "48": "img/logo_48.png"
+  }
+}

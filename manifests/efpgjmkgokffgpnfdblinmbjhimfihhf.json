@@ -1,0 +1,41 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Safe Passtracker 10000",
+  "description": "Password Storage and Protection",
+  "version": "2.1",
+  "options_page": "options.html",
+  "content_security_policy": "script-src 'self' https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js; object-src 'self'",
+  "browser_action": {
+    "default_icon": "Safe.png",
+    "default_title": "Work!"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "Function.js",
+        "pbkdf2Roll.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "background.js",
+      "Function.js",
+      "pbkdf2Roll.js"
+    ]
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "https://ajax.googleapis.com/",
+    "notifications",
+    "storage"
+  ]
+}

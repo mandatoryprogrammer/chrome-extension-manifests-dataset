@@ -1,0 +1,73 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Asana Quick Add +",
+  "version": "1.0.7",
+  "description": "Quickly add your notes, website research and archive it as attachment to Asana, from any web page or Chrome window.",
+  "minimum_chrome_version": "33",
+  "options_page": "options/index.html",
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "vendor/regenerator-runtime.min.js",
+      "vendor/zip.js",
+      "options/lib/store.js",
+      "lib/chrome.api.async.common.js",
+      "lib/chrome.api.async.background.js",
+      "lib/zipmodel.js",
+      "lib/asana.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.asana.com/*"
+      ],
+      "css": [],
+      "js": [
+        "vendor/regenerator-runtime.min.js",
+        "options/lib/store.js",
+        "lib/backgroundInterop.async.foreground.js",
+        "lib/chrome.api.async.common.js",
+        "lib/chrome.api.async.foreground.js",
+        "lib/asana.js",
+        "foreground.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "icons": {
+    "128": "icon128.png",
+    "48": "icon48.png",
+    "16": "icon16.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "icon19.png",
+      "38": "icon48.png"
+    },
+    "default_title": "Asana Quick Add +"
+  },
+  "permissions": [
+    "tabs",
+    "cookies",
+    "webRequest",
+    "webNavigation",
+    "*://*.asana.com/*",
+    "pageCapture",
+    "storage"
+  ],
+  "web_accessible_resources": [
+    "foreground.css"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+Shift+A"
+      }
+    }
+  },
+  "manifest_version": 2
+}

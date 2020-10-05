@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "$schema": "http://json.schemastore.org/chrome-manifest",
+  "name": "Better Slides",
+  "short_name": "BetterSlides",
+  "description": "Automatic window moving with multiple monitors and speakers notes.",
+  "version": "1.0.4",
+  "permissions": [
+    "activeTab",
+    "https://docs.google.com/presentation/d/*",
+    "tabs",
+    "system.display"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://docs.google.com/presentation/d/*/edit*"
+      ],
+      "js": [
+        "content-edit.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://docs.google.com/presentation/d/*/present*"
+      ],
+      "js": [
+        "content-present.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "toinject-openSpeakers.js"
+  ],
+  "manifest_version": 2
+}

@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "img/icon19.png",
+      "38": "img/icon38.png"
+    },
+    "default_title": "SIP Client"
+  },
+  "name": "SuperVoIP SIP Phone",
+  "description": "Telefon SIP zintegrowany z siecią SuperVoIP.",
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "version": "0.9.7",
+  "manifest_version": 2,
+  "permissions": [
+    "storage",
+    "tabs",
+    "background",
+    "idle",
+    "identity",
+    "contextMenus",
+    "notifications",
+    "*://*.supervoip.pl/*",
+    "https://*.google.com/*",
+    "http://*/*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "web_accessible_resources": [
+    "README.md"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.supervoip.pl/*",
+      "*://*.ecrf.biz.pl/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/parser.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

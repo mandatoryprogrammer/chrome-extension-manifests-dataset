@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "DIM",
+  "description": "Puts an end to bright pages.",
+  "version": "1.0.4",
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "notifications",
+    "<all_urls>",
+    "storage"
+  ],
+  "options_page": "options/options.html",
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "icons": {
+    "16": "icons/icon16on.png",
+    "48": "icons/icon48on.png",
+    "128": "icons/icon128on.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/icon19off.png",
+      "38": "icons/icon38off.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "ga.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "manifest_version": 2,
+  "offline_enabled": true,
+  "short_name": "DIM",
+  "web_accessible_resources": [
+    "StackBoxBlur.js",
+    "script.js",
+    "options/jquery-2.0.3.min.js",
+    "options/jquery-2.0.3.min.map",
+    "icons/icon48off.png",
+    "icons/icon48on.png"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

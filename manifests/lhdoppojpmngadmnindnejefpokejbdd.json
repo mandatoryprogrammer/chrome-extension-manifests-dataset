@@ -1,0 +1,69 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "4.6.1",
+  "name": "axe - Web Accessibility Testing",
+  "manifest_version": 2,
+  "icons": {
+    "16": "assets/images/axe16.png",
+    "48": "assets/images/axe48.png",
+    "128": "assets/images/axe128.png"
+  },
+  "devtools_page": "devtools.html",
+  "background": {
+    "scripts": [
+      "browser-polyfill.js",
+      "vendor.bundle.js",
+      "background.bundle.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "assets/images/axe16.png",
+      "48": "assets/images/axe48.png",
+      "128": "assets/images/axe128.png"
+    },
+    "default_popup": "popup.html",
+    "default_title": "Axe Accessibility",
+    "browser_style": true
+  },
+  "web_accessible_resources": [
+    "*.woff2"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "browser-polyfill.js",
+        "vendor.bundle.js",
+        "adapter.bundle.js"
+      ],
+      "css": [
+        "adapter.bundle.css"
+      ],
+      "all_frames": true,
+      "run_at": "document_start",
+      "match_about_blank": true
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "debugger",
+    "activeTab",
+    "webNavigation",
+    "storage",
+    "identity"
+  ],
+  "storage": {
+    "managed_schema": "schema.json"
+  },
+  "description": "Accessibility Checker for Developers in Chrome",
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.google-analytics.com ; object-src 'self'",
+  "externally_connectable": {
+    "matches": [
+      "https://axe.deque.com/*"
+    ]
+  }
+}

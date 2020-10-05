@@ -1,0 +1,38 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "PNR Status Watchlist",
+  "short_name": "PNR Status Watchlist",
+  "version": "0.10.13",
+  "description": "Tired of tracking Waiting List(WL) and RAC status? PNR Chrome Extension lets you track all your Train tickets in SINGLE CLICK.",
+  "background": {
+    "page": "background.html"
+  },
+  "permissions": [
+    "http://pnrapi.alagu.net/",
+    "http://www.indianrail.gov.in/",
+    "notifications",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "icons": {
+    "48": "logo-48x48.png"
+  },
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_title": "PNR Status",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.irctc.co.in/*"
+      ],
+      "js": [
+        "assets/js/jquery.min.js",
+        "assets/js/contentscript.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://ajax.googleapis.com https://ssl.google-analytics.com; object-src 'self'"
+}

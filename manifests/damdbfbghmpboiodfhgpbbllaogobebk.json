@@ -1,0 +1,129 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "background": {
+    "scripts": [
+      "meta.js",
+      "deps.js",
+      "listeners.js",
+      "polyfills.js",
+      "api.js",
+      "rwsocket.js",
+      "socket_commander.js",
+      "threadlist.js",
+      "lzstring.min.js",
+      "main.js",
+      "scorefilter.js",
+      "contact_search_cache.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "exclude_matches": [
+        "*://*/r/*"
+      ],
+      "js": [
+        "scripts/api.js",
+        "scripts/installed.js"
+      ],
+      "matches": [
+        "*://shaozi.info/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "js": [
+        "scripts/api.js",
+        "scripts/deep_link_redirect.js"
+      ],
+      "matches": [
+        "*://shaozi.info/r/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "js": [
+        "scripts/api.js",
+        "scripts/support.js"
+      ],
+      "matches": [
+        "*://support.shaozi.info/*",
+        "*://shaozi.info/support*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "css": [
+        "styles/google_inject.css",
+        "styles/friend_card.css"
+      ],
+      "include_globs": [
+        "*://www.google.c??/*",
+        "*://www.google.com.??/*",
+        "*://www.google.co.??/*",
+        "*://www.google.??/*",
+        "*://www.baidu.???/*"
+      ],
+      "js": [
+        "scripts/api.js",
+        "scripts/lib/jquery.js",
+        "scripts/lib/jquery-hoverfu.js",
+        "scripts/lib/jquery-ui-position.min.js",
+        "scripts/lib/mustache.js",
+        "scripts/render.js",
+        "scripts/title_from_url.js",
+        "scripts/html/search/google.js",
+        "scripts/html/search/google_hits.js",
+        "scripts/html/search/google_hit.js",
+        "scripts/google_inject.js"
+      ],
+      "matches": [
+        "*://*/",
+        "*://*/?*",
+        "*://*/#*",
+        "*://*/search",
+        "*://*/search?*",
+        "*://*/search#*",
+        "*://*/webhp",
+        "*://*/webhp?*",
+        "*://*/webhp#*",
+        "*://*/s*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "content_security_policy": "default-src 'self'; connect-src http://*.shaozi.info https://*.shaozi.info http://shaozi.info https://shaozi.info ws://shaozi.info; img-src data:",
+  "description": "勺子 - 构建强大知识库，秀出你所长",
+  "icons": {
+    "128": "icons/shaozi.128.png",
+    "256": "icons/shaozi.256.png",
+    "48": "icons/shaozi.48.png"
+  },
+  "manifest_version": 2,
+  "minimum_chrome_version": "32",
+  "name": "勺子",
+  "page_action": {
+    "default_icon": {
+      "38": "icons/url_gray.png"
+    },
+    "default_title": "勺子"
+  },
+  "permissions": [
+    "tabs",
+    "bookmarks",
+    "webNavigation",
+    "webRequest",
+    "<all_urls>"
+  ],
+  "short_name": "勺子",
+  "version": "1.0.1",
+  "web_accessible_resources": [
+    "images/*.gif",
+    "images/*.jpg",
+    "images/*.png",
+    "images/*.svg",
+    "scripts/html/iframes/*.js",
+    "scripts/iframes/*.js",
+    "scripts/iframes/lib/*.js",
+    "styles/iframes/*.css"
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_extensionName__",
+  "short_name": "__MSG_extensionShortName__",
+  "description": "__MSG_extensionDescription__",
+  "version": "6.1",
+  "default_locale": "en",
+  "incognito": "not_allowed",
+  "manifest_version": 2,
+  "minimum_chrome_version": "70",
+  "container": "GOOGLE_DRIVE",
+  "permissions": [
+    "nativeMessaging",
+    "notifications",
+    "declarativeContent",
+    "storage"
+  ],
+  "icons": {
+    "16": "images/extension/ufo-16.png",
+    "32": "images/extension/ufo-32.png",
+    "48": "images/extension/ufo-48.png",
+    "128": "images/extension/ufo-128.png"
+  },
+  "background": {
+    "scripts": [
+      "module/vendor/vendor.bundle.js",
+      "module/vendor/jquery.bundle.js",
+      "module/vendor/moment.bundle.js",
+      "module/common.bundle.js",
+      "module/background/background.bundle.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://drive.google.com/*"
+      ],
+      "exclude_matches": [
+        "https://drive.google.com/file/d/*/view"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "module/vendor/vendor.bundle.js",
+        "module/vendor/jquery.bundle.js",
+        "module/vendor/jquery-ui.bundle.js",
+        "module/vendor/tippy.bundle.js",
+        "module/common.bundle.js",
+        "module/content/common.bundle.js",
+        "module/content/drive.explorer.bundle.js"
+      ],
+      "css": [
+        "css/common/common.css",
+        "css/content-script/drive.css",
+        "css/content-script/menu.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://drive.google.com/file/d/*/view",
+        "https://drive.google.com/file/d/*/view?*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "module/vendor/vendor.bundle.js",
+        "module/vendor/jquery.bundle.js",
+        "module/vendor/jquery-ui.bundle.js",
+        "module/common.bundle.js",
+        "module/content/common.bundle.js",
+        "module/content/drive.preview.bundle.js"
+      ],
+      "css": [
+        "css/common/common.css",
+        "css/content-script/menu.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://docs.google.com/document/*",
+        "https://docs.google.com/spreadsheets/*",
+        "https://docs.google.com/presentation/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "module/vendor/vendor.bundle.js",
+        "module/vendor/jquery.bundle.js",
+        "module/vendor/moment.bundle.js",
+        "module/common.bundle.js",
+        "module/content/common.bundle.js",
+        "module/content/docs.bundle.js"
+      ],
+      "css": [
+        "css/common/common.css"
+      ]
+    }
+  ],
+  "page_action": {
+    "default_icon": {
+      "16": "images/extension/ufo-loading-16.png",
+      "32": "images/extension/ufo-loading-32.png"
+    },
+    "default_title": "__MSG_pageActionTitle__",
+    "default_popup": "html/page-action/status.html"
+  },
+  "web_accessible_resources": [
+    "manifest.json",
+    "images/*",
+    "html/*",
+    "module/embedded/embedded.bundle.js"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtE6f10Qy4ofmYXIMGKFPvaHxcYqwUe2+SN7N4LrM4X8sXdXcAOo4X3ulQnQzRpqwmFn3EG0we+9cd20WxfAxaiNeR3c9my5BOhwxYw/0dolH8BIik2K8xlZX8BzGYB3jzFL1QQw/Um5REWwqh0fFuYyiGNNGjdrSz3qyga/dEib8vp1cWVDhrWG8kiNGuJDxKDSxD9G12OYr78lyBj2sgQfrF1s63tJ2G07rlF69R4OsicA+e4z29fK+Sv+JkkYxNGufIwrghoIBPgtQ6IGrH/9deab7WanFbMI/G7h+AdJxu4K2V009yLbsp7EYPPS0MPyda8tI+Z6fhA+fpcosrQIDAQAB",
+  "externally_connectable": {
+    "ids": [
+      "aaebjepcfidgkojljbgoilgkgklehldj",
+      "aikbehojjdffmangolfbohjdigfdnepa"
+    ],
+    "matches": [
+      "https://*.altirnao.com/*",
+      "https://*.aodocs.com/*"
+    ]
+  }
+}

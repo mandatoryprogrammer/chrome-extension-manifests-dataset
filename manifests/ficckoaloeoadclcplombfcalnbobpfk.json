@@ -1,0 +1,42 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Add Nzb Search Link To IMDb",
+  "version": "0.0.2.2",
+  "manifest_version": 2,
+  "description": "Injects link to IMDb page that opens a new tab to your favorite NZB Search engine with search criteria entered.",
+  "homepage_url": "https://chrome.google.com/webstore/detail/addnzbsearchlinktoimdb/ficckoaloeoadclcplombfcalnbobpfk",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "64": "icons/icon64.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "default_locale": "en",
+  "options_page": "src/options_custom/index.html",
+  "background": {
+    "scripts": [
+      "src/options_custom/lib/store.js",
+      "src/background/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.imdb.com/title/*"
+      ],
+      "js": [
+        "js/jquery/jquery.js",
+        "src/options_custom/lib/store.js",
+        "js/sprintf.js",
+        "src/options_custom/manifest.js",
+        "src/inject/inject.js"
+      ],
+      "css": [
+        "src/inject/inject.css"
+      ]
+    }
+  ]
+}

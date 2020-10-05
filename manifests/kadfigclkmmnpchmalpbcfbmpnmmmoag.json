@@ -1,0 +1,60 @@
+{
+  "update_url": "http://clients2.google.com/service/update2/crx",
+  "name": "Hulu With Me",
+  "version": "8.5",
+  "manifest_version": 2,
+  "description": "Watch your favorite shows with your favorite people.",
+  "homepage_url": "http://huluwith.me",
+  "permissions": [
+    "webRequest",
+    "tabs",
+    "notifications",
+    "http://huluwith.me",
+    "http://*.hulu.com/"
+  ],
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "minimum_chrome_version": "18",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://huluwith.me/*"
+      ],
+      "js": [
+        "check.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://www.hulu.com/watch/*"
+      ],
+      "js": [
+        "room-loader.js"
+      ],
+      "css": [
+        "style.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "jquery.js",
+    "socket.io.js",
+    "room.js",
+    "imgs/notification.png",
+    "imgs/notification-chat.png",
+    "imgs/notification-pause.png",
+    "imgs/notification-play.png",
+    "imgs/notification-seek_forward.png",
+    "imgs/notification-seek_back.png",
+    "imgs/notification-commercial.png"
+  ]
+}

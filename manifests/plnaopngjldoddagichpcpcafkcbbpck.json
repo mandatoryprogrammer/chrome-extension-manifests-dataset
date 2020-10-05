@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "ShopifyNerds app and theme detector",
+  "description": "Want to kno what theme or app a store is running? Relax, we got this",
+  "version": "1.0",
+  "author": "ShopifyNerds",
+  "homepage_url": "https://shopifynerds.com/detector",
+  "icons": {
+    "16": "img/icon.png",
+    "48": "img/icon.png",
+    "128": "img/icon.png"
+  },
+  "browser_action": {
+    "default_icon": "img/icon-disabled.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "activeTab",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "lib/zepto/zepto.min.js",
+      "js/sad.js",
+      "data/shopify_apps.js",
+      "data/shopify_themes.js",
+      "js/detector.js",
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "lib/zepto/zepto.min.js",
+        "js/sad.js",
+        "js/content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

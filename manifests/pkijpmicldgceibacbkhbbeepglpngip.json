@@ -1,0 +1,39 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Estimation Elephant",
+  "description": "This extension shows estimated reading time for articles. Compatible with New Yorker, NYTimes, The Atlantic, and The Economist.",
+  "version": "1.11",
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html",
+    "default_title": "Estimation Elephant Estimates Reading Time!"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.newyorker.com/*",
+        "*://*.nytimes.com/*",
+        "*://*.theatlantic.com/*",
+        "*://*.economist.com/*",
+        "http://jquery.com/*"
+      ],
+      "js": [
+        "content.js",
+        "jquery-3.1.1.slim.min.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "storage",
+    "https://ajax.googleapis.com/"
+  ]
+}

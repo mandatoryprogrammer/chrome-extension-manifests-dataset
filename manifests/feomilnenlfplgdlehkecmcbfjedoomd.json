@@ -1,0 +1,72 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Cryptohopper TradingView Extension",
+  "description": "This extension will provide a webhook url to connect tradingview with your hopper.",
+  "version": "2.0",
+  "options_page": "settings.html",
+  "permissions": [
+    "identity",
+    "identity.email",
+    "storage",
+    "tabs",
+    "https://*.tradingview.com/*",
+    "https://*.cryptohopper.com/*"
+  ],
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "assets/js/hmac-sha512.js",
+      "assets/js/core-min.js",
+      "assets/js/luxon.min.js",
+      "assets/js/axios.min.js",
+      "assets/js/qs.min.js",
+      "js/texts.js",
+      "js/apiCh.js",
+      "js/luxonHandler.js",
+      "js/alertHandler.js",
+      "js/tradingViewListener.js",
+      "js/tradingViewAlert.js",
+      "js/storage.js",
+      "js/functions.js",
+      "js/background.js"
+    ]
+  },
+  "icons": {
+    "16": "images/16.png",
+    "48": "images/48.png",
+    "128": "images/128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.cryptohopper.com/app?app_id=4"
+      ],
+      "js": [
+        "js/functions.js",
+        "js/contentCh.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://*.tradingview.com/*"
+      ],
+      "js": [
+        "js/functions.js",
+        "js/contentTv.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "browser_action": {
+    "default_icon": "images/48.png",
+    "default_popup": "popup.html",
+    "default_title": "Happy Hopping!"
+  },
+  "web_accessible_resources": [
+    "js/functions.js",
+    "js/contentTvEmbedded.js",
+    "js/contentChEmbedded.js"
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "options_page": "options.html",
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>"
+  ],
+  "version": "1.16.5",
+  "name": "Netcraft Extension",
+  "background": {
+    "scripts": [
+      "JavaScript/libs/jquery.min.js",
+      "JavaScript/libs/crypto.js",
+      "JavaScript/constants.js",
+      "JavaScript/utils.js",
+      "JavaScript/TrackTiming.js",
+      "JavaScript/list-xss.js",
+      "JavaScript/list-localblock.js",
+      "JavaScript/domains.js",
+      "JavaScript/classes/TabData.js",
+      "JavaScript/classes/InputAnalyser.js",
+      "JavaScript/classes/RelevantInputs.js",
+      "JavaScript/classes/EventHandlers.js",
+      "JavaScript/classes/PersistentSet.js",
+      "JavaScript/background.js"
+    ]
+  },
+  "incognito": "split",
+  "icons": {
+    "128": "Images/icon-large.png",
+    "16": "Images/icon-small.png",
+    "48": "Images/icon-mid.png"
+  },
+  "description": "Comprehensive site information and protection from phishing and malicious JavaScript when browsing the web",
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "minimum_chrome_version": "45",
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "match_about_blank": true,
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "JavaScript/constants.js",
+        "JavaScript/utils.js",
+        "JavaScript/classes/InputAnalyser.js",
+        "JavaScript/classes/RelevantInputs.js",
+        "JavaScript/content.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://toolbar.netcraft.com/report_url?*",
+        "*://toolbar.netcraft.com/report_mistake?*"
+      ],
+      "js": [
+        "JavaScript/constants.js",
+        "JavaScript/loadDetails.js",
+        "JavaScript/libs/jquery.min.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_title": "",
+    "default_icon": {
+      "19": "Images/action-normal.png"
+    }
+  },
+  "manifest_version": 2
+}

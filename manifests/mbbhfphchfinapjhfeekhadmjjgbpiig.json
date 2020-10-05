@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "SFR Spotter",
+  "version": "0.1.1",
+  "description": "Spot profitable SFRs on Zillow search results",
+  "manifest_version": 2,
+  "background": {
+    "scripts": [
+      "amazon-cognito-auth.min.js",
+      "background.min.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "storage",
+    "declarativeContent",
+    "activeTab",
+    "webRequest",
+    "https://www.zillow.com/*",
+    "https://*.amazonaws.com/Beta/zestimate",
+    "https://sfr.auth.us-east-2.amazoncognito.com/*",
+    "https://*.paypal.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.zillow.com/*"
+      ],
+      "css": [
+        "Styles/styles.css"
+      ],
+      "js": [
+        "prep.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://d35wio59s9fxlc.cloudfront.net/*",
+      "http://sfrspotter.s3-website.us-east-2.amazonaws.com/*"
+    ]
+  },
+  "page_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "images/Logo16.png",
+      "32": "images/Logo32.png",
+      "48": "images/Logo48.png",
+      "128": "images/Logo128.png"
+    }
+  },
+  "web_accessible_resources": [
+    "Top_Sum.html"
+  ],
+  "icons": {
+    "16": "images/Logo16.png",
+    "32": "images/Logo32.png",
+    "48": "images/Logo48.png",
+    "128": "images/Logo128.png"
+  }
+}

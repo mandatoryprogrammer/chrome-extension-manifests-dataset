@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_application_title__",
+  "description": "__MSG_application_description__",
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://api.instagram.com/; object-src 'self'",
+  "version": "1.1",
+  "manifest_version": 2,
+  "minimum_chrome_version": "20.0.0.0",
+  "default_locale": "en",
+  "icons": {
+    "48": "img/icon48.png",
+    "16": "img/icon16.png",
+    "128": "img/icon128.png"
+  },
+  "browser_action": {
+    "default_title": "Bring Me My Mouse",
+    "default_icon": "img/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "src/DisableSettings.js",
+      "src/sample.js",
+      "src/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "src/content_scripts.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "<all_urls>",
+    "contextMenus",
+    "https://*/*",
+    "http://*/*",
+    "storage",
+    "tabs",
+    "*://*.instagram.com/*",
+    "contextMenus",
+    "downloads",
+    "storage",
+    "unlimitedStorage"
+  ],
+  "web_accessible_resources": [
+    "/web_accessible_resources/index.js"
+  ]
+}

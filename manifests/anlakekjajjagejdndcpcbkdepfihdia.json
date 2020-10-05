@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "GitHub Enhancer",
+  "version": "2.2.1",
+  "description": "Deployments by DeployHQ and custom CSS styles in GitHub pull requests",
+  "permissions": [
+    "*://*.github.com/*",
+    "*://*.deployhq.com/*",
+    "declarativeContent",
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "js/settings.js",
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "page_action": {
+    "default_popup": "popup/index.html",
+    "default_icon": {
+      "32": "static/github-32.png",
+      "64": "static/github-64.png",
+      "128": "static/github-128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://github.com/*"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "js": [
+        "static/jquery-3.4.1.min.js",
+        "js/settings.js",
+        "js/content.js"
+      ]
+    }
+  ],
+  "icons": {
+    "32": "static/github-32.png",
+    "64": "static/github-64.png",
+    "128": "static/github-128.png"
+  },
+  "web_accessible_resources": [
+    "static/deployhq.png",
+    "static/styles.css"
+  ],
+  "manifest_version": 2
+}

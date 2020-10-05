@@ -1,0 +1,70 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Data By Chance",
+  "description": "This extension populates the selected DOM element with a random value using chance. You may also use the keyboard shortcus.",
+  "version": "1.0.2",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_title": "Data By Chance",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "tabs",
+    "activeTab"
+  ],
+  "background": {
+    "scripts": [
+      "libs/jquery-2.1.1.min.js",
+      "libs/chance.js",
+      "libs/actionHandler.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "libs/jquery-2.1.1.min.js",
+        "content_script.js"
+      ]
+    }
+  ],
+  "commands": {
+    "first": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+1",
+        "mac": "Command+Shift+1"
+      },
+      "description": "Generate first name"
+    },
+    "last": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+2",
+        "mac": "Command+Shift+2"
+      },
+      "description": "Generate last name"
+    },
+    "name": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+F",
+        "mac": "Command+Shift+F"
+      },
+      "description": "Generate full name"
+    },
+    "address": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+A",
+        "mac": "Command+Shift+A"
+      },
+      "description": "Generate address"
+    },
+    "city": {
+      "description": "Generate City"
+    }
+  }
+}

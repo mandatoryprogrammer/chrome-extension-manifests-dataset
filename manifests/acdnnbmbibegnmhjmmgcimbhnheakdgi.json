@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Canvas",
+  "short_name": "Canvas",
+  "version": "0.1",
+  "manifest_version": 2,
+  "description": "This extension enables Canvas users to share links from Chrome toolbar",
+  "homepage_url": "https://maincanvas.com",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.google.com/robots.txt*"
+      ],
+      "js": [
+        "oauth2/oauth2_inject.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.maincanvas.com/*",
+        "*://localhost/*"
+      ],
+      "js": [
+        "js/check_installed.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "page": "src/canvas/background.html"
+  },
+  "browser_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "Share link with Canvas",
+    "default_popup": "src/canvas/main.html"
+  },
+  "permissions": [
+    "alarms",
+    "webNavigation",
+    "tabs",
+    "https://accounts.google.com/o/oauth2/token",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "web_accessible_resources": [
+    "oauth2/oauth2.html"
+  ]
+}

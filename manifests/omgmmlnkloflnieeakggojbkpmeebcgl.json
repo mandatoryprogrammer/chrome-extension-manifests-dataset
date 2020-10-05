@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Tsahaylu: Share this Link",
+  "version": "3.0.4",
+  "description": "Tsahaylu",
+  "homepage_url": "https://tsahaylu.com",
+  "icons": {
+    "128": "images/tsahaylu-128.png",
+    "16": "images/tsahaylu-16.png",
+    "48": "images/tsahaylu-48.png"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "permissions": [
+    "cookies",
+    "storage",
+    "http://*/*",
+    "https://*/*",
+    "tabs"
+  ],
+  "options_page": "options.html",
+  "browser_action": {
+    "default_icon": "images/notlogin.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://tsahaylu.com/new.html",
+        "https://tsahaylu.com/"
+      ],
+      "js": [
+        "js/content.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/inject.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "commentFrame.html",
+    "buttonFrame.html",
+    "overlayFrame.html",
+    "css/iframe.css"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://tsahaylu.com/new.html"
+    ]
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://talkgadget.google.com https://www.gstatic.com https://*.firebaseio.com ;  object-src 'self'"
+}

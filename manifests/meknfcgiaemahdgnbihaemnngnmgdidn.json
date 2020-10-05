@@ -1,0 +1,85 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "McFarland EventSynch for Google Calendar",
+  "short_name": "EventSynch",
+  "manifest_version": 2,
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAye0iajdbW0kNx3Ud/QlnK0VglXG8cPhwoVavcGSYUdXlF0n68s34337F2RU7dYg5ycbs70uEH/clzKsoLRs7TXZZX0VadCitfQmxYKHF/hcq+nnOXZ47d5AwsUYSQ9i7rzn1MUBEIgPR1LSCr5vWz9Zwat8JNdmPdj5UYdLmGwMxCD07g+f5mbdsnPFwab8q3AlUbA0oUapyjy4w5iGnFsDSqdrEKz0IE+MMcZRdeDayA/nAxDUDWsObwGYaHCUIhN7h01s/QcTVZn3t/jev3XysafntKyQbNEWtz3e+vV9Ed6bJs0v1EpRbl9B4TQ41/9x3CmqmTzUAOL8JrKUsJwIDAQAB",
+  "description": "Easily synch events to Liquid Planner from your Google Calendar.",
+  "homepage_url": "https://chrome.google.com/webstore/detail/meknfcgiaemahdgnbihaemnngnmgdidn",
+  "icons": {
+    "128": "mcfarland/images/icon128.png",
+    "16": "mcfarland/images/icon16.png",
+    "48": "mcfarland/images/icon48.png"
+  },
+  "page_action": {
+    "default_icon": {
+      "16": "mcfarland/images/icon16.png",
+      "48": "mcfarland/images/icon48.png"
+    },
+    "default_title": "McFarland EventSynch for Google Calendar"
+  },
+  "background": {
+    "scripts": [
+      "background.js",
+      "googleCalendar.js"
+    ],
+    "persistent": false
+  },
+  "options_page": "options.html",
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://ssl.google-analytics.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.google.com/calendar/*",
+        "http://www.google.com/calendar/*"
+      ],
+      "js": [
+        "lib/jquery-2.1.1.min.js",
+        "mcfarland_chrome.js",
+        "mcfarland/liquidPlanner.js",
+        "mcfarland/google.js",
+        "mcfarland/config.js",
+        "mcfarland/main_lpchooser.js",
+        "mcfarland/main_lplogin.js",
+        "mcfarland/main_lpgetproject.js",
+        "mcfarland/view.js",
+        "mcfarland/view_dialog.js",
+        "mcfarland/main.js"
+      ],
+      "css": [
+        "mcfarland/css/main.css",
+        "mcfarland/css/font-face.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "default_locale": "en_US",
+  "permissions": [
+    "cookies",
+    "tabs",
+    "identity",
+    "storage",
+    "https://www.google.com/calendar/*",
+    "https://accounts.google.com/*",
+    "https://www.googleapis.com/*",
+    "https://*.liquidplanner.com/",
+    "https://*.liquidplannerlab.com/"
+  ],
+  "oauth2": {
+    "client_id": "610053271582-0fthf6e46di3abc6ldu5am10325ocffs.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/calendar.readonly"
+    ]
+  },
+  "web_accessible_resources": [
+    "mcfarland/fonts/*.woff",
+    "mcfarland/fonts/*.ttf",
+    "mcfarland/fonts/*.eot",
+    "mcfarland/fonts/*.svg",
+    "mcfarland/css/font-face.css",
+    "mcfarland/images/*.png",
+    "mcfarland/images/*.svg",
+    "*.html"
+  ],
+  "version": "0.7"
+}

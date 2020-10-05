@@ -1,0 +1,80 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Vault.Direct",
+  "description": "Provides secure way of pushing invoices to Vault.Direct",
+  "version": "1.0",
+  "manifest_version": 2,
+  "permissions": [
+    "storage",
+    "identity",
+    "declarativeContent",
+    "activeTab",
+    "tabs",
+    "https://*/*",
+    "http://*/*"
+  ],
+  "options_page": "options.html",
+  "background": {
+    "scripts": [
+      "utilities/models.js",
+      "utilities/config.js",
+      "backgroundScripts/background.js",
+      "backgroundScripts/intuitScripts.js",
+      "backgroundScripts/vaultScript.js"
+    ],
+    "persistent": false
+  },
+  "web_accessible_resources": [
+    "images/*"
+  ],
+  "icons": {
+    "16": "images/vault16.png",
+    "32": "images/vault32.png",
+    "48": "images/vault48.png",
+    "128": "images/vault128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.qbo.intuit.com/*"
+      ],
+      "run_at": "document_end",
+      "css": [
+        "font-awesome-4.7.0/css/font-awesome.css",
+        "css/btnStyle.css",
+        "css/manageStyle.css",
+        "css/outboxView.css",
+        "css/manage-recipient.css"
+      ],
+      "js": [
+        "utilities/dataUtility.js",
+        "utilities/models.js",
+        "utilities/config.js",
+        "utilities/constants.js",
+        "contentScripts/auth-service.js",
+        "contentScripts/ajaxService.js",
+        "contentScripts/btnClick.js",
+        "contentScripts/outboxView.js",
+        "contentScripts/manage-policy.js"
+      ]
+    }
+  ],
+  "page_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "images/vault16.png",
+      "32": "images/vault32.png",
+      "48": "images/vault48.png",
+      "128": "images/vault128.png"
+    }
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+F",
+        "mac": "MacCtrl+Shift+F"
+      },
+      "description": "Opens popup.html"
+    }
+  }
+}

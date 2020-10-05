@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "SourceBreaker App",
+  "description": "Provides quick access to recent or pinned searches",
+  "version": "2.2.5",
+  "version_name": "2.2.5",
+  "browser_action": {
+    "default_icon": "icon-big.png",
+    "default_title": "SourceBreaker App"
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "default_locale": "en",
+  "permissions": [
+    "storage",
+    "clipboardWrite",
+    "activeTab",
+    "background",
+    "notifications"
+  ],
+  "offline_enabled": false,
+  "web_accessible_resources": [
+    "js/*",
+    "css/*",
+    "images/*",
+    "fonts/*",
+    "templates/*",
+    "background.js",
+    "content-script.js",
+    "post-robot.js",
+    "index.html"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "content-script.js",
+        "index.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

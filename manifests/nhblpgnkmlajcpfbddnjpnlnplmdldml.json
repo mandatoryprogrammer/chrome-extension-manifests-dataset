@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "RxHistory",
+  "version": "2.0.0",
+  "manifest_version": 2,
+  "description": "Price history as a spreadsheet",
+  "homepage_url": "https://adelqalieh.com",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "js/FileSaver.min.js",
+      "js/moment.min.js",
+      "js/xlsx.full.min.js",
+      "src/bg/background.js"
+    ],
+    "persistent": false
+  },
+  "page_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "Download price history spreasheet"
+  },
+  "options_ui": {
+    "page": "src/settings/options.html",
+    "chrome_style": true
+  },
+  "permissions": [
+    "https://www.goodrx.com/*",
+    "declarativeContent",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.goodrx.com/*"
+      ],
+      "js": [
+        "src/inject/inject.js"
+      ]
+    }
+  ]
+}

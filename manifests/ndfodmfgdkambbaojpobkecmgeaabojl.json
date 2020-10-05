@@ -1,0 +1,42 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Janus",
+  "version": "2.0.0",
+  "description": "Allows the modification of headers and cookies of outgoing requests for specific URLs.",
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "eventPage.js"
+    ]
+  },
+  "browser_action": {
+    "name": "Janus",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "js": [
+        "userAgentContentScript.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "offline_enabled": true,
+  "options_page": "options.html",
+  "permissions": [
+    "activeTab",
+    "cookies",
+    "downloads",
+    "http://*/*",
+    "https://*/*",
+    "storage",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking"
+  ]
+}

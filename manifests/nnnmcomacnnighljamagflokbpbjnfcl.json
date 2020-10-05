@@ -1,0 +1,43 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "1.0.0.20",
+  "name": "CPACharge Browser Extension",
+  "description": "A browser extension for CPACharge",
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "128": "icon-128-00dfab6.png"
+    }
+  },
+  "icons": {
+    "128": "icon-128-00dfab6.png"
+  },
+  "options_page": "options.html",
+  "background": {
+    "page": "background.html"
+  },
+  "permissions": [
+    "background",
+    "identity",
+    "nativeMessaging",
+    "storage",
+    "*://*.affinipay.com/charges",
+    "*://*.lawpay.com/charges",
+    "*://*.cpacharge.com/charges"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.affinipay.com/charges",
+        "*://*.lawpay.com/charges",
+        "*://*.cpacharge.com/charges"
+      ],
+      "js": [
+        "/content_script.bundle.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com https://js.intercomcdn.com https://widget.intercom.io 'unsafe-eval'; object-src 'self'"
+}

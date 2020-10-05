@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Earny - Up to 20% Cash Back",
+  "short_name": "Earny",
+  "version": "1.3.8",
+  "description": "Earny: Money Back Savings App",
+  "icons": {
+    "16": "icons/logo-40.png",
+    "48": "icons/logo-80.png",
+    "128": "icons/logo-180.png"
+  },
+  "browser_action": {
+    "default_popup": "popup/index.html",
+    "default_title": "Earny"
+  },
+  "background": {
+    "scripts": [
+      "background/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content-script/static/js/2.chunk.js",
+        "content-script/static/js/main.chunk.js",
+        "content-script/static/js/runtime-main.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [
+        "content-script/static/css/main.chunk.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    "content-script/static/js/main.chunk.js",
+    "content-script/static/js/runtime-main.js",
+    "content-script/static/css/2.chunk.css",
+    "content-script/static/css/main.chunk.css",
+    "fonts/*.ttf"
+  ],
+  "permissions": [
+    "storage",
+    "tabs",
+    "notifications",
+    "clipboardWrite",
+    "clipboardRead",
+    "cookies",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_security_policy": "script-src 'self' 'sha256-zQY2+YF8b9+cXqf13aMee8XVLruX7GcpwfPfPiHwOyc=' https://www.google-analytics.com; object-src 'self'"
+}

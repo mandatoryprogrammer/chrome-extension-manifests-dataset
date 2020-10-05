@@ -1,0 +1,72 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "version": "1.14",
+  "name": "TV for Reddit",
+  "description": "Plays all videos on a Reddit page sequentially. Designed for NBA Reddit.",
+  "default_locale": "en",
+  "icons": {
+    "128": "images/icon.128.png"
+  },
+  "web_accessible_resources": [
+    "images/icon.128.png"
+  ],
+  "options_page": "options.html",
+  "browser_action": {},
+  "background": {
+    "scripts": [
+      "js/Config.js",
+      "js/RnbaAction.js",
+      "js/RnbaActivityManager.js",
+      "js/RnbaEvent.js",
+      "js/RnbaStateManager.js",
+      "js/Utils.js",
+      "js/background.js",
+      "js/ga.background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.twitch.tv/*",
+        "https://*.instagram.com/*",
+        "https://instagram.com/*",
+        "https://*.youtube.com/*",
+        "https://youtube.com/*",
+        "https://*.streamable.com/*",
+        "https://streamable.com/*",
+        "https://*.streamja.com/*",
+        "https://streamja.com/*",
+        "https://*.reddit.com/*",
+        "https://reddit.com/*"
+      ],
+      "js": [
+        "js/Config.js",
+        "js/PlaylistTracker.js",
+        "js/RedditModifier.js",
+        "js/RnbaAction.js",
+        "js/UrlType.js",
+        "js/Utils.js",
+        "js/content.js"
+      ],
+      "css": [
+        "css/tv.css"
+      ],
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "storage",
+    "tabs"
+  ],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+Shift+B",
+        "windows": "Alt+Shift+B",
+        "mac": "Alt+B"
+      }
+    }
+  }
+}

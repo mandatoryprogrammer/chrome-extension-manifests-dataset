@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Michael's Upgrade for TrakED",
+  "short_name": "Michael's TrakED",
+  "version": "1.2",
+  "description": "Upgraded features for Trak ED in the LGH. (This extension is not an official product of the LGH or Intersystems Trak software.",
+  "permissions": [
+    "*://trak-ed.health.local/*",
+    "storage",
+    "tabs"
+  ],
+  "icons": {
+    "48": "Icons/icon-48.png",
+    "128": "Icons/icon-128.png",
+    "512": "Icons/icon-512.png"
+  },
+  "web_accessible_resources": [
+    "Icons/*",
+    "Pages/*"
+  ],
+  "background": {
+    "scripts": [
+      "Background/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://trak-ed.health.local/trakcare/live/web/csp/websys.csp*"
+      ],
+      "js": [
+        "jquery-3.3.1.js",
+        "TrakED/edb_notes.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://trak-ed.health.local/*"
+      ],
+      "js": [
+        "jquery-3.3.1.js",
+        "papaparse.js",
+        "TrakED/edb_login.js",
+        "TrakED/edb_icon.js",
+        "TrakED/edb_EHR.js",
+        "TrakED/edb_enquiry.js",
+        "TrakED/edb_triage.js",
+        "TrakED/edb_EMU.js",
+        "TrakED/edb_ED.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": "Icons/icon-512.png"
+  }
+}

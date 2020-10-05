@@ -1,0 +1,94 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "AMS Genie",
+  "version": "1.0.5",
+  "description": "AMS Genie is the best tool for book publishers to track their AMS campaigns.",
+  "author": "AMS Genie",
+  "short_name": "Amazon Marketing Services extension for book publishers.",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "icon48.png"
+  },
+  "background": {
+    "default_icon": "icon48.png",
+    "scripts": [
+      "scripts/background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "tabs"
+  ],
+  "web_accessible_resources": [
+    "logo.png",
+    "scripts/ams_script.js",
+    "scripts/autocomplete_inline_script.js",
+    "scripts/autocomplete_script.js",
+    "scripts/campaigns_inline_script.js",
+    "scripts/dashboard_inline_script.js"
+  ],
+  "content_scripts": [
+    {
+      "js": [
+        "scripts/utils.js",
+        "scripts/dashboard_templates.js",
+        "scripts/dashboard.js"
+      ],
+      "css": [
+        "css/total.css",
+        "css/logo.css"
+      ],
+      "matches": [
+        "https://ams.amazon.com/ads/dashboard*",
+        "https://advertising.amazon.com/ads/dashboard*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "scripts/campaigns.js"
+      ],
+      "matches": [
+        "https://ams.amazon.com/ads/campaigns/*",
+        "https://ams.amazon.com/ads/campaigns",
+        "https://advertising.amazon.com/ads/campaigns/*",
+        "https://advertising.amazon.com/ads/campaigns"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "js": [
+        "scripts/utils.js",
+        "scripts/campaigns_templates.js",
+        "scripts/campaign.js",
+        "scripts/autocomplete.js"
+      ],
+      "css": [
+        "css/autocomplete.css",
+        "css/logo.css"
+      ],
+      "matches": [
+        "https://ams.amazon.com/rta/campaign/*",
+        "https://ams.amazon.com/rta/campaign?*",
+        "https://advertising.amazon.com/rta/campaign/*",
+        "https://advertising.amazon.com/rta/campaign?*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "scripts/reporting.js"
+      ],
+      "matches": [
+        "https://ams.amazon.com/*",
+        "https://advertising.amazon.com/*"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

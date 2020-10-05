@@ -1,0 +1,76 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Wildix integration to Infusionsoft",
+  "description": "Wildix. Сall management integration for Infusionsoft.",
+  "version": "1.5.16",
+  "manifest_version": 2,
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": "images/is-16.png"
+  },
+  "icons": {
+    "16": "images/is-16.png",
+    "32": "images/is-32.png",
+    "48": "images/is-48.png",
+    "128": "images/is-128.png"
+  },
+  "permissions": [
+    "*://*.infusionsoft.com/*",
+    "tabs",
+    "activeTab",
+    "declarativeContent",
+    "storage",
+    "management",
+    "webRequest",
+    "notifications"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.infusionsoft.com/*"
+      ],
+      "exclude_matches": [
+        "*://accounts.infusionsoft.com/*",
+        "*://signin.infusionsoft.com/*",
+        "*://developer.infusionsoft.com/*",
+        "*://*.developer.infusionsoft.com/*",
+        "*://marketplace.infusionsoft.com/*"
+      ],
+      "css": [
+        "libs/jquery-ui/jquery-ui.css",
+        "css/styles.css",
+        "css/font-awesome.min.css"
+      ],
+      "js": [
+        "libs/jquery.js",
+        "libs/jquery-ui.js",
+        "js/utils/content/controllerNumPad.js",
+        "js/utils/content/controllerCallBtn.js",
+        "js/utils/content/helper.js",
+        "js/contentScript.js",
+        "js/fontawesome.js",
+        "libs/easytimer.min.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://*/api/v1/InfusionsoftAuthSuccess*"
+      ],
+      "js": [
+        "libs/chrome-ex-oauth/injection.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "libs/*",
+    "images/*",
+    "sw.js"
+  ],
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmOBYWrMr2hQRauuGryY/EMhidjDw9qAVJMN3Vl13BujxoRFmoy2xcAyYMAJXEPw09Jp4b9kW/ZZVOeCDt8/CSWSZHCJtZrwksg+113m2j39QwGgS5p0tbnZWPhIsl/jmGcpCvw20AnhlEz1BfR5tb4ZHJ8BKSlhb7tijf9WUwW5qZDRaw+s6OuRH2KtKlOyNi+Sb8I/6dfJ+vYnaP2VOkJ8yHQf5chNFH2hUQ1jy3Z6+6IqkzbcvWACz77ROHLxhCvj3kamsj82AGG3wL3zvRNvIUdYhaIAH52UW5mAZi4FGrlVI8sRwLLHWqiloid8zX0EFzwWgzrJh0ffS21+C1QIDAQAB"
+}

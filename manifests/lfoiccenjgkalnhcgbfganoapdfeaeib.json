@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Проверка уникальности Copylancer",
+  "description": "Вспомогательное расширение для поиска похожих текстов",
+  "version": "2.3",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "https://yandex.ru/",
+    "http://findcopy.copylancer.ru/",
+    "http://findcopy.copylancer.ru/landing",
+    "https://copylancer.ru/"
+  ],
+  "background": {
+    "scripts": [
+      "classes/EventListener.js",
+      "classes/Finder.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.yandex.ru/*"
+      ],
+      "js": [
+        "client/yandTrait.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://findcopy.copylancer.ru/*",
+        "*://copylancer.ru/findcopy*"
+      ],
+      "js": [
+        "client/findcopyTrait.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://copylancer.ru/*"
+      ],
+      "js": [
+        "client/clTrait.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_title": "Проверка уникальности Copylancer",
+    "default_icon": "img/icon_grey.png"
+  },
+  "icons": {
+    "128": "img/icon_green.png"
+  },
+  "manifest_version": 2
+}

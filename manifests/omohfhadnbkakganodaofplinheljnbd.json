@@ -1,0 +1,60 @@
+{
+  "manifest_version": 2,
+  "name": "docway",
+  "description": "简单好用的在线接口文档管理工具，支持http文档在线测试",
+  "icons": {
+    "16": "icon_16.png",
+    "48": "icon_48.png",
+    "128": "icon_128.png"
+  },
+  "update_url": "http://clients2.google.com/service/update2/crx",
+  "version": "3.1",
+  "homepage_url": "http://www.docway.net",
+  "browser_action": {
+    "default_icon": "icon_128.png",
+    "default_popup": "popup.html",
+    "default_title": "docway在线接口文档管理"
+  },
+  "background": {
+    "scripts": [
+      "background.js",
+      "script/jquery.min.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*",
+        "*://xiaoyaoji.cn/*",
+        "*://*.xiaoyaoji.cn/*",
+        "<all_urls>"
+      ],
+      "js": [
+        "script/jquery.min.js",
+        "script/script.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://xiaoyaoji.cn/*",
+        "*://*.xiaoyaoji.cn/*",
+        "http://localhost/*",
+        "<all_urls>"
+      ],
+      "js": [
+        "script/site.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "alarms",
+    "webRequest",
+    "notifications",
+    "*://*/*"
+  ]
+}

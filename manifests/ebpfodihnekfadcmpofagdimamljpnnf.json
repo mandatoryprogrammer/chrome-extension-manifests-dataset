@@ -1,0 +1,79 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "AmzScope Chrome Extension",
+  "description": "Find the perfect product on Amazon with the help of AmzScope - the best product research helper!",
+  "version": "7.3.0",
+  "homepage_url": "http://www.amzscope.com",
+  "manifest_version": 2,
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArE9eM/pS5dy+2FhC06hmPCL9JOsYjHmv6O4xQMWBT4s+hjSYSvF/JqKbK6/ZNm7SZGOGBh7eULqt7RZxzXgeIZiWcrH80F28mn9YvOHm3PttOHvPgZtZtWQ3F7M/vKj26/HAHUtOBGK2v98ZQYjBe3rEvcUbvZ2ihTBsUgmo37yILuRISkM8ryeI6Ll1l01fcsolfsYgUP8xLl72l6tv1vvThAuKhw3uAIiv7tzVwEdbFjfUoHW6JPh0NYmzY4f/wNSSa2dqY5eDcC5YDUX5GroiwVFDQXN+ihyWXijM/RSbuY84+WZFXBaEZJHGve87/uDowDiNBpWdI2TWB54AEQIDAQAB",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "identity",
+    "background",
+    "storage",
+    "unlimitedStorage",
+    "https://amazon.com/*",
+    "https://www.amazon.com/*",
+    "http://amzscopeapi.com/*",
+    "http://www.amzscope.com/*",
+    "https://app.amzscope.com/*"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "background": {
+    "scripts": [
+      "lib/jquery-2.2.0.min.js",
+      "lib/jquery-ui.min.js",
+      "lib/tablesorter.min.js",
+      "js/background.js",
+      "js/researchHelper.js",
+      "js/fetcherHelper.js",
+      "js/tableHelper.js",
+      "js/dashboardHelper.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "img/icon_19.png",
+      "38": "img/icon_38.png"
+    }
+  },
+  "icons": {
+    "16": "img/icon_16.png",
+    "48": "img/icon_48.png",
+    "128": "img/icon_128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://amazon.com/*",
+        "https://www.amazon.com/*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "lib/jquery-2.2.0.min.js",
+        "lib/jquery-ui.min.js",
+        "lib/tablesorter.min.js",
+        "lib/jquery.tooltipster.min.js",
+        "js/researchHelper.js",
+        "js/fetcherHelper.js",
+        "js/tableHelper.js",
+        "js/dashboardHelper.js",
+        "js/main.js"
+      ],
+      "css": [
+        "css/style.css",
+        "css/amzscope-popup.css",
+        "css/tooltipster.css",
+        "css/jquery-ui.min.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "index.html",
+    "login.html",
+    "img/*",
+    "*.jpg",
+    "font/*"
+  ]
+}

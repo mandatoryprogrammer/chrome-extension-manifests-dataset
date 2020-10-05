@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Steemifier",
+  "description": "Monetize your content via the steemifier web extension",
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "applications": {
+    "gecko": {
+      "id": "steemifier@gmail.com",
+      "strict_min_version": "42.0"
+    }
+  },
+  "icons": {
+    "48": "icons/icon_48.png",
+    "128": "icons/icon_128.png"
+  },
+  "browser_action": {
+    "default_title": "Steemifier",
+    "default_popup": "popup/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "identity",
+    "storage",
+    "tabs",
+    "https://v2.steemconnect.com/api/oauth2/*",
+    "https://accounts.google.com/o/oauth2/*",
+    "https://www.googleapis.com/*",
+    "https://www.youtube.com/*",
+    "https://api.steemit.com/*",
+    "https://2wzvbagx7e.execute-api.us-east-1.amazonaws.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/*",
+        "https://youtu.be/*"
+      ],
+      "js": [
+        "steemifier/steemifier.js"
+      ],
+      "css": [
+        "steemifier/steemifier.css"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ]
+}

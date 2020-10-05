@@ -1,0 +1,99 @@
+{
+  "name": "买家秀",
+  "version": "2.4.2",
+  "author": "一叶知秋",
+  "manifest_version": 2,
+  "update_url": "http://clients2.google.com/service/update2/crx",
+  "description": "帮你一键查看商品买家秀，现支持淘宝买家秀，天猫买家秀，京东买家秀。",
+  "homepage_url": "http://www.quandasheng.com/",
+  "background": {
+    "scripts": [
+      "js/jquery-2.2.4.min.js",
+      "js/function.js",
+      "js/background.js"
+    ]
+  },
+  "icons": {
+    "128": "icon/show72.png",
+    "48": "icon/show72.png",
+    "16": "icon/show72.png"
+  },
+  "web_accessible_resources": [
+    "images/show.png",
+    "js/m.js"
+  ],
+  "content_security_policy": "script-src 'self' ; object-src 'self'",
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "css": [
+        "css/common_style.css",
+        "js/layer/skin/default/layer.css"
+      ],
+      "js": [
+        "js/jquery-2.2.4.min.js",
+        "js/function.js",
+        "js/layer/layer.js",
+        "js/highstock.js",
+        "js/common.js",
+        "js/jquery.qrcode.min.js"
+      ],
+      "matches": [
+        "*://*.tmall.hk/*",
+        "*://*.taobao.com/*",
+        "*://*.tmall.com/*",
+        "*://*.95095.com/*",
+        "*://*.liangxinyao.com/*",
+        "*://*.aliexpress.com/*",
+        "*://*.jd.com/*",
+        "*://*.yiyaojd.com/*"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "all_frames": false,
+      "js": [
+        "js/jquery-2.2.4.min.js",
+        "js/b.js"
+      ],
+      "css": [
+        "css/m.css"
+      ],
+      "matches": [
+        "*://*/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "js/jquery-2.2.4.min.js",
+        "js/quan.js"
+      ],
+      "css": [
+        "css/quan.css"
+      ],
+      "matches": [
+        "*://*.quandasheng.com/*",
+        "*://uland.taobao.com/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "options_page": "options.html",
+  "browser_action": {
+    "default_icon": "icon/show72.png",
+    "default_title": "买家秀",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "contextMenus",
+    "*://*/*",
+    "cookies",
+    "tabs",
+    "notifications",
+    "webRequestBlocking",
+    "webRequest",
+    "storage"
+  ]
+}

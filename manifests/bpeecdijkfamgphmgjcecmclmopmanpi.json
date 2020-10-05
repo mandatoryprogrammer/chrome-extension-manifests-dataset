@@ -1,0 +1,70 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "RestoWatch",
+  "short_name": "RestoWatch",
+  "description": "Check if a restaurant or grocery store was recently fined by the city",
+  "version": "1.0.2",
+  "author": "Francis Amankrah and Eric Nguyen",
+  "background": {
+    "scripts": [
+      "js/eventpage.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "js/clipboard.min.js",
+        "js/jquery-3.2.1.min.js",
+        "js/includes/api.js",
+        "js/includes/scraper.js",
+        "js/includes/adapters/eater-montreal.js",
+        "js/includes/adapters/foodora.js",
+        "js/includes/adapters/foursquare.js",
+        "js/includes/adapters/google.js",
+        "js/includes/adapters/just-eat.js",
+        "js/includes/adapters/mtl-a-table.js",
+        "js/includes/adapters/opentable.js",
+        "js/includes/adapters/restomontreal.js",
+        "js/includes/adapters/trip-advisor.js",
+        "js/includes/adapters/yellow-pages.js",
+        "js/includes/adapters/yelp.js",
+        "js/includes/adapters/zomato.js",
+        "js/contentscript.js"
+      ],
+      "run_at": "document_end",
+      "css": [
+        "css/alert.css"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": "images/icon.png",
+    "default_popup": "popup.html",
+    "default_title": "Check if the restaurant or grocery store is clean"
+  },
+  "permissions": [
+    "activeTab",
+    "https://ajax.googleapis.com/",
+    "geolocation",
+    "https://www.restowatch.com/",
+    "storage"
+  ],
+  "content_security_policy": "script-src 'self' https://maps.googleapis.com; object-src 'self'",
+  "web_accessible_resources": [
+    "alert.html",
+    "fonts/*",
+    "images/gradient_png.png",
+    "images/logo.svg",
+    "images/share_icon.svg"
+  ],
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}

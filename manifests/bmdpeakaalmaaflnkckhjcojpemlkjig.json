@@ -1,0 +1,459 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Kixie Dialer",
+  "short_name": "Kixie PC",
+  "homepage_url": "https://www.kixie.com",
+  "description": "Kixie PowerCall enhances your Kixie experience by enabling click-to-call, immediate CRM data access and simple activity scheduling.",
+  "version": "1.7.63",
+  "permissions": [
+    "storage",
+    "notifications",
+    "contextMenus",
+    "gcm",
+    "tabs",
+    "alarms",
+    "commands"
+  ],
+  "background": {
+    "scripts": [
+      "eventpage.js",
+      "/lib/jquery-3.3.1.min.js",
+      "phoneFormat.js"
+    ],
+    "persistent": true
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://checkout.stripe.com https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com https://*.kixie.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.kixie.com/oauth/*",
+        "http://*.kixie.com/oauth/*"
+      ],
+      "js": [
+        "lib/close-oauth.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://*.pipedrive.com/*",
+        "https://*.pipedrive.com/*"
+      ],
+      "exclude_matches": [
+        "*://developers.pipedrive.com/*"
+      ],
+      "css": [
+        "kixiec2c.css"
+      ],
+      "js": [
+        "/lib/jquery-3.3.1.min.js",
+        "lib/initialize-jquery-plugin.js",
+        "phoneFormat.js",
+        "kixie-lib.js",
+        "kixie-pipedrive.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "http://*.activehosted.com/*",
+        "https://*.activehosted.com/*"
+      ],
+      "css": [
+        "kixiec2c.css"
+      ],
+      "js": [
+        "/lib/jquery-3.3.1.min.js",
+        "lib/initialize-jquery-plugin.js",
+        "phoneFormat.js",
+        "kixie-lib.js",
+        "kixie-activecampaign.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://app.prosperworks.com/*"
+      ],
+      "exclude_matches": [
+        "*://www.prosperworks.com/*"
+      ],
+      "css": [
+        "kixiec2c.css"
+      ],
+      "js": [
+        "/lib/jquery-3.3.1.min.js",
+        "lib/initialize-jquery-plugin.js",
+        "phoneFormat.js",
+        "kixie-lib.js",
+        "kixie-prosperworks.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "http://*.nutshell.com/*",
+        "https://*.nutshell.com/*"
+      ],
+      "exclude_matches": [
+        "*://www.nutshell.com/*"
+      ],
+      "css": [
+        "kixiec2c.css"
+      ],
+      "js": [
+        "/lib/jquery-3.3.1.min.js",
+        "lib/initialize-jquery-plugin.js",
+        "phoneFormat.js",
+        "kixie-lib.js",
+        "kixie-nutshell.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "http://new.vanillasoft.net/*",
+        "https://new.vanillasoft.net/*"
+      ],
+      "exclude_matches": [
+        "*://www.vanillasoft.com/"
+      ],
+      "css": [
+        "kixiec2c.css"
+      ],
+      "js": [
+        "/lib/jquery-3.3.1.min.js",
+        "lib/initialize-jquery-plugin.js",
+        "phoneFormat.js",
+        "kixie-lib.js",
+        "kixie-vanillasoft.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "http://*.persistiq.com/app*",
+        "https://*.persistiq.com/app*"
+      ],
+      "exclude_matches": [
+        "*://persistiq.com/"
+      ],
+      "css": [
+        "kixiec2c.css"
+      ],
+      "js": [
+        "/lib/jquery-3.3.1.min.js",
+        "lib/initialize-jquery-plugin.js",
+        "phoneFormat.js",
+        "kixie-lib.js",
+        "kixie-persistiq.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "http://*.zoho.com/*",
+        "https://*.zoho.com/*"
+      ],
+      "exclude_matches": [
+        "*://www.zoho.com/*"
+      ],
+      "css": [
+        "kixiec2c.css"
+      ],
+      "js": [
+        "/lib/jquery-3.3.1.min.js",
+        "lib/initialize-jquery-plugin.js",
+        "phoneFormat.js",
+        "kixie-lib.js",
+        "kixie-zoho.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "http://*.outreach.io/*",
+        "https://*.outreach.io/*"
+      ],
+      "exclude_matches": [
+        "*://www.outreach.io/*"
+      ],
+      "css": [
+        "kixiec2c.css"
+      ],
+      "js": [
+        "/lib/jquery-3.3.1.min.js",
+        "lib/initialize-jquery-plugin.js",
+        "phoneFormat.js",
+        "kixie-lib.js",
+        "kixie-outreach.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "*://*.pipedrive.com/*",
+        "*://*.nutshell.com/*",
+        "*://*.zoho.com/*",
+        "*://*.outreach.io/*",
+        "*://*.campnative.com/*",
+        "*://app.prosperworks.com/*",
+        "*://*.pipelinedeals.com/*",
+        "*://*.capsulecrm.com/*",
+        "*://*.discoverydb.com/*"
+      ],
+      "css": [
+        "kixiec2c.css"
+      ],
+      "js": [
+        "/lib/jquery-3.3.1.min.js",
+        "phoneFormat.js",
+        "kixie-lib.js",
+        "kixiec2c.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "*://*.infusionsoft.com/Contact/manageContact.jsp*"
+      ],
+      "exclude_matches": [
+        "*://www.infusionsoft.com/*"
+      ],
+      "css": [
+        "kixiec2c.css"
+      ],
+      "js": [
+        "/lib/jquery-3.3.1.min.js",
+        "lib/initialize-jquery-plugin.js",
+        "phoneFormat.js",
+        "kixie-lib.js",
+        "kixie-infusionsoft.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "*://*.hubspot.com/sales/*",
+        "*://*.hubspot.com/contacts/*"
+      ],
+      "exclude_matches": [
+        "*://www.hubspot.com/*"
+      ],
+      "css": [
+        "kixiec2c.css"
+      ],
+      "js": [
+        "/lib/jquery-3.3.1.min.js",
+        "lib/initialize-jquery-plugin.js",
+        "phoneFormat.js",
+        "kixie-hubspot.js",
+        "kixie-lib.js",
+        "kixiec2c.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "*://*.lightning.force.com/one/*"
+      ],
+      "exclude_matches": [],
+      "css": [
+        "kixiec2c.css"
+      ],
+      "js": [
+        "/lib/jquery-3.3.1.min.js",
+        "lib/initialize-jquery-plugin.js",
+        "phoneFormat.js",
+        "kixie-lib.js",
+        "kixie-salesforce-lightning.js",
+        "kixiec2c.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "*://*.lightning.force.com/lightning/*"
+      ],
+      "exclude_matches": [],
+      "css": [
+        "kixiec2c.css"
+      ],
+      "js": [
+        "/lib/jquery-3.3.1.min.js",
+        "lib/initialize-jquery-plugin.js",
+        "phoneFormat.js",
+        "kixie-lib.js",
+        "kixie-salesforce-lightning2.js",
+        "kixiec2c.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "*://*.salesforce.com/*"
+      ],
+      "exclude_matches": [],
+      "css": [
+        "kixiec2c.css"
+      ],
+      "js": [
+        "/lib/jquery-3.3.1.min.js",
+        "lib/initialize-jquery-plugin.js",
+        "phoneFormat.js",
+        "kixie-lib.js",
+        "kixie-salesforce.js",
+        "kixiec2c.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "*://*.insightly.com/*"
+      ],
+      "exclude_matches": [],
+      "css": [
+        "kixiec2c.css"
+      ],
+      "js": [
+        "/lib/jquery-3.3.1.min.js",
+        "lib/initialize-jquery-plugin.js",
+        "phoneFormat.js",
+        "kixie-lib.js",
+        "kixie-insightly2.js",
+        "kixiec2c.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "*://*.insight.ly/*"
+      ],
+      "exclude_matches": [],
+      "css": [
+        "kixiec2c.css"
+      ],
+      "js": [
+        "/lib/jquery-3.3.1.min.js",
+        "lib/initialize-jquery-plugin.js",
+        "phoneFormat.js",
+        "kixie-lib.js",
+        "kixie-insightly2.js",
+        "kixiec2c.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "http://*.pipelinedeals.com/*",
+        "https://*.pipelinedeals.com/*"
+      ],
+      "css": [
+        "kixiec2c.css"
+      ],
+      "js": [
+        "/lib/jquery-3.3.1.min.js",
+        "lib/initialize-jquery-plugin.js",
+        "phoneFormat.js",
+        "kixie-lib.js",
+        "kixie-pipelinedeals.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "http://*.capsulecrm.com/*",
+        "https://*.capsulecrm.com/*"
+      ],
+      "css": [
+        "kixiec2c.css"
+      ],
+      "js": [
+        "/lib/jquery-3.3.1.min.js",
+        "lib/initialize-jquery-plugin.js",
+        "phoneFormat.js",
+        "kixie-lib.js",
+        "kixie-capsule.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "http://*.discoverydb.com/*",
+        "https://*.discoverydb.com/*"
+      ],
+      "css": [
+        "kixiec2c.css"
+      ],
+      "js": [
+        "/lib/jquery-3.3.1.min.js",
+        "lib/initialize-jquery-plugin.js",
+        "phoneFormat.js",
+        "kixie-lib.js",
+        "kixie-discoverydb.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    "images/*",
+    "html/*"
+  ],
+  "icons": {
+    "128": "images/icon_128.png",
+    "64": "images/icon_64.png"
+  },
+  "browser_action": {
+    "default_icon": "images/dt_k.png",
+    "default_title": "Kixie"
+  },
+  "commands": {
+    "answer-hotkey": {
+      "suggested_key": {
+        "default": "Ctrl+Left"
+      },
+      "description": "answer hotkey"
+    },
+    "call-hotkey": {
+      "suggested_key": {
+        "default": "Alt+1"
+      },
+      "description": "call hotkey"
+    },
+    "hangup-hotkey": {
+      "suggested_key": {
+        "default": "Alt+2"
+      },
+      "description": "hangup hotkey"
+    },
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+K"
+      }
+    }
+  }
+}

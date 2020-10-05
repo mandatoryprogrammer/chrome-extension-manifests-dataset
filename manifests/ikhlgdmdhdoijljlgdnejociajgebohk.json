@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "author": "Arvin Flores",
+  "name": "CRXDE File Tracker",
+  "description": "Track files saved while using Adobe CRXDE editor",
+  "version": "1.0",
+  "browser_action": {
+    "default_icon": "assets/images/crxde_icon.png",
+    "default_popup": "assets/index.html"
+  },
+  "permissions": [
+    "https://cmsauthor.activision.com/*",
+    "activeTab",
+    "storage",
+    "webRequest"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://cmsauthor.activision.com/crx/de/index.jsp*"
+      ],
+      "js": [
+        "assets/js/libs/moment.js",
+        "assets/js/crxde-editor.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://cmsauthor.activision.com/etc/replication/treeactivation.html"
+      ],
+      "js": [
+        "assets/js/activate-tree.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "assets/js/background.js"
+    ]
+  }
+}

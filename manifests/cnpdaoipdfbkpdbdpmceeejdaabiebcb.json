@@ -1,0 +1,281 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "short_name": "Codota",
+  "name": "Codota - Java Code Viewer Developer Tool",
+  "description": "Awesome viewer for Java and android code snippets",
+  "homepage_url": "https://www.codota.com",
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "version": "2.7.4",
+  "icons": {
+    "128": "icons/favicon_128.png",
+    "48": "icons/favicon_48.png",
+    "16": "icons/favicon_16.png"
+  },
+  "omnibox": {
+    "keyword": "cod"
+  },
+  "permissions": [
+    "*://*/*",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "clipboardWrite",
+    "storage",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "page": "background.html"
+  },
+  "web_accessible_resources": [
+    "icons/icomoon.eot",
+    "icons/icomoon.svg",
+    "icons/icomoon.ttf",
+    "icons/icomoon.woff",
+    "images/gh-bullet.png",
+    "images/logo.png",
+    "welcome.html",
+    "menu.html",
+    "doc.html",
+    "css/font-awesome/fonts/fontawesome-webfont.eot",
+    "css/font-awesome/fonts/fontawesome-webfont.woff",
+    "css/font-awesome/fonts/fontawesome-webfont.ttf",
+    "css/font-awesome/fonts/fontawesome-webfont.svg",
+    "javascript/jquery.min.map"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "exclude_matches": [
+        "*://*.codota.com/*",
+        "*://*.snip2code.com/*",
+        "*://play.google.com/music/*",
+        "*://*.wattpad.com/*",
+        "*://web.whatsapp.com/*"
+      ],
+      "js": [
+        "javascript/jquery-1.9.1.min.js",
+        "javascript/bootstrap-custom-3.2.0.js",
+        "javascript/lodash.min.js",
+        "javascript/md5.min.js",
+        "javascript/jquery.fancybox.js",
+        "javascript/prettify.js",
+        "javascript/ga.js",
+        "javascript/mixpanel.js",
+        "javascript/livecode-util.js",
+        "javascript/livecode-format.js",
+        "javascript/livecode-bridge.js",
+        "javascript/codeboxManager.js"
+      ],
+      "css": [
+        "css/livecode.css",
+        "css/codota.bootstrap-custom-3.2.0.css",
+        "css/jquery.fancybox.css",
+        "css/font-awesome/css/font-awesome.min.css",
+        "icons/style.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://stackoverflow.com/*",
+        "*://www.vogella.com/tutorials/*",
+        "*://*.github.com/*",
+        "*://developer.android.com/*",
+        "*://*.androidhive.info/*",
+        "*://*.androidexample.com/*",
+        "*://*.javacodegeeks.com/*",
+        "*://code.google.com/p/ide-examples/wiki/IntelliJIdeaPsiCookbook",
+        "*://confluence.jetbrains.com/*"
+      ],
+      "js": [
+        "javascript/jquery-1.9.1.min.js",
+        "javascript/mark-ext-present.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.codota.com/livecode/bridge*",
+        "*://*.codota.com/codebox/*"
+      ],
+      "js": [
+        "javascript/livecode-bridge.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://stackoverflow.com/*"
+      ],
+      "js": [
+        "javascript/integration/sof.js"
+      ],
+      "css": [
+        "css/integration/sof.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://www.vogella.com/tutorials/*"
+      ],
+      "js": [
+        "javascript/integration/vogella.js"
+      ],
+      "css": [
+        "css/integration/vogella.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.github.com/*"
+      ],
+      "js": [
+        "javascript/integration/github.js"
+      ],
+      "css": [
+        "css/integration/github.css",
+        "css/integration/prettify-github.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://developer.android.com/samples/*"
+      ],
+      "js": [
+        "javascript/integration/offi-samples.js"
+      ],
+      "css": [
+        "css/integration/offi-samples.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://developer.android.com/guide/*",
+        "*://developer.android.com/google/*",
+        "*://developer.android.com/training/*",
+        "*://developer.android.com/reference/*"
+      ],
+      "js": [
+        "javascript/integration/offi-guides.js"
+      ],
+      "css": [
+        "css/integration/offi-guides.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.androidhive.info/*"
+      ],
+      "js": [
+        "javascript/integration/hive.js"
+      ],
+      "css": [
+        "css/integration/hive.css",
+        "css/integration/prettify-hive.css"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "*://*.androidexample.com/*"
+      ],
+      "js": [
+        "javascript/integration/syntax-highlighter.js"
+      ],
+      "css": [
+        "css/integration/androidexample.css",
+        "css/integration/prettify-androidexample.css"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "*://*.javacodegeeks.com/*"
+      ],
+      "js": [
+        "javascript/integration/show-linenums.js",
+        "javascript/integration/syntax-highlighter.js"
+      ],
+      "css": [
+        "css/integration/prettify-syntaxhighlighter.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://code.google.com/p/ide-examples/wiki/IntelliJIdeaPsiCookbook"
+      ],
+      "js": [
+        "javascript/integration/offi-guides.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://confluence.jetbrains.com/*"
+      ],
+      "js": [
+        "javascript/integration/jetbrains.js"
+      ],
+      "css": [
+        "css/integration/prettify-syntaxhighlighter.css",
+        "css/integration/jetbrains.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.codota.com/*"
+      ],
+      "js": [
+        "javascript/jquery-1.9.1.min.js",
+        "javascript/integration/codota.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.codota.com/shareSnippet/*"
+      ],
+      "js": [
+        "javascript/jquery-1.9.1.min.js",
+        "javascript/share-snippet.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "exclude_matches": [
+        "*://*.codota.com/*",
+        "*://*.wattpad.com/*",
+        "*://*.google.co.il/*",
+        "*://*.snip2code.com/*",
+        "*://stackoverflow.com/*",
+        "*://www.vogella.com/tutorials/*",
+        "*://*.github.com/*",
+        "*://developer.android.com/*",
+        "*://www.androidhive.info/*",
+        "*://*.androidexample.com/*",
+        "*://*.javacodegeeks.com/*",
+        "*://code.google.com/p/ide-examples/wiki/IntelliJIdeaPsiCookbook",
+        "*://confluence.jetbrains.com/*"
+      ],
+      "js": [
+        "javascript/integration/default.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

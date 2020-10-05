@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "GPA Calculator",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "GPA Calculator helps you to calculate fast and easily your GPA for free.",
+  "homepage_url": "https://www.calcunation.com/",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_security_policy": "script-src 'self' https://*.cloudflare.com; object-src 'self'",
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": true
+  },
+  "options_page": "src/options_custom/index.html",
+  "browser_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "GPA Calculator",
+    "default_popup": "src/browser_action/browser_action.html"
+  },
+  "permissions": [
+    "contentSettings",
+    "notifications",
+    "tabs",
+    "https://*/*,http://*/*"
+  ],
+  "omnibox": {
+    "keyword": "GPA Calculator"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "css": [
+        "src/inject/inject.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "src/inject/inject.js"
+      ]
+    }
+  ]
+}

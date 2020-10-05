@@ -1,0 +1,88 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "aizimov_network_communication",
+  "short_name": "aizimov",
+  "description": "Help you connect your targets of LinkedIn and send message to them",
+  "version": "0.0.5",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "icons": {
+    "16": "images/rebot-16.png",
+    "128": "images/rebot-128.png"
+  },
+  "web_accessible_resources": [
+    "/static/media/linkedin.png",
+    "/static/media/aizimov_key.png",
+    "/static/media/linkedin_hover.png",
+    "/static/media/login_background-min.jpg",
+    "/static/media/LogoInMenu.png",
+    "/static/css/content.css"
+  ],
+  "background": {
+    "scripts": [
+      "scripts/background.js",
+      "scripts/popupFunctions.js",
+      "scripts/collect.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.linkedin.com/*"
+      ],
+      "css": [
+        "styles/linkedin.css"
+      ],
+      "js": [
+        "modules/jquery.js",
+        "scripts/linkedin.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "*://*.linkedin.com/in/*"
+      ],
+      "js": [
+        "scripts/removeFromList.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "*://*.linkedin.com/*"
+      ],
+      "css": [
+        "/static/css/app.css"
+      ],
+      "js": [
+        "/static/js/0.chunk.js",
+        "/static/js/1.chunk.js",
+        "/static/js/content.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "*://plugin.aizimov.com/*",
+        "*://testing-plugin.aizimov.com/*"
+      ],
+      "js": [
+        "scripts/aizimov.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "browser_action": {
+    "default_icon": "images/rebot-38.png"
+  },
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "cookies",
+    "storage",
+    "<all_urls>"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

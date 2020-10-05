@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Momentum",
+  "short_name": "Momentum",
+  "version": "1.18.14",
+  "description": "Replace new tab page with a personal dashboard featuring to-do, weather, and inspiration.",
+  "icons": {
+    "16": "img/app/icon-16.png",
+    "32": "img/app/icon-32.png",
+    "48": "img/app/icon-48.png",
+    "128": "img/app/icon-128.png"
+  },
+  "background": {
+    "scripts": [
+      "background-scripts/momentum.js"
+    ],
+    "persistent": false
+  },
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "chrome_url_overrides": {
+    "newtab": "dashboard.html"
+  },
+  "offline_enabled": true,
+  "browser_action": {
+    "default_title": "Momentum"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.momentumdash.com/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "content-scripts/momoSiteInterop.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "geolocation",
+    "unlimitedStorage",
+    "*://*.momentumdash.com/*"
+  ],
+  "optional_permissions": [
+    "bookmarks",
+    "topSites",
+    "chrome://favicon/"
+  ]
+}

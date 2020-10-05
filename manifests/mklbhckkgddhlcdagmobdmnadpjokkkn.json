@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "description": "Your team's collective knowledge, everywhere you need it.",
+  "version": "2.106.74",
+  "web_accessible_resources": [
+    "*"
+  ],
+  "icons": {
+    "16": "common/images/icons/logo/g-icon-16.png",
+    "48": "common/images/icons/logo/g-icon-48.png",
+    "128": "common/images/icons/logo/g-icon-128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "common/images/icons/logo/guru-chrome19.png",
+      "38": "common/images/icons/logo/guru-chrome38.png"
+    },
+    "default_title": "Guru"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "name": "Guru",
+  "content_scripts": [
+    {
+      "js": [
+        "topFrameOnlyEntry.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "allFramesEntry.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "https://*/*",
+    "http://*/*"
+  ],
+  "optional_permissions": [
+    "contextMenus"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; style-src 'self'; img-src *; font-src 'self'; connect-src * blob:; media-src 'self'; object-src 'self'; prefetch-src 'self'; frame-src 'self'; worker-src 'self'; frame-ancestors 'self'; form-action 'self'; base-uri 'self'"
+}

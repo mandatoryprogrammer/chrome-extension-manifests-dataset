@@ -1,0 +1,103 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_extensionName__",
+  "description": "__MSG_extensionDescription__",
+  "version": "2.4",
+  "default_locale": "en",
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "/img/logo_on.png"
+  },
+  "background": {
+    "scripts": [
+      "/lib/jquery-3.3.1.min.js",
+      "/js/conf.js",
+      "/js/IndexedDB.js",
+      "/js/Cache.js",
+      "/js/Redirect.js",
+      "/js/Robots.js",
+      "/js/RobotsParser.js",
+      "/js/Helpers.js",
+      "/js/App.js",
+      "/js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "/js/cs-meta.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "include_globs": [
+        "*://www.google.*/*"
+      ],
+      "js": [
+        "/lib/jquery-3.3.1.min.js",
+        "/js/Prefix.js",
+        "/js/prefix-init.js",
+        "/js/CSV.js",
+        "/js/Helpers.js",
+        "/js/cs-google-prerender.js",
+        "/js/cs-google.js"
+      ],
+      "css": [
+        "/css/cs-google.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "include_globs": [
+        "*://www.google.*/*"
+      ],
+      "js": [
+        "/lib/jquery-3.3.1.min.js",
+        "/js/Prefix.js",
+        "/js/prefix-init.js",
+        "/js/cs-serp-iframe.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://seominion.com/service/widget.php*"
+      ],
+      "all_frames": true,
+      "js": [
+        "/js/cs-iframe-resize.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "/img/*",
+    "/html/*"
+  ],
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "webNavigation",
+    "activeTab",
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "storage"
+  ]
+}

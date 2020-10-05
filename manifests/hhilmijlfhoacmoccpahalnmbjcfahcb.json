@@ -1,0 +1,42 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "ニコ補助 - Download",
+  "version": "0.2.3",
+  "description": "ニコニコ動画にダウンロードリンクを作ります。コメントもダウンロードすることが可能です。",
+  "manifest_version": 2,
+  "background": {
+    "page": "html/background.html"
+  },
+  "icons": {
+    "256": "img/dl.ico"
+  },
+  "options_page": "html/options.html",
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "tabs",
+    "http://*.nicovideo.jp/*",
+    "https://*.nicovideo.jp/*",
+    "http://*.nicogs.net/*",
+    "http://test.grn-web.net/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.nicovideo.jp/watch/*",
+        "https://*.nicovideo.jp/watch/*"
+      ],
+      "css": [
+        "css/dl.css"
+      ],
+      "js": [
+        "js/jquery-1.7.1.min.js",
+        "js/debug.js",
+        "js/dl_contentscript.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "minimum_chrome_version": "18",
+  "web_accessible_resources": []
+}

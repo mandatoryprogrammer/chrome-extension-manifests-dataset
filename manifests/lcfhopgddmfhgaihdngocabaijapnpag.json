@@ -1,0 +1,75 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "OPIS Helper",
+  "short_name": "OPIS Extension",
+  "description": "A bunch of browser hacks for Workfront and etc.",
+  "version": "1.11.0",
+  "minimum_chrome_version": "38",
+  "permissions": [
+    "contextMenus",
+    "tabs",
+    "storage",
+    "notifications",
+    "nativeMessaging",
+    "contentSettings",
+    "https://oasys.opisnet.com/*"
+  ],
+  "browser_action": {
+    "default_icon": "assets/logo.png",
+    "default_popup": "options.html"
+  },
+  "icons": {
+    "16": "assets/logo.png"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "background": {
+    "scripts": [
+      "js/jquery.js",
+      "main.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://opis.attask-ondemand.com/*",
+        "https://opis.my.workfront.com/*"
+      ],
+      "js": [
+        "js/jquery.js",
+        "workfront.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://oasys.opisnet.com/*",
+        "https://tst-oasys-opisnet-com.preprodopisnet.io/*"
+      ],
+      "js": [
+        "js/jquery.js",
+        "js/bootstrap.min.js",
+        "js/moment.min.js",
+        "js/clipboard.min.js",
+        "js/jquery.dataTables.min.js",
+        "js/datetime-moment.js",
+        "js/js.cookie.js",
+        "oasys.js"
+      ],
+      "css": [
+        "css/jquery.dataTables.min.css",
+        "css/dataTables.bootstrap.min.css",
+        "css/oasys.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://oasys.opisnet.com/*"
+    ]
+  }
+}

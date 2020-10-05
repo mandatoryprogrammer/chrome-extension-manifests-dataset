@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Simpli",
+  "version": "1.0.12",
+  "description": "Beautiful personal homepage for Google Chrome",
+  "manifest_version": 2,
+  "offline_enabled": true,
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://*.google.com https://*.google-analytics.com https://*.googletagmanager.com https://*.googleapis.com https://*.getsimpli.app https://geoip-db.com; object-src 'self'",
+  "permissions": [
+    "geolocation",
+    "topSites",
+    "tabs",
+    "bookmarks",
+    "storage",
+    "*://*.getsimpli.app/*"
+  ],
+  "chrome_url_overrides": {
+    "newtab": "main.html"
+  },
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "js/init.js"
+    ]
+  },
+  "browser_action": {
+    "default_title": "Home page"
+  },
+  "icons": {
+    "16": "img/assets/icon16.png",
+    "32": "img/assets/icon32.png",
+    "48": "img/assets/icon48.png",
+    "128": "img/assets/icon128.png"
+  },
+  "web_accessible_resources": [
+    "font/*.*",
+    "style-content-script.css"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start",
+      "css": [
+        "style-content-script.css"
+      ],
+      "js": [
+        "js/content.js"
+      ]
+    }
+  ]
+}

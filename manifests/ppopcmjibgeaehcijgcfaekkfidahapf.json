@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "short_name": "hm-chrome",
+  "name": "Heymarket - Business Text Messaging",
+  "version": "1.3.2",
+  "manifest_version": 2,
+  "description": "Click to text from any CRM or webpage.",
+  "icons": {
+    "16": "assets/hey_ffc296.png",
+    "48": "assets/hey_ffc296.png",
+    "128": "assets/hey_ffc296.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "assets/hey_ffc296.png",
+      "38": "assets/hey_ffc296.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "*://localhost:*/*",
+        "*://*.heymarket.com/*"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "js": [
+        "lodash-debounce.js",
+        "libphonenumber-max.js",
+        "content.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "storage",
+    "activeTab"
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  },
+  "content_security_policy": "script-src 'self' 'sha256-GgRxrVOKNdB4LrRsVPDSbzvfdV4UqglmviH9GoBJ5jk='; object-src 'self'"
+}

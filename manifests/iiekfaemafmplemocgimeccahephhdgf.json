@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "VratnePenize.cz Připomínáček",
+  "version": "3.0.4.0",
+  "description": "Připomínáček tě včas automaticky upozorní na cashback neboli vrácení peněz a slevové kupony ve vybraných obchodech.",
+  "homepage_url": "https://www.vratnepenize.cz/",
+  "author": "VratnePenize.cz",
+  "manifest_version": 2,
+  "options_ui": {
+    "chrome_style": false,
+    "page": "settings.html"
+  },
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "storage",
+    "<all_urls>",
+    "cookies"
+  ],
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "js": [
+        "vendors/bundle.js",
+        "content/bundle.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "vendors/bundle.js",
+      "bg/bundle.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "48x48.png",
+    "default_title": "VratnéPenize ",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "48x48.png",
+    "18": "48x48.png",
+    "32": "48x48.png",
+    "128": "48x48.png"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "web_accessible_resources": [
+    "content/*.css",
+    "content/*.svg",
+    "popup/*css",
+    "*.css",
+    "images",
+    "*.png"
+  ]
+}

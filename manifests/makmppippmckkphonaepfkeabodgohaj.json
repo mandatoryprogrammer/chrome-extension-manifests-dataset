@@ -1,0 +1,88 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Los Altos High Helper",
+  "short_name": "LAHS+",
+  "version": "2.20",
+  "description": "A collection of tools designed for students at Los Altos High (MVLA). Targets Google Classroom, Aeries, and the Bell Countdown.",
+  "browser_action": {
+    "default_icon": "icons/icon128.png",
+    "default_popup": "popup.html",
+    "default_title": "LAHS+"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.asp.aeries.net/student/*",
+        "https://*.asp.aeries.net/Student/*"
+      ],
+      "css": [
+        "css/cs.css"
+      ],
+      "js": [
+        "js/jquery-3.2.1.min.js",
+        "js/cs.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://bell.lahs.club/*",
+        "http://bell.lahs.club/*",
+        "https://countdown.zone/*",
+        "http://countdown.zone/*",
+        "https://bell.plus/*"
+      ],
+      "js": [
+        "js/bell-override.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://classroom.google.com/*"
+      ],
+      "css": [
+        "css/classroom.css"
+      ],
+      "js": [
+        "js/jquery-3.2.1.min.js",
+        "js/classroom.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/jquery-3.2.1.min.js",
+      "js/popup.js",
+      "js/background.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "css/bell.css"
+  ],
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "storage",
+    "notifications",
+    "https://*.asp.aeries.net/*",
+    "http://*.asp.aeries.net/*",
+    "http://bell.lahs.club/*",
+    "https://bell.lahs.club/*",
+    "http://countdown.zone/*",
+    "https://countdown.zone/*",
+    "https://classroom.google.com/*",
+    "https://bell.plus/*"
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "icons": {
+    "128": "icons/icon128.png"
+  },
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com https://www.googletagmanager.com 'sha256-uq4nb7xzgZgfL2i4B3dJdx3eKKrhBelaRVfs2yzl/rE='; object-src 'self'",
+  "manifest_version": 2
+}

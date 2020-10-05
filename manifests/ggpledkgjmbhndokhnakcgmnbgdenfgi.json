@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "YouTube Audio Filtering",
+  "description": "Filter out swearwords you hear on YouTube videos based on your own preferences!",
+  "version": "1.4",
+  "background": {
+    "scripts": [
+      "js/angular.min.js",
+      "/data/xml2json.js",
+      "js/jquery-3.1.1.js",
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "content_security_policy": "script-src 'self' https://ajax.googleapis.com/ https://s3-us-west-2.amazonaws.com/ https://cdnjs.cloudflare.com/; object-src 'self'",
+  "options_page": "index.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.youtube.com/*"
+      ],
+      "css": [
+        "css/content.css",
+        "css/icon.css"
+      ],
+      "html": [
+        "html/background.html"
+      ],
+      "js": [
+        "js/angular.min.js",
+        "js/jquery-3.1.1.js",
+        "/data/xml2json.js",
+        "js/content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "icons": {
+    "16": "/img/logo_YAF_ICON.png",
+    "48": "/img/logo_YAF_ICON.png",
+    "128": "/img/YAF_Logo_with_text.png"
+  },
+  "web_accessible_resources": [
+    "/html/options_container.html",
+    "/index.html",
+    "/img/logo_YAF_ICON.png",
+    "/img/YAF_Logo_with_text.png",
+    "css/icon.css"
+  ],
+  "page_action": {
+    "default_icon": "img/logo_YAF_ICON.png",
+    "default_popup": "html/popup.html",
+    "default_title": "Youtube Audio Filtering"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "https://ajax.googleapis.com/",
+    "declarativeContent",
+    "storage"
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Blink by IrisPR",
+  "version": "1.9.8.26",
+  "description": "Blink by IrisPR lets you capture PR wins in an instant and save them in IrisPR, where you can create beautiful PR reports.",
+  "icons": {
+    "128": "results/img/iris-square-solidbg-128.png"
+  },
+  "browser_action": {
+    "default_icon": "results/img/blink-icon.png"
+  },
+  "content_security_policy": "script-src 'self' https://cdn.heapanalytics.com/js/heap-3015135535.js; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "results/js/jquery-2.1.3.min.js",
+        "results/content/content.js",
+        "Logger.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "gmail/library/jquery-1.10.2.min.js",
+        "gmail/library/gmail.js",
+        "gmail/content/InjectGmail.js",
+        "gmail/content/inject.js",
+        "Logger.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "gmail/library/jquery-1.10.2.min.js",
+      "results/background/background.js",
+      "gmail/background/background.js",
+      "common.js",
+      "Logger.js"
+    ],
+    "persistent": false
+  },
+  "web_accessible_resources": [
+    "gmail/library/jquery-1.10.2.min.js",
+    "gmail/library/gmail.js",
+    "gmail/library/moment.min.js",
+    "gmail/js/main.js",
+    "gmail/html/login.html",
+    "gmail/js/login.js",
+    "gmail/img/logo_iris.png",
+    "gmail/img/blink-icon.png",
+    "gmail/html/injectCampaign.html",
+    "gmail/html/pitchCapture.html",
+    "gmail/content/InjectGmail.js",
+    "gmail/html/responseCapture.html",
+    "Logger.js",
+    "common.js"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://mail.google.com/*"
+    ]
+  },
+  "author": "IrisPR",
+  "permissions": [
+    "storage",
+    "tabs",
+    "cookies",
+    "http://*/*",
+    "https://*/*"
+  ]
+}

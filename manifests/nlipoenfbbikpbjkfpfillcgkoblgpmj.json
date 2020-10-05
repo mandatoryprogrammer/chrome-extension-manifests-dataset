@@ -1,0 +1,118 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "version": "4.3.11",
+  "default_locale": "en",
+  "name": "__MSG_extName__",
+  "description": "__MSG_extDesc__",
+  "minimum_chrome_version": "6.0",
+  "background": {
+    "page": "background.html"
+  },
+  "options_page": "option-react.html",
+  "icons": {
+    "16": "images/icon16.png",
+    "32": "images/icon32.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "container": "GOOGLE_DRIVE",
+  "api_console_project_id": "934696770472",
+  "permissions": [
+    "tabs",
+    "<all_urls>",
+    "storage",
+    "unlimitedStorage",
+    "desktopCapture",
+    "tabCapture",
+    "cookies"
+  ],
+  "oauth2": {
+    "client_id": "934696770472-c4k28j2t25p9fpntqsiblj12v8k8cob3.apps.googleusercontent.com",
+    "scopes": [
+      "profile",
+      "email",
+      "https://www.googleapis.com/auth/youtube",
+      "https://www.googleapis.com/auth/drive"
+    ]
+  },
+  "commands": {
+    "stop-recording": {
+      "suggested_key": {
+        "default": "Alt+S"
+      },
+      "description": "Stop recording",
+      "global": true
+    },
+    "pause-or-resume-recording": {
+      "suggested_key": {
+        "default": "Alt+P"
+      },
+      "description": "Pause/Resume recording",
+      "global": true
+    }
+  },
+  "optional_permissions": [
+    "downloads"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon19.png",
+      "38": "images/icon38.png"
+    },
+    "default_title": "__MSG_extName__",
+    "default_popup": "popup.html"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://ssl.google-analytics.com https://www.google-analytics.com https://connect.facebook.net https://platform.twitter.com http://localhost:8097/; object-src 'self' connect-src ws://localhost:8097",
+  "web_accessible_resources": [
+    "images/success.gif",
+    "images/clear.png",
+    "images/icon19.png",
+    "images/button_icon_cancel.png",
+    "images/button_icon_cancel@2x.png",
+    "images/button_icon_cancel_hover.png",
+    "images/button_icon_cancel_hover@2x.png",
+    "images/button_icon_capture.png",
+    "images/button_icon_capture@2x.png",
+    "images/button_icon_capture_hover.png",
+    "images/button_icon_capture_hover@2x.png",
+    "images/button_icon_copy@2x.png",
+    "images/button_icon_copy.png",
+    "camera.html"
+  ],
+  "content_scripts": [
+    {
+      "js": [
+        "javascripts/libs/jquery-3.4.0.min.js",
+        "javascripts/libs/dragresize.js",
+        "javascripts/jquery.draggable.js",
+        "javascripts/libs/jquery-ui-custom.min.js",
+        "javascripts/in-place-play.js",
+        "javascripts/content_script.js"
+      ],
+      "css": [
+        "stylesheets/selected.css"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_globs": [
+        "https://awesomescreenshot.com/save-local-flash/SaveToDisk.html"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*"
+      ],
+      "js": [
+        "javascripts/libs/inboxsdk.js",
+        "javascripts/gmail_content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "offline_enabled": true
+}

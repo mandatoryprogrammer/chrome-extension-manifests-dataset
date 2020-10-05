@@ -1,0 +1,42 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Trello List Filter",
+  "version": "1.2.1",
+  "manifest_version": 2,
+  "description": "Help manage the horizontal sprawl of trello lists on a single board.",
+  "homepage_url": "http://github.com/evilbuck/trello-list-filter",
+  "icons": {
+    "16": "icons/trello-tile-16.png",
+    "48": "icons/trello-tile-48.png",
+    "128": "icons/trello-tile-128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": true
+  },
+  "options_page": "src/options/index.html",
+  "permissions": [
+    "http://trello.com/*",
+    "https://trello.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://trello.com/*",
+        "https://trello.com/*"
+      ],
+      "css": [
+        "src/inject/inject.css"
+      ],
+      "js": [
+        "src/jquery.js",
+        "src/inject/inject.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'"
+}

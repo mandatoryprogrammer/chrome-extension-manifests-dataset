@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "name": "Betterworks for Gmail",
+  "description": "This extension allows to you access Betterworks",
+  "version": "1.6",
+  "icons": {
+    "16": "assets/logo16.png",
+    "32": "assets/logo32.png",
+    "80": "assets/logo80.png",
+    "128": "assets/logo128.png"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "scripts/inject.js",
+        "scripts/listeners.js"
+      ],
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "run_at": "document_idle",
+      "exclude_globs": [
+        "*?ui=2&view=btop*"
+      ]
+    }
+  ],
+  "page_action": {
+    "default_icon": {
+      "19": "assets/logo32.png"
+    },
+    "default_title": "Betterworks Plugin Options",
+    "default_popup": "popup/popup.html"
+  },
+  "permissions": [
+    "activeTab",
+    "https://ajax.googleapis.com/",
+    "https://mail.google.com/*",
+    "background",
+    "tabs",
+    "storage"
+  ],
+  "content_security_policy": "script-src 'self' https://cdn.segment.com https://www.google-analytics.com https://cdn.mxpnl.com https://api.mixpanel.com; object-src 'self'",
+  "externally_connectable": {
+    "matches": [
+      "https://mail.google.com/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "index.html",
+    "scripts/*.js",
+    "assets/**",
+    "popup/**"
+  ]
+}

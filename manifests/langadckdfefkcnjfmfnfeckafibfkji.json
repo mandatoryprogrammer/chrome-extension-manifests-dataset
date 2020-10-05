@@ -1,0 +1,40 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Force Safe Search",
+  "author": "Bill Hayden",
+  "version": "1.5",
+  "description": "Force Safe Search on all major search engines: Google, YouTube, Yahoo, Bing, Yandex, Dogpile, Reddit, Ixquick, and DuckDuckGo",
+  "icons": {
+    "44": "icon44.png",
+    "50": "icon50.png",
+    "128": "icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "permissions": [
+    "<all_urls>",
+    "webRequest",
+    "webRequestBlocking",
+    "cookies",
+    "nativeMessaging"
+  ],
+  "-ms-preload": {
+    "backgroundScript": "backgroundScriptsAPIBridge.js",
+    "contentScript": "contentScriptsAPIBridge.js"
+  }
+}

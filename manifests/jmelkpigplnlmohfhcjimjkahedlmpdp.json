@@ -1,0 +1,79 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Chill Remote",
+  "short_name": "Chill Remote",
+  "description": "Control Netflix and Amazon Prime from your iPhone or iPad.",
+  "version": "1.2.7",
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon19.png",
+      "38": "images/icon38.png"
+    },
+    "default_popup": "pages/popup.html"
+  },
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "js/injector.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://emp.bbc.co.uk/*",
+        "https://emp.britbox.com/*"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "js/injector.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/jquery.min.js",
+      "js/cable.js",
+      "js/cable-manager.js",
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "web_accessible_resources": [
+    "js/remotes.js",
+    "js/jquery.min.js",
+    "js/iplayer-helper.js",
+    "js/britbox-helper.js",
+    "css/hs-style.css"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://chillremote.tv/*",
+      "https://beta.chillremote.tv/*",
+      "https://netflixremote.app/*",
+      "https://beta.netflixremote.app/*"
+    ]
+  },
+  "permissions": [
+    "<all_urls>",
+    "activeTab",
+    "tabs",
+    "storage",
+    "tabs",
+    "gcm",
+    "cookies",
+    "https://chillremote.tv/"
+  ]
+}

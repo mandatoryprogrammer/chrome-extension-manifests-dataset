@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "redflyplugin",
+  "description": "This extension helps make the link between linkedin and redfly",
+  "version": "0.0.8",
+  "icons": {
+    "128": "icon128.png"
+  },
+  "externally_connectable": {
+    "matches": [
+      "http://redfly.redstar.com/*"
+    ]
+  },
+  "background": {
+    "scripts": [
+      "extconf.js",
+      "redflybackground.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "webNavigation",
+    "tabs",
+    "cookies",
+    "storage",
+    "http://www.linkedin.com/*",
+    "http://redfly.redstar.com/*"
+  ],
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "http://redfly.redstar.com/*"
+      ],
+      "js": [
+        "extconf.js",
+        "redflycontent.js"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "http://www.linkedin.com/*"
+      ],
+      "js": [
+        "extconf.js",
+        "linkedcontent.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "extconf.js",
+    "redflycontent.js",
+    "linkedcontent.js"
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "ABS",
+  "description": "Automatically perform daily searches and collect bonus reward points.",
+  "version": "1.2.19",
+  "manifest_version": 2,
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.bing.com/*",
+        "https://account.microsoft.com/rewards/*"
+      ],
+      "js": [
+        "script-injector.js",
+        "constants.js",
+        "utils.js",
+        "chrome-utils.js",
+        "content-script.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "constants.js",
+      "utils.js",
+      "chrome-utils.js",
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "commands": {
+    "start-searches": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+S",
+        "mac": "Command+Shift+S"
+      },
+      "description": "Start searches"
+    }
+  },
+  "web_accessible_resources": [
+    "window-variable-grabber.js"
+  ],
+  "permissions": [
+    "https://*.bing.com/*",
+    "webRequest",
+    "webRequestBlocking",
+    "tabs",
+    "storage"
+  ]
+}

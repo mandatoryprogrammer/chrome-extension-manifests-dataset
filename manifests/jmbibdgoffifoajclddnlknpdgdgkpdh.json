@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Zero-Click",
+  "description": "Surf withOut CLICKING.",
+  "version": "0.0.9",
+  "icons": {
+    "16": "src/icon.png",
+    "48": "src/icon.png",
+    "128": "src/icon.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "src/icon.png",
+      "38": "src/icon.png"
+    },
+    "default_title": "Browse web without any clicks. Place your mouse anywhere and it will auto-click for you.",
+    "default_popup": "src/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "node_modules/jquery/dist/jquery.min.js",
+      "src/background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "tabs",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "node_modules/jquery/dist/jquery.min.js",
+        "src/content.js"
+      ],
+      "css": []
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

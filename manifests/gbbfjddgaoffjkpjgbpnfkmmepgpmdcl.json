@@ -1,0 +1,43 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Remove All Politics From Facebook",
+  "description": "A Facebook Politics Switch - On or Off",
+  "version": "2.6",
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "icons": {
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.facebook.com/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "js/external/jquery-1.11.1.min.js",
+        "js/facebook_filter.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": "images/icon48.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "webRequest"
+  ],
+  "web_accessible_resources": [
+    "data/data.json",
+    "sharetemplate.html"
+  ]
+}

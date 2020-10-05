@@ -1,0 +1,67 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Progress Telerik Test Studio Extension",
+  "version": "2020.2.728.1",
+  "description": "Progress Telerik Test Studio extension enables recording and executions of web tests within web browser.",
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "homepage_url": "http://www.telerik.com/teststudio/",
+  "icons": {
+    "16": "img/16.png",
+    "48": "img/48.png",
+    "128": "img/128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "scripts/foreground.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "scripts/teststudio-interceptors-foreground.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "browsingData",
+    "storage",
+    "tabs",
+    "cookies",
+    "history",
+    "*://*/*",
+    "debugger"
+  ],
+  "web_accessible_resources": [
+    "img/*.png",
+    "scripts/pageScript.js",
+    "scripts/teststudio.js",
+    "scripts/teststudio-interceptors.js",
+    "scripts/teststudio-webComponent-interceptor.js",
+    "scripts/communicationRecoverer.js",
+    "scripts/2017.3.1013.1/pageScript.js",
+    "scripts/2017.3.1013.1/teststudio.js"
+  ],
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAiQjT69/fKv088JdKfb8kdakanYbVGxVUDxUKi4NWuu5b42rQ4wMkKq5hCuMFFMfVhLR1kUcntgG97Ni2+CMjh5snNUHJN3HGxsBF5sU6GXYf/g9yit9/mXseqGFpQw7j5XI/IxBEyzb/40FIc6PcQesMnU1Olj1pqQW+3TUQRM1HfYkVlW4G7xWyqiPP40lRErysFETJaKJ3Y9wct8dWWH3I0VdvXZYpzshZg3G/ZT1QyMSnAFn+7NDv8mhkiWHNS6SLCawbTkGLp5Grskh7O2VA/Chwr5VK/5TSzCiReDt340d4wTJkpnXS2Xvp/5JP48eWjzyeWNhIv+Bzx0BFIwIDAQAB",
+  "browser_action": {
+    "default_icon": "img/48.png",
+    "default_title": "Progress Telerik Test Studio Extension",
+    "default_popup": "about_popup.html"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  }
+}

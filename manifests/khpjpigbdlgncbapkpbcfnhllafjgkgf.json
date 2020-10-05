@@ -1,0 +1,35 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Hackers New",
+  "version": "1.0.5",
+  "description": "Show items from HN's /newest page on the Hacker News front page.",
+  "icons": {
+    "48": "icons/icon-48.png",
+    "96": "icons/icon-96.png",
+    "128": "icons/icon-128.png"
+  },
+  "permissions": [
+    "*://hacker-news.firebaseio.com/*",
+    "*://news.ycombinator.com/*",
+    "alarms",
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "refresh-new.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "display-new.js"
+      ],
+      "matches": [
+        "*://news.ycombinator.com/",
+        "*://news.ycombinator.com/news*"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

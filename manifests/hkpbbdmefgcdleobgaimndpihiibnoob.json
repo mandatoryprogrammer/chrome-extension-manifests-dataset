@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Subsmovies",
+  "version": "2.6",
+  "manifest_version": 2,
+  "description": "Watch movies and tv-shows with subtitles and get subtitles translation right in the player.",
+  "icons": {
+    "16": "images/16.png",
+    "48": "images/64.png",
+    "128": "images/128.png"
+  },
+  "browser_action": {
+    "default_icon": "images/16.png",
+    "default_popup": "popup.html",
+    "default_title": "Subsmovies"
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "include_globs": [
+        "https://www1.subsmovies.*/*",
+        "https://www.subsmovies.*/*"
+      ],
+      "css": [
+        "css/content-script.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.flowyourvideo.com/*"
+      ],
+      "js": [
+        "js/libs/jquery-2.2.3.min.js",
+        "js/content-script.js"
+      ],
+      "css": [
+        "css/content-script.css"
+      ],
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "storage",
+    "tabs",
+    "webNavigation",
+    "<all_urls>"
+  ],
+  "web_accessible_resources": [
+    "js/*",
+    "css/*",
+    "images/*",
+    "fonts/*.*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Factoid Finder",
+  "version": "1.0",
+  "description": "Highlights users keywords and allows them to make notes/factoids of those by selecting the text they want",
+  "icons": {
+    "16": "icon/icon16.png",
+    "48": "icon/icon48.png",
+    "128": "icon/icon128.png"
+  },
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "author": "Sean Brougham",
+  "permissions": [
+    "activeTab",
+    "declarativeContent",
+    "storage",
+    "clipboard",
+    "clipboardRead",
+    "clipboardWrite",
+    "background"
+  ],
+  "options_page": "Settings.html",
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "js/content_script.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

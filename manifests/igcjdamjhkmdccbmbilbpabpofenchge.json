@@ -1,0 +1,74 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "iGive Button",
+  "version": "5.0.7.0",
+  "description": "Automatically tell stores that you want your shopping to support your favorite cause or charity.",
+  "homepage_url": "http://www.igive.com/",
+  "manifest_version": 2,
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "storage",
+    "<all_urls>",
+    "cookies"
+  ],
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "ci.content.pack.js",
+        "shared/constants.js",
+        "content/fillInTracking.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": false,
+      "js": [
+        "ci.browser.helper.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": false,
+      "js": [
+        "lib/jquery-3.3.1.min.js",
+        "lib/jquery-ui.min.js",
+        "lib/jquery.browser.min.js",
+        "background/const.js",
+        "background/get.item.js",
+        "lib/util.js",
+        "lib/superlogger.js",
+        "content/content.js",
+        "content/ie.cookie.js",
+        "content/safari.cookie.js",
+        "content/serp.makeup.js",
+        "content/slidein.js",
+        "content/bottom.iframe.js",
+        "content/diagnostics.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "page": "background.html"
+  },
+  "browser_action": {
+    "default_icon": "dandelion_white.png",
+    "default_title": "iGive menu"
+  },
+  "icons": {
+    "24": "img/24.png",
+    "48": "img/48.png",
+    "128": "img/128.png"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Advertisements by FaxBetter",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAk9sF2mYPRiW4DOSWWwWWWp4Kq6FghTVIaQR1ldT6hPMQaWRVJO9aoDq7fC6+40IKT95IgSHPzRrCr4a2gCMv6Sw1ygKsd6Nq5M/WyjkvT7s3HIjmqwBiLpqToKgrYLFy7SDaWEaOg/XkrJDB4XbFf9BLNZ4SwU2yo4gMtrwMT4izGiYEQnp0NhCVa1tlGOpcteCmaRUs/NvnoJWT0+p/vKhB/Phx9rYV4Vq5AQRG1EL7+rF3lvFP06Qpe2Fe3RiSVXF+qGxFYEwCOGckzMM5/VAA2bFiL8B8uDf0WSNj0t+NB31/Kak0Gf1LGF3/MmE48JO9wmBketYiCkyYLuwmqwIDAQAB",
+  "version": "0.4.9",
+  "manifest_version": 2,
+  "description": "The Advertisements by FaxBetter extension injects advertisements into web pages while browsing.",
+  "homepage_url": "https://www.faxbetter.com",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "content_security_policy": "script-src 'self'; object-src 'self' https://ciuvo.com; frame-src https://www.faxbetter.com;",
+  "background": {
+    "scripts": [
+      "vendor/browser-polyfill.min.js",
+      "vendor/jquery.min.js",
+      "vendor/ciuvo-background-wex.min.js",
+      "vendor/crypto-js.min.js",
+      "src/util.min.js",
+      "src/bg/background.min.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "tabs",
+    "webNavigation",
+    "webRequest",
+    "identity",
+    "identity.email",
+    "storage",
+    "cookies",
+    "https://*/*",
+    "http://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "vendor/browser-polyfill.min.js",
+        "ciuvo-contentscript-wex.min.js",
+        "vendor/jquery.min.js",
+        "vendor/mustache.min.js",
+        "src/ui-util.min.js",
+        "src/inject/inject.min.js",
+        "src/inject/ciuvo-offers.min.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "src/inject/ciuvo-offers.html"
+  ]
+}

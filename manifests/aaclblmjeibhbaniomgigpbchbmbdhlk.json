@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "NeoGAF Thread Summarizer",
+  "version": "1.7.0.2",
+  "description": "Analyses threads for most quoted posts, lets you keep track of your favourite posters, caches thread pages for fast access.",
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "page_action": {
+    "default_icon": "noci-19.png",
+    "default_title": "NeoGAF Thread Summarizer",
+    "default_popup": "popup.html"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "permissions": [
+    "webNavigation",
+    "tabs",
+    "storage",
+    "alarms",
+    "*://*.neogaf.com/*"
+  ],
+  "icons": {
+    "48": "noci-48.png",
+    "128": "noci-128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.neogaf.com/forum/showthread.php*"
+      ],
+      "js": [
+        "showresults.js"
+      ],
+      "css": [
+        "inject.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "manifest_version": 2
+}

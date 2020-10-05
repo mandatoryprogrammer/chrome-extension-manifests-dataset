@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Mubi Score",
+  "version": "0.4.1",
+  "author": "Gergely Imreh",
+  "developer": {
+    "name": "Gergely Imreh",
+    "url": "https://github.com/imrehg/mubiscore"
+  },
+  "description": "Add movie scores to Mubi's Now Showing page.",
+  "permissions": [
+    "storage",
+    "https://www.omdbapi.com/"
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "128": "icons/icon128.png"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true,
+    "browser_style": true
+  },
+  "applications": {
+    "gecko": {
+      "id": "mubiscore@imreh.net",
+      "strict_min_version": "52.0"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mubi.com/showing",
+        "https://mubi.com/*/showing"
+      ],
+      "run_at": "document_idle",
+      "css": [
+        "content.css"
+      ],
+      "js": [
+        "browser-polyfill.js",
+        "contentScript.js"
+      ]
+    }
+  ],
+  "manifest_version": 2
+}

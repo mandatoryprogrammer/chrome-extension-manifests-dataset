@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Send to OneNote",
+  "description": "Clip part of a web page , or a whole page to Microsoft OneNote right from the right-click menu.",
+  "version": "1.2.13",
+  "manifest_version": 2,
+  "permissions": [
+    "contextMenus",
+    "nativeMessaging",
+    "activeTab",
+    "http://*/*",
+    "https://*/*",
+    "storage",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "content_security_policy": "default-src *; frame-src *; img-src * data:; connect-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-eval' https://*.live.net https://*.live.com https://ssl.google-analytics.com; object-src 'self'",
+  "browser_action": {
+    "default_icon": "notebook128_gray.png",
+    "default_title": "Send to OneNote",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "jquery.min.js",
+      "moment.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "jquery.min.js",
+        "content.js"
+      ]
+    }
+  ],
+  "options_page": "options.html",
+  "icons": {
+    "16": "notebook16.png",
+    "48": "notebook48.png",
+    "128": "notebook128.png"
+  }
+}

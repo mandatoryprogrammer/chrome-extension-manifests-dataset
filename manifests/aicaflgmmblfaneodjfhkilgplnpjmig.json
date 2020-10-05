@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Qlearly - Tab and Bookmark Manager",
+  "description": "Organize your favorite websites by columns and boards.",
+  "version": "2.9.9",
+  "author": "Guillaume Bardet, Ravi Shukla",
+  "browser_action": {
+    "default_icon": "asset/image/icons/128.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "asset/image/icons/16.png",
+    "32": "asset/image/icons/32.png",
+    "48": "asset/image/icons/48.png",
+    "128": "asset/image/icons/128.png"
+  },
+  "permissions": [
+    "bookmarks",
+    "contextMenus",
+    "activeTab",
+    "storage",
+    "tabs",
+    "https://*/",
+    "http://*/"
+  ],
+  "chrome_url_overrides": {
+    "newtab": "board-detail2.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://qlearly.com/beta/setup/ext/social-token*"
+      ],
+      "js": [
+        "asset/js/twitter-session.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://qlearly.com https://*.google-analytics.com https://*.helpcrunch.com https://*.usemagnify.com https://stripe.com https://*.stripe.com; object-src 'self'; connect-src https://*.helpcrunch.com wss://qlearly.helpcrunch.com https://*.google-analytics.com https://qlearly.com https://*.usemagnify.com https://stripe.com https://*.stripe.com;"
+}

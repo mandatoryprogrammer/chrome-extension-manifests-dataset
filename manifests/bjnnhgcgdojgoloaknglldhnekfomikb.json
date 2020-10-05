@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Shoplus Facebook Order Helper",
+  "version": "2.37.1",
+  "description": "Shoplus Facebook Order Helper helps you to collect orders with ease.",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "images/icon32g.png",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.facebook.com/*/inbox*"
+      ],
+      "run_at": "document_end",
+      "all_frames": true,
+      "js": [
+        "content.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "images/store-default.svg",
+    "inject.css",
+    "inject.js"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://*.facebook.com/*/inbox*",
+      "https://*.shoplus.me/*",
+      "https://*.shoplus.me.test/*"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "https://*.facebook.com/*/inbox*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://cdn.amplitude.com; object-src 'self'"
+}

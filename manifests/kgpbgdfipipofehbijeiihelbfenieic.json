@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Wallhaven Extender",
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "description": "Adds download and slideshow links directly onto images on Wallhaven.cc",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": [
+    "*://*.wallhaven.cc/",
+    "downloads",
+    "storage"
+  ],
+  "browser_action": {
+    "default_icon": "icons/icon32.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.wallhaven.cc/*"
+      ],
+      "exclude_matches": [
+        "*://*.wallhaven.cc/settings/*"
+      ],
+      "css": [
+        "lib/simpleLightbox-2.1.0/simpleLightbox.css",
+        "src/content.css"
+      ],
+      "js": [
+        "lib/simpleLightbox-2.1.0/simpleLightbox.js",
+        "src/util.js",
+        "src/content.common.js",
+        "src/content.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.wallhaven.cc/settings/browsing/*"
+      ],
+      "js": [
+        "src/content.browsing.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "src/util.js",
+    "src/inject.js",
+    "src/inject.common.js",
+    "src/inject.lightbox.js"
+  ],
+  "background": {
+    "scripts": [
+      "src/background.js"
+    ],
+    "persistent": false
+  }
+}

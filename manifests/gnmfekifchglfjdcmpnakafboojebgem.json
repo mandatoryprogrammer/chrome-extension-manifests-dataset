@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Facebook time tracker",
+  "description": "Track the used time of Facebook pages. Then prevent user to use more after the time is over",
+  "version": "0.2",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "https://www.facebook.com/",
+    "https://facebook.com/",
+    "http://www.facebook.com/",
+    "http://facebook.com/"
+  ],
+  "icons": {
+    "16": "facebook.time.tracker/images/facebook-timer-16.png",
+    "48": "facebook.time.tracker/images/facebook-timer-48.png",
+    "128": "facebook.time.tracker/images/facebook-timer-128.png"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "facebook.time.tracker/injectScript.min.js"
+      ],
+      "matches": [
+        "http://facebook.com/",
+        "http://www.facebook.com/",
+        "https://facebook.com/",
+        "https://www.facebook.com/"
+      ]
+    }
+  ],
+  "options_page": "facebook.time.tracker/pages/options.html",
+  "browser_action": {
+    "default_icon": {
+      "19": "facebook.time.tracker/images/facebook-timer-19.png",
+      "38": "facebook.time.tracker/images/facebook-timer-38.png"
+    },
+    "default_title": "Facebook time tracker"
+  },
+  "background": {
+    "scripts": [
+      "facebook.time.tracker/js/background.min.js"
+    ],
+    "persistent": false
+  },
+  "web_accessible_resources": [
+    "*.js"
+  ]
+}

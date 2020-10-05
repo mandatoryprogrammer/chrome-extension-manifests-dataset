@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Smart PBS CrewID",
+  "short_name": "Smart PBS",
+  "version": "2.1.0.0",
+  "description": "Improve access to UAL Pilot PBS Bidding Screen",
+  "manifest_version": 2,
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://bidding.ual.com/interbids/admin/index"
+      ],
+      "js": [
+        "contentScript -- Admin page background.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://bidding.ual.com/interbids/admin/admin_list_users.jsp"
+      ],
+      "js": [
+        "contentScript -- Crew Entry Frame.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://bidding.ual.com/interbids/index?com=AdminProxyBid&crew=*"
+      ],
+      "js": [
+        "contentScript -- Pilot Bid Screens.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "javascriptAdminPageBackground.js",
+    "javascriptCrewEntryFrame.js",
+    "javascriptPilotBidScreens.js"
+  ]
+}

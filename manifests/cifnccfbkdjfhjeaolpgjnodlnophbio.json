@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Commerce Cloud WebDAV+",
+  "manifest_version": 2,
+  "version": "2.4.0",
+  "author": "Marcel Douma",
+  "description": "Transform Commerce Cloud WebDav browser view into an advanced WebDav client plus other useful features.",
+  "icons": {
+    "128": "img/logo.png"
+  },
+  "options_page": "options.html",
+  "permissions": [
+    "activeTab",
+    "downloads",
+    "downloads.shelf",
+    "storage"
+  ],
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "img/*",
+    "js/vendor/jquery.min.js",
+    "js/polyfill.js",
+    "js/webdav/WebDavPlus.min.js"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/on/demandware.servlet/webdav/Sites/*"
+      ],
+      "css": [
+        "css/vendor/bootstrap.min.css",
+        "css/webdav-style.css"
+      ],
+      "js": [
+        "js/vendor/moment.min.js",
+        "js/vendor/jquery.min.js",
+        "js/vendor/jquery.tablesorter.min.js",
+        "js/webdav/WebDavDownload.js",
+        "js/webdav/WebDavLogFileView.js",
+        "js/webdav/WebDavView.js",
+        "webdav-main.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*/on/demandware.store/Sites-Site/default/*"
+      ],
+      "css": [
+        "css/bm-style.css"
+      ],
+      "js": [
+        "js/vendor/jquery.min.js",
+        "js/vendor/jsonlint.js",
+        "bm-main.js"
+      ]
+    }
+  ]
+}

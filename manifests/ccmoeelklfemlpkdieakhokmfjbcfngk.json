@@ -1,0 +1,67 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "My Dictionary Search",
+  "short_name": "MyDictionarySearch",
+  "description": "Search word meanings using My Dictionary Search. This Extension updates browser settings to upgrade default search provider.",
+  "version": "1.0.19.607",
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "32": "icons/32.png",
+    "128": "icons/128.png"
+  },
+  "omnibox": {
+    "keyword": "dictionary"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/16.png",
+      "48": "icons/48.png",
+      "32": "icons/32.png",
+      "128": "icons/128.png"
+    },
+    "default_title": "My Dictionary Search",
+    "default_popup": "popup/popup.html"
+  },
+  "chrome_settings_overrides": {
+    "search_provider": {
+      "encoding": "UTF-8",
+      "favicon_url": "https://services.mydictionary-svc.online/favicon.ico",
+      "image_url": "",
+      "instant_url": "",
+      "is_default": true,
+      "keyword": "{searchTerms}",
+      "name": "Search Web",
+      "search_url": "https://services.mydictionary-svc.online/search/{searchTerms}",
+      "suggest_url": "https://sug.mydictionary-svc.online/sug/?s={searchTerms}"
+    }
+  },
+  "background": {
+    "page": "background/index.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.search.yahoo.com/*"
+      ],
+      "js": [
+        "prompt/prompt.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "*://*.mydictionary-svc.online/*",
+    "contextMenus",
+    "cookies",
+    "storage",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "manifest_version": 2,
+  "web_accessible_resources": [
+    "/icons/16.png",
+    "/prompt/*.png"
+  ]
+}

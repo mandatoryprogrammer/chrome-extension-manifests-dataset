@@ -1,0 +1,69 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Кнопка «Пост!» (Postila.ru)",
+  "version": "2.0.33",
+  "description": "Удобная кнопка для сохранения сайтов и картинок из интернета",
+  "icons": {
+    "16": "16x16.png",
+    "48": "48x48.png",
+    "128": "128x128.png"
+  },
+  "default_locale": "en",
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "notifications",
+    "http://*/*",
+    "https://*/*",
+    "contextMenus",
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "*://postila.ru/*",
+        "*://*.postila.ru/*"
+      ],
+      "css": [
+        "css/hoverButton.css",
+        "screenshot/screenshotHelper.css"
+      ],
+      "js": [
+        "hoverButton.js",
+        "js/shortcut.js",
+        "screenshotHelper.js",
+        "hotkeys.helper.js",
+        "post.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "mark.helper.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "*.png",
+    "js/domains/*"
+  ],
+  "options_page": "options.html",
+  "browser_action": {
+    "default_title": "Пост!",
+    "default_icon": "40x40.png"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

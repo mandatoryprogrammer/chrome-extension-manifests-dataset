@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "homepage_url": "https://www.inwebo.com",
+  "name": "inWebo Helium Backup",
+  "short_name": "Helium Backup",
+  "description": "This extension guarantees availability of inWebo One-Time Passwords generators in any circumstances",
+  "icons": {
+    "16": "images/favicon_16.png",
+    "24": "images/favicon_24.png",
+    "48": "images/favicon_48.png",
+    "128": "images/favicon_128.png"
+  },
+  "default_locale": "en",
+  "version": "2.1.0",
+  "background": {
+    "page": "background.html"
+  },
+  "permissions": [
+    "tabs",
+    "notifications",
+    "cookies",
+    "management",
+    "https://*/*",
+    "unlimitedStorage"
+  ],
+  "content_security_policy": "script-src 'self' http://localhost; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "vendors/jquery.min.js",
+        "chrome/config.js",
+        "chrome/chromeReload.js",
+        "chrome/chromeIndocFunctions.js",
+        "indoc/backup.js",
+        "detectors/selfcare.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ]
+}

@@ -1,0 +1,131 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Social Blade",
+  "version": "2.4.9",
+  "description": "See the best of Social Blade Stats right on YouTube, TwitchTV",
+  "author": "Social Blade LLC",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "20": "icon16.png",
+      "40": "icon48.png"
+    },
+    "default_title": "Social Blade"
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "*://*.youtube.com/*",
+        "*://*.twitter.com/*",
+        "*://*.twitch.tv/*"
+      ],
+      "js": [
+        "app.js"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "all_frames": true,
+      "matches": [
+        "*://*.twitch.tv/*"
+      ],
+      "js": [
+        "sbttv.js"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "all_frames": false,
+      "matches": [
+        "*://*.twitter.com/*"
+      ],
+      "js": [
+        "twitter/script.js"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "all_frames": false,
+      "matches": [
+        "*://studio.youtube.com/*"
+      ],
+      "js": [
+        "live_count/injector.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "*://*.socialblade.com/*",
+    "*://*.youtube.com/*",
+    "*://*.twitter.com/*",
+    "*://*.twitch.tv/*",
+    "*://*.instagram.com/*",
+    "*://*.facebook.com/*",
+    "storage"
+  ],
+  "web_accessible_resources": [
+    "sb-svg.svg",
+    "settings/index.html",
+    "settings/close.html",
+    "settings/logo.png",
+    "settings/style.css",
+    "settings/script.js",
+    "instagram/login.html",
+    "instagram/stats.html",
+    "instagram/script.js",
+    "twitter/stats.html",
+    "twitter/script.js",
+    "sbttv_script.js",
+    "sb-badge.png",
+    "header.png",
+    "sb-bars.png",
+    "sb-bars-white.png",
+    "arrow.png",
+    "ttv-stats.html",
+    "ttv-login.html",
+    "stats.html",
+    "stats-page.html",
+    "material-stats.html",
+    "material-stats-page.html",
+    "error.html",
+    "login.html",
+    "register.html",
+    "quota.html",
+    "account.html",
+    "storage-error.html",
+    "inject.js",
+    "jquery-1.12.3.js",
+    "font-awesome/css/font-awesome.css",
+    "font-awesome/fonts/*",
+    "legacy.js",
+    "live_count/index.js",
+    "live_count/index.html",
+    "live_count/index.css",
+    "sha1.min.js"
+  ],
+  "-ms-preload": {
+    "backgroundScript": "backgroundScriptsAPIBridge.js",
+    "contentScript": "contentScriptsAPIBridge.js"
+  },
+  "minimum_edge_version": "33.14281.1000.0",
+  "options_page": "settings/index.html",
+  "applications": {
+    "gecko": {
+      "id": "self-extension@socialblade.com",
+      "update_url": "https://addon.socialblade.com/updates.json"
+    }
+  }
+}

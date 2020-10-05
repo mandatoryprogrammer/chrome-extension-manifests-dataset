@@ -1,0 +1,128 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "AddOns.LA",
+  "version": "5.5.4",
+  "description": "An AddOns.LA multi-functional chrome extension. Powered by ArtusMode.",
+  "icons": {
+    "128": "./icons/addons_logo_trans_128.png",
+    "48": "./icons/addons_logo_trans_48.png",
+    "16": "./icons/addons_logo_trans_16.png"
+  },
+  "browser_action": {
+    "default_icon": "./icons/addons_logo_trans_16.png",
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "background": {
+    "scripts": [
+      "ortc.js",
+      "background_functions.js",
+      "event.js",
+      "background.js",
+      "jquery-3.2.1.min.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.mylimobiz.com/admin*"
+      ],
+      "js": [
+        "jquery-3.2.1.min.js",
+        "content_header.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.mylimobiz.com/admin/manageRes.*"
+      ],
+      "js": [
+        "jquery-3.2.1.min.js",
+        "content_reserv.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.addons.la/communications/phone/screen_pop.php*"
+      ],
+      "js": [
+        "jquery-3.2.1.min.js",
+        "content_screenpop.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.mylimobiz.com/admin/manageQuotes.*"
+      ],
+      "js": [
+        "jquery-3.2.1.min.js",
+        "content_quotes.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.mylimobiz.com/admin/default.asp"
+      ],
+      "js": [
+        "jquery-3.2.1.min.js",
+        "content_admin_default.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://manage.mylimobiz.com/admin/Scheduler.asp"
+      ],
+      "js": [
+        "jquery-3.2.1.min.js",
+        "content_calendar.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.mylimobiz.com/admin/managePrint.*"
+      ],
+      "js": [
+        "jquery-3.2.1.min.js",
+        "content_tools.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.mylimobiz.com/admin/DispatchGrid.*",
+        "https://*.mylimobiz.com/admin/dispatchgrid.*",
+        "https://*.mylimobiz.com/admin/Map.*",
+        "https://*.mylimobiz.com/admin/map.*",
+        "https://*.mylimobiz.com/admin/Graph.*",
+        "https://*.mylimobiz.com/admin/graph.*",
+        "https://*.mylimobiz.com/admin/GPS.*",
+        "https://*.mylimobiz.com/admin/gps.*"
+      ],
+      "js": [
+        "jquery-3.2.1.min.js",
+        "content_dispatch.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "background",
+    "storage",
+    "activeTab",
+    "https://*.mylimobiz.com/*",
+    "https://*.addons.la/communications/phone/screen_pop.php*",
+    "https://*.addons.la/people/employees/chrome/*",
+    "https://*.addons.la/addonsla/comms/*",
+    "webRequest",
+    "<all_urls>"
+  ],
+  "web_accessible_resources": [
+    "icons/*.png"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://*.addons.la/*"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://ortc-developers.realtime.co/server/ssl/2.1/; object-src 'self'"
+}

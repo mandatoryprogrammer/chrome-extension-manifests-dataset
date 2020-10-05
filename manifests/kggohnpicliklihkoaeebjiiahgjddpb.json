@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "short_name": "Google Privacy Shade",
+  "name": "Google Privacy Shade",
+  "manifest_version": 2,
+  "version": "1.0",
+  "browser_action": {
+    "default_popup": "index.html",
+    "default_title": "Google Privacy Shade"
+  },
+  "icons": {
+    "16": "./media/icon.png",
+    "48": "./media/icon.png",
+    "128": "./media/icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "./js/content_scripts/enableApp.js",
+        "./js/content_scripts/updateShadeCSS.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "./js/background.js"
+    ],
+    "persistent": false
+  },
+  "commands": {
+    "_execute_page_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+A",
+        "mac": "MacCtrl+Shift+A"
+      },
+      "description": "Google Privacy Shade"
+    }
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "background",
+    "storage",
+    "http://*/",
+    "https://*/"
+  ]
+}

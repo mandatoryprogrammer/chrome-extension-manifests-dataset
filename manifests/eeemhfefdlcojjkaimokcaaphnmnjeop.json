@@ -1,0 +1,93 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "CampaignAmp Capture",
+  "short_name": "Capture",
+  "description": "Boost your productivity on CampaignAmp using Capture",
+  "version": "2.2.6",
+  "manifest_version": 2,
+  "icons": {
+    "16": "images/icon16.png",
+    "32": "images/icon32.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "libraries/jquery-3.2.1.min.js",
+      "background.js",
+      "LoadLinksFromTabs.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "name": "CampaignAmp Capture",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.campaignamp.com/*"
+      ],
+      "js": [
+        "libraries/jquery-3.2.1.min.js",
+        "CAScraper.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.facebook.com/*"
+      ],
+      "js": [
+        "libraries/jquery-3.2.1.min.js",
+        "CAFBInjector.js"
+      ],
+      "css": [
+        "css/ca_social_capture.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.twitter.com/*"
+      ],
+      "js": [
+        "libraries/jquery-3.2.1.min.js",
+        "CATWInjector.js"
+      ],
+      "css": [
+        "css/ca_social_capture.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.instagram.com/*"
+      ],
+      "js": [
+        "libraries/jquery-3.2.1.min.js",
+        "CAINInjector.js"
+      ],
+      "css": [
+        "css/ca_social_capture.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "background",
+    "storage",
+    "activeTab",
+    "tabs",
+    "cookies",
+    "unlimitedStorage",
+    "*://*.campaignamp.com/",
+    "*://*.facebook.com/",
+    "*://*.twitter.com/",
+    "*://*.instagram.com/",
+    "<all_urls>"
+  ],
+  "web_accessible_resources": [
+    "images/*"
+  ]
+}

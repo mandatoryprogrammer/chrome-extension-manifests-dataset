@@ -1,0 +1,54 @@
+{
+  "manifest_version": 2,
+  "name": "CouponChief Scout",
+  "description": "Your friendly helper, Scout, will hunt down and apply coupon codes and cash back offers to your shopping cart - automatically.",
+  "version": "1.08",
+  "permissions": [
+    "tabs",
+    "storage",
+    "unlimitedStorage",
+    "http://*/*",
+    "https://*/*",
+    "cookies",
+    "webNavigation",
+    "webRequest",
+    "<all_urls>"
+  ],
+  "background": {
+    "scripts": [
+      "background.js",
+      "aes.js",
+      "raven.min.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "images/icons/disable38x38.png",
+    "default_title": "CouponChief Scout"
+  },
+  "icons": {
+    "128": "images/icons/logo128.png",
+    "48": "images/icons/enable48x48.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "content.js",
+        "aes.js",
+        "raven.min.js"
+      ]
+    }
+  ],
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "web_accessible_resources": [
+    "content.js",
+    "raven.min.js",
+    "*.png",
+    "*.gif"
+  ]
+}

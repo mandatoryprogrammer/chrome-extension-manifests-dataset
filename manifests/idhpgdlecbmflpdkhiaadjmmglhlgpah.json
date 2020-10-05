@@ -1,0 +1,80 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "SkyTime",
+  "version": "1.0.0.7",
+  "description": "SkyTime - best time tracking application. Exstension for Jira, Asana & Trello",
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+  "page_action": {
+    "default_icon": {
+      "16": "icon.png",
+      "24": "icon.png",
+      "32": "icon.png"
+    },
+    "default_title": "SkyTime"
+  },
+  "author": "Digital Skynet LLC",
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://app.asana.com/*",
+        "*://*.jira.com/*",
+        "*://jira.s1inc.com/*",
+        "*://trello.com/*"
+      ],
+      "js": [
+        "jquery.js",
+        "moment.js",
+        "skytime.js"
+      ],
+      "css": [
+        "skytime.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://app.asana.com/*"
+      ],
+      "js": [
+        "asana.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.jira.com/*",
+        "*://jira.s1inc.com/*"
+      ],
+      "js": [
+        "jira.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://trello.com/*"
+      ],
+      "js": [
+        "trello.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "homepage_url": "http://skytime.digitalskynet.com/",
+  "permissions": [
+    "tabs",
+    "nativeMessaging",
+    "http://skytime.digitalskynet.com/"
+  ]
+}

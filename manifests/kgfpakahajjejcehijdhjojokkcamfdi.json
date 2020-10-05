@@ -1,0 +1,112 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "SFDC Helper - QM",
+  "description": "This extension help to check info for your SFDC tools",
+  "version": "2019.9.21",
+  "icons": {
+    "128": "faviconQM.png",
+    "16": "faviconQM.png",
+    "48": "faviconQM.png"
+  },
+  "web_accessible_resources": [
+    "images/*.png",
+    "images/*.gif"
+  ],
+  "background": {
+    "page": "bg.html"
+  },
+  "options_page": "options.html",
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "notifications",
+    "tabs",
+    "storage",
+    "contextMenus",
+    "tts",
+    "notifications"
+  ],
+  "browser_action": {
+    "default_title": "SFDC QM Helper - 2019.9.21",
+    "default_icon": "faviconQM.png",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.salesforce.com/*",
+        "*://*.force.com/*",
+        "https://hp--c.na41.visual.force.com/apex/*",
+        "https://hp--c.na86.visual.force.com/apex/*",
+        "https://login.ext.hpe.com/*"
+      ],
+      "js": [
+        "lib/jquery.js",
+        "lib/bootstrap.js",
+        "lib/arrive.js",
+        "content_script_helper.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*.salesforce.com/*",
+        "*://*.force.com/*",
+        "https://login.ext.hpe.com/*"
+      ],
+      "js": [
+        "lib/jquery.js",
+        "lib/bootstrap.js",
+        "lib/arrive.js",
+        "content_script_new.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://hp.my.salesforce.com/500?*",
+        "https://hp--c.na41.visual.force.com/apex/ActivityView*",
+        "https://hp--c.na86.visual.force.com/apex/ActivityView*"
+      ],
+      "js": [
+        "lib/jquery.js",
+        "lib/bootstrap.js",
+        "lib/arrive.js",
+        "lib/iNotify.js",
+        "content_script_500.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://hp--c.na41.visual.force.com/apex/GSDCSCEntitlementPage*",
+        "https://hp--c.na86.visual.force.com/apex/GSDCSCEntitlementPage*",
+        "https://hp.my.salesforce.com/apex/GSDCSCEntitlementPage*",
+        "https://hp.my.salesforce.com/apex/GSDCSCAccountLocationSearch*",
+        "https://hp--c.na41.visual.force.com/apex/GSDCSCAccountLocationSearch*",
+        "https://hp--c.na86.visual.force.com/apex/GSDCSCAccountLocationSearch*"
+      ],
+      "js": [
+        "lib/jquery.js",
+        "lib/bootstrap.js",
+        "lib/arrive.js",
+        "content_script_apex.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://hp.my.salesforce.com/servlet/servlet.Integration*",
+        "https://hp--c.na41.visual.force.com/apex/ActivityView*",
+        "https://hp--c.na86.visual.force.com/apex/ActivityView*"
+      ],
+      "js": [
+        "lib/jquery.js",
+        "lib/bootstrap.js",
+        "lib/arrive.js",
+        "content_script_Activity.js"
+      ],
+      "all_frames": true
+    }
+  ]
+}

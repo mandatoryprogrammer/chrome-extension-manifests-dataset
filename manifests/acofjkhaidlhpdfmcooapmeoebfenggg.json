@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "has_many collections",
+  "version": "1.4",
+  "manifest_version": 2,
+  "description": "See which collections a product hunt post has been added to",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "https://www.producthunt.com/",
+    "http://www.producthunt.com/"
+  ],
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "background_page/background.js",
+      "background_page/background/api.js",
+      "background_page/background/page_action_decider.js",
+      "background_page/main.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://hunting-cabin.cc/has_many_collections/authorized*",
+        "http://localhost:3000/has_many_collections/authorized*"
+      ],
+      "js": [
+        "content_script/jquery.js",
+        "content_script/url.js",
+        "content_script/main.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "page_action": {
+    "default_icon": {
+      "38": "icon.png"
+    },
+    "default_popup": "page_action/main.html"
+  }
+}

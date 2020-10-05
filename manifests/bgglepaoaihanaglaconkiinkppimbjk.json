@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Twitlist",
+  "version": "0.1.5",
+  "description": "Adds personal custom notes about Twitter users.",
+  "permissions": [
+    "http://twitter.com/",
+    "https://twitter.com/",
+    "tabs",
+    "activeTab",
+    "storage",
+    "declarativeContent"
+  ],
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.twitter.com/*",
+        "https://*.twitter.com/*"
+      ],
+      "js": [
+        "content.bundle.js"
+      ],
+      "css": [
+        "twitlist.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://www.gstatic.com/ https://*.firebaseio.com https://firestore.googleapis.com https://www.googleapis.com https://apis.google.com; object-src 'self' https://*.googleapis.com",
+  "page_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "128": "images/twitlist_128.png"
+    },
+    "icons": {
+      "128": "images/twitlist_128.png"
+    }
+  },
+  "manifest_version": 2
+}

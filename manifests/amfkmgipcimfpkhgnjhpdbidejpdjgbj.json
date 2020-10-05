@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "VIPERCONSIG EXTRATOS",
+  "version": "2.6",
+  "manifest_version": 2,
+  "description": "Geração local de extratos de pagamentos para cálculos dentro do sistema",
+  "homepage_url": "http://sis21.viperconsig.com.br",
+  "icons": {
+    "48": "./viper_ico.png"
+  },
+  "background": {
+    "scripts": [
+      "./background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "js": [
+        "./viper.js"
+      ],
+      "matches": [
+        "http://sis21.viperconsig.com.br/*",
+        "http://localhost/*",
+        "http://sish.viperconsig.com.br/*"
+      ],
+      "all_frames": true
+    },
+    {
+      "js": [
+        "./dtpv.js"
+      ],
+      "matches": [
+        "https://sipa.inss.gov.br/SipaINSS/*",
+        "http://localhost/*",
+        "http://sipa.inss.gov.br/SipaINSS/*"
+      ],
+      "all_frames": true
+    }
+  ],
+  "browser_action": {
+    "default_icon": "./favicon.ico",
+    "default_title": "Viperconsig - Sistema"
+  },
+  "externally_connectable": {
+    "matches": [
+      "http://sis21.viperconsig.com.br/*",
+      "http://localhost/*",
+      "http://sipa.inss.gov.br/*",
+      "http://sish.viperconsig.com.br/*"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "declarativeContent",
+    "storage"
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "minimum_chrome_version": "46",
+  "name": "__MSG_name__",
+  "description": "__MSG_description__",
+  "permissions": [
+    "<all_urls>",
+    "chrome://favicon/",
+    "http://*/*",
+    "https://*/*",
+    "tabs",
+    "storage",
+    "bookmarks"
+  ],
+  "default_locale": "ru",
+  "version": "2.7.8",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png"
+    }
+  },
+  "web_accessible_resources": [
+    "main.html"
+  ],
+  "chrome_url_overrides": {
+    "newtab": "main.html"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "modules/content/application.js"
+      ],
+      "all_frames": false,
+      "run_at": "document_start"
+    }
+  ],
+  "options_ui": {
+    "page": "main.html?#settings",
+    "open_in_tab": true
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' blob: https://nova.rambler.ru https://soft.rambler.ru https://id.rambler.ru https://mail.rambler.ru https://api.rambler.ru https://static.rambler.ru https://st.top100.ru https://www.google-analytics.com 'sha256-Kuc4kTUXHFXygcdhisGvqvC6NqyvpqDJbs0wL3fmmS4=' 'sha256-mm8IuLqLHlz931hL2fkFfFMn13/udR3R7+P2GF3gkME='; object-src 'self'"
+}

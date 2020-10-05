@@ -1,0 +1,77 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Tribe: Alerts for Conscious Consumers",
+  "description": "Be a conscious consumer. Get business practice alerts while you shop online.",
+  "version": "1.0.3",
+  "short_name": "Tribe",
+  "manifest_version": 2,
+  "homepage_url": "http://jointribe.us",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "Tribe",
+    "default_popup": "pages/popup.html"
+  },
+  "permissions": [
+    "*://*.jointribe.us/",
+    "*://localhost/*",
+    "cookies",
+    "notifications",
+    "geolocation",
+    "storage"
+  ],
+  "options_ui": {
+    "page": "pages/options.html",
+    "open_in_tab": true,
+    "chrome_style": false
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://localhost/*",
+      "*://*.jointribe.us/"
+    ]
+  },
+  "web_accessible_resources": [
+    "scripts/fetch.js",
+    "styles/styles.css",
+    "pages/popup.html",
+    "scripts/popup.js",
+    "pages/options.html",
+    "scripts/options.js"
+  ],
+  "background": {
+    "scripts": [
+      "scripts/mixpanel.js",
+      "scripts/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": [
+        "https://*.amazon.com/dp/*",
+        "https://*.amazon.com/*/dp/*",
+        "https://amazon.com/*/dp/*",
+        "https://amazon.com/dp/*",
+        "https://*.amazon.com/gp/product/*",
+        "https://amazon.com/gp/product/*",
+        "https://*.target.com/*",
+        "https://target.com/*",
+        "https://www.walmart.com/ip/*",
+        "https://*.walmart.com/ip/*",
+        "https://walmart.com/*",
+        "https://walmart.com/ip/*"
+      ],
+      "js": [
+        "scripts/first.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js; object-src 'self'"
+}

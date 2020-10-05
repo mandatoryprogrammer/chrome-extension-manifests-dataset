@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "name": "Rumola - bypass CAPTCHA",
+  "short_name": "Rumola",
+  "version": "3.0.6",
+  "manifest_version": 2,
+  "description": "__MSG_desc__",
+  "default_locale": "en",
+  "homepage_url": "http://skipinput.com/",
+  "icons": {
+    "16": "images/on.png",
+    "48": "images/rumola48.png",
+    "128": "images/rumola128.png"
+  },
+  "browser_action": {
+    "default_icon": "images/on.png",
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "include/independent_functions.js",
+        "include/full_process_page.js",
+        "include/wait_box.js",
+        "include/rumola_form_ready_input.js",
+        "include/rumola_form_ready_image.js",
+        "rumola.js"
+      ],
+      "css": [
+        "images/style.css"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "permissions": [
+    "contextMenus",
+    "storage",
+    "notifications",
+    "tabs",
+    "<all_urls>"
+  ],
+  "web_accessible_resources": [
+    "images/*"
+  ]
+}

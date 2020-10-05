@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Vergil+",
+  "version": "0.1.17",
+  "manifest_version": 2,
+  "description": "Vergil+ upgrades your registration experience.",
+  "homepage_url": "http://upgradevergil.com",
+  "icons": {
+    "16": "icons/V3-16.png",
+    "48": "icons/V3-48.png",
+    "128": "icons/V3-128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "page": "src/bg/background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icons/V3-16.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://vergil.registrar.columbia.edu/*"
+      ],
+      "js": [
+        "content_scripts/injected.js"
+      ],
+      "css": [
+        "content_css/injected.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://upgradevergil.com/"
+      ],
+      "js": [
+        "content_scripts/injected_upgradevergil.js"
+      ],
+      "css": [
+        "content_css/injected_upgradevergil.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "https://vergil.registrar.columbia.edu/*"
+  ],
+  "web_accessible_resources": [
+    "js/VES_0.0.1.js",
+    "js/gVES_0.0.1.js",
+    "icons/vergil-plain.png"
+  ]
+}

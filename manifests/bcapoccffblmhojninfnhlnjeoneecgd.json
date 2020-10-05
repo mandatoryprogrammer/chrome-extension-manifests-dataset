@@ -1,0 +1,81 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_extName__",
+  "version": "10201.2.0.0",
+  "description": "__MSG_extDesc__",
+  "default_locale": "en",
+  "browser_action": {
+    "default_icon": "images/icons/blue-48.png",
+    "default_popup": "index.html",
+    "default_title": "__MSG_extDefaultTitle__"
+  },
+  "icons": {
+    "16": "images/icons/blue-16.png",
+    "48": "images/icons/blue-48.png",
+    "128": "images/icons/blue-128.png"
+  },
+  "chrome_settings_overrides": {
+    "search_provider": {
+      "name": "__MSG_extName__",
+      "keyword": "SG",
+      "search_url": "https://utililab.mysearchguardian.com/ps?q={searchTerms}",
+      "favicon_url": "https://utililab.mysearchguardian.com/common/images/favicon.png",
+      "encoding": "UTF-8",
+      "is_default": true
+    }
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+S",
+        "linux": "Alt+S",
+        "mac": "Alt+S",
+        "windows": "Alt+S"
+      }
+    }
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "js/jquery.js",
+        "js/purl.js",
+        "js/wbrowser.min.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://utililab.mysearchguardian.com/*"
+      ],
+      "js": [
+        "js/no-popup.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "/images/logo.png",
+    "/images/info.png",
+    "/images/safe.png",
+    "/images/cross.png",
+    "/js/jquery.js"
+  ],
+  "permissions": [
+    "contextMenus",
+    "tabs",
+    "storage",
+    "<all_urls>",
+    "*://*/*"
+  ]
+}

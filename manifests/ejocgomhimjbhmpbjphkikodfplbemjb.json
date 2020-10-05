@@ -1,0 +1,98 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Wtyczka Tipli",
+  "version": "1.6.5",
+  "description": "Wtyczka Tipli poinformuje Cię o możliwości uzyskania zwrotu za zakupy w danym sklepie internetowym.",
+  "author": "Tipli.pl",
+  "homepage_url": "http://www.tipli.pl",
+  "icons": {
+    "16": "assets/icon16.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "alarms",
+    "tabs",
+    "storage",
+    "unlimitedStorage",
+    "webRequest",
+    "<all_urls>"
+  ],
+  "options_page": "src/options.html",
+  "browser_action": {
+    "default_icon": {
+      "16": "assets/icon16.png",
+      "48": "assets/icon48.png",
+      "128": "assets/icon128.png"
+    },
+    "default_title": "Wtyczka Tipli",
+    "default_popup": "src/popup.html"
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "config.js",
+      "src/vendor/jquery-3.2.1.min.js",
+      "src/vendor/moment.min.js",
+      "src/vendor/psl.min.js",
+      "src/vendor/underscore-min.js",
+      "src/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://search.seznam.cz/*"
+      ],
+      "js": [
+        "config.js",
+        "src/vendor/jquery-3.2.1.min.js",
+        "src/vendor/moment.min.js",
+        "src/vendor/psl.min.js",
+        "src/vendor/underscore-min.js",
+        "src/seznam.js"
+      ],
+      "css": [
+        "src/seznam.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.google.cz/*",
+        "https://www.google.sk/*",
+        "https://www.google.pl/*",
+        "https://www.google.com/*"
+      ],
+      "js": [
+        "config.js",
+        "src/vendor/jquery-3.2.1.min.js",
+        "src/vendor/moment.min.js",
+        "src/vendor/psl.min.js",
+        "src/vendor/underscore-min.js",
+        "src/google.js"
+      ],
+      "css": [
+        "src/google.css"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "config.js",
+        "src/vendor/jquery-3.2.1.min.js",
+        "src/vendor/moment.min.js",
+        "src/vendor/psl.min.js",
+        "src/vendor/underscore-min.js",
+        "src/content.js"
+      ],
+      "css": [
+        "src/vendor/animate.min.css",
+        "src/content.css"
+      ]
+    }
+  ]
+}

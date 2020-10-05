@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_name__",
+  "description": "__MSG_description__",
+  "default_locale": "en",
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/icon-grey-16.png",
+      "24": "icons/icon-grey-24.png",
+      "32": "icons/icon-grey-32.png"
+    },
+    "default_title": "__MSG_name__"
+  },
+  "icons": {
+    "16": "icons/icon-green-16.png",
+    "48": "icons/icon-green-48.png",
+    "128": "icons/icon-green-128.png"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "webRequest",
+    "management",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "js/background.js",
+      "lib/jquery-3.4.1.min.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "js": [
+        "js/assistant-content-script.js"
+      ],
+      "css": [
+        "css/assistant-content-script.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    "assistant.html"
+  ],
+  "content_security_policy": "img-src 'self' https://www.google.com/s2/favicons https://agendium-media-public.s3.amazonaws.com; script-src 'self'; object-src 'self';",
+  "version": "1.3.1"
+}

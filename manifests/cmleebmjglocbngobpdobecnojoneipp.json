@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Plecto Login",
+  "short_name": "Login to Plecto on your TV",
+  "description": "Permanently login into Plecto with a secure token, allowing you to have it open on your TV screen without entering your password.",
+  "author": "Plecto ApS",
+  "version": "1.2",
+  "permissions": [
+    "tabs",
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "https://app.plecto.com/*"
+  ],
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://app.plecto.com/login/*"
+      ],
+      "js": [
+        "jquery.min.js",
+        "fingerprint.js",
+        "content.js"
+      ]
+    }
+  ],
+  "page_action": {
+    "default_icon": "icon128.png",
+    "default_popup": "popup.html",
+    "default_title": "Plecto Login"
+  },
+  "incognito": "split",
+  "externally_connectable": {
+    "matches": [
+      "https://app.plecto.com/*"
+    ]
+  }
+}

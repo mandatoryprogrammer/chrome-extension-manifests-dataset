@@ -1,0 +1,94 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Screen Shader | Smart Screen Tinting",
+  "short_name": "Screen Shader",
+  "version": "2.0.80",
+  "manifest_version": 2,
+  "offline_enabled": true,
+  "description": "Shades Chrome to a soothing orange color to decrease eye-strain, eye fatigue and to appease your brain's day/night cycle.",
+  "browser_action": {
+    "default_icon": {
+      "19": "img/grey19.png",
+      "38": "img/icon38.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "*://*.redditmedia.com/*",
+        "*://www.youtube.com/ad_companion/*",
+        "*://staticxx.facebook.com/*",
+        "*://platform.twitter.com/widgets/*",
+        "*://*.googlesyndication.com/*",
+        "*://*.doubleclick.net/*",
+        "*://js.stripe.com/v2/m/outer.html*",
+        "*://*.amazon-adsystem.com/*",
+        "*://*.lijit.com/beacon*",
+        "*://*.doubleverify.com/*",
+        "*://pixel.sitescout.com/*",
+        "*://*.2mdn.net/*",
+        "*://acdn.adnxs.com/dmp/async_usersync.html"
+      ],
+      "js": [
+        "scripts/content.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "storage",
+    "file:///*",
+    "<all_urls>"
+  ],
+  "incognito": "spanning",
+  "minimum_chrome_version": "57",
+  "commands": {
+    "0-toggle": {
+      "suggested_key": {
+        "default": "Alt+Shift+S"
+      },
+      "description": "Toggle Screen Shader on/off"
+    },
+    "1-increase-shade": {
+      "suggested_key": {
+        "default": "Alt+Shift+Up"
+      },
+      "description": "Increase current shade"
+    },
+    "2-decrease-shade": {
+      "suggested_key": {
+        "default": "Alt+Shift+Down"
+      },
+      "description": "Decrease current shade"
+    },
+    "3-increase-darkness": {
+      "description": "Increase darkness"
+    },
+    "4-decrease-darkness": {
+      "description": "Decrease darkness"
+    },
+    "5-change-color": {
+      "description": "Iterate through colors"
+    },
+    "6-toggle-shaded-scrollbar": {
+      "description": "Toggle Shaded Scrollbar on and off"
+    }
+  }
+}

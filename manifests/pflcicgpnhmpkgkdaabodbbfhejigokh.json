@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "SuperSelect",
+  "description": "Select and save text from web pages with speed.",
+  "version": "0.0.7",
+  "browser_action": {
+    "default_title": "SuperSelect",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "38": "images/z38.png",
+      "128": "images/z128.png"
+    }
+  },
+  "icons": {
+    "38": "images/z38-active.png",
+    "128": "images/z128.png"
+  },
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "web_accessible_resources": [
+    "css/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "*://superselect.rocks/*"
+      ],
+      "css": [
+        "css/fa/css/font-awesome-ff-chrome-ext.css"
+      ],
+      "js": [
+        "compiled/content-script.js"
+      ]
+    }
+  ],
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "permissions": [
+    "tabs",
+    "storage"
+  ],
+  "manifest_version": 2,
+  "minimum_chrome_version": "55"
+}

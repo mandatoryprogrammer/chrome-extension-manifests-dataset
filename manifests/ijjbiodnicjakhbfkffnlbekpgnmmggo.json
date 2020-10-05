@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "OpenAPI Preview",
+  "version": "0.2",
+  "description": "Preview OpenAPI files in Pull Requests and single file visualisation",
+  "author": "Rafael Ferreira",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://github.com/*pull*"
+      ],
+      "js": [
+        "base.js",
+        "pull_request_view.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://github.com/*swagger.yaml",
+        "https://github.com/*swagger.yml",
+        "https://github.com/*openapi.yaml",
+        "https://github.com/*openapi.yml"
+      ],
+      "js": [
+        "base.js",
+        "single_file_view.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js",
+      "spec_load.js"
+    ],
+    "persistence": false
+  },
+  "web_accessible_resources": [
+    "redoc.html"
+  ],
+  "permissions": [
+    "tabs"
+  ]
+}

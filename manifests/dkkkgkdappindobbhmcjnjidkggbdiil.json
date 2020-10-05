@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Open in PDF-XChange™ Viewer",
+  "description": "Adds a context menu item to send PDF links directly to PDF-XChange™ Viewer",
+  "author": "Andy Portmen",
+  "version": "0.1.4",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "permissions": [
+    "storage",
+    "contextMenus",
+    "notifications",
+    "nativeMessaging",
+    "downloads"
+  ],
+  "optional_permissions": [
+    "activeTab"
+  ],
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "config.js",
+      "common.js"
+    ]
+  },
+  "homepage_url": "https://add0n.com/open-in.html?from=xchange",
+  "icons": {
+    "16": "data/icons/16.png",
+    "19": "data/icons/19.png",
+    "32": "data/icons/32.png",
+    "38": "data/icons/38.png",
+    "48": "data/icons/48.png",
+    "128": "data/icons/128.png"
+  },
+  "options_ui": {
+    "page": "data/options/index.html",
+    "chrome_style": true
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "data/icons/16.png",
+      "19": "data/icons/19.png",
+      "32": "data/icons/32.png",
+      "38": "data/icons/38.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "match_about_blank": true,
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "data/inject.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ]
+}

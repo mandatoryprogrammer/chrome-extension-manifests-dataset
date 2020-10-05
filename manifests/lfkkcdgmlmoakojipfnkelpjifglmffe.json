@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Calm for Chrome",
+  "description": "Stop mindless checking by taking a breath before you check! Facilitates alternative, productive ways to take a break.",
+  "version": "0.0.0.2",
+  "manifest_version": 2,
+  "icons": {
+    "16": "images/calm.png",
+    "48": "images/calm.png",
+    "128": "images/calm.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "images/calm.png",
+    "default_popup": "popup.html"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.calm.com/breathe/*"
+      ],
+      "css": [
+        "css/content.css"
+      ],
+      "js": [
+        "jquery-3.2.1.min.js",
+        "content.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.calm.com/meditate/*"
+      ],
+      "css": [
+        "css/content.css"
+      ],
+      "js": [
+        "jquery-3.2.1.min.js",
+        "content_meditate.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "<all_urls>",
+    "webRequest",
+    "webRequestBlocking",
+    "activeTab",
+    "storage",
+    "background"
+  ]
+}

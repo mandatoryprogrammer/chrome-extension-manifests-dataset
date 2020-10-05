@@ -1,0 +1,165 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Vidyard - Free Video and Screen Recorder",
+  "short_name": "Vidyard GoVideo",
+  "version": "3.1.8",
+  "minimum_chrome_version": "55",
+  "manifest_version": 2,
+  "description": "Capture your screen, share your video and track who's watching it!",
+  "permissions": [
+    "https://api.vidyard.com/*",
+    "webRequest",
+    "webNavigation",
+    "webRequestBlocking",
+    "tabs",
+    "tabCapture",
+    "notifications",
+    "storage",
+    "clipboardWrite",
+    "contextMenus",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "optional_permissions": [
+    "downloads"
+  ],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Shift+Alt+V"
+      }
+    },
+    "restart_during_recording": {
+      "suggested_key": {
+        "default": "Shift+Alt+Z"
+      },
+      "description": "Restart Recording"
+    },
+    "pause_during_recording": {
+      "suggested_key": {
+        "default": "Shift+Alt+P"
+      },
+      "description": "Pause/Resume Recording"
+    },
+    "discard_during_recording": {
+      "description": "Cancel Recording"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "lib/js/inboxsdk.js",
+        "gmailContent.min.js"
+      ],
+      "css": [
+        "gmailContent.min.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://share.viewedit.test/*",
+        "*://share.viewedit.com/*",
+        "*://share-staging.viewedit.com/*",
+        "*://share.vidyard.test/watch/*",
+        "*://share.vidyard.com/watch/*",
+        "*://share-staging.vidyard.com/watch/*",
+        "*://share.vidyard.test/waiting",
+        "*://share.vidyard.com/waiting",
+        "*://share-staging.vidyard.com/waiting",
+        "*://*.hubs.vidyard.test/watch/*",
+        "*://*.hubs.vidyard.com/watch/*",
+        "*://*.hubs.staging.vidyard.com/watch/*",
+        "*://embed.vidyard.test/share/*",
+        "*://embed.vidyard.com/share/*",
+        "*://staging.vidyard.com/share/*"
+      ],
+      "js": [
+        "shareContent.min.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://secure.vidyard.test/*",
+        "*://staging.vidyard.com/*",
+        "*://secure.vidyard.com/*",
+        "*://staging-flash.vidyard.com/*",
+        "*://staging-superman.vidyard.com/*",
+        "*://staging-qa.vidyard.com/*",
+        "*://staging-aquaman.vidyard.com/*",
+        "*://staging-batman.vidyard.com/*",
+        "*://staging-daredevil.vidyard.com/*",
+        "*://staging-hawkgirl.vidyard.com/*",
+        "*://staging-deadpool.vidyard.com/*",
+        "*://staging-beast.vidyard.com/*",
+        "*://staging-hulk.vidyard.com/*",
+        "*://staging-ironman.vidyard.com/*",
+        "*://staging-mysterion.vidyard.com/*",
+        "*://staging-wasp.vidyard.com/*",
+        "*://staging-beast.vidyard.com/*",
+        "*://secure.sandbox.vystaging.com/*"
+      ],
+      "js": [
+        "editContent.min.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://welcome.viewedit.com/*",
+        "*://welcome-staging.viewedit.com/*",
+        "*://welcome.viewedit.test/*",
+        "*://welcome.vidyard.com/*",
+        "*://welcome-staging.vidyard.com/*",
+        "*://welcome.vidyard.test/*"
+      ],
+      "js": [
+        "welcomeContent.min.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://app.vidyard.com/*",
+        "https://app-staging.vidyard.com/*",
+        "https://app-staging-audit.vidyard.com/*",
+        "https://app.vidyard.test/*",
+        "https://blockbuster.vidyard.test/*"
+      ],
+      "js": [
+        "ebertContent.min.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://app.vidyard.com/*",
+      "https://secure.vidyard.com/*"
+    ]
+  },
+  "incognito": "split",
+  "web_accessible_resources": [
+    "*.html",
+    "assets/*",
+    "images/*",
+    "*.js",
+    "*.css"
+  ],
+  "icons": {
+    "16": "images/icon-vidyard-16.png",
+    "48": "images/icon-vidyard-48.png",
+    "128": "images/icon-vidyard-128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.min.js",
+      "heap.min.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "images/icon-vidyard-128.png",
+    "default_popup": "popup.html"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://faye.getstream.io https://cdn.heapanalytics.com https://app-staging.vidyard.com https://app-staging-audit.vidyard.com https://app.vidyard.test https://app.vidyard.com; object-src 'self'"
+}

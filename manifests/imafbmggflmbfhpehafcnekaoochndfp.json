@@ -1,0 +1,83 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Vaetas Connect",
+  "short_name": "Vaetas",
+  "version": "0.0.7",
+  "description": "Vaetas Connect chrome extension to enable screen recording. Also support email collection and direct video sharing from linkedin.",
+  "permissions": [
+    "activeTab",
+    "declarativeContent",
+    "storage",
+    "tabs",
+    "https://app.vaetas.com/api/*",
+    "https://vaetasuploads.s3.amazonaws.com/videos/*",
+    "https://s3.amazonaws.com/vaetas-thumbs/thumbnails/*",
+    "https://i.ytimg.com/vi/*",
+    "https://cdnjs.cloudflare.com/*",
+    "desktopCapture"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://connect.vaetas.com/*",
+      "*://studio.invidz.com/*"
+    ]
+  },
+  "background": {
+    "scripts": [
+      "constants.js",
+      "variables.js",
+      "network/ApiClient.js",
+      "background/background.helper.js",
+      "background/background.windows.js",
+      "background/routes.js",
+      "background/background.js",
+      "background/background.webcam.js",
+      "background/background.messages.js",
+      "background/background.videoPlayer.js",
+      "record/MediaStreamRecorder.js",
+      "record/MultiStreamRecorder.js"
+    ],
+    "persistent": false
+  },
+  "page_action": {
+    "default_popup": "login/login.html",
+    "default_icon": {
+      "16": "images/vaetas_logo.png",
+      "32": "images/vaetas_logo.png",
+      "48": "images/vaetas_logo.png",
+      "128": "images/vaetas_logo.png"
+    }
+  },
+  "icons": {
+    "16": "images/vaetas_logo.png",
+    "32": "images/vaetas_logo.png",
+    "48": "images/vaetas_logo.png",
+    "128": "images/vaetas_logo.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.linkedin.com/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "constants.js",
+        "variables.js",
+        "inject/templates/templates.js",
+        "network/ApiClient.js",
+        "inject/content.inject.js",
+        "inject/linkedin/content-profile-script.js",
+        "inject/linkedin/content-message-script.js",
+        "inject/content.messages.js"
+      ],
+      "css": [
+        "inject/linkedin/content-message-script.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "images/*",
+    "video/*"
+  ],
+  "manifest_version": 2
+}

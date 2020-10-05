@@ -1,0 +1,106 @@
+{
+  "author": "PSA",
+  "background": {
+    "page": "Background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "assets/icon-blue-16.png",
+      "20": "assets/icon-blue-20.png",
+      "32": "assets/icon-blue-32.png",
+      "40": "assets/icon-blue-40.png",
+      "48": "assets/icon-blue-48.png",
+      "128": "assets/icon-blue-128.png"
+    },
+    "default_title": "Microsoft Shopping Assistant"
+  },
+  "chrome_url_overrides": {
+    "newtab": "iframe_msn.html"
+  },
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "js": [
+        "stub.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "js": [
+        "extensionDetector.js"
+      ],
+      "matches": [
+        "*://psawebapi-dev.azurewebsites.net/*",
+        "*://psa.microsoft.com/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "content.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "include_globs": [
+        "*://*/*#ms-psa-bg-extraction-iframe"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": true,
+      "css": [
+        "msn_content.scss"
+      ],
+      "js": [
+        "msn_content.js"
+      ],
+      "matches": [
+        "https://*.msn.com/spartan/sntp*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "description": "__MSG_extensionDescription__",
+  "icons": {
+    "16": "assets/icon-blue-16.png",
+    "48": "assets/icon-blue-48.png",
+    "128": "assets/icon-blue-128.png"
+  },
+  "manifest_version": 2,
+  "name": "__MSG_extension_name_msft__",
+  "short_name": "__MSG_extension_name_msft__",
+  "default_locale": "en",
+  "permissions": [
+    "topSites",
+    "tabs",
+    "cookies",
+    "http://*/",
+    "https://*/",
+    "alarms",
+    "history",
+    "storage",
+    "unlimitedStorage",
+    "notifications",
+    "activeTab",
+    "contextMenus",
+    "webRequest",
+    "webRequestBlocking",
+    "webNavigation"
+  ],
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "10000.1945.70",
+  "web_accessible_resources": [
+    "*.js",
+    "*.css",
+    "*.html"
+  ]
+}

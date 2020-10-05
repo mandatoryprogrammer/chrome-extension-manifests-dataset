@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "QFind",
+  "version": "0.0.0.25",
+  "manifest_version": 2,
+  "description": "Find open tabs and organize them.  Search for text, see list of matching tabs, open found tab, group tabs, etc.",
+  "homepage_url": "http://inactivist.github.io/chrome-qfind/",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "omnibox": {
+    "keyword": "qf"
+  },
+  "background": {
+    "page": "src/bg/background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "QFind\rFind text in open tabs",
+    "default_popup": "src/browser_action/browser_action.html"
+  },
+  "permissions": [
+    "tabs",
+    "<all_urls>",
+    "clipboardWrite",
+    "clipboardRead"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/misc/underscore-min.js",
+        "src/makestruct.js",
+        "src/ExcerptEntry.js",
+        "src/MatchEntry.js",
+        "src/QFUtil.js",
+        "src/ResultsModel.js",
+        "src/MatchMaker.js",
+        "src/inject/inject.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://apis.google.com/ https://ssl.google-analytics.com; object-src 'self'",
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "windows": "Ctrl+Shift+F",
+        "mac": "Command+Shift+F",
+        "chromeos": "Ctrl+Shift+F",
+        "linux": "Ctrl+Shift+F"
+      }
+    }
+  }
+}

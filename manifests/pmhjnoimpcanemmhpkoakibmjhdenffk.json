@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Blend In and Spoof Most Popular Properties",
+  "short_name": "BP Blend In for Anti-Fingerprint",
+  "version": "1.7.0",
+  "author": "Browser Plugs",
+  "homepage_url": "https://www.BrowserPlugs.com",
+  "manifest_version": 2,
+  "description": "Pretend to be using only the most popular fonts, display, network API, and device properties.",
+  "icons": {
+    "16": "icons/16.png",
+    "32": "icons/32.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/19.png",
+      "38": "icons/38.png"
+    },
+    "default_title": "Browser Plugs to blend in with the most popular settings."
+  },
+  "permissions": [
+    "tabs",
+    "privacy",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "background": {
+    "page": "html/background.html"
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "js/xFinger.js",
+        "js/xFingerScript.js",
+        "js/bpfonts.js"
+      ],
+      "matches": [
+        "<all_urls>",
+        "*://*/*"
+      ],
+      "exclude_globs": [
+        "*://www.google.com/*",
+        "*://developer.chrome.com/*",
+        "*://chrome.google.com/*",
+        "file://*/*",
+        "https://www.google.com/maps/*",
+        "https://www.google.com/recaptcha/*",
+        "https://www.gstatic.com/recaptcha/*",
+        "https://www.google.com/intl/*",
+        "https://developers.google.com/recaptcha/*",
+        "https://support.google.com/recaptcha/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "js/xFinger.js",
+    "js/xFingerScript.js",
+    "js/bpfonts.js"
+  ]
+}

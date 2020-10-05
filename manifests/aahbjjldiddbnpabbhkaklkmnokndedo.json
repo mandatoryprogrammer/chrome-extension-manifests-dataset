@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Moka简藏",
+  "version": "2.20.9",
+  "manifest_version": 2,
+  "description": "一键导入简历至您的Moka招聘系统",
+  "icons": {
+    "16": "images/icon-16.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
+  },
+  "background": {
+    "scripts": [
+      "bundle/background-script.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "cookies",
+    "webRequest",
+    "webRequestBlocking",
+    "management",
+    "<all_urls>",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://localhost/*",
+        "*://*/*"
+      ],
+      "js": [
+        "bundle/content-script-loader.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "exclude_globs": [
+        "http://localhost:*/chrome-ext/*",
+        "https://*.mokahr.*/chrome-ext/*",
+        "http://*.mokahr.*/chrome-ext/*"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon-gray-19.png",
+      "38": "images/icon-gray-38.png"
+    },
+    "default_title": "Moka简藏",
+    "default_popup": "htmls/popup.html"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "web_accessible_resources": [],
+  "externally_connectable": {
+    "matches": [
+      "*://localhost/*",
+      "*://*.mokahr.com/*"
+    ]
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "browser_action": {
+    "default_icon": "client/resource/icon_128px.png",
+    "default_popup": "client/html/popup.html",
+    "default_title": "盘古移动测试工具v4"
+  },
+  "description": "盘古移动测试工具v4",
+  "icons": {
+    "16": "client/resource/icon_16px.png",
+    "32": "client/resource/icon_32px.png",
+    "48": "client/resource/icon_48px.png",
+    "128": "client/resource/icon_128px.png"
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "client/scripts/common/jquery-3.2.1.min.js",
+        "client/scripts/data/elementClassNameData.js",
+        "client/scripts/common/elementClassName.js",
+        "client/scripts/content_scripts/common/communicateWithPlugin.js",
+        "client/scripts/content_scripts/common/setElementValue.js",
+        "client/scripts/content_scripts/autoFillRedmine/autoFillRedmine.js",
+        "client/scripts/content_scripts/bugCheck/bugCheck.js"
+      ],
+      "matches": [
+        "http://*.pm.netease.com/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "client/scripts/background_scripts/common/xhrHttpGet.js",
+      "client/scripts/background_scripts/common/communicateWithContentScripts.js",
+      "client/scripts/background_scripts/jenkinsBuildNotification/notification_timer.js",
+      "client/scripts/background_scripts/bugCheck/bugCheck.js",
+      "client/scripts/data/jenkinsNotifyData.js"
+    ]
+  },
+  "manifest_version": 2,
+  "name": "盘古移动测试工具v4",
+  "permissions": [
+    "tabs",
+    "declarativeContent",
+    "storage",
+    "notifications",
+    "http://10.241.4.232:8000/",
+    "http://10.240.120.97:27025/"
+  ],
+  "version": "4.0.3"
+}

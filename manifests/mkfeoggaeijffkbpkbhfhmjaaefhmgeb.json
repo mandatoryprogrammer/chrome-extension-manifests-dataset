@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "version": "2.0",
+  "description": "__MSG_appDesc__",
+  "default_locale": "en",
+  "manifest_version": 2,
+  "browser_action": {
+    "default_title": "RingVPN",
+    "default_icon": "icon.png",
+    "default_popup": "./dist_popup/index.html"
+  },
+  "background": {
+    "scripts": [
+      "./src_background/background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "<all_urls>",
+    "proxy",
+    "storage",
+    "webRequest",
+    "privacy",
+    "webRequestBlocking",
+    "*://api.ringvpn.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "src_content/content.js"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}

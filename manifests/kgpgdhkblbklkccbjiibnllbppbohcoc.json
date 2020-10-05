@@ -1,0 +1,96 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "author": "Zix|AppRiver",
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "js/jquery-2.2.4.min.js",
+      "webapp/chrome/background.js",
+      "config/ssourl.js",
+      "js/version.js",
+      "apiBundle.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "40": "webapp/chrome/images/icon48.png"
+    },
+    "default_title": "Secure Messaging Extension"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://sandbox.qbo.intuit.com/*"
+      ],
+      "js": [
+        "extension/quickbook_js.js",
+        "extension/quickbook_content.js"
+      ],
+      "css": [
+        "css/webfont.css",
+        "css/tooltipster.css",
+        "css/ce-content.css",
+        "extension/css/sweetalert.css",
+        "extension/Secure/content.css",
+        "extension/QuickBook/content.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "exclude_matches": [
+        "*://*.secure-messaging.com/*",
+        "*://*.betasabrina.com/*",
+        "*://*.deliveryslip.com/*",
+        "*://*.ciriusdev.com/*"
+      ],
+      "exclude_globs": [
+        "*.secure-messaging.com",
+        "*.betasabrina.com",
+        "*.email2.com",
+        "*.deliveryslip.com",
+        "*.cirius.com",
+        "*.ciriusdev.com",
+        "*qbo*",
+        "*intuit*"
+      ],
+      "css": [
+        "webapp/chrome/contentscript.css"
+      ],
+      "js": [
+        "js/version.js",
+        "webapp/chrome/extension_lib.js",
+        "webapp/chrome/extension_content.js",
+        "Controllers/UserContactsController.js",
+        "config/ssourl.js",
+        "apiBundle.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "icons": {
+    "128": "webapp/chrome/images/icon128.png",
+    "48": "webapp/chrome/images/icon48.png"
+  },
+  "manifest_version": 2,
+  "name": "Secure Messaging",
+  "options_ui": {
+    "page": "webapp/chrome/options.html",
+    "chrome_style": true
+  },
+  "description": "Read and respond to your secure messages without leaving your webmail such as Gmail, OWA, Yahoo Mail.",
+  "permissions": [
+    "tabs",
+    "*://*/*",
+    "notifications",
+    "storage",
+    "identity"
+  ],
+  "version": "7.20.20203.16",
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://stats.pusher.com; object-src 'self'",
+  "web_accessible_resources": [
+    "*"
+  ]
+}

@@ -1,0 +1,465 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "web_accessible_resources": [
+    "content/ui/popup-in-page.html",
+    "content/ui/content-page.css",
+    "content/ui/notification.html",
+    "content/images/ic-field-logo.svg",
+    "content/images/spinner-blue.gif",
+    "content/ui/xidsafe-logging-inprogress.html",
+    "content/ui/auto-password-changer-overlay.html",
+    "content/ui/auto-password-changer-overlay.css",
+    "content/ui/compromised-password-ribbon.html",
+    "content/ui/compromised-password-modal.html"
+  ],
+  "description": "__MSG_extensionDescription__",
+  "default_locale": "en",
+  "author": "Symantec Corporation",
+  "manifest_version": 2,
+  "icons": {
+    "128": "content/images/idsafe-logo-128.png",
+    "48": "content/images/idsafe-logo-48.png",
+    "16": "content/images/idsafe-logo-16.png"
+  },
+  "name": "__MSG_extensionName__",
+  "version": "7.0.0.16",
+  "background": {
+    "page": "global.html",
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "all_frames": true,
+      "js": [
+        "content/scripts/IDSContextInit.js",
+        "content/scripts/SymBfwCS.js",
+        "content/scripts/SymO2CS.js",
+        "content/scripts/SymWaxCS.js",
+        "content/scripts/IDSUIConstants.js",
+        "content/scripts/IDSConstants.js",
+        "content/scripts/IDSEventUITelemetryWrapper.js",
+        "content/scripts/IDSPopup.js",
+        "content/scripts/IDSCPasswordChangerCS.js",
+        "content/scripts/IDSSettingsProxy.js",
+        "content/scripts/IDSUIPageViewTelemetryWrapper.js",
+        "content/scripts/IDSTelemetryWrapper.js",
+        "content/scripts/IDSFormHandler.js",
+        "content/scripts/IDSFormSubmissionClientCSImpl.js",
+        "content/scripts/IDSWAX.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://isolate.norton.com/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "content/scripts/FGHelperCS.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "all_frames": false,
+      "js": [
+        "content/scripts/IDSContextInit.js",
+        "content/scripts/BfwNotificationCenterProxy.js",
+        "content/scripts/IDSCompromisedPasswordRibbon.js",
+        "content/scripts/IDSCompromisedPasswordModal.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "all_frames": true,
+      "js": [
+        "content/libs/uri.min.js",
+        "content/libs/avl.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://*.norton.com/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "content/scripts/IDSContextInit.js",
+        "content/scripts/IDSPortalUtils.js",
+        "content/scripts/IDSPortal.js",
+        "content/scripts/portalInstallFlowCS.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://cloudconnect2.norton.com/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "content/scripts/IDSContextInit.js",
+        "content/scripts/SymBfwCS.js",
+        "content/scripts/IDSConstants.js",
+        "content/scripts/IDSBridgeEvents.js",
+        "content/scripts/IDSLoader.js",
+        "content/scripts/IDSCCTListener.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://login.norton.com/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "content/scripts/IDSContextInit.js",
+        "content/scripts/SymBfwCS.js",
+        "content/scripts/IDSUIConstants.js",
+        "content/scripts/IDSConstants.js",
+        "content/scripts/IDSNSLListener.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://www.tirerack.com/ssl/PaymentOptions.jsp*"
+      ],
+      "all_frames": true,
+      "js": [
+        "content/formdata/sitescripts/tirerack.com.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://secure-luxury.zappos.com/checkout/pay*"
+      ],
+      "all_frames": true,
+      "run_at": "document_start",
+      "js": [
+        "content/formdata/sitescripts/WAXUtils.js",
+        "content/formdata/sitescripts/zappos.com.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://secure-luxury.zappos.com/checkout*"
+      ],
+      "all_frames": true,
+      "js": [
+        "content/formdata/sitescripts/WAXUtils.js",
+        "content/formdata/sitescripts/zappos.com.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://secure-luxury.zappos.com/checkout/address*"
+      ],
+      "all_frames": true,
+      "run_at": "document_start",
+      "js": [
+        "content/formdata/sitescripts/WAXUtils.js",
+        "content/formdata/sitescripts/zappos.com.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.marksandspencer.com/webapp/wcs/stores/servlet/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "content/formdata/sitescripts/marksandspencer.com.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://www.amazon.com/gp/buy/payselect/handlers/display.html*"
+      ],
+      "all_frames": true,
+      "run_at": "document_start",
+      "js": [
+        "content/formdata/sitescripts/WAXUtils.js",
+        "content/formdata/sitescripts/amazon.com.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.amazon.com/gp/buy/shipoptionselect/handlers/display.html*"
+      ],
+      "all_frames": true,
+      "js": [
+        "content/formdata/sitescripts/WAXUtils.js",
+        "content/formdata/sitescripts/amazon.com.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://www.amazon.com/gp/buy/addressselect/handlers/continue.html*"
+      ],
+      "all_frames": true,
+      "run_at": "document_start",
+      "js": [
+        "content/formdata/sitescripts/WAXUtils.js",
+        "content/formdata/sitescripts/amazon.com.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.amazon.com/gp/buy/shipaddressselect/handlers/continue.html*"
+      ],
+      "all_frames": true,
+      "js": [
+        "content/formdata/sitescripts/WAXUtils.js",
+        "content/formdata/sitescripts/amazon.com.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://idmsa.apple.com/appleauth/auth/signin*"
+      ],
+      "all_frames": true,
+      "run_at": "document_start",
+      "js": [
+        "content/formdata/sitescripts/icloud.com.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.uniqlo.com/us/en/billing-checkout/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "content/formdata/sitescripts/uniqlo.com.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://www.citi.com/credit-cards/citi.action*"
+      ],
+      "all_frames": true,
+      "run_at": "document_start",
+      "js": [
+        "content/formdata/sitescripts/WAXUtils.js",
+        "content/formdata/sitescripts/accountonline.login.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.zara.com/webapp/wcs/stores/servlet/OrderPaymentPage*"
+      ],
+      "all_frames": true,
+      "js": [
+        "content/formdata/sitescripts/WAXUtils.js",
+        "content/formdata/sitescripts/zara.com.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://accountonline.citi.com/cards/svc/LoginGet.do*"
+      ],
+      "all_frames": true,
+      "run_at": "document_start",
+      "js": [
+        "content/formdata/sitescripts/accountonline.citi.com.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.footlocker.com/checkout*"
+      ],
+      "all_frames": true,
+      "js": [
+        "content/formdata/sitescripts/footlocker.com.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://www.abercrombie.com/shop/OrderCheckoutDisplayView*"
+      ],
+      "all_frames": true,
+      "run_at": "document_start",
+      "js": [
+        "content/formdata/sitescripts/abercrombie.com.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.zappos.com/checkout/pay*"
+      ],
+      "all_frames": true,
+      "js": [
+        "content/formdata/sitescripts/WAXUtils.js",
+        "content/formdata/sitescripts/zappos.com.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://www.zappos.com/checkout/initiate*"
+      ],
+      "all_frames": true,
+      "run_at": "document_start",
+      "js": [
+        "content/formdata/sitescripts/WAXUtils.js",
+        "content/formdata/sitescripts/zappos.com.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.zappos.com/checkout/address*"
+      ],
+      "all_frames": true,
+      "js": [
+        "content/formdata/sitescripts/WAXUtils.js",
+        "content/formdata/sitescripts/zappos.com.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://www.hautelook.com/checkout*"
+      ],
+      "all_frames": true,
+      "run_at": "document_start",
+      "js": [
+        "content/formdata/sitescripts/hautelook.com.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://ib.absa.co.za/absa-online/login.jsp*"
+      ],
+      "all_frames": true,
+      "js": [
+        "content/formdata/sitescripts/ib.absa.co.za.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://mycw39.eclinicalweb.com/*"
+      ],
+      "all_frames": true,
+      "run_at": "document_start",
+      "js": [
+        "content/formdata/sitescripts/mycw39.eclinicalweb.com.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://nid.naver.com/nidlogin.login*"
+      ],
+      "all_frames": true,
+      "js": [
+        "content/formdata/sitescripts/naver.com.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://store.steampowered.com/checkout/*"
+      ],
+      "all_frames": true,
+      "run_at": "document_start",
+      "js": [
+        "content/formdata/sitescripts/steampowered.com.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://direct.kinecta.org/9002Kinecta/AOP/Password.aspx*"
+      ],
+      "all_frames": true,
+      "js": [
+        "content/formdata/sitescripts/direct.kinecta.org.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://www.dickssportinggoods.com/DSGPaymentViewCmd*"
+      ],
+      "all_frames": true,
+      "run_at": "document_start",
+      "js": [
+        "content/formdata/sitescripts/dickssportinggoods.com.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.hobbylobby.com/checkout/multi/payment-method/add*"
+      ],
+      "all_frames": true,
+      "js": [
+        "content/formdata/sitescripts/hobbylobby.com.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://www.ifixit.com/cart/place-order*"
+      ],
+      "all_frames": true,
+      "run_at": "document_start",
+      "js": [
+        "content/formdata/sitescripts/ifixit.com.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://login.vivo.com.br/loginmarca/appmanager/marca/publico*"
+      ],
+      "all_frames": true,
+      "js": [
+        "content/formdata/sitescripts/WAXUtils.js",
+        "content/formdata/sitescripts/login.vivo.com.br.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://www.qvc.com/webapp/wcs/stores/servlet/BillingDetailsView*"
+      ],
+      "all_frames": true,
+      "run_at": "document_start",
+      "js": [
+        "content/formdata/sitescripts/qvc.com.js"
+      ]
+    }
+  ],
+  "version_name": "7.0.0.16",
+  "browser_action": {
+    "default_icon": {
+      "54": "content/images/ic-extension-off@3x.png",
+      "38": "content/images/ic-extension-off@2x.png",
+      "16": "content/images/ic-extension-off.png"
+    },
+    "default_title": "__MSG_extensionName__"
+  },
+  "permissions": [
+    "tabs",
+    "background",
+    "webNavigation",
+    "storage",
+    "notifications",
+    "<all_urls>",
+    "webRequest",
+    "webRequestBlocking",
+    "clipboardWrite"
+  ]
+}

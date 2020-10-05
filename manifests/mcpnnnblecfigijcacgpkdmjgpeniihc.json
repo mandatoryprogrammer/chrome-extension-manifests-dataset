@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Redbot - A Bot For Reddit",
+  "description": "A smart reddit bot, voting, commenting and posting with an easy way.",
+  "version": "1.1.0",
+  "manifest_version": 2,
+  "icons": {
+    "48": "icons/icon_48.png",
+    "128": "icons/icon_128.png"
+  },
+  "browser_action": {
+    "default_title": "Redbot for Reddit",
+    "default_popup": "popup/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "libs/analytics.js",
+      "libs/mixpanel.js",
+      "libs/parse.min.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.reddit.com/*",
+        "*://*.getwebooster.com/*"
+      ],
+      "js": [
+        "libs/jquery-3.2.1.min.js",
+        "libs/parse.min.js",
+        "content/content.js"
+      ],
+      "css": [
+        "libs/style.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "permissions": [
+    "*://*.reddit.com/*",
+    "webRequest",
+    "webRequestBlocking",
+    "cookies",
+    "tabs",
+    "storage",
+    "identity",
+    "identity.email"
+  ],
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA7yVJ8JQyEyd6yhFLhfzynu8V2mRP2DmmrcSe4o9xbsc/GbqE6kbsdNDItt4rxgse/K2ZTSutqX+DiyMHsswOB5xnmF7WBIhSREXYY6j04lndAXSTYhX3BqCRpuWyHf3stclQlgJxqZcV9fHVHffS717YNoqM3GwoKuYjf2t6rbHmy6dJ2eOpE6veCku83MWAFEQ1QyxW4Gu7i1wNcvQZBC526Pi4QCTrC45y3aIY4xzqs2FiNZ1M5woPYw0q2n7NkLSj97zpMW6vPLryXT+NAK23CZawL81oqGBhPk9+9+z7aMTHgAgcM5764jK0YKUw/tr/OZwO0FuXDRKQFMTnjwIDAQAB",
+  "oauth2": {
+    "client_id": "540815872951-f9og7kc55atnbsf9ml7pfs4irpu81u2q.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email"
+    ]
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' 'sha256-1oTdDnau2RjOUUCdgB1kxAqer7b365g28hKHJPBAo+o=' https://cdn.mxpnl.com/ https://ssl.google-analytics.com/ https://www.google-analytics.com; object-src 'self'",
+  "web_accessible_resources": [
+    "libs/*"
+  ]
+}

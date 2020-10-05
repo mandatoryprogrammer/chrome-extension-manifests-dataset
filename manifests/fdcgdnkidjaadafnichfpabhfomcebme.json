@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_appName__",
+  "short_name": "ZenMate VPN",
+  "description": "__MSG_appDesc__",
+  "version": "7.1.1.0",
+  "icons": {
+    "16": "icons/standard-16.png",
+    "48": "icons/standard-48.png",
+    "64": "icons/standard-64.png",
+    "128": "icons/standard-128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/standard-16.png",
+      "48": "icons/standard-48.png",
+      "64": "icons/standard-64.png",
+      "128": "icons/standard-128.png"
+    },
+    "default_popup": "index.html",
+    "default_title": "ZenMate"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.zenmate.com/*",
+        "*://*.zenmate.io/*"
+      ],
+      "js": [
+        "page_api.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "assets/libs/axios.min.js",
+      "assets/libs/crypto.js",
+      "background.js",
+      "runtime.js"
+    ]
+  },
+  "permissions": [
+    "*://*/*",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "proxy",
+    "unlimitedStorage",
+    "storage",
+    "notifications",
+    "cookies",
+    "alarms"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://ssl.google-analytics.com; object-src 'self'",
+  "web_accessible_resources": [
+    "assets/css/*"
+  ],
+  "optional_permissions": [
+    "privacy"
+  ],
+  "default_locale": "en"
+}

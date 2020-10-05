@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "CNStart",
+  "description": "Все самые популярные Интернет-ресурсы в одном дополнении.",
+  "version": "0.3.4",
+  "icons": {
+    "16": "images/cnstart_16.png",
+    "32": "images/cnstart_32.png",
+    "64": "images/cnstart_64.png",
+    "128": "images/cnstart.png"
+  },
+  "permissions": [
+    "alarms",
+    "notifications",
+    "tabs",
+    "http://cnstart.karelia.pro/",
+    "http://karelia.pro/stats"
+  ],
+  "background": {
+    "scripts": [
+      "functions.js",
+      "chrome.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": "images/cnstart.png",
+    "default_popup": "popup.html"
+  },
+  "web_accessible_resources": [
+    "images/searchButton.png"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://yandex.ru/*",
+        "*://*.yandex.ru/*",
+        "*://*.ya.ru/*",
+        "*://ya.ru/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

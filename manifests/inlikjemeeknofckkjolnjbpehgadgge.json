@@ -1,0 +1,73 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_extName__",
+  "short_name": "Distill",
+  "version": "1.17.0",
+  "description": "__MSG_extDesc__",
+  "default_locale": "en",
+  "icons": {
+    "48": "ui/img/distill_48.png",
+    "128": "ui/img/distill_128.png"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "ui/img/distill_19.png",
+      "38": "ui/img/distill_38.png"
+    },
+    "default_title": "__MSG_extName__",
+    "default_popup": "ui/popup.html"
+  },
+  "sandbox": {
+    "pages": [
+      "sandbox.html"
+    ]
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://distill.io https://ssl.google-analytics.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "exclude_matches": [],
+      "js": [
+        "content/port-loader.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "exclude_matches": [],
+      "js": [
+        "content/auth.js"
+      ],
+      "matches": [
+        "https://*.distill.io/*",
+        "http://*.distill.local/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "minimum_chrome_version": "68.0.0.0",
+  "permissions": [
+    "contextMenus",
+    "*://*/*",
+    "idle",
+    "notifications",
+    "tabs",
+    "unlimitedStorage"
+  ],
+  "optional_permissions": [],
+  "web_accessible_resources": [
+    "content/*",
+    "lib/*",
+    "ui/lib/*",
+    "ui/img*",
+    "ui/htmlselector.html",
+    "ui/htmlselector.js"
+  ],
+  "manifest_version": 2
+}

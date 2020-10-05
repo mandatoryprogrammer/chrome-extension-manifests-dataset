@@ -1,0 +1,179 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "description": "Import and sync products from AliExpress to your DSers platform account.",
+  "version": "2.5.9",
+  "name": "DSers -  AliExpress.com Product Importer",
+  "homepage_url": "https://www.dsers.com",
+  "options_ui": {
+    "chrome_style": false,
+    "page": "/popups/default.html"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "browser_action": {
+    "default_popup": "popups/default.html",
+    "default_icon": "/assets/icons/48x48.png"
+  },
+  "content_scripts": [
+    {
+      "css": [
+        "assets/css/main.css"
+      ],
+      "js": [
+        "content.bundle.js",
+        "scripts/content/category.js"
+      ],
+      "matches": [
+        "https://*.aliexpress.com/af/*",
+        "https://*.aliexpress.com/w/*",
+        "https://*.aliexpress.com/category/*",
+        "https://*.aliexpress.com/wholesale*",
+        "https://*.aliexpress.com/premium*",
+        "https://*.aliexpress.com/wishlist/wish_list_product_list.htm*",
+        "https://*.aliexpress.com/*_reviews.html*",
+        "https://home.aliexpress.com/dropshipper/ds_center.htm*",
+        "https://*.aliexpress.com/item/*"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "js": [
+        "sync.bundle.js"
+      ],
+      "matches": [
+        "https://trade.aliexpress.com/orderList.htm*",
+        "https://trade.aliexpress.com/order_list.htm*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "css": [
+        "assets/css/main.css"
+      ],
+      "js": [
+        "content.bundle.js",
+        "scripts/content/product.js"
+      ],
+      "matches": [
+        "https://*.aliexpress.com/item/*",
+        "https://*.aliexpress.com/store/product/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "css": [
+        "assets/css/aliOrder.css"
+      ],
+      "js": [
+        "aliOrder.bundle.js",
+        "scripts/content/aliOrder.js"
+      ],
+      "matches": [
+        "https://*.aliexpress.com/order_list.htm*",
+        "https://*.aliexpress.com/orderList.htm*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "content.bundle.js",
+        "scripts/content/dsers.js"
+      ],
+      "matches": [
+        "https://*.dsers.com/*",
+        "*://localhost/*"
+      ]
+    },
+    {
+      "js": [
+        "content.bundle.js",
+        "scripts/content/order.js"
+      ],
+      "matches": [
+        "https://shoppingcart.aliexpress.com/order/confirm_order.htm*"
+      ]
+    },
+    {
+      "css": [
+        "assets/css/main.css"
+      ],
+      "js": [
+        "oberlo.bundle.js",
+        "scripts/content/oberlo.js"
+      ],
+      "matches": [
+        "https://app.oberlo.com/my-products*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "css": [
+        "assets/css/main.css"
+      ],
+      "js": [
+        "dropified.bundle.js",
+        "scripts/content/dropified.js"
+      ],
+      "matches": [
+        "https://app.dropified.com/product?store=c*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "shopifyOrder.bundle.js",
+        "scripts/content/shopifyOrder.js"
+      ],
+      "matches": [
+        "https://*.myshopify.com/admin/orders/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "icons": {
+    "16": "assets/icons/16x16.png",
+    "48": "assets/icons/48x48.png",
+    "128": "assets/icons/128x128.png"
+  },
+  "manifest_version": 2,
+  "permissions": [
+    "notifications",
+    "tabs",
+    "storage",
+    "unlimitedStorage",
+    "webNavigation",
+    "cookies",
+    "https://*.aliexpress.com/*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "web_accessible_resources": [
+    "assets/images/logo.svg",
+    "assets/images/logo-full.png",
+    "assets/images/logo-small.png",
+    "assets/images/logo-xs.png",
+    "assets/images/icon-sync.png",
+    "assets/images/btn-floating.png",
+    "assets/images/icon-time.png",
+    "assets/images/icon-x.png",
+    "assets/images/icon-import-success.png",
+    "assets/images/icon-import-error.png",
+    "assets/images/icon-check.png",
+    "assets/images/icon-close.png",
+    "assets/images/icon-close-circle.png",
+    "assets/images/icon_track_normal.png",
+    "assets/images/icon_track_active.png",
+    "assets/images/icon_track_hover.png",
+    "assets/images/icon_import_normal.png",
+    "assets/images/sync.png",
+    "assets/images/icon-close.svg",
+    "/assets/images/icon-warring.png",
+    "/assets/images/icon-loading.gif"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.dsers.com/*",
+      "*://localhost/*"
+    ]
+  }
+}

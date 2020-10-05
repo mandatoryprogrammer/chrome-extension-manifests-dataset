@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Builder Addictions",
+  "version": "2.2.2",
+  "manifest_version": 2,
+  "description": "Extensão para facilitar a visualização das funcionalidades do Blip Builder.",
+  "icons": {
+    "128": "./manifest/images/icon-128px.png",
+    "48": "./manifest/images/icon-48px.png",
+    "32": "./manifest/images/icon-32px.png",
+    "16": "./manifest/images/icon.png"
+  },
+  "browser_action": {
+    "default_icon": "./manifest/images/icon.png",
+    "default_popup": "./pages/popup.html"
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "*://*.blip.ai/*"
+      ],
+      "js": [
+        "./js/content.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "/js/background.js"
+    ],
+    "persistent": false
+  },
+  "web_accessible_resources": [
+    "/js/injected.js",
+    "/resources/collapser.html",
+    "/resources/addictionsConfiguration.html",
+    "/resources/menuActionButton.html"
+  ],
+  "permissions": [
+    "*://*.blip.ai/*",
+    "storage"
+  ]
+}

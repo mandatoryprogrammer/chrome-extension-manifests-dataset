@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "A/B player",
+  "version": "1.0",
+  "description": "Add markers to online audios and loop them as you want. Speed up or down the audio. Indispensible tool for any musician.",
+  "permissions": [
+    "activeTab",
+    "declarativeContent"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "page_action": {
+    "default_popup": "./popup/popup.html",
+    "default_icon": {
+      "512": "icon.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.youtube.com/*",
+        "https://*.musi.sh/*",
+        "https://*.tidal.com/*",
+        "https://*.vimeo.com/*",
+        "https://*.spotify.com/*"
+      ],
+      "js": [
+        "pageCode.js"
+      ]
+    }
+  ],
+  "commands": {
+    "setA": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Left"
+      },
+      "description": "Set marker A"
+    },
+    "setB": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Right"
+      },
+      "description": "Set marker B"
+    },
+    "speedUp": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Up"
+      },
+      "description": "Speed up"
+    },
+    "speedDown": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Down"
+      },
+      "description": "Speed down"
+    }
+  },
+  "manifest_version": 2
+}

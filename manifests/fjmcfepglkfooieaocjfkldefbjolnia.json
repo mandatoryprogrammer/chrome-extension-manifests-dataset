@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "CryptoVeil",
+  "externally_connectable": {
+    "ids": [
+      "*"
+    ],
+    "matches": [
+      "*://mail.google.com/*",
+      "*://*.cryptoveil.com/*"
+    ]
+  },
+  "description": "A Chrome extension that lets you encrypt data posted to third party apps in order to protect sensitive data.",
+  "version": "1.0.0",
+  "icons": {
+    "16": "16-16-logo.png",
+    "48": "48-48-logo.png",
+    "128": "128-128-logo.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "red128.png"
+    },
+    "default_popup": "popup.html",
+    "default_title": "CryptoVeil"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "http://mail.google.com/*"
+      ],
+      "js": [
+        "/js/jquery-1.10.2.min.js",
+        "/js/content.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "/js/jquery-1.10.2.min.js",
+    "/js/gmail.js",
+    "/js/externalMain.js",
+    "/js/dependencies/aes.js"
+  ],
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "background",
+    "webRequest",
+    "webRequestBlocking",
+    "*://*.google.com/",
+    "*://*.herokuapp.com/*",
+    "*://*.cryptoveil.com/*"
+  ]
+}

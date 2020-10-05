@@ -1,0 +1,78 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_chrome_extension_name__",
+  "short_name": "__MSG_chrome_extension_sname__",
+  "description": "__MSG_chrome_extension_description__",
+  "default_locale": "en",
+  "version": "2.41",
+  "options_page": "options.html",
+  "icons": {
+    "48": "im/64.png",
+    "64": "im/64.png",
+    "128": "im/128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "css/inj2.css"
+      ],
+      "js": [
+        "lib/MooTools-Core-1.6.0-compressed.js",
+        "js/s2.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "js": [
+        "js/profiler.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start",
+      "match_about_blank": true,
+      "all_frames": true
+    },
+    {
+      "js": [
+        "js/content.js"
+      ],
+      "matches": [
+        "*://*.aliexpress.com/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "web_accessible_resources": [
+    "im/*.png",
+    "im/*.gif",
+    "lib/*.js"
+  ],
+  "permissions": [
+    "idle",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking",
+    "unlimitedStorage",
+    "tabs",
+    "proxy",
+    "browsingData",
+    "storage",
+    "<all_urls>"
+  ],
+  "browser_action": {
+    "default_title": "__MSG_browser_action_title__",
+    "default_icon": "im/38g.png"
+  },
+  "minimum_chrome_version": "36"
+}

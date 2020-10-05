@@ -1,0 +1,92 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "EtherAddressLookup",
+  "short_name": "EtherAddressLookup",
+  "description": "Adds links to strings that look like Ethereum addresses to your favorite blockchain explorer + antiphishing measures.",
+  "version": "1.23.1",
+  "browser_action": {
+    "default_icon": "images/ether-128x128.png",
+    "default_popup": "options.html",
+    "default_title": "EtherAddressLookup"
+  },
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "optional_permissions": [
+    "history"
+  ],
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/app/lib/punycode.js",
+        "js/app/lib/blockies.js",
+        "js/app/lib/sha256.js",
+        "js/DomainBlacklist.js",
+        "js/SignatureInject.js"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "matches": [
+        "http://twitter.com/*",
+        "https://twitter.com/*"
+      ],
+      "js": [
+        "js/app/lib/patch-worker.js"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/app/lib/web3.js",
+        "js/DomManipulator.js",
+        "js/labels.js",
+        "js/main.js",
+        "js/app/lib/nat-twbs-modal-popover.js"
+      ],
+      "css": [
+        "css/app.css"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "https://twitter.com/*"
+      ],
+      "js": [
+        "js/TwitterFakeAccount.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/options.js"
+    ]
+  },
+  "icons": {
+    "16": "images/ether-16x16.png",
+    "48": "images/ether-48x48.png",
+    "128": "images/ether-128x128.png"
+  },
+  "web_accessible_resources": [
+    "images/powered-by-quiknode.png",
+    "/js/workers/TwitterFakeAccount.js",
+    "images/twitter/whitelisted.png",
+    "images/twitter/blacklisted.png",
+    "images/twitter/neutral.png",
+    "static/phishing/phishing.html",
+    "static/phishing/phishing-phishfort.html",
+    "static/phishing/phishing-segasec.html"
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCOTL79YGbTHdtMIYXBtM9sEXaHVP9W/FGm2dtuzxfkB8ouBKRuTERx6t0D1EScCioIJhRBy0/er8Ce3ebPrG/JC/4SIWA4CnKLy0T+jC7Gyfi6gLfZJrPLT60uWcXCmrSnzjmYCSMzmqStGRWcCdzjiQaF5KnmMdO7cpMeuhvs1QIDAQAB",
+  "name": "__MSG_APP_NAME__",
+  "short_name": "__MSG_APP_SHORT_NAME__",
+  "description": "__MSG_APP_DESCRIPTION__",
+  "version": "2.2.20",
+  "author": "start.me",
+  "homepage_url": "https://start.me",
+  "icons": {
+    "16": "icons/icon16.png",
+    "19": "icons/icon19.png",
+    "32": "icons/icon32.png",
+    "38": "icons/icon38.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "offline_enabled": false,
+  "incognito": "split",
+  "background": {
+    "scripts": [
+      "constants.js",
+      "lib.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "constants.js",
+        "lib.js",
+        "overlay_host.js",
+        "content_script.js"
+      ],
+      "css": [
+        "overlay_host.css"
+      ],
+      "all_frames": false,
+      "run_at": "document_start"
+    }
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true,
+    "open_in_tab": false
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/icon-grey19.png",
+      "38": "icons/icon-grey38.png"
+    },
+    "default_title": "__MSG_APP_NAME__",
+    "default_popup": ""
+  },
+  "commands": {
+    "show_sidebar_action": {
+      "suggested_key": {
+        "default": "Alt+S"
+      },
+      "description": "__MSG_OPEN_PAGESMENU__"
+    },
+    "add_bookmark_action": {
+      "suggested_key": {
+        "default": "Alt+B"
+      },
+      "description": "__MSG_ADD_TO_STARTME__"
+    }
+  },
+  "minimum_chrome_version": "51",
+  "permissions": [
+    "activeTab",
+    "*://*.start.me/*"
+  ],
+  "optional_permissions": [
+    "contextMenus",
+    "bookmarks",
+    "tabs"
+  ],
+  "externally_connectable": {
+    "ids": [
+      "*"
+    ],
+    "matches": [
+      "*://localhost/*",
+      "*://*.start.me/*",
+      "*://*.startme.com/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "bookmark_bar.html",
+    "pagesmenu.html"
+  ]
+}

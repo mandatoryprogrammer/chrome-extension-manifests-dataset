@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Amazon Price Scanner",
+  "short_name": "APS",
+  "version": "1.0.23",
+  "manifest_version": 2,
+  "description": "Find items you want to track on Amazon and get notified if the price drops!",
+  "icons": {
+    "128": "resources/imgs/i1.png"
+  },
+  "permissions": [
+    "http://www.amazon.com/*",
+    "http://price-scanner.com/extension/*",
+    "tabs",
+    "activeTab",
+    "storage",
+    "notifications"
+  ],
+  "browser_action": {
+    "default_icon": "resources/imgs/i1.png",
+    "default_title": "APS",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.amazon.com/*",
+        "http://price-scanner.com/extension/*"
+      ],
+      "includes_globs": [
+        "http://www.amazon.com/*",
+        "http://price-scanner.com/extension/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "button.js",
+        "popup.js",
+        "jquery.min.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  }
+}

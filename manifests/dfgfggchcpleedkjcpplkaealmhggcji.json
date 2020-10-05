@@ -1,0 +1,35 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Blank new tab page",
+  "version": "0.0.0.1",
+  "manifest_version": 2,
+  "incognito": "split",
+  "chrome_url_overrides": {
+    "newtab": "dist/index.html"
+  },
+  "browser_action": {
+    "default_icon": "icon.png"
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon_128.png"
+  },
+  "permissions": [
+    "http://*/",
+    "https://*/",
+    "https://sp0.baidu.com/"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://sp0.baidu.com/; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://sp0.baidu.com/"
+      ],
+      "js": [
+        "dist/main.js",
+        "dist/vendors.js"
+      ]
+    }
+  ]
+}

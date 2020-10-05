@@ -1,0 +1,37 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Prevent Pwned Passwords",
+  "short_name": "PreventPwned",
+  "description": "Checks password hashes against Have I Been Pwned and displays a notification if the hash has been leaked in a breach.",
+  "version": "1.1.0",
+  "icons": {
+    "16": "ppp_16.png",
+    "48": "ppp_48.png",
+    "128": "ppp_128.png"
+  },
+  "permissions": [
+    "notifications",
+    "storage",
+    "contextMenus"
+  ],
+  "background": {
+    "scripts": [
+      "background.js",
+      "sha1.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "ppp.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "UrbanBuzV3/Sapaad",
+  "description": "UrbanBuz V3 Extension For Sapaad",
+  "version": "3.0.0.3",
+  "icons": {
+    "16": "gfx/icon_16.png",
+    "48": "gfx/icon_48.png",
+    "128": "gfx/icon_128.png"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "lib/jquery-3.2.1.min.js",
+      "lib/sha.js",
+      "lib/urbanbuz.js",
+      "lib/phone-format.min.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.sapaad.com/*"
+      ],
+      "js": [
+        "lib/jquery-3.2.1.min.js",
+        "cs_checkin.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.sapaad.com/callcenter*"
+      ],
+      "js": [
+        "lib/jquery-3.2.1.min.js",
+        "cs_callcenter.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.sapaad.com/weborders*"
+      ],
+      "js": [
+        "lib/jquery-3.2.1.min.js",
+        "cs_weborders.js"
+      ]
+    }
+  ],
+  "page_action": {
+    "default_title": "UrbanBuz",
+    "default_icon": {
+      "16": "gfx/icon_16.png",
+      "48": "gfx/icon_48.png",
+      "128": "gfx/icon_128.png"
+    }
+  },
+  "permissions": [
+    "*://*.urbanbuz.com/*",
+    "tabs",
+    "storage",
+    "notifications"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.sapaad.com/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "ls_checkin.js",
+    "ls_callcenter.js",
+    "ls_weborders.js",
+    "ls_weborders_modify.js"
+  ]
+}

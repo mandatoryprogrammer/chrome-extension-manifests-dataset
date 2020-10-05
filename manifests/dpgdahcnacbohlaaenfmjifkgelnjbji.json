@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "G2A.COM Deal Tracker & Price Comparison",
+  "short_name": "G2A",
+  "version": "0.0.11",
+  "author": "G2A.COM",
+  "description": "We will check if you can buy the game cheaper on G2A.",
+  "homepage_url": "https://www.g2a.com",
+  "icons": {
+    "16": "assets/g_icon_16x16.png",
+    "32": "assets/g_icon_32x32.png",
+    "48": "assets/g_icon_48x48.png",
+    "128": "assets/g_icon_128x128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "https://api.g2a.com/price-comparison/v1/offer"
+  ],
+  "browser_action": {
+    "default_icon": "assets/g_icon_16x16.png",
+    "default_title": "Go to G2A.com Marketplace"
+  },
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "css": [
+        "inject.css"
+      ],
+      "js": [
+        "inject.js"
+      ],
+      "run_at": "document_end",
+      "matches": [
+        "https://store.steampowered.com/*",
+        "https://www.kinguin.net/*"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "assets/*.svg"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self';"
+}

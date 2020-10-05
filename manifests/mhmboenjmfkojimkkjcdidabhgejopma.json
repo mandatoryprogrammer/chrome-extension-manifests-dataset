@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Kiwi Merch",
+  "version": "0.0.7",
+  "manifest_version": 2,
+  "description": "",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "page": "src/bg/background.html",
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.amazon.co.uk/*",
+        "https://www.amazon.com/*",
+        "https://www.amazon.de/*",
+        "https://www.amazon.it/*",
+        "https://www.amazon.fr/*",
+        "https://members.merchinformer.com/*"
+      ],
+      "js": [
+        "vendor/moment.min.js",
+        "vendor/jquery-3.4.1.min.js",
+        "src/inject/utils.js",
+        "src/common/page-parser.js",
+        "src/inject/inject.js"
+      ],
+      "css": [
+        "src/kiwi-merch-extension.css"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://cdn.jsdelivr.net; object-src 'self'",
+  "browser_action": {
+    "default_popup": "src/popup/popup.html"
+  },
+  "permissions": [
+    "unlimitedStorage",
+    "storage",
+    "https://api.gumroad.com/*",
+    "https://www.amazon.com/*"
+  ]
+}

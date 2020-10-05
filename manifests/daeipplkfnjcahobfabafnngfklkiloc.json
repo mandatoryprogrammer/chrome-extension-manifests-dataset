@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Pingry Today",
+  "short_name": "Pingry Today",
+  "description": "A layout for your new tab page that fills you in on Pingry news and information.",
+  "version": "5.5",
+  "browser_action": {
+    "default_title": "Pingry Today",
+    "default_popup": "popup.html"
+  },
+  "chrome_url_overrides": {
+    "newtab": "pie.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_security_policy": "script-src 'self'; object-src 'self';",
+  "icons": {
+    "128": "photos/_standard/PIE-128.png",
+    "48": "photos/_standard/PIE-48.png",
+    "16": "photos/_standard/PIE-16.png"
+  },
+  "permissions": [
+    "activeTab",
+    "bookmarks",
+    "contextMenus",
+    "cookies",
+    "https://www.pingry.org/*",
+    "https://www.sagedining.com/*",
+    "http://localhost:8080/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://localhost:8080/*",
+        "https://www.pingry.org/*"
+      ],
+      "js": [
+        "jquery.min.js",
+        "background.js",
+        "widget.js",
+        "popup.js",
+        "US_announcements.js",
+        "bookmarks.js"
+      ]
+    }
+  ]
+}

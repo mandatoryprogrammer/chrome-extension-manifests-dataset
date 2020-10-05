@@ -1,0 +1,77 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "commands": {
+    "_execute_page_action": {
+      "suggested_key": {
+        "default": "Alt+M",
+        "windows": "Alt+Shift+P",
+        "mac": "Alt+Shift+P"
+      }
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_globs": [
+        "*google*",
+        "*scorestorybook.ee*",
+        "*inforegister.ee*",
+        "*1kontakt.ee*",
+        "*kreedix.ee*"
+      ],
+      "all_frames": false,
+      "js": [
+        "dist/content.min.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "declarativeContent",
+    "storage",
+    "tabs",
+    "<all_urls>"
+  ],
+  "web_accessible_resources": [
+    "js/*",
+    "html/*",
+    "css/*",
+    "images/*"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "options_ui": {
+    "page": "html/options.html",
+    "chrome_style": true
+  },
+  "background": {
+    "scripts": [
+      "js/jquery-3.3.1.min.js",
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "page_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/trusted16.png",
+      "32": "icons/trusted32.png",
+      "48": "icons/trusted32.png",
+      "128": "icons/trusted32.png"
+    }
+  },
+  "icons": {
+    "16": "icons/trusted16.png",
+    "32": "icons/trusted32.png",
+    "48": "icons/trusted32.png",
+    "128": "icons/trusted32.png"
+  },
+  "name": "__MSG_appName__",
+  "description": "__MSG_appDesc__",
+  "default_locale": "et",
+  "version": "0.9.9.4"
+}

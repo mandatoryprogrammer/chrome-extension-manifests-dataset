@@ -1,0 +1,93 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "TiwlaBlinker",
+  "short_name": "TiwlaBlinker",
+  "author": "TiwlaTeam",
+  "version": "1.0.4",
+  "manifest_version": 2,
+  "minimum_chrome_version": "49",
+  "description": "Record your screen for upload to youtube",
+  "homepage_url": "https://www.tiwla.com",
+  "background": {
+    "scripts": [
+      "background/background.common.js",
+      "background/background.js",
+      "background/background.desktopCapture.js",
+      "background/background.tabCapture.js",
+      "background/background.badgeText.js",
+      "background/background.getUserMedia.js",
+      "background/background.messaging.js",
+      "background/background.players.js",
+      "RecordRTC/MediaStreamRecorder.js",
+      "RecordRTC/MultiStreamRecorder.js",
+      "RecordRTC/MultiStreamsMixer.js",
+      "RecordRTC/StereoAudioRecorder.js",
+      "RecordRTC/DiskStorage.js",
+      "RecordRTC/EBML.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "background/background.contentScript.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    }
+  ],
+  "browser_action": {
+    "default_icon": "images/main-icon.png",
+    "default_title": "Record Your Screen, Tab",
+    "default_popup": "dropdown.html"
+  },
+  "icons": {
+    "16": "images/main-icon.png",
+    "22": "images/main-icon.png",
+    "32": "images/main-icon.png",
+    "48": "images/main-icon.png",
+    "128": "images/main-icon.png"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "tts",
+    "tabCapture",
+    "activeTab",
+    "<all_urls>",
+    "identity",
+    "https://www.googleapis.com/*",
+    "https://www.tiwla.com/*",
+    "https://texttospeech.googleapis.com/*",
+    "http://*/",
+    "https://*/"
+  ],
+  "oauth2": {
+    "client_id": "740339592268-nilglp4ikhbi0cmqd51dgm2u3f2ffjic.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/youtube.upload",
+      "https://www.googleapis.com/auth/youtube",
+      "https://texttospeech.googleapis.com/v1/text"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://apis.google.com; object-src 'self'",
+  "web_accessible_resources": [
+    "images/main-icon.png"
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true,
+    "open_in_tab": false
+  },
+  "commands": {
+    "scroll": {
+      "suggested_key": {
+        "default": "Ctrl+Space"
+      },
+      "description": "Start Record Stop Record"
+    }
+  }
+}

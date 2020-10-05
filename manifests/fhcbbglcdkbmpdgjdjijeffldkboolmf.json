@@ -1,0 +1,81 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "TV Time",
+  "version": "0.3.2",
+  "description": "Automatically check-in on TV Time when you watch an episode from anywhere on the web.",
+  "author": "TV Time",
+  "background": {
+    "persistent": true,
+    "page": "background.html"
+  },
+  "browser_action": {
+    "default_title": "",
+    "default_icon": "images/icon_128_white.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "tabs",
+    "alarms",
+    "identity",
+    "storage",
+    "webNavigation",
+    "webRequest",
+    "http://*.tvshowtime.com/",
+    "http://*.tvshowtime.com/*",
+    "https://*.tvshowtime.com/",
+    "https://*.tvshowtime.com/*",
+    "https://*.tvtime.com/",
+    "https://*.tvtime.com/*",
+    "*://www.facebook.com/*",
+    "*://facebook.com/*"
+  ],
+  "web_accessible_resources": [
+    "dist/cs.css",
+    "fonts/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "dist/libs/jquery.js",
+        "dist/content-scripts/dom.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.facebook.com/*",
+        "*://facebook.com/*"
+      ],
+      "js": [
+        "dist/libs/jquery.js",
+        "dist/content-scripts/fb.js"
+      ],
+      "css": [
+        "dist/cs.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.twitter.com/*",
+        "*://twitter.com/*"
+      ],
+      "js": [
+        "dist/libs/jquery.js",
+        "dist/content-scripts/twitter.js"
+      ],
+      "css": [
+        "dist/cs.css"
+      ]
+    }
+  ],
+  "icons": {
+    "32": "images/icon_32.png",
+    "128": "images/icon_128.png"
+  },
+  "minimum_chrome_version": "33",
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "manifest_version": 2
+}

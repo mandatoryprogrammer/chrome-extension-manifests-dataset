@@ -1,0 +1,38 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Fedex Quickship",
+  "version": "1.1.1",
+  "description": "Allow user to automatically import the shipping information from ebay to Fedex Ship Manager",
+  "browser_action": {
+    "default_title": "Fedex Quickship",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "images/fedex-ebay_16px.png",
+      "24": "images/fedex-ebay_24px.png",
+      "32": "images/fedex-ebay_32px.png"
+    }
+  },
+  "author": "Qiaowei Tang",
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "activeTab",
+    "tabs"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.fedex.com/shipping/*",
+        "https://www.fedex.com/shipping/shipAction.do?method=doInitialize&utype=nulls"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "iCentrex - Click-To-Call",
+  "version": "1.2.0",
+  "description": "Enables click-to-call functionality for phone numbers found in pages.",
+  "icons": {
+    "16": "resources/icon16.png",
+    "48": "resources/icon48.png",
+    "128": "resources/icon128.png"
+  },
+  "minimum_chrome_version": "55",
+  "background": {
+    "page": "background.html"
+  },
+  "browser_action": {
+    "default_title": "iCentrex - Click-To-Call",
+    "default_icon": "resources/icon48.png",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "exclude_matches": [
+        "*://app.icentrex.com/*",
+        "*://app.briteback.com/*",
+        "*://test.briteback.com/*",
+        "*://icentrextest.briteback.com/*",
+        "*://*.briteback.com/*"
+      ],
+      "js": [
+        "common.js",
+        "ClickToDial.js",
+        "chrome.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "ClickToDial.js",
+    "common.js",
+    "chrome.js"
+  ],
+  "permissions": [
+    "tabs",
+    "storage",
+    "contextMenus",
+    "*://*/*"
+  ]
+}

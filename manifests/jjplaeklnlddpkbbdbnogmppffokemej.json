@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "CrowdScrape",
+  "version": "1.2.6",
+  "description": "Scrape web content for indicators of interest and integrate CrowdStrike Intelligence information",
+  "icons": {
+    "128": "img/icon.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "css/inject.css"
+      ],
+      "js": [
+        "lib/jquery-2.1.4.js",
+        "entityextractor.js",
+        "logic.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "page_action": {
+    "default_name": "Display Menu",
+    "default_icon": "img/cs_logo_tiny_red.png",
+    "default_popup": "popup.html"
+  },
+  "web_accessible_resources": [
+    "img/icon.png",
+    "img/cs_logo_tiny_grey.png",
+    "img/cs_logo_tiny_red.png",
+    "lib/jquery-2.1.4.js",
+    "fonts/glyphicons-halflings-regular.woff2",
+    "entityextractor.js",
+    "logic.js",
+    "css/inject.css"
+  ],
+  "permissions": [
+    "storage",
+    "webRequest",
+    "activeTab",
+    "clipboardWrite",
+    "*://*/*"
+  ],
+  "commands": {
+    "_execute_page_action": {
+      "suggested_key": {
+        "default": "Alt+S",
+        "windows": "Alt+S",
+        "mac": "Alt+S"
+      }
+    }
+  },
+  "manifest_version": 2,
+  "content_security_policy": "default-src 'none'; style-src 'self'; script-src 'self'; connect-src *;"
+}

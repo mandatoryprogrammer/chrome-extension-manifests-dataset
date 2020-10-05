@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Feed Learn",
+  "short_name": "feedlearn",
+  "description": "FeedLearn helps you learn vocabulary by showing you quizzes as you browse your Facebook feed",
+  "version": "1.18",
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "permissions": [
+    "cookies",
+    "http://facebook.com/*",
+    "https://facebook.com/*",
+    "http://www.facebook.com/*",
+    "https://www.facebook.com/*",
+    "http://feedlearn.herokuapp.com/*",
+    "https://feedlearn.herokuapp.com/*"
+  ],
+  "background": {
+    "scripts": [
+      "jquery-1.11.1.min.js",
+      "baseurl.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "jquery-1.11.1.min.js",
+        "jquery.isinview.js",
+        "baseurl.js",
+        "feedlearn.js"
+      ],
+      "matches": [
+        "http://facebook.com/*",
+        "https://facebook.com/*",
+        "http://www.facebook.com/*",
+        "https://www.facebook.com/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "jquery-1.11.1.min.js",
+        "feedlearninstalled.js"
+      ],
+      "matches": [
+        "http://feedlearn.herokuapp.com/study1",
+        "https://feedlearn.herokuapp.com/study1"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

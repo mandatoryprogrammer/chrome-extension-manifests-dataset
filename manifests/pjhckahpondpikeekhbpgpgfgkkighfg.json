@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_extNameProd__",
+  "version": "0.9.2",
+  "description": "__MSG_extDesc__",
+  "default_locale": "en",
+  "browser_action": {
+    "default_title": "__MSG_extDefaultTitle__",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "images/icon-disabled-16.png",
+    "48": "images/icon-disabled-48.png",
+    "128": "images/icon-disabled-128.png"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'; style-src * 'unsafe-inline' 'self' blob:; img-src 'self'; connect-src https://sessions.bugsnag.com/ https://notify.bugsnag.com/ https://pro.lookup.whitepages.com https://app.ekata.com;",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "compiled/base.js",
+        "compiled/content-script.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "page": "background.html",
+    "persistent": false
+  },
+  "web_accessible_resources": [
+    "inject.html",
+    "compiled/base.js",
+    "compiled/content-script.js"
+  ],
+  "permissions": [
+    "contextMenus",
+    "management",
+    "tabs",
+    "storage",
+    "activeTab",
+    "*://*/*"
+  ],
+  "manifest_version": 2,
+  "minimum_chrome_version": "53"
+}

@@ -1,0 +1,132 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "GipsyBot extension",
+  "version": "0.0.166",
+  "description": "Create tasks from wherever you want!",
+  "manifest_version": 2,
+  "icons": {
+    "16": "GipsyZen16.png",
+    "48": "GipsyZen48.png",
+    "128": "GipsyZen128.png"
+  },
+  "browser_action": {
+    "default_popup": "taskOrReviewPopup.html",
+    "default_icon": {
+      "16": "GipsyZen16.png",
+      "48": "GipsyZen48.png",
+      "128": "GipsyZen128.png"
+    }
+  },
+  "background": {
+    "scripts": [
+      "static/js/background.js",
+      "static/js/hotreload.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.mail.google.com/*"
+      ],
+      "run_at": "document_idle",
+      "css": [
+        "index.css"
+      ],
+      "js": [
+        "static/js/supportedwebsites.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://docs.google.com/*"
+      ],
+      "run_at": "document_idle",
+      "css": [
+        "index.css"
+      ],
+      "js": [
+        "static/js/supportedwebsites.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://paper.dropbox.com/*"
+      ],
+      "run_at": "document_idle",
+      "css": [
+        "index.css"
+      ],
+      "js": [
+        "static/js/supportedwebsites.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.dropbox.com/*"
+      ],
+      "run_at": "document_idle",
+      "css": [
+        "index.css"
+      ],
+      "js": [
+        "static/js/supportedwebsites.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://github.com/*"
+      ],
+      "run_at": "document_idle",
+      "css": [
+        "index.css"
+      ],
+      "js": [
+        "static/js/supportedwebsites.js"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "*://*.mail.google.com/*",
+        "https://docs.google.com/*",
+        "https://paper.dropbox.com/*",
+        "https://github.com/*",
+        "*://localhost/*",
+        "*://*.gipsydev.com/*",
+        "*://*.gipsytime.com/*",
+        "*://app.gipsybot.com/*"
+      ],
+      "run_at": "document_idle",
+      "css": [
+        "index.css"
+      ],
+      "js": [
+        "static/js/anysite.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "cookies",
+    "storage",
+    "tabs",
+    "<all_urls>"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.gipsybot.com/*",
+      "*://*.gipsytime.com/*",
+      "*://*.gipsydev.com/*",
+      "*://localhost/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "icons/*",
+    "index.css",
+    "static/css/anysite.css",
+    "static/js/*.map"
+  ]
+}

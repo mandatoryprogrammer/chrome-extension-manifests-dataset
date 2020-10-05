@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Intello",
+  "version": "0.2.9",
+  "description": "Instantly share feedback on the products you use and recommend new ones to improve your day-to-day.",
+  "icons": {
+    "16": "./images/logo/badge.png"
+  },
+  "incognito": "split",
+  "offline_enabled": true,
+  "permissions": [
+    "history",
+    "storage",
+    "activeTab",
+    "tabs",
+    "identity",
+    "identity.email",
+    "management",
+    "idle",
+    "https://accounts.google.com/*",
+    "https://www.googleapis.com/*",
+    "https://*.intello.io/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.intello.io/*"
+      ],
+      "js": [
+        "./scripts/content_scripts.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://*.intello.io/*"
+    ]
+  },
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "content_security_policy": "script-src 'self' https://cdn.ravenjs.com https://d24n15hnbwhuhn.cloudfront.net https://cdn.segment.com/analytics.js/v1/8mLLNzcoZ1pBjUB66abBXpg8mFzJCoLE/analytics.min.js https://cdn.segment.com/analytics.js/v1/pXBqikpOmtwmcjDvi642s2X4uyfjsmVx/analytics.min.js; object-src 'self'",
+  "background": {
+    "scripts": [
+      "./scripts/events_page.js"
+    ],
+    "persistent": false
+  },
+  "storage": {
+    "managed_schema": "schema.json"
+  },
+  "oauth2": {
+    "client_id": "896330124794-osb8hdkr7te0lm36b09vsmq8niitv45o.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/userinfo.profile"
+    ]
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmTodmnLzrFVb7mWwZjoqW46NQDmWkQvwfTdVZOQ2Zbc6LOsBQRzNwEylBWnheNTa1o2S6armxg5GoZixq2G2GtVp4UIQtQIQwXAc+4o9lNX+6QB7meGgS0CieKi/k4pOj9vJRlWRQoiP4oGM23gKzzOfcehhnGIdBIzw0DZnYQQGM0JjHvwy6smJsL6DzZQX8sjZHxB44orq6b0DqzHaPdY+l0KFS/PvyV/MADhKLwg0PMXB4VwnS1Jvd71qGqGuU2PxN/dUcVe2mHIwpKKn+LZaOJILh6TejKPh/3Py8nVdWpzlS7OILNQMbb/YgCil/oSGjNMWux6/uUpcdYvh0wIDAQAB"
+}

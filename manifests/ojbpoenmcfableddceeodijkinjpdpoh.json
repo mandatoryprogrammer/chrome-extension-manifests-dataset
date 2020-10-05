@@ -1,0 +1,75 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_appName__",
+  "description": "__MSG_appDesc__",
+  "default_locale": "pt_BR",
+  "version": "1.7.1",
+  "short_name": "__MSG_shortDesc__",
+  "permissions": [
+    "storage",
+    "unlimitedStorage",
+    "tabs",
+    "webRequest",
+    "management",
+    "contextMenus",
+    "clipboardWrite",
+    "clipboardRead",
+    "*://*/*"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "options_page": "options/op-settings.html",
+  "options_ui": {
+    "page": "options/op-settings.html",
+    "chrome_style": true
+  },
+  "icons": {
+    "128": "options/img/128.png",
+    "48": "options/img/48.png",
+    "16": "options/img/16.png"
+  },
+  "browser_action": {
+    "default_popup": "options/op-settings.html",
+    "default_icon": "options/img/BF_SocialSharing.png",
+    "default_title": "BeeFluent News and Settings"
+  },
+  "background": {
+    "scripts": [
+      "listener.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.facebook.com/*"
+      ],
+      "js": [
+        "libs/parse.js",
+        "core.js",
+        "beeSettings.js",
+        "bf_ga.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://web.whatsapp.com/*"
+      ],
+      "js": [
+        "libs/parse.js",
+        "core.js",
+        "beeSettings.js",
+        "bf_ga.js",
+        "pages/whatsapp.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.beefluentapp.com/rateLimit/*"
+      ],
+      "js": [
+        "clearRate.js"
+      ]
+    }
+  ]
+}

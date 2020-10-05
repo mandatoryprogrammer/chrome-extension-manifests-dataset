@@ -1,0 +1,95 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Milanote Web Clipper",
+  "short_name": "Milanote",
+  "description": "Start planning your next great piece of work by collecting inspiration from around the web.",
+  "version": "2.2.7",
+  "author": "Milanote.com",
+  "icons": {
+    "16": "resources/icons/icon_16/icon.png",
+    "19": "resources/icons/icon_19/icon.png",
+    "32": "resources/icons/icon_16/icon@2x.png",
+    "38": "resources/icons/icon_19/icon@2x.png",
+    "40": "resources/icons/icon_40/icon.png",
+    "80": "resources/icons/icon_40/icon@2x.png",
+    "128": "resources/icons/icon_128/icon.png",
+    "256": "resources/icons/icon_128/icon@2x.png"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "browser_action": {
+    "default_title": "Milanote"
+  },
+  "background": {
+    "scripts": [
+      "resources/3rdparty/amplitude.min.js",
+      "background.bundle.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "*://app.milanote.com/*",
+        "*://staging.milanote.com/*",
+        "*://test.milanote.com/*",
+        "*://v1.milanote.com/*",
+        "*://new.milanote.com/*",
+        "*://beta.milanote.com/*",
+        "*://localhost/*"
+      ],
+      "match_about_blank": false,
+      "css": [
+        "css/pinner.css",
+        "css/fonts.css"
+      ],
+      "js": [
+        "pinner.bundle.js",
+        "drawer.bundle.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://app.milanote.com/*",
+        "*://staging.milanote.com/*",
+        "*://v1.milanote.com/*",
+        "*://new.milanote.com/*",
+        "*://beta.milanote.com/*",
+        "*://test.milanote.com/*"
+      ],
+      "js": [
+        "restricted.bundle.js"
+      ]
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://localhost/*",
+      "*://app.milanote.com/*",
+      "*://staging.milanote.com/*",
+      "*://test.milanote.com/*"
+    ]
+  },
+  "permissions": [
+    "https://*.milanote.com/",
+    "http://*/*",
+    "https://*/*",
+    "tabs",
+    "activeTab",
+    "identity",
+    "storage",
+    "contextMenus"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "web_accessible_resources": [
+    "resources/font/*.*",
+    "resources/img/*.*",
+    "css/drawer.css"
+  ]
+}

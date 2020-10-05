@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "description": "__MSG_appDesc__",
+  "default_locale": "en",
+  "version": "2.7.1",
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://connect.facebook.net; object-src 'self'",
+  "permissions": [
+    "declarativeContent",
+    "storage",
+    "activeTab",
+    "history",
+    "tabs",
+    "webRequest",
+    "*://*.facebook.net/",
+    "*://*.amazon.fr/"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "page_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "images/img16.png",
+      "32": "images/img32.png",
+      "48": "images/img48.png",
+      "128": "images/img128.png"
+    }
+  },
+  "icons": {
+    "16": "images/img16.png",
+    "32": "images/img32.png",
+    "48": "images/img48.png",
+    "128": "images/img128.png"
+  },
+  "commands": {
+    "_execute_page_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+A",
+        "mac": "Command+Shift+A"
+      }
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.amazon.fr/*"
+      ],
+      "css": [
+        "content-scripts/amazon/amazon_fr.css",
+        "content-scripts/amazon/amazon_fr_checkout.css"
+      ],
+      "js": [
+        "langs/fr.js",
+        "langs/en.js",
+        "langs/langs.js",
+        "content-scripts/amazon/amazon_fr.js",
+        "content-scripts/amazon/amazon_fr_checkout.js"
+      ]
+    }
+  ],
+  "manifest_version": 2
+}

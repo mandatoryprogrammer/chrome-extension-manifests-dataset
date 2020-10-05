@@ -1,0 +1,114 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Admin UI Tweaks for Canvas",
+  "short_name": "Admin UI Tweaks for Canvas",
+  "description": "Admin UI Tweaks for the busy Canvas LMS Admin",
+  "manifest_version": 2,
+  "version": "0.0.0.1",
+  "icons": {
+    "16": "icons/screwdriver16.png",
+    "48": "icons/screwdriver48.png",
+    "128": "icons/screwdriver128.png"
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "storage",
+    "declarativeContent",
+    "https://*.instructure.com/*"
+  ],
+  "options_page": "window.html",
+  "browser_action": {
+    "default_title": "Canvas Admin Tweaks",
+    "default_icon": "icons/screwdriver16.png",
+    "default_popup": "window.html"
+  },
+  "background": {
+    "page": "background.html",
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.instructure.com/*"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "js/require.js",
+        "js/myrequire.js",
+        "js/content.js"
+      ],
+      "css": [
+        "css/all.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.instructure.com/accounts/*/sub_accounts"
+      ],
+      "js": [
+        "js/tweaks/subaccount_list_tweaks.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.instructure.com/accounts/*/users*"
+      ],
+      "js": [
+        "js/user_list_tweaks.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.instructure.com/accounts/*/terms*"
+      ],
+      "js": [
+        "js/term_list_tweaks.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.instructure.com/accounts/*"
+      ],
+      "js": [
+        "js/course_list_tweaks.js"
+      ],
+      "css": [
+        "css/account_tweaks.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.instructure.com/accounts/*/sis_import*",
+        "https://*.instructure.com/accounts/*/sis_import#"
+      ],
+      "js": [
+        "js/bootstrap.min.js",
+        "js/jquery.ui.js",
+        "js/dust-core.min.js",
+        "templates/dust/templates.js",
+        "templates/dust/pr_popover_msg.html.js",
+        "templates/dust/pr_popover_content.html.js",
+        "templates/dust/show_more_sis.html.js",
+        "templates/dust/user_details.html.js",
+        "templates/dust/ws_popover_msg.html.js",
+        "templates/dust/more_sis_load_more.html.js",
+        "templates/dust/get_more_data_row.html.js",
+        "templates/dust/more_sis_container.html.js",
+        "js/tweaks/sis_import_extras.js"
+      ],
+      "css": [
+        "css/bootstrap.min.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.instructure.com/courses/*/sections/*",
+        "https://*.instructure.com/courses/*/settings"
+      ],
+      "js": [
+        "js/section_xlist_extra.js"
+      ]
+    }
+  ]
+}

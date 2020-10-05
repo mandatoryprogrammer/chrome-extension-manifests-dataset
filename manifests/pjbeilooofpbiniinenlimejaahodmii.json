@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Shop and Give reminder",
+  "version": "4.1.22",
+  "description": "https://www.thegivingmachine.co.uk",
+  "homepage_url": "https://www.thegivingmachine.co.uk",
+  "manifest_version": 2,
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "storage",
+    "<all_urls>"
+  ],
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "js": [
+        "ci.content.pack.js",
+        "scripts/content_bundle.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": false,
+      "js": [
+        "ci.browser.helper.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "page": "background.html"
+  },
+  "browser_action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "The Giving Machine",
+    "default_icon": "images/logo/tgm-32.ico"
+  },
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "web_accessible_resources": [
+    "scripts/content/*.css",
+    "scripts/popup/*.css",
+    "scripts/settings/*.css"
+  ],
+  "icons": {
+    "16": "images/logo/tgm-32.ico",
+    "18": "images/logo/tgm-32.ico",
+    "24": "images/logo/tgm-24.png",
+    "48": "images/logo/tgm-48.png",
+    "128": "images/logo/tgm-128.png"
+  }
+}

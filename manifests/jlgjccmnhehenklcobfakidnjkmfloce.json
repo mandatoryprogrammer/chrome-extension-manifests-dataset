@@ -1,0 +1,85 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Coinback: Click. Shop. Earn Bitcoin.",
+  "version": "1.0.20",
+  "manifest_version": 2,
+  "description": "Coinback: Click. Shop. Earn Bitcoin.",
+  "homepage_url": "https://coinback.com",
+  "default_locale": "en",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjJpN8E+7ie+pX5yLo8J4wm5/h09qhL3dPvUFaLvBrjBagy80OhYbRFNfLVxUKi2vZutRFerYQQqwBH4gxLlc+5hDxTEsEN0YMSqeMsb0poLRL1H2DAV4VuhnfIi7UJ0Oz7mdVTBEZ+BNr8gR2i2v/H1VGPQop8phHq9RNJowUeGOAnM87z667tTBufPu3yaehcWyqjvznMvBw/AF7DFPHwEYiO7AMuzVDrAAORm2PnOODo2vOqrudHjQIxAoZ3TuTM75JMkstPxpolRDO7TEulD5tYSyyORAKkENz7lrIKMG5X/gk8oGovbjkP/7yahKLaC3aemaQQm/Wkul87W0OwIDAQAB",
+  "icons": {
+    "48": "icons/icon-48x48.png"
+  },
+  "background": {
+    "scripts": [
+      "vendor/google-analytics-bundle.js",
+      "vendor/jquery.js",
+      "vendor/handlebars.runtime.js",
+      "vendor/uri.js",
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "exclude_matches": [
+        "https://www.facebook.com/v2.3/dialog/oauth*"
+      ],
+      "js": [
+        "vendor/jquery.js",
+        "vendor/uri.js",
+        "js/injection.js"
+      ],
+      "all_frames": false,
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.google.com/*",
+        "https://www.google.fr/*"
+      ],
+      "include_globs": [
+        "https://www.google.com/search*",
+        "https://www.google.fr/search*"
+      ],
+      "js": [
+        "vendor/jquery.js",
+        "vendor/uri.js",
+        "js/results.js"
+      ],
+      "all_frames": false,
+      "run_at": "document_end"
+    }
+  ],
+  "browser_action": {
+    "default_icon": "icons/icon-48x48.png",
+    "default_title": "coinback"
+  },
+  "permissions": [
+    "tabs",
+    "cookies",
+    "storage",
+    "webNavigation",
+    "webRequest",
+    "identity",
+    "https://*/*",
+    "http://*/*"
+  ],
+  "web_accessible_resources": [
+    "dialogs/*",
+    "icons/icon-16x16.jpg",
+    "icons/icon-16x16.svg",
+    "icons/no_coupons.svg"
+  ],
+  "oauth2": {
+    "client_id": "916298338596-bnq7cbb3r7ts2qu2n7smpkq7l15bkdar.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com/ https://apis.google.com; object-src 'self'"
+}

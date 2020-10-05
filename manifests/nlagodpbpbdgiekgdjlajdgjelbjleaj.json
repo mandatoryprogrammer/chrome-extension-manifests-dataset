@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "author": "Ihtisham Mazhar",
+  "name": "net2phone Click to Call",
+  "short_name": "net2phone",
+  "version": "1.8.1",
+  "description": "A net2phone browser extension to connect with net2phone features.",
+  "manifest_version": 2,
+  "omnibox": {
+    "keyword": "-call"
+  },
+  "browser_action": {
+    "default_title": "net2phone Click to Call",
+    "default_icon": {
+      "16": "images/favicon16.png",
+      "48": "images/favicon48.png"
+    },
+    "default_popup": "main.html"
+  },
+  "web_accessible_resources": [
+    "images/click2dial.png",
+    "js/injected.js"
+  ],
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "js/jsapi.js",
+      "js/jquery.min.js",
+      "js/browser.js",
+      "js/log.js",
+      "js/moment.min.js",
+      "js/unite.js",
+      "js/unite_actions.js",
+      "js/backgroundCallMessages.js",
+      "js/background.js"
+    ]
+  },
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/browser.js",
+        "js/prepareDocument.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "notifications",
+    "activeTab"
+  ],
+  "icons": {
+    "16": "images/favicon16.png",
+    "48": "images/favicon48.png"
+  }
+}

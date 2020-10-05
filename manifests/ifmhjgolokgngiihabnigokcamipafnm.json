@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "spoilergon",
+  "short_name": "spoilergon",
+  "version": "2.0.0",
+  "description": "Spoilergon : A spoiler blocker for The Verge, Polygon and Vox",
+  "browser_action": {
+    "default_icon": "assets/icons/icon.png",
+    "default_popup": "popup.html",
+    "default_title": "spoilergon"
+  },
+  "icons": {
+    "32": "assets/icons/icon.png",
+    "128": "assets/icons/icon.png"
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "*://www.polygon.com/*"
+      ],
+      "js": [
+        "scripts/jquery.min.js",
+        "scripts/master.js",
+        "scripts/polygon_filter.js"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "*://www.theverge.com/*"
+      ],
+      "js": [
+        "scripts/jquery.min.js",
+        "scripts/master.js",
+        "scripts/verge_filter.js"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "*://www.vox.com/*"
+      ],
+      "js": [
+        "scripts/jquery.min.js",
+        "scripts/master.js",
+        "scripts/vox_filter.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

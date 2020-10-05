@@ -1,0 +1,86 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Leo Translate",
+  "version": "1.12.3",
+  "description": "Translate words on the internet pages using LinguaLeo API and add words to the LinguaLeo Dictionary.",
+  "applications": {
+    "gecko": {
+      "id": "leotranslate@mdnsk",
+      "strict_min_version": "55.0"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "dist/vendor.js",
+        "dist/content-render.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "dist/vendor.js",
+        "dist/content-capture.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "scripts": [
+      "dist/vendor.js",
+      "dist/background.js"
+    ]
+  },
+  "browser_action": {
+    "browser_style": true,
+    "default_icon": "icons/icon128.png",
+    "theme_icons": [
+      {
+        "light": "icons/light-icon.svg",
+        "dark": "icons/icon.svg",
+        "size": 16
+      },
+      {
+        "light": "icons/light-icon.svg",
+        "dark": "icons/icon.svg",
+        "size": 32
+      }
+    ],
+    "default_title": "LeoTranslate",
+    "default_popup": "templates/browser-action.html"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "options_ui": {
+    "page": "templates/options-page.html",
+    "browser_style": true
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+L"
+      }
+    }
+  },
+  "permissions": [
+    "contextMenus",
+    "activeTab",
+    "notifications",
+    "storage",
+    "*://api.lingualeo.com/*"
+  ],
+  "web_accessible_resources": [
+    "templates/popup-iframe.html"
+  ]
+}

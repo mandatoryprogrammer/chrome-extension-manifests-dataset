@@ -1,0 +1,69 @@
+{
+  "name": "__MSG_extension_name__",
+  "default_locale": "en",
+  "version": "2.0.0",
+  "short_name": "SimpRead",
+  "description": "__MSG_extension_desc__",
+  "homepage_url": "https://simpread.pro",
+  "author": "Kenshin Wang <kenshin@ksria.com>",
+  "icons": {
+    "16": "assets/images/icon16.png",
+    "48": "assets/images/icon48.png",
+    "128": "assets/images/icon128.png"
+  },
+  "permissions": [
+    "contextMenus",
+    "tabs",
+    "storage",
+    "unlimitedStorage",
+    "tts",
+    "<all_urls>"
+  ],
+  "optional_permissions": [
+    "cookies",
+    "https://*.youdao.com/",
+    "downloads"
+  ],
+  "background": {
+    "scripts": [
+      "/ga.js",
+      "/bundle/common.js",
+      "/bundle/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*/*.txt",
+        "file:///*/*.md"
+      ],
+      "exclude_matches": [
+        "http://localhost/*",
+        "https://simpread.herokuapp.com/view/*"
+      ],
+      "js": [
+        "/bundle/common.js",
+        "/bundle/vendors.js",
+        "/bundle/contentscripts.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "page_action": {
+    "default_icon": {
+      "16": "assets/images/icon16.png"
+    }
+  },
+  "options_page": "options/options.html",
+  "web_accessible_resources": [
+    "/assets/images/*",
+    "website_list.json",
+    "options/corb.html"
+  ],
+  "offline_enabled": true,
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://ssl.google-analytics.com; object-src 'self'",
+  "manifest_version": 2
+}

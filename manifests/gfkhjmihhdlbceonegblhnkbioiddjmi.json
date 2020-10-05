@@ -1,0 +1,55 @@
+{
+  "manifest_version": 2,
+  "name": "快截精靈 Cloudbox Crop",
+  "description": "「快截精靈」是雲端資料櫃的截圖工具，您將可以在瀏覽網頁時，即時將網頁進行截圖並存回雲端資料櫃中！",
+  "browser_action": {
+    "default_icon": "data/icons/icon16.png",
+    "default_popup": "data/popup.html",
+    "default_title": "以快截精靈進行截圖"
+  },
+  "background": {
+    "scripts": [
+      "data/jscripts/chrome/background.js",
+      "data/jscripts/chrome/contextmenu.js"
+    ],
+    "persistent": false
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+F",
+        "mac": "MacCtrl+Shift+F"
+      }
+    }
+  },
+  "content_security_policy": "script-src 'self' https://api.xuite.net; object-src 'self'",
+  "content_scripts": [
+    {
+      "js": [
+        "data/jscripts/chrome/resetLoginStatus.js"
+      ],
+      "matches": [
+        "http://blog.stage.xuite.net/_members/CloudboxCropUserInfo.php?close=yes*",
+        "http://blog.xuite.net/_members/CloudboxCropUserInfo.php?close=yes*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "icons": {
+    "128": "data/icons/icon128.png",
+    "16": "data/icons/icon16.png",
+    "48": "data/icons/icon48.png"
+  },
+  "update_url": "http://clients2.google.com/service/update2/crx",
+  "version": "0.1.2",
+  "permissions": [
+    "contextMenus",
+    "activeTab",
+    "tabs",
+    "storage",
+    "http://*/*",
+    "https://*/*",
+    "downloads",
+    "<all_urls>"
+  ]
+}

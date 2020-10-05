@@ -1,0 +1,109 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "IDE Powers",
+  "description": "Write text like you would in an IDE",
+  "version": "0.7.4",
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "img/icon16.png",
+      "48": "img/icon48.png"
+    },
+    "default_title": "IDE Power"
+  },
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png",
+    "256": "img/icon256.png"
+  },
+  "permissions": [
+    "storage",
+    "activeTab"
+  ],
+  "applications": {
+    "gecko": {
+      "id": "ff-addon@krister.ee",
+      "strict_min_version": "42.0"
+    }
+  },
+  "background": {
+    "scripts": [
+      "browser.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "browser.js",
+        "lib/helpers.js",
+        "doubleLetters.js",
+        "main.js",
+        "hotkeys.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://medium.com/*"
+      ],
+      "js": [
+        "domainSettings/mediumcom.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.facebook.com/*",
+        "*://*.messenger.com/*"
+      ],
+      "js": [
+        "domainSettings/facebookcom.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.jsfiddle.net/*"
+      ],
+      "js": [
+        "domainSettings/disabled.js"
+      ]
+    }
+  ],
+  "commands": {
+    "new-line-above": {
+      "suggested_key": {
+        "default": "Ctrl+Up"
+      },
+      "description": "Insert blank line above."
+    },
+    "new-line-below": {
+      "suggested_key": {
+        "default": "Ctrl+Down"
+      },
+      "description": "Insert blank line below."
+    },
+    "cut-line": {
+      "suggested_key": {
+        "default": "Ctrl+X"
+      },
+      "description": "Cut line (delete and keep in clipboard)."
+    },
+    "delete-line": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+K"
+      },
+      "description": "Delete line (just remove it)."
+    },
+    "move-line-up": {
+      "description": "Move line up. (beta & buggy)"
+    },
+    "move-line-down": {
+      "description": "Move line down. (beta & buggy)"
+    }
+  }
+}

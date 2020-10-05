@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Milesplit Follower",
+  "version": "2.01",
+  "description": "Follow athletes on Milesplit",
+  "background": {
+    "scripts": [
+      "Scripts/jquery-3.1.1.min.js",
+      "Scripts/background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_title": "Milesplit Follower",
+    "default_popup": "Pages/popup.html",
+    "default_icon": "Images/icon.png"
+  },
+  "permissions": [
+    "tabs",
+    "https://www.milesplit.com/",
+    "activeTab",
+    "storage"
+  ],
+  "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.milesplit.com/athletes/*"
+      ],
+      "exclude_matches": [
+        "*://*.milesplit.com/athletes",
+        "*://*.milesplit.com/athletes/"
+      ],
+      "js": [
+        "Scripts/jquery-3.1.1.min.js",
+        "Scripts/content.js"
+      ],
+      "css": [
+        "Styles/content_style.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "Images/*"
+  ],
+  "icons": {
+    "128": "Images/icon128.png",
+    "16": "Images/icon.png"
+  }
+}

@@ -1,0 +1,212 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Axon Guru",
+  "short_name": "AxonGuru",
+  "description": "Axon Guru Image Uploading Helper",
+  "version": "1.7.2",
+  "author": "Tao Chen",
+  "manifest_version": 2,
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "*://*.shutterstock.com/",
+    "http://localhost:3001/",
+    "https://axonguru.extension.callback/",
+    "*://*.axonimage.com/",
+    "*://*.axonguru.com/",
+    "*://*.dreamstime.com/",
+    "*://*.fotolia.com/",
+    "*://*.smugmug.com/",
+    "*://*.staticflickr.com/",
+    "*://*.google.com/",
+    "*://*.googleusercontent.com/",
+    "*://*.cloudfront.net/"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "32": "axonimage.png"
+    }
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.dreamstime.com/uploadfile*"
+      ],
+      "exclude_matches": [
+        "*://*.dreamstime.com/uploadfile2*"
+      ],
+      "js": [
+        "lib/js/jquery-2.2.3.min.js",
+        "lib/js/jquery.ui.widget.js",
+        "lib/js/jquery.fileupload.js",
+        "config.js",
+        "images-upload.js",
+        "file-upload.js",
+        "dreamstime/images-upload-dreamstime.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.dreamstime.com/unfinished*"
+      ],
+      "js": [
+        "lib/js/jquery-2.2.3.min.js",
+        "config.js",
+        "dreamstime/unfinished-uploads-dreamstime.js"
+      ],
+      "css": [
+        "css/global.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.dreamstime.com/uploadfile2*"
+      ],
+      "js": [
+        "lib/js/jquery-2.2.3.min.js",
+        "config.js",
+        "autocomplete-metadata.js",
+        "dreamstime/autocomplete-metadata-dreamstime.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.dreamstime.com/earnings*"
+      ],
+      "js": [
+        "lib/js/jquery-2.2.3.min.js",
+        "config.js",
+        "earnings.js",
+        "dreamstime/earnings-dreamstime.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.fotolia.com/Contributor/UploadContent*"
+      ],
+      "js": [
+        "lib/js/jquery-2.2.3.min.js",
+        "lib/js/jquery.ui.widget.js",
+        "lib/js/jquery.fileupload.js",
+        "config.js",
+        "images-upload.js",
+        "file-upload.js",
+        "fotolia/images-upload-fotolia.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.fotolia.com/Contributor/Indexing*"
+      ],
+      "js": [
+        "lib/js/jquery-2.2.3.min.js",
+        "config.js",
+        "autocomplete-metadata.js",
+        "fotolia/autocomplete-metadata-fotolia.js"
+      ],
+      "css": [
+        "css/global.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.fotolia.com/Member/MyCredits*"
+      ],
+      "js": [
+        "lib/js/jquery-2.2.3.min.js",
+        "config.js",
+        "earnings.js",
+        "fotolia/earnings-fotolia.js"
+      ],
+      "css": [
+        "css/global.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://submit.shutterstock.com/upload/portfolio*"
+      ],
+      "js": [
+        "lib/js/jquery-2.2.3.min.js",
+        "config.js",
+        "images-upload.js",
+        "shutterstock/images-upload-shutterstock.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://submit.shutterstock.com/edit?*"
+      ],
+      "js": [
+        "lib/js/jquery-2.2.3.min.js",
+        "config.js",
+        "autocomplete-metadata.js",
+        "shutterstock/autocomplete-metadata-shutterstock.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://submit.shutterstock.com/earnings*"
+      ],
+      "js": [
+        "lib/js/jquery-2.2.3.min.js",
+        "config.js",
+        "earnings.js",
+        "shutterstock/earnings-shutterstock.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://localhost/*",
+        "*://guru.axonimage.com/*",
+        "*://www.guru.axonimage.com/*",
+        "*://*.axonguru.com/*"
+      ],
+      "js": [
+        "axon_review_inject.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://localhost/*",
+        "*://guru.axonimage.com/*",
+        "*://www.guru.axonimage.com/*",
+        "*://*.axonguru.com/*"
+      ],
+      "js": [
+        "lib/js/jquery-2.2.3.min.js",
+        "axon_review_inject2.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "options.js",
+    "shutterstock/inject_upload.js"
+  ],
+  "icons": {
+    "100": "axonimage.png"
+  }
+}

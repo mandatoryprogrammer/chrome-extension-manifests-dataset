@@ -1,0 +1,42 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Sonus Imago",
+  "version": "0.1.1",
+  "description": "Assists non-sighted users with playing a amospheric melody that correlates with the colours in an image on the active webpage.",
+  "author": "Joshua Thornton",
+  "permissions": [
+    "tabs",
+    "<all_urls>"
+  ],
+  "web_accessible_resources": [
+    "scripts/*",
+    "images/*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "background": {
+    "scripts": [
+      "scripts/require.js",
+      "scripts/require-config.js",
+      "scripts/background/main.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "scripts/require.js",
+        "scripts/require-cs.js",
+        "scripts/require-config.js",
+        "scripts/content/main.js"
+      ],
+      "css": [
+        "styles/content.css"
+      ]
+    }
+  ],
+  "options_page": "options.html"
+}

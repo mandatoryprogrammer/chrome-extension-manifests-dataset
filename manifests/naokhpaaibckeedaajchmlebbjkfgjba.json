@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "version": "3.2.46",
+  "name": "Adapt Webmail Connector",
+  "short_name": "Adapt Webmail Connector",
+  "description": "Seamless integration between Bond Adapt and webmail",
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "data/chrome/extn/background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": "data/common/images/icon_off.png",
+    "default_title": "Adapt"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "data/chrome/extn/content.js",
+        "data/common/libs/jquery-1.10.2.min.js",
+        "data/common/libs/moment-with-locales.js",
+        "data/common/libs/moment-timezone-with-data.js",
+        "data/common/libs/gmail.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "icons": {
+    "128": "data/common/images/icon.png"
+  },
+  "options_ui": {
+    "page": "data/chrome/options/options.html",
+    "chrome_style": true,
+    "open_in_tab": false
+  },
+  "permissions": [
+    "identity",
+    "storage",
+    "tabs",
+    "declarativeContent",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "storage": {
+    "managed_schema": "data/chrome/extn/schema.json"
+  },
+  "web_accessible_resources": [
+    "data/common/libs/jquery-1.10.2.min.js",
+    "data/common/libs/moment-with-locales.js",
+    "data/common/libs/moment-timezone-with-data.js",
+    "data/common/libs/gmail.js",
+    "data/chrome/extn/embedded.js"
+  ]
+}

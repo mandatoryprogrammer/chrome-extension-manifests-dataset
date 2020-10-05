@@ -1,0 +1,72 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "POGO.io",
+  "short_name": "POGO.io",
+  "description": "The Pogo.io sidebar allows you to grab the exact images, text and links you want from the web by dragging them into your projects.",
+  "version": "0.1.9",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "exclude_matches": [
+        "*://*.pogo.io/*"
+      ],
+      "css": [
+        "lib/fontawesome.css",
+        "src/style/animation.css",
+        "src/style/sidebarDiv.css",
+        "src/style/draw.css"
+      ],
+      "js": [
+        "lib/axios.min.js",
+        "lib/validator.min.js",
+        "src/utils/solo/getShortUrl.js",
+        "src/utils/solo/isUrl.js",
+        "src/utils/solo/isProjectActive.js",
+        "src/utils/solo/truncate.js",
+        "src/utils/solo/isAbsoluteURL.js",
+        "src/utils/solo/combineURLs.js",
+        "src/utils/solo/getUrlComponents.js",
+        "src/utils/solo/normalizeUrlLite.js",
+        "src/utils/solo/prependProtocol.js",
+        "src/services/ApiEndpoints.js",
+        "src/services/UserApiService.js",
+        "src/services/ProjectApiService.js",
+        "src/services/CardApiService.js",
+        "src/services/ImageFileService.js",
+        "src/getElement.js",
+        "src/draw.js",
+        "src/routes/sbCardEditor.js",
+        "src/routes/sbLogin.js",
+        "src/routes/router.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    "src/sidebar.html"
+  ],
+  "browser_action": {
+    "default_title": "Pogo.io"
+  },
+  "icons": {
+    "16": "./static/img/icon16.png",
+    "32": "./static/img/icon32.png",
+    "48": "./static/img/icon256.png",
+    "128": "./static/img/icon256.png"
+  },
+  "background": {
+    "scripts": [
+      "src/background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "activeTab",
+    "cookies",
+    "https://api.pogo.io/",
+    "https://pogo.io/"
+  ]
+}

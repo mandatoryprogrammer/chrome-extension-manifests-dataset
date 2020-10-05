@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Self Butler",
+  "description": "Shortcuts to Self Butler",
+  "icons": {
+    "48": "icon.png",
+    "128": "icon128.png"
+  },
+  "version": "1.0.19",
+  "permissions": [
+    "tabs",
+    "topSites",
+    "storage",
+    "*://*.selfbutler.com/*"
+  ],
+  "browser_action": {
+    "default_title": "Self Butler",
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "chrome_url_overrides": {
+    "newtab": "newtab/index.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.selfbutler.com/*"
+      ],
+      "js": [
+        "injectTopSites.js"
+      ],
+      "css": [
+        "topsites.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.selfbutler.com/*"
+      ],
+      "js": [
+        "noextwarning.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "style.css",
+    "*.png"
+  ],
+  "default_locale": "en",
+  "manifest_version": 2,
+  "applications": {
+    "gecko": {
+      "id": "{29828a3b-b422-4c85-a683-1f738fba9d16}",
+      "strict_min_version": "57.0"
+    }
+  }
+}

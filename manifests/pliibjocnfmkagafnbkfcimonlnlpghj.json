@@ -1,0 +1,94 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_appName__",
+  "short_name": "__MSG_appName__",
+  "description": "__MSG_appDescription__",
+  "version": "1.9.1",
+  "icons": {
+    "16": "assets/icon-16.png",
+    "48": "assets/icon-48.png",
+    "128": "assets/icon-128.png"
+  },
+  "default_locale": "en",
+  "permissions": [
+    "alarms",
+    "identity",
+    "storage",
+    "unlimitedStorage",
+    "tabs",
+    "activeTab",
+    "notifications",
+    "contextMenus",
+    "downloads",
+    "<all_urls>",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "optional_permissions": [
+    "desktopCapture"
+  ],
+  "background": {
+    "page": "index.html#event-page",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "assets/icon-19.png",
+      "38": "assets/icon-38.png"
+    },
+    "default_title": "__MSG_appName__",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://app.clickup.com/*"
+      ],
+      "css": [
+        "inject/content-script.css"
+      ],
+      "js": [
+        "inject/content-script.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "inject/inject_main.css"
+      ],
+      "js": [
+        "inject/inject_main.js"
+      ]
+    }
+  ],
+  "commands": {
+    "capture-full": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+1"
+      },
+      "description": "Capture Full"
+    },
+    "capture-area": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+2"
+      },
+      "description": "Capture Area"
+    },
+    "notepad": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+N"
+      },
+      "description": "Notepad"
+    }
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsukIpNYC+sJLzEmIhxwLsETloVHkNVLH6ZsLs2xMMBYqJ7MNoRTrsbBgZ/PhUI/qhoXNtHguaNxGoBqq91QbhRyXsULUAXJ2c5O33WkUR4JKy9lsn/xY8JNHzPn0DgeQjRONCQnHHo65g7/UuANY1FzrkGdAUOoHn/8yr0F0RNv9Gd13Hd6n7MB65dvhDZvJNuc4X+VySD2g9Ub+iv9ft3siRgPQTEK+CgWWx428+T+7QaVGVdQy8fg8VLk1sRa8vBB2wynYZGvWaWb+N9t8etBu8RfkuczQIWeSjnuTdpf95XLUCp2Rk9wx11PpahKg2JrrC2Vebf5wm2NVsWG/+wIDAQAB",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'; font-src 'self';",
+  "web_accessible_resources": [
+    "*"
+  ]
+}

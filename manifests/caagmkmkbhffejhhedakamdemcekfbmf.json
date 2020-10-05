@@ -1,0 +1,114 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Datawallet 3.0 - Developer Edition",
+  "description": "Your data has value. Source it, store it, and use it.",
+  "version": "3.1.0",
+  "icons": {
+    "16": "assets/images/dw-default-16.png",
+    "32": "assets/images/dw-default-32.png",
+    "48": "assets/images/dw-default-48.png",
+    "128": "assets/images/dw-default-128.png"
+  },
+  "browser_action": {
+    "browser_style": true,
+    "default_icon": {
+      "16": "assets/images/dw-default-16.png",
+      "32": "assets/images/dw-default-32.png",
+      "48": "assets/images/dw-default-48.png",
+      "128": "assets/images/dw-default-128.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://localhost/*"
+      ],
+      "js": [
+        "dist/datawalletApi.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://www.amazon.com/*"
+      ],
+      "js": [
+        "dist/content/amazon.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.facebook.com/*"
+      ],
+      "js": [
+        "dist/content/facebook.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.linkedin.com/*"
+      ],
+      "js": [
+        "dist/content/linkedin.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://*.datawallet.com/*",
+        "https://youaretheproduct.wtf/*",
+        "https://personality.gallery/*"
+      ],
+      "js": [
+        "dist/datawalletApi.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "*://*/*",
+    "webNavigation",
+    "storage",
+    "unlimitedStorage",
+    "idle",
+    "activeTab",
+    "tabs",
+    "history",
+    "downloads",
+    "bookmarks",
+    "topSites",
+    "webRequest",
+    "webRequestBlocking",
+    "notifications"
+  ],
+  "optional_permissions": [],
+  "web_accessible_resources": [
+    "dist/datawalletApiInjected.js",
+    "dist/message.js",
+    "dist/originFetch.js",
+    "content-ui.css",
+    "content-ui.html"
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnp6EDXeBXEdmcRgmR8ZTcQot/hehJKEaC3CeYzkRDLkw8kWjBysefnNk+8YhsN7invwadD52E9SxgFC5gHVtlJOEtRWUAeL7aIWj2QSC7GkPW7UhNVrNJ+ik0FV33DQ36hMbzCV00YrCv3srWFwZTzsYY+oIO75/ar4VGBof/JDje0MnTnqneS6dcxLsOImT9xS4L8pS8peDTqhLyyP2LC2qArew63OktK15V+DZKYY7JtdArQytxr37Pn89XRLyyyocmSC1/edKC+GplGIk4iKVNyY+cDwlfmgP0wgQT+0UMN4NyU6GvB+JrGDMP2wVLKiiPiBw2eEiCyC7NpbOSwIDAQAB",
+  "externally_connectable": {
+    "matches": [
+      "https://win.datawallet.com/*",
+      "https://web.datawallet.com/*"
+    ],
+    "accepts_tls_channel_id": true
+  }
+}

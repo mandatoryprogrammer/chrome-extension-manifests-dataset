@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Sitecore Straight to Datasource",
+  "short_name": "Sitecore Straight to Datasource",
+  "description": "S2D will add a link to the data source of all items in Multilist, Treelist and drop link fields.",
+  "version": "1.0.0.2",
+  "icons": {
+    "16": "images/icons/icon-16.png",
+    "48": "images/icons/icon-48.png",
+    "128": "images/icons/icon-128.png"
+  },
+  "background": {
+    "persistent": false,
+    "page": "views/background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/sitecore*"
+      ],
+      "js": [
+        "scripts/inject.js"
+      ],
+      "runat_at": "document_idle",
+      "all_frames": true,
+      "css": [
+        "styles/main.css"
+      ]
+    }
+  ],
+  "page_action": {
+    "default_icon": {
+      "19": "images/icons/icon-19.png"
+    },
+    "default_title": "Sitecore S2D"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "options_page": "views/options.html",
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "storage",
+    "tabs",
+    "notifications"
+  ]
+}

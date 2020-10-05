@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "EvalPal",
+  "short_name": "EvalPal",
+  "description": "See your teachers' grades before they grade you, right on Duckweb.",
+  "version": "2.0",
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "web_accessible_resources": [
+    "images/loading2.gif",
+    "images/x.jpg"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://duckweb.uoregon.edu/*",
+      "https://www.applyweb.com/*"
+    ],
+    "accepts_tls_channel_id": false
+  },
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "tabs",
+    "activeTab"
+  ],
+  "background": {
+    "page": "background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.applyweb.com/eval/*"
+      ],
+      "js": [
+        "injectEval.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_idle"
+    }
+  ],
+  "page_action": {
+    "default_icon": "images/icon48.png",
+    "default_popup": "popup.html"
+  }
+}

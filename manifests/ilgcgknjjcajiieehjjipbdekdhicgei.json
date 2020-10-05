@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Sizmek Tags Tester",
+  "version": "1.0.0.58",
+  "description": "Provide information of pages running Sizmek scripts",
+  "background": {
+    "scripts": [
+      "js/environment.js",
+      "js/enums.js",
+      "js/infra.js",
+      "js/enricher.js",
+      "background.js"
+    ]
+  },
+  "devtools_page": "devtools.html",
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "http://*/*",
+    "https://*/*",
+    "<all_urls>",
+    "storage"
+  ],
+  "icons": {
+    "16": "imgs/icon_full_16.png",
+    "48": "imgs/icon_full_48.png",
+    "128": "imgs/icon_full_128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "imgs/icon_empty_16.png",
+      "48": "imgs/icon_empty_48.png",
+      "128": "imgs/icon_empty_128.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/environment.js",
+        "js/infra.js",
+        "js/enums.js",
+        "js/analyzer.js",
+        "content.js"
+      ],
+      "css": [
+        "onetag-ext-style.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "manifest_version": 2,
+  "web_accessible_resources": [
+    "legacy.js",
+    "js/analyzer.js"
+  ]
+}

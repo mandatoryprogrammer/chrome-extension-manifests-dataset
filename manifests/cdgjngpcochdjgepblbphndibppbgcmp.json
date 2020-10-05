@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "version": "1.0.1",
+  "manifest_version": 2,
+  "description": "__MSG_appDescription__",
+  "icons": {
+    "16": "app/images/logo-16.png",
+    "128": "app/images/logo-128.png"
+  },
+  "default_locale": "zh_CN",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "background": {
+    "scripts": [
+      "app/scripts/background.js"
+    ]
+  },
+  "permissions": [
+    "*://www.baidu.com/",
+    "*://www.baidu.com/?*",
+    "*://www.baidu.com/s?*",
+    "http://bdad.applinzi.com/*",
+    "storage"
+  ],
+  "options_ui": {
+    "page": "app/options.html",
+    "chrome_style": false,
+    "open_in_tab": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.baidu.com/",
+        "*://www.baidu.com/?*",
+        "*://www.baidu.com/s?*"
+      ],
+      "css": [
+        "app/styles/contentscript.css"
+      ],
+      "js": [
+        "app/lib/uuid.js",
+        "app/scripts/rules.js",
+        "app/scripts/common.js",
+        "app/scripts/contentscript.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "page_action": {
+    "default_icon": {
+      "19": "app/images/logo-19.png",
+      "38": "app/images/logo-38.png"
+    },
+    "default_title": "__MSG_appName__",
+    "default_popup": "app/popup.html"
+  }
+}

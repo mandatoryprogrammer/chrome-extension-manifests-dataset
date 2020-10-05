@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "ycWordCount for YCFellowship Application Form",
+  "version": "0.0.1",
+  "description": "Automatic word counting on the YC Fellowship application form - to allow you to focus on perfecting your YC Fellowship application.",
+  "browser_action": {
+    "default_icon": {
+      "19": "image/enso_zen.icon.19.png",
+      "38": "image/enso_zen.icon.38.png",
+      "128": "image/enso_zen.icon.padded16.128.png"
+    },
+    "default_title": "Go to the YC application webpage"
+  },
+  "author": "",
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "ycWordCount.chrome.background.js"
+    ]
+  },
+  "commands": {
+    "purpose-of-command_name": {
+      "suggested_key": {
+        "default": "Ctrl+B",
+        "mac": "Command+B"
+      },
+      "description": "Description-of-purpose-of-command"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://yc.submittable.com/submit/44764"
+      ],
+      "js": [
+        "ycWordCount.bgn.1st.js",
+        "ycWordCount.bgn.inj1.elems.js",
+        "ycWordCount.bgn.inj2.saveTextContent.js",
+        "lib/angular.js",
+        "ycWordCount.dcl.angular.app.js",
+        "ycWordCount.dcl..js"
+      ],
+      "css": [
+        "ycWordCount.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "permissions": [
+    "http://*/",
+    "https://*/",
+    "tabs",
+    "storage"
+  ],
+  "web_accessible_resources": [
+    "lib/angular.min.js.map",
+    "ycWordCount.forYCFellowshipSubmittable.js",
+    "ycWordCount.html",
+    "ycWordCount.paypal.html"
+  ],
+  "version_name": ""
+}

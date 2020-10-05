@@ -1,0 +1,42 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Data Usage",
+  "short_name": "Monitor how much data being consumed by website and how long took to load",
+  "description": "Monitor how much data being consumed by website and how long took to load",
+  "version": "0.0.3",
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/128.png",
+    "default_title": "Data Usage",
+    "default_popup": "screens/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/"
+      ],
+      "js": [
+        "js/content.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/ga.js",
+      "js/bg.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "tabs",
+    "http://*/",
+    "https://*/"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.google-analytics.com; object-src 'self' "
+}

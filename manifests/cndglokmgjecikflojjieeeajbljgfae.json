@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "0.4.2",
+  "name": "Axhub",
+  "manifest_version": 2,
+  "description": "可以一键同步原型到 Axhub 或者团队的服务器",
+  "browser_action": {
+    "default_title": "Axhub",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "img/icon-16.png",
+    "48": "img/icon-48.png",
+    "128": "img/icon-128.png"
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": [
+        "*://*:*/start.html*"
+      ],
+      "js": [
+        "static/js/sync.js"
+      ],
+      "css": [
+        "static/css/sync.css"
+      ]
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "http://iconfont.cn/*",
+        "http://www.iconfont.cn/*",
+        "https://iconfont.cn/*",
+        "https://www.iconfont.cn/*"
+      ],
+      "js": [
+        "iconfont/jquery-3.2.1.min.js",
+        "iconfont/copy-to-clipboard.js",
+        "iconfont/iconfont.js"
+      ],
+      "css": [
+        "iconfont/iconfont.css"
+      ]
+    }
+  ],
+  "background": {
+    "page": "background.html"
+  },
+  "permissions": [
+    "notifications"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

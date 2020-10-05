@@ -1,0 +1,70 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "SimplGrid",
+  "short_name": "SimplGrid",
+  "description": "",
+  "version": "1.2.1",
+  "minimum_chrome_version": "38",
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/128.png",
+    "default_popup": "main-context-menu.html"
+  },
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "permissions": [
+    "contextMenus",
+    "identity",
+    "storage",
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "oauth2": {
+    "client_id": "408099233340-96uf6ne59ttpjtfs6b3p2jnacsss4ljp.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/gmail.readonly",
+      "https://www.googleapis.com/auth/plus.me"
+    ]
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://apis.google.com; object-src 'self'",
+  "web_accessible_resources": [
+    "background.html",
+    "html/simplgrid.html",
+    "img/*.png",
+    "img/*.jpg"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/libs/jquery-2.1.4.min.js",
+        "js/libs/jquery-ui.min.js",
+        "js/libs/sortable.js",
+        "js/libs/idle-timer.min.js",
+        "js/libs/color-thief.js",
+        "js/libs/toastr.js",
+        "js/libs/jquery.mCustomScrollbar.concat.min.js",
+        "js/libs/handlebars-v4.0.5.js",
+        "js/simplgrid.js"
+      ],
+      "css": [
+        "css/toastr.css",
+        "css/jquery.mCustomScrollbar.min.css",
+        "css/simplgrid.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "options_page": "options.html"
+}

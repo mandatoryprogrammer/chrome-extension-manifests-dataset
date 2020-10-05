@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "FrontSpin Chrome Extension",
+  "short_name": "FrontSpin",
+  "description": "The FrontSpin Chrome extension gives users ability to call using FrontSpin while using other applications.",
+  "version": "0.11.27",
+  "homepage_url": "https://www.frontspin.com",
+  "background": {
+    "scripts": [
+      "popup.min.js"
+    ]
+  },
+  "icons": {
+    "128": "images/Icon128.png",
+    "48": "images/Icon48.png",
+    "32": "images/Icon32.png",
+    "16": "images/Icon16.png"
+  },
+  "minimum_chrome_version": "59.0.0.0",
+  "browser_action": {
+    "default_icon": "images/favicon.ico"
+  },
+  "permissions": [
+    "tabs",
+    "*://*.frontspin.com/*",
+    "storage",
+    "system.display",
+    "contextMenus"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://mail.google.com/*",
+        "*://inbox.google.com/*",
+        "*://*.force.com/*",
+        "*://*.salesforce.com/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "content.min.js"
+      ],
+      "css": [
+        "content.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "*.png"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com https://www.google.com/recaptcha/api.js https://app.vidyard.com https://www.gstatic.com; object-src 'self'"
+}

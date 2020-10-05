@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "icons": {
+    "16": "img/SIQ-Logo-Sqaure-16.png",
+    "48": "img/SIQ-Logo-Sqaure-48.png",
+    "128": "img/SIQ-Logo-Sqaure-128.png"
+  },
+  "name": "PhishNotify",
+  "description": "SecurityIQ tool for reporting phishing e-mails in your GMail.",
+  "version": "3.0.1",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "app_context_script.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.infosecinstitute.com/robots.txt?*"
+      ],
+      "js": [
+        "oauth2/oauth2_inject.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "zepto.min.js",
+      "base64.js",
+      "oauth2/oauth2.js",
+      "app_background.out.js"
+    ]
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "identity",
+    "*://*.google.com/*",
+    "*://www.googleapis.com/*",
+    "*://*.infosecinstitute.com/*"
+  ],
+  "options_page": "options.html",
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  },
+  "browser_action": {
+    "default_icon": "img/phish-icon2.png",
+    "default_popup": "app_popup.html"
+  },
+  "web_accessible_resources": [
+    "oauth2/oauth2.html"
+  ],
+  "version_name": "3.0.1",
+  "homepage_url": "https://securityiq.infosecinstitute.com",
+  "storage": {
+    "managed_schema": "schema.json"
+  }
+}

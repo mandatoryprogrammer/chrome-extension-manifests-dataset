@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_ext_name__",
+  "description": "__MSG_ext_desc__",
+  "default_locale": "en",
+  "author": "BTC.com",
+  "version": "1.2.4",
+  "browser_action": {
+    "default_popup": "components/popup/popup.html",
+    "default_icon": {
+      "19": "images/icon-19.png",
+      "38": "images/icon-38.png"
+    }
+  },
+  "icons": {
+    "16": "images/icon-16.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
+  },
+  "permissions": [
+    "storage",
+    "alarms",
+    "contextMenus",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "build/background.bundle.js"
+    ],
+    "persistent": true
+  },
+  "web_accessible_resources": [
+    "components/lookup/images/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "components/lookup/style.css"
+      ],
+      "js": [
+        "components/lookup/jquery.min.js",
+        "components/lookup/bitcore.min.js",
+        "build/lookup.bundle.js",
+        "components/lookup/tool.js"
+      ]
+    }
+  ],
+  "options_page": "components/option/option.html"
+}

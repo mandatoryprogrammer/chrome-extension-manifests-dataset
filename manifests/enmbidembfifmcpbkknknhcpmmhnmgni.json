@@ -1,0 +1,109 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_appName__",
+  "description": "__MSG_appDesc__",
+  "version": "60.4",
+  "default_locale": "en",
+  "author": "Kesantielu Dasefern",
+  "homepage_url": "https://kesantielu.github.io/oldvk",
+  "minimum_chrome_version": "42",
+  "icons": {
+    "48": "oldvk-48.png",
+    "64": "oldvk-64.png",
+    "128": "oldvk-128.png"
+  },
+  "browser_action": {
+    "default_icon": "oldvk-48.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "*://vk.com/*",
+    "tabs",
+    "storage",
+    "notifications"
+  ],
+  "background": {
+    "scripts": [
+      "lib/lib.js",
+      "events.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://vk.com/*"
+      ],
+      "js": [
+        "lib/lib.js",
+        "content/mainStart.js"
+      ],
+      "run_at": "document_start",
+      "exclude_matches": [
+        "*://vk.com/notifier.php*",
+        "*://vk.com/al_*.php*",
+        "*://vk.com/dev/*",
+        "*://vk.com/apps?act=manage*",
+        "*://vk.com/upload_fails.php*",
+        "*://vk.com/ads_rotate.php*",
+        "*://vk.com/share.php*",
+        "*://vk.com/like.php*",
+        "*://vk.com/adscreate*",
+        "*://vk.com/wkview.php*",
+        "*://vk.com/bugs",
+        "*://vk.com/bugs?*",
+        "*://vk.com/login.php*",
+        "*://vk.com/q_frame.php*",
+        "*://vk.com/login.php*",
+        "*://vk.com/about*",
+        "*://vk.com/jobs*",
+        "*://vk.com/*.svg*",
+        "*://vk.com/widget_*.php*",
+        "*://vk.com/data_protection*"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://vk.com/*"
+      ],
+      "js": [
+        "content/mainEnd.js"
+      ],
+      "run_at": "document_end",
+      "exclude_matches": [
+        "*://vk.com/notifier.php*",
+        "*://vk.com/al_*.php*",
+        "*://vk.com/dev/*",
+        "*://vk.com/apps?act=manage*",
+        "*://vk.com/upload_fails.php*",
+        "*://vk.com/ads_rotate.php*",
+        "*://vk.com/share.php*",
+        "*://vk.com/like.php*",
+        "*://vk.com/adscreate*",
+        "*://vk.com/wkview.php*",
+        "*://vk.com/bugs",
+        "*://vk.com/bugs?*",
+        "*://vk.com/login.php*",
+        "*://vk.com/q_frame.php*",
+        "*://vk.com/about*",
+        "*://vk.com/jobs*",
+        "*://vk.com/*.svg*",
+        "*://vk.com/widget_*.php*",
+        "*://vk.com/data_protection*"
+      ],
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "content/*.css",
+    "content/injectStart.js",
+    "content/injectEnd.js"
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "options_page": "options.html"
+}

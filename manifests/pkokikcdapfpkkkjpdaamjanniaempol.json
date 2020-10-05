@@ -1,0 +1,82 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Privly",
+  "short_name": "Privly",
+  "version": "0.5.1",
+  "description": "The Official Privly extension for Google Chrome.",
+  "author": "The Privly Foundation",
+  "manifest_version": 2,
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "contextMenus",
+    "tabs",
+    "notifications",
+    "<all_urls>"
+  ],
+  "offline_enabled": false,
+  "background": {
+    "page": "background.html"
+  },
+  "web_accessible_resources": [
+    "images/logo_16.png",
+    "images/logo_16_white.png",
+    "images/logo_48.png",
+    "privly-applications/PlainPost/show.html",
+    "privly-applications/PlainPost/seamless.html",
+    "privly-applications/PlainPost/seamless_ttlselect.html",
+    "privly-applications/Message/show.html",
+    "privly-applications/Message/seamless.html",
+    "privly-applications/Message/seamless_ttlselect.html",
+    "privly-applications/vendor/jquery-1.10.2.min.map"
+  ],
+  "icons": {
+    "16": "images/logo_16.png",
+    "48": "images/logo_48.png",
+    "96": "images/logo_96.png",
+    "112": "images/logo_112.png",
+    "128": "images/logo_128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/logo_48.png",
+      "38": "images/logo_48.png"
+    },
+    "default_title": "Privly Extension",
+    "default_popup": "pages/popup.html"
+  },
+  "options_page": "privly-applications/Pages/ChromeOptions.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "match_about_blank": true,
+      "all_frames": true,
+      "js": [
+        "javascripts/content_scripts/privly.js"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "match_about_blank": true,
+      "all_frames": true,
+      "run_at": "document_start",
+      "js": [
+        "privly-applications/shared/javascripts/context_messenger.js",
+        "javascripts/content_scripts/posting.resource.js",
+        "javascripts/content_scripts/posting.util.js",
+        "javascripts/content_scripts/posting.service.js",
+        "javascripts/content_scripts/posting.controller.js",
+        "javascripts/content_scripts/posting.app.js",
+        "javascripts/content_scripts/posting.button.js",
+        "javascripts/content_scripts/posting.floating.js",
+        "javascripts/content_scripts/posting.tooltip.js",
+        "javascripts/content_scripts/posting.ttlselect.js",
+        "javascripts/content_scripts/posting.target.js"
+      ]
+    }
+  ]
+}

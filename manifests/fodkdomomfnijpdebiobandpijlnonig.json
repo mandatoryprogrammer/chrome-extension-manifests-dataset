@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "uFilter",
+  "description": "Don't get harrassed again. uFilter is a smart filter which filters profanity from webpage based on your choice",
+  "version": "0.0.0.2",
+  "manifest_version": 2,
+  "icons": {
+    "16": "public/img/blocker-icon-16.png",
+    "48": "public/img/blocker-icon-48.png",
+    "128": "public/img/blocker-icon-128.png"
+  },
+  "background": {
+    "scripts": [
+      "bower_components/firebase/firebase.js",
+      "background/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "content/searchDOM.js",
+        "content/blur.js",
+        "content/content.js",
+        "bower_components/sentimood/sentimood.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "activeTab",
+    "storage",
+    "debugger",
+    "contextMenus"
+  ],
+  "web_accessible_resources": [],
+  "content_security_policy": "script-src 'self' https://cdn.firebase.com https://*.firebaseio.com 'unsafe-eval'; object-src 'self'",
+  "browser_action": {
+    "default_title": "uFilter",
+    "default_popup": "public/index.html"
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Kunversion",
+  "version": "1.0.22",
+  "manifest_version": 2,
+  "description": "Kunversion client extension for dashboard and autolisting.",
+  "homepage_url": "http://www.kunversion.com",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://kunversion.com/broker/posting.php*",
+        "*://www.kunversion.com/broker/posting.php*",
+        "*://kunversion.com/newagent/posting.php*",
+        "*://www.kunversion.com/newagent/posting.php*"
+      ],
+      "css": [
+        "css/posting.css"
+      ],
+      "js": [
+        "js/jquery.js",
+        "js/posting.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://post.craigslist.org/*"
+      ],
+      "js": [
+        "/js/jquery.js",
+        "js/utils.js",
+        "js/craigslist.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.craigslist.org/"
+      ],
+      "js": [
+        "/js/jquery.js",
+        "js/utils.js",
+        "js/craigslist_redirect.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://mail.google.com/*"
+      ],
+      "js": [
+        "/js/jquery.js",
+        "js/gmail-content.js"
+      ]
+    }
+  ],
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "js/jquery.js",
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "Kunversion",
+    "default_popup": "src/browser_action/browser_action.html"
+  },
+  "permissions": [
+    "http://www.kunversion.com/broker/*",
+    "http://kunversion.com/broker/*",
+    "http://www.kunversion.com/newagent/*",
+    "http://kunversion.com/newagent/*",
+    "https://www.kunversion.com/system/*",
+    "https://kunversion.com/system/*",
+    "*://*.craigslist.org/*",
+    "storage",
+    "notifications",
+    "unlimitedStorage"
+  ],
+  "omnibox": {
+    "keyword": "kv"
+  },
+  "web_accessible_resources": [
+    "js/jquery.js",
+    "js/gmail.js",
+    "js/email-importer.js",
+    "/images/*",
+    "/icons/*"
+  ]
+}

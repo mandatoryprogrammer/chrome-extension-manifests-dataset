@@ -1,0 +1,73 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Steemir",
+  "icons": {
+    "48": "images/steemir_48.png",
+    "128": "images/steemir_128.png"
+  },
+  "description": "Monetize your YouTube videos automatically on Steemit.com!",
+  "version": "1.0.0.3",
+  "permissions": [
+    "tabs",
+    "https://www.youtube.com/",
+    "https://cdn.steemjs.com/",
+    "https://steemir.com/",
+    "https://www.steemir.com/",
+    "storage"
+  ],
+  "manifest_version": 2,
+  "browser_action": {
+    "default_icon": {
+      "48": "images/steemir_48.png"
+    },
+    "default_title": "Steemir",
+    "default_popup": "steemir.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/channel/*",
+        "https://www.youtube.com/",
+        "https://www.youtube.com/watch*",
+        "https://www.youtube.com/user/*",
+        "https://www.youtube.com/my_videos*",
+        "https://www.youtube.com/dashboard*"
+      ],
+      "js": [
+        "js/steem.min.js",
+        "js/youtube.js"
+      ],
+      "css": [
+        "css/youtube.css",
+        "css/font-awesome/css/font-awesome.min.css"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://www.youtube.com/*"
+      ],
+      "js": [
+        "js/upload.js",
+        "js/steem.min.js"
+      ],
+      "css": [
+        "css/upload.css"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    "images/*",
+    "css/font-awesome/fonts/*"
+  ],
+  "content_security_policy": "script-src 'self' https://cdn.steemjs.com; object-src 'self'"
+}

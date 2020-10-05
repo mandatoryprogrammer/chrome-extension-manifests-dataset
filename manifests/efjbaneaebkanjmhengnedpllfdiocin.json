@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Sitemod.io",
+  "description": "Sitemod lets anybody modify a website without having access to the source code and get a shareable link to the modified website.",
+  "version": "1.0.6",
+  "icons": {
+    "48": "icon.png"
+  },
+  "devtools_page": "components/devtools/devtools.html",
+  "browser_action": {
+    "browser_style": false,
+    "default_icon": "icon.png",
+    "default_popup": "components/popup/popup.html"
+  },
+  "permissions": [
+    "<all_urls>",
+    "tabs",
+    "activeTab",
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "lib/browser-polyfill.min.js",
+      "components/common.js",
+      "components/background/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://sitemod.io/*"
+      ],
+      "js": [
+        "lib/browser-polyfill.min.js",
+        "components/common.js",
+        "components/content-scripts/sitemod_auth_hook.js"
+      ]
+    }
+  ],
+  "content_security_policy": "default-src 'self'; connect-src 'self' https://api.devbyte.io http://sitemod.io https://sitemod.io https://apps.sitemod.io; style-src 'self' 'unsafe-inline'; img-src 'self' https://apps.sitemod.io data:",
+  "minimum_chrome_version": "59"
+}

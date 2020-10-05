@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Christmas List App",
+  "description": "Manage all your Christmas shopping. Create Christmas lists and stay on budget. Plus a fun Christmas countdown!",
+  "homepage_url": "https://www.christmaslistapp.com",
+  "version": "1.1",
+  "version_name": "v1.1",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon128.png",
+    "128": "icons/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/icon19.png",
+      "38": "icons/icon38.png"
+    },
+    "default_title": "Christmas List App"
+  },
+  "permissions": [
+    "activeTab",
+    "cookies",
+    "<all_urls>",
+    "storage",
+    "gcm",
+    "notifications",
+    "identity"
+  ],
+  "background": {
+    "page": "src/bg/background.html",
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "css": [
+        "src/inject/inject.css"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "src/inject/inject.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "images/*",
+    "js/*.js",
+    "src/inject/*.html"
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "version": "1.0.1",
+  "default_locale": "en",
+  "name": "Steam Anti-Fraud",
+  "short_name": "SAF",
+  "description": "__MSG_appDescription__",
+  "author": "CSGOBack",
+  "homepage_url": "http://csgoback.net/info/steam-antifraud",
+  "browser_action": {
+    "default_title": "Steam Anti-Fraud",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "assets/icons/gray16.png",
+      "24": "assets/icons/gray24.png",
+      "32": "assets/icons/gray32.png",
+      "48": "assets/icons/gray48.png"
+    }
+  },
+  "icons": {
+    "16": "assets/icons/green16.png",
+    "24": "assets/icons/green24.png",
+    "32": "assets/icons/green32.png",
+    "48": "assets/icons/green48.png",
+    "96": "assets/icons/green96.png",
+    "128": "assets/icons/green128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "assets/js/jquery.js",
+        "assets/js/main.js"
+      ],
+      "css": [
+        "assets/css/main.css"
+      ],
+      "run_at": "document_start",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "https://*.steamcommunity.com/*login*",
+        "https://*.steampowered.com/*login*"
+      ],
+      "js": [
+        "assets/js/jquery.js",
+        "assets/js/steam-login.js"
+      ],
+      "css": [
+        "assets/css/steam-login.css"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "assets/js/jquery.js",
+      "assets/js/background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "*://*.csgoback.net/*",
+    "tabs",
+    "storage"
+  ],
+  "web_accessible_resources": [
+    "*.png",
+    "*.mp3",
+    "*.woff2"
+  ],
+  "offline_enabled": false
+}

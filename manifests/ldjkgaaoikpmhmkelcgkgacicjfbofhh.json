@@ -1,0 +1,85 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Instapaper",
+  "description": "Instapaper browser extension to save links for offline reading.",
+  "version": "2.0.5",
+  "options_page": "options.html",
+  "icons": {
+    "16": "insta_logo_tiny.png",
+    "48": "insta_logo_small.png",
+    "128": "insta_logo.png"
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "contextMenus",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "readlater.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "insta_default_action.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "bookmarklet.js",
+        "deflate-base64-min.js",
+        "highlight_ugly.js"
+      ],
+      "css": [
+        "instapaper.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://twitter.com/*",
+        "https://twitter.com/*"
+      ],
+      "js": [
+        "twitter.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://www.reddit.com/*"
+      ],
+      "js": [
+        "reddit.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://news.ycombinator.com/*"
+      ],
+      "js": [
+        "hackernews.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://www.usv.com/",
+        "https://www.usv.com/"
+      ],
+      "js": [
+        "usv.js"
+      ],
+      "css": [
+        "usv.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "*.png"
+  ]
+}

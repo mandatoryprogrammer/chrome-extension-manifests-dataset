@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Last.fm Scrobbler for YouTube",
+  "version": "0.1.8",
+  "description": "Scrobbling YouTube music videos to Last.fm",
+  "permissions": [
+    "storage",
+    "https://www.last.fm/api/*",
+    "https://ws.audioscrobbler.com/2.0/*",
+    "identity"
+  ],
+  "icons": {
+    "16": "data/icons/16.png",
+    "32": "data/icons/32.png",
+    "48": "data/icons/48.png",
+    "64": "data/icons/64.png",
+    "128": "data/icons/128.png",
+    "256": "data/icons/256.png"
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "*://*.youtube.com/*"
+      ],
+      "css": [
+        "data/scrobbler/inject.css"
+      ],
+      "js": [
+        "data/love/protected.js",
+        "data/scrobbler/protected.js",
+        "data/player/protected.js"
+      ]
+    }
+  ],
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "md5.min.js",
+      "lastfm.js",
+      "background.js"
+    ]
+  },
+  "page_action": {
+    "default_icon": {
+      "16": "data/icons/16.png",
+      "32": "data/icons/32.png",
+      "48": "data/icons/48.png",
+      "64": "data/icons/64.png"
+    },
+    "default_title": "Last.fm Scrobbler for YouTube"
+  },
+  "web_accessible_resources": [
+    "data/love/unprotected.js"
+  ],
+  "homepage_url": "https://add0n.com/lastfm-tool.html?from=youtube",
+  "options_ui": {
+    "page": "data/options/index.html",
+    "chrome_style": true
+  }
+}

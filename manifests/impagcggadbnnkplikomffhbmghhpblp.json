@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Koda Koala",
+  "description": "Search differently with Koda Koala search extension!",
+  "version": "1.1",
+  "icons": {
+    "48": "images/icon48.png"
+  },
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "scripts/foreground.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "html/modal.html",
+    "html/modal.css"
+  ],
+  "browser_action": {
+    "default_title": "Koda Koala"
+  },
+  "chrome_url_overrides": {
+    "newtab": "newtab/newtab.html"
+  },
+  "chrome_settings_overrides": {
+    "search_provider": {
+      "name": "Koda Koala",
+      "keyword": "Koda Koala",
+      "search_url": "http://search.kodakoala.com/search?q={searchTerms}",
+      "favicon_url": "http://www.kodakoala.com/icon.ico",
+      "instant_url": "",
+      "image_url": "",
+      "encoding": "UTF-8",
+      "is_default": true
+    }
+  },
+  "permissions": [
+    "cookies",
+    "history",
+    "management",
+    "storage",
+    "webRequest",
+    "alarms",
+    "http://*.kodakoala.com/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.kodakoala.com/*"
+    ]
+  }
+}

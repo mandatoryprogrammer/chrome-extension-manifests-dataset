@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Blissify",
+  "description": "Blissify uses facial recognition technology to automatically block pages that are making you unhappy.",
+  "version": "0.0.1",
+  "browser_action": {
+    "default_icon": "/images/icon-3.png",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>",
+        "http://*/*"
+      ],
+      "js": [
+        "./js/jquery-2.2.3.min.js",
+        "./js/content.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "./js/jquery-2.2.3.min.js",
+      "./js/utils.js",
+      "./js/clmtrackr.min.js",
+      "./models/model_pca_20_svm_emotionDetection.js",
+      "./js/emotion_classifier.js",
+      "./js/emotionmodel.js",
+      "./js/background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "activeTab",
+    "http://*/*",
+    "<all_urls>",
+    "background"
+  ],
+  "web_accessible_resources": [
+    "alert.html",
+    "calibrate.html",
+    "fonts/OpenSans-Bold.ttf",
+    "fonts/OpenSans-Light.ttf",
+    "fonts/OpenSans-Regular.ttf",
+    "images/sad_5.png",
+    "images/logo_small.png",
+    "images/cloud-1.png",
+    "images/cloud-2.png",
+    "blocked_page.html",
+    ".js/jquery-2.2.3.min.js"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "icons": {
+    "16": "/images/icon-3.png",
+    "48": "/images/icon-2.png",
+    "128": "/images/icon-1.png"
+  }
+}

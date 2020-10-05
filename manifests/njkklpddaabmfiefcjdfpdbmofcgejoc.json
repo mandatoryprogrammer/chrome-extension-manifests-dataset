@@ -1,0 +1,43 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "ineffable explorer",
+  "description": "when activated, links are opened in a new tab and the current tab is still active (equivalent of right-click-open-link-in-new-tab).",
+  "version": "1.0",
+  "manifest_version": 2,
+  "icons": {
+    "16": "images/icon16.png",
+    "32": "images/icon32.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "images/icon19_off.png"
+  },
+  "commands": {
+    "default-right-click-new-tab": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+E",
+        "mac": "Command+Shift+E"
+      },
+      "description": "hotkey on/off"
+    }
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "all_frames": true,
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ]
+}

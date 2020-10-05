@@ -1,0 +1,68 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "2.19.1",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "name": "__MSG_name__",
+  "short_name": "autoreplayforyoutube",
+  "description": "__MSG_description__",
+  "icons": {
+    "18": "youtubereplay18.png",
+    "24": "youtubereplay24.png",
+    "48": "youtubereplay48.png",
+    "64": "youtubereplay64.png",
+    "128": "youtubereplay128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content/blocker.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content/youtubeautoreplay.js",
+        "content/jquery.js"
+      ],
+      "css": [
+        "content/youtubeautoreplay.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "browser_action": {
+    "default_title": "Auto Replay for YouTube™",
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "18": "youtubereplay18.png",
+      "24": "youtubereplay24.png",
+      "48": "youtubereplay48.png",
+      "64": "youtubereplay64.png",
+      "128": "youtubereplay128.png"
+    }
+  },
+  "web_accessible_resources": [
+    "*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.google-analytics.com https://cdn.productanalytic.com; object-src 'self'",
+  "background": {
+    "scripts": [
+      "content/background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "storage",
+    "http://*/*",
+    "https://*/*"
+  ]
+}

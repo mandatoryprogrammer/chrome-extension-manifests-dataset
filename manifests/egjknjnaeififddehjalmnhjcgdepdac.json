@@ -1,0 +1,175 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_extensionName__",
+  "short_name": "__MSG_shortName__",
+  "description": "__MSG_extensionDescription__",
+  "author": "Label305",
+  "version": "1.0.1.6",
+  "default_locale": "nl",
+  "icons": {
+    "128": "img/store_icon.png"
+  },
+  "background": {
+    "scripts": [
+      "./js/runtime.js",
+      "./js/commons.js",
+      "./js/background.js"
+    ],
+    "persistent": false
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "browser_action": {
+    "default_icon": "img/icon_dark_128.png",
+    "default_popup": "popup.html",
+    "browser_style": true,
+    "theme_icons": [
+      {
+        "light": "img/icon_light_16.png",
+        "dark": "img/icon_dark_16.png",
+        "size": 16
+      },
+      {
+        "light": "img/icon_light_32.png",
+        "dark": "img/icon_dark_32.png",
+        "size": 32
+      },
+      {
+        "light": "img/icon_light_128.png",
+        "dark": "img/icon_dark_128.png",
+        "size": 128
+      }
+    ]
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "contextMenus",
+    "identity",
+    "https://*.keeping.nl/",
+    "https://*.keeping-staging.nl/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "*://*/*.pdf"
+      ],
+      "js": [
+        "./js/runtime.js",
+        "./js/ui_vendor.js",
+        "./js/commons.js",
+        "./js/entry_modal.js",
+        "./js/report_modal.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.basecamphq.com/*"
+      ],
+      "js": [
+        "./js/basecamp1.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://basecamp.com/*"
+      ],
+      "js": [
+        "./js/basecamp2.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://3.basecamp.com/*"
+      ],
+      "js": [
+        "./js/basecamp3.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://trello.com/*"
+      ],
+      "js": [
+        "./js/trello.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://github.com/*"
+      ],
+      "js": [
+        "./js/github.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://app.asana.com/*"
+      ],
+      "js": [
+        "./js/asana.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.atlassian.net/*"
+      ],
+      "js": [
+        "./js/jira.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://todoist.com/app*"
+      ],
+      "js": [
+        "./js/todoist.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "land.html",
+    "spawn_modal.html",
+    "/img/loader.gif",
+    "/fonts/lato-bold.woff",
+    "/fonts/lato-regular.woff",
+    "/fonts/lato-light.woff",
+    "/fonts/lato-italic.woff",
+    "/fonts/lato-lightitalic.woff"
+  ],
+  "applications": {
+    "gecko": {
+      "id": "{6b505257-7b76-4529-f671-f264629f3d4d}",
+      "strict_min_version": "42.0"
+    }
+  },
+  "commands": {
+    "edit-ongoing-entry": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+E",
+        "mac": "Command+Shift+E"
+      },
+      "description": "Edit the current ongoing entry"
+    },
+    "start-new-entry": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+S",
+        "mac": "Command+Shift+S"
+      },
+      "description": "Start a new entry"
+    },
+    "toggle-last-entry": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Space",
+        "mac": "Command+Shift+Space"
+      },
+      "description": "Toggle the last entry"
+    }
+  }
+}

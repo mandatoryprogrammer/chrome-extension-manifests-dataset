@@ -1,0 +1,113 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Free Email tracking, Scheduling & Templates",
+  "description": "100% free email tracking without any hidden signatures, logos or gimmicks.",
+  "version": "2.5.9",
+  "default_locale": "en",
+  "icons": {
+    "16": "icons/16x16.png",
+    "32": "icons/32x32.png",
+    "48": "icons/48x48.png",
+    "64": "icons/64x64.png",
+    "128": "icons/128x128.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/browser_action_icon.png",
+    "default_title": "Gmail plugin for SalesHandy"
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "js/lib/underscore-min.js",
+      "js/lib/socket.io.js",
+      "js/background.js",
+      "js/dataFetcherPusher.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*"
+      ],
+      "js": [
+        "js/features/localMessagePassing.js",
+        "js/timezone.js",
+        "js/lib/datadog-logs-us.js",
+        "js/datadog-config.js",
+        "js/shapp.js",
+        "js/lib/moment.js",
+        "js/lib/moment-timezone.js",
+        "js/lib/inboxsdk.js",
+        "js/lib/auto-complete.js",
+        "js/lib/flat_picker.js",
+        "js/lib/minMaxTimePlugin.js",
+        "js/lib/underscore-min.js",
+        "js/lib/popper.js",
+        "js/lib/tippy.js",
+        "js/lib/anchorme.js",
+        "js/lib/jquery-3.4.1.slim.min.js",
+        "js/lib/code-mirror/codemirror.js",
+        "js/lib/code-mirror/formatting.js",
+        "js/lib/code-mirror/xml.js",
+        "js/lib/code-mirror/htmlmixed.js",
+        "js/lib/summernote-lite.js",
+        "js/lib/summernote-image-attributes.js",
+        "js/features/free_user_popup.js",
+        "js/features/welcome_compose.js",
+        "js/features/helpers.js",
+        "js/components/templateModal.js",
+        "js/features/schedule_dropup.js",
+        "js/features/sequence_template.js",
+        "js/features/gmail-compose-encoder.js",
+        "js/components/ThreadStore.js",
+        "js/features/ReadReceipts.js",
+        "js/features/QuickTemplates.js",
+        "js/features/tour_taker.js",
+        "js/elements.js",
+        "js/features/chrome_feed_frame.js",
+        "js/content.js"
+      ],
+      "css": [
+        "css/compose_window.css",
+        "css/content.css",
+        "css/popup.css",
+        "css/flat_picker.css",
+        "css/codemirror/codemirror.css",
+        "css/codemirror/monokai.css",
+        "css/summernote-lite.css",
+        "css/summernote-lite-overrides.css",
+        "css/template_modal.css",
+        "css/auto-complete.css",
+        "css/ReadReceipts.css",
+        "css/QuickTemplates.css",
+        "css/tippy.google.theme.css",
+        "css/chrome_feed_frame.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "https://mail.google.com/",
+    "https://inbox.google.com/",
+    "https://*.saleshandy.net/",
+    "http://*.saleshandy.com/",
+    "https://*.saleshandy.com/",
+    "https://fonts.gstatic.com/s/materialicons/",
+    "notifications",
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "*://*.saleshandy.com/*",
+    "*://*.googleusercontent.com/*"
+  ],
+  "content_security_policy": "script-src 'self' https://*.saleshandy.com/*; object-src 'self'",
+  "web_accessible_resources": [
+    "icons/*",
+    "images/*",
+    "frame.html",
+    "frame.js",
+    "css/*"
+  ]
+}

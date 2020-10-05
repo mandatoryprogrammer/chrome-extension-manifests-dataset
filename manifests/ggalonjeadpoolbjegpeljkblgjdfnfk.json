@@ -1,0 +1,43 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Chat on Page",
+  "version": "9.0.0",
+  "description": "chat on page and meet the interesting people",
+  "icons": {
+    "128": "icon.png"
+  },
+  "browser_action": {
+    "default_title": "chat on page",
+    "default_icon": "icon.png"
+  },
+  "background": {
+    "scripts": [
+      "background/json-request.js",
+      "background/message-manager.js",
+      "background/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "content/inject.css"
+      ],
+      "js": [
+        "content/inject.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "server/*"
+  ],
+  "permissions": [
+    "http://*/",
+    "https://*/"
+  ]
+}

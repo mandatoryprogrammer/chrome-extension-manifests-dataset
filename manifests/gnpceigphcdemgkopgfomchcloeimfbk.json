@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "NPM Graph - linking GitHub and NPM",
+  "short_name": "NPM Graph",
+  "manifest_version": 2,
+  "version": "1.20.0",
+  "description": "Evaluate NPM packages by listing top GitHub projects that depend on them",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": [
+    "*://www.npmjs.com/*",
+    "*://*.github.com/*",
+    "*://*.npm-graph.com/*",
+    "contextMenus",
+    "notifications",
+    "storage"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.google-analytics.com https://www.googleadservices.com; object-src 'self'",
+  "background": {
+    "scripts": [
+      "lib/jquery.min.js",
+      "lib/lodash.js",
+      "src/utils.js",
+      "src/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.npmjs.com/*"
+      ],
+      "js": [
+        "lib/jquery.min.js",
+        "lib/lodash.js",
+        "src/utils.js",
+        "src/contentScript.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://github.com/*"
+      ],
+      "js": [
+        "lib/jquery.min.js",
+        "lib/lodash.js",
+        "src/utils.js",
+        "src/contentScript.js"
+      ]
+    }
+  ],
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtOGNwBGYI8U42Zet3QWrfTzkHdHeu8KGxgsXA1SfMCCQUwj2lSJiRl1vuvUxwOfOy2fP1fnDzgHHiA97zg/MXU0AFrIrI7R9m0MUkrupb21APxQXXg0NIdv3BCkePxeg9A2tNFIONVWzZkk/R3yh52ZEHjYQwwEHfFTVxfANpvnXZE028vxcI187C08o16trzqJj3Hih9MZsMSmfbdO5zoBH41Ub3h2R81H3qJ36ZN3QIUOhAgcnzDFV9TekCt1XvwHUfWNAMKD5rEwzfBEva+GgQdUCxvqjRoGezzZykDPNtYPq60IGEBZ/uK1+Z8Ed7N4v8A6jhAS48B4SFwlr7QIDAQAB"
+}

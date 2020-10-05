@@ -1,0 +1,163 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "version": "9.13.4",
+  "manifest_version": 2,
+  "description": "__MSG_appDescription__",
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "scripts/lib/handlebars.runtime.min.js",
+      "templates/modals.tmpl.js",
+      "scripts/bundles/background.bundle.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "scripts/lib/intercom-snippet.js",
+        "scripts/lib/snowplowSnippet.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "scripts/gmail.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "scripts/bundles/gmail.start.bundle.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "css": [
+        "styles/style.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "scripts/bundles/gmail.end.bundle.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://mailtrack.io/*/dashboard/welcome*",
+        "*://mailtrack.io/*/dashboard/reauthorized*",
+        "*://mailtrack.io/*/dashboard/install-success*",
+        "*://mailtrack.io/*/dashboard/payment/teams/success*"
+      ],
+      "js": [
+        "scripts/bundles/setup.bundle.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://mailtrack.io/*"
+      ],
+      "js": [
+        "scripts/bundles/dashboard.bundle.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "images/buttons-crx-sprite_1x.png",
+    "images/buttons-crx-sprite_2x.png",
+    "images/mailtrack-crx-sprite_2x.png",
+    "images/expand-tracking.png",
+    "images/doublecheck.svg",
+    "images/icon-128.png",
+    "images/sprite.svg",
+    "images/icons/icon-close.svg",
+    "images/icons/icon-search.svg",
+    "images/icons/icon-add.svg",
+    "images/icons/icon-added.svg",
+    "images/icons/icon-remove.svg",
+    "images/icons/icon-added-blue.svg",
+    "images/icons/icon-notification-grey.svg",
+    "images/icons/icon-notifications-off.svg",
+    "images/icons/icon-send.svg",
+    "images/icons/icon-mail.svg",
+    "images/icons/icon-checkbox-checked.svg",
+    "images/icons/icon-checkbox-unchecked.svg",
+    "images/icons/icon-checkbox-indeterminated.svg",
+    "images/icons/icon-arrow-down.svg",
+    "images/icons/bell.svg",
+    "images/icons/icon-disabled.svg",
+    "images/icons/icon-notification-settings.svg",
+    "images/icons/icon-trash.svg",
+    "images/icons/icon-trash-red.svg",
+    "images/icons/statusTooltip/read.svg",
+    "images/icons/statusTooltip/click.svg",
+    "images/icons/statusTooltip/download.svg",
+    "images/icons/icon-lists.svg",
+    "images/icons/icon-lists-black.svg",
+    "images/icons/icon-lists-white.svg",
+    "images/icons/mt-logo-free.svg",
+    "images/icons/mt-logo-pro.svg",
+    "images/icons/mt-logo-sales.svg",
+    "images/lists-permissions-modal-bg.png",
+    "https://mailtrack.io/recipients",
+    "templates/iframe.html",
+    "templates/iframe.css",
+    "templates/iframe.js",
+    "scripts/lib/intercom-shim.js",
+    "scripts/lib/intercom-frame.js",
+    "scripts/lib/intercom-frame-modern.js",
+    "scripts/lib/intercom-vendor.js",
+    "scripts/lib/intercom-vendor-modern.js",
+    "scripts/lib/intercom-app-modern.js",
+    "scripts/lib/intercom-vendors-app-modern.js",
+    "scripts/lib/intercom-banner-message-messenger-modern.js",
+    "scripts/lib/intercom-vendors-banner-message-messenger-modern.js",
+    "scripts/lib/intercom-message-messenger-modern.js",
+    "scripts/lib/intercom-message-modern.js",
+    "scripts/lib/intercom-messenger-modern.js",
+    "scripts/lib/intercom-vendors-message-modern.js",
+    "scripts/lib/snowplow.js",
+    "scripts/bundles/gmail.inject.bundle.js"
+  ],
+  "permissions": [
+    "*://*.mailtrack.io/*",
+    "*://mailtrack.io/*",
+    "https://mail.google.com/*",
+    "*://*.googleusercontent.com/*",
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "notifications",
+    "contextMenus"
+  ],
+  "browser_action": {
+    "default_icon": "images/icon-32.png",
+    "default_title": "__MSG_appName__",
+    "default_popup": "templates/popup.html"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "homepage_url": "https://mailtrack.io",
+  "icons": {
+    "16": "images/icon-16.png",
+    "128": "images/icon-128.png"
+  }
+}

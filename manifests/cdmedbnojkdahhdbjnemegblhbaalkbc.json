@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "AutonomIQ AI Enterprise Recorder",
+  "description": "AutonomiQ - lets companies deploy confidently, ensuring they can deliver value to the business.",
+  "manifest_version": 2,
+  "homepage_url": "https://www.autonomiq.io",
+  "version": "1.1.42",
+  "browser_action": {
+    "default_icon": "icons-48.png",
+    "default_title": "AutonomiQ"
+  },
+  "icons": {
+    "48": "icons-48.png",
+    "96": "icons-96.png",
+    "128": "icons-128.png"
+  },
+  "background": {
+    "scripts": [
+      "content-script/browser-polyfill.min.js",
+      "extension/background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "tabs",
+    "tabCapture",
+    "activeTab",
+    "contextMenus",
+    "webNavigation",
+    "notifications"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "all_frames": true,
+      "js": [
+        "content-script/browser-polyfill.min.js",
+        "content-script/contentScript.js",
+        "content-script/recorder.js",
+        "content-script/web-page.js"
+      ],
+      "match_about_blank": true
+    }
+  ],
+  "web_accessible_resources": [
+    "icons/logo.png"
+  ]
+}

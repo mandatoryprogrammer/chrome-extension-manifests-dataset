@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "UT Course Registration",
+  "description": "Adds features to UT's course catalog.",
+  "version": "1.2.2",
+  "permissions": [
+    "https://utdirect.utexas.edu/registrar/",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://utdirect.utexas.edu/apps/registrar/course_schedule/*/results/*"
+      ],
+      "js": [
+        "lib/jquery-2.1.1.min.js",
+        "lib/select2.min.js",
+        "registrar/contentScript.js",
+        "common.js"
+      ],
+      "css": [
+        "lib/select2.min.css",
+        "registrar/registrar.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://utdirect.utexas.edu/ctl/ecis/results/view_results.WBX*"
+      ],
+      "css": [
+        "cis/cis.css"
+      ],
+      "js": [
+        "lib/jquery-2.1.1.min.js",
+        "cis/contentScript.js",
+        "common.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "resources/*"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "options_page": "options.html"
+}

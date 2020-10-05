@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "iTalk Chrome Extension.",
+  "version": "0.0.24",
+  "manifest_version": 2,
+  "description": "This extension allows users access to the ITalk push to talk communication service.",
+  "homepage_url": "http://www.italkptt.com/",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "src/bg/background.js",
+      "src/bg/scriptslistener/socket.io.js",
+      "src/bg/scriptslistener/libopus.js",
+      "src/bg/scriptslistener/opus.js",
+      "src/bg/scriptslistener/xaudio.js",
+      "src/bg/scriptslistener/ws-audio-api.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "browser action demo",
+    "default_popup": "src/browser_action/browser_action.html"
+  },
+  "permissions": [
+    "tabs",
+    "notifications",
+    "http://*/",
+    "https://*/"
+  ],
+  "content_security_policy": "script-src 'self' https://cdn.firebase.com https://*.firebaseio.com https://www.gstatic.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.google.com/*"
+      ],
+      "css": [
+        "src/inject/inject.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.google.com/*"
+      ],
+      "js": [
+        "src/inject/inject.js",
+        "src/permission/permission.js"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "1.0.3",
+  "name": "Shoutcrow Video",
+  "description": "Shoutcrow : Clip Youtube videos and loop them.",
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "page_action": {
+    "default_icon": "images/icon_16.png",
+    "default_title": "Find Shoutcrow Video clipper below every youtube video",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.youtube.com/*",
+        "https://www.youtube.com/*",
+        "http://video.shoutcrow.com/shoutvideo/*"
+      ],
+      "js": [
+        "libs/jquery-1.6.2.min.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://www.youtube.com/*",
+        "https://www.youtube.com/*",
+        "http://video.shoutcrow.com/shoutvideo/*"
+      ],
+      "js": [
+        "youtube.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "default_locale": "en",
+  "icons": {
+    "16": "images/icon_16.png",
+    "48": "images/icon_48.png",
+    "128": "images/icon_128.png"
+  },
+  "manifest_version": 2,
+  "permissions": [
+    "tabs",
+    "storage",
+    "http://*/*",
+    "https://*/*",
+    "activeTab",
+    "contextMenus"
+  ]
+}

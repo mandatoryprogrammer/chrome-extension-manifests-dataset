@@ -1,0 +1,137 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "MNMN",
+  "description": "This extension will enrich your HN experience with summaries.",
+  "version": "0.1.11",
+  "icons": {
+    "32": "assets/icons/icon_32.png",
+    "64": "assets/icons/icon_64.png",
+    "128": "assets/icons/icon_128.png"
+  },
+  "options_ui": {
+    "page": "templates/options.html",
+    "chrome_style": true
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "assets/lib/jquery/jquery.min.js",
+      "assets/lib/jwt/jwt-decode.min.js",
+      "assets/lib/aws/aws-sdk.min.js",
+      "assets/lib/aws/amazon-cognito.min.js",
+      "assets/js/notifications.js",
+      "assets/js/actions.js",
+      "assets/js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://news.ycombinator.com/*"
+      ],
+      "exclude_matches": [
+        "https://news.ycombinator.com/submit",
+        "https://news.ycombinator.com/user*",
+        "https://news.ycombinator.com/newsguidelines.html",
+        "https://news.ycombinator.com/newsfaq.html",
+        "https://news.ycombinator.com/security.html",
+        "https://news.ycombinator.com/lists",
+        "https://news.ycombinator.com/bookmarklet.html",
+        "https://news.ycombinator.com/dmca.html",
+        "https://news.ycombinator.com/ask",
+        "https://news.ycombinator.com/newcomments"
+      ],
+      "css": [
+        "assets/css/hn.css",
+        "assets/css/vex.css",
+        "assets/css/vex-theme-default.css"
+      ],
+      "js": [
+        "assets/js/vendor/vex.combined.min.js",
+        "assets/lib/jquery/jquery.min.js",
+        "assets/lib/jwt/jwt-decode.min.js",
+        "assets/lib/aws/aws-sdk.min.js",
+        "assets/js/actions.js",
+        "assets/lib/aws/lib/axios/dist/axios.standalone.js",
+        "assets/lib/aws/lib/CryptoJS/rollups/hmac-sha256.js",
+        "assets/lib/aws/lib/CryptoJS/rollups/sha256.js",
+        "assets/lib/aws/lib/CryptoJS/components/hmac.js",
+        "assets/lib/aws/lib/CryptoJS/components/enc-base64.js",
+        "assets/lib/aws/lib/url-template/url-template.js",
+        "assets/lib/aws/lib/apiGatewayCore/sigV4Client.js",
+        "assets/lib/aws/lib/apiGatewayCore/apiGatewayClient.js",
+        "assets/lib/aws/lib/apiGatewayCore/simpleHttpClient.js",
+        "assets/lib/aws/lib/apiGatewayCore/utils.js",
+        "assets/lib/aws/apigClient.js",
+        "assets/js/hn.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "assets/css/demo.css",
+        "assets/css/modal.css",
+        "assets/css/normalize.css",
+        "assets/css/vex.css",
+        "assets/css/vex-theme-default.css"
+      ],
+      "js": [
+        "assets/js/vendor/vex.combined.min.js",
+        "assets/lib/jwt/jwt-decode.min.js",
+        "assets/lib/aws/aws-sdk.min.js",
+        "assets/js/actions.js",
+        "assets/lib/aws/lib/axios/dist/axios.standalone.js",
+        "assets/lib/aws/lib/CryptoJS/rollups/hmac-sha256.js",
+        "assets/lib/aws/lib/CryptoJS/rollups/sha256.js",
+        "assets/lib/aws/lib/CryptoJS/components/hmac.js",
+        "assets/lib/aws/lib/CryptoJS/components/enc-base64.js",
+        "assets/lib/aws/lib/url-template/url-template.js",
+        "assets/lib/aws/lib/apiGatewayCore/sigV4Client.js",
+        "assets/lib/aws/lib/apiGatewayCore/apiGatewayClient.js",
+        "assets/lib/aws/lib/apiGatewayCore/simpleHttpClient.js",
+        "assets/lib/aws/lib/apiGatewayCore/utils.js",
+        "assets/lib/aws/apigClient.js",
+        "assets/js/modal.js",
+        "assets/js/mnmn_modal.js",
+        "assets/js/common.js",
+        "assets/js/personal_area.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "assets/icons/icon_32.png",
+      "38": "assets/icons/icon_64.png"
+    },
+    "default_popup": "templates/popup.html",
+    "default_title": "Open MNMN!"
+  },
+  "permissions": [
+    "tabs",
+    "https://www.google.com/accounts/OAuthGetRequestToken",
+    "https://www.google.com/accounts/OAuthAuthorizeToken",
+    "https://www.google.com/accounts/OAuthGetAccessToken",
+    "http://www.google.com/m8/feeds/*",
+    "storage",
+    "activeTab",
+    "identity",
+    "identity.email",
+    "storage",
+    "notifications",
+    "<all_urls>"
+  ],
+  "oauth2": {
+    "client_id": "964264311355-ip832rlpsok9oc6o60c3ap267djnoq55.apps.googleusercontent.com",
+    "client_secret": "846OXzS33t6Aq6V6mV-KuGFK",
+    "scopes": [
+      "openid",
+      "email",
+      "profile"
+    ]
+  }
+}

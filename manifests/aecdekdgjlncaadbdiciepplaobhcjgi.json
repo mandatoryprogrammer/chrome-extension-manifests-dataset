@@ -1,0 +1,75 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Zillow to Excel",
+  "short_name": "Z2E",
+  "description": "This extension allows you to save Zillow search results as Excel spreadsheet",
+  "content_security_policy": "default-src 'self'",
+  "version": "1.0.1",
+  "manifest_version": 2,
+  "minimum_chrome_version": "55",
+  "permissions": [
+    "activeTab",
+    "declarativeContent",
+    "storage",
+    "unlimitedStorage",
+    "downloads",
+    "https://*.zillow.com/*/*"
+  ],
+  "background": {
+    "scripts": [
+      "Core/Services/oneTimeMessageHandlerService.js",
+      "Core/Services/searchResultsHandlerService.js",
+      "Resources/Plugins/js-xlsx/xlsx.full.min.js",
+      "Core/BackgroundLayer/Scripts/background.js"
+    ],
+    "persistent": false
+  },
+  "page_action": {
+    "default_popup": "Core/PopupLayer/Htmls/popup.html",
+    "default_icon": {
+      "16": "Resources/Images/icon16.png",
+      "32": "Resources/Images/icon32.png",
+      "48": "Resources/Images/icon48.png",
+      "128": "Resources/Images/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "Resources/Images/icon16.png",
+    "32": "Resources/Images/icon32.png",
+    "48": "Resources/Images/icon48.png",
+    "128": "Resources/Images/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.zillow.com/*/*"
+      ],
+      "include_globs": [
+        "https://*.zillow.com/homes/*",
+        "https://*.zillow.com/homedetails/*",
+        "https://*.zillow.com/b/*",
+        "https://*.zillow.com/*searchQueryState*",
+        "https://*.zillow.com/*make_me_move/*"
+      ],
+      "css": [
+        "Core/ContentScriptLayer/Css/notificationMessage.css"
+      ],
+      "js": [
+        "Resources/Plugins/jQuery/jquery-3.4.1.min.js",
+        "Core/Services/oneTimeMessageHandlerService.js",
+        "Core/ContentScriptLayer/Scripts/googleMapInstanceInterceptor.js",
+        "Core/ContentScriptLayer/Scripts/requestInterceptor.js",
+        "Core/ContentScriptLayer/Scripts/formattingInterceptedData.js",
+        "Core/ContentScriptLayer/Scripts/errorMessageHandler.js",
+        "Core/ContentScriptLayer/Scripts/actionMessageHandler.js",
+        "Core/ContentScriptLayer/Scripts/notificationPopup.js",
+        "Core/ContentScriptLayer/Scripts/content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "Resources/Fonts/FontAwesome5/js/all.min.js",
+    "Resources/Plugins/polybooljs/polybool.js"
+  ]
+}

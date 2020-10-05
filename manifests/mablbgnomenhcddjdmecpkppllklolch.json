@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "author": "Ye Myat Thein",
+  "manifest_version": 2,
+  "name": "Browsing Graph",
+  "short_name": "Browsing Graph",
+  "description": "View your browsing history in a graph",
+  "version": "0.0.5.3",
+  "background": {
+    "scripts": [
+      "ext_scripts/common.js",
+      "ext_scripts/event_helper.js",
+      "ext_scripts/event.js"
+    ],
+    "persistent": false
+  },
+  "icons": {
+    "16": "res/icon_16.png",
+    "48": "res/icon_48.png",
+    "128": "res/icon_128.png"
+  },
+  "browser_action": {
+    "default_popup": "pages/popup.html"
+  },
+  "permissions": [
+    "webNavigation",
+    "history",
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "ext_scripts/common.js",
+        "ext_scripts/content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

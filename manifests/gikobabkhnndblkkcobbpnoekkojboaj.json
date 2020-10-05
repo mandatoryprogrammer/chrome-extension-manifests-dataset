@@ -1,0 +1,87 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "prosoftsourcing",
+  "description": "Mit der prosoftsourcing Erweiterung haben Sie die Möglichkeit Kandidaten aus XING direkt in prosoftrecruiting © zu importieren.",
+  "version": "0.3.12",
+  "icons": {
+    "16": "icon-16x16.png",
+    "48": "icon-48x48.png",
+    "128": "icon-128x128.png"
+  },
+  "browser_action": {
+    "default_icon": "icon-128x128.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.ebay-kleinanzeigen.de/*"
+      ],
+      "js": [
+        "ebay/ebay.js"
+      ],
+      "css": [
+        "ebay/ebay.css"
+      ]
+    },
+    {
+      "js": [
+        "xing/xing.js"
+      ],
+      "css": [
+        "xing/xing.css"
+      ],
+      "matches": [
+        "https://www.xing.com/profile/*"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "js": [
+        "ba/ba.js"
+      ],
+      "css": [
+        "ba/ba.css"
+      ],
+      "matches": [
+        "https://jobboerse.arbeitsagentur.de/vamJB/bewerberVerwalten.html*"
+      ]
+    },
+    {
+      "js": [
+        "recruiting/recruiting.js",
+        "recruiting/cropper.js",
+        "recruiting/html2canvas.js"
+      ],
+      "css": [
+        "recruiting/cropper.css"
+      ],
+      "matches": [
+        "http://localhost:4200/*",
+        "http://localhost:4210/*",
+        "https://deviis16.prosoft.net/*",
+        "https://*.europersonal.com/*",
+        "https://*.intelligentapp.com/*",
+        "http://*.localtest.me:4200/*",
+        "http://*.localtest.me:4210/*"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "storage",
+    "cookies",
+    "*://*.ebay-kleinanzeigen.de/",
+    "*://*.xing.com/",
+    "*://*.europersonal.com/",
+    "*://*.intelligentapp.com/",
+    "*://jobboerse.arbeitsagentur.de/"
+  ]
+}

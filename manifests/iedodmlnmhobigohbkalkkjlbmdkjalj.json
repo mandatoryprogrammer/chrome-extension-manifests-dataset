@@ -1,0 +1,118 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "法規亦毒氣",
+  "description": "將網頁中的法規與條號都轉變成連結，讓您快速查閱指定條文。",
+  "version": "1.5.0",
+  "author": "kong0107",
+  "homepage_url": "https://g0v.github.io/laweasyread-front/",
+  "options_ui": {
+    "page": "options_ui/index.html",
+    "open_in_tab": true
+  },
+  "icons": {
+    "128": "icon.png"
+  },
+  "permissions": [
+    "alarms",
+    "contextMenus",
+    "storage",
+    "https://cdn.jsdelivr.net/gh/"
+  ],
+  "web_accessible_resources": [
+    "*.json",
+    "*.txt"
+  ],
+  "background": {
+    "scripts": [
+      "node_modules/webextension-polyfill/dist/browser-polyfill.min.js",
+      "parseData.js",
+      "browser/browser.js",
+      "browser/background.js",
+      "browser/contextMenus.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_popup": "browser/popup.html",
+    "default_icon": "icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "*://www.youtube.com/embed/*",
+        "*://apis.google.com/*",
+        "*://accounts.google.com/*"
+      ],
+      "js": [
+        "node_modules/webextension-polyfill/dist/browser-polyfill.min.js",
+        "chinese-parseint/chinese-parseint.js",
+        "lawtext2obj/lawtext2obj.js",
+        "domCrawler/domCrawler.js",
+        "browser/browser.js",
+        "content_scripts/functions.js",
+        "LER.js",
+        "LER.popup.js",
+        "content_scripts/loadLaws.js"
+      ],
+      "css": [
+        "content_scripts/main.css"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://law.moj.gov.tw/*"
+      ],
+      "css": [
+        "content_scripts/moj.css"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://law.moj.gov.tw/LawClass/*"
+      ],
+      "exclude_matches": [
+        "*://law.moj.gov.tw/LawClass/LawHistory.aspx*"
+      ],
+      "js": [
+        "content_scripts/moj.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://lis.ly.gov.tw/lglawc/lglawkm"
+      ],
+      "js": [
+        "content_scripts/ly_lglawkm.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://lis.ly.gov.tw/lglawc/lawsingle?*"
+      ],
+      "js": [
+        "content_scripts/ly_lawsingle.js"
+      ],
+      "css": [
+        "content_scripts/ly_lawsingle.css"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content_scripts/exec.js"
+      ],
+      "all_frames": true
+    }
+  ]
+}

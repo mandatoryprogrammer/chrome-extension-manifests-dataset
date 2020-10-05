@@ -1,0 +1,67 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_liloName__",
+  "version": "1.1.0",
+  "author": "Lilo.org",
+  "default_locale": "fr",
+  "description": "__MSG_liloDesc__",
+  "permissions": [
+    "storage",
+    "contextMenus",
+    "https://*.lilo.org/*"
+  ],
+  "icons": {
+    "256": "assets/icon/lilo_b_256.png",
+    "128": "assets/icon/lilo_b_128.png",
+    "64": "assets/icon/lilo_b_64.png",
+    "48": "assets/icon/lilo_b_48.png",
+    "32": "assets/icon/lilo_b_32.png",
+    "16": "assets/icon/lilo_b_16.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "256": "assets/icon/lilo_tr_256.png",
+      "128": "assets/icon/lilo_tr_128.png",
+      "64": "assets/icon/lilo_tr_64.png",
+      "40": "assets/icon/lilo_tr_40.png",
+      "32": "assets/icon/lilo_tr_32.png",
+      "16": "assets/icon/lilo_tr_16.png"
+    },
+    "default_title": "__MSG_browserActionTitle__",
+    "default_popup": "browserAction/drop.html"
+  },
+  "content_security_policy": "script-src 'self'; object-src 'self';",
+  "background": {
+    "scripts": [
+      "assets/js/background-scripts/Config.js",
+      "assets/js/background-scripts/Lilo.js",
+      "assets/js/background-scripts/User.js",
+      "assets/js/background-scripts/tools.js",
+      "assets/js/background-scripts/main.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.lilo.org/*"
+      ],
+      "js": [
+        "assets/js/content-scripts/lilo_cs.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "assets/js/content-scripts/lilo_affiliation.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ]
+}

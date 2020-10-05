@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "author": "Trusted Mail",
+  "name": "Trusted Mail",
+  "short_name": "TM",
+  "version": "2.3.25",
+  "version_name": "2.3.25",
+  "description": "Prevents email fraud using facial-biometrics with proprietary proof of life to encrypt and sign secure e-mails and attachments.",
+  "omnibox": {
+    "keyword": "Trusted Mail"
+  },
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "static/css/content.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://verification.trustedmail.pro/*"
+      ],
+      "js": [
+        "registration.js"
+      ]
+    }
+  ],
+  "options_page": "options.html",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "permissions": [
+    "identity",
+    "tabs",
+    "storage",
+    "*://*.google.com/*",
+    "*://*.trustedmail.pro/*",
+    "https://mail-attachment.googleusercontent.com/*"
+  ],
+  "icons": {
+    "19": "static/media/4189f3b8906d49234947a43e2a35e77f.png",
+    "38": "static/media/f0051d24faabc06a2a7852d4ddcd5b3c.png",
+    "48": "static/media/fdc66830c28d1ae07b8806091eb414e5.png",
+    "128": "static/media/cd18e0d1b7eabb0f262026be6c315159.png"
+  },
+  "browser_action": {
+    "default_icon": "static/media/4189f3b8906d49234947a43e2a35e77f.png",
+    "default_title": "Trusted Mail",
+    "default_popup": "popup.html"
+  },
+  "web_accessible_resources": [
+    "static/*"
+  ]
+}

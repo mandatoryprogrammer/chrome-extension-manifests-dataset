@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "SurfDog Web Protection",
+  "version": "0.9.1",
+  "minimum_chrome_version": "34.0",
+  "manifest_version": 2,
+  "description": "Proteja o acesso ao Internet Banking do seu banco com o SurfDog.",
+  "options_page": "adm.html",
+  "icons": {
+    "16": "icon16.png",
+    "32": "icon32.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "web_accessible_resources": [
+    "warning.png",
+    "continue.png",
+    "out.png",
+    "notification.png",
+    "nao.png",
+    "sim.png",
+    "bark.mp3",
+    "botaoBB.png",
+    "botaoBradesco.png",
+    "botaoItau.png",
+    "botaoSantander.png"
+  ],
+  "background": {
+    "scripts": [
+      "sha256.js",
+      "background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "dog.png",
+    "default_title": "SurfDog",
+    "default_popup": "browser_action.html"
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "key_event.js",
+        "jquery.min.js",
+        "popup.js",
+        "collect.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "permissions": [
+    "tabs",
+    "storage",
+    "webNavigation",
+    "notifications",
+    "*://*/*"
+  ]
+}

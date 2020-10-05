@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Fame Control",
+  "version": "1.0.1",
+  "description": "A browser extension that blocks mass murderers' names from your social feeds.",
+  "homepage_url": "http://www.getrather.com",
+  "icons": {
+    "16": "assets/images/icons/icon_bg_16.png",
+    "48": "assets/images/icons/icon_bg_48.png",
+    "128": "assets/images/icons/icon_bg_128.png"
+  },
+  "permissions": [
+    "notifications",
+    "storage",
+    "*://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "assets/js/plugins.js",
+      "assets/js/main.js",
+      "assets/js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.facebook.com/*",
+        "*://facebook.com/*"
+      ],
+      "css": [
+        "assets/css/inject.css"
+      ],
+      "js": [
+        "assets/js/plugins.js",
+        "assets/js/main.js",
+        "assets/js/inject.js",
+        "assets/js/inject.facebook.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.twitter.com/*",
+        "*://twitter.com/*"
+      ],
+      "css": [
+        "assets/css/inject.css"
+      ],
+      "js": [
+        "assets/js/plugins.js",
+        "assets/js/main.js",
+        "assets/js/inject.js",
+        "assets/js/inject.twitter.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "offline_enabled": false,
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://platform.twitter.com https://connect.facebook.net; object-src 'self'"
+}

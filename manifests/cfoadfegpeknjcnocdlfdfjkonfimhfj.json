@@ -1,0 +1,43 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "FanFic Filter",
+  "version": "0.0.1.8",
+  "description": "FanFic Filter provides a way to more efficiently filter stories on FanFiction.Net.",
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "icons": {
+    "48": "icon_48.png",
+    "128": "icon_128.png"
+  },
+  "page_action": {
+    "default_icon": "icon.png",
+    "default_title": "FF Filter",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "http://www.fanfiction.net/*",
+    "https://www.fanfiction.net/*"
+  ],
+  "background": {
+    "scripts": [
+      "bg.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.fanfiction.net/*",
+        "https://www.fanfiction.net/*"
+      ],
+      "js": [
+        "ff_filter.js"
+      ],
+      "css": [
+        "ff_filter.css"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

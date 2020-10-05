@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Friend Hunt",
+  "version": "1.3",
+  "manifest_version": 2,
+  "description": "Get desktop notifications when people whose opinion you care about comment on Product Hunt.",
+  "permissions": [
+    "storage",
+    "unlimitedStorage",
+    "gcm",
+    "https://www.producthunt.com/*",
+    "http://www.producthunt.com/*",
+    "http://localhost:3000/*",
+    "http://hunting-cabin.cc/*",
+    "notifications"
+  ],
+  "icons": {
+    "16": "assets/logo.png",
+    "48": "assets/logo.png",
+    "128": "assets/logo.png"
+  },
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "environment.js",
+      "background/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.producthunt.com/@*",
+        "http://www.producthunt.com/@*"
+      ],
+      "js": [
+        "content_script/content_script.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "browser_action": {
+    "default_icon": "assets/logo.png",
+    "default_popup": "browser_action/main.html"
+  }
+}

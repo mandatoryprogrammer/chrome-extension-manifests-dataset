@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Send to Kindle for Google Chrome",
+  "version": "1.0.1.74",
+  "description": "__MSG_extensionDescription__",
+  "default_locale": "en",
+  "incognito": "split",
+  "background": {
+    "scripts": [
+      "content/send-to-kindle.js"
+    ]
+  },
+  "options_page": "content/options/send-to-kindle-options.html",
+  "icons": {
+    "16": "icon/s2k-icon-16.png",
+    "19": "icon/s2k-icon-19.png",
+    "32": "icon/s2k-icon-32.png",
+    "64": "icon/s2k-icon-64.png",
+    "128": "icon/s2k-icon-128.png",
+    "256": "icon/s2k-icon-256.png"
+  },
+  "browser_action": {
+    "default_icon": "icon/s2k-icon-19.png",
+    "default_title": "Send to Kindle",
+    "default_popup": "content/popup/send-to-kindle-popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.amazon.com/gp/sendtokindle/reader*"
+      ],
+      "js": [
+        "content/send-to-kindle-libraries.js",
+        "content/send-to-kindle-logic.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "content/send-to-kindle-action.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "content/images/s2k-sprite.png",
+    "content/images/s2k-hsprite.png",
+    "content/images/s2k-setup-sprite.png",
+    "content/images/s2k-spinner-small.gif",
+    "content/images/s2k-spinner-large.gif",
+    "content/history/send-to-kindle-history.html"
+  ],
+  "permissions": [
+    "tabs",
+    "<all_urls>",
+    "storage",
+    "unlimitedStorage"
+  ]
+}

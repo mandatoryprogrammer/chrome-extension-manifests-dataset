@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "WTA Enhancer",
+  "short_name": "WTA++",
+  "description": "Adds information about trip time, weather, and more to wta.org hike description pages",
+  "version": "0.0.0.4",
+  "icons": {
+    "128": "img/WTA++.png"
+  },
+  "author": "bberger",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.wta.org/*go-hiking/hikes/*",
+        "http://localhost/*"
+      ],
+      "js": [
+        "lib/jquery-2.2.0.min.js",
+        "descriptionEnhancer.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.wta.org/go-hiking/trip-reports*"
+      ],
+      "js": [
+        "lib/jquery-2.2.0.min.js",
+        "tripReportEnhancer.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "page": "background.html"
+  },
+  "content_security_policy": "script-src 'self' https://*.googleapis.com/; object-src 'self'",
+  "permissions": [
+    "storage"
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "web_accessible_resources": [
+    "hikeLookup.json"
+  ]
+}

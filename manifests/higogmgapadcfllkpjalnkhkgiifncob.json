@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Yahoo Sports OneClick",
+  "version": "7",
+  "description": "Extension to set browser's default new tab page to Yahoo Sports and display trending game information",
+  "permissions": [
+    "tabs",
+    "storage",
+    "activeTab"
+  ],
+  "short_name": "Yahoo Sports",
+  "icons": {
+    "16": "sports-app-icon.png",
+    "48": "sports-app-icon.png",
+    "128": "sports-app-icon.png"
+  },
+  "browser_action": {
+    "default_icon": "sports-app-icon.png",
+    "default_popup": "index.html"
+  },
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "popup.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js",
+      "TrackingEncoder.js",
+      "TrackingManager.js",
+      "LogManager.js",
+      "Constants.js",
+      "BrowserGap.js",
+      "index.js"
+    ]
+  },
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://ajax.googleapis.com 'unsafe-eval'; object-src 'self'"
+}

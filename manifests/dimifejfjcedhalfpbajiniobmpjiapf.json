@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "version": "1.05",
+  "name": "WellRyde Billing Reconciler For Logisticare",
+  "author": "WellRyde",
+  "homepage_url": "https://www.wellryde.com",
+  "description": "Use the WellRyde Billing Reconciler to make sure you’re getting paid for all your LogistiCare trips.",
+  "icons": {
+    "16": "images/wellryde-symbol-16.png",
+    "32": "images/wellryde-symbol-32.png",
+    "48": "images/wellryde-symbol-48.png",
+    "128": "images/wellryde-symbol-128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "128": "images/wellryde-symbol.png"
+    },
+    "default_title": "WellRyde Billing Extension"
+  },
+  "background": {
+    "scripts": [
+      "js/jquery-3.3.1.min.js",
+      "js/WellRydeExtension.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "css": [
+        "css/wellryde.css"
+      ],
+      "js": [
+        "js/jquery-3.3.1.min.js",
+        "js/WellRydeExtMainPage.js"
+      ],
+      "matches": [
+        "*://*.logisticare.com/ProcessATMBatches.aspx"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self'; default-src *.nuvizzards.com *.nuvizzapps.com ; object-src 'self' ",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "https://*.logisticare.com/",
+    "http://*.logisticare.com/",
+    "https://*.nuvizzapps.com/",
+    "https://*.nuvizzards.com/"
+  ],
+  "web_accessible_resources": [
+    "images/*.png"
+  ],
+  "offline_enabled": false
+}

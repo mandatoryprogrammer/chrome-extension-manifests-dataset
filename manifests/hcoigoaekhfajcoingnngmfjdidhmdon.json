@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "WhaleVault",
+  "version": "0.1.39",
+  "description": "Secure Graphene Cross-Chain Key Store Extension",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs",
+    "https://*/*",
+    "notifications",
+    "idle"
+  ],
+  "browser_action": {
+    "default_popup": "html/popup.html",
+    "default_icon": "images/icons8-safe-50.png",
+    "default_title": "WhaleVault :: locked"
+  },
+  "icons": {
+    "128": "images/icons8-safe-ok-128.png"
+  },
+  "background": {
+    "scripts": [
+      "vendor/whale-1.0.0.js",
+      "vendor/eosjs-api.js",
+      "vendor/eosjs-jsonrpc.js",
+      "vendor/eosjs-jssig.js",
+      "vendor/eosjs-numeric.js",
+      "js/encrypt.js",
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "web_accessible_resources": [
+    "/images/icons8-safe-50.png",
+    "js/whalevault.js"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://0.0.0.0:1337/*",
+        "http://*/*"
+      ],
+      "js": [
+        "vendor/jquery.js",
+        "js/web_interface.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "manifest_version": 2
+}

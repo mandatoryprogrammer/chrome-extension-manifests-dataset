@@ -1,0 +1,42 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Quotes From a Friend",
+  "short_name": "Quotes From a Friend",
+  "version": "0.0.4",
+  "description": "Every time you open a fresh tab, read a powerful quote by Tony Robbins.",
+  "browser_action": {
+    "default_title": "Quotes From a Friend",
+    "default_icon": "img/icon.ico"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/jquery.js",
+        "js/content.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://ssl.google-analytics.com https://s.ytimg.com https://*.youtube.com; object-src 'self'",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "http://localhost/*",
+    "http://*/*",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>"
+  ],
+  "chrome_url_overrides": {
+    "newtab": "tony.html"
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ]
+  }
+}

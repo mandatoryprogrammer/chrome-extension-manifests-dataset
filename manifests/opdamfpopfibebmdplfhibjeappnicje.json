@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "REAAAAAAYE",
+  "version": "0.0.5",
+  "manifest_version": 2,
+  "description": "Displays transport times from the property to your work, lists local nearby train stations. For realestate.com.au property pages",
+  "homepage_url": "https://github.com/webwaldo",
+  "content_security_policy": "script-src 'self' https://maps.googleapis.com; object-src 'self'",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "js/jquery/jquery.js",
+      "src/background/background.js"
+    ]
+  },
+  "page_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "page action demo",
+    "default_popup": "src/page_action/page_action.html"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "http://*.realestate.com.au/",
+    "https://*.realestate.com.au/",
+    "http://*.onthehouse.com.au/",
+    "https://*.onthehouse.com.au/",
+    "http://www.onthehouse.com.au/",
+    "http://localhost/",
+    "http://whateverorigin/",
+    "https://maps.googleapis.com/",
+    "https://maps.googleapis.com/maps/api/js?libraries=places&callback=initAutocomplete"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.realestate.com.au/*",
+        "https://www.realestate.com.au/*"
+      ],
+      "css": [
+        "src/inject/inject.css"
+      ],
+      "js": [
+        "js/jquery/jquery.js",
+        "js/moment.js",
+        "js/reaaa_helper.js",
+        "src/inject/inject.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "src/inject/actions.js",
+    "js/jquery/jquery.js",
+    "js/reaaa_helper.js",
+    "js/moment.js"
+  ],
+  "options_ui": {
+    "page": "src/options/options.html",
+    "chrome_style": true
+  }
+}

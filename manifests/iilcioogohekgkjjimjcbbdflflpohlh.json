@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Discovery pinboard extension",
+  "version": "1.0.5",
+  "description": "a chrome extension to help you pin anywhere to discovery",
+  "author": "",
+  "manifest_version": 2,
+  "icons": {
+    "16": "icons/favicon.png",
+    "32": "icons/favicon.png",
+    "48": "icons/favicon.png",
+    "128": "icons/favicon.png"
+  },
+  "permissions": [
+    "activeTab",
+    "background",
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "https://*.patsnap.com/",
+    "http://*.patsnap.com/"
+  ],
+  "browser_action": {
+    "default_icon": "icons/favicon.png",
+    "default_popup": "pages/popup.html"
+  },
+  "background": {
+    "persistent": true,
+    "page": "pages/background.html"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "js/content.js"
+      ],
+      "run_at": "document_start",
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "icons/favicon.png"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

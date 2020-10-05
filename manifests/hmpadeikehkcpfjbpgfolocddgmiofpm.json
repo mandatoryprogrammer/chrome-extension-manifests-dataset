@@ -1,0 +1,85 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "TabsFolders",
+  "description": "Manage thousands of tabs with one easy-to-use tool",
+  "default_locale": "en",
+  "version": "1.2.19",
+  "homepage_url": "https://www.tabsfolders.com/",
+  "commands": {
+    "display-tf": {
+      "description": "Organize Bookmarks and Tabs",
+      "suggested_key": {
+        "default": "Alt+Shift+1"
+      }
+    },
+    "send-all-tabs-in-current-window-to-tf": {
+      "description": "Store current window",
+      "suggested_key": {
+        "default": "Alt+Shift+2"
+      }
+    },
+    "send-current-tab-to-tf": {
+      "description": "Store only this tab",
+      "suggested_key": {
+        "default": "Alt+Shift+3"
+      }
+    }
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "data/Icon-19.png",
+      "32": "data/Icon-32.png",
+      "64": "data/Icon-64.png"
+    },
+    "default_title": "TabsFolders"
+  },
+  "icons": {
+    "16": "data/Icon-16.png",
+    "19": "data/Icon-19.png",
+    "32": "data/Icon-32.png",
+    "48": "data/Icon-48.png",
+    "64": "data/Icon-64.png",
+    "128": "data/Icon-128.png"
+  },
+  "options_page": "data/options.html",
+  "background": {
+    "scripts": [
+      "lib/polyfill.js",
+      "lib/vendor.js",
+      "lib/libs/lodash.min.js",
+      "lib/libs/localforage.min.js",
+      "lib/libs/localforage-setitems.min.js",
+      "lib/libs/localforage-removeitems.min.js",
+      "lib/config.js",
+      "lib/util.js",
+      "lib/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "lib/config.js",
+        "data/js/content.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "all_frames": false,
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "contextMenus"
+  ],
+  "optional_permissions": [
+    "bookmarks",
+    "downloads"
+  ],
+  "content_security_policy": "script-src 'self' https://*.tabsfolders.com https://cdn.heapanalytics.com https://heapanalytics.com https://static.clevertap.com https://wzrkt.com https://d2r1yp2w7bby2u.cloudfront.net https://d2wy8f7a9ursnm.cloudfront.net; object-src 'self'",
+  "manifest_version": 2
+}

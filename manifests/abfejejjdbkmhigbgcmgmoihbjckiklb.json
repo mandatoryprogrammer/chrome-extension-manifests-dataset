@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Find-A-Record",
+  "short_name": "Find-A-Record",
+  "version": "3.0.1",
+  "description": "Connect your FamilySearch tree to the Find-A-Record Research Assistant.",
+  "author": "Genealogy Systems, LLC",
+  "permissions": [
+    "tabs"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "background": {
+    "page": "background/background.html"
+  },
+  "page_action": {
+    "default_icon": {
+      "19": "images/icon19.png",
+      "38": "images/icon38.png"
+    },
+    "default_title": "Find-A-Record"
+  },
+  "web_accessible_resources": [
+    "scripts/jquery-2.0.3.min.map",
+    "images/icon16.png",
+    "images/icon48.png"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://familysearch.org/tree/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "scripts/jquery-2.0.3.min.js",
+        "scripts/far.js",
+        "scripts/familysearch.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.findarecord.com/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "scripts/jquery-2.0.3.min.js",
+        "scripts/far.com.js"
+      ]
+    }
+  ]
+}

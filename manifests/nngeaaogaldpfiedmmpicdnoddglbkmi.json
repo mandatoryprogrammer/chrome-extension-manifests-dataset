@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Wikipedia Reading Lists",
+  "description": "Save Wikipedia articles to read on Wikipedia’s iOS and Android apps",
+  "version": "1.1",
+  "manifest_version": 2,
+  "permissions": [
+    "tabs",
+    "https://*.wikipedia.org/",
+    "https://*.wikivoyage.org/"
+  ],
+  "background": {
+    "scripts": [
+      "dist/browser-polyfill.min.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "dist/browser-polyfill.min.js",
+        "content.js"
+      ],
+      "matches": [
+        "https://*.wikipedia.org/*",
+        "https://*.wikivoyage.org/*"
+      ]
+    }
+  ],
+  "page_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon_Addtolist_48x48.png",
+      "32": "icon_Addtolist_48x48.png",
+      "48": "icon_Addtolist_48x48.png",
+      "128": "icon_Addtolist_128x128.png"
+    }
+  },
+  "icons": {
+    "16": "icon_Addtolist_48x48.png",
+    "32": "icon_Addtolist_48x48.png",
+    "48": "icon_Addtolist_48x48.png",
+    "128": "icon_Addtolist_128x128.png"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+A",
+        "mac": "MacCtrl+Shift+A"
+      },
+      "description": "Add the current page to the default reading list"
+    }
+  }
+}

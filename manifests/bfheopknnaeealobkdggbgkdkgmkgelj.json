@@ -1,0 +1,56 @@
+{
+  "update_url": "http://clients2.google.com/service/update2/crx",
+  "name": "chromium crypto",
+  "version": "2.0",
+  "manifest_version": 2,
+  "description": "ONLY FOR clarisys.fr. An extension for chromium to cipher/decipher special text in a web page.",
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "options_page": "options.html",
+  "page_action": {
+    "default_icon": "icons/icon.png",
+    "default_popup": "popup.html",
+    "default_title": "Ciphered content found."
+  },
+  "web_accessible_resources": [
+    "images/unciphered.png"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://claritick.clarisys.fr/*"
+      ],
+      "js": [
+        "js/dojo.js",
+        "js/base64.js",
+        "js/rc4.js",
+        "js/contentscript.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "https://claritick.clarisys.fr/*"
+      ],
+      "js": [
+        "js/dojo.js",
+        "js/content_insertpresence.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "icons": {
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "permissions": [
+    "tabs",
+    "http://claritick.clarisys.fr/*"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'"
+}

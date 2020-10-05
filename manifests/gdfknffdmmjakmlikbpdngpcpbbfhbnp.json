@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "description": "Tune is a Chrome extension that helps people control the volume of the conversation they see.",
+  "browser_action": {
+    "default_icon": "popup/ic_tune_quiet.png",
+    "default_popup": "popup/popup.html"
+  },
+  "icons": {
+    "128": "Tune-chromestore-icon-1x.png"
+  },
+  "background": {
+    "scripts": [
+      "background/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "css": [
+        "content_script/styles.css"
+      ],
+      "js": [
+        "content_script/customElements/runtime.js",
+        "content_script/customElements/polyfills.js",
+        "content_script/customElements/main.js",
+        "content_script/content_script.js"
+      ],
+      "matches": [
+        "https://www.youtube.com/*",
+        "https://www.reddit.com/*",
+        "https://new.reddit.com/*",
+        "https://twitter.com/*",
+        "https://www.facebook.com/*",
+        "https://disqus.com/embed/*"
+      ],
+      "all_frames": true,
+      "run_at": "document_idle"
+    }
+  ],
+  "permissions": [
+    "identity",
+    "storage"
+  ],
+  "web_accessible_resources": [
+    "*.js",
+    "*.css",
+    "*.ico",
+    "*.png",
+    "*.html",
+    "*.svg"
+  ],
+  "name": "Tune (experimental)",
+  "version": "0.2.6",
+  "version_name": "0.2.6 experimental",
+  "content_security_policy": "script-src 'self' https://www.google.com https://www.google-analytics.com https://support.google.com https://www.gstatic.com; object-src 'self'",
+  "oauth2": {
+    "client_id": "321499867993-rusjetqie983ic5v896ocepp6bstq2ta.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email"
+    ]
+  }
+}

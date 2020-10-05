@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Remote Deluge",
+  "description": "Provides a quick overview of torrent status for Deluge.",
+  "version": "1.2.4",
+  "icons": {
+    "128": "images/icons/128.png",
+    "64": "images/icons/64.png",
+    "32": "images/icons/32.png",
+    "16": "images/icons/16.png"
+  },
+  "web_accessible_resources": [
+    "images/icons/16.png",
+    "images/icons/16_green.png"
+  ],
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "js/libs/jquery-3.0.0.min.js",
+      "js/global_options.js",
+      "js/debug_log.js",
+      "js/deluge.js",
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "options_page": "options.html",
+  "browser_action": {
+    "default_icon": "images/icons/deluge.png",
+    "default_title": "__MSG_browser_title_disabled__",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/libs/jquery-3.0.0.min.js",
+        "js/global_options.js",
+        "js/debug_log.js",
+        "js/add_torrent.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "contextMenus",
+    "storage",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "manifest_version": 2
+}

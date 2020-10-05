@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "DX Shipment Tracker for India",
+  "description": "This extension helps in tracking DX.com shipments to India.",
+  "version": "1.4",
+  "browser_action": {
+    "default_icon": "images/icon_16x16.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "omnibox.js",
+      "ShipmentManager.js"
+    ]
+  },
+  "permissions": [
+    "http://ipsweb.ptcmysore.gov.in/",
+    "storage"
+  ],
+  "omnibox": {
+    "keyword": "dxin"
+  },
+  "options_page": "options/options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://my.dx.com/MyOrders/OrderDetail/*"
+      ],
+      "css": [
+        "content_scripts/dxin.css"
+      ],
+      "js": [
+        "content_scripts/jquery-2.1.3.min.js",
+        "content_scripts/dxin.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "images/*.png"
+  ],
+  "icons": {
+    "16": "images/icon_16x16.png",
+    "48": "images/icon_48x48.png",
+    "128": "images/icon_128x128.png"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

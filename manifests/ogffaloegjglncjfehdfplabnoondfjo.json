@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Night Video Tuner",
+  "version": "1.1.0",
+  "description": "__MSG_manifest_description__",
+  "author": "PyvesB",
+  "homepage_url": "https://github.com/PyvesB/night-video-tuner",
+  "default_locale": "en",
+  "offline_enabled": true,
+  "background": {
+    "scripts": [
+      "background/background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_title": "__MSG_adjust_video_properties__",
+    "default_icon": "icons/icon-pause.png",
+    "default_popup": "popup/popup.html"
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "filters/filters.js",
+        "content/content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "storage",
+    "notifications",
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "icons": {
+    "48": "icons/icon-medium.png",
+    "128": "icons/icon-large.png"
+  },
+  "manifest_version": 2
+}

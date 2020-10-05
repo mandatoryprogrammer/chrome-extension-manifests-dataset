@@ -1,0 +1,127 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "0.8.35",
+  "manifest_version": 2,
+  "minimum_chrome_version": "45",
+  "name": "Fakespot Fake Amazon Reviews and eBay Sellers",
+  "description": "Protect yourself from fake reviews and bad sellers on Amazon, eBay, Walmart, Best Buy, and Sephora!",
+  "short_name": "Fakespot",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.yelp.com/*",
+        "*://*.tripadvisor.com/*",
+        "*://*.sephora.com/*",
+        "*://*.bestbuy.com/*",
+        "*://*.fakespot.com/*",
+        "*://*.fakespot.local/*",
+        "*://*.google.com/search*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "*://*.amazon.com.au/*",
+        "*://*.amazon.co.uk/*",
+        "*://*.amazon.ca/*",
+        "*://*.amazon.us/*",
+        "*://*.amazon.com/*",
+        "*://*.amazon.in/*"
+      ],
+      "exclude_matches": [
+        "*://primenow.amazon.com.au/*",
+        "*://primenow.amazon.co.uk/*",
+        "*://primenow.amazon.ca/*",
+        "*://primenow.amazon.us/*",
+        "*://primenow.amazon.com/*",
+        "*://primenow.amazon.in/*",
+        "*://*.amazon.com.au/Prime-Video/*",
+        "*://*.amazon.co.uk/Prime-Video/*",
+        "*://*.amazon.ca/Prime-Video/*",
+        "*://*.amazon.us/Prime-Video/*",
+        "*://*.amazon.com/Prime-Video/*",
+        "*://*.amazon.in/Prime-Video/*",
+        "*://*.amazon.com.au/Amazon-Video/*",
+        "*://*.amazon.co.uk/Amazon-Video/*",
+        "*://*.amazon.ca/Amazon-Video/*",
+        "*://*.amazon.us/Amazon-Video/*",
+        "*://*.amazon.com/Amazon-Video/*",
+        "*://*.amazon.in/Amazon-Video/*",
+        "*://*.amazon.com.au/gp/video/*",
+        "*://*.amazon.co.uk/gp/video/*",
+        "*://*.amazon.ca/gp/video/*",
+        "*://*.amazon.us/gp/video/*",
+        "*://*.amazon.com/gp/video/*",
+        "*://*.amazon.in/gp/video/*"
+      ],
+      "js": [
+        "amazonContent.js",
+        "pricesContent.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "*://*.ebay.com/*",
+        "*://*.ebay.co.uk/*",
+        "*://*.ebay.com.au/*",
+        "*://*.ebay.us/*",
+        "*://*.ebay.ca/*"
+      ],
+      "js": [
+        "ebayContent.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "*://*.walmart.com/*"
+      ],
+      "js": [
+        "walmartContent.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "browser_action": {
+    "default_icon": "icons/icon128.png",
+    "default_title": "Fakespot",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "walkThroughView.html",
+    "walkThroughScript.js",
+    "fonts/Inter.ttf",
+    "images/prices-settings.png"
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": [
+    "identity",
+    "identity.email",
+    "unlimitedStorage",
+    "webRequest",
+    "webRequestBlocking",
+    "http://*/*",
+    "https://*/*",
+    "activeTab"
+  ],
+  "oauth2": {
+    "client_id": "539370883133-24d5phshctslkt3p7rbfg06uj3pmh066.apps.googleusercontent.com",
+    "scopes": [
+      "email"
+    ]
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlg1GK3pjAIg0sAjAdc+1PaLdb+OyocFMvFk/P0qcCcQa6kZ8ndysR75i30Xe+m1+CvgDDkmo4fb6Ouxj38Rw6k/txuYA0ZDg5tHm1VWdb+PVFzqbVweEMKRATMyGrL6fmKX9xWTwDi11lYfOv1n3RZknaXkSg61pLF71MhSHlMnBsQGapOdpIJXhGMwk0N8jpPuwC1MZOjAtpkU9eMYHPGGM1CZ3Y1Pe1fC5YbuQDyGZZR3I8qKLgHgP3c4VXjPH3BIgriFOpdPcaz+yTlO7r4EkusxcgDZlwX9qB74strrCTX0eWh7NtMskxRRDiU2GsbFFKVgijhrTXmqadABLnQIDAQAB"
+}

@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Captain Linked",
+  "description": "This extension automates your LinkedIn engagement with companies and persons you care about.",
+  "version": "1.0.3",
+  "incognito": "split",
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.linkedin.com/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "content-script.js"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "autopilot.16.png",
+    "48": "autopilot.48.png",
+    "128": "autopilot.128.png"
+  },
+  "browser_action": {
+    "default_title": "Click to open Captain control panel",
+    "default_icon": "autopilot.16.png"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "permissions": [
+    "alarms",
+    "storage",
+    "cookies",
+    "*://*.linkedin.com/"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://localhost/*",
+      "https://*.captainlinked.in/*"
+    ]
+  }
+}

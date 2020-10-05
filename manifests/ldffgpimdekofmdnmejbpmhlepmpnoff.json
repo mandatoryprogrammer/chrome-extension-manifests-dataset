@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Meetin.gs",
+  "version": "1.4",
+  "manifest_version": 2,
+  "description": "Meetin.gs is a cloud-based meeting organizer for running awesome business meetings.",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.linkedin.com/profile/view*",
+        "*://*.highrisehq.com/people/*",
+        "*://mail.google.com/mail/u/*",
+        "*://www.google.com/calendar/*",
+        "*://*.salesforce.com/*",
+        "*://outlook.office365.com/owa/*",
+        "*://*.outlook.com/owa/*",
+        "*://www.facebook.com/messages/*"
+      ],
+      "js": [
+        "jquery.js",
+        "base.js",
+        "index.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://meetin.gs/*"
+      ],
+      "css": [
+        "rate.css"
+      ],
+      "js": [
+        "jquery.js",
+        "rate.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "images/button.png",
+    "images/button-linkedin.png",
+    "images/button-calendar.png",
+    "images/button-meetme.png",
+    "integrations.js",
+    "manifest.json"
+  ],
+  "permissions": [
+    "https://meetin.gs/*"
+  ]
+}

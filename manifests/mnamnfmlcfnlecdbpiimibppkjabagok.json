@@ -1,0 +1,42 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Social Ad Spotter",
+  "description": "This extension tracks the ads inserted in a social feed.",
+  "version": "1.1",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "https://www.facebook.com/*",
+    "https://www.twitter.com/*",
+    "https://*.twitter.com/*",
+    "storage"
+  ],
+  "browser_action": {
+    "default_icon": "/icons/new_icon-19.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "128": "/icons/new_icon-128.png"
+  },
+  "background": {
+    "scripts": [
+      "/js/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.facebook.com/*",
+        "https://twitter.com/*",
+        "https://*.twitter.com/*"
+      ],
+      "js": [
+        "/js/content_script.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ]
+}

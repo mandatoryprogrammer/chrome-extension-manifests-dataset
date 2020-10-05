@@ -1,0 +1,84 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "RevSeller",
+  "description": "Product research tool for third-party Amazon sellers that estimates FBA fees, margin, ROI, and details about Variations.",
+  "version": "2.3.3",
+  "icons": {
+    "16": "img/icon16.png",
+    "24": "img/icon24.png",
+    "32": "img/icon32.png",
+    "48": "img/icon48.png",
+    "64": "img/icon64.png",
+    "128": "img/icon128.png",
+    "256": "img/icon256.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "img/icon16.png",
+      "24": "img/icon24.png",
+      "32": "img/icon32.png",
+      "48": "img/icon48.png"
+    },
+    "default_popup": "html/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "/lib/jquery-3.4.1.min.js",
+      "/lib/mustache-3.1.0.min.js",
+      "/js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.amazon.com/*",
+        "https://*.amazon.com/*"
+      ],
+      "js": [
+        "/js/content-script-0.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://*.amazon.com/*",
+        "https://*.amazon.com/*"
+      ],
+      "js": [
+        "/lib/jquery-3.4.1.min.js",
+        "/lib/moment.min.js",
+        "/lib/Chart.min.js",
+        "/lib/chart-zoom-plugin.js",
+        "/js/content-script-1.js"
+      ],
+      "css": [
+        "/css/amazon.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://sellercentral.amazon.com/hz/fba/profitabilitycalculator/index*",
+        "https://sellercentral.amazon.com/fba/profitabilitycalculator/index*",
+        "https://sellercentral.amazon.com/fba/revenuecalculator/index*"
+      ],
+      "js": [
+        "/js/content-script-2.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://www.gstatic.com; object-src 'self'",
+  "web_accessible_resources": [
+    "/img/*",
+    "/html/*"
+  ],
+  "permissions": [
+    "*://www.amazon.com/*",
+    "*://*.images-amazon.com/*",
+    "*://revseller.com/*",
+    "https://sellercentral.amazon.com/*",
+    "storage"
+  ]
+}

@@ -1,0 +1,195 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "DropWorx",
+  "description": "An extension to manage the DropWorx web application.",
+  "version": "1.1022",
+  "icons": {
+    "128": "icon128.png",
+    "48": "icon48.png",
+    "16": "icon16.png"
+  },
+  "browser_action": {
+    "default_icon": "icon16.png",
+    "default_popup": "popup/index.html"
+  },
+  "background": {
+    "scripts": [
+      "background/index.js"
+    ],
+    "persistent": true
+  },
+  "externally_connectable": {
+    "matches": [
+      "http://localhost:1337/*",
+      "https://dropworxshopify.ngrok.io/*",
+      "http://localhost:4200/*",
+      "https://dropworxv2.herokuapp.com/*",
+      "https://www.dropworx.com/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.aliexpress.com/*"
+      ],
+      "js": [
+        "aliexpress/aliexpress.js"
+      ],
+      "css": [],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://login.aliexpress.com/*"
+      ],
+      "js": [
+        "aliexpress/login.js"
+      ],
+      "css": [],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://login.aliexpress.com/xman/xlogout.htm*"
+      ],
+      "js": [
+        "aliexpress/logout.js"
+      ],
+      "css": [],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://www.aliexpress.com/category/*",
+        "https://www.aliexpress.com/af/category/*",
+        "https://www.aliexpress.com/wholesale/*"
+      ],
+      "js": [
+        "aliexpress/productlist.js"
+      ],
+      "css": [
+        "aliexpress/productlist.css"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://www.aliexpress.com/item/*",
+        "https://www.aliexpress.com/store/product/*"
+      ],
+      "js": [
+        "aliexpress/product.js"
+      ],
+      "css": [
+        "aliexpress/product.css"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://shoppingcart.aliexpress.com/shopcart/shopcartDetail.htm*"
+      ],
+      "js": [
+        "aliexpress/cart.js"
+      ],
+      "css": [
+        "aliexpress/cart.css"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://trade.aliexpress.com/order_detail.htm*"
+      ],
+      "js": [
+        "aliexpress/order.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://shoppingcart.aliexpress.com/order/confirm_order.htm*"
+      ],
+      "js": [
+        "aliexpress/confirmorder.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://icashier.alipay.com/payment/checkout.htm*"
+      ],
+      "js": [
+        "aliexpress/checkout.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://trade.aliexpress.com/orderList.htm*"
+      ],
+      "js": [
+        "aliexpress/orderlist.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://*.myshopify.com/admin/*"
+      ],
+      "js": [
+        "shopify/shopify.js"
+      ],
+      "css": [
+        "shopify/shopify.css"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://passport.aliexpress.com/mini_login.htm*"
+      ],
+      "js": [
+        "aliexpress/loggedin.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "http://localhost:1337/*",
+        "http://localhost:4200/*",
+        "https://dropworxv2.herokuapp.com/*",
+        "https://www.dropworx.com/*"
+      ],
+      "js": [
+        "app/app.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*/wp-admin*",
+        "*://*/*wp-admin/*"
+      ],
+      "js": [
+        "woocommerce/productlist.js"
+      ],
+      "css": [
+        "woocommerce/productlist.css"
+      ],
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "storage",
+    "notifications",
+    "contextMenus",
+    "tabs",
+    "activeTab",
+    "identity",
+    "webRequest",
+    "webRequestBlocking",
+    "*://*/*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com; object-src 'self'"
+}

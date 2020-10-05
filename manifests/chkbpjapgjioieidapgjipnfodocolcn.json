@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "author": "Ignat Remizov",
+  "manifest_version": 2,
+  "name": "YouTube Extension Suite",
+  "short_name": "YES!",
+  "version": "0.2.1",
+  "description": "This extesnion lists the total play time of a youtube playlist",
+  "icons": {
+    "16": "images/Icon16.png",
+    "48": "images/Icon48.png",
+    "128": "images/Icon128.png"
+  },
+  "permissions": [
+    "identity",
+    "storage",
+    "*://*.youtube.com/watch*list*",
+    "*://*.youtube.com/playlist*"
+  ],
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.youtube.com/watch*list*",
+        "*://*.youtube.com/playlist*"
+      ],
+      "js": [
+        "js/vendor/moment.js",
+        "js/vendor/moment-duration-format.js",
+        "js/helpers.js",
+        "js/duration_helpers.js",
+        "js/dom_helpers.js",
+        "js/main.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "keys.json",
+    "pageTokens.json",
+    "js/*.js"
+  ],
+  "oauth2": {
+    "client_id": "940024462417-5ais2trpuo7htdvonu4ulsmoia54fnsc.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/youtube.readonly"
+    ]
+  }
+}

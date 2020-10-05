@@ -1,0 +1,74 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Filly Vanilli",
+  "description": " A chrome extension for filling in forms with data from the portal",
+  "author": "ph7webdev <ph7webdev@gmail.com>",
+  "version": "1.0.12",
+  "icons": {
+    "96": "icons/icon.png"
+  },
+  "permissions": [
+    "https://docs.google.com/*",
+    "https://portal.care360.com/care360/*",
+    "https://sites.google.com/oasismedgroup.com/*",
+    "https://app.workpath.co/*",
+    "https://app2.workpath.co/*",
+    "*://portal.alpha.raspberrycorvette.net/*",
+    "*://portal.beta.raspberrycorvette.net/*",
+    "*://portal.gamma.raspberrycorvette.net/*",
+    "*://portal.gamma-qa.oasisraspberry.care/*",
+    "*://portal.preprod.oasisraspberry.care/*",
+    "*://portal.oasisraspberry.care/*",
+    "tabs",
+    "activeTab",
+    "background"
+  ],
+  "browser_action": {
+    "default_title": "FillyVanilli",
+    "default_popup": "pages/popup.html"
+  },
+  "background": {
+    "persistent": false,
+    "page": "pages/background.html"
+  },
+  "options_page": "pages/options.html",
+  "content_scripts": [
+    {
+      "js": [
+        "js/manifest.js",
+        "js/vendor.js",
+        "js/content.js"
+      ],
+      "run_at": "document_end",
+      "matches": [
+        "https://docs.google.com/*",
+        "https://portal.care360.com/care360/*",
+        "https://app.workpath.co/*",
+        "https://app2.workpath.co/*"
+      ],
+      "all_frames": true
+    },
+    {
+      "js": [
+        "js/manifest.js",
+        "js/vendor.js",
+        "js/portalContent.js"
+      ],
+      "run_at": "document_end",
+      "matches": [
+        "*://portal.alpha.raspberrycorvette.net/*",
+        "*://portal.beta.raspberrycorvette.net/*",
+        "*://portal.gamma.raspberrycorvette.net/*",
+        "*://portal.gamma-qa.oasisraspberry.care/*",
+        "*://portal.preprod.oasisraspberry.care/*",
+        "*://portal.oasisraspberry.care/*"
+      ],
+      "all_frames": true
+    }
+  ],
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "web_accessible_resources": [
+    "js/contentBridge.js"
+  ]
+}

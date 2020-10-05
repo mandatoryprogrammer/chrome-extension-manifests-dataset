@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "GitMeme",
+  "version": "1.8",
+  "description": "Easily add memes to your Github comments by simply typing a word after a forward slash, like /shipit",
+  "manifest_version": 2,
+  "permissions": [
+    "activeTab",
+    "identity",
+    "storage",
+    "https://us-central1-git-meme-prod.cloudfunctions.net/",
+    "https://api.giphy.com/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.github.com/*",
+        "https://github.com/*",
+        "https://git.musta.ch/*"
+      ],
+      "css": [
+        "build/style.css"
+      ],
+      "js": [
+        "build/contentScript.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_popup": "popup/index.html"
+  },
+  "web_accessible_resources": [
+    "assets/selectedButton.png",
+    "assets/collapseButton.png",
+    "assets/expandButton.png",
+    "assets/icon-48x48.png",
+    "popup/index.html"
+  ],
+  "background": {
+    "scripts": [
+      "build/background.js"
+    ],
+    "persistent": false
+  },
+  "icons": {
+    "16": "assets/icon-16x16.png",
+    "48": "assets/icon-48x48.png",
+    "128": "assets/icon-128x128.png"
+  },
+  "applications": {
+    "gecko": {
+      "id": "gitmeme@gitme.me"
+    }
+  }
+}

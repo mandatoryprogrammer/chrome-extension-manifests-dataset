@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Prolific Assistant",
+  "version": "3.6.0",
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "browser_action": {
+    "default_title": "Prolific Assistant",
+    "default_icon": {
+      "16": "images/icon16.png",
+      "24": "images/icon24.png",
+      "32": "images/icon32.png"
+    },
+    "default_popup": "pages/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "pages/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://app.prolific.co/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "pages/contentScript.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "notifications",
+    "tabs",
+    "webRequest",
+    "webNavigation",
+    "https://*.prolific.co/*"
+  ]
+}

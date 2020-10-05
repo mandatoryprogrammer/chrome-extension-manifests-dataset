@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Netflix Multi-Subtitles",
+  "version": "0.0.0.9",
+  "description": "Chrome extension for netflix allowing to turn on several sets of subtitles simultaneously.",
+  "manifest_version": 2,
+  "icons": {
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "icon48.png"
+  },
+  "permissions": [
+    "identity",
+    "https://*.netflix.com/*",
+    "https://*.nflxvideo.net/*",
+    "webRequest",
+    "webRequestBlocking",
+    "https://www.googleapis.com/"
+  ],
+  "background": {
+    "scripts": [
+      "bgp_m.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "matches": [
+        "https://www.netflix.com/*"
+      ],
+      "js": [
+        "jquery.min.js",
+        "jquery-ui.min.js",
+        "inject_m.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'",
+  "web_accessible_resources": [
+    "inject.css",
+    "shadow.css"
+  ],
+  "oauth2": {
+    "client_id": "561793132704-h1m6tavr37b0jd1sbtbg6sghuldsejuh.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/plus.login",
+      "https://www.googleapis.com/auth/chromewebstore.readonly"
+    ]
+  }
+}

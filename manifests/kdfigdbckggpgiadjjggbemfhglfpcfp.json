@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Queue Player Extension",
+  "description": "This extension adds a button to videos all over the web to play them in Queue Player",
+  "version": "1.1.1",
+  "permissions": [
+    "activeTab",
+    "background",
+    "tabCapture",
+    "<all_urls>",
+    "tabs",
+    "management"
+  ],
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "dist/background.bundle.js"
+    ]
+  },
+  "browser_action": {
+    "default_title": "Queue Player"
+  },
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "manifest_version": 2,
+  "web_accessible_resources": [
+    "images/*.png"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*/*"
+      ],
+      "css": [
+        "dist/content.css"
+      ],
+      "js": [
+        "libs/jQuery/jquery.min.js",
+        "dist/content.bundle.js"
+      ],
+      "all_frames": true
+    }
+  ]
+}

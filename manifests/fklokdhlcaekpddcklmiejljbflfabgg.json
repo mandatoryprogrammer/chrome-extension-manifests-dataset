@@ -1,0 +1,91 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Veracross Student Extension",
+  "short_name": "VSE",
+  "author": "EmOwen4",
+  "version": "3.2.5",
+  "description": "The extension for Veracross student clients.",
+  "homepage_url": "https://github.com/emowen/Veracross-Student-Extension",
+  "icons": {
+    "16": "images/icon16.png",
+    "32": "images/icon32.png",
+    "48": "images/icon48.png",
+    "64": "images/icon64.png",
+    "128": "images/icon128.png"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "notifications",
+    "https://portals.veracross.com/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://portals.veracross.com/*/student",
+        "https://portals.veracross.com/*/student/student/overview"
+      ],
+      "css": [
+        "/css/jquery-ui.min.css",
+        "/css/jquery-ui.structure.min.css",
+        "/css/jquery-ui.theme.min.css",
+        "/css/vse.css"
+      ],
+      "js": [
+        "/js/jquery-3.2.1.min.js",
+        "/js/jquery-ui.min.js",
+        "/js/common.js",
+        "/js/content-notifier.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://documents.veracross.com/*/grade_detail/*"
+      ],
+      "css": [
+        "/css/jquery-ui.min.css",
+        "/css/jquery-ui.structure.min.css",
+        "/css/jquery-ui.theme.min.css",
+        "/css/vse.css"
+      ],
+      "js": [
+        "/js/jquery-3.2.1.min.js",
+        "/js/jquery-ui.min.js",
+        "/js/echarts.min.js",
+        "/js/common.js",
+        "/js/content-class-grade.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://portals.veracross.com/*/student/*"
+      ],
+      "exclude_matches": [
+        "https://portals.veracross.com/*/student",
+        "https://portals.veracross.com/*/student/student/overview"
+      ],
+      "css": [
+        "/css/jquery-ui.min.css",
+        "/css/jquery-ui.structure.min.css",
+        "/css/jquery-ui.theme.min.css",
+        "/css/vse.css"
+      ],
+      "js": [
+        "/js/jquery-3.2.1.min.js",
+        "/js/jquery-ui.min.js",
+        "/js/common.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "/js/*.js",
+    "/images/*.png",
+    "/css/*.css"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

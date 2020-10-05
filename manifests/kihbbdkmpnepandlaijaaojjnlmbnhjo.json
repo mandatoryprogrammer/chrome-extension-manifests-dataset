@@ -1,0 +1,40 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Wrike Quick View",
+  "description": "A Quick view of your current wrike projects, and timelogs.",
+  "version": "2.0.7",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.wrike.com/robots.txt*"
+      ],
+      "js": [
+        "oauth2/oauth2_inject.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "oauth2/oauth2.html"
+  ],
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "https://www.wrike.com/*",
+    "https://www.wrike.com/oauth2/token",
+    "https://www.wrike.com/api/v3/*"
+  ]
+}

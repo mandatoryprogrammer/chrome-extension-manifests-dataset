@@ -1,0 +1,71 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Calendly: Meeting Scheduling Software",
+  "version": "2.1.3.1",
+  "version_name": "v2.1.3.1 - a79c062",
+  "manifest_version": 2,
+  "description": "Schedule meetings without the hassle. Never get double booked. Calendly works with your calendar to automate appointment scheduling.",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "options_page": "options.html",
+  "background": {
+    "scripts": [
+      "browser-polyfill.js",
+      "javascripts/background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "activeTab",
+    "https://*.calendly.com/*",
+    "http://*.calendly.com/*",
+    "https://mail.google.com/*",
+    "cookies",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.calendly.com/*"
+      ],
+      "js": [
+        "javascripts/login.content.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "/browser-polyfill.js",
+        "/javascripts/iframeManager.content.js",
+        "/javascripts/gMenu.content.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://*.segment.com; object-src 'self';",
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/icon-19.png",
+      "38": "icons/icon-38.png"
+    },
+    "default_title": "Calendly: Meeting Scheduling Software"
+  },
+  "web_accessible_resources": [
+    "index.html",
+    "iframe_sidebar.html",
+    "iframe_adhoc.html",
+    "welcome.html",
+    "stylesheets/chosen-sprite.png",
+    "stylesheets/chosen-sprite@2x.png",
+    "icons/*.*",
+    "images/*.*",
+    "fonts/*.*",
+    "assets/*.*",
+    "javascripts/gMenu.inline.js",
+    "data/*.*"
+  ]
+}

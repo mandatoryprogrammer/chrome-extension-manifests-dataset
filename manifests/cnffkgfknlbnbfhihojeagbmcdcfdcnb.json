@@ -1,0 +1,102 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_infoName__",
+  "short_name": "Cloudopt AdBlocker",
+  "version": "2.2.0",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "description": "__MSG_infoDescription__",
+  "default_locale": "en",
+  "icons": {
+    "64": "image/icon/default/icon64.png",
+    "128": "image/icon/default/icon128.png",
+    "256": "image/icon/default/icon256.png",
+    "512": "image/icon/default/icon512.png"
+  },
+  "permissions": [
+    "<all_urls>",
+    "privacy",
+    "downloads",
+    "notifications",
+    "tabs",
+    "activeTab",
+    "bookmarks",
+    "storage",
+    "unlimitedStorage",
+    "webRequest",
+    "webRequestBlocking",
+    "contextMenus",
+    "webNavigation",
+    "system.memory"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "image/icon/default/icon19.png",
+      "38": "image/icon/default/icon38.png"
+    },
+    "default_title": "Cloudopt AdBlocker",
+    "default_popup": "popup.html"
+  },
+  "options_page": "option.html",
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "match_about_blank": true,
+      "css": [
+        "lib/icon/icon.css",
+        "css/bookmark.css"
+      ],
+      "js": [
+        "lib/jquery.min.js",
+        "content.js"
+      ]
+    },
+    {
+      "all_frames": false,
+      "matches": [
+        "http://*.cloudopt.net/*",
+        "https://*.cloudopt.net/*"
+      ],
+      "js": [
+        "block.js"
+      ]
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "lib/purify.min.js",
+        "adguard/adguard-content.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "match_about_blank": true,
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": false,
+      "js": [
+        "lib/purify.min.js",
+        "adguard/adguard-assistant.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "adguard/assistant/assistant.js",
+    "suspend.html"
+  ]
+}

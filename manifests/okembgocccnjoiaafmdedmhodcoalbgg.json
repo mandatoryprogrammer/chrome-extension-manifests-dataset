@@ -1,0 +1,81 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_extName__",
+  "description": "__MSG_extDesc__",
+  "homepage_url": "https://canjetiendasonline.latampass.com/",
+  "version": "4.8.2",
+  "default_locale": "es",
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "static/js/runtime.js",
+      "static/js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "css": [
+        "static/css/content.css"
+      ],
+      "matches": [
+        "*://www.amazon.com/*",
+        "*://*.walmart.com/*",
+        "*://*.aliexpress.com/*",
+        "*://*.ebay.com/*"
+      ],
+      "js": [
+        "static/js/runtime.js",
+        "static/js/content.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "*://apx-security.amazon.com/*"
+      ],
+      "js": [
+        "static/js/runtime.js",
+        "static/js/iframe.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "icons": {
+    "16": "icon-16.png",
+    "48": "icon-48.png",
+    "128": "icon-128.png"
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://*.latampass.com/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "static/img/*.png",
+    "static/img/*.jpg",
+    "static/assets/*.svg",
+    "static/assets/*.ttf",
+    "static/assets/*.woff",
+    "static/assets/*.woff2",
+    "static/assets/*.eot",
+    "static/assets/*.otf",
+    "icon-small-128.png",
+    "icon-16.png"
+  ],
+  "permissions": [
+    "gcm",
+    "notifications",
+    "storage",
+    "tabs",
+    "cookies",
+    "*://*/*"
+  ],
+  "browser_action": {
+    "default_icon": "icon-grey-128.png",
+    "default_popup": "popup.html",
+    "default_title": "__MSG_extTitle__"
+  },
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com https://*.latampass.com; object-src 'self'"
+}

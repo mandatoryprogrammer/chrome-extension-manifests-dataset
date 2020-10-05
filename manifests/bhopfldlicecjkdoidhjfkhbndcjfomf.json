@@ -1,0 +1,78 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "minimum_chrome_version": "34",
+  "name": "Loop11 User Testing",
+  "version": "1.3.18",
+  "version_name": "1.3.18",
+  "description": "The Loop11 extension lets you participate in usability tests & is only active whilst completing a test for which you’ve opted in.",
+  "homepage_url": "http://www.loop11.com/",
+  "icons": {
+    "16": "icons/loop11-16.png",
+    "48": "icons/loop11-48.png",
+    "128": "icons/loop11-128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/action/loop11-19.png",
+      "38": "icons/action/loop11-38.png"
+    },
+    "default_title": ""
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "desktopCapture",
+    "<all_urls>"
+  ],
+  "background": {
+    "scripts": [
+      "dist/URI.js",
+      "dist/background.js",
+      "dist/ui/background.js",
+      "dist/record-participant/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "dist/contentStart.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "dist/injectLoop11.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "dist/ui/content.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_idle"
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.loop11.com/*",
+      "https://localhost:8443/*",
+      "http://localhost:8000/*",
+      "https://localhost:3000/*"
+    ]
+  }
+}

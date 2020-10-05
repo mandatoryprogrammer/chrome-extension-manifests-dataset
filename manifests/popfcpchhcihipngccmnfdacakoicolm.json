@@ -1,0 +1,71 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Google Keep™ PowerUp",
+  "short_name": "Keep PowerUp",
+  "version": "0.0.8.0",
+  "description": "Google Keep™ PowerUp adds functionalities to your standard experience focusing on productivity at work.",
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "img/logo.google-keep-powerup.32.png"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "js/content-apiProxyListener.js"
+      ],
+      "all_frames": true,
+      "matches": [
+        "https://keep.google.com/*",
+        "https://clients6.google.com/static/proxy.html*",
+        "https://notes-pa.clients6.google.com/static/proxy.html*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "js/content-loadData.js"
+      ],
+      "matches": [
+        "https://keep.google.com/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "css": [
+        "css/keep.css"
+      ],
+      "js": [
+        "js/content-main.js"
+      ],
+      "matches": [
+        "https://keep.google.com/*"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "default_locale": "en",
+  "externally_connectable": {
+    "matches": [
+      "https://keep.google.com/*",
+      "https://clients6.google.com/*",
+      "https://notes-pa.clients6.google.com/*"
+    ]
+  },
+  "icons": {
+    "16": "img/logo.google-keep-powerup.16.png",
+    "32": "img/logo.google-keep-powerup.32.png",
+    "64": "img/logo.google-keep-powerup.64.png",
+    "128": "img/logo.google-keep-powerup.128.png",
+    "256": "img/logo.google-keep-powerup.256.png"
+  },
+  "options_page": "html/options.html",
+  "permissions": [
+    "storage",
+    "https://keep.google.com/*"
+  ]
+}

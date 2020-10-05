@@ -1,0 +1,69 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Ghost Peek",
+  "short_name": "Ghost Peek",
+  "description": "Keep your searches private by redirecting searches that may be tracked to Ghost Peek, a privacy-focused search engine.",
+  "version": "1.0.0",
+  "icons": {
+    "16": "/img/gp/icon16.png",
+    "48": "/img/gp/icon48.png",
+    "128": "/img/gp/icon128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "webRequest",
+    "webRequestBlocking",
+    "http://*/*",
+    "https://*/*",
+    "storage",
+    "tabs",
+    "privacy",
+    "webNavigation",
+    "contextMenus",
+    "management",
+    "cookies",
+    "*://*.ghostpeek.com/"
+  ],
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "lib/page-protection.js"
+      ],
+      "css": [
+        "css/tooltip.css"
+      ]
+    }
+  ],
+  "background": {
+    "persistent": true,
+    "page": "background.html"
+  },
+  "homepage_url": "https://www.ghostpeek.com",
+  "chrome_settings_overrides": {
+    "search_provider": {
+      "name": "Ghost Peek",
+      "keyword": "gp",
+      "search_url": "https://www.ghostpeek.com/encsearch?q={searchTerms}",
+      "favicon_url": "https://www.ghostpeek.com/content/branding/ghostpeek/img/favicon.ico",
+      "image_url": "https://www.ghostpeek.com/images?q={searchTerms}",
+      "suggest_url": "https://www.ghostpeek.com/encsuggest?q={searchTerms}",
+      "encoding": "UTF-8",
+      "is_default": true
+    }
+  },
+  "browser_action": {
+    "default_title": "Ghost Peek",
+    "default_icon": "/img/gp/icon16_disabled.png",
+    "default_popup": "panel.html"
+  },
+  "options_page": "settings.html",
+  "web_accessible_resources": [
+    "settings.html"
+  ]
+}

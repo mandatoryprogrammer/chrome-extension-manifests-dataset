@@ -1,0 +1,77 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "content_scripts": [
+    {
+      "css": [
+        "buildbot.css"
+      ],
+      "js": [
+        "buildbot.js"
+      ],
+      "matches": [
+        "*://build.chromium.org/p/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "xsrf.js",
+        "rietveld.js"
+      ],
+      "matches": [
+        "*://codereview.chromium.org/*",
+        "*://chromiumcodereview.appspot.com/*",
+        "*://chromium-review.googlesource.com/*",
+        "*://dawn-review.googlesource.com/*",
+        "*://polymer2-chromium-review.googlesource.com/*",
+        "*://polymer1-chromium-review.googlesource.com/*",
+        "*://canary-chromium-review.googlesource.com/*",
+        "*://gerrit-review.googlesource.com/*",
+        "*://dawn-review.googlesource.com/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "edit.js"
+      ],
+      "matches": [
+        "*://chromium-review.googlesource.com/butler-edit/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "edit-common.js",
+        "gitiles.js"
+      ],
+      "matches": [
+        "*://chromium.googlesource.com/chromium/src/+/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "backgroundOwnerResolution.js"
+    ],
+    "persistent": false
+  },
+  "description": "Meant to be useful to chromium developers (for buildbot and/or codereview).",
+  "manifest_version": 2,
+  "name": "Chromite Butler",
+  "permissions": [
+    "*://src.chromium.org/*",
+    "*://chromium.googlesource.com/*",
+    "*://chromium-review.googlesource.com/*",
+    "*://dawn-review.googlesource.com/*",
+    "*://polymer2-chromium-review.googlesource.com/*",
+    "*://polymer1-chromium-review.googlesource.com/*",
+    "*://canary-chromium-review.googlesource.com/*",
+    "*://gerrit-review.googlesource.com/*",
+    "*://dawn-review.googlesource.com/*",
+    "*://source.chromium.org/*"
+  ],
+  "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCHPBnm/sXvNMiizXUuMWTcK0NTnIUt1UGvp2CFJ4XzZ36rYssklYevtzr+pQpXJbKY2GzsKJYksZzvxTuJ6FX+xsWsxs6LPO105YCrvZW6LtONIWIDU7uNjYxJJAhae8atywswyQa2ZSIni+zq3/ok1tfAapSI0k4vZUBIJRMbZwIDAQAB",
+  "version": "1.120"
+}

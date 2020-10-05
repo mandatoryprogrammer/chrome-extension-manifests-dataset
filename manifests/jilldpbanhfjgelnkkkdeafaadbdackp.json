@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Digg",
+  "version": "0.2.1",
+  "manifest_version": 2,
+  "description": "The most interesting and talked about stories, videos and pictures on the web.",
+  "icons": {
+    "16": "images/icon-16.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
+  },
+  "browser_action": {
+    "default_icon": "images/icon-19.png"
+  },
+  "background": {
+    "scripts": [
+      "js/lib/require.min.js",
+      "js/require_config.js",
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://digg.com/reader*"
+      ],
+      "js": [
+        "js/lib/require.min.js",
+        "js/require_config.js",
+        "js/require_cs.js",
+        "js/diggreader.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://digg.com/settings*"
+      ],
+      "js": [
+        "js/lib/require.min.js",
+        "js/require_config.js",
+        "js/require_cs.js",
+        "js/digg_settings.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "storage",
+    "tabs",
+    "cookies",
+    "*://*.digg.com/*"
+  ],
+  "web_accessible_resources": [
+    "/js/*",
+    "/images/*",
+    "/css/*",
+    "/html/*"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

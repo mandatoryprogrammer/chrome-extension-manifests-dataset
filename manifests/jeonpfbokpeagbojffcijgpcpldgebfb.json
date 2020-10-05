@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Leetcode Pairing",
+  "version": "1.1.0",
+  "description": "A chrome extension for pairing on Leetcode problems",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "icon16.png",
+    "default_title": "Leetcode Pairing",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js",
+      "hot-reload.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://leetcode.com/problems/*"
+      ],
+      "js": [
+        "simplepeer.min.js",
+        "content.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://localhost:3000/oauthCallback*",
+        "https://leetcode-pairing.herokuapp.com/oauthCallback*"
+      ],
+      "js": [
+        "contentTwo.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "leetCodeReadWrite.js"
+  ],
+  "permissions": [
+    "<all_urls>",
+    "tabs",
+    "activeTab",
+    "declarativeContent"
+  ]
+}

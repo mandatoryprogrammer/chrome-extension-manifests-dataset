@@ -1,0 +1,83 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "applications": {
+    "gecko": {
+      "id": "keyhub@topicus.nl",
+      "update_url": "https://files.topicus-keyhub.com/extension/firefox_addon.json"
+    }
+  },
+  "manifest_version": 2,
+  "name": "Topicus KeyHub",
+  "short_name": "KeyHub",
+  "version": "3.7.0",
+  "description": "__MSG_manifest_description__",
+  "default_locale": "en_GB",
+  "author": "Topicus Security B.V.",
+  "icons": {
+    "32": "icon/keyhub-icon-32.png",
+    "128": "icon/keyhub-icon-128.png",
+    "256": "icon/keyhub-icon-256.png"
+  },
+  "browser_action": {
+    "default_title": "Topicus KeyHub",
+    "default_icon": {
+      "32": "icon/keyhub-icon-32.png",
+      "128": "icon/keyhub-icon-128.png",
+      "256": "icon/keyhub-icon-256.png"
+    },
+    "default_popup": "index.html"
+  },
+  "commands": {
+    "trigger-fill-with-keyhub": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+F",
+        "mac": "Ctrl+Shift+F"
+      },
+      "description": "Fill with Topicus KeyHub"
+    },
+    "trigger-fill-rotating-pwd": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+X",
+        "mac": "Ctrl+Shift+X"
+      },
+      "description": "Fill rotating password"
+    }
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/console*"
+      ],
+      "js": [
+        "detectkeyhub.js"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "all_frames": true,
+      "js": [
+        "autofill.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "index.html"
+  ],
+  "permissions": [
+    "clipboardWrite",
+    "contextMenus",
+    "identity",
+    "storage",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "https://*/keyhub/rest/v1*"
+  ]
+}

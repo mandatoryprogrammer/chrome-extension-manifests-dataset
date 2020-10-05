@@ -1,0 +1,97 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "TunnelBear Blocker",
+  "version": "1.0.1",
+  "default_locale": "en",
+  "description": "__MSG_extShortDesc__",
+  "icons": {
+    "16": "img/extension_icon_16.png",
+    "48": "img/extension_icon_48.png",
+    "128": "img/extension_icon_128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "img/icon_16-off.png",
+      "32": "img/icon_32-off.png"
+    },
+    "default_title": "TunnelBear Blocker",
+    "default_popup": "popup.html"
+  },
+  "author": "TunnelBear",
+  "background": {
+    "page": "background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "/js/vapi.js",
+        "js/vapi-client.js",
+        "js/blockbear-contentscript-start.js",
+        "js/contentscript.js"
+      ],
+      "css": [
+        "css/block.css"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/scriptlets/subscriber.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/blockbear-contentscript-end.js"
+      ],
+      "css": [
+        "css/content.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "minimum_chrome_version": "51.0",
+  "optional_permissions": [
+    "file:///*"
+  ],
+  "options_ui": {
+    "page": "settings.html"
+  },
+  "permissions": [
+    "privacy",
+    "storage",
+    "tabs",
+    "unlimitedStorage",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>"
+  ],
+  "web_accessible_resources": [
+    "img/flash_blocked.png",
+    "img/flash_blocked2x.png",
+    "img/flash_unblock.png",
+    "img/flash_unblock2x.png",
+    "js/canvas-blocker.js",
+    "js/blockbear-pixel-tracking.js",
+    "js/blockbear-contentscript-inject.js",
+    "/web_accessible_resources/*"
+  ],
+  "short_name": "TunnelBear Blocker"
+}

@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Hide morning in Calendar",
+  "description": "Hide morning hours on your Google Calendar to stop wasting space on your screen for empty hours.",
+  "version": "0.1.9",
+  "permissions": [],
+  "background": {
+    "scripts": [
+      "src/background/externals/amplitudeSnippet.js",
+      "src/legacy/impure.js",
+      "src/background/bgStateManager.js",
+      "src/background/bgMain.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "css": [
+        "src/tadaSleep.css"
+      ],
+      "js": [
+        "src/legacy/pure.js",
+        "src/legacy/impure.js",
+        "src/content/dom/find/gcalElements.js",
+        "src/content/dom/find/tadaElements.js",
+        "src/content/dom/domManipulation.js",
+        "src/content/dom/domAnalysis.js",
+        "src/content/dom/tadaElems.js",
+        "src/content/dataManipulation.js",
+        "src/content/micro/cStateManager.js",
+        "src/content/micro/gatherEssentials.js",
+        "src/content/micro/environmentWatchdog.js",
+        "src/content/cMain.js"
+      ],
+      "matches": [
+        "https://calendar.google.com/calendar/*"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "browser_action": {
+    "default_popup": "src/browserAction/browserAction.html",
+    "css": "src/browserAction/browserAction.css",
+    "default_icon": {
+      "16": "images/bedtime-icon-16.png",
+      "32": "images/bedtime-icon-32.png",
+      "64": "images/bedtime-icon-64.png",
+      "128": "images/bedtime-icon-128.png"
+    }
+  },
+  "icons": {
+    "16": "images/bedtime-icon-16.png",
+    "32": "images/bedtime-icon-32.png",
+    "64": "images/bedtime-icon-64.png",
+    "128": "images/bedtime-icon-128.png"
+  },
+  "web_accessible_resources": [
+    "images/*"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self';"
+}

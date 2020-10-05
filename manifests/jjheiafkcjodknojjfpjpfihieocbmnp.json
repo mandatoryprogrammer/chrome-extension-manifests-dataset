@@ -1,0 +1,106 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Dropship Collector",
+  "description": "Dropship Collector",
+  "version": "0.0.0.40",
+  "icons": {
+    "128": "icon_128.png"
+  },
+  "content_security_policy": "script-src 'self' https://aliexpress.com; object-src 'self'",
+  "permissions": [
+    "tabs",
+    "*://*.aliexpress.com/*",
+    "https://api-dbh1-alitools.com/products/*",
+    "unlimitedStorage",
+    "activeTab",
+    "storage",
+    "chrome-extension://jfibkmhejhpgggokihadmlapajnjomdh/tabs_api.html"
+  ],
+  "browser_action": {
+    "default_icon": "img/icon.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "jsCss/js/jquery-3.3.1.js",
+      "jsCss/js/bootstrap.min.js",
+      "popup.js",
+      "background.js",
+      "backgroundServices.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.aliexpress.com/*",
+        "*://*.ebay.com/*",
+        "*://*.ebay.de/*",
+        "*://*.ebay.co.uk/*",
+        "*://*.autods.com/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "jsCss/js/jquery-3.3.1.js",
+        "content/getPageSourceBanggood.js",
+        "content/common.js",
+        "content/background.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.aliexpress.com/item/*"
+      ],
+      "js": [
+        "content/Chart.js",
+        "content/innerProductAliExpress.js",
+        "content/innerProductAliExpress2.js"
+      ],
+      "css": [
+        "jsCss/css/UploadElements.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://k2b-bulk.ebay.com/*",
+        "https://www.ebay.com/sh/ord/*",
+        "https://www.ebay.co.uk/sh/ord",
+        "https://www.ebay.de/sh/ord",
+        "https://www.ebay.fr/sh/ord",
+        "https://www.ebay.com.au/sh/ord"
+      ],
+      "all_frames": true,
+      "js": [
+        "content/ebayOrders.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://sale.aliexpress.com/*",
+        "https://www.aliexpress.com/item/*",
+        "https://shoppingcart.aliexpress.com/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "content/aliexpressOrder.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.dropshipcollector.com/ebayAccess/*",
+        "http://localhost:56234/ebayAccess/*"
+      ],
+      "js": [
+        "content/dropshipcollector.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.autods.com/uploader/*"
+      ],
+      "js": [
+        "content/autoDS.js"
+      ]
+    }
+  ]
+}

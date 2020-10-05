@@ -1,0 +1,35 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Titech AutoMatrix",
+  "short_name": "AutoMatrix",
+  "description": "Automatically fill in the matrix authentication when logging in to TokyoTech Portal",
+  "version": "1.1",
+  "icons": {
+    "32": "icon.ico"
+  },
+  "options_page": "options.html",
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://portal.nap.gsic.titech.ac.jp/GetAccess/Login*"
+      ],
+      "include_globs": [
+        "*Template=idg_key*",
+        "*AUTHMETHOD=IG*",
+        "*GASF=CERTIFICATE,IG.GRID"
+      ],
+      "js": [
+        "fillMatrix.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "storage"
+  ]
+}

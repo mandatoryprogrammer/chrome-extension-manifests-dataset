@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Queue Player",
+  "description": "Queue videos from all over the web and your local harddrive to play in a customizable player or on your ChromeCast.",
+  "version": "1.2.0",
+  "minimum_chrome_version": "29",
+  "permissions": [
+    "<all_urls>",
+    "storage",
+    "background",
+    "app.window.fullscreen",
+    {
+      "fileSystem": [
+        "write",
+        "retainEntries",
+        "directory"
+      ]
+    },
+    "idle",
+    "alwaysOnTopWindows",
+    "system.network",
+    "retainEntries",
+    "webview",
+    "system.network",
+    "browser"
+  ],
+  "sockets": {
+    "tcpServer": {
+      "listen": "*:*"
+    },
+    "tcp": {
+      "connect": "*:*"
+    }
+  },
+  "app": {
+    "background": {
+      "scripts": [
+        "./dist/background.bundle.js"
+      ]
+    }
+  },
+  "webview": {
+    "partitions": [
+      {
+        "name": "static",
+        "accessible_resources": [
+          "/layout/youtube-player.html",
+          "/dist/app.css",
+          "/dist/youtubeplayer.bundle.js",
+          "/Libs/Youtube/youtube-iframe-api.js",
+          "/Libs/Youtube/widgetapi.js"
+        ]
+      }
+    ]
+  },
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "manifest_version": 2
+}

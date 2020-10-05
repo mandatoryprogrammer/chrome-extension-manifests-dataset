@@ -1,0 +1,70 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "X-notifier Neo",
+  "version": "2.2.5",
+  "description": "__MSG_app_description__",
+  "default_locale": "en",
+  "browser_action": {
+    "default_title": "__MSG_app_name__",
+    "default_icon": {
+      "19": "icon_19_gray.png",
+      "38": "icon_38_gray.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "icon_16.png",
+    "48": "icon_48.png",
+    "128": "icon_128.png"
+  },
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "incognito": "spanning",
+  "permissions": [
+    "background",
+    "alarms",
+    "tabs",
+    "notifications",
+    "storage",
+    "cookies",
+    "webRequest",
+    "webRequestBlocking",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://xnotifier.tobwithu.com/xn/"
+      ],
+      "css": [
+        "content/style.css"
+      ],
+      "js": [
+        "exlib/common.js",
+        "js/ui.js",
+        "content/script.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://www.icloud.com/"
+      ],
+      "js": [
+        "content/icloud.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "res/gmail/*.png"
+  ]
+}

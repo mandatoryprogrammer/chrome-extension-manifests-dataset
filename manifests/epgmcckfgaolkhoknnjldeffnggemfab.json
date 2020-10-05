@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Oasys Authenticator",
+  "description": "This extension allows integration with Oasys Authenticator App on smartphones",
+  "version": "1.12",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "icon128.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "https://*/*",
+    "http://*/*",
+    "tabs",
+    "activeTab",
+    "storage",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "load-injector.js"
+      ],
+      "all_frames": true,
+      "match_about_blank": true
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "pages": [
+      "background.html"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://api.oasys-security.com; style-src 'self' https://api.oasys-security.com 'unsafe-inline'; object-src 'self' https://api.oasys-security.com; font-src 'self' https://api.oasys-security.com"
+}

@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Alexa BrowserHelp",
+  "short_name": "BrowserHelp",
+  "version": "0.0.1",
+  "description": "Control your Browser via Amazon Alexa",
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "socket.io.js",
+      "md5.min.js",
+      "jquery.min.js",
+      "background.js"
+    ]
+  },
+  "options_ui": {
+    "page": "settings.html",
+    "chrome_style": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://serene-harbor-37271.herokuapp.com/login"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "setup.js"
+      ]
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://serene-harbor-37271.herokuapp.com/*"
+    ]
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "history",
+    "http://*/*",
+    "https://*/*"
+  ]
+}

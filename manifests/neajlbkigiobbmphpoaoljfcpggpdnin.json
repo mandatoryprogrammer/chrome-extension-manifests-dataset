@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Make Amazon Good Again",
+  "version": "0.1.1",
+  "description": "Amazon should be about the buyer and give him organic results",
+  "manifest_version": 2,
+  "icons": {
+    "128": "aicon_128px.png"
+  },
+  "background": {
+    "scripts": [
+      "start.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "storage"
+  ],
+  "page_action": {
+    "default_title": "Make Amazon Good Again",
+    "default_popup": "./popup/popup.html",
+    "default_icon": "aicon_128px.png",
+    "matches": [
+      "https://www.amazon.com/s?k=*",
+      "https://www.amazon.de/s?k=*",
+      "https://www.amazon.fr/s?k=*",
+      "https://www.amazon.co.uk/s?k=*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.amazon.com/s?k=*",
+        "https://www.amazon.de/s?k=*",
+        "https://www.amazon.fr/s?k=*",
+        "https://www.amazon.co.uk/s?k=*"
+      ],
+      "js": [
+        "./ContentHandlers/searchResultCleaner.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.amazon.com/*",
+        "https://www.amazon.de/*",
+        "https://www.amazon.fr/*",
+        "https://www.amazon.co.uk/*"
+      ],
+      "js": [
+        "./ContentHandlers/productPageCleaner.js"
+      ]
+    }
+  ]
+}

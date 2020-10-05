@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Attackpoint Plus",
+  "version": "1.2.12",
+  "description": "Additional features for the attackpoint.org website.",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "declarativeContent",
+    "tabs"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.attackpoint.org/*"
+    ]
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.attackpoint.org/discussionthread.jsp/*"
+      ],
+      "js": [
+        "scripts/discussionthread.js"
+      ],
+      "run-at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.attackpoint.org/log.jsp/*",
+        "*://*.attackpoint.org/viewlog.jsp/*"
+      ],
+      "js": [
+        "scripts/traininglog.js"
+      ],
+      "run-at": "document_start"
+    }
+  ],
+  "page_action": {
+    "default_icon": {
+      "16": "images/favicon-16x16.png",
+      "32": "images/favicon-32x32.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "images/favicon-16x16.png",
+    "32": "images/favicon-32x32.png"
+  },
+  "manifest_version": 2
+}

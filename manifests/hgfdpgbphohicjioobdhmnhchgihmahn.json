@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "FundRequest",
+  "version": "0.0.6",
+  "manifest_version": 2,
+  "description": "Extension to fund github issues using the FundRequest platform.",
+  "homepage_url": "https://fundrequest.io/",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "default_locale": "en",
+  "options_ui": {
+    "page": "options.html"
+  },
+  "page_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "FundRequest",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://github.com/*"
+      ],
+      "js": [
+        "vendors/web3/js/web3.min.js",
+        "js/vendor.js",
+        "js/github.js"
+      ],
+      "css": [
+        "vendors/iziToast/css/iziToast.min.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.fundrequest.io/*",
+        "http://localhost:8080/*"
+      ],
+      "js": [
+        "vendors/sweetalert2.all.min.js",
+        "js/vendor.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/vendor.js",
+      "js/background.js"
+    ]
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "notifications",
+    "contentSettings",
+    "activeTab",
+    "https://github.com/*",
+    "https://*.fundrequest.io/*",
+    "http://localhost:8080/*"
+  ]
+}

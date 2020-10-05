@@ -1,0 +1,95 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Brightspace Improvements",
+  "description": "Improves myCourses/desire2learn websites",
+  "version": "3.2.8",
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "permissions": [
+    "storage",
+    "https://mycourses.rit.edu/*"
+  ],
+  "optional_permissions": [
+    "https://*/d2l/*"
+  ],
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/d2l/loginh/*"
+      ],
+      "js": [
+        "scripts/login.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*/d2l/*"
+      ],
+      "exclude_matches": [
+        "https://*/d2l/le/content/*/fullscreen/*"
+      ],
+      "js": [
+        "scripts/base.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*/d2l/home"
+      ],
+      "css": [
+        "styles/home.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://*/d2l/home/*"
+      ],
+      "css": [
+        "styles/course.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://*/d2l/le/content/*/Home*"
+      ],
+      "js": [
+        "scripts/content.js"
+      ],
+      "css": [
+        "styles/content.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://*/d2l/le/content/*/fullscreen/*"
+      ],
+      "js": [
+        "scripts/popout-content.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*/d2l/le/*/discussions/*"
+      ],
+      "js": [
+        "lib/jquery.1.6.1.min.js",
+        "scripts/discussions.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_title": "",
+    "default_icon": "images/icon16.png",
+    "default_popup": "popup.html"
+  }
+}

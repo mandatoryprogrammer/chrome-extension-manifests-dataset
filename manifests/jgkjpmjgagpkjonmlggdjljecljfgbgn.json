@@ -1,0 +1,34 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Biomatters dev tools",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "Grabs the JIRA number and summary formatting for use in a commit message. Removing those infernal spaces and new lines.",
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "jira-grab/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://biomatters.atlassian.net/secure/RapidBoard.jspa*",
+        "https://biomatters.atlassian.net/browse/*"
+      ],
+      "js": [
+        "jira-grab/jira_grab.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": "jira-grab/icons/icon.png",
+    "default_title": "Grab JIRA number and summary for use in commit message"
+  },
+  "permissions": [
+    "activeTab"
+  ],
+  "icons": {
+    "48": "jira-grab/icons/icon48.png"
+  }
+}

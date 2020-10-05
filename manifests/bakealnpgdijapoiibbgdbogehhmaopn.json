@@ -1,0 +1,38 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "ESPN Private League Key API",
+  "description": "This extension will get a users ESPN API keys for accessing private leagues. These keys can be used by websites to access ESPN APIs.",
+  "version": "1.4",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "cookies",
+    "*://*.espn.com/",
+    "activeTab"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://theffhub.com/*",
+        "https://www.theffhub.com/*"
+      ],
+      "js": [
+        "myapi.js",
+        "content_script.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "myapi.js"
+  ]
+}

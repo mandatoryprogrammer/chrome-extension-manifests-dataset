@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "VK Notes",
+  "version": "1.3",
+  "icons": {
+    "16": "icon-16.png",
+    "48": "icon-48.png",
+    "128": "icon-128.png"
+  },
+  "manifest_version": 2,
+  "description": "Позволяет прикреплять к личным страницам пользователей заметки, которые видны только вам.",
+  "permissions": [
+    "tabs",
+    "*://*.vk.com/*"
+  ],
+  "background": {
+    "scripts": [
+      "common.js",
+      "background.js"
+    ]
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.vk.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://login.vk.com https://vk.com; object-src 'self'",
+  "web_accessible_resources": [
+    "style.css",
+    "inject.js"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.vk.com/*"
+    ]
+  }
+}

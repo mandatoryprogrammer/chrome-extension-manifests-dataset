@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "AgileZen Story Copy Machine",
+  "short_name": "AZ Copy Machine",
+  "version": "1.0",
+  "author": "Matthew Baker",
+  "description": "Copy stories across AgileZen projects.",
+  "icons": {
+    "48": "images/icon.png"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "browser_action": {
+    "default_popup": "html/popup.html"
+  },
+  "options_ui": {
+    "page": "html/options.html",
+    "chrome_style": true
+  },
+  "background": {
+    "scripts": [
+      "js/eventPage.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://agilezen.com/project/*/story/*"
+      ],
+      "js": [
+        "js/jquery-2.2.3.min.js",
+        "js/jquery.dropdown.min.js",
+        "js/CopyMachine.options.js",
+        "js/CopyMachine.ui.js",
+        "js/CopyMachine.api.js",
+        "js/CopyMachine.js"
+      ],
+      "css": [
+        "css/content-style.css",
+        "css/font-awesome.min.css",
+        "css/jquery.dropdown.min.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "fonts/*",
+    "images/*"
+  ]
+}

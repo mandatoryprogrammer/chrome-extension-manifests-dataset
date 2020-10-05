@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "tbfed perf",
+  "version": "0.0.4",
+  "description": "performance extension of tbfed",
+  "browser_action": {
+    "default_title": "perf",
+    "default_icon": "assets/img/logo_dark_48.png"
+  },
+  "icons": {
+    "16": "assets/img/logo_light_16.png",
+    "48": "assets/img/logo_light_48.png",
+    "128": "assets/img/logo_light_128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_globs": [
+        "https://www.google*"
+      ],
+      "js": [
+        "build/pages/loader/index.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://*.alicdn.com https://*.alipayobjects.com 'unsafe-eval'; object-src 'self'; style-src * 'unsafe-inline' https://*.alicdn.com; img-src 'self' https://*.alicdn.com https://gm.mmstat.com data:;",
+  "background": {
+    "scripts": [
+      "build/pages/background/index.js"
+    ],
+    "persistent": true
+  },
+  "manifest_version": 2,
+  "devtools_page": "devtools.html",
+  "web_accessible_resources": [
+    "build/pages/page/index.js"
+  ],
+  "permissions": [
+    "<all_urls>",
+    "tabs",
+    "notifications",
+    "webRequest",
+    "webRequestBlocking"
+  ]
+}

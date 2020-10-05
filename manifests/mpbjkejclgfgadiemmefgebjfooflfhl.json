@@ -1,0 +1,70 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_extensionName__",
+  "description": "__MSG_extensionDescription__",
+  "version": "1.0.1",
+  "author": "Armin Sebastian",
+  "homepage_url": "https://github.com/dessant/buster",
+  "default_locale": "en",
+  "minimum_chrome_version": "76.0",
+  "permissions": [
+    "storage",
+    "notifications",
+    "webRequest",
+    "webRequestBlocking",
+    "webNavigation",
+    "nativeMessaging",
+    "<all_urls>"
+  ],
+  "content_security_policy": "default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src *; object-src 'none'; frame-ancestors http://127.0.0.1:*;",
+  "icons": {
+    "16": "src/icons/app/icon-16.png",
+    "19": "src/icons/app/icon-19.png",
+    "24": "src/icons/app/icon-24.png",
+    "32": "src/icons/app/icon-32.png",
+    "38": "src/icons/app/icon-38.png",
+    "48": "src/icons/app/icon-48.png",
+    "64": "src/icons/app/icon-64.png",
+    "96": "src/icons/app/icon-96.png",
+    "128": "src/icons/app/icon-128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.google.com/recaptcha/api2/bframe*",
+        "https://www.recaptcha.net/recaptcha/api2/bframe*"
+      ],
+      "all_frames": true,
+      "run_at": "document_idle",
+      "css": [
+        "src/solve/style.css"
+      ],
+      "js": [
+        "src/manifest.js",
+        "src/solve/script.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://127.0.0.1/buster/setup?session=*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "src/content/setup.js"
+      ]
+    }
+  ],
+  "options_ui": {
+    "page": "src/options/index.html",
+    "chrome_style": false,
+    "open_in_tab": true
+  },
+  "background": {
+    "page": "src/background/index.html"
+  },
+  "web_accessible_resources": [
+    "src/setup/index.html",
+    "src/content/reset.js"
+  ]
+}

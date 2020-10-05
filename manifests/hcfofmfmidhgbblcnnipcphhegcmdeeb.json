@@ -1,0 +1,187 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "HF Xtension",
+  "short_name": "HFX",
+  "version": "0.2.5.3",
+  "icons": {
+    "16": "images/icon16.png",
+    "32": "images/icon32.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "version_name": "beta 0.2.5.3",
+  "description": "Enhance your HF Experience!",
+  "options_ui": {
+    "chrome_style": true,
+    "page": "pages/options.html"
+  },
+  "incognito": "spanning",
+  "author": "xadamxk",
+  "offline_enabled": false,
+  "browser_action": {
+    "default_icon": {
+      "16": "images/icon16.png",
+      "32": "images/icon32.png",
+      "48": "images/icon48.png",
+      "128": "images/icon128.png"
+    },
+    "default_title": "HFX Settings",
+    "default_popup": "pages/options.html"
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "*://hackforums.net/showthread.php?tid=*",
+        "*://hackforums.net/showthread.php?pid=*"
+      ],
+      "js": [
+        "js/dependencies/jquery-3.2.1.js",
+        "js/dependencies/infinite-scroll.pkgd.min.js",
+        "js/modules/ShowThread - PostbitHide.js",
+        "js/modules/ShowThread - SmartQuotes.js",
+        "js/modules/ShowThread - PostOptions.js",
+        "js/modules/ShowThread - ImageChanges.js"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "*://hackforums.net/reputation.php?uid=*",
+        "*://hackforums.net/repsgiven.php?uid=*"
+      ],
+      "js": [
+        "js/dependencies/jquery-3.2.1.js",
+        "js/dependencies/Chart.bundle.min.js",
+        "js/modules/Reputation - RepCharts.js"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "*://hackforums.net/trustscan.php?uid=*"
+      ],
+      "js": [
+        "js/dependencies/jquery-3.2.1.js",
+        "js/dependencies/Chart.bundle.min.js",
+        "js/modules/TrustScan- TSCharts.js"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "*://hackforums.net/",
+        "*://hackforums.net/index.php"
+      ],
+      "js": [
+        "js/dependencies/jquery-3.2.1.js",
+        "js/modules/Index - OnlineSorting.js"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "*://hackforums.net/private.php?action=send&pmid=*",
+        "*://hackforums.net/private.php?action=send&uid=*",
+        "*://hackforums.net/private.php?action=send",
+        "*://hackforums.net/private.php?action=read&pmid=*",
+        "*://hackforums.net/private.php?action=tracking*"
+      ],
+      "js": [
+        "js/dependencies/jquery-3.2.1.js",
+        "js/modules/Private Reply - PMChanges.js"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "*://hackforums.net/forumdisplay.php?fid=*"
+      ],
+      "js": [
+        "js/dependencies/jquery-3.2.1.js",
+        "js/dependencies/infinite-scroll.pkgd.min.js",
+        "js/modules/ForumDisplay.js"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "*://hackforums.net/showthread.php?tid=*",
+        "*://hackforums.net/showthread.php?pid=*",
+        "*://hackforums.net/private.php?action=read&pmid=*"
+      ],
+      "js": [
+        "js/dependencies/jquery-3.2.1.js",
+        "js/modules/ShowThread - QuickRep.js"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "*://hackforums.net/*"
+      ],
+      "js": [
+        "js/dependencies/jquery-3.2.1.js",
+        "js/dependencies/purify.min.js",
+        "js/dependencies/jquery.sticky.js",
+        "js/dependencies/jquery.tinybox.js",
+        "js/dependencies/tippy.all.min.js",
+        "js/modules/Global.js",
+        "js/modules/CronJob.js",
+        "js/dependencies/converse.min.js",
+        "js/modules/XMPP.js"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "*://hackforums.net/showthread.php?tid=*",
+        "*://hackforums.net/newreply.php?tid=*",
+        "*://hackforums.net/newthread.php?fid=*",
+        "*://hackforums.net/editpost.php?pid=*",
+        "*://hackforums.net/private.php?action=send*"
+      ],
+      "js": [
+        "js/dependencies/jquery-3.2.1.js",
+        "js/dependencies/xbbcode.js",
+        "js/modules/LivePreview.js"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "*://hackforums.net/private.php?action=read&pmid=*"
+      ],
+      "js": [
+        "js/modules/Private Reply - Remind.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "storage",
+    "https://raw.githubusercontent.com/xadamxk/HFX/master/Badges.json?nc=*",
+    "https://raw.githubusercontent.com/xadamxk/HFX/master/Alert.json?nc=*",
+    "https://hacker.im/xmpp-websocket/*"
+  ],
+  "omnibox": {
+    "keyword": "HF"
+  },
+  "web_accessible_resources": [
+    "/images/collapse.gif",
+    "/images/collapse_collapsed.gif",
+    "/css/xbbcode.css",
+    "/images/icon128.png",
+    "/images/trophy_testers3.png",
+    "/images/trophy_supporters2.png",
+    "/images/trophy_donators.png",
+    "/images/trophy_contributer.png",
+    "/images/dismiss_notice.png",
+    "/css/converse.min.css"
+  ]
+}

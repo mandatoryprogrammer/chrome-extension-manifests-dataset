@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Clever Messenger Helper Extension",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "This extension provides different tools to help you achieve more with Clever Messenger",
+  "homepage_url": "https://app.clevermessenger.com",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon120.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "storage",
+    "background",
+    "tabs"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "http://localhost/clever-app/saas/*",
+      "https://*.clevermessenger.com/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://b-graph.facebook.com/*"
+      ],
+      "js": [
+        "js/jquery/jquery.js",
+        "src/inject/saveToken.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://localhost/clever-app/saas/composer.php?*",
+        "https://*.clevermessenger.com/composer.php?*"
+      ],
+      "js": [
+        "js/jquery/jquery.js",
+        "src/inject/getToken.js"
+      ]
+    }
+  ]
+}

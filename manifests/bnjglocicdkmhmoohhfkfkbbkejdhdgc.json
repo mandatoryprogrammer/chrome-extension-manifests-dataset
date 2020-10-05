@@ -1,0 +1,97 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "FlowCrypt: Encrypt Gmail with PGP",
+  "description": "Simple end-to-end encryption to secure email and attachments on Google.",
+  "version": "7.9.2",
+  "browser_action": {
+    "default_icon": {
+      "16": "/img/logo/flowcrypt-logo-16-16.png",
+      "19": "/img/logo/flowcrypt-logo-19-19.png",
+      "24": "/img/logo/flowcrypt-logo-24-24.png",
+      "32": "/img/logo/flowcrypt-logo-32-32.png",
+      "48": "/img/logo/flowcrypt-logo-48-48.png",
+      "64": "/img/logo/flowcrypt-logo-64-64.png",
+      "128": "/img/logo/flowcrypt-logo-128-128.png"
+    },
+    "default_title": "FlowCrypt Encryption for Gmail",
+    "default_popup": "/chrome/popups/default.htm"
+  },
+  "icons": {
+    "16": "/img/logo/flowcrypt-logo-16-16.png",
+    "19": "/img/logo/flowcrypt-logo-19-19.png",
+    "24": "/img/logo/flowcrypt-logo-24-24.png",
+    "32": "/img/logo/flowcrypt-logo-32-32.png",
+    "48": "/img/logo/flowcrypt-logo-48-48.png",
+    "64": "/img/logo/flowcrypt-logo-64-64.png",
+    "128": "/img/logo/flowcrypt-logo-128-128.png"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "https://flowcrypt.com/*",
+    "https://*.google.com/*",
+    "https://outlook.live.com/*",
+    "https://outlook.office365.com/*",
+    "https://outlook.office.com/*",
+    "https://graph.microsoft.com/*",
+    "https://login.microsoftonline.com/*",
+    "https://www.googleapis.com/*",
+    "unlimitedStorage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "css": [
+        "/css/webmail.css",
+        "/css/sweetalert2.css"
+      ],
+      "js": [
+        "/lib/purify.js",
+        "/lib/jquery.min.js",
+        "/lib/sweetalert2.js",
+        "/js/content_scripts/webmail_bundle.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://flowcrypt.com/stripe*"
+      ],
+      "js": [
+        "/lib/purify.js",
+        "/lib/jquery.min.js",
+        "/js/content_scripts/stripe_bundle.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "page": "/js/background_page/background_page.htm"
+  },
+  "options_page": "/chrome/settings/index.htm",
+  "web_accessible_resources": [
+    "/css/webmail.css",
+    "/img/logo/logo.svg",
+    "/img/svgs/reply-icon.svg",
+    "/img/svgs/spinner-white-small.svg",
+    "/img/svgs/spinner-green-small.svg",
+    "/img/svgs/unlock.svg",
+    "/img/logo/flowcrypt-logo-19-19.png",
+    "/chrome/elements/compose.htm",
+    "/chrome/elements/pgp_block.htm",
+    "/chrome/elements/setup_dialog.htm",
+    "/chrome/elements/attachment.htm",
+    "/chrome/elements/attachment_preview.htm",
+    "/chrome/elements/passphrase.htm",
+    "/chrome/elements/add_pubkey.htm",
+    "/chrome/elements/pgp_pubkey.htm",
+    "/chrome/elements/backup.htm",
+    "/chrome/elements/subscribe.htm",
+    "/chrome/elements/verification.htm",
+    "/chrome/elements/shared/footer.htm"
+  ],
+  "minimum_chrome_version": "61",
+  "content_security_policy": "script-src 'self'; frame-ancestors https://mail.google.com 'self';"
+}

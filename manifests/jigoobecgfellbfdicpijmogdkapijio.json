@@ -1,0 +1,148 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "description": "__MSG_appDescription__",
+  "version": "2020.8.4",
+  "short_name": "__MSG_appShortName__",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "icons": {
+    "16": "images/icon-16.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
+  },
+  "background": {
+    "scripts": [
+      "scripts/background.js",
+      "scripts/omnibox.background.js",
+      "scripts/messaging.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon-19.png",
+      "38": "images/icon-38.png"
+    },
+    "default_title": "__MSG_browserActionTitle__",
+    "default_popup": "pages/options.html"
+  },
+  "options_page": "pages/options.html",
+  "options_ui": {
+    "page": "pages/options.html",
+    "chrome_style": true
+  },
+  "omnibox": {
+    "keyword": "alma"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.getalma.com/*",
+        "https://*.getalma.com/*"
+      ],
+      "css": [
+        "styles/contentscript.css"
+      ],
+      "js": [
+        "scripts/contentscript.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "http://*.getalma.com/reports*",
+        "https://*.getalma.com/reports*"
+      ],
+      "js": [
+        "scripts/reports.layout.content.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "http://*.getalma.com/workflows/processes/*/review",
+        "https://*.getalma.com/workflows/processes/*/review"
+      ],
+      "js": [
+        "scripts/almastart.processreview.content.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "http://*.getalma.com/workflows/processes/*/*/*",
+        "https://*.getalma.com/workflows/processes/*/*/*"
+      ],
+      "js": [
+        "scripts/almastart.pdfprocess.content.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "http://*.getalma.com/reports/school-attendance*",
+        "https://*.getalma.com/reports/school-attendance*"
+      ],
+      "js": [
+        "scripts/attendance.content.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "http://*.getalma.com/*gradebook",
+        "https://*.getalma.com/*gradebook"
+      ],
+      "js": [
+        "scripts/gradebook.content.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "http://*.getalma.com/workflows/processes/*/*/*",
+        "https://*.getalma.com/workflows/processes/*/*/*"
+      ],
+      "css": [
+        "styles/almastart.css"
+      ],
+      "js": [
+        "scripts/almastart.layout.content.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    "scripts/hijacks/alma-table-freeze.js",
+    "scripts/hijacks/alma-table-freeze.js.map",
+    "scripts/contentscript.js.map",
+    "images/icon-128.png",
+    "styles/normalize.css"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.getalma.com/*"
+    ]
+  },
+  "permissions": [
+    "activeTab",
+    "background",
+    "alarms",
+    "contextMenus",
+    "downloads",
+    "identity",
+    "notifications",
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "unlimitedStorage",
+    "*://*.getalma.com/*"
+  ]
+}

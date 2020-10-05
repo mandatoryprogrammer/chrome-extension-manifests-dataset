@@ -1,0 +1,77 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_extensionName__",
+  "version": "1.8.9",
+  "description": "__MSG_extensionDescription__",
+  "default_locale": "en",
+  "icons": {
+    "128": "src/icon.png"
+  },
+  "author": "Michael Ziminsky",
+  "homepage_url": "https://github.com/mgziminsky/FacebookTrackingRemoval",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{bb1b80be-e6b3-40a1-9b6e-9d4073343f0b}",
+      "strict_min_version": "59.0"
+    }
+  },
+  "permissions": [
+    "storage",
+    "*://*.facebook.com/*",
+    "*://*.messenger.com/*",
+    "*://*.facebookcorewwwi.onion/*",
+    "webRequest",
+    "webRequestBlocking",
+    "https://mgziminsky.gitlab.io/FacebookTrackingRemoval/*"
+  ],
+  "options_ui": {
+    "page": "src/options.html"
+  },
+  "background": {
+    "scripts": [
+      "browser-polyfill.min.js",
+      "src/common.js",
+      "src/util.js",
+      "src/rules_sync.js",
+      "src/background.js"
+    ],
+    "persistent": true
+  },
+  "page_action": {
+    "browser_style": true,
+    "default_icon": "src/icon.png",
+    "default_popup": "src/options.html",
+    "show_matches": [
+      "*://*.facebook.com/*",
+      "*://*.messenger.com/*",
+      "*://*.facebookcorewwwi.onion/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": [
+        "*://*.facebook.com/*",
+        "*://*.messenger.com/*",
+        "*://*.facebookcorewwwi.onion/*"
+      ],
+      "css": [
+        "src/app.css"
+      ],
+      "js": [
+        "browser-polyfill.min.js",
+        "src/common.js",
+        "src/util.js",
+        "src/app.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "src/hide_rules/*",
+    "src/click_whitelist/*",
+    "src/param_cleaning/*"
+  ],
+  "incognito": "spanning",
+  "manifest_version": 2
+}

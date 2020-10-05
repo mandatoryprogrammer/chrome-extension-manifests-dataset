@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Extension for Univ. Ryukyus Library",
+  "version": "0.2.4",
+  "manifest_version": 2,
+  "description": "Extension for University of the Ryukyus",
+  "icons": {
+    "16": "images/icon-16.png",
+    "128": "images/icon-128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "scripts/chromereload.js",
+      "scripts/background.js"
+    ]
+  },
+  "permissions": [
+    "contextMenus",
+    "tabs",
+    "http://api.calil.jp/*",
+    "https://api.calil.jp/*",
+    "https://sg3jk3se8d.openurl.xml.serialssolutions.com/*",
+    "http://sg3jk3se8d.openurl.xml.serialssolutions.com/*",
+    "http://ci.nii.ac.jp/*"
+  ],
+  "content_security_policy": "script-src 'self' https://api.calil.jp/ https://ssl.google-analytics.com ; object-src; object-src 'self' https://sm1021.skr.u-ryukyu.ac.jp/img/bg/* ",
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "bower_components/jquery/dist/jquery.min.js",
+        "scripts/contentscript.js"
+      ],
+      "css": [
+        "style.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Habyts for Chromebook",
+  "description": "Habyts controls for a standalone chrome browser, e.g. on a Chromebook",
+  "version": "1.12",
+  "background": {
+    "scripts": [
+      "main.bundle.js"
+    ],
+    "persistent": true
+  },
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "permissions": [
+    "<all_urls>",
+    "tabs",
+    "notifications",
+    "webRequestBlocking",
+    "webRequest",
+    "storage",
+    "identity",
+    "identity.email",
+    "enterprise",
+    "enterprise.deviceAttributes",
+    "https://*.habyts.com/",
+    "http://*.habyts.com/",
+    "http://localhost/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.habyts.com/*"
+      ],
+      "js": [
+        "hb-hb-handler.js"
+      ]
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.habyts.com/*"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "img/ic_mode_offline.png",
+    "default_title": "Habyts",
+    "default_popup": "menu.html"
+  },
+  "manifest_version": 2
+}

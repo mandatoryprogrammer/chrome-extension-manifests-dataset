@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "monote",
+  "description": "monote lets you bookmark products to find them again later.",
+  "version": "1.5",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "128": "icon.png"
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "cookies"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "vendor/jquery-3.2.1.min.js",
+        "vendor/jquery.webui-popover.min.js",
+        "monote.lib.js",
+        "content.js"
+      ],
+      "css": [
+        "vendor/jquery.webui-popover.min.css",
+        "styles.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "images/master-picture.svg",
+    "popup.html",
+    "popup.js",
+    "application.css",
+    "vendor/rails-ujs.js",
+    "icon.png",
+    "styles.css"
+  ],
+  "content_security_policy": "script-src 'self' http://localhost:3000; object-src 'self'"
+}

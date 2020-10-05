@@ -1,0 +1,77 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Stack Exchange Post Watcher",
+  "version": "1.2.0",
+  "manifest_version": 2,
+  "description": "Watch questions & answers on the Stack Exchange network of sites to find out when they are edited, commented on, answered, and more!",
+  "homepage_url": "http://github.com/shu8",
+  "icons": {
+    "16": "icons/logo-16.png",
+    "19": "icons/logo-19.png",
+    "24": "icons/logo-24.png",
+    "32": "icons/logo-32.png",
+    "48": "icons/logo-48.png",
+    "64": "icons/logo-64.png",
+    "128": "icons/logo-128.png"
+  },
+  "background": {
+    "scripts": [
+      "src/browser-polyfill.min.js",
+      "src/background/constants.js",
+      "src/background/helpers.js",
+      "src/background/API.js",
+      "src/background/postChangeDetector.js",
+      "src/background/background.js"
+    ]
+  },
+  "page_action": {
+    "default_icon": {
+      "16": "icons/logo-16.png",
+      "19": "icons/logo-19.png",
+      "24": "icons/logo-24.png",
+      "32": "icons/logo-32.png",
+      "48": "icons/logo-48.png",
+      "64": "icons/logo-64.png",
+      "128": "icons/logo-128.png"
+    },
+    "default_title": "Stack Exchange Post Watcher",
+    "default_popup": "src/pageAction/pageAction.html"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "identity",
+    "alarms",
+    "notifications",
+    "*://*.stackoverflow.com/*",
+    "*://*.stackexchange.com/*",
+    "*://*.superuser.com/*",
+    "*://*.serverfault.com/*",
+    "*://*.askubuntu.com/*",
+    "*://*.stackapps.com/*",
+    "*://*.mathoverflow.net/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.stackoverflow.com/*",
+        "*://*.stackexchange.com/*",
+        "*://*.superuser.com/*",
+        "*://*.serverfault.com/*",
+        "*://*.askubuntu.com/*",
+        "*://*.stackapps.com/*",
+        "*://*.mathoverflow.net/*"
+      ],
+      "css": [
+        "src/contentScript/contentScript.css"
+      ],
+      "js": [
+        "src/browser-polyfill.min.js",
+        "src/background/constants.js",
+        "src/background/helpers.js",
+        "src/contentScript/contentScript.js"
+      ]
+    }
+  ]
+}

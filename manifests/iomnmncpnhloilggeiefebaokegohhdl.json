@@ -1,0 +1,78 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Map Services Enhanced",
+  "short_name": "Map Services Enhanced",
+  "version": "1.4.0",
+  "manifest_version": 2,
+  "description": "An extension for analyzing, interrogating, and troubleshooting ArcGIS REST Services.",
+  "homepage_url": "https://github.com/raykendo/Map-Services-Enhanced",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": false
+  },
+  "options_page": "src/options/options.html",
+  "page_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "Map Services Enhanced",
+    "default_popup": "src/page_action/page_action.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*/rest/services",
+        "*://*/*/rest/services/*"
+      ],
+      "css": [
+        "src/inject/inject.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*/*/rest/services",
+        "*://*/*/rest/services/*"
+      ],
+      "js": [
+        "src/inject/inject.js",
+        "src/inject/status.js",
+        "src/inject/mapImages.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*/*/rest/services/*/query",
+        "*://*/*/rest/services/*/query*"
+      ],
+      "js": [
+        "src/inject/queryTest.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*/*/rest/services*execute",
+        "*://*/*/rest/services*execute*",
+        "*://*/*/rest/services*submitjob",
+        "*://*/*/rest/services*submitjob*"
+      ],
+      "js": [
+        "src/inject/printTask.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "storage"
+  ],
+  "offline_enabled": false,
+  "web_accessible_resources": [
+    "src/images/*",
+    "src/config/*"
+  ]
+}

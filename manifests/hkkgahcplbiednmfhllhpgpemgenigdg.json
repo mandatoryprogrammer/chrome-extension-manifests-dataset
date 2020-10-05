@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Youtube Pause",
+  "version": "1.3.1",
+  "manifest_version": 2,
+  "description": "Pause a vídeo on youtube",
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "icon-pause-32.png",
+    "default_title": "Pause youtube video",
+    "default_popup": "html/popup.html"
+  },
+  "icons": {
+    "128": "icon-pause-128.png",
+    "16": "icon-pause-16.png",
+    "64": "icon-pause-64.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/**"
+      ],
+      "js": [
+        "js/contentscript.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "https://www.youtube.com/**"
+  ],
+  "commands": {
+    "playPause": {
+      "suggested_key": {
+        "default": "MediaPlayPause"
+      },
+      "global": true,
+      "description": "Toggle play/pause"
+    },
+    "playNext": {
+      "suggested_key": {
+        "default": "MediaNextTrack"
+      },
+      "global": true,
+      "description": "Play next track"
+    },
+    "playPrev": {
+      "suggested_key": {
+        "default": "MediaPrevTrack"
+      },
+      "global": true,
+      "description": "Play previous track"
+    }
+  }
+}

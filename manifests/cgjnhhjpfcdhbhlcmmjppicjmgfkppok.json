@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "description": "Download Facebook (Album & Video), Instagram, Pinterest, Twitter, Ask.fm, Weibo Album.",
+  "icons": {
+    "16": "img/icon16.png",
+    "128": "img/icon128.png"
+  },
+  "name": "DownAlbum",
+  "page_action": {
+    "default_icon": {
+      "19": "img/icon19.png",
+      "38": "img/icon38.png"
+    },
+    "default_title": "DownAlbum",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.facebook.com/*",
+        "https://instagram.com/*",
+        "https://*.instagram.com/*"
+      ],
+      "js": [
+        "js/md5.min.js",
+        "js/saveHelper.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "permissions": [
+    "<all_urls>",
+    "storage",
+    "tabs",
+    "unlimitedStorage",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://ssl.google-analytics.com/ https://www.google-analytics.com https://dl.dropbox.com/ https://dl.dropboxusercontent.com/ https://connect.facebook.net/ https://m.facebook.com/ https://web.facebook.com/ https://www.facebook.com/ https://apis.google.com/; object-src 'self'",
+  "manifest_version": 2,
+  "version": "0.20.7.1"
+}

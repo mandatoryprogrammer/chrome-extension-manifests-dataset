@@ -1,0 +1,71 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "MailZak",
+  "short_name": "Give boost to your email marketing.",
+  "version": "0.0.2",
+  "manifest_version": 2,
+  "description": "MailZak makes email marketing effective and effortless. We do the heavy lifting so you can focus on your customers and business.",
+  "homepage_url": "https://mailzak.com",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "page": "src/bg/background.html",
+    "persistent": true
+  },
+  "options_page": "src/options/index.html",
+  "browser_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "browser action demo",
+    "default_popup": "src/browser_action/browser_action.html"
+  },
+  "permissions": [
+    "https://*/*",
+    "http://*/*",
+    "tabs",
+    "storage",
+    "management"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "http://mail.google.com/*"
+      ],
+      "css": [
+        "src/inject/inject.css",
+        "src/inject/boot.css",
+        "src/inject/gmail/contacts/contacts.css",
+        "src/inject/gmail/campaigns/campaign.css",
+        "src/inject/gmail/gmail.css",
+        "src/inject/inbox/inbox.css"
+      ],
+      "js": [
+        "js/jquery/jquery.min.js",
+        "js/jquery/jquery.serializejson.min.js",
+        "js/inboxsdk/inboxsdk.js",
+        "src/inject/gmail/contacts/contact_templates.js",
+        "src/inject/gmail/contacts/contact_functions.js",
+        "src/inject/gmail/campaigns/campaign_templates.js",
+        "src/inject/gmail/campaigns/campaign_functions.js",
+        "src/inject/gmail/templates.js",
+        "src/inject/gmail/functions.js",
+        "src/inject/gmail/gmail.js",
+        "src/inject/inbox/templates.js",
+        "src/inject/inbox/inbox.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://mailzak.com/oauth/authorize/*"
+      ],
+      "js": [
+        "js/jquery/jquery.min.js",
+        "src/inject/authorize/authorize.js"
+      ]
+    }
+  ]
+}

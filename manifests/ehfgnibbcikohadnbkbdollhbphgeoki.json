@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Invenias Extension",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAle+9sk3WjFEM7bEzGNSQ6+z61AvXyX8MfH8R7WWZUJY8GvT3cJ1CpL3xIA44Cpgjbud4gFBBDs+VvwknuxF/AHoDjcusiO76zL0uvg03mzVB+OVVqq94Btdgwlj7kbhxdEEV+HAGhJMwVGBM6vrSN2joA+nXtjldRv7utz56BkQbI39YONYuqRIo3BkE4hkE2xteHT6UdRT5TUCholP2YCJIhKK0EOp83kpixmjQkKRoiqfdpTl3ekibDo6OEzfbnm5Z0Sx4ClIn0o2CHmMKPLan3yrgInePxMU0+/untEisGFbpPzhjPB+dQ16grgFY2jcHdHOHMb2EbW+FNbX9mQIDAQAB",
+  "version": "1.0.16",
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "http://*/*",
+    "https://*/*",
+    "cookies",
+    "storage",
+    "identity",
+    "http://*.inveniasnextgen.local:44444/identity/*",
+    "<all_urls>"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "js": [
+        "content-script.js",
+        "assets/scripts/jquery.min.js",
+        "assets/scripts/generic.js"
+      ],
+      "css": [
+        "assets/css/iframe_fix.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "browser_action": {},
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "web_accessible_resources": [
+    "index.html",
+    "assets/scripts/jquery.min.js",
+    "assets/scripts/generic.js",
+    "assets/image/background.jpg",
+    "assets/image/invenias-logo.svg",
+    "assets/css/iframe_fix.css"
+  ],
+  "icons": {
+    "128": "/assets/image/favicon.png"
+  },
+  "oauth2": {
+    "client_id": "WebApp",
+    "scopes": [
+      "openid",
+      "api",
+      "profile",
+      "email"
+    ],
+    "response_type": "id_token token",
+    "redirect_uri": "https://ehfgnibbcikohadnbkbdollhbphgeoki.chromiumapp.org/login-complete/",
+    "acr_values": "form_factor=2 deviceId=bfebd3b9-c33b-499f-9873-88ff6cdddc03 deviceName=ChromeParser"
+  }
+}

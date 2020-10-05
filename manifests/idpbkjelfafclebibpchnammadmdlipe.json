@@ -1,0 +1,98 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://rec.scupio.com/recweb/js/rec.js; object-src 'self'",
+  "name": "購有錢-比價賺現金小幫手",
+  "description": "《購有錢-比價賺現金小幫手》是你網購必備的超有用工具！當你進入與《購有錢》有合作的特約商店時，可即時獲得賺現金回饋的提醒，點擊啟動現金回饋按鈕，即可順利獲得現金回饋，購物有錢拿！",
+  "version": "2.0.5",
+  "icons": {
+    "16": "img/icon/go-red-icon@16x-8.png",
+    "18": "img/icon/go-red-icon@18x-8.png",
+    "24": "img/icon/go-red-icon@24x-8.png",
+    "32": "img/icon/go-red-icon@32x-8.png",
+    "48": "img/icon/go-icon@48x-8.png",
+    "64": "img/icon/go-icon@64x-8.png",
+    "128": "img/icon/go-icon@128x-8.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "img/icon/go-red-icon@16x-8.png",
+      "18": "img/icon/go-red-icon@18x-8.png",
+      "24": "img/icon/go-red-icon@24x-8.png",
+      "32": "img/icon/go-red-icon@32x-8.png",
+      "48": "img/icon/go-icon@48x-8.png",
+      "64": "img/icon/go-icon@64x-8.png",
+      "128": "img/icon/go-icon@128x-8.png"
+    },
+    "default_title": "購有錢-比價賺現金小幫手",
+    "default_popup": "index.html"
+  },
+  "background": {
+    "scripts": [
+      "background/background.bundle.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content/content/content.bundle.js"
+      ],
+      "css": [
+        "content/content/content.styles.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content/context-menu/context-menu.bundle.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://www.goyomoney.com.tw/*"
+      ],
+      "js": [
+        "content/set-installed-node/set-installed-node.bundle.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "https://*.goyomoney.com.tw/*"
+      ],
+      "js": [
+        "content/web-notification/web-notification.bundle.js"
+      ],
+      "css": [
+        "content/web-notification/web-notification.styles.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "img/logo-sm.png",
+    "img/close.png",
+    "img/*",
+    "content/*/*.styles.css"
+  ],
+  "permissions": [
+    "tabs",
+    "cookies",
+    "webNavigation",
+    "http://*.goyomoney.com.tw/*",
+    "https://*.goyomoney.com.tw/*",
+    "contextMenus"
+  ]
+}

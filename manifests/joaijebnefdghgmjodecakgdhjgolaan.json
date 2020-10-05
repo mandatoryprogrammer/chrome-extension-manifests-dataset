@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Soothe",
+  "description": "Browse the web with peace of mind.",
+  "version": "0.0.0.2",
+  "manifest_version": 2,
+  "icons": {
+    "16": "public/img/soothe-icon-16.png",
+    "48": "public/img/soothe-icon-48.png",
+    "128": "public/img/soothe-icon-128.png"
+  },
+  "background": {
+    "scripts": [
+      "bower_components/firebase/firebase.js",
+      "background/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "content/searchDOM.js",
+        "content/blur.js",
+        "content/content.js",
+        "bower_components/sentimood/sentimood.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "activeTab",
+    "storage",
+    "debugger",
+    "contextMenus"
+  ],
+  "web_accessible_resources": [],
+  "content_security_policy": "script-src 'self' https://cdn.firebase.com https://*.firebaseio.com 'unsafe-eval'; object-src 'self'",
+  "browser_action": {
+    "default_title": "Soothe",
+    "default_popup": "public/index.html"
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "minimum_chrome_version": "32",
+  "name": "Quiklogin",
+  "description": "",
+  "version": "1.5.0",
+  "icons": {
+    "16": "images/icons/16.png",
+    "32": "images/icons/32.png",
+    "48": "images/icons/48.png",
+    "64": "images/icons/64.png",
+    "128": "images/icons/128.png",
+    "256": "images/icons/256.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "images/icons/16.png",
+      "32": "images/icons/32.png",
+      "48": "images/icons/48.png",
+      "64": "images/icons/64.png",
+      "128": "images/icons/128.png",
+      "256": "images/icons/256.png"
+    }
+  },
+  "content_security_policy": "script-src 'self' https://query.yahooapis.com/ https://ipinfo.io/; object-src 'self'",
+  "chrome_url_overrides": {
+    "newtab": "/html/newtabRedirect.html"
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "libs/jquery.js",
+      "scripts/utils.js",
+      "scripts/theme.js",
+      "scripts/config.js",
+      "libs/deskmetrics.js",
+      "scripts/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://newtab.quiklogin.co/"
+      ],
+      "js": [
+        "scripts/newtabContentScript.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://www.bing.com/*"
+      ],
+      "js": [
+        "scripts/utils.js",
+        "scripts/brandContentScript.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "images/SS-distract.png"
+  ],
+  "permissions": [
+    "*://search.quiklogin.co/",
+    "*://*/",
+    "storage",
+    "unlimitedStorage",
+    "privacy",
+    "cookies",
+    "tabs"
+  ],
+  "incognito": "not_allowed"
+}

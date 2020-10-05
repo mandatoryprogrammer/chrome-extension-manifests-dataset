@@ -1,0 +1,80 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Link Finder ai - Say goodbye to bookmarks",
+  "description": "Search for your important links in your emails and messages with our AI-powered search.",
+  "version": "1.2.0",
+  "manifest_version": 2,
+  "browser_action": {
+    "default_icon": "assets/images/logo.png",
+    "default_popup": "popup/index.html"
+  },
+  "options_ui": {
+    "page": "options/index.html",
+    "open_in_tab": true
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "*://www.google.com/*",
+        "*://www.google.co.uk/*",
+        "*://www.google.ca/*",
+        "*://www.google.de/*",
+        "*://www.google.fr/*",
+        "*://www.google.co.jp/*",
+        "*://www.google.ru/*",
+        "*://www.google.ch/*",
+        "*://www.google.it/*",
+        "*://www.google.nl/*",
+        "*://www.google.es/*",
+        "*://www.google.hu/*",
+        "*://www.bing.com/*",
+        "*://search.yahoo.com/*",
+        "*://duckduckgo.com/*"
+      ],
+      "js": [
+        "content/search-engine-inlay-widget.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "permissions": [
+    "storage",
+    "tabs",
+    "webNavigation",
+    "bookmarks",
+    "history",
+    "alarms"
+  ],
+  "icons": {
+    "16": "assets/images/icons/icon-16.png",
+    "48": "assets/images/icons/icon-48.png",
+    "128": "assets/images/icons/icon-128.png"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Space",
+        "mac": "MacCtrl+Space",
+        "windows": "Ctrl+Space",
+        "chromeos": "Ctrl+Space",
+        "linux": "Ctrl+Space"
+      }
+    }
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "扫我吧",
+  "description": "最给力的二维码平台提供的最方便的二维码插件",
+  "version": "1.0.3",
+  "options_page": "page/options.htm",
+  "browser_action": {
+    "default_title": "扫我吧",
+    "default_icon": "app_icon_64.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "64": "app_icon_64.png",
+    "128": "app_icon_128.png"
+  },
+  "permissions": [
+    "tabs",
+    "contextMenus",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "lib/jquery.min.js",
+        "lib/jquery.simplemodal.js",
+        "constants.js",
+        "highlight.js",
+        "content.js"
+      ],
+      "css": [
+        "css/content.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "constants.js",
+      "lib/jquery.min.js",
+      "lib/cryptojs-sha256.js",
+      "js/common.js",
+      "background.js"
+    ]
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://lg.saowoba.net/*"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://s.tbcdn.cn; object-src 'self'",
+  "web_accessible_resources": [
+    "page/contentshow.htm",
+    "page/options.htm",
+    "page/login_success.htm",
+    "js/*",
+    "lib/*",
+    "css/*"
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "购物搜索",
+  "version": "0.1.0",
+  "description": "Search products through taobao.com and jingdong.com",
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Z",
+        "mac": "MacCtrl+Shift+Z"
+      },
+      "description": "Open popup.html"
+    }
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "js/content.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_title": "Shopping Search",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "permissions": [
+    "contextMenus",
+    "declarativeContent"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://s.taobao.com/ https://search.jd.com/; object-src 'self'"
+}

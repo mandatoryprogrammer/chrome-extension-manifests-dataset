@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "ADP Project - Accelerated Desktop Pages",
+  "version": "1.0.1",
+  "manifest_version": 2,
+  "description": "View the Accelerated Mobile Pages (AMP) version of webpages",
+  "homepage_url": "http://www.adpproject.org",
+  "icons": {
+    "16": "icons/adp_icon_16x16.png",
+    "48": "icons/adp_icon_48x48.png",
+    "128": "icons/adp_icon_128x128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "js/jquery/jquery-1.11.2.min.js",
+      "src/bg/background.js"
+    ],
+    "persistent": true
+  },
+  "options_ui": {
+    "page": "src/options/index.html",
+    "chrome_style": true
+  },
+  "browser_action": {
+    "default_icon": "icons/adp_unavailable_128x128.png",
+    "default_title": "ADP Unavailable"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "http://*.adpproject.org/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*"
+      ],
+      "js": [
+        "js/jquery/jquery-1.11.2.min.js",
+        "src/inject/inject.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

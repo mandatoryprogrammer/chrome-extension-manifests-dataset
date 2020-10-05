@@ -1,0 +1,79 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Wikibuy: Shop online, save in seconds",
+  "version": "0.1.823.675",
+  "manifest_version": 2,
+  "description": "A simple and free way to help you save online",
+  "icons": {
+    "16": "assets/icons/icon16.png",
+    "48": "assets/icons/icon48.png",
+    "128": "assets/icons/icon128.png"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "permissions": [
+    "tabs",
+    "contextMenus",
+    "storage",
+    "cookies",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>"
+  ],
+  "web_accessible_resources": [
+    "GENERATED/*",
+    "webpage/*",
+    "notifications/*"
+  ],
+  "background": {
+    "page": "bg/bg.html"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "assets/icons/browser/browseraction-off-19.png",
+      "38": "assets/icons/browser/browseraction-off-38.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "notifications/pageView.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.amazon.com/*",
+        "*://*.bestbuy.com/*",
+        "*://*.homedepot.com/*",
+        "*://*.target.com/*",
+        "*://*.zappos.com/*"
+      ],
+      "js": [
+        "GENERATED/commons-1.js",
+        "GENERATED/commons-2.js",
+        "GENERATED/site.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.ivf-local.com/*",
+        "*://*.ivf-dev.com/*",
+        "*://*.ivf-stage.com/*",
+        "*://*.wikibuy.com/*"
+      ],
+      "js": [
+        "GENERATED/commons-1.js",
+        "GENERATED/commons-2.js",
+        "GENERATED/wikibuy.js"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

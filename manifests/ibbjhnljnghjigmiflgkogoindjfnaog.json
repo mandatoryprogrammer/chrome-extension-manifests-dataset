@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Select Text To Translate",
+  "description": "Học tiếng anh hiệu quả",
+  "version": "0.3",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/icon32.png",
+    "default_popup": "background.html"
+  },
+  "background": {
+    "scripts": [
+      "scripts/context.js",
+      "js/libs/jquery.min.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "storage",
+    "contextMenus",
+    "notifications",
+    "storage",
+    "http://*/",
+    "https://*/",
+    "<all_urls>",
+    "https://www.googleapis.com/customsearch/v1",
+    "http://api.giphy.com/v1/gifs/search*",
+    "http://www.stackoverflow.com/search*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*"
+      ],
+      "css": [
+        "css/style.css"
+      ],
+      "js": [
+        "js/libs/jquery.min.js",
+        "features/dictionary.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    }
+  ]
+}

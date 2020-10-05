@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Wikipedia Highlight Lookup Plugin",
+  "version": "0.0.3",
+  "manifest_version": 2,
+  "description": "Look up highlighted text on wikipedia.  Just highlight the word or phrase you want to look up and press Ctrl+I.",
+  "icons": {
+    "16": "icon/16.png",
+    "48": "icon/48.png",
+    "128": "icon/128.png"
+  },
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "src/bg/content.js"
+      ]
+    }
+  ],
+  "commands": {
+    "wiki-lookup": {
+      "suggested_key": {
+        "default": "Ctrl+I",
+        "mac": "Command+I"
+      },
+      "description": "Toggle wikipedia lookup"
+    }
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "notifications",
+    "http://*/*",
+    "https://upload.wikimedia.org/*"
+  ]
+}

@@ -1,0 +1,161 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Radium CRM",
+  "version": "3.2.6",
+  "manifest_version": 2,
+  "description": "Helps you enter new contacts from information you find on the web and track your conversations in Gmail.",
+  "options_page": "pages/options.html",
+  "background": {
+    "page": "pages/background.html"
+  },
+  "web_accessible_resources": [
+    "img/*",
+    "oauth2/oauth2.html",
+    "webfonts/*",
+    "css/gmail.css",
+    "js/followup-dialog.js",
+    "js/lib/talwar-gmail.js",
+    "errors/lib/*",
+    "js/lib/gibberish.js",
+    "css/images/*"
+  ],
+  "permissions": [
+    "storage",
+    "identity",
+    "tabs",
+    "cookies",
+    "notifications",
+    "alarms",
+    "clipboardRead",
+    "clipboardWrite",
+    "geolocation",
+    "*://*/*"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "img/logo19.png",
+      "38": "img/logo38.png"
+    },
+    "default_popup": "pages/popup.html"
+  },
+  "icons": {
+    "16": "img/icon-white-16.png",
+    "48": "img/icon-white-48.png",
+    "128": "img/icon-white-128.png"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://maps.googleapis.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "errors/lib/raygun.js",
+        "errors/lib/tracekit.js",
+        "js/auth.js",
+        "js/lib/jquery.js",
+        "js/lib/rsvp.js",
+        "js/lib/jquery-ui.min.js",
+        "js/radiumhelper.js",
+        "js/radium.js",
+        "js/clipper.js"
+      ],
+      "exclude_matches": [
+        "*://*.linkedin.com/*",
+        "*://*.google.com/*",
+        "*://*.radiumcrm.com/*"
+      ],
+      "css": [
+        "css/clipper.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://www.linkedin.com/*"
+      ],
+      "js": [
+        "errors/lib/raygun.js",
+        "errors/lib/tracekit.js",
+        "js/auth.js",
+        "js/lib/jquery.js",
+        "js/lib/rsvp.js",
+        "js/lib/jquery-ui.min.js",
+        "js/radiumhelper.js",
+        "js/radium.js",
+        "js/linkedin.js"
+      ],
+      "css": [
+        "css/linkedin.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://mail.google.com/*"
+      ],
+      "js": [
+        "errors/lib/raygun.js",
+        "js/lib/jquery.js",
+        "js/lib/jquery-ui.min.js",
+        "js/lib/jquery.template.min.js",
+        "js/lib/jquery.switchButton.min.js",
+        "js/lib/tagit.js",
+        "js/lib/lodash.js",
+        "js/lib/rsvp.js",
+        "js/lib/gibberish.js",
+        "js/lib/talwar-gmail.js",
+        "errors/lib/tracekit.js",
+        "js/lib/mutation-summary.js",
+        "js/radiumhelper.js",
+        "js/radium.js",
+        "js/profile.js",
+        "js/gmail.js",
+        "js/gmailreply.js",
+        "js/followup-dialog.js",
+        "js/lib/bootstrap-datepicker.js"
+      ],
+      "css": [
+        "webfonts/ss-symbolicons-block.css",
+        "webfonts/ss-standard.css",
+        "webfonts/ss-social.css",
+        "css/gmail.css",
+        "css/login.css",
+        "css/tagit.css",
+        "css/jquery.css",
+        "css/bootstrap-datepicker.css",
+        "css/ui.switchButton.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://www.radiumcrm.com/*"
+      ],
+      "js": [
+        "js/lib/jquery.js",
+        "js/marketing.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://app.radiumcrm.com/*"
+      ],
+      "js": [
+        "js/lib/jquery.js",
+        "js/frontend.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://www.google.com/robots.txt*"
+      ],
+      "js": [
+        "/oauth2/oauth2_inject.js"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

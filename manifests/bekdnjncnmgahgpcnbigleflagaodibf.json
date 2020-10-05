@@ -1,0 +1,131 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Prohardver! Eszközök",
+  "version": "4.5.3",
+  "description": "A Prohardver! lapcsalád funkcióit bővítő kiegészítő.",
+  "background": {
+    "scripts": [
+      "js/mootools-core-1.4.5-full-nocompat-yc.js",
+      "js/options.js",
+      "js/database.js",
+      "js/ToolbarIcon.js",
+      "js/notification.js",
+      "js/msg.js",
+      "js/observer-bg.js",
+      "js/bg_page.js"
+    ],
+    "persistent": true
+  },
+  "options_page": "options.html",
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon19.png",
+      "38": "images/icon38.png"
+    },
+    "default_title": "Prohardver! Eszközök",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "web_accessible_resources": [
+    "images/star.png",
+    "images/star-none.png",
+    "images/star-half.png"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self' 'unsafe-eval'",
+  "permissions": [
+    "notifications",
+    "idle",
+    "tabs",
+    "storage",
+    "http://prohardver.hu/*",
+    "http://itcafe.hu/*",
+    "http://gamepod.hu/*",
+    "http://logout.hu/*",
+    "http://mobilarena.hu/*",
+    "http://hardverapro.hu/*"
+  ],
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "http://prohardver.hu/*",
+        "http://itcafe.hu/*",
+        "http://gamepod.hu/*",
+        "http://logout.hu/*",
+        "http://mobilarena.hu/*",
+        "http://hardverapro.hu/*"
+      ],
+      "js": [
+        "js/mootools-core-1.4.5-full-nocompat-yc.js",
+        "js/RequestSender.class.js",
+        "js/observer.js",
+        "js/hotkeys.js"
+      ],
+      "css": [
+        "css/common.css"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "matches": [
+        "http://prohardver.hu/tag/*",
+        "http://itcafe.hu/tag/*",
+        "http://gamepod.hu/tag/*",
+        "http://logout.hu/tag/*",
+        "http://mobilarena.hu/tag/*",
+        "http://hardverapro.hu/tag/*"
+      ],
+      "js": [
+        "js/userpage.js"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "matches": [
+        "http://prohardver.hu/tema/*",
+        "http://itcafe.hu/tema/*",
+        "http://gamepod.hu/tema/*",
+        "http://logout.hu/tema/*",
+        "http://mobilarena.hu/tema/*",
+        "http://hardverapro.hu/tema/*",
+        "http://prohardver.hu/privat/*",
+        "http://itcafe.hu/privat/*",
+        "http://gamepod.hu/privat/*",
+        "http://logout.hu/privat/*",
+        "http://mobilarena.hu/privat/*",
+        "http://hardverapro.hu/privat/*"
+      ],
+      "js": [
+        "js/topicapro.js"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "http://logout.hu/*"
+      ],
+      "css": [
+        "css/logoutCenterAlign.css"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "http://itcafe.hu/privatok/listaz.php",
+        "http://prohardver.hu/privatok/listaz.php",
+        "http://mobilarena.hu/privatok/listaz.php",
+        "http://gamepod.hu/privatok/listaz.php",
+        "http://logout.hu/privatok/listaz.php",
+        "http://hardverapro.hu/privatok/listaz.php"
+      ],
+      "css": [
+        "css/messagesFix.css"
+      ]
+    }
+  ]
+}

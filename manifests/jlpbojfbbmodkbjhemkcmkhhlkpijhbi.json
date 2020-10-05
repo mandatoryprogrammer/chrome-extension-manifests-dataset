@@ -1,0 +1,38 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Jira Link and Search",
+  "short_name": "Jira Link-Search",
+  "description": "Turns JIRA numbers into hyperlinks, and provides a right-click menu to search for any highlighted text within Atlassian Jira.",
+  "version": "0.2.4",
+  "minimum_chrome_version": "38",
+  "permissions": [
+    "contextMenus",
+    "tabs",
+    "https://www.google-analytics.com/",
+    "storage"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "icons": {
+    "16": "assets/search.png"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "highlight.js",
+        "activate-ga.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "ga.js",
+    "background.html"
+  ]
+}

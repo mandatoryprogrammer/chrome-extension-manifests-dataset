@@ -1,0 +1,70 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Vigia de Preço",
+  "description": "No Vigia de Preço você encontra cupom de desconto das maiores lojas do Brasil, frete grátis, ofertas, histórico de preço",
+  "author": "Vigia de Preço <contato@vigiadepreco.com.br>",
+  "version": "7.3.3",
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "background": {
+    "scripts": [
+      "browser-polyfill.js",
+      "js/lib/firebase-app-7.15.0.js",
+      "js/lib/firebase-messaging-7.15.0.js",
+      "js/fcm/fcm.js",
+      "js/fcm/fcm-client.js",
+      "js/fcm/notification.js",
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "browser-polyfill.js",
+        "script.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "js": [
+        "browser-polyfill.js",
+        "contentscript.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "img/logos/16x16_logo.png",
+      "38": "img/logos/48x48_logo.png"
+    },
+    "default_popup": "popup.html",
+    "default_title": "Vigia de Preço"
+  },
+  "web_accessible_resources": [
+    "assets/img/*",
+    "img/*",
+    "js/*"
+  ],
+  "icons": {
+    "16": "img/logos/16x16_logo.png",
+    "128": "img/logos/128x128_logo.png"
+  },
+  "permissions": [
+    "storage",
+    "unlimitedStorage",
+    "webNavigation",
+    "notifications",
+    "http://*/*",
+    "https://*/*"
+  ]
+}

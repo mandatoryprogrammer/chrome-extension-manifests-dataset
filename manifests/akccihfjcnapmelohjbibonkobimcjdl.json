@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Wordbank@gDrive",
+  "version": "0.0.4",
+  "manifest_version": 2,
+  "description": "An extension to add new words from the omnibar to wordbank on google drive.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ]
+  },
+  "omnibox": {
+    "keyword": "define"
+  },
+  "options_page": "src/options/options.html",
+  "permissions": [
+    "tabs",
+    "identity",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.etymonline.com/*"
+      ],
+      "js": [
+        "src/injected/word-origin.js"
+      ]
+    }
+  ],
+  "oauth2": {
+    "client_id": "319187458275-dtebijonueujc4dt4uki8fut1nbkf4bn.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/spreadsheets",
+      "https://www.googleapis.com/auth/drive"
+    ]
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkbfL8ul6olL9vks8tAbGYO3SXmX1e/AVhBdHTi0c+mFK+SCxK4ChM7ARAF0nSp5XInNUM8BZHczbP5bBLh9sv5A6szHKRVgB/u+8gVsy4u0QoXc27aNnzDs/EJMk+dVrJcLBH7338dACAM45NWWbUkMBcPqJmG/lO3NghvLgK9oi3r8T0wVDbvdz3yfOJ59kHWIBJga6OcyOPE/oBeHCmOpJeY2q/40xG+kUbXISdnQprrawFycv2X77IemX1S9Vg3VQwT5cmavyydTxKt86IpTd01oCl+4ZDNzPBy/GtBSnvq4vcSzbP37tEDBy1dKQesdkm1oMXuoVaryY5BRQqQIDAQAB"
+}

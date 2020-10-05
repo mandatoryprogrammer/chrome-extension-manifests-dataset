@@ -1,0 +1,94 @@
+{
+  "background": {
+    "scripts": [
+      "libs/promise.js",
+      "src/bg/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "icons/play19.png",
+    "default_title": "__MSG_default_title__"
+  },
+  "commands": {
+    "next": {
+      "description": "Play next song",
+      "suggested_key": {
+        "default": "MediaNextTrack",
+        "mac": "MediaNextTrack"
+      }
+    },
+    "play-pause": {
+      "description": "Play/Pause",
+      "suggested_key": {
+        "default": "MediaPlayPause",
+        "mac": "MediaPlayPause"
+      }
+    },
+    "prev": {
+      "description": "Play prev song",
+      "suggested_key": {
+        "default": "MediaPrevTrack",
+        "mac": "MediaPrevTrack"
+      }
+    }
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "src/inject/ContentScript.js"
+      ],
+      "matches": [
+        "*://*/*",
+        "*://soundcloud.com/*"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "css": [
+        "libs/font-awesome/css/font-awesome.css",
+        "src/player/player.css"
+      ],
+      "exclude_matches": [
+        "*://*.soundcloud.com/*",
+        "*://soundcloud.com/*"
+      ],
+      "js": [
+        "libs/draggabilly.pkgd.js",
+        "src/player/player.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "default_locale": "en",
+  "description": "Management of music with soundcloud is always at hand on any website. All the most necessary: play/pause/track switcht/liked track",
+  "icons": {
+    "128": "icons/soundcloud_btn_ext_icon_64x64.png",
+    "16": "icons/soundcloud_btn_ext_icon_48x48.png",
+    "48": "icons/soundcloud_btn_ext_icon_48x48.png"
+  },
+  "manifest_version": 2,
+  "name": "Player on all tabs",
+  "options_page": "src/options/options.html",
+  "permissions": [
+    "tabs",
+    "contextMenus",
+    "*://*.soundcloud.com/*",
+    "*://soundcloud.com/*",
+    "http://*/",
+    "*://*/*",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "short_name": "Player on All tabs",
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "3.1.1",
+  "web_accessible_resources": [
+    "src/*",
+    "icons/*",
+    "libs/*"
+  ]
+}

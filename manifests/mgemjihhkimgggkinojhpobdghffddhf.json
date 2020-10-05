@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "LMOD Plus",
+  "version": "0.0.2.14",
+  "manifest_version": 2,
+  "description": "Removes all bloat from the learning modules MIT site.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://learning-modules.mit.edu/class/*",
+        "*://learning-modules.mit.edu/portal/*",
+        "*://learning-modules.mit.edu/materials/*"
+      ],
+      "js": [
+        "src/inject.js"
+      ],
+      "css": [
+        "css/inject.css"
+      ]
+    }
+  ],
+  "browser_action": {},
+  "web_accessible_resources": [
+    "src/html/main.html"
+  ],
+  "background": {
+    "scripts": [
+      "dist/axios.min.js",
+      "src/hook.js",
+      "src/keepalive.js"
+    ],
+    "persistent": true
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "cookies",
+    "storage",
+    "*://learning-modules.mit.edu/*",
+    "*://plus.mit.edu/*"
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Trello Linkedin Helper",
+  "version": "0.6",
+  "manifest_version": 2,
+  "description": "",
+  "page_action": {
+    "default_icon": {
+      "19": "icons/19.png",
+      "38": "icons/38.png"
+    }
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "settings/options.html"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.linkedin.com/in/*",
+        "*://*.linkedin.com/search/results/*"
+      ],
+      "js": [
+        "lib/jquery.js",
+        "lib/trello_client.js",
+        "lib/trello.embed.min.js",
+        "trello_trigger.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "*://*.linkedin.com/in/*",
+    "storage"
+  ],
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "content_security_policy": "connect-src 'self' https://trello.com; script-src 'self' https://trello.com; object-src 'self' https://trello.com;"
+}

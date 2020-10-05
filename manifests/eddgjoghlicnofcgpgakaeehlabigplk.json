@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Youtube Focus - Remove Recommendations",
+  "short_name": "youtubefocus",
+  "version": "0.0.2",
+  "manifest_version": 2,
+  "description": "Focus, and Stop Youtube from distracting you!",
+  "homepage_url": "http://afomer.me",
+  "permissions": [
+    "tabs",
+    "storage"
+  ],
+  "icons": {
+    "16": "icons/youtubefocus_icon16.png",
+    "48": "icons/youtubefocus_icon48.png",
+    "128": "icons/youtubefocus_icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "./icons/youtubefocus_icon128.png",
+    "default_title": "Focus, and Stop Youtube from distracting you!",
+    "default_popup": "src/browser_action/browser_action.html"
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "js/jquery/jquery.js",
+      "src/bg/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/*"
+      ],
+      "js": [
+        "js/jquery/jquery.js",
+        "src/inject/inject.js"
+      ],
+      "css": [
+        "src/inject/inject.css"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

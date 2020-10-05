@@ -1,0 +1,75 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "niconico scale changer",
+  "version": "1.0.0",
+  "description": "ニコニコ動画の動画・コメント欄などの高さ・幅を変更できます。",
+  "icons": {
+    "16": "icon_16.png",
+    "48": "icon_48.png",
+    "128": "icon_128.png"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "notifications",
+    "http://www.nicovideo.jp/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.nicovideo.jp/watch*"
+      ],
+      "css": [
+        "./style/panel_common.css",
+        "./style/videopage_style.css"
+      ],
+      "js": [
+        "./script/jquery-2.0.3.min.js",
+        "./script/object.js",
+        "./script/videopage_script.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://www.nicovideo.jp/my*",
+        "http://www.nicovideo.jp/user*"
+      ],
+      "css": [
+        "./style/panel_common.css",
+        "./style/nicorepo_style.css"
+      ],
+      "js": [
+        "./script/jquery-2.0.3.min.js",
+        "./script/object.js",
+        "./script/nicorepo_script.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://www.nicovideo.jp/*mylist*"
+      ],
+      "css": [
+        "./style/panel_common.css",
+        "./style/mylist_style.css"
+      ],
+      "js": [
+        "./script/jquery-2.0.3.min.js",
+        "./script/object.js",
+        "./script/mylist_script.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "browser_action": {
+    "default_icon": "icon_38.png"
+  },
+  "background": {
+    "scripts": [
+      "./script/background.js"
+    ]
+  },
+  "options_page": "options.html",
+  "manifest_version": 2
+}

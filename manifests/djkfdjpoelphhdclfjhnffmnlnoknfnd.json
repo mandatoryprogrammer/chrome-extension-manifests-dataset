@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Awesome Autocomplete for GitHub",
+  "description": "Add instant search capabilities to GitHub's search bar.",
+  "background": {
+    "scripts": [
+      "js/chrome/background.js",
+      "js/libs/algoliasearch.js",
+      "js/chrome/omnibox.js"
+    ],
+    "persistent": false
+  },
+  "omnibox": {
+    "keyword": "aa"
+  },
+  "manifest_version": 2,
+  "icons": {
+    "16": "images/icon-16.png",
+    "48": "images/icon-48.png",
+    "64": "images/icon-64.png",
+    "128": "images/icon.png"
+  },
+  "page_action": {
+    "default_title": "Awesome Autocomplete for GitHub",
+    "default_popup": "html/chrome.html",
+    "default_icon": "images/icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://github.com/*"
+      ],
+      "js": [
+        "js/libs/jquery-3.1.1.min.js",
+        "js/libs/hogan-3.0.1.js",
+        "js/libs/typeahead.bundle.js",
+        "js/libs/algoliasearch.js",
+        "js/content.js"
+      ],
+      "css": [
+        "css/content.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "https://github.com/*",
+    "activeTab",
+    "storage",
+    "declarativeContent",
+    "https://github.algolia.com/*",
+    "*://*.algolia.net/*"
+  ],
+  "web_accessible_resources": [
+    "images/*"
+  ],
+  "version": "1.7.0"
+}

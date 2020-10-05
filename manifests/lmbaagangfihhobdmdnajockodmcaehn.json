@@ -1,0 +1,115 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Investor Intelligence",
+  "short_name": "Investor Intelligence",
+  "description": "LinkedIn automation extension to find investors.",
+  "version": "1.0.29",
+  "icons": {
+    "16": "images/icon-16.png",
+    "128": "images/icon-128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "webRequest",
+    "webRequestBlocking",
+    "browsingData",
+    "storage",
+    "unlimitedStorage",
+    "http://linkedin.com/*",
+    "https://linkedin.com/*",
+    "http://*.linkedin.com/*",
+    "https://*.linkedin.com/*",
+    "http://www.linkedin.com/*",
+    "https://www.linkedin.com/*"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon-19.png",
+      "38": "images/icon-38.png"
+    },
+    "default_title": "Ttrial",
+    "default_popup": "html/popup.html"
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "content_security_policy": "script-src 'self' http://localhost:3000 http://localhost https://investorintelligence-api.herokuapp.com https://www.investorintelligence.io https://ssl.google-analytics.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://linkedin.com/in/*",
+        "https://linkedin.com/in/*",
+        "http://*.linkedin.com/in/*",
+        "https://*.linkedin.com/in/*"
+      ],
+      "js": [
+        "js/jquery.js",
+        "js/gUrlParser.js",
+        "js/getVisitInfo.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "http://linkedin.com/in/*/detail/contact-info/*",
+        "https://linkedin.com/in/*/detail/contact-info/*",
+        "http://*.linkedin.com/in/*/detail/contact-info/*",
+        "https://*.linkedin.com/in/*/detail/contact-info/*"
+      ],
+      "js": [
+        "js/getContactInfo.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "http://linkedin.com/*",
+        "https://linkedin.com/*",
+        "http://*.linkedin.com/*",
+        "https://*.linkedin.com/*"
+      ],
+      "css": [
+        "styles/main.css"
+      ],
+      "js": [
+        "js/jquery.js",
+        "js/bootstrap.min.js",
+        "js/cookie.js",
+        "js/gUrlParser.js",
+        "js/getmineInfos.js",
+        "js/getVisitInfo.js",
+        "js/contents.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "https://www.InvestorIntelligence.io/*"
+      ],
+      "js": [
+        "js/jquery.js",
+        "js/leadbring_storage.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": false
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.linkedin.com/*",
+      "*://linkedin.com/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "js/*.js",
+    "styles/*.css",
+    "images/*.png"
+  ]
+}

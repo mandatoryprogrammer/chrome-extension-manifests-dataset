@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "CanJS DevTools",
+  "description": "DevTools Extension for CanJS",
+  "version": "0.0.42",
+  "icons": {
+    "16": "images/canjs-16-enabled.png",
+    "48": "images/canjs-48-enabled.png",
+    "128": "images/canjs-128-enabled.png"
+  },
+  "manifest_version": 2,
+  "devtools_page": "index.html",
+  "background": {
+    "scripts": [
+      "canjs-devtools-background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "canjs-devtools-content-script.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    "canjs-devtools-injected-script.js"
+  ],
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "file:///*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "browser_action": {
+    "default_title": "CanJS Devtools",
+    "default_popup": "popups/no-can.html",
+    "default_icon": {
+      "16": "images/canjs-16-disabled.png"
+    }
+  }
+}

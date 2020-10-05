@@ -1,0 +1,94 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "OneLogin for Google Chrome",
+  "version": "3.4.44",
+  "manifest_version": 2,
+  "description": "Single Sign-On for cloud lovers.",
+  "minimum_chrome_version": "22.0.0.0",
+  "incognito": "split",
+  "icons": {
+    "16": "icons/normal/Icon-16.png",
+    "48": "icons/normal/Icon-48.png",
+    "128": "icons/normal/Icon-128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.bundle.js",
+      "integrationTest.bundle.js"
+    ]
+  },
+  "options_page": "options/options.html",
+  "options_ui": {
+    "page": "options/options.html",
+    "chrome_style": true
+  },
+  "browser_action": {
+    "default_title": "OneLogin for Google Chrome",
+    "default_icon": {
+      "19": "icons/normal/Icon-19.png",
+      "38": "icons/normal/Icon-38.png"
+    }
+  },
+  "commands": {
+    "unit_test": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+U",
+        "mac": "Command+Shift+U"
+      },
+      "description": "Run unit tests"
+    }
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "contentAll.bundle.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "contentAllDocStart.bundle.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "js": [
+        "contentPortal.bundle.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "include_globs": [
+        "http://localhost:*/*",
+        "http://*.onelogin*/*",
+        "https://*.onelogin*/*"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "ui/saveNewAppDialog.html",
+    "ui/updateAppDialog.html"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "permissions": [
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "cookies",
+    "webNavigation"
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "update_url": "http://clients2.google.com/service/update2/crx",
+  "name": "Time spend on Facebook",
+  "version": "0.34",
+  "description": "Tracks the time you spend on Facebook per day.",
+  "manifest_version": 2,
+  "background": {
+    "scripts": [
+      "script.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "*://*.facebook.com/*"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.facebook.com/*"
+      ],
+      "js": [
+        "time_tracking.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ]
+}

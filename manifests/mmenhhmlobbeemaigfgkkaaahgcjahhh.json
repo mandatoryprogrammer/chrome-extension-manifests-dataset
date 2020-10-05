@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Begone",
+  "version": "1.10",
+  "description": "Define your prohibited words/pictures list. Any page element, post or article containing one of these words it's censored.",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "all_frames": true,
+      "css": [
+        "styles.css"
+      ],
+      "js": [
+        "common.js",
+        "content.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "common.js",
+      "background.js",
+      "libs/ml/tf.min.js",
+      "libs/ml/coco-ssd.js",
+      "libs/ml/mobilenet.min.js"
+    ],
+    "content_security_policy": "script-src 'self' 'unsafe-inline'; object-src 'self'"
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "storage",
+    "notifications",
+    "alarms"
+  ],
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "web_accessible_resources": [
+    "diagonal.jpg",
+    "*.ttf"
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "OpenLink YouID",
+  "short_name": "opl_youid",
+  "author": "OpenLink Software",
+  "version": "1.2.10",
+  "manifest_version": 2,
+  "minimum_chrome_version": "18",
+  "description": "YouID selector.",
+  "icons": {
+    "16": "images/icon20.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "images/icon20.png",
+    "default_title": "YouID",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "file:///*/*",
+        "*://*/*"
+      ],
+      "js": [
+        "browser.js",
+        "content-script.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://*/*"
+      ],
+      "js": [
+        "browser.js",
+        "oidc-webid-inject.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "options_page": "options.html",
+  "permissions": [
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "tabs",
+    "http://*/",
+    "https://*/",
+    "*://*/*",
+    "file:///*/*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' chrome-extension://lib; object-src 'self' chrome-extension://lib; style-src 'self' 'unsafe-inline' chrome-extension://lib https://solid.openlinksw.com; media-src 'self' 'unsafe-inline' chrome-extension://lib ;"
+}

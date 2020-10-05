@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "DS Amazon Quick View",
+  "description": "",
+  "version": "3.0.6",
+  "icons": {
+    "19": "img/on38.png",
+    "38": "img/on38.png",
+    "128": "img/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "img/off38.png",
+    "default_popup": "/html/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "/lib/google-analytics-bundle.js",
+      "/js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.amazon.com/*",
+        "*://*.amazon.co.uk/*"
+      ],
+      "js": [
+        "/lib/jquery-2.2.1.min.js",
+        "/js/content-script-0.js"
+      ],
+      "css": [
+        "/css/style.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.amazon.com/*",
+        "*://*.amazon.co.uk/*"
+      ],
+      "js": [
+        "/js/content-script-1.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "/img/*"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "permissions": [
+    "*://*.amazon.com/*",
+    "*://*.amazon.co.uk/*",
+    "webRequest",
+    "webRequestBlocking",
+    "storage"
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Canada Task Force Oscar extension",
+  "version": "1.5.0",
+  "description": "Canada Task Force Oscar extension",
+  "icons": {
+    "16": "images/icon-16.png",
+    "128": "images/icon-128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*/*"
+      ],
+      "js": [
+        "jquery/jquery-3.1.1.min.js",
+        "hqicrc.js",
+        "utility.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*/*/admin/admin.jsp"
+      ],
+      "js": [
+        "hqicCtfAdmin.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*/*/administration/"
+      ],
+      "js": [
+        "hqicCtfAdmin_oscar15.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*/*/provider/providercontrol.jsp?*"
+      ],
+      "js": [
+        "hqicCtf_QBE.js",
+        "hqicCtf_dataservice.js",
+        "hqicCtfProvider.js"
+      ],
+      "css": [
+        "css/hqicCtf.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*/*/casemgmt/forward.jsp?*"
+      ],
+      "js": [
+        "hqicCtf_QBE.js",
+        "hqicCtf_dataservice.js",
+        "hqicCtf_encounter.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "hqicCtf_registration.html",
+    "images/*",
+    "css/*"
+  ],
+  "permissions": [
+    "contextMenus",
+    "tabs",
+    "storage"
+  ]
+}

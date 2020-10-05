@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Tunable Image Block",
+  "version": "1.7.1",
+  "description": "Block images without breaking the page. Tune restriction of images by data size.",
+  "manifest_version": 2,
+  "permissions": [
+    "<all_urls>",
+    "tabs",
+    "activeTab",
+    "webRequest",
+    "webRequestBlocking",
+    "storage"
+  ],
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "browser_action": {
+    "default_title": "Tunable Image Block",
+    "default_icon": "icon16.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/api.js",
+        "js/content.js"
+      ],
+      "css": [
+        "css/image.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  }
+}

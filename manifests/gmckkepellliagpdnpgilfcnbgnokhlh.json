@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_extName__",
+  "description": "__MSG_extDesc__",
+  "version": "1.1",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "contextMenus",
+    "http://*/*",
+    "https://*/*",
+    "storage"
+  ],
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": "assets/img/qr-code.png"
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "assets/js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "css": [
+        "assets/css/content.css"
+      ],
+      "js": [
+        "assets/js/jquery.min.js",
+        "assets/js/jquery.qrcode.min.js",
+        "assets/js/content.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+F",
+        "mac": "MacCtrl+Shift+F"
+      },
+      "description": "Opens options.html"
+    }
+  }
+}

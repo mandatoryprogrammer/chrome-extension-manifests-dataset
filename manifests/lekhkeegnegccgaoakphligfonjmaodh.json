@@ -1,0 +1,107 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Marktplaats zonder spam",
+  "version": "2.2.0",
+  "manifest_version": 2,
+  "icons": {
+    "16": "res/mzs-logo-16x16.png",
+    "48": "res/mzs-logo-48x48.png",
+    "128": "res/mzs-logo-128x128.png"
+  },
+  "description": "Verwijdert alles wat je niet wilt zien op marktplaats.",
+  "content_security_policy": "object-src 'self'; script-src 'self'",
+  "options_ui": {
+    "page": "content/settings/mzs_settings.html"
+  },
+  "web_accessible_resources": [
+    "content/settings/mzs_settings.js",
+    "content/settings/mzs_settings.html"
+  ],
+  "permissions": [
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": [
+        "*://*.marktplaats.nl/",
+        "*://*.marktplaats.nl/c/*"
+      ],
+      "js": [
+        "content/lib/es6-promise/es6-promise.js",
+        "content/lib/sweetalert2/sweetalert2.js",
+        "content/lib/jquery/jquery-3.2.1.min.js",
+        "content/lib/jsoncomp/JSONC.js",
+        "content/common/mzs_extension_settings.js",
+        "content/common/mzs_init.js",
+        "content/common/mzs_news.js",
+        "content/homepage/mzs_home.js"
+      ],
+      "css": [
+        "content/lib/sweetalert2/sweetalert2.css",
+        "content/homepage/mzs_home.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "*://*.marktplaats.nl/q*",
+        "*://*.marktplaats.nl/l*"
+      ],
+      "js": [
+        "content/lib/es6-promise/es6-promise.js",
+        "content/lib/sweetalert2/sweetalert2.js",
+        "content/lib/jquery/jquery-3.2.1.min.js",
+        "content/lib/jsoncomp/JSONC.js",
+        "content/lib/simple-dialog/simple-dialog.js",
+        "content/common/mzs_extension_settings.js",
+        "content/common/mzs_init.js",
+        "content/common/mzs_news.js",
+        "content/search-result/mzs_search_result.js"
+      ],
+      "css": [
+        "content/lib/sweetalert2/sweetalert2.css",
+        "content/lib/simple-dialog/simple-dialog.css",
+        "content/search-result/mzs_search_result.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "*://*.marktplaats.nl/z*"
+      ],
+      "js": [
+        "content/lib/es6-promise/es6-promise.js",
+        "content/lib/sweetalert2/sweetalert2.js",
+        "content/lib/jquery/jquery-3.2.1.min.js",
+        "content/lib/jsoncomp/JSONC.js",
+        "content/lib/simple-dialog/simple-dialog.js",
+        "content/common/mzs_extension_settings.js",
+        "content/common/mzs_init.js",
+        "content/common/mzs_news.js",
+        "content/search-result/mzs_search_result_legacy.js"
+      ],
+      "css": [
+        "content/lib/sweetalert2/sweetalert2.css",
+        "content/lib/simple-dialog/simple-dialog.css",
+        "content/search-result/mzs_search_result.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "*://*.marktplaats.nl/a*"
+      ],
+      "js": [
+        "content/lib/jquery/jquery-3.2.1.min.js",
+        "content/common/mzs_extension_settings.js",
+        "content/common/mzs_init.js",
+        "content/advertisement/mzs_advertisement.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

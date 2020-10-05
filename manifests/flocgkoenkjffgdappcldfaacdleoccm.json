@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Lo trovo a meno",
+  "version": "1.0.2",
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "description": "Il plug-in “Lo trovo a meno” individua automaticamente i migliori prezzi su un sito di ecommerce.",
+  "background": {
+    "scripts": [
+      "browser-polyfill.js",
+      "extension-configuration.js",
+      "lifecycle-hooks.js",
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "browser-polyfill.js",
+        "contentscript.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://test-achats-banner-local.workitsaas.com/*"
+      ],
+      "js": [
+        "browser-polyfill.js",
+        "banner-script.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "app/*/*"
+  ],
+  "icons": {
+    "48": "IT-PLUGIN_48x48.png",
+    "128": "IT-PLUGIN_128x128.png"
+  },
+  "browser_action": {
+    "default_icon": "IT-PLUGIN_48x48.png"
+  }
+}

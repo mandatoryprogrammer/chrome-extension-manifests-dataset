@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Fasterize Status",
+  "version": "3.3.1",
+  "manifest_version": 2,
+  "description": "See detailed information on a fasterized page",
+  "icons": {
+    "16": "icons/store/icon16.png",
+    "48": "icons/store/icon48.png",
+    "128": "icons/store/icon128.png"
+  },
+  "page_action": {
+    "browser_style": true,
+    "default_title": "Fasterize",
+    "default_icon": "icons/store/icon.png"
+  },
+  "background": {
+    "scripts": [
+      "vendor/browser-polyfill.js",
+      "mapping.js",
+      "frz-request.js",
+      "main.js"
+    ]
+  },
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "tabs",
+    "cookies",
+    "storage",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "vendor/browser-polyfill.js",
+        "contentscript.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "applications": {
+    "gecko": {
+      "id": "{c1687a9a-9054-430e-94cf-2ef9b3caeb7b}",
+      "update_url": "https://raw.githubusercontent.com/fasterize/fasterize-web-extension/master/app/update-manifest.json",
+      "strict_min_version": "48.0"
+    }
+  },
+  "web_accessible_resources": [
+    "show_deferjs_trace.js"
+  ],
+  "incognito": "split"
+}

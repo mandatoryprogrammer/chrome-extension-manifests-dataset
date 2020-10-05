@@ -1,0 +1,68 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Text Stack",
+  "short_name": "Text Stack",
+  "author": "Jiri Kuba",
+  "description": "This extension is collecting selected text in page and add it to the stack. You can use stacked text for Google Search.",
+  "version": "1.1",
+  "icons": {
+    "19": "images/icon-19.png",
+    "38": "images/icon-38.png",
+    "128": "images/icon-128.png"
+  },
+  "permissions": [
+    "tabs",
+    "clipboardWrite",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon-19.png",
+      "38": "images/icon-38.png",
+      "128": "images/icon-128.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "content_script.js"
+      ]
+    }
+  ],
+  "commands": {
+    "google-request": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+A",
+        "mac": "MacCtrl+Shift+A"
+      },
+      "description": "Will do Google Search with joined text"
+    },
+    "add-selected": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+S",
+        "mac": "MacCtrl+Shift+S"
+      },
+      "description": "Add selected text to the stack"
+    },
+    "clear-stack": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+X",
+        "mac": "MacCtrl+Shift+X"
+      },
+      "description": "Clear Stack"
+    }
+  }
+}

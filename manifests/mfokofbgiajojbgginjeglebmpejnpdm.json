@@ -1,0 +1,152 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "version": "1.6.2",
+  "name": "ScriptCase Tools",
+  "short_name": "SCT",
+  "description": "A browser extension to make working with ScriptCase simpler and more productive",
+  "icons": {
+    "16": "assets/img/icon-16.png",
+    "32": "assets/img/icon-32.png",
+    "48": "assets/img/icon-48.png",
+    "96": "assets/img/icon-96.png",
+    "128": "assets/img/icon-128.png"
+  },
+  "browser_action": {
+    "browser_style": false,
+    "default_title": "ScriptCase Tools",
+    "default_popup": "pages/popup/index.html",
+    "default_icon": {
+      "16": "assets/img/icon-16.png",
+      "32": "assets/img/icon-32.png"
+    }
+  },
+  "background": {
+    "scripts": [
+      "modules/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*/devel/iface/login.php*"
+      ],
+      "js": [
+        "modules/localstorage_maintenance.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*/*/devel/compat/*",
+        "*://*/*/devel/iface/*"
+      ],
+      "js": [
+        "modules/page_tools.js",
+        "modules/session_ping.js",
+        "modules/deploy.js",
+        "modules/tab_shortcut.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*/*/devel/iface/open_app_list.php*"
+      ],
+      "js": [
+        "modules/open_app_list/open_app_list.js"
+      ],
+      "css": [
+        "modules/open_app_list/open_app_list.css"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*/*/devel/iface/methods.php*",
+        "*://*/*/devel/compat/nm_edit_php_edit.php*",
+        "*://*/*/devel/iface/app_template.php*",
+        "*://*/*/devel/iface/event.php*",
+        "*://*/*/devel/iface/button.php*",
+        "*://*/*/devel/iface/app.php*"
+      ],
+      "css": [
+        "modules/newEditor/hideCurrentEditor.css"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*/*/devel/iface/methods.php*",
+        "*://*/*/devel/compat/nm_edit_php_edit.php*",
+        "*://*/*/devel/iface/app_template.php*",
+        "*://*/*/devel/iface/event.php*",
+        "*://*/*/devel/iface/button.php*",
+        "*://*/*/devel/iface/app.php*"
+      ],
+      "js": [
+        "modules/newEditor/include.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "pages/key_bindings/index.html",
+    "assets/jquery.js",
+    "assets/img/icon-16.png",
+    "assets/img/icon-help.svg",
+    "modules/newEditor/index.html",
+    "modules/newEditor/index.js",
+    "modules/newEditor/cm/lib/codemirror.css",
+    "modules/newEditor/cm/addon/dialog/dialog.css",
+    "modules/newEditor/cm/addon/hint/show-hint.css",
+    "modules/newEditor/cm/theme/all.css",
+    "modules/newEditor/cm/lib/codemirror.js",
+    "modules/newEditor/cm/mode/xml/xml.js",
+    "modules/newEditor/cm/mode/javascript/javascript.js",
+    "modules/newEditor/cm/mode/css/css.js",
+    "modules/newEditor/cm/mode/clike/clike.js",
+    "modules/newEditor/cm/mode/php/php.js",
+    "modules/newEditor/cm/mode/htmlmixed/htmlmixed.js",
+    "modules/newEditor/keymap.sublime.js",
+    "modules/newEditor/cm/addon/dialog/dialog.js",
+    "modules/newEditor/cm/addon/search/search.js",
+    "modules/newEditor/cm/addon/search/searchcursor.js",
+    "modules/newEditor/cm/addon/search/jump-to-line.js",
+    "modules/newEditor/cm/addon/hint/show-hint.js",
+    "modules/newEditor/cm/addon/hint/php-hint.js",
+    "modules/newEditor/cm/addon/hint/php-sc7-hint.js",
+    "modules/newEditor/cm/addon/hint/php-sc8-hint.js",
+    "modules/newEditor/cm/addon/hint/php-sc9-hint.js",
+    "modules/newEditor/cm/addon/hint/anyword-hint.js",
+    "modules/newEditor/cm/addon/selection/active-line.js",
+    "modules/newEditor/cm/addon/edit/closebrackets.js",
+    "modules/newEditor/cm/addon/fold/foldgutter.css",
+    "modules/newEditor/cm/addon/fold/foldcode.js",
+    "modules/newEditor/cm/addon/fold/foldgutter.js",
+    "modules/newEditor/cm/addon/fold/brace-fold.js",
+    "modules/newEditor/cm/addon/fold/xml-fold.js",
+    "modules/newEditor/cm/addon/fold/comment-fold.js",
+    "modules/newEditor/cm/addon/fold/indent-fold.js",
+    "modules/newEditor/cm/addon/scroll/annotatescrollbar.js",
+    "modules/newEditor/cm/addon/search/matchesonscrollbar.js",
+    "modules/newEditor/cm/addon/search/searchcursor.js",
+    "modules/newEditor/cm/addon/search/match-highlighter.js",
+    "modules/newEditor/cm/addon/show-invisibles.js",
+    "modules/newEditor/cm/addon/edit/matchbrackets.js",
+    "modules/newEditor/cm/addon/comment/comment.js",
+    "modules/newEditor/cm/addon/emmet/emmet.js",
+    "modules/newEditor/img/fullscreen.png",
+    "modules/newEditor/img/search.png",
+    "modules/newEditor/img/replace.png",
+    "modules/newEditor/img/attributes.png",
+    "modules/newEditor/img/help.png",
+    "modules/newEditor/img/key.png"
+  ],
+  "permissions": [
+    "tabs",
+    "http://*/",
+    "https://*/"
+  ]
+}

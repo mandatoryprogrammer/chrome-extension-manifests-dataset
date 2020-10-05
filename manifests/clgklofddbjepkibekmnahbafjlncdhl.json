@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_extName__",
+  "version": "1.0.1",
+  "manifest_version": 2,
+  "description": "__MSG_extDescription__",
+  "icons": {
+    "16": "icons/icon-16wh.png",
+    "48": "icons/icon-48wh.png",
+    "128": "icons/icon-128wh.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "background/badge-controller.js",
+      "background/chrome-storage.js",
+      "background/content-script.js",
+      "background/context-menu.js",
+      "background/main.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icons/icon-128wh.png",
+    "default_title": "Copy Locker"
+  },
+  "permissions": [
+    "contextMenus",
+    "http://*/*, https://*/*",
+    "file://*/*",
+    "storage"
+  ],
+  "author": "Nicholas Jensen",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "content_scripts/js/chrome-storage.js",
+        "content_scripts/js/background-script.js",
+        "content_scripts/js/copy-locker-panel.js",
+        "content_scripts/js/z-Indexes.js",
+        "content_scripts/js/my-date.js",
+        "content_scripts/js/main.js"
+      ],
+      "css": [
+        "content_scripts/css/style-copy-locker.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "content_scripts/img/ic_close_white_48px.svg",
+    "content_scripts/img/ic_close_black_48px.svg",
+    "content_scripts/img/ic_lock_open_black_48px.svg",
+    "content_scripts/img/ic_lock_black_48px.svg",
+    "content_scripts/img/ic_expand_less_black_48px.svg"
+  ]
+}

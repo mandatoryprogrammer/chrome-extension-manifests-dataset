@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Ogo Delivery - Talabat",
+  "version": "0.0.4",
+  "manifest_version": 2,
+  "description": "This extension was created for talabat order post on ogo.delivery.",
+  "homepage_url": "http://github.com/",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "page": "src/bg/background.html",
+    "persistent": true
+  },
+  "options_page": "src/options_custom/index.html",
+  "browser_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "Ogo Delivery",
+    "default_popup": "src/browser_action/browser_action.html"
+  },
+  "permissions": [
+    "chrome://favicon/",
+    "chrome://*",
+    "contentSettings",
+    "contextMenus",
+    "https://wla.talabat.com/",
+    "https://makan.place/orderingbeta/admin/restaurant",
+    "https://*/"
+  ],
+  "omnibox": {
+    "keyword": "ogo.delivery"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.google.com/*"
+      ],
+      "css": [
+        "src/inject/inject.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://wla.talabat.com/",
+        "https://makan.place/orderingbeta/admin/restaurant"
+      ],
+      "js": [
+        "src/inject/jquery.js",
+        "src/inject/inject.js"
+      ]
+    }
+  ]
+}

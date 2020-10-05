@@ -1,0 +1,124 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Minerva",
+  "version": "2020.01.29.2300",
+  "description": "Find insights in congress.gov",
+  "permissions": [
+    "storage",
+    "https://*.minerva.run/",
+    "http://*.minerva.run/"
+  ],
+  "options_page": "options.html",
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.congress.gov/bill/*/cosponsors*"
+      ],
+      "js": [
+        "notification.js",
+        "datamodel/datamodel.js",
+        "utility/html.js",
+        "politics/partisanship.js",
+        "map.js",
+        "politics/districtinfo.js",
+        "chamber.js",
+        "histogram.js",
+        "application/gui.js",
+        "scan.js",
+        "utility/color.js",
+        "utility/shapes.js",
+        "analysis/piechart.js"
+      ],
+      "css": [
+        "graphs.css",
+        "maps.css",
+        "application/gui.css",
+        "notifications.css",
+        "utility/shapes.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://clerk.house.gov/*/roll*.xml"
+      ],
+      "js": [
+        "notification.js",
+        "datamodel/datamodel.js",
+        "utility/html.js",
+        "politics/partisanship.js",
+        "map.js",
+        "politics/districtinfo.js",
+        "chamber.js",
+        "application/gui.js",
+        "vote-house.js",
+        "utility/color.js",
+        "utility/shapes.js",
+        "analysis/piechart.js"
+      ],
+      "css": [
+        "graphs.css",
+        "maps.css",
+        "application/gui.css",
+        "notifications.css",
+        "utility/shapes.css",
+        "votes.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.senate.gov/legislative/*/roll_call_vote_cfm.cfm*"
+      ],
+      "js": [
+        "map.js",
+        "vote-senate.js",
+        "chamber.js",
+        "utility/color.js",
+        "politics/partisanship.js",
+        "analysis/piechart.js",
+        "politics/districtinfo.js",
+        "utility/html.js"
+      ],
+      "css": [
+        "graphs.css",
+        "maps.css",
+        "application/gui.css",
+        "votes.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "member.html",
+    "images/*",
+    "data/members.json",
+    "data/pvi_referals.json",
+    "data/pvi_issue.json",
+    "data/pvi_legislation.json",
+    "data/org_roster.json",
+    "data/org.json",
+    "data/states.json",
+    "data/partisanship.json",
+    "tables.css"
+  ],
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "images/16.png",
+      "32": "images/32.png",
+      "48": "images/48.png",
+      "128": "images/128.png"
+    }
+  },
+  "icons": {
+    "16": "images/16.png",
+    "32": "images/32.png",
+    "48": "images/48.png",
+    "128": "images/128.png"
+  },
+  "manifest_version": 2
+}

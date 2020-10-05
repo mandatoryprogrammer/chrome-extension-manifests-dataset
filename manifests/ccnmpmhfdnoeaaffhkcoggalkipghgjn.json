@@ -1,0 +1,41 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "SumTotal Intelligent Assistant",
+  "description": "SumTotal Intelligent Assistant (SIA): Search for SumTotal Learn training right from your browser.",
+  "version": "1.4",
+  "icons": {
+    "48": "assets/images/defaultPlugin-icon.png"
+  },
+  "permissions": [
+    "identity",
+    "storage",
+    "contextMenus",
+    "*://*.sumtotaldevelopment.net/",
+    "*://*/*"
+  ],
+  "background": {
+    "page": "index.html#/event-page",
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "assets/jquery-3.4.0.min.js",
+        "app/highlight/highlight-inject.js"
+      ],
+      "css": [
+        "app/highlight/highlight-inject.css"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": "assets/images/defaultPlugin-icon.png",
+    "default_popup": "index.html#/popup"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

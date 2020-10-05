@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Photo Alt Tagger",
+  "version": "1.0.1.5",
+  "manifest_version": 2,
+  "description": "This extension helps you search for your Google photos and add alt tags to your Twitter posts.",
+  "icons": {
+    "16": "icons/alttag.png",
+    "48": "icons/alttag.png",
+    "128": "icons/alttag.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/alttag.png",
+    "default_title": "Photo Tagger",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "js/lib/jquery.min.js",
+      "js/lib/oAuth.js",
+      "js/lib/sha1.js",
+      "js/lib/twitter.js",
+      "js/background.js",
+      "js/lib/ig.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "storage",
+    "identity",
+    "https://api.twitter.com/*",
+    "https://lh3.googleusercontent.com/*",
+    "https://comphcithree.eecs.umich.edu:8020/*"
+  ],
+  "oauth2": {
+    "client_id": "1031556612482-hgmf4fhku2i9lunhr133nrn0hf5puj25.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/photoslibrary.readonly"
+    ]
+  },
+  "web_accessible_resources": [
+    "facebook_popup.html"
+  ],
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlhHg7ZH5uM2RoVePRbgp5C7/Czt/7FQe+dYnWx5ZloGkTB2uFyO8xCZkad28s4lXF1yLx/aEF6xDjtiPFSYZtEPKVcVGjMqwhvEgEs82/A0EERutOPMXfHqh+50NEWXW7utmZcSyoTawZMvOtsnY777WK6qnGdulAaLRlu1u9MpF6Z53+1Bjxbvw/M4kmAwXgiThsJKSpq52XutGSMBqVmv9NvjAxguHbF92ZxYf/baDD7NbLSEqENh0HqGKlNqQnRf+GSI1n/txQUrjwh/F1boMC7Ur/P4IeF4KujlIRZK2yYaf6vLalpPSR+fyW23HIbBXcHwuBytTbkdypBllEQIDAQAB",
+  "content_security_policy": "script-src 'self' https://connect.facebook.net/en_US/sdk.js; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://github.com/ZHANG-EH/twitter*"
+      ],
+      "js": [
+        "js/session_twitter.js"
+      ]
+    }
+  ]
+}

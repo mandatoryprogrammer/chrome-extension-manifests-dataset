@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Kumo",
+  "short_name": "Kumo",
+  "version": "0.1.2",
+  "manifest_version": 2,
+  "description": "Chrome extension for Kumo",
+  "homepage_url": "http://getkumo.com",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "page": "src/bg/background.html",
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://soundcloud.com/*"
+      ],
+      "js": [
+        "content/overcast.js",
+        "content/creds.js",
+        "bower_components/firebase/firebase.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "https://soundcloud.com/*",
+    "storage",
+    "debugger",
+    "tabs"
+  ],
+  "content_security_policy": "script-src 'self' https://cdn.firebase.com https://*.firebaseio.com 'unsafe-eval'; object-src 'self'",
+  "browser_action": {
+    "default_title": "Overcast",
+    "default_popup": "public/index.html"
+  },
+  "web_accessible_resources": [
+    "public/img/sc_notification.png"
+  ]
+}

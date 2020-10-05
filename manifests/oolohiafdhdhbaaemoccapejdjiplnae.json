@@ -1,0 +1,44 @@
+{
+  "page_action": {
+    "default_icon": {
+      "19": "data/img/icon19.png",
+      "38": "data/img/icon38.png"
+    },
+    "default_title": "SoundSuggest"
+  },
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "description": "A simple Google Chrome extension using D3.js and Last.fm API.",
+  "background": {
+    "persistent": false,
+    "page": "background.html"
+  },
+  "name": "Last.fm Profile Visualizer",
+  "permissions": [
+    "tabs",
+    "*://ws.audioscrobbler.com/2.0/",
+    "http://www.last.fm/user/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.last.fm/user/*"
+      ],
+      "exclude_matches": [
+        "http://www.last.fm/user/*/*"
+      ],
+      "js": [
+        "js/lib/jquery/jquery-1.8.3.js",
+        "js/lib/d3/d3.v2.js",
+        "js/lib/lastfm/lastfm.api.chrome.js",
+        "js/lib/infovis/infovis.profilevis.js",
+        "js/main.js"
+      ],
+      "css": [
+        "css/main.css"
+      ]
+    }
+  ],
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://ws.audioscrobbler.com/2.0/; object-src 'self'",
+  "version": "2.1"
+}

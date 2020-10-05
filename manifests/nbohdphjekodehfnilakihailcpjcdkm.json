@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Everliker Standalone | Social Assistant",
+  "description": "Smart and Simple Assistant for Instagram(tm)",
+  "version": "25.0.0",
+  "icons": {
+    "16": "img/icon-16.png",
+    "128": "img/icon-128.png",
+    "500": "img/icon-500.png"
+  },
+  "background": {
+    "scripts": [
+      "js/common.libs.js",
+      "js/background.libs.js",
+      "js/background.js",
+      "js/compression-worker.min.js",
+      "js/hack-timer-worker.min.js",
+      "js/image-analysis-worker.min.js"
+    ],
+    "persistent": true
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://ssl.google-analytics.com/ https://www.google-analytics.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.instagram.com/*"
+      ],
+      "js": [
+        "/js/instagram-content-script.min.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "alarms",
+    "background",
+    "cookies",
+    "webRequest",
+    "webRequestBlocking",
+    "*://*.instagram.com/*"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "48": "img/icon-badge-48-empty.png"
+    },
+    "default_title": "Everliker",
+    "default_popup": "html/popup.html"
+  }
+}

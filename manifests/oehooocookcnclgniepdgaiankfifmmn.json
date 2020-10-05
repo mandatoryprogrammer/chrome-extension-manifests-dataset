@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "short_name": "Pancake v2",
+  "version": "0.2.94",
+  "manifest_version": 2,
+  "description": "__MSG_appDescription__",
+  "icons": {
+    "16": "images/icon-16.png",
+    "128": "images/icon-128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "*://*.facebook.com/",
+    "*://*.pages.fm/"
+  ],
+  "page_action": {
+    "default_icon": "images/icon-128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://comcake.localhost:3000/*",
+        "https://localhost:3000/*",
+        "https://pages.fm/*",
+        "http://vn.pages.fm/*",
+        "http://sg.pages.fm/*",
+        "https://comcake.co/*",
+        "http://dev.pages.fm/*"
+      ],
+      "js": [
+        "scripts/contentscript.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "sandbox": {
+    "pages": [
+      "sandbox.html"
+    ]
+  },
+  "web_accessible_resources": [
+    "pancext.html"
+  ]
+}

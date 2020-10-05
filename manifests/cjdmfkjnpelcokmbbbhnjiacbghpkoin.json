@@ -1,0 +1,79 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "author": "Plexant",
+  "name": "Evalyzer",
+  "version": "1.0.2",
+  "description": "Permet de réaliser des tests utilisateurs.",
+  "icons": {},
+  "browser_action": {
+    "default_icon": {
+      "16": "images/icon16.png",
+      "24": "images/icon24.png",
+      "32": "images/icon32.png",
+      "48": "images/icon48.png",
+      "64": "images/icon64.png"
+    },
+    "default_title": "Evalyzer"
+  },
+  "background": {
+    "scripts": [
+      "main.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "jquery/dist/jquery.min.js"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_globs": [
+        "*://*/evalyzer*"
+      ],
+      "js": [
+        "eventlistener.js",
+        "conditionslistener.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*/evalyzer/testeur/start*"
+      ],
+      "js": [
+        "startpagehandler.js",
+        "usermediarecorder.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*/evalyzer/testeur/end*"
+      ],
+      "js": [
+        "endpagehandler.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*/evalyzer/testeur/test*",
+        "*://*/evalyzer/testeur/endTest*"
+      ],
+      "js": [
+        "taskcontrolhandler.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "<all_urls>"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

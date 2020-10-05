@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Terrapin Works Tools",
+  "short_name": "TW Tools",
+  "author": "UMD Terrapin Works",
+  "description": "Tools to augment the ICMP platform & PaperCut.",
+  "version": "2.3.4",
+  "minimum_chrome_version": "9",
+  "manifest_version": 2,
+  "omnibox": {
+    "keyword": "ic"
+  },
+  "icons": {
+    "16": "Icon-16.png",
+    "48": "Icon-48.png",
+    "128": "Icon-128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://umd.innovationcenter.makerbot.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://portal.tw.umd.edu/*"
+      ],
+      "js": [
+        "checkinstall.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://maker.umd.edu/app*"
+      ],
+      "js": [
+        "includes/jquery-3.4.1.min.js",
+        "webcashier.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "webcashier.html"
+  ],
+  "permissions": [
+    "activeTab"
+  ]
+}

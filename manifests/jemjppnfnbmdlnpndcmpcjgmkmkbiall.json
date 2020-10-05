@@ -1,0 +1,39 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "みんなよう見とる",
+  "version": "0.9",
+  "description": "YouTubeのチャットから設定したアカウントの発言を拾って通知",
+  "permissions": [
+    "storage",
+    "notifications"
+  ],
+  "icons": {
+    "16": "images/icon16.png",
+    "32": "images/icon32.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "options_page": "options.html",
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "all_frames": true,
+      "matches": [
+        "https://*.youtube.com/live_chat*",
+        "https://gaming.youtube.com/watch*",
+        "https://gaming.youtube.com/channel/*/live"
+      ],
+      "js": [
+        "watch.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://code.getmdl.io/; object-src 'self'",
+  "manifest_version": 2
+}

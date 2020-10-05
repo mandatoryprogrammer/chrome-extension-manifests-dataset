@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Zvida",
+  "short_name": "Zvida",
+  "version": "1.0.7",
+  "description": "The official Zvida browser extension.",
+  "icons": {
+    "64": "icons/64.png",
+    "128": "icons/128.png"
+  },
+  "permissions": [
+    "storage",
+    "notifications",
+    "http://*.youtube.com/",
+    "https://www.googleapis.com/",
+    "https://twitchemotes.com/api_cache/v2/*.json",
+    "https://api.betterttv.net/2/emotes",
+    "https://api.betterttv.net/2/channels/*"
+  ],
+  "options_page": "options/options.html",
+  "options_ui": {
+    "page": "options/options.html"
+  },
+  "background": {
+    "scripts": [
+      "external/jquery.js",
+      "background.js"
+    ]
+  },
+  "manifest_version": 2,
+  "browser_action": {
+    "default_icon": "icons/128.png",
+    "default_title": "Zvida",
+    "default_popup": ""
+  },
+  "content_security_policy": "script-src 'self' https://*.twitter.com https://*.twimg.com https://*.googleapis.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "js": [
+        "external/jquery.js",
+        "content.js"
+      ],
+      "css": [
+        "external/hint.css",
+        "content.css"
+      ],
+      "run_at": "document_end",
+      "matches": [
+        "*://*.gaming.youtube.com/*",
+        "*://*.youtube.com/*"
+      ],
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "external/chat-colors.css",
+    "icons/*.png",
+    "icons/emotes/*.png",
+    "content.html"
+  ]
+}

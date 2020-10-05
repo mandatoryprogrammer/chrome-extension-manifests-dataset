@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Better Online Dating",
+  "version": "0.6.0",
+  "manifest_version": 2,
+  "description": "Simply adds distance and duration to profiles and quick-matching for both OKCupid and Plenty-Of-Fish.",
+  "homepage_url": "https://bitbucket.org/DaveTheAve/better-online-dating",
+  "icons": {
+    "16": "images/icons/icon16.png",
+    "19": "images/icons/icon19.png",
+    "48": "images/icons/icon48.png",
+    "128": "images/icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "page": "src/bg/background.html",
+    "persistent": true
+  },
+  "options_page": "src/options_custom/index.html",
+  "browser_action": {
+    "default_icon": "images/icons/icon48.png",
+    "default_title": "Better Online Dating"
+  },
+  "permissions": [
+    "storage",
+    "contextMenus",
+    "tabs",
+    "https://www.pof.com/*",
+    "https://www.okcupid.com/*"
+  ],
+  "web_accessible_resources": [
+    "images/*",
+    "src/options_custom/index.html"
+  ],
+  "content_security_policy": "script-src 'self' https://maps.googleapis.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "https://www.pof.com/*"
+      ],
+      "css": [
+        "src/inject/services/pof/dating_service.css"
+      ],
+      "js": [
+        "js/jquery/jquery.js",
+        "src/inject/services/pof/dating_service.js",
+        "src/inject/inject.js"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "https://www.okcupid.com/*"
+      ],
+      "css": [
+        "src/inject/services/okcupid/dating_service.css"
+      ],
+      "js": [
+        "js/jquery/jquery.js",
+        "src/inject/services/okcupid/dating_service.js",
+        "src/inject/inject.js"
+      ]
+    }
+  ]
+}

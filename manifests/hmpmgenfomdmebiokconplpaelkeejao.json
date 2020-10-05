@@ -1,0 +1,63 @@
+{
+  "update_url": "http://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Link Pad",
+  "version": "0.3.1",
+  "default_locale": "en_US",
+  "description": "Netscape Link Pad clone",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_title": "Link Pad",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "content.js"
+      ],
+      "matches": [
+        "*://*/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "greader.js"
+      ],
+      "matches": [
+        "http://www.google.com/reader/*",
+        "http://www.google.co.jp/reader/*",
+        "https://www.google.com/reader/*",
+        "https://www.google.co.jp/reader/*"
+      ]
+    },
+    {
+      "js": [
+        "ldr.js"
+      ],
+      "matches": [
+        "http://reader.livedoor.com/reader/*",
+        "http://fastladder.com/reader/*"
+      ]
+    }
+  ],
+  "background": {
+    "page": "background.html"
+  },
+  "icons": {
+    "128": "app_icon_128.png",
+    "16": "app_icon_16.png",
+    "32": "app_icon_32.png",
+    "48": "app_icon_48.png"
+  },
+  "options_page": "options.html",
+  "permissions": [
+    "contextMenus",
+    "tabs",
+    "notifications",
+    "chrome://favicon/",
+    "bookmarks",
+    "*://*/*"
+  ]
+}

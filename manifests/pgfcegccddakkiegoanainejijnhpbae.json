@@ -1,0 +1,102 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "FV Extender",
+  "short_name": "FVE",
+  "version": "3.1.31",
+  "description": "Helps you accept FarmVille requests.",
+  "icons": {
+    "16": "graphics/chrome_16.jpg",
+    "19": "graphics/chrome_19.png",
+    "38": "graphics/chrome_38.png",
+    "32": "graphics/chrome_32.jpg",
+    "48": "graphics/chrome_48.jpg",
+    "128": "graphics/chrome_128.jpg"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "graphics/chrome_19.png",
+      "38": "graphics/chrome_38.png"
+    },
+    "default_title": "FV Extender - Requests",
+    "default_popup": "html/menu.html"
+  },
+  "author": "Martin Andersen",
+  "homepage_url": "http://a-creative.dk/fv-extender-3",
+  "background": {
+    "page": "html/background.html"
+  },
+  "permissions": [
+    "tabs",
+    "*://www.facebook.com/plugins/serverfbml.php",
+    "http://apps.facebook.com/onthefarm*"
+  ],
+  "options_page": "html/settings.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.facebook.com/ajax/games/apprequest/apprequest.php"
+      ],
+      "js": [
+        "js/redirect_error.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://www.facebook.com/dialog/apprequests*"
+      ],
+      "js": [
+        "js/jquery-1.7.min.js",
+        "js/detect_changes.js",
+        "js/content_send_request.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://www.facebook.com/plugins/serverfbml.php*"
+      ],
+      "js": [
+        "js/content_min.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://www.facebook.com/reqs.php",
+        "*://www.facebook.com/games/activity"
+      ],
+      "js": [
+        "js/jquery-1.7.min.js",
+        "js/detect_changes.js",
+        "js/ui_events.js",
+        "js/content_accept_all.js"
+      ],
+      "css": [
+        "css/global.css",
+        "css/accept_all.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://fv-zprod.farmville.com/?fb_source=request&request_ids=*",
+        "*://fv-zprod.farmville.com/?fb_source=appcenter_request&request_ids=*",
+        "*://apps.facebook.com/onthefarm/",
+        "*://apps.facebook.com/onthefarm/index.php*",
+        "*://apps.facebook.com/onthefarm/?installed=1*",
+        "*://fv-zprod.farmville.com/"
+      ],
+      "js": [
+        "js/jquery-1.7.min.js",
+        "js/detect_changes.js",
+        "js/content_app_request.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ]
+}

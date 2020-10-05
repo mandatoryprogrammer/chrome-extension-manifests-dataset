@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Spoiler Blocker",
+  "description": "Blocks spoilers on your Facebook and Twitter feed.",
+  "version": "0.2.3",
+  "browser_action": {
+    "default_title": "Spoiler Blocker",
+    "default_icon": {
+      "16": "img/icon16.png",
+      "32": "img/icon32.png"
+    },
+    "default_popup": "panel.html"
+  },
+  "options_ui": {
+    "page": "options.html"
+  },
+  "icons": {
+    "16": "img/icon16.png",
+    "32": "img/icon32.png",
+    "64": "img/icon64.png",
+    "128": "img/icon128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "https://spoilerblocker.herokuapp.com/downloadList/*"
+  ],
+  "background": {
+    "page": "bg.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.facebook.com/*",
+        "*://facebook.com/*"
+      ],
+      "js": [
+        "fb.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.twitter.com/*",
+        "*://twitter.com/*"
+      ],
+      "js": [
+        "tw.js"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

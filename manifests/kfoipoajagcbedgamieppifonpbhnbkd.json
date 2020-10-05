@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "WappBot",
+  "description": "Automatic answering of incoming messages by means of javascript and using Whatsapp Web",
+  "version": "1.0.0",
+  "author": "Boehler German",
+  "homepage_url": "https://github.com/boehlergerman/WappBot",
+  "manifest_version": 2,
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "storage",
+    "nativeMessaging",
+    "webRequest",
+    "webRequestBlocking",
+    "browsingData",
+    "https://*.whatsapp.com/"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.whatsapp.com/"
+      ],
+      "js": [
+        "script/content_script.js"
+      ]
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://*.whatsapp.com/"
+    ]
+  },
+  "web_accessible_resources": [
+    "script/wappbot.js"
+  ],
+  "content_security_policy": "script-src 'self' https://*.whatsapp.com/; object-src 'self'",
+  "browser_action": {
+    "default_title": "WappBot",
+    "default_icon": {
+      "16": "images/icon32-off.png"
+    },
+    "default_popup": "popup/popup.html"
+  },
+  "icons": {
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  }
+}

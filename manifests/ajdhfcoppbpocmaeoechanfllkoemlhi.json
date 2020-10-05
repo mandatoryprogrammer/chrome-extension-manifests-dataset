@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "FireEye iSIGHT Browser Extension",
+  "version": "1.4.1",
+  "description": "Finds IPs, Domains, MD5, SHA256, SHA1, fuzzy hashes and file names in web pages and matches to FireEye iSIGHT intelligence",
+  "icons": {
+    "16": "img/isight-logo-red.png",
+    "48": "img/isight-logo-red48.png",
+    "128": "img/isight-logo-red128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [
+        "css/style.css"
+      ],
+      "js": [
+        "js/jquery-1.8.0.min.js",
+        "js/highlight.js",
+        "js/threat-verifier.js",
+        "js/iSIGHTContentScript.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "notifications",
+    "tabs",
+    "contextMenus",
+    "*://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "js/background.js",
+      "js/jquery-1.8.0.min.js"
+    ]
+  },
+  "browser_action": {
+    "default_name": "Threat-data",
+    "default_icon": "img/isight-logo-red.png",
+    "default_popup": "choose_page.html",
+    "browser_style": true
+  },
+  "web_accessible_resources": [
+    "img/isight-logo-red.png",
+    "img/logo-isight.png",
+    "css/style.css",
+    "css/options.css",
+    "options.html"
+  ],
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self'; object-src 'self'"
+}

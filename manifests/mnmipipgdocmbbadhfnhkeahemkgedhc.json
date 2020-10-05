@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Zoho Calendar Sync",
+  "version": "6.69.66.69",
+  "description": "Sync your Zoho tasks to Google Calendar automatically",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjEvAlmHltnYivXX53QQgr2Fe8nmuMU2rzv5UiT+qpmKcMHBwjZEhUNG8zwLabc4NfxP7/7cfVrVqJEjkwnB0aYJqPjFy0HeGsv0R486OboNX3ZQdQ135UemIzyoXygTKeyrLbKjwetliv/GNIquzlZ1UEWHUiax8GDYOruz+9wUZ8Kje7F/zAX00XYYq0PPd3NGUHOszZWz+O5KfBL7/rurAWU7HilPqdBu7hOAnqK5ZaXHswuj/B8nGqfrtpTymkabx/rBtMap+9P2zT4GqZLCVv5tNh+9utLIt6WmhWP47nLyRaVcctStfsy0Wil6rsX5/Wv9zD8x9+VlDOKHIrwIDAQAB",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://projects.zoho.com/*"
+      ],
+      "js": [
+        "background/storage.js",
+        "dom/scraper.js",
+        "dom/main.js"
+      ]
+    },
+    {
+      "js": [
+        "dom/xhrListener.js"
+      ],
+      "matches": [
+        "https://projects.zoho.com/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "identity",
+    "activeTab",
+    "tabs",
+    "storage",
+    "contextMenus",
+    "webRequest",
+    "https://projects.zoho.com/*/updateaction.do",
+    "https://projects.zoho.com/*/deletetodotask.do"
+  ],
+  "oauth2": {
+    "client_id": "302170307712-96acdij9nirukkm7mhgprmmrd2evmil7.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/calendar"
+    ]
+  },
+  "background": {
+    "scripts": [
+      "background/storage.js",
+      "background/gcalendar.js",
+      "background/main.js"
+    ],
+    "persistent": true
+  },
+  "options_page": "options/options.html",
+  "page_action": {
+    "default_icon": {
+      "128": "images/get_started128.png"
+    }
+  },
+  "icons": {
+    "128": "images/get_started128.png"
+  },
+  "manifest_version": 2
+}

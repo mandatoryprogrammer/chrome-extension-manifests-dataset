@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Hadoop Beeswax Helper",
+  "version": "0.0.4",
+  "manifest_version": 2,
+  "description": "This extension was created to help automatically add the Settings into the Query Editor",
+  "homepage_url": "http://hadoop.apache.org/",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": [
+    "contentSettings",
+    "contextMenus",
+    "history",
+    "management",
+    "notifications",
+    "storage",
+    "clipboardWrite",
+    "clipboardRead"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/beeswax/execute/*"
+      ],
+      "js": [
+        "js/jquery/jquery.min.js",
+        "src/inject/inject.execute.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*/beeswax/results/*"
+      ],
+      "js": [
+        "js/jquery/jquery.min.js",
+        "src/inject/inject.results.js"
+      ]
+    }
+  ]
+}

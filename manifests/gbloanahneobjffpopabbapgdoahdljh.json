@@ -1,0 +1,38 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Data Explorer for Force.com",
+  "description": "Execute Force.com SOQL queries from your browser",
+  "version": "1.0.2",
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://login.salesforce.com/services/oauth2/success*data_explorer*"
+      ],
+      "js": [
+        "/oauth2/oauth2_inject.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com https://anupshindeweb.appspot.com; object-src 'self'",
+  "permissions": [
+    "https://*.salesforce.com/"
+  ],
+  "web_accessible_resources": [
+    "oauth2/oauth2.html"
+  ],
+  "browser_action": {
+    "default_icon": "icon.png"
+  },
+  "background": {
+    "scripts": [
+      "launch.js"
+    ]
+  }
+}

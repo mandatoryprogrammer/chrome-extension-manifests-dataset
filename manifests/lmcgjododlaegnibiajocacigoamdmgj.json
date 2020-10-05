@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Motivosity",
+  "short_name": "Motivosity",
+  "version": "1.2",
+  "manifest_version": 2,
+  "description": "Motivosity is an employee recognition platform where employees can give each other small monetary bonuses for doing good work",
+  "homepage_url": "https://www.motivosity.com",
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "permissions": [
+    "cookies",
+    "webRequest",
+    "webRequestBlocking",
+    "*://*/*",
+    "*://*.motivosity.com/*"
+  ],
+  "icons": {
+    "16": "icons/mv-blue-icon-small.png",
+    "48": "icons/mv-blue-small.png",
+    "128": "icons/mv-blue-small.png"
+  },
+  "default_locale": "en",
+  "browser_action": {
+    "default_icon": "icons/mv-blue-small.png",
+    "default_title": "browser action demo",
+    "default_popup": "src/browser_action/browser_action.html"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://localhost:8080/*",
+        "*://motivosity.attask-ondemand.com/task/view*",
+        "https://*.sugarondemand.com/*"
+      ],
+      "js": [
+        "js/jquery.js",
+        "js/arrive.min.js",
+        "js/remodal.min.js",
+        "js/content.js"
+      ],
+      "css": [
+        "css/remodal.css",
+        "css/remodal-default-theme.css"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "js/arrive.min.js",
+    "img/mv-blue-small.png",
+    "src/browser_action/browser_action.html",
+    "css/remodal.css",
+    "css/remodal-default-theme.css",
+    "js/remodal.min.js"
+  ]
+}

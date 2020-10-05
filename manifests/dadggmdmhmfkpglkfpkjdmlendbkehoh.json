@@ -1,0 +1,83 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "OpenVideo - ad-free streaming",
+  "short_name": "OpenVideo",
+  "description": "Watch all of the videos - but none of the ads! (...even on sites which block adblockers)",
+  "content_security_policy": "script-src 'self'; object-src 'self';",
+  "applications": {
+    "gecko": {
+      "id": "OpenVideoFS@gmail.com"
+    }
+  },
+  "browser_action": {
+    "default_icon": "logos/logo256.png",
+    "default_popup": "pages/popupmenu/index.html"
+  },
+  "icons": {
+    "16": "logos/logo16.png",
+    "48": "logos/logo48.png",
+    "64": "logos/logo64.png",
+    "128": "logos/logo128.png",
+    "256": "logos/logo256.png"
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "background-scripts/background.js"
+    ]
+  },
+  "permissions": [
+    "storage",
+    "*://openvideofs.github.io/*",
+    "*://*/*OVReferer=*",
+    "*://*/*isOV*",
+    "*://*/*ovreferer=*",
+    "*://*/*isov*",
+    "tabs",
+    "unlimitedStorage",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "optional_permissions": [
+    "downloads"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content-scripts/topPageScript.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content-scripts/ovWebPage.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content-scripts/allFramesScript.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "inject-scripts/searchvideos.js",
+    "pages/popupmenu/index.html",
+    "pages/runisolatedscript/index.html"
+  ],
+  "version": "2.10.0"
+}

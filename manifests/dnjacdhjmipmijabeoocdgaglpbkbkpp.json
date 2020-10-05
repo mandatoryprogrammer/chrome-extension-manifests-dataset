@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Meet The World",
+  "short_name": "meettheworld",
+  "version": "1.0.8",
+  "manifest_version": 2,
+  "description": "Save the location of your favorite Instagram pictures and visualize them in a map.",
+  "homepage_url": "http://meettheworld.judithsirera.com/",
+  "web_accessible_resources": [
+    "images/*.png"
+  ],
+  "icons": {
+    "16": "icons/icon_16.png",
+    "48": "icons/icon_48.png",
+    "128": "icons/icon_128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icons/icon_19.png",
+    "default_title": "InstaTravel",
+    "default_popup": "src/browser_action/browser_action.html"
+  },
+  "permissions": [
+    "chrome://favicon/",
+    "contentSettings",
+    "tabs",
+    "cookies",
+    "webRequest",
+    "*://*.instagram.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.instagram.com/*"
+      ],
+      "css": [
+        "src/inject/inject.css"
+      ],
+      "js": [
+        "js/jquery/jquery.js",
+        "js/htmlElements.js",
+        "js/firebase.js",
+        "js/firebaseManager.js",
+        "js/instagramManager.js",
+        "src/inject/inject.js"
+      ]
+    }
+  ]
+}

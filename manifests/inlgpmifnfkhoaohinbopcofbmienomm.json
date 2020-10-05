@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "ePack Trader",
+  "description": "Saves time while trading larger amount of cards.",
+  "version": "1.1",
+  "browser_action": {
+    "default_title": "ePack Trader",
+    "default_icon": "icon.png"
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "https://www.upperdeckepack.com/*"
+  ],
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "matches": [
+      "https://www.upperdeckepack.com*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.upperdeckepack.com/*"
+      ],
+      "js": [
+        "content_script.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://www.upperdeckepack.com/Collection/ViewCards/sports/trading*"
+      ],
+      "js": [
+        "jquery.min.js",
+        "content_script_add_all.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ]
+}

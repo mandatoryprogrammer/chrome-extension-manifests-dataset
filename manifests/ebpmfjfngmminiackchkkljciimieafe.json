@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Time Tracker by eBillity",
+  "description": "Sync Your Google Calendar with Time Tracker",
+  "version": "1.0.7",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAiMR0+6RUY2oOTsHVa7qcC59V8vI08Qwe76Gq2R628DPgtbL/YeRvjSjFEOV0DKeM9W/k7ErCrvG+WbQ/t2wh+B+H6kueT1FJ4+bXdLRApSxXZF+RQ/FLNcMWmq4Q3CHvVY8F2E61AsKaaU83jzpx+eVYVoRWz8Unh3TIjbcG6i7JJkd2mi4zARHN4qE2l5ViZQ4gEGCEb5qUuHuv3JwWMODybcCl9b1M23mcoxvbhh5SwQtMuRMGXA65NfFWobhVuaA8JaEhG7RBUlgg1ndB3yh5r/ogm6Rx5mOQioT5B6/TFtCiOWo6y5QazJFKfyi8buv+ny7FtcF3HFuKYmRP2QIDAQAB",
+  "background": {
+    "scripts": [
+      "scripts/jquery-1.9.1.js",
+      "scripts/jquery.rest.min.js",
+      "scripts/select2.min.js",
+      "scripts/common.js",
+      "scripts/background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": "images/icon.png",
+    "default_popup": "popup.html"
+  },
+  "web_accessible_resources": [
+    "popup.html"
+  ],
+  "icons": {
+    "128": "images/icon.png",
+    "16": "images/icon.png",
+    "48": "images/icon.png"
+  },
+  "content_security_policy": "script-src 'self' https://calendar.google.com; object-src 'self'",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "http://office365.ebillity.com/api/office365/",
+    "https://calendar.google.com/",
+    "identity"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://calendar.google.com/*"
+      ],
+      "js": [
+        "scripts/jquery-1.9.1.js",
+        "scripts/select2.js",
+        "scripts/jquery.plugin.js",
+        "scripts/bootstrap-datepicker.js",
+        "scripts/jquery.timeentry.js",
+        "scripts/ebillitybutton.js"
+      ]
+    }
+  ],
+  "oauth2": {
+    "client_id": "1043231144641-6dfki9snrtohh7cv1dgvfenhkqsv6i1p.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/calendar.events.readonly"
+    ]
+  }
+}

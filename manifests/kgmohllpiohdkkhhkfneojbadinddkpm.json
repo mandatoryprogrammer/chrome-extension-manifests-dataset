@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Opus Web Advisor Agent",
+  "version": "1.100.101",
+  "manifest_version": 2,
+  "description": "Dynamically suggested help documents",
+  "package_name": "Opus-Web-Advisor-Agent",
+  "browser_action": {
+    "default_icon": "extension/lightbulb.png",
+    "default_popup": "index.html"
+  },
+  "icons": {
+    "16": "extension/lightbulb16.png",
+    "48": "extension/lightbulb48.png"
+  },
+  "background": {
+    "scripts": [
+      "common.js",
+      "extension/jquery-3.2.1.min.js",
+      "extension/bluebird.min.js",
+      "extension/socket.io.js",
+      "services.js",
+      "log.js",
+      "prod.js",
+      "idb.js",
+      "background.js",
+      "background.indexeddb.js",
+      "follow-me-background.js"
+    ],
+    "persistent": true
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "match_about_blank": true,
+      "js": [
+        "common.js",
+        "idb.js",
+        "log.js",
+        "follow-me.js",
+        "monitor-event.js",
+        "eassistant.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "<all_urls>",
+    "storage",
+    "notifications",
+    "alarms"
+  ],
+  "web_accessible_resources": [
+    "eassistant/*",
+    "/index.html"
+  ]
+}

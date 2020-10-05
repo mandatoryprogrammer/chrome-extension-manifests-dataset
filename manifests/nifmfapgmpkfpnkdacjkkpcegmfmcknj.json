@@ -1,0 +1,157 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Datlaco.vn Order Tool",
+  "short_name": "Datlaco.vn Order Tool",
+  "version": "1.9.6",
+  "description": "Datlaco.vn - Order Tool",
+  "icons": {
+    "16": "app/assets/icons/icon_16_active.png",
+    "48": "app/assets/icons/icon_48_active.png",
+    "128": "app/assets/icons/icon_128_active.png"
+  },
+  "browser_action": {
+    "default_icon": "app/assets/icons/icon_16_active.png",
+    "default_title": "Datlaco.vn"
+  },
+  "author": "Datlaco.vn.",
+  "background": {
+    "scripts": [
+      "app/assets/js/const.js",
+      "app/assets/js/jquery/jquery.min.js",
+      "app/assets/js/utils.js",
+      "app/assets/js/contentScriptHelper.js",
+      "app/assets/js/background.js",
+      "app/assets/js/accounting.min.js"
+    ],
+    "persistent": true
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://world.tmall.com https://detail.tmall.com 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "app/assets/js/const.js",
+        "app/assets/js/jquery/jquery.min.js",
+        "app/assets/js/utils.js",
+        "app/assets/js/contentScriptHelper.js",
+        "app/assets/js/accounting.min.js",
+        "app/assets/js/cartHelper.js",
+        "app/assets/js/jquery/jquery-ui.min.js",
+        "app/assets/js/lodash/lodash.min.js"
+      ],
+      "css": [],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://world.taobao.com/item/*"
+      ],
+      "css": [
+        "app/assets/css/toolbar-taobao.css",
+        "app/assets/css/container-price.css"
+      ],
+      "js": [
+        "app/inject/taobao/taobao.contentscript.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://item.taobao.com/*"
+      ],
+      "css": [
+        "app/assets/css/toolbar-taobao.css",
+        "app/assets/css/container-price.css"
+      ],
+      "js": [
+        "app/inject/taobao/item.taobao.contentscript.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://detail.tmall.com/*"
+      ],
+      "css": [
+        "app/assets/css/toolbar-taobao.css",
+        "app/assets/css/container-price.css"
+      ],
+      "js": [
+        "app/inject/tmall/detail.tmall.contentscript.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://world.tmall.com/*"
+      ],
+      "css": [
+        "app/assets/css/toolbar-taobao.css",
+        "app/assets/css/container-price.css"
+      ],
+      "js": [
+        "app/inject/tmall/tmall.contentscript.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://detail.1688.com/*"
+      ],
+      "css": [
+        "app/assets/css/toolbar-taobao.css",
+        "app/assets/css/container-price.css"
+      ],
+      "js": [
+        "app/inject/1688/1688.contentscript.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://www.datlaco.vn/gio-hang"
+      ],
+      "css": [
+        "app/assets/css/loading.css"
+      ],
+      "js": [
+        "app/inject/datlaco/datlaco.contentscript.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "cookies",
+    "activeTab",
+    "https://*.world.taobao.com/*",
+    "https://*.item.taobao.com/*",
+    "https://*.tmall.com/*",
+    "http://*.datlaco.vn/*",
+    "https://*.detail.1688.com/*",
+    "http://admin.datlaco.vn",
+    "storage"
+  ],
+  "web_accessible_resources": [
+    "icons/icon_48_active.png",
+    "app/assets/js/utils.js",
+    "app/assets/css/toolbar-taobao.css",
+    "app/assets/js/jquery/jquery.min.js",
+    "app/assets/js/jquery/jquery-ui.min.js",
+    "app/assets/js/lodash/lodash.min.js",
+    "app/inject/taobao/taobao.contentscript.js",
+    "app/inject/taobao/item.taobao.contentscript.js",
+    "app/inject/tmall/tmall.contentscript.js",
+    "app/inject/tmall/detail.tmall.contentscript.js",
+    "app/inject/dalaco/datlaco.contentscript.js",
+    "app/inject/1688/1688.contentscript.js",
+    "app/assets/template/*",
+    "app/assets/js/const.js",
+    "app/assets/js/cartHelper.js",
+    "app/assets/js/accounting.min.js",
+    "app/assets/images/*"
+  ]
+}

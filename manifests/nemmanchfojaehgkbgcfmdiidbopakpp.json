@@ -1,0 +1,89 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "version": "8.0.0.0",
+  "description": "__MSG_appDesc__",
+  "default_locale": "en",
+  "homepage_url": "https://www.virtru.com",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "manifest_version": 2,
+  "permissions": [
+    "storage",
+    "http://*.virtru.com/*",
+    "https://*.virtru.com/*",
+    "http://*.google.com/*",
+    "https://*.google.com/*",
+    "http://*.googleusercontent.com/*",
+    "https://*.googleusercontent.com/*",
+    "http://*.google.com/",
+    "https://*.google.com/"
+  ],
+  "web_accessible_resources": [
+    "js/*",
+    "css/*",
+    "fonts/*",
+    "images/*",
+    "icons/*"
+  ],
+  "background": {
+    "scripts": [
+      "js/shared.bundle.js",
+      "js/xregexp-shared.bundle.js",
+      "js/background.js",
+      "js/vault-shared.js",
+      "js/vault-background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/browser-action-19.png",
+      "38": "icons/browser-action-38.png"
+    },
+    "default_popup": "popup.html",
+    "default_title": "Virtru"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "js/shared.bundle.js",
+        "js/xregexp-shared.bundle.js",
+        "js/gmail-content.js",
+        "js/gmail-page-inject.js"
+      ],
+      "matches": [
+        "http://mail.google.com/*",
+        "https://mail.google.com/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "js": [
+        "js/shared.bundle.js",
+        "js/xregexp-shared.bundle.js",
+        "js/virtru-content.js"
+      ],
+      "matches": [
+        "http://*.virtru.com/*",
+        "https://*.virtru.com/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "css": [
+        "css/vault.css"
+      ],
+      "js": [
+        "js/vault-shared.js",
+        "js/vault-content.js"
+      ],
+      "matches": [
+        "https://ediscovery.google.com/*"
+      ]
+    }
+  ],
+  "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCnoQj0TZwjh3tJfyIssdpq92Hoq6m5a1i44MdO2GdkRldGi83OTAarWDrgisbQo68Ncr5LkzSy881lM9k3z1jGhGzb1frca89VTCXIJCHIK8r1ryhMTrLF3UK3zalcPmWSHUyxmogAmNc+a/UmzT2a+Td3H1VueCBCyq0C4Ej3ZQIDAQAB"
+}

@@ -1,0 +1,141 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "JavaScript and CSS Code Beautifier",
+  "version": "3.3.4",
+  "short_name": "Code Beautifier",
+  "description": "Beautify CSS, JavaScript and JSON code when you open a .css/.js/.json file.",
+  "minimum_chrome_version": "41",
+  "author": "Cople",
+  "icons": {
+    "16": "icons/icon_16.png",
+    "32": "icons/icon_32.png",
+    "48": "icons/icon_48.png",
+    "128": "icons/icon_128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*.js",
+        "*://*/*.js?*",
+        "*://*/*.ts",
+        "*://*/*.ts?*",
+        "*://*/*.json",
+        "*://*/*.json?*",
+        "file:///*/*.js",
+        "file:///*/*.js?*",
+        "file:///*/*.ts",
+        "file:///*/*.ts?*",
+        "file:///*/*.json",
+        "file:///*/*.json?*"
+      ],
+      "js": [
+        "codemirror/addon/runmode/runmode-standalone.js",
+        "codemirror/mode/javascript/javascript.js",
+        "jsbeautify/beautify.js",
+        "jsbeautify/unpackers/javascriptobfuscator_unpacker.js",
+        "jsbeautify/unpackers/myobfuscate_unpacker.js",
+        "jsbeautify/unpackers/p_a_c_k_e_r_unpacker.js",
+        "jsbeautify/unpackers/urlencode_unpacker.js",
+        "utils.js",
+        "content-script.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*/*.jsx",
+        "*://*/*.jsx?*",
+        "file:///*/*.jsx",
+        "file:///*/*.jsx?*"
+      ],
+      "js": [
+        "codemirror/addon/runmode/runmode-standalone.js",
+        "codemirror/mode/javascript/javascript.js",
+        "codemirror/mode/xml/xml.js",
+        "codemirror/mode/jsx/jsx.js",
+        "jsbeautify/beautify.js",
+        "jsbeautify/unpackers/javascriptobfuscator_unpacker.js",
+        "jsbeautify/unpackers/myobfuscate_unpacker.js",
+        "jsbeautify/unpackers/p_a_c_k_e_r_unpacker.js",
+        "jsbeautify/unpackers/urlencode_unpacker.js",
+        "utils.js",
+        "content-script.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*/*.css",
+        "*://*/*.css?*",
+        "*://*/*.scss",
+        "*://*/*.scss?*",
+        "*://*/*.less",
+        "*://*/*.less?*",
+        "file:///*/*.css",
+        "file:///*/*.css?*",
+        "file:///*/*.scss",
+        "file:///*/*.scss?*",
+        "file:///*/*.less",
+        "file:///*/*.less?*"
+      ],
+      "js": [
+        "codemirror/addon/runmode/runmode-standalone.js",
+        "codemirror/mode/css/css.js",
+        "jsbeautify/beautify-css.js",
+        "utils.js",
+        "content-script.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*/*.sass",
+        "*://*/*.sass?*",
+        "file:///*/*.sass",
+        "file:///*/*.sass?*"
+      ],
+      "js": [
+        "codemirror/addon/runmode/runmode-standalone.js",
+        "codemirror/mode/sass/sass.js",
+        "jsbeautify/beautify-css.js",
+        "utils.js",
+        "content-script.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*/*.md",
+        "*://*/*.md?*",
+        "file:///*/*.md",
+        "file:///*/*.md?*"
+      ],
+      "js": [
+        "codemirror/addon/runmode/runmode-standalone.js",
+        "codemirror/mode/xml/xml.js",
+        "codemirror/mode/markdown/markdown.js",
+        "utils.js",
+        "content-script.js"
+      ]
+    }
+  ],
+  "offline_enabled": true,
+  "options_page": "options.html",
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "web_accessible_resources": [
+    "icons/*.png",
+    "img/*.png"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "<all_urls>"
+  ]
+}

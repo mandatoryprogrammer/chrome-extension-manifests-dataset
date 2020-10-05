@@ -1,0 +1,43 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Wikipedia Search",
+  "version": "10",
+  "author": "Corbin Davenport",
+  "homepage_url": "https://github.com/corbindavenport/wikipedia-search",
+  "description": "Search Wikipedia in every language from the address bar and context menu.",
+  "options_page": "settings.html",
+  "omnibox": {
+    "keyword": "wiki"
+  },
+  "permissions": [
+    "contextMenus",
+    "http://*.wikipedia.org/*",
+    "https://*.wikipedia.org/*",
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "js/shared.js",
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.wikipedia.org/*",
+        "https://*.wikipedia.org/*"
+      ],
+      "js": [
+        "js/contentscript.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "icons": {
+    "16": "img/icon16.png",
+    "32": "img/icon32.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  }
+}

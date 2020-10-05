@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Altru Videos",
+  "description": "Browse and share Altru videos from anywhere!",
+  "version": "2.2.0",
+  "manifest_version": 2,
+  "icons": {
+    "16": "icons/altru-16.png",
+    "34": "icons/altru-34.png",
+    "48": "icons/altru-48.png",
+    "96": "icons/altru-96.png",
+    "128": "icons/altru-128.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/altru-enabled.png",
+    "default_title": "Share Altru Videos!",
+    "default_popup": "popup/popup.html"
+  },
+  "commands": {
+    "toggle-recording": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+A"
+      },
+      "description": "Toggle recording"
+    }
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "content.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "matches": [
+      "<all_urls>"
+    ]
+  },
+  "permissions": [
+    "*://mail.google.com/mail/*",
+    "*://outlook.live.com/mail/*",
+    "*://beamery.com/*",
+    "*://app.sandbox.beamery.com/*",
+    "storage",
+    "activeTab",
+    "tabs",
+    "desktopCapture"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "web_accessible_resources": [
+    "*"
+  ]
+}

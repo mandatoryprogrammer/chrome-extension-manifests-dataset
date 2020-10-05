@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Stay Up",
+  "author": "Kiemtiencenter",
+  "description": "Stay Up is a Chrome Extension that offers many features for users to make the most out of social media platforms.",
+  "version": "2.0.2",
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+  "default_locale": "en",
+  "browser_action": {
+    "default_icon": {
+      "16": "icon.png",
+      "24": "icon.png",
+      "32": "icon.png"
+    },
+    "default_popup": "popup.html",
+    "default_title": "Stay Up"
+  },
+  "background": {
+    "scripts": [
+      "assets/js/core/jquery.min.js",
+      "scripts/analytics.js",
+      "scripts/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "scripts/injects.js"
+      ],
+      "matches": [
+        "https://*.facebook.com/messages/*",
+        "https://*.messenger.com/t/*"
+      ],
+      "css": [
+        "assets/injects.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.google-analytics.com https://ssl.google-analytics.com https://ajax.googleapis.com https://cdnjs.cloudflare.com; object-src 'self'",
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "notifications",
+    "contextMenus",
+    "cookies",
+    "webRequest",
+    "webRequestBlocking"
+  ]
+}

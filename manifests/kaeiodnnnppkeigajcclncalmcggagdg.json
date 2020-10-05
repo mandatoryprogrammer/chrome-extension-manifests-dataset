@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Trinity Radar",
+  "description": "Trinity Radar extension for recording automated website tests.",
+  "version": "1.0.0",
+  "homepage_url": "http://app.trinityradar.com",
+  "web_accessible_resources": [
+    "inject.html",
+    "css/inject.css"
+  ],
+  "icons": {
+    "16": "img/trinity_default-16.png",
+    "48": "img/trinity_default-48.png",
+    "128": "img/trinity_default-128.png"
+  },
+  "browser_action": {
+    "default_title": "Trinity Radar",
+    "default_icon": "img/trinity_default.png",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "match_about_blank": true,
+      "all_frames": true,
+      "js": [
+        "js/inject_1.0.0.bundle.js"
+      ]
+    }
+  ],
+  "background": {
+    "page": "background.html"
+  },
+  "content_security_policy": "default-src 'self'; script-src https://www.youtube.com https://s.ytimg.com 'unsafe-eval'; connect-src https://api.honeybadger.io http://api.honeybadger.io https://app.trinityradar.com http://app.trinityradar.com; style-src * 'unsafe-inline'; font-src https://fonts.gstatic.com/; frame-src https://www.youtube.com ; img-src 'self' data:;",
+  "permissions": [
+    "contextMenus",
+    "tabs",
+    "activeTab",
+    "storage",
+    "*://*/",
+    "webNavigation"
+  ],
+  "incognito": "split"
+}

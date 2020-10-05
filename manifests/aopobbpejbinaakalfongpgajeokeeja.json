@@ -1,0 +1,73 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Shimasu",
+  "version": "1.2.4",
+  "description": "Enhance your learning experience & capacity with YouTube and stop searching for word meanings, definitions, images with Shimasu.",
+  "icons": {
+    "16": "./icons/favicon-16.png",
+    "48": "./icons/favicon-48.png",
+    "128": "./icons/favicon-144.png"
+  },
+  "browser_action": {
+    "default_icon": "./icons/favicon-16.png",
+    "default_popup": "index.html"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+F",
+        "mac": "MacCtrl+Shift+F"
+      },
+      "description": "Opens Shimasu"
+    }
+  },
+  "background": {
+    "matches": [
+      "*://youtube.com/watch?v=*",
+      "*://www.youtube.com/watch?v=*",
+      "*://api.cognitive.microsoft.com/bing/v7.0/images/search*"
+    ],
+    "scripts": [
+      "jquery.js",
+      "axios.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_security_policy": "script-src 'self' 'sha256-5As4+3YpY62+l38PsxCEkjB1R4YtyktBtRScTJ3fyLU='; object-src 'self'",
+  "permissions": [
+    "https://youtube.com/watch?v=*",
+    "*://shimasu.co/*",
+    "*://api.shimasu.co/*",
+    "*://*.shimasu.co/*",
+    "*://shimasu-landing.herokuapp.com/*",
+    "*://newspy.herokuapp.com/*",
+    "activeTab",
+    "tabs",
+    "declarativeContent",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://youtube.com/watch?v=*",
+        "*://www.youtube.com/watch?v=*",
+        "*://en.wikipedia.org/w/api.php?*",
+        "*://api.cognitive.microsoft.com/bing/v7.0/images/search*"
+      ],
+      "js": [
+        "jquery.js",
+        "alertify.min.js",
+        "axios.js",
+        "styles.js",
+        "arrive.js",
+        "cs.js"
+      ],
+      "css": [
+        "css/alertify.min.css",
+        "css/default.min.css"
+      ]
+    }
+  ]
+}

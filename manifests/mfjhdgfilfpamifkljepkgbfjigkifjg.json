@@ -1,0 +1,83 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_pdjcheck_name__",
+  "description": "__MSG_pdjcheck_description__",
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "default_locale": "en",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "persistent": true,
+    "page": "background.html"
+  },
+  "options_page": "options.html",
+  "permissions": [
+    "tabs",
+    "cookies",
+    "alarms",
+    "storage",
+    "notifications",
+    "http://promodj.com/",
+    "https://promodj.com/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://promodj.com/*",
+        "https://promodj.com/*"
+      ],
+      "js": [
+        "/content/inject.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://promodj.com/*",
+        "https://promodj.com/*"
+      ],
+      "js": [
+        "/libs/jquery-2.1.4.min.js",
+        "/libs/global.js",
+        "/libs/jquery.qtip.min.js",
+        "/content/fixes.js"
+      ],
+      "css": [
+        "/libs/jquery.qtip.min.css"
+      ]
+    },
+    {
+      "matches": [
+        "http://promodj.com/msg/history/*",
+        "https://promodj.com/msg/history/*"
+      ],
+      "js": [
+        "/content/msg_history.js"
+      ],
+      "css": [
+        "/content/msg_history.css"
+      ]
+    },
+    {
+      "matches": [
+        "http://promodj.com/msg/new*",
+        "https://promodj.com/msg/new*"
+      ],
+      "js": [
+        "/content/msg_new.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "/content/*",
+    "/content/qtip.js"
+  ],
+  "version": "1.8.1",
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

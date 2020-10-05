@@ -1,0 +1,72 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Test & Feedback",
+  "short_name": "XT, exploratory tesing, feedback, TF",
+  "version": "1.0.170.0",
+  "description": "Now everyone on the team can own quality. Capture findings, create issues, and collaborate with the team, directly from the browser.",
+  "homepage_url": "https://marketplace.visualstudio.com/items?itemName=ms.vss-exploratorytesting-web",
+  "icons": {
+    "128": "Images/NormalState-128.png",
+    "48": "Images/NormalState-48.png",
+    "16": "Images/NormalState-16.png"
+  },
+  "browser_action": {
+    "default_icon": "Images/NormalState-128.png",
+    "default_title": "Test & Feedback",
+    "default_popup": "Popup2/Popup.html"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "windows": "Ctrl+Shift+Y",
+        "mac": "Command+Shift+Y",
+        "chromeos": "Ctrl+Shift+Y",
+        "linux": "Ctrl+Shift+Y"
+      }
+    }
+  },
+  "background": {
+    "page": "Background/Worker/Background.html",
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "ContentScript/CustomisedWorkItemMessaging.js",
+        "ContentScript/CaptureBrowserEvent.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end",
+      "match_about_blank": true
+    }
+  ],
+  "options_ui": {
+    "page": "Options/Options.html",
+    "chrome_style": true
+  },
+  "web_accessible_resources": [
+    "Fonts/*.*"
+  ],
+  "permissions": [
+    "activeTab",
+    "clipboardRead",
+    "tabs",
+    "storage",
+    "desktopCapture",
+    "<all_urls>",
+    "unlimitedStorage",
+    "system.cpu",
+    "system.memory",
+    "system.display",
+    "webNavigation"
+  ],
+  "sandbox": {
+    "pages": [
+      "AnnotationTool/View/AnnotationTool.html"
+    ]
+  }
+}

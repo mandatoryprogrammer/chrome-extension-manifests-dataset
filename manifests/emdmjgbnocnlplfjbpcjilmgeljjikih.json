@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Scrum2Trello",
+  "version": "1.0.1",
+  "manifest_version": 2,
+  "description": "Adds Agile points estimation to Trello. Draw burn up charts. Unique card numbers",
+  "homepage_url": "http://it2.bz",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "src/js/background.js"
+    ],
+    "persistent": true
+  },
+  "author": "Art Voloshin",
+  "permissions": [
+    "tabs",
+    "storage",
+    "https://trello.com/*"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/icon16.png",
+      "38": "icons/icon48.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://trello.com/*"
+      ],
+      "css": [
+        "src/css/styles.css",
+        "src/css/count.css",
+        "src/css/labels.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://trello.com/*"
+      ],
+      "js": [
+        "src/js/libs/jquery.js",
+        "src/js/inject.js"
+      ]
+    }
+  ]
+}

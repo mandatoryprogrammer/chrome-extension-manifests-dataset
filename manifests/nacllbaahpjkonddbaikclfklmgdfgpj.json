@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_extName__",
+  "version": "0.2.1",
+  "manifest_version": 2,
+  "description": "__MSG_extDescription__",
+  "homepage_url": "https://github.com/behcet-li/numericgrades",
+  "icons": {
+    "64": "icons/red-64.png",
+    "128": "icons/red-128.png"
+  },
+  "applications": {
+    "gecko": {
+      "id": "numericgrades@dolm.us",
+      "strict_min_version": "48.0a1",
+      "strict_max_version": "53.0"
+    }
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "lib/jquery-2.2.1.min.js",
+      "src/background/options.js",
+      "src/background/notifications.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icons/red-128-borderless.png",
+    "default_title": "Numeric Grades",
+    "default_popup": "html/options.html"
+  },
+  "options_ui": {
+    "page": "html/options.html",
+    "chrome_style": true
+  },
+  "permissions": [
+    "*://*.popmundo.com/*",
+    "tabs",
+    "storage",
+    "notifications"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://popmundo.com/*",
+        "http://popmundo.com/*",
+        "https://*.popmundo.com/*",
+        "http://*.popmundo.com/*"
+      ],
+      "js": [
+        "src/content/numericGrades.js",
+        "lib/favico-0.3.10.min.js",
+        "src/content/notifications.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "/src/inject/menuNotifications.js"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

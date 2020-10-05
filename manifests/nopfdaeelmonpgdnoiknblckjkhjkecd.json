@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "amTREX",
+  "short_name": "amazon.tracking.exposed",
+  "description": "A tool for academic researchers. Part of the tracking.exposed project, is meant to analyze the algorithm of a popular retail portal.",
+  "version": "0.0.4",
+  "author": "The team of https://tracking.exposed",
+  "icons": {
+    "16": "amtrex16.png",
+    "48": "amtrex48.png",
+    "128": "amtrex128.png"
+  },
+  "browser_action": {
+    "default_icon": "amtrex16.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "storage",
+    "cookies",
+    "tabs",
+    "https://*.amazon.com/",
+    "https://*.amazon.it/",
+    "https://*.tracking.exposed/"
+  ],
+  "background": {
+    "scripts": [
+      "./background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.tracking.exposed/*",
+        "https://*.amazon.com/*",
+        "https://*.amazon.it/*"
+      ],
+      "js": [
+        "./app.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "*.png"
+  ]
+}

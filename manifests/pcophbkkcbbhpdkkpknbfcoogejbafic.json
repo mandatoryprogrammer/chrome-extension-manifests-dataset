@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Just Stream",
+  "version": "1.2.0",
+  "manifest_version": 2,
+  "description": "__MSG_description__",
+  "homepage_url": "http://arqex.com",
+  "icons": {
+    "16": "icons/icon-justStream.png",
+    "48": "icons/icon-justStream.png",
+    "128": "icons/icon-justStream.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "page": "src/bg/background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icons/icon-justStream.png",
+    "default_title": "Just Stream",
+    "default_popup": "src/browser_action/browser_action.html"
+  },
+  "permissions": [
+    "https://*/*",
+    "http://*/*",
+    "storage",
+    "tabs",
+    "webNavigation"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "css": [
+        "src/inject/inject.css"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "js": [
+        "src/browser_action/utils.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "js": [
+        "src/inject/searcher.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "/icons/*"
+  ]
+}

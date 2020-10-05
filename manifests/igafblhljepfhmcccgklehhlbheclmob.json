@@ -1,0 +1,71 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "NetSuite Links",
+  "version": "3.3.3.3",
+  "description": "Load N/* Modules , search via Shortcut and More.",
+  "permissions": [
+    "tabs",
+    "*://*.app.netsuite.com/*",
+    "storage"
+  ],
+  "browser_action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "NetSuite Links"
+  },
+  "background": {
+    "scripts": [
+      "myScripts/messagingBackbone.js",
+      "shortcuts/shortcut_handler.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.app.netsuite.com/*"
+      ],
+      "run_at": "document_start",
+      "exclude_globs": [
+        "*workflowdesktop.nl*"
+      ],
+      "js": [
+        "myScripts/contentScrptMultiInstance.js"
+      ],
+      "css": [
+        "shortcuts/overlays.css"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "icons/NewIconStar16.png",
+    "32": "icons/NewIconStar32.png",
+    "48": "icons/NewIconStar48.png",
+    "128": "icons/NewIconStar128.png"
+  },
+  "content_security_policy": "script-src 'self' https://code.jquery.com; object-src 'self'",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAoGi8+m3TKvNDUgTOJMOwclfJZ2CzkGAyle6w8fzBMv05+tMcjuXsktYTKwFdHmHK39fXJvxHerctWwS0UCzrIi20KHqg+tEDlLg0qemwoQPBRZ8Ybo4JTbAZfjs1jysQa8m/FkJtmlNN6rY5NWaI7u2vCYRvEL6mWBTWPHAplxyoH9aHIVIq5139mLgITxjJPzMqlqng5pCg1aQJKVmLTRdeIC5L4kbyTNsrCYS0PtlfjsbcN5ZKLVbzpkVBfhK3cSOan4WV417xl5+YMzOqCsOTEsivPt5LfFW9QFxpnK206f7CLNrnk3EzsgSyUHm1kuKhiFzKc9Geu3WVMNWqAwIDAQAB",
+  "commands": {
+    "load-module-shrtct": {
+      "suggested_key": {
+        "default": "Ctrl+M",
+        "mac": "Command+M"
+      },
+      "description": "Load Modules via Shortcut."
+    },
+    "multi-instance-shrtct": {
+      "suggested_key": {
+        "default": "Ctrl+I",
+        "mac": "Command+I"
+      },
+      "description": "Load Multiple Instances"
+    },
+    "search-suite-answers-shrtct": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+S",
+        "mac": "Command+Shift+S"
+      },
+      "description": "Search SuiteAnswers via Shortcut."
+    }
+  }
+}

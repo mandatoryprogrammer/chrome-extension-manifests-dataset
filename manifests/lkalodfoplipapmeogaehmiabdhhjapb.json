@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Wordtracker Scout",
+  "version": "1.5.1",
+  "manifest_version": 2,
+  "description": "__MSG_app_description__",
+  "default_locale": "en",
+  "icons": {
+    "16": "images/app_icon_16.png",
+    "48": "images/app_icon_48.png",
+    "128": "images/app_icon_128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon_19x19.png",
+      "38": "images/icon_38x38.png"
+    },
+    "default_popup": "views/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "scripts/domain/page_scraper.js",
+        "scripts/domain/content_analyzer_dumb.js",
+        "scripts/domain/content_analyzer_paragraph.js",
+        "scripts/domain/content_analyzer_selective.js",
+        "scripts/domain/navigation_analyzer.js",
+        "scripts/scraper_content_script.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "background",
+    "storage",
+    "cookies",
+    "http://*/",
+    "https://*/",
+    "clipboardWrite"
+  ],
+  "background": {
+    "page": "views/background.html"
+  }
+}

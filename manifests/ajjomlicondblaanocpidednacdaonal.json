@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Email Paste",
+  "description": "Paste Your Email address into web forms.",
+  "version": "1.2",
+  "offline_enabled": false,
+  "icons": {
+    "16": "icon/16x16.png",
+    "24": "icon/24x24.png",
+    "32": "icon/32x32.png",
+    "48": "icon/48x48.png",
+    "64": "icon/64x64.png",
+    "128": "icon/128x128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "contextMenus"
+  ],
+  "browser_action": {
+    "default_icon": "icon/48x48.png",
+    "default_popup": "popup.html",
+    "default_title": "Paste Email Address"
+  },
+  "commands": {
+    "paste-email": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+E",
+        "mac": "Command+Shift+E"
+      },
+      "description": "Paste Email address"
+    }
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "contentscript.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ]
+}

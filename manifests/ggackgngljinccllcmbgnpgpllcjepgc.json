@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "version": "3.1",
+  "minimum_chrome_version": "31.0.0",
+  "short_name": "WindmillVPN",
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "assets/images/windmill-normal-24.png",
+    "default_title": "WindmillVPN",
+    "default_popup": "popup.html"
+  },
+  "default_locale": "en",
+  "description": "__MSG_manifest_appDescription__",
+  "icons": {
+    "16": "assets/images/windmill-normal-16.png",
+    "24": "assets/images/windmill-normal-24.png",
+    "128": "assets/images/windmill-normal-128.png"
+  },
+  "name": "__MSG_manifest_appName__",
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://ssl.google-analytics.com; object-src 'self';",
+  "permissions": [
+    "privacy",
+    "proxy",
+    "tabs",
+    "notifications",
+    "webRequest",
+    "webRequestBlocking",
+    "management",
+    "*://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "assets/scripts/replication.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

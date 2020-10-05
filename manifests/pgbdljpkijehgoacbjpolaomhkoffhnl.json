@@ -1,0 +1,83 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "MailTracker: Free email tracker for Gmail",
+  "short_name": "MailTracker",
+  "description": "Know when your emails are opened.",
+  "version": "1.4.9",
+  "manifest_version": 2,
+  "homepage_url": "https://mailtracker.hunter.io",
+  "icons": {
+    "16": "shared/img/icon16.png",
+    "48": "shared/img/icon48.png",
+    "128": "shared/img/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*"
+      ],
+      "js": [
+        "/shared/js/lib/moment.min.js",
+        "/shared/js/lib/moment-timezone.min.js",
+        "/shared/js/lib/jquery.min.js",
+        "/shared/js/lib/mobile-detect.min.js",
+        "/shared/js/lib/underscore.min.js",
+        "/shared/js/lib/kefir.min.js",
+        "/shared/js/lib/inboxsdk.min.js",
+        "/shared/js/config.js",
+        "/shared/js/utilities.js",
+        "/shared/js/account.js",
+        "/content_script/js/gmail-threads.js",
+        "/content_script/js/gmail-compose.js",
+        "/content_script/js/gmail-conversation.js",
+        "/content_script/js/gmail.js"
+      ],
+      "css": [
+        "/shared/css/lib/fontawesome-all.css",
+        "/shared/css/fonts.css",
+        "/content_script/css/gmail.css",
+        "/content_script/css/new-ui.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://mailtracker.hunter.io/messages"
+      ],
+      "js": [
+        "/shared/js/lib/underscore.min.js",
+        "/shared/js/lib/jquery.min.js",
+        "/shared/js/config.js",
+        "/shared/js/utilities.js",
+        "/shared/js/account.js",
+        "/content_script/js/authentication.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background/install.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "shared/img/icon16.png",
+      "48": "shared/img/icon48.png"
+    },
+    "default_title": "MailTracker",
+    "default_popup": "browser_action/popup.html"
+  },
+  "web_accessible_resources": [
+    "shared/img/*",
+    "shared/fonts/*",
+    "content_script/css/*"
+  ],
+  "permissions": [
+    "*://mail.google.com/",
+    "*://mailtracker.hunter.io/",
+    "storage"
+  ]
+}

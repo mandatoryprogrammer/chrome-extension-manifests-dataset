@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Pass box",
+  "version": "5.0.0",
+  "manifest_version": 2,
+  "icons": {
+    "16": "img/icon-16.png"
+  },
+  "description": "Passbox is a password manager. It manage your logins as a bookmark with auto-login functionality",
+  "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCwK8LCeYQP43fg6HJdHIwiuZISu9aL7dxqX/P0/471HeWnt1dxtUYIQY/H2AkRIXszhuI97fgMOuTS2fTnXJDi1VgRQ9h/Jy168ENI8sjGPU2BnLcn/zDchI3sP3XtuAnP7DNa/Lmj73WdNbQagZeNEuoHTVKgLRdSqLjxbTHRjwIDAQAB",
+  "background": {
+    "page": "background.html"
+  },
+  "browser_action": {
+    "default_title": "Pass box",
+    "default_icon": "img/icon-19.png",
+    "default_popup": "login.html"
+  },
+  "permissions": [
+    "identity",
+    "notifications",
+    "https://*/*",
+    "http://*/*",
+    "tabs"
+  ],
+  "oauth2": {
+    "client_id": "617782734075-tqjust51ftb5ovmiomj7ch02tdio343n.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/drive"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "script/inject/content.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://apis.google.com; object-src 'self'; style-src 'self' 'unsafe-inline'; connect-src *"
+}

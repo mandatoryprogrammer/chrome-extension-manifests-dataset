@@ -1,0 +1,350 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_extNameFull__",
+  "description": "__MSG_extNameFull__",
+  "default_locale": "en",
+  "options_page": "options.html",
+  "version": "9.1.20.1728",
+  "icons": {
+    "16": "img/wex16.png",
+    "32": "img/wex32.png",
+    "128": "img/wex128.png"
+  },
+  "permissions": [
+    "storage",
+    "notifications",
+    "background",
+    "management",
+    "tabs",
+    "cookies",
+    "idle",
+    "http://*/*",
+    "https://*/*",
+    "https://esna.conferencing/*",
+    "https://esna.conferencing.webex/*"
+  ],
+  "background": {
+    "page": "background.html"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*/wex2gate0.html*",
+        "http://*/*/wex2gate0.html*",
+        "file://*/*/wex2gate0.html*"
+      ],
+      "all_frames": true,
+      "js": [
+        "i18n.js",
+        "dom.js",
+        "util.js",
+        "contentscriptIntercom.js",
+        "webex_util.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "file://*/*",
+        "https://*/*"
+      ],
+      "all_frames": false,
+      "run_at": "document_end",
+      "js": [
+        "injector.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "file://*/*",
+        "https://*/*"
+      ],
+      "all_frames": true,
+      "run_at": "document_end",
+      "js": [
+        "jsc.tags.js"
+      ],
+      "css": [
+        "css/tags.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.google.com/robots.txt*",
+        "https://sso.apps.avaya.com/clients/webex/token.redirect*"
+      ],
+      "js": [
+        "oauth2/oauth2_inject.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://static.apps.avaya.com/clients/webex/redirect.html*"
+      ],
+      "js": [
+        "redir.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://*.webex.com/dispatcher/SAML2AuthService*",
+        "https://*.webex.com/dispatcher/CIAuthService.do*",
+        "https://*.webex.com/dispatcher/FederatedSSO.do*"
+      ],
+      "js": [
+        "contentScriptWexSaml.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.google.com/calendar/*",
+        "https://calendar.google.com/calendar/*"
+      ],
+      "js": [
+        "i18n.js",
+        "contentScriptCalendar.js",
+        "webex_util.js",
+        "util.js",
+        "date.js"
+      ],
+      "css": [
+        "css/common_small.css",
+        "css/font_opensans.css",
+        "css/font_social.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://*.google.com/*",
+        "https://*.gstatic.com/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "i18n.js",
+        "csGoogleCalendar2017a_eventPopup.js",
+        "csGoogleCalendar2017a.js",
+        "dom_utils.js",
+        "webex_util.js",
+        "util.js",
+        "date.js"
+      ],
+      "css": [
+        "css/common_small.css",
+        "css/font_opensans.css",
+        "css/font_social.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.google.com/*/hovercard*"
+      ],
+      "all_frames": true,
+      "run_at": "document_start",
+      "js": [
+        "contentscriptGoogleMail.js",
+        "jsc.gmail.js"
+      ],
+      "css": [
+        "css/font_social.css",
+        "css/vcard_common.css",
+        "css/vcard_specific.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://meet.google.com/*"
+      ],
+      "all_frames": false,
+      "js": [
+        "contentscriptGoogleMeet.js",
+        "dom_utils.js",
+        "i18n.js"
+      ],
+      "css": [
+        "css_inj/gmeet.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://outlook.office365.com/*",
+        "https://outlook.office.com/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "contentscriptOffice365schedule.js",
+        "contentscriptOffice365.js",
+        "codeworks.js",
+        "i18n.js",
+        "firsttimer.js",
+        "util.js",
+        "webex_util.js",
+        "dom_utils.js"
+      ],
+      "css": [
+        "css/inject.css",
+        "css/inject_specific.css",
+        "css/font_opensans.css",
+        "css/font_social.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://teams.microsoft.com/*"
+      ],
+      "all_frames": false,
+      "js": [
+        "contentscriptMsTeams.js",
+        "codeworks.js",
+        "i18n.js",
+        "firsttimer.js",
+        "dom_utils.js",
+        "util.js",
+        "webex_util.js"
+      ],
+      "css": [
+        "css/inject.css",
+        "css/inject_specific.css",
+        "css/font_opensans.css",
+        "css/font_social.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://apis.google.com/*",
+        "http://mail.google.com/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "i18n.js",
+        "contentscriptGoogleMail.js",
+        "webex_util.js",
+        "firsttimer.js"
+      ],
+      "css": [
+        "css/inject.css",
+        "css/inject_specific.css",
+        "css/font_opensans.css",
+        "css/font_social.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://*.salesforce.com/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "i18n.js",
+        "dom.js",
+        "util.js",
+        "contentscriptSalesforce.js",
+        "webex_util.js",
+        "firsttimer.js"
+      ],
+      "css": [
+        "css/inject.css",
+        "css/inject_specific.css",
+        "css/font_opensans.css",
+        "css/font_social.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://*.lightning.force.com/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "i18n.js",
+        "dom.js",
+        "util.js",
+        "dom_utils.js",
+        "contentscriptSalesforceLight.js",
+        "contentscriptSalesforceLightEvent.js",
+        "webex_util.js",
+        "firsttimer.js"
+      ],
+      "css": [
+        "css/inject.css",
+        "css/inject_specific.css",
+        "css/font_opensans.css",
+        "css/font_social.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://*.google.com/hangouts/_/*"
+      ],
+      "all_frames": false,
+      "js": [
+        "i18n.js",
+        "hangoutInject.js",
+        "util.js",
+        "webex_util.js",
+        "contentScriptHangout.js",
+        "firsttimer.js"
+      ],
+      "css": [
+        "css/inject.css",
+        "css/inject_specific.css",
+        "css/font_opensans.css",
+        "css/font_social.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "browser_action": {
+    "default_icon": "img/wex19.png",
+    "default_popup": "popup.html"
+  },
+  "web_accessible_resources": [
+    "date.js",
+    "util.js",
+    "consts.js",
+    "templates.html",
+    "i18n.js",
+    "support_backurl.html",
+    "support_backurl.js",
+    "popup.html",
+    "popup.js",
+    "contentScriptCalendar.js",
+    "hangoutInject.js",
+    "webex_ui.js",
+    "webex_util.js",
+    "img/wex32.png",
+    "img/wex16.png",
+    "img/wex16b.png",
+    "img/error_48.png",
+    "img/information2_48.png",
+    "img/busy_16.gif",
+    "css/inject.css",
+    "css/inject_specific.css",
+    "css/common.css",
+    "css/balloon.css",
+    "css/specific.css",
+    "css/font_social.css",
+    "css/font_opensans.css",
+    "css/vcard_specific.css",
+    "css/vcard_common.css",
+    "css_inj/mst_common.css",
+    "css_inj/gmeet.css",
+    "css_inj/inject_font_soc.css",
+    "css_inj/inject_font_soc_specific.css",
+    "css_inj/o365_common.css",
+    "css_inj/o365_specific.css"
+  ]
+}

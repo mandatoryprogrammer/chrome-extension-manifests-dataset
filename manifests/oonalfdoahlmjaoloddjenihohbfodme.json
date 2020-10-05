@@ -1,0 +1,95 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "英辞郎 on the WEB 拡張機能",
+  "version": "1.5.2",
+  "manifest_version": 2,
+  "description": "アルクが公開している英和・対訳オンライン検索サービス「英辞郎 on the WEB」を、その場で便利に検索できる拡張機能です。「英辞郎 on the WEB Pro / Pro Lite」にも対応。※「英辞郎」は道端早知子氏の登録商標です。",
+  "background": {
+    "page": "background.html"
+  },
+  "options_page": "options.html",
+  "browser_action": {
+    "default_icon": "icons/eow_19.png",
+    "default_title": "英辞郎 on the WEB",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "icons/eow_16.png",
+    "32": "icons/eow_32.png",
+    "48": "icons/eow_48.png",
+    "128": "icons/eow_128.png"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "lib/utils.js",
+        "content/eow-content.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true,
+      "exclude_globs": [
+        "https?://eowp.alc.co.jp/small*",
+        "https?://eowp.alc.co.jp/login*small*",
+        "https?://eowp.alc.co.jp/chrome*",
+        "https?://eowp.alc.co.jp/login*chrome*"
+      ]
+    },
+    {
+      "css": [
+        "lib/jquery-ui/theme-base/jquery.ui.resizable.css"
+      ],
+      "js": [
+        "lib/jquery-1.8.2.min.js",
+        "lib/jquery-ui/jquery-ui-1.8.12.custom.js",
+        "lib/utils.js",
+        "lib/TwoStateSwitch.js",
+        "content/extensionConnection.js",
+        "content/eow-sideView-content.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end",
+      "all_frames": false,
+      "exclude_globs": [
+        "https?://eowp.alc.co.jp/small*",
+        "https?://eowp.alc.co.jp/login*small*",
+        "https?://eowp.alc.co.jp/chrome*",
+        "https?://eowp.alc.co.jp/login*chrome*"
+      ]
+    },
+    {
+      "js": [
+        "content/eow-closeSideView-content.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end",
+      "all_frames": true,
+      "exclude_globs": [
+        "https?://eowp.alc.co.jp/chrome*",
+        "https?://eowp.alc.co.jp/login*chrome*"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "contextMenus",
+    "management",
+    "https://*.alc.co.jp/"
+  ],
+  "web_accessible_resources": [
+    "img/hideheader.png",
+    "img/openheader.png",
+    "img/pin_off.png",
+    "img/pin_on.png",
+    "img/resize-grip-nw.png"
+  ]
+}

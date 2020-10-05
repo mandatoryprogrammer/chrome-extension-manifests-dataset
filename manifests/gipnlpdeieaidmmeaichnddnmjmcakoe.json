@@ -1,0 +1,85 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Selection Search",
+  "version": "0.8.56",
+  "manifest_version": 2,
+  "description": "Search for the selected text in search engines",
+  "minimum_chrome_version": "35",
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "options_page": "options/options.html",
+  "background": {
+    "page": "background/background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_popup": "browseraction/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file://*/*"
+      ],
+      "js": [
+        "common/browsersupport.js",
+        "popup/popup.js",
+        "popup/popup_modifier.js",
+        "popup/circular_popup.js",
+        "popup/activators.js",
+        "common/actionutils.js",
+        "popup/selection_util.js",
+        "popup/actions.js",
+        "popup/style.js",
+        "popup/button.js",
+        "common/encoding.js",
+        "popup/event_utils.js",
+        "common/urlparse.js",
+        "common/jquery-3.4.1.min.js",
+        "old/engine-editor.js",
+        "old/extractform.js",
+        "popup/positioning.js",
+        "popup/autohide.js",
+        "popup/search_engine_hotkeys.js",
+        "popup/init_script.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "http://mycroftproject.com/*",
+        "https://mycroftproject.com/*"
+      ],
+      "js": [
+        "common/browsersupport.js",
+        "old/opensearch.js",
+        "sites/mycroft.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "contextMenus",
+    "storage",
+    "notifications",
+    "clipboardWrite",
+    "tabs"
+  ],
+  "web_accessible_resources": [
+    "img/folder.png",
+    "img/icon16.png",
+    "img/icon48.png",
+    "img/close.png",
+    "img/ajax-loader.gif",
+    "img/copy.png",
+    "img/default_favicon.png",
+    "old/postsearch.html",
+    "old/encoding-search.html",
+    "old/postsearch.js"
+  ]
+}

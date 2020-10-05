@@ -1,0 +1,97 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "ACOG Prenatal Record",
+  "short_name": "APR",
+  "description": "",
+  "version": "1.4.3",
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "19": "icons/icon19.png",
+      "38": "icons/icon38.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "19": "icons/icon19.png",
+    "38": "icons/icon38.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "lib/jwt-decode.min.js",
+      "bundles/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.dorsata.com/acog*",
+        "https://*.dorsata-prerelease.com/acog*",
+        "https://*.dorsata-staging.com/acog*",
+        "https://*.dorsata-salesdemo.com/acog*",
+        "https://*.dorsata.com/ww*",
+        "https://*.dorsata-prerelease.com/ww*",
+        "https://*.dorsata-staging.com/ww*",
+        "https://*.dorsata-salesdemo.com/ww*",
+        "http://127.0.0.1:5000/acog*",
+        "http://127.0.0.1:5000/ww*"
+      ],
+      "js": [
+        "lib/jquery.js",
+        "bundles/client.js"
+      ],
+      "run_at": "document_start",
+      "css": [],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://*.athenahealth.com/*"
+      ],
+      "js": [
+        "lib/jquery.js",
+        "bundles/athenahealth.js"
+      ],
+      "css": [
+        "css/main.css"
+      ],
+      "all_frames": true
+    }
+  ],
+  "options_ui": {
+    "page": "templates/options.html",
+    "chrome_style": true
+  },
+  "web_accessible_resources": [
+    "templates/frame-container-content.html",
+    "scripts/inline-context.js",
+    "scripts/dorsata-inline-context.js",
+    "images/check.svg",
+    "images/chevron.svg"
+  ],
+  "permissions": [
+    "https://app.dorsata.com/acog*",
+    "https://app.dorsata-prerelease.com/acog*",
+    "https://app.dorsata-staging.com/acog*",
+    "https://app.dorsata-salesdemo.com/acog*",
+    "https://app.dorsata.com/ww*",
+    "https://app.dorsata-prerelease.com/ww*",
+    "https://app.dorsata-staging.com/ww*",
+    "https://app.dorsata-salesdemo.com/ww*",
+    "https://athenanet.athenahealth.com/*",
+    "https://preview.athenahealth.com/*",
+    "https://salesdemo.athenahealth.com/*",
+    "http://athenahealth.com/*",
+    "http://127.0.0.1:5000/*",
+    "tabs",
+    "storage",
+    "webRequest",
+    "cookies"
+  ],
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAiUynzLMHET74VJuao1ErxomleXevLlJ8zPYgW/OuuKMYLw4k79ttP8ofnyLhxljCsjOAIs8yZo6c5/eRJgAHLADvvmfAGMdtC67iCvkWiG4SFK12lkr9jE82mSaDfSc+2yllTFJvh4NkU9YbZloFucD+NLomoENH40TumNuowmTp88RUOY8zL4+Iq7M/iPn/ZnebSyj5O51vtmHmc2N5QB4DfCfW4a/oFo/tZzpN6IYuaPf4KiApT2GQTgVUemsJB8uhY5L5KuFDqoU2CPeOd2Bsje3+9DS9vs3UzefQiwdOqgf4qFKBAghzRwhbl6w3OJIsReyLnGZGyOHE+zuOYQIDAQAB"
+}

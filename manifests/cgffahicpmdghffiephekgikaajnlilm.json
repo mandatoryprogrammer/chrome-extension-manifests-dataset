@@ -1,0 +1,79 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Muze",
+  "description": "Tab-Manager-Player to manage multiple music tabs with ease [YouTube, SoundCloud, JioSaavn, Gaana, Youtube Music]",
+  "version": "3.0.5",
+  "browser_action": {
+    "default_icon": "assets/images/logo/logo_new_48.png",
+    "default_popup": "index.html",
+    "default_title": "Muze : Your music companion"
+  },
+  "icons": {
+    "16": "assets/images/logo/logo_new_16.png",
+    "48": "assets/images/logo/logo_new_48.png",
+    "128": "assets/images/logo/logo_new_128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "https://www.youtube.com/*"
+  ],
+  "optional_permissions": [
+    "tabs",
+    "https://*/"
+  ],
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "vendor/js/jquery.min.js",
+      "background/index.js"
+    ]
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/*"
+      ],
+      "js": [
+        "vendor/js/jquery.min.js",
+        "content/content_script.js"
+      ],
+      "css": [
+        "content/content.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "assets/content/content.html",
+    "assets/images/logo/logo_new_128.png"
+  ],
+  "commands": {
+    "toggle-player": {
+      "suggested_key": {
+        "default": "Alt+K",
+        "windows": "Alt+K",
+        "mac": "Alt+K"
+      },
+      "description": "Toggle player"
+    },
+    "next-song": {
+      "suggested_key": {
+        "default": "Alt+L",
+        "windows": "Alt+L",
+        "mac": "Alt+L"
+      },
+      "description": "Go to next song"
+    },
+    "prev-song": {
+      "suggested_key": {
+        "default": "Alt+J",
+        "windows": "Alt+J",
+        "mac": "Alt+J"
+      },
+      "description": "Go to previous song"
+    }
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Nelis for Gmail",
+  "short_name": "Nelis for GMail",
+  "version": "1.2.4",
+  "description": "Nelis extension for Gmail",
+  "homepage_url": "http://www.nelis.fr",
+  "manifest_version": 2,
+  "icons": {
+    "48": "img/nelis_48.png",
+    "128": "img/nelis_128.png"
+  },
+  "background": {
+    "scripts": [
+      "js/vendor/oauth2/oauth2.js",
+      "js/vendor/jquery.min.js",
+      "js/scripts/global.js",
+      "js/lib.js",
+      "js/scripts/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.google.com/robots.txt*"
+      ],
+      "js": [
+        "js/vendor/oauth2/oauth2_inject.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://www.google.com/robots.txt*"
+      ],
+      "js": [
+        "js/vendor/oauth2/oauth2_inject.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://mail.google.com/*"
+      ],
+      "js": [
+        "js/vendor/jquery.min.js",
+        "js/vendor/parsley.min.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://mail.google.com/*"
+      ],
+      "js": [
+        "js/vendor/jquery.ba-bbq.js",
+        "js/vendor/jquery.jgrowl.js",
+        "js/vendor/handlebars.js",
+        "js/vendor/select2.min.js",
+        "js/vendor/jquery.pageslide.min.js",
+        "js/scripts/global.js",
+        "js/scripts/gmailInjection.js",
+        "js/lib.js",
+        "js/scripts/contentscript.js"
+      ],
+      "css": [
+        "css/vendor/jgrowl.css",
+        "css/vendor/select2.css",
+        "css/vendor/jquery.pageslide.css",
+        "css/vendor/parsley.css",
+        "css/gmail.css",
+        "css/fonts.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "options_page": "html/settings.html",
+  "permissions": [
+    "tabs",
+    "storage",
+    "*://*/*"
+  ],
+  "web_accessible_resources": [
+    "img/*",
+    "css/fonts/*",
+    "html/tmpl/*",
+    "html/settings.html",
+    "js/vendor/jquery.min.js",
+    "js/vendor/jquery-2.0.3.min.map",
+    "js/vendor/oauth2/oauth2.html",
+    "js/vendor/gmail.js",
+    "js/scripts/gmailPost.js"
+  ]
+}

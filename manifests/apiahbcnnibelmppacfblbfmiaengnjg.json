@@ -1,0 +1,80 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Cont3nt.com Requester",
+  "short_name": "Cont3nt.com",
+  "description": "This extension enables you to request to license content easily through Twitter and Tweetdeck",
+  "version": "1.2.0",
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/icon19.png",
+      "38": "icons/icon38.png"
+    }
+  },
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "scripts/lib/jquery.min.js",
+        "scripts/lib/underscore.js",
+        "scripts/lib/angular.min.js",
+        "scripts/lib/angular-route.js",
+        "scripts/lib/angular-sanitize.js",
+        "scripts/lib/ui-bootstrap-tpls-0.6.0.js",
+        "scripts/requester.angular.js",
+        "scripts/content.js"
+      ],
+      "css": [
+        "css/content.css"
+      ]
+    },
+    {
+      "matches": [
+        "http://twitter.com/*",
+        "https://twitter.com/*"
+      ],
+      "js": [
+        "scripts/connectors/twitterConnector.js",
+        "scripts/triggers/twitterTrigger.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://tweetdeck.twitter.com/*",
+        "https://tweetdeck.twitter.com/*"
+      ],
+      "js": [
+        "scripts/connectors/tweetdeckConnector.js",
+        "scripts/triggers/tweetdeckTrigger.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "templates/requester.html",
+    "scripts/lib/underscore-min.map",
+    "icons/extensionTwitterIcon.png",
+    "icons/extensionTwitterIconSmall.png",
+    "icons/spinner.gif",
+    "scss/cont3nt/fonts/cont3nt.eot",
+    "scss/cont3nt/fonts/cont3nt.eot",
+    "scss/cont3nt/fonts/cont3nt.ttf",
+    "scss/cont3nt/fonts/cont3nt.woff",
+    "scss/cont3nt/fonts/cont3nt.svg#cont3nt"
+  ],
+  "permissions": [
+    "tabs",
+    "notifications",
+    "http://*/*",
+    "https://*/*",
+    "http://cont3nt.com/*",
+    "https://ajax.googleapis.com/*"
+  ]
+}

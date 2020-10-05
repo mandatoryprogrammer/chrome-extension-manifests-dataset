@@ -1,0 +1,124 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "author": "K.",
+  "name": "__MSG_EXTENSION_NAME__",
+  "description": "__MSG_EXTENSION_DESCRIPTION__",
+  "version": "10.2017.12.22",
+  "default_locale": "ko",
+  "icons": {
+    "16": "resources/extension_icons/icon16.png",
+    "24": "resources/extension_icons/icon24.png",
+    "32": "resources/extension_icons/icon32.png",
+    "64": "resources/extension_icons/icon64.png",
+    "128": "resources/extension_icons/icon128.png",
+    "256": "resources/extension_icons/icon256.png",
+    "512": "resources/extension_icons/icon512.png"
+  },
+  "permissions": [
+    "storage",
+    "unlimitedStorage",
+    "tabs"
+  ],
+  "background": {
+    "scripts": [
+      "libraries/Hashing/js-sha3/sha3.js",
+      "libraries/Identicon/Jdenticon/jdenticon@1.7.2.js",
+      "libraries/Identicon/identicon.js/pnglib.js",
+      "libraries/Identicon/identicon.js/identicon.js",
+      "core.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://gall.dcinside.com/board/lists*",
+        "http://gall.dcinside.com/board/view*",
+        "http://gall.dcinside.com/mgallery/board/lists*",
+        "http://gall.dcinside.com/mgallery/board/view*",
+        "http://gall.dcinside.com/search/kakao*"
+      ],
+      "all_frames": true,
+      "js": [
+        "to-be-injected/realtime_post_entries.js"
+      ],
+      "css": [
+        "to-be-injected/post_entries.css"
+      ]
+    },
+    {
+      "matches": [
+        "http://gall.dcinside.com/board/lists*",
+        "http://gall.dcinside.com/board/view*",
+        "http://gall.dcinside.com/mgallery/board/lists*",
+        "http://gall.dcinside.com/mgallery/board/view*"
+      ],
+      "all_frames": true,
+      "js": [
+        "to-be-injected/identicon.js"
+      ],
+      "css": [
+        "to-be-injected/identicon.css"
+      ]
+    },
+    {
+      "matches": [
+        "http://gall.dcinside.com/board/lists*",
+        "http://gall.dcinside.com/board/view*",
+        "http://gall.dcinside.com/mgallery/board/lists*",
+        "http://gall.dcinside.com/mgallery/board/view*"
+      ],
+      "all_frames": false,
+      "css": [
+        "to-be-injected/page_glitch_fix.css"
+      ]
+    },
+    {
+      "matches": [
+        "http://gall.dcinside.com/board/lists*",
+        "http://gall.dcinside.com/board/view*",
+        "http://gall.dcinside.com/mgallery/board/lists*",
+        "http://gall.dcinside.com/mgallery/board/view*",
+        "http://gall.dcinside.com/search/kakao*"
+      ],
+      "all_frames": true,
+      "js": [
+        "to-be-injected/cryptocurrency_icon_support.js"
+      ],
+      "css": [
+        "to-be-injected/cryptocurrency_icon_support.css"
+      ]
+    },
+    {
+      "matches": [
+        "http://gall.dcinside.com/board/view/*"
+      ],
+      "js": [
+        "to-be-injected/realtime_post.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "resources/cryptocurrency_icons/*",
+    "resources/Cryptocoins/*"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "16": "resources/extension_icons/icon16.png",
+      "24": "resources/extension_icons/icon24.png",
+      "32": "resources/extension_icons/icon32.png",
+      "64": "resources/extension_icons/icon64.png",
+      "128": "resources/extension_icons/icon128.png",
+      "256": "resources/extension_icons/icon256.png",
+      "512": "resources/extension_icons/icon512.png"
+    },
+    "default_title": "__MSG_EXTENSION_NAME__",
+    "default_popup": "settings_popup.html"
+  },
+  "options_page": "settings.html",
+  "options_ui": {
+    "page": "settings.html",
+    "chrome_style": true
+  }
+}

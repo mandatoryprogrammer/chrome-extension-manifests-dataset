@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Awoobooru",
+  "version": "1.2.0",
+  "icons": {
+    "32": "icon32.png",
+    "64": "icon64.png",
+    "128": "icon128.png"
+  },
+  "description": "Extra Danbooru functions",
+  "permissions": [
+    "tabs",
+    "storage"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "32": "icon32.png",
+      "64": "icon64.png",
+      "128": "icon128.png"
+    },
+    "default_title": "Awoobooru",
+    "default_popup": "html/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.donmai.us/*"
+      ],
+      "js": [
+        "scripts/jquery-3.3.1.min.js",
+        "scripts/bootstrap.bundle.min.js",
+        "scripts/content.js"
+      ],
+      "css": [
+        "css/bootstrap.min.css",
+        "css/global.css",
+        "themes/dark.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.donmai.us/*"
+      ],
+      "js": [
+        "scripts/multitag.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "*://*.donmai.us/posts/*"
+      ],
+      "js": [
+        "scripts/posts.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

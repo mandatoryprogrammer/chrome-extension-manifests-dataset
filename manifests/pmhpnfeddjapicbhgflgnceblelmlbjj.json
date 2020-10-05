@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Pocketdoor Add Item",
+  "short_name": "Pocketdoor",
+  "version": "1.2.91",
+  "default_locale": "en",
+  "description": "Add an item to Pocketdoor from the URL you are viewing!",
+  "icons": {
+    "16": "icons/pocketdoor16.png",
+    "48": "icons/pocketdoor48.png",
+    "128": "icons/pocketdoor128.png"
+  },
+  "permissions": [
+    "https://app.pocketdoor.com/*",
+    "tabs",
+    "activeTab",
+    "storage"
+  ],
+  "browser_action": {
+    "default_title": "Add to Pocketdoor",
+    "default_icon": {
+      "16": "icons/20.png",
+      "32": "icons/32.png",
+      "40": "icons/40.png",
+      "50": "icons/50.png"
+    },
+    "default_popup": "index.html"
+  },
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com https://www.googletagmanager.com 'sha256-GgRxrVOKNdB4LrRsVPDSbzvfdV4UqglmviH9GoBJ5jk='; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://app.pocketdoor.com/*"
+      ],
+      "js": [
+        "getToken.js"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "/static/js/parser.js",
+        "/static/js/0.chunk.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Linguist Unknown",
+  "description": "Language Savant for unknown, lost or new programming languages on GitHub.",
+  "version": "1.0.7.1",
+  "browser_action": {
+    "default_icon": "./img/linguist-unknown-icon.png",
+    "default_popup": "./src/views/popup.html"
+  },
+  "icons": {
+    "16": "./img/linguist-unknown-icon-16.png",
+    "48": "./img/linguist-unknown-icon-48.png",
+    "128": "./img/linguist-unknown-icon-128.png"
+  },
+  "permissions": [
+    "tabs",
+    "notifications",
+    "http://*/",
+    "https://*/",
+    "activeTab",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.github.com/*",
+        "https://www.github.com/*",
+        "http://github.com/*",
+        "https://github.com/*"
+      ],
+      "css": [
+        "./src/css/linguist_style.css"
+      ],
+      "js": [
+        "./src/scripts-min/js-yaml.min.js",
+        "./src/scripts-min/linguist-bootstrap-chrome.min.js",
+        "./src/scripts-min/linguist.min.js"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

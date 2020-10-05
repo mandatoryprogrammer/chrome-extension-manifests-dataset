@@ -1,0 +1,76 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Athena",
+  "version": "0.1.7.0000",
+  "manifest_version": 2,
+  "description": "",
+  "permissions": [
+    "<all_urls>",
+    "clipboardWrite",
+    "storage",
+    "tabs",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "contentstyle.css"
+      ]
+    }
+  ],
+  "background": {
+    "page": "pdfHandler.html"
+  },
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_title": "Athena"
+  },
+  "externally_connectable": {
+    "matches": [
+      "https://*.useathena.io/*",
+      "https://*.useathena.co/*"
+    ]
+  },
+  "storage": {
+    "managed_schema": "preferences_schema.json"
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "chrome_style": true
+  },
+  "icons": {
+    "16": "icon_16.png",
+    "32": "icon_32.png",
+    "48": "icon_48.png",
+    "128": "icon_128.png"
+  },
+  "content_security_policy": "script-src 'self' https://www.useathena.io/extensionApp/annotationController.js https://www.useathena.io/extensionApp/sidePanel.js https://www.useathena.io/extensionApp/sidepanelframe.js https://use.fortawesome.com/0796e41f.js https://apis.google.com/js/api.js https://apis.google.com/_/scs/apps-static/_/js/k=oz.gapi.en.wOJqE8XK0UA.O/m=gapi_iframes/rt=j/sv=1/d=1/ed=1/am=wQ/rs=AGLTcCNkE55MWHlS1_apO5kxBrI2RKq_9w/cb=gapi.loaded_0; object-src 'self'",
+  "options_page": "options/options.html",
+  "web_accessible_resources": [
+    "content.js",
+    "*/content.js",
+    "sidepanelframe.html",
+    "sidePanel.html",
+    "*/annotationController.js",
+    "content/web/viewer.html",
+    "http:/*",
+    "https:/*",
+    "ftp:/*",
+    "file:/*",
+    "chrome-extension:/*",
+    "blob:*",
+    "data:*",
+    "filesystem:/*",
+    "drive:*"
+  ]
+}

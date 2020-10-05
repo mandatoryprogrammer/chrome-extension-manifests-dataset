@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "it's my data",
+  "version": "0.3.1",
+  "description": "A tool to increase the awareness of your digital data traces.",
+  "manifest_version": 2,
+  "homepage_url": "https://itsmydata.de",
+  "default_locale": "en",
+  "icons": {
+    "16": "logo_16.png",
+    "48": "logo_48.png",
+    "128": "logo.png"
+  },
+  "web_accessible_resources": [
+    "manifest.json"
+  ],
+  "permissions": [
+    "storage",
+    "notifications",
+    "tabs",
+    "cookies",
+    "activeTab",
+    "webRequest",
+    "<all_urls>",
+    "*://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "api.js",
+      "background.js",
+      "vendors.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "logo-off.png",
+    "default_title": "It's my data",
+    "default_popup": "login.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "vendors.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "exclude_matches": [
+        "*://*/_/chrome/newtab*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "all_frames": false,
+      "run_at": "document_idle"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Youtube Video Box",
+  "description": "This extension plays youtube video running from any tab in your current tab",
+  "version": "1.3",
+  "icons": {
+    "16": "assets/youtube16.png",
+    "128": "assets/youtube128.png"
+  },
+  "browser_action": {
+    "default_icon": "assets/youtubeImage.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage"
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "content_security_policy": "script-src 'self' https://apis.google.com;assets-cdn.github.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.youtube.com/*"
+      ],
+      "js": [
+        "contentscripts/youtubecontrols.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "css": [
+        "resources/jquery-ui.min.css"
+      ],
+      "js": [
+        "resources/jquery-3.2.1.min.js",
+        "resources/jquery-ui.min.js",
+        "resources/iframe_api.js",
+        "contentscripts/youtubebox.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "assets/close.png"
+  ]
+}

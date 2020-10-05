@@ -1,0 +1,82 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Lingotek In-Context Workbench",
+  "description": "A powerful, in-context translation and review tool that changes the way companies distribute content to a global audience.",
+  "version": "1.5.8.2",
+  "browser_action": {
+    "default_icon": "icons/chevron_38x38.png",
+    "default_popup": "popup/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "main.js"
+    ]
+  },
+  "icons": {
+    "16": "icons/orangeChevron-16.png",
+    "48": "icons/orangeChevron-48.png",
+    "128": "icons/orangeChevron-128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "dist/contentScripts.min.js"
+      ],
+      "css": [
+        "app/css/angular-csp.css"
+      ]
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "identity",
+    "clipboardWrite",
+    "tabs",
+    "contextMenus",
+    "cookies",
+    "storage",
+    "unlimitedStorage",
+    "https://ajax.googleapis.com/",
+    "https://gmc.lingotek.com/*",
+    "https://cms.lingotek.com/*",
+    "https://myaccount.lingotek.com/*"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "externally_connectable": {
+    "matches": [
+      "*://cms.lingotek.com/*",
+      "*://myaccount.lingotek.com/*",
+      "*://clone.lingotek.com/*",
+      "*://*.lingotek.com/*",
+      "*://10.0.14.254/*",
+      "*://10.0.14.235/*",
+      "*://10.0.15.21/*",
+      "*://10.0.8.29/"
+    ]
+  },
+  "commands": {
+    "toggle-workbench": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Space"
+      },
+      "description": "Show/hide the workbench"
+    }
+  },
+  "options_ui": {
+    "page": "options/lingotek-options.html",
+    "chrome_style": false
+  },
+  "web_accessible_resources": [
+    "app/*",
+    "lib/*",
+    "options/*",
+    "popup/*",
+    "templates/*",
+    "bower_components/*",
+    "img/*"
+  ]
+}

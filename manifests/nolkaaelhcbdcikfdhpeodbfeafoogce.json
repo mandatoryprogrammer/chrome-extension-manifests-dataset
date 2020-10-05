@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Weather 123",
+  "version": "0.0.19",
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' 'sha256-WOdSzz11/3cpqOdrm89LBL2UPwEU9EhbDtMy2OciEhs=' 'unsafe-eval' https://query.yahooapis.com/ https://*.amazonaws.com https://*.googletagmanager.com  https://*.google-analytics.com https://slicefactory.com https://extensionfactory.com https://*.slicefactory.com https://*.extensionfactory.com https://*.addthis.com https://*.sharethis.com; object-src 'self';",
+  "description": "You can know weather in your geo position.",
+  "homepage_url": "http://search.weather123.info/",
+  "icons": {
+    "19": "icons/icon19.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "page": "src/background/background.html",
+    "persistent": true
+  },
+  "page_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "Weather 123",
+    "default_popup": "src/page_action/page_action.html"
+  },
+  "chrome_url_overrides": {
+    "newtab": "src/override/create_page.html"
+  },
+  "permissions": [
+    "chrome://favicon/",
+    "cookies",
+    "tabs",
+    "geolocation",
+    "bookmarks",
+    "http://*/",
+    "https://*/",
+    "file:///*/*",
+    "https://*.google.com/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.google.com/*"
+      ],
+      "css": [
+        "css/app.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.google.com/*",
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "src/inject/inject.js",
+        "src/override/js/create_page.js"
+      ]
+    }
+  ]
+}

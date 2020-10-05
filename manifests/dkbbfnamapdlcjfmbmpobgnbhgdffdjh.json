@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Herald Syndication Snoop",
+  "short_name": "Syndi-Snoop",
+  "version": "0.15.8",
+  "description": "Never get baited again - clearly see where an article really came from",
+  "icons": {
+    "16": "icon_16.png",
+    "48": "icon_48.png",
+    "128": "icon_128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.nzherald.co.nz/"
+      ],
+      "js": [
+        "data.js",
+        "lib/lib.js",
+        "lib/nzh.js",
+        "headlines.js"
+      ],
+      "run-at": "document_start"
+    },
+    {
+      "matches": [
+        "http://www.nzherald.co.nz/*/article.cfm*"
+      ],
+      "js": [
+        "data.js",
+        "lib/lib.js",
+        "lib/nzh.js",
+        "articlePage.js"
+      ],
+      "run-at": "document_start"
+    }
+  ],
+  "permissions": [
+    "storage",
+    "cookies",
+    "*://*.nzherald.co.nz/*"
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "web_accessible_resources": [
+    "icon_16.png"
+  ]
+}

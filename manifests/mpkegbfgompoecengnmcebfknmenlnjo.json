@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "PoliticsRemoval",
+  "description": "Remove unwanted politic post",
+  "version": "1.3",
+  "icons": {
+    "128": "images/icon.png"
+  },
+  "browser_action": {
+    "default_icon": "images/icon.png",
+    "default_title": "Poliremoval"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "webNavigation",
+    "storage",
+    "<all_urls>"
+  ],
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "script/jquery.js",
+      "script/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "css": [
+        "styles.css"
+      ],
+      "js": [
+        "script/jquery.js",
+        "script/setting.js",
+        "script/content.js"
+      ],
+      "matches": [
+        "https://www.facebook.com/*",
+        "https://www.facebook.com/",
+        "https://web.facebook.com/",
+        "https://web.facebook.com/*"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "setting/data.xml",
+    "images/setting.png",
+    "images/download.gif"
+  ]
+}

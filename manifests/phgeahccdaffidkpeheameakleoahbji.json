@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Smash Mini Calendar",
+  "version": "0.1.0.0",
+  "description": "Bookmark smash.gg events for future use.",
+  "background": {
+    "scripts": [
+      "js/axios.js",
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": "img/cal-logo.png",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://smash.gg/*",
+        "http://smash.gg/*"
+      ],
+      "js": [
+        "js/content.js"
+      ],
+      "css": [
+        "css/content.css",
+        "css/balloon.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "icons": {
+    "48": "img/cal-logo.png",
+    "96": "img/cal-logo.png"
+  },
+  "permissions": [
+    "contextMenus",
+    "storage",
+    "http://*/*",
+    "https://*/*",
+    "activeTab",
+    "tabs",
+    "notifications",
+    "https://smash.gg/*",
+    "http://smash.gg/*",
+    "unlimitedStorage"
+  ],
+  "web_accessible_resources": [
+    "img/*.png"
+  ],
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

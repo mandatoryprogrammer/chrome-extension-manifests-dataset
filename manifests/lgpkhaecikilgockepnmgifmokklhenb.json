@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "mindmeister-markdown",
+  "version": "0.0.3",
+  "manifest_version": 2,
+  "description": "Add Markdown Support to Mindmeister Notes",
+  "icons": {
+    "16": "images/icon-16.png",
+    "128": "images/icon-128.png"
+  },
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "page_action": {
+    "default_icon": {
+      "19": "images/icon-19.png",
+      "38": "images/icon-38.png"
+    },
+    "default_title": "mindmeister-markdown"
+  },
+  "web_accessible_resources": [
+    "bower_components/jquery/dist/jquery.min.map"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.mindmeister.com/*",
+        "https://www.mindmeister.com/*"
+      ],
+      "css": [
+        "styles/github-markdown.css",
+        "styles/github.css",
+        "styles/main.css"
+      ],
+      "js": [
+        "bower_components/jquery/dist/jquery.min.js",
+        "bower_components/marked/lib/marked.js",
+        "scripts/highlight.pack.js",
+        "scripts/contentscript.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "http://www.mindmeister.com/*",
+    "https://www.mindmeister.com/*"
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "version": "0.12.10",
+  "short_name": "DashOne",
+  "name": "DashOne",
+  "description": "Supercharge your new tab with intelligent widgets and smart bookmarks.",
+  "icons": {
+    "16": "logo-16.png",
+    "48": "logo-48.png",
+    "128": "logo-128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "unlimitedStorage",
+    "geolocation",
+    "chrome://favicon/"
+  ],
+  "optional_permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "*://*.linkedin.com/*",
+    "*://*.instagram.com/*",
+    "*://*.facebook.com/*",
+    "*://*.twitter.com/*",
+    "topSites"
+  ],
+  "content_scripts": [
+    {
+      "js": [
+        "fbInject.js"
+      ],
+      "matches": [
+        "https://m.facebook.com/*"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  },
+  "browser_action": {},
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://platform.twitter.com https://cdn.syndication.twimg.com 'sha256-5As4+3YpY62+l38PsxCEkjB1R4YtyktBtRScTJ3fyLU=' 'sha256-RYig4ZtBvtxJ2YkJaTM0Giz2FY+VgRiEn3fW7Nmj+iE=' 'sha256-Z2GClm90+OWDqVzZwHXymc2tj0Gap8f4Rcj6+r9+qNI=' 'sha256-YT+Say6nHvIWVMGFqbt4jek5+82jeTNUJ3pIPJYi0R4=' 'sha256-2p7Fn+dnWkj5QIPnEiG3XgyeV152TbNjqIdAMUST5ek='; object-src 'self'"
+}

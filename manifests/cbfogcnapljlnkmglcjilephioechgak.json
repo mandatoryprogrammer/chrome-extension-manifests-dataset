@@ -1,0 +1,83 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Adblocker.Global",
+  "version": "1.0.7",
+  "commands": {
+    "launch-element-zapper": {
+      "description": "__MSG_popupTipZapper__"
+    },
+    "launch-element-picker": {
+      "description": "__MSG_popupTipPicker__"
+    },
+    "launch-logger": {
+      "description": "__MSG_popupTipLog__"
+    }
+  },
+  "default_locale": "ru",
+  "description": "__MSG_extShortDesc__",
+  "icons": {
+    "16": "img/icon_16.png",
+    "128": "img/icon_128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "img/browsericons/icon19.png",
+      "38": "img/browsericons/icon38.png"
+    },
+    "default_title": "Adblocker.Global",
+    "default_popup": "popup.html"
+  },
+  "author": "Adblocker.Global",
+  "background": {
+    "page": "background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "/js/vapi.js",
+        "/js/vapi-client.js",
+        "/js/contentscript.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "/js/scriptlets/subscriber.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "incognito": "split",
+  "minimum_chrome_version": "45.0",
+  "optional_permissions": [
+    "file:///*"
+  ],
+  "options_page": "dashboard.html",
+  "permissions": [
+    "management",
+    "contextMenus",
+    "privacy",
+    "storage",
+    "tabs",
+    "unlimitedStorage",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>"
+  ],
+  "short_name": "Adblocker.Global",
+  "storage": {
+    "managed_schema": "managed_storage.json"
+  }
+}

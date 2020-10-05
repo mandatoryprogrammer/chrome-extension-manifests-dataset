@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Reddit Multiple Accounts Switcher & Manager",
+  "description": "One-click throwaway generator, account switcher and inbox checker.",
+  "version": "0.11",
+  "icons": {
+    "128": "icon128.png"
+  },
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "common.js",
+      "common-bm.js",
+      "background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "icon128.png",
+    "default_popup": "main.html",
+    "default_title": "Reddit Accounts"
+  },
+  "options_page": "options.html",
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true,
+    "open_in_tab": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://reddit.com/*",
+        "http://*.reddit.com/*",
+        "https://reddit.com/*",
+        "https://*.reddit.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "alarms",
+    "storage",
+    "notifications",
+    "cookies",
+    "http://reddit.com/",
+    "http://*.reddit.com/",
+    "https://reddit.com/",
+    "https://*.reddit.com/"
+  ]
+}

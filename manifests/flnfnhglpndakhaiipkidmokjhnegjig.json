@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "vtkkMutiSub",
+  "description": "a chrome extension allow you to add secondary subtitle on KKTV.",
+  "version": "1.2.1",
+  "default_locale": "zh_TW",
+  "minimum_chrome_version": "49",
+  "icons": {
+    "16": "icons/kk16.png",
+    "32": "icons/kk32.png",
+    "48": "icons/kk48.png",
+    "128": "icons/kk128.png"
+  },
+  "page_action": {
+    "default_popup": "popups/default.html",
+    "default_icon": {
+      "16": "icons/kk16.png",
+      "32": "icons/kk32.png",
+      "48": "icons/kk48.png",
+      "128": "icons/kk128.png"
+    }
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "background": {
+    "scripts": [
+      "build/background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "https://www.kktv.me/*",
+    "declarativeContent",
+    "tabs"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.kktv.me/*"
+      ],
+      "js": [
+        "build/inject.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://www.kktv.me/*"
+      ],
+      "js": [
+        "build/contentscript.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

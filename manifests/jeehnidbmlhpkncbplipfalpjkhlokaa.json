@@ -1,0 +1,121 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Poll Everywhere for Google Slides",
+  "short_name": "Poll Everywhere",
+  "author": "Poll Everywhere, Inc.",
+  "homepage_url": "https://www.polleverywhere.com/app/google-slides",
+  "version": "1.16.7",
+  "description": "Live audience response polling in Google Slides",
+  "icons": {
+    "16": "images/icon16.png",
+    "32": "images/icon32.png",
+    "48": "images/icon48.png",
+    "64": "images/icon64.png",
+    "128": "images/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "javascripts/logging.js",
+      "javascripts/navigation_events.js",
+      "javascripts/rollbar_reporting.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://docs.google.com/presentation/*/edit*",
+        "*://docs.google.com/*/presentation/*/edit*",
+        "*://docs.google.com/*/*/presentation/*/edit*"
+      ],
+      "exclude_globs": [
+        "*rm=minimal*",
+        "*invite=*"
+      ],
+      "js": [
+        "javascripts/edit_loop.js"
+      ],
+      "css": [
+        "stylesheets/all.css"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://docs.google.com/presentation/*"
+      ],
+      "js": [
+        "javascripts/presentation_loop.js"
+      ],
+      "css": [
+        "stylesheets/all.css"
+      ],
+      "all_frames": true,
+      "run_at": "document_end",
+      "match_about_blank": true
+    },
+    {
+      "matches": [
+        "*://presenter.polleverywhere.com/*",
+        "*://beta.polleverywhere.com/*"
+      ],
+      "js": [
+        "javascripts/inject_fn.js",
+        "javascripts/inject_binding_layer.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://docs.google.com/picker*",
+        "*://docs.google.com/*/picker*",
+        "*://docs.google.com/*/*/picker*"
+      ],
+      "js": [
+        "javascripts/uploader_loader.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://viz.polleverywhere.com/*"
+      ],
+      "include_globs": [
+        "*platform=goog_presenter*"
+      ],
+      "js": [
+        "javascripts/keyboard_loader.js",
+        "javascripts/inject_fn.js",
+        "javascripts/inject_slide_visibility.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://cdnjs.cloudflare.com; object-src 'self'",
+  "externally_connectable": {
+    "matches": [
+      "*://*.polleverywhere.com/*",
+      "*://*.pollev.com/*",
+      "*://polleverywhere.com/*"
+    ]
+  },
+  "incognito": "spanning",
+  "offline_enabled": false,
+  "permissions": [
+    "tabs",
+    "webNavigation",
+    "https://docs.google.com/presentation/*",
+    "*://presenter.polleverywhere.com/*",
+    "*://viz.polleverywhere.com/*",
+    "storage"
+  ],
+  "web_accessible_resources": [
+    "fonts/pollev_assets/*",
+    "javascripts/*"
+  ]
+}

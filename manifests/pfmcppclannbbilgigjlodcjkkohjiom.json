@@ -1,0 +1,39 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Movie Ratings",
+  "version": "1.6.2",
+  "description": "Retrieve movie ratings from Rotten Tomatoes.",
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "permissions": [
+    "contextMenus",
+    "tabs"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "listeners.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "display.html",
+    "display.js",
+    "config.js",
+    "listeners.js",
+    "lib/*.js"
+  ],
+  "content_security_policy": "script-src 'self' https://rt-fetcher.herokuapp.com; object-src 'self'"
+}

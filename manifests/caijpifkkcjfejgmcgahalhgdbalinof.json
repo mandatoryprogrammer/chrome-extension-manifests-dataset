@@ -1,0 +1,77 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_app_name__",
+  "version": "1.0.9",
+  "default_locale": "en",
+  "description": "__MSG_app_desc__",
+  "permissions": [
+    "<all_urls>",
+    "notifications",
+    "alarms",
+    "storage",
+    "management",
+    "idle",
+    "activeTab",
+    "tabs"
+  ],
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "background.js",
+      "js/jquery.min.js",
+      "js/jQuery.ajax.arraybuffer.js",
+      "js/rss-parser.js",
+      "js/htmlencode.js",
+      "js/moment-with-locales.js",
+      "js/common.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "js/feed_finder.js",
+        "doc_start.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "js": [
+        "js/feed_finder.js",
+        "doc_idle.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "images/rss-16.png",
+      "32": "images/rss-32.png",
+      "48": "images/rss-48.png",
+      "128": "images/rss-128.png"
+    }
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Shift+Alt+F"
+      },
+      "description": "Popup toggle"
+    }
+  },
+  "options_page": "options.html",
+  "icons": {
+    "16": "images/rss-16.png",
+    "32": "images/rss-32.png",
+    "48": "images/rss-48.png",
+    "128": "images/rss-128.png"
+  },
+  "manifest_version": 2
+}

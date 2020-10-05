@@ -1,0 +1,104 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "xmail",
+  "description": "Send private and secure emails; look for the green lock to know your email can only be read by recipient.",
+  "version": "0.8.2",
+  "manifest_version": 2,
+  "icons": {
+    "16": "resources/icon16.png",
+    "48": "resources/icon48.png",
+    "128": "resources/icon128.png"
+  },
+  "permissions": [
+    "storage",
+    "*://mail.google.com/",
+    "*://mail-attachment.googleusercontent.com/"
+  ],
+  "background": {
+    "scripts": [
+      "javascripts/event.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_title": "xmail",
+    "default_icon": "resources/icon16.png",
+    "default_popup": "popup/popup.html"
+  },
+  "sandbox": {
+    "pages": [
+      "pages/templates_sandbox.html"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://mail.google.com/*"
+      ],
+      "css": [],
+      "js": [
+        "lib/jquery-1.11.0.min.js",
+        "lib/underscore.js",
+        "lib/bootstrap/js/bootstrap.min.js",
+        "lib/jaml.js",
+        "lib/forge.min.js",
+        "javascripts/environment.js",
+        "javascripts/templates.js",
+        "javascripts/xmail.js",
+        "javascripts/xmail_crypt.js",
+        "javascripts/xmail_requests.js",
+        "javascripts/xmail_gui.js",
+        "javascripts/platform_chrome.js",
+        "javascripts/gmail_templates.js",
+        "javascripts/gmail_plugin.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "https://www.shwyz.ca/verify/*"
+      ],
+      "js": [
+        "lib/jquery-1.11.0.min.js",
+        "lib/underscore.js",
+        "lib/forge.min.js",
+        "javascripts/environment.js",
+        "javascripts/xmail.js",
+        "javascripts/xmail_crypt.js",
+        "javascripts/xmail_requests.js",
+        "javascripts/platform_chrome.js",
+        "javascripts/verification.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    "javascripts/inject.js",
+    "javascripts/gmail_inject.js",
+    "lib/jquery-1.11.0.min.js",
+    "lib/jquery-1.11.0.min.js.map",
+    "lib/jquery.balloon.min.js",
+    "lib/bootstrap/css/bootstrap.min.css",
+    "lib/bootstrap/fonts/glyphicons-halflings-regular.woff",
+    "lib/bootstrap/fonts/glyphicons-halflings-regular.ttf",
+    "lib/bootstrap/fonts/glyphicons-halflings-regular.svg",
+    "resources/loader.gif",
+    "resources/loader-small.gif",
+    "resources/icon16.png",
+    "resources/mini-lock.png",
+    "resources/mini-lock-open.png",
+    "resources/lock-open-small.png",
+    "resources/lock-closed-small.png",
+    "resources/lock-closed-big.png",
+    "resources/lock-open-big.png",
+    "resources/lock-closed.png",
+    "resources/lock-open.png",
+    "resources/lock-unavailable.png",
+    "resources/lock-key-pair.png",
+    "resources/lock-closed-small-white.png",
+    "resources/certificate-valid.png",
+    "resources/certificate-invalid.png"
+  ]
+}

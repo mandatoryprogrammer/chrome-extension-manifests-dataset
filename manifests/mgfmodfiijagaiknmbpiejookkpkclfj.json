@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://*.google.com; object-src 'self';",
+  "oauth2": {
+    "client_id": "393264643596-gs59li9pguufen4k206id7c7ob6n9fmn.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/spreadsheets"
+    ]
+  },
+  "version": "2.4.1",
+  "background": {
+    "scripts": [
+      "js/jquery-3.2.1.min.js",
+      "js/background.js",
+      "js/options.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "images/favicon.png",
+    "images/loader.gif",
+    "popup.html"
+  ],
+  "name": "TrueSocialMetrics Sync",
+  "description": "Sync TruesocialMetrics data with your spreadsheets",
+  "default_locale": "en",
+  "icons": {
+    "128": "images/favicon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/spreadsheets/*"
+      ],
+      "js": [
+        "js/content-scripts.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "storage",
+    "identity",
+    "cookies",
+    "https://accounts.google.com/"
+  ],
+  "options_page": "options.html",
+  "page_action": {
+    "default_icon": {
+      "19": "images/favicon.png"
+    },
+    "default_title": "TrueSocialMetrics Sync"
+  }
+}

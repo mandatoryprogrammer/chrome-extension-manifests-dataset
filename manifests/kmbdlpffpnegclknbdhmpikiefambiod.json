@@ -1,0 +1,91 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "FeedBlock – Fix social media annoyances",
+  "short_name": "FeedBlock",
+  "version": "0.4.1",
+  "manifest_version": 2,
+  "description": "Block things you don't want to see in your Facebook and Twitter feeds.",
+  "icons": {
+    "32": "icons/icon32.png",
+    "64": "icons/icon64.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "default_locale": "en",
+  "permissions": [
+    "webNavigation",
+    "tabs",
+    "https://log.declaredintent.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.facebook.com/*",
+        "https://twitter.com/*"
+      ],
+      "css": [
+        "inject/styles/feedblock-structure.css",
+        "inject/styles/feedblock-style.css"
+      ],
+      "js": [
+        "inject/scripts/lib/vue.js",
+        "inject/scripts/lib/vuex.js",
+        "inject/scripts/lib/deepmerge.min.js",
+        "inject/scripts/lib/jmespath.js",
+        "inject/scripts/lib/lodash.core.js",
+        "inject/scripts/comm.js",
+        "inject/scripts/errors.js",
+        "inject/scripts/funcs.js",
+        "inject/scripts/store/blocklists.js",
+        "inject/scripts/store/filters.js",
+        "inject/scripts/store/sidebar.js",
+        "inject/scripts/store/index.js",
+        "inject/scripts/components/common/filter-manual.js",
+        "inject/scripts/components/common/filter-toggles.js",
+        "inject/scripts/components/common/filter-sidebar.js",
+        "inject/scripts/components/common/filter-keywords.js",
+        "inject/scripts/components/common/filter-mentions.js",
+        "inject/scripts/components/common/filter-hashtags.js",
+        "inject/scripts/components/common/filter-blocklists.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://www.facebook.com/*"
+      ],
+      "css": [
+        "inject/styles/lib/spinner.css",
+        "inject/styles/facebook-structure.css",
+        "inject/styles/facebook-style.css"
+      ],
+      "js": [
+        "inject/scripts/components/facebook/feedblock-facebook.js",
+        "inject/scripts/components/facebook/filtered-feed.js",
+        "inject/scripts/components/facebook/loading.js",
+        "inject/scripts/injectFacebook.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://twitter.com/*"
+      ],
+      "css": [
+        "inject/styles/twitter-structure.css",
+        "inject/styles/twitter-style.css"
+      ],
+      "js": [
+        "inject/scripts/components/twitter/feedblock-twitter.js",
+        "inject/scripts/components/twitter/autocomplete-twitter.js",
+        "inject/scripts/components/twitter/filtered-feed.js",
+        "inject/scripts/injectTwitter.js"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

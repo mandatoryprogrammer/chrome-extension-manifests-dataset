@@ -1,0 +1,42 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "ReWord",
+  "description": "This extension allows the user to suggest fixes for content on Facebook.",
+  "version": "1.0",
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://connect.facebook.net blob: filesystem: chrome-extension-resource:; object-src 'self'",
+  "page_action": {
+    "default_icon": "icon.png"
+  },
+  "icons": {
+    "16": "icon16.png",
+    "32": "icon32.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "tabs",
+    "https://ajax.googleapis.com/",
+    "https://connect.facebook.net/en_US/sdk/debug.js",
+    "http://*/",
+    "https://*/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.facebook.com/*"
+      ],
+      "js": [
+        "rewordInterface.js"
+      ]
+    }
+  ],
+  "minimum_chrome_version": "28"
+}

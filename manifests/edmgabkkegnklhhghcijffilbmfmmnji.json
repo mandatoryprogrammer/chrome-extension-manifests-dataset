@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Geosurf Pro",
+  "version": "6.6.1",
+  "description": "",
+  "homepage_url": "http://www.geosurf.com",
+  "manifest_version": 2,
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "images/main-off-18.png",
+    "default_title": "GeoSurf",
+    "default_popup": "popup/popup.html"
+  },
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "js": [
+        "js/libs/jquery-3.2.1.min.js",
+        "js/content/content.js",
+        "js/content/sso.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "js/content/getLocation.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self';",
+  "icons": {
+    "16": "icons/16.png",
+    "18": "icons/18.png",
+    "32": "icons/32.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "permissions": [
+    "<all_urls>",
+    "proxy",
+    "browsingData",
+    "webRequest",
+    "webRequestBlocking",
+    "cookies",
+    "storage",
+    "https://api.geosurf.io/*",
+    "https://api-toolbar.geosurf.io/*",
+    "https://toolbar.geosurf.com/*"
+  ],
+  "web_accessible_resources": [
+    "images/cookies_ok.png",
+    "flags/*"
+  ]
+}

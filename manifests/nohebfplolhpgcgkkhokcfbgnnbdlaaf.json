@@ -1,0 +1,75 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon.png"
+  },
+  "browser_action": {
+    "default_icon": "images/icon.png"
+  },
+  "background": {
+    "scripts": [
+      "js/config.js",
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*",
+        "https://us-central1-blueticks-v2.cloudfunctions.net/*",
+        "https://maps.googleapis.com/",
+        "https://blueticks.io/*",
+        "https://sm.blueticks.io/*",
+        "https://app.blueticks.io/*",
+        "https://maps.googleapis.com/*"
+      ],
+      "js": [
+        "js/inboxsdk.js",
+        "js/config.js",
+        "js/blueticks.js"
+      ],
+      "css": [
+        "css/flatpickr.min.css",
+        "css/common.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "background",
+    "notifications",
+    "tabs",
+    "https://mail.google.com/",
+    "https://www.inboxsdk.com/",
+    "https://inbox.google.com/",
+    "https://blueticks.io/*",
+    "https://app.blueticks.io/*",
+    "https://sm.blueticks.io/*",
+    "*://us-central1-blueticks-v2.cloudfunctions.net/*",
+    "https://maps.googleapis.com/",
+    "https://fcm.googleapis.com/*",
+    "*://*.google.com/",
+    "<all_urls>",
+    "webRequest",
+    "webRequestBlocking",
+    "gcm",
+    "storage",
+    "cookies",
+    "sessions"
+  ],
+  "web_accessible_resources": [
+    "js/*",
+    "html/*",
+    "css/*",
+    "images/*"
+  ],
+  "content_security_policy": "script-src  'self' 'unsafe-eval' https://maps.googleapis.com https://maps.gstatic.com https://maxcdn.bootstrapcdn.com https://cdnjs.cloudflare.com https://www.gstatic.com https://blueticks.io/ https://sm.blueticks.io/ https://fcm.googleapis.com/ https://us-central1-blueticks-v2.cloudfunctions.net https://www.google.com; object-src 'self'",
+  "name": "Blueticks",
+  "version": "1.0.7",
+  "description": "Be in the know what happens to your emails after you press send with real-time feedback when any of the recipient opens your email.",
+  "short_name": "Blueticks"
+}

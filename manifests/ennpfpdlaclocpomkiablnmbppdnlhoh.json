@@ -1,0 +1,91 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "background": {
+    "scripts": [
+      "core/compat.js",
+      "core/omnibox.js",
+      "core/command/base.js",
+      "core/command/simple.js",
+      "core/command/history.js",
+      "core/command/manager.js",
+      "settings.js",
+      "deminifier.js",
+      "search/book.js",
+      "search/crate.js",
+      "search/attribute.js",
+      "search/lint.js",
+      "search/docs/base.js",
+      "search/docs/std.js",
+      "search/docs/nightly.js",
+      "search/docs/crate-doc.js",
+      "index/attributes.js",
+      "index/books.js",
+      "index/crates.js",
+      "index/std-docs.js",
+      "index/lints.js",
+      "index/labels.js",
+      "index/commands.js",
+      "command/label.js",
+      "command/help.js",
+      "command/stable.js",
+      "main.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "128": "rust.png",
+      "16": "rust.png",
+      "48": "rust.png"
+    },
+    "default_popup": "popup/index.html",
+    "default_title": "The ultimate search extension for Rust"
+  },
+  "content_scripts": [
+    {
+      "css": [
+        "script/docs-rs.css"
+      ],
+      "js": [
+        "script/lib.js",
+        "script/docs-rs.js",
+        "libs/semver.js"
+      ],
+      "matches": [
+        "*://docs.rs/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "css": [],
+      "js": [
+        "script/lib.js",
+        "script/nightly-std.js"
+      ],
+      "matches": [
+        "*://doc.rust-lang.org/nightly/std/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'; script-src-elem 'self' https://rust.extension.sh/crates/index.js;",
+  "description": "A handy browser extension to search Rust docs and crates, etc in the address bar instantly!",
+  "icons": {
+    "128": "rust.png",
+    "16": "rust.png",
+    "48": "rust.png"
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxOX+QfzcFnxPwwmzXDhuU59XGCSMZq+FGo0vOx/ufg/Vw7HfKEPVb9TKzrGtqW38kafWkjxOxGhF7VyyX2ymi55W0xqf8BedePbvMtV6H1tY5bscJ0dLKGH/ZG4T4f645LgvOWOBgyv8s3NDWXzwOMS57ER1y+EtHjDsWD1M0nfe0VCCLW18QlAsNTHfLZk6lUeEeGXZrl6+jK+pZxwhQFmc8cJvOyw7uAq6IJ9lnGDvxFVjGUepA0lKbLuIZjN3p70mgVUIuBYzKE6R8HDk4oBbKAK0HyyKfnuAYbfwVYotHw4def+OW9uADSlZEDC10wwIpU9NoP3szh+vWSnk0QIDAQAB",
+  "manifest_version": 2,
+  "name": "Rust Search Extension",
+  "omnibox": {
+    "keyword": "rs"
+  },
+  "permissions": [
+    "tabs"
+  ],
+  "version": "0.11.0",
+  "web_accessible_resources": [
+    "script/add-search-index.js",
+    "script/add-nightly-search-index.js"
+  ]
+}

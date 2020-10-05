@@ -1,0 +1,74 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "version": "1.2.6",
+  "manifest_version": 2,
+  "description": "__MSG_appDescription__",
+  "author": "4IT",
+  "homepage_url": "https://www.facebook.com/groups/4it.community/",
+  "icons": {
+    "16": "images/icon-16.png",
+    "32": "images/icon-32.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png",
+    "256": "images/icon-256.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "scripts/libs/underscore-min.js",
+      "scripts/libs/apps.js",
+      "scripts/bg.js",
+      "scripts/config.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "cookies",
+    "notifications",
+    "contextMenus",
+    "storage",
+    "https://*.facebook.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.facebook.com/*"
+      ],
+      "exclude_matches": [
+        "https://m.facebook.com/*",
+        "https://touch.facebook.com/*",
+        "https://mobile.facebook.com/*",
+        "https://mbasic.facebook.com/*",
+        "https://graph.facebook.com/*",
+        "https://developers.facebook.com/*",
+        "https://code.facebook.com/*"
+      ],
+      "js": [
+        "scripts/contentscript.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "images/icon-16.png",
+      "32": "images/icon-32.png",
+      "48": "images/icon-48.png",
+      "128": "images/icon-128.png"
+    },
+    "default_title": "__MSG_appName__"
+  },
+  "options_ui": {
+    "chrome_style": true,
+    "page": "options.html?type=chrome_style"
+  },
+  "web_accessible_resources": [
+    "images/*",
+    "styles/*",
+    "scripts/*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

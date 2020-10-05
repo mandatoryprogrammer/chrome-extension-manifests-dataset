@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "SpongeWise Flashcard Clipper",
+  "short_name": "SpongeWise",
+  "description": "Flashcard clipper for any webpage. Add notes and quiz questions. Learn and memorize using spaced repetition to remember everything.",
+  "version": "5.0.0",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "icon48.png",
+    "default_title": "SpongeWise"
+  },
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "scripts/parse.min.js",
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.spongewise.com/*",
+        "https://localhost:3443/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "production.html",
+    "localhost.html"
+  ]
+}

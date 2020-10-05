@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "__MSG_appDescription__",
+  "homepage_url": "https://github.com/mariotacke",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "src/background/background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "__MSG_appName__",
+    "default_popup": "src/popup/index.html"
+  },
+  "permissions": [
+    "https://plex.tv/users/sign_in.xml",
+    "https://plex.tv/pms/servers.xml"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.imdb.com/title/*"
+      ],
+      "js": [
+        "src/plugins/imdb/index.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://www.rottentomatoes.com/m/*"
+      ],
+      "js": [
+        "src/plugins/rottentomatoes/index.js"
+      ]
+    }
+  ]
+}

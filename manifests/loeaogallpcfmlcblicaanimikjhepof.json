@@ -1,0 +1,108 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "TEA: Traffic Exchange Assistant",
+  "short_name": "TEA",
+  "version": "0.2.6",
+  "description": "__MSG_messageDescription__",
+  "default_locale": "en",
+  "homepage_url": "http://exprimiblog.blogspot.com",
+  "icons": {
+    "16": "data/icon-16.png",
+    "48": "data/icon-48.png",
+    "64": "data/icon.png",
+    "96": "data/icon-96.png",
+    "128": "data/icon-128.png"
+  },
+  "permissions": [
+    "webNavigation",
+    "storage",
+    "tabs",
+    "activeTab",
+    "*://*.youlikehits.com/*",
+    "*://youlikehits.com/*",
+    "*://*.easyhits4u.com/*",
+    "*://easyhits4u.com/*",
+    "*://*.comparteunclic.com/*",
+    "*://comparteunclic.com/*",
+    "*://damefans.com/*",
+    "*://*.damefans.com/*",
+    "*://*.linkcollider.com/*",
+    "*://linkcollider.com/*",
+    "http://skylnk.co/Thiza",
+    "notifications",
+    "contextMenus",
+    "*://schema.org/Photograph",
+    "*://multishortener.blogspot.com/",
+    "*://cpmlink.net/*"
+  ],
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "matches": [
+        "*://*.linkcollider.com/page/activity/autosurf*"
+      ],
+      "js": [
+        "content/content-linkcollider.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.youlikehits.com/*"
+      ],
+      "js": [
+        "content/content-youLikeHits.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://damefans.com/*"
+      ],
+      "js": [
+        "content/content-damefans.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.comparteunclic.com/*"
+      ],
+      "js": [
+        "content/content-comparteunclic.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "browser_action": {
+    "default_title": "TEA - Ctrl+Shift+A",
+    "default_icon": "data/icon.png",
+    "default_popup": "popup/short.html"
+  },
+  "background": {
+    "scripts": [
+      "background/install.js",
+      "background/apis.js",
+      "background/tea.js"
+    ]
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+A",
+        "mac": "Command+Shift+A"
+      },
+      "description": "Open TEA"
+    }
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "chrome_style": true
+  },
+  "web_accessible_resources": [
+    "content/*",
+    "popup/*",
+    "data/*"
+  ]
+}

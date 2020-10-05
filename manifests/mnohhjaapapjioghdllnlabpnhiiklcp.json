@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Forward Observer",
+  "version": "0.1.1",
+  "manifest_version": 2,
+  "description": "Forward Observer is designed to educate you on OAuth grants before you give access to your account.",
+  "icons": {
+    "16": "assets/logo-16.png",
+    "128": "assets/logo-128.png"
+  },
+  "default_locale": "en",
+  "permissions": [
+    "activeTab",
+    "notifications"
+  ],
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "assets/logo-48.png"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://accounts.google.com/o/oauth2/*",
+        "https://accounts.google.com/signin/oauth*"
+      ],
+      "js": [
+        "scripts/jquery.min.js",
+        "scripts/identity_providers/google.js",
+        "scripts/forwardobserver.js"
+      ],
+      "css": [
+        "styles/forwardobserver.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "page_action": {
+    "default_icon": {
+      "19": "assets/logo-16.png",
+      "38": "assets/logo-48.png"
+    },
+    "default_title": "Forward Observer"
+  }
+}

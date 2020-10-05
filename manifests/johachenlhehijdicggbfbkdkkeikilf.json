@@ -1,0 +1,36 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "UnQuote for Gmail",
+  "description": "Unquote text of previous mails from the reply.",
+  "version": "0.0.7",
+  "icons": {
+    "128": "app/assets/icon.png"
+  },
+  "browser_action": {
+    "default_title": "UnQuote for Gmail",
+    "default_popup": "app/popup/index.html"
+  },
+  "background": {
+    "page": "app/bg/bg.html",
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://mail.google.com/*"
+      ],
+      "js": [
+        "app/cs/bundle.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "app/*"
+  ],
+  "permissions": [
+    "storage",
+    "tabs"
+  ]
+}

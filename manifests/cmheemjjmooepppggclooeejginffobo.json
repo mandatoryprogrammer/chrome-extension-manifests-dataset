@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Contentful Sidekick",
+  "short_name": "Contentful Sidekick",
+  "description": "Chrome Extension that enables inline editing for websites created in Contentful",
+  "version": "0.0.9",
+  "permissions": [
+    "activeTab",
+    "cookies",
+    "identity",
+    "storage",
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "*://*/*"
+  ],
+  "icons": {
+    "16": "img/icon16.png",
+    "32": "img/icon32.png",
+    "48": "img/icon48.png",
+    "64": "img/icon64.png",
+    "128": "img/icon128.png",
+    "256": "img/icon256.png"
+  },
+  "browser_action": {},
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "js/vendor.js",
+        "js/content.js"
+      ],
+      "css": [
+        "css/content.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "js/content.js"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

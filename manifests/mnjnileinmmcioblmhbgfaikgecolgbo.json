@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "JSIT Uploader",
+  "description": "Upload selected magnet:/torrents to justseed.it",
+  "version": "0.4.8",
+  "permissions": [
+    "contextMenus",
+    "http://*/",
+    "https://*/",
+    "storage",
+    "tabs"
+  ],
+  "manifest_version": 2,
+  "icons": {
+    "16": "logo_16.png",
+    "48": "logo_48.png",
+    "128": "logo_128.png"
+  },
+  "background": {
+    "scripts": [
+      "jsit_tools.js",
+      "jsit_chrome_background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "jsit_tools.js",
+        "contentscript.js"
+      ],
+      "css": [
+        "contentstyle.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://justseed.it/*"
+      ],
+      "js": [
+        "jsit_menu.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "options_page": "options.html",
+  "web_accessible_resources": [
+    "*.png",
+    "options.html",
+    "jsit_tools.js",
+    "injector.js"
+  ]
+}

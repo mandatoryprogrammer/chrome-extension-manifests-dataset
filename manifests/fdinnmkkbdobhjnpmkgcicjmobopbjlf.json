@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "TurboRater Automation Client",
+  "short_name": "TurboRater Automation Client",
+  "description": "Automatically log into your carrier websites from TurboRater.",
+  "version": "1.0.0.1",
+  "icons": {
+    "16": "img/tr-16.png",
+    "32": "img/tr-32.png",
+    "48": "img/tr-48.png",
+    "64": "img/tr-64.png",
+    "128": "img/tr-128.png",
+    "256": "img/tr-256.png",
+    "512": "img/tr-512.png"
+  },
+  "author": "Insurance Technologies Corporation",
+  "offline_enabled": false,
+  "homepage_url": "https://www.getitc.com/",
+  "minimum_chrome_version": "15",
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "pquery-3.1.0.min.js",
+        "autologin.js",
+        "agent.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "webRequest"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.iwantinsurance.com/*",
+      "*://*.turborater.com/*",
+      "http://localhost:52695/*",
+      "https://localhost:44380/*",
+      "https://localhost:2485/*",
+      "http://localhost:2485/*"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "img/tr-128.png"
+  }
+}

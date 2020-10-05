@@ -1,0 +1,102 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Buycott - Vote With Your Wallet",
+  "short_name": "Buycott",
+  "version": "1.1",
+  "manifest_version": 2,
+  "description": "Buycott helps you vote with your wallet",
+  "homepage_url": "https://buycott.com",
+  "icons": {
+    "16": "icons/icon16.png",
+    "19": "icons/icon19.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "src/bg/js/jquery-1.11.0.min.js",
+        "js/amazon-buycott-check.js",
+        "js/buycott-auth.js",
+        "src/bg/js/background.js",
+        "src/bg/js/SpryTabbedPanels.js",
+        "src/bg/js/jquery.bxslider.js",
+        "src/bg/js/jquery.bxslider.min.js"
+      ],
+      "matches": [
+        "http://*.amazon.com/*",
+        "http://*.amazon.com/*",
+        "http://*.buycott.com/*",
+        "https://*.buycott.com/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "src/bg/js/jquery-1.11.0.min.js",
+      "src/bg/js/helpers/storageHelper.js",
+      "src/bg/js/helpers/domainHelper.js",
+      "src/bg/js/helpers/excludedDomains.js",
+      "src/bg/js/helpers/api.js",
+      "src/bg/js/tabs-checker.js",
+      "src/bg/js/background.js"
+    ],
+    "persistent": true
+  },
+  "sandbox": {
+    "pages": [
+      "src/bg/background.html"
+    ]
+  },
+  "web_accessible_resources": [
+    "src/bg/images/*",
+    "src/bg/fonts/*",
+    "src/bg/css/*",
+    "src/bg/background.html",
+    "pages/popup/popup.html",
+    "src/bg/js/*",
+    "src/bg/html/buycott-banks-template.html",
+    "src/bg/html/buycott-non-banks-template.html",
+    "src/bg/html/on-close-note.html",
+    "src/bg/html/reminder-signup.html",
+    "pages/options/options.html",
+    "pages/signup/index.html",
+    "chrome-extension://cgapjpjgceifhhonjlakolmkmeonchpf/*",
+    "http://*/*",
+    "https://*/*",
+    "https://s3.amazonaws.com/",
+    "http://localhost/"
+  ],
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "https://s3.amazonaws.com/",
+    "http://localhost/",
+    "http://fonts.googleapis.com/",
+    "https://fonts.googleapis.com/",
+    "tabs",
+    "cookies",
+    "notifications",
+    "contextMenus",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking",
+    "unlimitedStorage",
+    "storage"
+  ],
+  "browser_action": {
+    "default_popup": "pages/popup/popup.html",
+    "default_title": "Buycott"
+  },
+  "options_page": "pages/options/options.html",
+  "externally_connectable": {
+    "matches": [
+      "http://localhost/*",
+      "*://buycott.com/*"
+    ]
+  }
+}

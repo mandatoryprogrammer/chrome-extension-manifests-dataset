@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Hangouts Notifications",
+  "description": "Add Chrome notifications to hangouts",
+  "short_name": "Hangouts Notifications",
+  "version": "3.1.1",
+  "icons": {
+    "18": "icons/18.png",
+    "19": "icons/19.png",
+    "38": "icons/38.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "18": "icons/inactive_18.png",
+      "19": "icons/inactive_19.png",
+      "38": "icons/inactive_38.png",
+      "48": "icons/inactive_48.png",
+      "128": "icons/inactive_128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://hangouts.google.com/webchat/*",
+        "https://hangouts.google.com/webchat/u/*",
+        "http://hangouts.google.com/webchat/*",
+        "http://hangouts.google.com/webchat/u/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "scripts": [
+      "configuration.js",
+      "Notification.js",
+      "optionalPermissions.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "options_page": "options/options.html",
+  "permissions": [
+    "storage",
+    "notifications"
+  ],
+  "optional_permissions": [
+    "tabs"
+  ],
+  "content_security_policy": "default-src 'self'; script-src 'self' 'unsafe-eval' https://www.google-analytics.com; img-src 'self' https://www.google-analytics.com https://stats.g.doubleclick.net data:"
+}

@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "author": "Khalid Salomao",
+  "name": "TrExEn TradingView Extention",
+  "short_name": "TrExEn Alerts",
+  "version": "1.7.3",
+  "description": "Profit-sync trexen bot integration with TradingView alerts!",
+  "manifest_version": 2,
+  "minimum_chrome_version": "46.0",
+  "icons": {
+    "16": "icons/icon16.jpg",
+    "48": "icons/icon48.jpg",
+    "128": "icons/icon128.jpg"
+  },
+  "background": {
+    "scripts": [
+      "libs/jquery/jquery-3.3.1.min.js",
+      "libs/socket.io.min.js",
+      "src/common.js",
+      "src/bg/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "icons/icon19.jpg",
+    "default_title": "TrExEn TradingView Extention",
+    "default_popup": "popup.html"
+  },
+  "options_page": "src/browser_action/notification-group.html",
+  "permissions": [
+    "storage",
+    "webRequest",
+    "identity",
+    "contentSettings",
+    "tabs",
+    "https://*.tradingview.com/*",
+    "https://www.googleapis.com/"
+  ],
+  "content_scripts": [
+    {
+      "js": [
+        "libs/jquery/jquery-3.3.1.min.js",
+        "src/common.js",
+        "src/inject/inject.js"
+      ],
+      "matches": [
+        "https://*.tradingview.com/*"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "default_locale": "ru",
+  "name": "PAYJEX - Возвращай 10.75% с AliExpress!",
+  "version": "1.3",
+  "short_name": "PAYJEX AliExpress Cashback",
+  "description": "Возвращайте кэшбэк с каждой покупки на AliExpress с плагином PAYJEX!",
+  "browser_action": {
+    "default_title": "PAYJEX",
+    "default_icon": "img/19-unknown.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "img/16.png",
+    "32": "img/32.png",
+    "48": "img/48.png",
+    "128": "img/128.png"
+  },
+  "permissions": [
+    "tabs",
+    "cookies",
+    "storage",
+    "activeTab",
+    "background",
+    "alarms",
+    "notifications",
+    "*://*/*",
+    "*://payjex.com/*"
+  ],
+  "content_scripts": [
+    {
+      "css": [
+        "css/content.css"
+      ],
+      "js": [
+        "js/jquery.js",
+        "js/payjex.js",
+        "js/content.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ]
+    },
+    {
+      "js": [
+        "js/content-meta.js"
+      ],
+      "matches": [
+        "*://payjex.com/*",
+        "*://*.payjex.com/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "web_accessible_resources": [
+    "img/*.png",
+    "img/*.jpg",
+    "css/*.css",
+    "css/images/*.png",
+    "css/images/*.jpg"
+  ],
+  "background": {
+    "page": "background.html"
+  }
+}

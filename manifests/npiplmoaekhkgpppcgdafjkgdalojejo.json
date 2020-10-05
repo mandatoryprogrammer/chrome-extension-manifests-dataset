@@ -1,0 +1,81 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "FetLife Enhancer",
+  "short_name": "FLE",
+  "version": "2.3.6",
+  "description": "Add new features to enhance your FetLife experience!  It's like viagra for FetLife!",
+  "icons": {
+    "16": "images/icons/FL16.png",
+    "48": "images/icons/FL48.png",
+    "128": "images/icons/FL128.png"
+  },
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.fetlife.com/*"
+      ],
+      "js": [
+        "scripts/other.js",
+        "scripts/Events.js",
+        "scripts/Gallery.js",
+        "scripts/UI.js",
+        "scripts/MassMessage.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.fetlife.com/users/*",
+        "*://*.fetlife.com/groups/188715/*"
+      ],
+      "js": [
+        "scripts/Perks.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "Changelog.js",
+    "settings.js",
+    "css/Main.css",
+    "images/chrome.png",
+    "images/firefox.png",
+    "images/paypal.png",
+    "images/unicorn.png",
+    "images/tanuki.png",
+    "images/kitty.png",
+    "images/miku.png"
+  ],
+  "options_ui": {
+    "page": "settings.html",
+    "open_in_tab": true
+  },
+  "permissions": [
+    "*://*.fetlife.com/*",
+    "*://*.fetlifeenhancer.droppages.com/*",
+    "storage",
+    "tabs",
+    "commands"
+  ],
+  "commands": {
+    "FLE-Reload": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Z",
+        "mac": "Command+MacCtrl+Z"
+      },
+      "description": "Reload Extension (Mainly for debugging)"
+    }
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "FLE@fetlife.com",
+      "strict_min_version": "42.0"
+    }
+  }
+}

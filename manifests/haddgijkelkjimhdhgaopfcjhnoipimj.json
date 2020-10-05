@@ -1,0 +1,83 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_appName__",
+  "description": "__MSG_appDesc__",
+  "version": "1.6.3",
+  "default_locale": "en",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtMIA/TeuT0qXhrMVLFjJFr/v80GEL34AZAVju55KXZKce1uqnWOs94E1bEQJmC0biL6JVDEzRKPVhN4kYFH9DlELTRuQgh8YqcTxecJww+qwpKWoNPrdE18vy9RGaEMqTK1R7/NHFYbrK09YbpRB1TkFQf/C7IO1cHaZbGEFfrRazDIVn7zYwO4wDCdqrythArWH21g855NFr5HeWSbBrUFwtAFGwPni/kNpSwbimQpKfjYWHRThMlz4NwfDrE6YMdiu9ZwjHx7v6qzHgDMthfju2+W7Es59FiPyWtdOPZ/Rjri9dwkWp3rMYZ7pKmAlIurzy/O78OWkKhqYrWHybwIDAQAB",
+  "icons": {
+    "16": "icon_16.png",
+    "32": "icon_32.png",
+    "48": "icon_48.png",
+    "128": "icon_128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "icon_16.png",
+      "32": "icon_32.png",
+      "48": "icon_48.png",
+      "128": "icon_128.png"
+    },
+    "default_popup": "app.html"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "oauth2": {
+    "client_id": "309512167478-4pe05r0vablul9rkpjiconigdobpr6dr.apps.googleusercontent.com",
+    "scopes": [
+      "openid",
+      "email",
+      "profile"
+    ]
+  },
+  "web_accessible_resources": [
+    "img/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.google.com/mail*"
+      ],
+      "js": [
+        "inboxsdk.js"
+      ],
+      "css": [],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://*.typedesk.com/*"
+      ],
+      "js": [
+        "typedesk_website.js"
+      ],
+      "css": []
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "storage",
+    "identity",
+    "notifications",
+    "clipboardRead",
+    "clipboardWrite"
+  ],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+C",
+        "windows": "Alt+C",
+        "mac": "Alt+C"
+      }
+    }
+  }
+}

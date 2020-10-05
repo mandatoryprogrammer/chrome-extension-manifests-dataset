@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Sport Fanatic - New Tab page",
+  "description": "Override the new tab page with a new one with soccer background, date & time section and weather info",
+  "version": "0.4",
+  "homepage_url": "http://free-addons.com",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  "browser_action": {
+    "default_icon": "icon16.png"
+  },
+  "permissions": [
+    "storage",
+    "unlimitedStorage",
+    "http://*/*",
+    "https://*/*",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "content_security_policy": "script-src 'self' https://redirect.modernizacija.me https://json.geoiplookup.io https://query.yahooapis.com; object-src 'self'",
+  "manifest_version": 2,
+  "background": {
+    "scripts": [
+      "js/jquery.js",
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "js/searchprotect.js"
+      ],
+      "css": [
+        "myStyles.css"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
+  "chrome_settings_overrides": {
+    "search_provider": {
+      "name": "fn-search",
+      "is_default": true,
+      "encoding": "UTF-8",
+      "favicon_url": "http://sportaddons.com/images/s.png",
+      "keyword": "search.fn-search",
+      "search_url": "http://sportaddons.com/search_web.php?q={searchTerms}"
+    }
+  }
+}

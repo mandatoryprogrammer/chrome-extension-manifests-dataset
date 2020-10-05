@@ -1,0 +1,69 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Top Deal",
+  "version": "0.1.11",
+  "manifest_version": 2,
+  "description": "The Best Crowdsourced Deal",
+  "homepage_url": "http://topdeal.co",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "js/jquery/jquery.min.js",
+      "src/bg/background.min.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "TopDeal.co",
+    "default_popup": "src/browser_action/browser_action.html"
+  },
+  "permissions": [
+    "tabs",
+    "identity",
+    "identity.email",
+    "storage",
+    "cookies",
+    "https://*/*",
+    "http://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "src/inject/inject.min.css"
+      ],
+      "js": [
+        "js/jquery/jquery.min.js",
+        "js/handlebars-1.0.0.beta.6.min.js",
+        "src/inject/inject.min.js"
+      ]
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://localhost/*",
+      "*://*.topdeal.co/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "src/inject/inject.html",
+    "src/inject/infobar.html",
+    "src/inject/infopop.html",
+    "src/inject/infobar.min.js"
+  ],
+  "sandbox": {
+    "pages": [
+      "src/inject/infobar.html",
+      "src/inject/infopop.html"
+    ]
+  }
+}

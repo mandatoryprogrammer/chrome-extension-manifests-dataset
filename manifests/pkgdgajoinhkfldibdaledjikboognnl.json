@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Testofill, Form Filler for Testers",
+  "version": "0.14.0",
+  "manifest_version": 2,
+  "author": "Jakub Holy <https://blog.jakubholy.net/>",
+  "icons": {
+    "16": "autofill_16x16.png"
+  },
+  "description": "Enable testers to fill forms automatically/on-demand based on (sets of) rules they wrote / captured.",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs",
+    "contextMenus",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "browser_action": {
+    "default_title": "Testofill",
+    "default_icon": {
+      "19": "autofill_16x16.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "generated/testofill-content-packed.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "options_page": "options.html",
+  "background": {
+    "scripts": [
+      "events.js"
+    ],
+    "persistent": false
+  }
+}

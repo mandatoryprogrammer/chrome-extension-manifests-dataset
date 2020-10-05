@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "WhereWasI",
+  "description": "Locate last link you clicked on the current page.",
+  "version": "0.0.0.3",
+  "manifest_version": 2,
+  "icons": {
+    "128": "batch-icon128.png",
+    "48": "batch-icon48.png",
+    "16": "batch-icon16.png"
+  },
+  "options_page": "options.html",
+  "permissions": [
+    "webNavigation",
+    "tabs",
+    "*://*/*"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "38": "batch-icon38.png",
+      "19": "batch-icon19.png"
+    },
+    "default_title": "Where Was I?"
+  },
+  "background": {
+    "scripts": [
+      "common.js",
+      "dataaccess.js",
+      "background.js"
+    ]
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "windows": "Ctrl+Shift+F",
+        "mac": "Command+Shift+F",
+        "chromeos": "Ctrl+Shift+F",
+        "linux": "Ctrl+Shift+F"
+      }
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "common.js",
+        "content.js"
+      ]
+    }
+  ]
+}

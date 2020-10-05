@@ -1,0 +1,75 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "TeacherView",
+  "author": "Radix",
+  "version": "10.1.90",
+  "manifest_version": 2,
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA7otfSq4OtDxXOHEduDNV6rhTWK3a6EO94BsFmkUYhRSu6D6WNRBv5sZ/pJfiCNXnaH9XphIJWWSyXxhCqxQwx5CS/WfxbVG8F1brGnk3taRsZSzCqfTLlASAKGn1hsjMcDFYlI8oEI5vSx+rkGv3qxiPlQAaHq6PUq43jTkNL4YatBzwpdK/0hH6wx5MxrgzFGe48L2ulZenA781vplAU5ggQxJTJXhxhDvuxMz+mKbQZ8OrDIeQp3nbgfsdpX/3PNTqR530J/On7Ucss2Ii53gdFwDJo3qOQYSlfIA8YJmAkbDgauXmeUymtkMw4emfGS6gWWECtiL33M5PWjzYFQIDAQAB",
+  "minimum_chrome_version": "34",
+  "description": "TeacherView student app",
+  "background": {
+    "scripts": [
+      "extension/bower_components/jquery/dist/jquery.min.js",
+      "extension/ConfigManager.js",
+      "extension/loader.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "extension/icon.png"
+  },
+  "icons": {
+    "48": "extension/icon.png"
+  },
+  "permissions": [
+    "tabs",
+    "desktopCapture",
+    "identity",
+    "identity.email",
+    "storage",
+    "management",
+    "notifications",
+    "https://apis.google.com/*",
+    "gcm"
+  ],
+  "web_accessible_resources": [
+    "extension/icon.png"
+  ],
+  "oauth2": {
+    "client_id": "570383229154-4d4ta15asvgqf6b397d3b4d2mv76k0sl.apps.googleusercontent.com",
+    "scopes": [
+      "openid",
+      "email",
+      "profile"
+    ]
+  },
+  "content_security_policy": "script-src 'self'  https://*.glbth.com https://*.teacher-view.com https://teacherview.live https://*.teacherview.live https://*.visomdm.com https://www.googleapis.com https://apis.google.com http://localhost:8080 http://127.0.0.1:8080 ; object-src 'self'",
+  "externally_connectable": {
+    "matches": [
+      "https://localhost/*",
+      "http://localhost/*",
+      "https://*.glbth.com/*",
+      "https://*.visomdm.com/*",
+      "https://*.teacherview.live/*",
+      "https://teacherview.live/*",
+      "https://*.teacher-view.com/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "extension/content-script.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end",
+      "matches": [
+        "https://localhost/*",
+        "http://localhost/*",
+        "https://*.glbth.com/*",
+        "https://*.visomdm.com/*",
+        "https://*.teacherview.live/*",
+        "https://*.teacher-view.com/*"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "CoolStart",
+  "description": "__MSG_extdesc__",
+  "version": "1.026",
+  "default_locale": "en",
+  "permissions": [
+    "cookies",
+    "*://*.coolstart.com/",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://my.coolstart.com/",
+        "https://my.coolstart.com/?welcome"
+      ],
+      "all_frames": true,
+      "js": [
+        "js/jquery.min.js",
+        "js/moment.min.js",
+        "js/newtab.js",
+        "js/controller.js",
+        "js/owl.carousel.min.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://my.coolstart.com/*"
+      ],
+      "run_at": "document_end",
+      "all_frames": true,
+      "js": [
+        "js/jquery.min.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "/*.html",
+    "img/*"
+  ],
+  "background": {
+    "scripts": [
+      "js/jquery.min.js",
+      "js/database.js",
+      "js/background.js"
+    ]
+  },
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  },
+  "browser_action": {
+    "default_title": "CoolStart New Tab"
+  },
+  "short_name": "CoolStart",
+  "icons": {
+    "16": "img/16.png",
+    "48": "img/48.png",
+    "128": "img/128.png"
+  },
+  "optional_permissions": [
+    "history",
+    "bookmarks",
+    "tabs",
+    "topSites",
+    "chrome://favicon/",
+    "<all_urls>",
+    "*://*.facebook.com/*"
+  ],
+  "chrome_settings_overrides": {
+    "search_provider": {
+      "name": "CoolStart",
+      "keyword": "CS",
+      "encoding": "UTF-8",
+      "image_url": "",
+      "is_default": true,
+      "search_url": "https://coolstart.com/?action=webSearch&t_id=1001&q={searchTerms}",
+      "favicon_url": "https://coolstart.com/favicon.ico",
+      "instant_url": "",
+      "suggest_url": "https://coolstart.com/?action=searchSuggest&q={searchTerms}"
+    }
+  }
+}

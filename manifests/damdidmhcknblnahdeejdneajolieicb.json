@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "nsyteful",
+  "description": "Automatic authentication of nest video feeds on nsyteful dashboards.",
+  "version": "0.2.2",
+  "icons": {
+    "16": "images/icon16.png",
+    "32": "images/icon32.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "images/icon32.png"
+  },
+  "background": {
+    "scripts": [
+      "background_scripts/eventPage.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.nsyteful.com/*",
+        "*://*.development-dashboard.ballistixmis.com/*"
+      ],
+      "js": [
+        "content_scripts/nsytefulFrame.js"
+      ],
+      "all_frames": false,
+      "run_at": "document_end",
+      "allowed_domains": [
+        "https://video.nest.com",
+        "https://www.video.nest.com"
+      ]
+    },
+    {
+      "matches": [
+        "*://video.nest.com/*"
+      ],
+      "js": [
+        "content_scripts/nestFrame.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end",
+      "allowed_domains": [
+        "https://nsyteful.com",
+        "https://www.nsyteful.com",
+        "http://development-dashboard.ballistixmis.com",
+        "http://www.development-dashboard.ballistixmis.com"
+      ]
+    }
+  ]
+}

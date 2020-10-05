@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Dim Files on GitHub",
+  "version": "1.0.3",
+  "description": "Dim dotfiles (or any file) in the file browser",
+  "homepage_url": "https://github.com/bfred-it/dim-files-on-github",
+  "manifest_version": 2,
+  "minimum_chrome_version": "51",
+  "icons": {
+    "128": "icon.png"
+  },
+  "permissions": [
+    "https://github.com/*/*",
+    "storage"
+  ],
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "api.js"
+    ]
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "https://github.com/*/*"
+      ],
+      "exclude_matches": [
+        "https://github.com/*/dotfiles*"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "js": [
+        "api.js",
+        "node_modules/github-injection/index.js",
+        "content.js"
+      ]
+    }
+  ]
+}

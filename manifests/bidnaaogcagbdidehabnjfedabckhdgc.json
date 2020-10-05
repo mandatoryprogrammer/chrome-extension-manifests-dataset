@@ -1,0 +1,68 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "FindR",
+  "version": "1.1.2",
+  "description": "A find and replace bar for Google Chrome",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "icon19.png",
+      "38": "icon38.png"
+    },
+    "default_title": "FindR - click to search!",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [
+        "injectcss.css"
+      ],
+      "js": [
+        "jquery-2.2.2.min.js",
+        "c_script.js"
+      ]
+    }
+  ],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "windows": "Ctrl+Shift+F",
+        "mac": "Command+Shift+K",
+        "chromeos": "Ctrl+Shift+F",
+        "linux": "Ctrl+Shift+F"
+      }
+    },
+    "replace-all": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+A",
+        "mac": "Command+Shift+A"
+      },
+      "description": "Replace All, equivalent to pressing the Replace All button"
+    }
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": false
+  },
+  "offline_enabled": true,
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "storage"
+  ]
+}

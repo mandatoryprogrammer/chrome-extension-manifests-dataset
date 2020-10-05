@@ -1,0 +1,60 @@
+{
+  "update_url": "http://clients2.google.com/service/update2/crx",
+  "name": "Tabmark",
+  "version": "1.2.0",
+  "description": "Adds tab group bookmarking to Chrome, allowing users to save groups of tabs associated with tasks or projects and reopen them later.",
+  "permissions": [
+    "tabs",
+    "http://tabtaskmanager.appspot.com/*",
+    "chrome://favicon/"
+  ],
+  "manifest_version": 2,
+  "content_scripts": [
+    {
+      "matches": [
+        "http://tabtaskmanager.appspot.com/logged_in",
+        "http://tabtaskmanager.appspot.com/logout"
+      ],
+      "js": [
+        "close.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://tabtaskmanager.appspot.com/clear"
+      ],
+      "js": [
+        "clear.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://tabtaskmanager.appspot.com/reset"
+      ],
+      "js": [
+        "reset.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "images/icon16.png",
+    "default_title": "Tab Task Manager",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "jquery-1.7.2.min.js",
+      "common.js",
+      "background.js"
+    ]
+  },
+  "options_page": "options.html"
+}

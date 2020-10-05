@@ -1,0 +1,69 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "version": "1.9.5",
+  "manifest_version": 2,
+  "description": "__MSG_appDescription__",
+  "short_name": "__MSG_shortName__",
+  "homepage_url": "https://dndemail.com",
+  "icons": {
+    "16": "images/icon-16.png",
+    "128": "images/icon-128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "scripts/jquery-3.3.1.min.js",
+      "scripts/background.js",
+      "scripts/ga.js"
+    ]
+  },
+  "permissions": [
+    "https://mail.google.com/*",
+    "storage",
+    "alarms"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "scripts/jquery-3.3.1.min.js",
+        "scripts/sweetalert.min.js",
+        "scripts/bootstrap.min.js",
+        "scripts/jquery.timepicker.min.js",
+        "scripts/jstz.min.js",
+        "scripts/inboxsdk.js",
+        "scripts/contentscript.js"
+      ],
+      "css": [
+        "styles/main.css",
+        "styles/settings.css",
+        "styles/jquery.timepicker.min.css"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://app.dndemail.com/*"
+      ],
+      "js": [
+        "scripts/jquery-3.3.1.min.js",
+        "scripts/inline-install.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "browser_action": {
+    "default_title": "Launch Gmail with DNDEmail enabled."
+  },
+  "web_accessible_resources": [
+    "settings.html",
+    "images/*.png",
+    "scripts/*"
+  ]
+}

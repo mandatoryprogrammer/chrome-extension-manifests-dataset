@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "PSR for Google Chrome™",
+  "version": "7.5.3",
+  "description": "Automatische Erfassung von Passwörtern in Password Safe and Repository",
+  "background": {
+    "scripts": [
+      "wsHandling.js",
+      "bg.js",
+      "jquery-1.11.3.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": "16.png",
+    "default_title": "Passwort eintragen"
+  },
+  "options_ui": {
+    "page": "options.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file://*/*"
+      ],
+      "js": [
+        "contentscript.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": false
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self';",
+  "icons": {
+    "16": "16.png",
+    "48": "48.png",
+    "128": "128.png"
+  }
+}

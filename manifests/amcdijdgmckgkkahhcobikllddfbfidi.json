@@ -1,0 +1,155 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "version": "2.23.33",
+  "name": "Reply: LinkedIn Email Finder and Outreach",
+  "description": "Reply’s Free LinkedIn Email Finder and Outreach searches for emails on LinkedIn, automates the outreach process.",
+  "homepage_url": "https://reply.io",
+  "permissions": [
+    "*://www.linkedin.com/*/*",
+    "*://name2email.com/*",
+    "*://mail.google.com/*",
+    "*://contacts.google.com/*",
+    "*://run.replyapp-stage.net/*",
+    "*://api.reply.io/*",
+    "storage",
+    "tabs",
+    "contextMenus",
+    "management",
+    "activeTab",
+    "webRequest",
+    "clipboardRead",
+    "clipboardWrite"
+  ],
+  "content_security_policy": "script-src 'self' 'sha256-gnsjS2gPKvwLlWqWy9M+jvQUrBbM2n5/O6+TPrKsPKk=' https://www.google-analytics.com/analytics.js https://www.googletagmanager.com; object-src 'self'",
+  "background": {
+    "scripts": [
+      "analytics.js",
+      "backgroundSrc/background.build.js",
+      "contentSrc/forGmail/requests.js",
+      "backgroundSrc/locationWatcher.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://run.replyapp-stage.net/*",
+        "https://run.reply.io/*",
+        "https://run.dev.reply.io/*"
+      ],
+      "js": [
+        "contentSrc/forReply/forReply.build.js",
+        "contentSrc/forReply/browserZoom.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.lightning.force.com/*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "contentSrc/forSalesforce/new/forSalesforceNew.build.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.salesforce.com/*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "contentSrc/forSalesforce/old/forSalesforceOld.build.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.linkedin.com/*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "contentSrc/forLinkedin/forLinkedinLoader.js",
+        "contentSrc/forLinkedin/forLinkedin.build.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://app.prosperworks.com/*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "contentSrc/forCopper/forCopperLoader.js",
+        "contentSrc/forCopper/forCopper.build.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://app.hubspot.com/*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "contentSrc/forHubspot/forHubspot.build.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.mail.google.com/mail/u/*/*"
+      ],
+      "js": [
+        "contentSrc/forGmail/inboxsdk.js",
+        "contentSrc/forGmail/forGmailComposerPreact.build.js",
+        "contentSrc/forGmail/gmailButtonsLogic.js",
+        "contentSrc/forGmail/gmailContactSearch.js"
+      ],
+      "css": [
+        "contentSrc/forGmail/forGmail.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.mail.google.com/*"
+      ],
+      "js": [
+        "contentSrc/forGmail/emailSearchInit.js"
+      ],
+      "all_frames": false,
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://api.reply.io/api/v1/chrome-extension/play?*",
+        "https://api.replyapp-stage.net/api/v1/chrome-extension/play?*"
+      ],
+      "js": [
+        "contentSrc/forReply/hideUrl.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "contentSrc/forLinkedin/XMLHttpWatcher.js",
+    "contentSrc/forCopper/CopperHttpWatcher.js"
+  ],
+  "icons": {
+    "16": "icons/logo.png",
+    "48": "icons/logo-1.png",
+    "128": "icons/logo-2.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/logo-1.png",
+    "default_title": "Reply"
+  },
+  "commands": {
+    "toggle-feature": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Y",
+        "mac": "MacCtrl+Shift+Y"
+      },
+      "description": "Send a 'toggle-feature' event to the extension"
+    },
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+L",
+        "mac": "MacCtrl+Shift+L"
+      }
+    }
+  }
+}

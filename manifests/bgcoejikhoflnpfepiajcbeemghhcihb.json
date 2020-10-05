@@ -1,0 +1,42 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "YTchecker",
+  "short_name": "YTchecker",
+  "version": "2.0.0",
+  "author": "blausoft",
+  "description": "Shows YouTube video restrictions such as country blocks and whether a video can be embedded. Can give insight on deleted videos.",
+  "homepage_url": "https://ytchecker.com",
+  "offline_enabled": false,
+  "permissions": [
+    "activeTab"
+  ],
+  "icons": {
+    "96": "images/icon_96.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "96": "images/icon_96.png"
+    },
+    "default_popup": "popup.html",
+    "default_title": "YTchecker"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.youtube.com/*"
+      ],
+      "js": [
+        "video_fetcher.js",
+        "content_script.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  }
+}

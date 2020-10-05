@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Food Hygiene Ratings for JustEat",
+  "version": "0.0.2",
+  "manifest_version": 2,
+  "description": "Adds the Food Standards Agency ratings for restaurants, cafes, and takeaways listed on JustEat, so you can see what you're getting.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": true
+  },
+  "web_accessible_resources": [
+    "images/*"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "permissions": [
+    "contentSettings",
+    "https://www.just-eat.co.uk/*",
+    "https://api.ratings.food.gov.uk/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.just-eat.co.uk/*"
+      ],
+      "css": [
+        "src/inject/inject.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.just-eat.co.uk/*"
+      ],
+      "js": [
+        "src/inject/inject.js"
+      ]
+    }
+  ]
+}

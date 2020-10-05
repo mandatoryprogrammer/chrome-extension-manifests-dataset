@@ -1,0 +1,70 @@
+{
+  "update_url": "http://clients2.google.com/service/update2/crx",
+  "name": "Wiki Social Reader",
+  "version": "0.5.8.8",
+  "description": "Wiki Social Reader - frictionlessly sharing your wiki reading on Facebook",
+  "icons": {
+    "16": "images/wikisocialreader-16.png",
+    "48": "images/wikisocialreader-48.png",
+    "128": "images/wikisocialreader-128.png"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "page_action": {
+    "default_icon": "images/wikisocialreader-16.png",
+    "default_title": "Wiki -> Facebook"
+  },
+  "permissions": [
+    "tabs",
+    "https://graph.facebook.com/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.wikipedia.org/*",
+        "https://*.wikipedia.org/*"
+      ],
+      "js": [
+        "oauth2/oauth2.js",
+        "lib/jquery.min.js",
+        "lib/iphone-style-checkboxes.js",
+        "lib/spinner.js",
+        "contentscript.js"
+      ],
+      "css": [
+        "style.css"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "http://www.wikisocialreader.com/facebook-login/*"
+      ],
+      "js": [
+        "oauth2/oauth2_inject.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://www.wikisocialreader.com/fb_share*"
+      ],
+      "js": [
+        "redirect.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "images/iphone-style-checkboxes/off.png",
+    "images/iphone-style-checkboxes/on.png",
+    "images/iphone-style-checkboxes/slider_left.png",
+    "images/iphone-style-checkboxes/slider_right.png",
+    "images/iphone-style-checkboxes/slider_center.png",
+    "images/placeholder.png",
+    "oauth2/oauth2.html"
+  ],
+  "manifest_version": 2
+}

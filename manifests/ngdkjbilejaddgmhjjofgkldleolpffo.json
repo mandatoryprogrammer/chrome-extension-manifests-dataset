@@ -1,0 +1,107 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "SPS Gradegrubber",
+  "description": "This extension adds extra features to the Seattle Public Schools gradebook website, The Source",
+  "version": "1.11.7",
+  "background": {
+    "page": "background/background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icon.png"
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "https://ajax.googleapis.com/",
+    "https://ps.seattleschools.org/*",
+    "https://districtlms.seattleschools.org/*",
+    "http://localhost:5000/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://ps.seattleschools.org/guardian/home.html"
+      ],
+      "js": [
+        "jquery-1.11.3.min.js",
+        "thesource/home/content.js"
+      ],
+      "css": [
+        "thesource/home/content.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://ps.seattleschools.org/guardian/scores.html?*"
+      ],
+      "js": [
+        "jquery-1.11.3.min.js",
+        "thesource/scores/calculators.content.js",
+        "thesource/scores/scrapers.content.js",
+        "thesource/scores/writers.content.js",
+        "thesource/scores/scores.content.js"
+      ],
+      "css": [
+        "thesource/scores/scores.content.css"
+      ]
+    },
+    {
+      "matches": [
+        "file:///home/millan/Downloads/G10Grades/*.html"
+      ],
+      "js": [
+        "jquery-1.11.3.min.js",
+        "10scores/calculators.content.js",
+        "10scores/scrapers.content.js",
+        "10scores/writers.content.js",
+        "10scores/scores.content.js"
+      ],
+      "css": [
+        "thesource/scores/scores.content.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://ps.seattleschools.org/guardian/termgrades*"
+      ],
+      "js": [
+        "jquery-1.11.3.min.js",
+        "thesource/termgrades/termgrades.content.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://ps.seattleschools.org/public/#welcome"
+      ],
+      "css": [
+        "thesource/login/content.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://districtlms.seattleschools.org/course/*/materials"
+      ],
+      "js": [
+        "jquery-1.11.3.min.js",
+        "schoology/class-page/content.js"
+      ],
+      "css": [
+        "schoology/class-page/content.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://fesrv.seattleschools.org/adfs/ls/?*"
+      ],
+      "js": [
+        "jquery-1.11.3.min.js",
+        "schoology/login/content.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "icon.png"
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "InvoxCall",
+  "version": "1.25.1",
+  "description": "Numintec's extension that allows you to check your calls",
+  "homepage_url": "http://extdevel.invoxcontact.com",
+  "icons": {
+    "16": "assets/available16X16.png",
+    "48": "assets/available48X48.png",
+    "128": "assets/available128X128.png"
+  },
+  "browser_action": {
+    "default_icon": "assets/logged-out.png",
+    "default_popup": "pages/popup.html"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://*.invoxcontact.com; object-src 'self'",
+  "background": {
+    "page": "pages/background.html",
+    "persistent": true
+  },
+  "permissions": [
+    "https://api.generali.invoxcontact.io/*",
+    "https://api.invoxcontact.com/*",
+    "tabs",
+    "storage",
+    "management",
+    "notifications"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_globs": [
+        "*invoxcontact.com"
+      ],
+      "css": [
+        "content_script/css/style.css"
+      ],
+      "js": [
+        "content_script/js/jquery.min.js",
+        "content_script/js/script.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "content_script/icons/*"
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "CheckAC",
+  "version": "1.0.12",
+  "manifest_version": 2,
+  "icons": {
+    "48": "Ac.png"
+  },
+  "description": "为你在OJ上做过的题后面打上一个钩,快速判断一道题是否AC过",
+  "browser_action": {
+    "default_icon": "Ac.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "inject.js"
+      ],
+      "matches": [
+        "http://icpc.njust.edu.cn/*",
+        "http://poj.org/status*",
+        "http://acm.zju.edu.cn/*",
+        "http://njoj.org/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "css": [
+        "inject.css"
+      ],
+      "matches": [
+        "http://icpc.njust.edu.cn/UserArchive/*"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "Ac.png",
+    "/images/check.png",
+    "/images/nocheck.png"
+  ],
+  "options_page": "options.html",
+  "permissions": [
+    "notifications",
+    "http://icpc.njust.edu.cn/",
+    "http://poj.org/",
+    "http://acm.zju.edu.cn/",
+    "http://njoj.org/",
+    "http://contests.acmicpc.info/"
+  ]
+}

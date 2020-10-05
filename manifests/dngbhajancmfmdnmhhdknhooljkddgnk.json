@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "content_security_policy": "script-src 'self' https://www.cloodhq.net; object-src 'self' https://www.cloudhq.net",
+  "web_accessible_resources": [
+    "javascripts/*",
+    "icons/*"
+  ],
+  "name": "Save Emails to PDF by cloudHQ",
+  "short_name": "Save Emails to PDF by cloudHQ",
+  "icons": {
+    "128": "icons/icon-128x128.png",
+    "48": "icons/icon-48x48.png"
+  },
+  "converted_from_user_script": true,
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "javascripts/background.js",
+      "javascripts/popup.js",
+      "javascripts/jquery-1.4.4.js",
+      "javascripts/jquery.json.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "icons/savetopdf.png",
+    "default_popup": "popup.html",
+    "default_title": "Save Emails to PDF by cloudHQ"
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://*.cloudhq.net/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "exclude_globs": [],
+      "css": [
+        "stylesheets/jquery.dropdown.css",
+        "stylesheets/popover.css",
+        "stylesheets/file_browser.css",
+        "stylesheets/main_save_to_pdf.css"
+      ],
+      "include_globs": [],
+      "js": [
+        "javascripts/inboxsdk.js",
+        "javascripts/main_save_to_pdf_loader.js"
+      ],
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*"
+      ]
+    }
+  ],
+  "version": "1.1.0.16",
+  "description": "Export Gmail™ emails and labels to PDF with one click",
+  "permissions": [
+    "storage",
+    "background",
+    "https://mail.google.com/",
+    "https://www.cloudhq.net/"
+  ],
+  "manifest_version": 2
+}

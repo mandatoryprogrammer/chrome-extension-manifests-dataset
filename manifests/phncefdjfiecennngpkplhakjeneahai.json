@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Spoiler Preventer",
+  "short_name": "SpoilerPreventer",
+  "description": "Avoid colliding with spoilers",
+  "version": "0.6",
+  "author": "Naveen: BBDO Singapore",
+  "homepage_url": "https://www.cyclecarriage.com/",
+  "offline_enabled": true,
+  "browser_action": {
+    "default_icon": {
+      "19": "images/mz-logo-19x19.png",
+      "38": "images/mz-logo-38x38.png",
+      "48": "images/mz-logo-48x48.png",
+      "128": "images/mz-logo-128x128.png"
+    },
+    "default_title": "Spoiler Preventer",
+    "default_popup": "index.html"
+  },
+  "icons": {
+    "19": "images/mz-logo-19x19.png",
+    "38": "images/mz-logo-38x38.png",
+    "48": "images/mz-logo-48x48.png",
+    "128": "images/mz-logo-128x128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "background",
+    "storage",
+    "tabs"
+  ],
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "*://*.google.com/*",
+        "*://*.facebook.com/*",
+        "*://*.twitter.com/*",
+        "*://*.youtube.com/*"
+      ],
+      "css": [
+        "css/blocker-style.css"
+      ],
+      "js": [
+        "js/jquery-3.0.0.min.js",
+        "js/blocking.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'"
+}

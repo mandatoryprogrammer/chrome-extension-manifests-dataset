@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Monstercat Player",
+  "version": "1.1.4",
+  "description": "Provides a browser wide player for your favorite songs! (Ported from Firefox. For best experience and support use Firefox version)",
+  "icons": {
+    "16": "/icons/play16.png",
+    "48": "/icons/play48.png",
+    "32": "/icons/play32.png",
+    "128": "/icons/play.png"
+  },
+  "permissions": [
+    "*://*.monstercat.com/*",
+    "activeTab",
+    "tabs",
+    "storage",
+    "downloads"
+  ],
+  "browser_action": {
+    "default_area": "navbar",
+    "default_icon": "icons/play.png",
+    "default_title": "Monstercat Player [DEBUG]",
+    "default_popup": "popup/frontend.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.monstercat.com/*"
+      ],
+      "js": [
+        "Player.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "Backend.js"
+    ]
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "browser_style": true
+  }
+}

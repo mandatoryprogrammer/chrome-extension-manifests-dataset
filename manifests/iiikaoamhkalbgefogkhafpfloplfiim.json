@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "GTM Tag Organizer",
+  "short_name": "GTM Organize",
+  "version": "0.6",
+  "manifest_version": 2,
+  "description": "Extension to organize tags in Google Tag Manager container.",
+  "homepage_url": "http://marketlytics.com/playground/?utm_source=chrome&utm_medium=referral&utm_campaign=tagOrganize#gtmOrganizer",
+  "icons": {
+    "16": "icons/GTM-logo16.png",
+    "48": "icons/GTM-logo48.png",
+    "128": "icons/GTM-logo128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": true
+  },
+  "options_page": "src/page_action/page_action.html",
+  "page_action": {
+    "default_icon": "icons/GTM-logo19.png",
+    "default_title": "GTM Tag Organizer",
+    "default_popup": "src/page_action/page_action.html"
+  },
+  "permissions": [
+    "contentSettings",
+    "storage",
+    "https://www.google.com/tagmanager/web/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.google.com/tagmanager/web/*"
+      ],
+      "css": [
+        "src/inject/inject.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.google.com/tagmanager/web/*"
+      ],
+      "js": [
+        "src/inject/jquery.min.js",
+        "src/inject/inject.js"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,202 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Outreach Everywhere",
+  "version": "1.4.5",
+  "description": "Sell smarter, while you surf.",
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "browser_action": {
+    "default_icon": {
+      "19": "assets/browser-action/19.png",
+      "38": "assets/browser-action/38.png"
+    },
+    "default_title": "Outreach Everywhere"
+  },
+  "background": {
+    "scripts": [
+      "vendor.js",
+      "outreach.js",
+      "core.js",
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.mail.google.com/*"
+      ],
+      "js": [
+        "gmail.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.google.com/*"
+      ],
+      "css": [
+        "vendor-styles.css",
+        "outreach.css",
+        "content.css"
+      ],
+      "js": [
+        "vendor.js",
+        "vendor-content.js",
+        "outreach.js",
+        "vendor-styles.js",
+        "core.js",
+        "content.frames.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "include_globs": [
+        "*://*github.com*",
+        "*://*inbox.google.com*",
+        "*://*mail.google.com*",
+        "*://*linkedin.com*",
+        "*://*twitter.com*",
+        "*://*salesforce*",
+        "*://*force.com*",
+        "*://*cloudforce.com*",
+        "*://*visualforce.com*"
+      ],
+      "css": [
+        "vendor-styles.css",
+        "outreach.css",
+        "content.css"
+      ],
+      "js": [
+        "vendor.js",
+        "vendor-content.js",
+        "outreach.js",
+        "vendor-styles.js",
+        "core.js",
+        "content.legacy.js",
+        "content.windowmode.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.salesforce.com/*",
+        "*://*.force.com/*"
+      ],
+      "css": [
+        "vendor-styles.css",
+        "outreach.css",
+        "content.css"
+      ],
+      "js": [
+        "vendor.js",
+        "vendor-content.js",
+        "outreach.js",
+        "vendor-styles.js",
+        "core.js",
+        "content.frames.sfdc.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_globs": [
+        "*://*github.com*",
+        "*://*inbox.google.com*",
+        "*://*mail.google.com*",
+        "*://*linkedin.com*",
+        "*://*twitter.com*",
+        "*://*salesforce*",
+        "*://*force.com*",
+        "*://*cloudforce.com*",
+        "*://*visualforce.com*",
+        "*://*app1a.outreach.io*",
+        "*://*app1b.outreach.io*",
+        "*://*app1c.outreach.io*",
+        "*://*app1d.outreach.io*",
+        "*://*app1e.outreach.io*",
+        "*://*app1f.outreach.io*",
+        "*://*app2a.outreach.io*",
+        "*://*app2b.outreach.io*",
+        "*://*hello.outreach.io*"
+      ],
+      "css": [
+        "vendor-styles.css",
+        "outreach.css",
+        "content.css"
+      ],
+      "js": [
+        "vendor.js",
+        "vendor-content.js",
+        "outreach.js",
+        "vendor-styles.js",
+        "core.js",
+        "content.minimal.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.app1a.outreach.io/*",
+        "*://*.app1b.outreach.io/*",
+        "*://*.app1c.outreach.io/*",
+        "*://*.app1d.outreach.io/*",
+        "*://*.app1e.outreach.io/*",
+        "*://*.app1f.outreach.io/*",
+        "*://*.app2a.outreach.io/*",
+        "*://*.app2b.outreach.io/*"
+      ],
+      "js": [
+        "vendor.js",
+        "outreach.js",
+        "core.js",
+        "bridge.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*.lightning.force.com/*"
+      ],
+      "js": [
+        "sfdc-lightning.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "icons": {
+    "16": "assets/main/16.png",
+    "48": "assets/main/48.png",
+    "128": "assets/main/128.png"
+  },
+  "options_ui": {
+    "page": "assets/options/index.html",
+    "chrome_style": true
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "https://*.googleusercontent.com/proxy/*",
+    "https://*.mail.google.com/*"
+  ],
+  "web_accessible_resources": [
+    "assets/content/*.png",
+    "assets/content/*.svg",
+    "assets/content/fonts/*",
+    "assets/content/bridge.html",
+    "assets/content/container.html",
+    "assets/content/orca-container.html",
+    "gmail-addon.js",
+    "sfdc-lightning-addon.js"
+  ]
+}

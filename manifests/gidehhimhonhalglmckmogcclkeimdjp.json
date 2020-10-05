@@ -1,0 +1,79 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "LogMote",
+  "version": "1.1.5.0",
+  "author": "LogMote SAS",
+  "manifest_version": 2,
+  "description": "__MSG_description__",
+  "default_locale": "en",
+  "minimum_chrome_version": "36",
+  "permissions": [
+    "notifications",
+    "contextMenus",
+    "clipboardWrite",
+    "clipboardRead",
+    "tabs",
+    "idle",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "jscripts/browser.js",
+        "jscripts/jquery.min.js",
+        "jscripts/proto/long.min.js",
+        "jscripts/proto/bytebuffer.min.js",
+        "jscripts/proto/protobuf.min.js",
+        "v2/Logger.js",
+        "v2/Browser.js",
+        "v2/Browser/Message.js",
+        "v2/Tools/Proto.js",
+        "inject-min.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "32": "images/logo_disconnected.png"
+    },
+    "default_title": "__MSG_title__",
+    "default_popup": "notification.html"
+  },
+  "web_accessible_resources": [
+    "jscripts/proto/ads.proto",
+    "jscripts/proto/comAgent.proto",
+    "jscripts/proto/comAgentQrCode.proto",
+    "jscripts/proto/comCompany.proto",
+    "jscripts/proto/comCredentials.proto",
+    "jscripts/proto/comDescriptors.proto",
+    "jscripts/proto/comLight.proto",
+    "jscripts/proto/connectionLess.proto",
+    "jscripts/proto/extension.proto",
+    "jscripts/proto/reporting.proto",
+    "jscripts/proto/rules.proto",
+    "html/SlideFrame.html",
+    "jscripts/qrcode/ocrad.js",
+    "html/GenPwdFrame.html",
+    "html/AccountFrame.html",
+    "html/LoginFrame.html",
+    "html/QRcodeFrame.html",
+    "html/AlertMessageFrame.html",
+    "html/RegisterAccount.html"
+  ]
+}

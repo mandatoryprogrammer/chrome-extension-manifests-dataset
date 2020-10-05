@@ -1,0 +1,80 @@
+{
+  "background": {
+    "page": "background/index.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_title": "Gaia Mission - Search & save the coral reefs",
+    "default_icon": {
+      "64": "icons/64.png",
+      "128": "icons/128.png"
+    }
+  },
+  "chrome_url_overrides": {
+    "newtab": "newtab/index.html"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "content-scripts/installed.js",
+        "content-scripts/event-handler.js"
+      ],
+      "matches": [
+        "*://*.gaiamission.org/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "js": [
+        "content-scripts/visibility.js"
+      ],
+      "matches": [
+        "*://*.gaiamission.org/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "chrome_settings_overrides": {
+    "search_provider": {
+      "name": "Gaia Mission",
+      "keyword": "gaiamission.org",
+      "favicon_url": "https://gaiamission.org/favicon.ico",
+      "encoding": "UTF-8",
+      "is_default": true,
+      "search_url": "https://gaiamission.org/search/?tt=coral__ext&q={searchTerms}"
+    }
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://*.gaiamission.org/*"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com https://*.ytimg.com  https://www.googleapis.com https://*.ytimg.com https://*.gaiamission.org https://*.mystart.com https://*.gaiamissioncdn.org https://*.vmn.net https://api.facebook.com https://*.twitter.com; object-src 'self'",
+  "description": "Set your search engine & new tab page to Gaia Mission so you can help save coral reefs.",
+  "icons": {
+    "128": "icons/128.png",
+    "16": "icons/16.png",
+    "38": "icons/38.png",
+    "48": "icons/48.png",
+    "64": "icons/64.png"
+  },
+  "manifest_version": 2,
+  "name": "Gaia Mission - Search & save the coral reefs",
+  "offline_enabled": true,
+  "permissions": [
+    "alarms",
+    "management",
+    "storage",
+    "unlimitedStorage",
+    "*://*.gaiamission.org/*"
+  ],
+  "optional_permissions": [
+    "bookmarks",
+    "topSites",
+    "tabs",
+    "chrome://favicon/"
+  ],
+  "short_name": "Coral Reef",
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "2.19.61"
+}

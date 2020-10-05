@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Zynbit for Gmail",
+  "short_name": "ZB",
+  "version": "2020.7.16.1722",
+  "description": "Drive Sales with Data. Get more out of Salesforce. More actionable data. More insights.",
+  "homepage_url": "https://app.zynbit.com",
+  "permissions": [
+    "notifications",
+    "storage",
+    "background",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "*://*.googleusercontent.com/*",
+    "https://socket.zynbit.com/*",
+    "https://mail.google.com/*"
+  ],
+  "optional_permissions": [],
+  "background": {
+    "scripts": [
+      "js/bg/extension-bg.js"
+    ],
+    "persistence": false
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "js/content/gmail-extension.js"
+      ],
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "css": [
+        "css/common.style.css"
+      ],
+      "all_frames": false
+    },
+    {
+      "js": [
+        "js/content/calendar-extension.js"
+      ],
+      "matches": [
+        "https://calendar.google.com/*"
+      ],
+      "css": [
+        "css/common.style.css"
+      ],
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    "start/frame.html",
+    "start/frame-extension.js",
+    "js/content/gmail-inject.js",
+    "js/content/calendar-inject.js",
+    "img/*"
+  ],
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://*.google.com; object-src 'self'"
+}

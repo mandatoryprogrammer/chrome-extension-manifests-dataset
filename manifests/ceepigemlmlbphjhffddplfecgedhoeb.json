@@ -1,0 +1,36 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "pfcrypto",
+  "short_name": "personal finance crypto tracker",
+  "version": "1.2.0",
+  "manifest_version": 2,
+  "description": "cryptocurrency holdings updater",
+  "icons": {
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "https://home.personalcapital.com/page/login/app*",
+    "https://home.personalcapital.com/api/*",
+    "https://api.alternative.me/v1/ticker/",
+    "https://api.blockcypher.com/v1/*",
+    "https://api.ethplorer.io/getAddressInfo/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://home.personalcapital.com/page/login/app*"
+      ],
+      "js": [
+        "personalcapital.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

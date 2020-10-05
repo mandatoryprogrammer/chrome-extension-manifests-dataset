@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Social Hub",
+  "version": "1.0.1",
+  "manifest_version": 2,
+  "description": "Social Hub - access point for popular social medias",
+  "short_name": "Social Hub",
+  "icons": {
+    "16": "icons/icon16.png",
+    "22": "icons/icon22.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "64": "icons/icon64.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "depends/btstrap/jquery-3.2.1.min.js",
+      "depends/background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icons/icon48.png",
+    "default_title": "Social App",
+    "default_popup": "index.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.instagram.com/*",
+        "https://*.instagram.com/*"
+      ],
+      "js": [
+        "depends/content.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "<all_urls>",
+    "storage",
+    "contextMenus",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "minimum_chrome_version": "40"
+}

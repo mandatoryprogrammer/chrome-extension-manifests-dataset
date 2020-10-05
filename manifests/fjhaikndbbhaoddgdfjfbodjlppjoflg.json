@@ -1,0 +1,57 @@
+{
+  "update_url": "http://clients2.google.com/service/update2/crx",
+  "name": "Google Reader Count",
+  "version": "1.2.6",
+  "background": {
+    "scripts": [
+      "prefs.js",
+      "closure.js",
+      "main.js",
+      "background.js"
+    ]
+  },
+  "description": "Displays the number of unread items in your Google Reader account. Clicking opens your Reader account.",
+  "options_page": "options.html",
+  "manifest_version": 2,
+  "icons": {
+    "16": "icon-16.png",
+    "32": "icon-32.png",
+    "64": "icon-64.png",
+    "128": "icon-128.png"
+  },
+  "browser_action": {
+    "default_icon": "icon-signed-out.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.google.com/reader/*",
+        "https://www.google.com/reader/*"
+      ],
+      "js": [
+        "Libraries/jquery-1.8.1.min.js",
+        "Libraries/Library.js",
+        "contentscript.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://www.google.com/reader/*",
+        "https://www.google.com/reader/*"
+      ],
+      "js": [
+        "ReplaceIcon.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "http://www.google.com/*",
+    "https://www.google.com/*"
+  ],
+  "web_accessible_resources": [
+    "GoogleReader.ico"
+  ]
+}

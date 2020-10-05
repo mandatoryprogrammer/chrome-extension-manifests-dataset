@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "description": "Recarga las paginas de tramite de Apostilla, Pasaporte, Legalizacion y Antecedentes cuando aparecen los errores 404, 500, 502 y 504.",
+  "manifest_version": 2,
+  "name": "Ayudante de Tramites",
+  "version": "3.9",
+  "browser_action": {
+    "default_icon": "icon128.png",
+    "default_title": "Ayudante de Tramites",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "webNavigation",
+    "*://tramites.saime.gob.ve/*",
+    "*://certificacioninternacional.mijp.gob.ve/*",
+    "*://citas.saren.gob.ve/*",
+    "*://www.citavirtual.mppeu.gob.ve/*",
+    "*://legalizacionve.mppre.gob.ve/*"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "icons": {
+    "16": "icon16.png",
+    "32": "icon32.png",
+    "48": "icon48.png",
+    "64": "icon64.png",
+    "96": "icon96.png",
+    "128": "icon128.png",
+    "256": "icon256.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://tramites.saime.gob.ve/*",
+        "*://certificacioninternacional.mijp.gob.ve/*",
+        "*://citas.saren.gob.ve/*",
+        "*://www.citavirtual.mppeu.gob.ve/*",
+        "*://legalizacionve.mppre.gob.ve/*"
+      ],
+      "match_about_blank": true,
+      "js": [
+        "content-script.js",
+        "formularios.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ]
+}

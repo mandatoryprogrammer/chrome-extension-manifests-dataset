@@ -1,0 +1,43 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "WPSNIFFER - WordPress Themes Sniffer",
+  "description": "Detects active WordPress theme being used on current WordPress website.",
+  "version": "2.23",
+  "minimum_chrome_version": "2.23",
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "storage",
+    "tabs"
+  ],
+  "browser_action": {
+    "default_icon": "icons/icon-disabled.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "js/parse.min.js",
+      "data.js",
+      "theme_extractor.js",
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/parse.min.js",
+        "theme_extractor.js"
+      ]
+    }
+  ],
+  "manifest_version": 2,
+  "icons": {
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}

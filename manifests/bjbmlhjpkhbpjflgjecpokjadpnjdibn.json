@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Giftibly | Gift Assistant",
+  "version": "1.1.301",
+  "description": "Add gifts to your collection at Giftibly.com from nearly anywhere on the web.",
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "img/icon16.png",
+      "48": "img/icon48.png",
+      "128": "img/icon.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "scripts/eventPage.js"
+    ],
+    "persistent": false
+  },
+  "externally_connectable": {
+    "matches": [
+      "http://localhost:3000/*",
+      "http://giftibly.com/*",
+      "http://ec2-54-196-89-160.compute-1.amazonaws.com/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "vendor/jquery-3.2.1.min.js",
+        "vendor/purify.min.js",
+        "scripts/item.js",
+        "scripts/ga-loggedin.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "https://*/"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'"
+}

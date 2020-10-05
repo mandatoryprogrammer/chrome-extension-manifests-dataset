@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Blocksi Web Filter",
+  "version": "1.0.168",
+  "manifest_version": 2,
+  "minimum_chrome_version": "21",
+  "description": "__MSG_app_description__",
+  "default_locale": "en",
+  "background": {
+    "page": "background.html"
+  },
+  "options_page": "options.html",
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>",
+    "webNavigation",
+    "storage",
+    "identity",
+    "identity.email",
+    "geolocation"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "images/19x19.png",
+      "38": "images/38x38.png"
+    },
+    "default_title": "Add to black/white list",
+    "default_popup": "browser_action.html"
+  },
+  "icons": {
+    "16": "images/16x16.png",
+    "48": "images/48x48.png",
+    "128": "images/128x128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "scripts/page-inject.js"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

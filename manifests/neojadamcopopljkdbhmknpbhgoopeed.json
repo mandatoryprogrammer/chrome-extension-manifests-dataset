@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "OnTrack: Smart Productivity Tool",
+  "short_name": "OnTrack: Smart Productivity Tool",
+  "version": "2.5.5",
+  "web_accessible_resources": [
+    "biology.txt",
+    "history.txt",
+    "physics.txt",
+    "collegeApps.txt"
+  ],
+  "description": "The first smart productivity tool.",
+  "icons": {
+    "16": "packtrack16.png",
+    "48": "packtrack48.png",
+    "128": "packtrack128.png"
+  },
+  "author": "OnTrack",
+  "permissions": [
+    "<all_urls>",
+    "storage",
+    "contextMenus",
+    "clipboardWrite",
+    "webNavigation",
+    "activeTab",
+    "declarativeContent",
+    "debugger",
+    "downloads",
+    "pageCapture",
+    "tabCapture",
+    "declarativeNetRequest",
+    "contentSettings",
+    "management"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "contentscript.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": "packtrack16.png",
+    "default_popup": "ui2.html"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com  https://cdn.socket.io; object-src 'self'"
+}

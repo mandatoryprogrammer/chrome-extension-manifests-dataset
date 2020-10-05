@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "GiveWater",
+  "manifest_version": 2,
+  "version": "1.0.8",
+  "description": "Give clean water every time you search the web.",
+  "icons": {
+    "128": "./images/icon128.png",
+    "48": "./images/icon48.png",
+    "16": "./images/icon16.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "128": "./images/icon128.png",
+      "48": "./images/icon48.png",
+      "16": "./images/icon16.png"
+    },
+    "default_title": "giveWater"
+  },
+  "chrome_url_overrides": {
+    "newtab": "./newTab.html"
+  },
+  "chrome_settings_overrides": {
+    "search_provider": {
+      "encoding": "UTF-8",
+      "favicon_url": "https://www.givewater.com/wp-content/themes/givewater-2019/assets/icons/favicon-32x32.png",
+      "is_default": true,
+      "keyword": "giveWater",
+      "name": "giveWater Search",
+      "search_url": "https://www1.givewater.com/serp?q={searchTerms}&segment=givewater01"
+    }
+  },
+  "background": {
+    "scripts": [
+      "./js/background.js"
+    ],
+    "persistent": false
+  },
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.givewater.com/*"
+      ],
+      "css": [
+        "./css/hidePopup.css"
+      ]
+    }
+  ],
+  "permissions": [
+    "*://*.givewater.com/*"
+  ]
+}

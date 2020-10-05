@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Redskins Web Skin",
+  "short_name": "Redskins Web Skin",
+  "description": "Replace the term “Redskins” with a more dignified name in your browser, and in the NFL.",
+  "author": "Your friendly neighborhood football fan",
+  "version": "1.0.3",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "management",
+    "*://*/*",
+    "http://*/*",
+    "https://*/*",
+    "http://localhost/*",
+    "http://localhost:8888/*"
+  ],
+  "icons": {
+    "16": "logo16x16.png",
+    "19": "logo19x19.png",
+    "32": "logo32x32.png",
+    "48": "logo48x48.png",
+    "96": "logo96x96.png",
+    "128": "logo128x128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "logo19x19.png"
+    },
+    "default_title": "Redskins Web Skin",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "*://*.change.org/*",
+        "*://*.redskins.solutions/*"
+      ],
+      "js": [
+        "findAndReplaceDOMText.js",
+        "content.js"
+      ],
+      "all_frames": true,
+      "match_about_blank": true,
+      "run_at": "document_idle"
+    }
+  ]
+}

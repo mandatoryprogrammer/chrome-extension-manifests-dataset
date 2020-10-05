@@ -1,0 +1,48 @@
+{
+  "update_url": "http://clients2.google.com/service/update2/crx",
+  "name": "IMDB Improver",
+  "manifest_version": 2,
+  "version": "1.1.0",
+  "permissions": [
+    "storage"
+  ],
+  "description": "This adds the user rating beside the episode title for quick reference. Enjoy! I'll add more soon!",
+  "page_action": {
+    "default_icon": "imdb_48.png",
+    "default_title": "Fixing your imdb!"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.imdb.com/*/episodes*",
+        "https://www.imdb.com/*/episodes*"
+      ],
+      "js": [
+        "add_scores.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "http://www.imdb.com/*",
+        "https://www.imdb.com/*"
+      ],
+      "js": [
+        "clean_page.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "icons": {
+    "16": "imdb_16.png",
+    "48": "imdb_48.png",
+    "128": "imdb_128.png"
+  },
+  "options_page": "options.html",
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  }
+}

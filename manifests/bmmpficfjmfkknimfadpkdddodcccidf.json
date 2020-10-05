@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "TU Berlin ISIS Course Crawler",
+  "version": "1.6",
+  "description": "Crawls a TU Berlin ISIS course for available resources (PDF documents, etc.) and allows the user to download them all at once.",
+  "homepage_url": "https://github.com/marcelreppi/tu-berlin-isis-course-crawler",
+  "icons": {
+    "16": "./icons/icon16.png",
+    "48": "./icons/icon48.png",
+    "128": "./icons/icon128.png"
+  },
+  "permissions": [
+    "*://isis.tu-berlin.de/*",
+    "activeTab",
+    "downloads",
+    "storage"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "16": "./icons/icon16.png",
+      "48": "./icons/icon48.png",
+      "128": "./icons/icon128.png"
+    },
+    "default_title": "TU Berlin ISIS Course Crawler",
+    "default_popup": "./popup/index.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://isis.tu-berlin.de/course/view.php?id=*"
+      ],
+      "js": [
+        "./shared/browser-polyfill.js",
+        "./content_scripts/coursePage.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "./shared/browser-polyfill.js",
+      "./background_scripts/extension-listener.js",
+      "./background_scripts/downloader.js"
+    ]
+  },
+  "options_ui": {
+    "page": "./pages/options/options.html"
+  },
+  "applications": {
+    "gecko": {
+      "update_url": "https://raw.githubusercontent.com/marcelreppi/tu-berlin-isis-course-crawler/master/update.json"
+    }
+  }
+}

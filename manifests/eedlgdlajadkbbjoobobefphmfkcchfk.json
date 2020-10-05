@@ -1,0 +1,69 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "target": "chrome",
+  "name": "__MSG_store_title_new__",
+  "description": "__MSG_store_shortdesc_new__",
+  "version": "3.3.0",
+  "default_locale": "en",
+  "homepage_url": "https://www.ecosia.org",
+  "icons": {
+    "16": "img/favicon16.png",
+    "48": "img/logo_square_transparent48.png",
+    "128": "img/logo_square_transparent128.png"
+  },
+  "manifest_version": 2,
+  "web_accessible_resources": [
+    "img/favicon16.png",
+    "img/logo.png"
+  ],
+  "browser_action": {
+    "default_title": "__MSG_browser_action_hover__",
+    "default_icon": "img/icon19.png",
+    "browser_style": false
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.ecosia.org/*"
+      ],
+      "js": [
+        "funnel.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "chrome_settings_overrides": {
+    "search_provider": {
+      "name": "Ecosia Search",
+      "keyword": "ecosia",
+      "search_url": "https://www.ecosia.org/search?q={searchTerms}&addon=chrome&addonversion=3.3.0&method=topbar",
+      "favicon_url": "https://cdn.ecosia.org/assets/images/ico/favicon.ico",
+      "suggest_url": "https://ac.ecosia.org/?q={searchTerms}&type=list&mkt=__MSG_@@ui_locale__",
+      "encoding": "UTF-8",
+      "is_default": true
+    }
+  },
+  "permissions": [
+    "*://*.ecosia.org/*",
+    "activeTab",
+    "contextMenus",
+    "cookies",
+    "storage",
+    "topSites"
+  ],
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+  "content_security_policy": "script-src 'self' https://*.ecosia.org/; object-src 'self'",
+  "externally_connectable": {
+    "matches": [
+      "*://*.ecosia.org/*"
+    ]
+  }
+}

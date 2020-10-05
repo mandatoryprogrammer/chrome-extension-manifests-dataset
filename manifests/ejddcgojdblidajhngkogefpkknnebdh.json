@@ -1,0 +1,67 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "description": "__MSG_extensionDescription__",
+  "manifest_version": 2,
+  "name": "AutoplayStopper",
+  "version": "1.7.8",
+  "applications": {
+    "gecko": {
+      "id": "autoplaystopper@byo.co.il"
+    }
+  },
+  "default_locale": "en",
+  "icons": {
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png"
+  },
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "tabs",
+    "contextMenus",
+    "storage",
+    "webNavigation"
+  ],
+  "background": {
+    "scripts": [
+      "utils.js",
+      "background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "32": "icons/icon32.png"
+    },
+    "default_title": "AutoplayStopper",
+    "default_popup": "skin/popup.html",
+    "browser_style": true
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "match_about_blank": true,
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "script/selector.js",
+        "content/handler-utils.js",
+        "content/content.js"
+      ]
+    }
+  ],
+  "options_ui": {
+    "chrome_style": true,
+    "browser_style": true,
+    "page": "skin/options.html"
+  },
+  "devtools_page": "skin/devtools.html?view=page",
+  "optional_permissions": [
+    "file://*/*"
+  ],
+  "web_accessible_resources": [
+    "skin/content.css"
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Ninja Outreach Lite",
+  "description": "Ninja Outreach Lite adds powerful prospecting and outreach capabilities to your web browser on the fly.",
+  "version": "1.32.56",
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "images/chrome-ext-toolbar-icon.png",
+    "default_title": "Ninja Outreach",
+    "default_popup": "popup.html"
+  },
+  "externally_connectable": {
+    "matches": [
+      "https://app.ninjaoutreach.com/*",
+      "http://beta.ninjaoutreach.com/*",
+      "https://v1.ninjaoutreach.com/*",
+      "https://dev.ninjaoutreach.com/*",
+      "https://test.ninjaoutreach.com/*"
+    ]
+  },
+  "background": {
+    "scripts": [
+      "vendor/jquery-2.1.1.min.js",
+      "vendor/underscore-min.js",
+      "js/background/contextMenu.js",
+      "js/background/webapp.connector.js",
+      "js/global.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/content.js",
+        "vendor/jquery-2.1.1.min.js",
+        "js/background/parseDemographics.js",
+        "js/background/grabRSSFeeds.js",
+        "js/util.js",
+        "js/scraper.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "*://*/*",
+    "tabs",
+    "storage",
+    "downloads",
+    "contextMenus",
+    "notifications",
+    "http://api.facebook.com/*",
+    "http://urls.api.twitter.com/1/urls/*",
+    "http://www.linkedin.com/countserv/count/*",
+    "http://api.pinterest.com/v1/urls/*",
+    "https://plusone.google.com/u/0/_/+1/*",
+    "http://tools.mercenie.com/page-rank-checker/api/*",
+    "http://www.guest-postings.com/wp-content/plugins/bulk-page-domain-authority/get-domain-authority-ajax.php",
+    "http://data.alexa.com/*",
+    "http://rest.socialsharespy.com/*",
+    "http://www.linkedin.com/*",
+    "https://www.getdrip.com/forms/*"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

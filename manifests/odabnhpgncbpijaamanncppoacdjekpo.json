@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Stop Notifications New Tab",
+  "description": "Stop Notifications New Tab",
+  "version": "0.5",
+  "manifest_version": 2,
+  "permissions": [
+    "*://*.stopnotifications.com/*"
+  ],
+  "background": {
+    "page": "common/background.html",
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "common/contentscript.js"
+      ],
+      "matches": [
+        "*://*.stopnotifications.com/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "chrome_url_overrides": {
+    "newtab": "newtab/newtab.html"
+  },
+  "chrome_settings_overrides": {
+    "search_provider": {
+      "name": "Stop Notifications",
+      "keyword": "https://search.stopnotifications.com",
+      "search_url": "https://search.stopnotifications.com/searchresults.aspx?q={searchTerms}&src=ds&pid=stno",
+      "search_url_post_params": "",
+      "favicon_url": "https://www.stopnotifications.com/favicon.ico",
+      "encoding": "UTF-8",
+      "is_default": true
+    }
+  },
+  "browser_action": {
+    "default_icon": "img/logo_128x.png",
+    "default_title": "Stop Notifications"
+  },
+  "icons": {
+    "128": "img/logo_128x.png",
+    "16": "img/logo_16x.png",
+    "48": "img/logo_48x.png"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

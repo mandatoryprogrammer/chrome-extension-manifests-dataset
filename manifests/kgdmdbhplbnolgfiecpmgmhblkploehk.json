@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "ProductHook - Amazon Price Notifications",
+  "description": "Allows an Amazon users to track product prices, view product price history, and receive product notifications!",
+  "version": "4.0.23",
+  "permissions": [
+    "*://*.bddevelop.com/*",
+    "webRequest",
+    "webRequestBlocking",
+    "*://*.amazon.com/*",
+    "tabs",
+    "storage",
+    "notifications",
+    "activeTab"
+  ],
+  "background": {
+    "scripts": [
+      "notification.bundle.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "*://*.amazon.com/*"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "js": [
+        "content.bundle.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "img/logo.svg"
+  ],
+  "icons": {
+    "16": "img/16.png",
+    "48": "img/48.png",
+    "96": "img/96.png",
+    "128": "img/128.png"
+  },
+  "browser_action": {
+    "default_popup": "extension.html",
+    "default_icon": {
+      "16": "img/16.png",
+      "32": "img/32.png"
+    }
+  },
+  "content_security_policy": "img-src * data: 'unsafe-inline'; script-src 'self' 'unsafe-eval' https://connect.facebook.net 'sha256-3dXOGBQsz8aVFupqlLJ3VkO5PcIL5GWctjEp8GXyHfs='; object-src 'self'"
+}

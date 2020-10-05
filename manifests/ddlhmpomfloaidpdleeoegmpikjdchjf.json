@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "HackyBird",
+  "version": "0.8",
+  "description": "Filter tweets by keyword, Sort Twitter timeline by popularity (retweets, likes, users) & more ...",
+  "icons": {
+    "16": "favicon-16x16.png",
+    "32": "favicon-48x48.png",
+    "64": "favicon-64x64.png",
+    "128": "favicon-128x128.png"
+  },
+  "browser_action": {
+    "default_icon": "favicon-16x16.png"
+  },
+  "options_page": "options.html",
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.twitter.com/*",
+        "https://*.twitter.com/*"
+      ],
+      "js": [
+        "jquery-3.0.0.min.js",
+        "toastr/toastr.js",
+        "content.js"
+      ],
+      "css": [
+        "toastr/toastr.css",
+        "content.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "background": {
+    "scripts": [
+      "eventPage.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "storage",
+    "http://*.twitter.com/*",
+    "https://*.twitter.com/*"
+  ]
+}

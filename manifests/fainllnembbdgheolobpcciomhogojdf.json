@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Kiosked Placement Configurator",
+  "description": "Browser extension for Kiosked",
+  "version": "0.4.0",
+  "browser_action": {
+    "default_icon": "assets/images/256-kiosked.png",
+    "default_popup": "popup.html#/"
+  },
+  "icons": {
+    "16": "assets/images/16-kiosked.png",
+    "48": "assets/images/48-kiosked.png",
+    "128": "assets/images/128-kiosked.png",
+    "256": "assets/images/256-kiosked.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com/ga.js; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "tab.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "http://*/*",
+    "https://*/*",
+    "storage",
+    "tabs",
+    "notifications",
+    "unlimitedStorage",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "web_accessible_resources": [
+    "tab.js",
+    "assets/*"
+  ]
+}

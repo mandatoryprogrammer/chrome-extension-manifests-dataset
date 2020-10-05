@@ -1,0 +1,39 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "DontRuin.It",
+  "description": "DontRuin.It is the easiest way to mute spoilers, people, hashtags, terms and phrases on Twitter and Facebook.",
+  "version": "1.0.99",
+  "background": {
+    "scripts": [
+      "/lib/firebase.js",
+      "/src/background.js",
+      "/lib/mixpanel.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://twitter.com/*",
+        "https://www.facebook.com/*",
+        "http://*.dontruin.it/*"
+      ],
+      "js": [
+        "/lib/zepto.min.js",
+        "/lib/zepto-slides.min.js",
+        "/src/silencer.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "browser_action": {
+    "default_icon": "/icons/icon-mini.png",
+    "default_popup": "/src/popup.html"
+  },
+  "permissions": [
+    "https://*.twitter.com/*",
+    "https://www.facebook.com/*",
+    "http://*.dontruin.it/*"
+  ],
+  "content_security_policy": "script-src 'self' https://dontruinit.firebaseio.com https://s-dal5-nss-4.firebaseio.com https://cdn.mxpnl.com; object-src 'self'"
+}

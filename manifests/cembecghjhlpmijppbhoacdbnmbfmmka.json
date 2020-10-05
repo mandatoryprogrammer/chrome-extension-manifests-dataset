@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "BlockSchool: Scratch Helper",
+  "version": "1.1",
+  "description": "Get help in Scratch projects with a live coding tutor from BlockSchool -- whenever you need it!",
+  "manifest_version": 2,
+  "icons": {
+    "16": "images/blockschool16.png",
+    "32": "images/blockschool32.png",
+    "48": "images/blockschool48.png",
+    "128": "images/blockschool128.png"
+  },
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "http://scratch.mit.edu/*",
+    "https://scratch.mit.edu/*",
+    "http://127.0.0.1:8888/",
+    "storage",
+    "<all_urls>"
+  ],
+  "browser_action": {
+    "default_title": "Scratch Helper",
+    "default_icon": "images/blockschool32.png",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://scratch.mit.edu/*",
+        "https://scratch.mit.edu/*",
+        "http://127.0.0.1:8888/"
+      ],
+      "css": [
+        "scratchhelper.css"
+      ],
+      "js": [
+        "jquery-3.3.1.min.js",
+        "Dropbox-sdk.min.js",
+        "scratchhelper.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "intercom.js"
+  ]
+}

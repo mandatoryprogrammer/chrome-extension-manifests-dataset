@@ -1,0 +1,101 @@
+{
+  "name": "__MSG_extension_name__",
+  "short_name": "__MSG_extension_name__",
+  "author": "Pokeshot GmbH",
+  "version": "1.2.1.0",
+  "manifest_version": 2,
+  "description": "__MSG_extension_description__",
+  "homepage_url": "http://pokeshot.com",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "64": "icons/icon64.png",
+    "96": "icons/icon96.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "script/libs/smartertour-polyfill.js",
+      "script/libs/consolelog.min.js",
+      "script/libs/webext-options-sync.js",
+      "script/libs/jquery.min.js",
+      "script/libs/underscore-min.js",
+      "script/libs/dexie.min.js",
+      "script/smartertour-core.js",
+      "script/smartertour-background-services.js",
+      "script/smartertour-background.js"
+    ],
+    "persistent": true
+  },
+  "options_ui": {
+    "page": "views/options/options.html",
+    "chrome_style": true
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "19": "icons/icon19.png",
+      "48": "icons/icon48.png"
+    },
+    "default_title": "SmarterTour",
+    "default_popup": "views/menu/menu.html"
+  },
+  "permissions": [
+    "notifications",
+    "*://*/*",
+    "tabs",
+    "storage",
+    "unlimitedStorage"
+  ],
+  "storage": {
+    "managed_schema": "storage_schema.json"
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "all_frames": false,
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "js": [
+        "script/libs/smartertour-polyfill.js",
+        "script/libs/consolelog.min.js",
+        "script/libs/webext-options-sync.js",
+        "script/libs/jquery.min.js",
+        "script/libs/underscore-min.js",
+        "script/libs/dexie.min.js",
+        "script/smartertour-core.js",
+        "script/smartertour-content-start.js"
+      ]
+    },
+    {
+      "run_at": "document_idle",
+      "all_frames": false,
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "js": [
+        "script/smartertour-content-services.js",
+        "script/smartertour-content.js"
+      ],
+      "css": [
+        "style/inject.css",
+        "style/animations.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "res/conf/*",
+    "res/tours/*",
+    "_locales/*",
+    "script/*",
+    "**/libs/*.js",
+    "**/inject/*.js",
+    "**/inject/api/*.js",
+    "views/*.svg"
+  ],
+  "update_url": "https://clients2.google.com/service/update2/crx"
+}

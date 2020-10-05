@@ -1,0 +1,101 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Dayboard: New Tab & Site Blocker",
+  "version": "0.15.1",
+  "manifest_version": 2,
+  "description": "Dayboard is a new tab to do list and website blocker that helps you improve focus, reduce distractions, and fight procrastination.",
+  "homepage_url": "https://dayboard.co/",
+  "offline_enabled": true,
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128-green.png"
+  },
+  "background": {
+    "scripts": [
+      "lib/js/underscore.min.js",
+      "lib/js/moment.min.js",
+      "app/js/shared_external.min.js",
+      "app/js/background.min.js",
+      "app/js/import_tasks.min.js"
+    ],
+    "exclude_matches": [
+      "chrome://newtab"
+    ],
+    "persistent": true
+  },
+  "options_page": "frame.html#/settings",
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128-green.png"
+    },
+    "default_title": "Dayboard Site Blocker"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.dayboard.co/registration/import",
+        "https://*.dayboard.co/settings/import"
+      ],
+      "js": [
+        "lib/js/jquery.min.js",
+        "cs/js/import_tasks.min.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.dayboard.co/*"
+      ],
+      "js": [
+        "cs/js/dayboard.min.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "https://*.dayboard.co/*"
+      ],
+      "js": [
+        "lib/js/jquery.min.js",
+        "cs/js/refocus_tabs.min.js",
+        "cs/js/blocked_sites.min.js"
+      ],
+      "css": [
+        "lib/css/font-awesome.min.css",
+        "cs/css/refocus_tabs.css",
+        "cs/css/blocked_sites.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "fonts/*",
+    "app/img/*",
+    "frame.html"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://*.dayboard.co/*"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://js.intercomcdn.com/ https://*.intercom.io/ https://ssl.google-analytics.com http://localhost:35729; object-src 'self'; img-src 'self' data: https://www.gravatar.com http://www.google-analytics.com/ https://*.intercomcdn.com/ https://static.intercomassets.com/ https://images.intercom.io/",
+  "permissions": [
+    "alarms",
+    "cookies",
+    "identity",
+    "notifications",
+    "storage",
+    "unlimitedStorage",
+    "tabs",
+    "activeTab",
+    "http://*.dayboard.co/*",
+    "https://*.dayboard.co/*"
+  ]
+}

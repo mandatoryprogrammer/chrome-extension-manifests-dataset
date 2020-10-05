@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Google Messages Launcher",
+  "description": "Launches Google Messages in a dedicated window.",
+  "version": "1.0.0",
+  "author": "Jon Grffith",
+  "icons": {
+    "48": "icon_48.png",
+    "128": "icon_128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  },
+  "permissions": [
+    "storage",
+    "https://*/*"
+  ],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+E",
+        "windows": "Ctrl+Shift+E",
+        "mac": "Alt+Shift+E",
+        "linux": "Ctrl+Shift+E"
+      }
+    }
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "contentscript.js"
+      ],
+      "run_at": "document_start",
+      "matches": [
+        "https://messages.google.com/*"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": "icon_128.png"
+  }
+}

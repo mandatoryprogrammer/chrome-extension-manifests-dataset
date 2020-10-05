@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "GIVE US ALL YOUR MONEY",
+  "author": "Declan Hoare",
+  "description": "Replaces brand tweets with \"GIVE US ALL YOUR MONEY\"",
+  "version": "2",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "page_action": {
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "permissions": [
+    "https://*.twitter.com/",
+    "http://*.twitter.com/",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "https://*.twitter.com/*",
+        "http://*.twitter.com/*"
+      ],
+      "js": [
+        "scripts/giveusallyourmoney.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "data/brands.txt"
+  ],
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ],
+    "persistent": false
+  }
+}

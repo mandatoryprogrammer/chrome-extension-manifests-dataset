@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Avaya Spaces Utility",
+  "author": "zang",
+  "version": "4.0.1",
+  "manifest_version": 2,
+  "minimum_chrome_version": "34",
+  "default_locale": "en",
+  "description": "The Avaya Spaces Utility Add-on enables screen sharing across the web-based, Avaya Spaces app.",
+  "background": {
+    "scripts": [
+      "background-script.js",
+      "plugins/i18next-1.7.3.js",
+      "_locales/translation-en.js",
+      "utils/socket.io.js",
+      "utils/SocketConstants.js",
+      "utils/clientEnvironment.js",
+      "utils/Utils.js",
+      "spaces.common.js"
+    ],
+    "persistent": false
+  },
+  "externally_connectable": {
+    "matches": [
+      "https://*.onesna.com/*",
+      "https://*.esna.com/*",
+      "https://*.zang.io/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "content-script.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end",
+      "matches": [
+        "https://*.onesna.com/*",
+        "https://*.esna.com/*",
+        "https://*.zang.io/*"
+      ]
+    }
+  ],
+  "options_page": "options.html",
+  "icons": {
+    "48": "icon.png"
+  },
+  "permissions": [
+    "background",
+    "desktopCapture",
+    "storage",
+    "cookies",
+    "tabs",
+    "idle",
+    "notifications",
+    "https://*.onesna.com/*",
+    "https://*.esna.com/*",
+    "https://*.zang.io/*",
+    "https://*.googleusercontent.com/"
+  ],
+  "web_accessible_resources": [
+    "icon.png"
+  ]
+}

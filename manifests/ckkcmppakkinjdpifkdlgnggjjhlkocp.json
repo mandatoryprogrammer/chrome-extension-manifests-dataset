@@ -1,0 +1,81 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "ZipApply",
+  "short_name": "Profile grabber",
+  "version": "0.5.5",
+  "description": "Find decision makers and Hiring managers fast!",
+  "permissions": [
+    "notifications",
+    "activeTab",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "*://*/*",
+    "https://*/*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.google.com https://cse.google.com https://www.googleapis.com; object-src 'self'",
+  "browser_action": {
+    "default_icon": "icons/icon-19g.png",
+    "default_popup": "components/browseraction/search.html",
+    "default_title": "zipapply Title"
+  },
+  "icons": {
+    "128": "icons/icon-128.png",
+    "48": "icons/icon-48.png",
+    "38": "icons/icon-38.png",
+    "24": "icons/icon-19.png",
+    "16": "icons/icon-16.png"
+  },
+  "background": {
+    "scripts": [
+      "libs/jquery.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "*://*/*"
+      ],
+      "include_globs": [
+        "*://www.linkedin.com/*",
+        "*://*.indeed.*/viewjob*",
+        "*://*.indeed.*/cmp/*"
+      ],
+      "css": [
+        "css/button.css"
+      ],
+      "js": [
+        "libs/jquery.js",
+        "contentscripts/button.js",
+        "contentscripts/linkedin_parser.js",
+        "contentscripts/linkedin_urlaction.js",
+        "contentscripts/emailaddress.js",
+        "libs/jquery-ui.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "https://www.zipapply.com/*"
+      ],
+      "js": [
+        "contentscripts/ping_web.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "manifest_version": 2,
+  "web_accessible_resources": [
+    "contentscripts/get_discover_email_data.js",
+    "contentscripts/getdata.js",
+    "libs/*",
+    "img/*",
+    "css/*",
+    "html/*"
+  ]
+}

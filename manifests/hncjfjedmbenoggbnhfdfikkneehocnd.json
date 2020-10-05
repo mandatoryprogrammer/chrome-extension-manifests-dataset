@@ -1,0 +1,76 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Kineviz GraphXR Report",
+  "version": "1.7.1",
+  "description": "Screenshot, Export as PPTX or PDF",
+  "manifest_version": 2,
+  "minimum_chrome_version": "68",
+  "homepage_url": "https://graphxr.kineviz.com/",
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ],
+    "persistent": true
+  },
+  "icons": {
+    "16": "images/kineviz-128.png",
+    "22": "images/kineviz-128.png",
+    "32": "images/kineviz-128.png",
+    "48": "images/kineviz.png",
+    "128": "images/kineviz-128.png"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'; ",
+  "browser_action": {
+    "default_icon": "images/kineviz.png",
+    "default_title": "Kineviz GraphXR Report",
+    "default_popup": "popup.html"
+  },
+  "commands": {
+    "save-image": {
+      "description": "Auto capture the tab and save as image with Ctrl+Shift+S",
+      "suggested_key": {
+        "default": "Ctrl+Shift+S",
+        "mac": "MacCtrl+Shift+S"
+      }
+    },
+    "capture-image": {
+      "description": "Auto capture tab with Ctrl+Shift+P",
+      "suggested_key": {
+        "default": "Ctrl+Shift+P",
+        "mac": "MacCtrl+Shift+P"
+      }
+    }
+  },
+  "permissions": [
+    "tabs",
+    "http://*/",
+    "https://*/",
+    "<all_urls>",
+    "storage",
+    "tabCapture",
+    "activeTab",
+    "unlimitedStorage"
+  ],
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "scripts/contentscript.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "images/kineviz-fullscreen.png",
+    "images/kineviz-close.png"
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": false,
+    "open_in_tab": true
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Newsblock",
+  "description": "Your recommender of credible news sources",
+  "version": "1.09",
+  "browser_action": {
+    "default_icon": "newsblock_icon_128.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "newsblock_icon_16.png",
+    "48": "newsblock_icon_48.png",
+    "128": "newsblock_icon_128.png"
+  },
+  "background": {
+    "scripts": [
+      "google-analytics-bundle.js",
+      "levenshtein.min.js",
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "https://www.google-analytics.com/",
+    "activeTab",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Too Long; Didnt Read",
+  "description": "Text summary tool in your browser",
+  "version": "1.1",
+  "permissions": [
+    "tabs",
+    "http://boilerpipe-web.appspot.com/",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "event.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "jquery-3.2.1.min.js",
+        "content.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "icons": {
+    "128": "images/folded-newspaper.png"
+  },
+  "browser_action": {
+    "default_icon": "images/folded-newspaper.png",
+    "default_popup": "dialogue.html"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

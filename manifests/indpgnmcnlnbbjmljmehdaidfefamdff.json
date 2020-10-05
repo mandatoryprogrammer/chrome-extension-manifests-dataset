@@ -1,0 +1,81 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Ninja Popup Blocker: Block Unwanted Popups",
+  "short_name": "Ninja",
+  "description": "__MSG_app_description__",
+  "author": "Felipe",
+  "version": "0.1.2",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "permissions": [
+    "storage",
+    "tabs",
+    "<all_urls>",
+    "contextMenus"
+  ],
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "config.js",
+      "common.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "data/icons/16.png",
+      "19": "data/icons/19.png",
+      "32": "data/icons/32.png",
+      "38": "data/icons/38.png",
+      "48": "data/icons/48.png",
+      "64": "data/icons/64.png",
+      "128": "data/icons/128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "match_about_blank": true,
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "data/inject/blocker.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "data/inject/iframe.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": false
+    }
+  ],
+  "icons": {
+    "16": "data/icons/16.png",
+    "19": "data/icons/19.png",
+    "32": "data/icons/32.png",
+    "38": "data/icons/38.png",
+    "48": "data/icons/48.png",
+    "64": "data/icons/64.png",
+    "128": "data/icons/128.png"
+  },
+  "options_ui": {
+    "page": "data/options/index.html",
+    "chrome_style": false
+  },
+  "web_accessible_resources": [
+    "data/ui/*"
+  ],
+  "commands": {
+    "allow-last-request": {
+      "description": "__MSG_context_item2__"
+    },
+    "deny-last-request": {
+      "description": "__MSG_context_item3__"
+    }
+  }
+}

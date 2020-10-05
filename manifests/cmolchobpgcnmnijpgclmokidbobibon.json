@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Hide Advertisements",
+  "version": "1.0.1",
+  "description": "The Chrome Extension hides the ads in site: www.hostedredmine.com!",
+  "permissions": [
+    "*://*.hostedredmine.com/*",
+    "contextMenus",
+    "webNavigation",
+    "activeTab",
+    "notifications",
+    "clipboardRead",
+    "clipboardWrite",
+    "storage",
+    "unlimitedStorage",
+    "tts",
+    "tabs"
+  ],
+  "icons": {
+    "16": "logo_016.png",
+    "48": "logo_048.png",
+    "128": "logo_128.png"
+  },
+  "page_action": {
+    "default_icon": {
+      "19": "language_19.jpg",
+      "38": "language_19.jpg"
+    },
+    "default_title": "Hide Advertisements v1.0.0"
+  },
+  "background": {
+    "page": "background.html",
+    "persistent": false
+  },
+  "incognito": "spanning",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.hostedredmine.com/*"
+      ],
+      "js": [
+        "common.js",
+        "jquery.min.js",
+        "addDOMLoadEvent.js",
+        "content_scripts.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ]
+}

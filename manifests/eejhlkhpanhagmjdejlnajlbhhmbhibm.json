@@ -1,0 +1,71 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "快捷分享 - 明道",
+  "description": "使用浏览器扩展插件【快捷分享】一键将网页精彩内容分享到明道，您可以分享网页链接、分享网页精彩图片、分享网页各个区域截图等至明道",
+  "version": "1.0.2",
+  "background": {
+    "scripts": [
+      "js/ajax.js",
+      "js/background.js",
+      "js/hotkeys.js",
+      "js/utils.js",
+      "js/mingdao.js"
+    ]
+  },
+  "manifest_version": 2,
+  "browser_action": {
+    "default_icon": "images/icon.png",
+    "default_title": "快捷分享 - 明道",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "contextMenus",
+    "https://api.mingdao.com/oauth2/authorize",
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "activeTab",
+    "<all_urls>"
+  ],
+  "icons": {
+    "16": "images/16_16.png",
+    "48": "images/48_48.png",
+    "128": "images/128_128.png"
+  },
+  "content_scripts": [
+    {
+      "exclude_globs": [
+        "http://mingdao.com*",
+        "http://www.mingdao.com*"
+      ],
+      "include_globs": [
+        "*"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [
+        "css/capture.css",
+        "css/page.css"
+      ],
+      "js": [
+        "js/isload.js",
+        "js/content_script.js",
+        "js/script.js",
+        "js/shortcut.js",
+        "js/page.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    "css/*",
+    "js/*",
+    "libs/*",
+    "images/*",
+    "login.html",
+    "share.html",
+    "index.html"
+  ]
+}

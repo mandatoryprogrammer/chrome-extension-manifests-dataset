@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "TumblrFox",
+  "short_name": "TumblrFox",
+  "description": "A super hacky dashboard filter for Tumblr",
+  "version": "0.6.8",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "icons": {
+    "16": "images/fox.png",
+    "128": "images/fox.png"
+  },
+  "background": {
+    "scripts": [
+      "scripts/vendor.bundle.js",
+      "scripts/background.js"
+    ]
+  },
+  "options_ui": {
+    "page": "pages/options.html",
+    "chrome_style": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.tumblr.com/*"
+      ],
+      "css": [
+        "contentScripts/styles/popover.css"
+      ],
+      "js": [
+        "scripts/vendor.bundle.js",
+        "scripts/contentscript.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "permissions": [
+    "downloads",
+    "tabs",
+    "idle",
+    "storage",
+    "unlimitedStorage",
+    "http://api.tumblr.com/*",
+    "https://tumblr.com/*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://cdn.firebase.com https://*.firebaseio.com; object-src 'self'",
+  "web_accessible_resources": [
+    "pages/chrome_ex_oauth.html",
+    "images/*.png",
+    "scripts/vendor.bundle.js",
+    "scripts/fox-bootstrap.js"
+  ]
+}

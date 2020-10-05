@@ -1,0 +1,854 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Gopher: Cash Back from Hotels + See Discounts",
+  "short_name": "Gopher",
+  "version": "1.11.25",
+  "manifest_version": 2,
+  "description": "Earn cash back when you book directly with a hotel! Easily compare rates while on major travel sites with the hotel's site.",
+  "homepage_url": "https://joingopher.com/",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "web_accessible_resources": [
+    "src/inject/analytics.js",
+    "src/inject/scripts/deal.json",
+    "src/inject/scripts/gopher_deal.json",
+    "views/*",
+    "templates/*",
+    "*.woff2",
+    "*.woff",
+    "*.ttf"
+  ],
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icons/gopher_na.png",
+    "default_title": "Gopher Hotel Deals"
+  },
+  "permissions": [
+    "webRequest",
+    "storage",
+    "alarms",
+    "tabs",
+    "<all_urls>"
+  ],
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "http://*.cheaptickets.com/*",
+        "https://*.cheaptickets.com/*",
+        "http://*.expedia.at/*",
+        "https://*.expedia.at/*",
+        "http://*.expedia.com/*",
+        "https://*.expedia.com/*",
+        "http://*.expedia.com.au/*",
+        "https://*.expedia.com.au/*",
+        "http://*.expedia.com.tw/*",
+        "https://*.expedia.com.tw/*",
+        "http://*.expedia.com.br/*",
+        "https://*.expedia.com.br/*",
+        "http://*.expedia.com.vn/*",
+        "https://*.expedia.com.vn/*",
+        "http://*.expedia.com.sg/*",
+        "https://*.expedia.com.sg/*",
+        "http://*.expedia.com.my/*",
+        "https://*.expedia.com.my/*",
+        "http://*.expedia.com.ph/*",
+        "https://*.expedia.com.ph/*",
+        "http://*.expedia.com.ar/*",
+        "https://*.expedia.com.ar/*",
+        "http://*.expedia.com.hk/*",
+        "https://*.expedia.com.hk/*",
+        "http://*.expedia.co/*",
+        "https://*.expedia.co/*",
+        "http://*.expedia.co.id/*",
+        "https://*.expedia.co.id/*",
+        "http://*.expedia.co.th/*",
+        "https://*.expedia.co.th/*",
+        "http://*.expedia.co.in/*",
+        "https://*.expedia.co.in/*",
+        "http://*.expedia.co.kr/*",
+        "https://*.expedia.co.kr/*",
+        "http://*.expedia.co.uk/*",
+        "https://*.expedia.co.uk/*",
+        "http://*.expedia.co.nz/*",
+        "https://*.expedia.co.nz/*",
+        "http://*.expedia.co.jp/*",
+        "https://*.expedia.co.jp/*",
+        "http://*.expedia.cn/*",
+        "https://*.expedia.cn/*",
+        "http://*.expedia.ca/*",
+        "https://*.expedia.ca/*",
+        "http://*.expedia.mx/*",
+        "https://*.expedia.mx/*",
+        "http://*.expedia.ch/*",
+        "https://*.expedia.ch/*",
+        "http://*.expedia.fi/*",
+        "https://*.expedia.fi/*",
+        "http://*.expedia.fr/*",
+        "https://*.expedia.fr/*",
+        "http://*.expedia.es/*",
+        "https://*.expedia.es/*",
+        "http://*.expedia.de/*",
+        "https://*.expedia.de/*",
+        "http://*.expedia.dk/*",
+        "https://*.expedia.dk/*",
+        "http://*.expedia.be/*",
+        "https://*.expedia.be/*",
+        "http://*.expedia.ie/*",
+        "https://*.expedia.ie/*",
+        "http://*.expedia.it/*",
+        "https://*.expedia.it/*",
+        "http://*.expedia.nl/*",
+        "https://*.expedia.nl/*",
+        "http://*.expedia.se/*",
+        "https://*.expedia.se/*",
+        "http://*.expedia.no/*",
+        "https://*.expedia.no/*",
+        "http://*.hotwire.com/*",
+        "https://*.hotwire.com/*",
+        "http://*.orbitz.com/*",
+        "https://*.orbitz.com/*",
+        "http://*.travelocity.ca/*",
+        "https://*.travelocity.ca/*",
+        "http://*.travelocity.com/*",
+        "https://*.travelocity.com/*"
+      ],
+      "css": [
+        "src/inject/css/gopher-bootstrap-tour-standalone.css",
+        "src/inject/css/gopher-v1.css",
+        "src/inject/css/gopher-v2.css",
+        "styles/application.css"
+      ],
+      "js": [
+        "src/inject/scripts/contentScriptSetup.js",
+        "src/inject/scripts/otas/gopher-expedia.js"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "matches": [
+        "http://*.booking.com/*",
+        "https://*.booking.com/*"
+      ],
+      "css": [
+        "src/inject/css/gopher-bootstrap-tour-standalone.css",
+        "src/inject/css/gopher-v1.css",
+        "src/inject/css/gopher-v2.css",
+        "styles/application.css"
+      ],
+      "js": [
+        "src/inject/scripts/contentScriptSetup.js",
+        "src/inject/scripts/otas/booking-com.js"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "matches": [
+        "http://*.google.at/*",
+        "https://*.google.at/*",
+        "http://*.google.ca/*",
+        "https://*.google.ca/*",
+        "http://*.google.cl/*",
+        "https://*.google.cl/*",
+        "http://*.google.cn/*",
+        "https://*.google.cn/*",
+        "http://*.google.co/*",
+        "https://*.google.co/*",
+        "http://*.google.co.id/*",
+        "https://*.google.co.id/*",
+        "http://*.google.co.jp/*",
+        "https://*.google.co.jp/*",
+        "http://*.google.co.kr/*",
+        "https://*.google.co.kr/*",
+        "http://*.google.co.nz/*",
+        "https://*.google.co.nz/*",
+        "http://*.google.co.th/*",
+        "https://*.google.co.th/*",
+        "http://*.google.co.uk/*",
+        "https://*.google.co.uk/*",
+        "http://*.google.co.za/*",
+        "https://*.google.co.za/*",
+        "http://*.google.com/*",
+        "https://*.google.com/*",
+        "http://*.google.com.ar/*",
+        "https://*.google.com.ar/*",
+        "http://*.google.com.au/*",
+        "https://*.google.com.au/*",
+        "http://*.google.com.br/*",
+        "https://*.google.com.br/*",
+        "http://*.google.com.bz/*",
+        "https://*.google.com.bz/*",
+        "http://*.google.com.hk/*",
+        "https://*.google.com.hk/*",
+        "http://*.google.com.mx/*",
+        "https://*.google.com.mx/*",
+        "http://*.google.com.my/*",
+        "https://*.google.com.my/*",
+        "http://*.google.com.pe/*",
+        "https://*.google.com.pe/*",
+        "http://*.google.com.ph/*",
+        "https://*.google.com.ph/*",
+        "http://*.google.com.sg/*",
+        "https://*.google.com.sg/*",
+        "http://*.google.com.tr/*",
+        "https://*.google.com.tr/*",
+        "http://*.google.com.tw/*",
+        "https://*.google.com.tw/*",
+        "http://*.google.com.vn/*",
+        "https://*.google.com.vn/*",
+        "http://*.google.ch/*",
+        "https://*.google.ch/*",
+        "http://*.google.cz/*",
+        "https://*.google.cz/*",
+        "http://*.google.de/*",
+        "https://*.google.de/*",
+        "http://*.google.dk/*",
+        "https://*.google.dk/*",
+        "http://*.google.es/*",
+        "https://*.google.es/*",
+        "http://*.google.fi/*",
+        "https://*.google.fi/*",
+        "http://*.google.fr/*",
+        "https://*.google.fr/*",
+        "http://*.google.gr/*",
+        "https://*.google.gr/*",
+        "http://*.google.ie/*",
+        "https://*.google.ie/*",
+        "http://*.google.it/*",
+        "https://*.google.it/*",
+        "http://*.google.nl/*",
+        "https://*.google.nl/*",
+        "http://*.google.no/*",
+        "https://*.google.no/*",
+        "http://*.google.pl/*",
+        "https://*.google.pl/*",
+        "http://*.google.rs/*",
+        "https://*.google.rs/*",
+        "http://*.google.ru/*",
+        "https://*.google.ru/*",
+        "http://*.google.se/*",
+        "https://*.google.se/*",
+        "http://*.google.sk/*",
+        "https://*.google.sk/*",
+        "http://*.google.sr/*",
+        "https://*.google.sr/*"
+      ],
+      "css": [
+        "src/inject/css/gopher-bootstrap-tour-standalone.css",
+        "src/inject/css/gopher-v1.css",
+        "src/inject/css/gopher-v2.css",
+        "styles/application.css"
+      ],
+      "js": [
+        "src/inject/scripts/contentScriptSetup.js",
+        "src/inject/scripts/otas/gopher-google.js"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "matches": [
+        "http://*.agoda.com/*",
+        "https://*.agoda.com/*"
+      ],
+      "css": [
+        "src/inject/css/gopher-bootstrap-tour-standalone.css",
+        "src/inject/css/gopher-v1.css",
+        "src/inject/css/gopher-v2.css",
+        "styles/application.css"
+      ],
+      "js": [
+        "src/inject/scripts/contentScriptSetup.js",
+        "src/inject/scripts/otas/agoda.js"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "matches": [
+        "http://*.concursolutions.com/*",
+        "https://*.concursolutions.com/*"
+      ],
+      "css": [
+        "src/inject/css/gopher-bootstrap-tour-standalone.css",
+        "src/inject/css/gopher-v1.css",
+        "src/inject/css/gopher-v2.css",
+        "styles/application.css"
+      ],
+      "js": [
+        "src/inject/scripts/contentScriptSetup.js",
+        "src/inject/scripts/otas/concur.js"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "matches": [
+        "http://*.hotels.com/*",
+        "https://*.hotels.com/*",
+        "http://*.hotels.cn/*",
+        "https://*.hotels.cn/*",
+        "http://*.hoteis.com/*",
+        "https://*.hoteis.com/*",
+        "http://*.hoteles.com/*",
+        "https://*.hoteles.com/*"
+      ],
+      "css": [
+        "src/inject/css/gopher-bootstrap-tour-standalone.css",
+        "src/inject/css/gopher-v1.css",
+        "src/inject/css/gopher-v2.css",
+        "styles/application.css"
+      ],
+      "js": [
+        "src/inject/scripts/contentScriptSetup.js",
+        "src/inject/scripts/otas/hotels.js"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "matches": [
+        "http://*.priceline.com/*",
+        "https://*.priceline.com/*"
+      ],
+      "css": [
+        "src/inject/css/gopher-bootstrap-tour-standalone.css",
+        "src/inject/css/gopher-v1.css",
+        "src/inject/css/gopher-v2.css",
+        "styles/application.css"
+      ],
+      "js": [
+        "src/inject/scripts/contentScriptSetup.js",
+        "src/inject/scripts/otas/priceline.js"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "matches": [
+        "http://*.tripadvisor.at/*",
+        "https://*.tripadvisor.at/*",
+        "http://*.tripadvisor.be/*",
+        "https://*.tripadvisor.be/*",
+        "http://*.tripadvisor.ca/*",
+        "https://*.tripadvisor.ca/*",
+        "http://*.tripadvisor.ch/*",
+        "https://*.tripadvisor.ch/*",
+        "http://*.tripadvisor.cl/*",
+        "https://*.tripadvisor.cl/*",
+        "http://*.tripadvisor.co/*",
+        "https://*.tripadvisor.co/*",
+        "http://*.tripadvisor.co.hu/*",
+        "https://*.tripadvisor.co.hu/*",
+        "http://*.tripadvisor.co.id/*",
+        "https://*.tripadvisor.co.id/*",
+        "http://*.tripadvisor.co.kr/*",
+        "https://*.tripadvisor.co.kr/*",
+        "http://*.tripadvisor.co.nz/*",
+        "https://*.tripadvisor.co.nz/*",
+        "http://*.tripadvisor.co.uk/*",
+        "https://*.tripadvisor.co.uk/*",
+        "http://*.tripadvisor.co.za/*",
+        "https://*.tripadvisor.co.za/*",
+        "http://*.tripadvisor.com/*",
+        "https://*.tripadvisor.com/*",
+        "http://*.tripadvisor.com.ar/*",
+        "https://*.tripadvisor.com.ar/*",
+        "http://*.tripadvisor.com.au/*",
+        "https://*.tripadvisor.com.au/*",
+        "http://*.tripadvisor.com.br/*",
+        "https://*.tripadvisor.com.br/*",
+        "http://*.tripadvisor.com.eg/*",
+        "https://*.tripadvisor.com.eg/*",
+        "http://*.tripadvisor.com.gr/*",
+        "https://*.tripadvisor.com.gr/*",
+        "http://*.tripadvisor.com.hk/*",
+        "https://*.tripadvisor.com.hk/*",
+        "http://*.tripadvisor.com.mx/*",
+        "https://*.tripadvisor.com.mx/*",
+        "http://*.tripadvisor.com.my/*",
+        "https://*.tripadvisor.com.my/*",
+        "http://*.tripadvisor.com.pe/*",
+        "https://*.tripadvisor.com.pe/*",
+        "http://*.tripadvisor.com.ph/*",
+        "https://*.tripadvisor.com.ph/*",
+        "http://*.tripadvisor.com.sg/*",
+        "https://*.tripadvisor.com.sg/*",
+        "http://*.tripadvisor.com.tr/*",
+        "https://*.tripadvisor.com.tr/*",
+        "http://*.tripadvisor.com.tw/*",
+        "https://*.tripadvisor.com.tw/*",
+        "http://*.tripadvisor.com.ve/*",
+        "https://*.tripadvisor.com.ve/*",
+        "http://*.tripadvisor.com.vn/*",
+        "https://*.tripadvisor.com.vn/*",
+        "http://*.tripadvisor.cn/*",
+        "https://*.tripadvisor.cn/*",
+        "http://*.tripadvisor.cz/*",
+        "https://*.tripadvisor.cz/*",
+        "http://*.tripadvisor.de/*",
+        "https://*.tripadvisor.de/*",
+        "http://*.tripadvisor.dk/*",
+        "https://*.tripadvisor.dk/*",
+        "http://*.tripadvisor.es/*",
+        "https://*.tripadvisor.es/*",
+        "http://*.tripadvisor.fi/*",
+        "https://*.tripadvisor.fi/*",
+        "http://*.tripadvisor.fr/*",
+        "https://*.tripadvisor.fr/*",
+        "http://*.tripadvisor.ie/*",
+        "https://*.tripadvisor.ie/*",
+        "http://*.tripadvisor.in/*",
+        "https://*.tripadvisor.in/*",
+        "http://*.tripadvisor.it/*",
+        "https://*.tripadvisor.it/*",
+        "http://*.tripadvisor.jp/*",
+        "https://*.tripadvisor.jp/*",
+        "http://*.tripadvisor.nl/*",
+        "https://*.tripadvisor.nl/*",
+        "http://*.tripadvisor.pt/*",
+        "https://*.tripadvisor.pt/*",
+        "http://*.tripadvisor.rs/*",
+        "https://*.tripadvisor.rs/*",
+        "http://*.tripadvisor.ru/*",
+        "https://*.tripadvisor.ru/*",
+        "http://*.tripadvisor.se/*",
+        "https://*.tripadvisor.se/*",
+        "http://*.tripadvisor.sk/*",
+        "https://*.tripadvisor.sk/*"
+      ],
+      "css": [
+        "src/inject/css/gopher-bootstrap-tour-standalone.css",
+        "src/inject/css/gopher-v1.css",
+        "src/inject/css/gopher-v2.css",
+        "styles/application.css"
+      ],
+      "js": [
+        "src/inject/scripts/contentScriptSetup.js",
+        "src/inject/scripts/otas/tripadvisor.js"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "matches": [
+        "http://*.kayak.ae/*",
+        "https://*.kayak.ae/*",
+        "http://*.kayak.cat/*",
+        "https://*.kayak.cat/*",
+        "http://*.kayak.ch/*",
+        "https://*.kayak.ch/*",
+        "http://*.kayak.cl/*",
+        "https://*.kayak.cl/*",
+        "http://*.kayak.com/*",
+        "https://*.kayak.com/*",
+        "http://*.kayak.com.ar/*",
+        "https://*.kayak.com.ar/*",
+        "http://*.kayak.com.au/*",
+        "https://*.kayak.com.au/*",
+        "http://*.kayak.com.br/*",
+        "https://*.kayak.com.br/*",
+        "http://*.kayak.com.co/*",
+        "https://*.kayak.com.co/*",
+        "http://*.kayak.com.hk/*",
+        "https://*.kayak.com.hk/*",
+        "http://*.kayak.com.mx/*",
+        "https://*.kayak.com.mx/*",
+        "http://*.kayak.com.my/*",
+        "https://*.kayak.com.my/*",
+        "http://*.kayak.com.pe/*",
+        "https://*.kayak.com.pe/*",
+        "http://*.kayak.com.tr/*",
+        "https://*.kayak.com.tr/*",
+        "http://*.kayak.co/*",
+        "https://*.kayak.co/*",
+        "http://*.kayak.co.id/*",
+        "https://*.kayak.co.id/*",
+        "http://*.kayak.co.in/*",
+        "https://*.kayak.co.in/*",
+        "http://*.kayak.co.jp/*",
+        "https://*.kayak.co.jp/*",
+        "http://*.kayak.co.kr/*",
+        "https://*.kayak.co.kr/*",
+        "http://*.kayak.co.th/*",
+        "https://*.kayak.co.th/*",
+        "http://*.kayak.co.uk/*",
+        "https://*.kayak.co.uk/*",
+        "http://*.kayak.de/*",
+        "https://*.kayak.de/*",
+        "http://*.kayak.dk/*",
+        "https://*.kayak.dk/*",
+        "http://*.kayak.fr/*",
+        "https://*.kayak.fr/*",
+        "http://*.kayak.ie/*",
+        "https://*.kayak.ie/*",
+        "http://*.kayak.it/*",
+        "https://*.kayak.it/*",
+        "http://*.kayak.nl/*",
+        "https://*.kayak.nl/*",
+        "http://*.kayak.no/*",
+        "https://*.kayak.no/*",
+        "http://*.kayak.pl/*",
+        "https://*.kayak.pl/*",
+        "http://*.kayak.pt/*",
+        "https://*.kayak.pt/*",
+        "http://*.kayak.ru/*",
+        "https://*.kayak.ru/*",
+        "http://*.kayak.se/*",
+        "https://*.kayak.se/*",
+        "http://*.kayak.sg/*",
+        "https://*.kayak.sg/*"
+      ],
+      "css": [
+        "src/inject/css/gopher-bootstrap-tour-standalone.css",
+        "src/inject/css/gopher-v1.css",
+        "src/inject/css/kayak-gopher-design-1.css",
+        "src/inject/css/gopher-v2.css",
+        "styles/application.css"
+      ],
+      "js": [
+        "src/inject/scripts/contentScriptSetup.js",
+        "src/inject/scripts/otas/kayak.js"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "matches": [
+        "http://*.trivago.com/*",
+        "https://*.trivago.com/*"
+      ],
+      "css": [
+        "src/inject/css/gopher-bootstrap-tour-standalone.css",
+        "src/inject/css/gopher-v1.css",
+        "src/inject/css/kayak-gopher-design-1.css",
+        "src/inject/css/gopher-v2.css",
+        "styles/application.css"
+      ],
+      "js": [
+        "src/inject/scripts/contentScriptSetup.js",
+        "src/inject/scripts/otas/trivago.js"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "matches": [
+        "http://*.secure-hotel-booking.com/*",
+        "https://*.secure-hotel-booking.com/*"
+      ],
+      "css": [
+        "src/inject/css/gopher-bootstrap-tour-standalone.css",
+        "src/inject/css/gopher-v1.css",
+        "src/inject/css/kayak-gopher-design-1.css",
+        "src/inject/css/gopher-v2.css",
+        "styles/application.css"
+      ],
+      "js": [
+        "src/inject/scripts/contentScriptSetup.js",
+        "src/inject/scripts/hotels/availpro.js"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "matches": [
+        "http://*.bestwestern.com/*",
+        "https://*.bestwestern.com/*"
+      ],
+      "css": [
+        "src/inject/css/gopher-bootstrap-tour-standalone.css",
+        "src/inject/css/gopher-v1.css",
+        "src/inject/css/kayak-gopher-design-1.css",
+        "src/inject/css/gopher-v2.css",
+        "styles/application.css"
+      ],
+      "js": [
+        "src/inject/scripts/contentScriptSetup.js",
+        "src/inject/scripts/hotels/bestwestern.js"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "matches": [
+        "http://*.thebookingbutton.com/*",
+        "https://*.thebookingbutton.com/*",
+        "http://*.thebookingbutton.com.au/*",
+        "https://*.thebookingbutton.com.au/*",
+        "http://*.thebookingbutton.co/*",
+        "https://*.thebookingbutton.co/*",
+        "http://*.thebookingbutton.co.uk/*",
+        "https://*.thebookingbutton.co.uk/*"
+      ],
+      "css": [
+        "src/inject/css/gopher-bootstrap-tour-standalone.css",
+        "src/inject/css/gopher-v1.css",
+        "src/inject/css/kayak-gopher-design-1.css",
+        "src/inject/css/gopher-v2.css",
+        "styles/application.css"
+      ],
+      "js": [
+        "src/inject/scripts/contentScriptSetup.js",
+        "src/inject/scripts/hotels/bookingButton.js"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "matches": [
+        "http://*.choicehotels.com/*",
+        "https://*.choicehotels.com/*"
+      ],
+      "css": [
+        "src/inject/css/gopher-bootstrap-tour-standalone.css",
+        "src/inject/css/gopher-v1.css",
+        "src/inject/css/kayak-gopher-design-1.css",
+        "src/inject/css/gopher-v2.css",
+        "styles/application.css"
+      ],
+      "js": [
+        "src/inject/scripts/contentScriptSetup.js",
+        "src/inject/scripts/hotels/choice.js"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "matches": [
+        "http://*.hilton.com/*",
+        "https://*.hilton.com/*"
+      ],
+      "css": [
+        "src/inject/css/gopher-bootstrap-tour-standalone.css",
+        "src/inject/css/gopher-v1.css",
+        "src/inject/css/kayak-gopher-design-1.css",
+        "src/inject/css/gopher-v2.css",
+        "styles/application.css"
+      ],
+      "js": [
+        "src/inject/scripts/contentScriptSetup.js",
+        "src/inject/scripts/hotels/hilton.js"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "matches": [
+        "http://*.hyatt.com/*",
+        "https://*.hyatt.com/*"
+      ],
+      "css": [
+        "src/inject/css/gopher-bootstrap-tour-standalone.css",
+        "src/inject/css/gopher-v1.css",
+        "src/inject/css/kayak-gopher-design-1.css",
+        "src/inject/css/gopher-v2.css",
+        "styles/application.css"
+      ],
+      "js": [
+        "src/inject/scripts/contentScriptSetup.js",
+        "src/inject/scripts/hotels/hyatt.js"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "matches": [
+        "http://*.ihg.com/*",
+        "https://*.ihg.com/*"
+      ],
+      "css": [
+        "src/inject/css/gopher-bootstrap-tour-standalone.css",
+        "src/inject/css/gopher-v1.css",
+        "src/inject/css/kayak-gopher-design-1.css",
+        "src/inject/css/gopher-v2.css",
+        "styles/application.css"
+      ],
+      "js": [
+        "src/inject/scripts/contentScriptSetup.js",
+        "src/inject/scripts/hotels/ihg.js"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "matches": [
+        "http://*.marriott.com/*",
+        "https://*.marriott.com/*",
+        "http://*.marriott-res.com/*",
+        "https://*.marriott-res.com/*"
+      ],
+      "css": [
+        "src/inject/css/gopher-bootstrap-tour-standalone.css",
+        "src/inject/css/gopher-v1.css",
+        "src/inject/css/kayak-gopher-design-1.css",
+        "src/inject/css/gopher-v2.css",
+        "styles/application.css"
+      ],
+      "js": [
+        "src/inject/scripts/contentScriptSetup.js",
+        "src/inject/scripts/hotels/marriott.js"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "matches": [
+        "http://*.reservhotel.com/*",
+        "https://*.reservhotel.com/*"
+      ],
+      "css": [
+        "src/inject/css/gopher-bootstrap-tour-standalone.css",
+        "src/inject/css/gopher-v1.css",
+        "src/inject/css/kayak-gopher-design-1.css",
+        "src/inject/css/gopher-v2.css",
+        "styles/application.css"
+      ],
+      "js": [
+        "src/inject/scripts/contentScriptSetup.js",
+        "src/inject/scripts/hotels/reservhotel.js"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "matches": [
+        "http://*.reztrip.com/*",
+        "https://*.reztrip.com/*",
+        "http://*.wellingtonhotel.com/*",
+        "https://*.wellingtonhotel.com/*"
+      ],
+      "css": [
+        "src/inject/css/gopher-bootstrap-tour-standalone.css",
+        "src/inject/css/gopher-v1.css",
+        "src/inject/css/kayak-gopher-design-1.css",
+        "src/inject/css/gopher-v2.css",
+        "styles/application.css"
+      ],
+      "js": [
+        "src/inject/scripts/contentScriptSetup.js",
+        "src/inject/scripts/hotels/reztrip.js"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "matches": [
+        "http://*.synxis.com/*",
+        "https://*.synxis.com/*"
+      ],
+      "css": [
+        "src/inject/css/gopher-bootstrap-tour-standalone.css",
+        "src/inject/css/gopher-v1.css",
+        "src/inject/css/kayak-gopher-design-1.css",
+        "src/inject/css/gopher-v2.css",
+        "styles/application.css"
+      ],
+      "js": [
+        "src/inject/scripts/contentScriptSetup.js",
+        "src/inject/scripts/hotels/synxis.js"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "matches": [
+        "http://*.travelclick.com/*",
+        "https://*.travelclick.com/*",
+        "http://*.titanic.com/*",
+        "https://*.titanic.com/*",
+        "http://*.ottomanslifedeluxe.com/*",
+        "https://*.ottomanslifedeluxe.com/*",
+        "http://*.bespokehotels.com/*",
+        "https://*.bespokehotels.com/*"
+      ],
+      "css": [
+        "src/inject/css/gopher-bootstrap-tour-standalone.css",
+        "src/inject/css/gopher-v1.css",
+        "src/inject/css/kayak-gopher-design-1.css",
+        "src/inject/css/gopher-v2.css",
+        "styles/application.css"
+      ],
+      "js": [
+        "src/inject/scripts/contentScriptSetup.js",
+        "src/inject/scripts/hotels/travelclick.js"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "matches": [
+        "http://*.windsurfercrs.com/*",
+        "https://*.windsurfercrs.com/*"
+      ],
+      "css": [
+        "src/inject/css/gopher-bootstrap-tour-standalone.css",
+        "src/inject/css/gopher-v1.css",
+        "src/inject/css/kayak-gopher-design-1.css",
+        "src/inject/css/gopher-v2.css",
+        "styles/application.css"
+      ],
+      "js": [
+        "src/inject/scripts/contentScriptSetup.js",
+        "src/inject/scripts/hotels/windsurfer-crs.js"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "matches": [
+        "http://*.wyndhamhotels.com/*",
+        "https://*.wyndhamhotels.com/*"
+      ],
+      "css": [
+        "src/inject/css/gopher-bootstrap-tour-standalone.css",
+        "src/inject/css/gopher-v1.css",
+        "src/inject/css/kayak-gopher-design-1.css",
+        "src/inject/css/gopher-v2.css",
+        "styles/application.css"
+      ],
+      "js": [
+        "src/inject/scripts/contentScriptSetup.js",
+        "src/inject/scripts/hotels/wyndham.js"
+      ]
+    },
+    {
+      "run_at": "document_idle",
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [
+        "styles/application.css"
+      ],
+      "js": [
+        "src/inject/scripts/allUrls.js"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "matches": [
+        "http://*.joingopher.com/*",
+        "https://*.joingopher.com/*",
+        "http://*.joingopher.net/*",
+        "https://*.joingopher.net/*"
+      ],
+      "all_frames": true,
+      "css": [
+        "src/inject/css/gopher-bootstrap-tour-standalone.css",
+        "src/inject/css/gopher-v1.css",
+        "src/inject/css/kayak-gopher-design-1.css",
+        "src/inject/css/gopher-v2.css",
+        "styles/application.css"
+      ],
+      "js": [
+        "src/inject/scripts/contentScriptSetup.js",
+        "src/inject/scripts/joingopher.js"
+      ]
+    }
+  ],
+  "externally_connectable": {
+    "ids": [],
+    "matches": [
+      "*://*.joingopher.com/*",
+      "*://*.thelondonwesthollywood.com/*",
+      "*://reservations.travelclick.com/*",
+      "*://joingopher.net/*",
+      "*://blog.theguestbook.com/*",
+      "*://*.travelcoterie.com/*",
+      "*://*.secure-hotel-booking.com/*",
+      "*://*.hfrontenac.com/*",
+      "*://*.hsplendid.com/*",
+      "*://*.trilltravel.co/*"
+    ],
+    "accepts_tls_channel_id": false,
+    "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'"
+  }
+}

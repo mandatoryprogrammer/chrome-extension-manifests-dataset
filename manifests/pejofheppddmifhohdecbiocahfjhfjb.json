@@ -1,0 +1,84 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "iSams Utilities (formerly iSams GradesPaster)",
+  "short_name": "iSamsUtilities",
+  "version": "0.1.5.1",
+  "description": "Paste grades into iSams Mark Books + Paste data into Bulk Update + Make links clickable in LS Reports and Student Notes",
+  "manifest_version": 2,
+  "author": "Azadi Saryev",
+  "minimum_chrome_version": "66",
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "activeTab",
+    "declarativeContent",
+    "contextMenus",
+    "storage"
+  ],
+  "icons": {
+    "16": "images/isamsmbp-16.png",
+    "32": "images/isamsmbp-32.png",
+    "48": "images/isamsmbp-48.png",
+    "64": "images/isamsmbp-64.png",
+    "128": "images/isamsmbp-128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.isams.cloud/Main/Framework*",
+        "https://*.isams.cloud/Framework*",
+        "https://*.isams.cloud/modules/studentmanagement/shared/batcheditpreview.aspx*"
+      ],
+      "js": [
+        "contentscript.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.isams.cloud/legacy/modules/markbooks/markbooks/main/overview/index.aspx*"
+      ],
+      "js": [
+        "isamsmbp-markbook.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://*.isams.cloud/modules/senmanager/register/list.asp*",
+        "https://*.isams.cloud/modules/studentmanagement/record/record.asp*"
+      ],
+      "js": [
+        "isamsmbp-links.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://*.isams.cloud/modules/studentmanagement/shared/batchedit.asp*"
+      ],
+      "js": [
+        "isamsmbp-batchupdate.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "page_action": {
+    "default_name": "Start iSams Utilities",
+    "default_icon": {
+      "16": "images/isamsmbp-16.png",
+      "32": "images/isamsmbp-32.png",
+      "48": "images/isamsmbp-48.png",
+      "64": "images/isamsmbp-64.png",
+      "128": "images/isamsmbp-128.png"
+    }
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  },
+  "web_accessible_resources": []
+}

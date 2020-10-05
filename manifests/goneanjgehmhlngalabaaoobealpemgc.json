@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Linkens Beta",
+  "description": "Boost your business network, empower your communication and automate your work",
+  "default_locale": "en",
+  "icons": {
+    "128": "img/icon.png"
+  },
+  "browser_action": {
+    "default_icon": "img/icon.png",
+    "default_popup": "page/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "build/background.js"
+    ]
+  },
+  "permissions": [
+    "identity",
+    "webNavigation",
+    "tabs",
+    "activeTab",
+    "notifications",
+    "cookies",
+    "storage",
+    "unlimitedStorage",
+    "https://gravatar.com/*",
+    "https://linkens.online/",
+    "https://linkens.pp.ua/",
+    "https://www.linkedin.com/*",
+    "https://accounts.google.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.linkedin.com/*"
+      ],
+      "all_frames": true,
+      "exclude_matches": [
+        "*://www.linkedin.com/csp/*"
+      ],
+      "css": [
+        "build/content.css"
+      ],
+      "js": [
+        "build/content.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "img/*.png"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com https://ajax.googleapis.com https://unpkg.com https://use.fontawesome.com 'unsafe-eval'; object-src 'self'",
+  "version": "1.7",
+  "oauth2": {
+    "client_id": "990055935813-s3qsvnt1fbihnim3d2qrqqu787s52pa4.apps.googleusercontent.com",
+    "scopes": [
+      "openid"
+    ]
+  }
+}

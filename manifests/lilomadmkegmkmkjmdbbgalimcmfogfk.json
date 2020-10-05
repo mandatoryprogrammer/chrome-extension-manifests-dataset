@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Key-ncognito",
+  "version": "2.0.0",
+  "manifest_version": 2,
+  "description": "Use a keyboard shortcut to open links incognito.",
+  "homepage_url": "http://musicallyut.in",
+  "icons": {
+    "128": "icons/key-ncognito-128.png"
+  },
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "https://*/*",
+    "http://*/*"
+  ],
+  "options_page": "src/options/index.html",
+  "options_ui": {
+    "page": "src/options/index.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*",
+        "file://*/*"
+      ],
+      "js": [
+        "src/inject/handler.js",
+        "src/inject/inject.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "browser_action": {
+    "default_title": "Open same URL in incognito mode."
+  }
+}

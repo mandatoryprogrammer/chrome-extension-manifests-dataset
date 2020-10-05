@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Spredfast",
+  "description": "Use Spredfast conversations and intelligence from native social sites",
+  "version": "1.1.6",
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "storage"
+  ],
+  "content_security_policy": "script-src 'self' https://*.spredfast.com; object-src 'self'",
+  "icons": {
+    "16": "images/spredfast-16.png",
+    "48": "images/spredfast-48.png",
+    "128": "images/spredfast-128.png"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "background": {
+    "scripts": [
+      "analytics-node.js",
+      "eventPage.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.spredfast.com/user/extension-config/*"
+      ],
+      "js": [
+        "autoconfig.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.twitter.com/*"
+      ],
+      "css": [
+        "spredfast-twitter.css"
+      ],
+      "js": [
+        "util.js",
+        "spredfast-twitter.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "images/*.png",
+    "images/*.svg"
+  ],
+  "manifest_version": 2
+}

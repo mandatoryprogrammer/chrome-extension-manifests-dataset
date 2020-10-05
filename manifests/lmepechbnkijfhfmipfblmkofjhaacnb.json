@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "EquityTouch Gmail Extension",
+  "short_name": "EQT Extension",
+  "description": "Send emails to EquityTouch",
+  "version": "1.1.1",
+  "icons": {
+    "16": "img/EQT16.png",
+    "48": "img/EQT48.png",
+    "128": "img/EQT128.png"
+  },
+  "background": {
+    "persistent": false,
+    "page": "gmailAPI/gauth2.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*"
+      ],
+      "js": [
+        "js/inboxsdk.js",
+        "js/jquery-1.10.2.min.js",
+        "js/eqt_gmail.js"
+      ],
+      "css": [
+        "css/eqt_gmail.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "oauth2": {
+    "client_id": "583883649823-sqtevof2khck9an5s5cl95kka6adnqsd.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/gmail.readonly"
+    ]
+  },
+  "content_security_policy": "script-src https://*.google.com 'self' https://apis.google.com/; object-src 'self'",
+  "web_accessible_resources": [
+    "js/jquery-1.10.2.min.js",
+    "img/EQT21.png",
+    "gmailAPI/gauth2.html",
+    "postdata/postdata.html",
+    "postdata/postdata.js"
+  ],
+  "permissions": [
+    "identity",
+    "identity.email",
+    "storage",
+    "tabs",
+    "https://mail.google.com/",
+    "https://inbox.google.com/",
+    "https://apis.google.com/js/*",
+    "http://*.equitytouch.com/*",
+    "https://*.equitytouch.com/*"
+  ],
+  "manifest_version": 2
+}

@@ -1,0 +1,36 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "GIPHY for Gmail",
+  "version": "2.4",
+  "description": "Add the power of GIPHY to your Gmail experience. Search and discover the best GIFs for your every email need quickly and easily.",
+  "manifest_version": 2,
+  "icons": {
+    "128": "/img/128x128_vertical.png"
+  },
+  "web_accessible_resources": [
+    "/img/*"
+  ],
+  "permissions": [
+    "https://mail.google.com/",
+    "https://inbox.google.com/",
+    "https://api.giphy.com/*",
+    "https://www.google-analytics.com/",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*",
+        "https://www.google-analytics.com/"
+      ],
+      "js": [
+        "./analytics.js",
+        "./inboxsdk.js",
+        "./index.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

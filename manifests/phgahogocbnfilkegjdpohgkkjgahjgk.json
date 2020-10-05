@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Code Climate",
+  "version": "711",
+  "homepage_url": "https://codeclimate.com",
+  "description": "A Chrome extension for Code Climate",
+  "icons": {
+    "128": "icons/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/icon64.png",
+    "default_popup": "popup.html"
+  },
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://github.com/*"
+      ],
+      "js": [
+        "js/content.js"
+      ],
+      "css": [
+        "vendor/octicons/octicons.css",
+        "vendor/bentonsans/benton.css",
+        "stylesheets/styles.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://codeclimate.com/*",
+        "https://api.codeclimate.com/*"
+      ],
+      "js": [
+        "js/cc_content.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "https://github.com/*",
+    "https://codeclimate.com/*",
+    "https://api.codeclimate.com/*",
+    "cookies",
+    "storage"
+  ],
+  "web_accessible_resources": [
+    "badges/*",
+    "icons/*",
+    "vendor/octicons/octicons.eot",
+    "vendor/octicons/octicons.svg",
+    "vendor/octicons/octicons.ttf",
+    "vendor/octicons/octicons.woff",
+    "vendor/bentonsans/*",
+    "vendor/snowplow/2.7.0/*"
+  ],
+  "options_page": "options.html"
+}

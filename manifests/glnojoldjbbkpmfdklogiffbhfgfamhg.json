@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "OmniJoin Loader for Chrome",
+  "version": "7.0.0.12",
+  "description": "Chrome extension which provides installation and launch capabilities for the OmniJoin conference client",
+  "icons": {
+    "16": "res/icon16.png",
+    "48": "res/icon48.png",
+    "128": "res/icon128.png"
+  },
+  "page_action": {
+    "default_icon": {
+      "19": "res/icon19.png",
+      "38": "res/icon38.png"
+    }
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/join*"
+      ],
+      "js": [
+        "loader.js"
+      ],
+      "_comment": "REQUIRED SO THAT OUR JAVASCRIPT IS INJECTED BEFORE THE EVENT IT LISTENS FOR IS TRIGGERED",
+      "run_at": "document_start"
+    }
+  ],
+  "externally_connectable": {
+    "matches": [],
+    "ids": []
+  },
+  "incognito": "spanning",
+  "minimum_chrome_version": "1.0",
+  "offline_enabled": false,
+  "permissions": [
+    "declarativeContent",
+    "tabs",
+    "activeTab",
+    "nativeMessaging",
+    "downloads"
+  ],
+  "short_name": "OJ Loader",
+  "version_name": "7.0.0.12"
+}

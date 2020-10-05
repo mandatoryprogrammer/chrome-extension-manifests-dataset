@@ -1,0 +1,74 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "La Bonne Carte",
+  "short_name": "LaBonneCarte",
+  "description": "Affiche les résultats de vos recherches leboncoin sur une carte.",
+  "version": "0.3.0",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": [
+    "https://api.mapbox.com/*",
+    "https://api-adresse.data.gouv.fr/*",
+    "tabs"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "web_accessible_resources": [
+    "lib/*",
+    "foreground/map/img/*",
+    "foreground/map/html/*",
+    "foreground/container/html/*"
+  ],
+  "background": {
+    "scripts": [
+      "lib/jquery-2.2.3.min.js",
+      "utils/logger.js",
+      "utils/extractHostFromURL.js",
+      "utils/utils.js",
+      "models/item.js",
+      "models/geocode.js",
+      "models/geocoded-item.js",
+      "interface/constants/shared-const.js",
+      "interface/constants/method-keys.js",
+      "background/geocodecache.js",
+      "background/geocodeapi.js",
+      "background/geocoded-item-factory.js",
+      "background/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.leboncoin.fr/*"
+      ],
+      "js": [
+        "lib/jquery-2.2.3.min.js",
+        "lib/mapbox-gl-v0.51.0.js",
+        "lib/mapboxgl-spiderifier.js",
+        "utils/logger.js",
+        "utils/extractHostFromURL.js",
+        "utils/utils.js",
+        "models/item.js",
+        "models/geocode.js",
+        "models/geocoded-item.js",
+        "interface/constants/shared-const.js",
+        "interface/constants/method-keys.js",
+        "interface/background-interface.js",
+        "foreground/parser/webpageparser.js",
+        "foreground/map/js/popup-factory.js",
+        "foreground/map/js/mapmanager.js",
+        "foreground/container/js/mapcontainermanager.js",
+        "foreground/main/main.js"
+      ],
+      "all_frames": true,
+      "css": [
+        "lib/mapbox-gl-v0.51.0.css",
+        "foreground/container/css/mapcontainer.css",
+        "foreground/map/css/map.css"
+      ]
+    }
+  ]
+}

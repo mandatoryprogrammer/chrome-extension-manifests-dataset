@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Udemy Coupons Finder",
+  "version": "0.20",
+  "description": "Want FREE Udemy courses ?  Just install our plugin and get daily coupons & free courses !",
+  "icons": {
+    "128": "Icon.png",
+    "48": "Icon.png",
+    "16": "Icon.png"
+  },
+  "browser_action": {
+    "default_icon": "Icon.png",
+    "default_popup": "index.html",
+    "default_title": "When you browse courses on the Udemy website, a notification will be show if we have a valid coupon"
+  },
+  "background": {
+    "scripts": [
+      "chrome-extension-async.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.udemy.com/*"
+      ],
+      "js": [
+        "udemy.js"
+      ],
+      "css": [],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "https://www.udemy.com/*",
+    "https://comidoc.net/*",
+    "notifications",
+    "cookies",
+    "storage"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://comidoc.net/*",
+      "http://localhost:7777/*"
+    ]
+  },
+  "content_security_policy": "script-src 'self' 'sha256-GgRxrVOKNdB4LrRsVPDSbzvfdV4UqglmviH9GoBJ5jk='; object-src 'self'"
+}

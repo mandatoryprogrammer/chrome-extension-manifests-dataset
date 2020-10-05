@@ -1,0 +1,79 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Doubletick - Email tracking for Gmail",
+  "description": "Get whatsapp like double checkmarks when someone reads your email",
+  "version": "1.9",
+  "background": {
+    "scripts": [
+      "assets/js/jquery-2.2.4.min.js",
+      "config.js",
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "icons": {
+    "16": "assets/icons/new-icons/dt-16.png",
+    "48": "assets/icons/new-icons/dt-48.png",
+    "128": "assets/icons/new-icons/dt-128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "assets/icons/new-icons/dt-16.png",
+      "24": "assets/icons/new-icons/dt-24.png",
+      "32": "assets/icons/new-icons/dt-32.png"
+    },
+    "default_title": "Doubletick - Email tracking for Gmail",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "run_at": "document_end",
+      "all_frames": false,
+      "css": [
+        "assets/css/style.css"
+      ],
+      "js": [
+        "assets/js/jquery-2.2.4.min.js",
+        "assets/js/inboxsdk.js",
+        "config.js",
+        "content.js",
+        "sent.js",
+        "token.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "https://mail.google.com/",
+    "https://doubletick.co/*",
+    "*://*.doubletick.co/*",
+    "*://*.googleusercontent.com/*",
+    "https://js.intercomcdn.com/*",
+    "*://*.intercom.io/*",
+    "webRequest",
+    "webRequestBlocking",
+    "tabs",
+    "storage",
+    "cookies",
+    "notifications"
+  ],
+  "web_accessible_resources": [
+    "assets/icons/enabled.svg",
+    "assets/icons/disabled.svg",
+    "assets/icons/untracked.svg",
+    "assets/icons/dt-untracked.png",
+    "assets/icons/dt-read.png",
+    "assets/icons/dt-unread.png",
+    "assets/js/intercom-shim.js",
+    "assets/js/intercom-frame.js"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://doubletick.co/*",
+      "https://*.doubletick.co/*"
+    ]
+  },
+  "manifest_version": 2
+}

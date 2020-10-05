@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "version": "0.10.154",
+  "manifest_version": 2,
+  "description": "__MSG_appDescription__",
+  "icons": {
+    "16": "images/television-16.png",
+    "24": "images/television-24.png",
+    "32": "images/television-32.png",
+    "48": "images/television-48.png",
+    "64": "images/television-64.png",
+    "128": "images/television-128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/television-16.png",
+      "38": "images/television-32.png"
+    },
+    "default_title": "Rozu Video"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://isites.harvard.edu/icb/icb.do?keyword=*&pageid=icb.page*&pageContentId=icb.pagecontent*&view=watch.do&viewParam_entry=*",
+        "https://isites.harvard.edu/icb/icb.do?keyword=*&pageid=icb.page*&pageContentId=icb.pagecontent*&view=watch.do&viewParam_entry=*"
+      ],
+      "exclude_matches": [
+        "*://*/*#no-rozu"
+      ],
+      "js": [
+        "scripts/rozu.min.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    "scripts/*",
+    "styles/*",
+    "font/*"
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "SoftwareSeni Hub",
+  "short_name": "software-seni-hub",
+  "description": "An extension for SoftwareSeni Hub",
+  "version": "1.5",
+  "author": "Rudi Wahyudi",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "offline_enabled": false,
+  "browser_action": {
+    "default_icon": "icon48.png",
+    "default_popup": "app.html"
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://hub.softwareseni.co.id/pages/timesheet",
+        "*://hub.softwareseni.co.id/program"
+      ],
+      "js": [
+        "js/stateChecker.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://hub.softwareseni.co.id/pages/my_timesheet_report"
+      ],
+      "js": [
+        "js/jquery.js",
+        "js/timeSheetChecker.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://hub.softwareseni.co.id/staff/s_attendance/quick_log"
+      ],
+      "js": [
+        "js/jquery.js",
+        "js/submitLogHandler.js"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "*://hub.softwareseni.co.id/pages/timesheet",
+        "*://hub.softwareseni.co.id/program",
+        "*://hub.softwareseni.co.id/pages/my_timesheet_report",
+        "*://hub.softwareseni.co.id/staff/s_attendance/quick_log"
+      ],
+      "js": [
+        "js/jquery.js",
+        "js/toastr.js",
+        "js/notificationHandler.js"
+      ],
+      "css": [
+        "css/toastr.css"
+      ]
+    }
+  ],
+  "permissions": [
+    "alarms",
+    "storage",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "*://hub.softwareseni.co.id/*"
+  ]
+}

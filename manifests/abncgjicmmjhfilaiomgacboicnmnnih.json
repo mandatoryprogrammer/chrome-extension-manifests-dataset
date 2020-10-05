@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Wikiword",
+  "description": "Get instant word meanings and definitions from wikipedia and translation from google",
+  "version": "2",
+  "icons": {
+    "16": "images/ww16.png",
+    "48": "images/ww48.png",
+    "32": "images/ww32.png",
+    "128": "images/ww128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "<all_urls>",
+    "storage",
+    "declarativeContent",
+    "tabs",
+    "webNavigation"
+  ],
+  "manifest_version": 2,
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {},
+  "web_accessible_resources": [
+    "images/*",
+    "/*"
+  ],
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "content_script.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "content_security_policy": "connect-src http://localhost:5000/ https://*/ ;default-src 'self'; script-src 'self' ; style-src * 'unsafe-inline';  object-src 'self' "
+}

@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Cricket",
+  "version": "0.2.0",
+  "icons": {
+    "48": "images/cricket1.png"
+  },
+  "description": "A Cricket chrome extension - platform for locating and monitoring desired products by the customer",
+  "background": {
+    "scripts": [
+      "./js/lib/jquery.min.js",
+      "./js/background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "contextMenus",
+    "https://cricketeam.herokuapp.com/*"
+  ],
+  "browser_action": {
+    "default_icon": "images/cricket_default.png",
+    "default_popup": "./templates/popup.html"
+  },
+  "content_scripts": [
+    {
+      "css": [
+        "includes/css/style.css"
+      ],
+      "js": [
+        "./js/lib/jquery.min.js",
+        "./js/content.js"
+      ],
+      "matches": [
+        "http://*.ebay.com/itm*",
+        "https://*.amazon.com/*/dp/*/ref*",
+        "https://*.amazon.com/dp/*/ref*",
+        "https://*.amazon.com/*/dp/*psc*",
+        "https://*.amazon.com/gp/*/ref*",
+        "http://*.gearbest.com/*/pp*",
+        "http://*.dx.com/p/*",
+        "https://*.banggood.com/*-p-*",
+        "https://*.amazon.com/dp/*"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://apis.google.com/js/content.js; object-src 'self'"
+}

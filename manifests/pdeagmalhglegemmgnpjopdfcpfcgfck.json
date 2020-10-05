@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "PSAN Chrome Extension",
+  "manifest_version": 2,
+  "version": "9.0.11",
+  "incognito": "split",
+  "description": "Download profiles from selected Job Boards and Social sites into database with a few clicks.",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.monsterindia.com/*",
+        "https://*.naukri.com/*",
+        "https://*.naukrigulf.com/*",
+        "https://*.linkedin.com/*",
+        "https://*.platinasoft.com/*"
+      ],
+      "js": [
+        "/scripts/util.js",
+        "/scripts/sppc_injectable_chrome.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "https://*.monsterindia.com/*",
+    "https://*.naukri.com/*",
+    "https://*.naukrigulf.com/*",
+    "https://*.linkedin.com/*",
+    "https://*.platinasoft.com/*",
+    "management"
+  ],
+  "background": {
+    "scripts": [
+      "/scripts/util.js",
+      "/scripts/sppcutil_chrome.js",
+      "/scripts/sppc_bg_main_chrome.js"
+    ]
+  },
+  "externally_connectable": {
+    "matches": [
+      "https://*.platinasoft.com/*"
+    ]
+  },
+  "browser_action": {
+    "default_title": "PSAN Chrome Extension",
+    "default_icon": {
+      "19": "/images/sp.png"
+    },
+    "default_popup": "popup_main_chrome.html"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  }
+}

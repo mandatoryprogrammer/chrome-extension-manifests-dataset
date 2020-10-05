@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Kad.li - Kadcon Linkshortener",
+  "description": "Der einfachste Weg, Kadcon-Links mit Kad.li zu kürzen.",
+  "version": "1.6.4",
+  "author": "BuenaJormax",
+  "homepage_url": "https://kad.li",
+  "offline_enabled": false,
+  "short_name": "Kad.li",
+  "page_action": {
+    "default_icon": {
+      "19": "19.png",
+      "38": "38.png"
+    },
+    "default_title": "Kurzlink kopieren"
+  },
+  "icons": {
+    "16": "16.png",
+    "32": "32.png",
+    "48": "48.png",
+    "128": "128.png"
+  },
+  "web_accessible_resources": [
+    "*.png"
+  ],
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "clipboardWrite",
+    "tabs",
+    "http://kad.li/",
+    "https://kad.li/",
+    "notifications"
+  ],
+  "background": {
+    "scripts": [
+      "background.js",
+      "sharedFunctions.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://forum.kadcon.de/Thread/*"
+      ],
+      "js": [
+        "insertlink.js",
+        "sharedFunctions.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

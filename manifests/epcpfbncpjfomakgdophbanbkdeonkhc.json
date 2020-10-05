@@ -1,0 +1,103 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Modalyst - AliExpress Dropshipping Partner",
+  "description": "Curate the best AliExpress products for dropshipping and import their product information into your Modalyst account.",
+  "version": "2.0.3",
+  "icons": {
+    "16": "img/icon_16.png",
+    "32": "img/icon_32.png",
+    "48": "img/icon_48.png",
+    "128": "img/icon_128.png",
+    "256": "img/icon_256.png",
+    "512": "img/icon_512.png"
+  },
+  "background": {
+    "scripts": [
+      "src/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "src/aliexpress_content_script.js"
+      ],
+      "matches": [
+        "http://*.paypal.com/*",
+        "https://*.paypal.com/*",
+        "http://aliexpress.com/*",
+        "http://*.aliexpress.com/*",
+        "https://aliexpress.com/*",
+        "https://*.aliexpress.com/*",
+        "http://www.aliexpress.com/*",
+        "http://*.www.aliexpress.com/*",
+        "https://www.aliexpress.com/*",
+        "https://*.www.aliexpress.com/*"
+      ],
+      "css": [
+        "css/aliexpress_content_script.css"
+      ]
+    },
+    {
+      "js": [
+        "src/checkout_lock.js"
+      ],
+      "css": [
+        "css/checkout_lock.css"
+      ],
+      "matches": [
+        "http://aliexpress.com/*",
+        "http://*.aliexpress.com/*",
+        "https://aliexpress.com/*",
+        "https://*.aliexpress.com/*",
+        "http://www.aliexpress.com/*",
+        "http://*.www.aliexpress.com/*",
+        "https://www.aliexpress.com/*",
+        "https://*.www.aliexpress.com/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "js": [
+        "src/modalyst_content_script.js"
+      ],
+      "matches": [
+        "https://modalyst.co/*"
+      ],
+      "css": [
+        "css/modalyst_content_script.css"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "storage",
+    "cookies",
+    "http://*.paypal.com/*",
+    "https://*.paypal.com/*",
+    "http://aliexpress.com/*",
+    "http://*.aliexpress.com/*",
+    "https://aliexpress.com/*",
+    "https://*.aliexpress.com/*",
+    "http://www.aliexpress.com/*",
+    "http://*.www.aliexpress.com/*",
+    "https://www.aliexpress.com/*",
+    "https://*.www.aliexpress.com/*",
+    "https://modalyst.co/*"
+  ],
+  "page_action": {
+    "default_icon": {
+      "16": "img/icon_16.png",
+      "32": "img/icon_32.png"
+    },
+    "default_title": "Modalyst",
+    "default_popup": "popup.html"
+  },
+  "web_accessible_resources": [
+    "src/modalyst_injected.js",
+    "src/aliexpress_injected.js",
+    "img/*",
+    "fonts/*"
+  ]
+}

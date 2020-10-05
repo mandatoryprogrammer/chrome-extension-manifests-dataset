@@ -1,0 +1,98 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Rocket Whale",
+  "version": "1.0.5",
+  "manifest_version": 2,
+  "description": "Email Anyone - No Contact Information Needed",
+  "icons": {
+    "16": "icons/favicon.png",
+    "48": "icons/favicon.png",
+    "128": "icons/favicon.png"
+  },
+  "background": {
+    "scripts": [
+      "js/jquery.min.js",
+      "js/underscore-min.js",
+      "js/parseuri.js",
+      "src/constants.js",
+      "src/background/operations.js",
+      "src/background/background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": "icons/favicon.png",
+    "default_title": "Rocket Whale: Search for people on LinkedIn",
+    "default_popup": "src/popup/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.linkedin.com/*",
+        "https://www.linkedin.com/*"
+      ],
+      "css": [
+        "src/inject/common.css",
+        "src/inject/linkedin.css"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "js/moment.min.js",
+        "js/underscore-min.js",
+        "js/parseuri.js",
+        "src/constants.js",
+        "src/inject/common.js",
+        "src/inject/templates.js",
+        "src/inject/linkedin.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://www.google.com/search*",
+        "http://www.google.com/webhp*",
+        "https://www.google.com/search*",
+        "https://www.google.com/webhp*"
+      ],
+      "css": [
+        "src/inject/common.css",
+        "src/inject/google.css"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "js/moment.min.js",
+        "js/underscore-min.js",
+        "js/parseuri.js",
+        "src/constants.js",
+        "src/inject/common.js",
+        "src/inject/templates.js",
+        "src/inject/google.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://rocketwhale.com/*",
+        "http://staging.rocketwhale.com/*",
+        "http://dev.rocketwhale.com:3000/*",
+        "http://lvh.me:3000/*"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "js/underscore-min.js",
+        "js/parseuri.js",
+        "src/constants.js",
+        "src/inject/common.js",
+        "src/inject/rocketwhale.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "*://*/*",
+    "storage",
+    "tabs"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "web_accessible_resources": [
+    "img/*",
+    "js/*"
+  ]
+}

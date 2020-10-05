@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "OnAir_FM",
+  "version": "2.4.2",
+  "manifest_version": 2,
+  "description": "Ultimate OnAir_FM extension for Google Chrome. No Eva&Vašek tracks were played during development.",
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "author": "Marek Chrenko",
+  "homepage_url": "http://monokell.com",
+  "browser_action": {
+    "default_icon": "img/icon128.png",
+    "default_title": "OnAir_FM",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://onair.monokell.com/*"
+      ],
+      "js": [
+        "js/md5.js",
+        "js/tokenwrite.js"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/key.js"
+      ]
+    }
+  ],
+  "background": {
+    "page": "background.html",
+    "script": "background.js"
+  },
+  "options_page": "options.html",
+  "permissions": [
+    "http://*.rtvs.sk/*",
+    "http://*.livebox.sk/*",
+    "http://onair.monokell.com/*",
+    "http://*.monokell.com/*",
+    "tabs",
+    "contextMenus",
+    "notifications",
+    "idle",
+    "http://ws.audioscrobbler.com/*"
+  ],
+  "minimum_chrome_version": "22",
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

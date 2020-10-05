@@ -1,0 +1,76 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "iManage Work for Gmail",
+  "description": "iManage Work for Gmail",
+  "version": "10.2.1.24",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*"
+      ],
+      "js": [
+        "inboxsdk.loader.js",
+        "app.loader.js"
+      ],
+      "css": [
+        "application.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "inject.js",
+    "modal-iframe/modal-iframe.html",
+    "login/common-login.html",
+    "login/successful-login.html",
+    "assets/*.*",
+    "configuration/internal-config.json",
+    "build.js",
+    "locales/*",
+    "chrome://*",
+    "imanage-config.json",
+    "tests/*"
+  ],
+  "icons": {
+    "16": "assets/imanage-icon.png",
+    "48": "assets/imanage-icon.png",
+    "128": "assets/imanage-icon.png"
+  },
+  "browser_action": {
+    "default_icon": "assets/imanage-icon.png"
+  },
+  "permissions": [
+    "contextMenus",
+    "https://mail.google.com/",
+    "https://inbox.google.com/",
+    "https://*/",
+    "storage",
+    "identity",
+    "identity.email",
+    "cookies",
+    "webRequest",
+    "webRequestBlocking",
+    "tabs",
+    "*://*.google.com/*",
+    "https://mail-attachment.googleusercontent.com/",
+    "privacy"
+  ],
+  "background": {
+    "scripts": [
+      "vendors/jquery/dist/jquery.js",
+      "common/gmail/background.loader.js"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://*.google.com 'sha256-yd5btrbNiKegpZQvPQvROXREtvCjkGq/AfYIk5mV2Ug=' 'sha256-gva9eR/y1Mwid2ZB+QrxUxIlBLJgcoil4vho1wSjCkA=' 'unsafe-eval'; object-src 'self'",
+  "oauth2": {
+    "client_id": "452563512549-mp71tkjg0prsmch8hln3tpk4859ft0kf.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/gmail.modify",
+      "https://www.googleapis.com/auth/gmail.labels",
+      "https://www.googleapis.com/auth/drive.readonly"
+    ]
+  },
+  "manifest_version": 2,
+  "options_page": "configuration/configuration.html"
+}

@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Music Pause/Resume",
+  "short_name": "caesura",
+  "description": "Pause and resume streaming music with a keyboard shortcut",
+  "version": "0.1.4",
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "commands": {
+    "toggle-audio-playback": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+0"
+      },
+      "description": "Toggle audio playback",
+      "global": true
+    },
+    "debug": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+9"
+      },
+      "description": "debug",
+      "global": false
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "common.js",
+        "contentScript.js"
+      ]
+    }
+  ],
+  "icons": {
+    "128": "icons/icon_key_128.png"
+  },
+  "background": {
+    "scripts": [
+      "common.js",
+      "eventPage.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "nativeMessaging"
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "background": {
+    "scripts": [
+      "common.js",
+      "platform/chromium-vars.js",
+      "background/core.js",
+      "background/rules.js",
+      "background/debug.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "128": "icon128.png"
+    },
+    "default_title": "Bypass AdBlock Detection"
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "common.js",
+        "libdom.js",
+        "content/core.js",
+        "content/rules-common.js",
+        "content/rules-specific.js",
+        "content/rules-sticky.js",
+        "content/debug.js",
+        "content/ubo-extra.js"
+      ],
+      "match_about_blank": true,
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "name": "Bypass AdBlock Detection",
+  "description": "Bypass Adblock Detection on Websites that Bombard You With Ads",
+  "minimum_chrome_version": "63.0",
+  "manifest_version": 2,
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "icons": {
+    "128": "icon128.png"
+  },
+  "incognito": "split",
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "tabs",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "version": "1.0.0",
+  "web_accessible_resources": [
+    "resources/*"
+  ]
+}

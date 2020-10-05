@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Image Parser",
+  "short_name": "Image Parser",
+  "description": "Ищет и агрегирует изображения на странице, позволяет сохранить изображения даже с так называемых \"защищенных\" страниц.",
+  "version": "0.2.0",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "<all_urls>"
+  ],
+  "page_action": {
+    "default_icon": "icon_16.png",
+    "default_title": "Image Parser"
+  },
+  "icons": {
+    "16": "icon_16.png",
+    "48": "icon_48.png",
+    "128": "icon_128.png"
+  },
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "bg.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "match_about_blank": true,
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "jquery.js",
+        "FileSaver.js",
+        "jszip.js",
+        "imgparser.js"
+      ],
+      "css": [
+        "styles.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "options_page": "options.html",
+  "web_accessible_resources": [
+    "*.woff",
+    "*.woff2",
+    "*.svg"
+  ]
+}

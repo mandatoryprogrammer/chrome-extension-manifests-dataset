@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "CLEAR CACHE of OGP",
+  "short_name": "SOC2",
+  "description": "Twitter and FaceBook OGP cache clearing support tool.",
+  "version": "1.1.0",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/icon19.png",
+      "38": "icons/icon38.png"
+    },
+    "default_title": "CLEAR CACHE of OGP",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "tabs",
+    "clipboardRead"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://developers.facebook.com/tools/debug/*"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "js/content_script_fb.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://cards-dev.twitter.com/*"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "js/content_script_tw.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

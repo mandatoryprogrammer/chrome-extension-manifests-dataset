@@ -1,0 +1,80 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "MyCrunchyList",
+  "version": "0.0.1.1",
+  "description": "Anime & Manga search between Crunchyroll & MyAnimeList websites. bridging between the two major anime and manga websites.",
+  "icons": {
+    "16": "images/icons/icon16.png",
+    "19": "images/icons/icon19.png",
+    "48": "images/icons/icon48.png",
+    "128": "images/icons/icon128.png"
+  },
+  "author": "Gil Goldshlager",
+  "homepage_url": "http://mycrunchylist.com",
+  "incognito": "split",
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ],
+    "persistent": false
+  },
+  "page_action": {
+    "default_icon": {
+      "19": "images/icons/icon19.png",
+      "38": "images/icons/icon38.png"
+    },
+    "default_title": "My Crunchy List",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "storage",
+    "declarativeContent",
+    "activeTab"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.crunchyroll.com/*",
+        "*://*.myanimelist.net/*"
+      ],
+      "css": [
+        "styles/default.css"
+      ],
+      "js": [
+        "scripts/default.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*.crunchyroll.com/*"
+      ],
+      "css": [
+        "styles/crunchyroll.css"
+      ],
+      "js": [
+        "scripts/crunchyroll.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*.myanimelist.net/*"
+      ],
+      "css": [
+        "styles/myanimelist.css"
+      ],
+      "js": [
+        "scripts/myanimelist.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "images/*"
+  ]
+}

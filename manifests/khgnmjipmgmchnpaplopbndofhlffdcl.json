@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Fresh",
+  "description": "Play the most recent track by a specified user",
+  "version": "2.2",
+  "permissions": [
+    "storage",
+    "contextMenus",
+    "https://soundcloud.com/*"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": {
+      "128": "icon128.png"
+    },
+    "default_title": "Play most recent track"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://soundcloud.com/*"
+      ],
+      "js": [
+        "jquery.js",
+        "initialize.js",
+        "content.js"
+      ]
+    }
+  ],
+  "icons": {
+    "128": "icon128.png"
+  },
+  "commands": {
+    "play": {
+      "suggested_key": {
+        "default": "Ctrl+Comma",
+        "mac": "Command+Comma"
+      },
+      "description": "Go to playing tab"
+    }
+  },
+  "options_page": "options.html"
+}

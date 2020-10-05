@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Housefolios",
+  "version": "1.0.2",
+  "manifest_version": 2,
+  "description": "Housefolios extension for importing public information from realtor sites.",
+  "homepage_url": "https://www.housefolios.com",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "page": "src/bg/background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "Housefolios Extension",
+    "default_popup": "src/browser_action/browser_action.html"
+  },
+  "externally_connectable": {
+    "matches": [
+      "http://localhost/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "js": [
+        "js/jquery/jquery.min.js",
+        "js/ddp/meteor-ddp.js",
+        "src/content.js",
+        "js/jquery/jquery_number.min.js"
+      ],
+      "css": [
+        "css/style.css"
+      ],
+      "run_at": "document_end",
+      "match_about_blank": true
+    }
+  ],
+  "permissions": [
+    "cookies",
+    "http://*/*",
+    "https://*/*",
+    "storage",
+    "tabs"
+  ],
+  "content_security_policy": "script-src 'self' https://codegena.com/assets/js/async-iframe.js; object-src 'self'"
+}

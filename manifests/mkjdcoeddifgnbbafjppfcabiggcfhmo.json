@@ -1,0 +1,120 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "ChargeDesk for Stripe, PayPal & Braintree",
+  "short_name": "ChargeDesk",
+  "description": "Manage payments inside tickets and emails. Works with Zendesk, Help Scout, Intercom, Freshdesk, Front, Desk.com, Gmail and more.",
+  "version": "1.3.5",
+  "author": "ChargeDesk",
+  "browser_action": {
+    "default_icon": {
+      "16": "images/icon16x16.png",
+      "19": "images/icon19x19.png",
+      "32": "images/icon32x32.png",
+      "38": "images/icon76x76.png",
+      "48": "images/icon48x48.png",
+      "76": "images/icon76x76.png",
+      "96": "images/icon96x96.png",
+      "128": "images/icon128x128.png"
+    },
+    "default_title": "ChargeDesk"
+  },
+  "icons": {
+    "16": "images/icon16x16.png",
+    "19": "images/icon19x19.png",
+    "32": "images/icon32x32.png",
+    "38": "images/icon76x76.png",
+    "48": "images/icon96x96.png",
+    "76": "images/icon76x76.png",
+    "96": "images/icon96x96.png",
+    "128": "images/icon128x128.png"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "<all_urls>"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://chargedesk.com/app/*",
+      "https://chargedesk.com/extension/*",
+      "https://chargedesk.test/app/*",
+      "https://chargedesk.test/extension/*"
+    ]
+  },
+  "background": {
+    "scripts": [
+      "js/chargedesk.constant.js",
+      "js/chargedesk.lib.js",
+      "js/chargedesk.api.js",
+      "js/chargedesk.storage.js",
+      "js/chargedesk.comms.js",
+      "js/chargedesk.event.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://secure.helpscout.net/*",
+        "https://*.zendesk.com/*",
+        "https://*.freshdesk.com/*",
+        "https://*.desk.com/*",
+        "https://app.intercom.io/*",
+        "https://app.intercom.com/*",
+        "https://app.hubspot.com/*"
+      ],
+      "js": [
+        "js/includes/iframeResizer.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "https://chargedesk.com/app/*",
+        "https://chargedesk.test/app/*"
+      ],
+      "match_about_blank": true,
+      "css": [
+        "css/chargedesk.content.css"
+      ],
+      "js": [
+        "js/includes/crypto-js/core.js",
+        "js/includes/crypto-js/sha256.js",
+        "js/includes/crypto-js/enc-base64.js",
+        "js/includes/mutation-summary.js",
+        "js/includes/detect-element-resize.js",
+        "js/chargedesk.constant.js",
+        "js/chargedesk.lib.js",
+        "js/chargedesk.storage.js",
+        "js/chargedesk.comms.js",
+        "js/chargedesk.settings.js",
+        "js/chargedesk.integrations.js",
+        "js/chargedesk.content.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://chargedesk.com/*",
+        "https://chargedesk.test/*"
+      ],
+      "exclude_matches": [
+        "https://chargedesk.com/app/*",
+        "https://chargedesk.test/app/*"
+      ],
+      "js": [
+        "js/chargedesk.web.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "frame.html",
+    "frame.js"
+  ]
+}

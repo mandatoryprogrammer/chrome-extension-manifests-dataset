@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Snowplow Analytics Debugger",
+  "short_name": "Igloo",
+  "version": "1.0.9",
+  "description": "Debug your Snowplow Analytics implementation with the Snowplow Analytics Debugger in Developer Tools.",
+  "author": "Igloo Analytics",
+  "icons": {
+    "128": "/img/logo.png"
+  },
+  "browser_action": {
+    "default_icon": "/img/logo.png",
+    "default_popup": "/pages/popup/index.html"
+  },
+  "devtools_page": "/js/background/devtools.html",
+  "options_ui": {
+    "page": "/pages/options/index.html",
+    "open_in_tab": false
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "/lib/jquery.min.js",
+      "/lib/webx.js",
+      "/js/background/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "/js/content_script.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>"
+  ],
+  "web_accessible_resources": [
+    "/*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://d10wj4q5nggahc.cloudfront.net/; object-src 'self'"
+}

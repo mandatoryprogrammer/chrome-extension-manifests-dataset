@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "xdebug-devtools",
+  "description": "Visualize xdebug messages using chrome devtools.",
+  "version": "0.0.2",
+  "minimum_chrome_version": "57",
+  "devtools_page": "main.html",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "web_accessible_resources": [
+    "main.html",
+    "panel.html",
+    "styles/xdebug-devtools.css"
+  ],
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "icons": {
+    "48": "icons/xdebug-48.png",
+    "128": "icons/xdebug-128.png"
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [
+        "styles/xdebug-devtools-startup.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "scripts/contentscript.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "file:///*",
+    "tabs",
+    "storage"
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_extName__",
+  "version": "1.4.5",
+  "manifest_version": 2,
+  "description": "__MSG_extDescription__",
+  "default_locale": "ja",
+  "permissions": [
+    "tabs",
+    "storage",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "icons": {
+    "16": "images/ccslyrt_16.png",
+    "48": "images/ccslyrt_48.png",
+    "128": "images/ccslyrt_128.png"
+  },
+  "options_page": "options.html",
+  "web_accessible_resources": [
+    "options.html"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://help.twitter.com/forms/dmca"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "js/writer.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.google.co.jp/search?q=*"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "js/g_search.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://mobile.twitter.com/search?q=*"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "js/reporter.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "exclude_matches": [
+        "https://*.google.co.jp/*",
+        "https://ja.wikipedia.org/*",
+        "https://*.google.com/*",
+        "*://*.amazon.com/*",
+        "*://*.amazon.co.jp/*",
+        "*://*.2ch.net/*",
+        "*://*.pixiv.net/*"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "js/content.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://mobile.twitter.com/*/status/*"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "js/reporter_e.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.google.com/webmasters/tools/dmca-notice"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "js/g_writer.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": "images/ccslyrt_16.png",
+    "default_title": "Copycat Slayer",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

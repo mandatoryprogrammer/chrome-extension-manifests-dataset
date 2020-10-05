@@ -1,0 +1,157 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "VipIP.ru Extension",
+  "description": "Лучшее расширение для заработка в Интернете",
+  "short_name": "VipIP.ru",
+  "version": "3.6",
+  "browser_action": {
+    "default_popup": "app/index.html",
+    "default_icon": "img/icon.jpg"
+  },
+  "background": {
+    "scripts": [
+      "./lib/jquery.js",
+      "./lib/watch.js",
+      "./lib/socket.io.js",
+      "./worker/helper/common.js",
+      "./worker/helper/event-manager.js",
+      "./worker/helper/configurable.js",
+      "./worker/service/social/abstract-network.js",
+      "./worker/service/social/network/facebook.js",
+      "./worker/service/social/network/instagram.js",
+      "./worker/service/social/network/ok.js",
+      "./worker/service/social/network/twitter.js",
+      "./worker/service/social/network/rutube.js",
+      "./worker/service/social/network/vk.js",
+      "./worker/service/social/network/youtube.js",
+      "./worker/service/log.js",
+      "./worker/service/auth.js",
+      "./worker/service/browser.js",
+      "./worker/service/social/social.js",
+      "./worker/service/storage.js",
+      "./worker/service/socket.js",
+      "./worker/service/settings.js",
+      "./worker/service/task.js",
+      "./worker/service/popup.js",
+      "./worker/worker.js",
+      "index.js"
+    ],
+    "persistent": true
+  },
+  "icons": {
+    "16": "img/ico16.png",
+    "32": "img/ico32.png",
+    "48": "img/ico48.png",
+    "128": "img/ico128.png"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "https://ok.ru/*",
+    "https://vk.com/*",
+    "https://*.ok.ru/*",
+    "https://rutube.ru/*",
+    "https://new.vk.com/*",
+    "https://twitter.com/*",
+    "https://oauth.vk.com/*",
+    "https://oauth.vipip.ru/*",
+    "https://www.youtube.com/*",
+    "https://www.facebook.com/*",
+    "https://www.instagram.com/*",
+    "https://accounts.google.com/*"
+  ],
+  "web_accessible_resources": [
+    "img/logo.png",
+    "img/ico16.png",
+    "img/ico32.png",
+    "img/ico48.png",
+    "img/ico128.png"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://vk.com/*",
+        "https://vk.com/*",
+        "https://oauth.vk.com/*",
+        "https://new.vk.com/*"
+      ],
+      "js": [
+        "lib/jquery.js",
+        "content/common.js",
+        "content/vk.com.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.instagram.com/*"
+      ],
+      "js": [
+        "lib/jquery.js",
+        "content/common.js",
+        "content/instagram.com.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://www.youtube.com/*",
+        "https://www.youtube.com/*",
+        "https://accounts.google.com/*"
+      ],
+      "js": [
+        "lib/jquery.js",
+        "content/common.js",
+        "content/youtube.com.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://rutube.ru/*"
+      ],
+      "js": [
+        "lib/jquery.js",
+        "content/common.js",
+        "content/rutube.ru.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://*.ok.ru/*",
+        "http://*.ok.ru/*"
+      ],
+      "js": [
+        "lib/jquery.js",
+        "content/common.js",
+        "content/ok.ru.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.facebook.com/*"
+      ],
+      "js": [
+        "lib/jquery.js",
+        "content/common.js",
+        "content/facebook.com.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://twitter.com/*"
+      ],
+      "js": [
+        "lib/jquery.js",
+        "content/common.js",
+        "content/twitter.com.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

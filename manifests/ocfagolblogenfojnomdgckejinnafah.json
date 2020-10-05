@@ -1,0 +1,73 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Помошник администратора вконтакте",
+  "version": "1.6.7",
+  "manifest_version": 2,
+  "description": "Маленький помошник санты",
+  "icons": {
+    "256": "icons/icon_filter_256.png",
+    "128": "icons/icon_filter_128.png",
+    "64": "icons/icon_filter_64.png",
+    "32": "icons/icon_filter_32.png",
+    "16": "icons/icon_filter_16.png"
+  },
+  "background": {
+    "scripts": [
+      "config.js",
+      "js/tools/logger.js",
+      "js/tools/chromehelper.js",
+      "lib/angular.js",
+      "lib/angular-resource.js",
+      "js/background.js"
+    ]
+  },
+  "page_action": {
+    "default_icon": "icons/icon_filter_256.png",
+    "default_title": "Помошник администратора ВКонтакте",
+    "default_popup": "html/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://vk.com/*",
+        "https://vk.com/*"
+      ],
+      "js": [
+        "config.js",
+        "lib/angular.js",
+        "lib/angular-resource.js",
+        "lib/angular-filter.js",
+        "lib/mb-scrollbar.js",
+        "js/content-app/app.js",
+        "js/content-app/directives/ng-directive-unfor.js",
+        "js/content-app/directives/ng-directive-dynamic-dom.js",
+        "js/content-app/services/karma-service.js",
+        "js/content-app/filters.js",
+        "js/tools/logger.js",
+        "js/tools/chromehelper.js",
+        "js/contentscript.js"
+      ],
+      "run_at": "document_end",
+      "css": [
+        "css/content.css"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "storage",
+    "http://vk.com/*",
+    "https://vk.com/*",
+    "http://jcont.ru:100/*",
+    "https://karma-off-border-1.c9users.io/*"
+  ],
+  "web_accessible_resources": [
+    "html/content-app/main.html",
+    "html/content-app/commenters.html",
+    "html/content-app/deletion.html",
+    "icons/*.png",
+    "icons/icon_filter_256.png",
+    "icons/icon_filter_16.png"
+  ],
+  "content_security_policy": "img-src 'self' * '*'; object-src 'self'; script-src 'self'"
+}

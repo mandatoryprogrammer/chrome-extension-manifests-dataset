@@ -1,0 +1,43 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "p2pSearch",
+  "version": "0.0.2",
+  "manifest_version": 2,
+  "background": {
+    "scripts": [
+      "src/background/background.js"
+    ],
+    "persistent": true
+  },
+  "description": "Searches P2P files for the web sites you are visiting.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "See results",
+    "default_popup": "src/browser_action/browser_action.html"
+  },
+  "permissions": [
+    "clipboardWrite",
+    "http://*/",
+    "https://*/",
+    "tabs",
+    "storage"
+  ],
+  "omnibox": {
+    "keyword": "p2p"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "src/inject/inject.js"
+      ]
+    }
+  ]
+}

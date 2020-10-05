@@ -1,0 +1,74 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Blur",
+  "version": "8.1.2502",
+  "description": "Protect your Passwords, Payments, and Privacy.",
+  "browser_action": {
+    "default_icon": "images/icons/b-icon-40.png",
+    "default_title": "Blur v8.1.2502"
+  },
+  "manifest_version": 2,
+  "web_accessible_resources": [
+    "panel.html",
+    "pages/images/dnt-field-icon.png"
+  ],
+  "icons": {
+    "16": "images/icons/b-icon-16.png",
+    "48": "images/icons/b-icon-48.png",
+    "128": "images/icons/b-icon-128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "almond-min.js",
+        "jquery-min.js",
+        "underscore-min.js",
+        "backbone-min.js",
+        "common.js",
+        "common-content.js",
+        "content.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "iframe_content.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "scripts": [
+      "socket-io-min.js",
+      "almond-min.js",
+      "jquery-min.js",
+      "underscore-min.js",
+      "api-background.js",
+      "cognito-min.js",
+      "common.js",
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "tabs",
+    "<all_urls>",
+    "contextMenus",
+    "clipboardWrite",
+    "storage"
+  ],
+  "optional_permissions": [
+    "privacy"
+  ]
+}

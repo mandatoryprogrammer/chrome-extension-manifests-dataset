@@ -1,0 +1,72 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "StackEye",
+  "version": "20.7.28",
+  "manifest_version": 2,
+  "description": "Chrome Extension to get notifications about questions and from users in your watchlist",
+  "background": {
+    "scripts": [
+      "src/shared/analytics.js",
+      "src/libs/jquery-1.9.1.js",
+      "src/shared/globals.js",
+      "src/shared/analyticsHelper.js",
+      "src/shared/api_methods.js",
+      "src/shared/shared.js",
+      "src/background/watchQuestion.js",
+      "src/background/followUser.js",
+      "src/background/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/questions/*"
+      ],
+      "js": [
+        "src/libs/jquery-1.9.1.js",
+        "src/content_scripts/questionPage.js"
+      ],
+      "css": [
+        "src/content_scripts/cs.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*/users/*"
+      ],
+      "js": [
+        "src/libs/jquery-1.9.1.js",
+        "src/content_scripts/profilePage.js"
+      ],
+      "css": [
+        "src/content_scripts/cs.css"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "browser_action": {
+    "default_icon": "resources/images/icon_so_48.png",
+    "default_title": "Get latest notifications on your favorite questions",
+    "default_popup": "src/popup/popup.html"
+  },
+  "icons": {
+    "16": "resources/images/icon_so_48.png",
+    "48": "resources/images/icon_so_48.png",
+    "128": "resources/images/icon_so_48.png"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "*://*.askubuntu.com/*",
+    "*://*.mathoverflow.net/*",
+    "*://*.serverfault.com/*",
+    "*://*.stackapps.com/*",
+    "*://*.stackexchange.com/*",
+    "*://*.stackoverflow.com/*",
+    "*://*.superuser.com/*"
+  ],
+  "web_accessible_resources": [
+    "resources/icons/eye-open/128.png",
+    "resources/icons/eye-closed/128.png"
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_application_title__",
+  "short_name": "Chromium-Highlighter",
+  "description": "__MSG_application_description__",
+  "default_locale": "en",
+  "permissions": [
+    "tabs",
+    "contextMenus",
+    "notifications",
+    "activeTab",
+    "alarms",
+    "downloads",
+    "storage"
+  ],
+  "icons": {
+    "16": "Plugin16.png",
+    "96": "Plugin96.png"
+  },
+  "background": {
+    "scripts": [
+      "libs/sanitize-html/sanitize-html.js",
+      "extWordHighlighter.js"
+    ]
+  },
+  "commands": {
+    "ScrollHighlight": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Space",
+        "mac": "Command+Shift+Space"
+      },
+      "description": "ScrollHighlight"
+    }
+  },
+  "version": "1.1",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "libs/jquery/jquery-3.4.1.js",
+        "hilitor.js",
+        "tabWordHighlighter.js"
+      ],
+      "css": [
+        "highlightThis.css"
+      ],
+      "all_frames": true,
+      "run_at": "document_start",
+      "match_about_blank": true
+    }
+  ],
+  "browser_action": {
+    "default_icon": "Plugin16.png",
+    "default_popup": "popup.html"
+  }
+}

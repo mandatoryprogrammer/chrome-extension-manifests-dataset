@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Bluetail Aviation App Web Clipper",
+  "version": "1.2.5",
+  "manifest_version": 2,
+  "short_name": "Bluetail Web Clipper",
+  "description": "Use the Bluetail Extension to clip and save things you see in aviation apps or the web into your Bluetail aircraft account.",
+  "browser_action": {
+    "default_icon": "img/icon/icon.png",
+    "default_popup": "popup/popup.html",
+    "default_title": "Bluetail Web Clipper"
+  },
+  "permissions": [
+    "tabs",
+    "<all_urls>",
+    "pageCapture",
+    "activeTab",
+    "storage",
+    "https://jsonplaceholder.typicode.com/posts",
+    "https://stagingapp.bluetail.aero/",
+    "http://*/*",
+    "https://*/*",
+    "tabs"
+  ],
+  "icons": {
+    "24": "img/icon/icon24.png",
+    "48": "img/icon/icon48.png",
+    "128": "img/icon/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "./bottom/jquery.min.js",
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>",
+        "http://*/*",
+        "https://*/*",
+        "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"
+      ],
+      "js": [
+        "js/contentscript-imgur.js",
+        "lib/es6-promise.auto.js",
+        "lib/jspdf.min.js",
+        "lib/html2canvas.min.js",
+        "lib/html2pdf.min.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

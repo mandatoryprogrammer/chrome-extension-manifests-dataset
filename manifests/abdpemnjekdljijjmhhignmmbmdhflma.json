@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Tellwise",
+  "short_name": "Tellwise",
+  "description": "Smarter Than Email: Email + Instant Messaging + Social + Analytics",
+  "version": "4.6.27",
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "https://*.tellwise.com/",
+    "https://tellwise.s3.amazonaws.com/",
+    "https://tellwise-deployments.s3.amazonaws.com/",
+    "https://fonts.googleapis.com/",
+    "https://mail.google.com/*",
+    "https://inbox.google.com/*",
+    "webRequest",
+    "webRequestBlocking",
+    "notifications",
+    "<all_urls>"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.tellwise.com/*",
+        "https://mail.google.com/*",
+        "https://*.salesforce.com/*",
+        "https://*.force.com/*",
+        "https://*.discoverydb.com/*",
+        "https://*.crm.dynamics.com/*",
+        "https://go.zoominfo.com/*",
+        "https://app.zoominfo.com/*"
+      ],
+      "js": [
+        "js/modernizr-2.8.3.min.chromeapp_custom_build.js",
+        "js/inboxsdk.js",
+        "js/chrome_app_loader.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_title": "Tellwise",
+    "default_icon": {
+      "19": "img/tellwise_logo_16.png"
+    },
+    "default_popup": "views/popup/popup.html"
+  },
+  "web_accessible_resources": [
+    "img/*.png"
+  ],
+  "icons": {
+    "16": "img/tellwise_logo_16.png",
+    "48": "img/tellwise_logo_48.png",
+    "128": "img/tellwise_logo_128.png"
+  }
+}

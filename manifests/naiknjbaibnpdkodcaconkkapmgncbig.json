@@ -1,0 +1,103 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_chrome_extension_name__",
+  "short_name": "Clipix Extension",
+  "version": "3.5.6",
+  "description": "__MSG_chrome_extension_description__",
+  "background": {
+    "scripts": [
+      "lib/config.live.js",
+      "lib/main.js"
+    ]
+  },
+  "default_locale": "en",
+  "content_scripts": [
+    {
+      "js": [
+        "data/lib/jquery-2.1.1.js",
+        "data/lib/jquery-ui-draggable.min.js",
+        "data/lib/jquery.Jcrop.js",
+        "data/scripts/tools.js",
+        "data/scripts/content.js",
+        "data/scripts/messagingCH.js"
+      ],
+      "css": [
+        "data/styles/insulate.css",
+        "data/styles/jquery.Jcrop.css",
+        "data/styles/toolbar.css"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "*://clipix.com/*",
+        "*://*.clipix.com/*",
+        "*://*.clipixtesting.com/*",
+        "*://*.cxnico.com/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "js": [
+        "data/scripts/tools.js",
+        "data/scripts/content.clipix.js",
+        "data/scripts/messagingCH.js"
+      ],
+      "matches": [
+        "*://clipix.com/*",
+        "*://*.clipix.com/*",
+        "*://*.clipixtesting.com/*",
+        "*://*.cxnico.com/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "js": [
+        "data/scripts/specific/content.pinterest.js"
+      ],
+      "matches": [
+        "*://*.pinterest.com/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "browser_action": {
+    "default_icon": "data/icons/icon-32.png",
+    "default_title": "__MSG_browser_action_title__"
+  },
+  "commands": {
+    "captureCrop": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Z",
+        "mac": "MacCtrl+Shift+Z"
+      },
+      "description": "__MSG_tipClipCrop"
+    },
+    "capture": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+X",
+        "mac": "MacCtrl+Shift+X"
+      },
+      "description": "__MSG_tipClipShot"
+    }
+  },
+  "options_ui": {
+    "page": "settings/settings.html",
+    "chrome_style": true
+  },
+  "icons": {
+    "16": "data/icons/icon-16.png",
+    "48": "data/icons/icon-48.png",
+    "128": "data/icons/icon-128.png"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "contextMenus",
+    "<all_urls>"
+  ],
+  "web_accessible_resources": [
+    "data/images/*.png"
+  ],
+  "manifest_version": 2
+}

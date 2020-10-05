@@ -1,0 +1,113 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Opinew Shopify Reviews Importer",
+  "version": "1.5.4",
+  "manifest_version": 2,
+  "description": "Easily import product reviews from dropshipping shopify apps (Oberlo, Spreadr, Importify, Dropified, Amazon, Aliexpress).",
+  "permissions": [
+    "https://www.opinew.com/",
+    "https://opinew.ngrok.io/",
+    "storage",
+    "declarativeContent",
+    "activeTab"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "icons/opinew_o16.png",
+      "32": "icons/opinew_o32.png",
+      "48": "icons/opinew_o48.png",
+      "128": "icons/opinew_o128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/opinew_o16.png",
+    "32": "icons/opinew_o32.png",
+    "48": "icons/opinew_o48.png",
+    "128": "icons/opinew_o128.png"
+  },
+  "web_accessible_resources": [
+    "/js/inject_script_oberlo.js",
+    "/js/inject_script_dropified.js"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://app.oberlo.com/my-products*"
+      ],
+      "js": [
+        "content_scripts/oberlo.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://app.dropified.com/product*?store=*"
+      ],
+      "js": [
+        "content_scripts/dropified.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://app.importify.net/dashboard/products*"
+      ],
+      "js": [
+        "content_scripts/importify.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://spreadr.co/home*"
+      ],
+      "js": [
+        "content_scripts/spreadr.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://*.amazon.com/inventory*",
+        "https://*.amazon.ca/inventory*",
+        "https://*.amazon.com.mx/inventory*",
+        "https://*.amazon.com.br/inventory*",
+        "https://*.amazon.de/inventory*",
+        "https://*.amazon.es/inventory*",
+        "https://*.amazon.fr/inventory*",
+        "https://*.amazon.it/inventory*",
+        "https://*.amazon.co.uk/inventory*",
+        "https://*.amazon.in/inventory*",
+        "https://*.amazon.cn/inventory*",
+        "https://*.amazon.co.jp/inventory*",
+        "https://*.amazon.co.kr/inventory*",
+        "https://*.amazon.co.th/inventory*",
+        "https://*.amazon.sg/inventory*",
+        "https://*.amazon.com.au/inventory*",
+        "https://*.amazon.com.tw/inventory*",
+        "https://*.amazon.ae/inventory*"
+      ],
+      "js": [
+        "content_scripts/amazon_seller.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://www.opinew.com/*",
+        "https://opinew.ngrok.io/*"
+      ],
+      "js": [
+        "content_scripts/opinew.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

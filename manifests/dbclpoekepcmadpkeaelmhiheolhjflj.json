@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "0.2.7",
+  "manifest_version": 2,
+  "name": "User-Agent Switcher",
+  "short_name": "useragent-switcher",
+  "background": {
+    "page": "lib/chrome/background.html"
+  },
+  "homepage_url": "https://mybrowseraddon.com/useragent-switcher.html",
+  "description": "Switch between popular useragent strings from toolbar popup!",
+  "permissions": [
+    "storage",
+    "webRequest",
+    "http://*/*",
+    "https://*/*",
+    "webRequestBlocking"
+  ],
+  "browser_action": {
+    "default_title": "User-Agent Switcher",
+    "default_popup": "data/popup/popup.html",
+    "default_icon": {
+      "16": "data/icons/16.png",
+      "32": "data/icons/32.png",
+      "48": "data/icons/48.png",
+      "64": "data/icons/64.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "run_at": "document_start",
+      "js": [
+        "data/content_script/inject.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ]
+    }
+  ],
+  "commands": {
+    "toggle-default-mode": {
+      "description": "Toggle default UA mode",
+      "suggested_key": {
+        "mac": "Command+Shift+D",
+        "default": "Ctrl+Shift+D"
+      }
+    }
+  },
+  "icons": {
+    "16": "data/icons/16.png",
+    "32": "data/icons/32.png",
+    "48": "data/icons/48.png",
+    "64": "data/icons/64.png",
+    "128": "data/icons/128.png"
+  }
+}

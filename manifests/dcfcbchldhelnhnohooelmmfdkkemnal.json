@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Shutterfly Exporter",
+  "version": "2.0.1",
+  "description": "Download all pictures from your Shutterfly album to your computer",
+  "icons": {
+    "16": "assets/download.png",
+    "48": "assets/download_48.png",
+    "128": "assets/download_128.png"
+  },
+  "background": {
+    "scripts": [
+      "vendor/jquery.js",
+      "background.js"
+    ],
+    "run_at": "document_idle"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "https://*.shutterfly.com/*",
+    "downloads",
+    "storage"
+  ],
+  "page_action": {
+    "default_name": "Download Album",
+    "default_icon": "assets/download.png",
+    "default_popup": "popup.html"
+  },
+  "manifest_version": 2,
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.shutterfly.com/*"
+      ],
+      "css": [
+        "assets/css/foundation.min.css",
+        "assets/css/normalize.css",
+        "assets/css/stylesheet.css"
+      ],
+      "js": [
+        "vendor/jquery.js",
+        "vendor/durable-json-lint-with-dependencies.min.js",
+        "vendor/raven.min.js",
+        "lib/export.js",
+        "contentscript.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "lib/injected.js"
+  ]
+}

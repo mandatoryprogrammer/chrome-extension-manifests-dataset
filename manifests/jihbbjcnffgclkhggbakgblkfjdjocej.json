@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Melhor Escolha",
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "description": "O plug-in “Melhor Escolha” encontra automaticamente o mais barato. Basta entrar numa loja online e pesquisar por um produto.",
+  "background": {
+    "scripts": [
+      "browser-polyfill.js",
+      "extension-configuration.js",
+      "lifecycle-hooks.js",
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "browser-polyfill.js",
+        "contentscript.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://test-achats-banner-local.workitsaas.com/*"
+      ],
+      "js": [
+        "browser-polyfill.js",
+        "banner-script.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "app/*/*"
+  ],
+  "icons": {
+    "48": "PT-PLUGIN_48x48.png",
+    "128": "PT-PLUGIN_128x128.png"
+  },
+  "browser_action": {
+    "default_icon": "PT-PLUGIN_48x48.png"
+  }
+}

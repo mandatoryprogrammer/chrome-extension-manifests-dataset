@@ -1,0 +1,69 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "ORC Text Snap",
+  "description": "Extract text from images with Optical Character Recognition",
+  "version": "1.0",
+  "manifest_version": 2,
+  "background": {
+    "scripts": [
+      "dist/main.js",
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon19.png",
+      "38": "images/icon38.png"
+    },
+    "default_title": "Extract text from images"
+  },
+  "options_ui": {
+    "page": "html/options.html",
+    "open_in_tab": false,
+    "chrome_style": true
+  },
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "homepage_url": "https://github.com/jofen-chrome-extensions/orc-text-snap",
+  "web_accessible_resources": [
+    "html/iframe/*",
+    "images/Jcrop.gif",
+    "images/pixel.png",
+    "images/close.png"
+  ],
+  "commands": {
+    "take-screenshot": {
+      "suggested_key": {
+        "default": "Alt+S"
+      },
+      "description": "Take Screenshot"
+    }
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "activeTab",
+    "clipboardWrite",
+    "clipboardRead"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "vendor/jquery.js",
+        "js/inject.js"
+      ],
+      "css": [
+        "css/inject.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://cdn.jsdelivr.net; object-src 'self'"
+}

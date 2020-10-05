@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Albums B Gone",
+  "description": "Cleans a list of Facebook albums by ID.",
+  "author": "RoeRunner",
+  "version": "2.1",
+  "icons": {
+    "256": "albums-b-gone-icon-256b.png",
+    "128": "albums-b-gone-icon-128b.png",
+    "48": "albums-b-gone-icon-48b.png"
+  },
+  "browser_action": {
+    "default_icon": "albums-b-gone-icon-128b.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "https://roerunner.com/portal/*"
+      ],
+      "js": [
+        "version.js"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "https://www.facebook.com/*"
+      ],
+      "js": [
+        "remove.js"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "matches": [
+        "https://www.facebook.com/*"
+      ],
+      "js": [
+        "content-mask.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "https://roerunner.com/",
+    "https://www.facebook.com/",
+    "activeTab",
+    "tabs",
+    "storage"
+  ]
+}

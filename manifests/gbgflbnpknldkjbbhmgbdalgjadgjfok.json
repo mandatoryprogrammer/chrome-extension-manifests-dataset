@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "MindfulTube (YouTube™ without distractions)",
+  "short_name": "MindfulTube",
+  "version": "0.0.4",
+  "description": "Use YouTube™ with intention and without distraction",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "background": {
+    "scripts": [
+      "dist/background/index.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.youtube.com/*"
+      ],
+      "js": [
+        "dist/content_scripts/index.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "dist/styles/index.css",
+    "dist/styles/results.css",
+    "dist/styles/watch.css",
+    "dist/styles/all.css",
+    "dist/in_page/sortResults.js"
+  ],
+  "browser_action": {
+    "default_popup": "dist/popup/popup.html",
+    "default_icon": {
+      "16": "images/icon_16.png",
+      "32": "images/icon_32.png",
+      "48": "images/icon_48.png",
+      "128": "images/icon_128.png"
+    }
+  },
+  "icons": {
+    "16": "images/icon_16.png",
+    "32": "images/icon_32.png",
+    "48": "images/icon_48.png",
+    "128": "images/icon_128.png"
+  },
+  "manifest_version": 2
+}

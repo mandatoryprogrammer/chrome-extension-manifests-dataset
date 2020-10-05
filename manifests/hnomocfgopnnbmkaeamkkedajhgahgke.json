@@ -1,0 +1,86 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "ID50 Passwort Manager",
+  "description": "IDENTsmart ID50 Passwort Manager",
+  "author": "Elias Rabl - IDENTsmart",
+  "homepage_url": "https://identsmart.com",
+  "version": "1.3.4",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "default_locale": "en_US",
+  "web_accessible_resources": [
+    "js/*",
+    "images/*",
+    "css/*",
+    "data/*",
+    "data/js/*",
+    "data/images/*",
+    "data/css/*"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "16": "icon19.png"
+    },
+    "default_popup": "popup.html",
+    "default_title": "ID50 Passwort Manager"
+  },
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "tabs",
+    "<all_urls>",
+    "notifications",
+    "privacy"
+  ],
+  "short_name": "PWM-ID50",
+  "background": {
+    "persistent": true,
+    "page": "background.html"
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/jquery-2.1.4.min.js",
+        "js/jquery.popupoverlay.js"
+      ],
+      "css": [
+        "css/tooltip.css"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/inject.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://identsmart.com/support/support-id50-passwort-manager",
+        "https://identsmart.com/en/support-en/support-id50-password-manager",
+        "https://identsmart.com/support/support-id50-passwort-manager/*",
+        "https://identsmart.com/en/support-en/support-id50-password-manager/*"
+      ],
+      "js": [
+        "js/support.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Strudel Devtools",
+  "version": "0.9.5",
+  "manifest_version": 2,
+  "description": "Devtools for Strudel.js framework",
+  "permissions": [
+    "storage"
+  ],
+  "homepage_url": "http://strudeljs.org",
+  "devtools_page": "devtools-background.html",
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/icon16-gray.png",
+      "48": "icons/icon48-gray.png",
+      "128": "icons/icon128-gray.png"
+    },
+    "default_title": "Strudel Devtools"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "build/hook.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "build/detector.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "build/proxy.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [
+        "build/highlighter.css"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "build/background.js"
+    ],
+    "persistent": false
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "web_accessible_resources": [
+    "node_modules/*",
+    "build/*"
+  ],
+  "version_name": "0.9.5"
+}

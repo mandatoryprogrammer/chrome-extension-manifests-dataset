@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Netflix豆瓣电影助手",
+  "short_name": "Netflix-豆瓣",
+  "version": "3.1.3",
+  "description": "帮助你快速获取Netflix电影的豆瓣评分；一键搜索和加载SRT格式字幕。",
+  "icons": {
+    "16": "img/logo@1x.png",
+    "24": "img/logo@1.5x.png",
+    "32": "img/logo@2x.png",
+    "48": "img/logo@3x.png",
+    "128": "img/logo@8x.png"
+  },
+  "background": {
+    "scripts": [
+      "js/background/onMessage.js",
+      "js/background/background.js",
+      "js/background/rating/rating.js",
+      "js/background/rating/douban.js",
+      "js/background/subtitleParser.js",
+      "js/console.js",
+      "js/Exception.js",
+      "test/netflix.js"
+    ]
+  },
+  "browser_action": {
+    "default_title": "Netflix豆瓣电影助手",
+    "default_popup": "browserAction.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.netflix.com/*",
+        "file:///*.netflix.com/*"
+      ],
+      "js": [
+        "js/external/jquery-3.1.1.min.js",
+        "js/contentScript.js",
+        "js/extract.js",
+        "js/injectRating.js",
+        "js/listContents.js",
+        "js/playerContents.js",
+        "js/injectSubtitle.js",
+        "js/console.js"
+      ],
+      "css": [
+        "listContents.css"
+      ]
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "https://*.netflix.com/*",
+    "https://api.douban.com/v2/movie*"
+  ],
+  "web_accessible_resources": [
+    "img/doubanLogo16x16.png",
+    "img/doubanLogo48x48.png"
+  ]
+}

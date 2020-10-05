@@ -1,0 +1,75 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "version": "6.2.0",
+  "manifest_version": 2,
+  "description": "__MSG_appDescription__",
+  "icons": {
+    "16": "images/icon-16.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/bar-icon-on.png",
+      "38": "images/bar-icon-on@2x.png"
+    },
+    "default_title": "Workable Chrome Extension"
+  },
+  "content_security_policy": "script-src https://maps.googleapis.com/ 'self'; object-src 'self';",
+  "externally_connectable": {
+    "matches": [
+      "*://*.workable.com/*"
+    ]
+  },
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "tabs",
+    "cookies",
+    "background",
+    "contextMenus",
+    "alarms",
+    "idle"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "http://www.istockphoto.com/*",
+        "https://www.istockphoto.com/*"
+      ],
+      "js": [
+        "scripts/content.js"
+      ],
+      "css": [
+        "styles/inject.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "omnibox": {
+    "keyword": "OMNIBOX-KEYWORD"
+  },
+  "web_accessible_resources": [
+    "fonts/*.woff",
+    "fonts/*.ttf",
+    "fonts/*.svg",
+    "fonts/*.eot",
+    "images/*.png",
+    "images/*.svg",
+    "images/*.gif",
+    "styles/*.css",
+    "frames/*.html"
+  ]
+}

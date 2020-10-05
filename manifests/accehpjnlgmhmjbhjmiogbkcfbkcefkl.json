@@ -1,0 +1,38 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "TweetBlocker",
+  "description": "This extension lets you block tweets that you don't want to see on Twitter by keyword.",
+  "version": "1.0.0.0",
+  "browser_action": {
+    "default_icon": "twitter_16.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "activeTab",
+    "https://ajax.googleapis.com/",
+    "https://www.google-analytics.com/",
+    "tabs",
+    "http://*/*",
+    "storage"
+  ],
+  "icons": {
+    "16": "twitter_16.png",
+    "48": "twitter_48.png",
+    "128": "twitter_128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://twitter.com/*"
+      ],
+      "js": [
+        "jquery-2.2.0.min.js",
+        "tweetblocker.js",
+        "popup.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "MixrElixr",
+  "description": "Enhances the Mixer experience with custom emotes, new features, and tons of options.",
+  "version": "2.12.0",
+  "manifest_version": 2,
+  "icons": {
+    "16": "resources/images/elixr-light-16.png",
+    "48": "resources/images/elixr-light-48.png",
+    "128": "resources/images/elixr-light-128.png"
+  },
+  "browser_action": {
+    "default_title": "MixrElixr",
+    "default_icon": "/resources/images/elixr-light-16.png",
+    "default_popup": "popup/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "/background/background.js"
+    ],
+    "persistent": true
+  },
+  "web_accessible_resources": [
+    "resources/images/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://mixer.com/*"
+      ],
+      "exclude_globs": [
+        "*/api/*"
+      ],
+      "css": [
+        "/injected-content/injected-content.css"
+      ],
+      "js": [
+        "/injected-content/injected-content.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://mixer.com/*",
+      "*://*.mixerusercontent.com/*"
+    ]
+  },
+  "permissions": [
+    "storage",
+    "background",
+    "*://mixer.com/*",
+    "*://crowbartools.com/*",
+    "*://*.mixrelixr.com/*"
+  ]
+}

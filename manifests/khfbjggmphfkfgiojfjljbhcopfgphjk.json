@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "PAN Discovery Browser",
+  "short_name": "PAN Discovery",
+  "description": "Protect your browser from pages containing cardholder data.",
+  "version": "1.4",
+  "applications": {
+    "gecko": {
+      "id": "{26c292d3-6808-4a7a-8f05-e9d9663374a5}",
+      "strict_min_version": "48.0"
+    }
+  },
+  "icons": {
+    "48": "icons/icon-48.png"
+  },
+  "permissions": [
+    "notifications"
+  ],
+  "content_security_policy": "default-src 'self'; script-src 'self'; img-src 'self'; style-src 'self' 'unsafe-inline';",
+  "browser_action": {
+    "browser_style": true,
+    "default_icon": {
+      "48": "icons/icon-48.png"
+    },
+    "default_title": "PAN Discovery"
+  },
+  "background": {
+    "scripts": [
+      "bg-notify.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "context.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file://*/*"
+      ]
+    }
+  ]
+}

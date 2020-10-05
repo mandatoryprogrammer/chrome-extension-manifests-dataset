@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Profanity Filter by PureMedia Software",
+  "description": "Profanity Filter eliminates profanity and other offensive content from the web.",
+  "version": "1.1.3",
+  "browser_action": {
+    "default_icon": "images/icon-19.png",
+    "default_popup": "views/popup.html"
+  },
+  "icons": {
+    "16": "images/icon-16.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
+  },
+  "web_accessible_resources": [
+    "images/filtered-gray.png",
+    "images/filtered-orange.png",
+    "images/busy.gif",
+    "images/icon.png",
+    "images/icon-inactive.png"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "css/contentScriptProfanityFilter.css"
+      ],
+      "js": [
+        "js/contentScriptProfanityFilter.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    }
+  ],
+  "content_security_policy": "script-src 'unsafe-eval' 'self' https://*.bootstrapcdn.com; object-src 'self';",
+  "permissions": [
+    "storage",
+    "tabs",
+    "cookies",
+    "<all_urls>"
+  ]
+}

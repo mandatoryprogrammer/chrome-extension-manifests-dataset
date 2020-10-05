@@ -1,0 +1,83 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "History Search",
+  "author": "History Search",
+  "description": "Keep track of your information online. Find any article, document or webpage you’ve been before, using keywords you remember on it",
+  "short_name": "HS",
+  "manifest_version": 2,
+  "version": "1.5.38",
+  "browser_action": {
+    "default_icon": "app/img/app-icon/icon128.png",
+    "default_title": "History Search",
+    "default_popup": "app/index.html"
+  },
+  "icons": {
+    "16": "app/img/app-icon/icon16.png",
+    "48": "app/img/app-icon/icon48.png",
+    "128": "app/img/app-icon/icon128.png"
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "app/js/lib/jquery.min.js",
+      "app/bower_components/moment/moment.js",
+      "app/app.config.js",
+      "app/js/helpers.js",
+      "app/js/plugin-background/omnibox.js",
+      "app/js/plugin-background/facebook-auth.js",
+      "app/js/plugin-background/context-menu.js",
+      "app/js/plugin-background/plugin-background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "app/css/hs-ntf.css"
+      ],
+      "js": [
+        "app/js/lib/jquery.min.js",
+        "app/js/lib/purl.js",
+        "app/bower_components/moment/moment.js",
+        "app/js/lib/jquery.mCustomScrollbar.concat.min.js",
+        "app/app.config.js",
+        "app/js/helpers.js",
+        "app/js/plugin-content/plugin-content.js",
+        "app/js/plugin-content/google-view.js",
+        "app/bower_components/angular/angular.js",
+        "app/js/plugin-content/ntf/index.js",
+        "app/js/plugin-content/ntf/ntf-controller.js"
+      ],
+      "all_frames": false
+    }
+  ],
+  "omnibox": {
+    "keyword": "h"
+  },
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "clipboardWrite",
+    "tabs",
+    "<all_urls>",
+    "history"
+  ],
+  "offline_enabled": false,
+  "web_accessible_resources": [
+    "app/*",
+    "frame.html"
+  ],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Shift+Alt+Up",
+        "windows": "Shift+Alt+Up",
+        "mac": "Shift+Alt+Up"
+      }
+    }
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://js.intercomcdn.com https://widget.intercom.io https://geoip-db.com; object-src 'self'"
+}

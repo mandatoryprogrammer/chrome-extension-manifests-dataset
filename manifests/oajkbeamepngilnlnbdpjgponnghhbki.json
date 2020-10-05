@@ -1,0 +1,42 @@
+{
+  "update_url": "http://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Clips",
+  "description": "Manage your Pocket list with Google Chrome.",
+  "version": "0.2",
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "img/popup_icon19.png",
+      "38": "img/popup_icon38.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "https://getpocket.com/"
+  ],
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://getpocket.com/*/pocketChrome"
+      ],
+      "js": [
+        "js/redirect.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/jquery-1.9.0.min.js",
+      "js/background.js"
+    ]
+  }
+}

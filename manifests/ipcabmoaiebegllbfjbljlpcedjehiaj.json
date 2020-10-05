@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Spigot Sales Graph",
+  "description": "See your montly/total revenue in your premium spigot resources",
+  "version": "1.7.0",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "permissions": [
+    "https://www.spigotmc.org/*",
+    "storage"
+  ],
+  "browser_action": {
+    "default_popup": "source/popup/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.spigotmc.org/*/buyers"
+      ],
+      "js": [
+        "source/libs/highcharts.js",
+        "source/libs/annotations.js",
+        "source/libs/exporting.js",
+        "source/common/helper.js",
+        "source/common/money.js",
+        "source/resource/buyers.js",
+        "source/resource/dashboard.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://www.spigotmc.org/*/authors/*"
+      ],
+      "js": [
+        "source/libs/highcharts.js",
+        "source/libs/exporting.js",
+        "source/common/helper.js",
+        "source/common/money.js",
+        "source/author/author.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.spigotmc.org/resources/*/edit*"
+      ],
+      "js": [
+        "source/common/helper.js",
+        "source/resource/edit/sale_calculator.js"
+      ]
+    }
+  ]
+}

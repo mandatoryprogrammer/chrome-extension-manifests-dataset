@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "AdWallet",
+  "description": "This extension will help you to clip/save ads from any website to your digital adwallet",
+  "version": "1.0.11",
+  "browser_action": {
+    "default_icon": {
+      "19": "icon.png",
+      "38": "icon_38x38.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "cookies",
+    "contextMenus",
+    "tabs",
+    "http://*/",
+    "https://*/"
+  ],
+  "icons": {
+    "16": "icon.png",
+    "19": "icon.png",
+    "38": "icon_38x38.png",
+    "48": "icon_48x48.png",
+    "128": "icon_128x128.png"
+  },
+  "background": {
+    "scripts": [
+      "rp_utils.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "rp_utils.js",
+        "draw_overlay.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end",
+      "match_about_blank": true
+    },
+    {
+      "matches": [
+        "http://prefs.adwallet.xyz/*",
+        "https://prefs.adwallet.xyz/*"
+      ],
+      "js": [
+        "content_id.js"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Google Slides Auto Resize Speaker Notes",
+  "version": "1.1",
+  "manifest_version": 2,
+  "description": "Automatically resize the slide previews when the Speaker Notes window is resized, or drag the sidebar to manually select a size.",
+  "page_action": {
+    "default_icon": "img/icon-48.png",
+    "default_popup": "html/gsbn-popup.html",
+    "default_title": "Google Slides Auto Resize Speaker Notes"
+  },
+  "background": {
+    "scripts": [
+      "js/gsbn-background.js",
+      "js/gsbn-common.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "declarativeContent",
+    "https://docs.google.com/presentation/*",
+    "https://docs.google.com/*/presentation/*",
+    "storage"
+  ],
+  "icons": {
+    "16": "img/icon-16.png",
+    "48": "img/icon-48.png",
+    "128": "img/icon-128.png"
+  },
+  "options_page": "html/gsbn-options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://docs.google.com/*/presentation/*/present*slide*",
+        "https://docs.google.com/presentation/*/present*slide*",
+        "https://docs.google.com/presentation/present*slide*"
+      ],
+      "match_about_blank": true,
+      "all_frames": true,
+      "js": [
+        "js/gsbn-common.js",
+        "js/gsbn.js"
+      ]
+    }
+  ],
+  "homepage_url": "https://github.com/daattali/gslides-betternotes-extension"
+}

@@ -1,0 +1,111 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "MiCloud CRM Integrations",
+  "short_name": "__MSG_extShortName__",
+  "version": "3.4.214",
+  "description": "MiCloud CRM Integrations",
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "Utils.js",
+      "StorageService.js",
+      "BackgroundLoader.js",
+      "LicenseLoader.js"
+    ]
+  },
+  "browser_action": {
+    "default_title": "MiCloud CRM Integrations"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "Utils.js",
+        "StorageService.js",
+        "PopupLoader.js",
+        "v3/injectIframeOuter.js"
+      ],
+      "css": [
+        "bundle.css",
+        "vedge/jquery.datetimepicker.css",
+        "vedge/select2.css",
+        "vedge/iframeOuter.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "vedge/ctd/ctd-crm.min.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "Utils.js",
+        "v3/plugins/calendar-meeting/calendarMeetingIntegration.js"
+      ],
+      "css": [
+        "v3/plugins/calendar-meeting/calendarMeetingIntegration.css"
+      ],
+      "matches": [
+        "http://calendar.google.com/*",
+        "https://calendar.google.com/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://mail.google.com/*"
+      ],
+      "js": [
+        "inboxsdk.js",
+        "vedge/history/js/jquery/jquery.js",
+        "vedge/select2.min.js",
+        "vedge/jquery.datetimepicker.full.min.js",
+        "vedge/tenfoldNextFollowUp.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "v3/*",
+    "vedge/*",
+    "vprevious/*"
+  ],
+  "permissions": [
+    "tabs",
+    "cookies",
+    "gcm",
+    "storage",
+    "contextMenus",
+    "management",
+    "notifications",
+    "webRequest",
+    "webRequestBlocking",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "icons": {
+    "16": "v3/icon16.png",
+    "48": "v3/icon48.png",
+    "96": "v3/icon96.png",
+    "128": "v3/icon128.png"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://localhost:3033 http://localhost:3033 https://*.firebaseio.com https://*.fullstory.com ; object-src 'self'; frame-src 'self' https://localhost:3033 http://localhost:3033 https://*.firebaseio.com https://*.cloudfront.net https://*.fullstory.com;",
+  "externally_connectable": {
+    "matches": [
+      "https://*.tenfold.com/*",
+      "https://*.micloudoffice.com/*",
+      "https://*.mitel.com/*"
+    ]
+  }
+}

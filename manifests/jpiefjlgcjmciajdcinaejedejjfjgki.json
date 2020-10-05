@@ -1,0 +1,39 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "name": "Manual Geolocation",
+  "description": "Override HTML5 GeoLocation API and return an arbitrary location.",
+  "version": "1.1.0",
+  "content_scripts": [
+    {
+      "js": [
+        "fakegeo_content.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "browser_action": {
+    "default_icon": "blue_dot_circle.png",
+    "default_popup": "popup.html"
+  },
+  "content_security_policy": "script-src 'self' https://maps.googleapis.com https://ajax.googleapis.com https://maps.gstatic.com https://mts0.googleapis.com https://mts1.googleapis.com; object-src 'self'",
+  "permissions": [
+    "geolocation",
+    "webNavigation",
+    "tabs",
+    "storage"
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  }
+}

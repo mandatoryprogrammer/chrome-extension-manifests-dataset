@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_app_name__",
+  "default_locale": "zh_CN",
+  "version": "1.0.0.21",
+  "description": "__MSG_description__",
+  "icons": {
+    "128": "data/icon.png"
+  },
+  "options_page": "data/setting.html",
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "lib/main.js"
+    ]
+  },
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>",
+    "tabs",
+    "http://*/",
+    "https://*/",
+    "notifications",
+    "unlimitedStorage"
+  ],
+  "browser_action": {
+    "default_title": "__MSG_app_name__",
+    "default_icon": "data/icon.png",
+    "default_popup": "data/popup.html"
+  },
+  "content_security_policy": "script-src 'self'; object-src 'self';frame-src *",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*isOlpfBgMonitor=1",
+        "https://*/*isOlpfBgMonitor=1"
+      ],
+      "js": [
+        "data/lang.js",
+        "data/base.js",
+        "data/jquery-2.1.1.min.js",
+        "data/feature.js",
+        "data/desktop.js",
+        "data/addModule.js",
+        "data/content.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "offline_enabled": true
+}

@@ -1,0 +1,43 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_appName__",
+  "description": "__MSG_appDesc__",
+  "default_locale": "en",
+  "author": "Andrew Flower",
+  "version": "1.6.0",
+  "icons": {
+    "32": "icons/icon.png",
+    "48": "icons/icon48.png",
+    "64": "icons/icon64.png",
+    "96": "icons/icon96.png",
+    "128": "icons/icon128.png"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.youtube.com/*"
+      ],
+      "js": [
+        "script/content/sync_state.js",
+        "script/content/youtube_video.js",
+        "script/content/video_commands.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "script/inject/movie_player_interface.js"
+  ],
+  "browser_action": {
+    "default_icon": "icons/icon.png",
+    "default_popup": "html/popup.html"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "*://*.youtube.com/*"
+  ],
+  "minimum_chrome_version": "49"
+}

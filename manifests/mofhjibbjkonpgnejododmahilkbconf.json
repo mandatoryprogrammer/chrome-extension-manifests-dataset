@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Fluig Identity",
+  "short_name": "Fluig Identity",
+  "description": "The Fluig Identity plugin allows you to log into a wide variety of web based applications.",
+  "version": "1.2.8",
+  "icons": {
+    "16": "icon-16.png",
+    "48": "icon-48.png",
+    "128": "icon-128.png"
+  },
+  "browser_action": {
+    "default_icon": "icon-128.png",
+    "default_title": "Go to Fluig Identity Launch Pad"
+  },
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*/launchpad/launchExtension/*",
+        "*://*/launchpad/launchExtension/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*/*/launchpad/launchAppList"
+      ],
+      "js": [
+        "pluginInfo.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "scripts": [
+      "plugin.js"
+    ]
+  }
+}

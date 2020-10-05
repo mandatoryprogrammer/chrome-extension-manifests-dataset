@@ -1,0 +1,61 @@
+{
+  "name": "Shield",
+  "short_name": "Shield",
+  "version": "0.0.2.0",
+  "description": "Improve your online security by preventing password reuse and phishing.",
+  "icons": {
+    "16": "img/Logo-16.png",
+    "48": "img/Logo-48.png",
+    "128": "img/Logo-128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "img/Logo-success-16.png",
+      "24": "img/Logo-success-24.png",
+      "32": "img/Logo-success-32.png"
+    },
+    "default_title": "Shield",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "webNavigation",
+    "notifications",
+    "storage",
+    "tabs",
+    "identity",
+    "unlimitedStorage",
+    "<all_urls>"
+  ],
+  "options_page": "options.html",
+  "background": {
+    "scripts": [
+      "background.bundle.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "all_frames": false,
+      "js": [
+        "content.bundle.js"
+      ],
+      "css": [
+        "css/overlay.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "storage": {
+    "managed_schema": "schema.json"
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqhwxVNMar7X465VJmeWmeMRzeGQQMjYnwhSbyNgYP4QHz3buf8nERIKvw4ABkFlNdkGA0Ncx8vCMH6BSKDY0OkENEaBf+xDVnz00cvV56H40bwvGTHBFcdid8Rm6gYq3sG+2Sa5XaFcUtBZgi5qGZuwisfXAdOLLk0iqrDLqzXP/1IpX8WqqrEKMFxrokCjRwHSt/FFQesfmtjG6O7GMlq/Y2mhIEGn5hObBYwaOSKZWaNyT9vEeyun77JmVVXoeW9pO3ns4OiLCXmPFk0MSyM14l9oTfiG1gWp8ZiDfYNW3ubmFj6HHhPlDSIenjt7c2QQ9QdNrvpWYfwS9BG7cywIDAQAB",
+  "manifest_version": 2,
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

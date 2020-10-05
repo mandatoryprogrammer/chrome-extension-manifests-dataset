@@ -1,0 +1,83 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Actively",
+  "description": "Actively is an open source project to help you know people's active date on Linkedin. So you can target your lead more efficiently.",
+  "version": "1.1.1",
+  "icons": {
+    "16": "icon-2.png",
+    "48": "icon-2.png",
+    "128": "icon-2.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "icon-2.png",
+      "38": "icon-2.png"
+    },
+    "default_popup": "html/popup.html",
+    "default_title": "Actively"
+  },
+  "background": {
+    "scripts": [
+      "js/jquery.js",
+      "js/getProfileUtils.js",
+      "js/background_availability.js",
+      "js/background_getProfile.js",
+      "js/sockjs.js",
+      "js/background_support.js"
+    ]
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "*://*.linkedin.com/*",
+    "webRequest",
+    "webRequestBlocking",
+    "storage",
+    "background"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.linkedin.com/in/*",
+        "*://*.linkedin.com/profile/*",
+        "*://*.linkedin.com/recruiter/profile/*"
+      ],
+      "js": [
+        "js/jquery.js",
+        "js/jquery-ui.js",
+        "js/getProfileUtils.js",
+        "js/content_profile.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*.linkedin.com/in/*",
+        "*://*.linkedin.com/profile/*"
+      ],
+      "js": [
+        "js/jquery.js",
+        "js/test.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://localhost/*",
+        "*://123.207.138.224/*"
+      ],
+      "js": [
+        "js/jquery.js",
+        "js/getProfileUtils.js",
+        "js/popupcontent.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "html/display_profile.html"
+  ]
+}

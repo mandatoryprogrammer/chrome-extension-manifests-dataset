@@ -1,0 +1,331 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "minimum_chrome_version": "49.0.0.0",
+  "name": "Alitoolkit - Aliexpress.com Product Importer",
+  "description": "Import and sync products from AliExpress to Alitoolkit",
+  "icons": {
+    "16": "assets/icons/16x16.png",
+    "48": "assets/icons/48x48.png",
+    "128": "assets/icons/128x128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "assets/icons/inactive19x19.png",
+      "38": "assets/icons/inactive38x38.png"
+    },
+    "default_title": "AliExpress.com Product Importer",
+    "default_popup": "popups/default.html"
+  },
+  "background": {
+    "scripts": [
+      "assets/js/common.bundle.js",
+      "assets/js/main.js",
+      "assets/js/vendor/datatables.min.js",
+      "assets/js/vendor/dataTables.fixedHeader.min.js",
+      "scripts/background.js"
+    ]
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://*.alitoolkit.com/*",
+      "*://localhost/*",
+      "*://*.aliexpress.com/*",
+      "*://*.banggood.com/*",
+      "*://*.ebay.com/*",
+      "*://*.dhgate.com/*",
+      "*://*.asos.com/*",
+      "*://*.booking.com/*",
+      "*://*.hotels.com/*",
+      "*://*.zapals.com/*",
+      "*://*.ebay.co.uk/*",
+      "*://*.amazon.com/*",
+      "*://*.walmart.com/*",
+      "*://*.fitflop.com/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.aliexpress.com/af/*",
+        "*://*.aliexpress.com/w/*",
+        "*://*.aliexpress.com/category/*",
+        "*://*.aliexpress.com/wholesale*",
+        "*://*.aliexpress.com/premium*",
+        "*://*.aliexpress.com/store/group/*",
+        "*://*.aliexpress.com/store/all-*",
+        "*://*.aliexpress.com/store/sale-items/*",
+        "*://*.aliexpress.com/store/top-rated-products/*",
+        "*://*.aliexpress.com/store/new-arrivals/*",
+        "*://*.aliexpress.com/store/*/search*"
+      ],
+      "js": [
+        "assets/js/common.bundle.js",
+        "assets/js/main.js",
+        "scripts/content/category.js"
+      ],
+      "css": [
+        "assets/css/main.css"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "*://*.aliexpress.com/item/*",
+        "*://*.aliexpress.com/store/product/*"
+      ],
+      "js": [
+        "assets/js/chart.bundle.min.js",
+        "assets/js/common.bundle.js",
+        "assets/js/main.js",
+        "scripts/content/product.js"
+      ],
+      "css": [
+        "assets/css/main.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.amazon.com/*/dp/*",
+        "*://*.amazon.com/dp/*"
+      ],
+      "js": [
+        "assets/js/chart.bundle.min.js",
+        "assets/js/common.bundle.js",
+        "assets/js/main.js",
+        "scripts/content/amazon_product.js"
+      ],
+      "css": [
+        "assets/css/main.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.amazon.com/a/addresses/add*"
+      ],
+      "js": [
+        "assets/js/common.bundle.js",
+        "assets/js/main.js",
+        "scripts/content/amazon_address.js"
+      ],
+      "css": [
+        "assets/css/main.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.amazon.com/gp/*/order-history*"
+      ],
+      "js": [
+        "assets/js/common.bundle.js",
+        "assets/js/main.js",
+        "scripts/content/amazon_orders.js"
+      ],
+      "css": [
+        "assets/css/main.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.amazon.com/*"
+      ],
+      "js": [
+        "assets/js/common.bundle.js",
+        "assets/js/main.js",
+        "scripts/content/amazon_init.js"
+      ],
+      "css": [
+        "assets/css/main.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.walmart.com/checkout*"
+      ],
+      "js": [
+        "assets/js/common.bundle.js",
+        "assets/js/main.js",
+        "scripts/content/walmart_address.js"
+      ],
+      "css": [
+        "assets/css/main.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://shoppingcart.aliexpress.com/shopcart/shopcartDetail.htm*"
+      ],
+      "js": [
+        "assets/js/common.bundle.js",
+        "assets/js/main.js",
+        "scripts/content/cart.js"
+      ],
+      "css": [
+        "assets/css/main.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://shoppingcart.aliexpress.com/orders.htm*",
+        "https://shoppingcart.aliexpress.com/order/confirm_order.htm*"
+      ],
+      "js": [
+        "assets/js/common.bundle.js",
+        "assets/js/main.js",
+        "scripts/content/new-checkout.js"
+      ],
+      "css": [
+        "assets/css/main.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://shoppingcart.aliexpress.com/order/*"
+      ],
+      "exclude_matches": [
+        "*://shoppingcart.aliexpress.com/order/payOnlineSuccess*",
+        "*://shoppingcart.aliexpress.com/order/pay-online-success*"
+      ],
+      "css": [
+        "assets/css/main.css"
+      ],
+      "js": [
+        "assets/js/common.bundle.js",
+        "assets/js/main.js",
+        "scripts/content/checkout.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://shoppingcart.aliexpress.com/order/payOnlineSuccess.htm*",
+        "*://shoppingcart.aliexpress.com/order/payOnlineFailure.htm*",
+        "*://shoppingcart.aliexpress.com/order/pay-online-success.htm*",
+        "*://shoppingcart.aliexpress.com/order/pay_online_success.htm*",
+        "*://shoppingcart.aliexpress.com/buynow/payOnlineSuccess.htm*",
+        "*://shoppingcart.aliexpress.com/buynow/pay-online-success.htm*",
+        "*://shoppingcart.aliexpress.com/buynow/pay_online_success.htm*",
+        "*://shoppingcart.aliexpress.com/order/payOnlineResult.htm*",
+        "*://shoppingcart.aliexpress.com/order/pay-online-result.htm*",
+        "*://shoppingcart.aliexpress.com/order/pay_online_result.htm*"
+      ],
+      "js": [
+        "assets/js/common.bundle.js",
+        "assets/js/main.js",
+        "scripts/content/pay-online-success.js"
+      ],
+      "css": [
+        "assets/css/main.css"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "*://icashier.alipay.com/payment/checkout.htm*"
+      ],
+      "js": [
+        "assets/js/common.bundle.js",
+        "assets/js/main.js",
+        "scripts/content/alipay-checkout.js"
+      ],
+      "css": [
+        "assets/css/main.css"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "*://trade.aliexpress.com/orderList.htm*",
+        "*://trade.aliexpress.com/order_list.htm*"
+      ],
+      "js": [
+        "assets/js/common.bundle.js",
+        "assets/js/main.js",
+        "scripts/content/order-list.js"
+      ],
+      "css": [
+        "assets/css/main.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.banggood.com/*-p-*",
+        "*://*.ebay.com/itm/*",
+        "*://*.dhgate.com/product/*",
+        "*://*.asos.com/*/*/prd/*",
+        "*://*.booking.com/hotel/*",
+        "*://*.hotels.com/ho*",
+        "*://*.zapals.com/*",
+        "*://*.ebay.co.uk/itm/*",
+        "*://*.walmart.com/ip/*",
+        "*://*.fitflop.com/*/*/"
+      ],
+      "js": [
+        "assets/js/common.bundle.js",
+        "assets/js/main.js",
+        "scripts/content/affiliate.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "https://*.aliexpress.com/*",
+    "*://*.banggood.com/*",
+    "*://*.ebay.com/*",
+    "*://*.dhgate.com/*",
+    "*://*.asos.com/*",
+    "*://*.booking.com/*",
+    "*://*.hotels.com/*",
+    "*://*.zapals.com/*",
+    "*://*.ebay.co.uk/*",
+    "*://*.amazon.com/*",
+    "*://*.walmart.com/*",
+    "*://*.fitflop.com/*",
+    "*://*.alitoolkit.com/*",
+    "*://localhost/*",
+    "*://localhost:8080/*",
+    "webRequest",
+    "webRequestBlocking",
+    "tabs",
+    "storage",
+    "cookies",
+    "unlimitedStorage"
+  ],
+  "web_accessible_resources": [
+    "assets/icons/128x128.png",
+    "assets/images/logo-full.png",
+    "assets/images/logo-small.png",
+    "assets/images/logo-xs.png",
+    "assets/images/icon-sync.png",
+    "assets/images/btn-floating.png",
+    "assets/images/icon-time.png",
+    "assets/images/icon-x.png",
+    "assets/images/icon-import-success.png",
+    "assets/images/icon-import-error.png",
+    "assets/images/error-icon-3.png",
+    "assets/images/success-icon-10.png",
+    "assets/images/save.png",
+    "assets/images/gear-animation-green.gif",
+    "assets/images/close_btn.png",
+    "assets/images/loading.gif",
+    "assets/images/required_login.png",
+    "scripts/run-params.js",
+    "scripts/override.js"
+  ],
+  "options_ui": {
+    "page": "popups/help.html",
+    "chrome_style": false
+  },
+  "root_url": "https://www.alitoolkit.com",
+  "version": "1.1.50",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

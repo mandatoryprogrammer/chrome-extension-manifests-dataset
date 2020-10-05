@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Freshsales for Gmail",
+  "short_name": "Freshsales for Gmail",
+  "version": "1.5.5",
+  "description": "Freshsales - CRM for High-Velocity Sales Teams",
+  "icons": {
+    "16": "images/freshsales-logo.png",
+    "48": "images/freshsales-logo.png",
+    "128": "images/freshsales-logo.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "32": "images/freshsales-logo.png"
+    },
+    "default_title": "Freshsales for Gmail"
+  },
+  "author": "Freshsales",
+  "background": {
+    "page": "background.html",
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/mail/u/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "permissions": [
+    "activeTab",
+    "cookies",
+    "identity",
+    "notifications",
+    "storage",
+    "tabs",
+    "https://mail.google.com/*",
+    "https://*.freshsales.io/*"
+  ],
+  "web_accessible_resources": [
+    "contexts/gmail/setup-globals.js",
+    "gmail.js",
+    "jquery-1.10.2.min.js"
+  ]
+}

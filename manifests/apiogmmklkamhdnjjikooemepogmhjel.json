@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "kbwarrior",
+  "description": "Browse the web like a true keyboard warrior with simple hinting and a few vim-style browsing shortcuts.",
+  "version": "0.4.0",
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_title": "kbwarrior"
+  },
+  "icons": {
+    "16": "kbw16.png",
+    "48": "kbw48.png",
+    "128": "kbw128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "*://*.facebook.com/*",
+        "*://*.twitter.com/*",
+        "*://*.reddit.com/*",
+        "*://*.github.com/*",
+        "*://*.youtube.com/*"
+      ],
+      "js": [
+        "helpers.js",
+        "content.js"
+      ],
+      "css": [
+        "content.css"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

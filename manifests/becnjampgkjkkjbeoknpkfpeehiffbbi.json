@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Vizrt Viz Feed Streamer",
+  "short_name": "Vizrt Viz Feed Streamer",
+  "version": "1.0.16",
+  "manifest_version": 2,
+  "description": "Stream content from social media networks to Vizrt Social TV",
+  "author": "prod",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "icon16.png",
+      "38": "icon128.png"
+    },
+    "default_title": "Vizrt Viz Feed Streamer",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "social.js"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://localhost:8089/*",
+        "https://*.facebook.com/*",
+        "https://*.twitter.com/*",
+        "https://*.instagram.com/*"
+      ],
+      "js": [
+        "social_loader.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://docs.vizrt.com/; object-src 'self'",
+  "incognito": "spanning",
+  "offline_enabled": false,
+  "permissions": [
+    "contextMenus",
+    "storage",
+    "clipboardWrite",
+    "unlimitedStorage",
+    "http://*/",
+    "https://*/*"
+  ],
+  "homepage_url": "http://www.vizrt.com/solutions/social-tv-solution/"
+}

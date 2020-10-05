@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "securMeet Calendar Integration",
+  "description": "This extension allows you to schedule securMeet meetings and stream your desktop into securMeet conferences.",
+  "version": "0.0.1",
+  "minimum_chrome_version": "34",
+  "icons": {
+    "16": "logo16.png",
+    "48": "logo48.png",
+    "128": "logo128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "desktopCapture",
+    "https://calendar.google.com/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://meet.securcom.me/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://calendar.google.com/calendar/*",
+        "https://outlook.live.com/owa/*"
+      ],
+      "js": [
+        "jquery.js",
+        "RandomUtil.js",
+        "RoomnameGenerator.js",
+        "meet-calendar.js"
+      ],
+      "css": [
+        "/css/all.css"
+      ],
+      "all_frames": false,
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "logo48.png",
+    "logo.svg"
+  ],
+  "browser_action": {
+    "default_title": "Create securMeet meetings",
+    "default_popup": "popup.html"
+  }
+}

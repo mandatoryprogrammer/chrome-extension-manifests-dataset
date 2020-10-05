@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Pinboard Plus",
+  "version": "2.12.4",
+  "description": "A better extension for Pinboard (http://pinboard.in). Easy to know current page has been saved or not.",
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "browser_action": {
+    "default_title": "Pinboard Plus",
+    "default_icon": "images/icon_black_16.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "scripts/description.js",
+        "scripts/keywords_suggestions.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "icons": {
+    "16": "images/appicon_16.png",
+    "48": "images/appicon_48.png",
+    "128": "images/appicon_128.png"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "windows": "Ctrl+Shift+P",
+        "mac": "Command+Shift+P",
+        "chromeos": "Ctrl+Shift+P",
+        "linux": "Ctrl+Shift+P"
+      }
+    }
+  }
+}

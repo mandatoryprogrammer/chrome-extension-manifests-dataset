@@ -1,0 +1,73 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Survicate Feedback Hub",
+  "version": "1.1.1",
+  "description": "Capture, store, and categorize every piece of customer feedback with Survicate Feedback Hub.",
+  "permissions": [
+    "storage",
+    "contextMenus",
+    "activeTab",
+    "desktopCapture",
+    "storage",
+    "tabs",
+    "tabCapture",
+    "<all_urls>",
+    "identity",
+    "https://www.googleapis.com/*"
+  ],
+  "background": {
+    "scripts": [
+      "background.js",
+      "background/background.common.js",
+      "background/background.js",
+      "background/background.desktopCapture.js",
+      "background/background.tabCapture.js",
+      "background/background.badgeText.js",
+      "background/background.getUserMedia.js",
+      "background/background.messaging.js",
+      "RecordRTC/MediaStreamRecorder.js",
+      "RecordRTC/DiskStorage.js",
+      "RecordRTC/EBML.js"
+    ],
+    "persistent": false
+  },
+  "web_accessible_resources": [
+    "save_frame.html"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "inject/in_every_page.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://*.survicate.construction/*",
+        "https://*.survicate.com/*"
+      ],
+      "js": [
+        "inject/in_survicate.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://apis.google.com; object-src 'self'",
+  "browser_action": {
+    "default_popup": "popup_unsigned.html",
+    "default_icon": {
+      "16": "img/survicate-icon-16.png",
+      "32": "img/survicate-icon-32.png",
+      "48": "img/survicate-icon-48.png"
+    }
+  },
+  "icons": {
+    "16": "img/survicate-icon-16.png",
+    "32": "img/survicate-icon-32.png",
+    "48": "img/survicate-icon-48.png"
+  },
+  "manifest_version": 2
+}

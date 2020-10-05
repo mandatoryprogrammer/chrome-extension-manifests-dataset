@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "LGTM reloaded",
+  "short_name": "LGTM!",
+  "version": "1.4.1",
+  "manifest_version": 2,
+  "description": "Use a keyboard shortcut to LGTM! pull requests in seconds.",
+  "homepage_url": "http://www.mediavrog.net/projects/lgtm/",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "/src/background.js"
+    ],
+    "persistent": true
+  },
+  "page_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "Looks good to me!"
+  },
+  "commands": {
+    "lgtm": {
+      "suggested_key": {
+        "default": "Alt+L"
+      },
+      "description": "LGTM! this pull request"
+    },
+    "lgtm_no_submit": {
+      "suggested_key": {
+        "default": "Alt+Shift+L"
+      },
+      "description": "LGTM! this pull request (without comment auto-submit)"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://github.com/*"
+      ],
+      "js": [
+        "src/lgtm.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "https://us-central1-lgtm-reloaded.cloudfunctions.net/lgtm",
+    "https://github.com/",
+    "declarativeContent"
+  ]
+}

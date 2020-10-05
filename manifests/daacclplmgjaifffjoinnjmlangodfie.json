@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "MonAmi - Bookmarks, Clips, Scheduled browsing",
+  "description": "Allows users to manage bookmarks, browsing history, text clips in the cloud, and also setup scheduled browsing",
+  "version": "1.6.0",
+  "manifest_version": 2,
+  "author": "SimBust Soft",
+  "background": {
+    "page": "mon_background.html"
+  },
+  "browser_action": {
+    "default_icon": "images/android-icon-48x48.png",
+    "default_title": "Show Menu",
+    "default_popup": "mon_popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "file://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "lib/jquery.min.js",
+        "mon_kon.js",
+        "mon_content_script.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "content_security_policy": "script-src 'self' ; object-src 'self'",
+  "icons": {
+    "16": "images/favicon-16x16.png",
+    "48": "images/android-icon-48x48.png",
+    "128": "images/apple-icon-120x120.png"
+  },
+  "permissions": [
+    "bookmarks",
+    "contextMenus",
+    "tabs",
+    "http://localhost/",
+    "http://simbust.com/"
+  ],
+  "web_accessible_resources": [
+    "images/checkmark.png",
+    "images/door-open.svg",
+    "images/door-closed.svg",
+    "images/search.svg",
+    "mon_content_style.css",
+    "mon_modal_save_clip.html"
+  ]
+}

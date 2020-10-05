@@ -1,0 +1,85 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "SignalHire - find email or phone number",
+  "short_name": "SH",
+  "description": "SignalHire is a great way to find contact information in a couple of clicks.",
+  "version": "4.0.9",
+  "icons": {
+    "16": "icons/icon_16.png",
+    "30": "icons/icon_30.png",
+    "48": "icons/icon_48.png",
+    "128": "icons/icon_128.png"
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "icons/icon_30.png",
+    "default_title": "Find contacts with SignalHire!",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.linkedin.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "assets/content.css"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://*.linkedin.com/*"
+      ],
+      "js": [
+        "contentLI.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://github.com/*",
+        "https://*.facebook.com/*",
+        "https://twitter.com/*"
+      ],
+      "js": [
+        "contentSocial.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://www.signalhire.com/*"
+      ],
+      "js": [
+        "contentSH.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "assets/*",
+    "inject.js",
+    "injectLI.js"
+  ],
+  "permissions": [
+    "storage",
+    "cookies",
+    "https://github.com/*",
+    "https://*.facebook.com/*",
+    "https://twitter.com/*",
+    "https://*.linkedin.com/*",
+    "https://www.signalhire.com/"
+  ],
+  "optional_permissions": [
+    "notifications"
+  ]
+}

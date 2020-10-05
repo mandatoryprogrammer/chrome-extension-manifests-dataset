@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Critica",
+  "short_name": "Critica",
+  "version": "0.5.3.2",
+  "manifest_version": 2,
+  "icons": {
+    "16": "img/icon_16.png",
+    "48": "img/icon_48.png",
+    "128": "img/icon_128.png"
+  },
+  "homepage_url": "http://critica.io/",
+  "incognito": "spanning",
+  "minimum_chrome_version": "25.0",
+  "description": "Transform any website into a canvas for public discussion and debate",
+  "browser_action": {
+    "name": "Launch Critica",
+    "default_icon": {
+      "19": "img/icon.png"
+    }
+  },
+  "background": {
+    "page": "html/background.html",
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "https://auth.critica.io/*",
+        "https://accounts.google.com/*"
+      ],
+      "js": [
+        "js/lib/require-2.1.11.min.js",
+        "js/lib/context.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "html/error/*",
+    "auth/*",
+    "css/*",
+    "js/lib/*",
+    "http://s3-us-west-2.amazonaws.com/app.critica.io/*",
+    "https://s3-us-west-2.amazonaws.com/app.critica.io/*"
+  ],
+  "permissions": [
+    "activeTab",
+    "notifications",
+    "tabs",
+    "storage",
+    "webRequest",
+    "http://s3-us-west-2.amazonaws.com/app.critica.io/*",
+    "https://s3-us-west-2.amazonaws.com/app.critica.io/*",
+    "*://*/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "http://s3-us-west-2.amazonaws.com/app.critica.io/*",
+      "https://s3-us-west-2.amazonaws.com/app.critica.io/*"
+    ]
+  }
+}

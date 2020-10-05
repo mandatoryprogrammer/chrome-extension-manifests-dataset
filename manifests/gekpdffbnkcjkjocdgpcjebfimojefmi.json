@@ -1,0 +1,71 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_extName__",
+  "short_name": "__MSG_appName__",
+  "version": "1.0.1",
+  "description": "__MSG_extDesc__",
+  "default_locale": "en",
+  "author": "NZT Solution",
+  "homepage_url": "https://nzt-solution.com",
+  "icons": {
+    "16": "icons/nzt-gmail.png",
+    "32": "icons/nzt-gmail.png",
+    "48": "icons/nzt-gmail.png",
+    "96": "icons/nzt-gmail.png",
+    "128": "icons/nzt-gmail.png"
+  },
+  "background": {
+    "scripts": [
+      "./vendor/jquery/jquery.min.js",
+      "./vendor/moment-with-locales.min.js",
+      "./vendor/xml2json.min.js",
+      "./js/nzt-action.js",
+      "./js/nzt-storage.js",
+      "./js/nzt-logger.js",
+      "./js/nzt-data.js",
+      "./js/nzt-sound.js",
+      "./js/nzt-service.js",
+      "./js/nzt-permission.js",
+      "./js/nzt-event.js",
+      "./js/nzt-background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "js/nzt-embed.js"
+      ],
+      "matches": [
+        "https://mail.google.com/mail/mu/mp/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "browser_action": {
+    "name": "Gmail Notify",
+    "icons": {
+      "128": "icons/nzt-128-old.png"
+    },
+    "default_icon": "icons/nzt-128-old.png"
+  },
+  "optional_permissions": [
+    "background",
+    "*://*/*"
+  ],
+  "permissions": [
+    "https://mail.google.com/**/*",
+    "https://*.googleusercontent.com/**/*",
+    "notifications",
+    "tabs",
+    "webRequest",
+    "tts",
+    "storage"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' ; object-src 'self';",
+  "web_accessible_resources": [
+    "sound/*.json"
+  ]
+}

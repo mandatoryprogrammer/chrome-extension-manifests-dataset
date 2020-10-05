@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_maniName__",
+  "description": "__MSG_maniDescription__",
+  "version": "1.1.12",
+  "default_locale": "en",
+  "icons": {
+    "128": "icons/icon128.png",
+    "16": "icons/icon128.png",
+    "48": "icons/icon128.png"
+  },
+  "browser_action": {
+    "name": "Encoding",
+    "icons": [
+      "icons/icon128.png"
+    ],
+    "default_popup": "menu/popup.html",
+    "default_icon": "icons/icon128.png"
+  },
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "storage",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end",
+      "all_frames": true,
+      "js": [
+        "js/contents.js",
+        "decoder/smallendian.js",
+        "decoder/bigendian.js",
+        "decoder/converter.js"
+      ]
+    }
+  ]
+}

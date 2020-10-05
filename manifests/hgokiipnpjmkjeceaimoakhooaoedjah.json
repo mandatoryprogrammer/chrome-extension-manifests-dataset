@@ -1,0 +1,137 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Sendoso",
+  "description": "The Official Sendoso Chrome Extension. We source, store, ship, and track ROI for anything you ever need to send.",
+  "version": "2.9.15",
+  "minimum_chrome_version": "64.0.3282",
+  "icons": {
+    "128": "img/icon.png"
+  },
+  "browser_action": {
+    "default_icon": "img/icon.png"
+  },
+  "background": {
+    "scripts": [
+      "shared/sendoso-config.js",
+      "js/bugsnag.min.js",
+      "utilities/jquery-3.4.1.min.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs",
+    "unlimitedStorage",
+    "https://app.sendoso.com/*",
+    "https://*.linkedin.com/*",
+    "https://*.salesforce.com/*",
+    "https://*.salesloft.com/*",
+    "https://*.hubspot.com/contacts/*/contact/*/",
+    "https://*.lightning.force.com/*",
+    "https://*.visual.force.com/*",
+    "https://*.outreach.io/*",
+    "https://*.amazon.ca/*",
+    "https://*.amazon.co.uk/*",
+    "https://*.amazon.com/*"
+  ],
+  "web_accessible_resources": [
+    "utilities/*",
+    "linkedin/*",
+    "salesforce/*",
+    "salesloft/*",
+    "hubspot/*",
+    "outreach/*",
+    "salesforceLighteningReady/*",
+    "amazon/*",
+    "img/*",
+    "js/*",
+    "css/*",
+    "lib/*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.amazon.com/*",
+        "https://*.amazon.ca/*",
+        "https://*.amazon.co.uk/*"
+      ],
+      "css": [
+        "css/amazon.css"
+      ],
+      "js": [
+        "shared/sendoso-config.js",
+        "utilities/jquery-3.4.1.min.js",
+        "shared/sendoso-widget.js",
+        "shared/sendoso-iframe.js",
+        "amazon/sendoso-amazon-widget.js",
+        "amazon/amazon-iframe.js",
+        "amazon/amazon-script.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.lightning.force.com/*"
+      ],
+      "css": [
+        "css/style.css"
+      ],
+      "js": [
+        "shared/sendoso-config.js",
+        "utilities/jquery-3.4.1.min.js",
+        "shared/salesforce-shared.js",
+        "lib/salesforce/salesforce-handler-service.js",
+        "salesforce/sendoso-component-manager.js",
+        "salesforce/sendoso-component.js",
+        "salesforce/sendoso-classic-component.js",
+        "salesforce/sendoso-lightening-component.js",
+        "shared/sendoso-sidebar-container.js",
+        "salesforceLighteningReady/salesforce-script.js",
+        "salesforceLighteningReady/salesforce-handler.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.salesforce.com/*",
+        "https://*.visual.force.com/*"
+      ],
+      "exclude_matches": [
+        "https://login.salesforce.com/*"
+      ],
+      "css": [
+        "css/style.css"
+      ],
+      "js": [
+        "shared/sendoso-config.js",
+        "utilities/jquery-3.4.1.min.js",
+        "shared/salesforce-shared.js",
+        "lib/salesforce/salesforce-handler-service.js",
+        "salesforce/sendoso-component-manager.js",
+        "salesforce/sendoso-component.js",
+        "salesforce/sendoso-classic-component.js",
+        "salesforce/sendoso-lightening-component.js",
+        "salesforce/salesforce-script.js",
+        "salesforce/salesforce-handler.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.hubspot.com/*"
+      ],
+      "css": [
+        "css/style.css"
+      ],
+      "js": [
+        "shared/sendoso-config.js"
+      ]
+    }
+  ],
+  "incognito": "split"
+}

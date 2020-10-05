@@ -1,0 +1,69 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Walcu TRUEPrice",
+  "description": "Encuentra el precio real en diferentes páginas de compra de coches",
+  "author": "Walcu",
+  "homepage_url": "https://walcu.com",
+  "short_name": "TRUEPrice",
+  "version": "3.6.21",
+  "browser_action": {
+    "default_icon": "images/TP_Color_38.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.coches.net/*",
+        "https://www.coches.net/*",
+        "*://*.autocasion.com/*",
+        "*://*.vibbo.com/*",
+        "*://*.wallapop.com/*",
+        "*://*.autoscout24.es/*",
+        "*://*.motor.es/*",
+        "*://*.coches.com/*",
+        "*://*.motorflash.com/*",
+        "*://*.auto10.com/*",
+        "*://*.km77.com/*"
+      ],
+      "js": [
+        "content_global.js",
+        "content_pricedetector.js"
+      ],
+      "css": [
+        "global.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "http://www.coches.net/*",
+        "https://www.coches.net/*"
+      ],
+      "js": [
+        "content_cochesnet.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs",
+    "alarms"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "web_accessible_resources": [
+    "images/*"
+  ],
+  "icons": {
+    "48": "/images/TP_Color_48.png",
+    "128": "/images/TP_Color_128.png"
+  }
+}

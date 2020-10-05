@@ -1,0 +1,78 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Truth Chalk",
+  "version": "0.0.7",
+  "manifest_version": 2,
+  "description": "Inline annotation for the web. Simply select the text you agree or disagree, vote on it.",
+  "browser_action": {
+    "default_icon": "img/T-400_white.png",
+    "default_popup": "popup/login.html"
+  },
+  "icons": {
+    "128": "img/T-400.png",
+    "48": "img/T-400.png",
+    "16": "img/T-400.png"
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "tabs",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://twitter.com/*",
+        "*://disqus.com/*",
+        "*://www.engadget.com/*",
+        "*://www.usmessageboard.com/*",
+        "*://news.yahoo.com/*",
+        "*://www.huffingtonpost.com/*",
+        "*://www.nytimes.com/*",
+        "*://www.foxnews.com/*",
+        "*://www.nbcnews.com/*",
+        "*://www.dailymail.co.uk/*",
+        "*://www.vbulletin.com/*",
+        "*://www.cnn.com/*"
+      ],
+      "css": [
+        "css/tc-font.css",
+        "css/highlight.css",
+        "js/popline/themes/default.css",
+        "js/toastr/toastr.css"
+      ],
+      "js": [
+        "js/lib/parse.js",
+        "js/lib/jquery.min.js",
+        "js/toastr/toastr.js",
+        "js/rangy/rangy-core.js",
+        "js/rangy/rangy-cssclassapplier.js",
+        "js/rangy/rangy-selectionsaverestore.js",
+        "js/rangy/rangy-serializer.js",
+        "js/rangy/rangy-textrange.js",
+        "js/processor/processor.js",
+        "js/processor/modules/processor.twitter.js",
+        "js/processor/modules/processor.disqus.js",
+        "js/processor/modules/processor.engadget.js",
+        "js/processor/modules/processor.usmessageboard.js",
+        "js/processor/modules/processor.vbulletin.js",
+        "js/processor/modules/processor.newswebsite.js",
+        "js/popline/jquery.popline.js",
+        "js/popline/plugins/jquery.popline.opinion.js",
+        "js/popline/plugins/jquery.popline.annotation.js",
+        "js/main.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "fonts/*",
+    "img/cancel.svg",
+    "js/lib/jquery.min.map"
+  ]
+}

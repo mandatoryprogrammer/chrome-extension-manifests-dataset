@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "version": "0.0.10",
+  "manifest_version": 2,
+  "description": "__MSG_appDescription__",
+  "icons": {
+    "16": "images/icon-16.png",
+    "128": "images/icon-128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "page_action": {
+    "default_icon": {
+      "19": "images/icon-19.png",
+      "38": "images/icon-38.png"
+    },
+    "default_title": "Extra Charts for MyFitnessPal",
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "bower_components/d3/d3.js",
+        "bower_components/c3/c3.js",
+        "bower_components/jquery/dist/jquery.js",
+        "scripts/DatePartsHelperFactory.js",
+        "scripts/MyFitnessPalService.js",
+        "scripts/ExponentiallySmoothedMovingAverageChart.js",
+        "scripts/MyFitnessPalDataScrubber.js",
+        "scripts/contentscript.js"
+      ],
+      "css": [
+        "bower_components/c3/c3.css",
+        "styles/main.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "permissions": [
+    "webRequest",
+    "http://*.myfitnesspal.com/"
+  ]
+}

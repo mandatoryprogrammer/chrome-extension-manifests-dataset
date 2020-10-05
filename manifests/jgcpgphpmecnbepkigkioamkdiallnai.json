@@ -1,0 +1,64 @@
+{
+  "name": "115网盘离线下载",
+  "version": "1.5.31",
+  "manifest_version": 2,
+  "description": "针对115网盘会员用户,提供磁力快速离线功能",
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "homepage_url": "http://115.aacc.in",
+  "icons": {
+    "16": "assets/img/icons/icon16.png",
+    "48": "assets/img/icons/icon48.png",
+    "128": "assets/img/icons/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "assets/js/vendor/jquery-3.2.1.min.js",
+      "dist/background.entry.js"
+    ],
+    "persistent": true
+  },
+  "optional_permissions": [
+    "tabs",
+    "<all_urls>"
+  ],
+  "options_page": "option/index.html",
+  "browser_action": {
+    "default_icon": "assets/img/icons/icon48.png",
+    "default_title": "115网盘离线下载"
+  },
+  "permissions": [
+    "cookies",
+    "storage",
+    "notifications",
+    "contextMenus",
+    "*://115.com/*",
+    "*://*.115.com/*",
+    "*://qnapi.hichinese.top/*",
+    "*://api.aamm.top/*"
+  ],
+  "web_accessible_resources": [
+    "dist/inject_115.entry.js",
+    "assets/img/icons/icon128.png"
+  ],
+  "content_scripts": [
+    {
+      "js": [
+        "dist/inject_export_start.entry.js"
+      ],
+      "matches": [
+        "*://*.115.com/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "css": [
+        "assets/css/export_style.css"
+      ],
+      "all_frames": true,
+      "matches": [
+        "*://*.115.com/*"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

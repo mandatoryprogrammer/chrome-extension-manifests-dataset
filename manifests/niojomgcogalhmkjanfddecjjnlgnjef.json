@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "WikiLink",
+  "description": "This extension is for wikilink.co.il users, it will enable the users to view their data from the chrome directly.",
+  "version": "1.0.166",
+  "browser_action": {
+    "default_icon": "favicon.png",
+    "default_popup": "wikilink_ext.html"
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://*.wikilink.co.il/*",
+      "http://localhost:8080/*"
+    ]
+  },
+  "background": {
+    "scripts": [
+      "tmp_all_index.js"
+    ]
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.wikilink.co.il/*",
+        "http://localhost:8080/*"
+      ],
+      "js": [
+        "wikilink_content.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "cookies",
+    "storage",
+    "activeTab",
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "http://localhost:8080/*",
+    "http://www.wikilink.co.il/*",
+    "unlimitedStorage",
+    "contextMenus"
+  ],
+  "icons": {
+    "16": "favicon.png",
+    "48": "favicon.png",
+    "128": "favicon.png"
+  }
+}

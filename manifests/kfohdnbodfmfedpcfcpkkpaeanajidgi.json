@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "version": "1.0.0",
+  "name": "Hotel4box",
+  "short_name": "H4B",
+  "description": "Hotel4box extension for easily buying goods in popular online stores",
+  "author": "Onix-Systems",
+  "permissions": [
+    "storage",
+    "webNavigation",
+    "tabs",
+    "https://www.amazon.com/*",
+    "https://amazon.com/*",
+    "webNavigation",
+    "webRequestBlocking",
+    "unlimitedStorage",
+    "tabs",
+    "notifications"
+  ],
+  "icons": {
+    "16": "images/hotel4box_icon_16x16.png",
+    "48": "images/hotel4box_icon_48x48.png",
+    "128": "images/hotel4box_icon_128x128.png"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.amazon.com/*",
+        "https://amazon.com/*"
+      ],
+      "js": [
+        "content-script.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "browser_action": {
+    "default_icon": "images/hotel4box_icon_128x128.png",
+    "default_title": "Hotel4box",
+    "default_popup": "index.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  }
+}

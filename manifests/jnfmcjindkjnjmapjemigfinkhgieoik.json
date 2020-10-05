@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Bulldog Book",
+  "short_name": "BDBook",
+  "description": "See residential college information on the Facebook profile of Yale students.",
+  "version": "0.1.6",
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "lib.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.facebook.com/*",
+        "https://www.facebook.com/*"
+      ],
+      "run_at": "document_start",
+      "css": [
+        "injection/fb.css"
+      ],
+      "js": [
+        "lib.js",
+        "injection/jquery-2.1.4.min.js",
+        "injection/fb.js",
+        "nicknames.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://students.yale.edu/facebook/*"
+      ],
+      "run_at": "document_start",
+      "css": [
+        "injection/yalefb.css"
+      ],
+      "js": [
+        "lib.js",
+        "injection/jquery-2.1.4.min.js",
+        "injection/yalefb.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "storage",
+    "webNavigation"
+  ]
+}

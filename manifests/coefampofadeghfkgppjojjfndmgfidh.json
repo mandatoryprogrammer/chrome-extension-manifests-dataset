@@ -1,0 +1,84 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "short_name": "__MSG_appShortName__",
+  "description": "__MSG_appDescription__",
+  "version": "1.2.0",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "icons": {
+    "16": "images/App_Icon_28x128.png",
+    "128": "images/App_Icon_28x128.png"
+  },
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://www.google.com/calendar/*",
+        "https://www.google.com/contacts/*"
+      ],
+      "js": [
+        "scripts/lib/vendors/md5.js",
+        "scripts/lib/vendors/yepnope.min.js",
+        "scripts/vendor.js",
+        "scripts/contentscript.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "https://calendar.google.com/*"
+      ],
+      "js": [
+        "scripts/lib/vendors/md5.js",
+        "scripts/lib/vendors/yepnope.min.js",
+        "scripts/vendor.js",
+        "scripts/calendar.js"
+      ],
+      "css": [
+        "styles/calendar-page.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://sap-anywhere.appspot.com/login/success?*",
+        "https://sap-anywhere.appspot.com/install/success?*"
+      ],
+      "js": [
+        "scripts/lib/vendors/oauth_window.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "notifications",
+    "tabs",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking",
+    "http://*/*",
+    "https://*/*",
+    "management"
+  ],
+  "content_security_policy": "script-src https://*.google.com https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js 'self' 'unsafe-eval'; object-src 'self'",
+  "web_accessible_resources": [
+    "fonts/*",
+    "styles/main.css",
+    "styles/sap-icons.css",
+    "styles/wizy.materialize.css",
+    "scripts/gmail.js",
+    "scripts/lib/vendors/gmail.js",
+    "scripts/calendar-page.js",
+    "images/sap-anywhere-logo.jpg",
+    "images/sap-anywhere-logo-white.png",
+    "images/sap-bg.jpg",
+    "images/google_contact.png",
+    "images/google_calendar.png",
+    "images/default-customer.png"
+  ]
+}

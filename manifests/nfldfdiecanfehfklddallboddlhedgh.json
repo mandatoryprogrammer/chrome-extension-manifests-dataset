@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "TabList Manager",
+  "version": "4.5",
+  "description": "TabList Manager",
+  "icons": {
+    "16": "icon16.png",
+    "32": "icon32.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "options_page": "options.html",
+  "browser_action": {
+    "default_icon": "icon19.png",
+    "default_title": "TabList Manager",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "run_at": "document_start",
+      "js": [
+        "contentscript.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+Z"
+      },
+      "description": "Send tab command"
+    },
+    "myCommand_sidewindow": {
+      "suggested_key": {
+        "default": "Alt+Shift+Z"
+      },
+      "description": "Send tabs command"
+    }
+  },
+  "web_accessible_resources": [
+    "menu.png",
+    "stack.html",
+    "popup.html",
+    "iframe.html"
+  ],
+  "content_security_policy": "script-src 'self'; connect-src *; img-src *; frame-src *; object-src 'self'",
+  "permissions": [
+    "chrome://favicon/*",
+    "tabs",
+    "<all_urls>"
+  ]
+}

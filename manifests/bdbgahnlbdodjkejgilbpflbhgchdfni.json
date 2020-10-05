@@ -1,0 +1,113 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_name__",
+  "short_name": "__MSG_shortName__",
+  "description": "__MSG_description__",
+  "author": "SS Protect Ltd",
+  "version": "1.37.0.0",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "browser_action": {
+    "default_title": "__MSG_browserAction_defaultTitle__",
+    "default_popup": "assets/html/popup.html",
+    "default_icon": {
+      "16": "/assets/img/_brand/icon16.png",
+      "20": "/assets/img/_brand/icon20.png",
+      "48": "/assets/img/_brand/icon48.png",
+      "80": "/assets/img/_brand/icon80.png",
+      "128": "/assets/img/_brand/icon128.png"
+    },
+    "browser_style": false
+  },
+  "icons": {
+    "16": "/assets/img/_brand/icon16.png",
+    "20": "/assets/img/_brand/icon20.png",
+    "48": "/assets/img/_brand/icon48.png",
+    "80": "/assets/img/_brand/icon80.png",
+    "128": "/assets/img/_brand/icon128.png"
+  },
+  "web_accessible_resources": [
+    "/assets/img/**/*.png",
+    "/assets/img/**/*.jpg"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "permissions": [
+    "cookies",
+    "contentSettings",
+    "storage",
+    "browsingData",
+    "notifications",
+    "activeTab",
+    "webRequest",
+    "webRequestBlocking",
+    "webNavigation",
+    "downloads",
+    "downloads.open",
+    "history",
+    "*://*.totalav.local.protected.net/*",
+    "*://*.totalav.qa.protected.net/*",
+    "*://*.totalav.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "assets/js/shared/jquery.min.js",
+        "assets/js/content_scripts/extension-api-normalizer.js",
+        "assets/js/content_scripts/stop_google_generating_tracking_links.js",
+        "assets/js/content_scripts/password-vault-field-checker.js",
+        "assets/js/extContentApp.min.js"
+      ],
+      "css": [
+        "/assets/css/injectable/global/secure-search.min.css",
+        "/assets/css/injectable/_brand/secure-search.min.css"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "all_frames": true,
+      "js": [
+        "assets/js/shared/jquery.min.js",
+        "assets/js/content_scripts/extension-api-normalizer.js",
+        "assets/js/content_scripts/adguard-content.js"
+      ],
+      "match_about_blank": true,
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://my.totalav.com/*",
+        "*://my.scanguard.com/*",
+        "*://my.pcprotect.com/*",
+        "*://my.totalav.qa.protected.net/*",
+        "*://my.scanguard.qa.protected.net/*",
+        "*://my.pcprotect.qa.protected.net/*",
+        "*://my.totalav.local.protected.net/*",
+        "*://my.scanguard.local.protected.net/*",
+        "*://my.pcprotect.local.protected.net/*"
+      ],
+      "js": [
+        "assets/js/content_scripts/my-adblock-toggle.js",
+        "assets/js/content_scripts/my-webshield-newtab.js"
+      ]
+    }
+  ],
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "assets/js/shared/jquery.min.js",
+      "assets/js/shared/extension-api-normalizer.js",
+      "assets/js/background_scripts/message-broker.js",
+      "assets/js/background_scripts/combined-background.js",
+      "assets/js/background_scripts/intercept-and-redirect.js",
+      "assets/js/background_scripts/adguard/adguard-api.js",
+      "assets/js/extBackgroundApp.min.js",
+      "assets/js/enableQuietModeOnStartup.min.js"
+    ]
+  },
+  "incognito": "split"
+}

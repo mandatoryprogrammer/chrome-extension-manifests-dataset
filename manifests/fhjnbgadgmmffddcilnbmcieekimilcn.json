@@ -1,0 +1,98 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_extensionName__",
+  "description": "__MSG_extensionDescription__",
+  "homepage_url": "https://westbyte.com/ida/chrome/",
+  "version": "3.16.0",
+  "default_locale": "en",
+  "icons": {
+    "16": "ui/assets/icons/download-master-16.png",
+    "48": "ui/assets/icons/download-master-48.png",
+    "128": "ui/assets/icons/download-master-128.png"
+  },
+  "minimum_chrome_version": "35",
+  "permissions": [
+    "alarms",
+    "nativeMessaging",
+    "notifications",
+    "downloads",
+    "downloads.shelf",
+    "downloads.open",
+    "cookies",
+    "storage",
+    "contextMenus",
+    "tabs",
+    "activeTab",
+    "webRequest",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "src/content-script/autostart.js"
+      ],
+      "css": [
+        "src/content-script/dm-inject.css"
+      ]
+    },
+    {
+      "matches": [
+        "ftp://*/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "src/content-script/autostart.js"
+      ],
+      "css": [
+        "src/content-script/dm-inject.css"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "src/lib/chrome-promise.js",
+      "src/config.js",
+      "src/extension-controller.js",
+      "src/background.js",
+      "src/download-master-plugin.js",
+      "src/handle-video.js",
+      "src/context-menu.js",
+      "src/updater.js",
+      "src/downloads.js",
+      "src/commands.js"
+    ]
+  },
+  "options_ui": {
+    "page": "ui/options.html",
+    "open_in_tab": false,
+    "chrome_style": true
+  },
+  "browser_action": {
+    "default_title": "__MSG_extensionName__",
+    "default_popup": "/ui/popup.html",
+    "default_icon": {
+      "19": "ui/assets/icons/browser-action/dm-19-enabled.png",
+      "38": "ui/assets/icons/browser-action/dm-38-enabled.png"
+    }
+  },
+  "commands": {
+    "toggleStatePassToDownloadMaster": {
+      "description": "Pass downloads to Internet Download Accelerator",
+      "global": false,
+      "suggested_key": {
+        "default": "Ctrl+Shift+1"
+      }
+    }
+  },
+  "content_security_policy": "script-src 'self'; object-src 'self';",
+  "web_accessible_resources": [
+    "ui/assets/img/*.png"
+  ],
+  "manifest_version": 2
+}

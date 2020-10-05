@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "GoThru Constellation",
+  "version": "0.1.2",
+  "manifest_version": 2,
+  "description": "GoThru Constellation",
+  "homepage_url": "https://gothru.co",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "page": "src/bg/background.html",
+    "persistent": true
+  },
+  "page_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "page action demo",
+    "default_popup": "src/page_action/page_action.html"
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "contenscript.js"
+      ],
+      "matches": [
+        "https://www.google.com/streetview/businesses/publish/pano_moderator?cid=*",
+        "https://www.google.com/maps/views/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "oauth2": {
+    "client_id": "684094326396-lc20s820v59pf4oqbfmqe16jgqotmsti.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/plus.me"
+    ]
+  },
+  "web_accessible_resources": [
+    "contentscript_script.js"
+  ],
+  "permissions": [
+    "identity",
+    "webRequest",
+    "webRequestBlocking",
+    "tabs",
+    "activeTab",
+    "https://ws.gothru.ca/*",
+    "https://www.google.com/streetview/businesses/publish/pano_moderator?cid=*",
+    "https://www.google.com/maps/views/*"
+  ]
+}

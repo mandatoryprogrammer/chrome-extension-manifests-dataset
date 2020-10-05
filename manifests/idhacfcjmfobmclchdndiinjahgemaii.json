@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Скачать Яндекс.Музыку",
+  "version": "1.1",
+  "manifest_version": 2,
+  "description": "Скачивайте любые треки с Яндекс.Музыки в хорошем качестве. Просто и удобно!",
+  "minimum_chrome_version": "20",
+  "background": {
+    "scripts": [
+      "js/core.js",
+      "js/background.js"
+    ]
+  },
+  "icons": {
+    "16": "icons/icon_16.png",
+    "48": "icons/icon_48.png",
+    "128": "icons/icon_128.png"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "js/hash.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "js/core.js",
+        "js/md5.js",
+        "js/pages.js"
+      ],
+      "matches": [
+        "*://*.yandex.ru/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "css/style/button_download_background.svg"
+  ],
+  "permissions": [
+    "cookies",
+    "storage",
+    "downloads",
+    "*://*.yandex.ru/*"
+  ]
+}

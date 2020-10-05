@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "AviTice DMS",
+  "description": "AviTice DMS - Gestion de parc informatique",
+  "version": "1.4",
+  "default_locale": "fr",
+  "icons": {
+    "16": "images/agent16.png",
+    "48": "images/agent48.png",
+    "128": "images/agent128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "images/agent16.png",
+      "24": "images/agent24.png",
+      "32": "images/agent32.png"
+    }
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "background": {
+    "scripts": [
+      "js/lib/config.js",
+      "js/lib/require.js",
+      "js/lib/jquery-1.11.1.min.js",
+      "js/modules/main.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/modules/content/clientMessaging.js",
+        "js/modules/content/keyHandlers.js",
+        "js/modules/content/clipData.js",
+        "js/modules/content/safeguard.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "identity",
+    "identity.email",
+    "enterprise.deviceAttributes",
+    "storage",
+    "<all_urls>",
+    "system.cpu",
+    "system.memory",
+    "system.storage"
+  ],
+  "storage": {
+    "managed_schema": "chrome.storage.managed.schema.json"
+  },
+  "oauth2": {
+    "client_id": "1090158105936-2hejbuj11hk39on6vfpqretau6ud55va.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email"
+    ]
+  }
+}

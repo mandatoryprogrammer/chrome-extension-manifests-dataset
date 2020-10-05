@@ -1,0 +1,89 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Viraltag",
+  "version": "1.4.33",
+  "manifest_version": 2,
+  "description": "Viraltag allows users to easily share their images on multiple social networks.",
+  "homepage_url": "https://www.viraltag.com",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "permissions": [
+    "storage",
+    "contextMenus",
+    "notifications",
+    "tabs"
+  ],
+  "browser_action": {
+    "default_icon": "icon48.png",
+    "default_title": "Viraltag"
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "web_accessible_resources": [
+    "img/viraltag-logo-white.png",
+    "img/fa-check-circle.png",
+    "img/gif-load.gif",
+    "img/v-logo.png",
+    "img/v-ugc.png",
+    "bower_components/fontawesome/fonts/*.*",
+    "styles/css/viraltag.css",
+    "templates/image-model-template.html",
+    "templates/parent-template.html",
+    "templates/pinterest-pin-template.html",
+    "templates/dailymotion-template.html",
+    "templates/vimeo-template.html",
+    "templates/vimeo-template-2.html",
+    "templates/vimeo-template-3.html",
+    "templates/youtube-template.html"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "http://app.viraltag.com/*",
+        "https://app.viraltag.com/*",
+        "http://localhost:8000/*",
+        "http://viraltag-wix.elasticbeanstalk.com/*",
+        "http://viraltag-test.elasticbeanstalk.com/*",
+        "http://viraltag-env.elasticbeanstalk.com/*"
+      ],
+      "js": [
+        "bower_components/jquery/dist/jquery.js",
+        "bower_components/underscore/underscore.js",
+        "bower_components/backbone/backbone.js",
+        "bower_components/le_js/product/le.js",
+        "bower_components/backbone.localStorage/backbone.localStorage.js",
+        "bower_components/imagesloaded/imagesloaded.pkgd.js",
+        "bower_components/wookmark/wookmark.js",
+        "js/setup.js",
+        "js/models/image-model.js",
+        "js/collections/images-collection.js",
+        "js/views/image-model-view.js",
+        "js/views/pinterest-pin-view.js",
+        "js/views/parent-view.js",
+        "js/views/dailymotion-view.js",
+        "js/views/vimeo-view.js",
+        "js/views/youtube-view.js",
+        "js/views/instagram-ugc-view.js",
+        "js/views/nymag/gallery-view.js",
+        "js/utils/async-css.js",
+        "js/content.js"
+      ],
+      "css": [
+        "bower_components/fontawesome/css/font-awesome.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "IMDb Game",
+  "description": "Challenge your knowledge of movies",
+  "version": "1.3.3",
+  "permissions": [
+    "declarativeContent",
+    "tabs",
+    "storage",
+    "alarms",
+    "https://www.imdb.com/*",
+    "http://www.imdb.com/*",
+    "https://imdb-game-api.herokuapp.com/*"
+  ],
+  "browser_action": {
+    "default_title": "IMDB Game",
+    "default_icon": {
+      "16": "resources/images/icon16.png",
+      "48": "resources/images/icon48.png",
+      "128": "resources/images/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "resources/images/icon16.png",
+    "48": "resources/images/icon48.png",
+    "128": "resources/images/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js",
+      "imdb-ga.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.imdb.com/*",
+        "http://www.imdb.com/*"
+      ],
+      "js": [
+        "node_modules/angular/angular.min.js",
+        "node_modules/lodash/lodash.min.js",
+        "node_modules/angular-clipboard/angular-clipboard.js",
+        "bootstrap.js",
+        "app.js",
+        "templates.js"
+      ],
+      "css": [
+        "resources/styles/game.css",
+        "node_modules/angular/angular-csp.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "*"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "manifest_version": 2
+}

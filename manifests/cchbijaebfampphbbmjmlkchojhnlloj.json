@@ -1,0 +1,33 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Newsworthy New Tab",
+  "version": "0.3",
+  "description": "Newsworthy Tab, a minimalistic new tab page with weather, top news headlines, and to-do list.",
+  "icons": {
+    "16": "images/favicon-16.png",
+    "48": "images/favicon-48.png",
+    "128": "images/favicon-128.png"
+  },
+  "permissions": [
+    "management",
+    "https://query.yahooapis.com/*"
+  ],
+  "content_security_policy": "script-src 'self' https://query.yahooapis.com/v1/public/yql?format=json&rnd=20172513&diagnostics=true&callback=jQuery311035002536172006415_1490993510325&q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text=%2294720%22)%20and%20u=%22f%22&_=1490993510326; object-src 'self'",
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "jquery-3.1.1.min.js",
+        "build/min/main.min.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ]
+    }
+  ],
+  "offline_enabled": true
+}

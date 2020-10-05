@@ -1,0 +1,94 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Trackerbot Semi-auto",
+  "short_name": "Trackerbot",
+  "version": "0.0.2.1",
+  "manifest_version": 2,
+  "description": "Upload your trackings to eBay without any API required!",
+  "icons": {
+    "16": "images/icon16.png",
+    "32": "images/icon32.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "https://k2b-bulk.ebay.com/*",
+    "https://k2b-bulk.ebay.co.uk/*",
+    "https://www.ebay.com/ship/tr/update",
+    "https://www.ebay.co.uk/ship/tr/update",
+    "https://www.ebay.com/sh/ord/*",
+    "https://www.ebay.co.uk/sh/ord/*",
+    "https://payments.ebay.com/ws/*",
+    "https://payments.ebay.co.uk/ws/*",
+    "https://app.trackerbot.me/*",
+    "https://tracker-bot-odd-jobs-queue.herokuapp.com/*"
+  ],
+  "browser_action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "TrackerBot"
+  },
+  "background": {
+    "scripts": [
+      "/light-bootstrap-dashboard-pro/assets/js/core/jquery.3.2.1.min.js",
+      "background/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://k2b-bulk.ebay.com/*",
+        "https://k2b-bulk.ebay.co.uk/*"
+      ],
+      "js": [
+        "/light-bootstrap-dashboard-pro/assets/js/core/jquery.3.2.1.min.js",
+        "/content/selectPhaseSharedFunctions.js",
+        "/content/selectPhase.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.ebay.com/sh/ord/*",
+        "https://www.ebay.co.uk/sh/ord/*"
+      ],
+      "js": [
+        "/light-bootstrap-dashboard-pro/assets/js/core/jquery.3.2.1.min.js",
+        "/content/selectPhaseSharedFunctions.js",
+        "/content/selectPhaseNoStore.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.ebay.com/ship/tr/update",
+        "https://www.ebay.co.uk/ship/tr/update"
+      ],
+      "js": [
+        "/light-bootstrap-dashboard-pro/assets/js/core/jquery.3.2.1.min.js",
+        "/content/uploadPhaseSharedFunctions.js",
+        "/content/uploadPhase.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://payments.ebay.com/ws/*",
+        "https://payments.ebay.co.uk/ws/*"
+      ],
+      "js": [
+        "/light-bootstrap-dashboard-pro/assets/js/core/jquery.3.2.1.min.js",
+        "/content/uploadPhaseSharedFunctions.js",
+        "/content/uploadPhaseNoStore.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://app.trackerbot.me/welcome/chrome"
+      ],
+      "js": [
+        "/light-bootstrap-dashboard-pro/assets/js/core/jquery.3.2.1.min.js",
+        "content/onboard.js"
+      ]
+    }
+  ]
+}

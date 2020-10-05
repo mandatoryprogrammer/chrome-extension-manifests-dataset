@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "GrowFlare",
+  "short_name": "GrowFlare",
+  "version": "1.0.14",
+  "description": "Easily find B2B companies most likely to buy from you. In one simple click.",
+  "author": "",
+  "icons": {
+    "128": "/img/logo.png"
+  },
+  "browser_action": {
+    "default_icon": "/img/logo.png",
+    "default_popup": "/pages/popup/index.html"
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "/lib/jquery.min.js",
+        "/lib/webx.js",
+        "/js/content_script/content_script_controller.js",
+        "/js/content_script/injected_compoment_module.js",
+        "/js/content_script/main.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "/lib/jquery.min.js",
+      "/lib/webx.js",
+      "/js/background/api_manager.js",
+      "/js/background/tab_storage_manager.js",
+      "/js/background/background_controller.js",
+      "/js/background/background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "unlimitedStorage",
+    "cookies",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "web_accessible_resources": [
+    "/*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.google-analytics.com; object-src 'self'"
+}

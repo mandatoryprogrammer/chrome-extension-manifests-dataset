@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Hashtagify",
+  "description": "Get hashtag stats, wherever you are!",
+  "version": "0.2.0",
+  "browser_action": {
+    "default_icon": "assets/images/icon.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "assets/images/icon-16.png",
+    "48": "assets/images/icon-48.png",
+    "128": "assets/images/icon-128.png"
+  },
+  "permissions": [
+    "storage",
+    "webNavigation",
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://twitter.com/*",
+        "https://hashtagify.me/*",
+        "https://hootsuite.com/*"
+      ],
+      "css": [
+        "assets/css/content.css"
+      ],
+      "js": [
+        "assets/js/jquery-1.8.3.min.js",
+        "assets/js/shared.js",
+        "assets/js/jquery.sparkline.js",
+        "assets/js/jquery.dataTables.min.js",
+        "assets/js/HashtagTrend.js",
+        "assets/js/vendor.js",
+        "assets/js/content.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "web_accessible_resources": [
+    "frame.html",
+    "frame-login.html"
+  ],
+  "background": {
+    "scripts": [
+      "assets/js/vendor.js",
+      "assets/js/background.js"
+    ],
+    "persistent": true
+  },
+  "options_ui": {
+    "chrome_style": true,
+    "page": "options.html"
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_ext_name__",
+  "version": "2.3.0",
+  "description": "__MSG_ext_desc__",
+  "author": "でゅん",
+  "homepage_url": "https://bitbucket.org/dhun-h/lazy-applicant-support",
+  "default_locale": "en",
+  "icons": {
+    "128": "images/icon-128.png"
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "*://*/*/projects/*/issues",
+        "*://*/*/projects/*/issues/new*",
+        "*://*/projects/*/issues",
+        "*://*/projects/*/issues/new*"
+      ],
+      "js": [
+        "lib/jquery-ui-1.11.0/external/jquery/jquery.js",
+        "lib/jquery-ui-1.11.0/jquery-ui.min.js",
+        "lib/jquery-balloon-0.5.1/jquery.balloon.min.js",
+        "js/env.js",
+        "js/common/define.js",
+        "js/common/functions.js",
+        "js/common/db-functions.js",
+        "js/common/ui-functions.js",
+        "js/common/ga-functions.js",
+        "js/content-scripts/func-for-form.js",
+        "js/content-scripts/func-for-tracker.js",
+        "js/content-scripts/func-for-description.js",
+        "js/content-scripts/func-for-assigner.js",
+        "js/content-scripts/func-for-applicant-days.js",
+        "js/content-scripts/func-for-watcher.js",
+        "js/content-scripts/func-for-date.js",
+        "js/content-scripts/pre-submit.js",
+        "js/content-scripts/post-load.js",
+        "js/content-scripts/main.js"
+      ],
+      "css": [
+        "lib/jquery-ui-1.11.0/jquery-ui.min.css",
+        "css/lazy-applicant.css"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "lib/jquery-ui-1.11.0/external/jquery/jquery.js",
+      "js/env.js",
+      "js/common/define.js",
+      "js/common/functions.js",
+      "js/common/db-functions.js",
+      "js/common/ga-functions.js",
+      "js/background/background.js"
+    ]
+  },
+  "options_ui": {
+    "page": "js/option-page/options.html",
+    "open_in_tab": true
+  },
+  "web_accessible_resources": [
+    "images/*",
+    "js/option-page/options.html"
+  ],
+  "permissions": [
+    "storage"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

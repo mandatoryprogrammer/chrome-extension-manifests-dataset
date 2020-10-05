@@ -1,0 +1,67 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Data Scraper - Easy Web Scraping",
+  "short_name": "Data Scraper",
+  "version": "3.299.84",
+  "description": "Data Scraper extracts data out of HTML web pages and imports it into Microsoft Excel spreadsheets",
+  "icons": {
+    "16": "img/mining16.png",
+    "48": "img/mining48.png",
+    "128": "img/mining128.png"
+  },
+  "background": {
+    "page": "client/bg/index_bg.html"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "img/mining19.png",
+      "38": "img/mining38.png"
+    },
+    "default_title": "Data Miner",
+    "default_popup": "client/dist/index.html#/popup"
+  },
+  "permissions": [
+    "tabs",
+    "contextMenus",
+    "clipboardWrite",
+    "http://*/*",
+    "https://*/*",
+    "storage",
+    "unlimitedStorage",
+    "webRequestBlocking",
+    "webRequest"
+  ],
+  "optional_permissions": [
+    "downloads",
+    "pageCapture",
+    "file://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file://*/*"
+      ],
+      "run_at": "document_start",
+      "css": [
+        "client/dist2/css/content_xpath.css"
+      ],
+      "js": [
+        "js/dm_content.js",
+        "client/dist2/js/vendor.js",
+        "client/dist2/js/dm_content_script.js"
+      ]
+    }
+  ],
+  "options_ui": {
+    "page": "admin/index.html",
+    "chrome_style": false,
+    "open_in_tab": true
+  },
+  "web_accessible_resources": [
+    "client/dist/index.html"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://data-miner.io https://ssl.google-analytics.com https://www.google-analytics.com https://dj3xmmjxrdmmc.cloudfront.net; object-src 'self'"
+}

@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Tweet Sig",
+  "version": "0.6",
+  "description": "Post data in '#tweet-sig-in' or selection and put the posted url into '#tweet-sig-out' or clipboard.",
+  "icons": {
+    "48": "icons/tweet_sig_48.png"
+  },
+  "permissions": [
+    "identity",
+    "tabs",
+    "contextMenus",
+    "clipboardWrite",
+    "storage"
+  ],
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "options_ui": {
+    "page": "options.html"
+  },
+  "page_action": {
+    "browser_style": false,
+    "default_icon": "icons/tweet_sig_32.png",
+    "default_title": "Tweet Sig"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "https://twitter.com/intent/tweet*",
+        "http://jrf.cocolog-nifty.com/archive/tweet_sig/fb_page_poster.html"
+      ],
+      "js": [
+        "check_form.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://twitter.com/intent/tweet/complete?*"
+      ],
+      "js": [
+        "clipboard.js",
+        "check_comp.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://jrf.cocolog-nifty.com/archive/tweet_sig/fb_page_poster.html"
+      ],
+      "js": [
+        "clipboard.js",
+        "check_fbpp.js"
+      ]
+    }
+  ]
+}

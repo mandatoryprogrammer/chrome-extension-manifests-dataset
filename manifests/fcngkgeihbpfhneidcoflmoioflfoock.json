@@ -1,0 +1,43 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Google Automatic Lyric Extender",
+  "version": "0.0.3",
+  "manifest_version": 2,
+  "description": "Automatically extends lyrics to display all of them when googling.",
+  "homepage_url": "http://extensionizr.com",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": true
+  },
+  "page_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "Auto lyric extender",
+    "default_popup": "src/page_action/page_action.html"
+  },
+  "permissions": [
+    "contentSettings",
+    "https://www.google.ca/*",
+    "https://www.google.com/*",
+    "https://www.google.com.au/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.google.ca/*",
+        "https://www.google.com/*",
+        "https://www.google.com.au/*"
+      ],
+      "js": [
+        "src/inject/inject.js"
+      ]
+    }
+  ]
+}

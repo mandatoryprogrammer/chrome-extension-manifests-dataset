@@ -1,0 +1,74 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'unsafe-eval'",
+  "name": "FShares Wallet",
+  "description": "FSC Identity Signature and Authorization System",
+  "version": "1.1.9",
+  "icons": {
+    "16": "img/icon-16.png",
+    "128": "img/icon-128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "img/icon-19.png",
+      "38": "img/icon-38.png"
+    },
+    "default_title": "FShares Wallet",
+    "default_popup": "index.html"
+  },
+  "permissions": [
+    "background",
+    "contextMenus",
+    "idle",
+    "storage",
+    "unlimitedStorage",
+    "tabs",
+    "activeTab",
+    "alarms",
+    "https://*.fshares.com/*",
+    "*://*.valicn.com/*",
+    "*://*.fshares.io/*",
+    "*://fsharesdexweb.fshares.now.sh/*",
+    "*://*.fsdex.io/*",
+    "*://localhost/*"
+  ],
+  "externally_connectable": {
+    "ids": [
+      "*"
+    ],
+    "matches": [
+      "*://fsharesdexweb.fshares.now.sh/*",
+      "*://*.valicn.com/*",
+      "*://*.fshares.io/*",
+      "*://*.fsdex.io/*",
+      "*://localhost/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://fsharesdexweb.fshares.now.sh/*",
+        "*://*.valicn.com/*",
+        "*://*.fshares.io/*",
+        "*://*.fsdex.io/*",
+        "*://localhost/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "inject.js",
+    "img/icon-16.png"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "devtools_page": "devtools.html"
+}

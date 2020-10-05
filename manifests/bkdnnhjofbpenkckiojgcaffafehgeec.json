@@ -1,0 +1,181 @@
+{
+  "manifest_version": 2,
+  "name": "Read and Note Clipper",
+  "version": "4.2",
+  "minimum_chrome_version": "34",
+  "default_locale": "en",
+  "description": "The best way to clip text, images, articles, screenshots, documents, bookmarks from websites and sync with Read and Note",
+  "icons": {
+    "16": "images/icon32.png",
+    "32": "images/icon32.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "homepage_url": "https://readandnote.com",
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon32.png",
+      "38": "images/icon48.png"
+    },
+    "default_title": "Read and Note Clipper"
+  },
+  "commands": {
+    "clip-area": {
+      "description": "Clip",
+      "suggested_key": {
+        "default": "Ctrl+Shift+C",
+        "mac": "Command+Shift+C"
+      }
+    }
+  },
+  "content_scripts": [
+    {
+      "css": [
+        "ranicons/css/animation.css",
+        "ranicons/css/ran-icons.css",
+        "styles/ran.css"
+      ],
+      "js": [
+        "scripts/actions.js",
+        "libraries/jquery-3.4.1.min.js",
+        "libraries/jquery-migrate-3.0.1.min.js",
+        "libraries/md5.min.js",
+        "scripts/clipper.js",
+        "scripts/cropper.js",
+        "scripts/content.js",
+        "scripts/extractions.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "js": [
+        "readability/JSDOMParser.js",
+        "readability/Readability.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "*://*.readandnote.com/*"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "js": [
+        "rangy-1.3.0/rangy-core.js",
+        "rangy-1.3.0/rangy-classapplier.js",
+        "rangy-1.3.0/rangy-highlighter.js",
+        "rangy-1.3.0/rangy-selectionsaverestore.js",
+        "rangy-1.3.0/rangy-serializer.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "*://*.readandnote.com/*"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "js": [
+        "scripts/highlight.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "*://*.readandnote.com/*"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "js": [
+        "scripts/nr_drawing.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "scripts/readandnote.js"
+      ],
+      "matches": [
+        "*://*.readandnote.com/",
+        "*://*.readnote.com/",
+        "*://*.readandnote.com/*",
+        "*://*.readnote.com/*"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'sha256-58+Pd1IqzOVG1mwwZHiFDIixrn/hThWnTPfMNS8j4dE=' https://app.readandnote.com https://working.readandnote.com https://www.youtube.com/iframe_api https://ssl.google-analytics.com; object-src 'self'",
+  "externally_connectable": {
+    "matches": [
+      "https://working.readandnote.com/",
+      "https://app.readandnote.com/",
+      "https://meet.readandnote.com/",
+      "*://meet.readandnote.com/*",
+      "*://*.readandnote.com/*"
+    ]
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjR6BY9JCFqWNjFctE979uZZAUDDyna5S07FIRu5nSsFQS3AY5u/KUjJBwO5NUGAl+Y5WAgKUajc5przMP1QIsjcLYxmJyP0ehsaer7fnSd7DDwb4hciptWaxyB/o+DIyZ/h1UwjHu6e0mfvhezRXLXr+NYFcCqfk9hVlkxjip/YrotKyuR52dQJC08RQd8PbuVE/b29rJwEYb5MbE26eQYWAie2iZ5eAkNHHecSCGAxtR2wiwDu76mETp6yXQP6R1QyKm2ZJTegqaB0WF8rzPWnFM0ri7lPYsPoV8pq6Rmlne16z/3dFaLuL6C8GsGwspt4l71AZCDXxerOk2GtxSwIDAQAB",
+  "options_page": "options.html",
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "permissions": [
+    "activeTab",
+    "cookies",
+    "http://*/*",
+    "https://*/*",
+    "<all_urls>",
+    "tabs",
+    "contextMenus",
+    "storage",
+    "tabCapture",
+    "unlimitedStorage",
+    "webRequest",
+    "desktopCapture"
+  ],
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "web_accessible_resources": [
+    "images/*",
+    "styles/*",
+    "ranicons/css/*",
+    "ranicons/font/*",
+    "scripts/actions.js",
+    "scripts/background.js",
+    "scripts/clipper.js",
+    "scripts/cropper.js",
+    "scripts/jquery-2.2.0.min.js",
+    "libraries/md5.min.js",
+    "scripts/login.js",
+    "scripts/options.js",
+    "scripts/popup.js",
+    "scripts/tools.js",
+    "scripts/nr_drawing.js",
+    "scripts/readandnote.js",
+    "tools.html",
+    "annotation.html",
+    "share.html",
+    "cleanArticle.html",
+    "scripts/cleanArticle.js",
+    "rangy-1.3.0/rangy-core.js",
+    "rangy-1.3.0/rangy-classapplier.js",
+    "rangy-1.3.0/rangy-highlighter.js",
+    "rangy-1.3.0/rangy-selectionsaverestore.js",
+    "rangy-1.3.0/rangy-serializer.js",
+    "rangy-1.3.0/rangy-textrange.js",
+    "screenshot.wav"
+  ]
+}

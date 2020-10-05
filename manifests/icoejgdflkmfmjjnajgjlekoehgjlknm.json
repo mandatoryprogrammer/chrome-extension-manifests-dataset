@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_name__",
+  "short_name": "YouCare",
+  "description": "__MSG_description__",
+  "version": "3.0.10",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "icons": {
+    "16": "static/icons/16.png",
+    "24": "static/icons/24.png",
+    "32": "static/icons/32.png",
+    "48": "static/icons/48.png",
+    "128": "static/icons/128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "static/icons/16.png",
+      "24": "static/icons/24.png",
+      "32": "static/icons/32.png",
+      "48": "static/icons/48.png",
+      "128": "static/icons/128.png"
+    },
+    "default_title": "__MSG_browserActionDefaultTitle__"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "chrome_settings_overrides": {
+    "search_provider": {
+      "encoding": "UTF-8",
+      "favicon_url": "https://youcare.world/static/images/favicon/favicon.ico",
+      "is_default": true,
+      "keyword": "youcare",
+      "name": "YouCare",
+      "search_url": "https://youcare.world/all?abds&q={searchTerms}",
+      "suggest_url": "https://youcare.world/api/v2/search/suggestions?q={searchTerms}&m=__MSG_market__"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://youcare.world/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "homepage_url": "https://youcare.world",
+  "chrome_url_overrides": {
+    "newtab": "newtab/index.html"
+  },
+  "optional_permissions": [
+    "topSites"
+  ]
+}

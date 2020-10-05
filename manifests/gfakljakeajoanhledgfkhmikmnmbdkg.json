@@ -1,0 +1,42 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Lazy Loading",
+  "version": "1.1",
+  "manifest_version": 2,
+  "description": "Add lazy loading to the tabs restore built in functionality of Chrome.",
+  "icons": {
+    "16": "/images/icon16.png",
+    "32": "/images/icon32.png",
+    "48": "/images/icon48.png",
+    "128": "/images/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "/images/icon128.png"
+    },
+    "default_title": "Close"
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "https://lazy-loading-chrome.googlecode.com/git/server/blank.html*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://lazy-loading-chrome.googlecode.com/git/server/blank.html*"
+      ],
+      "js": [
+        "inject_blank.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

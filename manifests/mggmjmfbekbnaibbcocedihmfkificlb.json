@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "AuthAnvil SSO Assistant",
+  "version": "4.0.1",
+  "description": "Assists AuthAnvil to automatically log into websites without having to remember passwords or type in anything.",
+  "permissions": [
+    "tabs",
+    "webNavigation",
+    "storage",
+    "cookies",
+    "http://*/",
+    "https://*/"
+  ],
+  "options_page": "options.html",
+  "web_accessible_resources": [
+    "authcomplete.html"
+  ],
+  "page_action": {
+    "default_icon": "icon48.png",
+    "default_title": "AuthAnvil SSO Assistant - Runner",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "jquery-2.0.3.min.js",
+        "contentscript.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "jquery-2.0.3.min.js",
+      "background.js"
+    ]
+  },
+  "externally_connectable": {
+    "matches": [
+      "https://localhost:44300/trust/*",
+      "https://*.my.authanvil.com/*",
+      "https://*.dev.orangemesa.com/*",
+      "https://*.my.authanvil.eu/*",
+      "https://*.staging.orangemesa.com/*"
+    ]
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}

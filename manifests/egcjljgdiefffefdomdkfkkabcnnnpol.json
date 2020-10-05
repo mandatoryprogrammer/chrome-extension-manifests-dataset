@@ -1,0 +1,40 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Curia",
+  "version": "0.0.6",
+  "description": "Curia",
+  "icons": {
+    "32": "./images/on.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "32": "./images/on.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "webNavigation",
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "./dist/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "./dist/content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

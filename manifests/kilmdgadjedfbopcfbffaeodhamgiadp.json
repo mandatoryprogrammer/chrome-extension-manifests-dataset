@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "FactoidL (beta)",
+  "description": "Checks the accuracy of webpage content based on other web sources.",
+  "version": "2.0",
+  "icons": {
+    "16": "factoidL_icon16.png",
+    "48": "factoidL_icon48.png",
+    "128": "factoidL_icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "compromise.min.js",
+      "jquery-1.11.3.min.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "jquery-1.11.3.min.js",
+        "content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html",
+    "default_title": "FactoidL"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "https://ajax.googleapis.com/",
+    "https://*/",
+    "*://*/*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

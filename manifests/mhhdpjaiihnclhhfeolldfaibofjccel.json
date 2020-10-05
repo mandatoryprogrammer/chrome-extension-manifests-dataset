@@ -1,0 +1,68 @@
+{
+  "update_url": "http://clients2.google.com/service/update2/crx",
+  "name": "神凑单计算器",
+  "version": "1.0.8",
+  "manifest_version": 2,
+  "description": "双11,双12,618等电商的活动，根据活动内容自动计算到手价，并提供合适的凑单方式。",
+  "icons": {
+    "16": "16.png",
+    "128": "128.png"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "homepage_url": "https://www.taobao.com/",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.taobao.com/*",
+        "*://*.tmall.com/item.htm*",
+        "*://*.tmall.hk/hk/item.htm*",
+        "*://*.yao.95095.com/item.htm*",
+        "*://*.liangxinyao.com/item.htm*"
+      ],
+      "js": [
+        "/js/jquery-1.10.1.js",
+        "/js/util.js",
+        "/js/tbCalc.js"
+      ],
+      "css": [
+        "/css/goodcc.css"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://www.good.cc/alicalc.aspx*"
+      ],
+      "js": [
+        "/js/jquery-1.10.1.js",
+        "/js/util.js",
+        "/js/alicalc.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "contextMenus",
+    "notifications",
+    "tabs",
+    "cookies",
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "clipboardWrite",
+    "clipboardRead",
+    "management",
+    "*://*.good.cc/",
+    "storage",
+    "*://*.taobao.com/",
+    "*://*.tmall.com/",
+    "*://*.tmall.hk/",
+    "*://*.95095.com/",
+    "*://*.liangxinyao.com/"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

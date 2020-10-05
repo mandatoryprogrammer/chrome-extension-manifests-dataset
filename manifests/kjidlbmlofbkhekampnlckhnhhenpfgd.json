@@ -1,0 +1,135 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Soapbox: Meeting Agendas and Notes",
+  "version": "1.7.3",
+  "description": "Have effective meetings with collaborative agendas, meeting notes, next steps, feedback and more with the Soapbox Chrome extension.",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "tabs",
+    "https://*.soapboxhq.com/*",
+    "https://*.soapboxdev.com/*",
+    "https://*.soapboxdev.com:4200/*",
+    "https://calendar.google.com/*"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "SoapBox",
+    "default_popup": "popup/popup.html"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "help@soapboxhq.com",
+      "strict_min_version": "48.0"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.soapboxhq.com/*",
+        "https://*.soapboxdev.com/*",
+        "https://*.soapboxdev.com:4200/*"
+      ],
+      "exclude_matches": [
+        "https://app.soapboxhq.com/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "update-token.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://soapboxhq.com/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "marketing-website.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://calendar.google.com/*"
+      ],
+      "js": [
+        "embeds/components/confetti/confetti.js",
+        "embeds/google_calendar/inject_connect.js",
+        "embeds/google_calendar/inject_nextsteps.js",
+        "embeds/google_calendar/inject_styledevents.js",
+        "embeds/google_calendar/inject_sidebar.js",
+        "embeds/google_calendar/inject_meetingratings.js",
+        "embeds/google_calendar/inject.js"
+      ],
+      "css": [
+        "embeds/google_calendar/inject.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://meet.google.com/*"
+      ],
+      "css": [
+        "embeds/google_meet/inject.css"
+      ],
+      "js": [
+        "embeds/google_meet/inject.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://twitter.com/*",
+        "https://linkedin.com/feed/",
+        "https://*.linkedin.com/feed/"
+      ],
+      "css": [
+        "embeds/components/gsd/inject.css"
+      ],
+      "js": [
+        "embeds/components/gsd/inject.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://app.asana.com/*"
+      ],
+      "js": [
+        "embeds/asana/inject.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://todoist.com/app*"
+      ],
+      "js": [
+        "embeds/todoist/inject.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "panel.html",
+    "icons/icon128.png",
+    "icons/icon48.png",
+    "icons/icon19.png",
+    "icons/icon16.png",
+    "embeds/components/meeting_rating/panel.html",
+    "embeds/components/create_meeting/panel.html",
+    "embeds/components/nextsteps/panel.html",
+    "embeds/components/gsd/panel.html",
+    "embeds/google_calendar/panel.html",
+    "embeds/google_meet/panel.html",
+    "embeds/asana/panel.html",
+    "embeds/todoist/panel.html"
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "manifest_version": 2
+}

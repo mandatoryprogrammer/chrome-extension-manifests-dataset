@@ -1,0 +1,88 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "author": "Cala Prezzi",
+  "name": "__MSG_appName__",
+  "default_locale": "it",
+  "short_name": "__MSG_appShortName__",
+  "description": "__MSG_appDesc__",
+  "version": "0.99.80",
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "icona24.png",
+      "24": "icona24.png"
+    },
+    "default_title": "__MSG_iconTooltip__"
+  },
+  "icons": {
+    "16": "icona16.png",
+    "48": "icona48.png",
+    "128": "icona128.png"
+  },
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "css": [
+        "css/amazon.css"
+      ],
+      "matches": [
+        "*://*.amazon.it/*",
+        "*://*.amazon.es/*",
+        "*://*.amazon.fr/*",
+        "*://*.amazon.de/*",
+        "*://*.amazon.co.uk/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": false,
+      "run_at": "document_end",
+      "matches": [
+        "*://*.amazon.it/*",
+        "*://*.amazon.es/*",
+        "*://*.amazon.fr/*",
+        "*://*.amazon.de/*",
+        "*://*.amazon.co.uk/*",
+        "*://*.calaprezzi.it/*",
+        "*://*.google.com/*"
+      ],
+      "js": [
+        "js/jquery-3.2.1.min.js",
+        "js/lodash.min.js",
+        "js/core.js",
+        "TopBar.js",
+        "content.js",
+        "amazon.js"
+      ],
+      "css": [
+        "css/topBar.css",
+        "css/animate.css",
+        "css/content.css"
+      ]
+    }
+  ],
+  "permissions": [
+    "gcm",
+    "storage",
+    "<all_urls>",
+    "*://*.calaprezzi.it/*",
+    "webNavigation",
+    "notifications",
+    "nativeMessaging",
+    "contextMenus",
+    "tabs"
+  ],
+  "web_accessible_resources": [
+    "*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.calaprezzi.it/*"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://*.gstatic.com https://cdn.firebase.com https://*.firebaseio.com; object-src 'self'"
+}

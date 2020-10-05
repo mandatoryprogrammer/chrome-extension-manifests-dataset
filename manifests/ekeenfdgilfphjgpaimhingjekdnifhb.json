@@ -1,0 +1,41 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Clickbait Killer",
+  "version": "0.4",
+  "manifest_version": 2,
+  "description": "Attempts to remove clickbait 'listicles' (from the likes of Taboola, Revcontent etc) from any web page you visit.",
+  "icons": {
+    "48": "48.png",
+    "128": "128.png"
+  },
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "permissions": [
+    "*://www.google.co.za/*",
+    "*://www.google-analytics.com/*",
+    "*://www.google.com/*",
+    "*://mail.google.com/*"
+  ],
+  "browser_action": {
+    "default_title": "",
+    "default_icon": "48.png",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "http://www.google.com/*"
+      ],
+      "css": [
+        "clickbaitkiller.css"
+      ],
+      "js": [
+        "clickbaitkiller.js",
+        "jquery.min.js"
+      ]
+    }
+  ]
+}

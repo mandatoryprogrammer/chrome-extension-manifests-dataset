@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Gist-prettify",
+  "version": "0.9.2",
+  "manifest_version": 2,
+  "description": "Prettify your gist on popular gist website such as gist.github.com and app.gistboxapp.com.",
+  "minimum_chrome_version": "14",
+  "offline_enabled": true,
+  "icons": {
+    "16": "images/gist-beautify-16.png",
+    "48": "images/gist-beautify-48.png",
+    "128": "images/gist-beautify-128.png",
+    "256": "images/gist-beautify-256.png"
+  },
+  "web_accessible_resources": [
+    "images/gist-beautify-48.png",
+    "styles/main.css"
+  ],
+  "permissions": [
+    "tabs",
+    "notifications"
+  ],
+  "background": {
+    "scripts": [
+      "scripts/lib/beautify.js",
+      "scripts/lib/beautify-css.js",
+      "scripts/lib/beautify-html.js",
+      "scripts/chromereload.js",
+      "scripts/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "images/gist-beautify-19.png",
+    "default_title": "Copy-Prettify-Paste"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://app.gistboxapp.com/*",
+        "https://gist.github.com/*/edit"
+      ],
+      "all_frames": true,
+      "css": [
+        "styles/main.css"
+      ],
+      "js": [
+        "scripts/content_script.js"
+      ]
+    }
+  ]
+}

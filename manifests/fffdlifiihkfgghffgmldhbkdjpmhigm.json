@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Datahug for Gmail",
+  "description": "Datahug for Gmail - quickly identify slipping deals and improve close rates directly from Gmail.",
+  "version": "0.6.3",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "cookies",
+    "storage",
+    "https://*.salesforce.com/*",
+    "https://mail.google.com/*",
+    "https://www.google-analytics.com/"
+  ],
+  "options_ui": {
+    "page": "options/options.html",
+    "chrome_style": true
+  },
+  "background": {
+    "scripts": [
+      "app/mash/background.js"
+    ],
+    "persistent": false
+  },
+  "icons": {
+    "16": "app/img/icon_16.png",
+    "128": "app/img/icon_128.png"
+  },
+  "manifest_version": 2,
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "http://mail.google.com/*"
+      ],
+      "js": [
+        "app/mash/injector.js",
+        "app/mash/scripts.js"
+      ],
+      "css": [
+        "app/styles/style.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "app/img/logo.png",
+    "app/img/logo-small.png",
+    "app/index.html",
+    "app/detail/*.html",
+    "app/list/*.html",
+    "app/login/*.html",
+    "app/list/**/*.html",
+    "app/mash/injected.js",
+    "app/styles/fonts/glyphicons-halflings-regular.eot",
+    "app/styles/fonts/glyphicons-halflings-regular.svg",
+    "app/styles/fonts/glyphicons-halflings-regular.ttf",
+    "app/styles/fonts/glyphicons-halflings-regular.woff"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self' "
+}

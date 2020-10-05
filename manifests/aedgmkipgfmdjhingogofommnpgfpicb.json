@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Useless Websites",
+  "version": "1.3.2",
+  "manifest_version": 2,
+  "description": "Visit useless websites!",
+  "browser_action": {
+    "default_icon": "icon/default.png",
+    "default_title": "Useless Websites"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "tabs",
+    "activeTab"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://extension.tom.st/uselesswebsites/request.php"
+      ],
+      "js": [
+        "contentScript.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://extension.tom.st/uselesswebsites/InstallChromeExtension/*"
+      ],
+      "js": [
+        "jquery.js",
+        "contentScriptInstall.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}

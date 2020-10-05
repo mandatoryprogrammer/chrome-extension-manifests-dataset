@@ -1,0 +1,76 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "e-pity - dodatek",
+  "author": "e-file sp. z o.o. sp. k.",
+  "version": "2.1.2",
+  "manifest_version": 2,
+  "description": "Dodatek umożliwia zapisywanie danych Programu e-pity w pamięci dodatku oraz wyszukiwanie formularzy e-pity w Google",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "js/apiChrome.js",
+      "js/api.js",
+      "js/dbutil.js",
+      "js/background.js",
+      "js/bgChrome.js",
+      "lib/mutationobserver.min.js",
+      "js/twojepitBackground.js"
+    ]
+  },
+  "minimum_chrome_version": "26.0.0.0",
+  "permissions": [
+    "notifications",
+    "storage",
+    "unlimitedStorage",
+    "tabs",
+    "https://secure.fillup.pl/*",
+    "https://secure.e-pity.pl/*",
+    "https://e-pity.pl/*",
+    "https://www.e-pity.pl/*",
+    "https://www.google.pl/*",
+    "https://www.google.com/*"
+  ],
+  "browser_action": {
+    "default_icon": "icons/actions/1.png",
+    "default_title": "e-pity - dodatek",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.google.pl/*",
+        "https://www.google.com/*"
+      ],
+      "js": [
+        "js/apiChrome.js",
+        "js/api.js",
+        "js/dbutil.js",
+        "js/google.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://secure.fillup.pl/*",
+        "https://secure.e-pity.pl/*",
+        "https://e-pity.pl/*",
+        "https://www.e-pity.pl/*"
+      ],
+      "js": [
+        "js/apiChrome.js",
+        "js/api.js",
+        "js/dbutil.js",
+        "js/extension.js",
+        "js/twojepit.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ]
+}

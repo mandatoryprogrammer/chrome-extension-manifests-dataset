@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "background": {
+    "scripts": [
+      "jquery-3.2.1.min.js",
+      "background.js"
+    ]
+  },
+  "manifest_version": 2,
+  "name": "jobRely Talent Sourcer",
+  "short_name": "jobRely ts",
+  "version": "1.0.24",
+  "icons": {
+    "48": "images/j_48.png",
+    "128": "images/j_128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "images/j_16.png",
+      "32": "images/j_32.png",
+      "48": "images/j_48.png",
+      "64": "images/j_64.png",
+      "128": "images/j_128.png"
+    },
+    "default_title": "jobRely Talent Sourcer",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.linkedin.com/*"
+      ],
+      "css": [
+        "content/content.css"
+      ],
+      "js": [
+        "jquery-3.2.1.min.js",
+        "content/content.js",
+        "content/contentMessageManager.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://www.linkedin.com/*"
+      ],
+      "js": [
+        "content/profileScraper.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "description": "Save potential candidate profiles to your projects with a single click",
+  "web_accessible_resources": [
+    "lib/requestInterceptor.js"
+  ],
+  "permissions": [
+    "webRequest",
+    "tabs",
+    "contextMenus",
+    "notifications",
+    "storage",
+    "*://*.linkedin.com/*",
+    "*://linkedin.com/*"
+  ]
+}

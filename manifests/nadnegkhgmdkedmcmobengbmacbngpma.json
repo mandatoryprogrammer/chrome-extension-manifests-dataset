@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "short_name": "notification-muter",
+  "name": "Notification Muter",
+  "version": "0.0.3.18",
+  "manifest_version": 2,
+  "description": "This extension will mute notifications",
+  "homepage_url": "http://github.com/mikfreedman/notification-muter",
+  "icons": {
+    "16": "icons/bell.png",
+    "48": "icons/bell.png",
+    "128": "icons/bell.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "src/notificationMuter.js",
+      "src/popupMuter.js",
+      "src/alertMuter.js",
+      "src/clickListener.js",
+      "src/iconListener.js",
+      "src/reinjectListener.js",
+      "src/background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": "icons/bell.png",
+    "default_title": "mute/unmute notifications"
+  },
+  "permissions": [
+    "https://calendar.google.com/*",
+    "http://calendar.google.com/*",
+    "contentSettings",
+    "storage"
+  ],
+  "web_accessible_resources": [
+    "icons/no-bell.png"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://calendar.google.com/*",
+        "http://calendar.google.com/*"
+      ],
+      "js": [
+        "src/inject/inject.js"
+      ]
+    }
+  ]
+}

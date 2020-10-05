@@ -1,0 +1,81 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Anyshortcut",
+  "description": "__MSG_extension_description__",
+  "version": "1.10.0",
+  "default_locale": "en",
+  "browser_action": {
+    "default_icon": {
+      "16": "icon/icon32.png",
+      "48": "icon/icon48.png"
+    },
+    "default_popup": "popup.html",
+    "default_title": "__MSG_popup_default_title__"
+  },
+  "icons": {
+    "16": "icon/icon32.png",
+    "48": "icon/icon48.png",
+    "128": "icon/icon128.png"
+  },
+  "options_ui": {
+    "page": "popup.html#/preference",
+    "chrome_style": false
+  },
+  "background": {
+    "scripts": [
+      "dist/background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "<all_urls>",
+    "file://*/*",
+    "ftp://*/*"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>",
+        "file://*/*",
+        "ftp://*/*"
+      ],
+      "match_about_blank": true,
+      "js": [
+        "dist/content_script.js"
+      ],
+      "css": [
+        "dist/css/content_script.css"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "dist/img/*",
+    "icon/*"
+  ],
+  "commands": {
+    "toggle_recent_tab": {
+      "suggested_key": {
+        "default": "Alt+Period"
+      },
+      "description": "Toggle Recent Tabs"
+    },
+    "jump_to_home": {
+      "suggested_key": {
+        "default": "Alt+Shift+Space"
+      },
+      "description": "Jump to home page of current url"
+    }
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://*.anyshortcut.com/*"
+    ]
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtsU34L7ro2a1etZPGPg4rRD5gVP4I7Px1mZuJqafP5Bqoh+wtVmOZgGNS3nlyGBfLCYphC3mmtYrZ8OvXLb+fRIe0sk/k/F+cIEZPmExin0epDN4jtA8ptT+FMDf6bFxRfwMrJCHMpjsfNWqhfrVEIBsOHQiDGQyy/05fYfwWl/XocFfEmKWayYiwdijSLa5io/dS71qp0VeDwudbQo9El9cf0CZdbTbYziVORXf7BQQNW56o/51Tg4X6kdNqs0Ck9c1rnZIqf92sNRmsfHKdhBFpWN1d3hD9rJ7ROriq69f3HjbOX3pAAJHJX7JqwapvGbk7A1loyAwbDgo8VQICwIDAQAB"
+}

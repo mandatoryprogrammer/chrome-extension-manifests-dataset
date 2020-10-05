@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Pontoon Add-on",
+  "description": "Tools for Pontoon and its integration into the browser.",
+  "version": "4.0.1",
+  "author": "Michal Stanke",
+  "icons": {
+    "32": "packages/commons/static/img/pontoon-logo-32.png",
+    "128": "packages/commons/static/img/pontoon-logo-128.png"
+  },
+  "permissions": [
+    "https://pontoon.mozilla.org/*",
+    "storage",
+    "contextMenus",
+    "tabs",
+    "notifications",
+    "alarms",
+    "<all_urls>"
+  ],
+  "optional_permissions": [
+    "<all_urls>"
+  ],
+  "options_ui": {
+    "page": "packages/options/index.html",
+    "open_in_tab": true
+  },
+  "browser_action": {
+    "default_title": "Pontoon notifications",
+    "default_icon": "packages/commons/static/img/pontoon-logo-32.png"
+  },
+  "background": {
+    "scripts": [
+      "packages/background/build/main.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://pontoon.mozilla.org/*"
+      ],
+      "js": [
+        "packages/content-scripts/build/notifications-bell-icon.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "packages/commons/static/img/pontoon-logo.svg",
+    "packages/commons/static/img/bugzilla-icon.png"
+  ]
+}

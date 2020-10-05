@@ -1,0 +1,344 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "minimum_chrome_version": "49.0.0.0",
+  "name": "Oberlo - Aliexpress.com Product Importer",
+  "description": "Import and sync products from AliExpress to your Shopify store",
+  "icons": {
+    "16": "assets/icons/16x16.png",
+    "48": "assets/icons/48x48.png",
+    "128": "assets/icons/128x128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "assets/icons/inactive-19x19.png",
+      "38": "assets/icons/inactive-38x38.png"
+    },
+    "default_title": "AliExpress.com Product Importer",
+    "default_popup": "popups/default.html"
+  },
+  "background": {
+    "scripts": [
+      "assets/js/common.bundle.js",
+      "assets/js/main.js",
+      "scripts/background.js"
+    ]
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://*.oberlo.com/*",
+      "*://*.myshopify.io/*",
+      "*://*.aliexpress.com/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.aliexpress.com/af/*",
+        "https://*.aliexpress.com/w/*",
+        "https://*.aliexpress.com/category/*",
+        "https://*.aliexpress.com/wholesale*",
+        "https://*.aliexpress.com/premium*"
+      ],
+      "js": [
+        "assets/js/common.bundle.js",
+        "assets/js/main.js",
+        "scripts/content/category.js"
+      ],
+      "css": [
+        "assets/css/main.css"
+      ],
+      "webfonts": [
+        "assets/webfonts/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://*.aliexpress.com/wow/gf/wholesale1029_fr"
+      ],
+      "js": [
+        "assets/js/common.bundle.js",
+        "assets/js/main.js",
+        "scripts/content/wholesale-fr-promo.js"
+      ],
+      "css": [
+        "assets/css/main.css"
+      ],
+      "webfonts": [
+        "assets/webfonts/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://sale.aliexpress.com/*"
+      ],
+      "js": [
+        "assets/js/common.bundle.js",
+        "assets/js/main.js",
+        "scripts/content/sales-category-page.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://sale.aliexpress.com/__pc/affi-item.htm*"
+      ],
+      "js": [
+        "assets/js/common.bundle.js",
+        "assets/js/main.js",
+        "scripts/content/sales-page.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://*.aliexpress.com/item/*",
+        "https://*.aliexpress.com/store/product/*"
+      ],
+      "js": [
+        "assets/js/common.bundle.js",
+        "assets/js/main.js",
+        "scripts/content/product.js"
+      ],
+      "css": [
+        "assets/css/main.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://*.aliexpress.com/item/*",
+        "https://*.aliexpress.com/store/product/*",
+        "https://*.aliexpress.com/af/*",
+        "https://*.aliexpress.com/w/*",
+        "https://*.aliexpress.com/category/*",
+        "https://*.aliexpress.com/wholesale*",
+        "https://*.aliexpress.com/premium*"
+      ],
+      "js": [
+        "scripts/content/document-domain-script-inject.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://*.aliexpress.com/404.html"
+      ],
+      "js": [
+        "assets/js/common.bundle.js",
+        "assets/js/main.js",
+        "scripts/content/404.js"
+      ],
+      "css": [
+        "assets/css/main.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://shoppingcart.aliexpress.com/order/*"
+      ],
+      "exclude_matches": [
+        "https://shoppingcart.aliexpress.com/order/payOnlineSuccess*",
+        "https://shoppingcart.aliexpress.com/order/pay-online-success*",
+        "https://shoppingcart.aliexpress.com/order/confirm_order.htm*",
+        "https://shoppingcart.aliexpress.com/order/payResult.htm*",
+        "https://shoppingcart.aliexpress.com/order/createOrderFailed.htm*"
+      ],
+      "css": [
+        "assets/css/main.css"
+      ],
+      "js": [
+        "assets/js/common.bundle.js",
+        "assets/js/main.js",
+        "scripts/content/checkout.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://shoppingcart.aliexpress.com/order/createOrderFailed.htm*"
+      ],
+      "css": [
+        "assets/css/main.css"
+      ],
+      "js": [
+        "assets/js/common.bundle.js",
+        "assets/js/main.js",
+        "scripts/content/create-order-failed.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://shoppingcart.aliexpress.com/shopcart/shopcartDetail.htm*"
+      ],
+      "js": [
+        "assets/js/common.bundle.js",
+        "assets/js/main.js",
+        "scripts/content/cart.js"
+      ],
+      "css": [
+        "assets/css/main.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://shoppingcart.aliexpress.com/orders.htm*",
+        "https://shoppingcart.aliexpress.com/order/confirm_order.htm*"
+      ],
+      "js": [
+        "assets/js/common.bundle.js",
+        "assets/js/main.js",
+        "scripts/content/new-checkout.js"
+      ],
+      "css": [
+        "assets/css/main.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://trade.aliexpress.com/order_detail.htm*",
+        "https://trade.aliexpress.com/orderDetail.htm*"
+      ],
+      "js": [
+        "assets/js/common.bundle.js",
+        "assets/js/main.js",
+        "scripts/content/order-detail.js"
+      ],
+      "css": [
+        "assets/css/main.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://trade.aliexpress.com/orderList.htm*",
+        "https://trade.aliexpress.com/order_list.htm*"
+      ],
+      "js": [
+        "assets/js/common.bundle.js",
+        "assets/js/main.js",
+        "scripts/content/order-list.js"
+      ],
+      "css": [
+        "assets/css/main.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://shoppingcart.aliexpress.com/order/payOnlineSuccess.htm*",
+        "https://shoppingcart.aliexpress.com/order/pay-online-success.htm*",
+        "https://shoppingcart.aliexpress.com/order/pay_online_success.htm*",
+        "https://shoppingcart.aliexpress.com/buynow/payOnlineSuccess.htm*",
+        "https://shoppingcart.aliexpress.com/buynow/pay-online-success.htm*",
+        "https://shoppingcart.aliexpress.com/buynow/pay_online_success.htm*",
+        "https://shoppingcart.aliexpress.com/order/payOnlineResult.htm*",
+        "https://shoppingcart.aliexpress.com/order/payResult.htm*",
+        "https://shoppingcart.aliexpress.com/order/pay-online-result.htm*",
+        "https://shoppingcart.aliexpress.com/order/pay_online_result.htm*"
+      ],
+      "js": [
+        "assets/js/common.bundle.js",
+        "assets/js/main.js",
+        "scripts/content/pay-online-success.js"
+      ],
+      "css": [
+        "assets/css/main.css"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://*.aliexpress.com/wishlist/wish_list_product_list.htm*"
+      ],
+      "js": [
+        "assets/js/common.bundle.js",
+        "assets/js/main.js",
+        "scripts/content/wishlist.js"
+      ],
+      "css": [
+        "assets/css/main.css"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://*.aliexpress.com/order/secondPayment.htm*"
+      ],
+      "js": [
+        "assets/js/common.bundle.js",
+        "assets/js/main.js",
+        "scripts/content/secondPayment.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://oberlo.myshopify.io/*",
+        "https://app.oberlo.com/*"
+      ],
+      "js": [
+        "assets/js/common.bundle.js",
+        "assets/js/main.js",
+        "scripts/content/oberlo-orders.js"
+      ],
+      "css": [
+        "assets/css/main.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "permissions": [
+    "https://*.aliexpress.com/*",
+    "*://*.oberlo.com/*",
+    "https://*.alibaba.com/*",
+    "webRequest",
+    "webRequestBlocking",
+    "tabs",
+    "notifications",
+    "storage",
+    "cookies",
+    "unlimitedStorage"
+  ],
+  "web_accessible_resources": [
+    "assets/images/logo.svg",
+    "assets/images/logo-tag.svg",
+    "assets/images/logo-full.png",
+    "assets/images/logo-small.png",
+    "assets/images/logo-xs.png",
+    "assets/images/icon-sync.png",
+    "assets/images/btn-floating.png",
+    "assets/images/icon-time.png",
+    "assets/images/icon-x.png",
+    "assets/images/icon-import-success.png",
+    "assets/images/icon-import-error.png",
+    "assets/images/icon-check.png",
+    "assets/images/icon-close.png",
+    "assets/images/icon-close.svg",
+    "assets/images/icon-close-circle.png",
+    "assets/images/icon-question.svg",
+    "assets/images/icon-loader.svg",
+    "scripts/run-params.js",
+    "scripts/override.js",
+    "scripts/injected.js",
+    "scripts/payment.js",
+    "pages/help.html",
+    "pages/status.html",
+    "pages/first-install.html"
+  ],
+  "options_ui": {
+    "page": "pages/help.html",
+    "chrome_style": false
+  },
+  "content_security_policy": "script-src 'self' https://cdn.shopifycloud.com/ https://www.youtube.com/ https://s.ytimg.com; object-src 'self'",
+  "homepage_url": "https://app.oberlo.com/",
+  "version": "3.27.5"
+}

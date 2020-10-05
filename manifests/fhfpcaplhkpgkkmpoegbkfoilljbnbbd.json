@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "First Mention",
+  "description": "See the first time a name was mentioned in the article you’re reading with a single click",
+  "author": "Dan Stillman",
+  "homepage_url": "https://danstillman.com/firstmention/",
+  "version": "1.0.7",
+  "icons": {
+    "32": "icons/icon_32.png",
+    "48": "icons/icon_48.png",
+    "96": "icons/icon_96.png",
+    "128": "icons/icon_128.png"
+  },
+  "background": {
+    "scripts": [
+      "xregexp.js",
+      "wordBlacklist.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "https://twitter.com/*"
+      ],
+      "css": [
+        "first_mention.css"
+      ],
+      "js": [
+        "tooltip.min.js",
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "permissions": [
+    "<all_urls>"
+  ]
+}

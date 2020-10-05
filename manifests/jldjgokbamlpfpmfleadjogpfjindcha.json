@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "淘宝手机无线详情页",
+  "description": "无线详情页制作一键生成",
+  "version": "2.2",
+  "permissions": [
+    "http://upload.taobao.com/",
+    "http://upload.tmall.com/",
+    "http://mai.taobao.com/seller_admin.htm",
+    "https://login.taobao.com/",
+    "http://i.taobao.com/",
+    "tabs",
+    "webNavigation"
+  ],
+  "browser_action": {
+    "default_icon": "icon.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://localhost/wapsdk3.0.4/*",
+        "http://localhost/wapsdk/*",
+        "http://192.168.2.223/*",
+        "http://wapsdk.da-mai.com/*",
+        "http://test.da-mai.com/*"
+      ],
+      "js": [
+        "contentscript.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://login.taobao.com/member/login.jhtml?redirectURL=http%3A%2F%2Fmai.taobao.com%2Fseller_admin.htm%3Fnick%3D*"
+      ],
+      "js": [
+        "taobaologin.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://mai.taobao.com/welcome.htm",
+        "http://mai.taobao.com/seller_admin.htm*"
+      ],
+      "js": [
+        "get_login_nick.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Content Holmes",
+  "description": "Now you can protect your child online easily!",
+  "version": "1.0.5",
+  "version_name": "1.5-alpha",
+  "icons": {
+    "48": "logo_48.png",
+    "128": "logo_128.png"
+  },
+  "background": {
+    "scripts": [
+      "libraries/jquery-2.1.4.min.js",
+      "libraries/socket.io.js",
+      "js/event.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": "./logo_xs.png",
+    "default_title": "Content Holmes",
+    "default_popup": "html/popup.html"
+  },
+  "web_accessible_resources": [
+    "html/safetypage.html"
+  ],
+  "options_page": "html/first.html",
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "libraries/jquery-2.1.4.min.js",
+        "js/URLBlock.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "js/URLInviz.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "libraries/jquery-2.1.4.min.js",
+        "js/URLBlocker.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "libraries/jquery-2.1.4.min.js",
+        "js/content_script.js",
+        "js/sentiment.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "storage",
+    "activeTab",
+    "management"
+  ]
+}

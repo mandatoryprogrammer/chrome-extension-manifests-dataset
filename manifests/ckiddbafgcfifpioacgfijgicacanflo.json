@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "description": "Get reviews and ratings on every website you visit: Avoid scams and shop and surf safely with the Sitejabber Chrome Extension.",
+  "manifest_version": 2,
+  "name": "Sitejabber: Ratings & Reviews on Every Site",
+  "author": "Michael Lai",
+  "version": "1.4.4",
+  "homepage_url": "https://www.sitejabber.com/extension-download",
+  "icons": {
+    "128": "icons/128x128-icon.png"
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "cookies",
+    "storage",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "scripts/core.js",
+      "scripts/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "icons/icon_gray.png",
+    "default_title": "Sitejabber",
+    "default_popup": "popup/popup.html"
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "scripts/core.js",
+        "scripts/content.js"
+      ],
+      "css": [
+        "popup/content.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "popup/chrome_icons_sp.png"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

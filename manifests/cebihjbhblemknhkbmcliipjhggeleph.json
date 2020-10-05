@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "TagMyCode",
+  "version": "0.4",
+  "description": "Official Chrome extension for TagMyCode, a platform where developers can save their code snippets.",
+  "icons": {
+    "48": "img/icon-48.png",
+    "128": "img/icon-128.png"
+  },
+  "options_page": "options.html",
+  "background": {
+    "scripts": [
+      "js/jquery.min.js",
+      "client.js",
+      "app.js",
+      "util.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "css": [],
+      "js": [
+        "selectText.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "chrome_ex_oauth.html",
+    "redirect.html"
+  ],
+  "browser_action": {
+    "default_title": "TagMyCode",
+    "default_icon": "img/icon-16-off.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "contextMenus",
+    "tabs",
+    "http://*.tagmycode.com/*",
+    "https://*.tagmycode.com/*",
+    "https://tagmycode.com/*"
+  ],
+  "content_security_policy": "script-src 'self' https://api.tagmycode.com https://tagmycode.com; object-src 'self'"
+}

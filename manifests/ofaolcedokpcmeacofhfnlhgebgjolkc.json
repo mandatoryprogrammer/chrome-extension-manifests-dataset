@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Zoho Mail Tracker",
+  "short_name": "ZMT",
+  "description": "This extensions helps you track the emails you send using Zoho Mail.",
+  "version": "3.0.1",
+  "icons": {
+    "16": "images/logo16.png",
+    "32": "images/logo32.png",
+    "48": "images/logo48.png",
+    "64": "images/logo64.png",
+    "128": "images/logo128.png"
+  },
+  "options_page": "options.html",
+  "homepage_url": "https://zohomailtracker.com",
+  "web_accessible_resources": [
+    "images/tracker_inserted.png",
+    "images/tracker_failed.png",
+    "images/logo64.png"
+  ],
+  "permissions": [
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "*://zohomailtracker.com/api/v3/img/*",
+    "*://zohomailtracker.com/*",
+    "<all_urls>",
+    "notifications"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/jquery-3.3.1.min.js",
+        "js/tracker.js"
+      ],
+      "css": [
+        "css/tracker.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/environment.js",
+      "js/helpers.js",
+      "js/pubnub.js",
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {}
+}

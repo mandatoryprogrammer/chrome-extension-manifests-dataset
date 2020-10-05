@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "SOQL Extractor and Analyzer for SalesForce",
+  "short_name": "Extract SOQL",
+  "version": "2.0.0.0",
+  "manifest_version": 2,
+  "description": "Extract SOQL queries with their execution counts from Debug Logs of Salesforce. Helps you analyze the 'Too Many SOQLs' error.",
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "https://*.salesforce.com/",
+    "https://*.force.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "https://*.salesforce.com/*",
+        "https://*.visual.force.com/*",
+        "https://*.lightning.force.com/*"
+      ],
+      "js": [
+        "jquery-1.4.2.min.js",
+        "content_script.js",
+        "CollapsibleLists.compressed.js"
+      ],
+      "css": [
+        "collapse.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "img/*.png",
+    "content_script.js",
+    "jquery-1.4.2.min.js",
+    "CollapsibleLists.compressed.js"
+  ],
+  "page_action": {
+    "default_icon": "sfglass19x19.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "sfglass16x16.png",
+    "48": "sfglass48x48.png",
+    "128": "sfglass128x128.png"
+  }
+}

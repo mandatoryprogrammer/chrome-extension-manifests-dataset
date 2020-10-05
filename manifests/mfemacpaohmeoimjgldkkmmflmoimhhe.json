@@ -1,0 +1,82 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "TripStitch",
+  "short_name": "tripstitch",
+  "version": "0.0.1.24",
+  "description": "Plan and share your trips with TripStitch!",
+  "homepage_url": "https://www.taggrr.io",
+  "permissions": [
+    "activeTab",
+    "cookies",
+    "*://www.taggrr.io/",
+    "*://app.tripstitch.io/",
+    "storage"
+  ],
+  "icons": {
+    "48": "icons/logo48.png",
+    "128": "icons/logo128.png"
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "24": "icons/logo24.png",
+      "32": "icons/logo32.png",
+      "48": "icons/logo48.png"
+    },
+    "default_title": "TripStitch",
+    "default_popup": "html/popup.html"
+  },
+  "commands": {
+    "parse-url-meta": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+9",
+        "mac": "Ctrl+Shift+9"
+      },
+      "description": "Parse page metadata"
+    },
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+0",
+        "mac": "Ctrl+Shift+0"
+      }
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://ccsearch.creativecommons.org/*",
+        "https://mail.google.com/*",
+        "https://outlook.live.com/*",
+        "https://www.pexels.com/*",
+        "https://www.taggrr.io/*",
+        "https://www.google.com/maps/place/*"
+      ],
+      "exclude_matches": [
+        "https://www.taggrr.io/oauth_callback*"
+      ],
+      "css": [
+        "css/jquery-ui.min.css",
+        "css/font-awesome.css",
+        "css/chrome.css",
+        "css/cpx-bootstrap.css"
+      ],
+      "js": [
+        "js/require.js",
+        "js/lib.js",
+        "js/content_script.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "html/chrome.html",
+    "js/injected.js"
+  ],
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://*.taggrr.io https://cdnjs.cloudflare.com https://cdn.plot.ly; object-src 'self'; font-src 'self' https://*.taggrr.io https://fonts.gstatic.com; connect-src https://*.taggrr.io https://*.googleapis.com",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvruksYApY8mwETPhcnxrtSOLtRVaogs4jYvewQsLWAcsjyDtXxXVWGj/EDCq8yatgmfwq3BlTfJqilnG/9WZfRXFqGQfF54RXH9cVPwuaiWx1rUPPFBSc31zINzv8g5yYkeO80XqKPiJPuNff79rF3LDcLUSrml9Ibd905ZIVt+iEnfEFAHTJNUEF0ykFXG2GaZN2RjwMcJNIYjBfk2KYRfbIpfW4oqCH5ofbSftI+MkPHH3fuaNjCqm9YVAqAGuz1GbmS68Y1CBCYKnB+9rsfCxQihKMDP/zkPJg2n5gwNJWr/gF3qV8Lm+c9Esnbl+GSacQTzbd2VhnZWxmA2Y6wIDAQAB"
+}

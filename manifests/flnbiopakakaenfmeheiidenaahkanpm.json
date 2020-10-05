@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "HP Mobile View",
+  "author": "HP Inc.",
+  "version": "1.0.41",
+  "manifest_version": 2,
+  "description": "This extension is to enhance your browsing experience on the second screen.",
+  "browser_action": {
+    "default_icon": {
+      "20": "Images/Blue_Desktop_20.png",
+      "40": "Images/Blue_Desktop_40.png"
+    },
+    "default_title": "HP Mobile View"
+  },
+  "icons": {
+    "48": "Images/Icon_48.png",
+    "128": "Images/Icon_128.png",
+    "176": "Images/Icon_176.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js",
+      "jquery-3.3.1.min.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "userAgentScript.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>",
+    "tabs",
+    "nativeMessaging",
+    "activeTab"
+  ],
+  "web_accessible_resources": [
+    "userAgent.js"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'"
+}

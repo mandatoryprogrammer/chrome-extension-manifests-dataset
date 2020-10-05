@@ -1,0 +1,42 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "IBM Aspera Connect",
+  "version": "3.9.7.4",
+  "description": "Enable high-speed FASP transfers.",
+  "author": "ibm",
+  "manifest_version": 2,
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "all_frames": true,
+      "js": [
+        "asperaweb.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "<all_urls>",
+    "nativeMessaging",
+    "activeTab",
+    "tabs"
+  ],
+  "icons": {
+    "256": "icon-256.png"
+  },
+  "-ms-preload": {
+    "backgroundScript": "backgroundScriptsAPIBridge.js",
+    "contentScript": "contentScriptsAPIBridge.js"
+  },
+  "applications": {
+    "gecko": {
+      "id": "connect@aspera.ibm.com"
+    }
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Chatgun.io - граббер медиакодов Вконтакте",
+  "description": "Получайте медиакоды аудиозаписей, постов, картинок, документов, видеозаписей из социальной сети Вконтакте",
+  "version": "0.6.0",
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "js/background.js",
+      "js/vendor/jquery-3.2.0.min.js"
+    ]
+  },
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_title": "Click here!"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "notifications",
+    "activeTab",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://vk.com/*",
+        "https://vk.com/*",
+        "http://www.vk.com/*",
+        "https://www.vk.com/*"
+      ],
+      "js": [
+        "js/vendor/jquery-3.2.0.min.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "http://vk.com/*",
+        "https://vk.com/*",
+        "http://www.vk.com/*",
+        "https://www.vk.com/*"
+      ],
+      "css": [
+        "styles/inject.css"
+      ],
+      "js": [
+        "js/inject.js",
+        "js/inject_listeners.js",
+        "js/popup.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    "js/vendor/jquery-3.2.0.min.js",
+    "js/inject_listeners.js",
+    "img/icon16.png"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.vk.com/*"
+    ]
+  }
+}

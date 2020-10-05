@@ -1,0 +1,72 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_AppName__",
+  "version": "1.0.228",
+  "default_locale": "en_US",
+  "description": "__MSG_AppDesc__",
+  "icons": {
+    "16": "icons/logo_webex_16.png",
+    "48": "icons/logo_webex_48.png",
+    "128": "icons/logo_webex_128.png"
+  },
+  "background": {
+    "persistent": true,
+    "page": "background/background.html"
+  },
+  "storage": {
+    "managed_schema": "schema.json"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/logo_webex_16.png",
+      "32": "icons/logo_webex_32.png"
+    },
+    "default_popup": "app/app.html",
+    "default_title": "__MSG_AppName__"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://calendar.google.com/*",
+        "http://calendar.google.com/*"
+      ],
+      "css": [
+        "style/app.min.css",
+        "vendor/style/angular-csp.css"
+      ],
+      "js": [
+        "vendor/js/jquery.min.js",
+        "vendor/js/angular.min.js",
+        "content/content.min.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "vendor/js/*",
+    "content/*.html",
+    "icons/*.png"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com https://*.google.com 'unsafe-eval'; object-src 'self'",
+  "oauth2": {
+    "client_id": "716620561689-fcl49u6irno00tho00sma9ip12trevtk.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/calendar",
+      "profile",
+      "email"
+    ]
+  },
+  "permissions": [
+    "storage",
+    "cookies",
+    "notifications",
+    "tabs",
+    "https://*.webex.com/*",
+    "https://*.webex.com.cn/*",
+    "https://*.qa.webex.com/*",
+    "https://*.google.com/*",
+    "identity",
+    "identity.email"
+  ]
+}

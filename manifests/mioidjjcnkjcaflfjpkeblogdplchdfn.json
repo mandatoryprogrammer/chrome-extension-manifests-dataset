@@ -1,0 +1,102 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Merch Ad Automator",
+  "version": "1.4.1",
+  "description": "Create AMS ads on the fly. Spend less time creating ads and take your Amazon Merch business to the next level.",
+  "manifest_version": 2,
+  "short_name": "MAA",
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "img/icon128.png",
+    "default_popup": "html/popup.html",
+    "default_title": "Create AMS ads on the fly. Spend less time creating ads and take your Amazon Merch business to the next level."
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://advertising.amazon.com/*",
+        "https://advertising.amazon.de/*",
+        "https://advertising.amazon.co.uk/*",
+        "https://advertising.amazon.es/*",
+        "https://advertising.amazon.it/*",
+        "https://advertising.amazon.fr/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "js/inject.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://merch.amazon.com/manage/designs?ads*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "js/merch-ads-page.js",
+        "js/d3.min.js",
+        "js/c3.min.js"
+      ],
+      "css": [
+        "css/bootstrap.css",
+        "css/modal-dialog.css",
+        "css/themify-icons.css",
+        "css/c3.min.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://merch.amazon.com/*"
+      ],
+      "exclude_matches": [
+        "https://merch.amazon.com/landing*",
+        "https://*/MerchAnalytics/*",
+        "https://*/IndividualProductPage/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "js/merch-ads-menu.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://kdp.amazon.com/*/bookshelf*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "js/kdp-content.js"
+      ],
+      "css": [
+        "css/modal-dialog.css"
+      ]
+    }
+  ],
+  "permissions": [
+    "https://members.merchamigo.com/*",
+    "https://.amazon.com/*",
+    "https://*.amazon.co.uk/*",
+    "https://*.amazon.de/*",
+    "https://*.amazon.es/*",
+    "https://*.amazon.it/*",
+    "https://*.amazon.fr/*",
+    "https://advertising.amazon.com/*",
+    "activeTab",
+    "unlimitedStorage",
+    "tabs",
+    "storage"
+  ],
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "js/jquery.min.js",
+      "js/background.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "js/inline.js",
+    "fonts/*"
+  ]
+}

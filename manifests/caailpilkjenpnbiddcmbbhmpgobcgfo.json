@@ -1,0 +1,72 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "QMetry Exploratory Testing",
+  "description": "Test while you Explore. Save efforts with Automated documentation. Report Bugs with screen shots and reduce streamline communication",
+  "short_name": "QMetry Exploratory Testing",
+  "version": "1.4.4",
+  "default_locale": "en",
+  "icons": {
+    "16": "img/logo.png",
+    "48": "img/logo.png",
+    "128": "img/logo.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/icon.png",
+    "default_title": "QMetry Exploratory Testing",
+    "default_popup": "popup/popup.html"
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs",
+    "<all_urls>"
+  ],
+  "input_components": [
+    {
+      "name": "Test IME",
+      "type": "ime",
+      "id": "test",
+      "description": "Test IME",
+      "language": "en-US",
+      "layouts": [
+        "us::eng"
+      ]
+    }
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file://*/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "content scripts/Shared/communicator.js",
+        "content scripts/Shared/utility.js",
+        "content scripts/Shared/DOMNodeProperties.js",
+        "content scripts/Recorder/bindListeners.js",
+        "content scripts/Recorder/removeListeners.js",
+        "content scripts/Recorder/recorder.js",
+        "content scripts/Player/DOMElementFinder.js",
+        "content scripts/Player/eventInject.js",
+        "content scripts/Player/player.js"
+      ],
+      "all_frames": false
+    }
+  ],
+  "background": {
+    "page": "background/background.html"
+  },
+  "web_accessible_resources": [
+    "options/logDefect.html"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "externally_connectable": {
+    "matches": [
+      "*://localhost/*",
+      "*://qmetry.com/*"
+    ]
+  }
+}

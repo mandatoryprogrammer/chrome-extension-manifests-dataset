@@ -1,0 +1,143 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "ブクスバ",
+  "version": "1.0.38",
+  "description": "オンライン書店のページに価格比較を自動表示します。対応書店は、Amazon.co.jp、楽天ブックス、ブックオフオンライン、ネットオフ、駿河屋です。",
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "background": {
+    "scripts": [
+      "libs/jquery-3.5.1.min.js",
+      "store.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "icons": {
+    "128": "icons/icon128.png"
+  },
+  "manifest_version": 2,
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{d594812b-188f-4434-b297-f94640266360}",
+      "strict_min_version": "42.0"
+    }
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": [
+        "*://*.amazon.co.jp/*"
+      ],
+      "css": [
+        "booksbar.css",
+        "amazon.user.css"
+      ],
+      "js": [
+        "libs/jquery-3.5.1.min.js",
+        "store.js",
+        "booksbar.js",
+        "amazon.user.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "*://*.rakuten.co.jp/*"
+      ],
+      "css": [
+        "booksbar.css",
+        "rakuten.user.css"
+      ],
+      "js": [
+        "libs/jquery-3.5.1.min.js",
+        "store.js",
+        "booksbar.js",
+        "rakuten.user.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "*://*.bookoffonline.co.jp/*"
+      ],
+      "css": [
+        "booksbar.css",
+        "bookoff.user.css"
+      ],
+      "js": [
+        "libs/jquery-3.5.1.min.js",
+        "store.js",
+        "booksbar.js",
+        "bookoff.user.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "*://*.netoff.co.jp/*"
+      ],
+      "css": [
+        "booksbar.css",
+        "netoff.user.css"
+      ],
+      "js": [
+        "libs/jquery-3.5.1.min.js",
+        "store.js",
+        "booksbar.js",
+        "netoff.user.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "*://*.suruga-ya.jp/*"
+      ],
+      "css": [
+        "booksbar.css",
+        "surugaya.user.css"
+      ],
+      "js": [
+        "libs/jquery-3.5.1.min.js",
+        "store.js",
+        "booksbar.js",
+        "surugaya.user.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "homepage_url": "https://booksbar.jp/?page_id=122",
+  "permissions": [
+    "*://*.amazon.co.jp/*",
+    "*://*.rakuten.co.jp/*",
+    "*://*.bookoffonline.co.jp/*",
+    "*://*.netoff.co.jp/*",
+    "*://*.suruga-ya.jp/*",
+    "*://*.booksbar.jp/*",
+    "*://lab.sugimototatsuo.com/*",
+    "activeTab",
+    "storage",
+    "unlimitedStorage"
+  ],
+  "_old_permissions": [
+    "*://*.amazon.co.jp/*",
+    "*://*.rakuten.co.jp/*",
+    "*://*.bookoffonline.co.jp/*",
+    "*://*.netoff.co.jp/*",
+    "*://*.suruga-ya.jp/*",
+    "*://*.booksbar.jp/*",
+    "*://lab.sugimototatsuo.com/*"
+  ],
+  "web_accessible_resources": [
+    "options/*",
+    "images/*.png"
+  ],
+  "options_ui": {
+    "page": "options/options.html",
+    "browser_style": true,
+    "chrome_style": true
+  }
+}

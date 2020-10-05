@@ -1,0 +1,98 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "New NicoLive Helper",
+  "version": "0.18",
+  "applications": {
+    "gecko": {
+      "id": "nicolivehelperxx@miku39.jp",
+      "strict_min_version": "57.0"
+    }
+  },
+  "description": "New NicoLive Helper",
+  "homepage_url": "http://com.nicovideo.jp/community/co105163",
+  "icons": {
+    "48": "icons/icon-48.png",
+    "96": "icons/icon-96.png"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "permissions": [
+    "*://*.nicovideo.jp/*",
+    "https://api.twitter.com/*",
+    "contextMenus",
+    "notifications",
+    "storage",
+    "tabs",
+    "activeTab",
+    "clipboardWrite",
+    "downloads"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://live.nicovideo.jp/watch/*",
+        "*://live2.nicovideo.jp/watch/*"
+      ],
+      "js": [
+        "libs/browser-polyfill.js",
+        "content_scripts/nicolivehelperx.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://com.nicovideo.jp/video/*"
+      ],
+      "js": [
+        "libs/browser-polyfill.js",
+        "libs/utils.js",
+        "content_scripts/communityvideo.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://www.nicovideo.jp/tag/*",
+        "*://www.nicovideo.jp/search/*",
+        "*://www.nicovideo.jp/ranking*"
+      ],
+      "js": [
+        "libs/browser-polyfill.js",
+        "libs/utils.js",
+        "content_scripts/nicovideosearch.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://www2.jasrac.or.jp/eJwid/main.jsp*"
+      ],
+      "js": [
+        "libs/browser-polyfill.js",
+        "libs/utils.js",
+        "content_scripts/jwidsearch.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png",
+      "48": "icons/icon-48.png",
+      "96": "icons/icon-96.png"
+    },
+    "default_title": "New NicoLive Helper"
+  },
+  "background": {
+    "scripts": [
+      "libs/browser-polyfill.js",
+      "libs/utils.js",
+      "bg/background.js"
+    ]
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "chrome_style": true
+  }
+}

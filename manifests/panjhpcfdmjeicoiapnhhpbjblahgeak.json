@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Thnks Chrome extension",
+  "description": "Thnks Chrome extension",
+  "version": "1.0.52",
+  "manifest_version": 2,
+  "icons": {
+    "16": "./icon16x16.png",
+    "48": "./icon48x48.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "./icon16x16.png",
+      "32": "./icon32x32.png",
+      "128": "./icon128x128.png"
+    },
+    "default_title": "Thnks"
+  },
+  "background": {
+    "scripts": [
+      "./js/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.linkedin.com/*",
+        "https://*.force.com/*",
+        "<all_urls>"
+      ],
+      "js": [
+        "./inboxsdk.js",
+        "./js/content.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "storage",
+    "identity",
+    "tabs",
+    "activeTab"
+  ],
+  "content_security_policy": "script-src 'self' https://cdn.segment.com https://d24n15hnbwhuhn.cloudfront.net https://widget.intercom.io https://cdn.mxpnl.com; object-src 'self'",
+  "web_accessible_resources": [
+    "fonts/*",
+    "images/*",
+    "icon48x48.png",
+    "icon32x32.png",
+    "reset-icon.svg"
+  ],
+  "oauth2": {
+    "client_id": "188520525350-4jveh268kf38i6b92mlt2dbevbn59gu8.apps.googleusercontent.com",
+    "scopes": [
+      "profile email openid"
+    ]
+  }
+}

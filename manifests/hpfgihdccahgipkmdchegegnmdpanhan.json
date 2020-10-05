@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Music in the Age of Digital Surveillance",
+  "version": "0.8",
+  "description": "Sonifies your cookies concretizing digital tracking",
+  "manifest_version": 2,
+  "permissions": [
+    "activeTab",
+    "cookies",
+    "tabs",
+    "https://ajax.googleapis.com/",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "icons": {
+    "16": "cookie.png",
+    "48": "cookie.png",
+    "128": "cookie.png"
+  },
+  "browser_action": {
+    "default_icon": "cookie.png"
+  },
+  "content_security_policy": "script-src 'self' http://localhost; object-src 'self' http://localhost",
+  "incognito": "split",
+  "offline_enabled": false,
+  "background": {
+    "scripts": [
+      "manager.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "match_about_blank": true,
+      "js": [
+        "Tone.min.js",
+        "content_script.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "manifest.json",
+    "parser.js"
+  ]
+}

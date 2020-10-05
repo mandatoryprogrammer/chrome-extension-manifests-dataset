@@ -1,0 +1,88 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Hunchly 2.0",
+  "description": "Hunchly is a tool to capture and organize online data for your investigations. Requires the Hunchly app (https://www.hunch.ly)",
+  "version": "2.2.3",
+  "icons": {
+    "1": "icons/logo1.png",
+    "16": "icons/logo16.png",
+    "48": "icons/logo48.png",
+    "128": "icons/logo128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file://*/*"
+      ],
+      "js": [
+        "browser-polyfill.min.js",
+        "content-script/mark.min.js",
+        "content-script/mutations.js",
+        "content-script/content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "browser_action": {
+    "default_icon": "icons/logo.png",
+    "default_popup": "popup/popup.html"
+  },
+  "web_accessible_resources": [
+    "spinner.gif",
+    "content-script/modal_img.html",
+    "content-script/modal_note.html",
+    "content-script/modal.js",
+    "content-script/modal.css"
+  ],
+  "background": {
+    "scripts": [
+      "browser-polyfill.min.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true
+  },
+  "permissions": [
+    "<all_urls>",
+    "https://*/*",
+    "http://*/*",
+    "contextMenus",
+    "activeTab",
+    "pageCapture",
+    "tabs",
+    "storage",
+    "unlimitedStorage",
+    "alarms",
+    "downloads",
+    "nativeMessaging"
+  ],
+  "commands": {
+    "take-note": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+O",
+        "mac": "Command+Shift+O"
+      },
+      "description": "Take note"
+    },
+    "capture-page": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+P",
+        "mac": "Command+Shift+P"
+      },
+      "description": "Capture page"
+    },
+    "toggle-auto-capture": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+A",
+        "mac": "Command+Shift+A"
+      },
+      "description": "Toggle auto-capture"
+    }
+  }
+}

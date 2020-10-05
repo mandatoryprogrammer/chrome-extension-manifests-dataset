@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Janus Workspace",
+  "description": "Janus Workspace creates a page into a workspace with frames with their own navigation.",
+  "version": "5.4.7",
+  "icons": {
+    "256": "/img/icon256.png"
+  },
+  "browser_action": {
+    "default_popup": "index.html"
+  },
+  "background": {
+    "scripts": [
+      "js/config.js",
+      "js/utils.js",
+      "js/background.js"
+    ]
+  },
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "tabs",
+    "identity",
+    "identity.email",
+    "storage",
+    "webRequest",
+    "webNavigation",
+    "webRequestBlocking",
+    "*://*.google.com/",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "oauth2": {
+    "client_id": "396892693634-7hdpl3rnpbauhnutoek81vklm4srm25k.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/plus.login",
+      "https://www.googleapis.com/auth/chromewebstore.readonly"
+    ]
+  },
+  "chrome_url_overrides": {},
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/jquery-3.1.1.js",
+        "js/utils.js",
+        "js/content.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    }
+  ]
+}

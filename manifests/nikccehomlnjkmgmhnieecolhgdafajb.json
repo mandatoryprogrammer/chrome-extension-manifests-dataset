@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Beanote - Note Taking on Web Pages",
+  "short_name": "Beanote",
+  "version": "1.4.0",
+  "manifest_version": 2,
+  "description": "This extension helps you to highlight, take notes and annotate on web pages.",
+  "icons": {
+    "128": "public/icons/icon128.png",
+    "16": "public/icons/icon16.png",
+    "48": "public/icons/icon48.png"
+  },
+  "default_locale": "en",
+  "permissions": [
+    "<all_urls>",
+    "tabs",
+    "contextMenus",
+    "activeTab",
+    "storage",
+    "clipboardWrite",
+    "clipboardRead"
+  ],
+  "optional_permissions": [
+    "downloads"
+  ],
+  "background": {
+    "scripts": [
+      "public/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "public/foreground.js"
+      ],
+      "all_frames": false
+    }
+  ],
+  "browser_action": {
+    "default_title": "Beanote",
+    "default_icon": "public/icons/icon-chrome.png",
+    "default_popup": "public/actionPage/index.html"
+  },
+  "web_accessible_resources": [
+    "public/*",
+    "public/images/*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

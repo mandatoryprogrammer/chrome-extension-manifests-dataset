@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "CTA Video Conference",
+  "description": "CTA Video Conference",
+  "version": "0.2.9",
+  "minimum_chrome_version": "34",
+  "icons": {
+    "16": "logo-16.png",
+    "48": "logo-48.png",
+    "128": "logo-120.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "desktopCapture",
+    "https://calendar.google.com/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://vicon.vwex.xyz/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://calendar.google.com/calendar/*",
+        "https://outlook.live.com/owa/*"
+      ],
+      "js": [
+        "jquery.js",
+        "RandomUtil.js",
+        "RoomnameGenerator.js",
+        "meet-calendar.js"
+      ],
+      "css": [
+        "/css/all.css"
+      ],
+      "all_frames": false,
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "jitsi-logo-48x48.png",
+    "jitsi-logo-white-48x48.png",
+    "jitsi-logo-blue.svg",
+    "jitsi-logo-grey.svg"
+  ],
+  "browser_action": {
+    "default_title": "Create Jitsi Meetings",
+    "default_popup": "popup.html"
+  }
+}

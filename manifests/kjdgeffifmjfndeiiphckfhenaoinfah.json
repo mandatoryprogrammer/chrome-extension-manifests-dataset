@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Kerberos AutoLogin",
+  "short_name": "AutoLogin",
+  "description": "Automatically logs you into BU Kerberos.",
+  "version": "3.0",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://weblogin.bu.edu/*",
+        "https://shib.bu.edu/*",
+        "https://shib2.bu.edu/*"
+      ],
+      "js": [
+        "js/jquery.js",
+        "js/login.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/block.js"
+    ]
+  },
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "https://weblogin.bu.edu/lib/scripts/BUweblogin.js",
+    "storage"
+  ],
+  "web_accessible_resources": [
+    "img/loading.svg"
+  ],
+  "browser_action": {
+    "default_title": "BU Kerberos AutoLogin",
+    "default_icon": "img/lock_16x16.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "img/lock_16x16.png",
+    "48": "img/lock_48x48.png",
+    "128": "img/lock_128x128.png"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "manifest_version": 2
+}

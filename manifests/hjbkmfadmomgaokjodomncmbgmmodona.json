@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Readline",
+  "short_name": "readline",
+  "description": "Reading made fast & simple",
+  "version": "4.2",
+  "icons": {
+    "16": "icon/icon_16px_enabled.png",
+    "19": "icon/icon_19px_enabled.png",
+    "32": "icon/icon_32px_enabled.png",
+    "38": "icon/icon_38px_enabled.png",
+    "48": "icon/icon_48px_enabled.png",
+    "128": "icon/icon_128px_enabled.png"
+  },
+  "browser_action": {
+    "default_title": "Readline",
+    "default_icon": "icon/icon_128px_disabled.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "src/ReadlineUser.js",
+      "background.js"
+    ]
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "run_at": "document_end",
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*"
+      ],
+      "css": [
+        "content_script.css"
+      ],
+      "js": [
+        "lib/jquery.1.10.2.min.js",
+        "lib/jquery.ui.1.10.4.min.js",
+        "src/ReadlineRSVPController.js",
+        "src/ReadlineRSVPModel.js",
+        "src/ReadlineRSVPView.js",
+        "content_script.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "contextMenus",
+    "tabs",
+    "storage"
+  ]
+}

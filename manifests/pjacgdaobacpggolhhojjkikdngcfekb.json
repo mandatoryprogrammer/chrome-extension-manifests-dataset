@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "JIRA SubTask URL Redirection",
+  "version": "1.3.5",
+  "description": "disable event propagation for jira subtasks <a> tags",
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+  "browser_action": {
+    "default_icon": "icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://jira.netease.com/browse/*",
+        "http://jira.netease.com/projects/JIRA/issues/*",
+        "http://jira.netease.com/issues/*",
+        "https://jira.mail.netease.com/browse/*",
+        "https://jira.mail.netease.com/projects/*",
+        "https://jira.mail.netease.com/issues/*"
+      ],
+      "js": [
+        "propagation.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://doc.hz.netease.com/*",
+        "http://doc-demo.netease.com/*"
+      ],
+      "all_frames": true,
+      "css": [
+        "Custom.css"
+      ],
+      "js": [
+        "scrollTo.js"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

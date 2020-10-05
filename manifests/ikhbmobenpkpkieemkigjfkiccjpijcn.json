@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Datap - AI-Powered Web Scraping",
+  "description": "Turn web pages into CSV and JSON",
+  "version": "0.1.21",
+  "icons": {
+    "16": "assets/icon16.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "dist/background/background.js",
+      "dist/background/encoder_service.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": "assets/icon48.png",
+    "default_popup": "dist/popup/popup.html"
+  },
+  "permissions": [
+    "activeTab",
+    "notifications",
+    "tabs",
+    "storage"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "dist/content/content.js"
+      ],
+      "css": [
+        "dist/content/content.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "dist/content/editor.css",
+    "assets/icon48.png"
+  ]
+}

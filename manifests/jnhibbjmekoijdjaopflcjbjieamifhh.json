@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "vREST - REST API Testing Tool",
+  "short_name": "vREST",
+  "description": "vREST is an automated REST API Testing Tool. This extension records HTTP requests and their responses in vREST application.",
+  "version": "1.2.8",
+  "manifest_version": 2,
+  "icons": {
+    "16": "images/icon-16.png",
+    "128": "images/icon-128.png"
+  },
+  "author": "Dheeraj Kumar Aggarwal <dheeraj.aggarwal@optimizory.com>",
+  "background": {
+    "scripts": [
+      "vendor/browser-request/index.js",
+      "scripts/testRunner.js",
+      "background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "images/pause-icon.png",
+    "default_title": "vREST: Click to start capturing",
+    "default_popup": "popup/popup.html"
+  },
+  "options_page": "options.html",
+  "permissions": [
+    "debugger",
+    "http://*/*",
+    "https://*/*",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "web_accessible_resources": [
+    "options.html"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "js": [
+        "scripts/vrest_content.js"
+      ]
+    }
+  ]
+}

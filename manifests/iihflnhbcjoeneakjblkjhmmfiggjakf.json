@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Savio",
+  "short_name": "Savio",
+  "description": "Save customer feedback from across the web to Savio",
+  "content_security_policy": "default-src 'self'; connect-src http://localhost:8001/ https://www.savio.io;",
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "version": "0.0.2.0",
+  "browser_action": {},
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "homepage_url": "https://www.savio.io",
+  "web_accessible_resources": [
+    "popup.html"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.savio.io/*",
+        "https://www.savio.io/*"
+      ],
+      "js": [
+        "auth_listener.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "http://www.savio.io/*",
+      "https://www.savio.io/*"
+    ]
+  },
+  "permissions": [
+    "https://www.savio.io/*",
+    "tabs",
+    "activeTab",
+    "cookies",
+    "storage",
+    "webRequest",
+    "webRequestBlocking"
+  ]
+}

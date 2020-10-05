@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "My Azure Portal Extention",
+  "version": "0.1.1",
+  "manifest_version": 2,
+  "description": "Setup wallpapers in your Azure Portal top and highlight empty resource groups",
+  "browser_action": {
+    "default_icon": "img/icon128.png",
+    "icons": {
+      "16": "img/icon16.png",
+      "48": "img/icon48.png",
+      "128": "img/icon128.png"
+    },
+    "scripts": [
+      "jquery-3.5.1.min.js",
+      "popup.js"
+    ],
+    "css": [
+      "css/popup.css"
+    ],
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "https://ms.portal.azure.com/*",
+    "https://portal.azure.com/*",
+    "https://afd.hosting.portal.azure.net/",
+    "https://web.vortex.data.microsoft.com/",
+    "https://management.azure.com/*",
+    "webRequest",
+    "webRequestBlocking",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://ms.portal.azure.com/*",
+        "https://portal.azure.com/*"
+      ],
+      "js": [
+        "jquery-3.5.1.min.js",
+        "script.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "jquery-3.5.1.min.js",
+      "background.js"
+    ],
+    "persistent": true
+  }
+}

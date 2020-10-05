@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Death To _blank",
+  "version": "1.8.0",
+  "description": "Keeps links from opening new tabs by removing the _blank attribute",
+  "icons": {
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "lib/URI.min.js",
+      "background.js"
+    ]
+  },
+  "browser_action": {
+    "default_title": "Death To _blank",
+    "default_icon": {
+      "16": "images/icon16.png",
+      "24": "images/icon24.png",
+      "32": "images/icon32.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "ftp://*/*",
+        "file://*/*"
+      ],
+      "js": [
+        "lib/jquery-3.2.1.min.js",
+        "lib/jquery.onmutate.min.js",
+        "content_script.js"
+      ]
+    }
+  ],
+  "options_page": "options.html",
+  "web_accessible_resources": [
+    "lib/jquery-3.2.1.min.map"
+  ]
+}

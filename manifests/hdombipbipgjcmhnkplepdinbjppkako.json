@@ -1,0 +1,68 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "AudienceProject autopilot",
+  "version": "1.0.12",
+  "description": "Automates routine tasks in DFP and DCM UI for AudienceProject customers",
+  "icons": {
+    "128": "icon128.png"
+  },
+  "page_action": {},
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "event_rules": [
+    {
+      "event": "declarativeContent.onPageChanged",
+      "conditions": [
+        {
+          "type": "declarativeContent.PageStateMatcher",
+          "pageUrl": {
+            "hostEquals": "admanager.google.com"
+          },
+          "css": [
+            "#gwt-debug-videoCreativeWidget-thirdPartyTrackingUrlWidget",
+            "#gwt-debug-thirdPartyTrackingWidget-suggestBox",
+            "#gwt-debug-thirdPartyTrackingWidget-uri"
+          ]
+        },
+        {
+          "type": "declarativeContent.PageStateMatcher",
+          "pageUrl": {
+            "hostEquals": "www.google.com",
+            "pathPrefix": "/dfp/"
+          },
+          "css": [
+            "#gwt-debug-vastRedirectWidget-thirdPartyTrackingUrlWidget",
+            "#gwt-debug-thirdPartyTrackingWidget-suggestBox",
+            "#gwt-debug-thirdPartyTrackingWidget-uri"
+          ]
+        },
+        {
+          "type": "declarativeContent.PageStateMatcher",
+          "pageUrl": {
+            "hostEquals": "www.google.com",
+            "pathPrefix": "/dfa/"
+          }
+        }
+      ],
+      "actions": [
+        {
+          "type": "declarativeContent.ShowPageAction"
+        }
+      ]
+    }
+  ],
+  "permissions": [
+    "declarativeContent",
+    "activeTab",
+    "storage"
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "ticker sticker",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "On-hover information for stock references on webpages",
+  "icons": {
+    "16": "icons/ticker_sticker_1.png",
+    "48": "icons/ticker_sticker_1.png",
+    "128": "icons/ticker_sticker_1.png"
+  },
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_title": "ticker sticker"
+  },
+  "permissions": [
+    "debugger",
+    "storage",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [],
+      "js": [
+        "js/jquery-3.1.0.min.js",
+        "js/mustache.min.js",
+        "scripts/inject.js"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "content_security_policy": "frame-src 'self' https://www.cloudhq.net https://www.cloudhq.net; script-src 'self' https://www.cloudhq.net https://www.cloudhq.net; object-src 'self' https://www.cloudhq.net https://www.cloudhq.net;",
+  "web_accessible_resources": [
+    "javascripts/*",
+    "icons/*"
+  ],
+  "name": "URL Link Previews in Gmail by cloudHQ",
+  "short_name": "URL Link Previews in Gmail by cloudHQ",
+  "browser_action": {
+    "default_icon": "icons/gmail_url_previews.png"
+  },
+  "icons": {
+    "128": "icons/icon-128x128.png",
+    "48": "icons/icon-48x48.png"
+  },
+  "converted_from_user_script": true,
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "javascripts/jquery-3.2.1.min.js",
+      "javascripts/background.js"
+    ]
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://*.orecons.com/*",
+      "*://*.cloudhq.net/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "exclude_globs": [],
+      "css": [
+        "stylesheets/jquery.dropdown.css",
+        "stylesheets/popover.css",
+        "stylesheets/border_bottom_animation.css"
+      ],
+      "include_globs": [],
+      "matches": [
+        "<all_urls>"
+      ]
+    },
+    {
+      "exclude_globs": [],
+      "css": [
+        "stylesheets/jquery.dropdown.css",
+        "stylesheets/popover.css",
+        "stylesheets/border_bottom_animation.css"
+      ],
+      "include_globs": [],
+      "js": [
+        "javascripts/inboxsdk.js",
+        "javascripts/jquery-3.2.1.min.js",
+        "javascripts/jquery.json.js",
+        "javascripts/jquery.tokeninput.js",
+        "javascripts/jquery.drilldown.js",
+        "javascripts/common.js",
+        "javascripts/findAndReplaceDOMText.js",
+        "javascripts/main_gmail_url_previews.js"
+      ],
+      "matches": [
+        "https://mail.google.com/*"
+      ]
+    }
+  ],
+  "version": "1.0.1.19",
+  "description": "Automatically add full web URL link previews when composing your email.",
+  "permissions": [
+    "storage",
+    "background",
+    "tabs",
+    "activeTab",
+    "<all_urls>",
+    "*://*/*",
+    "contextMenus",
+    "clipboardRead",
+    "clipboardWrite"
+  ],
+  "manifest_version": 2
+}

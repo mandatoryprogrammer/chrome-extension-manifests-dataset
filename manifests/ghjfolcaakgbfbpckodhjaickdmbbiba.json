@@ -1,0 +1,347 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Super Google",
+  "version": "101.4",
+  "manifest_version": 2,
+  "description": "Create a custom list of the best Google tools and have them right at your fingertips.",
+  "icons": {
+    "16": "images/extension/blackmenu/icon.png",
+    "32": "images/extension/blackmenu/icon.png",
+    "48": "images/extension/blackmenu/icon.png",
+    "128": "images/extension/blackmenu/icon.png"
+  },
+  "background": {
+    "scripts": [
+      "scripts/landing.js",
+      "scripts/cj-extensions.js",
+      "scripts/cj-basics.js",
+      "scripts/bm-basics.js",
+      "scripts/webrequest.js",
+      "scripts/contextmenu.js",
+      "scripts/background.js",
+      "pages/hangouts/app/background.js"
+    ],
+    "persistent": true
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.google.com/jsapi https://hangouts.google.com https://ssl.google-analytics.com https://www.gstatic.com/charts/ https://maps.gstatic.com/ https://www.google.com/uds/ https://apis.google.com/_/scs/apps-static/_/js/ https://apis.google.com/js/ https://cbks0.googleapis.com/cbk https://cbks1.googleapis.com/cbk https://mts0.googleapis.com/vt https://mts1.googleapis.com/vt https://maps.googleapis.com; object-src 'self'",
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "notifications",
+    "http://*.google.com/",
+    "https://*.google.com/",
+    "https://*.googleapis.com/",
+    "https://*.googleusercontent.com/",
+    "https://*.gstatic.com/",
+    "storage",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "optional_permissions": [
+    "management",
+    "topSites",
+    "bookmarks"
+  ],
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "contentscripts/button-count.js"
+      ],
+      "matches": [
+        "https://*.google.com/*bm_toolbar_button_count=*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "contentscripts/website-inject.js"
+      ],
+      "matches": [
+        "https://*.google.com/*bm_fix_embed=1*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "css": [
+        "gapi/contentscript.css"
+      ],
+      "js": [
+        "gapi/contentscript.js"
+      ],
+      "matches": [
+        "https://*.google.com/g-api/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "css": [
+        "pages/aboutme/contentscripts/website.css"
+      ],
+      "matches": [
+        "https://*.google.com/*bm_contentscript=aboutme*"
+      ]
+    },
+    {
+      "all_frames": true,
+      "css": [
+        "pages/albumarchive/contentscripts/website.css"
+      ],
+      "matches": [
+        "https://*.google.com/*bm_contentscript=albumarchive*"
+      ]
+    },
+    {
+      "all_frames": true,
+      "css": [
+        "pages/alerts/contentscripts/contentscript.css"
+      ],
+      "matches": [
+        "https://*.google.com/*bm_contentscript=alerts*"
+      ]
+    },
+    {
+      "all_frames": true,
+      "css": [
+        "pages/express/contentscripts/contentscript.css"
+      ],
+      "js": [
+        "pages/express/contentscripts/contentscript.js"
+      ],
+      "matches": [
+        "https://*.google.com/*bm_contentscript=express*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "pages/fit/contentscripts/inject.js"
+      ],
+      "css": [
+        "pages/fit/contentscripts/contentscript.css"
+      ],
+      "matches": [
+        "https://*.google.com/*bm_contentscript=fit*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "css": [
+        "pages/flights/contentscripts/contentscript.css"
+      ],
+      "matches": [
+        "https://*.google.com/*bm_contentscript=flights*"
+      ]
+    },
+    {
+      "all_frames": true,
+      "css": [
+        "pages/save/contentscripts/contentscript.css"
+      ],
+      "js": [
+        "pages/save/contentscripts/contentscript.js"
+      ],
+      "matches": [
+        "https://*.google.com/*bm_contentscript=save*"
+      ]
+    },
+    {
+      "all_frames": true,
+      "css": [
+        "pages/gmail/contentscripts/gmail.css"
+      ],
+      "js": [
+        "pages/gmail/contentscripts/gmail.js"
+      ],
+      "matches": [
+        "https://*.google.com/mail/mu/mp/*mui=bm_mail*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "css": [
+        "pages/gplus/contentscripts/sharebox.css"
+      ],
+      "js": [
+        "pages/gplus/contentscripts/sharebox-inject.js"
+      ],
+      "matches": [
+        "https://*.google.com/*bm_contentscript=sharebox*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "css": [
+        "pages/gplus/contentscripts/comments.css"
+      ],
+      "js": [
+        "pages/gplus/contentscripts/comments.js"
+      ],
+      "matches": [
+        "https://*.google.com/*bm_contentscript=comments*"
+      ]
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "pages/gplus/contentscripts/comments-plusone.js"
+      ],
+      "matches": [
+        "https://*.google.com/*bm_contentscript=commentsplusone*"
+      ]
+    },
+    {
+      "all_frames": true,
+      "css": [
+        "pages/gplus/contentscripts/website.css"
+      ],
+      "js": [
+        "pages/gplus/contentscripts/website.js"
+      ],
+      "matches": [
+        "https://*.google.com/*bm_contentscript=plus*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "css": [
+        "pages/hangouts/app/contentscript.css"
+      ],
+      "js": [
+        "pages/hangouts/app/contentscript.js"
+      ],
+      "matches": [
+        "https://*.google.com/webchat*prop=ChromeApp*"
+      ]
+    },
+    {
+      "all_frames": true,
+      "css": [
+        "pages/inbox/contentscripts/inbox.css"
+      ],
+      "matches": [
+        "https://*.google.com/mail/mu/mp/*mui=bm_mail_inbox*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "css": [
+        "pages/payments/contentscripts/contentscript.css"
+      ],
+      "matches": [
+        "https://*.google.com/*bm_contentscript=payments*"
+      ]
+    },
+    {
+      "all_frames": true,
+      "css": [
+        "pages/search/contentscripts/contentscript.css"
+      ],
+      "js": [
+        "pages/search/contentscripts/contentscript.js"
+      ],
+      "matches": [
+        "https://*.google.com/*bm_contentscript=search*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "css": [
+        "pages/shopping/contentscripts/contentscript.css"
+      ],
+      "js": [
+        "pages/shopping/contentscripts/contentscript.js"
+      ],
+      "matches": [
+        "https://*.google.com/*bm_contentscript=shopping*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "css": [
+        "pages/spaces/contentscripts/website.css"
+      ],
+      "matches": [
+        "https://*.google.com/*bm_contentscript=spaces*"
+      ]
+    },
+    {
+      "all_frames": true,
+      "css": [
+        "pages/translate/contentscripts/contentscript.css"
+      ],
+      "js": [
+        "pages/translate/contentscripts/contentscript.js"
+      ],
+      "matches": [
+        "https://*.google.com/*bm_contentscript=translate*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "css": [
+        "pages/webmastertools/contentscripts/website.css"
+      ],
+      "matches": [
+        "https://*.google.com/*bm_contentscript=searchconsole*"
+      ]
+    },
+    {
+      "all_frames": true,
+      "css": [
+        "pages/youtube/contentscripts/comments.css"
+      ],
+      "matches": [
+        "https://*.google.com/*bm_contentscript=youtubecomments*"
+      ]
+    },
+    {
+      "all_frames": true,
+      "css": [
+        "pages/notifications/contentscripts/website.css"
+      ],
+      "matches": [
+        "https://*.google.com/*bm_contentscript=notifications*"
+      ]
+    },
+    {
+      "all_frames": true,
+      "css": [
+        "pages/notifications/contentscripts/page.css"
+      ],
+      "js": [
+        "pages/notifications/contentscripts/inject.js"
+      ],
+      "matches": [
+        "https://*.google.com/*bm_contentscript=mobilenotifications*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt + B"
+      }
+    }
+  },
+  "browser_action": {
+    "default_popup": "app.html?popup=1",
+    "default_icon": {
+      "19": "images/extension/blackmenu/icon.png",
+      "38": "images/extension/blackmenu/icon.png"
+    }
+  }
+}

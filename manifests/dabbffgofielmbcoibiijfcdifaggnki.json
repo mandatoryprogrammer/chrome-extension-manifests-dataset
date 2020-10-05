@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "지오유톡ZioYouTalk",
+  "version": "1.3.1",
+  "manifest_version": 2,
+  "description": "협업의 시작은 지오유와 함께! 모바일 환경과 연동되는 웹브라우저에서 실행되는 메신저입니다.",
+  "icons": {
+    "16": "./images/icon_16.png",
+    "48": "./images/icon_48.png",
+    "128": "./images/icon_128.png"
+  },
+  "permissions": [
+    "contentSettings",
+    "contextMenus",
+    "management",
+    "tabs",
+    "*://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "content_script.js"
+      ]
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "gogw.js"
+      ],
+      "matches": [
+        "http://on.zioyou.com:88/alimy/client/main.php"
+      ]
+    }
+  ],
+  "requirements": {
+    "plugins": {
+      "npapi": false
+    }
+  },
+  "background": {
+    "persistent": false,
+    "page": "background.html"
+  },
+  "browser_action": {
+    "default_icon": "./images/icon_36.png",
+    "default_popup": "popup.html",
+    "default_title": "웹브라우저에서 마우스 오른쪽을 클릭하시면 지오유톡 메뉴가 표시됩니다."
+  },
+  "options_page": "popup.html"
+}

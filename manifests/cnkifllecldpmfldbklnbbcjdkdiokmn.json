@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Pathmatics Explorer",
+  "version": "3.0.12",
+  "description": "The Pathmatics Explorer extension gives you real-time advertising information for the top Advertisers and Publishers on the web.",
+  "homepage_url": "https://explorer.pathmatics.com",
+  "icons": {
+    "128": "images/icon-app.png"
+  },
+  "options_page": "html/options.html",
+  "browser_action": {
+    "default_popup": "/html/popup.html",
+    "default_icon": {
+      "32": "images/icon-button.png",
+      "48": "images/icon-button-48.png"
+    }
+  },
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "js/jquery.js",
+      "js/helpers.js",
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "https://*.pathmatics.com/*"
+      ],
+      "js": [
+        "js/content-pathmatics.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "storage",
+    "https://*.pathmatics.com/",
+    "http://localhost:1903/",
+    "identity"
+  ],
+  "incognito": "split",
+  "oauth2": {
+    "client_id": "443089852488-o7ohnlt8229b8vakr6cnou1q9qv61i3r.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email"
+    ]
+  }
+}

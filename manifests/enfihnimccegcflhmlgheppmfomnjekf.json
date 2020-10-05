@@ -1,0 +1,74 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "manifest_version": 2,
+  "description": "__MSG_appDescription__",
+  "icons": {
+    "32": "icons/app-32.png",
+    "57": "icons/app-57.png",
+    "128": "icons/app-128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "page": "background.html",
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": {
+      "32": "icons/app-32.png"
+    },
+    "default_title": "Ryver"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "css/content.css"
+      ],
+      "js": [
+        "javascripts/vendor.js",
+        "javascripts/content.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://mail.google.com/*"
+      ],
+      "js": [
+        "javascripts/gmail.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "storage",
+    "contextMenus",
+    "desktopCapture",
+    "*://*.contatta.com/*",
+    "*://*.ryver.com/*",
+    "*://localhost/*",
+    "*://fonts.googleapis.com/*"
+  ],
+  "web_accessible_resources": [
+    "css/*",
+    "icons/*",
+    "images/*",
+    "javascripts/*",
+    "workspace.html"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://localhost:*/*",
+      "*://*.ryver.com:*/*",
+      "*://mail.google.com/*",
+      "http://mail.google.com/*",
+      "https://mail.google.com/*"
+    ]
+  },
+  "version": "2.0.6"
+}

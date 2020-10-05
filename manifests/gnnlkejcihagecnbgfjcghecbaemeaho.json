@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Improver",
+  "version": "4.4",
+  "description": "Improver — find personal emails and phone numbers.",
+  "manifest_version": 2,
+  "permissions": [
+    "webNavigation",
+    "tabs",
+    "storage",
+    "*://*.improver.io/*",
+    "*://*.linkedin.com/*"
+  ],
+  "default_locale": "en",
+  "browser_action": {
+    "default_title": "improver",
+    "default_icon": {
+      "19": "images/icons/19.png",
+      "38": "images/icons/38.png"
+    }
+  },
+  "icons": {
+    "16": "images/icons/16.png",
+    "32": "images/icons/32.png",
+    "48": "images/icons/48.png",
+    "64": "images/icons/64.png",
+    "128": "images/icons/128.png"
+  },
+  "background": {
+    "scripts": [
+      "/js/amplitude-4.4.0-min.gz.js",
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_idle",
+      "css": [
+        "css/styles.css"
+      ],
+      "matches": [
+        "*://*.linkedin.com/*"
+      ],
+      "js": [
+        "/js/functions.js",
+        "/js/template.js",
+        "/js/content.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.improver.io/*"
+      ],
+      "js": [
+        "/js/token.js"
+      ]
+    }
+  ]
+}

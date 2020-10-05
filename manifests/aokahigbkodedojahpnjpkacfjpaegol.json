@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Save emails to PDF",
+  "description": "This is the simplest tool to save your emails to PDF format with just one click.",
+  "author": "Jeremiah Tin Bui",
+  "version": "0.1",
+  "manifest_version": 2,
+  "permissions": [
+    "storage",
+    "tabs",
+    "<all_urls>",
+    "downloads"
+  ],
+  "background": {
+    "scripts": [
+      "common.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "mail16.png",
+      "48": "mail48.png",
+      "128": "mail128.png"
+    },
+    "default_title": "Save Your Email To PDF",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://mail.google.com/*"
+      ],
+      "run_at": "document_start",
+      "css": [
+        "/data/button/index.css"
+      ],
+      "js": [
+        "/data/button/index.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://mail.google.com/mail/u/*/*&view=pt&*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "/prefs.js",
+        "/data/view/index.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "data/button/save.svg",
+    "data/assets/*.ttf"
+  ],
+  "icons": {
+    "16": "/data/icons/mail16.png",
+    "32": "/data/icons/mail32.png",
+    "48": "/data/icons/mail48.png",
+    "64": "/data/icons/mail64.png",
+    "128": "/data/icons/mail128.png",
+    "256": "/data/icons/mail256.png"
+  }
+}

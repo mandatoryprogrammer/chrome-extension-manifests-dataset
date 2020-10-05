@@ -1,0 +1,75 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "SafeSocial: Toxicity Checker",
+  "description": "Enhance your social posts by eliminating negativity.",
+  "version": "1.0.0.5",
+  "author": "",
+  "permissions": [
+    "storage",
+    "webRequest",
+    "webNavigation",
+    "webRequestBlocking",
+    "activeTab",
+    "tabs",
+    "https://www.facebook.com/*",
+    "https://www.linkedin.com/*",
+    "https://twitter.com/*",
+    "https://www.twitter.com/*",
+    "https://demo.safesocial.io/*",
+    "https://app.safesocial.io/*",
+    "https://stage.safesocial.io/*",
+    "https://*.slack.com/*",
+    "https://safesocial.io/*"
+  ],
+  "browser_action": {
+    "default_icon": "img/Icon128.png",
+    "default_title": "",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "img/Icon16.png",
+    "48": "img/Icon48.png",
+    "128": "img/Icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "axios.min.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.facebook.com/*",
+        "https://www.linkedin.com/*",
+        "https://twitter.com/*",
+        "https://www.twitter.com/*",
+        "https://*.slack.com/*",
+        "https://safesocial.io/*"
+      ],
+      "js": [
+        "webcomponents-sd-ce.js",
+        "content.js"
+      ],
+      "css": [],
+      "match_about_blank": true,
+      "all_frames": false,
+      "run_at": "document_end"
+    }
+  ],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "windows": "Ctrl+Shift+I",
+        "mac": "Command+Shift+I",
+        "chromeos": "Ctrl+Shift+I",
+        "linux": "Ctrl+Shift+J"
+      }
+    }
+  },
+  "web_accessible_resources": [
+    "frame.html",
+    "popup.js"
+  ]
+}

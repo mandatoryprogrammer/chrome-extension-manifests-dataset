@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Pigeon for Gmail",
+  "version": "0.1.1.28",
+  "manifest_version": 2,
+  "options_page": "app/options.html",
+  "browser_action": {},
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "http://localhost:3000/*",
+        "https://localhost:3141/*",
+        "https://pigeonapi.herokuapp.com/*",
+        "https://trypigeon.co/*",
+        "https://storage.googleapis.com/*"
+      ],
+      "js": [
+        "/inboxsdk.js",
+        "/loader.js"
+      ],
+      "css": [
+        "/styles.css"
+      ]
+    }
+  ],
+  "permissions": [
+    "storage",
+    "notifications",
+    "webRequest",
+    "webRequestBlocking",
+    "*://mail.google.com/",
+    "*://*.googleusercontent.com/",
+    "*://*.google.com/",
+    "*://*.trypigeon.co/"
+  ],
+  "background": {
+    "scripts": [
+      "app/options.js",
+      "app/background.js"
+    ],
+    "persistent": true
+  },
+  "content_security_policy": "script-src 'self' 'sha256-GgRxrVOKNdB4LrRsVPDSbzvfdV4UqglmviH9GoBJ5jk='; object-src 'self'"
+}

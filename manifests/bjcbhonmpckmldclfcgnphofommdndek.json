@@ -1,0 +1,75 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "SourcinBox",
+  "version": "1.2.71.98",
+  "description": "One-click importing AliExpress products, analyzing sales data and filtering ePacket delivery,for chrome version before 71.0.3578.98",
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon19.png",
+      "38": "images/icon38.png"
+    },
+    "default_title": "SIB",
+    "default_popup": "login.html"
+  },
+  "devtools_page": "devtools.html",
+  "background": {
+    "scripts": [
+      "js/jquery-3.1.1.min.js",
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "css": [
+        "css/content.css"
+      ],
+      "js": [
+        "js/jquery-3.1.1.min.js",
+        "js/content.js"
+      ],
+      "matches": [
+        "https://*.aliexpress.com/af/*",
+        "https://*.aliexpress.com/w/*",
+        "https://*.aliexpress.com/category/*",
+        "https://*.aliexpress.com/wholesale*",
+        "https://*.aliexpress.com/store/*",
+        "https://*.aliexpress.com/premium*",
+        "https://*.aliexpress.com/wishlist/wish_list_product_list.htm*",
+        "https://*.aliexpress.com/*_reviews.html*",
+        "https://home.aliexpress.com/dropshipper/ds_center.htm*"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "css": [
+        "css/content.css"
+      ],
+      "js": [
+        "js/echarts.min.js",
+        "js/jquery-3.1.1.min.js",
+        "js/productdetail.js"
+      ],
+      "matches": [
+        "https://*.aliexpress.com/item/*",
+        "https://*.aliexpress.com/store/product/*"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    "images/sib_import_btn.png"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "permissions": [
+    "cookies",
+    "notifications",
+    "storage",
+    "<all_urls>"
+  ]
+}

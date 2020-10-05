@@ -1,0 +1,54 @@
+{
+  "update_url": "http://clients2.google.com/service/update2/crx",
+  "name": "Kynetx for Google Chrome",
+  "version": "2.2.0",
+  "manifest_version": 2,
+  "description": "Take control of the Internet with browser apps from apps.kynetx.com. Unlock the Live Web on Facebook, Twitter, Netflix and more.",
+  "icons": {
+    "16": "images/off.png",
+    "48": "images/kynetx_48.png",
+    "128": "images/kynetx_128.png"
+  },
+  "background": {
+    "scripts": [
+      "resources/jquery.js",
+      "background/background.js",
+      "background/gm_support.js"
+    ],
+    "persistent": false
+  },
+  "options_page": "option_page/options.html",
+  "minimum_chrome_version": "5.0.316.0",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "resources/jquery.js",
+        "page_interaction/page.js",
+        "page_interaction/grease_monkey.js",
+        "kynetx_interaction/kobj_interact.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://init.kobj.net; connect-src  https://apps.kynetx.com  http://apps.kynetx.com http://*.kobj.net https://*.kobj.net ; object-src 'self'",
+  "permissions": [
+    "https://apps.kynetx.com/",
+    "*://*/",
+    "tabs",
+    "cookies",
+    "contextMenus",
+    "idle",
+    "notifications",
+    "unlimitedStorage",
+    "management"
+  ],
+  "browser_action": {
+    "default_title": "Manage Applications",
+    "default_icon": "images/off.png",
+    "default_popup": "browser_actions/popup.html"
+  }
+}

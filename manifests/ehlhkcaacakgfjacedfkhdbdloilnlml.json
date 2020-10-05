@@ -1,0 +1,95 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "SF SPIRIT",
+  "description": "SegmentFault精灵用于自定义补完SF不完美的地方",
+  "version": "0.0.8",
+  "manifest_version": 2,
+  "icons": {
+    "16": "./img/icon16.png",
+    "24": "./img/icon24.png",
+    "48": "./img/icon48.png",
+    "128": "./img/icon128.png"
+  },
+  "browser_action": {
+    "default_title": "SF SPIRIT",
+    "default_icon": {
+      "19": "img/icon24.png",
+      "38": "img/icon48.png"
+    }
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://segmentfault.com/u/*/answers*"
+      ],
+      "js": [
+        "answerSearch/main.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://segmentfault.com/q/*",
+        "http://segmentfault.com/blog/*"
+      ],
+      "js": [
+        "cmt-enhanced/main.js"
+      ],
+      "css": [
+        "cmt-enhanced/cmt-enhanced.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://segmentfault.com/u/*"
+      ],
+      "js": [
+        "reputation-chart-3d/obelisk.js",
+        "reputation-chart-3d/iso.js",
+        "reputation-chart-3d/main.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://segmentfault.com/*",
+        "http://*.segmentfault.com/*"
+      ],
+      "js": [
+        "jquery-2.0.3.min.js",
+        "chatOnline/prettify.js",
+        "chatOnline/SaeChannel.js",
+        "chatOnline/Markdown.Converter.js",
+        "chatOnline/emotion.js",
+        "chatOnline/at.js",
+        "chatOnline/main.js",
+        "hotkey/main.js",
+        "main.js"
+      ],
+      "css": [
+        "chatOnline/chatroom.css",
+        "chatOnline/desert.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "http://*/*",
+    "notifications",
+    "storage",
+    "unlimitedStorage",
+    "tabs",
+    "notifications",
+    "cookies",
+    "background"
+  ],
+  "options_page": "options.html"
+}

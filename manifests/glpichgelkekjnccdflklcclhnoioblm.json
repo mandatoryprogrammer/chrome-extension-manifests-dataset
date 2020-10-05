@@ -1,0 +1,91 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "SendSafely Encryption for Chrome and Gmail",
+  "version": "1.6.10",
+  "manifest_version": 2,
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmmEk7XwbtQ5AulkvErc9WWesWJ+4JmHEAyJw5F/aaIk52FU8x+ND4GkPTkaMYdrXPSgRHbrt1jWIvRNLrq5ddcUY9JL5heiqEMB9/mLkhtnJRbzM+LdyWxw2c3jVzb9aCyc1FWxikjdKj+xVRB2U7V9Ry77RsnaI71WZsSganLOSfXjlf2Yn8BeY0PkPVeibhbUPARp+g36WRf8aWi0cGobQ3Bm6p7U8sAL+O6UeFBvttDN/pNSQVQV2000KVM/BG8dfpB04iaECyg4X10WXl9m64jK/8wboHVvCKnTYVtduguv/8msuf+iQyIXVs6rD8YQqNnrB2fBO9/O4Aj8u2QIDAQAB",
+  "description": "Chrome extension that provides end-to-end encryption for Gmail. Encrypt private emails and securely share files up to 10GB.",
+  "background": {
+    "persistent": true,
+    "page": "html/background_page.html"
+  },
+  "options_page": "html/sendsafely.html",
+  "browser_action": {
+    "default_title": "SendSafely for Chrome",
+    "default_icon": {
+      "19": "images/sendsafely_padlock_19.png",
+      "38": "images/sendsafely_padlock_38.png"
+    },
+    "default_popup": "html/sendsafely.html?view=popup"
+  },
+  "icons": {
+    "16": "images/sendsafely_padlock_16.png",
+    "48": "images/sendsafely_padlock_48.png",
+    "128": "images/sendsafely_padlock_128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.sendsafely.com/*",
+        "https://*.sendsafely.co.uk/*",
+        "https://*.sendsafely.eu/*",
+        "https://*.sendsafely-au.com/*",
+        "https://*.sendsafely.com.au/*"
+      ],
+      "js": [
+        "/js/KeycodeLoader.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "clipboardWrite",
+    "storage",
+    "unlimitedStorage",
+    "identity"
+  ],
+  "optional_permissions": [
+    "tabs",
+    "*://*/*",
+    "downloads"
+  ],
+  "oauth2": {
+    "client_id": "1038922135064-ircl84vhei47ndqime5snkgca4j924bm.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/userinfo.profile"
+    ]
+  },
+  "content_security_policy": "default-src http://*.sendsafely.com:8080 'self' https://*.s3-accelerate.amazonaws.com https://mail.google.com https://www.googleapis.com chrome-extension://* https://*.sendsafely.com https://*.sendsafely.co.uk https://*.sendsafely.eu https://*.sendsafely-au.com https://*.sendsafely.com.au https://pmnffbbpjgdhgehnpfllcboddjojnpef.chromiumapp.org https://glpichgelkekjnccdflklcclhnoioblm.chromiumapp.org; script-src 'self' https://mail.google.com; object-src 'self' https://mail.google.com; style-src 'unsafe-inline'; connect-src * data: blob: filesystem:;",
+  "web_accessible_resources": [
+    "css/bootstrap.min.css",
+    "css/bootstrap-switch.min.css",
+    "css/bootstrap.css.map",
+    "css/sass_bootstrap.css",
+    "css/font-awesome.min.css",
+    "css/custom.css",
+    "css/flags.css",
+    "js/Gmail.js",
+    "js/GmailContentPage.js",
+    "js/lib/gmail.js",
+    "images/flags.png",
+    "images/sendsafely_padlock_100.png",
+    "images/sendsafely_padlock_32.png",
+    "images/sendsafely_padlock_16.png",
+    "images/sendsafely_banner.png",
+    "css/jquery-ui-1.10.4.custom.min.css",
+    "images/add_message_32.png",
+    "images/blank.gif",
+    "images/loading.gif",
+    "images/add_recipient_32.png",
+    "images/attach_file_32.png",
+    "images/message_plus_32.png",
+    "images/file_icon_32.png",
+    "images/lock_open_16.png",
+    "images/lock_16.png",
+    "images/user_icon_32.png",
+    "images/flag_default.png",
+    "fonts/glyphicons-halflings-regular.svg",
+    "fonts/fontawesome-webfont.svg",
+    "js/init.js"
+  ]
+}

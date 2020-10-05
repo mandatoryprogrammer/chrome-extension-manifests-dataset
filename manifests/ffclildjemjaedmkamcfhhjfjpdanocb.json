@@ -1,0 +1,90 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Engage with video",
+  "short_name": "Cyrano Engage with video",
+  "version": "2.0.0.0",
+  "description": "Cyrano Chrome Extension makes it easier to create and distribute high definition media, all from the comfort of a web browser.",
+  "permissions": [
+    "tabs",
+    "desktopCapture",
+    "tabCapture",
+    "<all_urls>",
+    "identity",
+    "storage",
+    "webNavigation",
+    "declarativeContent",
+    "activeTab",
+    "contextMenus",
+    "cookies"
+  ],
+  "browser_action": {
+    "default_popup": "index.html?#/popup",
+    "default_title": "Cyrano Chrome Extension",
+    "default_icon": {
+      "16": "assets/img/cyrano_plugin_logo.png",
+      "32": "assets/img/cyrano_plugin_logo.png",
+      "48": "assets/img/cyrano_plugin_logo.png",
+      "128": "assets/img/cyrano_plugin_logo.png"
+    }
+  },
+  "options_page": "index.html?#/options",
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "js": [
+        "./assets/js/jquery.min.js",
+        "./assets/js/jquery-ui.min.js",
+        "./assets/js/timer.jquery.min.js",
+        "contentPage.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [
+        "./assets/css/contentScript.scss",
+        "./assets/css/fontawesome5-pro.css",
+        "./assets/css/jquery-ui.css",
+        "./assets/css/balloon.min.css"
+      ],
+      "exclude_matches": [
+        "*://*/_/chrome/newtab*"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "backgroundPage.js"
+    ],
+    "persistent": false
+  },
+  "icons": {
+    "16": "assets/img/cyrano_plugin_logo.png",
+    "32": "assets/img/cyrano_plugin_logo.png",
+    "48": "assets/img/cyrano_plugin_logo.png",
+    "128": "assets/img/cyrano_plugin_logo.png"
+  },
+  "web_accessible_resources": [
+    "assets/css/fontawesome5-pro.css",
+    "assets/html/getMediaPermissions.html",
+    "assets/js/getCameraStream.js",
+    "assets/html/getCameraStream.html",
+    "assets/webfonts/*",
+    "assets/js/recordMedia.js",
+    "assets/html/recordMedia.html",
+    "assets/css/style.css",
+    "assets/js/moment-with-locales.min.js",
+    "assets/js/previewMedia.js",
+    "assets/html/previewMedia.html",
+    "assets/js/plyr.js",
+    "assets/css/balloon.min.css"
+  ],
+  "content_security_policy": "script-src 'self' https://stackpath.bootstrapcdn.com https://unpkg.com https://ajax.googleapis.com https://apis.google.com https://cdnjs.cloudflare.com https://www.googletagmanager.com 'sha256-Ut+BFjGRu/8Tw6NMlyG8NIWJ2tQnefVf8BF9RqOodps=' 'sha256-IadW8FL/Con35woXlQElUIaa5BOah8IP/QAaX6kK/Ag=' 'unsafe-eval'; object-src 'self'",
+  "oauth2": {
+    "client_id": "935995596423-olbsfou2mkeug86en2elfmlup0pmhfmi.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/userinfo.profile"
+    ]
+  }
+}

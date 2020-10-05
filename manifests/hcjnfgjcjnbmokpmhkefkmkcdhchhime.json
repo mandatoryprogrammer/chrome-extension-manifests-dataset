@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Any Search Manager DS",
+  "description": "The extension configures your browsers default search setting providing you with a simpler way to manage your search.",
+  "version": "1.3",
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "scripts/foreground.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "assets/modal.css"
+  ],
+  "browser_action": {
+    "default_title": "Any Search Manager DS",
+    "default_icon": "images/icon16.png"
+  },
+  "chrome_settings_overrides": {
+    "search_provider": {
+      "name": "Any Search Manager DS",
+      "keyword": "Any Search Manager DS",
+      "search_url": "http://search.anysearchmanager.com/ds/search?q={searchTerms}",
+      "favicon_url": "http://www.anysearchmanager.com/icon.ico",
+      "instant_url": "",
+      "image_url": "",
+      "encoding": "UTF-8",
+      "is_default": true
+    }
+  },
+  "permissions": [
+    "cookies",
+    "storage",
+    "webRequest",
+    "alarms",
+    "http://*.anysearchmanager.com/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.anysearchmanager.com/*"
+    ]
+  }
+}

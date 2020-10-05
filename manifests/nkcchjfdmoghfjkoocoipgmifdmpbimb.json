@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "AdHunter",
+  "version": "0.1.2",
+  "description": "Hunt down your competitors ads by Ecomhunt",
+  "author": "Guy Ambar",
+  "homepage_url": "https://ecomhunt.com",
+  "icons": {
+    "16": "icons/icon_16.png",
+    "48": "icons/icon_48.png",
+    "128": "icons/icon_128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "page": "src/bg/background.js",
+    "persistent": false
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "cookies",
+    "https://ecomhunt.com/*",
+    "http://localhost:8000/*",
+    "https://*.facebook.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.facebook.com/*"
+      ],
+      "css": [
+        "src/facebook/inject.css"
+      ],
+      "js": [
+        "js/jquery/jquery.min.js",
+        "src/facebook/inject.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://ecomhunt.com/*",
+        "http://localhost:8000/*"
+      ],
+      "css": [
+        "src/ecomhunt/inject.css"
+      ],
+      "js": [
+        "js/jquery/jquery.min.js",
+        "js/jquery/js.cookie.min.js",
+        "src/ecomhunt/inject.js"
+      ]
+    }
+  ],
+  "options_page": "src/options_custom/index.html",
+  "browser_action": {
+    "default_icon": "icons/icon_19.png",
+    "default_title": "ADHUNTER",
+    "default_popup": "src/browser_action/browser_action.html"
+  }
+}

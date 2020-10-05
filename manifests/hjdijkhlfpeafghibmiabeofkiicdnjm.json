@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Grepsr - Web Scraping Tool",
+  "short_name": "Grepsr for Chrome",
+  "version": "1.0.6",
+  "author": "Bidhan A",
+  "description": "Scrape data from any website & turn it into a spreadsheet or API in seconds!",
+  "browser_action": {
+    "default_title": "Grepsr"
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://app.grep.sr/*",
+      "*://app.dev.grepsr.net/*",
+      "*://appnext.dev.grepsr.net/*",
+      "*://appnext.grepsr.com/*",
+      "*://app.local.grepsr.net/*",
+      "*://app.grepsr.com/*",
+      "*://www.grepsr.com/*",
+      "http://localhost:3010/*"
+    ]
+  },
+  "background": {
+    "page": "background.html",
+    "persistent": false
+  },
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon64.png"
+  },
+  "permissions": [
+    "https://*/*",
+    "http://*/*",
+    "file://*/*",
+    "tabs",
+    "notifications",
+    "cookies"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file://*/*"
+      ],
+      "js": [
+        "content-script.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "img/*",
+    "templates/*",
+    "fonts/*"
+  ],
+  "content_security_policy": "script-src 'self' https://cdn.segment.com/analytics.js/v1/db4qO5ehHztrRgO3ylU9TIyhEI4PGbal/analytics.min.js https://www.google-analytics.com/analytics.js https://bat.bing.com/bat.js https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js; object-src 'self'"
+}

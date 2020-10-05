@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "京价保 - 京东价保助手",
+  "short_name": "京价保",
+  "description": "京价保（京价宝）是自动为你申请京东价格保护，自动签到领京豆、钢镚的多功能京东助手",
+  "version": "2.8.8",
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "static/image/jjb.png",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.jd.com/*",
+        "*://*.jd.hk/*"
+      ],
+      "js": [
+        "static/jquery.min.js",
+        "static/content_script.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "run_at": "document_start",
+      "js": [
+        "static/mobile_script.js"
+      ],
+      "matches": [
+        "*://*.m.jd.com/*",
+        "*://m.jr.jd.com/*",
+        "*://wq.jd.com/*",
+        "*://wqs.jd.com/*",
+        "*://msitepp-fm.jd.com/*"
+      ],
+      "all_frames": true
+    }
+  ],
+  "icons": {
+    "16": "static/image/16.png",
+    "48": "static/image/48.png",
+    "128": "static/image/128.png"
+  },
+  "web_accessible_resources": [
+    "static/priceChart.js",
+    "static/touch-emulator.js"
+  ],
+  "permissions": [
+    "*://*.jd.com/*",
+    "*://*.jd.hk/*",
+    "webRequest",
+    "webRequestBlocking",
+    "alarms",
+    "contextMenus",
+    "notifications"
+  ]
+}

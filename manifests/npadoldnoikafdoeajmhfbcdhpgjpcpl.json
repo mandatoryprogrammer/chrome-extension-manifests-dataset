@@ -1,0 +1,37 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Rizzoma @Mentions Notifier",
+  "version": "0.262",
+  "manifest_version": 2,
+  "description": "Check out and respond to @mentions in Rizzoma immediately. Know if somebody needs your attention right away.",
+  "icons": {
+    "48": "img/rizzoma-48x48.png",
+    "128": "img/rizzoma-128x128.png"
+  },
+  "browser_action": {
+    "default_icon": "img/rizzoma-transparent-icon.png",
+    "default_popup": "popup/popup.html"
+  },
+  "background": {
+    "page": "rizzoma-notifications-background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://rizzoma.com/*",
+        "https://rizzoma.com/*"
+      ],
+      "js": [
+        "lib/jquery-1.8.2.js",
+        "src/rizzoma-iframe/find-authentification-token.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "storage",
+    "http://rizzoma.com/*",
+    "https://rizzoma.com/*"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

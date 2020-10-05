@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "TLDR: Summarize Anything",
+  "version": "1.01",
+  "manifest_version": 2,
+  "minimum_chrome_version": "18",
+  "description": "Too long didn't read? Summarize Articles, News, Anything",
+  "icons": {
+    "16": "icons/tldr-48x48.png",
+    "48": "icons/tldr-48x48.png",
+    "128": "icons/tldr-128x128.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/tldr-48.png"
+  },
+  "background": {
+    "scripts": [
+      "scripts/background.js",
+      "scripts/jquery-1.9.1.min.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "css/tldr.css",
+        "css/options.css"
+      ],
+      "js": [
+        "scripts/jquery-1.9.1.min.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "contextMenus",
+    "background"
+  ],
+  "web_accessible_resources": [
+    "html/overlay.html",
+    "img/preloader.gif"
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAo1nKmXMcpoYuacb5JIjIExFoVbJ5CkJBDptUIXOZ4qh8nUHE/T5YycC2Sc37MLTiv0Y61hd0joECdegR9o0UzID9WczGN9GnAhth5Woj6vQE1FY+V9k8F21GTCwzJXsavyrpqQd1OqzA8W20XqHf0Ki+1678JgjoUjww3lFwP/6Mvj+4gSqTarohdmaJJ/uq5Nkhe+IFOoWN7IGsNf5bpmECt9K24D6C+3M+LaOWOeufD89KYn/WBxuvsr4AgbyxlSh7CVezQoRmedfGaZRi/Sqqef7NzETon+OoRAWKqO5RrtOOk8hqL9j0/ICzJN6u7Ph6vjm9LGOz1ZOXDI/mTwIDAQAB",
+  "name": "Magic for Podio",
+  "version": "4.10.13",
+  "manifest_version": 2,
+  "description": "Chrome to Podio integration",
+  "homepage_url": "http://www.gryffin.com",
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "Podio Magic"
+  },
+  "background": {
+    "scripts": [
+      "src/browser_action/js/jquery.min.js",
+      "src/browser_action/js/frame.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "activeTab",
+    "unlimitedStorage",
+    "http://*/*",
+    "https://*/*",
+    "https://api.podio.com/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "js": [
+        "src/browser_action/js/jquery.min.js",
+        "src/inject/inject.js"
+      ],
+      "css": [
+        "css/frame.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "src/browser_action/browser_action.html"
+  ]
+}

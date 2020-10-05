@@ -1,0 +1,175 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "CodeCode Ninja Snippet Saver",
+  "version": "1.1.2",
+  "description": "Allows you to save snippets of code into CodeCode Ninja, to turn into flashcards.",
+  "background": {
+    "scripts": [
+      "scripts/config/constants.js",
+      "scripts/utils/analytics.js",
+      "scripts/utils/apiHandler.js",
+      "scripts/utils/loginHandler.js",
+      "scripts/background/notifications.js",
+      "scripts/background/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://stackoverflow.com/*"
+      ],
+      "js": [
+        "scripts/config/contentScripts.js",
+        "scripts/contentScripts/stackoverflow.js"
+      ],
+      "css": [
+        "styles/stackoverflow.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://developer.mozilla.org/*/docs/*"
+      ],
+      "js": [
+        "scripts/config/contentScripts.js",
+        "scripts/contentScripts/mdn.js"
+      ],
+      "css": [
+        "styles/mdn.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://css-tricks.com/*"
+      ],
+      "js": [
+        "scripts/config/contentScripts.js",
+        "scripts/contentScripts/css-tricks.js"
+      ],
+      "css": [
+        "styles/css-tricks.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.freecodecamp.org/challenges/*"
+      ],
+      "js": [
+        "scripts/config/contentScripts.js",
+        "scripts/contentScripts/freecodecamp.js"
+      ],
+      "css": [
+        "styles/freecodecamp.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://tech.io/playgrounds/*"
+      ],
+      "js": [
+        "scripts/config/contentScripts.js",
+        "scripts/contentScripts/tech.io.js"
+      ],
+      "css": [
+        "styles/tech.io.css"
+      ]
+    },
+    {
+      "matches": [
+        "http://devdocs.io/*"
+      ],
+      "js": [
+        "scripts/config/contentScripts.js",
+        "scripts/contentScripts/devdocs.js"
+      ],
+      "css": [
+        "styles/devdocs.css"
+      ]
+    },
+    {
+      "matches": [
+        "http://campus.codeschool.com/*"
+      ],
+      "js": [
+        "scripts/config/contentScripts.js",
+        "scripts/contentScripts/codeschool.js"
+      ],
+      "css": [
+        "styles/codeschool.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.howtogeek.com/*"
+      ],
+      "js": [
+        "scripts/config/contentScripts.js",
+        "scripts/contentScripts/howtogeek.js"
+      ],
+      "css": [
+        "styles/howtogeek.css"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "scripts/utils/popupHTML.js",
+        "scripts/config/constants.js",
+        "scripts/config/languages.js",
+        "scripts/utils/apiHandler.js",
+        "scripts/utils/loginHandler.js",
+        "vendor/jquery-3.1.1.min.js",
+        "vendor/jquery.flexdatalist.min.js",
+        "scripts/utils/initializeCard.js",
+        "popup/popup.js",
+        "scripts/contentScripts/main.js"
+      ],
+      "css": [
+        "vendor/jquery.flexdatalist.min.css",
+        "popup/popup.css",
+        "styles/inject.css"
+      ]
+    }
+  ],
+  "manifest_version": 2,
+  "icons": {
+    "16": "images/no_pending_16x16.png",
+    "128": "images/no_pending.png"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+Shift+W"
+      }
+    }
+  },
+  "permissions": [
+    "alarms",
+    "notifications",
+    "activeTab",
+    "clipboardRead",
+    "contextMenus",
+    "cookies",
+    "storage",
+    "<all_urls>"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.codecode.ninja/*"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "images/no_pending.png",
+    "default_popup": "popup/popup.html",
+    "default_title": "Create a CCN Snippet"
+  },
+  "options_page": "options/options.html",
+  "web_accessible_resources": [
+    "images/*",
+    "fonts/*",
+    "config/*"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'  https://www.google-analytics.com"
+}

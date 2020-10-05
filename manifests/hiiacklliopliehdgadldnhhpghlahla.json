@@ -1,0 +1,84 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "트위티콘 차원문",
+  "version": "1.1.2.5",
+  "description": "한글 별칭으로 Twitch 이모티콘 사용",
+  "icons": {
+    "16": "portal_16.png",
+    "48": "portal_48.png",
+    "128": "portal_128.png"
+  },
+  "browser_action": {
+    "scripts": [
+      "skin/script.js"
+    ],
+    "default_popup": "setting.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.twitch.tv/",
+        "https://*.twitch.tv/*"
+      ],
+      "css": [
+        "styles/styles.css"
+      ],
+      "js": [
+        "lib/hangul.min.js",
+        "TwitchChatFramework/content_scripts/tmi.min.js",
+        "TwitchChatFramework/content_scripts/twitchChatframe.js",
+        "content_scripts/header.js",
+        "content_scripts/chat_observer.js",
+        "content_scripts/emote_tooltip.js",
+        "content_scripts/alias_load.js",
+        "content_scripts/emote_picker.js",
+        "content_scripts/emote_count.js",
+        "content_scripts/paste_check.js",
+        "content_scripts/auto_complete.js",
+        "content_scripts/on_load.js",
+        "content_scripts/main.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "lib/LRU_cache.js",
+      "lib/hangul.min.js",
+      "TwitchChatFramework/background/get_user_info.js",
+      "TwitchChatFramework/background/get_emote.js",
+      "TwitchChatFramework/background/get_channel_emote.js",
+      "TwitchChatFramework/background/get_extension_id.js",
+      "background/get_alias.js",
+      "TwitchChatFramework/background/tcf_background.js",
+      "TwitchChatFramework/background/master_check.js",
+      "background/shortcut_background.js",
+      "background/main.js"
+    ]
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' ; object-src 'self'",
+  "permissions": [
+    "cookies",
+    "tabs",
+    "contextMenus",
+    "*://*.twitch.tv/",
+    "storage",
+    "management"
+  ],
+  "web_accessible_resources": [
+    "emote_picker.png",
+    "bit_picker.png",
+    "gear.png",
+    "menu.png",
+    "black_emote_picker.png",
+    "black_gear.png",
+    "black_menu.png",
+    "black_bit_picker.png",
+    "AutoCompleteBottom.png",
+    "AutoCompleteLeft.png",
+    "AutoCompleteRight.png",
+    "html/*.html",
+    "TwtichChatFramework/html/*.html"
+  ]
+}

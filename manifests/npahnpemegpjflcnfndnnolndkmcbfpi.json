@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "QuickCal",
+  "short_name": "quickcal",
+  "version": "0.1.2",
+  "description": "Add dates from webpages to Google Calendar in a single click",
+  "icons": {
+    "512": "icons/classic/main.png",
+    "16": "icons/classic/16.png"
+  },
+  "manifest_version": 2,
+  "background": {
+    "page": "src/bg/background.html",
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.google.com/robots.txt*"
+      ],
+      "js": [
+        "oauth2/oauth2_inject.js"
+      ],
+      "match_about_blank": true,
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "https://accounts.google.com/o/oauth2/token",
+    "https://www.googleapis.com/",
+    "*://*/*",
+    "https://*/*",
+    "http://*/*",
+    "tabs",
+    "storage",
+    "notifications",
+    "contextMenus"
+  ],
+  "web_accessible_resources": [
+    "oauth2/oauth2.html",
+    "*"
+  ],
+  "options_page": "options/index.html",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

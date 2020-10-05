@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "description": "Edit your tweets, finally.",
+  "version": "0.0.20",
+  "name": "Covfefe",
+  "manifest_version": 2,
+  "homepage_url": "https://blurt.app",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/icon48.png",
+    "default_title": "Covfefe",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "deweet.bundle.js",
+      "background.bundle.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "contextMenus",
+    "webRequest",
+    "https://api.twitter.com/*",
+    "https://platform.twitter.com/*",
+    "https://twitter.com/i/tweet/*",
+    "https://twitter.com/intent/tweet*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.google-analytics.com https://platform.twitter.com https://cdn.syndication.twimg.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://coreygwin.com/*"
+      ],
+      "js": [
+        "session.bundle.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://twitter.com/*"
+      ],
+      "js": [
+        "undo.bundle.js"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Don't Pay Trump",
+  "description": "The simple Trump boycott extension that makes it easy to be a conscious consumer and keep your money out of Trump’s tiny hands.",
+  "version": "1.9.2",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "background": {
+    "scripts": [
+      "./lib/event.js"
+    ],
+    "persistent": false
+  },
+  "icons": {
+    "24": "./assets/red-24.png",
+    "48": "./assets/red-48.png",
+    "128": "./assets/red-128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "lib/main.js"
+      ],
+      "css": [
+        "lib/main.css",
+        "lib/popup.css",
+        "fonts.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "tabs",
+    "webNavigation"
+  ],
+  "page_action": {
+    "default_popup": "./index.popup.html",
+    "default_title": "Don't Pay Trump",
+    "default_icon": {
+      "24": "./assets/red-24.png",
+      "48": "./assets/red-48.png",
+      "128": "./assets/red-128.png"
+    }
+  },
+  "web_accessible_resources": [
+    "lib/main.css",
+    "lib/popup.css",
+    "options.html"
+  ],
+  "options_page": "options.html"
+}

@@ -1,0 +1,39 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Cypher text",
+  "version": "1.0.0",
+  "description": "Cypher any text on web page.",
+  "icons": {
+    "16": "ico/icon-bitty.png",
+    "64": "ico/icon-medium.png",
+    "128": "ico/icon-large.png"
+  },
+  "background": {
+    "scripts": [
+      "js/constants.js",
+      "js/passphraseResolver.js",
+      "lib/rc4.js",
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/constants.js",
+        "js/save_last_element.js",
+        "js/contentMain.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "storage",
+    "background",
+    "contextMenus",
+    "tabs"
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Flashcontrol",
+  "description": "__MSG_ManifestDescription__",
+  "version": "9.4",
+  "manifest_version": 2,
+  "minimum_chrome_version": "56",
+  "default_locale": "en",
+  "icons": {
+    "16": "assets/16.png",
+    "48": "assets/48.png",
+    "128": "assets/128.png"
+  },
+  "browser_action": {
+    "default_icon": "assets/48.png",
+    "default_title": "Flashcontrol",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "match_about_blank": true,
+      "css": [
+        "assets/content.css"
+      ],
+      "matches": [
+        "*://*/*"
+      ]
+    },
+    {
+      "all_frames": true,
+      "match_about_blank": true,
+      "js": [
+        "bootstrap.js",
+        "content.js"
+      ],
+      "matches": [
+        "*://*/*"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "adblockplus/compat.js",
+      "adblockplus/info.js",
+      "adblockplus/publicSuffixList.js",
+      "adblockplus/adblockplus.js",
+      "bootstrap.js",
+      "runtime.js"
+    ],
+    "persistent": false
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "permissions": [
+    "tabs",
+    "*://*/*",
+    "storage",
+    "contextMenus"
+  ],
+  "devtools_page": "devpanel.html",
+  "web_accessible_resources": [
+    "assets/flashlogo.svg",
+    "assets/pluginlogo.svg"
+  ]
+}

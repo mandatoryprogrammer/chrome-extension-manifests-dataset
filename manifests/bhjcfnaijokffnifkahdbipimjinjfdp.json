@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "1.0.3",
+  "name": "Datalet",
+  "manifest_version": 2,
+  "description": "Datalet - Build Deep Learning Dataset in minutes",
+  "browser_action": {
+    "default_title": "Datalet - Build Deep Learning Dataset in minutes",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "img/icon-16.png",
+    "48": "img/icon-48.png",
+    "128": "img/icon-128.png"
+  },
+  "web_accessible_resources": [
+    "inject.html",
+    "css/*",
+    "fonts/*",
+    "img/*"
+  ],
+  "background": {
+    "page": "background.html"
+  },
+  "content_scripts": [
+    {
+      "persistent": true,
+      "matches": [
+        "https://*.google.com/*"
+      ],
+      "js": [
+        "js/content.bundle.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "contextMenus",
+    "management",
+    "tabs",
+    "storage",
+    "cookies",
+    "https://datalet.co/*"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com 'unsafe-eval';   object-src 'self'; connect-src https://ssl.google-analytics.com/ http://aid.deepword.cn https://datalet.co; style-src * 'unsafe-inline' 'self' blob:; img-src * 'self' data: https:;"
+}

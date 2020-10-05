@@ -1,0 +1,80 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "description": "Make WhaleSlide your default search engine on Chrome",
+  "homepage_url": "http://www.whaleslide.com/",
+  "manifest_version": 2,
+  "name": "WhaleSlide Private Search",
+  "version": "1.1.6",
+  "icons": {
+    "128": "assets/images/icons/icon128.png"
+  },
+  "browser_action": {
+    "browser_style": true,
+    "default_icon": {
+      "128": "assets/images/icons/icon128.png"
+    },
+    "default_popup": "assets/html/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "assets/js/global/config.js",
+      "assets/js/global/settings.js",
+      "assets/js/background/helpers.js",
+      "assets/js/background/auth.js",
+      "assets/js/background/postOffice.js",
+      "assets/js/background/events.js",
+      "assets/js/background/filter.js",
+      "assets/js/background/options.js",
+      "assets/js/background/init.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "assets/vendor/jquery.js",
+        "assets/js/content/init.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "https://www.whaleslide.com/",
+    "http://www.whaleslide.com/",
+    "http://static.whaleslide.com/",
+    "http://ext.whaleslide.com/",
+    "http://devpeak.whaleslide.com/",
+    "http://dev.whaleslide.com/",
+    "*://aotb.mysearch.co.uk/",
+    "notifications",
+    "tabs",
+    "cookies",
+    "contextMenus",
+    "activeTab",
+    "webRequestBlocking",
+    "webRequest",
+    "storage",
+    "<all_urls>"
+  ],
+  "web_accessible_resources": [
+    "assets/images/*.gif",
+    "assets/images/*.jpg",
+    "assets/images/*.png",
+    "assets/images/*.svg",
+    "assets/css/fonts/*.ttf",
+    "assets/css/fonts/*.woff2"
+  ],
+  "chrome_settings_overrides": {
+    "search_provider": {
+      "name": "WhaleSlide",
+      "keyword": "whaleslide.com",
+      "search_url": "https://www.whaleslide.com/search/web/?q={searchTerms}",
+      "favicon_url": "https://whaleslide.com/assets/favicon/WS_FAVICON.png",
+      "suggest_url": "https://search.whaleslide.com/api/v1/suggestions/get/{searchTerms}",
+      "image_url": "https://www.whaleslide.com/search/images/{searchTerms}",
+      "encoding": "UTF-8",
+      "is_default": true
+    }
+  }
+}

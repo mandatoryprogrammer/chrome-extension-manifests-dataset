@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Poppy Meet",
+  "description": "A simple extension that allows you to schedule Poppy Meetings and stream your desktop into Poppy Meet conferences.",
+  "version": "1.0.6",
+  "minimum_chrome_version": "34",
+  "icons": {
+    "16": "Poppy-tec-icon-16x16.png",
+    "48": "Poppy-tec-icon-48x48.png",
+    "128": "Poppy-tec-icon-128x128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "desktopCapture",
+    "https://calendar.google.com/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://voip.imeeting365.com/*",
+      "*://imeeting365.com/*",
+      "*://e-board365.com/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://calendar.google.com/calendar/*",
+        "https://outlook.live.com/owa/*"
+      ],
+      "js": [
+        "jquery.js",
+        "RandomUtil.js",
+        "RoomnameGenerator.js",
+        "meet-calendar.js"
+      ],
+      "css": [
+        "/css/all.css"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "Poppy-tec-icon-48x48.png",
+    "Poppy-tec-icon-white-48x48.png"
+  ]
+}

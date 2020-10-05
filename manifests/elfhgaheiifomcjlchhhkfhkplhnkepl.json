@@ -1,0 +1,95 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "name": "__MSG_ExtName__",
+  "description": "__MSG_ExtDescription__",
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAgL6kmMy6OZZQTjIYqrdNt/B/qWXwLt2fnOc2zBD74NgsNfgvOG5hhnvH4J8OO7BO/BjoWAkx+V5BjWJ+15vibN5O847RXno5O9XrzpMYKElvrM/f8gc0XE9akCFjoGQJNp3RCeq9mcfALCQkme7JMMl6uuziMKb1i5DQm9CV2LAzS2ZshA+/RiciyU6xpVrhi0ZIeFLmwb/dOruzQi09wexWHfMyyJUeRvtk8CGtKT2dzFnNn+5ZAtcMXCHT6wbllzJG9ZaGDLNvD0jGMMg4hqgqcDLLbyhvsCETWdoDrBURIgUi8fIAE1VtWMpovsYJG5Ob2g1M/sQpOk+0PBEwQwIDAQAB",
+  "browser_action": {
+    "default_icon": "media/Blur_icon_inactive_square_128.png",
+    "default_popup": "popups/index.html"
+  },
+  "homepage_url": "https://blur.live",
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "<all_urls>"
+      ],
+      "all_frames": true,
+      "js": [
+        "light.js"
+      ],
+      "css": [
+        "./styles/blur.css"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "matches": [
+        "<all_urls>"
+      ],
+      "all_frames": false,
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "./styles/blur.css"
+      ]
+    },
+    {
+      "run_at": "document_idle",
+      "matches": [
+        "<all_urls>"
+      ],
+      "all_frames": false,
+      "js": [
+        "notification_base.js"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "matches": [
+        "https://blur.live/notification*",
+        "https://staging.blur.live/notification*"
+      ],
+      "all_frames": true,
+      "js": [
+        "notification_notify.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "storage",
+    "webNavigation",
+    "webRequest",
+    "downloads",
+    "<all_urls>"
+  ],
+  "icons": {
+    "16": "media/16.png",
+    "48": "media/48.png",
+    "128": "media/128.png"
+  },
+  "commands": {
+    "open-extension-details": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+6",
+        "mac": "Command+Shift+6"
+      },
+      "description": "Show Blur Config"
+    }
+  },
+  "web_accessible_resources": [
+    "notification.html",
+    "notification.js"
+  ],
+  "version": "1.20.1918.2656"
+}

@@ -1,0 +1,31 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Flake linker",
+  "description": "Links to Chromium flakiness dashboard from build result pages.",
+  "version": "1.10",
+  "manifest_version": 2,
+  "icons": {
+    "128": "icon128.png"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "flake_linker.js"
+      ],
+      "matches": [
+        "*://ci.chromium.org/*"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "js": [
+        "log_scroller.js"
+      ],
+      "matches": [
+        "*://chromium-swarm.appspot.com/*",
+        "*://chrome-swarming.appspot.com/*"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

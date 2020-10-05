@@ -1,0 +1,36 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "evernote url opener",
+  "description": "open evernote link url on evernote app",
+  "version": "0.0.5",
+  "manifest_version": 2,
+  "permissions": [
+    "https://www.evernote.com/*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "icons": {
+    "32": "evernote_icon32.png",
+    "48": "evernote_icon48.png",
+    "128": "evernote_icon128.png"
+  },
+  "options_page": "options.html",
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.evernote.com/shard/*",
+        "https://www.evernote.com/view/notebook/*",
+        "https://www.evernote.com/notelink/Login.action*",
+        "https://www.evernote.com/Login.action*"
+      ],
+      "js": [
+        "script.js"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Swatch Blocks",
+  "version": "0.1.0",
+  "manifest_version": 2,
+  "description": "Color inspiration from your favorite websites.",
+  "homepage_url": "https://swatchblocks.com",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "bg/background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": "icons/icon128.png",
+    "default_title": "Swatch Blocks"
+  },
+  "permissions": [
+    "activeTab",
+    "*://*/*",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.pinterest.com/*",
+        "https://www.google.com/search*",
+        "http://notcot.org/*"
+      ],
+      "css": [
+        "inject/onpage.css"
+      ],
+      "js": [
+        "inject/onpage.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'wasm-eval'; object-src 'self'"
+}

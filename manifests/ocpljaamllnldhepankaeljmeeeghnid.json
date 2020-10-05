@@ -1,0 +1,149 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Mixmax: Email Tracking, Templates, Mail Merge",
+  "short_name": "Mixmax",
+  "version": "4.7.14",
+  "description": "Email tracking and productivity suite for Gmail.",
+  "author": "Mixmax, Inc.",
+  "background": {
+    "scripts": [
+      "src/assets/lib/aws-sdk-v2.437.0.js",
+      "src/assets/lib/jquery-2.1.4.js",
+      "src/assets/lib/underscore-1.8.3.js",
+      "src/assets/lib/raven-3.3.0.js",
+      "src/assets/lib/Environment.js",
+      "src/assets/lib/raven-config.js",
+      "src/assets/lib/error.js",
+      "src/assets/lib/lz-string-1.4.4.js",
+      "src/background.js"
+    ]
+  },
+  "icons": {
+    "16": "src/assets/img/icon.png",
+    "48": "src/assets/img/icon.png",
+    "128": "src/assets/img/icon.png"
+  },
+  "permissions": [
+    "tabs",
+    "notifications",
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "unlimitedStorage",
+    "*://*/*"
+  ],
+  "homepage_url": "https://mixmax.com",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.mixmax.com/*"
+      ],
+      "exclude_matches": [
+        "*://*.mixmax.com/public/analyticsbridge.html"
+      ],
+      "js": [
+        "src/content/globals.js",
+        "src/assets/lib/raven-3.3.0.js",
+        "src/assets/lib/Environment.js",
+        "src/assets/lib/raven-config.js",
+        "src/assets/lib/error.js",
+        "src/content/ExtensionMessageBus.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://mail.google.com/*"
+      ],
+      "js": [
+        "src/content/unblock.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://mail.google.com/*",
+        "*://*.force.com/*",
+        "*://*.salesforce.com/*"
+      ],
+      "js": [
+        "src/content/globals.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://mail.google.com/*"
+      ],
+      "js": [
+        "src/content/pageInterop.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://mail.google.com/*",
+        "*://*.force.com/*",
+        "*://*.salesforce.com/*"
+      ],
+      "js": [
+        "src/assets/lib/raven-3.3.0.js",
+        "src/assets/lib/Environment.js",
+        "src/assets/lib/raven-config.js",
+        "src/assets/lib/error.js",
+        "src/content/ExtensionMessageBus.js",
+        "src/content/app.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://www.linkedin.com/sales/widget/*"
+      ],
+      "js": [
+        "src/content/globals.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://www.linkedin.com/sales/widget/*"
+      ],
+      "js": [
+        "src/assets/lib/raven-3.3.0.js",
+        "src/assets/lib/Environment.js",
+        "src/assets/lib/raven-config.js",
+        "src/assets/lib/error.js",
+        "src/content/app.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "*://mail.google.com/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "src/content/mailTo.js",
+        "src/content/callTo.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    "src/iframeProxy/proxy.html",
+    "src/assets/img/emptyPixel.gif"
+  ],
+  "browser_action": {
+    "default_icon": "src/assets/img/icon.png",
+    "default_title": "Mixmax"
+  },
+  "manifest_version": 2,
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAoYQ79kFdYz3gjTbz/YPkGBaaEOsP8NT//Jugc88JGj9/v92YHzze0y9tApTkk8Qv3DlrAXXnigTiCfNnCkRY66evHZ4Jf8j+Q9E5P/sRTp9J73dtQRcB4Fiz7QgJYnviVXckbAQMLUSCBbUXZeav/xEvmrxNX6Tr16sYBSXB06Ll4kkH8V7hDvqZzOFHlEI7cduMI+I1h6ip3yZ9aSkPD/OlRjGaqM299gonGw0ntrv4LUjvyJiRRvviceWO1BPXZLCoKcqIq5fFeGhymq4hN2RMG5c7YvJEqlsJyT+TvBaGNp/zFg+7uKIOk48y2JV3vKaG7rR8d+hBU7+SNnOHnQIDAQAB"
+}

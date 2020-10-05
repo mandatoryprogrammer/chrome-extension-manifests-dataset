@@ -1,0 +1,91 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "description": "__MSG_appDesc__",
+  "version": "1.2.0",
+  "manifest_version": 2,
+  "name": "__MSG_appName__",
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "/js/lib/sentry.js",
+      "/js/lib/socket.io.js",
+      "/js/background.bundle.js"
+    ],
+    "persistent": true
+  },
+  "icons": {
+    "16": "/img/icon16.png",
+    "48": "/img/icon48.png",
+    "128": "/img/icon128.png"
+  },
+  "content_security_policy": "script-src 'self' https://cdnjs.cloudflare.com; object-src 'self'",
+  "browser_action": {
+    "default_icon": {
+      "16": "/img/icon16.png",
+      "48": "/img/icon48.png",
+      "128": "/img/icon128.png"
+    },
+    "default_title": "Mailpanion",
+    "default_popup": "/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*"
+      ],
+      "js": [
+        "/js/lib/inboxsdk.js",
+        "/js/lib/sentry.js",
+        "/js/gmail.bundle.js",
+        "/js/lib/jquery.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*"
+      ],
+      "css": [
+        "/css/inject.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://mailpanion.com/success*"
+      ],
+      "js": [
+        "/js/success.bundle.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "https://*.googleusercontent.com/",
+    "https://mail.google.com/",
+    "declarativeContent",
+    "storage",
+    "tabs",
+    "notifications",
+    "management",
+    "identity"
+  ],
+  "web_accessible_resources": [
+    "/img/*",
+    "/css/*",
+    "/js/*",
+    "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css"
+  ],
+  "oauth2": {
+    "client_id": "387181534281-vmu4j2g84uuidar891vrgun4vkaimdqf.apps.googleusercontent.com",
+    "scopes": [
+      "email",
+      "profile"
+    ]
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzAfBVHG6XChd/NoGF/C8WNslaSR0o34y06cBUCR2FAJIRIyK3ZRD14c+V63yIPVf9yXoTpMFlbL+kGJe/Eid5TTz8XGb6IOLWGpqEsl/CW0ipAcU0NiznJ0y/o9GUxfx32zx7lhW1fXh1eiNew69C6XydyHF6FEe8wqImlwHcYQ4yHHYiW+6HxKvf+lJYURhcEE5MMMLqfXPrM61UB5Tgxc6xWP5Vbw8TrrZVLCss+WvKD82/ylp5zE7Bj6XC9q2pSS7t0Mk4GxZauxSZNJ6J/Zk0sDoTMTVptoLg83dJQeY8xBcVtFeth0pO008W1fKMdQFw2cUf/3baUGTyhWFeQIDAQAB"
+}

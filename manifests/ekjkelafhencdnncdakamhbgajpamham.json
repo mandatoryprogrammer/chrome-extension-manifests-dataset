@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Prembox.com",
+  "version": "2.0.0",
+  "default_locale": "en",
+  "description": "__MSG_extensionDescription__",
+  "homepage_url": "https://prembox.com",
+  "icons": {
+    "48": "icons/logotype-48.png",
+    "128": "icons/icon_128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "cookies",
+    "contextMenus",
+    "webRequest",
+    "notifications",
+    "http://prembox/*",
+    "https://prembox/*",
+    "http://*.prembox.com/*",
+    "https://*.prembox.com/*",
+    "https://prembox.com/*"
+  ],
+  "browser_action": {
+    "browser_style": false,
+    "default_icon": "icons/logotype-48.png",
+    "default_title": "Prembox",
+    "default_popup": "popup/main.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "thirdparty/browser-polyfill.min.js",
+        "content/filehostpage.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "thirdparty/browser-polyfill.min.js",
+      "thirdparty/jquery-3.2.0.min.js",
+      "background/utils_bg.js",
+      "background/api.js",
+      "background/context_menu.js",
+      "background/filehost.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "images/logo.png"
+  ],
+  "options_ui": {
+    "page": "settings/options.html"
+  }
+}

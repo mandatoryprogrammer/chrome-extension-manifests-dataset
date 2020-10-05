@@ -1,0 +1,176 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Collokia Tips",
+  "manifest_version": 2,
+  "version": "2.11.0",
+  "description": "Use machine learning to automatically keep track of your IT team skills set. Collokia is secure and confidential.",
+  "homepage_url": "https://www.collokia.com",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "page": "pages/background/index.html",
+    "persistent": true
+  },
+  "options_page": "pages/options/index.html",
+  "browser_action": {
+    "default_icon": "icons/icon19-popup-inactive.png",
+    "default_title": "Collokia Tips",
+    "default_popup": "pages/browser-action/index.html"
+  },
+  "optional_permissions": [
+    "history"
+  ],
+  "permissions": [
+    "idle",
+    "notifications",
+    "activeTab",
+    "tabs",
+    "webNavigation",
+    "storage",
+    "alarms",
+    "contextMenus",
+    "https://api.collokia.com/*",
+    "https://api-test.collokia.com/*",
+    "https://app.collokia.com/*",
+    "https://app-test.collokia.com/*",
+    "https://api-dev.collokia.com/*",
+    "https://app-dev.collokia.com/*",
+    "https://api-dev.collokia.com:8443/*",
+    "https://app-dev.collokia.com:8443/*",
+    "http://app-dev.collokia.com:9000/*",
+    "https://www.google-analytics.com/",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "exclude_globs": [
+        "*://accounts.google.com/*",
+        "*://mail.google.com/*",
+        "*://*.google.com/maps/*",
+        "*://*.google.com.??/maps/*",
+        "*://*.google.com/calendar/*",
+        "*://*.google.com.??/calendar/*",
+        "*://*/_/chrome/newtab*"
+      ],
+      "include_globs": [
+        "*://www.google.com/*",
+        "*://www.google.??/*",
+        "*://www.google.com.??/*",
+        "*://www.google.co.??/*",
+        "*://www.google.cat/*",
+        "https://encrypted.google.com/*",
+        "https://encrypted.google.??/*",
+        "https://encrypted.google.com.??/*",
+        "https://encrypted.google.co.??/*",
+        "https://encrypted.google.cat/*"
+      ],
+      "js": [
+        "jspm_packages/system.js",
+        "build/bootstrap/inject/preconfig.js",
+        "config.js",
+        "build/bootstrap/inject/startup-google.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "exclude_globs": [],
+      "include_globs": [
+        "*://www.stackoverflow.com/*",
+        "*://stackoverflow.com/*"
+      ],
+      "js": [
+        "jspm_packages/system.js",
+        "build/bootstrap/inject/preconfig.js",
+        "config.js",
+        "build/bootstrap/inject/startup-stackoverflow.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "exclude_globs": [],
+      "include_globs": [
+        "https://app.collokia.com/*",
+        "https://app-test.collokia.com/*",
+        "https://app-dev.collokia.com:8443/*",
+        "http://app-dev.collokia.com:9000/*"
+      ],
+      "js": [
+        "build/bootstrap/inject/app-comm.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "build/*.js",
+    "build/**/*.js",
+    "build/**/*.js.map",
+    "jspm_packages/**/*.js",
+    "jspm_packages/**/*.css",
+    "inject/*.css",
+    "jspm_packages/**/*.otf",
+    "jspm_packages/**/*.svg",
+    "jspm_packages/**/*.ttf",
+    "jspm_packages/**/*.woff",
+    "jspm_packages/**/*.woff2",
+    "jspm_packages/**/*.eot",
+    "jspm_packages/**/*.js.map",
+    "icons/*.png",
+    "images/*.png",
+    "images/*.jpg",
+    "images/*.gif",
+    "images/**/*.png",
+    "images/**/*.jpg",
+    "images/**/*.gif",
+    "fonts/*.otf",
+    "fonts/*.svg",
+    "fonts/*.ttf",
+    "fonts/*.woff",
+    "fonts/*.woff2",
+    "fonts/*.eot",
+    "pages/**/*.html",
+    "pages/**/*.hbs",
+    "vendor/**/*.js",
+    "vendor/*.js",
+    "https://collokia-app-test.firebaseio.com/*",
+    "https://collokia-app.firebaseio.com/*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://cdn.firebase.com https://*.firebaseio.com https://*.firebaseio.com; object-src 'self'; ",
+  "externally_connectable": {
+    "ids": [
+      "ghjblfcbcodgplpibgobicdakohgofid",
+      "pfegdhncnknjgdbfkihpobnjdadagnai",
+      "bkegccppmbdkkmpkdakgjafhpadiofie",
+      "kacncifoldmhbfgppcjifjmhloedhgkg",
+      "nnlgkbjangkengmlganbfpgdadeojobo",
+      "fbfbhlhdpnkbjkcgglnkilfelminidkj",
+      "bhlgcajaekghmlkcpjceibpfcoehhgal",
+      "hmkigfjpcbfnbimcknfidbfdlkgaapfi",
+      "hofheknelbbhnanfdlkiohknpdadkmij",
+      "ekblepkineomofcchbfjgognlndeloef",
+      "fiafohmdjmjgoahfnmolbiflcjeolnak",
+      "beekioggkgladkkkpianmanognbkpglj",
+      "jdofkocogglkkkenimhnkfbmfnjpjeij"
+    ],
+    "matches": [
+      "https://app.collokia.com/*",
+      "https://app-test.collokia.com/*",
+      "https://app-dev.collokia.com:8443/*",
+      "http://app-dev.collokia.com:9000/*",
+      "https://glow.corp.globant.com/*"
+    ]
+  }
+}

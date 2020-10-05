@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Dable extension",
+  "version": "0.0.11",
+  "manifest_version": 2,
+  "description": "Dable administration tools",
+  "homepage_url": "http://dable.io",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "browser_action": {
+    "default_popup": "src/bg/popup.html"
+  },
+  "background": {
+    "page": "src/bg/background.html",
+    "persistent": false
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "contextMenus",
+    "clipboardWrite",
+    "cookies",
+    "https://*/*",
+    "http://*/*",
+    "webNavigation"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/jquery/jquery.min.js",
+        "src/inject/inject.js"
+      ],
+      "all_frames": true
+    }
+  ]
+}

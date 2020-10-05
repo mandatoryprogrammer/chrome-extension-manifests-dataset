@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Signature",
+  "version": "1.0.0",
+  "description": "Signatures for Medium, simplified.",
+  "icons": {
+    "64": "resources/icons/favicon-256.png",
+    "128": "resources/icons/favicon-256.png"
+  },
+  "browser_action": {
+    "browser_style": true,
+    "default_icon": {
+      "16": "resources/icons/favicon-256.png",
+      "32": "resources/icons/favicon-256.png"
+    },
+    "default_title": "Signature, for Medium"
+  },
+  "permissions": [
+    "clipboardRead",
+    "clipboardWrite",
+    "storage"
+  ],
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.medium.com/*"
+      ],
+      "js": [
+        "content/vendor/quill-delta-to-html.js",
+        "content/vendor/clipboard-polyfill.js",
+        "content/insertSignature.js"
+      ],
+      "css": [
+        "content/modifiedTooltip.css"
+      ]
+    }
+  ],
+  "options_ui": {
+    "chrome_style": false,
+    "page": "settings/settings.html",
+    "open_in_tab": true
+  },
+  "web_accessible_resources": [
+    "content/*.svg"
+  ],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+Shift+S"
+      }
+    }
+  }
+}

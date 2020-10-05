@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "ElePass - Agency Password Manager",
+  "short_name": "ElePass",
+  "description": "Trade the spreadsheets and other risky places you’ve been storing client info for an easy, secure client password management tool.",
+  "version": "3.0.3",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "ext/jquery-3.2.1.min.js",
+        "build/content.js"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "homepage_url": "https://elepass.io",
+  "background": {
+    "scripts": [
+      "build/background.js",
+      "ext/jquery-3.2.1.min.js",
+      "build/inject.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icons/elephant.png",
+    "default_title": "ElePass",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "nativeMessaging",
+    "tabs",
+    "*://*/*",
+    "storage",
+    "unlimitedStorage",
+    "cookies",
+    "clipboardWrite"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://elepass.io/*",
+      "*://app.elepass.io/*",
+      "http://localhost:62924/*",
+      "*://elepass-staging.azurewebsites.net/*",
+      "*://elepass-api.azurewebsites.net/*",
+      "*://wa.dev-squared.com/*"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://wa.dev-squared.com/m.js object-src 'self' 'unsafe-eval'"
+}

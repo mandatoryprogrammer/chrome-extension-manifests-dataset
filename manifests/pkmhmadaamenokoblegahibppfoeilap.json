@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "save-anywhere",
+  "short_name": "saveanywhere",
+  "version": "1.25",
+  "description": "save-anywerhe 可以右键保存选中的文本，存储到浏览器本地的 indexedDb。如果需要同步不同机器保存的内容，需要使用 github oauth 登陆授权，然后使用同步功能即可同步不同机器保存的内容。",
+  "manifest_version": 2,
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": "assets/img/save-everywhere16.png",
+    "default_title": "save-anywhere"
+  },
+  "background": {
+    "page": "./chrome/background.html"
+  },
+  "permissions": [
+    "activeTab",
+    "windows",
+    "storage",
+    "contextMenus",
+    "notifications",
+    "webRequest",
+    "https://accounts.google.com/o/oauth2/token",
+    "https://github.com/",
+    "http://btbtd.org/api/*"
+  ],
+  "web_accessible_resources": [
+    "chrome/utils/oauth2/oauth2.html"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://btbtd.org/api/saveanywhere/token*"
+      ],
+      "js": [
+        "chrome/utils/oauth2/oauth2_inject.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "options_page": "index.html",
+  "homepage_url": "https://github.com/hnjd-fe/chrome-plugin-save-anywhere",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "icons": {
+    "16": "assets/img/save-everywhere16.png",
+    "32": "assets/img/save-everywhere32.png",
+    "48": "assets/img/save-everywhere48.png",
+    "128": "assets/img/save-everywhere128.png"
+  }
+}

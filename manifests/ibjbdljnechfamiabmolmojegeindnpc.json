@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "VWO",
+  "description": "VWO plugin lets you add observations and download heat maps and scrollmap.",
+  "version": "1.0.36",
+  "homepage_url": "https://vwo.com",
+  "content_scripts": [
+    {
+      "js": [
+        "./js/utils.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.vwo.com/*"
+    ]
+  },
+  "background": {
+    "scripts": [
+      "./js/background.js",
+      "./js/segment.min.js",
+      "./js/SegmentEnum.js",
+      "./js/SegmentAnalytics.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "unlimitedStorage",
+    "webRequest",
+    "downloads",
+    "<all_urls>",
+    "webRequestBlocking",
+    "webNavigation"
+  ],
+  "web_accessible_resources": [
+    "/snapshot/snapshot.html",
+    "/assets/observation-icon.svg",
+    "/assets/cross-no-bg.svg",
+    "/assets/tap-pointer.svg"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "128": "icons/extension-icon-128.png"
+    },
+    "default_title": "VWO",
+    "default_popup": "./html/popup.html"
+  },
+  "icons": {
+    "16": "icons/extension-icon-16.png",
+    "32": "icons/extension-icon-32.png",
+    "48": "icons/extension-icon-48.png",
+    "64": "icons/extension-icon-64.png",
+    "128": "icons/extension-icon-128.png"
+  },
+  "content_security_policy": "script-src 'self' https://cdn.segment.com; object-src 'self'"
+}

@@ -1,0 +1,48 @@
+{
+  "update_url": "http://clients2.google.com/service/update2/crx",
+  "name": "Kotnet Login",
+  "manifest_version": 2,
+  "version": "1.9.0",
+  "homepage_url": "http://kotnetloginextension.googlecode.com",
+  "description": "__MSG_manifest_extensionDescription__",
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "browser_action": {
+    "default_title": "Kotnet Login",
+    "default_icon": "icon/icon_128.png"
+  },
+  "icons": {
+    "32": "icon/icon_32.png",
+    "48": "icon/icon_48.png",
+    "128": "icon/icon_128.png"
+  },
+  "web_accessible_resources": [
+    "icon/icon_48.png",
+    "warning.png",
+    "warning_hover.png"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.kuleuven.be/*",
+        "*://*.groept.be/*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "notification.js",
+        "init.js",
+        "login.js",
+        "redirect.js"
+      ]
+    }
+  ],
+  "options_page": "options.html",
+  "permissions": [
+    "tabs",
+    "notifications"
+  ],
+  "default_locale": "en"
+}

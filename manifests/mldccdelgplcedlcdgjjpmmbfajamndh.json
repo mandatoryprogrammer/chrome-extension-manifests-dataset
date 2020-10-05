@@ -1,0 +1,39 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Happy Comments",
+  "description": "Removes comments that have been unrated or negatively rated by other people. Saving you from ever having to waste your time on them.",
+  "version": "1.0.0.0",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "icon19.png",
+    "default_popup": "popup.html",
+    "default_title": "Options"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "background": {
+    "page": "background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "all_frames": true,
+      "css": [
+        "commentHidingStyles.css"
+      ],
+      "js": [
+        "jquery.js",
+        "commentHider.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "storage"
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "browser_action": {
+    "default_icon": "assets/asanaSmallLogin.png",
+    "default_popup": "popup.html",
+    "default_title": "Asana"
+  },
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "description": "With this extension you can see your incomplete tasks, mark them as complete and add new tasks.",
+  "background": "background.html",
+  "name": "Asana Extension",
+  "permissions": [
+    "tabs",
+    "*://*/*",
+    "cookies",
+    "*://*.asana.com/*",
+    "*://localhost.org/*"
+  ],
+  "minimum_chrome_version": "16",
+  "icons": {
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png",
+    "16": "assets/icon16.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "all_frames": false,
+      "exclude_matches": [
+        "*://*.asana.com/*"
+      ],
+      "js": [
+        "js/asana.js",
+        "js/selection_client.js",
+        "js/quick_add_client.js",
+        "js/background.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "manifest_version": 2,
+  "version": "1.0.6"
+}

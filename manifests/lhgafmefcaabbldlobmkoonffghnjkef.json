@@ -1,0 +1,99 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Revenapp",
+  "short_name": "Revenapp Admob synchronization",
+  "description": "This extension will create and sync Revenapp adunits in your Admob account",
+  "version": "0.0.1",
+  "browser_action": {
+    "default_icon": {
+      "16": "img/icon/icon-128.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "img/icon/icon-16.png",
+    "32": "img/icon/icon-32.png",
+    "64": "img/icon/icon-64.png",
+    "128": "img/icon/icon-128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://revenapp.com/*"
+      ],
+      "js": [
+        "js/vendor/jquery.min.js",
+        "js/vendor/modal.js",
+        "js/globals.js",
+        "js/login.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://apps.admob.com/*"
+      ],
+      "js": [
+        "js/vendor/jquery.min.js",
+        "js/vendor/modal.js",
+        "js/helpers.js",
+        "js/overlay.js",
+        "js/globals.js",
+        "js/admob-synchronizer.js",
+        "js/admob-sync-apps.js",
+        "js/admob-api.js"
+      ],
+      "css": [
+        "css/modal.css",
+        "css/custom.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://console.developers.google.com/*"
+      ],
+      "js": [
+        "js/vendor/jquery.min.js",
+        "js/vendor/modal.js",
+        "js/helpers.js",
+        "js/overlay.js",
+        "js/globals.js"
+      ],
+      "css": [
+        "css/modal.css",
+        "css/custom.css"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/vendor/jquery.min.js",
+      "js/globals.js",
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "web_accessible_resources": [
+    "img/*",
+    "js/vendor/*"
+  ],
+  "permissions": [
+    "tabs",
+    "cookies",
+    "storage",
+    "notifications",
+    "webNavigation",
+    "identity",
+    "*://revenapp.com/*",
+    "*://*.admob.com/*",
+    "*://console.developers.google.com/*",
+    "*://chrome.google.com/webstore/detail/revenapp/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.admob.com/*",
+      "*://console.developers.google.com/*",
+      "*://chrome.google.com/webstore/detail/revenapp/*"
+    ]
+  }
+}

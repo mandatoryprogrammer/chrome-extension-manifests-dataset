@@ -1,0 +1,90 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "CustomBlocker",
+  "version": "4.1.4",
+  "default_locale": "en",
+  "description": "__MSG_extDescription__",
+  "browser_action": {
+    "default_title": "CustomBlocker preference",
+    "default_icon": "icon/icon_disabled.png",
+    "default_popup": "index.html"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "options_page": "pref/index.html",
+  "background": {
+    "page": "background_page.html"
+  },
+  "web_accessible_resources": [
+    "css/reset.css",
+    "css/rule_editor_common.css",
+    "css/rule_editor.css",
+    "css/smart_rule_editor.css",
+    "css/keywords.css",
+    "css/rule_editor_cursor.css",
+    "img/loading.gif",
+    "img/smart_path_preview_img.png",
+    "img/word_delete.png",
+    "img/word_delete_hover.png",
+    "img/rule_editor_close.png",
+    "img/wand.png",
+    "img/wand_transparent.png",
+    "img/icon_upper.png",
+    "img/help_icon.png",
+    "img/icon_regexp.png",
+    "img/keyword_delete.png",
+    "img/keyword_case_sensitive_red.png",
+    "img/keyword_include_href_red.png",
+    "img/keyword_regexp_red.png",
+    "img/keyword_case_sensitive_blue.png",
+    "img/keyword_include_href_blue.png",
+    "img/keyword_regexp_blue.png",
+    "rule_editor_frame_ja.html",
+    "rule_editor_frame_en.html",
+    "en/rule_editor_frame.html",
+    "ja/rule_editor_frame.html"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "src/util.js",
+        "src/uuid.js",
+        "src/element_highlighter.js",
+        "src/db/DbObj.js",
+        "src/db/Rule.js",
+        "src/db/Word.js",
+        "src/rule/Storage.js",
+        "src/rule/Rule.js",
+        "src/rule/Word.js",
+        "src/rule/WordGroup.js",
+        "src/rule_executor.js",
+        "src/contentscript.js",
+        "src/smart_path_analyzer.js",
+        "src/rule_editor.js",
+        "src/smart_rule_editor.js",
+        "src/path_analyzer.js",
+        "src/xpath_builder.js",
+        "src/css_builder.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "permissions": [
+    "background",
+    "tabs",
+    "storage",
+    "contextMenus",
+    "chrome://favicon/",
+    "unlimitedStorage"
+  ],
+  "icons": {
+    "128": "icon/icon128.png",
+    "48": "icon/icon48.png",
+    "32": "icon/icon32.png"
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Spoiler Shield",
+  "description": "Block Spoilers in Your Social Media Feed",
+  "version": "1.3.1",
+  "icons": {
+    "16": "icons/Icon-16.png",
+    "19": "icons/Icon-19.png",
+    "48": "icons/Icon-48.png",
+    "128": "icons/Icon-128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/Icon-16.png",
+      "19": "icons/Icon-19.png",
+      "48": "icons/Icon-48.png",
+      "128": "icons/Icon-128.png"
+    },
+    "default_title": "Spoiler Shield",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.facebook.com/*",
+        "https://*.facebook.com/*"
+      ],
+      "js": [
+        "jquery-1.10.2.min.js",
+        "functions/emailFunctions.js",
+        "facebookSpoilers.js",
+        "jquery.validate.min.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://api.twitter.com/oauth/authorize"
+      ],
+      "js": [
+        "const.js",
+        "content_script.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "http://*.twitter.com/*",
+        "https://*.twitter.com/*"
+      ],
+      "exclude_globs": [
+        "https://about.twitter.com/*",
+        "http://about.twitter.com/*",
+        "https://blog.twitter.com/*",
+        "http://blog.twitter.com/*"
+      ],
+      "js": [
+        "jquery-1.10.2.min.js",
+        "functions/emailFunctions.js",
+        "twitterSpoilers.js",
+        "jquery.validate.min.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "library/jquery.min.js",
+      "library/underscore.min.js",
+      "library/sha1.js",
+      "library/oauth.js",
+      "functions/emailFunctions.js",
+      "const.js",
+      "popup.js",
+      "twitter.js",
+      "background.js",
+      "jquery.validate.min.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "css/placeholder.css",
+    "icons/icon-68.png",
+    "icons/twitter.png",
+    "icons/facebook.png",
+    "icons/mail.png",
+    "icons/mail2.png",
+    "icons/smiley-error.png",
+    "icons/check-sent.png",
+    "jquery-1.10.2.min.map",
+    "jquery.validate.min.js"
+  ],
+  "permissions": [
+    "tabs",
+    "storage",
+    "http://*/*",
+    "https://*/*"
+  ]
+}

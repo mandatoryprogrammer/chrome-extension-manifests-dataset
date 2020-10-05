@@ -1,0 +1,130 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "AppWise",
+  "description": "One search across multiple accounts.",
+  "version": "2.1.89",
+  "icons": {
+    "128": "static/images/logos/AppWise-128x128.png",
+    "16": "static/images/logos/AppWise-16x16.png"
+  },
+  "omnibox": {
+    "keyword": "appwise-disabled"
+  },
+  "options_page": "options/index.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "include_globs": [
+        "*.google.*"
+      ],
+      "exclude_globs": [
+        "*mail.google.com*",
+        "*docs.google.com*",
+        "*drive.google.com*"
+      ],
+      "js": [
+        "static/js/jquery-1.12.4.min.js",
+        "static/js/jquery.reveal.js",
+        "static/js/moment.js",
+        "search.js",
+        "embed/contentscript.js"
+      ],
+      "css": [
+        "static/css/embed.css",
+        "static/css/reveal.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://appwise.appdirect.com/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "embed/is_installed.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.google.com/_/chrome/newtab*"
+      ],
+      "run_at": "document_idle",
+      "css": [
+        "static/css/slide-veil.css"
+      ],
+      "js": [
+        "slide/slide-manager.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://appwise.appdirect.com/dashboard/connected/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "embed/close_service_popup.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://appwise.appdirect.com/close_popup*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "embed/close_account_popup.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.linkedin.com/*"
+      ],
+      "js": [
+        "static/js/jquery-1.12.4.min.js",
+        "search.js",
+        "embed/linkedin.js"
+      ],
+      "css": [
+        "static/css/embed.css"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com https://cdn.mxpnl.com; object-src 'self'",
+  "web_accessible_resources": [
+    "static/js/jquery-1.12.4.min.js",
+    "static/js/jquery.reveal.js",
+    "static/images/spinner.gif",
+    "static/images/services/yammer.png",
+    "static/images/buttons/*",
+    "static/images/*",
+    "options/*",
+    "slide/*"
+  ],
+  "permissions": [
+    "contextMenus",
+    "*://*.linkedin.com/*",
+    "https://mail.google.com/*",
+    "*://appwise.appdirect.com/",
+    "notifications",
+    "activeTab",
+    "alarms"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "static/images/logos/appwise-extension-off.png"
+  },
+  "commands": {
+    "open_slide": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+A",
+        "mac": "Command+Shift+A"
+      },
+      "description": "Open AppWise"
+    }
+  }
+}

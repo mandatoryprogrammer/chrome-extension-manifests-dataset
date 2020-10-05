@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "FortiVoice Click-to-dial",
+  "version": "1.0.6",
+  "description": "Initiate calls with FortiVoice from Chrome.",
+  "manifest_version": 2,
+  "icons": {
+    "128": "images/fv_corner_icon_128.png"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "https://*/*",
+    "http://*/*",
+    "webRequest",
+    "contextMenus"
+  ],
+  "options_ui": {
+    "page": "views/options.html",
+    "chrome_style": true
+  },
+  "background": {
+    "scripts": [
+      "scripts/util.js",
+      "scripts/requestUtil.js",
+      "scripts/background.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "images/phone_blue.png",
+    "styles/contentStyle.css"
+  ],
+  "browser_action": {
+    "default_icon": "images/fv_corner_icon_128.png",
+    "default_popup": "views/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*.htm",
+        "file:///*.html"
+      ],
+      "css": [
+        "styles/contentStyle.css"
+      ],
+      "js": [
+        "scripts/libphonenumber-max.min.js",
+        "scripts/util.js",
+        "scripts/requestUtil.js",
+        "scripts/content.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true,
+      "match_about_blank": true
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

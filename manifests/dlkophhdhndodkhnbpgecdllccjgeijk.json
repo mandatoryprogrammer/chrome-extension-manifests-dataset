@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Kymono: Encrypt Everything",
+  "short_name": "Kymono",
+  "version": "1.0.1",
+  "manifest_version": 2,
+  "description": "Send encrypted emails, encrypted attachments, and encrypt cloud-stored documents.",
+  "icons": {
+    "16": "static/img/icon-16x16.png",
+    "32": "static/img/icon-32x32.png",
+    "96": "static/img/icon-96x96.png",
+    "128": "static/img/icon-128x128.png",
+    "192": "static/img/icon-192x192.png"
+  },
+  "background": {
+    "scripts": [
+      "static/js/manifest.js",
+      "static/js/vendor.js",
+      "static/js/background.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "background",
+    "unlimitedStorage",
+    "downloads",
+    "clipboardRead",
+    "clipboardWrite",
+    "storage",
+    "webRequest",
+    "*://*.google.com/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "static/css/contentscript.css"
+      ],
+      "js": [
+        "static/js/manifest.js",
+        "static/js/vendor.js",
+        "static/js/contentscript.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "96": "static/img/icon-96x96.png",
+      "32": "static/img/icon-32x32.png"
+    },
+    "default_title": "Kymono",
+    "default_popup": "popup.html"
+  },
+  "web_accessible_resources": [
+    "static/img/icon-96x96.png",
+    "inject.html"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com https://fonts.googleapis.com; object-src 'self'"
+}

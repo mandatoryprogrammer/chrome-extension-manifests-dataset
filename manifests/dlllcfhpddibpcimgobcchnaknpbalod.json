@@ -1,0 +1,70 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "author": "Max 'CloudMax' Persson",
+  "name": "CloudyRoll",
+  "short_name": "CloudyRoll",
+  "version": "1.2.3.94",
+  "description": "Managing your Crunchyroll queue has never been easier.",
+  "omnibox": {
+    "keyword": "cr"
+  },
+  "permissions": [
+    "storage",
+    "background",
+    "cookies",
+    "contextMenus",
+    "notifications",
+    "alarms",
+    "*://*.crunchyroll.com/*"
+  ],
+  "icons": {
+    "16": "assets/images/cr.png",
+    "48": "assets/images/cr.png",
+    "128": "assets/images/cr.png"
+  },
+  "background": {
+    "scripts": [
+      "background/background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": "assets/images/cr.png",
+    "default_popup": "popup/popup.html"
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "chrome_style": true
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "content/content.js"
+      ],
+      "css": [
+        "content/content.css"
+      ],
+      "matches": [
+        "*://*.crunchyroll.com/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "queue/queue.js"
+      ],
+      "css": [
+        "queue/queue.css"
+      ],
+      "matches": [
+        "*://*.crunchyroll.com/home/queue*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "content/content.js.map",
+    "queue/queue.js.map"
+  ],
+  "manifest_version": 2
+}

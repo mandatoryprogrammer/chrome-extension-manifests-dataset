@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "AddonMoney",
+  "short_name": "AddonMoney",
+  "version": "0.106",
+  "description": "Расширение зарабатывает деньги за счет сёрфинга сайтов, вывод от 1 рубля на Qiwi, счет мобильного или Яндекс.Деньги.",
+  "permissions": [
+    "tabs",
+    "storage",
+    "activeTab",
+    "http://*/*",
+    "https://*/*",
+    "history",
+    "contentSettings",
+    "browsingData",
+    "notifications"
+  ],
+  "browser_action": {
+    "default_icon": "icon48.png",
+    "default_popup": "toolbar_popup.html"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "web_accessible_resources": [
+    "load.html",
+    "icon48.png"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "data/js/plugins/jq.js",
+        "data/js/include/storage.js",
+        "data/js/include/include.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://*.addon.money/*"
+      ],
+      "js": [
+        "data/js/plugins/jq.js",
+        "data/js/include/checking.js"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}

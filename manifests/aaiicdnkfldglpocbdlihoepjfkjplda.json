@@ -1,0 +1,117 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "2020.121.4.20",
+  "version_name": "4.20.2",
+  "name": "__MSG_appName__",
+  "short_name": "__MSG_shortName__",
+  "description": "__MSG_description__",
+  "manifest_version": 2,
+  "minimum_chrome_version": "49",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjqdckULaPbEEtp9mep8h715no360Jz2mIRwKMObNVq724qraLWcyg/RG+UzkIimWZ6E2TEU6VJpAPVZtwtjzvi/Ajf4keLMeIwSEfBhlO5OyvPxOYygYfrnuoqOQIH3Oc3Dv3Ce7mzu00rFKdw/wQJ1oV+4AcpMc3oGTHMWU1zGJ++aLUDJk20cXcKcxpvz8mrp5YZHozCxBNupiLAsgTxSJX7BnT5FoUNP13WPZoBszCyKvv2dazef5jZLjxGpjhFJ+4APQDyhybN8FQI7fUDQDS1OHwpj+YN2RCQlrL3Is3TjxTi2uFPlqZFCZyp2Bp7BIOdYPrQ8hAFAYO0yMTwIDAQAB",
+  "icons": {
+    "16": "img/icons/ic_iar_16.png",
+    "48": "img/icons/ic_iar_48.png",
+    "128": "img/icons/ic_iar_128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "js/ls.js",
+      "js/constants.js",
+      "js/ext/jquery-3.3.1.min.js",
+      "js/ext/sha1.js",
+      "js/utils.js",
+      "js/instapaper.js",
+      "js/bgscript.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "img/icons/ic_iar_signedout_16.png",
+      "24": "img/icons/ic_iar_signedout_24.png",
+      "32": "img/icons/ic_iar_signedout_32.png"
+    },
+    "default_title": "__MSG_browserActionTitle__",
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "optional_permissions": [
+    "clipboardRead",
+    "<all_urls>"
+  ],
+  "permissions": [
+    "alarms",
+    "contextMenus",
+    "cookies",
+    "notifications",
+    "storage",
+    "tabs",
+    "unlimitedStorage",
+    "https://www.instapaper.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.instapaper.com/*"
+      ],
+      "css": [
+        "css/iar.css",
+        "css/iar_timetags.css"
+      ],
+      "js": [
+        "js/ext/jquery-3.3.1.min.js",
+        "js/constants.js",
+        "js/keycodes.js",
+        "js/ls.js",
+        "js/iar.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.instapaper.com/notes*"
+      ],
+      "css": [
+        "css/iar_notes.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.instapaper.com/read/*"
+      ],
+      "css": [
+        "css/iar_wide_reading.css"
+      ]
+    }
+  ],
+  "commands": {
+    "addPageToList": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+A",
+        "mac": "Command+Shift+A"
+      },
+      "description": "Add page to Instapaper"
+    },
+    "addPageToFolder": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+F",
+        "mac": "Command+Shift+F"
+      },
+      "description": "Custom command - configure in options"
+    },
+    "showList": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+L",
+        "mac": "Command+Shift+L"
+      },
+      "description": "Open Instapaper"
+    },
+    "openRandom": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+X",
+        "mac": "Command+Shift+X"
+      },
+      "description": "Read a randomly selected article from your list"
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_extName__",
+  "short_name": "photo comments",
+  "description": "__MSG_extDesc__",
+  "version": "1.6",
+  "default_locale": "en",
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "page_action": {
+    "default_icon": {
+      "19": "images/icon19.png",
+      "38": "images/icon38.png"
+    },
+    "default_title": "__MSG_extDesc__",
+    "default_popup": "popup/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.facebook.com/*"
+      ],
+      "js": [
+        "scripts/jquery.js",
+        "scripts/contentscript.js"
+      ],
+      "css": [
+        "styles/photocomment.css"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "web_accessible_resources": [
+    "styles/photocomment.css",
+    "html/content.html"
+  ],
+  "permissions": [
+    "tabs",
+    "*://*.facebook.com/*",
+    "https://secure.drup1.net/"
+  ]
+}

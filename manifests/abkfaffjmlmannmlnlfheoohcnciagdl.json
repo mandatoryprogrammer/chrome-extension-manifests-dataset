@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Blockless Proxy VPN - Freedom & Privacy",
+  "description": "Protects your privacy and unblocks websites with one-click region switching.",
+  "short_name": "blockless_vpn",
+  "version": "0.9.5",
+  "browser_action": {
+    "default_popup": "data/extension.html",
+    "default_icon": "data/img/logo.icon-off.png"
+  },
+  "icons": {
+    "16": "data/img/logo.icon-16.png",
+    "48": "data/img/logo.icon-48.png",
+    "128": "data/img/logo.icon-128.png"
+  },
+  "background": {
+    "scripts": [
+      "./service/extension.js",
+      "./service/api.js",
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "debugger",
+    "storage",
+    "proxy",
+    "webRequest",
+    "webRequestBlocking",
+    "tabs",
+    "background",
+    "notifications",
+    "https://*/*",
+    "http://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "data/js/angular.min.js",
+        "data/js/main.js",
+        "data/js/controller.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

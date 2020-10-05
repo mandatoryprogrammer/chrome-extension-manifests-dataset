@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Epiverse",
+  "version": "3.0.2",
+  "description": "View Reddit and Hacker News comments on all webpages.",
+  "web_accessible_resources": [
+    "app/index.html",
+    "extension/config.json"
+  ],
+  "icons": {
+    "16": "extension/assets/icon16.png",
+    "48": "extension/assets/icon48.png",
+    "128": "extension/assets/icon128.png"
+  },
+  "externally_connectable": {
+    "ids": []
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "https://epiverse.co/"
+  ],
+  "background": {
+    "scripts": [
+      "extension/scripts/backgroundInstall.js",
+      "extension/scripts/backgroundBrowserAction.js",
+      "extension/scripts/backgroundUrlChange.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {},
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "extension/scripts/contentScript.js"
+      ],
+      "css": [
+        "extension/style.css"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "options_ui": {
+    "page": "options/index.html",
+    "open_in_tab": true
+  }
+}

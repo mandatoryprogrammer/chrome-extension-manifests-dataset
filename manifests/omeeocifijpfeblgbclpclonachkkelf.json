@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "SafeCoin - antiphishing Extension",
+  "short_name": "SafeCoin",
+  "version": "0.2",
+  "manifest_version": 2,
+  "description": "This extension checks the domain you're on, and validates it with a whitelist and a blacklist of domains related to cryptocurrency.",
+  "homepage_url": "https://monxas.com/safecoin",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "options_page": "src/page_action/page_action.html",
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "tabs",
+    "storage"
+  ],
+  "background": {
+    "page": "src/bg/background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/icon19.png",
+      "38": "icons/icon48.png"
+    },
+    "default_popup": "src/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [
+        "src/inject/inject.css"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "/js/jquery/jquery.min.js",
+        "src/inject/inject.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "icons/stop.png"
+  ],
+  "content_security_policy": "script-src 'self' https://monxas.com; object-src 'self'"
+}

@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Public Hangouts by HangoutSnitch.com",
+  "description": "This extension shows you all public hangouts that are currently active.",
+  "version": "1.0",
+  "permissions": [
+    "<all_urls>"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "icon.png",
+      "38": "icon.png"
+    },
+    "default_title": "Public hangouts",
+    "default_popup": "popup.html"
+  },
+  "content_security_policy": "script-src 'self' https://apis.google.com; object-src 'self'",
+  "sandbox": {
+    "pages": [
+      "sandbox.html"
+    ]
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.google.com/robots.txt*"
+      ],
+      "js": [
+        "oauth2/oauth2_inject.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "icons": {
+    "default": "icon.png",
+    "16": "icon.png",
+    "48": "icon.png",
+    "19": "icon.png",
+    "38": "icon.png"
+  }
+}

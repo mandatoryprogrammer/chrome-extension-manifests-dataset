@@ -1,0 +1,85 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "RunebaseChrome",
+  "description": "Runebase light wallet and transaction signing client.",
+  "version": "1.4.7",
+  "manifest_version": 2,
+  "icons": {
+    "16": "images/logo-main-16.png",
+    "32": "images/logo-main-32.png",
+    "48": "images/logo-main-48.png",
+    "64": "images/logo-main-64.png",
+    "128": "images/logo-main-128.png"
+  },
+  "browser_action": {
+    "default_title": "RunebaseChrome",
+    "default_icon": "images/logo-main-128.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "storage",
+    "*://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "hot-reload.js",
+      "commons.all.js",
+      "commons.exclude-contentscript.js",
+      "commons.exclude-popup.js",
+      "commons.exclude-inpage.js",
+      "commons.background-contentscript.js",
+      "commons.background-popup.js",
+      "commons.background-inpage.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "file://*/*",
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "commons.all.js",
+        "commons.exclude-background.js",
+        "commons.exclude-popup.js",
+        "commons.exclude-inpage.js",
+        "commons.background-contentscript.js",
+        "commons.contentscript-popup.js",
+        "commons.contentscript-inpage.js",
+        "contentscript.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "web_accessible_resources": [
+    "commons.all.js",
+    "commons.exclude-background.js",
+    "commons.exclude-contentscript.js",
+    "commons.exclude-popup.js",
+    "commons.background-inpage.js",
+    "commons.contentscript-inpage.js",
+    "commons.popup-inpage.js",
+    "inpage.js",
+    "sign-tx.html",
+    "images/logo.png",
+    "css/modal.css"
+  ],
+  "externally_connectable": {
+    "ids": [
+      "*"
+    ]
+  },
+  "author": [
+    {
+      "name": "Bodhi Foundation",
+      "website": "https://www.bodhi.network/"
+    },
+    {
+      "name": "Runebase Project",
+      "website": "https://runebase.org/en"
+    }
+  ]
+}

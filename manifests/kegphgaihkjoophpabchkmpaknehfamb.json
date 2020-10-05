@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "description": "During checkout Cently will remind you, and automatically apply coupon codes for you with a single click.",
+  "icons": {
+    "16": "assets/img/catc2-16.png",
+    "48": "assets/img/catc2-32.png",
+    "64": "assets/img/catc2-64.png",
+    "128": "assets/img/catc2-128.png"
+  },
+  "background": {
+    "scripts": [
+      "chunks/vendors.js",
+      "lscache.js",
+      "background.js",
+      "background-legacy.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "assets/img/catc2-disabled-19.png",
+      "38": "assets/img/catc2-disabled-38.png"
+    },
+    "default_title": "Cently"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "all_frames": false,
+      "js": [
+        "chunks/vendors.js",
+        "content.js",
+        "lscache.js",
+        "content-legacy.js"
+      ],
+      "css": [
+        "assets/css/cssreset-context.css",
+        "assets/css/contentStyles.css",
+        "assets/css/bpw/main.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "commands": {},
+  "homepage_url": "https://couponfollow.com/checkout",
+  "permissions": [
+    "tabs",
+    "<all_urls>",
+    "storage",
+    "webRequest"
+  ],
+  "web_accessible_resources": [
+    "/assets/*",
+    "/components/*",
+    "/sitescripts/*",
+    "NunitoSansBlack.ttf",
+    "NunitoSansBold.ttf",
+    "NunitoSansRegular.ttf",
+    "NunitoSansSemiBold.ttf"
+  ],
+  "name": "Cently (Coupons at Checkout)",
+  "version": "5.6.1",
+  "content_security_policy": "default-src 'self'; script-src 'self'; font-src * data:; connect-src http://* https://*; style-src * 'unsafe-inline' 'self' blob:; img-src 'self' data: http://* https://*;frame-src https://www.cently.com"
+}

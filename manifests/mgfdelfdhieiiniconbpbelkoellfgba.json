@@ -1,0 +1,37 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "2.2.14",
+  "name": "Worklog Tracker",
+  "manifest_version": 2,
+  "description": "Browser extension for sharing work log between different time trackers",
+  "browser_action": {
+    "default_title": "Worklog Tracker",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "img/ic_16.png",
+    "48": "img/ic_48.png",
+    "128": "img/ic_128.png"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://worklogtracker.com/api/v1/auth/oauth/result*",
+        "https://api.worklogtracker.com/api/v1/auth/oauth/result*"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "storage",
+    "http://*/",
+    "https://*/"
+  ],
+  "content_security_policy": "default-src 'self'; script-src 'self'; connect-src *; style-src * 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; frame-src 'self' https://www.google.com/"
+}

@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "BM Extender",
+  "manifest_version": 2,
+  "minimum_chrome_version": "23",
+  "version": "1.7.5",
+  "description": "A chrome extension that adds custom functionality to the SFCC Business Manager.",
+  "icons": {
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "images/icon48.png",
+    "default_title": "Log files",
+    "default_popup": "popup/popup.html"
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "*://*.commercecloud.salesforce.com/*",
+        "*://*.demandware.com/*",
+        "*://*.demandware.net/*"
+      ],
+      "js": [
+        "jquery.js",
+        "dotjs.js"
+      ]
+    }
+  ],
+  "options_page": "options/options.html",
+  "permissions": [
+    "activeTab",
+    "*://*.commercecloud.salesforce.com/*",
+    "*://*.demandware.com/*",
+    "*://*.demandware.net/*",
+    "storage"
+  ],
+  "web_accessible_resources": [
+    "scripts/*.js",
+    "styles/*.css"
+  ]
+}

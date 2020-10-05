@@ -1,0 +1,67 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Vocabulary Boost",
+  "short_name": "Vocboost",
+  "description": "This extension allows translate selected text, and add translated words to a vocabulary",
+  "version": "1.0.34",
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "browser_action": {
+    "default_icon": "resources/img/vocboost_16.png",
+    "default_popup": "index.html"
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "https://ajax.googleapis.com/",
+    "contextMenus",
+    "http://localhost:8080/*",
+    "https://localhost:8443/*",
+    "background",
+    "notifications",
+    "identity",
+    "storage",
+    "file://*/*",
+    "tts"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://apis.google.com; object-src 'self'",
+  "web_accessible_resources": [
+    "app/content/content.less",
+    "resources/img/*",
+    "resources/img/left-arrow.svg"
+  ],
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>",
+        "file://*/*.pdf"
+      ],
+      "js": [
+        "polyfills.bundle.js",
+        "vendor.bundle.js",
+        "content.bundle.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnIkMDQnVIWDUYzafMIOlXY7tupzpLPt73doy7gWF8Wrj3+yUSoiOKsZ2sSm+dtozh4BZx9H/QLJ2fHFS2yPjD1PGV8B10xWOSA7sKt6Ss7FcLcjh7vquDDYkACEJYk3BhB4P9bowM1nMBJZbIdCCwsQ1Azni7b7NDfmR7jtYrNlBCC694IUpXhBVS1MY2ikV0MuKOPkkctbQLWvV5dWfURyhrcbc0vvolfdicKBEyzcC3nmTm8XdQFE31w+aP81P1ZOhLOb9J3ccyn8L38G6HeGqW8RyBYoc+LGHOR2clvmO4hR1t1T5SUq3dv9Veq4HqhWeGASsjIA73SQO0qA+iQIDAQAB",
+  "oauth2": {
+    "client_id": "422701952643-kd3nn2fl5l8g5vimdc420i7o0e97g1tm.apps.googleusercontent.com",
+    "scopes": [
+      "email",
+      "https://www.googleapis.com/auth/userinfo.profile"
+    ]
+  },
+  "icons": {
+    "16": "resources/img/vocboost_16.png",
+    "48": "resources/img/vocboost_48.png",
+    "128": "resources/img/vocboost_128.png"
+  }
+}

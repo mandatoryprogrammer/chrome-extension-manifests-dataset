@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "RFPIO-CRM Connector",
+  "short_name": "RFPIO-CRM Connector",
+  "baseUrl": "https://app.rfpio.com",
+  "version": "1.0.22",
+  "description": "Create, Manage and track RFP / RFI / Security Questionnaire and other Response Projects within your CRM using RFPIO CRM extension.",
+  "icons": {
+    "48": "rfpio48.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://localhost:*/*",
+      "https://dev1.rfpio.com/*",
+      "https://app.rfpio.com/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": [
+        "https://*.pipedrive.com/*",
+        "https://*.pipelinedeals.com/*"
+      ],
+      "js": [
+        "jquery.min.js",
+        "crm/pipedrive.js",
+        "crm/pipelinedeals.js",
+        "moment.min.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "page_action": {
+    "default_icon": "rfpio.png",
+    "default_popup": "popup.html",
+    "default_title": "RFPIO-CRM Connector"
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "declarativeContent",
+    "https://*/*",
+    "storage",
+    "webNavigation"
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  }
+}

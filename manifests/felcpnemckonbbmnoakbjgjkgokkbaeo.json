@@ -1,0 +1,74 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "6.2.6",
+  "background": {
+    "scripts": [
+      "js/helpers/utils.js",
+      "js/db.js",
+      "js/config.js",
+      "js/dbHandler.js",
+      "js/dbBadShopsHandler.js",
+      "js/helpers/punycode.js",
+      "js/matcher.js",
+      "js/background.js",
+      "js/basesWorkflow.js"
+    ]
+  },
+  "default_locale": "en",
+  "description": "__MSG_ExtensionDescription__",
+  "name": "__MSG_ExtensionName__",
+  "icons": {
+    "128": "images/logo_eu_b2b.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "include_globs": [
+        "*://www.google.*"
+      ],
+      "js": [
+        "js/config.js",
+        "js/injectorGoogle.js"
+      ],
+      "css": [
+        "css/google.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "include_globs": [
+        "*://*.trustedshops.*/*"
+      ],
+      "js": [
+        "js/config.js",
+        "js/injectorTsHome.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_title": "__MSG_ExtensionName__",
+    "default_icon": {
+      "16": "images/default/icon_default-16.png",
+      "24": "images/default/icon_default-24.png",
+      "32": "images/default/icon_default-32.png"
+    },
+    "default_popup": "templates/popup.html"
+  },
+  "manifest_version": 2,
+  "minimum_chrome_version": "25",
+  "permissions": [
+    "alarms",
+    "storage",
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "idle"
+  ],
+  "web_accessible_resources": [
+    "images/*"
+  ]
+}

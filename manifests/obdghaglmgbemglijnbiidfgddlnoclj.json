@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Andon",
+  "description": "To display any description and any background color to the site bottom, increase the visibility.",
+  "version": "1.0.2",
+  "browser_action": {
+    "default_icon": "images/icon048_off.png",
+    "default_title": ""
+  },
+  "icons": {
+    "48": "images/icon048_on.png",
+    "128": "images/icon148.png"
+  },
+  "background": {
+    "scripts": [
+      "js/chromeApi.js",
+      "js/andonEventDispatcher.js",
+      "js/localstorage.js",
+      "js/andonLocalstorage.js",
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "css/contentscript.css"
+      ],
+      "js": [
+        "js/jquery-2.2.0.min.js",
+        "js/chromeApi.js",
+        "js/andonEventDispatcher.js",
+        "js/contentscript.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "options_page": "options.html",
+  "permissions": [
+    "tabs"
+  ]
+}

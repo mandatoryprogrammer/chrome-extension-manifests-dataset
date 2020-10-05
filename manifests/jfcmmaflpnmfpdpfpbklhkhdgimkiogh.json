@@ -1,0 +1,41 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "PosturePanda",
+  "version": "0.1.0.9",
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "description": "Reminders for posture breaks and guided stretches to keep you healthy at work.",
+  "homepage_url": "http://posturepanda.com/exercises",
+  "icons": {
+    "16": "icons/pandaFace.png_16x16.png",
+    "48": "icons/pandaFace.png_48x48.png",
+    "128": "icons/pandaFace.png_128x128.png"
+  },
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icons/pandaFace.png_48x48.png",
+    "default_title": "PosturePanda Status",
+    "default_popup": "src/popup.html"
+  },
+  "permissions": [
+    "notifications",
+    "tabs",
+    "storage",
+    "idle"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "src/inject/inject.js"
+      ]
+    }
+  ]
+}

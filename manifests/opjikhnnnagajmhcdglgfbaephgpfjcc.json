@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "$schema": "http://json.schemastore.org/webextension",
+  "manifest_version": 2,
+  "name": "Tildes ReExtended",
+  "description": "An updated and reimagined recreation of Tildes Extended to enhance and improve the experience of Tildes.net.",
+  "version": "0.3.3",
+  "permissions": [
+    "downloads",
+    "storage",
+    "*://tildes.net/*"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'; style-src 'unsafe-inline'",
+  "web_accessible_resources": [
+    "assets/tildes-reextended-128.png",
+    "assets/tildes-reextended-128.svg"
+  ],
+  "icons": {
+    "128": "assets/tildes-reextended-128.png"
+  },
+  "background": {
+    "scripts": [
+      "ts/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "128": "assets/tildes-reextended-128.png"
+    }
+  },
+  "options_ui": {
+    "page": "html/options.html",
+    "open_in_tab": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://tildes.net/*"
+      ],
+      "run_at": "document_end",
+      "css": [
+        "scss/scripts/jump-to-new-comment.css",
+        "scss/scripts/back-to-top.css",
+        "scss/scripts/user-labels.css",
+        "scss/scripts/markdown-toolbar.css"
+      ],
+      "js": [
+        "ts/scripts/jump-to-new-comment.js",
+        "ts/scripts/back-to-top.js",
+        "ts/scripts/user-labels.js",
+        "ts/scripts/markdown-toolbar.js",
+        "ts/scripts/hide-votes.js"
+      ]
+    }
+  ],
+  "applications": {
+    "gecko": {
+      "id": "{3a6a9b87-5ea1-441c-98d8-e27a1a0958c8}"
+    }
+  }
+}

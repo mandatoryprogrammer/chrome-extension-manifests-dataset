@@ -1,0 +1,78 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "DogeCoin Reddit Helper",
+  "description": "A helper for Shibes wanting to make DogeCoin Transactions on /r/DogeMarket",
+  "version": "0.7",
+  "manifest_version": 2,
+  "icons": {
+    "16": "image/icons/icon.16.png",
+    "48": "image/icons/icon.48.png",
+    "128": "image/icons/icon.128.png"
+  },
+  "permissions": [
+    "*://*.reddit.com/*",
+    "http://doge.gusgold.com/*",
+    "tabs"
+  ],
+  "background": {
+    "scripts": [
+      "js/background/background.js"
+    ]
+  },
+  "options_page": "html/options/options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.reddit.com/r/dogemarket/*"
+      ],
+      "exclude_matches": [
+        "*://*.reddit.com/r/dogemarket/comments/*"
+      ],
+      "js": [
+        "js/content_script/highlighter.js",
+        "js/content_script/setup.js",
+        "js/content_script/dogemarket.js"
+      ],
+      "css": [
+        "css/content_script/style.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.reddit.com/r/dogemarket/comments/*"
+      ],
+      "js": [
+        "js/content_script/highlighter.js",
+        "js/content_script/comments.js",
+        "js/content_script/setup.js"
+      ],
+      "css": [
+        "css/content_script/style.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.reddit.com/message/*"
+      ],
+      "js": [
+        "js/content_script/highlighter.js",
+        "js/content_script/messages.js",
+        "js/content_script/setup.js"
+      ],
+      "css": [
+        "css/content_script/style.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "page_action": {
+    "default_icon": {
+      "19": "image/page_action/19.png",
+      "38": "image/page_action/38.png"
+    },
+    "default_title": "DogeCoin Reddit Helper",
+    "default_popup": "html/page_action/popup.html"
+  }
+}

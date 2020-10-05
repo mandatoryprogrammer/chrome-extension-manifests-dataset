@@ -1,0 +1,72 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "version": "5.0.2.4347",
+  "name": "Teem",
+  "description": "__MSG_application_description__",
+  "default_locale": "en",
+  "icons": {
+    "16": "images/icon-black-16.png",
+    "32": "images/icon-black-32.png",
+    "48": "images/icon-black-48.png",
+    "64": "images/icon-black-64.png",
+    "80": "images/icon-black-80.png",
+    "128": "images/icon-black-128.png"
+  },
+  "externally_connectable": {
+    "ids": [
+      "*"
+    ],
+    "matches": [
+      "http://localhost:8000/*",
+      "https://app.teem.ninja/*",
+      "https://app.teem.com/*",
+      "https://accounts.google.com/*",
+      "https://legacy.teem.com/*"
+    ]
+  },
+  "page_action": {
+    "default_popup": "info.html",
+    "default_title": "__MSG_application_title__",
+    "default_icon": {
+      "16": "images/icon-black-16.png",
+      "32": "images/icon-black-32.png",
+      "48": "images/icon-black-48.png",
+      "64": "images/icon-black-64.png",
+      "80": "images/icon-black-80.png",
+      "128": "images/icon-black-128.png"
+    }
+  },
+  "background": {
+    "scripts": [
+      "js/Background.bundle.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://calendar.google.com/calendar/*"
+      ],
+      "js": [
+        "js/Content.bundle.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "https://calendar.google.com/*",
+    "identity",
+    "notifications",
+    "storage",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "content_security_policy": "script-src 'self' 'sha256-m3KGMcmzbqf2sQ3bNwtl2BR6TsUQNnQxr7Ef0zDhgYg=' https://js-agent.newrelic.com https://bam.nr-data.net 'sha256-e1+zgntKwIHOrAFLccr8e48F6xcbOAuyKxdIUFxyirU=' 'sha256-R/VJgtDggxaZeOekjDEFW5wKnPOSE0E/c/bx6yRp+XU=' https://d2c7xlmseob604.cloudfront.net; object-src 'self'",
+  "web_accessible_resources": [
+    "*.html",
+    "js/*.js",
+    "images/*.png"
+  ]
+}

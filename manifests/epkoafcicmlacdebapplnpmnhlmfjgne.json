@@ -1,0 +1,96 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Flare Browser Controller",
+  "short_name": "QBC",
+  "version": "1.0.6",
+  "devtools_page": "popup/popup.html",
+  "description": "Control. Protection. Privacy.",
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon19.png",
+      "38": "images/icon38.png"
+    },
+    "default_title": "Flare Browser Controller",
+    "default_popup": "popup/popup.html"
+  },
+  "permissions": [
+    "browsingData",
+    "cookies",
+    "storage",
+    "tabs",
+    "proxy",
+    "webRequest",
+    "webNavigation",
+    "webRequestBlocking",
+    "http://*/*",
+    "https://*/*",
+    "<all_urls>"
+  ],
+  "background": {
+    "page": "popup/background.html",
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/framework/jquery-3.3.1.min.js",
+        "js/framework/sjcl.js",
+        "js/urlFilter.js",
+        "js/wordFilter.js",
+        "js/activitypanelanim.js"
+      ],
+      "css": [
+        "css/fontcontent.css",
+        "css/activitypanel.css"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/framework/jquery-ui.js",
+        "js/framework/messenger.js",
+        "js/framework/messenger-theme-future.js",
+        "js/wordFilter.js",
+        "js/customError.js",
+        "js/notification.js"
+      ],
+      "css": [
+        "css/hover.css",
+        "css/tooltip-sharp.css",
+        "css/messenger.css",
+        "css/messenger-theme-future.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "popup/browserActivityTab.html",
+    "popup/notification.html",
+    "popup/advancedSettings.html",
+    "popup/geoLocation.html",
+    "popup/trackerSettings.html",
+    "popup/statsdetails.html",
+    "images/*",
+    "images/favicon.ico",
+    "css/framework/BCfonts/*",
+    "css/notification.css",
+    "js/notification.js"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self';connect-src  https://s3.amazonaws.com/assets.redmorph.com/system-variable https://accounts.redmorph.com https://freegeoip-rm.herokuapp.com/ https://qa-accounts.rmorph.com http://redmorph.com/ https://india.redmorph.com http://localhost:9771/vpn http://accounts.redmorph.com/activatedeviceandcode/validate/browser https://accounts.redmorph.com/prod_api/activatedeviceandcode/validate/browser;"
+}

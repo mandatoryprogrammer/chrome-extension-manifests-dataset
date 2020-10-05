@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "WebGL Insight",
+  "description": "A helpful Chrome extension for WebGL development",
+  "manifest_version": 2,
+  "version": "1.0.3",
+  "web_accessible_resources": [
+    "src/shared/message_types.js",
+    "src/content_script/buffer_viewer.js",
+    "src/content_script/call_stack.js",
+    "src/content_script/contexts.js",
+    "src/content_script/depth_inspector.js",
+    "src/content_script/duplicate_program_detection.js",
+    "src/content_script/fcn_bindings.js",
+    "src/content_script/frame_control.js",
+    "src/content_script/helpers.js",
+    "src/content_script/histogram.js",
+    "src/content_script/messages.js",
+    "src/content_script/message_handling.js",
+    "src/content_script/pixel_inspector.js",
+    "src/content_script/program_usage_counter.js",
+    "src/content_script/shader_viewer.js",
+    "src/content_script/state_variables.js",
+    "src/content_script/texture_viewer.js",
+    "src/content_script/mipmap_viewer.js",
+    "src/content_script/webgl_bind.js"
+  ],
+  "devtools_page": "src/devtools2/devtools.html",
+  "background": {
+    "scripts": [
+      "src/background_page/background_page_init.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "storage"
+  ],
+  "icons": {
+    "16": "static/logo-16.png",
+    "48": "static/logo-48.png",
+    "128": "static/logo-128.png"
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "src/content_script/content_script_init.js"
+      ]
+    }
+  ],
+  "content_security_policy": "default-src 'self' chrome-extension-resource: ; img-src 'self' * data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-eval'; connect-src *; frame-src *;"
+}

@@ -1,0 +1,78 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Clockify Time Tracker",
+  "short_name": "Clockify",
+  "description": "Track time from anywhere on the web and improve productivity.",
+  "background": {
+    "scripts": [
+      "main.bundle.js",
+      "vendors.main.bundle.js",
+      "contentScripts/helper-background.js",
+      "contentScripts/background.js",
+      "contentScripts/webSocket-background.js",
+      "contentScripts/timeEntry-httpRequests-background.js",
+      "contentScripts/token-background.js",
+      "contentScripts/idle-detection-background.js",
+      "contentScripts/notification-background.js",
+      "contentScripts/reminder-background.js",
+      "contentScripts/pomodoro-background.js",
+      "contentScripts/project-httpRequests-background.js"
+    ]
+  },
+  "version": "1.8.48",
+  "browser_action": {
+    "default_popup": "index.html",
+    "default_title": "Clockify"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "contentScripts/contentScript.js"
+      ],
+      "matches": [
+        "https://clockify.me/*"
+      ]
+    }
+  ],
+  "options_page": "settings.html",
+  "commands": {
+    "quick-start-stop-entry": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+U"
+      },
+      "description": "Quick start/stop current entry"
+    }
+  },
+  "icons": {
+    "16": "assets/images/logo-16.png",
+    "48": "assets/images/logo-48.png",
+    "128": "assets/images/logo-128.png"
+  },
+  "oauth2": {
+    "client_id": "800081634217-rbfe00vph9bbuk3cldi3hfemufs7r2bd.apps.googleusercontent.com",
+    "scopes": [
+      "openid",
+      "email",
+      "profile",
+      "https://www.googleapis.com/auth/userinfo.email"
+    ]
+  },
+  "permissions": [
+    "background",
+    "contextMenus",
+    "*://*.clockify.me/*",
+    "storage",
+    "tabs",
+    "*://*/",
+    "webNavigation",
+    "activeTab",
+    "identity",
+    "idle",
+    "notifications"
+  ],
+  "optional_permissions": [
+    "*://*/"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'"
+}

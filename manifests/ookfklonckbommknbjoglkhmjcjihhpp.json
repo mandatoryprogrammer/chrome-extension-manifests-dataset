@@ -1,0 +1,60 @@
+{
+  "update_url": "http://clients2.google.com/service/update2/crx",
+  "name": "Firemeld for Chrome",
+  "description": "Firemeld for Chrome is a web browser plug-in that allows publishers to view ad-related information about ads on their web pages.",
+  "version": "1.0.5",
+  "manifest_version": 2,
+  "minimum_chrome_version": "18",
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "web_accessible_resources": [
+    "bullseyes.png",
+    "sprite.png"
+  ],
+  "background": {
+    "scripts": [
+      "background_bin.js"
+    ]
+  },
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": "meld-inactive.png"
+  },
+  "icons": {
+    "16": "meld-active.png",
+    "48": "meld-48x48.png",
+    "128": "meld-128x128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "ad_bin.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "overlay_bin.js"
+      ],
+      "css": [
+        "overlay_css.css"
+      ],
+      "run_at": "document_start",
+      "all_frames": false
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "cookies",
+    "webRequest",
+    "webRequestBlocking",
+    "webNavigation",
+    "<all_urls>"
+  ]
+}

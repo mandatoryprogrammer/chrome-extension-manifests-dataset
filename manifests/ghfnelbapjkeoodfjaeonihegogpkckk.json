@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Musixmatch Lyrics for Spotify (Unofficial)",
+  "short_name": "Spotify Translate",
+  "description": "Automatically load Musixmatch lyrics for Spotify Web Player",
+  "author": "Eric Aguilera",
+  "version": "1.1",
+  "manifest_version": 2,
+  "permissions": [
+    "https://open.spotify.com/*",
+    "https://www.musixmatch.com/search/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://open.spotify.com/*"
+      ],
+      "js": [
+        "js/spotifyListener.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://www.musixmatch.com/search/*"
+      ],
+      "js": [
+        "js/musixmatchSearch.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/startup.js"
+    ]
+  },
+  "options_ui": {
+    "page": "html/options.html",
+    "chrome_style": true
+  },
+  "browser_action": {
+    "default_title": "Click to enable/disable Spotify Translate"
+  },
+  "icons": {
+    "48": "icon/st_green_48.png",
+    "144": "icon/st_green_144.png"
+  }
+}

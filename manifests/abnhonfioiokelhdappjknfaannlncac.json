@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Volume Manager",
+  "version": "29",
+  "author": "Vadagon",
+  "manifest_version": 2,
+  "description": "Control and boost video sound up to 700%",
+  "permissions": [
+    "tabCapture",
+    "activeTab",
+    "tabs",
+    "storage",
+    "<all_urls>"
+  ],
+  "browser_action": {
+    "default_title": "Volume Manager",
+    "default_popup": "popup.html",
+    "default_icon": "images/icon512.png"
+  },
+  "icons": {
+    "16": "images/icon32.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "background/core.js",
+      "background/main.js",
+      "background/listeners.js",
+      "background/visualizer.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*",
+        "<all_urls>"
+      ],
+      "css": [
+        "custom/css/style.css"
+      ],
+      "js": [
+        "custom/js/content.js"
+      ]
+    }
+  ],
+  "offline_enabled": true,
+  "commands": {
+    "toggle-up-1": {
+      "suggested_key": {
+        "default": "Alt+Up"
+      },
+      "description": "Volume up"
+    },
+    "toggle-down-1": {
+      "suggested_key": {
+        "default": "Alt+Down"
+      },
+      "description": "Volume down"
+    }
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

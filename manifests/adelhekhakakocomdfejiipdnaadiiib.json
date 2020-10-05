@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Text Mode",
+  "version": "0.5.0",
+  "manifest_version": 2,
+  "description": "Browse the web without distractions via simple text based pages.",
+  "icons": {
+    "16": "icons/icon_16x16.png",
+    "48": "icons/icon_48x48.png",
+    "128": "icons/icon_128x128.png"
+  },
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "options_page": "html/options.html",
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "file://*/*",
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "css/tab.css"
+      ],
+      "__css_comment": "These are injected in the order they appear in this array, before any DOM is constructed or displayed for the page.",
+      "js": [
+        "js/vendor/parseuri.js",
+        "js/vendor/holder-2.2.min.js",
+        "js/tab.js"
+      ],
+      "run_at": "document_start",
+      "__js_comment": "In the case of 'document_end', the files are injected immediately after the DOM is complete, but before subresources like images and frames have loaded. In the case of 'document_start', the files are injected after any files from css, but before any other DOM is constructed or any other script is run.",
+      "all_frames": true
+    }
+  ],
+  "browser_action": {
+    "name": "Text Mode",
+    "default_title": "Set Text Mode on/off",
+    "default_icon": "imgs/icon.png",
+    "icons": [
+      "imgs/icon.png"
+    ],
+    "__default_popup_comment": "Commenting the popup since we don't need it for now",
+    "__default_popup": "html/popup.html"
+  },
+  "web_accessible_resources": [
+    "imgs/bg/bg_blank_1px.png",
+    "imgs/bg/bg_grey_1px.png",
+    "imgs/bg/bg_1.png",
+    "imgs/bg/bg_2.png",
+    "imgs/bg/bg_3.png",
+    "imgs/bg/bg_4.png"
+  ]
+}

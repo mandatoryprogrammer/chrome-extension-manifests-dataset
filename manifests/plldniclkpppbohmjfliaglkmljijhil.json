@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Craigslist Car Search Refiner",
+  "version": "1.1.7.2",
+  "manifest_version": 2,
+  "description": "Help to create a convenient and friendly interface for Craigslist car search user",
+  "icons": {
+    "48": "images/logo_48_1.png",
+    "128": "images/logo_128_1.png"
+  },
+  "background": {
+    "scripts": [
+      "js/eventPage.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": "images/craigslist_logo_grey.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "http://*.craigslist.org/*",
+    "http://*.kbb.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.craigslist.org/*ct*"
+      ],
+      "js": [
+        "js/jquery.js",
+        "js/jquery.mousewheel-3.0.6.pack.js",
+        "js/contentScriptSearch.js",
+        "js/contentScriptPost.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "ccsh.css",
+    "js/jquery.mousewheel-3.0.6.pack.js",
+    "js/jquery.fancybox.pack.js",
+    "js/helperMethodsForPopup.js",
+    "css/jquery.fancybox.css",
+    "images/logo_128_1.png"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

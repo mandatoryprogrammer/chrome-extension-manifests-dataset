@@ -1,0 +1,73 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Suite Guru Lite for NetSuite",
+  "version": "1.0.84",
+  "manifest_version": 2,
+  "homepage_url": "https://netsolutes.com/",
+  "description": "A comprehensive plugin for NetSuite Users, NetSuite Developers, NetSuite Admins, NetSuite Testers & NetSuite Functional Consultants.",
+  "icons": {
+    "16": "icons/suiteguruc.png",
+    "48": "icons/suiteguruc.png",
+    "128": "icons/suiteguruc.png"
+  },
+  "incognito": "split",
+  "content_security_policy": "script-src 'self' https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com; object-src 'self'",
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "windows": "Alt+G",
+        "mac": "Command+G",
+        "chromeos": "Alt+G",
+        "linux": "Alt+G"
+      }
+    }
+  },
+  "default_locale": "en",
+  "background": {
+    "page": "src/bg/background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icons/suiteguruc.png",
+    "default_title": "Suite Guru",
+    "default_popup": "src/browser_action/dashboard.html"
+  },
+  "permissions": [
+    "notifications",
+    "activeTab",
+    "identity"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.app.netsuite.com/*"
+      ],
+      "js": [
+        "src/inject/inject.js"
+      ],
+      "css": [
+        "src/inject/inject.css",
+        "src/inject/jqueryModal.css"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "https://*.app.netsuite.com/*"
+      ],
+      "js": [
+        "js/jquery/jquery.min.js",
+        "js/jquery/jqueryui.min.js",
+        "src/inject/inject.js",
+        "src/inject/NetSuitePushNotifications.js",
+        "js/excel/xlsx.js",
+        "src/inject/inject-suitehelper.js",
+        "js/TimeLine/highcharts.js",
+        "js/TimeLine/sankey.js",
+        "js/TimeLine/organisation.js",
+        "js/TimeLine/exporting.js",
+        "src/inject/timeline.js"
+      ]
+    }
+  ]
+}

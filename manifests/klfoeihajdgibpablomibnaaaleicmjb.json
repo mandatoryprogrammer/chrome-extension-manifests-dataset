@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Github Whitespace ignorable differ",
+  "description": "This extension allows you to only see only the non-whitespace diffs.",
+  "version": "0.0.2",
+  "manifest_version": 2,
+  "incognito": "split",
+  "icons": {
+    "16": "resources/icon-16.png",
+    "48": "resources/icon-48.png",
+    "128": "resources/icon-128.png"
+  },
+  "web_accessible_resources": [
+    "page-script-link-rewriter.js",
+    "resources/icon-16.png"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*/commit/*",
+        "https://*/*/compare/*",
+        "https://*/*/pull/*"
+      ],
+      "js": [
+        "jsuri/jsuri-1.1.1.js",
+        "cookies/cookies-1.1.0.js",
+        "content-script-cookie-api.js",
+        "content-script-toggle-button.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "https://*/*/commit/*",
+        "https://*/*/compare/*",
+        "https://*/*/pull/*"
+      ],
+      "js": [
+        "jsuri/jsuri-1.1.1.js",
+        "cookies/cookies-1.1.0.js",
+        "content-script-cookie-api.js",
+        "content-script-preference-loader.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ]
+}

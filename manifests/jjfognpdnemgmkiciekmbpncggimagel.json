@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Romance compass",
+  "description": "Romance compass",
+  "version": "1.98",
+  "author": "Bogdan",
+  "icons": {
+    "128": "/dist/assets/128.png",
+    "48": "/dist/assets/48.png",
+    "16": "/dist/assets/16.png"
+  },
+  "permissions": [
+    "tabs",
+    "notifications",
+    "power",
+    "https://api.anti-captcha.com/"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.romancecompass.com/*",
+        "http://*.romancecompass.com/*"
+      ],
+      "js": [
+        "/js/index.js",
+        "/dist/inline.bundle.js",
+        "/dist/polyfills.bundle.js",
+        "/dist/styles.bundle.js",
+        "/dist/vendor.bundle.js",
+        "/dist/main.bundle.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "/background/index.js"
+    ],
+    "persistent": true
+  },
+  "web_accessible_resources": [
+    "/js/index.js"
+  ],
+  "browser_action": {
+    "default_title": "Romance compass"
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Chatsilo",
+  "short_name": "ChatSilo",
+  "version": "1.6.8",
+  "description": "Use tags to manage and organize your Facebook Messenger conversations and leads",
+  "background": {
+    "scripts": [
+      "/assets/js/jquery-3.4.1.min.js",
+      "/assets/js/moment.min.js",
+      "/config.js",
+      "/assets/js/background.js"
+    ]
+  },
+  "icons": {
+    "16": "16.png",
+    "32": "32.png",
+    "64": "64.png",
+    "128": "128.png"
+  },
+  "browser_action": {
+    "browser_style": false,
+    "default_title": "ChatSilo",
+    "default_popup": "/index.html"
+  },
+  "content_security_policy": "script-src 'self' https://apis.google.com https://db.onlinewebfonts.com 'unsafe-eval';  object-src 'self'",
+  "permissions": [
+    "activeTab",
+    "*://*.facebook.com/*",
+    "*://*.chatsilo.com/*",
+    "*://*.messenger.com/*",
+    "storage",
+    "cookies",
+    "identity",
+    "webRequest",
+    "notifications",
+    "webRequestBlocking",
+    "*://www.googleapis.com/*",
+    "*://accounts.google.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.facebook.com/messages*",
+        "*://*.facebook.com/*/inbox*",
+        "*://*.messenger.com/*"
+      ],
+      "js": [
+        "/assets/js/jquery-3.4.1.min.js",
+        "config.js",
+        "/assets/js/content_script.js",
+        "/assets/js/page_content_script.js"
+      ],
+      "css": [
+        "/assets/css/content_script.css"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*.facebook.com/*"
+      ],
+      "js": [
+        "/assets/js/jquery-3.4.1.min.js",
+        "config.js",
+        "/assets/js/content_script.js",
+        "/assets/js/profile_content_script.js"
+      ],
+      "css": [
+        "/assets/css/content_script.css"
+      ]
+    }
+  ]
+}

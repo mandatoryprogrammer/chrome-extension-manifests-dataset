@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "EZE.AI",
+  "version": "2.4",
+  "description": "Meetings Made Intelligent & Productive",
+  "icons": {
+    "16": "blue-logo2.png",
+    "48": "blue-logo2.png",
+    "128": "blue-logo2.png"
+  },
+  "browser_action": {
+    "default_title": "EZE.AI",
+    "default_popup": "index.html"
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://localhost/*",
+      "*://test.eze.ai/*",
+      "https://www.eze.ai/",
+      "https://test.eze.ai/"
+    ]
+  },
+  "background": {
+    "scripts": [
+      "jquery-3.2.1.js",
+      "background.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "index.html",
+    "jquery-1.10.2.min.js"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*",
+        "https://outlook.live.com/*"
+      ],
+      "css": [
+        "/static/css/main.css"
+      ],
+      "js": [
+        "jquery-3.2.1.js",
+        "jqueryUi.js",
+        "inboxsdk.js",
+        "/static/js/main.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "contextMenus",
+    "management",
+    "tabs",
+    "storage",
+    "https://mail.google.com/*",
+    "https://inbox.google.com/*",
+    "https://outlook.live.com/*"
+  ],
+  "content_security_policy": "default-src 'self'; script-src 'self'  'unsafe-eval'; connect-src ; style-src * 'unsafe-inline' 'self' blob:; img-src 'self' data:;"
+}

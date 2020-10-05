@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Maskmail",
+  "description": "This extension uses Maskmail.net to hide your email from online trackers",
+  "version": "5.1",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "app/index.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "http://localhost/*"
+      ],
+      "exclude_matches": [
+        "https://*.happybun.com/*",
+        "https://happybun.com/*",
+        "https://*.maskmail.net/*",
+        "https://maskmail.net/*"
+      ],
+      "js": [
+        "clipboard.js",
+        "frameActions.js",
+        "content.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://maskmail.net/dashboard",
+        "https://www.maskmail.net/dashboard"
+      ],
+      "js": [
+        "frameActions.js",
+        "clearLocalCache.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "app/index.html"
+  ],
+  "permissions": [
+    "activeTab",
+    "<all_urls>",
+    "https://maskmail.net/",
+    "http://localhost:3004/",
+    "https://happybun.com/",
+    "https://api.rollbar.com/",
+    "clipboardRead",
+    "clipboardWrite",
+    "storage"
+  ]
+}

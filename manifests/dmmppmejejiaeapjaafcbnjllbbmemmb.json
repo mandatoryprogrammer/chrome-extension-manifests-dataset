@@ -1,0 +1,76 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "F*#$ Duo",
+  "version": "2.3",
+  "description": "Do you hate when administrators force users to use two factor authentication? Well then F*#$ Duo is for you!",
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://apis.google.com; object-src 'self'",
+  "icons": {
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "web_accessible_resources": [
+    "*.ttf",
+    "*.css"
+  ],
+  "browser_action": {
+    "default_popup": "popup.html",
+    "defautl_title": "F*#$ Duo"
+  },
+  "permissions": [
+    "tabs",
+    "identity",
+    "storage",
+    "background",
+    "https://*.google.com/*",
+    "https://ssl.gstatic.com/",
+    "https://www.googleapis.com/",
+    "https://accounts.google.com/"
+  ],
+  "background": {
+    "scripts": [
+      "background.js",
+      "client.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.duosecurity.com/*"
+      ],
+      "js": [
+        "jquery.min.js",
+        "insert_pass.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://fed.erau.edu/DuoLogin/DuoLogin.jsp"
+      ],
+      "js": [
+        "f-duo-overlay.js"
+      ],
+      "css": [
+        "f-duo-overlay.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://fed.erau.edu/oamfed/idp/samlv20"
+      ],
+      "js": [
+        "jquery.min.js",
+        "click-login.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "oauth2": {
+    "client_id": "54136894305-jd9s3rjjb5as5tauvuqerhqvto30l4fc.apps.googleusercontent.com",
+    "scopes": [
+      "https://mail.google.com/"
+    ]
+  },
+  "manifest_version": 2
+}

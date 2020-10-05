@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "icons": {
+    "128": "images/build_agents_128.png",
+    "48": "images/build_agents_48.png",
+    "32": "images/build_agents_32.png",
+    "16": "images/build_agents_16.png"
+  },
+  "page_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "128": "images/build_agents_128.png",
+      "48": "images/build_agents_48.png",
+      "32": "images/build_agents_32.png",
+      "16": "images/build_agents_16.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "src/build_agents.js",
+        "src/popup.js",
+        "src/jenkins1.js",
+        "src/jenkins2.js"
+      ],
+      "matches": [
+        "http://jenkins.spp.lonelyplanet.com:8080/",
+        "https://leeroy-jenkins.spp.lonelyplanet.com/"
+      ]
+    }
+  ],
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "src/background.js"
+    ]
+  },
+  "permissions": [
+    "activeTab",
+    "declarativeContent",
+    "storage"
+  ],
+  "description": "Launch or retire specific Jenkins build-agents en masse",
+  "version": "0.8",
+  "name": "Jenkins BuildAgent Launcher"
+}

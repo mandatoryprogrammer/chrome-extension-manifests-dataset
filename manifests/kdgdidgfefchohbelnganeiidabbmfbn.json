@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "SyncVid.io",
+  "version": "1.0.2",
+  "manifest_version": 2,
+  "description": "Watch YouTube videos in sync with anyone in the world!",
+  "homepage_url": "http://syncvid.io",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "SyncVid.io",
+    "default_popup": "src/browser_action/main.html"
+  },
+  "permissions": [
+    "https://www.youtube.com/*",
+    "http://www.youtube.com/*",
+    "tabs",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/*"
+      ],
+      "js": [
+        "src/inject/inject.js",
+        "js/jquery/jquery.min.js",
+        "src/inject/twilio-common.min.js",
+        "src/inject/twilio-sync.min.js"
+      ]
+    }
+  ]
+}

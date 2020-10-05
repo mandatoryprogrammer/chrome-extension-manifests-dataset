@@ -1,0 +1,59 @@
+{
+  "name": "Strikedeck GO Notes",
+  "short_name": "Strikedeck GO",
+  "description": "Add new Notes to Strikedeck GO.",
+  "version": "1.0.5",
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://apis.google.com; object-src 'self'",
+  "permissions": [
+    "tabs",
+    "storage",
+    "unlimitedStorage",
+    "https://*.strikedeck.com/*"
+  ],
+  "icons": {
+    "128": "images/favicon.png",
+    "16": "images/favicon.png",
+    "48": "images/favicon.png"
+  },
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "images/favicon.png",
+    "default_popup": "popup.html",
+    "default_title": "Strikedeck GO Notes"
+  },
+  "oauth2": {
+    "client_id": "995231863702-vfl8p9oi0qu9sm84fo6rihkddl5ei1ta.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/userinfo.profile",
+      "https://www.googleapis.com/auth/calendar.events.readonly"
+    ]
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": [
+        "https://calendar.google.com/*",
+        "https://calendar.google.com/calendar/*",
+        "https://gostage.strikedeck.com/goplatform/*"
+      ],
+      "js": [
+        "js/content.js"
+      ],
+      "css": [
+        "styles.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "images/12x12.png"
+  ],
+  "update_url": "https://clients2.google.com/service/update2/crx"
+}

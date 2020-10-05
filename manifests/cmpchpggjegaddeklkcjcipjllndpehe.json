@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Search My Inbox",
+  "short_name": "Search My Inbox",
+  "description": "Search your inbox via the browser address bar and use Yahoo as your Web Search provider.",
+  "version": "1.0.19.214",
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "32": "icons/32.png",
+    "128": "icons/128.png"
+  },
+  "omnibox": {
+    "keyword": "email"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/16.png",
+      "48": "icons/48.png",
+      "32": "icons/32.png",
+      "128": "icons/128.png"
+    },
+    "default_title": "Search My Inbox",
+    "default_popup": "popup/popup.html"
+  },
+  "chrome_settings_overrides": {
+    "search_provider": {
+      "encoding": "UTF-8",
+      "favicon_url": "https://services.searchmyinbox-svc.com/favicon.ico",
+      "image_url": "",
+      "instant_url": "",
+      "is_default": true,
+      "keyword": "{searchTerms}",
+      "name": "SearchWeb",
+      "search_url": "https://services.searchmyinbox-svc.com/search/{searchTerms}",
+      "suggest_url": "https://sug.searchmyinbox-svc.com/sug/?s={searchTerms}"
+    }
+  },
+  "background": {
+    "page": "background/index.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.search.yahoo.com/*"
+      ],
+      "js": [
+        "prompt/prompt.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "*://*.searchmyinbox-svc.com/*",
+    "cookies",
+    "storage",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "manifest_version": 2,
+  "web_accessible_resources": [
+    "/icons/16.png",
+    "/prompt/*.png"
+  ]
+}

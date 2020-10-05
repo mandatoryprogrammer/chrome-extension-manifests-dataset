@@ -1,0 +1,146 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "BlazeMeter | The Continuous Testing Platform",
+  "description": "Record Selenium and HTTP traffic to create a load and functional tests in less than 10 minutes (Apache JMeter Compatible).",
+  "version": "4.9.9",
+  "permissions": [
+    "storage",
+    "unlimitedStorage",
+    "webRequest",
+    "webNavigation",
+    "webRequestBlocking",
+    "http://*/*",
+    "https://*/*",
+    "browsingData",
+    "activeTab",
+    "tabs",
+    "notifications",
+    "contextMenus"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.blazemeter.com/*",
+        "*://*.blazemeter.net/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "dist/debug-protocol/index.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "*://a.blazemeter.com/*",
+        "*://www.a.blazemeter.com/*"
+      ],
+      "all_frames": false,
+      "run_at": "document_start",
+      "js": [
+        "jquery/jquery-3.3.1.min.js",
+        "jquery/jquery-ui.min.js",
+        "js/content-script.js"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "*://*.blazemeter.com/*",
+        "*://*.blazemeter.net/*"
+      ],
+      "js": [
+        "dist/browser-polyfill.min.js",
+        "sideex/content/shadow-listen.js",
+        "sideex/content/atoms.js",
+        "sideex/content/utils.js",
+        "sideex/content/selenium-browserbot.js",
+        "sideex/content/user-extensions.js",
+        "sideex/content/escape.js",
+        "sideex/content/selenium-api.js",
+        "sideex/content/locator-builders.js",
+        "sideex/content/shadow-locator-builder.js",
+        "sideex/content/record-api.js",
+        "sideex/content/record.js",
+        "sideex/content/commands-api.js",
+        "sideex/content/target-selecter.js",
+        "sideex/content/sizzle.js",
+        "js/screenshots.js",
+        "js/object-highlighter.js"
+      ],
+      "match_about_blank": true,
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "*://a.blazemeter.com/*",
+        "*://www.a.blazemeter.com/*"
+      ],
+      "js": [
+        "dist/browser-polyfill.min.js",
+        "sideex/content/prompt-injecter.js",
+        "sideex/content/monkey-patch-injecter.js"
+      ],
+      "match_about_blank": true,
+      "all_frames": true,
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "html/transaction.html",
+    "theme/blazemeter/images/bm_logo.svg",
+    "theme/dynatrace/images/dt.svg",
+    "html/transaction-ui.html",
+    "dist/transaction-controls.html",
+    "sideex/prompt.js",
+    "sideex/monkey-patch.js"
+  ],
+  "background": {
+    "scripts": [
+      "dist/background-utils/index.js",
+      "sideex/content/utils.js",
+      "jquery/jquery-3.3.1.min.js",
+      "uri/URI.js",
+      "js/ard.js",
+      "js/blazemeter.js",
+      "js/files-names-formats.js",
+      "yaml/js-yaml.min.js",
+      "dist/browser-polyfill.min.js",
+      "sideex/background/bg-testsuite.js",
+      "sideex/background/bg-recorder-ui.js",
+      "sideex/background/background-ui.js",
+      "js/generate-yaml.js",
+      "js/selenium/format/generate-script.js",
+      "js/background-common.js",
+      "js/selenium/format/testCase.js",
+      "js/selenium/format/formatCommandOnlyAdapter.js",
+      "sideex/playback/ext-command.js",
+      "sideex/playback/format-command.js",
+      "dist/remote-debugger/index.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "theme/blazemeter/images/72x72.png",
+    "default_title": "Click on the icon to show additional options.",
+    "default_popup": "main.html"
+  },
+  "icons": {
+    "16": "theme/blazemeter/images/19x19.png",
+    "32": "theme/blazemeter/images/32x32.png",
+    "48": "theme/blazemeter/images/48x48.png",
+    "128": "theme/blazemeter/images/store-image-128.png"
+  },
+  "key": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCdq1JM9OUHcOtLOGGtaxje+f9ZB4DIFRPlfvqDXv6fE5BO/ClyOwu7AAPVRC0kFr3SlalCFSHPk6Jej5Pzh4TMlfN/pHF4m4re5zifQ/Oe1N4Uu8FHFxm1EY+4WkBOox0X4XT2ZANP7iNDQdCGAmTp3bIJCYMpyy8tRlHf07p3FQIDAQAB",
+  "options_page": "dist/options.html",
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com https://cdn.mxpnl.com/libs/mixpanel-2.2.min.js; object-src 'self'",
+  "incognito": "split",
+  "minimum_chrome_version": "31"
+}

@@ -1,0 +1,102 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "NCU Helper",
+  "homepage_url": "https://github.com/seanwu1105/ncu-helper",
+  "description": "Add some features and change the design of NCU webpages in more modern style.",
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "permissions": [
+    "storage",
+    "alarms",
+    "https://uncia.cc.ncu.edu.tw/*"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "ncu-helper",
+    "default_icon": {
+      "19": "icons/19.png",
+      "38": "icons/38.png"
+    }
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "chrome_style": false,
+    "open_in_tab": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://lms.ncu.edu.tw/*"
+      ],
+      "exclude_matches": [
+        "https://lms.ncu.edu.tw/rss/*"
+      ],
+      "js": [
+        "content_scripts/lms.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://cis.ncu.edu.tw/ScoreInquiries/*"
+      ],
+      "exclude_matches": [
+        "https://cis.ncu.edu.tw/ScoreInquiries/student_top.php*"
+      ],
+      "js": [
+        "content_scripts/score-inquiries.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://cis.ncu.edu.tw/ScoreInquiries/student_top.php*"
+      ],
+      "js": [
+        "content_scripts/score-inquiries-header.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://cis.ncu.edu.tw/grad/index.php*"
+      ],
+      "js": [
+        "content_scripts/graduate.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://portal.ncu.edu.tw/",
+        "https://portal.ncu.edu.tw/chgpasswd*",
+        "https://portal.ncu.edu.tw/login*",
+        "https://portal.ncu.edu.tw/system/147*",
+        "https://portal.ncu.edu.tw/system/162*"
+      ],
+      "js": [
+        "content_scripts/portal.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "stylesheets/*.css",
+    "images/*",
+    "icons/*"
+  ],
+  "version": "3.0.4"
+}

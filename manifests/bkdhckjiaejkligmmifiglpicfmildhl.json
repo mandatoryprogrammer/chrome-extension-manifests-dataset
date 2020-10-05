@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "description": "This add-on adds function of editing Gitlab board issue name right on the sidebar.",
+  "manifest_version": 2,
+  "name": "Better Gitlab Board",
+  "version": "1.2",
+  "homepage_url": "https://gitlab.com/samuelchanx/better-gitlab-board",
+  "icons": {
+    "48": "icons/icon-48.png"
+  },
+  "browser_action": {
+    "default_title": "Better Gitlab Board",
+    "browser_style": true,
+    "default_popup": "popup/input_token.html",
+    "default_icon": {
+      "32": "icons/icon-32.png",
+      "48": "icons/icon-48.png"
+    }
+  },
+  "permissions": [
+    "storage"
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{cdf91ac1-4039-4dde-84a5-cf00f0dcac1f}"
+    },
+    "edge": {
+      "browser_action_next_to_addressbar": true
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.gitlab.com/*/boards/*",
+        "*://*.gitlab.com/*/boards"
+      ],
+      "js": [
+        "content_script/storage.js",
+        "content_script/showdown.min.js",
+        "content_script/main.js"
+      ]
+    }
+  ]
+}

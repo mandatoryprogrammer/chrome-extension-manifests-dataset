@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "klood booking",
+  "description": "This plugin allows you to share your klood virtual room details by one click. Just login and go to Google Agenda.",
+  "version": "2.1",
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "https://calendar.google.com/calendar/*",
+    "activeTab",
+    "storage"
+  ],
+  "browser_action": {
+    "default_popup": "app/views/extension_popup.html",
+    "default_icon": {
+      "19": "app/images/icon19.png",
+      "38": "app/images/icon38.png"
+    }
+  },
+  "icons": {
+    "16": "app/images/icon16.png",
+    "48": "app/images/icon48.png",
+    "128": "app/images/icon128.png"
+  },
+  "web_accessible_resources": [
+    "app/images/*.svg",
+    "app/images/*.png",
+    "*.html"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://calendar.google.com/*",
+        "https://calendar.google.com/*"
+      ],
+      "js": [
+        "lib/jquery-2.1.1.min.js",
+        "lib/moment.min.js",
+        "lib/moment-timezone-with-data.min.js",
+        "app/common.js",
+        "app/config.js",
+        "app/view.js",
+        "app/main.js",
+        "app/sign_in.js",
+        "app/services/rest.js",
+        "app/services/auth.js",
+        "app/helpers/date.js",
+        "app/helpers/recurrence.js"
+      ],
+      "css": [
+        "app/css/main.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "default_locale": "en_US",
+  "manifest_version": 2
+}

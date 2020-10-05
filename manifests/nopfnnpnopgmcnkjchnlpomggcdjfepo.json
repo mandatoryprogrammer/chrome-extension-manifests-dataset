@@ -1,0 +1,80 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Clever",
+  "short_name": "Clever",
+  "author": "Clever",
+  "description": "Allows students and staff to access apps in Clever Portal.",
+  "version": "1.16.3",
+  "icons": {
+    "16": "marketing-assets/icons/16.png",
+    "20": "marketing-assets/icons/20.png",
+    "25": "marketing-assets/icons/25.png",
+    "30": "marketing-assets/icons/30.png",
+    "32": "marketing-assets/icons/32.png",
+    "40": "marketing-assets/icons/40.png",
+    "48": "marketing-assets/icons/48.png",
+    "96": "marketing-assets/icons/96.png",
+    "128": "marketing-assets/icons/128.png",
+    "176": "marketing-assets/icons/176.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "marketing-assets/icons/16.png",
+      "20": "marketing-assets/icons/20.png",
+      "25": "marketing-assets/icons/25.png",
+      "30": "marketing-assets/icons/30.png",
+      "32": "marketing-assets/icons/32.png",
+      "40": "marketing-assets/icons/40.png",
+      "48": "marketing-assets/icons/48.png",
+      "96": "marketing-assets/icons/96.png",
+      "128": "marketing-assets/icons/128.png",
+      "176": "marketing-assets/icons/176.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "js/document_start.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://localhost/in/*",
+        "https://clever.com/in/*",
+        "https://*.int.clever.com/in/*"
+      ],
+      "js": [
+        "js/portal.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "cookies",
+    "tabs",
+    "storage",
+    "*://*/*",
+    "https://clever.com/*"
+  ],
+  "web_accessible_resources": [
+    "js/credential_form.html"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://localhost/*",
+      "https://clever.com/*"
+    ]
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": true
+  }
+}

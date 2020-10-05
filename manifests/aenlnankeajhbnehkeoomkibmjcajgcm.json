@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Prospecat Chrome Extension",
+  "version": "3.0.1",
+  "description": "Prospecat Extension. Find business emails on LinkedIn.",
+  "author": "Prospecat",
+  "manifest_version": 2,
+  "icons": {
+    "32": "icons/32.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "cookies",
+    "background",
+    "storage",
+    "*://www.prospecat.com/*",
+    "*://*.linkedin.com/*"
+  ],
+  "page_action": {
+    "default_title": "Prospecat Chrome Extension",
+    "default_popup": "pages/popup.html"
+  },
+  "background": {
+    "persistent": false,
+    "page": "pages/background.html"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "js/inject.js"
+      ],
+      "run_at": "document_end",
+      "matches": [
+        "*://www.linkedin.com/*"
+      ],
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "js/content.js"
+  ]
+}

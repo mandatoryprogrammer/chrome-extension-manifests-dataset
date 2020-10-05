@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "NetConnect Chrome Extension",
+  "version": "1.25",
+  "description": "Chrome Extension for NetConnect Sessions",
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "background/background.js",
+      "background/iconChanger.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "images/icon_disabled_128.png",
+    "default_popup": "popup/popup.html",
+    "default_title": ""
+  },
+  "icons": {
+    "48": "/images/icon_enabled_48.png",
+    "128": "/images/icon_enabled_128.png"
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_idle",
+      "matches": [
+        "*://*/ncpRemoteApp/*",
+        "*://*/nosRemoteApp/*",
+        "*://*/monitor/*"
+      ],
+      "js": [
+        "content/appname.js",
+        "content/hasExtension.js",
+        "content/fullscreen.js"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "*://*/monitor/*"
+      ],
+      "js": [
+        "content/connectionIdEventListener.js",
+        "content/windowClosedListener.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "storage",
+    "system.display",
+    "tabs"
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "version": "1.0.13",
+  "manifest_version": 2,
+  "description": "__MSG_appDescription__",
+  "default_locale": "pl",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "128": "icons/icon-128.png"
+  },
+  "background": {
+    "scripts": [
+      "scripts/background/backgroundScript.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "https://*.pipedrive.com/*",
+    "https://*.livespace.io/*",
+    "https://*.bitrix24.pl/*",
+    "https://*.bitrix24.com/*",
+    "https://*.bitrix24.net/*",
+    "https://*.bitrix24.eu/*",
+    "https://app.sellizer.pl/creator*"
+  ],
+  "web_accessible_resources": [
+    "images/poll_green.png",
+    "images/poll_gray.png",
+    "images/close.png",
+    "images/profile.png",
+    "images/menu_down.png",
+    "images/chevron-down.png",
+    "images/scoring-mask.svg",
+    "images/menu-swap.png",
+    "images/menu-swap-up.png",
+    "images/menu-swap-down.png",
+    "images/logo.svg"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.pipedrive.com/*"
+      ],
+      "js": [
+        "scripts/content-scripts/pipeDriveContentScript.js"
+      ],
+      "css": [
+        "styles/pipedrive.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.livespace.io/Contact/company/details/id*",
+        "https://*.livespace.io/Contact/contact/details/id*",
+        "https://*.livespace.io/Deal/deal/details/id*"
+      ],
+      "js": [
+        "scripts/content-scripts/liveSpaceContentScript.js"
+      ],
+      "css": [
+        "styles/livespace.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.bitrix24.pl/crm/contact/details/*",
+        "https://*.bitrix24.pl/crm/company/details/*",
+        "https://*.bitrix24.pl/crm/deal/details/*",
+        "https://*.bitrix24.pl/crm/deal/kanban/",
+        "https://*.bitrix24.com/crm/contact/details/*",
+        "https://*.bitrix24.com/crm/company/details/*",
+        "https://*.bitrix24.com/crm/deal/details/*",
+        "https://*.bitrix24.com/crm/deal/kanban/",
+        "https://*.bitrix24.net/crm/contact/details/*",
+        "https://*.bitrix24.net/crm/company/details/*",
+        "https://*.bitrix24.net/crm/deal/details/*",
+        "https://*.bitrix24.net/crm/deal/kanban/",
+        "https://*.bitrix24.eu/crm/contact/details/*",
+        "https://*.bitrix24.eu/crm/company/details/*",
+        "https://*.bitrix24.eu/crm/deal/details/*",
+        "https://*.bitrix24.eu/crm/deal/kanban/"
+      ],
+      "js": [
+        "scripts/content-scripts/bitrix24ContentScript.js"
+      ],
+      "css": [
+        "styles/bitrix24.css"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://app.sellizer.pl/login*",
+        "https://app.sellizer.pl/dashboard*"
+      ],
+      "js": [
+        "scripts/content-scripts/loginContentScript.js"
+      ]
+    }
+  ]
+}

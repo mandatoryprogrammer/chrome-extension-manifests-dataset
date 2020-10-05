@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Netflix Tweaked",
+  "short_name": "Netflix Tweaked",
+  "author": "Andrew Brey <andrew@fluencyy.com>",
+  "version": "2.0.1",
+  "manifest_version": 2,
+  "description": "A web extension to tweak the Netflix home screen, preventing auto-play trailers and moving your lists to the top",
+  "homepage_url": "https://github.com/andrewbrey/netflix-tweaked",
+  "icons": {
+    "16": "images/icon-16.png",
+    "19": "images/icon-19.png",
+    "38": "images/icon-38.png",
+    "128": "images/icon-128.png",
+    "150": "images/icon-150.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.netflix.com/*"
+      ],
+      "js": [
+        "scripts/netflix-tweak.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.netflix.com/*"
+      ],
+      "css": [
+        "styles/netflix-tweak.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "scripts/mutation-observers.js"
+  ],
+  "permissions": [
+    "*://*.netflix.com/*"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "16": "images/icon-16.png",
+      "24": "images/icon-24.png",
+      "32": "images/icon-32.png",
+      "128": "images/icon-128.png"
+    },
+    "default_title": "Netflix Tweaked"
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Klara Chrome Extension",
+  "description": "Work in Klara and your EHR side by side",
+  "author": "Klara Technologies, Inc.",
+  "version": "1.2.5",
+  "manifest_version": 2,
+  "background": {
+    "scripts": [
+      "axios.js",
+      "config.js",
+      "api.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "*://*.klara.com/*"
+      ],
+      "js": [
+        "config.js",
+        "injectOuterFrame.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "*://static.practicefusion.com/*"
+      ],
+      "js": [
+        "siteConfigs/PracticeFusion.js",
+        "sentry.min.js",
+        "moment.js",
+        "config.js",
+        "scraper.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://*.ema.md/ema/*"
+      ],
+      "js": [
+        "siteConfigs/ema.js",
+        "sentry.min.js",
+        "moment.js",
+        "config.js",
+        "scraper.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "*://doctor.klara.com/*"
+      ],
+      "js": [
+        "detectKlaraURLChanges.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://*.pendo.io; object-src 'self'",
+  "web_accessible_resources": [
+    "fonts/*",
+    "images/*",
+    "sidebar/*"
+  ],
+  "icons": {
+    "128": "images/icon.png"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "<all_urls>",
+    "storage",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "browser_action": {
+    "default_icon": "images/icon.png",
+    "default_title": "Klara"
+  }
+}

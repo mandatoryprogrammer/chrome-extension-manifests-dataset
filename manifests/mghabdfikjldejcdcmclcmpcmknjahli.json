@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Bass Boost: HD Audio",
+  "short_name": "Bass Boost",
+  "description": "Bass Boost makes videos, songs, movies and more sound awesome by boosting your speakers or headphones.",
+  "version": "2.3",
+  "permissions": [
+    "tabCapture",
+    "activeTab",
+    "storage",
+    "tabs"
+  ],
+  "commands": {
+    "toggle-bass-boost": {
+      "suggested_key": {
+        "default": "Ctrl+B",
+        "mac": "Command+B"
+      },
+      "description": "Toggle Bass Boost"
+    }
+  },
+  "icons": {
+    "128": "buttonOn.png"
+  },
+  "web_accessible_resources": [
+    "logo.png",
+    "buttonOn.png",
+    "buttonOff.png"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "jquery.js",
+        "fullscreen.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "browser_action": {
+    "default_title": "Boost Bass",
+    "default_icon": {
+      "128": "buttonOn.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "jquery.js",
+      "jungle.js",
+      "background.js"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com https://apis.google.com https://rcm-na.amazon-adsystem.com; object-src 'self'"
+}

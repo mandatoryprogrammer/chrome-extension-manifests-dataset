@@ -1,0 +1,69 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Amazon intl. shipping with forward2me",
+  "short_name": "Amazon intl. shipping with forward2me",
+  "description": "Provides accurate realtime international shipping prices from UK to your country within European Amazon sites (.co.uk, .de, .fr)",
+  "version": "0.1.7",
+  "author": "forward2me Ltd.",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage"
+  ],
+  "web_accessible_resources": [
+    "img/param.png",
+    "img/plane.png",
+    "img/ajax-loader.gif",
+    "img/service/dhl.png",
+    "img/service/dpd.png",
+    "img/service/fedex.png",
+    "img/service/parcelforce.png",
+    "img/service/royalmail.png",
+    "img/service/tnt.png",
+    "img/service/ups.png",
+    "img/service/untracked.png"
+  ],
+  "icons": {
+    "16": "img/logo16.png",
+    "48": "img/logo48.png",
+    "128": "img/logo128.png"
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "settings_chrome.js",
+      "thirdParty/jquery-2.1.4.min.js",
+      "thirdParty/rsvp-latest.min.js",
+      "main.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.amazon.co.uk/*",
+        "*://*.amazon.fr/*",
+        "*://*.amazon.de/*"
+      ],
+      "js": [
+        "settings_chrome.js",
+        "thirdParty/jquery-2.1.4.min.js",
+        "content.js",
+        "notify.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_title": "Amazon international shipping with forward2me",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "19": "img/favicon.png"
+    }
+  },
+  "options_page": "options.html",
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true,
+    "open_in_tab": false
+  }
+}

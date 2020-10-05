@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "TipStash",
+  "version": "1.11",
+  "manifest_version": 2,
+  "description": "Add the TipStash button on YouTube",
+  "icons": {
+    "128": "coin128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "webNavigation",
+    "https://www.tipstash.com/*",
+    "http://localhost:8080/*",
+    "https://localhost:443/*"
+  ],
+  "browser_action": {
+    "default_icon": "coin128.png",
+    "default_popup": "popup.html",
+    "default_title": "TipStash"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/*"
+      ],
+      "css": [
+        "content.css",
+        "custom.css"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "*://localhost/*",
+        "https://www.tipstash.com/*"
+      ],
+      "js": [
+        "contentTS.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "donateButtonGold.png",
+    "donateButtonCopper.png",
+    "donateButtonGrey.png"
+  ]
+}

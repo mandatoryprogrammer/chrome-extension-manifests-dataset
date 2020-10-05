@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Pokrex JIRA Assistant",
+  "version": "1.2.6",
+  "description": "Integrates with both JIRA cloud and JIRA server, allows to import tickets into Pokrex and sync results back to JIRA.",
+  "manifest_version": 2,
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": "icons/icon.png",
+    "default_title": "Pokrex"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "content_script.js"
+      ],
+      "css": [
+        "content_style.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "https://pokrex.com/*",
+    "<all_urls>"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'"
+}

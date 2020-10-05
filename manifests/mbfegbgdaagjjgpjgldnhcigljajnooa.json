@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "sean-snaps",
+  "description": "Snap the app",
+  "manifest_version": 2,
+  "version": "2.0",
+  "background": {
+    "version": 2,
+    "scripts": [
+      "script.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "sean-snap.png",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "contentScript.js"
+      ],
+      "all_frames": false,
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "domInjection.js",
+    "loggerInjection.js"
+  ],
+  "permissions": [
+    "notifications",
+    "background",
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "http://domain/getjson*",
+    "webRequest",
+    "*://*.google.com/",
+    "activeTab"
+  ]
+}

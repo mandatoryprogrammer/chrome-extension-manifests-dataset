@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Witsy",
+  "short_name": "WitsyAI",
+  "description": "A simple and powerful Chrome Extension that works collaboratively with https://witsy.ai",
+  "version": "1.0.0.3",
+  "manifest_version": 2,
+  "background": {
+    "scripts": [
+      "app/background.js",
+      "app/axios.min.js",
+      "app/jquery-3.3.1.min.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "cookies",
+    "storage",
+    "https://mywitsy.ai/*",
+    "https://witsy.ai/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.witsy.ai/*",
+      "*://*.mywitsy.ai/*"
+    ]
+  },
+  "browser_action": {},
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [
+        "/static/css/app.css"
+      ],
+      "js": [
+        "/static/js/content.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.linkedin.com/*"
+      ],
+      "js": [
+        "app/jquery-3.3.1.min.js",
+        "app/jquery.modal.min.js",
+        "app/axios.min.js",
+        "app/linkedin-content.js"
+      ],
+      "css": [
+        "app/jquery.modal.min.css",
+        "app/linkedin.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "/static/css/content.css"
+  ],
+  "content_security_policy": "script-src 'self' 'sha256-GgRxrVOKNdB4LrRsVPDSbzvfdV4UqglmviH9GoBJ5jk='; object-src 'self'",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}

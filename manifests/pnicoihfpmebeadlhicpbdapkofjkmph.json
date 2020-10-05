@@ -1,0 +1,93 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "ViVi Smart remote",
+  "short_name": "ViVi",
+  "version": "3.5",
+  "description": "Scene-relevant information streamed to your mobile",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "*://localhost/"
+      ],
+      "match_about_blank": false,
+      "js": [
+        "static/scripts/svg-icons.js",
+        "static/scripts/vue.min.js",
+        "static/scripts/vuex.min.js",
+        "static/scripts/vue-slicksort.min.js",
+        "static/scripts/store.js",
+        "static/scripts/filters.js",
+        "static/components/pages/page-home.js",
+        "static/components/pages/page-login.js",
+        "static/components/pages/page-timeline.js",
+        "static/components/pages/page-item.js",
+        "static/components/timeline/timeline-header.js",
+        "static/components/timeline/timeline-options.js",
+        "static/components/scene/scene-update.js",
+        "static/components/scene/scene-tag-editor.js",
+        "static/components/item/item-list.js",
+        "static/components/item/item-filter.js",
+        "static/components/item/item-search.js",
+        "static/components/item/item-update.js",
+        "static/components/miscellaneous/loader.js",
+        "static/components/miscellaneous/divider.js",
+        "content/content-vue.js",
+        "content/content-messages.js",
+        "content/content.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_title": "ViVi",
+    "default_icon": {
+      "16": "static/images/icons/icon16.png",
+      "32": "static/images/icons/icon32.png"
+    }
+  },
+  "icons": {
+    "48": "static/images/icons/icon48.png",
+    "128": "static/images/icons/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "static/scripts/socket.io.js",
+      "background/background-messages.js",
+      "background/background-auth.js",
+      "background/background-group.js",
+      "background/background-timeline.js",
+      "background/background-scene.js",
+      "background/background-item.js",
+      "background/background-timestamp.js",
+      "background/background.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "static/fonts/sourceSansPro/*.*",
+    "static/fonts/sourceSansPro/SourceSansPro-Regular.ttf",
+    "static/fonts/sourceSansPro/SourceSansPro-Bold.ttf",
+    "*.ttf",
+    "*.svg",
+    "static/*"
+  ],
+  "permissions": [
+    "tabs",
+    "storage",
+    "https://playvivi.herokuapp.com/",
+    "http://vivi-tv.com/",
+    "https://playvivi.herokuapp.com/*",
+    "http://vivi-tv.com/*",
+    "<all_urls>"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://localhost/*",
+      "*://vivi-tv.com/*"
+    ]
+  }
+}

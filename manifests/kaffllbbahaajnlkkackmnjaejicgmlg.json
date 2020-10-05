@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "EUR Log-in",
+  "author": "From an EUR student for EUR students",
+  "version": "1.1",
+  "description": "Logs into your EUR account e.g. on MyEUR, Osiris, Canvas",
+  "manifest_version": 2,
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://engine.surfconext.nl/authentication/*"
+      ],
+      "js": [
+        "uniSelector.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://sso.eur.nl/opensso/SSORedirect/metaAlias/Erasmus/*"
+      ],
+      "js": [
+        "ssoSignIn.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.sin-online.nl/channel/index.html?SSOIMPORT=*"
+      ],
+      "js": [
+        "sinSignIn.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://login.ds.eur.nl/*"
+      ],
+      "js": [
+        "newLogInPage.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": "eur_logo.png",
+    "default_popup": "popup.html"
+  }
+}

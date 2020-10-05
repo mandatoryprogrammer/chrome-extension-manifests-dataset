@@ -1,0 +1,157 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "[LEGACY SUPPORT] Esna iLink for Cisco",
+  "description": "[LEGACY SUPPORT] Esna iLink for Cisco with deprecated WebCommunicator Support",
+  "default_locale": "en",
+  "version": "9.1.14.2019",
+  "icons": {
+    "16": "img/jabber/16.png",
+    "32": "img/jabber/32.png",
+    "128": "img/jabber/128.png"
+  },
+  "permissions": [
+    "notifications",
+    "geolocation",
+    "background",
+    "management",
+    "tabs",
+    "idle",
+    "http://*/*",
+    "https://*/*",
+    "https://esna.communications/*",
+    "https://esna.communications.jabber/*"
+  ],
+  "background": {
+    "page": "app/jabber/background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.google.com/robots.txt*"
+      ],
+      "js": [
+        "app/chrome/jsc.oauth2.inject.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "file://*/*",
+        "https://*/*"
+      ],
+      "all_frames": true,
+      "run_at": "document_end",
+      "js": [
+        "app/chrome/jsc.clicktodial.js"
+      ],
+      "css": [
+        "css/clicktodial.css"
+      ]
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "file://*/*",
+        "https://*/*"
+      ],
+      "all_frames": true,
+      "run_at": "document_end",
+      "js": [
+        "app/chrome/jsc.tags.js"
+      ],
+      "css": [
+        "css/tags.css"
+      ]
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "all_frames": true,
+      "run_at": "document_end",
+      "js": [
+        "app/chrome/jsc.salesforce.js"
+      ],
+      "css": [
+        "css/salesforce.css"
+      ]
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "file://*/*",
+        "https://*/*"
+      ],
+      "all_frames": false,
+      "run_at": "document_end",
+      "js": [
+        "app/chrome/jsc.popout.js"
+      ],
+      "css": [
+        "css/popout.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.google.com/*/hovercard*"
+      ],
+      "all_frames": true,
+      "run_at": "document_start",
+      "js": [
+        "app/chrome/jsc.gmail.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://manage1.esna.com/ilink/gadget.html*"
+      ],
+      "all_frames": true,
+      "run_at": "document_start",
+      "js": [
+        "app/chrome/jsc.gadget.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "file://*/*",
+        "https://*/*"
+      ],
+      "all_frames": true,
+      "run_at": "document_start",
+      "js": [
+        "app/chrome/jsc.jive.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": "img/jabber/19d.png"
+  },
+  "content_security_policy": "script-src 'self'; object-src 'self'; style-src 'self' 'unsafe-inline' https://manage1.esna.com; image-src 'self' 'unsafe-inline' data: http: https:;",
+  "web_accessible_resources": [
+    "img/jabber/32.png",
+    "img/jabber/19.png",
+    "img/jabber/p16.png",
+    "img/jabber/p16h.png",
+    "img/jabber/p16v.png",
+    "img/common/event16.png",
+    "img/common/esna.png",
+    "app/jabber/app.html",
+    "app/common/ntf.html",
+    "jsc/chrome/jsc.popout.js",
+    "css/popout.css"
+  ],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "windows": "Ctrl+Shift+I",
+        "mac": "Ctrl+Shift+I",
+        "chromeos": "Ctrl+Shift+I",
+        "linux": "Ctrl+Shift+I"
+      }
+    }
+  }
+}

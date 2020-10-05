@@ -1,0 +1,244 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Video & Screen Recorder for Work - Drift",
+  "short_name": "Drift Video",
+  "version": "4.3.2",
+  "manifest_version": 2,
+  "minimum_chrome_version": "44.0.0",
+  "description": "Record video, screen, or GIFs. Track views and chat live while they watch.",
+  "icons": {
+    "48": "images/drift-extension-icon-48x48.png",
+    "128": "images/drift-extension-icon-128x128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "page": "background.html"
+  },
+  "browser_action": {
+    "default_icon": {
+      "32": "images/drift-extension-icon-on-32x32.png"
+    },
+    "default_title": "Drift Video"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "tabCapture",
+    "desktopCapture",
+    "activeTab",
+    "unlimitedStorage",
+    "notifications",
+    "clipboardWrite",
+    "webRequest",
+    "<all_urls>"
+  ],
+  "web_accessible_resources": [
+    "*.html",
+    "**/*.html",
+    "scripts/share_modal_inject.js",
+    "injectedscript-automation.js",
+    "font/*",
+    "images/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://localhost:*/*",
+      "*://app.driftqa.com/*",
+      "*://app.drift.com/*",
+      "*://video.drift.com/*",
+      "*://app-qa.video.drift.com/*"
+    ]
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+Shift+A"
+      }
+    },
+    "drift-open-recording-modal": {
+      "suggested_key": {
+        "default": "Alt+Shift+R"
+      },
+      "description": "Toggle the embedded recording modal."
+    },
+    "drift-stop-recording": {
+      "suggested_key": {
+        "default": "Alt+Shift+S"
+      },
+      "description": "Stop an active recording."
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "contentscript-common.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "contentscript-recorder.js"
+      ],
+      "css": [
+        "contentscript-recorder.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "contentscript-embedded-recording-controls.js",
+        "contentscript-embedded-share-modal.js",
+        "contentscript-embedded-education-modal.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://app.hyfy.io/*",
+        "*://video.drift.com/*"
+      ],
+      "exclude_matches": [
+        "*://app.hyfy.io/admin/*",
+        "*://app.hyfy.io/jira/addon/*",
+        "*://video.drift.com/admin/*",
+        "*://video.drift.com/jira/addon/*"
+      ],
+      "js": [
+        "contentscript-webapp-sync.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://app.hyfy.io/share/*",
+        "*://video.drift.com/share/*"
+      ],
+      "js": [
+        "contentscript-share-modal.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://app.hyfy.io/jira/addon/*",
+        "*://video.drift.com/jira/addon/*"
+      ],
+      "js": [
+        "contentscript-recorder-jira-addon.js"
+      ],
+      "css": [
+        "contentscript-recorder-jira-addon.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://app.hyfy.io/jira/addon/share/*",
+        "*://video.drift.com/jira/addon/share/*"
+      ],
+      "js": [
+        "contentscript-jira-addon-share-dialog.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://mail.google.com/mail/u/*/?view=cm*"
+      ],
+      "js": [
+        "contentscript-share-gmail.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://mail.google.com/mail/*"
+      ],
+      "js": [
+        "contentscript-compose-gmail.js",
+        "contentscript-gmail.js",
+        "inboxsdk.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://video.drift.com/onboarding/*"
+      ],
+      "js": [
+        "contentscript-onboarding.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "contentscript-automation.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://www.linkedin.com/*"
+      ],
+      "js": [
+        "contentscript-linkedin.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://app.drift.com/inboxes/*"
+      ],
+      "js": [
+        "contentscript-drift-conversation-view.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.outreach.io/*"
+      ],
+      "js": [
+        "contentscript-outreach.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://outlook.live.com/mail/*"
+      ],
+      "js": [
+        "contentscript-outlook.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://my.15five.com/dashboard/high_fives/*",
+        "*://my.15five.com/report/*"
+      ],
+      "js": [
+        "contentscript-fifteen-five.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'sha256-mgAYsiEg434d2ub7SvCxbCWJVZ8JKcKftM9X+bb/MOA=' 'unsafe-eval' https://cdn.segment.com https://www.google-analytics.com https://js-agent.newrelic.com https://bam.nr-data.net; object-src 'self'"
+}

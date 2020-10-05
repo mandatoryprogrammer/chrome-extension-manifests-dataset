@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Grouptawk",
+  "description": "Grouptawk Chrome extension that allows you to schedule meetings and stream your desktop into Grouptawk conferences.",
+  "version": "0.2.8",
+  "minimum_chrome_version": "34",
+  "icons": {
+    "16": "grouptawk-16x16.png",
+    "48": "grouptawk-48x48.png",
+    "128": "grouptawk-128x128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "desktopCapture",
+    "https://calendar.google.com/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://www.grouptawk.com/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://calendar.google.com/calendar/*",
+        "https://outlook.live.com/owa/*"
+      ],
+      "js": [
+        "jquery.js",
+        "RandomUtil.js",
+        "RoomnameGenerator.js",
+        "meet-calendar.js"
+      ],
+      "css": [
+        "/css/all.css"
+      ],
+      "all_frames": false,
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "grouptawk-48x48.png",
+    "grouptawk-48x48.png",
+    "grouptawk-48x48.png",
+    "grouptawk-48x48.png"
+  ],
+  "browser_action": {
+    "default_title": "Create Grouptawk Meetings",
+    "default_popup": "popup.html"
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Collect by Spendesk",
+  "description": "Chrome extension of Collect by Spendesk",
+  "author": "auree",
+  "default_locale": "en",
+  "manifest_version": 2,
+  "icons": {
+    "16": "icons/16.png",
+    "128": "icons/128.png"
+  },
+  "permissions": [
+    "<all_urls>",
+    "*://*/*",
+    "activeTab",
+    "tabs",
+    "alarms",
+    "cookies",
+    "background",
+    "unlimitedStorage",
+    "storage",
+    "notifications"
+  ],
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "js/content-script.js"
+      ],
+      "run_at": "document_end",
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://collect.spendesk.com/*",
+      "*://collect-broker.spendesk.com/*",
+      "http://localhost:8080/*"
+    ]
+  },
+  "content_security_policy": "script-src 'self' ; object-src 'self'",
+  "web_accessible_resources": [
+    "js/content-script.js",
+    "img/*"
+  ],
+  "version": "0.2.1"
+}

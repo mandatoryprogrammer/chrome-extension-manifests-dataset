@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "WikiMaps",
+  "version": "1.2",
+  "description": "WikiMaps lets you select locations from text on the web, see them on a map, and view Wikipedia summaries for each one.",
+  "icons": {
+    "16": "img/16icon.png",
+    "48": "img/48icon.png",
+    "128": "img/128icon.png"
+  },
+  "commands": {
+    "add_selection": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Z",
+        "mac": "Command+Shift+Z"
+      },
+      "description": "Add selection to WikiMaps"
+    }
+  },
+  "background": {
+    "page": "html/background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "js/jquery.js",
+        "js/wikiMaps_content_script.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "contextMenus",
+    "webRequest",
+    "storage",
+    "https://maps.google.com/*",
+    "https://maps.googleapis.com/*",
+    "http://en.wikipedia.org/",
+    "http://dbpedia.org/",
+    "http://upload.wikimedia.org/wikipedia/"
+  ],
+  "browser_action": {
+    "default_name": "Display Map",
+    "default_title": "WikiMaps",
+    "default_icon": "img/marker2.png",
+    "default_popup": "html/popup.html"
+  },
+  "manifest_version": 2,
+  "content_security_policy": "default-src 'none'; font-src https://*.googleusercontent.com/; style-src 'self' 'unsafe-inline' https://*.googleapis.com/; script-src 'self' 'unsafe-eval' https://maps.gstatic.com/ https://*.googleapis.com/; connect-src 'self' http://dbpedia.org/ http://en.wikipedia.org/ https://maps.googleapis.com/ https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false; img-src http://upload.wikimedia.org/wikipedia/ https://maps.google.com https://*.googleapis.com/ https://*.gstatic.com/"
+}

@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Sudespacho Gmail",
+  "description": "Sudespacho Gmail",
+  "version": "0.1.4",
+  "manifest_version": 2,
+  "browser_action": {
+    "default_icon": "img/icon16.png",
+    "default_title": "SuDespacho",
+    "default_popup": "templates/popup_browser_action.html"
+  },
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "external/jquery-3.1.0.min.js",
+      "external/base64.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*"
+      ],
+      "css": [
+        "external/jquery-ui.min.css",
+        "css/content.css"
+      ],
+      "js": [
+        "external/jquery-3.1.0.min.js",
+        "external/jquery-ui.min.js",
+        "inboxsdk.js",
+        "content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "identity",
+    "*://*.google.com/*",
+    "https://www.inboxsdk.com/*",
+    "https://eplanv3.sudespacho.net/*",
+    "https://desarrollossl.sudespacho.local/*",
+    "https://dev.sudespacho.net/*",
+    "https://*.sudespacho.net/*",
+    "storage"
+  ],
+  "web_accessible_resources": [
+    "img/*.png",
+    "templates/*.html"
+  ],
+  "content_security_policy": "script-src https://*.google.com 'self' 'unsafe-eval'; object-src 'self'",
+  "oauth2": {
+    "client_id": "614033864576-bh8afcgk15luuab98155b8765gkl7fla.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/gmail.modify",
+      "https://www.googleapis.com/auth/gmail.labels"
+    ]
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_appName__",
+  "description": "__MSG_appDesc__",
+  "default_locale": "en",
+  "version": "1.523",
+  "homepage_url": "https://www.standsapp.org",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlB8Pj+GOnpKxOAc2l9oQRbOSualZoR9vzE9UJdZP1K+oiHSka9oBKhE5xSXyZpDVzya/P/CCLnPJaZbIaks/7m2GfcmyneNgiGylYDOmuBlm8vUNDdeh8SN/t3IeEGvBa6c17JidtHJWJK8FvY/YVqWyewPgcfRsCg1yemcaA/PsvS8OVHtdt+4mXPM9c/RCm1UOANzNnkyUtU9AMY9EF2910B18jqxmhxp5qoPHtnL9ujK0mKdxLVKGV8xNLCxH0zc6gWcu9x+Sin8w7/7669Rs6yttGk28Mqg4uv5//lGUTrc/vEfKIWwr11pDF7Idw3Ev7Q3drw/LcupkcbY3lwIDAQAB",
+  "icons": {
+    "128": "icons/128.png"
+  },
+  "background": {
+    "scripts": [
+      "common/common.js",
+      "common/common-background.js",
+      "background/chrome.js",
+      "background/utils.js",
+      "background/stndz.js",
+      "background/lists.js",
+      "background/mystats.js",
+      "background/user.js",
+      "background/block-element.js",
+      "background/notifications.js",
+      "background/core.js",
+      "background/start.js",
+      "background/malware-detector.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "webNavigation",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "http://*/*",
+    "https://*/*",
+    "notifications",
+    "storage",
+    "contextMenus",
+    "unlimitedStorage"
+  ],
+  "optional_permissions": [
+    "management"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "common/common.js",
+        "common/common-content.js",
+        "content/chrome.js",
+        "content/popup-blocking.js",
+        "content/doc-start.js",
+        "content/messaging.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start",
+      "match_about_blank": false
+    },
+    {
+      "matches": [
+        "https://*.facebook.com/*"
+      ],
+      "js": [
+        "content/sites/fb.js"
+      ],
+      "all_frames": false,
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://*.youtube.com/*"
+      ],
+      "js": [
+        "content/sites/yt.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "content/doc-end.js",
+        "content/content.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end",
+      "match_about_blank": false
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/19.png",
+      "38": "icons/38.png"
+    },
+    "default_title": "Fair AdBlocker",
+    "default_popup": "views/browser_action_window/window.html"
+  },
+  "web_accessible_resources": [
+    "views/web_accessible/*"
+  ],
+  "content_security_policy": "script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com; object-src 'self';"
+}

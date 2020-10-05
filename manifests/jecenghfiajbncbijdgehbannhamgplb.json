@@ -1,0 +1,107 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Glasssquid Chrome Extension",
+  "version": "1.0.9",
+  "manifest_version": 2,
+  "description": "glasssquid.io simplifies your job search. Extracts and analyzes job descriptions from indeed, glassdoor.",
+  "icons": {
+    "16": "assets/icons/favicon-16x16.png",
+    "32": "assets/icons/favicon-32x32.png",
+    "96": "assets/icons/favicon-96x96.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs",
+    "webNavigation"
+  ],
+  "page_action": {
+    "default_icon": {
+      "16": "assets/icons/favicon-16x16.png",
+      "32": "assets/icons/favicon-32x32.png"
+    },
+    "default_title": "glasssquid.io inkblot chrome extension",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "scripts/content/extension_check.js"
+      ],
+      "matches": [
+        "https://app.glasssquid.io/*",
+        "https://glasssquid.io/*",
+        "https://app-dev.glasssquid.io/*"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "js": [
+        "scripts/content/indeed/index.js"
+      ],
+      "css": [
+        "styles/customized_content_indeed.css"
+      ],
+      "matches": [
+        "http://www.indeed.com/*",
+        "https://www.indeed.com/*"
+      ]
+    },
+    {
+      "js": [
+        "scripts/content/glassdoor/index.js"
+      ],
+      "css": [
+        "styles/customized_content_glassdoor.css"
+      ],
+      "matches": [
+        "https://www.glassdoor.com/Job/*"
+      ]
+    },
+    {
+      "js": [
+        "scripts/common/config.js",
+        "scripts/common/utils.js",
+        "scripts/content/glasssquid/index.js",
+        "scripts/content/app.js"
+      ],
+      "matches": [
+        "https://app-dev.glasssquid.io/*",
+        "https://app.glasssquid.io/*",
+        "https://glasssquid.io/*"
+      ]
+    },
+    {
+      "js": [
+        "bower_components/jquery/dist/jquery.min.js",
+        "bower_components/jquery-ui/jquery-ui.min.js",
+        "bower_components/font-awesome/js/all.min.js",
+        "bower_components/font-awesome/js/v4-shims.min.js",
+        "scripts/lib/jquery-circlos.js",
+        "scripts/common/config.js",
+        "scripts/common/utils.js",
+        "scripts/content/app.js"
+      ],
+      "css": [
+        "bower_components/jquery-ui/themes/smoothness/jquery-ui.min.css",
+        "bower_components/font-awesome/css/all.min.css",
+        "bower_components/font-awesome/css/v4-shims.min.css",
+        "styles/customized_content.css",
+        "styles/loader.css"
+      ],
+      "matches": [
+        "http://www.indeed.com/*",
+        "https://www.indeed.com/*",
+        "https://www.glassdoor.com/Job/*"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Lytics Stealth",
+  "short_name": "Lytics Stealth",
+  "version": "0.0.3",
+  "author": "Mark Hayden",
+  "manifest_version": 2,
+  "description": "Installs the Lytics tag on any site and gives the ability to control the profile for demonstration purposes.",
+  "homepage_url": "http://getlytics.com",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "background": {
+    "scripts": [
+      "stealth.js",
+      "background-init.js"
+    ],
+    "persistent": true
+  },
+  "options_page": "settings.html",
+  "browser_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "Lytics Stealth",
+    "default_popup": "interface.html"
+  },
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "tabs",
+    "file:///*/*",
+    "<all_urls>",
+    "storage",
+    "unlimitedStorage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*/*"
+      ],
+      "js": [
+        "contentinit.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*/*"
+      ],
+      "js": [
+        "contentlytics.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

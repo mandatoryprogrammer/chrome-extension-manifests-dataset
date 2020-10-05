@@ -1,0 +1,76 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Eno® from Capital One®",
+  "description": "Shop more securely through your desktop browser with Eno®, your Capital One® assistant.",
+  "short_name": "Eno® from Capital One®",
+  "version": "3.2.4",
+  "icons": {
+    "16": "assets/images/app-icon.png",
+    "48": "assets/images/app-icon48.png",
+    "128": "assets/images/app-icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "assets/images/app-icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "all_frames": true,
+      "css": [
+        "assets/css/dnd_card.css"
+      ],
+      "js": [
+        "jquery.min.js",
+        "jquery-ui.min.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "content-scripts.min.js",
+        "cs.min.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "refresh.js",
+      "background.min.js",
+      "bg.min.js",
+      "jsrsasign.js",
+      "assets/vendor/snowplow.min.js"
+    ]
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "cookies",
+    "webRequest",
+    "webRequestBlocking",
+    "https://*/",
+    "http://*/"
+  ],
+  "web_accessible_resources": [
+    "assets/*",
+    "index.html",
+    "ccswap.html",
+    "ccswap*.js",
+    "automaton.min.js"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.capitalone.com/*"
+    ]
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAu028cNZuSZ52TZSkt+YkwcL+iHbz+Lzf2i7/jGTzaT1BPYM8R4poBMhRK219PbZA0oJmPGJrdcbbRONmIHSwPNUb+YE+nI3RRjFEEo9aoJg8Q3YRiS2ANFaWF7SeCxXtg+z09Qp+gIHalFlnx6H+txmGYt9ZHSKKSTaG6C5yTccsmdjBVw3k+FEc8QsAv3wfPQ/6T2oePEZvP+VvjudYylanVZ3IpF0kW7t9uRP9ge9E2cD2x+AmSiSYsPjL1ybBEzwCaVC9sDHPzt/SIMjhNz5upovDIoXpp8op4JobPUXB7JtshlLEzJuD96N4tmHfjUIch8Q+YlX0LD7k/GLTeQIDAQAB",
+  "content_security_policy": "script-src 'self' https://wib.capitalone.com/assets/enterprise/js/cp_eno.js; object-src 'self'"
+}

@@ -1,0 +1,48 @@
+{
+  "update_url": "http://clients2.google.com/service/update2/crx",
+  "name": "App Engine Offline Statistics Estimator",
+  "version": "1.5.4.5",
+  "manifest_version": 2,
+  "description": "This (unofficial) tool provides missing Admin console functionality for App Engine Premier customers (usage and cost estimation).",
+  "permissions": [
+    "https://appengine.google.com/dashboard*",
+    "https://appengine.google.com/billing/*",
+    "cookies",
+    "*://*.google.com"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://appengine.google.com/billing/*"
+      ],
+      "js": [
+        "jquery-1.7.2.js",
+        "common.js",
+        "contentscript-adminhistory.js"
+      ],
+      "css": [
+        "style.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://appengine.google.com/dashboard*"
+      ],
+      "js": [
+        "jquery-1.7.2.js",
+        "common.js",
+        "contentscript-dashboard.js"
+      ],
+      "css": [
+        "style.css"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

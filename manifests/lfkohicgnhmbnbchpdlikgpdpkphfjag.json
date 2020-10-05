@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Mail Shield",
+  "description": "Additional protection layer for your email address.",
+  "version": "1.1.0",
+  "web_accessible_resources": [
+    "img/*"
+  ],
+  "icons": {
+    "16": "img/shield.png",
+    "48": "img/shield.png",
+    "128": "img/shield@128px.png"
+  },
+  "browser_action": {
+    "default_icon": "img/shield.png",
+    "default_popup": "index.html",
+    "default_title": "Mail Shield, by Rogerio Taques"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "css": [
+        "css/onpageload.css"
+      ],
+      "js": [
+        "js/common.js",
+        "js/onpageload.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>",
+    "activeTab",
+    "*://mailshld.com/*",
+    "*://app.mailshld.com/*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js; object-src 'self'"
+}

@@ -1,0 +1,84 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Myles",
+  "description": "Compare rewards across various affiliate programs",
+  "version": "1.0.5",
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/64.png",
+    "128": "icons/128.png"
+  },
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "background/location.js",
+      "background/main.js"
+    ]
+  },
+  "browser_action": {
+    "default_popup": "popup/popup.html"
+  },
+  "permissions": [
+    "activeTab",
+    "identity",
+    "tabs",
+    "geolocation",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.amazon.com/",
+        "https://www.amazon.com/"
+      ],
+      "css": [
+        "lib/font.css",
+        "content/amazon-home/style.css"
+      ],
+      "js": [
+        "lib/jquery.js",
+        "lib/tether.js",
+        "lib/bootstrap.min.js",
+        "content/amazon-home/script.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_globs": [
+        "http://www.amazon.com/*",
+        "https://www.amazon.com/*"
+      ],
+      "css": [
+        "lib/font.css",
+        "header/style.css"
+      ],
+      "js": [
+        "lib/jquery.js",
+        "lib/tether.js",
+        "lib/bootstrap.min.js",
+        "content/db/db_us.js",
+        "content/db/db_in.js",
+        "content/helper/domain_extract.js",
+        "content/header/header_us.js",
+        "content/header/header_in.js",
+        "content/script.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://shop.jetprivilege.com/",
+        "http://shop.jetprivilege.com/"
+      ],
+      "css": [],
+      "js": [
+        "lib/jquery.js",
+        "content/jet/script.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Case Cat - Text Converter",
+  "version": "1.2.2",
+  "manifest_version": 2,
+  "description": "Format and convert case of selected text.",
+  "icons": {
+    "16": "images/icon-16.png",
+    "19": "images/icon-19.png",
+    "38": "images/icon-38.png",
+    "128": "images/icon-128.png"
+  },
+  "default_locale": "en",
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "background",
+    "clipboardRead",
+    "clipboardWrite",
+    "contextMenus",
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "scripts/vendor/Case.js",
+      "scripts/config.js",
+      "scripts/modules/option-manager.js",
+      "scripts/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "scripts/modules/option-manager.js",
+        "scripts/content.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon-19.png",
+      "38": "images/icon-38.png"
+    },
+    "default_title": "Case Cat",
+    "default_popup": "options.html"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  }
+}

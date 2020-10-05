@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Happy Translator",
+  "version": "1.2.1",
+  "description": "Turn negativity into nice-itivity, all over your internets.",
+  "author": "CampJefferson",
+  "icons": {
+    "16": "images/16.png",
+    "48": "images/128.png",
+    "128": "images/128.png"
+  },
+  "background": {
+    "scripts": [
+      "ht-storage.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/32.png",
+      "38": "images/48.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_maches": [
+        "*://mail.google.com/*",
+        "*://calendar.google.com/*",
+        "*://drive.google.com/*",
+        "*://docs.google.com/*",
+        "*://calendar.google.com/*",
+        "*://bitbucket.org/*",
+        "*://toggl.com/*",
+        "*://*.slack.com/*",
+        "*://trello.com/*"
+      ],
+      "all_frames": false,
+      "js": [
+        "ht-storage.js",
+        "findAndReplaceDOMText.js",
+        "ga.js",
+        "jquery-1.11.3.min.js",
+        "content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "dictionary.json"
+  ],
+  "permissions": [
+    "storage",
+    "tabs",
+    "activeTab",
+    "*://*/*"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'"
+}

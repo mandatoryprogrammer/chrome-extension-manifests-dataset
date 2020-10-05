@@ -1,0 +1,156 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "GoNimble.net - AliExpress Product Importer",
+  "short_name": "GoNimble.net",
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "description": "Import products from Aliexpress directly to your Shopify store with a single click.",
+  "version": "2.5.8",
+  "icons": {
+    "128": "icon_128.png"
+  },
+  "browser_action": {
+    "default_icon": "ft.png",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "css": [
+        "style.css",
+        "css/cybermonday.css"
+      ],
+      "js": [
+        "jquery.min.js",
+        "searchPage.js",
+        "src/chartjs/Chart.min.js",
+        "src/cyberMondayDeal.js"
+      ],
+      "matches": [
+        "https://*.aliexpress.com/af/*",
+        "http://*.aliexpress.com/af/*",
+        "https://*.aliexpress.com/w/*",
+        "http://*.aliexpress.com/w/*",
+        "https://*.aliexpress.com/category/*",
+        "http://*.aliexpress.com/category/*",
+        "https://*.aliexpress.com/wholesale*",
+        "http://*.aliexpress.com/wholesale*",
+        "https://*.aliexpress.com/premium*",
+        "http://*.aliexpress.com/premium*"
+      ]
+    },
+    {
+      "css": [
+        "style.css"
+      ],
+      "js": [
+        "jquery.min.js",
+        "itemPage.js",
+        "src/chartjs/Chart.min.js"
+      ],
+      "matches": [
+        "https://*.aliexpress.com/item/*",
+        "https://*.aliexpress.com/store/product/*"
+      ]
+    },
+    {
+      "css": [
+        "style.css"
+      ],
+      "js": [
+        "jquery.min.js",
+        "src/oberloPageProductFetcher.js"
+      ],
+      "matches": [
+        "https://app.oberlo.com/my-products",
+        "https://app.oberlo.com/*"
+      ]
+    },
+    {
+      "css": [
+        "style.css"
+      ],
+      "js": [
+        "jquery.min.js",
+        "src/dropifiedProductFetcher.js"
+      ],
+      "matches": [
+        "https://app.dropified.com/product/*",
+        "https://app.dropified.com/*"
+      ]
+    },
+    {
+      "js": [
+        "jquery.min.js",
+        "src/nimblePage.js"
+      ],
+      "matches": [
+        "*://www.gonimble.net/dashboard/unmigrated"
+      ]
+    },
+    {
+      "css": [
+        "css/paymentBar.css"
+      ],
+      "js": [
+        "jquery.min.js",
+        "src/aliexpressOrderlistpage.js"
+      ],
+      "matches": [
+        "*://trade.aliexpress.com/orderList.htm*",
+        "*://*.aliexpress.com/order/payResult.htm*"
+      ]
+    },
+    {
+      "css": [
+        "style.css"
+      ],
+      "js": [
+        "jquery.min.js",
+        "src/nimbleMigrator.js"
+      ],
+      "matches": [
+        "*://*.gonimble.net/dashboard/migrator"
+      ]
+    },
+    {
+      "css": [
+        "style.css"
+      ],
+      "js": [
+        "jquery.min.js",
+        "src/dsersParser/includes/getProducts.js",
+        "src/dsersParser/includes/requestHandler.js",
+        "src/dsersParser/includes/getSelectedStore.js",
+        "src/dsersParser/includes/renderMigrator.js",
+        "src/dsersParser/main.js"
+      ],
+      "matches": [
+        "https://www.dsers.com/*"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://www.gonimble.net/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "spinner.gif"
+  ],
+  "permissions": [
+    "storage",
+    "tabs",
+    "activeTab",
+    "https://*/admin/*",
+    "https://www.aliexpress.com/*",
+    "https://home.aliexpress.com/*",
+    "https://*.dsers.com/*",
+    "webRequest",
+    "webRequestBlocking"
+  ]
+}

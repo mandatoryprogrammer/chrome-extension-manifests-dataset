@@ -1,0 +1,74 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "SalesLoft Connect",
+  "short_name": "SalesLoft",
+  "version": "4.58.1",
+  "minimum_chrome_version": "35",
+  "manifest_version": 2,
+  "description": "SalesLoft Connect enables users to more easily track communication and add people to workflows using Salesforce.com and Gmail.",
+  "icons": {
+    "16": "images/SL-icon-16.png",
+    "48": "images/SL-icon-48.png",
+    "128": "images/SL-icon-128.png"
+  },
+  "background": {
+    "page": "pages/background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.calendar.google.com/calendar/*"
+      ],
+      "css": [
+        "styles/loft_calendar_events.css"
+      ],
+      "js": [
+        "vendor.js",
+        "bundle.js",
+        "loft_calendar_events.bundle.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_popup": "pages/options.html",
+    "default_title": "SalesLoft Connect"
+  },
+  "options_ui": {
+    "page": "pages/options.html",
+    "chrome_style": true,
+    "open_in_tab": true
+  },
+  "content_security_policy": "default-src 'self'; connect-src 'self' https://*.salesloft.com wss://*.salesloft.com https://*.qasalesloft.com wss://*.qasalesloft.com wss://*.devsalesloft.com https://api.segment.io https://*.bugsnag.com https://media.twiliocdn.com wss://*.twilio.com https://*.twilio.com https://*.s3.amazonaws.com http://127.0.0.1:8080 https://localhost.salesloft.com:9898 https://localhost.salesloft.com:9999; style-src 'self' 'unsafe-inline'; media-src 'self' https://media.twiliocdn.com;",
+  "permissions": [
+    "contextMenus",
+    "tabs",
+    "storage",
+    "notifications",
+    "webRequest",
+    "webNavigation",
+    "<all_urls>",
+    "system.cpu",
+    "system.memory",
+    "webRequestBlocking",
+    "idle"
+  ],
+  "web_accessible_resources": [
+    "vendor/*",
+    "styles/*",
+    "images/*",
+    "r_images/*",
+    "content/sfdc_iframe.js",
+    "fonts/*",
+    "pages/options.html"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://localhost.salesloft.com/*",
+      "*://sdr.salesloft.com/*",
+      "*://sdr.qasalesloft.com/*",
+      "*://app.salesloft.com/*",
+      "*://*.qasalesloft.com/*",
+      "*://sidecar-cdn.salesloft.com/*"
+    ]
+  }
+}

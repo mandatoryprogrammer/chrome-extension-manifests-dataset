@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_extName__",
+  "version": "0.2.4",
+  "manifest_version": 2,
+  "description": "__MSG_extDesc__",
+  "homepage_url": "https://www.thegoodshoppers.com",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "src/bg/background.js",
+      "src/inject/tgs_base_content.js"
+    ],
+    "persistent": true
+  },
+  "page_action": {
+    "default_popup": "src/options/select_npo.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "permissions": [
+    "*://*/*",
+    "activeTab",
+    "notifications",
+    "tabs",
+    "storage",
+    "declarativeContent",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking",
+    "cookies"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [
+        "src/inject/inject_all.css"
+      ],
+      "js": [
+        "src/inject/tgs_base_content.js",
+        "src/inject/inject_all.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

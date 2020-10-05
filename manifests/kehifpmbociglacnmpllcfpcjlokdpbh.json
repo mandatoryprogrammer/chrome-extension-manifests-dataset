@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Esencia Summarizer Plugin",
+  "description": "Esencia Extension (BETA) for Chrome - The best way to summarize news, blogs, technical articles and more.",
+  "version": "0.43",
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "contextMenus",
+    "identity",
+    "identity.email",
+    "storage"
+  ],
+  "browser_action": {
+    "default_icon": "/images/19x19logo lt green.png",
+    "default_popup": "/ChromePopup/popup.html"
+  },
+  "icons": {
+    "16": "/images/16x16logo dk green.png",
+    "100": "/images/logo 100x100 text size 175.png",
+    "128": "/images/icon 128x128 canvas size with text size 175.png"
+  },
+  "background": {
+    "scripts": [
+      "lib/moment.js",
+      "lib/angular.js",
+      "Services/UserInfo.js",
+      "Services/SummarizerOperation.js",
+      "Services/SummarizerService.js",
+      "Services/UsersService.js",
+      "Services/RemoteLoggerService.js",
+      "Services/Storage/LocalStorage.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "lib/jquery-2.2.4.min.js",
+        "ClientScripts/LinkInfo.js",
+        "ClientScripts/LinkScanner.js"
+      ],
+      "match_about_blank": false,
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "css/bootstrap.css",
+    "css/emailSummary.css",
+    "lib/ui-bootstrap-tpls-1.3.3.js",
+    "lib/angular.js",
+    "summary.js"
+  ]
+}

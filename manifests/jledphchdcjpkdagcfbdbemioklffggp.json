@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "alt-s",
+  "description": "An alternative way to search the web.",
+  "version": "0.2.0",
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "tabs",
+    "activeTab",
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistant": true
+  },
+  "browser_action": {
+    "default_icon": "alt_key48.png",
+    "default_popup": "toolbarInitial.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.alts.io/"
+      ],
+      "js": [
+        "jquery-1.11.1.min.js",
+        "extensionInstalled.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.alts.io/search"
+      ],
+      "js": [
+        "jquery-1.11.1.min.js",
+        "searchFromSite.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "css/*.css",
+    "toolbar.html",
+    "sidebar.html"
+  ],
+  "icons": {
+    "16": "alt_key16.png",
+    "48": "alt_key48.png",
+    "128": "alt_key128.png"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+S"
+      }
+    }
+  }
+}

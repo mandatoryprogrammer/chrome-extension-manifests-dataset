@@ -1,0 +1,68 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "author": "eschao",
+  "name": "MyGit",
+  "permissions": [
+    "storage",
+    "tabs",
+    "https://*.github.com/*",
+    "https://github.ibm.com/*",
+    "https://zenhub.innovate.ibm.com/*",
+    "https://*.zenhub.io/*"
+  ],
+  "version": "0.6.4",
+  "manifest_version": 2,
+  "description": "MyGit - Extension for GitHub",
+  "icons": {
+    "128": "img/icon/mygit_128.png",
+    "48": "img/icon/mygit_48.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "img/icon/mygit_19.png",
+      "38": "img/icon/mygit_38.png"
+    },
+    "default_popup": "popup.html",
+    "default_title": "MyGit"
+  },
+  "background": {
+    "scripts": [
+      "src/js/config.js",
+      "src/js/browser_api.js",
+      "src/js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.github.com/*",
+        "https://github.ibm.com/*"
+      ],
+      "css": [
+        "css/inject.css"
+      ],
+      "js": [
+        "src/js/utils.js",
+        "src/js/config.js",
+        "src/js/browser_api.js",
+        "src/js/github_api.js",
+        "src/js/inject/FileSaver.min.js",
+        "src/js/inject/drag_drop.js",
+        "src/js/inject/issue_export_dialog.js",
+        "src/js/inject/issue_filter.js",
+        "src/js/inject/issue_injector.js",
+        "src/js/inject/issue_preview.js",
+        "src/js/inject/favorite_repos_injector.js",
+        "src/js/inject/labels_injector.js",
+        "src/js/inject/injector.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "js/*",
+    "templates/*",
+    "img/*",
+    "fonts/*"
+  ]
+}

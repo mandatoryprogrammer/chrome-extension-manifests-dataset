@@ -1,0 +1,88 @@
+{
+  "browser_action": {
+    "default_icon": "images/icon-19.png",
+    "default_popup": "view/viewsdb.html",
+    "default_title": "Open SDB"
+  },
+  "minimum_chrome_version": "22.0.1229.79",
+  "options_page": "settings/settings.html",
+  "version": "1.0",
+  "content_security_policy": "script-src 'self'; object-src 'none'; img-src 'self' http://images.neopets.com; frame-src http://www.neopets.com; connect-src http://www.neopets.com; font-src 'none'; media-src 'none'",
+  "web_accessible_resources": [
+    "images/icon-128.png",
+    "lib/bootstrap/bootstrap.css",
+    "lib/jquery.min.js",
+    "notifications/notification.js"
+  ],
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "description": "Adds features to Neopets SDB.",
+  "name": "Neopets SDB Enhanced",
+  "sandbox": {
+    "content_security_policy": "script-src 'self'; object-src 'none'; img-src 'self'; frame-src 'none'; connect-src http://neo.regex.be; font-src 'none'; media-src 'none'"
+  },
+  "background": {
+    "scripts": [
+      "lib/jquery.min.js",
+      "Controller.js"
+    ]
+  },
+  "permissions": [
+    "http://images.neopets.com/",
+    "http://www.neopets.com/",
+    "storage",
+    "unlimitedStorage",
+    "webRequest",
+    "webRequestBlocking",
+    "notifications"
+  ],
+  "icons": {
+    "128": "images/icon-128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.neopets.com/safetydeposit.phtml*"
+      ],
+      "all_frames": true,
+      "js": [
+        "lib/jquery.min.js",
+        "content_scripts/sdb-enhanced.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://www.neopets.com/quickstock.phtml*"
+      ],
+      "all_frames": true,
+      "js": [
+        "lib/jquery.min.js",
+        "content_scripts/quickstock.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://www.neopets.com/iteminfo.phtml*"
+      ],
+      "all_frames": true,
+      "js": [
+        "lib/jquery.min.js",
+        "content_scripts/inventory.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://www.neopets.com/search.phtml?selected_type=object&SDB&string=*"
+      ],
+      "all_frames": true,
+      "js": [
+        "lib/jquery.min.js",
+        "content_scripts/lookupinfo.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "manifest_version": 2
+}

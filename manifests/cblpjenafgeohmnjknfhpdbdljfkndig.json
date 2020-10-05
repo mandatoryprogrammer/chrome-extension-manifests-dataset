@@ -1,0 +1,101 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_ext_title__",
+  "short_name": "__MSG_ext_short_name__",
+  "version": "0.1.4.16",
+  "description": "__MSG_ext_description__",
+  "author": "furyu",
+  "default_locale": "en",
+  "icons": {
+    "16": "img/icon_16.png",
+    "19": "img/icon_19.png",
+    "48": "img/icon_48.png",
+    "128": "img/icon_128.png"
+  },
+  "permissions": [
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "*://*.twitter.com/*",
+    "*://pbs.twimg.com/*",
+    "*://video.twimg.com/*",
+    "*://*.cdn.vine.co/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://twitter.com/*",
+        "*://tweetdeck.twitter.com/*",
+        "*://api.twitter.com/*",
+        "*://*.furyutei.work/oauth/*",
+        "*://pbs.twimg.com/media/*"
+      ],
+      "js": [
+        "js/browser_info.js",
+        "js/jquery.min.js",
+        "js/twitter-oauth/sha1.js",
+        "js/twitter-oauth/oauth.js",
+        "js/twitter-oauth/twitter-api.js",
+        "js/session.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "*://twitter.com/*",
+        "*://tweetdeck.twitter.com/*",
+        "*://pbs.twimg.com/media/*"
+      ],
+      "js": [
+        "js/decimal.min.js",
+        "js/jszip.min.js",
+        "js/zip_request_legacy.js",
+        "js/init.js",
+        "js/timeline.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://twitter.com/*"
+      ],
+      "js": [
+        "js/main_react.user.js",
+        "js/twMediaDownloader.user.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://tweetdeck.twitter.com/*"
+      ],
+      "js": [
+        "js/main_tweetdeck.user.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/jszip.min.js",
+      "js/zip_worker.js",
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "options_ui": {
+    "page": "html/options.html",
+    "open_in_tab": true
+  },
+  "browser_action": {
+    "default_icon": "img/icon_16.png",
+    "default_title": "__MSG_ext_title__",
+    "default_popup": "html/options.html"
+  },
+  "incognito": "split"
+}

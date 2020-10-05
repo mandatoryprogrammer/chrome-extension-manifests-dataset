@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "SkipShout",
+  "short_name": "SkipShout",
+  "version": "3.0",
+  "description": "SkipShout",
+  "icons": {
+    "16": "media/skipshout.png",
+    "48": "media/skipshout.png",
+    "128": "media/skipshout.png"
+  },
+  "manifest_version": 2,
+  "browser_action": {
+    "default_icon": "media/skipshout.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "vendor/async.js",
+      "vendor/underscore-min.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.youtube.com/*"
+      ],
+      "css": [
+        "content/css/style.css"
+      ],
+      "js": [
+        "vendor/async.js",
+        "content/page.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "content/templates.html",
+    "content/media/interstitial.mp4",
+    "content/media/phrasebg.png",
+    "content/media/promptbg.png",
+    "content/media/up_arrow_sign.png"
+  ],
+  "permissions": [
+    "storage",
+    "webRequest",
+    "tabs",
+    "webRequestBlocking",
+    "http://vaac-army.herokuapp.com/*",
+    "*://*/*"
+  ],
+  "options_page": "options/index.html"
+}

@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Fast Film",
+  "description": "__MSG_description__",
+  "version": "3.0.5",
+  "default_locale": "ru",
+  "icons": {
+    "16": "img/icons/icon16.png",
+    "48": "img/icons/icon48.png",
+    "128": "img/icons/icon128.png"
+  },
+  "web_accessible_resources": [
+    "img/icons/*"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "background": {
+    "scripts": [
+      "js/background.js",
+      "js/analytics.js"
+    ],
+    "persistent": false
+  },
+  "options_page": "html/settings.html",
+  "permissions": [
+    "tabs",
+    "*://*.kinopoisk.ru/film/*",
+    "*://*.imdb.com/title/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.kinopoisk.ru/film/*"
+      ],
+      "css": [
+        "style/content.css"
+      ],
+      "js": [
+        "libs/jquery.js",
+        "js/content/kinopoisk.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.imdb.com/title/*"
+      ],
+      "css": [
+        "style/content.css"
+      ],
+      "js": [
+        "libs/jquery.js",
+        "js/content/imdb.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Prototype Toolkit",
+  "version": "0.7",
+  "manifest_version": 2,
+  "description": "Tools for Axure prototypes to make life a little bit easier.",
+  "homepage_url": "http://claytonjgray.com",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "https://*.axshare.com/",
+    "http://127.0.0.1/start.html"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://127.0.0.1/start.html",
+        "https://*.axshare.com/"
+      ],
+      "css": [
+        "src/inject/inject.css"
+      ]
+    },
+    {
+      "matches": [
+        "http://127.0.0.1/start.html",
+        "https://*.axshare.com/"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "js/jquery-resizable.js",
+        "src/inject/inject.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://127.0.0.1/*.html",
+        "https://*.axshare.com/*.html"
+      ],
+      "css": [
+        "replace/shared.css"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "replace/shared.js",
+        "src/inject/all_frames.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "replace/*",
+    "web/*",
+    "images/*"
+  ]
+}

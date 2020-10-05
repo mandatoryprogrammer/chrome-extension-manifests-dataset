@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Facenick",
+  "version": "1.3",
+  "manifest_version": 2,
+  "description": "Give nicknames to your facebook friends",
+  "icons": {
+    "16": "icons/fn-16.png",
+    "48": "icons/fn-48.png",
+    "128": "icons/fn-128.png"
+  },
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": true
+  },
+  "page_action": {
+    "default_icon": "icons/fn.png",
+    "default_popup": "src/page_action/page_action.html"
+  },
+  "permissions": [
+    "tabs",
+    "https://*.facebook.com/*",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.facebook.com/*"
+      ],
+      "js": [
+        "js/content.js"
+      ]
+    }
+  ],
+  "commands": {
+    "_execute_page_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+N",
+        "windows": "Ctrl+Shift+N",
+        "mac": "Ctrl+Shift+N"
+      }
+    }
+  }
+}

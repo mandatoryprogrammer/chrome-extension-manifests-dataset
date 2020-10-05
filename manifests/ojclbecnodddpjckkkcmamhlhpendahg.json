@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Save to Cloud Drive",
+  "description": "Save to Cloud Drive makes it easy to add images from the web to your Amazon Cloud Drive account.",
+  "short_name": "Cloud Drive",
+  "version": "0.5",
+  "manifest_version": 2,
+  "icons": {
+    "16": "icon_16.png",
+    "48": "icon_48.png",
+    "128": "icon_128.png"
+  },
+  "permissions": [
+    "storage",
+    "notifications",
+    "contextMenus",
+    "cookies",
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "third-party/jquery.js",
+      "third-party/underscore.js",
+      "storage.js",
+      "config.js",
+      "service-handler.js",
+      "metrics.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.amazon.com/*",
+        "https://*.amazon.co.uk/*",
+        "https://*.amazon.de/*",
+        "https://*.amazon.fr/*",
+        "https://*.amazon.it/*",
+        "https://*.amazon.es/*",
+        "https://*.amazon.co.jp/*",
+        "https://*.amazon.cn/*",
+        "https://*.amazon.ca/*",
+        "https://*.amazon.com.br/*",
+        "https://*.amazon.com.au/*"
+      ],
+      "js": [
+        "content-scripts/content-script.js"
+      ]
+    }
+  ],
+  "options_page": "settings/settings.html",
+  "browser_action": {
+    "default_title": "Save to Cloud Drive",
+    "default_icon": "icon_128.png",
+    "default_popup": "popup/popup.html"
+  }
+}

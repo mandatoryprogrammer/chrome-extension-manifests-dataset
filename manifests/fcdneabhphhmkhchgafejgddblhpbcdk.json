@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Wisdom - Live View Injector",
+  "short_name": "Wisdom Live",
+  "version": "0.5.56",
+  "manifest_version": 2,
+  "description": "Injects a Wisdom frame into 3rd party websites to enable live-view of website vistors.",
+  "homepage_url": "https://getwisdom.io/",
+  "minimum_chrome_version": "56",
+  "incognito": "split",
+  "icons": {
+    "128": "icons/favicon-128.png"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://localhost:8080/*",
+        "https://app.getwisdom.io/*",
+        "https://errorception.com/*",
+        "https://mixpanel.com/*",
+        "https://app.intercom.io/*",
+        "https://app.purechat.com/*",
+        "https://chat2.olark.com/*",
+        "https://analytics.google.com/analytics/web/*",
+        "https://heapanalytics.com/app/*",
+        "https://sentry.io/*",
+        "https://dashboard.wootric.com/*",
+        "https://app.qualaroo.com/*",
+        "https://*.zendesk.com/chat/agent/*"
+      ],
+      "js": [
+        "./main.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "browser_action": {
+    "default_icon": "icons/favicon-128.png"
+  },
+  "options_ui": {
+    "page": "frames/options-redirect.html",
+    "open_in_tab": true,
+    "chrome_style": true
+  },
+  "web_accessible_resources": [
+    "frames/injector.html",
+    "frames/config.html",
+    "styles/intercom.css"
+  ],
+  "content_security_policy": "default-src 'self' chrome-extension-resource: https://app.getwisdom.io https://assets.getwisdom.io; script-src 'self' https://assets.getwisdom.io; style-src 'self' 'unsafe-inline' https://assets.getwisdom.io https://fonts.googleapis.com; img-src 'self' https://vanillicon.getwisdom.io https://app.getwisdom.io https://assets.getwisdom.io; font-src https://assets.getwisdom.io https://fonts.gstatic.com; connect-src 'none'; media-src 'none'; object-src 'none'; child-src 'self' https://app.getwisdom.io; frame-src https://app.getwisdom.io; worker-src 'none'; frame-ancestors 'self' chrome-extension-resource: chrome-extension://fcdneabhphhmkhchgafejgddblhpbcdk https://*; form-action 'self' https://app.getwisdom.io; upgrade-insecure-requests; block-all-mixed-content; disown-opener; reflected-xss block; referrer unsafe-url; report-uri https://app.getwisdom.io/csp-violation; report-to chrome-extension;"
+}

@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "TIM ASYSTENT",
+  "version": "0.16",
+  "manifest_version": 2,
+  "description": "Asystent zakupowy sklepu TIM",
+  "homepage_url": "https://tim.pl",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "options_ui": {
+    "page": "src/inject/options.html",
+    "open_in_tab": false
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "Asystent TIM",
+    "default_popup": "src/browser_action/browser_action.html"
+  },
+  "permissions": [
+    "*://*/*",
+    "storage",
+    "contextMenus",
+    "tabs"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "https://tim.pl/*"
+      ],
+      "js": [
+        "src/inject/popup.js"
+      ],
+      "css": [
+        "src/browser_action/browser_action.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

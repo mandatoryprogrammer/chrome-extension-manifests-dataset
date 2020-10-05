@@ -1,0 +1,67 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_appName__",
+  "description": "__MSG_appDesc__",
+  "default_locale": "en",
+  "short_name": "1TT Downloader",
+  "version": "1.0.4",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png",
+    "96": "icons/icon-96.png",
+    "128": "icons/icon-128.png"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "permissions": [
+    "storage",
+    "contextMenus",
+    "webRequest",
+    "webRequestBlocking",
+    "activeTab",
+    "downloads",
+    "http://*.alicdn.com/*",
+    "https://*.alicdn.com/*",
+    "http://detail.1688.com/*",
+    "https://detail.1688.com/*",
+    "http://detail.tmall.com/*",
+    "https://detail.tmall.com/*",
+    "http://item.taobao.com/*",
+    "https://item.taobao.com/*",
+    "https://descnew.taobao.com/*"
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_title": "1TT Downloader for 1688 Taobao Tmall"
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_idle",
+      "matches": [
+        "http://detail.1688.com/*",
+        "https://detail.1688.com/*",
+        "http://detail.tmall.com/*",
+        "https://detail.tmall.com/*",
+        "http://item.taobao.com/*",
+        "https://item.taobao.com/*"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "icons/*",
+    "extractor.js"
+  ]
+}

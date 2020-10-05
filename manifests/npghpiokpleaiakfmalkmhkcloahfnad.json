@@ -1,0 +1,67 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Dummy Form Filler",
+  "short_name": "Dummy FF",
+  "description": "One click to populate HTML forms with dummy data. Works out of the box.",
+  "version": "1.3.2",
+  "homepage_url": "https://github.com/ptomaszek/dummy-form-filler",
+  "icons": {
+    "48": "icons/seahorse_48.png",
+    "64": "icons/seahorse_64.png",
+    "96": "icons/seahorse_96.png",
+    "128": "icons/seahorse_128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "48": "icons/seahorse_48.png",
+      "64": "icons/seahorse_64.png",
+      "96": "icons/seahorse_96.png",
+      "128": "icons/seahorse_128.png"
+    },
+    "default_title": "Dummy Form Filler"
+  },
+  "background": {
+    "scripts": [
+      "options/options_defaults.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "*://*/*.xml",
+        "file:///*/*.xml"
+      ],
+      "js": [
+        "options/options_defaults.js",
+        "js-ext/jquery.min.js",
+        "js-ext/chance.min.js",
+        "js/dummy-logger.js",
+        "js/dummy-augur.js",
+        "js/dummy-limits.js",
+        "js/dummy-generator.js",
+        "js/dummy-engine.js"
+      ]
+    }
+  ],
+  "options_ui": {
+    "page": "options/options.html"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+Shift+D"
+      },
+      "description": "Run Dummy, run!"
+    }
+  }
+}

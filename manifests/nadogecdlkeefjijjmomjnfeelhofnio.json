@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "version": "0.10.0",
+  "short_name": "Công cụ đặt hàng của VBIMEX",
+  "description": "Công cụ đặt hàng của VBIMEX trên trình duyệt Chrome và Cốc Cốc",
+  "name": "Công cụ đặt hàng của VBIMEX",
+  "icons": {
+    "128": "./logo.png"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "notifications",
+    "system.display",
+    "system.cpu",
+    "system.memory",
+    "cookies"
+  ],
+  "background": {
+    "page": "background.html",
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "./content.js"
+      ],
+      "matches": [
+        "*://*.taobao.com/*",
+        "*://taobao.com/",
+        "*://*.1688.com/*",
+        "*://1688.com/*",
+        "*://*.tmall.com/*",
+        "*://tmall.com/*",
+        "http://*.tmall.hk/*",
+        "https://*.tmall.hk/*"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "js": [
+        "./content_service.js"
+      ],
+      "matches": [
+        "http://order.vbimex.com/*",
+        "https://order.vbimex.com/*"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "content.html",
+    "templates/*",
+    "injector.js",
+    "*.png"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://browser.sentry-cdn.com; object-src 'self'"
+}

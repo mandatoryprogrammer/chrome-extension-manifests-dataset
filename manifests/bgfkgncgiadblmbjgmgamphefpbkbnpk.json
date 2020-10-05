@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Rooster",
+  "description": "Start your day with gratitude and focus!",
+  "version": "0.2",
+  "permissions": [
+    "activeTab",
+    "identity",
+    "identity.email",
+    "storage"
+  ],
+  "browser_action": {
+    "default_popup": "src/popup/build/index.html",
+    "default_title": "Rooster"
+  },
+  "icons": {
+    "16": "src/static/img/icon16.png",
+    "48": "src/static/img/icon48.png",
+    "128": "src/static/img/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "src/build/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "src/build/content.js"
+      ],
+      "all_frames": true,
+      "css": [
+        "src/static/css/extension.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "src/build/*",
+    "src/iframe/build/*",
+    "src/popup/build/*"
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "LET ME LMGTFY",
+  "version": "1.0",
+  "description": "Convert highlighted text to a LMGTFY link to save to clipboard or open new tab",
+  "manifest_version": 2,
+  "icons": {
+    "16": "images/icon_small.png"
+  },
+  "browser_action": {
+    "default_icon": "images/icon.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+F",
+        "mac": "MacCtrl+Shift+F"
+      },
+      "description": "Runs background.js"
+    }
+  },
+  "permissions": [
+    "tabs",
+    "<all_urls>",
+    "contextMenus"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "selection.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ]
+}

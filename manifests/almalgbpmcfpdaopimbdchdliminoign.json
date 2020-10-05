@@ -1,0 +1,95 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "description": "__MSG_appDesc__",
+  "default_locale": "en",
+  "version": "5.1.0",
+  "homepage_url": "https://www.urban-vpn.com/",
+  "manifest_version": 2,
+  "background": {
+    "scripts": [
+      "bg/build.js",
+      "panel-os/panelos-background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icons/icon_grey.png",
+    "default_title": "Urban Shield",
+    "default_popup": "popup/index.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "js": [
+        "panel-os/panelos-content.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "match_about_blank": true
+    },
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "js": [
+        "content/post_api.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "js": [
+        "content/location.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "all_frames": false,
+      "js": [
+        "content/safecheck-notification/content.js",
+        "content/safecheck.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "icons": {
+    "16": "icons/icon.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "permissions": [
+    "tabs",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking",
+    "proxy",
+    "management",
+    "alarms",
+    "storage",
+    "browsingData",
+    "<all_urls>",
+    "https://sessions.bugsnag.com/*",
+    "https://notify.bugsnag.com/*",
+    "https://*.urban-vpn.com/*",
+    "https://google-analytics.com/*",
+    "https://www.google-analytics.com/*",
+    "https://ssl.google-analytics.com/*"
+  ],
+  "web_accessible_resources": [
+    "/bg/proxy-script.js",
+    "/content/safecheck-notification/notification-iframe/index.html"
+  ]
+}

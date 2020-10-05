@@ -1,0 +1,80 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "web_accessible_resources": [
+    "page/prompt.js",
+    "page/runScript.js",
+    "panel/bootstrap.html",
+    "icons/icon48.png",
+    "styles/dialogBox.css"
+  ],
+  "background": {
+    "scripts": [
+      "common/jquery-3.2.1.min.js",
+      "common/browser-polyfill.js",
+      "common/underscore-min-1.8.3.js",
+      "background/background.js",
+      "background/utils.js",
+      "background/selblocks-api.js",
+      "background/eureqa-api.js",
+      "background/index.js",
+      "background/command-grid.js",
+      "background/log.js",
+      "background/window-controller.js",
+      "background/record-receiver.js",
+      "background/editor.js",
+      "background/format-command.js",
+      "background/playback.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "match_about_blank": true,
+      "js": [
+        "common/browser-polyfill.js",
+        "common/jquery-3.2.1.min.js",
+        "content/headless/eureqa-connection.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "js": [
+        "content/headless/extension-info.js"
+      ],
+      "matches": [
+        "*://*.eureqatest.dev/*",
+        "*://*.eureqatest.net/*",
+        "*://*.eureqatest.com/*",
+        "*://*.eureqa.dev/*"
+      ]
+    }
+  ],
+  "applications": {
+    "gecko": {
+      "update_url": "https://www.eureqatest.com/QaSCRIBE/latest/QaSCRIBE.xpi",
+      "id": "{7ac6fddb-9ed8-49c7-a7f2-aa7c878e3527}"
+    }
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "description": "QaSCRIBE is the test script \"authoring\" tool that can help you rapidly automate your manual test cases",
+  "manifest_version": 2,
+  "name": "eureQa QaSCRIBE",
+  "version": "3.0.56",
+  "homepage_url": "http://www.sayeureqa.com/",
+  "devtools_page": "devtools/devtools.html",
+  "icons": {
+    "128": "icons/icon128.png",
+    "48": "icons/icon48.png",
+    "16": "icons/icon16.png"
+  },
+  "permissions": [
+    "tabs",
+    "contextMenus",
+    "webNavigation",
+    "*://*/*"
+  ]
+}

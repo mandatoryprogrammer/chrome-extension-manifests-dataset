@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Loadzen Recorder",
+  "version": "2.6.1",
+  "manifest_version": 2,
+  "description": "Create scenarios in your browser for load tests at http://www.loadzen.com.",
+  "browser_action": {
+    "default_icon": "icons/icon48.png",
+    "default_popup": "html/popup.html"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": [
+    "*://*/*",
+    "webRequest",
+    "tabs",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "js/libs/jquery.min.js",
+        "js/content.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/libs/underscore-min.js",
+      "js/libs/backbone-min.js",
+      "js/libs/backbone-localstorage.js",
+      "js/lz-models.js",
+      "js/background.js"
+    ]
+  },
+  "sandbox": {
+    "pages": [
+      "main_window.html",
+      "popup.html",
+      "background.html"
+    ]
+  },
+  "web_accessible_resources": [
+    "js/track_xhr.js"
+  ]
+}

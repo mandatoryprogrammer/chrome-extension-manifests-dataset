@@ -1,0 +1,82 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Sense Messaging for Chrome",
+  "short_name": "Sense",
+  "version": "1.26.1",
+  "description": "Popover view of the Sense Chat application",
+  "minimum_chrome_version": "67",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAut4kdq4DrYjnIQ18sy+EbWJEwEqIKkPT6dMDeFpxaJyL9xYILzBPv7XeKpchlZtg7c98PILj16SO2o5othSp5XXWhewIn+wOdqIZsgw5Tu1bwyjh8a/gNjEE8vXUJwRrbLmCz1VYoHMu3iCHIlNngfICSg3JTiivSUZqhWylVjZIaZlLrLZkM/jjsLv+46XC06HOn+bnii9dMMdv0Wqll/pgZeL5rTFuNYQm1bBDlkAd78oZX+X91eyEIvjNhby43lOZLaIHPtCacynkFgeJgL5wd17ADhs1MgffOoeAVhqQA0+H9uXn2eFDo2cVOQohwt/zBms7VUJqy+IGWE3p9wIDAQAB",
+  "icons": {
+    "16": "icons/iconx16.png",
+    "32": "icons/iconx32.png",
+    "48": "icons/iconx48.png",
+    "128": "icons/iconx128.png",
+    "256": "icons/iconx256.png",
+    "512": "icons/iconx512.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/iconx16.png",
+      "32": "icons/iconx32.png",
+      "48": "icons/iconx48.png",
+      "128": "icons/iconx128.png",
+      "256": "icons/iconx256.png",
+      "512": "icons/iconx512.png"
+    },
+    "default_popup": "action-menu.html"
+  },
+  "permissions": [
+    "activeTab",
+    "notifications",
+    "cookies",
+    "storage",
+    "*://*.sensehq.co/*",
+    "*://*.sensehq.com/*",
+    "*://*.dserver.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "*://*.sensehq.co/*",
+        "*://*.sensehq.com/*",
+        "*://*.dserver.com/*"
+      ],
+      "all_frames": true,
+      "css": [
+        "page.css"
+      ],
+      "js": [
+        "page.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "options_ui": {
+    "page": "options.html"
+  },
+  "externally_connectable": {
+    "ids": [
+      "*"
+    ],
+    "matches": [
+      "*://*.sensehq.co/*",
+      "*://*.sensehq.com/*",
+      "*://*.dserver.com/*"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://www.gstatic.com/ https://*.firebaseio.com https://sensehq.com; object-src 'self'",
+  "web_accessible_resources": [
+    "images/*",
+    "page.js",
+    "web/*"
+  ]
+}

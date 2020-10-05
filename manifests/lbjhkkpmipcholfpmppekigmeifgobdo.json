@@ -1,0 +1,82 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "minimum_chrome_version": "64",
+  "offline_enabled": false,
+  "name": "Vukajlija",
+  "short_name": "Vukajlija",
+  "version": "4.0.2",
+  "description": "Prikazuje 10 odabranih definicija sa Vukajlije, omogućava izmenu pozadine na sajtu kao i dodatne mogućnosti na četu.",
+  "homepage_url": "https://www.igorware.com/extensions/vukajlija?referrer-ver=chrome-ext-manager",
+  "background": {
+    "scripts": [
+      "logger.js",
+      "cross.js",
+      "storage.js",
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "icons": {
+    "16": "images/icon_016.png",
+    "19": "images/icon_019.png",
+    "32": "images/icon_032.png",
+    "38": "images/icon_038.png",
+    "48": "images/icon_048.png",
+    "64": "images/icon_064.png",
+    "128": "images/icon_128.png"
+  },
+  "browser_action": {
+    "default_title": "Vukajlija",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "images/icon_016.png",
+      "19": "images/icon_019.png",
+      "32": "images/icon_032.png",
+      "38": "images/icon_038.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.vukajlija.com/*"
+      ],
+      "js": [
+        "includes/content.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "https://*.vukajlija.com/cet/*"
+      ],
+      "js": [
+        "includes/content_chat.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "content_security_policy": "default-src 'self'; connect-src https://api.igorware.com; font-src 'none'; img-src 'self'; media-src 'none'; object-src 'none'; style-src 'unsafe-inline'",
+  "web_accessible_resources": [
+    "images/web/smiley-grin.png",
+    "images/web/smiley-kiss.png",
+    "images/web/smiley-lol.png",
+    "images/web/smiley-neutral.png",
+    "images/web/smiley-razz.png",
+    "images/web/smiley-sad.png",
+    "images/web/smiley-smile.png",
+    "images/web/smiley-surprised.png",
+    "images/web/smiley-wink.png"
+  ],
+  "permissions": [
+    "storage",
+    "https://*.vukajlija.com/*",
+    "https://api.igorware.com/*"
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "name": "豆瓣读书和豆瓣电影扩展",
+  "short_name": "doubanMore",
+  "version": "1.2.5",
+  "description": "豆瓣读书：提供阅读链接。 豆瓣电影：提供观看链接。好友对书籍的评论。",
+  "icons": {
+    "16": "assets/icon/icon_16.png",
+    "48": "assets/icon/icon_48.png",
+    "128": "assets/icon/icon_128.png"
+  },
+  "background": {
+    "page": "pages/background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://book.douban.com/subject/*"
+      ],
+      "js": [
+        "assets/lib/jquery/jquery.js",
+        "assets/lib/jquery/jquery.tmpl.min.js",
+        "assets/lib/douban/douban.js",
+        "assets/lib/utils.js",
+        "assets/js/ebookOnDouban.js",
+        "assets/js/friendCommentOnBook.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://movie.douban.com/subject/*"
+      ],
+      "css": [
+        "assets/lib/sougou/base.css"
+      ],
+      "js": [
+        "assets/lib/jquery/jquery.js",
+        "assets/lib/douban/douban.js",
+        "assets/lib/utils.js",
+        "assets/js/movieOnDouban.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "assets/img/all_bigstars.gif",
+    "assets/img/allstar.gif",
+    "assets/img/loading.gif",
+    "assets/img/douban_book.png",
+    "assets/img/ico_sp.gif",
+    "assets/img/sprite.jpg"
+  ],
+  "browser_action": {
+    "default_icon": "assets/icon/icon_16.png",
+    "default_popup": "pages/popup.html"
+  },
+  "permissions": [
+    "tabs",
+    "http://*.douban.com/",
+    "https://*.douban.com/",
+    "http://*.taobao.com/",
+    "http://*.amazon.cn/",
+    "http://*.e.jd.com/",
+    "http://*.baidu.com/",
+    "http://*.duokan.com/",
+    "http://*.dangdang.com/",
+    "http://*.digilib.sh.cn/",
+    "http://*.bing.com/",
+    "http://*.sogou.com/",
+    "http://*.kb.cc/"
+  ]
+}

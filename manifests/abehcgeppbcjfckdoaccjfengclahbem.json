@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "T3nhance",
+  "version": "1.0.1",
+  "description": "Utilities for TYPO3 CMS backend editors",
+  "icons": {
+    "16": "contents/assets/images/icon_16.png",
+    "32": "contents/assets/images/icon_32.png",
+    "48": "contents/assets/images/icon_48.png",
+    "128": "contents/assets/images/icon_128.png"
+  },
+  "browser_action": {},
+  "background": {
+    "scripts": [
+      "contents/assets/js/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "contents/assets/js/typo3_exceptions.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*/typo3/index.php*",
+        "*://*/typo3/backend.php*",
+        "*://*/typo3/mod.php*",
+        "*://*/typo3/alt_doc.php*"
+      ],
+      "all_frames": true,
+      "js": [
+        "contents/assets/js/typo3_exceptions.js",
+        "contents/assets/js/backend.js"
+      ]
+    }
+  ],
+  "incognito": "spanning",
+  "options_ui": {
+    "chrome_style": true,
+    "page": "contents/options.html"
+  },
+  "permissions": [
+    "storage"
+  ]
+}

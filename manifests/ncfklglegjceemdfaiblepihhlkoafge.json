@@ -1,0 +1,144 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "co-trans-ext 翻译工具",
+  "version": "1.3",
+  "manifest_version": 2,
+  "description": "集搜狗翻译、百度翻译、有道翻译、金山词霸、谷歌翻译于一体的翻译工具",
+  "icons": {
+    "16": "src/img/icon-16.png",
+    "48": "src/img/icon-48.png",
+    "128": "src/img/icon-128.png"
+  },
+  "browser_action": {
+    "default_icon": "src/img/icon-48.png",
+    "default_title": "翻译工具",
+    "default_popup": "src/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_globs": [
+        "*x-from=co-translate-extension*"
+      ],
+      "all_frames": true,
+      "js": [
+        "src/lib/jquery-3.4.0.slim.min.js",
+        "src/js/utils.js",
+        "src/js/ext-data.js",
+        "src/js/content-script.js"
+      ],
+      "css": [
+        "src/css/extension.css"
+      ]
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "*://*/*x-from=co-translate-extension*"
+      ],
+      "js": [
+        "src/lib/jquery-3.4.0.slim.min.js"
+      ]
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "*://fanyi.sogou.com/*x-from=co-translate-extension*"
+      ],
+      "css": [
+        "src/css/base.css",
+        "src/css/sogou.css"
+      ],
+      "js": [
+        "src/js/utils.js",
+        "src/js/iframe-messager.js"
+      ]
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "*://fanyi.baidu.com/*x-from=co-translate-extension*"
+      ],
+      "css": [
+        "src/css/base.css",
+        "src/css/baidu.css"
+      ],
+      "js": [
+        "src/js/utils.js",
+        "src/lib/jquery-3.4.0.slim.min.js",
+        "src/js/iframe-messager.js"
+      ]
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "*://translate.google.cn/*x-from=co-translate-extension*"
+      ],
+      "css": [
+        "src/css/base.css",
+        "src/css/google.css"
+      ],
+      "js": [
+        "src/js/utils.js",
+        "src/js/iframe-messager.js"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "*://*/*x-from=co-translate-extension*"
+      ],
+      "js": [
+        "src/js/fake-navigator.js"
+      ]
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "*://m.youdao.com/*x-from=co-translate-extension*"
+      ],
+      "css": [
+        "src/css/base.css",
+        "src/css/youdao.css"
+      ],
+      "js": [
+        "src/js/utils.js",
+        "src/js/iframe-messager.js"
+      ]
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "*://m.iciba.com/*x-from=co-translate-extension*"
+      ],
+      "css": [
+        "src/css/base.css",
+        "src/css/kingsoft.css"
+      ],
+      "js": [
+        "src/js/utils.js",
+        "src/js/iframe-messager.js"
+      ]
+    }
+  ],
+  "homepage_url": "https://e12e.com",
+  "background": {
+    "page": "src/background.html"
+  },
+  "options_page": "src/options.html",
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>",
+    "storage"
+  ],
+  "web_accessible_resources": [
+    "src/lib/youdao-web-translate/*",
+    "src/css/iconfont/*",
+    "src/img/*"
+  ],
+  "content_security_policy": "script-src 'self' blob: filesystem: chrome-extension-resource: https://www.google-analytics.com; object-src 'self'"
+}

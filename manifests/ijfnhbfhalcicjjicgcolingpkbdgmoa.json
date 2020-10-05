@@ -1,0 +1,80 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "short_name": "__MSG_appShortName__",
+  "description": "__MSG_appDescription__",
+  "version": "1.1.1",
+  "manifest_version": 2,
+  "content_security_policy": "img-src * data:; script-src 'self' 'unsafe-eval'  'sha256-+2MVjt+4tdchosV+7icWYpKYo+gvJ3wyZ9GkRybFL40='; object-src 'self'",
+  "default_locale": "en",
+  "icons": {
+    "16": "images/icon@0,125x.png",
+    "24": "images/icon@0,1875x.png",
+    "32": "images/icon@0,25x.png",
+    "128": "images/icon.png"
+  },
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "commands": {
+    "run-basic": {
+      "suggested_key": {
+        "default": "Ctrl+Space",
+        "mac": "Command+Space"
+      },
+      "description": "Start Basic Scraper"
+    },
+    "run-deep": {
+      "suggested_key": {
+        "default": "Alt+Space",
+        "mac": "Alt+Space"
+      },
+      "description": "Start Deep Scraper"
+    }
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "images/icon@0,125x.png",
+      "24": "images/icon@0,1875x.png",
+      "32": "images/icon@0,25x.png",
+      "128": "images/icon.png"
+    },
+    "default_title": "__MSG_browserActionTitle__",
+    "default_popup": "pages/popup.html"
+  },
+  "minimum_chrome_version": "60.0",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "styles/contentscript.css"
+      ],
+      "js": [
+        "scripts/contentscript.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "permissions": [
+    "contentSettings",
+    "cookies",
+    "tabs",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking",
+    "storage",
+    "<all_urls>"
+  ],
+  "web_accessible_resources": [
+    "styles/**/*",
+    "resources/**/*",
+    "scripts/swiper.loader.js"
+  ],
+  "incognito": "split"
+}

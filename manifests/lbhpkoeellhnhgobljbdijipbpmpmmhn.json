@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "short_name": "Teston",
+  "name": "Teston Chrome",
+  "version": "0.7.4",
+  "description": "__MSG_applicationDesc__",
+  "icons": {
+    "16": "img/prod/teston-16x16.png",
+    "32": "img/prod/teston-32x32.png",
+    "48": "img/prod/teston-48x48.png",
+    "96": "img/prod/teston-96x96.png",
+    "128": "img/prod/teston-128x128.png"
+  },
+  "browser_action": {
+    "default_icon": "img/prod/disabled.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "background.bundle.js"
+    ],
+    "persistent": true
+  },
+  "externally_connectable": {
+    "matches": [
+      "http://localhost/*",
+      "https://teston.no/*",
+      "https://*.teston.no/*",
+      "https://teston.io/*",
+      "https://*.teston.io/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://localhost/*",
+        "https://*.teston.no/*",
+        "https://*.teston.io/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "content.bundle.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "iframe.html"
+  ],
+  "permissions": [
+    "downloads",
+    "desktopCapture",
+    "http://localhost/*",
+    "https://*.teston.no/*",
+    "https://*.teston.io/*",
+    "https://storage.googleapis.com/teston-locales/teston-chrome-extension/*"
+  ],
+  "minimum_chrome_version": "34",
+  "offline_enabled": true,
+  "content_security_policy": "script-src 'self' 'unsafe-eval' http://localhost:8098; object-src 'self'"
+}

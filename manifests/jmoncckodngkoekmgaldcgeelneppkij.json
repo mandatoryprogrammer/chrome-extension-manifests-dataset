@@ -1,0 +1,90 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "author": "Adbank",
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "polyfill.js",
+      "ext/common.js",
+      "ext/background.js",
+      "ext/bladeCommunicator.js",
+      "lib/compat.js",
+      "lib/adblockplus.js",
+      "devenvPoller__.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/blade/blade-16.png",
+      "19": "icons/blade/blade-19.png",
+      "20": "icons/blade/blade-20.png",
+      "32": "icons/blade/blade-32.png",
+      "38": "icons/blade/blade-38.png",
+      "40": "icons/blade/blade-40.png"
+    },
+    "default_popup": "popup.html",
+    "default_title": "BLADE ad blocker+"
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "polyfill.js",
+        "ext/common.js",
+        "ext/content.js",
+        "include.preload.js"
+      ],
+      "match_about_blank": true,
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "include.postload.js"
+      ],
+      "match_about_blank": true,
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "default_locale": "en_US",
+  "description": "BLADE ad blocker+ blocks ads and protects your privacy",
+  "devtools_page": "devtools.html",
+  "icons": {
+    "16": "icons/blade/blade-16.png",
+    "32": "icons/blade/blade-32.png",
+    "48": "icons/blade/blade-48.png",
+    "64": "icons/blade/blade-64.png"
+  },
+  "manifest_version": 2,
+  "minimum_chrome_version": "49.0",
+  "minimum_opera_version": "36.0",
+  "name": "BLADE ad blocker+",
+  "options_ui": {
+    "open_in_tab": true,
+    "page": "options.html"
+  },
+  "permissions": [
+    "tabs",
+    "<all_urls>",
+    "contextMenus",
+    "webRequest",
+    "webRequestBlocking",
+    "webNavigation",
+    "storage",
+    "unlimitedStorage",
+    "notifications"
+  ],
+  "short_name": "BLADE ad blocker+",
+  "storage": {
+    "managed_schema": "managed-storage-schema.json"
+  },
+  "version": "1.0.2"
+}

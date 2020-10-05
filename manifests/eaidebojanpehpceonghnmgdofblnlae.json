@@ -1,0 +1,111 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "background": {
+    "scripts": [
+      "js/dashboard/context_menu.js",
+      "entry_dashboard_extension.js",
+      "js/libs/jquery-3.2.1.min.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "favicons/favicon-letter-black_16x16.png",
+    "default_title": "Rebrand this page URL"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "chromeos": "Alt+R",
+        "default": "Alt+R",
+        "linux": "Alt+R",
+        "mac": "MacCtrl+R",
+        "windows": "Alt+R"
+      }
+    }
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "css": [
+        "css/style.css"
+      ],
+      "exclude_matches": [
+        "https://*.rebrandly.com/*"
+      ],
+      "js": [
+        "js/utils/constants.js",
+        "js/utils/defaults.js",
+        "js/libs/validator.min.js",
+        "js/libs/le.min.js",
+        "js/libs/tldjs.js",
+        "js/libs/jquery-3.2.1.min.js",
+        "js/utils/logger.js",
+        "js/menus/utils-eld-popup.js",
+        "js/helpers/api-middleware.js",
+        "js/ald/elements.js",
+        "js/ald/linkEngine.js",
+        "js/ald/core.js",
+        "entry_automatic_link_detection.js",
+        "js/features/automatic_replace.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "js/utils/external_listener.js"
+      ],
+      "matches": [
+        "*://localhost/*",
+        "https://*.rebrandly.com/*"
+      ]
+    },
+    {
+      "js": [
+        "js/oauth/oauth.js"
+      ],
+      "matches": [
+        "https://oauth.rebrandly.com/robots.txt*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "description": "Create branded links (short URLs with a custom domain name) directly from the page you are visiting",
+  "icons": {
+    "128": "favicons/favicon-letter-black@8x.png",
+    "16": "favicons/favicon-letter-black_16x16.png",
+    "32": "favicons/favicon-letter-black@2x.png",
+    "64": "favicons/favicon-letter-black@4x.png"
+  },
+  "manifest_version": 2,
+  "name": "Rebrandly | URL shortener",
+  "optional_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "options_page": "html/options.html",
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "storage",
+    "bookmarks",
+    "tabs"
+  ],
+  "short_name": "Your Brand on your Links",
+  "version": "2.9.7",
+  "web_accessible_resources": [
+    "js/utils/constants.js",
+    "js/libs/tldjs.js",
+    "html/rb-popup-short-menu.html",
+    "html/rb-not-working.html",
+    "html/rb-popover.html",
+    "css/select.min.css",
+    "js/libs/le.min.js",
+    "css/emoji/anguished.png",
+    "css/emoji.css",
+    "js/utils/iframe-spinner.js",
+    "html/iframe-spinner.html",
+    "html/spinner-error.html"
+  ]
+}

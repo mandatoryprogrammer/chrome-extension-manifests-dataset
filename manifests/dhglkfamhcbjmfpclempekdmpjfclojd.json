@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "BMC TrueSight Real User Monitoring Enterprise",
+  "version": "1.0.4",
+  "description": "The JavaScript plugin can collect metrics data from all the websites you visit",
+  "manifest_version": 2,
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "https://*/*",
+    "http://*/*",
+    "tabs",
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "assets/bmc_logo_16.png"
+  },
+  "icons": {
+    "16": "assets/bmc_logo_16.png",
+    "48": "assets/bmc_logo_48.png",
+    "128": "assets/bmc_logo_128.png"
+  },
+  "storage": {
+    "managed_schema": "schema.json"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "script.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "*/plugin_settings.json"
+  ]
+}

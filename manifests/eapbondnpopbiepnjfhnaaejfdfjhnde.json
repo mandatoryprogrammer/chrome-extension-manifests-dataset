@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Thankful",
+  "version": "0.8.1",
+  "description": "Support free culture by automatically sending cryptocurrency to the creators of the content you love.",
+  "icons": {
+    "64": "media/icon-64.png",
+    "128": "media/icon-128.png",
+    "256": "media/icon-256.png",
+    "512": "media/icon-512.png"
+  },
+  "browser_action": {
+    "default_icon": "media/icon-128.png",
+    "default_title": "Thankful",
+    "default_popup": "popup/index.html",
+    "browser_style": true
+  },
+  "background": {
+    "scripts": [
+      "background/index.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.youtube.com/*"
+      ],
+      "js": [
+        "content_youtube/index.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.medium.com/*"
+      ],
+      "js": [
+        "content_medium/index.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "storage",
+    "alarms",
+    "idle",
+    "notifications"
+  ],
+  "applications": {
+    "gecko": {
+      "id": "{b4bbcd8e-acc0-4044-b09b-1c15d0b66875}",
+      "strict_min_version": "57.0"
+    }
+  }
+}

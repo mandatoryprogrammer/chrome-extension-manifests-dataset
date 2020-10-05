@@ -1,0 +1,81 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "short_name": "Smallpdf",
+  "version": "0.18.2",
+  "description": "__MSG_appDesc__",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "content_security_policy": "script-src 'self' 'sha256-8VWEfV1MHXcCbi/lcOneF2oDbPdYwskZilS/Xih/+zc=' 'sha256-iHzLbQ/l3ApSsGFHa7HlcL6ClmFFDjQsgRixIF260Ac=' blob:; object-src 'self'",
+  "browser_action": {
+    "default_title": "Smallpdf",
+    "default_popup": "browserAction.html",
+    "default_icon": {
+      "16": "images/smallpdf_16.png",
+      "32": "images/smallpdf_32.png",
+      "48": "images/smallpdf_48.png",
+      "128": "images/smallpdf_128.png"
+    }
+  },
+  "icons": {
+    "16": "images/smallpdf_16.png",
+    "32": "images/smallpdf_32.png",
+    "48": "images/smallpdf_48.png",
+    "128": "images/smallpdf_128.png"
+  },
+  "background": {
+    "scripts": [
+      "static/js/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "ftp://*/*",
+        "file://*/*"
+      ],
+      "js": [
+        "static/js/content.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*"
+      ],
+      "js": [
+        "inboxsdk.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "storage",
+    "notifications",
+    "alarms",
+    "webRequest",
+    "webRequestBlocking",
+    "webNavigation",
+    "<all_urls>"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://*.smallpdf.com/*",
+      "https://smallpdf.com/*",
+      "https://smallpdf-staging.com/*",
+      "https://*.smallpdf-staging.com/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "static/media/*",
+    "images/*",
+    "options.html",
+    "viewer.html",
+    "pdftron/*"
+  ],
+  "options_page": "options.html"
+}

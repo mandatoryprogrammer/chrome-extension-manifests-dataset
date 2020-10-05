@@ -1,0 +1,153 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "author": "Testim.io",
+  "manifest_version": 2,
+  "name": "Testim Editor",
+  "description": "The simplest and most advanced testing automation tool, using Adaptive Learning and Computer Vision image validation.",
+  "version": "1.819.0",
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+T",
+        "windows": "Alt+T",
+        "mac": "Alt+T",
+        "linux": "Alt+T"
+      }
+    },
+    "text-validation": {
+      "suggested_key": {
+        "default": "Alt+V",
+        "mac": "Alt+V"
+      },
+      "description": "select element for text validation"
+    },
+    "hover-step": {
+      "suggested_key": {
+        "default": "Alt+H",
+        "mac": "Alt+H"
+      },
+      "description": "select element for hover step"
+    },
+    "element-validation": {
+      "suggested_key": {
+        "default": "Alt+L",
+        "mac": "Alt+L"
+      },
+      "description": "select element for element visible validation"
+    }
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "assets/images/icon16.png",
+      "48": "assets/images/icon48.png",
+      "128": "assets/images/icon128.png"
+    },
+    "default_popup": "popup2/menu/index.html"
+  },
+  "icons": {
+    "16": "assets/images/icon16.png",
+    "48": "assets/images/icon48.png",
+    "128": "assets/images/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "background/eventRegistrar.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "match_about_blank": true
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "background/eventAction.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "match_about_blank": true
+    },
+    {
+      "matches": [
+        "http://localhost:4040/extension-local/popup2/menu/*",
+        "https://*.ngrok.io/extension-local/popup2/menu/*"
+      ],
+      "js": [
+        "popup2/menu/vendor.js",
+        "popup2/menu/index.js"
+      ],
+      "css": [
+        "popup2/menu/index.min.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "externally_connectable": {
+    "ids": [
+      "*"
+    ],
+    "matches": [
+      "http://localhost/*",
+      "http://localhost:3000/*",
+      "https://localhost/*",
+      "http://local.testim.io:3000/*",
+      "https://localhost:3000/*",
+      "https://local.testim.io/*",
+      "https://local.testim.io:3000/*",
+      "http://testim.io/*",
+      "https://testim.io/*",
+      "http://app.testim.io/*",
+      "https://app.testim.io/*",
+      "https://playground.testim.io/*",
+      "https://force.testim.io/*",
+      "https://app.staging.testim.cc/*",
+      "http://stapp.testim.io/*",
+      "https://stapp.testim.io/*",
+      "http://staging.testim.io/*",
+      "https://staging.testim.io/*",
+      "http://run.testim.io/*",
+      "https://run.testim.io/*"
+    ]
+  },
+  "background": {
+    "scripts": [
+      "background/background.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "app/index.html",
+    "*"
+  ],
+  "oauth2": {
+    "client_id": "660918242353-i2obn77n4hotrscignlvo4b1a9nafebb.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.profile"
+    ]
+  },
+  "minimum_chrome_version": "50.0",
+  "content_security_policy": "img-src 'self' https://secure.gravatar.com http://res.cloudinary.com https://*.googleusercontent.com https://*.atlassian.net https://testimeyes.applitools.com https://eyes.applitools.com https://res.cloudinary.com https://static.intercomassets.com https://js.intercomcdn.com data: ; font-src https://js.intercomcdn.com 'self' chrome-extension-resource: ; default-src 'self' https://video.testim.io chrome-extension-resource: ; style-src 'self' 'unsafe-inline'; script-src 'self' https://d26b395fwzu5fz.cloudfront.net https://api.keen.io https://testimeyes.applitools.com https://eyes.applitools.com 'unsafe-eval' https://cdn.firebase.com https://*.firebaseio.com https://cdn.segment.com https://js.intercomcdn.com https://www.google-analytics.com https://widget.intercom.io/ http://localhost:35729/livereload.js; object-src 'self';  connect-src * 'self' 'unsafe-inline' 'unsafe-eval' http: https: file: data: mediastream: blob: filesystem:; frame-src *;",
+  "permissions": [
+    "tabs",
+    "debugger",
+    "webNavigation",
+    "cookies",
+    "<all_urls>",
+    "http://*/*",
+    "https://*/*",
+    "background",
+    "desktopCapture",
+    "chrome://favicon/",
+    "pageCapture",
+    "storage",
+    "notifications",
+    "downloads",
+    "downloads.shelf"
+  ]
+}

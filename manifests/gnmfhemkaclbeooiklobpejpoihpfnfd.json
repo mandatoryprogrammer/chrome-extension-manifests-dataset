@@ -1,0 +1,42 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Fix Twitter",
+  "version": "1.2",
+  "manifest_version": 2,
+  "author": "Jonathan Suh <hello@jonsuh.com>",
+  "description": "Fix dumb things about Twitter and TweetDeck on the web (e.g. hidden “replying to”, t.co links)",
+  "homepage_url": "https://github.com/jonsuh/fix-twitter/",
+  "icons": {
+    "16": "icon16.png",
+    "32": "icon32.png",
+    "48": "icon48.png",
+    "64": "icon64.png",
+    "128": "icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://twitter.com/*",
+        "https://tweetdeck.twitter.com/*"
+      ],
+      "js": [
+        "content_scripts.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "storage",
+    "https://twitter.com/*"
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  }
+}

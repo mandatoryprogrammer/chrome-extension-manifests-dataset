@@ -1,0 +1,36 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Library Login",
+  "description": "TThis extension performs auto-authentication of library resources for medical students at the University of Toronto.",
+  "version": "0.1.2",
+  "background": {
+    "scripts": [
+      "jquery-1.11.1.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "http://login.library.utoronto.ca/cgi-bin/*",
+    "https://login.library.utoronto.ca/cgi-bin/*",
+    "http://*.myaccess.library.utoronto.ca/*",
+    "https://*.myaccess.library.utoronto.ca/*",
+    "storage",
+    "cookies",
+    "*://*.library.utoronto.ca/*"
+  ],
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://login.library.utoronto.ca/cgi-bin/go_log*"
+      ],
+      "js": [
+        "jquery-1.11.1.js",
+        "uoftSignIn.js"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

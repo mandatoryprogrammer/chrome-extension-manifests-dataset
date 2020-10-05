@@ -1,0 +1,82 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "_license": [
+    "This file is part of Scrobbly.",
+    "Scrobbly is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.",
+    "Scrobbly is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.",
+    "You should have received a copy of the GNU General Public License along with Scrobbly.  If not, see <https://www.gnu.org/licenses/>."
+  ],
+  "manifest_version": 2,
+  "name": "Scrobbly",
+  "description": "__MSG_slogan__",
+  "author": "Scrobbly contributors",
+  "version": "2.4.1",
+  "version_name": "2.4.1",
+  "permissions": [
+    "*://www.crunchyroll.com/*",
+    "*://www.wakanim.tv/*",
+    "*://animedigitalnetwork.fr/*",
+    "*://scrobbly.leonekmi.fr/*",
+    "*://www.hulu.com/*",
+    "*://www.netflix.com/*",
+    "*://www.hidive.com/*",
+    "*://app.emby.media/*",
+    "*://app.plex.tv/*",
+    "*://www.anime-on-demand.de/*",
+    "*://tvdbapiproxy.leonekmi.fr/*",
+    "*://graphql.anilist.co/*",
+    "*://kitsu.io/*",
+    "*://ponimu.com/*",
+    "storage",
+    "notifications"
+  ],
+  "content_security_policy": "script-src 'self' blob: filesystem: 'unsafe-eval'; object-src 'self' blob: filesystem:;",
+  "applications": {
+    "gecko": {
+      "id": "scrobbly@leonekmi.fr",
+      "update_url": "https://scrobbly.leonekmi.fr/firefox/updates.json"
+    }
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "daemon.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.crunchyroll.com/*",
+        "*://www.netflix.com/*",
+        "*://app.plex.tv/*",
+        "*://www.wakanim.tv/*",
+        "*://app.emby.media/*",
+        "*://www.hidive.com/*",
+        "*://animedigitalnetwork.fr/*",
+        "*://www.anime-on-demand.de/*",
+        "*://ponimu.com/*"
+      ],
+      "js": [
+        "website.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://scrobbly.leonekmi.fr/anilist/*"
+      ],
+      "js": [
+        "anilist.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": "logos/logo512.png",
+    "default_popup": "pages/popup.html"
+  },
+  "icons": {
+    "64": "logos/logo64.png",
+    "128": "logos/logo128.png",
+    "256": "logos/logo256.png",
+    "512": "logos/logo512.png"
+  }
+}

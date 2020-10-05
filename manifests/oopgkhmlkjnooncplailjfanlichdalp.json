@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "pixiv_follower_filter",
+  "description": "pixiv follower filter on search result",
+  "version": "0.0.0.2",
+  "manifest_version": 2,
+  "permissions": [
+    "http://www.pixiv.net/*",
+    "storage",
+    "unlimitedStorage"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "icons": {
+    "32": "filter_icon32.png",
+    "48": "filter_icon48.png",
+    "128": "filter_icon128.png"
+  },
+  "browser_action": {
+    "name": "Reload Follow Data",
+    "default_icon": {
+      "19": "filter_icon19.png"
+    },
+    "default_title": "Reload Follow Data",
+    "default_popup": "popup.html",
+    "js": [
+      "src.js",
+      "jquery.min.js"
+    ]
+  },
+  "background": {
+    "scripts": [
+      "background.js",
+      "jquery.min.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.pixiv.net/search.php*"
+      ],
+      "js": [
+        "script.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

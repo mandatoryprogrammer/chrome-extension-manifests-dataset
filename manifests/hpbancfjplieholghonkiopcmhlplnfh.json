@@ -1,0 +1,51 @@
+{
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.htm"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+S",
+        "mac": "MacCtrl+Shift+S"
+      }
+    }
+  },
+  "version": "0.8",
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://ssl.google-analytics.com;  object-src 'self'",
+  "web_accessible_resources": [
+    "icon.png"
+  ],
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "description": "Upload Images from clipboard as simple as paste. Shortcut: CTRL + SHIFT + S",
+  "name": "Mark Image",
+  "background": {
+    "scripts": [
+      "bg.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "notifications",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "icons": {
+    "48": "icon.png",
+    "128": "icon.png",
+    "16": "icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.github.com/*"
+      ],
+      "js": [
+        "lib/jquery-1.9.1.min.js",
+        "github.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "manifest_version": 2
+}

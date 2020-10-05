@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Mighty GitHub PRs",
+  "version": "1.1.0",
+  "description": "Restyle Pull Request screen for easier navigation and more focused review sessions.",
+  "manifest_version": 2,
+  "icons": {
+    "48": "mighty-github-icon-48x48.png",
+    "128": "mighty-github-icon-128x128.png",
+    "192": "mighty-github-icon-192x192.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "48": "mighty-github-icon-48x48.png",
+      "128": "mighty-github-icon-128x128.png",
+      "192": "mighty-github-icon-192x192.png"
+    }
+  },
+  "permissions": [
+    "tabs",
+    "contextMenus",
+    "*://*.github.com/*"
+  ],
+  "optional_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "webext-permissions-events-polyfill.js",
+      "webext-dynamic-content-scripts.js",
+      "webext-domain-permission-toggle.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.github.com/*"
+      ],
+      "css": [
+        "pr-optimizer.css"
+      ],
+      "js": [
+        "pr-optimizer.js"
+      ]
+    }
+  ]
+}

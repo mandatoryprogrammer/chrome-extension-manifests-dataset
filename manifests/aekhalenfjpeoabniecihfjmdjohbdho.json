@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Budane - Translator, Dictionary",
+  "version": "1.4",
+  "description": "Highlight the word you want to translate only once, budane will show its translation to you without asking it anymore!",
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "permissions": [
+    "declarativeContent",
+    "storage",
+    "https://budane.net/*"
+  ],
+  "icons": {
+    "16": "images/budane_16.png",
+    "32": "images/budane_32.png",
+    "48": "images/budane_48.png",
+    "128": "images/budane_128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "images/budane_16.png",
+      "32": "images/budane_32.png",
+      "48": "images/budane_48.png",
+      "128": "images/budane_128.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "jquery.min.js",
+      "scripts.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "css": [
+        "budane.min.css"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_globs": [
+        "*google*"
+      ],
+      "exclude_matches": [
+        "https://*.google.com/*",
+        "https://*.budane.net/*"
+      ],
+      "js": [
+        "jquery.min.js",
+        "content.js"
+      ]
+    }
+  ]
+}

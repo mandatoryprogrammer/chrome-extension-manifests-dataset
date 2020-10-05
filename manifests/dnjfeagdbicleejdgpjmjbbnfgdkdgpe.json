@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "WikiLink",
+  "description": "The easiest way to be ̶l̶a̶z̶y̶ productive.",
+  "version": "1.1.9",
+  "icons": {
+    "16": "public/images/icon01/01wikilink16.png",
+    "48": "public/images/icon01/01wikilink48.png",
+    "128": "public/images/icon01/01wikilink128.png"
+  },
+  "options_page": "optionsPage/index.html",
+  "background": {
+    "scripts": [
+      "background/eventPage.js",
+      "background/messageManager.js"
+    ],
+    "persistence": true
+  },
+  "default_locale": "en",
+  "browser_action": {
+    "default_locale": "en",
+    "default_popup": "optionsPage/index.html",
+    "default_title": "WikiLink Settings"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "contentScripts/index.js"
+      ],
+      "css": [
+        "contentScripts/popover.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "storage",
+    "tabs",
+    "<all_urls>"
+  ],
+  "content_security_policy": "script-src 'self' https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js; object-src 'self'"
+}

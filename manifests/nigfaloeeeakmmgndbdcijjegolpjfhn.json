@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Wudooh وضوح",
+  "short_name": "Wudooh",
+  "description": "Clarify Arabic script text",
+  "version": "2.0.0",
+  "minimum_chrome_version": "35",
+  "permissions": [
+    "storage",
+    "tabs"
+  ],
+  "browser_action": {
+    "default_icon": "icons/icon256.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "128": "icons/icon128.png",
+    "256": "icons/icon256.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "all_frames": true,
+      "run_at": "document_idle",
+      "js": [
+        "shared.min.js",
+        "main.min.js"
+      ],
+      "css": [
+        "fonts.css"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "shared.min.js",
+      "background.min.js"
+    ],
+    "persistent": false
+  },
+  "web_accessible_resources": [
+    "fonts/*"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'"
+}

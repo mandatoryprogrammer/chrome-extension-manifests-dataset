@@ -1,0 +1,68 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Keepassa Secure Password Manager",
+  "description": "This extension is for Keepassa password manager.",
+  "version": "1.2.5",
+  "icons": {
+    "16": "images/KP_LOGO_16.png",
+    "48": "images/KP_LOGO_48.png",
+    "128": "images/KP_LOGO_128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "images/KP_LOGO_16.png",
+      "24": "images/KP_LOGO_24.png",
+      "32": "images/KP_LOGO_32.png"
+    },
+    "default_popup": "html/popup/login.html",
+    "default_title": "Keepassa - Password Manager"
+  },
+  "background": {
+    "scripts": [
+      "js/common.js",
+      "js/vendor/stringview.js",
+      "js/vendor/base64.js",
+      "js/vendor/crypto.js",
+      "js/background//background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "https://keepassa.omisoft.eu/",
+    "activeTab",
+    "storage",
+    "contextMenus"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "https://keepassa.omisoft.eu/*",
+        "https://keepassa.omisoft.eu/#*",
+        "*://localhost/*"
+      ],
+      "js": [
+        "js/vendor/jquery-3.1.1.min.js",
+        "js/common.js",
+        "js/content/decide.js"
+      ],
+      "css": [
+        "stylesheets/main.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "html/content/decide.html",
+    "html/content/listSaves.html",
+    "html/extension/newSave.html",
+    "html/extension/allSavesAndGroups.html",
+    "html/extension/listGroupSafes.html",
+    "images/KP_LOGO.svg",
+    "images/three-dots.svg"
+  ]
+}

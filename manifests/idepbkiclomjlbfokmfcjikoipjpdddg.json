@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "JIRA Issue Quick Open",
+  "description": "Open issue in JIRA by keyboard shortcut or by highlight and right click context menu. Omnibox. Recently visited issues.",
+  "version": "11.2",
+  "author": "Akhil Bansal",
+  "icons": {
+    "16": "icon-16.png",
+    "48": "icon-48.png",
+    "128": "icon-128.png"
+  },
+  "background": {
+    "scripts": [
+      "options.js",
+      "commands.js",
+      "common.js",
+      "context.js",
+      "popup.js"
+    ],
+    "persistant": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.atlassian.net/*"
+      ],
+      "js": [
+        "jira.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "contextMenus",
+    "activeTab",
+    "tabs",
+    "storage",
+    "history"
+  ],
+  "browser_action": {
+    "default_icon": "icon-128.png",
+    "default_popup": "popup.html"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  },
+  "omnibox": {
+    "keyword": "j"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+J",
+        "mac": "Alt+J"
+      }
+    },
+    "open-in-jira": {
+      "suggested_key": {
+        "default": "Alt+Shift+J",
+        "mac": "Alt+Shift+J"
+      },
+      "description": "Open selected story/issue  in Jira"
+    }
+  }
+}

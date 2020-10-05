@@ -1,0 +1,91 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "iLink",
+  "description": "Oracle Sales Cloud delivered to Chrome, Gmail, GSuite and more.",
+  "omnibox": {
+    "keyword": "crm"
+  },
+  "version": "1.5105",
+  "background": {
+    "scripts": [
+      "jquery-2.0.3.min.js",
+      "db.js",
+      "meta.js",
+      "profile.js",
+      "gmailTools.js",
+      "omni.js",
+      "language.js",
+      "main.js",
+      "background.js"
+    ]
+  },
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*"
+      ],
+      "js": [
+        "jquery-2.0.3.min.js",
+        "db.js",
+        "jquery-ui.min.js",
+        "inboxsdk.js",
+        "meta.js",
+        "profile.js",
+        "omni.js",
+        "language.js",
+        "main.js",
+        "content.js"
+      ],
+      "css": [
+        "jquery-ui.min.css",
+        "iLink.css",
+        "iLinkEmail.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "*"
+  ],
+  "permissions": [
+    "contextMenus",
+    "identity",
+    "identity.email",
+    "https://mail.google.com/",
+    "https://inbox.google.com/",
+    "*://*.google.com/*",
+    "https://*/",
+    "<all_urls>",
+    "storage",
+    "unlimitedStorage",
+    "clipboardRead"
+  ],
+  "oauth2": {
+    "client_id": "313648295057-76eqkaafmcmf1lnnpsj3gb182qe0d89s.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/gmail.modify"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://*.google.com 'unsafe-eval'; object-src 'self'",
+  "browser_action": {
+    "default_title": "iLink",
+    "default_icon": "images/icon.png",
+    "default_popup": "iLinki.html"
+  },
+  "commands": {
+    "openiLink": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+0"
+      },
+      "description": "Open iLink",
+      "global": true
+    }
+  },
+  "manifest_version": 2
+}

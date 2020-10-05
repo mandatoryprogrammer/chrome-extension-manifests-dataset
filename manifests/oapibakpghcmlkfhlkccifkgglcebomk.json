@@ -1,0 +1,42 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Expense Filler",
+  "short_name": "Expense Filler",
+  "description": "This extension will read a csv file and automatically create an expense report and corresponding expense items",
+  "version": "3",
+  "icons": {
+    "128": "icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "*://eeho.fa.us2.oraclecloud.com/fscmUI/faces*",
+    "power"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://eeho.fa.us2.oraclecloud.com/fscmUI/faces*"
+      ],
+      "js": [
+        "jquery.js",
+        "oef_bottom_popup.js",
+        "content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "script.js"
+  ]
+}

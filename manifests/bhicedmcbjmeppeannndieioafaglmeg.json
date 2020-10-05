@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Gridoid for Twitter and YouTube",
+  "version": "0.0.0.15",
+  "manifest_version": 2,
+  "description": "Grid layout for Twitter and YouTube, switch on/off with simple button; use for a better user experience.",
+  "background": {
+    "scripts": [
+      "GridoidBackground.js",
+      "onInstalled.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "https://*.youtube.com/*",
+    "https://*.twitter.com/*",
+    "activeTab",
+    "storage",
+    "tabs"
+  ],
+  "icons": {
+    "128": "icon128.png"
+  },
+  "browser_action": {
+    "default_title": "Gridoid",
+    "default_popup": "popup.html",
+    "default_icon": "Logo.png"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "YouGridContent.js"
+      ],
+      "matches": [
+        "https://*.youtube.com/*"
+      ]
+    },
+    {
+      "css": [
+        "TwitterGridStyles.css"
+      ],
+      "js": [
+        "bricks.js",
+        "TwitterGridContent.js"
+      ],
+      "matches": [
+        "https://*.twitter.com/*"
+      ],
+      "exclude_matches": [
+        "https://mobile.twitter.com/*"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "web_accessible_resources": [
+    "bricks.js",
+    "TwitterGridScript.js",
+    "onInstalled.js",
+    "TwitterGridStyles.css",
+    "YouGridStyles.css",
+    "YouGridScript.js",
+    "LogoOff.png",
+    "Logo.png",
+    "light_noisy_grid.jpg"
+  ]
+}

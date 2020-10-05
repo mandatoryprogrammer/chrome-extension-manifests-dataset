@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "VigiSupport CRX",
+  "short_name": "VigiCRX",
+  "version": "0.2",
+  "description": "This extension identifies phone numbers and allows the user to click the number to initiate a phonecall.",
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "activeTab",
+    "storage",
+    "contextMenus",
+    "notifications"
+  ],
+  "icons": {
+    "16": "img/icon16.png",
+    "128": "img/icon128.png"
+  },
+  "options_ui": {
+    "page": "view/options.html",
+    "chrome_style": true
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/jquery.js",
+        "js/kaylee.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "browser_action": {
+    "default_popup": "view/popup.html"
+  },
+  "manifest_version": 2
+}

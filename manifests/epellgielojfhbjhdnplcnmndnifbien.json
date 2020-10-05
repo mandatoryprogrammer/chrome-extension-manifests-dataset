@@ -1,0 +1,83 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "青葉のカメラ",
+  "version": "0.8.0",
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "description": "艦隊これくしょん～艦これ～ でプレイ画面のスクリーンショットを取得",
+  "icons": {
+    "128": "icon/icon128.png",
+    "48": "icon/icon48.png",
+    "16": "icon/icon16.png"
+  },
+  "options_page": "options.html",
+  "browser_action": {
+    "default_title": "青葉のカメラ[取得不可]",
+    "default_icon": {
+      "38": "icon/icon38_disabled.png"
+    }
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/",
+        "http://osapi.dmm.com/gadgets/*"
+      ],
+      "js": [
+        "lib/canvas-to-blob.js",
+        "lib/FileSaver.min.js",
+        "lib/jquery-2.1.3.min.js",
+        "lib/Varlink.js",
+        "lib/Controller.js",
+        "lib/LogicMaster.js",
+        "logic/MyCanvas.js",
+        "logic/MyFrame.js",
+        "logic/MyMenu.js",
+        "const.js",
+        "contents_script.js"
+      ],
+      "css": [
+        "logic/MyMenu.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "http://www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/",
+        "http://osapi.dmm.com/gadgets/*"
+      ],
+      "js": [
+        "logic/MyKey.js",
+        "intercept_keys.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "http://*/kcs2/index.php*"
+      ],
+      "js": [
+        "intercept_canvas.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "logic/MyMenu.html"
+  ],
+  "permissions": [
+    "background",
+    "management",
+    "tabs",
+    "storage",
+    "<all_urls>"
+  ]
+}

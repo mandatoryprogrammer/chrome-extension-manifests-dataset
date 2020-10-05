@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "LinkMatch For Zoho Recruit",
+  "short_name": "LinkMatch",
+  "description": "Adds access to Zoho Recruit features from LinkedIn or Xing, such as view/edit/add candidates. Also marks already existing profiles",
+  "version": "8.16",
+  "browser_action": {
+    "default_icon": {
+      "19": "icon48.png",
+      "38": "icon48.png"
+    }
+  },
+  "icons": {
+    "16": "icon48.png",
+    "48": "icon48.png",
+    "128": "icon48.png"
+  },
+  "permissions": [
+    "tabs",
+    "https://*.zoho.com/*",
+    "https://*.zoho.eu/*",
+    "https://*.zoho.in/*",
+    "https://*.linkedin.com/*",
+    "https://*.xing.com/*",
+    "https://*.linkmatch.net/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.linkedin.com/*",
+        "https://*.xing.com/*"
+      ],
+      "js": [
+        "content-script-bundle.js"
+      ],
+      "css": [
+        "content-styles.css",
+        "content-styles1.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://accounts.zoho.eu/apiauthtoken/*",
+        "https://accounts.zoho.com/apiauthtoken/*",
+        "https://accounts.zoho.in/apiauthtoken/*"
+      ],
+      "js": [
+        "auth-token-bundle.js"
+      ],
+      "css": [
+        "auth-token-styles.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background-script-bundle.js"
+    ]
+  },
+  "options_page": "options_page.html"
+}

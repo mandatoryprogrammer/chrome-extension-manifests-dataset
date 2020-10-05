@@ -1,0 +1,86 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "EstiBot LeadMailer",
+  "version": "1.0.8",
+  "description": "Quickly contact leads created using the EstiBot lead generator using your own Gmail account.",
+  "icons": {
+    "16": "images/16.png",
+    "48": "images/48.png",
+    "128": "images/128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/mail/u/*",
+        "https://mg.mail.yahoo.com/*",
+        "https://outlook.live.com/*",
+        "https://www.mail.google.com/mail/u/*",
+        "https://www.mg.mail.yahoo.com/*",
+        "https://www.outlook.live.com/*",
+        "https://mail.yahoo.com/*",
+        "https://www.mail.yahoo.com/*"
+      ],
+      "js": [
+        "scripts/jquery-3.2.1.min.js",
+        "scripts/messenger.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "https://estibot.com/account.settings",
+        "https://estibot.com/thank-you",
+        "https://www.estibot.com/account.settings",
+        "https://www.estibot.com/thank-you"
+      ],
+      "js": [
+        "scripts/jquery-3.2.1.min.js",
+        "scripts/validate.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "https://estibot.com/leads.email",
+        "https://www.estibot.com/leads.email"
+      ],
+      "js": [
+        "scripts/jquery-3.2.1.min.js",
+        "scripts/fetch.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "background": {
+    "scripts": [
+      "scripts/jquery-3.2.1.min.js",
+      "scripts/background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "images/16.png",
+      "48": "images/48.png",
+      "128": "images/128.png"
+    },
+    "default_title": "Estibot mailer",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "declarativeContent",
+    "storage",
+    "tabs",
+    "notifications"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://estibot.com/leads.email",
+      "https://www.estibot.com/leads.email"
+    ]
+  },
+  "manifest_version": 2
+}

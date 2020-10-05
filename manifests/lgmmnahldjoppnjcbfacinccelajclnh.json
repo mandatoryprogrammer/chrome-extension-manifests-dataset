@@ -1,0 +1,82 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "version": "1.7",
+  "short_name": "APEX Plugin",
+  "name": "SMART4Solutions - APEX Plugin",
+  "description": "Plugin which adds useful functionality when developing with Oracle APEX",
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "storage"
+  ],
+  "browser_action": {
+    "default_icon": "icons/16.png"
+  },
+  "icons": {
+    "16": "icons/16.png",
+    "24": "icons/24.png",
+    "32": "icons/32.png",
+    "48": "icons/48.png",
+    "64": "icons/64.png",
+    "96": "icons/96.png",
+    "128": "icons/128.png"
+  },
+  "options_page": "options.html",
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "commands": {
+    "uppercase": {
+      "description": "Uppercase",
+      "suggested_key": {
+        "default": "Ctrl+Shift+Up",
+        "mac": "Command+Shift+Up"
+      }
+    },
+    "lowercase": {
+      "description": "Lowercase",
+      "suggested_key": {
+        "default": "Ctrl+Shift+Down",
+        "mac": "Command+Shift+Down"
+      }
+    },
+    "format-sql": {
+      "description": "Format SQL",
+      "suggested_key": {
+        "default": "Ctrl+Shift+F",
+        "mac": "Command+Shift+F"
+      }
+    },
+    "beautify-js": {
+      "description": "Beautify JS",
+      "suggested_key": {
+        "default": "Ctrl+Shift+B",
+        "mac": "Command+Shift+B"
+      }
+    }
+  },
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "js": [
+        "js/jquery.min.js",
+        "js/codemirror-addons/beautify.min.js",
+        "js/content.js",
+        "js/codemirror-addons/sql-formatter.min.js"
+      ],
+      "matches": [
+        "*://*/*f?p=*",
+        "*://*/*wwv_flow.accept*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "css/inject-css.css",
+    "js/codemirror-addons/all.js"
+  ]
+}

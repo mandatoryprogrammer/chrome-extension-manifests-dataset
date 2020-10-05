@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "扇贝学习工具",
+  "version": "1.1.0",
+  "description": "任意网页英文查词，可加入扇贝生词本",
+  "icons": {
+    "16": "images/shanbay.png",
+    "32": "images/shanbay.png",
+    "48": "images/shanbay.png",
+    "128": "images/shanbay.png"
+  },
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_title": "任意网页右击查词，可加入扇贝生词本",
+    "default_icon": {
+      "16": "images/shanbay.png",
+      "32": "images/shanbay.png",
+      "48": "images/shanbay.png",
+      "128": "images/shanbay.png"
+    }
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  },
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "https://*.shanbay.com/*"
+      ],
+      "css": [
+        "style.css"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+B",
+        "mac": "MacCtrl+Shift+B"
+      },
+      "description": "Opens hello.html"
+    }
+  },
+  "web_accessible_resources": [
+    "images/404.png"
+  ]
+}

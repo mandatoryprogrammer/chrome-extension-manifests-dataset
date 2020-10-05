@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Slim Email Access",
+  "minimum_chrome_version": "24.0.1307.0",
+  "version": "2.1.15",
+  "icons": {
+    "16": "images/icon_16.png",
+    "48": "images/icon_128.png",
+    "128": "images/icon_128.png"
+  },
+  "browser_action": {
+    "default_icon": "images/icon_16.png",
+    "default_popup": "access.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "http://mail.google.com/*",
+        "https://inbox.google.com/*"
+      ],
+      "css": [
+        "styles/material.min.css",
+        "styles/getmdl-select.min.css"
+      ],
+      "js": [
+        "app-bundle.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "options_page": "options.html",
+  "permissions": [
+    "webRequest",
+    "background",
+    "storage",
+    "tabs"
+  ],
+  "web_accessible_resources": [
+    "fonts/MaterialIcons-Regular.woff2",
+    "fonts/MaterialIcons-Regular.woff",
+    "fonts/MaterialIcons-Regular.ttf",
+    "injector_payload-bundle.js"
+  ]
+}

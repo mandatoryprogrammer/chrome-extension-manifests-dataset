@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Purple Cloud Click-To-Call",
+  "description": "Make a phone call by clicking a phone number.",
+  "version": "1.16",
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "images/icon.png",
+    "default_title": "Purple Cloud Click-To-Call"
+  },
+  "web_accessible_resources": [
+    "page.js"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "https://*.dealersocket.com/*",
+        "https://*.eleadcrm.com/*"
+      ],
+      "exclude_globs": [
+        "*CuteSoft_Client*",
+        "*email_blank_message*"
+      ],
+      "all_frames": true,
+      "js": [
+        "content.js",
+        "page.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "*://*.purplecloud.com/"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://*.dealersocket.com/*",
+      "https://*.eleadcrm.com/*"
+    ]
+  }
+}

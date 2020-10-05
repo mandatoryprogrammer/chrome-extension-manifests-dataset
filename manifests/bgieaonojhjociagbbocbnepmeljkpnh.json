@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Myzuka Scrobbler",
+  "version": "1.1.7.9",
+  "default_locale": "en",
+  "description": "__MSG_0__",
+  "icons": {
+    "24": "assets/icon-24.png",
+    "48": "assets/icon-48.png",
+    "128": "assets/icon-128.png"
+  },
+  "page_action": {
+    "default_title": "Myzuka Scrobbler",
+    "default_popup": "popup/main.html"
+  },
+  "background": {
+    "page": "background/background.html",
+    "persistent": false
+  },
+  "permissions": [
+    "declarativeContent",
+    "storage",
+    "activeTab",
+    "http://api.chartlyrics.com/",
+    "https://www.last.fm/",
+    "https://api.deezer.com/"
+  ],
+  "web_accessible_resources": [
+    "web-resources/web-script.js"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://myzuka.club/*",
+        "*://myzcloud.me/*",
+        "*://myzcloud.pro/*"
+      ],
+      "js": [
+        "content-scripts/injector.js",
+        "content-scripts/message-listener.js"
+      ]
+    }
+  ],
+  "options_ui": {
+    "page": "options-ui/index.html",
+    "chrome_style": true
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://myzuka.club/*",
+      "*://myzcloud.me/*",
+      "*://myzcloud.pro/*"
+    ]
+  },
+  "author": "Narmólio Correia"
+}

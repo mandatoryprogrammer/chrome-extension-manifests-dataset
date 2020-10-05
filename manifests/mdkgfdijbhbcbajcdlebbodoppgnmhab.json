@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Go Links",
+  "description": "The official Golinks.io, go/links browser extension. Create team shortlinks \"go links\" with one click.",
+  "homepage_url": "https://www.golinks.io",
+  "version": "2.4.170",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/icon48.png",
+    "default_popup": "popup.html"
+  },
+  "omnibox": {
+    "keyword": "go/"
+  },
+  "permissions": [
+    "*://go/*",
+    "*://*.golinks.io/*",
+    "*://*.golinks.com/*",
+    "activeTab",
+    "cookies",
+    "storage",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "optional_permissions": [
+    "tabs",
+    "*://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "lib/jquery.min.js",
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://*.golinks.io https://*.golinks.com; object-src 'self' blob: filesystem: chrome-extension-resource:",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.golinks.io/*",
+        "*://*.golinks.com/*"
+      ],
+      "js": [
+        "identifier.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "icons/icon16.png",
+    "images/*"
+  ]
+}

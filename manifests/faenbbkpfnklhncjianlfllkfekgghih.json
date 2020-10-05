@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "GitHub Jira Integration",
+  "version": "1.2.1",
+  "description": "This extension shows contents of linked tasks from Jira in Github",
+  "author": "Rob Quist / DukeSoft",
+  "homepage_url": "https://github.com/RobQuistNL/chrome-github-jira",
+  "options_ui": {
+    "page": "src/options.html",
+    "chrome_style": true
+  },
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png",
+    "256": "images/icon256.png",
+    "512": "images/icon512.png"
+  },
+  "web_accessible_resources": [
+    "images/jira.png"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://github.com/*"
+      ],
+      "js": [
+        "vendor/jquery-3.3.1.min.js",
+        "src/content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "storage",
+    "https://*.atlassian.net/",
+    "http://*.atlassian.net/"
+  ],
+  "background": {
+    "scripts": [
+      "src/background.js"
+    ],
+    "persistent": false
+  }
+}

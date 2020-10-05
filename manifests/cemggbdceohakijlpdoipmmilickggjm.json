@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Главред",
+  "description": "Помогает очистить текст от словесного мусора, проверяет на соответствие информационному стилю.",
+  "version": "1.7",
+  "icons": {
+    "16": "images/icons/icon16.png",
+    "48": "images/icons/icon48.png",
+    "128": "images/icons/icon128.png",
+    "300": "images/icons/icon.png"
+  },
+  "browser_action": {
+    "default_icon": "images/icons/icon.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://glvrd.ru/*",
+        "https://glvrd.ru/*",
+        "http://retro.glvrd.ru/*",
+        "https://retro.glvrd.ru/*"
+      ],
+      "js": [
+        "vendors/jquery-2.1.4.min.js",
+        "scripts/content_script_glvrd.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "scripts/content_script_all.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "contextMenus",
+    "<all_urls>"
+  ],
+  "content_security_policy": "script-src 'self' https://api.glvrd.ru; object-src 'self'"
+}

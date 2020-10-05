@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Purse: Shop with Bitcoin (Beta)",
+  "description": "Get 5-33% off anything on Amazon with Bitcoin and Bitcoin Cash",
+  "version": "0.10.1",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "event.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_title": "Purse: Shop with Bitcoin",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.amazon.com/*",
+        "*://*.amazon.co.uk/*",
+        "*://*.amazon.ca/*",
+        "*://*.amazon.co.jp/*"
+      ],
+      "css": [
+        "./styles/button.css"
+      ],
+      "js": [
+        "index.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://purse.io/*"
+      ],
+      "js": [
+        "index_purse.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "*://*.amazon.com/",
+    "https://purse.io/"
+  ]
+}

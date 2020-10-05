@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Zulu",
+  "short_name": "Zulu",
+  "description": "__MSG_extensionDescription__",
+  "version": "3.1.1",
+  "author": "Sangoma Technologies, INC",
+  "default_locale": "en_US",
+  "icons": {
+    "24": "icons/icon24.png",
+    "48": "icons/icon48.png",
+    "96": "icons/icon96.png",
+    "192": "icons/icon192.png"
+  },
+  "browser_action": {
+    "default_title": "Zulu",
+    "default_icon": {
+      "24": "icons/icon24.png",
+      "48": "icons/icon48.png",
+      "96": "icons/icon96.png",
+      "192": "icons/icon192.png"
+    },
+    "default_popup": "browser_action/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "includes/browser.js",
+      "includes/functions.js",
+      "background.js"
+    ]
+  },
+  "options_ui": {
+    "page": "options_ui/options.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "includes/browser.js",
+        "includes/findAndReplaceDOMText.js",
+        "includes/functions.js",
+        "content_script/zulu.client.js"
+      ],
+      "css": [
+        "includes/font.css",
+        "content_script/content.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "notifications",
+    "storage",
+    "unlimitedStorage",
+    "nativeMessaging"
+  ]
+}

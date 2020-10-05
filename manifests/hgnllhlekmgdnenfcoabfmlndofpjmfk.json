@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Daedalus",
+  "version": "3.0.12",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "dist/background-bundle.js"
+    ]
+  },
+  "permissions": [
+    "*://*.linkedin.com/*",
+    "*://*.licdn.com/*",
+    "*://*.indeed.com/*",
+    "*://*.github.com/*",
+    "*://*.githubusercontent.com/*",
+    "*://*.angel.co/*",
+    "*://*.cloudfront.net/*",
+    "https://*.loxo.co/*",
+    "https://cdnjs.cloudflare.com/*",
+    "http://localhost/*",
+    "http://segmentationmetrics.com/*",
+    "storage",
+    "tabs",
+    "cookies",
+    "downloads"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.linkedin.com/*",
+        "https://*.indeed.com/*",
+        "https://*.github.com/*",
+        "https://*.angel.co/*"
+      ],
+      "js": [
+        "dist/domBridgeServer-bundle.js",
+        "dist/emberInterface-bundle.js",
+        "dist/backgroundScraper-bundle.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "16": "icon16.png"
+    },
+    "default_popup": "popup.html"
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "0.9.143",
+  "name": "__MSG_extNameChrome__",
+  "default_locale": "en",
+  "short_name": "Indeed",
+  "manifest_version": 2,
+  "description": "__MSG_extDescription__",
+  "minimum_chrome_version": "53.0.0",
+  "browser_action": {
+    "default_title": "__MSG_extNameChrome__",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "img/icon-16.png",
+    "48": "img/icon-48.png",
+    "128": "img/icon-128.png"
+  },
+  "omnibox": {
+    "keyword": "indeed"
+  },
+  "incognito": "not_allowed",
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_security_policy": "script-src 'self' https://t.qa.indeed.net https://t.indeed.com https://www.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://connect.facebook.net; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.google.com/search*"
+      ],
+      "run_at": "document_start",
+      "css": [
+        "hide-g4j.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.google.com/search*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "content-g4j.js"
+      ],
+      "css": [
+        "content-g4j.css"
+      ]
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "content-detached.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "content-detached.css",
+    "img/*"
+  ],
+  "permissions": [
+    "tabs",
+    "storage",
+    "http://*/*",
+    "https://*/*",
+    "cookies",
+    "webRequest",
+    "contextMenus",
+    "gcm"
+  ]
+}

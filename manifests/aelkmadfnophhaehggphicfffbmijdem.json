@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Work Time",
+  "version": "0.0.6",
+  "description": "Define work time from earliest chrome startup until latest shutdown time in day",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAta/Qhxmmu32ILr4zVdKDLthcvvg8jY0hWCi3zwPfGvqMGjlfhzcIlRUfddQnF7A7I7hirc4CEB+2uisjcSemcPieIfuv8tmwi6A2XZ0lOEzd1r1j/vY3FABkv+3hDap13MK4fU2GMKph8u/OZzQGHuY94++qSYs6lLPmJSCaTNbD2iVEzyJIDwkeRxDLujRO44zqPwVEkpOqAUahwwbE7smFDRF7sIQ4YID9EBdDHzoqjj5WbiK95btZ3/G/jOvaPx1WGJ/+yoUu/hdG/kP0buCTXBaZqza+IL5/rV81IxdkHrwVR6R4/P9/pHR9MZ8G2WHoYi2OdaHlQ5qLcjkSZwIDAQAB",
+  "author": "volyihin@gmail.com",
+  "permissions": [
+    "storage",
+    "https://*.firebaseio.com/",
+    "https://accounts.google.com/o/oauth2/token",
+    "https://www.googleapis.com/",
+    "https://www.googleapis.com/oauth2/v1/userinfo",
+    "https://*/",
+    "identity",
+    "background"
+  ],
+  "oauth2": {
+    "client_id": "246585209934-0loemsdod3hsqqju54nouc4tjlaldopq.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email"
+    ]
+  },
+  "browser_action": {
+    "default_popup": "typedUrls.html",
+    "default_icon": "img/clock.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.google.com/robots.txt*"
+      ],
+      "js": [
+        "oauth2/oauth2_inject.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/jquery-2.1.1.min.js",
+      "js/moment.js",
+      "js/firebase.js",
+      "oauth2/oauth2.js",
+      "js/background.js"
+    ]
+  },
+  "options_page": "options.html",
+  "content_security_policy": "script-src 'self' https://*.firebaseio.com ; object-src 'self' ",
+  "manifest_version": 2,
+  "web_accessible_resources": [
+    "oauth2/oauth2.html"
+  ]
+}

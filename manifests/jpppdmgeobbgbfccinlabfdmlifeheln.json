@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "HOMEADNET",
+  "version": "0.2.1",
+  "description": "Real Estate Web and Social Platform to help Realtors manage their content and create networking and marketing opportunities.",
+  "homepage_url": "http://homeadnet.com",
+  "icons": {
+    "128": "icon128.png",
+    "48": "icon48.png",
+    "16": "icon16.png"
+  },
+  "minimum_chrome_version": "25",
+  "browser_action": {
+    "default_icon": "icon19-offline.png",
+    "default_title": "HOMEADNET",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "persistent": false,
+    "page": "background.html"
+  },
+  "incognito": "split",
+  "offline_enabled": false,
+  "permissions": [
+    "tabs",
+    "cookies",
+    "alarms",
+    "webNavigation",
+    "*://localhost/*",
+    "*://homeadnet.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://localhost:8080/account/chrome-ext/*",
+        "http://homeadnet.com/account/chrome-ext/*"
+      ],
+      "js": [
+        "resources/js/jquery-1.8.0.min.js",
+        "resources/js/content.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self';"
+}

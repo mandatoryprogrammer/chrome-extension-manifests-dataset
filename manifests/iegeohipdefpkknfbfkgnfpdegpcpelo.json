@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Black Lister",
+  "version": "0.0.2",
+  "description": "Remove crappy links from google",
+  "permissions": [
+    "tabs",
+    "<all_urls>",
+    "storage"
+  ],
+  "page_action": {
+    "default_icon": {
+      "19": "images/icon_19.png",
+      "38": "images/icon_38.png"
+    },
+    "default_title": "Black Lister",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "<all_urls>"
+      ],
+      "js": [
+        "modify_css.js"
+      ],
+      "css": [
+        "black_lister.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "black_lister.css",
+    "black_list.json",
+    "images/MushroomCloud.png",
+    "images/gear.png"
+  ],
+  "icons": {
+    "16": "images/icon_16.png",
+    "48": "images/icon_48.png",
+    "128": "images/icon_128.png"
+  },
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "bg.js"
+    ]
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "iDiscount App",
+  "version": "1.0.3",
+  "manifest_version": 2,
+  "description": "Get Free Voucher Codes at top stores AND click and go to favorite webpage!",
+  "homepage_url": "http://iCashBack.ro",
+  "applications": {
+    "gecko": {
+      "id": "extension@iCashback.ro",
+      "strict_min_version": "52.0",
+      "update_url": "https://icashback-5bddf.firebaseapp.com/firefox/updates.json"
+    }
+  },
+  "icons": {
+    "16": "res/icons/icon16.png",
+    "48": "res/icons/icon48.png",
+    "128": "res/icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "src/js/jquery-3.1.1.js",
+        "src/components/logger/logger.js",
+        "src/utils/util.js",
+        "src/js/profitshare_code.js",
+        "src/js/main.js"
+      ],
+      "css": [
+        "src/css/main.css"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "*://www.iCashBack.ro/*",
+        "*://www.icashback.ro/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://cdn.firebase.com https://*.firebaseio.com https://ssl.google-analytics.com; object-src 'self'",
+  "background": {
+    "scripts": [
+      "src/js/jquery-3.1.1.js",
+      "src/utils/api.js",
+      "src/bg/background.js"
+    ],
+    "persistent": true
+  },
+  "options_page": "src/components/options/index.html",
+  "web_accessible_resources": [
+    "src/libs/*",
+    "src/components/*"
+  ],
+  "browser_action": {
+    "default_icon": "res/icons/icon19.png",
+    "default_title": "iDiscount"
+  },
+  "permissions": [
+    "storage",
+    "tabs"
+  ]
+}

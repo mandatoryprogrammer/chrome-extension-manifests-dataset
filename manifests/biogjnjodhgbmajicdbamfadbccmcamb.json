@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "version": "1.0.117",
+  "description": "__MSG_appDesc__",
+  "default_locale": "en",
+  "content_security_policy": "default-src 'self' 'sha256-nMxMqdZhkHxz5vAuW/PAoLvECzzsmeAxD/BNwG15HuA='; frame-src 'self' https://cloud.mindmanager.com/ https://mindmanager.auth0.com/; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; connect-src https://cloud.mindmanager.com/ http://cloud.mindmanager.com/ blob:; font-src https://fonts.gstatic.com; img-src blob:",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "contextMenus",
+    "webNavigation"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://cloud.mindmanager.com/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "commonDefines.js",
+        "SignIn.js"
+      ]
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "all_frames": true,
+      "match_about_blank": true,
+      "run_at": "document_start",
+      "js": [
+        "commonDefines.js",
+        "mimeTypes.js",
+        "captureSender.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "mimeTypes.js",
+      "commonDefines.js",
+      "util.js",
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_popup": "SignIn.html",
+    "default_title": "Snap to MindManager",
+    "icon": {
+      "16": "images/MindManager16.png",
+      "32": "images/MindManager32.png",
+      "48": "images/MindManager48.png",
+      "128": "images/MindManager128.png"
+    }
+  },
+  "icons": {
+    "16": "images/MindManager16.png",
+    "32": "images/MindManager32.png",
+    "48": "images/MindManager48.png",
+    "128": "images/MindManager128.png"
+  },
+  "manifest_version": 2
+}

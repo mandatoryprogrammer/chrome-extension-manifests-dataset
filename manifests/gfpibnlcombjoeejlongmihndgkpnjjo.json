@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Pablo",
+  "description": "Engaging social images in 30 seconds",
+  "homepage_url": "https://pablo.buffer.com/app",
+  "version": "1.2.1",
+  "icons": {
+    "16": "logo_icon_16.png",
+    "32": "logo_icon_32.png",
+    "48": "logo_icon_48.png",
+    "96": "logo_icon_96.png",
+    "128": "logo_icon_128.png",
+    "256": "logo_icon_256.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "logo_icon_19.png",
+      "38": "logo_icon_38.png",
+      "76": "logo_icon_76.png"
+    },
+    "default_title": "Open Pablo"
+  },
+  "background": {
+    "scripts": [
+      "data/shared/libs/jquery-2.1.1.min.js",
+      "pablo-chrome-port-wrapper.js",
+      "main.js",
+      "buffermetrics-bg-shim.js",
+      "buffermetrics.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "contextMenus"
+  ],
+  "web_accessible_resources": [
+    "data/shared/img/pablo-hover-icon@1x.png",
+    "data/shared/img/pablo-hover-icon@2x.png"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "pablo-chrome-port-wrapper.js",
+        "pablo-chrome-data-wrapper.js",
+        "pablo-chrome-embed.js",
+        "data/shared/libs/jquery-2.1.1.min.js",
+        "pablo-hover-button.js",
+        "pablo-chrome.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://pablo.buffer.com/*"
+      ],
+      "css": [
+        "data/shared/pablo-extension-detection.css"
+      ]
+    }
+  ],
+  "manifest_version": 2
+}

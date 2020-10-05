@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "p_16.png",
+      "48": "p_48.png",
+      "128": "p_128.png"
+    }
+  },
+  "name": "Productivity Redirect",
+  "version": "1.1",
+  "description": "Redirect from distracting sites to productive ones. Block the bad ones. Link to the good ones. Disable easily.",
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "storage",
+    "*://*/redirect.html",
+    "http://*/*/",
+    "https://*/*/",
+    "tabs"
+  ],
+  "web_accessible_resources": [
+    "*.js",
+    "*.html",
+    "*/redirect.html"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/redirect.html"
+      ],
+      "js": [
+        "content.js",
+        "interactive.js",
+        "handlebars-v4.0.12.js"
+      ],
+      "css": [
+        "styles.css"
+      ]
+    }
+  ],
+  "manifest_version": 2
+}

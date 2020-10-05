@@ -1,0 +1,80 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Кнопка сохранения данных в QuickStaff",
+  "description": "Первый многофункциональный сервис рекрутинга",
+  "homepage_url": "http://quickstaff.ru",
+  "version": "1.3.2",
+  "manifest_version": 2,
+  "icons": {
+    "48": "icons/icon_48.png",
+    "128": "icons/icon_128.png"
+  },
+  "browser_action": {
+    "default_title": "QuickStaff Helper",
+    "default_popup": "popup/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "https://hh.ru/*",
+    "https://*.hh.ru/*",
+    "https://hhcdn.ru/*",
+    "https://*.superjob.ru/*",
+    "https://joblab.ru/*",
+    "https://*.zarplata.ru/*",
+    "https://*.zp.ru/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://hh.ru/resume/*",
+        "https://*.hh.ru/resume/*"
+      ],
+      "js": [
+        "onpage/hh.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://www.superjob.ru/resume/*"
+      ],
+      "js": [
+        "onpage/sj.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://joblab.ru/res*.html"
+      ],
+      "js": [
+        "onpage/jl.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://hr.zarplata.ru/resumes/*"
+      ],
+      "js": [
+        "onpage/zp.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "commands": {
+    "import-resume": {
+      "description": "Импортировать в QuickStaff",
+      "suggested_key": {
+        "default": "Alt+S",
+        "mac": "Alt+S"
+      }
+    }
+  }
+}

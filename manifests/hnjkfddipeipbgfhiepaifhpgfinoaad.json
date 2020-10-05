@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Remix",
+  "short_name": "Remix",
+  "description": "Bookmark your favorite content to your TagTheLove platform.",
+  "version": "1.0.0",
+  "version_name": "1.0",
+  "icons": {
+    "16": "assets/img/icons/remix-icoon-16-dip.png",
+    "48": "assets/img/icons/remix-icoon-48-dip.png",
+    "128": "assets/img/icons/remix-icoon-128-dip.png"
+  },
+  "browser_action": {
+    "default_icon": "assets/img/icons/remix-icoon-48-dip.png",
+    "default_popup": "index.html",
+    "default_title": "Remix"
+  },
+  "offline_enabled": false,
+  "options_page": "index.html#settings",
+  "options_ui": {
+    "page": "index.html#settings",
+    "chrome_style": true,
+    "open_in_tab": false
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "contextMenus",
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "assets/js/libs/jquery-3.1.0.min.js",
+      "background/embeds/remix_cm.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "*"
+  ],
+  "content_scripts": [
+    {
+      "css": [
+        "background/remix_overlay.css"
+      ],
+      "js": [
+        "assets/js/libs/jquery-3.1.0.min.js",
+        "assets/js/libs/canvas-to-blob.min.js",
+        "background/remix_overlay.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "all_frames": true
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'"
+}

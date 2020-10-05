@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Greenlane SEO Sitemap Tools",
+  "short_name": "Sitemap Tools",
+  "version": "0.8.1",
+  "manifest_version": 2,
+  "description": "Tools to test and validate your sitemap for optimal SEO.",
+  "homepage_url": "https://www.greenlanemarketing.com",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "page": "src/bg/background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "Sitemap Tools",
+    "default_popup": "src/browser_action/browser_action.html"
+  },
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "declarativeContent",
+    "tabs",
+    "<all_urls>"
+  ],
+  "web_accessible_resources": [
+    "src/app/ui.html",
+    "src/app/functions.js",
+    "src/lib/material.min.js",
+    "src/app/greenlane-g-logo.png",
+    "src/app/loading.gif",
+    "src/app/queued.gif",
+    "src/inject/inject.css"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*.xml",
+        "*://*/*.xml.gz"
+      ],
+      "run_at": "document_start",
+      "css": [
+        "src/inject/inject.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*/*.xml",
+        "*://*/*.xml.gz"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "src/lib/jquery.min.js",
+        "src/lib/jquery.mark.min.js",
+        "src/lib/underscore.js",
+        "src/inject/inject.js"
+      ]
+    }
+  ]
+}

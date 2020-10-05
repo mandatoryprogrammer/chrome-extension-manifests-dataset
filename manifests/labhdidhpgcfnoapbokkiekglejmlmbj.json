@@ -1,0 +1,40 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Dewey",
+  "description": "The best way to save bookmarks, create collections and share with your friends.",
+  "version": "0.3.2",
+  "omnibox": {
+    "keyword": "dewey"
+  },
+  "icons": {
+    "128": "dewey-icon-lg.png",
+    "16": "dewey-icon-omni.png"
+  },
+  "permissions": [
+    "<all_urls>",
+    "tabs",
+    "bookmarks"
+  ],
+  "background": {
+    "page": "background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://dewey.to/*",
+        "http://dewey.to/*",
+        "http://localhost:3000/*"
+      ],
+      "js": [
+        "check-dewey-browser-extension.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://cdn.pubnub.com/; object-src 'self'",
+  "browser_action": {
+    "default_icon": "dewey-sm.png",
+    "default_popup": "index.html"
+  }
+}

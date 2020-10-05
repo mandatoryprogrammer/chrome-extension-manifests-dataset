@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Openload adv remover",
+  "description": "This extension removes ads from Openload",
+  "version": "1.1.0",
+  "browser_action": {
+    "default_icon": "icons/icon128.png"
+  },
+  "icons": {
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_idle",
+      "matches": [
+        "https://oload.download/*",
+        "https://openload.co/*"
+      ],
+      "js": [
+        "scripts/content_idle.js"
+      ]
+    },
+    {
+      "run_at": "document_start",
+      "matches": [
+        "https://oload.download/*",
+        "https://openload.co/*"
+      ],
+      "js": [
+        "scripts/content_start.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ],
+    "persistent": false
+  },
+  "web_accessible_resources": [
+    "/scripts/inject_start.js",
+    "/scripts/inject_idle.js"
+  ],
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "https://oload.download/*",
+    "https://openload.co/*"
+  ]
+}

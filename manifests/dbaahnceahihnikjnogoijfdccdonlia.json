@@ -1,0 +1,67 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Tarjomak",
+  "author": "Mostafa Alahyari",
+  "description": "Tarjomak extension provides quick translation of selected texts for persian users",
+  "version": "1.0.3",
+  "manifest_version": 2,
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [
+        "styles/popup_inject.css",
+        "styles/hint.min.css"
+      ],
+      "js": [
+        "script/allEnv/allEnv.js",
+        "script/contentscript/tarjomak.js",
+        "script/contentscript/tarjomak_main.js",
+        "script/clipboard.min.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "background": {
+    "scripts": [
+      "script/allEnv/allEnv.js",
+      "script/background/background.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "icons/*",
+    "styles/*",
+    "fonts/*"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/icon19.png",
+      "38": "icons/icon38.png"
+    },
+    "default_title": "Tarjomak",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "storage",
+    "*://*/*",
+    "<all_urls>"
+  ],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+Q"
+      }
+    }
+  }
+}

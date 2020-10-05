@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "browser_action": {
+    "default_icon": "icon48.png",
+    "default_title": "新浪微博助手",
+    "default_popup": "popup.html"
+  },
+  "manifest_version": 2,
+  "background": {
+    "page": "background_page.html"
+  },
+  "description": "动动鼠标即可把自己选中的图片、文字、以及视频的地址转播到新浪微博，您不必担心安全问题，因为这一切都是调用新浪微博官方API接口完成的.程序制作GodSon",
+  "icons": {
+    "128": "icon128.png",
+    "16": "icon128.png",
+    "48": "icon128.png"
+  },
+  "options_page": "setting.html#general",
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "matches": [
+        "http://www.jeasyuicn.com/callback.html*"
+      ],
+      "js": [
+        "oauth2/oauth2_inject.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": false,
+      "js": [
+        "javascript/content-js.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "minimum_chrome_version": "23.0",
+  "name": "新浪微博助手(&S)",
+  "permissions": [
+    "background",
+    "notifications",
+    "tabs",
+    "contextMenus",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "version": "4.0.8.0"
+}

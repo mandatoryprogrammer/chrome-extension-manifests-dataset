@@ -1,0 +1,89 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_product_name__",
+  "description": "__MSG_product_description__",
+  "version": "2.34.8",
+  "manifest_version": 2,
+  "minimum_chrome_version": "46",
+  "default_locale": "ru",
+  "background": {
+    "scripts": [
+      "build-info.js",
+      "brandings.js",
+      "backend/bootstrap.js",
+      "backend/bundle.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icons/19.png"
+  },
+  "chrome_url_overrides": {
+    "newtab": "layout/newtab.html"
+  },
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "js": [
+        "includes/contentscript.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": false,
+      "js": [
+        "includes/navigate.js"
+      ],
+      "matches": [
+        "http://zen.yandex.ru/*",
+        "https://zen.yandex.ru/*",
+        "http://zen.yandex.com/*",
+        "https://zen.yandex.com/*",
+        "http://zen.yandex.com.tr/*",
+        "https://zen.yandex.com.tr/*",
+        "http://zen.yandex.ua/*",
+        "https://zen.yandex.ua/*",
+        "http://zen.yandex.by/*",
+        "https://zen.yandex.by/*",
+        "http://zen.yandex.kz/*",
+        "https://zen.yandex.kz/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "permissions": [
+    "<all_urls>",
+    "alarms",
+    "bookmarks",
+    "chrome://favicon/",
+    "contextMenus",
+    "cookies",
+    "history",
+    "idle",
+    "geolocation",
+    "management",
+    "notifications",
+    "sessions",
+    "storage",
+    "tabs",
+    "topSites",
+    "unlimitedStorage",
+    "webNavigation",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "optional_permissions": [
+    "clipboardRead",
+    "clipboardWrite"
+  ]
+}

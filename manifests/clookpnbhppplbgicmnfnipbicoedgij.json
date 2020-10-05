@@ -1,0 +1,70 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "InfoFilms",
+  "version": "0.0.5",
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self'   'unsafe-eval'  https://*.themoviedb.org/  https://query.yahooapis.com/ https://*.amazonaws.com https://*.googletagmanager.com  https://*.google-analytics.com ; object-src 'self';",
+  "description": "INFOFILMS gives you all the information the most cinephiles",
+  "homepage_url": "http://search.infofilms.info/",
+  "icons": {
+    "19": "icons/icon19.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "page": "src/background/background.html",
+    "persistent": true
+  },
+  "page_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "InfoFilms",
+    "default_popup": "src/page_action/page_action.html"
+  },
+  "chrome_url_overrides": {
+    "newtab": "src/override/override.html"
+  },
+  "chrome_settings_overrides": {
+    "search_provider": {
+      "encoding": "UTF-8",
+      "favicon_url": "http://search.infofilms.info/favicon.ico",
+      "image_url": "http://search.infofilms.info/?cat=images&q={searchTerms}",
+      "is_default": true,
+      "keyword": "Infofilms",
+      "name": "Infofilms",
+      "search_url": "http://search.infofilms.info/?q={searchTerms}",
+      "suggest_url": "http://search.infofilms.info/?q={searchTerms}"
+    }
+  },
+  "permissions": [
+    "chrome://favicon/",
+    "cookies",
+    "tabs",
+    "geolocation",
+    "bookmarks",
+    "http://*/",
+    "https://*/",
+    "file:///*/*",
+    "https://*.google.com/",
+    "http://api.themoviedb.org/3",
+    "http://api.themoviedb.org/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.google.com/*"
+      ],
+      "css": [
+        "css/app.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://www.google.com/*"
+      ],
+      "js": [
+        "src/inject/inject.js"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Sintelix Extension",
+  "description": "Augment Sintelix with Extra Functionality",
+  "version": "2.0.11",
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "http://*/*",
+    "https://*/*",
+    "storage",
+    "cookies",
+    "<all_urls>"
+  ],
+  "icons": {
+    "16": "images/icon_16.png",
+    "48": "images/icon_48.png",
+    "128": "images/icon_128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "images/icon_16.png",
+      "19": "images/icon_19.png",
+      "128": "images/icon_128.png"
+    },
+    "default_title": "Sintelix Extension",
+    "default_popup": "popup.html"
+  },
+  "commands": {
+    "current-page-harvesting": {
+      "suggested_key": {
+        "default": "Alt+C"
+      },
+      "description": "Current page harvesting"
+    },
+    "store-url": {
+      "suggested_key": {
+        "default": "Alt+Z"
+      },
+      "description": "Store current page URL"
+    }
+  },
+  "web_accessible_resources": [
+    "edit_ruleset.html",
+    "current_page_harvesting.html",
+    "images/icon-refresh.png",
+    "images/send.png",
+    "images/add.png",
+    "images/cancel-add.png",
+    "images/ok.png",
+    "images/add.png",
+    "images/help.png",
+    "images/exit.png",
+    "images/icon_19.png",
+    "images/spinner.gif",
+    "images/icon-additem.png",
+    "images/icon-tick.png",
+    "images/icon-cancel.png",
+    "images/icon-radio.png",
+    "images/icon-keyboard.png",
+    "images/icon-goto.png",
+    "images/ui-callout-close.png",
+    "images/demo.gif"
+  ],
+  "background": {
+    "scripts": [
+      "script/lib/jquery-3.1.1.min.js",
+      "script/lib/async-2.1.4.min.js",
+      "script/constants.js",
+      "script/common.js",
+      "script/sintelix-service.js",
+      "script/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "script/lib/jquery-3.1.1.min.js",
+        "script/lib/async-2.1.4.min.js",
+        "script/common.js",
+        "script/constants.js",
+        "script/ruleset-marker-v2.js",
+        "script/content-script.js"
+      ],
+      "css": [
+        "css/content.css"
+      ]
+    }
+  ]
+}

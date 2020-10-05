@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "background": {
+    "persistent": true,
+    "page": "background.html"
+  },
+  "browser_action": {
+    "default_icon": "action-play.png"
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.pandora.com/*"
+      ],
+      "js": [
+        "jquery.min.js",
+        "pppandora.js",
+        "areyoulistening_loop.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "exclude_matches": [
+        "*://*.pandora.com/*"
+      ],
+      "js": [
+        "jquery.min.js",
+        "youtube_autopauser.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "description": "Play / Pause Pandora Tab",
+  "icons": {
+    "128": "icon_128.png"
+  },
+  "name": "Play / Pause Pandora Tab",
+  "permissions": [
+    "notifications",
+    "alarms",
+    "tabs",
+    "storage",
+    "webNavigation",
+    "*://*/*"
+  ],
+  "version": "1.4.0",
+  "manifest_version": 2
+}

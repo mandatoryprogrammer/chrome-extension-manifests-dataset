@@ -1,0 +1,39 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Pandora History Saver",
+  "description": "Records your history across all stations. Click on the song name to hear it on Youtube. You can export the history to a text file.",
+  "version": "1.0.2",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "model.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.pandora.com/*"
+      ],
+      "js": [
+        "model.js",
+        "content_script.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://apis.google.com; object-src 'self'",
+  "browser_action": {
+    "default_title": "Pandora History Saver",
+    "default_icon": "icons/icon.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "storage"
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "background": {
+    "page": "background.html"
+  },
+  "browser_action": {
+    "browser_style": false,
+    "default_icon": {
+      "16": "img/icon_16.png",
+      "32": "img/icon_32.png"
+    },
+    "default_popup": "popup.html",
+    "default_title": "Adblocker"
+  },
+  "commands": {
+    "launch-element-picker": {
+      "description": "__MSG_popupTipPicker__"
+    },
+    "launch-element-zapper": {
+      "description": "__MSG_popupTipZapper__"
+    },
+    "launch-logger": {
+      "description": "__MSG_popupTipLog__"
+    }
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "/js/vapi.js",
+        "/js/vapi-client.js",
+        "/js/contentscript.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file://*/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": false,
+      "js": [
+        "/js/scriptlets/subscriber.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; style-src 'self' 'unsafe-inline' 'unsafe-eval' ; connect-src *; object-src 'self' ",
+  "default_locale": "en",
+  "description": "__MSG_extShortDesc__",
+  "icons": {
+    "16": "img/icon_16.png",
+    "48": "img/icon_48.png",
+    "96": "img/icon_96.png"
+  },
+  "manifest_version": 2,
+  "name": "Adblocker Smart",
+  "options_ui": {
+    "open_in_tab": true,
+    "page": "dashboard.html"
+  },
+  "permissions": [
+    "contextMenus",
+    "privacy",
+    "storage",
+    "unlimitedStorage",
+    "tabs",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>"
+  ],
+  "short_name": "Adblocker Smart",
+  "version": "1.0.5",
+  "web_accessible_resources": [
+    "/web_accessible_resources/*",
+    "/img/*"
+  ]
+}

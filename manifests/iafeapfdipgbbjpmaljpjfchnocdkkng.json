@@ -1,0 +1,69 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "iHeartDogs Browser App",
+  "version": "0.3.1000.301",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "cookies",
+    "alarms",
+    "contextMenus",
+    "https://*.joona.io/*",
+    "http://*.joona.io/*"
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "description": "Help Feed Shelter Dogs with the iHeartDogs Browser App",
+  "chrome_url_overrides": {
+    "newtab": "html/load.html"
+  },
+  "omnibox": {
+    "keyword": "iheartdogs"
+  },
+  "chrome_settings_overrides": {
+    "search_provider": {
+      "is_default": true,
+      "name": "IHeartDogs",
+      "keyword": "iheartdogs.com",
+      "favicon_url": "https://api.joona.io/joona-favicon-32x32.png",
+      "search_url": "https://api.joona.io/search/bing?q={searchTerms}&o=true",
+      "suggest_url": "https://api.joona.io/search/suggest?q={searchTerms}",
+      "alternate_urls": [
+        "https://api.joona.io/search/omni?q={searchTerms}"
+      ],
+      "encoding": "UTF-8"
+    }
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "js/cs/data-frame.js"
+      ],
+      "matches": [
+        "https://*.joona.io/*",
+        "http://*.joona.io/*"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "page": "html/background.html",
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    },
+    "default_popup": "html/bab.html"
+  },
+  "web_accessible_resources": [
+    "js/bg/focus.js"
+  ]
+}

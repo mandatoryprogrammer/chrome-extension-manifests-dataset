@@ -1,0 +1,95 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "name": "Amazon adBlocker",
+  "short_name": "AmazonAdBlocker",
+  "description": "Amazon adblocker makes shopping on Amazon clear from sponsored ads.",
+  "version": "0.51",
+  "permissions": [
+    "https://www.smile.amazon.com/*",
+    "https://www.amazon.com/*",
+    "https://www.amazon.ca/*",
+    "https://www.amazon.fr/*",
+    "https://www.amazon.de/*",
+    "https://www.amazon.in/*",
+    "https://www.amazon.it/*",
+    "https://www.amazon.co.jp/*",
+    "https://www.amazon.com.mx/*",
+    "https://www.amazon.es/*",
+    "https://www.smile.amazon.co.uk/*",
+    "https://www.amazon.co.uk/*",
+    "https://extensions.adjusti.co/*",
+    "activeTab",
+    "tabs",
+    "webNavigation",
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "icons": {
+    "16": "./icons/icon.16.png",
+    "48": "./icons/icon.48.png",
+    "128": "./icons/icon.128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.smile.amazon.com/*",
+        "https://www.amazon.ca/*",
+        "https://www.amazon.com/*",
+        "https://www.amazon.com.mx/*"
+      ],
+      "css": [
+        "removeAdsOnSearchPageAmerica.css",
+        "removeAdsOnProductPage.css"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://www.amazon.fr/*",
+        "https://www.amazon.de/*",
+        "https://www.amazon.in/*",
+        "https://www.amazon.it/*",
+        "https://www.amazon.es/*",
+        "https://www.amazon.co.jp/*",
+        "https://www.smile.amazon.co.uk/*",
+        "https://www.amazon.co.uk/*"
+      ],
+      "js": [
+        "removeAds.js"
+      ],
+      "css": [
+        "removeAdsOnSearchPage.css",
+        "removeAdsOnProductPage.css"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://www.smile.amazon.com/*",
+        "https://www.amazon.com/*",
+        "https://www.amazon.ca/*",
+        "https://www.amazon.fr/*",
+        "https://www.amazon.de/*",
+        "https://www.amazon.in/*",
+        "https://www.amazon.it/*",
+        "https://www.amazon.co.jp/*",
+        "https://www.amazon.com.mx/*",
+        "https://www.amazon.es/*",
+        "https://www.smile.amazon.co.uk/*",
+        "https://www.amazon.co.uk/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

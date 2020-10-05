@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Little John",
+  "description": "Parses the current webpage for stock tickers and then lets you buy them via RobinHood",
+  "version": "1.5.1",
+  "browser_action": {
+    "default_icon": "./resources/imgs/littlejohn48.png"
+  },
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "./scripts/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "css": [
+        "test.css"
+      ],
+      "js": [
+        "./resources/tickers.js",
+        "./resources/findAndReplaceDOMText.js",
+        "./resources/lodash.js",
+        "./scripts/content.js"
+      ],
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "https://ajax.googleapis.com/",
+    "https://api.robinhood.com/*"
+  ],
+  "icons": {
+    "16": "./resources/imgs/littlejohn16.png",
+    "48": "./resources/imgs/littlejohn48.png",
+    "128": "./resources/imgs/littlejohn128.png"
+  }
+}

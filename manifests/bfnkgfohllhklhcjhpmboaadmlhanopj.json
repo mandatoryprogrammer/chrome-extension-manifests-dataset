@@ -1,0 +1,79 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Nucleus",
+  "short_name": "Nucleus",
+  "homepage_url": "https://meetnucleus.com",
+  "description": "This extension allows you to quickly share any article to Nucleus",
+  "version": "1.0.9",
+  "browser_action": {
+    "default_icon": {
+      "19": "img/icons/19x19.png",
+      "38": "img/icons/38x38.png"
+    },
+    "default_popup": "index.html"
+  },
+  "web_accessible_resources": [
+    "css/*.css",
+    "img/*.svg",
+    "img/*.png"
+  ],
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "*://*.twitter.com/*",
+        "*://tweetdeck.twitter.com/*",
+        "*://*.linkedin.com/*"
+      ],
+      "js": [
+        "js/global.js",
+        "js/content_scripts/medium.js",
+        "js/content_scripts/firstround.js",
+        "js/content_scripts/tc.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.twitter.com/*"
+      ],
+      "exclude_matches": [
+        "*://tweetdeck.twitter.com/*"
+      ],
+      "js": [
+        "js/global.js",
+        "js/content_scripts/twitter.js"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "matches": [
+        "*://*.linkedin.com/*"
+      ],
+      "js": [
+        "js/global.js",
+        "js/content_scripts/linkedin.js"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "img/icons/16x16.png",
+    "48": "img/icons/48x48.png",
+    "128": "img/icons/128x128.png"
+  }
+}

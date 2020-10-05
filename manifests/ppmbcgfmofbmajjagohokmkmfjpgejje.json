@@ -1,0 +1,77 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Belua",
+  "version": "0.19",
+  "manifest_version": 2,
+  "description": "Belua allows users, publishers and marketers to share opportunities and risks.",
+  "icons": {
+    "16": "images/icon-16.png",
+    "128": "images/icon-128.png"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "permissions": [
+    "tabs",
+    "background",
+    "idle",
+    "notifications",
+    "storage",
+    "webNavigation",
+    "webRequest",
+    "*://*.google.com/",
+    "webRequestBlocking"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://www.belua.com/*"
+    ]
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "content_security_policy": "script-src 'self' https://apis.google.com; object-src 'self'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; img-src 'self' blob:",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "utils.js",
+        "chrome.js",
+        "google.js",
+        "facebook.js",
+        "youtube.js",
+        "content.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "*://*.youtube.com/*"
+      ],
+      "js": [
+        "chrome.js",
+        "youtube-player.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "omnibox": {
+    "keyword": "OMNIBOX-KEYWORD"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon-19.png",
+      "38": "images/icon-38.png"
+    },
+    "default_title": "Belua",
+    "default_popup": "popup.html"
+  },
+  "web_accessible_resources": [
+    "images/icon-48.png"
+  ]
+}

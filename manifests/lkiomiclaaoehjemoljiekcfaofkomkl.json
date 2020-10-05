@@ -1,0 +1,42 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Twitch Pokemon Helper",
+  "version": "1.2.2",
+  "manifest_version": 2,
+  "description": "Helps attain pokemon badges the TwitchPresents stream.",
+  "permissions": [
+    "storage"
+  ],
+  "optional_permissions": [
+    "https://www.twitch.tv/twitchpresents"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.ext-twitch.tv/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "src/inject.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "src/preferences.js",
+      "src/bg.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_popup": "src/options.html"
+  },
+  "web_accessible_resources": [
+    "src/pageInject.js"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.ext-twitch.tv/*"
+    ]
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "ChatSpeech for Gmail",
+  "version": "1.4.3",
+  "manifest_version": 2,
+  "icons": {
+    "16": "icons/balloon16.png",
+    "48": "icons/balloon48.png",
+    "128": "icons/balloon128.png"
+  },
+  "description": "Speaks out Gmail's chats.",
+  "permissions": [
+    "storage",
+    "tabs",
+    "*://mail.google.com/*"
+  ],
+  "background": {
+    "page": "background.html"
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "chatListener.js",
+        "libs/jquery-1.7.2.min.js",
+        "libs/mutation_summary.js"
+      ],
+      "run_at": "document_end",
+      "matches": [
+        "*://mail.google.com/*"
+      ]
+    }
+  ],
+  "page_action": {
+    "default_icon": "icons/balloon32.png",
+    "default_title": "Toggle ChatSpeech"
+  },
+  "web_accessible_resources": [
+    "libs/jquery.1.4.2.js",
+    "libs/mutation_summary.js"
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Linguix Grammar and Spell Checker",
+  "description": "Linguix is the best way to find and eliminate spelling issues in your English texts anywhere on the web.",
+  "version": "1.2.4",
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "icons": {
+    "16": "icons/icon_16.png",
+    "32": "icons/icon_32.png",
+    "48": "icons/icon_48.png",
+    "128": "icons/icon_128.png"
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "ext-content/runtime.js",
+        "ext-content/main.js"
+      ]
+    }
+  ],
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "ext-background/polyfills.js",
+      "ext-background/runtime.js",
+      "ext-background/main.js"
+    ]
+  },
+  "browser_action": {
+    "default_popup": "ext-popup/index.html",
+    "default_title": "Linguix"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "contextMenus",
+    "<all_urls>"
+  ],
+  "version_name": "1.2.4",
+  "minimum_chrome_version": "68.0.0",
+  "externally_connectable": {
+    "matches": [
+      "*://*.linguix.com/*"
+    ]
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "graffio.me",
+  "version": "0.0.8",
+  "manifest_version": 2,
+  "description": "deface the web",
+  "homepage_url": "http://graffio.me",
+  "content_security_policy": "script-src 'self' https://*.firebaseio.com; object-src 'self'",
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "icons": {
+    "16": "static/graffiome_logo_16.png",
+    "48": "static/graffiome_logo_48.png",
+    "128": "static/graffiome_logo_128.png"
+  },
+  "background": {
+    "page": "src/background/background.html",
+    "persistent": true
+  },
+  "web_accessible_resources": [
+    "static/nyan.gif"
+  ],
+  "browser_action": {
+    "default_icon": "static/graffiome_logo_19.png",
+    "default_title": "graffio.me",
+    "default_popup": "src/app/index.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "bower_components/jquery/dist/jquery.js",
+        "bower_components/firebase/firebase.js",
+        "bower_components/CryptoJS/rollups/sha1.js",
+        "src/content-scripts/canvas.js"
+      ]
+    }
+  ]
+}

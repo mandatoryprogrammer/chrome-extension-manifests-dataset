@@ -1,0 +1,85 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "GoodData Extension Tool",
+  "version": "0.9114",
+  "version_name": "0.9114",
+  "icons": {
+    "128": "images/extension/gdlogo128.png",
+    "192": "images/extension/gdlogo192.png"
+  },
+  "description": "Makes your life easier when developing in GoodData Cloud BI platform",
+  "options_page": "options.html",
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "GDextension.js"
+    ]
+  },
+  "page_action": {
+    "default_icon": {
+      "19": "images/icons/gd19_rebrand_gray.png",
+      "38": "images/icons/retina/gd19_rebrand_gray.png"
+    },
+    "default_title": "Legen...wait for it GoodData is loading...dary!",
+    "default_popup": "gdpopup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*"
+      ],
+      "js": [
+        "gd_content_script.js"
+      ],
+      "css": [
+        "gd_content.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://*/gdc/projects/*/log*"
+      ],
+      "js": [
+        "gd_cc_log_script.js",
+        "cc_log_switching.js"
+      ],
+      "css": [
+        "gd_cc_log.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://*/gdc/md/*/obj/*",
+        "https://*/gdc/md/*/usedby2/*",
+        "https://*/gdc/md/*/using2/*"
+      ],
+      "js": [
+        "identifiers.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*/dashboards/*"
+      ],
+      "js": [
+        "gd_content_script_kpi.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "https://secure.gooddata.com/*",
+    "activeTab",
+    "storage"
+  ],
+  "optional_permissions": [
+    "https://*/*",
+    "tabs",
+    "contextMenus",
+    "notifications"
+  ],
+  "web_accessible_resources": [
+    "cc_log_switching.js",
+    "identifiers_inject.js"
+  ],
+  "manifest_version": 2
+}

@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "DropShip Toolkit",
+  "description": "More function... (Amazon, Ebay, alibaba)",
+  "version": "1.0",
+  "icons": {
+    "256": "assets/icon/stock-market-icon-256.png"
+  },
+  "permissions": [
+    "declarativeContent",
+    "history",
+    "webNavigation",
+    "storage",
+    "downloads",
+    "activeTab",
+    "tabs",
+    "https://*.amazon.com/*",
+    "https://*.amazon.co.uk/*",
+    "https://tool.appcenter.vn/*"
+  ],
+  "browser_action": {
+    "default_icon": "/assets/icon/stock-market-icon-256.png",
+    "default_popup": "index.html"
+  },
+  "options_page": "index.html",
+  "background": {
+    "scripts": [
+      "/assets/js/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.amazon.com/*",
+        "https://*.amazon.co.uk/*",
+        "https://tool.appcenter.vn/*"
+      ],
+      "js": [
+        "/assets/js/common.js",
+        "/assets/js/amazon-contentScript.js"
+      ]
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://*.amazon.com/*",
+      "https://*.amazon.co.uk/*",
+      "https://tool.appcenter.vn/*"
+    ]
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

@@ -1,0 +1,43 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Twitch VOD Addressbar Sync",
+  "description": "Syncs the twitch.tv addressbar with the video timestamp on VODs in the HTML5 player.",
+  "version": "0.1",
+  "icons": {
+    "16": "Bandage-26.png",
+    "48": "Bandage-50.png"
+  },
+  "page_action": {
+    "default_icon": "Bandage-26.png",
+    "default_title": "Twitch VOD Addressbar Sync",
+    "default_popup": "options.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.twitch.tv/*/v/*"
+      ],
+      "js": [
+        "jquery-1.11.3.min.js",
+        "jquery.history.js",
+        "sync_bar.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "history",
+    "storage"
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  }
+}

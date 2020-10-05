@@ -1,0 +1,37 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "GitHub Time Tracking",
+  "version": "0.7.1",
+  "manifest_version": 2,
+  "description": "Add time tracking to the GitHub Issue Tracker with Harvest.",
+  "icons": {
+    "128": "img/github-time-tracking-128.png",
+    "48": "img/github-time-tracking-48.png",
+    "16": "img/github-time-tracker-16.png"
+  },
+  "background": {
+    "scripts": [
+      "lib/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "data/index.js"
+      ],
+      "matches": [
+        "https://github.com/*/issues/*",
+        "https://github.com/*/pull/*"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://*.harvestapp.com; object-src 'self'",
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "https://github.com/*",
+    "https://*.harvestapp.com/*",
+    "tabs"
+  ]
+}

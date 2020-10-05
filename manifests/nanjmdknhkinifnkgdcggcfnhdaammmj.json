@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "3.0.3",
+  "name": "GuildWallet",
+  "short_name": "GuildWallet",
+  "manifest_version": 2,
+  "description": "GuildWallet",
+  "browser_action": {
+    "default_title": "GuildWallet",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "img/icon-16.png",
+    "48": "img/icon-48.png",
+    "128": "img/icon-128.png"
+  },
+  "web_accessible_resources": [
+    "inject.html",
+    "js/tronHook.js"
+  ],
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "file://*/*",
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/contentScript.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": false
+    }
+  ],
+  "permissions": [
+    "storage",
+    "unlimitedStorage",
+    "clipboardWrite",
+    "activeTab"
+  ],
+  "content_security_policy_prod": "default-src 'self';script-src 'self';style-src * 'unsafe-inline';img-src 'self' data:",
+  "content_security_policy": "default-src 'self';font-src * unsafe-inline data:;script-src 'self' https://api.trongrid.io https://api.shasta.trongrid.io https://super.guildchat.io https://solidity.guildchat.io https://graphql.guildchat.io https://trontrade.io https://api.coinmarketcap.com https://apilist.tronscan.org https://api.shasta.tronscan.org https://api.infura.io https://tronapi.test.trontrade.io https://api.infura.io https://ssl.google-analytics.com https://sdk.guildchat.io/graphql 'unsafe-eval';connect-src https://api.trongrid.io https://api.shasta.trongrid.io https://super.guildchat.io https://solidity.guildchat.io https://graphql.guildchat.io https://trontrade.io https://api.coinmarketcap.com https://apilist.tronscan.org https://api.shasta.tronscan.org https://api.infura.io https://tronapi.test.trontrade.io https://api.infura.io https://ssl.google-analytics.com https://sdk.guildchat.io/graphql;style-src * 'unsafe-inline' 'self' blob:;img-src * data:",
+  "externally_connectable": {}
+}

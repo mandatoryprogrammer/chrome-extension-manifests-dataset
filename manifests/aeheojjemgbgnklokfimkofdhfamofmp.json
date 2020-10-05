@@ -1,0 +1,69 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "ShopUp",
+  "description": "Manage your inventory from your facebook page directly.",
+  "version": "0.0.3.3",
+  "browser_action": {
+    "default_icon": "images/chrome-shopup-bag2x.png",
+    "default_popup": "index.html"
+  },
+  "icons": {
+    "16": "images/shopup-icon-bag-16px.png",
+    "48": "images/shopup-icon-bag-48px.png",
+    "128": "images/shopup-icon-bag-128px.png"
+  },
+  "externally_connectable": {
+    "matches": [
+      "https://*.facebook.com/*",
+      "https://*.shopup.com.bd/admin/*"
+    ],
+    "accepts_tls_channel_id": false
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "https://*.facebook.com/*"
+      ],
+      "js": [
+        "scripts/requestParser.js",
+        "scripts/external/jquery.min.js",
+        "scripts/external/draggabilly.pkgd.js",
+        "scripts/globals.js",
+        "scripts/utils.js",
+        "scripts/shopup.js",
+        "scripts/facebook.js"
+      ],
+      "css": [
+        "styles/ele.css",
+        "styles/main.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "images/*"
+  ],
+  "permissions": [
+    "activeTab",
+    "https://*.shopup.com.bd/*",
+    "https://*.facebook.com/*",
+    "https://*.shopup.com.bd/*",
+    "webRequest",
+    "https://*.facebook.com/*",
+    "*://*.shopup.com.bd/*",
+    "cookies",
+    "https://*.facebook.com/*",
+    "*://*.shopup.com.bd/*",
+    "notifications",
+    "https://*.facebook.com/*",
+    "*://*.shopup.com.bd/*"
+  ],
+  "background": {
+    "scripts": [
+      "scripts/external/jquery.min.js",
+      "scripts/requestParser.js",
+      "scripts/background.js"
+    ]
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_extName__",
+  "short_name": "Vclip Pro",
+  "homepage_url": "https://vclip.ga/",
+  "author": "vclip.ga",
+  "description": "__MSG_extDescription__",
+  "version": "1.0.3.7",
+  "icons": {
+    "128": "favicon128.png",
+    "48": "icon.png"
+  },
+  "default_locale": "bg",
+  "devtools_page": "devtools.html",
+  "browser_action": {
+    "default_icon": {
+      "48": "icon.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "async.js",
+      "background.js"
+    ]
+  },
+  "options_ui": {
+    "page": "settings.html",
+    "chrome_style": true
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "permissions": [
+    "notifications",
+    "downloads",
+    "tabs",
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "*://*/*"
+  ],
+  "web_accessible_resources": [
+    "<all_urls>",
+    "videoclip.bg.css"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "async.js",
+        "a_vclip.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*.videoclip.bg/*",
+        "*://videoclip.bg/*"
+      ],
+      "run_at": "document_start",
+      "css": [
+        "videoclip.bg.css"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://play.nova.bg/*",
+        "*://bgtv-on.com/recording?*=*",
+        "*://proxurf.com/browse.php?*=*",
+        "*://*.seirsanduk.com/*",
+        "*://*.seirsanduk.online/*",
+        "*://*.seirsanduk.us/*",
+        "*://bgtvfree.fun/*",
+        "*://telenet.bg/live/watch/bit",
+        "*://vclip.ga/c/"
+      ],
+      "js": [
+        "clappr.min.js",
+        "level-selector.min.js",
+        "a_vidup.js"
+      ],
+      "all_frames": true
+    }
+  ]
+}

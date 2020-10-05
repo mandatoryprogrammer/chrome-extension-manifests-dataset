@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "W Zoom",
+  "description": "A Chrome extension which can perform per-tab/per-origin/per-path zooming",
+  "version": "1.0.17",
+  "icons": {
+    "16": "img/icon16.png",
+    "18": "img/icon18.png",
+    "19": "img/icon19.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "img/icon16.png",
+      "18": "img/icon18.png",
+      "19": "img/icon19.png",
+      "48": "img/icon48.png",
+      "128": "img/icon128.png"
+    },
+    "default_title": "wZoom",
+    "default_popup": "source/popup/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "third-party/jquery/jquery.min.js",
+        "source/content-script/content-script.min.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "source/content-script/disable-mousewheel-zoom.min.js"
+  ],
+  "options_ui": {
+    "page": "source/options/options.html",
+    "chrome_style": true
+  },
+  "background": {
+    "scripts": [
+      "source/background.min.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "contextMenus",
+    "storage",
+    "tabs"
+  ],
+  "incognito": "split"
+}

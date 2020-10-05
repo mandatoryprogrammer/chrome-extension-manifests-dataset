@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Trotto go links",
+  "description": "This extension makes Trotto \"go links\" work seamlessly in Chrome.",
+  "storage": {
+    "managed_schema": "schema.json"
+  },
+  "version": "1.25",
+  "icons": {
+    "48": "icon@48.png",
+    "128": "icon@128.png"
+  },
+  "browser_action": {
+    "default_icon": "icon@48.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "*://go/*",
+    "*://*.trot.to/*"
+  ],
+  "optional_permissions": [
+    "*://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.trot.to/*"
+      ],
+      "js": [
+        "data_injector.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.trot.to/*"
+      ],
+      "js": [
+        "contentScript.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

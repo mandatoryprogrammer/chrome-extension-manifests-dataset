@@ -1,0 +1,74 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "BetterYGG",
+  "version": "1.2.6",
+  "description": "Téléchargez des torrents sur YGG sans ètre connecté et autres !!!",
+  "icons": {
+    "16": "img/flexgg16.png",
+    "24": "img/flexgg24.png",
+    "32": "img/flexgg32.png",
+    "48": "img/flexgg48.png",
+    "64": "img/flexgg64.png",
+    "128": "img/flexgg128.png"
+  },
+  "options_page": "options/options.html",
+  "background": {
+    "scripts": [
+      "backgroundScripts/background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "web_accessible_resources": [
+    "contentScripts/addTorrent/accessAddTorrent.js",
+    "contentScripts/allPages/accessAllPages.js",
+    "contentScripts/search/accessSearch.js",
+    "css/style.css",
+    "img/download.png"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.yggtorrent.se/torrent/*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "js/utilsFunctions.js",
+        "contentScripts/addTorrent/addTorrent.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.yggtorrent.se/"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "contentScripts/homePage.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.yggtorrent.se/*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "js/utilsFunctions.js",
+        "contentScripts/allPages/allPages.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.yggtorrent.se/engine/search*"
+      ],
+      "run_at": "document_idle",
+      "js": [
+        "js/utilsFunctions.js",
+        "contentScripts/search/search.js"
+      ]
+    }
+  ],
+  "manifest_version": 2
+}

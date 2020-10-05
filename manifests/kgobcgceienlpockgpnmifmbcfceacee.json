@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Streemly Chrome Extension",
+  "version": "2.0.0",
+  "description": "Streemly Chrome Extension",
+  "manifest_version": 2,
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "sessions",
+    "declarativeContent",
+    "notifications",
+    "cookies",
+    "http://localhost:3000/*",
+    "https://dev.streemly.co/*"
+  ],
+  "icons": {
+    "16": "images/icons/icon16.png",
+    "32": "images/icons/icon32.png",
+    "48": "images/icons/icon48.png",
+    "128": "images/icons/icon128.png"
+  },
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "browser_action": {},
+  "content_scripts": [
+    {
+      "exclude_matches": [
+        "https://*.streemly.co/*",
+        "https://*.google.com/*",
+        "http://localhost/*",
+        "http://192.168.1.11/*"
+      ],
+      "matches": [
+        "https://*.salesforce.com/*",
+        "https://*.force.com/*"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "js/iFrame.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "html/*.html",
+    "js/*.js",
+    "css/*.css",
+    "images/extHintIcon.png"
+  ]
+}

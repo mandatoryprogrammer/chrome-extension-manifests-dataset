@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Samespace Dock",
+  "version": "4.0.08",
+  "description": "Boost customer interactions directly from Chrome by integrating it with samespace™.",
+  "background": {
+    "scripts": [
+      "dist/background.js"
+    ]
+  },
+  "options_page": "login.html",
+  "permissions": [
+    "tabs",
+    "notifications",
+    "contextMenus",
+    "storage",
+    "https://*/*",
+    "http://*/*",
+    "activeTab"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "images/samespace-19-inactive.png",
+      "38": "images/samespace-38-inactive.png",
+      "48": "images/samespace-48-inactive.png",
+      "96": "images/samespace-96-inactive.png"
+    },
+    "default_title": "Samespace Dock",
+    "default_popup": "login.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "<all_urls>"
+      ],
+      "match_about_blank": true,
+      "css": [
+        "dist/click2call.css"
+      ],
+      "js": [
+        "dist/contentScript.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "icons": {
+    "48": "images/samespace-48.png",
+    "128": "images/samespace-128.png"
+  },
+  "web_accessible_resources": [
+    "*"
+  ],
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "browser_specific_settings": {
+    "gecko": {
+      "update_url": "https://www.samespace.com/assets/dock/firefox/updates.json"
+    }
+  }
+}

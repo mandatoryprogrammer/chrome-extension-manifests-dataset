@@ -1,0 +1,88 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Mooltipass Extension",
+  "version": "1.8.0",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "description": "__MSG_Manifest_Description__",
+  "icons": {
+    "19": "images/icon_extension_19.png",
+    "32": "images/icon_extension_32.png",
+    "128": "images/icon_extension_128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon_normal_19.png",
+      "32": "images/icon_normal_32.png",
+      "128": "images/icon_normal_128.png"
+    },
+    "default_title": "Mooltipass Extension",
+    "default_popup": "popups/popup_status.html"
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true
+  },
+  "background": {
+    "scripts": [
+      "shared_scripts/psl.min.js",
+      "vendor/seedrandom.js",
+      "background/httpauth.js",
+      "background/browserAction.js",
+      "background/page.js",
+      "vendor/mooltipass/backend.js",
+      "vendor/mooltipass/moolticute.js",
+      "vendor/mooltipass/device.js",
+      "background/event.js",
+      "background/init.js",
+      "background/installAction.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "vendor/jquery-3.2.1.js",
+        "shared_scripts/psl.min.js",
+        "vendor/mooltipass/website.js",
+        "vendor/jquery-ui-1.11.4.custom/jquery-ui.js",
+        "vendor/sendkeys.js",
+        "vendor/mooltipass/mcCombinations.js",
+        "content_scripts/cip.js",
+        "content_scripts/cipDefine.js",
+        "content_scripts/cipEvents.js",
+        "content_scripts/cipFields.js",
+        "content_scripts/cipPassword.js",
+        "content_scripts/mpDialog.js",
+        "mooltipass-content.js"
+      ],
+      "css": [
+        "mooltipass-content.css"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "jquery.min.map",
+    "images/icon_password_16.png",
+    "images/icon_password_24.png",
+    "images/logo_inverted.png",
+    "ui/*"
+  ],
+  "permissions": [
+    "contextMenus",
+    "clipboardWrite",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "https://*/*",
+    "http://*/*",
+    "https://raw.github.com/",
+    "management",
+    "notifications"
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Wader",
+  "description": "Categorize tracks posted or reposted by profiles you follow on SoundCloud.",
+  "version": "0.5.0",
+  "icons": {
+    "16": "images/wader-16.png",
+    "48": "images/wader-48.png",
+    "128": "images/wader-128.png"
+  },
+  "background": {
+    "page": "wader.html"
+  },
+  "browser_action": {
+    "default_popup": "popup/popup.html"
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "chrome_style": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://soundcloud.com/*"
+      ],
+      "js": [
+        "content_script/listening_scraper.js",
+        "data_classes/stream_action.js",
+        "data_classes/repost.js",
+        "data_classes/upload.js",
+        "data_classes/track.js",
+        "data_classes/profile.js",
+        "data_classes/playlist.js",
+        "data_classes/playlist_post.js",
+        "data_classes/playlist_repost.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "identity"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com https://apis.google.com; object-src 'self'",
+  "oauth2": {
+    "client_id": "68541536183-ht44ou1s0ktae6hekmnv3njulssadk7g.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/userinfo.profile"
+    ]
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjZoI32o57JipzijccBl+wkJYwdoGk250znNMgB83Napk7PhsUGU+r3FKs0utt+ERw2F20Gy1Hqh/rAqD8oeLdjMuFv+vx5wuMM8hxoeyWH5JffTrHlZhCr2jLytf8ilUQKRryb+GBALicSwrVOri0tn/Ns+FwZd71wmhONN9xLGgAnPiW9Ratcepf3McY35xVGykOrgLOJ29F9up+XZFKqgXefHiBjzNFfKdBZoKcOGjocfoFDqWk2OHfHAYzsg9fhKoUu3kmtCTRa0w1ZZHBBqIMy/y/WnxGfz0EtQfPUl0EQ3K86UDNkiNM2VUN385VnuW1DjM8sMxY1OLUxm99QIDAQAB"
+}

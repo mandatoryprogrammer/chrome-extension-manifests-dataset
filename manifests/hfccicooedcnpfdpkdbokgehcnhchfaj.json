@@ -1,0 +1,51 @@
+{
+  "browser_action": {
+    "default_icon": "icons/actions/1.png",
+    "default_title": "Toggle-Text"
+  },
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "description": "Extension for hiding all of the text on a website, for appreciating the design",
+  "background": {
+    "page": "background.html"
+  },
+  "name": "Toggle-Text",
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "tabs",
+    "cookies",
+    "notifications",
+    "contextMenus",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking",
+    "unlimitedStorage"
+  ],
+  "icons": {
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png",
+    "16": "icons/icon16.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "all_frames": true,
+      "js": [
+        "js/lib/logging.js",
+        "js/lib/reports.js",
+        "js/lib/xhr.js",
+        "js/api/cookie.js",
+        "js/api/message.js",
+        "js/lib/async_api.js",
+        "js/lib/app_api.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "version": "1.23.12"
+}

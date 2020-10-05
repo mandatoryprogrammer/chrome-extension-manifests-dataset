@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_application_title__",
+  "description": "__MSG_application_description__",
+  "version": "2.4.2.1",
+  "manifest_version": 2,
+  "default_locale": "nl",
+  "homepage_url": "http://kantoorroulette.nl",
+  "content_security_policy": "script-src 'self' 'unsafe-eval' 'sha256-jAjKYr5DGt/T+ZQRaN6AwyZ8uU0Oy1uuR0RxfxQgli4=' 'self' 'self' https://www.google-analytics.com; object-src 'self'",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png",
+    "256": "icons/icon256.png"
+  },
+  "externally_connectable": {
+    "matches": [
+      "https://kantoorroulette.nl/*"
+    ]
+  },
+  "background": {
+    "scripts": [
+      "src/bg/socket.io.slim.js",
+      "src/bg/sentry.js",
+      "src/bg/background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "__MSG_application_description__",
+    "default_popup": "src/browser_action/index.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://kantoorroulette.nl/*"
+      ],
+      "js": [
+        "src/content_script/kantoorroulette.nl.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "contextMenus",
+    "cookies",
+    "*://kantoorroulette.nl/*",
+    "tts",
+    "ttsEngine",
+    "storage",
+    "idle",
+    "notifications"
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Hunter: Find email addresses in seconds",
+  "short_name": "Hunter",
+  "version": "1.18.5",
+  "manifest_version": 2,
+  "description": "Find email addresses from anywhere on the web, with just one click.",
+  "homepage_url": "https://hunter.io",
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "img/icon19.png",
+      "38": "img/icon38.png"
+    },
+    "default_title": "Find email addresses",
+    "default_popup": "html/browser_popup.html"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "contextMenus"
+  ],
+  "background": {
+    "scripts": [
+      "js/lib/jquery.min.js",
+      "js/shared.min.js",
+      "js/background.min.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.hunter.io/*"
+      ],
+      "js": [
+        "js/lib/jquery.min.js",
+        "js/shared.min.js",
+        "js/hunter_content_script.min.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "js/lib/jquery.min.js",
+        "js/lib/purify.min.js",
+        "js/lib/mark.min.js",
+        "js/shared.min.js",
+        "js/websites_content_script.min.js"
+      ],
+      "css": [
+        "css/websites-sources.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "img/*",
+    "fonts/*",
+    "html/source_popup.html"
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Google Calendar Event Search",
+  "description": "Googleカレンダーのマイカレンダーの中からイベントを検索します。",
+  "version": "1.0.6",
+  "minimum_chrome_version": "29",
+  "icons": {
+    "128": "images/icon/icon_128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "128": "images/icon/icon_128.png"
+    },
+    "default_title": "Google Calendar Events to Text",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "tabs",
+    "http://www.google.com/*",
+    "https://www.google.com/*",
+    "https://www.googleapis.com/*",
+    "https://accounts.google.com/o/oauth2/token",
+    "https://www.googleapis.com/",
+    "https://riatw.me/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://riatw.me/_extension_oauth/index.html*"
+      ],
+      "js": [
+        "oauth2/oauth2_inject.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "oauth2/oauth2.html"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

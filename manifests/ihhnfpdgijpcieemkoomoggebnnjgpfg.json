@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Tornevall Networks Content Filter (Upgrading)",
+  "short_name": "Tornevall Networks Content Filter (Upgrading)",
+  "description": "The content filter that cleans up what Facebook don't",
+  "icons": {
+    "16": "icons/16x16.png",
+    "48": "icons/48x48.png",
+    "128": "icons/128x128.png"
+  },
+  "version": "2.0.0.3",
+  "browser_action": {
+    "default_icon": "icons/16x16.png",
+    "default_title": "Tornevall 'socialmedia' page and spamblocker (Currently Upgrading)",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "exclude_globs": [],
+      "exclude_matches": [],
+      "include_globs": [
+        "htt*://*.facebook.com/*"
+      ],
+      "js": [
+        "scripts/jquery-1.11.3.min.js",
+        "scripts/tornevall_chromedb.js",
+        "scripts/fb-antispam.js"
+      ],
+      "matches": [
+        "http://*.facebook.com/*",
+        "https://*.facebook.com/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "scripts/tornevall_chromedb.js",
+      "scripts/fb-antispam-background.js"
+    ]
+  },
+  "permissions": [
+    "background",
+    "*://*.facebook.com/*",
+    "tabs",
+    "contextMenus"
+  ]
+}

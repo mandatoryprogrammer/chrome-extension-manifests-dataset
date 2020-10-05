@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "PR Sourcing Tool",
+  "description": "Save time when sourcing candidates.",
+  "version": "1.26",
+  "devtools_page": "devtools.html",
+  "web_accessible_resources": [
+    "/js/scripts.js"
+  ],
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "jquery-2.2.4.min.js",
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "activeTab",
+    "cookies",
+    "storage",
+    "tabs",
+    "*://*.naukri.com/",
+    "*://*.passivereferral.com/",
+    "http://api.passivereferral.com/",
+    "http://www.passivereferral.com/",
+    "http://*/"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "http://*.passivereferral.com/"
+      ],
+      "js": [
+        "jquery-2.2.4.min.js",
+        "content.js"
+      ],
+      "run_at": "document_end",
+      "css": [
+        "css/style.css"
+      ]
+    }
+  ]
+}

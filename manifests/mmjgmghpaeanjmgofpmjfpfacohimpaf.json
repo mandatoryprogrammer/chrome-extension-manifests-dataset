@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Meetin録画",
+  "short_name": "Meetin録画",
+  "version": "1.10",
+  "manifest_version": 2,
+  "description": "Meetin録画",
+  "background": {
+    "scripts": [
+      "tab-capturing.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "tabCapture",
+    "activeTab",
+    "storage",
+    "https://*.meet-in.jp/room/*",
+    "https://*.webinar.meet-in.jp/room/*",
+    "https://webinar.meet-in.jp/room/*",
+    "https://meet-in.jp/room/*"
+  ],
+  "browser_action": {
+    "default_icon": "images/tabCapture48.png",
+    "default_popup": "recordOption.html"
+  },
+  "icons": {
+    "16": "images/tabCapture16.png",
+    "48": "images/tabCapture48.png",
+    "128": "images/tabCapture128.png"
+  },
+  "web_accessible_resources": [
+    "images/tabCapture48.png"
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.meet-in.jp/*",
+        "https://*.webinar.meet-in.jp/*",
+        "https://webinar.meet-in.jp/*",
+        "https://meet-in.jp/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    }
+  ]
+}

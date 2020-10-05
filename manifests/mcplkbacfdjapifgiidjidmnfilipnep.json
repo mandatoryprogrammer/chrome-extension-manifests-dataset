@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Tracxn Extension",
+  "type": "chrome",
+  "version": "7.0",
+  "manifest_version": 2,
+  "description": "One-click snapshot of millions of companies",
+  "icons": {
+    "16": "icons/16.png",
+    "128": "icons/128.png"
+  },
+  "background": {
+    "scripts": [
+      "scripts/constants.js",
+      "scripts/backgroundEvents.js",
+      "scripts/rightClick.js",
+      "scripts/codePull.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "unlimitedStorage",
+    "contextMenus",
+    "activeTab",
+    "background",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "js": [
+        "scripts/constants.js",
+        "scripts/pageInfo.js",
+        "scripts/frameRenderer.js"
+      ],
+      "matches": [
+        "*://*/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "popup.html"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/19.png",
+      "38": "icons/38.png"
+    },
+    "default_title": "Tracxn"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://cdn.tracxn.com; object-src 'self'"
+}

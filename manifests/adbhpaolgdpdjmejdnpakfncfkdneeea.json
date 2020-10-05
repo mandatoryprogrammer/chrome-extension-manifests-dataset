@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Git-Splainin",
+  "description": "You've got some git-splainin' to do",
+  "version": "1.0.0",
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "icons": {
+    "48": "vendor/octicons/pr48.png",
+    "128": "vendor/octicons/pr128.png"
+  },
+  "page_action": {
+    "default_icon": {
+      "19": "vendor/octicons/pr19.png",
+      "38": "vendor/octicons/pr38.png"
+    },
+    "default_title": "git-splainin: Git PR template"
+  },
+  "options_ui": {
+    "page": "html/options.html",
+    "chrome_style": false,
+    "open_in_tab": true
+  },
+  "permissions": [
+    "http://*/",
+    "https://*/",
+    "tabs",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://github.com/*"
+      ],
+      "js": [
+        "fill-pull-body.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

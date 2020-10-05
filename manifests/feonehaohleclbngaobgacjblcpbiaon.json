@@ -1,0 +1,84 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_appname__",
+  "short_name": "__MSG_shortname__",
+  "default_locale": "en",
+  "version": "4.0.0",
+  "description": "__MSG_description__",
+  "minimum_chrome_version": "49",
+  "background": {
+    "page": "background.html",
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "notesheet-16.png",
+      "32": "notesheet-32.png",
+      "64": "notesheet-64.png"
+    },
+    "default_popup": "popup.html",
+    "default_title": "NoteSheet"
+  },
+  "permissions": [
+    "http://*/",
+    "https://*/",
+    "tabs",
+    "activeTab",
+    "storage",
+    "unlimitedStorage",
+    "identity",
+    "contextMenus",
+    "notifications"
+  ],
+  "icons": {
+    "16": "notesheet-16.png",
+    "48": "notesheet-logo-48.png",
+    "128": "notesheet-logo-128.png"
+  },
+  "web_accessible_resources": [
+    "extension.css"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://editoy.com/posts/posting/*",
+      "*://editoy.com/answerpost/*",
+      "*://oong.ga/posts/posting/*",
+      "*://oong.ga/answerpost/*"
+    ]
+  },
+  "oauth2": {
+    "client_id": "160459627590-83p9qd1c0blra4dnvntsei0u20o127l9.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/drive",
+      "https://www.googleapis.com/auth/spreadsheets",
+      "https://www.googleapis.com/auth/userinfo.email"
+    ]
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "run_at": "document_end",
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "extension.css"
+      ],
+      "js": [
+        "content_script.js"
+      ]
+    },
+    {
+      "all_frames": true,
+      "matches": [
+        "https://editoy.com/oauth2callback/*"
+      ],
+      "js": [
+        "fallback-auth.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

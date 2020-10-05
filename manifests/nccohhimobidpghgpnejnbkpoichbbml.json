@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Reading Time",
+  "short_name": "Reading Time",
+  "description": "This extension shows the estimated reading time for a web page",
+  "version": "1.1.1",
+  "browser_action": {
+    "default_popup": "popupPage/popup.html",
+    "default_title": "Reading Time"
+  },
+  "icons": {
+    "16": "assets/timereadicon16.png",
+    "32": "assets/timereadicon32.png",
+    "48": "assets/timereadicon48.png",
+    "128": "assets/timereadicon128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "*://*.youtube.com/*"
+      ],
+      "js": [
+        "extensionSettings.js",
+        "readEstimator/Readability.js",
+        "readEstimator/estimateTime.js",
+        "readEstimator/mainContentScript.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "assets/*.*"
+  ],
+  "options_ui": {
+    "page": "optionsPage/options.html",
+    "chrome_style": true
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Crelate Talent Chrome Extension",
+  "short_name": "Crelate",
+  "version": "3.1.8",
+  "description": "Uses text from a web page to create a contact record inside of Crelate Talent",
+  "icons": {
+    "16": "img/icon16.png",
+    "32": "img/icon32.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_title": "Crelate Contact Import Tool"
+  },
+  "permissions": [
+    "https://*/*",
+    "http://*/*",
+    "storage",
+    "tabs"
+  ],
+  "background": {
+    "scripts": [
+      "js/events.js"
+    ],
+    "persistent": false
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "js": [
+        "js/content.js",
+        "scripts/jszip.min.js"
+      ]
+    }
+  ],
+  "author": "Crelate Development Team",
+  "web_accessible_resources": [
+    "sidebar.html"
+  ]
+}

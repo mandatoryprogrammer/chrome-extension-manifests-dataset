@@ -1,0 +1,78 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Email Tracking Tech",
+  "short_name": "Email Tracker",
+  "description": "Track your gmail emails to know if your emails have been read",
+  "version": "2.3.5",
+  "icons": {
+    "128": "images/icon128.png"
+  },
+  "manifest_version": 2,
+  "minimum_chrome_version": "29",
+  "browser_action": {
+    "default_icon": "images/icon128.png",
+    "default_title": "BRW"
+  },
+  "background": {
+    "scripts": [
+      "js/jquery.min.js",
+      "api.js",
+      "gmail.bg.js",
+      "fcm.bg.js",
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "gcm",
+    "*://*.googleapis.com/*",
+    "*://*.googleusercontent.com/*",
+    "*://brwwebsite.com/*",
+    "*://mail.google.com/*",
+    "*://inbox.google.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://mail.google.com/*",
+        "*://inbox.google.com/*"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "js/inboxsdk.js",
+        "js/moment.min.js",
+        "lcnc.js",
+        "api.js",
+        "cache.js",
+        "inboxsdk.content.js"
+      ],
+      "css": [
+        "css/gmail.inject.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://www.private-cloud-app.com/*"
+      ],
+      "js": [
+        "tracker.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "images/*",
+    "js/jquery.min.js",
+    "js/gmail.js",
+    "js/moment.min.js",
+    "gmail.inject.js"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://mail.google.com/*"
+    ]
+  }
+}

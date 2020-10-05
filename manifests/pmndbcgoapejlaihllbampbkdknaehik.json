@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Graffiti",
+  "short_name": "Comment in Graffiti style on any site!",
+  "description": "Users comment with digital Graffiti on any website using text, images & drawing. Leave your mark",
+  "version": "2018.6.6.2",
+  "author": "Graffiti Inc",
+  "icons": {
+    "16": "assets/images/icons/icon16.png",
+    "48": "assets/images/icons/icon48.png",
+    "128": "assets/images/icons/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "assets/images/g_logo.png",
+    "default_title": "Create Graffiti!",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "environment.js",
+      "datastore.js",
+      "background.js",
+      "crypto.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "http://localhost:3000/*",
+    "storage",
+    "http://*/*",
+    "https://*/*",
+    "webNavigation",
+    "contextMenus"
+  ],
+  "web_accessible_resources": [
+    "index.html",
+    "assets/popup.css"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.graffitiover.com/*"
+    ]
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval' 'sha256-sOV6zXS3gi5dsojItJ6z2wgmS/iVjopBBnRpXgSs0RY=' 'sha256-7wKHcdQn7njQ9/wmQNTJdSYLfUZp3xnjXbt+ekln+B4=' 'sha256-OLYhDIOWjnDpwXH8CA4cvTnO8hAtfAP7CDUXcjaTEzs=' 'sha256-hwVDcMLLiW5BUAuE8eCQugyc0IVrTCjc3lamvNOHgac=' 'sha256-p/xJWk5zr5PuCIn8rrg80CccH68F09r6YK2X7EOtEIQ=' 'sha256-z5aPHI39jnZIYhMAyMLXTvFPk+HsCKdesOJ9UT53eQs=' 'sha256-P69DoBIDzechRQvSN3WvngTrSZHiynB6Qzq5Fff+oV0=' https://www.google-analytics.com https://ssl.google-analytics.com https://cdnjs.cloudflare.com/ajax/libs/rollbar.js/2.4.0/rollbar.min.js; object-src 'self'"
+}

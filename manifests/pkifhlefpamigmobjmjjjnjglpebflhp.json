@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Kiwi Conversations",
+  "short_name": "Kiwi",
+  "description": "Kiwi Conversations searches community sites to find forum comment threads about the url you're visiting.",
+  "version": "1.2.6",
+  "permissions": [
+    "tabs",
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "vendor/gApiLoader.js",
+      "vendor/jquery-2.1.4.min.js",
+      "vendor/Underscore1-8-3.js",
+      "vendor/algoliasearch.min.js",
+      "vendor/CryptoJS.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "vendor/jquery-2.1.4.min.js",
+        "popup.js",
+        "vendor/Underscore1-8-3.js",
+        "vendor/bootstrap-3.3.5-dist/js/bootstrap.min.js",
+        "vendor/behigh-bootstrap_dropdown_enhancement/js/dropdowns-enhancement.js"
+      ],
+      "matches": [
+        "https://hn.algolia.com/*",
+        "https://www.reddit.com/submit.json*",
+        "https://www.reddit.com/api/*",
+        "https://news.ycombinator.com/*",
+        "http://news.ycombinator.com/*",
+        "https://api.producthunt.com/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://www.google.com/uds/?file=search&v=1; object-src 'self'",
+  "browser_action": {
+    "name": "Kiwi",
+    "default_icon": "kiwiFavico128.png",
+    "default_popup": "popup.html"
+  }
+}

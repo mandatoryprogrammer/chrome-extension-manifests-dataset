@@ -1,0 +1,73 @@
+{
+  "manifest_version": 2,
+  "background": {
+    "scripts": [
+      "JavaScript/jquery.min.js",
+      "JavaScript/constants.js",
+      "JavaScript/TrackTiming.js",
+      "JavaScript/background.js",
+      "JavaScript/list-xss.js",
+      "JavaScript/list-localblock.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "Images/icons/icon16.png",
+    "default_popup": "popup.html",
+    "default_title": "__MSG_appDefaultTitle__"
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "JavaScript/constants.js",
+        "JavaScript/jquery.min.js",
+        "JavaScript/check.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "JavaScript/grafo.js"
+      ],
+      "matches": [
+        "file://*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "content_security_policy": "script-src 'self';  object-src 'self'",
+  "description": "__MSG_appDescription__",
+  "icons": {
+    "128": "Images/icons/icon128.png",
+    "16": "Images/icons/icon16.png",
+    "48": "Images/icons/icon48.png"
+  },
+  "incognito": "split",
+  "minimum_chrome_version": "26",
+  "name": "__MSG_appName__",
+  "default_locale": "es",
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "*://*/",
+    "storage",
+    "unlimitedStorage",
+    "notifications"
+  ],
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "0.7",
+  "web_accessible_resources": [
+    "blocked.html"
+  ],
+  "sandbox": {
+    "pages": [
+      "https://banamex.com/*",
+      "https://www.bancanetempresarial.banamex.com.mx*"
+    ]
+  }
+}

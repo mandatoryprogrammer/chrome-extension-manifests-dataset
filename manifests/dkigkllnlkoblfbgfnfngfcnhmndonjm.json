@@ -1,0 +1,69 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Rather",
+  "version": "11.1",
+  "description": "Replace the things you hate on social media with things you'd rather see, like cats.",
+  "homepage_url": "http://www.getrather.com",
+  "icons": {
+    "16": "assets/images/icons/icon_bg_16.png",
+    "48": "assets/images/icons/icon_bg_48.png",
+    "128": "assets/images/icons/icon_bg_128.png"
+  },
+  "permissions": [
+    "notifications",
+    "storage",
+    "*://*/*"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "assets/images/icons/icon19.png",
+      "38": "assets/images/icons/icon38.png"
+    },
+    "default_title": "Rather",
+    "default_popup": "rather.html"
+  },
+  "background": {
+    "scripts": [
+      "assets/js/plugins.js",
+      "assets/js/main.js",
+      "assets/js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.facebook.com/*",
+        "*://facebook.com/*"
+      ],
+      "css": [
+        "assets/css/inject.css"
+      ],
+      "js": [
+        "assets/js/plugins.js",
+        "assets/js/main.js",
+        "assets/js/inject.js",
+        "assets/js/inject.facebook.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.twitter.com/*",
+        "*://twitter.com/*"
+      ],
+      "css": [
+        "assets/css/inject.css"
+      ],
+      "js": [
+        "assets/js/plugins.js",
+        "assets/js/main.js",
+        "assets/js/inject.js",
+        "assets/js/inject.twitter.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "offline_enabled": false,
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://platform.twitter.com https://connect.facebook.net; object-src 'self'"
+}

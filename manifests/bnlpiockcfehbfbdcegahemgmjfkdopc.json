@@ -1,0 +1,110 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Vudu Catalog",
+  "version": "2.4.1",
+  "description": "Creates a list of the movies you own",
+  "background": {
+    "page": "background.html"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "https://www.vudu.com/*"
+  ],
+  "browser_action": {
+    "default_icon": "image/logo_128.png"
+  },
+  "icons": {
+    "128": "image/logo_128.png",
+    "48": "image/logo_48.png",
+    "16": "image/logo_16.png"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "script/vuduredeem.js"
+      ],
+      "matches": [
+        "*://*.vudu.com/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "js": [
+        "script/vudu.js",
+        "script/vuduindexeddb.js",
+        "script/vuduredeem.js"
+      ],
+      "matches": [
+        "*://*.vudu.com/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "script/dma.js"
+      ],
+      "matches": [
+        "*://*.disneymoviesanywhere.com/my-collection/feature*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "script/ma.js"
+      ],
+      "matches": [
+        "*://*.moviesanywhere.com/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "script/fandangonow.js",
+        "script/fandangonowindexeddb.js"
+      ],
+      "matches": [
+        "*://*.fandangonow.com/library/movies*",
+        "*://*.fandangonow.com/library/tvshows*",
+        "*://*.fandangonow.com/library/uv*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "script/fandangonowindexeddb.js",
+        "script/fandangonowdetails.js"
+      ],
+      "matches": [
+        "*://*.fandangonow.com/details/movie/*",
+        "*://*.fandangonow.com/details/uv/*",
+        "*://*.fandangonow.com/details/series/*"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "js": [
+        "script/googleplay.js"
+      ],
+      "matches": [
+        "*://play.google.com/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "script/googleplayfs.js"
+      ],
+      "matches": [
+        "*://play.google.com/store/movies/details/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  }
+}

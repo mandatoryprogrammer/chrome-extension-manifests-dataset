@@ -1,0 +1,195 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "version": "9.3.1",
+  "version_name": "9.3.1",
+  "manifest_version": 2,
+  "description": "__MSG_appDescription__",
+  "icons": {
+    "16": "images/icon-16.png",
+    "32": "images/icon-32.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "images/icon-16.png",
+      "32": "images/icon-32.png",
+      "48": "images/icon-48.png",
+      "128": "images/icon-128.png"
+    },
+    "default_title": "snapADDY Grabber"
+  },
+  "omnibox": {
+    "keyword": "snapADDY Grabber"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.google.de/search?snapaddy=leads*"
+      ],
+      "js": [
+        "scripts/leads_contentscript.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "scripts/jquery.min.js",
+        "scripts/contentscript.js",
+        "scripts/open-grabber.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "scripts/crawl-button.js"
+      ],
+      "css": [
+        "styles/crawl-button.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "https://www.google.de/search*",
+        "https://www.google.com/search*"
+      ],
+      "js": [
+        "scripts/imageGrabber.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://www.snapaddy.com/de/index.html*"
+      ],
+      "js": [
+        "scripts/jquery.min.js",
+        "scripts/OAuth_Contentscript.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://www.snapaddy.com/xing-login.html?*"
+      ],
+      "js": [
+        "scripts/jquery.min.js",
+        "scripts/xing_OAuth_Contentscript.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "scripts/jquery.min.js",
+        "scripts/sidebar.js"
+      ],
+      "css": [
+        "styles/sidebar.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://*.pipedrive.com/*"
+      ],
+      "js": [
+        "scripts/jquery.min.js",
+        "scripts/updaterButtons/pipedrive.js"
+      ],
+      "css": [
+        "scripts/updaterButtons/pipedrive.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://*.salesforce.com/*"
+      ],
+      "js": [
+        "scripts/jquery.min.js",
+        "scripts/updaterButtons/salesforce.js"
+      ],
+      "css": [
+        "scripts/updaterButtons/salesforce.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://*.lightning.force.com/*"
+      ],
+      "js": [
+        "scripts/jquery.min.js",
+        "scripts/updaterButtons/salesforce-lightning.js"
+      ],
+      "css": [
+        "scripts/updaterButtons/salesforce-lightning.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://app.close.io/*",
+        "https://app.close.com/*"
+      ],
+      "js": [
+        "scripts/updaterButtons/closeio.js"
+      ],
+      "css": [
+        "scripts/updaterButtons/closeio.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.linkedin.com/*=snap"
+      ],
+      "js": [
+        "scripts/jquery.min.js",
+        "scripts/linkedin_iframe_contentscript.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "permissions": [
+    "<all_urls>",
+    "tabs",
+    "storage",
+    "contextMenus",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "optional_permissions": [
+    "cookies"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://s3.amazonaws.com https://www.google-analytics.com https://widget.intercom.io https://js.intercomcdn.com https://cdn.userlane.com; object-src 'self'",
+  "web_accessible_resources": [
+    "popup_dist/index.html"
+  ]
+}

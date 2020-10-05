@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "GitHub Remarks",
+  "manifest_version": 2,
+  "version": "1.2.1",
+  "description": "a chrome extension that can give github repos your own remarks",
+  "icons": {
+    "16": "icons/icon_16.png",
+    "48": "icons/icon_48.png",
+    "128": "icons/icon_128.png"
+  },
+  "browser_action": {
+    "default_title": "",
+    "default_icon": {
+      "19": "icons/icon_19.png",
+      "38": "icons/icon_38.png"
+    }
+  },
+  "permissions": [
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://github.com/*/*"
+      ],
+      "js": [
+        "content-scripts/repoDetail.js"
+      ],
+      "css": [],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://github.com/*"
+      ],
+      "js": [
+        "lib/jquery.min.js",
+        "lib/list.min.js",
+        "content-scripts/stars.js"
+      ],
+      "css": [],
+      "run_at": "document_end"
+    }
+  ]
+}

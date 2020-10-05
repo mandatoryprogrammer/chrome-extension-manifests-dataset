@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Mixcloud (with) Tracklist",
+  "version": "2.1.0",
+  "description": "Display tracklists on Mixcloud",
+  "icons": {
+    "16": "./icons/icon16.png",
+    "32": "./icons/icon32.png",
+    "48": "./icons/icon48.png",
+    "96": "./icons/icon96.png",
+    "128": "./icons/icon128.png"
+  },
+  "applications": {
+    "gecko": {
+      "strict_min_version": "58.0"
+    }
+  },
+  "permissions": [
+    "webRequest",
+    "tabs",
+    "http://*.mixcloud.com/*",
+    "https://*.mixcloud.com/*",
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "./background_scripts/index.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.mixcloud.com/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "./content_script/index.js"
+      ]
+    }
+  ],
+  "options_ui": {
+    "page": "./settings/settings.html"
+  }
+}

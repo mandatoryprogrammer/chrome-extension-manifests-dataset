@@ -1,0 +1,84 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Truly Media",
+  "short_name": "truly.media",
+  "version": "1.6.0",
+  "icons": {
+    "64": "img/logo-64.png",
+    "128": "img/logo-128.png"
+  },
+  "description": "Chrome extension for the Truly Media platform. Used for aggregation of Social Media content in Truly Media.",
+  "browser_action": {
+    "default_title": "Truly Media",
+    "default_icon": "img/logo-32.png"
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "storage",
+    "*://*/*",
+    "*://api.twitter.com/*",
+    "*://squall-4.atc.gr/*",
+    "*://squall-5.atc.gr/*",
+    "*://storm-8.atc.gr/*",
+    "*://storm-9.atc.gr/*"
+  ],
+  "background": {
+    "scripts": [
+      "popup/background.js"
+    ],
+    "persistent": true
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://oauth.io/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://twitter.com/*",
+        "*://tweetdeck.twitter.com/*",
+        "*://www.youtube.com/*",
+        "*://www.facebook.com/*"
+      ],
+      "js": [
+        "node_modules/jquery/dist/jquery.js",
+        "node_modules/jquery-modal/jquery.modal.min.js",
+        "node_modules/jquery-ui-dist/jquery-ui.min.js",
+        "node_modules/chosen-js/chosen.jquery.js",
+        "node_modules/sweetalert/dist/sweetalert.min.js",
+        "content/lib/socket.io-2.0.1.js",
+        "content/js/service/injector.class.js",
+        "content/js/service/template.class.js",
+        "content/js/service/socket.class.js",
+        "content/js/service/api.class.js",
+        "content/js/service/modal.class.js",
+        "content/js/social/twitter.class.js",
+        "content/js/social/tweetdeck.class.js",
+        "content/js/social/youtube.class.js",
+        "content/js/social/facebook.class.js",
+        "content/js/scope.js",
+        "content/js/main.js"
+      ],
+      "css": [
+        "node_modules/jquery-ui-dist/jquery-ui.min.css",
+        "node_modules/jquery-modal/jquery.modal.min.css",
+        "node_modules/sweetalert/dist/sweetalert.css",
+        "content/css/content.css",
+        "content/css/font-awesome-4.7.0/css/font-awesome.min.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "node_modules/sweetalert/dist/sweetalert.min.js",
+    "node_modules/sweetalert/dist/sweetalert.css",
+    "content/templates/modal.html",
+    "content/css/font-awesome-4.7.0/fonts/fontawesome-webfont.woff",
+    "content/css/roboto/latin.woff2",
+    "content/css/roboto/latin-ext.woff2",
+    "img/*.*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "manifest_version": 2
+}

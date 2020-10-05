@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Back to the Comments - Hacker News",
+  "description": "Adds a page action to hacker news posts that pops comments in when clicked.",
+  "version": "0.3.2",
+  "permissions": [
+    "tabs",
+    "<all_urls>",
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "*://news.ycombinator.com/item?id=*"
+  ],
+  "page_action": {
+    "default_icon": {
+      "19": "images/arrow-19.png",
+      "38": "images/arrow-38.png"
+    }
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://news.ycombinator.com/*"
+      ],
+      "js": [
+        "hackernews.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://hn.algolia.com/*"
+      ],
+      "js": [
+        "algolia.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "inject.js",
+    "comments.css"
+  ]
+}

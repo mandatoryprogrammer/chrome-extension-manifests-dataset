@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Tidio",
+  "description": "With this extension, you will remain online when you are using Google Chrome.",
+  "version": "4.4.2",
+  "minimum_chrome_version": "46",
+  "permissions": [
+    "tabs",
+    "notifications",
+    "storage"
+  ],
+  "browser_action": {
+    "default_icon": "icons/icon-32.png"
+  },
+  "omnibox": {
+    "keyword": "chat"
+  },
+  "background": {
+    "scripts": [
+      "bin/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.tidiochat.com/panel*"
+      ],
+      "js": [
+        "./bin/content-panel.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "https://www.tidiochat.com/*"
+      ],
+      "exclude_matches": [
+        "https://www.tidiochat.com/panel*"
+      ],
+      "js": [
+        "./bin/content-main.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "64": "icons/icon-64.png",
+    "128": "icons/icon-128.png"
+  },
+  "web_accessible_resources": [
+    "icons/icon-48.png"
+  ],
+  "content_security_policy": "script-src 'self' 'sha256-6Q3yU29EdSAW2xgjvJ+zT14FBsKJ2pYSYY8AiMirS2k='; object-src 'self'"
+}

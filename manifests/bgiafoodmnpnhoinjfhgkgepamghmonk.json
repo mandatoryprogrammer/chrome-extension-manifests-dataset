@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "ClickBlock",
+  "description": "Notifies the user of clickbait articles",
+  "version": "1.0",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_title": "ClickBlock"
+  },
+  "background": {
+    "scripts": [
+      "jquery.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.facebook.com/*"
+      ],
+      "js": [
+        "jquery.js",
+        "underscore.js",
+        "replace.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.facebook.com/*"
+      ],
+      "css": [
+        "style.css"
+      ]
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "https://ajax.googleapis.com/",
+    "http://localhost:5000/*",
+    "https://cryptic-shelf-41509.herokuapp.com/verifybait"
+  ],
+  "content_security_policy": "script-src 'self' https://cryptic-shelf-41509.herokuapp.com/verifybait; object-src 'self'"
+}

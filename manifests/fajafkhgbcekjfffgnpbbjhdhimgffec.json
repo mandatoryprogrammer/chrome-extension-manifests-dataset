@@ -1,0 +1,78 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "version": "7.1.15.0",
+  "description": "__MSG_appDescription__",
+  "homepage_url": "https://mallbery.com/",
+  "default_locale": "en",
+  "author": "Mallbery",
+  "manifest_version": 2,
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "webNavigation",
+    "storage",
+    "webRequestBlocking",
+    "<all_urls>",
+    "cookies",
+    "management",
+    "unlimitedStorage"
+  ],
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "js": [
+        "vendors/bundle.js",
+        "content/bundle.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_idle",
+      "match_about_blank": true
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "content_2/bundle.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start",
+      "match_about_blank": true
+    }
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "background": {
+    "scripts": [
+      "vendors/bundle.js",
+      "bg/bundle.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "images/toolbarIcon/48x48.png",
+    "default_title": "__MSG_appName__"
+  },
+  "icons": {
+    "48": "images/48x48.png"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "web_accessible_resources": [
+    "content/*.css",
+    "content/*.svg",
+    "popup/*css",
+    "*.css",
+    "images",
+    "*.png"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://*.mallbery.com/*"
+    ]
+  }
+}

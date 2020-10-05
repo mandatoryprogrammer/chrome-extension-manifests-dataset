@@ -1,0 +1,82 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Spalding Tab",
+  "short_name": "STab",
+  "author": "Cosmic Web Apps",
+  "description": "Spalding Tab replaces your NewTab page with one specifically focussed on giving you the latest Spalding news.",
+  "version": "3.0.0",
+  "manifest_version": 2,
+  "offline_enabled": true,
+  "homepage_url": "http://brycecary.design/spalding-ext/",
+  "icons": {
+    "128": "logo-128.png",
+    "256": "logo.png"
+  },
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  },
+  "permissions": [
+    "background",
+    "cookies",
+    "identity",
+    "notifications",
+    "storage"
+  ],
+  "browser_action": {
+    "default_title": "Spalding Tab",
+    "default_popup": "popup.html"
+  },
+  "web_accessible_resources": [
+    "logo.png"
+  ],
+  "background": {
+    "scripts": [
+      "socket.io.js",
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://netclassroom.archbishopspalding.org/"
+      ],
+      "js": [
+        "netclassroom/reload.min.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://netclassroom.archbishopspalding.org/NetClassroom7/*"
+      ],
+      "js": [
+        "netclassroom/dark-theme.min.js"
+      ],
+      "css": [
+        "netclassroom/dark-theme.min.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://archbishopspalding.myschoolapp.com/*"
+      ],
+      "js": [
+        "myschoolapp/dark-theme.js"
+      ],
+      "css": [
+        "myschoolapp/dark-theme.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://archbishopspalding.learning.powerschool.com/do/account/login*"
+      ],
+      "js": [
+        "psl/better-login.min.js"
+      ],
+      "css": [
+        "psl/better-login.min.css"
+      ]
+    }
+  ]
+}

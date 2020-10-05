@@ -1,0 +1,53 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Ven",
+  "description": "See political slant in your Facebook feed.",
+  "version": "1.1",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "notifications",
+    "cookies",
+    "http://*/",
+    "https://*/",
+    "contextMenus"
+  ],
+  "background": {
+    "scripts": [
+      "bg.js"
+    ],
+    "persistent": false
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com/ga.js; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.facebook.com/*",
+        "https://www.facebook.com/*"
+      ],
+      "exclude_matches": [],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "main.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "browser_action": {
+    "default_title": "Ven changes in color as you browse.\nClick for more info.",
+    "default_icon": "images/transparent-circle.png"
+  },
+  "manifest_version": 2,
+  "web_accessible_resources": [
+    "images/*.png",
+    "images/*.svg"
+  ],
+  "icons": {
+    "16": "images/ven-16.png",
+    "32": "images/ven-32.png",
+    "48": "images/ven-48.png",
+    "128": "images/ven-128.png"
+  }
+}

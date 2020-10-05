@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Get HLS from Youtbe",
+  "version": "1.0",
+  "description": "Retrieves the HLS URL from live Youtube streams.",
+  "icons": {
+    "16": "images/icon/24.png",
+    "48": "images/icon/48.png",
+    "128": "images/icon/128.png"
+  },
+  "permissions": [
+    "declarativeContent",
+    "background",
+    "tabs",
+    "clipboardRead",
+    "clipboardWrite"
+  ],
+  "page_action": {
+    "default_icon": {
+      "16": "images/icon/24.png",
+      "24": "images/icon/24.png",
+      "32": "images/icon/48.png"
+    },
+    "default_title": "Get HLS",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "scripts/event.js"
+    ],
+    "persistent": false
+  },
+  "web_accessible_resources": [
+    "images/*",
+    "scripts/*",
+    "styles/*",
+    "https://www.youtube.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/watch*"
+      ],
+      "js": [
+        "scripts/jquery-3.1.1.min.js",
+        "scripts/content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

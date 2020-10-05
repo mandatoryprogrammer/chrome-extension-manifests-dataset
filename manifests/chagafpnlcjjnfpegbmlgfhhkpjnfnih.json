@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Know It",
+  "version": "1.0.3",
+  "manifest_version": 2,
+  "description": "Know it, know more! Be updated everyday, at your convenience.",
+  "homepage_url": "http://www.newtabtools.com/",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "js/config.js",
+      "js/analytics-node.js",
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "storage",
+    "topSites",
+    "history",
+    "unlimitedStorage",
+    "*://*.newtabtools.com/*"
+  ],
+  "chrome_settings_overrides": {
+    "search_provider": {
+      "name": "newtabtools",
+      "keyword": "newtabtools.com",
+      "favicon_url": "http://newtabtools.com/assets/images/favicon.png",
+      "search_url": "http://newtabtools.com/search/bing?sb=1&r=1&q={searchTerms}",
+      "suggest_url": "http://newtabtools.com/search/suggest?q={searchTerms}&t=ss",
+      "image_url": "http://newtabtools.com/search/bing?sb=1&r=1&q={searchTerms}&search_type=image",
+      "encoding": "UTF-8",
+      "is_default": true
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.bing.com/*",
+        "https://*.bing.com/*",
+        "http://*.newtabtools.com/*",
+        "https://*.newtabtools.com/*"
+      ],
+      "js": [
+        "js/config.js",
+        "js/checker.js"
+      ]
+    }
+  ],
+  "chrome_url_overrides": {
+    "newtab": "new_tab.html"
+  }
+}

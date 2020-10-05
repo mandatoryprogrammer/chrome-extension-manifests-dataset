@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Investor Intel",
+  "description": "Look at investor reviews while browsing the web!",
+  "version": "1.4",
+  "browser_action": {
+    "default_icon": "img/app/logo.png",
+    "default_popup": "popup.html",
+    "default_title": "Know Your VC"
+  },
+  "content_scripts": [
+    {
+      "exclude_matches": [
+        "*://knowyourvc.com/*"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [
+        "style.css"
+      ],
+      "js": [
+        "js/libraries/jquery/jquery.min.js",
+        "js/libraries/algolia/algolia.min.js",
+        "js/libraries/compromise/compromise.min.js",
+        "js/content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "<all_urls>",
+    "activeTab",
+    "storage",
+    "http://*/",
+    "http://ec2-18-216-2-35.us-east-2.compute.amazonaws.com/*"
+  ]
+}

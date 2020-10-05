@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "version": "1.0.17",
+  "name": "__MSG_appName__",
+  "description": "__MSG_appDesc__",
+  "default_locale": "en",
+  "offline_enabled": false,
+  "icons": {
+    "128": "./images/icon_128.png",
+    "48": "./images/icon_48.png",
+    "16": "./images/icon_16.png"
+  },
+  "browser_action": {
+    "default_title": "Guarda wallet",
+    "default_icon": "images/icon_128.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "src/background.js"
+    ]
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "./src/content.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "images/*",
+    "src/inject.js"
+  ],
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage"
+  ]
+}

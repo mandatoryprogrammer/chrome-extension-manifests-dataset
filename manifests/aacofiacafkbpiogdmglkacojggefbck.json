@@ -1,0 +1,39 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "PricePal",
+  "description": "Tool that compares prices between European Amazon sites",
+  "version": "0.0.0.2",
+  "manifest_version": 2,
+  "browser_action": {
+    "default_popup": "index.html"
+  },
+  "icons": {
+    "16": "./imgs/logo-small.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.amazon.de/*",
+        "*://www.amazon.fr/*",
+        "*://www.amazon.it/*",
+        "*://www.amazon.es/*",
+        "*://www.amazon.co.uk/*"
+      ],
+      "js": [
+        "app/content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "background"
+  ],
+  "background": {
+    "scripts": [
+      "app/background.js"
+    ],
+    "persistent": false
+  }
+}

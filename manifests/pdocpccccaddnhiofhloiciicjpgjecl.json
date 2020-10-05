@@ -1,0 +1,41 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "vdom devtools",
+  "version": "0.1.1",
+  "description": "Chrome devtools extension for debugging vdom applications.",
+  "manifest_version": 2,
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "web_accessible_resources": [
+    "devtools.html",
+    "devtools-background.html",
+    "build/backend.js"
+  ],
+  "devtools_page": "devtools-background.html",
+  "background": {
+    "scripts": [
+      "build/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "build/hook.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "file://*"
+  ]
+}

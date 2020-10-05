@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Jankteki",
+  "description": "An enhancement suite for jinteki.net",
+  "version": "0.6.7",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "page_action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": "icons/icon48.png"
+  },
+  "background": {
+    "scripts": [
+      "lib/models/User.js",
+      "lib/friends.js",
+      "background/eventPage.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.jinteki.net/*",
+        "https://www.jinteki.net/*",
+        "https://jinteki.zaroth.net/*"
+      ],
+      "js": [
+        "lib/models/User.js",
+        "lib/friends.js",
+        "lib/options.js",
+        "inline/lobby.js",
+        "inline/injector.js",
+        "inline/options.js"
+      ],
+      "css": [
+        "inline/jankteki.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "options_page": "options/options.html",
+  "web_accessible_resources": [
+    "inline/gameboard.js",
+    "inline/widenHq.js"
+  ],
+  "permissions": [
+    "contextMenus",
+    "declarativeContent",
+    "notifications",
+    "storage",
+    "http://jinteki.net/*",
+    "https://jinteki.net/*"
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Dealer Inspire Conversations - Notifications",
+  "description": "This extension provides advanced notifications for Dealer Inspire Conversations",
+  "version": "2.3.0",
+  "browser_action": {
+    "default_icon": "images/icon.png"
+  },
+  "permissions": [
+    "tabs",
+    "notifications"
+  ],
+  "background": {
+    "scripts": [
+      "scripts/jquery-2.1.4.min.js",
+      "scripts/bootstrap.min.js",
+      "scripts/moment.min.js",
+      "scripts/background.js",
+      "scripts/messages.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "file://*/alert.html"
+      ],
+      "js": [
+        "scripts/content-offer.js",
+        "scripts/content-message.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "installation-check.txt"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.dealerinspire.com/*",
+      "*://localhost/*",
+      "*://conversations-web/*"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'"
+}

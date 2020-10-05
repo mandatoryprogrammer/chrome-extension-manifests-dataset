@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "YouTube Music Player and Picture in Picture",
+  "short_name": "YouTube Media Player",
+  "description": "Control YouTube Media Player without focusing on the YouTube page and Add the PinP mode to all sites.",
+  "author": "HTCom",
+  "version": "2.0.3",
+  "manifest_version": 2,
+  "permissions": [
+    "storage",
+    "tabs",
+    "activeTab",
+    "cookies",
+    "<all_urls>"
+  ],
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "common.js",
+      "ga.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.youtube.com/*"
+      ],
+      "js": [
+        "data/page.js",
+        "data/controls.js",
+        "data/no_buffer.js",
+        "data/quality.js",
+        "data/next_track.js",
+        "data/css.js",
+        "data/pinp.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "data/pinp.js"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "data/icons/16.png",
+    "32": "data/icons/32.png",
+    "48": "data/icons/48.png",
+    "64": "data/icons/64.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "data/icons/16.png",
+      "32": "data/icons/32.png",
+      "48": "data/icons/48.png",
+      "64": "data/icons/64.png"
+    },
+    "default_title": "Launch YouTube"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

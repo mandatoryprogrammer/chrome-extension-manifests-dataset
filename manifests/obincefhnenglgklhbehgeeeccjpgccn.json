@@ -1,0 +1,42 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Trello Feed",
+  "version": "1.1.1",
+  "description": "Have a full visibility of what is happening in Trello.",
+  "icons": {
+    "16": "icons/16x16.png",
+    "48": "icons/48x48.png",
+    "128": "icons/128x128.png"
+  },
+  "background": {
+    "page": "html/background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://trello.com/*"
+      ],
+      "js": [
+        "src/inject.js"
+      ],
+      "css": [
+        "css/modifiedBoards.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "html/app.html",
+    "icons/boards.white.svg",
+    "icons/feed.white.svg"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "browser_action": {},
+  "permissions": [
+    "https://trello.com/*",
+    "https://www.google-analytics.com/",
+    "storage",
+    "tabs",
+    "alarms"
+  ]
+}

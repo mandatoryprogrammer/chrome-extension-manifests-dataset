@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Smart Billboard",
+  "description": "为互联网上任意内容赋能，让其变成可以被拍卖的广告位。你的购买行为也将助力优质内容快速脱颖而出。",
+  "version": "1.1.1",
+  "manifest_version": 2,
+  "icons": {
+    "16": "icons/icon_16.png",
+    "48": "icons/icon_48.png",
+    "128": "icons/icon_128.png"
+  },
+  "browser_action": {
+    "default_title": "Smart Billboard",
+    "default_popup": "popup/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "chrome_style": true
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "storage",
+    "https://*.smartsignature.io/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://orange.xyz/*"
+      ],
+      "js": [
+        "popup/popup.js",
+        "popup/content.js"
+      ],
+      "css": [
+        "popup/content.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "icons/*"
+  ],
+  "homepage_url": "http://smartsignature.io"
+}

@@ -1,0 +1,105 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "InvoxMail",
+  "short_name": "InvoxMail",
+  "description": "Add notes to email threads in Gmail and Inbox.",
+  "version": "1.4.1",
+  "icons": {
+    "16": "image/icon_login_16.png",
+    "48": "image/icon_login_128.png",
+    "128": "image/icon_login_128.png"
+  },
+  "permissions": [
+    "https://api.invoxcontact.com/*",
+    "storage",
+    "notifications",
+    "activeTab",
+    "identity",
+    "https://www.googleapis.com/*",
+    "https://accounts.google.com/*",
+    "tabs",
+    "<all_urls>",
+    "alarms",
+    "management"
+  ],
+  "content_security_policy": "script-src 'self' https://*.invoxcontact.com; object-src 'self'",
+  "web_accessible_resources": [
+    "lib/jquery-3.1.0.min.js",
+    "lib/jquery.popupoverlay.js",
+    "common/gmail-sgn-dom.js",
+    "common/gmail-sgn-page.js",
+    "common/shared-common.js",
+    "lib/lru.js",
+    "lib/tinymce/tinymce.min.js",
+    "lib/tinymce/jquery.tinymce.min.js",
+    "lib/tinymce/plugins/lists/plugin.min.js",
+    "lib/tinymce/plugins/link/plugin.min.js",
+    "lib/tinymce/skins/lightgray/*",
+    "lib/tinymce/themes/modern/theme.min.js",
+    "page.js",
+    "lib/featherlight/featherlight.min.js",
+    "lib/featherlight/featherlight.min.css",
+    "css/style.css",
+    "css/bulma.min.css",
+    "image/color-picker.24.png",
+    "image/modal-loading.gif",
+    "image/search.24.png",
+    "image/logout.24.png",
+    "image/revoke.24.png",
+    "image/calendar.24.png",
+    "image/preferences.24.png",
+    "image/delete.24.png",
+    "image/chat.24.png",
+    "image/opportunity.svg",
+    "image/Google-Drive-icon.png",
+    "jquery.min.js",
+    "gmail.js",
+    "main.js",
+    "options.js",
+    "image/missing_icon.png",
+    "image/powered_by.png",
+    "image/right_icon.png",
+    "image/left_icon.png"
+  ],
+  "background": {
+    "scripts": [
+      "lib/jquery-3.1.0.min.js",
+      "common/shared-common.js",
+      "background.js",
+      "background-event.js",
+      "invoxNotes_bg.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*"
+      ],
+      "js": [
+        "lib/jquery-3.1.0.min.js",
+        "lib/jquery.popupoverlay.js",
+        "lib/jquery.simple-color.js",
+        "lib/featherlight/featherlight.min.js",
+        "common/shared-common.js",
+        "common/gmail-sgn-dom.js",
+        "invox-buttons.js",
+        "content.js"
+      ],
+      "css": [
+        "invoxNotes_styles.css",
+        "css/style.css",
+        "lib/featherlight/featherlight.min.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "browser_action": {
+    "default_icon": "image/icon_logged_out_24.png",
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhFzGHl8DJE3MH4qIpPgqO5hnYaNu4j3CXKC8AccdlPabNPSy1MwzKxbfi/Uj03d0iBx80+GduP6iLNHxj5zR2lCnHRO7/7w5cdeAeW74e50M3gErigyDIeK+2ieAgpYyx/Zu+WPn4wx0nHL++XUey+n3er58GFliFKRan8Bg7F9YkxN5/VEOxLvZoaV0Y8JoiWYUWjsAJsJE4Gx3YelVnpvvYzMDWWeGXpX+u6I0Scz2qoqjNxXrwAgOzX0Xv1OCk43i7+7/B+oTPs5a1yPR9TsPud2i1E+6pB12Mc6IZgB4ZtRH/OE6G2iUmjg+XLF8bBUX0jMPEIrtFXlns0IFOwIDAQAB"
+}

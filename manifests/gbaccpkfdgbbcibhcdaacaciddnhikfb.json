@@ -1,0 +1,101 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Betstudio Robot",
+  "short_name": "Betrobot",
+  "description": "Автоматическое размещение ставок по букмекерской вилке",
+  "version": "1.2",
+  "background": {
+    "scripts": [
+      "config.js",
+      "system/Storage.js",
+      "background/Service.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://positivebet.com/ru/bets/index",
+        "https://www.positivebet.com/ru/bets/index",
+        "https://positivebet.com/en/bets/index",
+        "https://www.positivebet.com/en/bets/index"
+      ],
+      "js": [
+        "/config.js",
+        "/lib/jquery-3.3.1.min.js",
+        "/system/Storage.js",
+        "/system/HTTP.js",
+        "/content/Positive/View.js",
+        "/common/Account.js",
+        "/content/Positive/Positive.js",
+        "/content/Positive/Betmanager.js",
+        "/content/Positive/Controller.js"
+      ],
+      "css": [
+        "/content/Positive/css/common.css",
+        "/content/Positive/css/execute.css",
+        "/content/Positive/css/startup.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://fonbet.com/*",
+        "https://www.fonbet.com/*"
+      ],
+      "js": [
+        "/config.js",
+        "/lib/jquery-3.3.1.min.js",
+        "/system/Storage.js",
+        "/system/HTTP.js",
+        "/content/Bookmaker/Bookmaker.js",
+        "/content/Bookmaker/Fonbet.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://marathonbet.com/*",
+        "https://www.marathonbet.com/*"
+      ],
+      "js": [
+        "/config.js",
+        "/lib/jquery-3.3.1.min.js",
+        "/system/Storage.js",
+        "/system/HTTP.js",
+        "/content/Bookmaker/Bookmaker.js",
+        "/content/Bookmaker/Marathon.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://olimp.com/*",
+        "https://www.olimp.com/*"
+      ],
+      "js": [
+        "/config.js",
+        "/lib/jquery-3.3.1.min.js",
+        "/system/Storage.js",
+        "/system/HTTP.js",
+        "/content/Bookmaker/Bookmaker.js",
+        "/content/Bookmaker/Olimp.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "/content/Positive/html/*",
+    "/popup/fonts/*"
+  ],
+  "permissions": [
+    "storage",
+    "tabs"
+  ],
+  "browser_action": {
+    "default_icon": "images/popup-default.png",
+    "default_popup": "popup/html/index.html"
+  },
+  "icons": {
+    "16": "images/icon32.png",
+    "48": "images/icon64.png",
+    "128": "images/icon128.png"
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Lyrco - Your personal lyrics service",
+  "description": "Popup oriented design for lyrics on Youtube, Spotify and Soundcloud services.",
+  "version": "1.6",
+  "manifest_version": 2,
+  "browser_action": {
+    "default_icon": "./img/app_icon_128.png",
+    "default_popup": "window.html"
+  },
+  "icons": {
+    "16": "./img/app_icon_16.png",
+    "48": "./img/app_icon_48.png",
+    "128": "./img/app_icon_128.png"
+  },
+  "background": {
+    "scripts": [
+      "./js/tabsUpdate.js",
+      "./libs/ga.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.youtube.com/*",
+        "*://*.spotify.com/*",
+        "*://*.pandora.com/station/*",
+        "*://soundcloud.com/*"
+      ],
+      "js": [
+        "libs/jquery-3.1.0.min.js",
+        "libs/jquery-ui.min.js",
+        "js/helpers/ChromeStorage.js",
+        "js/helpers/data/SearchData.js",
+        "js/helpers/LyricsDownloader.js",
+        "js/helpers/OnlineLyricsDownloader.js",
+        "js/helpers/OfflineLyricsDownloader.js",
+        "js/LyrcoHead.js",
+        "js/helpers/LyricsDownloader.js",
+        "js/createPopup.js"
+      ],
+      "css": [
+        "css/popup.css"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "storage",
+    "*://*.musixmatch.com/*",
+    "*://*.azlyrics.com/*",
+    "*://*.tekstovi-pesama.com/*",
+    "*://*.letssingit.com/*",
+    "*://*.justsomelyrics.com/*",
+    "*://google.com/*",
+    "*://*.youtube.com/*",
+    "*://*.spotify.com/*",
+    "*://*.pandora.com/station/*",
+    "*://soundcloud.com/*",
+    "<all_urls>"
+  ],
+  "web_accessible_resources": [
+    "img/*.png",
+    "templates/lyrcoHead.html"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'"
+}

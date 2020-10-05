@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "lepro inbox plus plus",
+  "description": "Это расширение облегчает создание списков рассылки для инбоксов",
+  "version": "2.4",
+  "browser_action": {
+    "default_icon": "img/inbox.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "<all_urls>",
+    "tts",
+    "tabs",
+    "activeTab"
+  ],
+  "background": {
+    "scripts": [
+      "ext/lodash.min.js",
+      "utils.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "https://*.leprosorium.ru/comments/*",
+        "https://leprosorium.ru/comments/*",
+        "https://leprosorium.ru/my/inbox/*",
+        "https://leprosorium.ru/users/*/comments*"
+      ],
+      "all_frames": true,
+      "js": [
+        "ext/jquery-2.2.0.min.js",
+        "ext/lodash.min.js",
+        "colorize.js",
+        "interface.js"
+      ]
+    }
+  ],
+  "options_page": "options.html",
+  "content_security_policy": "script-src 'self'; object-src 'self'"
+}

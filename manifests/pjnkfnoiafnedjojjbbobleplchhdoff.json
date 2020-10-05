@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "UnTrump.me",
+  "description": "Removes Donald Trump related news from your facebook news feed.",
+  "icons": {
+    "16": "/Icons/hide_dt16.png",
+    "48": "/Icons/hide_dt48.png",
+    "128": "/Icons/hide_dt128.png"
+  },
+  "version": "0.0.3",
+  "manifest_version": 2,
+  "author": "Cindy Lau",
+  "browser_action": {
+    "default_title": "UnTrump.me"
+  },
+  "commands": {
+    "untrump-settings": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Y"
+      },
+      "description": "Display settings"
+    }
+  },
+  "background": {
+    "scripts": [
+      "/js/background-bundle.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.facebook.com/*"
+      ],
+      "css": [
+        "css/content-script.css"
+      ],
+      "js": [
+        "/js/content-script-bundle.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "/js/script-bundle.js"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "permissions": [
+    "storage",
+    "unlimitedStorage"
+  ]
+}

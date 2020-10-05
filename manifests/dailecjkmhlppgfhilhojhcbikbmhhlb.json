@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Sidecar Debugger Tool",
+  "version": "0.2",
+  "description": "Sidecar Debugger Tool extension helps you debugging Sugar7, for a better productivity and faster development.",
+  "icons": {
+    "128": "img/sugarcube.png"
+  },
+  "browser_action": {
+    "default_icon": "img/sugarcube.png"
+  },
+  "devtools_page": "html/devtools.html",
+  "permissions": [
+    "webRequest",
+    "*://*/*/sidecar.js*",
+    "*://*/*/sidecar.min.js*",
+    "tabs"
+  ],
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [
+        "css/inject/injected.css"
+      ],
+      "js": [
+        "lib/jquery-1.9.1.js",
+        "js/inject/content_script.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "js/inject/sidecar.debug.js"
+  ],
+  "minimum_chrome_version": "50",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

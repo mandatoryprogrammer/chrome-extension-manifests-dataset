@@ -1,0 +1,123 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Fond Extension",
+  "description": "For Perks users, get a helpful reminder whenever you visit a site with perks! For Rewards users, send recognition from Gmail!",
+  "version": "1.63",
+  "browser_action": {
+    "default_icon": "icon-gray_24.png",
+    "active_icon": "icon_24.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "icons": {
+    "16": "images/app_logo16.png",
+    "48": "images/app_logo48.png",
+    "128": "images/app_logo128.png",
+    "256": "images/app_logo256.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [
+        "css/banner.scss",
+        "css/fonts.scss"
+      ],
+      "js": [
+        "content_script.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "js/inboxsdk.js",
+        "gmail_content_script.js"
+      ],
+      "css": [
+        "css/styles.css",
+        "css/libraries/slick.css",
+        "css/libraries/selectize.css",
+        "css/fonts.scss"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://*.salesforce.com/*"
+      ],
+      "js": [
+        "salesforce_content_script.js"
+      ],
+      "css": [
+        "css/libraries/slick.css",
+        "css/libraries/react-select.css",
+        "css/fonts.scss"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://*.lightning.force.com/*"
+      ],
+      "js": [
+        "salesforce_lightning_content_script.js"
+      ],
+      "css": [
+        "css/libraries/slick.css",
+        "css/libraries/react-select.css",
+        "css/lightning.scss",
+        "css/fonts.scss"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://*/tokens/extension_login_success"
+      ],
+      "js": [
+        "authenticate.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.google.com/*"
+      ],
+      "js": [
+        "google.js"
+      ],
+      "css": [
+        "css/google.scss"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://fond.co/*"
+      ],
+      "js": [
+        "install_checker.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "storage"
+  ],
+  "web_accessible_resources": [
+    "gmail_main.js",
+    "templates/*",
+    "logo.png",
+    "images/*",
+    "fonts/*"
+  ]
+}

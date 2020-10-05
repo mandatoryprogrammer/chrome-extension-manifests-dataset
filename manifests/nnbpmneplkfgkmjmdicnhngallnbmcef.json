@@ -1,0 +1,411 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "SuiteFiles",
+  "short_name": "SuiteFiles",
+  "description": "The SuiteFiles Chrome Extension optimises your SuiteFiles experience.",
+  "version": "1.3.5",
+  "icons": {
+    "16": "suitefiles_heart_16.png",
+    "32": "suitefiles_heart_32.png",
+    "48": "suitefiles_heart_48.png",
+    "128": "suitefiles_heart_128.png"
+  },
+  "background": {
+    "scripts": [
+      "jquery-2.1.1.min.js",
+      "APIService.js",
+      "suiteFilesSettings.js",
+      "background.js",
+      "PrintManager.js"
+    ],
+    "persistent": true
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "jquery-2.1.1.min.js",
+        "knockout-3.2.0.js",
+        "hyperlist.js",
+        "kohyper.js",
+        "viewmodel.js",
+        "suiteFilesSettings.js",
+        "locationChooserPopup.js",
+        "APIService.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.sharepoint.com/*",
+        "*://word-view.officeapps.live.com/*",
+        "*://word-edit.officeapps.live.com/*",
+        "*://excel.officeapps.live.com/*",
+        "*://powerpoint.officeapps.live.com/*",
+        "*://auc-word-view.officeapps.live.com/*",
+        "*://*.officeapps.live.com/*"
+      ],
+      "js": [
+        "jquery-2.1.1.min.js",
+        "content.js"
+      ],
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://auth.thefullsuite.com/*"
+      ],
+      "js": [
+        "MFAService.js",
+        "clientEditPrompt.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://outlook.office.com/*",
+        "https://outlook.office365.com/*"
+      ],
+      "js": [
+        "outlookScript.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*",
+        "https://mail-attachment.googleusercontent.com/"
+      ],
+      "js": [
+        "inboxsdk.js",
+        "inboxScript.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://practicemanager.xero.com/Client/Client/New",
+        "https://practicemanager.xero.com/Client/Client/NewProspect"
+      ],
+      "js": [
+        "saveNewClientButtonAction.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://practicemanager.xero.com/client/manager*"
+      ],
+      "js": [
+        "clientManagerScriptsXPM.js",
+        "clientEditPrompt.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://practicemanager.xero.com/Client/*/Detail",
+        "https://practicemanager.xero.com/client/*/detail"
+      ],
+      "js": [
+        "fileCreationPromptViewModel.js",
+        "filecreationPrompt.js",
+        "clientDetailsScriptsPracticeManager.js",
+        "editClientFolderScriptPracticeManager.js",
+        "clientEditPrompt.js",
+        "archiveClientPracticeManager.js",
+        "unarchiveClientPracticeManager.js",
+        "groupsPromptingPracticeManager.js",
+        "ClientMappingService.js"
+      ],
+      "css": [
+        "detailsStyles.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.workflowmax.com/financial/quoteedit.aspx?*"
+      ],
+      "js": [
+        "fileCreationPromptViewModel.js",
+        "filecreationPrompt.js",
+        "saveQuoteButtonAction.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.workflowmax.com/financial/quoteview.aspx?*"
+      ],
+      "js": [
+        "fileCreationPromptViewModel.js",
+        "filecreationPrompt.js",
+        "quoteCreationScriptPracticeManager.js",
+        "clientEditPrompt.js",
+        "quoteViewMapping.js",
+        "jobsAndQuotesMappingService.js",
+        "DocumentsTabService.js",
+        "DocumentsTabVM.js"
+      ],
+      "css": [
+        "ClientMapping.css",
+        "jobsMapping.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.workflowmax.com/job/jobedit.aspx*"
+      ],
+      "js": [
+        "fileCreationPromptViewModel.js",
+        "filecreationPrompt.js",
+        "saveJobButtonAction.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.workflowmax.com/job/jobview.aspx?*"
+      ],
+      "js": [
+        "fileCreationPromptViewModel.js",
+        "filecreationPrompt.js",
+        "clientEditPrompt.js",
+        "jobCreationScript.js",
+        "jobViewMapping.js",
+        "jobsAndQuotesMappingService.js",
+        "DocumentsTabService.js",
+        "DocumentsTabVM.js"
+      ],
+      "css": [
+        "ClientMapping.css",
+        "jobsMapping.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://practicemanager.xero.com/Client/Client/Edit/*",
+        "https://practicemanager.xero.com/client/client/edit/*"
+      ],
+      "js": [
+        "clientSaveForEdit.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.workflowmax.com/client/clientedit.aspx*"
+      ],
+      "js": [
+        "jquery-2.1.1.min.js",
+        "saveWorkFlowMaxClientAction.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.workflowmax.com/client/clientview.aspx?id=*"
+      ],
+      "js": [
+        "clientEditPrompt.js",
+        "fileCreationPromptViewModel.js",
+        "filecreationPrompt.js",
+        "clientActionWorkflowMax.js",
+        "unarchiveClientWorkflowMax.js",
+        "clientsDocumentsTabMapping.js",
+        "ClientMappingService.js",
+        "DocumentsTabService.js",
+        "DocumentsTabVM.js"
+      ],
+      "css": [
+        "ClientMapping.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.workflowmax.com/client/clientlist.aspx"
+      ],
+      "js": [
+        "clientEditPrompt.js",
+        "fileCreationPromptViewModel.js",
+        "archiveClientWorkflowMax.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.workflowmax.com/lead/won.aspx?*"
+      ],
+      "js": [
+        "fileCreationPromptViewModel.js",
+        "filecreationPrompt.js",
+        "saveLeadWonAction.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://client.xero.com/client/edit/*/basic"
+      ],
+      "js": [
+        "saveXeroHQEditAction.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://client.xero.com/client/index/*"
+      ],
+      "js": [
+        "editClientXeroHQ.js",
+        "filecreationPrompt.js",
+        "fileCreationPromptViewModel.js",
+        "clientEditPrompt.js",
+        "archiveFromDetailsXeroHQ.js",
+        "unarchiveFromDetailsXeroHQ.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://client.xero.com/list"
+      ],
+      "js": [
+        "fileCreationPromptViewModel.js",
+        "filecreationPrompt.js",
+        "clientListScriptsXeroHQ.js",
+        "clientEditPrompt.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://practicemanager.xero.com/Group/*/Members"
+      ],
+      "js": [
+        "clientEditPrompt.js",
+        "groupNameChangeXPM.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.workflowmax.com/lead/view.aspx?*"
+      ],
+      "js": [
+        "leadViewScripts.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.sharepoint.com/_layouts/15/OAuthAuthorize.aspx?*",
+        "https://*.sharepoint.com/_layouts/15/oauthauthorize.aspx?*"
+      ],
+      "js": [
+        "trustPage.js"
+      ],
+      "css": [
+        "trustPage.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://practicemanager.xero.com/Client/*/Jobs",
+        "https://practicemanager.xero.com/client/*/Jobs"
+      ],
+      "js": [
+        "clientsJobsTabMapping.js",
+        "fileCreationPromptViewModel.js",
+        "filecreationPrompt.js",
+        "ClientMappingService.js"
+      ],
+      "css": [
+        "detailsStyles.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://practicemanager.xero.com/Client/*/Quotes",
+        "https://practicemanager.xero.com/client/*/Quotes"
+      ],
+      "js": [
+        "clientsQuotesTabMapping.js",
+        "fileCreationPromptViewModel.js",
+        "filecreationPrompt.js",
+        "ClientMappingService.js"
+      ],
+      "css": [
+        "detailsStyles.css"
+      ]
+    }
+  ],
+  "commands": {
+    "toggle-feature": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Z"
+      },
+      "description": "Toggle feature"
+    }
+  },
+  "web_accessible_resources": [
+    "corestyles.css",
+    "wfmNavigation.html",
+    "popup.html",
+    "locationChooser.html",
+    "suiteFilesSettings.js",
+    "APIService.js",
+    "viewmodel.js",
+    "loginviewmodel.js",
+    "ic_suitefiles_cloud_lt.png",
+    "logo.svg",
+    "filter-icon.svg",
+    "folder-icon.svg",
+    "left-chevron-icon.svg",
+    "home-icon.svg",
+    "suitefiles_heart_32.png",
+    "suitefiles_heart_128.png",
+    "suitefiles_heart.png",
+    "filecreationPrompt.js",
+    "suitefiles_heart.svg",
+    "fileCreationPrompt.html",
+    "saveQuoteButtonAction.js",
+    "saveJobButtonAction.js",
+    "clientEditPrompt.html",
+    "printPopup.html",
+    "loadingIcon.html",
+    "loadingIcon.gif",
+    "trustItPage.html",
+    "icon_generic.svg",
+    "icon_code.svg",
+    "icon_excel.svg",
+    "icon_illustrator.svg",
+    "icon_image.svg",
+    "icon_mail.svg",
+    "icon_markdown.svg",
+    "icon_music.svg",
+    "icon_oneNote.svg",
+    "icon_pdf.svg",
+    "icon_powerpoint.svg",
+    "icon_photoshop.svg",
+    "icon_publisher.svg",
+    "icon_template.svg",
+    "icon_video.svg",
+    "icon_word.svg",
+    "icon_zip.svg",
+    "icon_upload.svg",
+    "icon_refresh.svg",
+    "icon_open_link.svg",
+    "icon_new_folder.svg",
+    "documentsNewFolder.html",
+    "locationChooserNewFolder.html",
+    "owaContent.css",
+    "hyperlist.js",
+    "kohyper.js"
+  ],
+  "browser_action": {
+    "default_icon": "suitefiles_heart_48.png",
+    "default_popup": "popup.html"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'; 'unsafe-inline",
+  "permissions": [
+    "https://*.google.com/",
+    "notifications",
+    "storage",
+    "<all_urls>",
+    "activeTab",
+    "tabs",
+    "printerProvider",
+    "https://mail-attachment.googleusercontent.com/",
+    "https://mail.google.com/",
+    "https://inbox.google.com/"
+  ]
+}

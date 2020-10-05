@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Autopitch",
+  "description": "Scrap information from linkedin.",
+  "version": "2.3",
+  "manifest_version": 2,
+  "icons": {
+    "128": "img/favicon.png"
+  },
+  "permissions": [
+    "activeTab",
+    "http://localhost:51412/LeadManagement/Leads",
+    "<all_urls>",
+    "https://ajax.googleapis.com/",
+    "tabs",
+    "https://www.linkedin.com/*",
+    "https://www.linkedin.com/in/*",
+    "https://www.linkedin.com/sales/profile/*"
+  ],
+  "browser_action": {
+    "default_icon": "img/favicon.png",
+    "default_popup": "popup.html",
+    "default_title": "Scrap Data"
+  },
+  "background": {
+    "matches": [
+      "https://www.linkedin.com/in/*",
+      "https://www.linkedin.com/sales/profile/*"
+    ],
+    "scripts": [
+      "jquery.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "css": [
+        "ExtractButtonCss.css"
+      ],
+      "js": [
+        "jquery.js",
+        "content.js"
+      ],
+      "matches": [
+        "https://www.linkedin.com/",
+        "https://www.linkedin.com/in/*",
+        "https://www.linkedin.com/sales/profile/*"
+      ],
+      "all_frames": false
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://www.google.com https://www.linkedin.com https://example.com https://ajax.googleapis.com; object-src 'self'"
+}

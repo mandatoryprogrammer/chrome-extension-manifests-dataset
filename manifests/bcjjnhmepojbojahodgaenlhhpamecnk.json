@@ -1,0 +1,84 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Smedian Network",
+  "version": "8.0.2",
+  "manifest_version": 2,
+  "description": "Smedian is a community of Medium editors who need writers who need editors. Extension for all Medium users.",
+  "homepage_url": "https://www.smedian.com",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icons/icon128.png",
+    "default_title": "Smedian Network"
+  },
+  "chrome_url_overrides": {
+    "newtab": "src/newTab/index.html"
+  },
+  "permissions": [
+    "clipboardRead",
+    "clipboardWrite",
+    "cookies",
+    "notifications",
+    "tabs",
+    "activeTab",
+    "contextMenus",
+    "downloads",
+    "downloads.open",
+    "*://*.medium.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.medium.com/*",
+        "https://medium.com/*",
+        "https://*/*",
+        "https://lcontacts.herokuapp.com/*",
+        "https://twitter.com/*/followers",
+        "https://twitter.com/*/following",
+        "https://www.twitter.com/*/followers",
+        "https://www.twitter.com/*/following"
+      ],
+      "exclude_matches": [
+        "*://*.youtube.com/*",
+        "*://*.facebook.com/*",
+        "*://*.linkedin.com/*",
+        "*://*.google.com/*"
+      ],
+      "js": [
+        "src/inject/js/libs/jquery.js",
+        "src/inject/js/libs/jquery-ui.js",
+        "src/inject/js/libs/angular1-4-6.js",
+        "src/inject/js/libs/socket-io/socket.io-1.4.5.js",
+        "src/inject/js/libs/angular-socket-io/socket.js",
+        "src/inject/js/libs/html2canvas/html2canvas.js",
+        "src/inject/js/main.js",
+        "src/inject/js/mainUtils.js",
+        "src/inject/js/main-jqueries.js",
+        "src/inject/js/classes/ArrayDataStore.js",
+        "src/inject/js/classes/PagingParams.js",
+        "src/inject/js/classes/ReferencesManager.js",
+        "src/inject/js/classes/TimerQueue.js",
+        "src/inject/js/ngServices/pubNetworkService.js",
+        "src/inject/js/ngServices/userNetworkService.js",
+        "src/inject/js/ngFilters/filters.js",
+        "src/inject/js/ngContextMenu.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "src/inject/js/libs/angular1-4-6.js",
+    "src/inject/js/libs/socket-io/socket.io-1.4.5.js",
+    "src/inject/js/libs/angular-socket-io/socket.js",
+    "src/templates/contextMenu.hbs"
+  ]
+}

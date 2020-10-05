@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Heartbleed Search",
+  "description": "Interactively notifies you of the Heartbleed bug on search pages on the top seach engines. (i.e. google.com, bing.com, yahoo.com)",
+  "version": "0.1.1",
+  "permissions": [
+    "declarativeContent",
+    "activeTab",
+    "https://hbelb.filippo.io/"
+  ],
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png",
+    "256": "images/icon256.png"
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.google.com/*",
+        "*://*.bing.com/news*",
+        "*://*.bing.com/search*",
+        "*://*.yahoo.com/*",
+        "*://www.ask.com/*",
+        "*://search.aol.com/*",
+        "*://www.wow.com/*",
+        "https://duckduckgo.com/*",
+        "*://blekko.com/*",
+        "*://*.ixquick.com/*"
+      ],
+      "css": [
+        "css/search.min.css"
+      ],
+      "js": [
+        "js/vendor/jquery.min.js",
+        "js/search.min.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.heartbleedsearch.com/*"
+      ],
+      "js": [
+        "js/installed.min.js"
+      ]
+    }
+  ],
+  "background": {
+    "js": "js/background.min.js",
+    "page": "background.html"
+  },
+  "page_action": {
+    "default_icon": {
+      "19": "images/icon-off19.png",
+      "38": "images/icon-off38.png"
+    },
+    "default_title": "Heartbleed Search"
+  },
+  "web_accessible_resources": [
+    "js/vendor/jquery.min.js",
+    "js/search.min.js",
+    "css/search.min.css"
+  ]
+}

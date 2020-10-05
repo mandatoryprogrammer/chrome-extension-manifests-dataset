@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Copy Translation",
+  "version": "4",
+  "manifest_version": 2,
+  "description": "Have your translations automatically copied to the clipboard!",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "64": "icons/icon-64.png",
+    "128": "icons/icon-128.png"
+  },
+  "background": {
+    "scripts": [
+      "src/background/clipboard-backup.js",
+      "src/background/background-services.js"
+    ]
+  },
+  "author": "Jorge Antonio Diaz-Benito Soriano",
+  "page_action": {
+    "default_title": "Copy Translation",
+    "default_icon": {
+      "19": "icons/icon-19.png",
+      "38": "icons/icon-38.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://translate.google.com/*",
+        "*://*.bing.com/translator*"
+      ],
+      "js": [
+        "src/common/jquery-2.1.3.min.js",
+        "src/common/clipboard.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://translate.google.com/*"
+      ],
+      "js": [
+        "src/scripts/google-translate.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.bing.com/translator*"
+      ],
+      "js": [
+        "src/scripts/bing-translator.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "clipboardWrite",
+    "clipboardRead"
+  ],
+  "web_accessible_resources": [
+    "templates/toast.html"
+  ]
+}

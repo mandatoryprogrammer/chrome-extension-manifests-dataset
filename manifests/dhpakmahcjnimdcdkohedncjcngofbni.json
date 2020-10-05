@@ -1,0 +1,112 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAq3czvTfuOXhAAag/imITdqc/a+C919Blz7cQoW7Lxngt/BGgp/duzfbh5K1T8QM7FxDTuVis8syWXaRcbFzSpONF46BJa8b4NFClj1xL/fYn4XgDRAQ0YmCfY8x3Rsoh45deJ+EVuzFUFqMdQoPg4msMl6K+TH9x2yJLuaswl0c2lnIwwxYEPKIRX78W2dHOwPWAHOLMclordp4nbnPRQr3pGBDywHmwsbIPOOi+VF4r8oa3gYo/c3fKeqKidw6n0pw8eFFXpF63BzGBbjsXgCCQoidDsR1A9zuV8gCONFZLNcUyf/+U05nmnS9FcY5jNoVA312EcwxCKqHEppLRAQIDAQAB",
+  "manifest_version": 2,
+  "name": "CSE Magellan Browser Extension",
+  "short_name": "CSETDExt",
+  "description": "This is the CSE Password SSO Plugin for Magellan.",
+  "version": "1.0.16",
+  "offline_enabled": false,
+  "options_page": "options/options.html",
+  "homepage_url": "http://cse-trinidad.co.uk",
+  "icons": {
+    "128": "icons/128.png",
+    "16": "icons/16.png",
+    "48": "icons/48.png"
+  },
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "tabs",
+    "cookies",
+    "notifications",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking",
+    "privacy",
+    "unlimitedStorage",
+    "storage",
+    "activeTab",
+    "nativeMessaging"
+  ],
+  "background": {
+    "scripts": [
+      "all/brand-common.js",
+      "all/brand-chrome.js",
+      "background/brand-common.js",
+      "all/common.js",
+      "background/common.js",
+      "all/chrome-common.js",
+      "background/jquery-1.11.1.min.js",
+      "background/jquery.signalR-2.2.0.min.js",
+      "background/background.js",
+      "background/MagellanDesktopBackground.js",
+      "background/webDavBackground.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/19disabled.png",
+      "38": "icons/38disabled.png"
+    },
+    "default_popup": "popover/icon-menu.html"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "all/brand-common.js",
+        "all/brand-chrome.js",
+        "content/brand-common.js",
+        "all/common.js",
+        "content/common.js",
+        "all/chrome-common.js",
+        "content/trinidad-start.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "content/MagellanAppDelay.js"
+      ],
+      "matches": [
+        "*://*.magellanportal.co.uk/trinidad/appdelay*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "content/trinidad-end.js",
+        "content/formfill.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "content/trinidad-idle.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://*.magellanportal.co.uk/*"
+    ]
+  }
+}

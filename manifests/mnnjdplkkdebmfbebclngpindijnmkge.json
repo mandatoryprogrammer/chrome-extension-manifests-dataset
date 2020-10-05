@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "description": "Webclipper companion for paperclip",
+  "version": "1.0.0",
+  "name": "Paper Kill Web Clipper",
+  "options_page": "options.html",
+  "background": {
+    "scripts": [
+      "./background.bundle.js",
+      "./api.bundle.js",
+      "./pouch.bundle.js"
+    ]
+  },
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": "clip-bar-icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "./main.css"
+      ],
+      "js": [
+        "./content.bundle.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "icons": {
+    "16": "./icon-128.png",
+    "128": "./icon-128.png"
+  },
+  "options_ui": {
+    "page": "./options.html",
+    "chrome_style": true
+  },
+  "permissions": [
+    "activeTab",
+    "background",
+    "contextMenus",
+    "http://*/*",
+    "https://*/*",
+    "pageCapture",
+    "tabs",
+    "tabCapture"
+  ],
+  "web_accessible_resources": [
+    "open-icon.svg",
+    "main.css"
+  ],
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

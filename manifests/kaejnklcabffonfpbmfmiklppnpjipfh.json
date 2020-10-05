@@ -1,0 +1,83 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Buboflash",
+  "description": "helps with learning",
+  "version": "2020.9.14.1",
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "images/icon-disabled.png",
+    "default_title": "Buboflash",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "static/jquery/jquery-3.3.1.min.js",
+      "static/jquery-ba-throttle-debounce-2019.01.19/jquery.ba-throttle-debounce.min.js",
+      "shared.js",
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "initial-content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "contextMenus",
+    "storage",
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "webRequest",
+    "https://buboflash.eu/bubo5/logout"
+  ],
+  "web_accessible_resources": [
+    "static/bootstrap-3.3.7-dist/*",
+    "static/jquery-ui-1.12.1.custom/*",
+    "static/fontawesome-free-5.6.3-web/*"
+  ],
+  "commands": {
+    "selectionToNewAnnotation": {
+      "suggested_key": {
+        "default": "Alt+N"
+      },
+      "description": "Selection -> Annotation"
+    },
+    "selectionToNewFlashcardQaQ": {
+      "suggested_key": {
+        "default": "Alt+Q"
+      },
+      "description": "Selection -> Flashcard Question, Answer -> other field"
+    },
+    "selectionToNewFlashcardQaA": {
+      "suggested_key": {
+        "default": "Alt+A"
+      },
+      "description": "Selection -> Flashcard Answer, Question -> other field"
+    },
+    "selectionToOtherField": {
+      "suggested_key": {
+        "default": "Alt+O"
+      },
+      "description": "Selection -> Other Field"
+    },
+    "selectionResetOtherField": {
+      "description": "Reset Other Field"
+    }
+  },
+  "homepage_url": "https://buboflash.eu/",
+  "content_security_policy": "script-src 'self'; object-src 'self'"
+}

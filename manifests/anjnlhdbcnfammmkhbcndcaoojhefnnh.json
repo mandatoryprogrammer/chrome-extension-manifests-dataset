@@ -1,0 +1,41 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "ElfBite - Your new tab page for charity",
+  "description": "Elfbite is your new, fully customizable, new tab page for charity. This extension sets ElfBite as your new tab page.",
+  "icons": {
+    "64": "icon_64.png"
+  },
+  "version": "1.0.1012",
+  "chrome_url_overrides": {
+    "newtab": "elfbite/index.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://elfbite.com/api/auth/facebook/*",
+        "http://elfbite.com/api/auth/google/*",
+        "http://elfbite.com/api/auth/twitter/*",
+        "http://www.elfbite.com/api/auth/facebook/*",
+        "http://www.elfbite.com/api/auth/google/*",
+        "http://www.elfbite.com/api/auth/twitter/*"
+      ],
+      "js": [
+        "js/content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "js/injected.js"
+  ],
+  "permissions": [
+    "storage"
+  ],
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.google-analytics.com/analytics.js; object-src 'self'"
+}

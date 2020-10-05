@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Betterlink",
+  "description": "Create and share personalized links to text within a webpage",
+  "version": "1.6.2",
+  "author": "Betterlink",
+  "homepage_url": "http://betterlink.io",
+  "icons": {
+    "48": "icons/betterlink-icon-48.png",
+    "128": "icons/betterlink-icon-128.png"
+  },
+  "incognito": "spanning",
+  "short_name": "Betterlink",
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "storage",
+    "<all_urls>"
+  ],
+  "background": {
+    "scripts": [
+      "background.js",
+      "broadcaster.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_globs": [
+        "*://mail.google.*/*",
+        "*://www.facebook.*/*",
+        "*://*mail.yahoo.*/*"
+      ],
+      "js": [
+        "injector.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.betterlink.io/*"
+    ]
+  }
+}

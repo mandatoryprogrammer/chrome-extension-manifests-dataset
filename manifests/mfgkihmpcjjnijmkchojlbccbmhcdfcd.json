@@ -1,0 +1,77 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_extName__",
+  "version": "1.6.4",
+  "manifest_version": 2,
+  "description": "__MSG_extDescription__",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "event-page.js"
+    ],
+    "persistent": false
+  },
+  "commands": {
+    "focus-on-search-field": {
+      "suggested_key": {
+        "default": "Alt+Shift+S"
+      },
+      "description": "Focus on the search field"
+    },
+    "clear-search-field": {
+      "suggested_key": {
+        "default": "Alt+Shift+A"
+      },
+      "description": "Clear the contents of the search field"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/allclasses-frame.html",
+        "http://*/*/allclasses-frame.html",
+        "https://*/allclasses-frame.html",
+        "https://*/*/allclasses-frame.html",
+        "file://*/allclasses-frame.html",
+        "file://*/*/allclasses-frame.html",
+        "http://*/package-frame.html",
+        "http://*/*/package-frame.html",
+        "https://*/package-frame.html",
+        "https://*/*/package-frame.html",
+        "file://*/package-frame.html",
+        "file://*/*/package-frame.html"
+      ],
+      "js": [
+        "lib/Messages.js",
+        "lib/Storage.js",
+        "lib/Option.js",
+        "lib/Frames.js",
+        "lib/OptionsPage.js",
+        "lib/HttpRequest.js",
+        "lib/common.js",
+        "allclasses-frame.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "minimum_chrome_version": "39",
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "options_page": "options.html",
+  "offline_enabled": true,
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "file://*/*",
+    "storage",
+    "webNavigation"
+  ]
+}

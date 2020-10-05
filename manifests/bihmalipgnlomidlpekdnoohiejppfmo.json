@@ -1,0 +1,131 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "short_name": "__MSG_appShortName__",
+  "description": "__MSG_appDescription__",
+  "version": "0.2.15",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "icons": {
+    "512": "images/icon-512.png"
+  },
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*",
+        "file:///*/*"
+      ],
+      "exclude_matches": [
+        "https://docs.google.com/spreadsheets/d/*",
+        "https://docs.google.com/spreadsheets/u/0/d/*",
+        "https://hypothes.is/login"
+      ],
+      "js": [
+        "scripts/contentScript.js"
+      ],
+      "css": [
+        "styles/contentScript.css"
+      ],
+      "run_at": "document_start",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "https://docs.google.com/spreadsheets/d/*",
+        "https://docs.google.com/spreadsheets/u/0/d/*"
+      ],
+      "js": [
+        "scripts/googleSheetsContentScript.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://dl.acm.org/citation.cfm?*"
+      ],
+      "js": [
+        "scripts/acmContentScript.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://ieeexplore.ieee.org/*"
+      ],
+      "js": [
+        "scripts/ieeeContentScript.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://www.sciencedirect.com/science/article/pii/*"
+      ],
+      "js": [
+        "scripts/scienceDirectContentScript.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://link.springer.com/*"
+      ],
+      "js": [
+        "scripts/springerContentScript.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://hypothes.is/groups/*/*"
+      ],
+      "js": [
+        "scripts/hypothesisGroupContentScript.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "page_action": {
+    "default_icon": "images/icon-38-bw.png",
+    "default_title": "__MSG_browserActionTitle__"
+  },
+  "options_page": "pages/options.html",
+  "options_ui": {
+    "page": "pages/options.html",
+    "chrome_style": false,
+    "open_in_tab": true
+  },
+  "permissions": [
+    "contextMenus",
+    "https://hypothes.is/*",
+    "identity",
+    "storage",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "*://doi.org/*",
+    "*://dx.doi.org/*",
+    "*://www.sciencedirect.com/science/article/pii/*",
+    "*://ieeexplore.ieee.org/document/*",
+    "*://www.dropbox.com/s/",
+    "*://*.dropboxusercontent.com/*",
+    "file://*/*"
+  ],
+  "oauth2": {
+    "client_id": "1008657588862-k3t7glpcvdrtc43dsmktkjudufh9m5ho.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/spreadsheets"
+    ]
+  },
+  "web_accessible_resources": [
+    "pages/*.html",
+    "content/*",
+    "images/*"
+  ],
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAoQgtyvjHN1xpYMWig50Bx7iL4d8oSum8aVhiTCLpdSK93YAA6JubzTxeJKWj0n/zx4X6jiByuAGaAd7V0/s+mrJfP2J8hiMFu5BnxT6+2iekiLNV4Nc1RlX9wuaOq2Res0l9E2+2DpMTCli4aS1DyEBd9zpfwaNWPMqbmToZOLO0afibAklS/VAIEfcH/2lbDLrdq3UACEZdW7/hlmICj0yItYFQ2mXEI3spetnJH3VG9Q5Sj5RsSLnyuescQLSeT0vl1uovsPnKCpD/aS/iRzNyEtRNtAy727Ju334bj4xyOA8VIsueWWwYiKPatvhQ+gcNqq77UNOmw5Ido5fHMQIDAQAB"
+}

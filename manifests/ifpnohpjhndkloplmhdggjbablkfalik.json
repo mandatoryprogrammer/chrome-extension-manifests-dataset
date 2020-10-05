@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Result Hunter - Search Engine",
+  "description": "Search engine FOR Conservatives BY Conservatives",
+  "version": "3.00",
+  "manifest_version": 2,
+  "permissions": [
+    "https://resulthunter.com/",
+    "gcm",
+    "storage",
+    "notifications",
+    "identity"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://resulthunter.com/*"
+      ],
+      "run_at": "document_start",
+      "css": [
+        "extension.css"
+      ]
+    }
+  ],
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "OneSignal.js",
+      "background.js"
+    ]
+  },
+  "icons": {
+    "32": "icon32.png",
+    "192": "icon192.png"
+  },
+  "chrome_settings_overrides": {
+    "search_provider": {
+      "name": "Result Hunter",
+      "keyword": "resulthunter.com",
+      "search_url": "https://resulthunter.com/web?q={searchTerms}&utm_source=extension&utm_medium=chrome",
+      "image_url": "https://resulthunter.com/images?q={searchTerms}&utm_source=extension&utm_medium=chrome",
+      "favicon_url": "https://resulthunter.com/uploads/brand/favicon.png",
+      "encoding": "UTF-8",
+      "is_default": true
+    }
+  }
+}

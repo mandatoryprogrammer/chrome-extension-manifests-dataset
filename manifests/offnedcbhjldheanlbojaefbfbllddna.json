@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "JetBrains Toolbox Extension",
+  "short_name": "Toolbox",
+  "description": "Clone and open projects from GitHub, GitLab, and Bitbucket in JetBrains IDEs right from your browser",
+  "version": "1.17.7265",
+  "icons": {
+    "128": "icon-128.png"
+  },
+  "browser_action": {
+    "default_icon": "icon-disabled-128.png",
+    "default_title": "JetBrains Toolbox Extension",
+    "default_popup": "jetbrains-toolbox-disabled-popup.html"
+  },
+  "background": {
+    "scripts": [
+      "jetbrains-toolbox-background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://github.com/*"
+      ],
+      "js": [
+        "jetbrains-toolbox-github-public.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://gitlab.com/*"
+      ],
+      "js": [
+        "jetbrains-toolbox-gitlab-public.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://bitbucket.org/*"
+      ],
+      "js": [
+        "jetbrains-toolbox-bitbucket-public.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "*.svg"
+  ],
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "storage",
+    "https://github.com/*",
+    "https://api.github.com/*",
+    "https://gitlab.com/*",
+    "https://bitbucket.org/*",
+    "https://api.bitbucket.org/*"
+  ],
+  "optional_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ]
+}

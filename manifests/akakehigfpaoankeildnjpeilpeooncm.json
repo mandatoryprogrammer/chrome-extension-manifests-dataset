@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Mitarbeitervorteile BonusMelder",
+  "manifest_version": 2,
+  "version": "1.1",
+  "default_locale": "de",
+  "background": {
+    "scripts": [
+      "js/browser-polyfill.min.js",
+      "js/envHelper.js",
+      "js/notification.js",
+      "js/domainExtractor.js",
+      "js/mivoApiClient.js",
+      "js/userRepository.js",
+      "js/offerRepository.js",
+      "js/jquery.min.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>",
+        "http://localhost:8080/*",
+        "https://mivo-dev.prodyna.com/*",
+        "https://mivo-qa.prodyna.com/*",
+        "https://mitarbeitervorteile.de/*"
+      ],
+      "js": [
+        "js/jquery.min.js",
+        "js/install_notifier.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "icons": {
+    "48": "images/mv.png"
+  },
+  "browser_action": {
+    "default_icon": "images/mv.png"
+  },
+  "options_ui": {
+    "page": "options.html"
+  },
+  "permissions": [
+    "activeTab",
+    "notifications",
+    "tabs",
+    "alarms",
+    "storage",
+    "history",
+    "webRequest",
+    "webRequestBlocking",
+    "https://mitarbeitervorteile.de/"
+  ],
+  "web_accessible_resources": [
+    "images/*.png"
+  ]
+}

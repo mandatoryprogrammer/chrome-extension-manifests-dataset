@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "XRPCharts+",
+  "version": "1.0.3",
+  "description": "This extension gets additional information from the official ripple database and adds it to the xrpcharts page.",
+  "default_locale": "en",
+  "icons": {
+    "48": "icons/coin_xrp_48.png",
+    "128": "icons/coin_xrp_128.png"
+  },
+  "permissions": [
+    "contextMenus",
+    "storage",
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "48": "icons/coin_xrp_48.png",
+      "128": "icons/coin_xrp_128.png"
+    }
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "options_page": "html/options.html",
+  "web_accessible_resources": [
+    "icons/coin_xrp_48.png",
+    "icons/coin_xrp_128.png"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://xrpcharts.ripple.com/*",
+        "http://xrpcharts.ripple.com/*"
+      ],
+      "css": [
+        "css/animate.css",
+        "css/roboto.css",
+        "css/content-script.css",
+        "css/jquery-confirm.css"
+      ],
+      "js": [
+        "lib/jquery-3.2.1.min.js",
+        "lib/jquery-confirm.js",
+        "lib/moment.min.js",
+        "js/content-script.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

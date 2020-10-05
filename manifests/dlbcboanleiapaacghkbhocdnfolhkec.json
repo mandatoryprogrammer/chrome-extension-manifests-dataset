@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Play Music State API",
+  "version": "1.1.7",
+  "default_locale": "en",
+  "manifest_version": 2,
+  "options_ui": {
+    "page": "src/bg/options.html",
+    "open_in_tab": true
+  },
+  "description": "Allows you to read the state of the Google Music player for use in own applications.",
+  "homepage_url": "https://nioxed.com/projects/gplaymusicapi/",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "page": "src/bg/background.html",
+    "persistent": true
+  },
+  "permissions": [
+    "storage",
+    "https://play.google.com/music/*",
+    "http://localhost:3500/"
+  ],
+  "optional_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "browser_action": {
+    "default_popup": "src/bg/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://play.google.com/music/*"
+      ],
+      "js": [
+        "src/bg/gplay.js",
+        "src/inject/inject.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "src/inject/*"
+  ]
+}

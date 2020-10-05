@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "云收藏",
+  "version": "2.0.1.4",
+  "manifest_version": 2,
+  "description": "云收藏是一款高速下载神器，无需安装迅雷和百度网盘客户端就可以下载迅雷和百度网盘资源",
+  "icons": {
+    "16": "logos/16.png",
+    "48": "logos/48.png",
+    "128": "logos/128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "logos/19.png",
+      "38": "logos/38.png"
+    },
+    "default_title": "云收藏",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "jquery.js",
+        "contentScript.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "run_at": "document_start",
+      "matches": [
+        "*://pan.baidu.com/*",
+        "*://yun.baidu.com/*"
+      ],
+      "js": [
+        "js/lib/baiduy.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "storage",
+    "unlimitedStorage",
+    "webRequest",
+    "webRequestBlocking",
+    "tabs",
+    "management",
+    "nativeMessaging"
+  ],
+  "content_security_policy": "script-src 'self'  'unsafe-eval'; object-src 'self'",
+  "background": {
+    "page": "background.html"
+  },
+  "web_accessible_resources": [
+    "*"
+  ]
+}

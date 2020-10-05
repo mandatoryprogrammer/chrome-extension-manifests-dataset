@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "QA Host Warning Tool",
+  "description": "Warns you with a red banner if your host is on a blacklisted IP. Works great for VPN disconnects when testing in QA.",
+  "version": "1.0",
+  "minimum_chrome_version": "20",
+  "manifest_version": 2,
+  "icons": {
+    "16": "/images/btn-warning16.png",
+    "48": "/images/btn-warning48.png",
+    "128": "/images/btn-warning128.png"
+  },
+  "browser_action": {
+    "default_popup": "options.html",
+    "default_icon": "/images/btn-warning48.png"
+  },
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "webRequest",
+    "storage",
+    "webRequestBlocking"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "run_at": "document_end",
+      "js": [
+        "jquery.ip.js",
+        "ip.js"
+      ],
+      "css": [
+        "css/style.css"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ]
+    }
+  ]
+}

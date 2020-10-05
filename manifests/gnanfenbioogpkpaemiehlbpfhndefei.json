@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "AEM DEV Shortcuts",
+  "short_name": "AEM DEV Shortcuts",
+  "version": "2.1",
+  "manifest_version": 2,
+  "author": "Prakashkumar SB",
+  "description": "Switch between EDIT/DISABLED mode by pressing Shift+E/Shift+D. Go to AEM windows by right click and choose from ContextMenu",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": false
+  },
+  "options_page": "src/options/index.html",
+  "page_action": {
+    "default_icon": "icons/aem-cloud-logo.png",
+    "default_title": "AEM DEV Shortcuts",
+    "default_popup": "src/page_action/page_action.html"
+  },
+  "permissions": [
+    "management",
+    "contextMenus",
+    "tabs",
+    "activeTab",
+    "https://*/*",
+    "http://*/* "
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "css": [
+        "src/inject/inject.css"
+      ],
+      "js": [
+        "src/inject/inject.js"
+      ]
+    }
+  ]
+}

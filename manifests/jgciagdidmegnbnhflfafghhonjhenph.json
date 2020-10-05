@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "jummp",
+  "version": "0.0.60",
+  "manifest_version": 2,
+  "description": "Switch to your browser tabs like apps.",
+  "homepage_url": "https://jummp.io",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png",
+    "256": "icons/icon256.png",
+    "512": "icons/icon512.png",
+    "1024": "icons/icon1024.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "permissions": [
+    "history",
+    "tabs",
+    "activeTab",
+    "gcm"
+  ],
+  "browser_action": {
+    "default_icon": "icons/icon16.png",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "permissions": [
+        "https://www.gstatic.com/*",
+        "https://www.googleapis.com/*",
+        "https://connect.stripe.com/*",
+        "https://*.firebaseio.com"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "src/content_script.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "externally_connectable": {
+    "matches": [
+      "http://localhost:5000/*",
+      "https://jummp.io/* "
+    ]
+  }
+}

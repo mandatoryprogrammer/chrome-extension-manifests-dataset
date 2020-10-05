@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "艦これタイマー連携ツール",
+  "version": "0.2.2",
+  "description": "遠征・入渠・建造完了時間をiPhone版 艦これタイマーに送信するツールです。",
+  "icons": {
+    "128": "src/img/icon128.png"
+  },
+  "manifest_version": 2,
+  "permissions": [
+    "webRequest",
+    "identity",
+    "<all_urls>"
+  ],
+  "oauth2": {
+    "client_id": "596857451248-9ga7vunruionf2e61jo118qmepjfuooo.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.profile"
+    ]
+  },
+  "browser_action": {
+    "default_title": "艦これタイマー連携ツール",
+    "default_icon": "src/img/icon128.png",
+    "default_popup": "src/html/popup.html"
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "src/js/constants.js",
+      "src/js/actions/action.js",
+      "src/js/actions/mission.js",
+      "src/js/actions/hospital.js",
+      "src/js/actions/build.js",
+      "src/js/dispatcher.js",
+      "src/js/util.js",
+      "src/js/apns.js",
+      "src/lib/aws-sdk-2.4.13.min.js",
+      "src/js/main.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://osapi.dmm.com/gadgets/ifr?*"
+      ],
+      "js": [
+        "src/lib/jquery.min.js",
+        "src/js/constants.js",
+        "src/js/embed.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://www.dmm.com/netgame/social/-/gadgets/=/app_id=854854/?shiptimer=true*"
+      ],
+      "js": [
+        "src/js/transfer.js"
+      ]
+    }
+  ]
+}

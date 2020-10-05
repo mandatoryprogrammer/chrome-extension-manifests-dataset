@@ -1,0 +1,101 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "vyte.in: schedule meetings 10x faster",
+  "short_name": "vyte.in",
+  "version": "0.2.63",
+  "manifest_version": 2,
+  "description": "Scheduling meets calendar sharing to let you plan your meetings 10x faster. Schedule a meeting from Linkedin, Gmail, Google Calendar",
+  "icons": {
+    "16": "images/vyte.in-logo-16.png",
+    "32": "images/vyte.in-logo-32.png",
+    "48": "images/vyte.in-logo-48.png",
+    "60": "images/vyte.in-logo-60.png",
+    "96": "images/vyte.in-logo-96.png",
+    "128": "images/vyte.in-logo-128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "images/vyte.in-logo-16.png",
+      "32": "images/vyte.in-logo-32.png",
+      "48": "images/vyte.in-logo-48.png",
+      "60": "images/vyte.in-logo-60.png",
+      "96": "images/vyte.in-logo-96.png",
+      "128": "images/vyte.in-logo-128.png"
+    },
+    "default_title": "vyte.in, schedule meetings 10x faster"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "css": [
+        "styles/main.css"
+      ],
+      "js": [
+        "scripts/loader/gmail.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "https://www.google.com/calendar/*",
+        "https://calendar.google.com/*"
+      ],
+      "css": [
+        "styles/main.css"
+      ],
+      "js": [
+        "scripts/loader/gcalendar.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "https://www.linkedin.com/profile/view*",
+        "https://www.linkedin.com/in/*"
+      ],
+      "css": [
+        "styles/main.css"
+      ],
+      "js": [
+        "scripts/loader/linkedin.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "http://localhost:9000/*",
+        "http://next.vyte.in/*",
+        "https://*.vyte.in/*"
+      ],
+      "js": [
+        "scripts/loader/vyte.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    "scripts/lib/jquery.js",
+    "scripts/lib/gmail.js",
+    "scripts/common.js",
+    "scripts/content/gmail.js",
+    "scripts/content/gcalendar.js",
+    "scripts/content/linkedin.js"
+  ],
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ]
+}

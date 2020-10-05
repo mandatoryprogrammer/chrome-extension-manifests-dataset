@@ -1,0 +1,134 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Satori Enhancements",
+  "description": "Adds a few useful enhancements to Satori Online Judge website.",
+  "version": "1.2.6",
+  "minimum_chrome_version": "62",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true,
+    "browser_style": true
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "notifications",
+    "webRequest",
+    "webRequestBlocking",
+    "*://satori.tcs.uj.edu.pl/*"
+  ],
+  "page_action": {
+    "default_icon": "icon128.png",
+    "default_title": "Satori Enhancements"
+  },
+  "background": {
+    "scripts": [
+      "vendor/browser-polyfill.js",
+      "js/config.js",
+      "js/common.js",
+      "js/background.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "images/*.png",
+    "images/*.svg"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://satori.tcs.uj.edu.pl/*"
+      ],
+      "js": [
+        "vendor/browser-polyfill.js",
+        "vendor/bower/jquery.min.js",
+        "js/config.js",
+        "js/general.js"
+      ],
+      "run_at": "document_end",
+      "css": [
+        "css/general.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://satori.tcs.uj.edu.pl/contest/*/*"
+      ],
+      "exclude_matches": [
+        "*://satori.tcs.uj.edu.pl/contest/apply/*"
+      ],
+      "js": [
+        "vendor/browser-polyfill.js",
+        "js/contest.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://satori.tcs.uj.edu.pl/*/ranking/*"
+      ],
+      "js": [
+        "vendor/bower/jquery.min.js",
+        "vendor/bower/jquery.dataTables.min.js",
+        "vendor/bower/dataTables.fixedColumns.min.js",
+        "vendor/bower/diacritics-neutralise.js",
+        "vendor/bower/intl.js",
+        "js/ranking.js"
+      ],
+      "run_at": "document_end",
+      "css": [
+        "vendor/bower/jquery.dataTables.min.css",
+        "vendor/bower/fixedColumns.dataTables.min.css",
+        "css/ranking.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://satori.tcs.uj.edu.pl/contest/*/problems*"
+      ],
+      "js": [
+        "vendor/browser-polyfill.js",
+        "vendor/bower/jquery.min.js",
+        "js/common.js",
+        "js/problems.js"
+      ],
+      "run_at": "document_end",
+      "css": [
+        "css/problems.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://satori.tcs.uj.edu.pl/contest/*/results"
+      ],
+      "js": [
+        "vendor/browser-polyfill.js",
+        "vendor/bower/jquery.min.js",
+        "js/results-list.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://satori.tcs.uj.edu.pl/contest/*/results/*"
+      ],
+      "js": [
+        "vendor/browser-polyfill.js",
+        "vendor/bower/jquery.min.js",
+        "vendor/bower/highlight.pack.min.js",
+        "vendor/bower/highlightjs-line-numbers.min.js",
+        "js/results.js"
+      ],
+      "run_at": "document_end",
+      "css": [
+        "vendor/bower/7-three-bounce.css",
+        "css/results.css"
+      ]
+    }
+  ]
+}

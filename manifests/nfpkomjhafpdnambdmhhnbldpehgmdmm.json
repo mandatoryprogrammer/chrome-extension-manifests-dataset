@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Deducifier",
+  "short_name": "Deducifier",
+  "version": "0.1.2",
+  "manifest_version": 2,
+  "description": "Tired of reading Sherlock out of character? Add some deduction back into your life! Inspired by Dinosaur Comics #2914.",
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "name": "Click to deduce"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "js": [
+        "lib/underscore.min.js",
+        "lib/jspos/lexer.js",
+        "lib/jspos/lexicon.js_",
+        "lib/jspos/PosTagger.js",
+        "deduce_standalone.js",
+        "replace.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "permissions": [
+    "tabs",
+    "*://*/*",
+    "<all_urls>"
+  ]
+}

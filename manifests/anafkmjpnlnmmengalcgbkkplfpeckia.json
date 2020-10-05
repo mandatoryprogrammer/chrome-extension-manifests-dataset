@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Web Page Reader TTS Text To Speech",
+  "short_name": "Web Page Reader",
+  "description": "No selection required :) *And* Highlights one sentence at a time when reading the page. Controllable by keyboard / toolbar. No ads!",
+  "version": "0.5.5",
+  "browser_action": {
+    "default_icon": "src/icons/WPFResourceDictionary_16x.png",
+    "default_popup": "src/popup/control-panel.html"
+  },
+  "icons": {
+    "16": "src/icons/WPFResourceDictionary_16x.png",
+    "32": "src/icons/WPFResourceDictionary_32x.png",
+    "48": "src/icons/WPFResourceDictionary_48x.png",
+    "64": "src/icons/WPFResourceDictionary_64x.png",
+    "128": "src/icons/WPFResourceDictionary_128x.png",
+    "256": "src/icons/WPFResourceDictionary_256x.png"
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs",
+    "https://ajax.googleapis.com/"
+  ],
+  "background": {
+    "scripts": [
+      "src/background/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file://*/*"
+      ],
+      "js": [
+        "lib/jquery-3.1.0.min.js",
+        "lib/bootstrap.min.js",
+        "lib/linq.min.js",
+        "src/js/namespaces.js",
+        "src/js/storage.js",
+        "src/js/language.js",
+        "src/js/regex.js",
+        "src/js/dom.js",
+        "src/js/speech.js",
+        "src/js/character.js",
+        "src/js/sentence.js",
+        "src/js/reader.js",
+        "src/content/content.js"
+      ],
+      "css": [
+        "src/content/content.css"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    }
+  ]
+}

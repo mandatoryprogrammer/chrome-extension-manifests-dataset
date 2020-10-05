@@ -1,0 +1,42 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Smarter CC & BCC : Murmure for Gmail™",
+  "version": "0.2.0",
+  "manifest_version": 2,
+  "description": "Send a private message to your recipients.",
+  "icons": {
+    "128": "media/images/icon-murmure.png"
+  },
+  "browser_action": {
+    "default_icon": "media/images/favicon-murmure.png",
+    "default_popup": "views/popup.htm",
+    "default_title": "About Murmure.io"
+  },
+  "background": {
+    "scripts": [
+      "javascript/background.js",
+      "javascript/vendor/jquery.js",
+      "javascript/vendor/inboxsdk.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "javascript/vendor/jquery.js"
+      ],
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "css": [
+        "stylesheets/page.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "minimum_chrome_version": "40",
+  "permissions": [
+    "storage",
+    "*://mail.google.com/*"
+  ]
+}

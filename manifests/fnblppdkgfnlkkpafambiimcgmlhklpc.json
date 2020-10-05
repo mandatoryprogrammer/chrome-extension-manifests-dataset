@@ -1,0 +1,41 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Block facebook content",
+  "description": "Block unwanted content on facebook",
+  "version": "0.0.2",
+  "manifest_version": 2,
+  "options_page": "options.html",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "*://*/*",
+    "https://www.facebook.com/*",
+    "http://*/",
+    "https://*/",
+    "storage",
+    "tabs"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": {
+      "38": "icon.png"
+    },
+    "default_title": "Block facebook unwanted content"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.facebook.com/*"
+      ],
+      "js": [
+        "script.js"
+      ]
+    }
+  ]
+}

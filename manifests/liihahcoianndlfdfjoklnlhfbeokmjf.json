@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Kernel Hub",
+  "short_name": "Kernel Hub",
+  "description": "Push your kaggle kernals directly to github",
+  "version": "1.0.8",
+  "manifest_version": 2,
+  "minimum_chrome_version": "5.0",
+  "permissions": [
+    "tabs",
+    "*://*/*",
+    "debugger",
+    "<all_urls>",
+    "webRequest",
+    "webRequestBlocking",
+    "tabs",
+    "identity",
+    "activeTab",
+    "background",
+    "storage",
+    "unlimitedStorage"
+  ],
+  "icons": {
+    "45": "icon-48.png",
+    "128": "icon.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js",
+      "public/lib/jquery.min.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "public/lib/angular.js",
+    "public/lib/angular-route.js",
+    "public/lib/jquery.min.js",
+    "public/lib/bootstrap.min.js",
+    "public/*",
+    "window.js"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/notebooks/*",
+        "*://www.kaggle.com/*"
+      ],
+      "js": [
+        "public/lib/jquery.min.js",
+        "public/lib/angular.js",
+        "public/lib/angular-route.js",
+        "public/lib/bootstrap.min.js",
+        "public/lib/bililiteRange.js",
+        "public/lib/jquery.sendkeys.js",
+        "public/lib/filesize.js",
+        "public/lib/moment.min.js",
+        "public/lib/Chart.min.js",
+        "public/lib/angular-charts.min.js",
+        "content.js",
+        "inject.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://js.stripe.com/v3/ https://checkout.stripe.com/checkout.js https://stripe.com/img/* https://www.google-analytics.com; object-src 'self'"
+}

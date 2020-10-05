@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Новинки аудиокниг онлайн в браузере",
+  "description": "Не пропустите новинки аудиокниг от сайта thebook.pub. Подпишитесь на выход книг от любимых авторов и актеров.",
+  "version": "2.9.31",
+  "background": {
+    "page": "bg.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "helper.js",
+        "injectInstalledContent.js"
+      ],
+      "all_frames": true,
+      "match_about_blank": true
+    }
+  ],
+  "sandbox": {
+    "pages": [
+      "sandbox.html"
+    ]
+  },
+  "applications": {
+    "gecko": {
+      "id": "admin@book-audio.com",
+      "strict_min_version": "56.0"
+    }
+  },
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "bookmarks",
+    "activeTab",
+    "storage",
+    "notifications",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>"
+  ]
+}

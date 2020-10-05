@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "ParLevel Autofill",
+  "description": "Receives data from the ParLevel Serial Monitor application to fill in web forms with data received from money counters.",
+  "version": "2.6.0",
+  "minimum_chrome_version": "23",
+  "permissions": [
+    "notifications",
+    "management",
+    "declarativeContent"
+  ],
+  "icons": {
+    "19": "icons/icon-19.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/daily-routes/*"
+      ],
+      "js": [
+        "js/content.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*/money-bags/*"
+      ],
+      "js": [
+        "js/content-bypass.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": "icons/icon-19.png",
+    "default_title": "Click to launch ParLevel Serial Monitor."
+  }
+}

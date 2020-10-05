@@ -1,0 +1,72 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Soda PDF Viewer",
+  "version": "1.0.1.20",
+  "description": "Allows you to view pdf files with the Soda online pdf viewer.",
+  "icons": {
+    "128": "assets/images/icon_128.png",
+    "48": "assets/images/icon_48.png",
+    "19": "assets/images/icon_19.png",
+    "16": "assets/images/icon_16.png"
+  },
+  "permissions": [
+    "fileBrowserHandler",
+    "webRequest",
+    "webRequestBlocking",
+    "tabs",
+    "webNavigation",
+    "cookies",
+    "storage",
+    "<all_urls>"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "ftp://*/*",
+        "file://*/*"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "js": [
+        "extension-core-js/contentscript.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "file_browser_handlers": [
+    {
+      "id": "open-as-pdf",
+      "default_title": "Open with PDF Viewer",
+      "file_filters": [
+        "filesystem:*.pdf"
+      ]
+    }
+  ],
+  "background": {
+    "page": "extension-core-js/pdfHandler.html"
+  },
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "19": "assets/images/icon_19.png",
+      "38": "assets/images/icon_48.png"
+    },
+    "default_title": "Show PDF URL"
+  },
+  "incognito": "split",
+  "web_accessible_resources": [
+    "content/web/viewer.html",
+    "http:/*",
+    "https:/*",
+    "ftp:/*",
+    "file:/*",
+    "chrome-extension:/*",
+    "blob:*",
+    "data:*",
+    "filesystem:/*",
+    "drive:*"
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Channelkit Old",
+  "version": "0.1.0",
+  "manifest_version": 2,
+  "description": "Organize links, articles, places, books or anything on the web into neat channels for personal or public use.",
+  "homepage_url": "https://old.channelkit.com",
+  "permissions": [
+    "storage",
+    "tabs",
+    "*://use.typekit.net/*",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "content_security_policy": "script-src 'self' https://use.typekit.net; object-src 'self'",
+  "icons": {
+    "16": "icons/icon_16.png",
+    "48": "icons/icon_48.png",
+    "128": "icons/icon_128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/icon_19.png",
+      "38": "icons/icon_38.png"
+    },
+    "default_title": "Save to Channelkit",
+    "default_popup": "src/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "src/inject/inject.js"
+      ]
+    }
+  ]
+}

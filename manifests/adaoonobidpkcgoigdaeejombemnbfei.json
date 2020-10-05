@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Khan Academy Dots",
+  "description": "Translate math notation in Khan Academy Crowdin strings.",
+  "author": "Daniel Hollas & Szymon Bubak & Krzysztof Krystek & Robert Pala",
+  "version": "3.3.0",
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
+  "web_accessible_resources": [
+    "5commastyle.gif"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true,
+    "chrome_style": true
+  },
+  "commands": {
+    "translate-math": {
+      "suggested_key": {
+        "default": "Alt+C",
+        "mac": "MacCtrl+C"
+      },
+      "description": "Click 'translate-math' button"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://crowdin.com/translate/khanacademy/*",
+        "https://crowdin.com/translate/khanacademy/*"
+      ],
+      "js": [
+        "3rdPartyLibs/zepto.min.js",
+        "KhanAcademyLibs/jipt-hack.js",
+        "KhanAcademyLibs/math-translator.js",
+        "app.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "icons": {
+    "16": "khan-logo-new-16.png",
+    "48": "khan-logo-new-48.png",
+    "128": "khan-logo-new-128.png"
+  },
+  "manifest_version": 2
+}

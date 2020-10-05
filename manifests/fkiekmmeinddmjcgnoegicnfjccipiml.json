@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "SocialShield",
+  "description": "Protection against dangerous content online",
+  "icons": {
+    "128": "images/icon.png"
+  },
+  "version": "1.2",
+  "background": {
+    "scripts": [
+      "library/jquery-3.1.0.min.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://twitter.com/*"
+      ],
+      "css": [
+        "library/sweetalert/sweetalert.css"
+      ],
+      "js": [
+        "library/jquery-3.1.0.min.js",
+        "library/jquery.foggy.min.js",
+        "library/sweetalert/sweetalert.min.js",
+        "TwitterCheck.js",
+        "checkOwnTweet.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://socialshield.herokuapp.com/authorize/*"
+      ],
+      "js": [
+        "auth.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "swearWords.json",
+    "images/Preloader_1.gif"
+  ],
+  "browser_action": {
+    "default_icon": "images/icon.png",
+    "default_title": "SocialShield",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "https://socialshield.herokuapp.com/*"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

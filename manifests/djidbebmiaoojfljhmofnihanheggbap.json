@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Unix Converter",
+  "short_name": "Unix Convert",
+  "description": "An easy-to-use all-in-one Unix Epoch timestamp converter.",
+  "author": "Isaac Oram",
+  "version": "1.2.2",
+  "manifest_version": 2,
+  "permissions": [
+    "storage",
+    "contextMenus",
+    "tabs",
+    "clipboardWrite",
+    "http://*/",
+    "https://*/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "dayjs.js",
+        "browser-polyfill.min.js",
+        "convert.js",
+        "content.js"
+      ],
+      "css": [
+        "main.css"
+      ],
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "scripts": [
+      "browser-polyfill.min.js",
+      "dayjs.js",
+      "convert.js",
+      "background.js"
+    ]
+  },
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_title": "Unix Converter"
+  },
+  "web_accessible_resources": [
+    "timezones.json"
+  ],
+  "icons": {
+    "16": "images/logo16.png",
+    "48": "images/logo48.png",
+    "96": "images/logo96.png",
+    "128": "images/logo128.png"
+  },
+  "commands": {
+    "cycle-fetch-format": {
+      "suggested_key": {
+        "default": "Alt+Shift+0"
+      },
+      "description": "Cycles the fetch format setting."
+    }
+  }
+}

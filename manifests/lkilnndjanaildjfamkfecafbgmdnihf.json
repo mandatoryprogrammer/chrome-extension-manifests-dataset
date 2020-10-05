@@ -1,0 +1,38 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Status Update Notifier for Github",
+  "version": "0.0.4",
+  "icons": {
+    "256": "/img/icon_256.png"
+  },
+  "description": "Shows notifications when Github commit status changes",
+  "permissions": [
+    "https://github.com/*",
+    "https://*.github.com/*",
+    "tabs",
+    "storage",
+    "notifications",
+    "webRequest"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://github.com/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "./dist/content-script/content-script.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "/dist/background/background.js"
+    ]
+  },
+  "options_ui": {
+    "page": "/dist/options/options.html",
+    "open_in_tab": true
+  },
+  "manifest_version": 2
+}

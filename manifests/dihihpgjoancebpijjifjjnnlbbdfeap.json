@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Less Vanity Metrics on YouTube",
+  "short_name": "Less Vanity Metrics",
+  "version": "0.0.4",
+  "manifest_version": 2,
+  "description": "Stop obsessing over views, keep creating quality content instead",
+  "homepage_url": "https://github.com/AshikNesin/less-vanity-metrics",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "dist/background.bundle.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "https://youtube.com/*"
+  ],
+  "web_accessible_resources": [
+    "dist/content.bundle.js"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/*"
+      ],
+      "js": [
+        "dist/inject.bundle.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.youtube.com/*"
+      ],
+      "css": [
+        "src/css/style.css"
+      ]
+    }
+  ]
+}

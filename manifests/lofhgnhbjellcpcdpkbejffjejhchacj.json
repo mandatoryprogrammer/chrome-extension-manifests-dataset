@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "PwdHash-PoC port",
+  "version": "0.1.0",
+  "manifest_version": 2,
+  "description": "Pwdhash-PoC 1.0 for Chrome. Automatically generates per-site passwords if you prefix your password with @@ or F2.",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "js": [
+        "pwdhash-poc/chrome/content/forge.min.js",
+        "pwdhash-poc/chrome/content/domain-extractor.js",
+        "pwdhash-poc/chrome/content/hashed-password.js",
+        "pwdhash-poc/chrome/content/pwdhash.js",
+        "null.js",
+        "AlternativeDomain.js",
+        "jquery.js",
+        "KeyHooker.js",
+        "Settings.js",
+        "pwdhash-chrome-port.js"
+      ]
+    }
+  ],
+  "options_page": "options.html",
+  "background": {
+    "page": "background.html"
+  },
+  "icons": {
+    "48": "images/icon48-stable.png",
+    "128": "images/icon128-stable.png"
+  },
+  "permissions": [
+    "tabs"
+  ],
+  "page_action": {
+    "default_icon": "images/icon19off.png",
+    "default_title": "PwdHash-PoC",
+    "default_popup": "popup.html"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Image Downloader Continued",
+  "description": "Browse and download images on a web page.",
+  "version": "2.8",
+  "minimum_chrome_version": "31",
+  "manifest_version": 2,
+  "permissions": [
+    "activeTab",
+    "downloads",
+    "<all_urls>",
+    "webNavigation"
+  ],
+  "browser_action": {
+    "default_icon": "/icon_128.png",
+    "default_popup": "/views/popup.html"
+  },
+  "icons": {
+    "16": "/icon_16.png",
+    "48": "/icon_48.png",
+    "128": "/icon_128.png"
+  },
+  "web_accessible_resources": [
+    "/scripts/injected.js"
+  ],
+  "background": {
+    "scripts": [
+      "/scripts/defaults.js"
+    ]
+  },
+  "options_page": "/views/options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "js": [
+        "/scripts/shadowInject.js"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Dialpad Extension",
+  "description": "Quick launch the Dialpad app and link phone numbers to call via Dialpad",
+  "version": "0.9.9",
+  "icons": {
+    "16": "images/icon_16.png",
+    "128": "images/icon_128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon_19.png",
+      "38": "images/icon_38.png"
+    },
+    "default_title": "Launch Dialpad"
+  },
+  "permissions": [
+    "contextMenus",
+    "tabs",
+    "storage",
+    "*://dialpad.com/"
+  ],
+  "background": {
+    "scripts": [
+      "js/lib/jquery-3.1.1.min.js",
+      "js/lib/underscore.js",
+      "js/background.js"
+    ]
+  },
+  "options_ui": {
+    "page": "html/options.html",
+    "chrome_style": true
+  },
+  "options_page": "html/options_legacy.html",
+  "content_scripts": [
+    {
+      "run_at": "document_idle",
+      "all_frames": true,
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "*://www.switch.co/*",
+        "*://dialpad.com/*",
+        "*://fstelephony.appspot.com/*"
+      ],
+      "js": [
+        "js/lib/jquery-3.1.1.min.js",
+        "js/lib/underscore.js",
+        "js/content_script.js"
+      ],
+      "css": [
+        "css/content-script.css"
+      ]
+    }
+  ]
+}

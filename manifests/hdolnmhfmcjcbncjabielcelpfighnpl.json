@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Audience",
+  "short_name": "Audience",
+  "version": "1.1",
+  "description": "Get torrent search results directly in IMDb page, you're welcome ;)",
+  "homepage_url": "https://www.facebook.com/Audienceofficialpage/",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "page": "src/bg/background.html",
+    "persistent": true
+  },
+  "options_ui": {
+    "chrome_style": false,
+    "page": "src/options_page/options.html"
+  },
+  "page_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "Audience",
+    "default_popup": "src/options_page/options.html"
+  },
+  "permissions": [
+    "storage",
+    "*://*.imdb.com/*",
+    "*://*.yts.ag/*"
+  ],
+  "web_accessible_resources": [
+    "loaders/*",
+    "icons/*.png"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.imdb.com/title/*"
+      ],
+      "js": [
+        "js/jquery/jquery.js",
+        "src/inject/inject.js",
+        "src/bg/background.js"
+      ],
+      "css": [
+        "src/inject/inject.css"
+      ]
+    }
+  ]
+}

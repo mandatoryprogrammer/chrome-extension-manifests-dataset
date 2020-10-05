@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Nickelled",
+  "short_name": "Nickelled",
+  "description": "Allows you to create amazing product guides for your web application",
+  "version": "1.0.5",
+  "background": {
+    "scripts": [
+      "background.js",
+      "check_install.js",
+      "content_security_policy.js"
+    ],
+    "persistent": true
+  },
+  "icons": {
+    "16": "images/nickelled_logo16.png",
+    "48": "images/nickelled_logo48.png",
+    "128": "images/nickelled_logo128.png"
+  },
+  "browser_action": {
+    "name": "Nickelled",
+    "default_icon": {
+      "19": "images/nickelled_inactive_19.png",
+      "38": "images/nickelled_inactive_38.png"
+    },
+    "default_title": "Nickelled Guide Creation"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "https://make.nickelled.com/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "persist.js"
+      ]
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://localhost/*",
+      "*://127.0.0.1/*",
+      "*://*.nickelled.com/*"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "<all_urls>",
+    "background",
+    "webRequest",
+    "webRequestBlocking",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "web_accessible_resources": [
+    "images/controller/play.png",
+    "images/controller/record.png",
+    "images/controller/save.png",
+    "images/controller/stop.png"
+  ]
+}

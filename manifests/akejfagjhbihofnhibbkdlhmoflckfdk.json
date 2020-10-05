@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "DashNotes",
+  "description": "Effortlessly take quick notes on your new tab. Browse the web and gather the best.",
+  "version": "0.4",
+  "permissions": [
+    "contextMenus",
+    "http://dashnotes.rocketfuse.com/*"
+  ],
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.youtube.com/*",
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/mutation-summary.js",
+        "contentscript.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    "templates/*",
+    "images/*.png",
+    "js/angular/*",
+    "css/*",
+    "fonts/*"
+  ],
+  "content_security_policy": "script-src 'self' https://www.youtube.com; object-src 'self' https://www.youtube.com",
+  "chrome_url_overrides": {
+    "newtab": "templates/tab.html"
+  },
+  "manifest_version": 2
+}

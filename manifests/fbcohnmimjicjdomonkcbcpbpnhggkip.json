@@ -1,0 +1,90 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "description": "__MSG_extensionDescription__",
+  "manifest_version": 2,
+  "name": "__MSG_extensionName__",
+  "short_name": "MyJDownloader",
+  "version": "3.3.7",
+  "author": "AppWork GmbH",
+  "homepage_url": "https://my.jdownloader.org",
+  "icons": {
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "contextMenus",
+    "<all_urls>"
+  ],
+  "background": {
+    "page": "index.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "images/icon32.png",
+    "default_title": "MyJDownloader",
+    "default_popup": "popup.html"
+  },
+  "options_ui": {
+    "page": "index.html#!/settings"
+  },
+  "web_accessible_resources": [
+    "toolbar.html",
+    "autograbber-indicator.html",
+    "res/browser_solver_template.html"
+  ],
+  "commands": {
+    "toggle-clipboard-observer": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+X",
+        "mac": "Command+Shift+X"
+      },
+      "description": "__MSG_toggle_clipboard_observer__"
+    },
+    "auto-grab-downloads": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Y",
+        "mac": "Command+Shift+Y"
+      },
+      "description": "__MSG_toggle_auto_grab_links__"
+    }
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "contentscripts/rc2Contentscript.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "<all_urls>"
+      ]
+    },
+    {
+      "js": [
+        "contentscripts/rc2LoadingIndicator.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "matches": [
+        "<all_urls>"
+      ]
+    },
+    {
+      "js": [
+        "contentscripts/webinterfaceEnhancer.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true,
+      "matches": [
+        "http://my.jdownloader.org/*",
+        "https://my.jdownloader.org/*",
+        "http://my.jdownloader.org/*"
+      ]
+    }
+  ],
+  "default_locale": "en"
+}

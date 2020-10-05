@@ -1,0 +1,68 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "EQUAL Wallet",
+  "short_name": "EQUAL Wallet",
+  "version": "1.2.1",
+  "manifest_version": 2,
+  "description": "EQUAL Wallet",
+  "author": "http://equal.tech",
+  "browser_action": {
+    "default_icon": {
+      "16": "images/new-icon-16.png",
+      "48": "images/new-icon-48.png"
+    },
+    "default_title": "Open the popup"
+  },
+  "icons": {
+    "16": "images/new-icon-16.png",
+    "48": "images/new-icon-48.png",
+    "128": "images/new-icon-128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "server/background.js",
+      "hot-reload.js"
+    ],
+    "persistent": true
+  },
+  "web_accessible_resources": [
+    "index.html",
+    "chrome-extension://*",
+    "inpage.js",
+    "web3.min.js",
+    "*.ttf"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "file://*/*",
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "contentscript.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "externally_connectable": {
+    "matches": [
+      "http://*/*",
+      "https://*/*"
+    ]
+  },
+  "permissions": [
+    "https://*/*",
+    "http://*/*",
+    "tabs",
+    "activeTab",
+    "notifications",
+    "background",
+    "clipboardRead",
+    "clipboardWrite",
+    "<all_urls>"
+  ]
+}

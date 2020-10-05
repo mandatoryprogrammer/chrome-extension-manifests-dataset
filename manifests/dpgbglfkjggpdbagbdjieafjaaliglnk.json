@@ -1,0 +1,42 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Make Me Unsee Comments",
+  "short_name": "MMUC",
+  "version": "0.1.2",
+  "description": "Hides comments according to rating treshhold",
+  "icons": {
+    "128": "icon_128.png"
+  },
+  "page_action": {
+    "default_icon": "icon_128.png",
+    "default_title": "MMUC",
+    "default_popup": "popup.html"
+  },
+  "author": "Victor Maslov aka Nakilon",
+  "permissions": [
+    "tabs",
+    "webNavigation",
+    "http://www.reddit.com/*",
+    "http://habrahabr.ru/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.reddit.com/*",
+        "http://habrahabr.ru/*"
+      ],
+      "js": [
+        "jquery-1.7.2.min.js",
+        "content.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

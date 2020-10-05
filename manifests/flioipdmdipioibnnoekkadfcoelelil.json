@@ -1,0 +1,88 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "description": "Try out the new navigation!",
+  "version": "0.79.0",
+  "manifest_version": 2,
+  "name": "Atlassian navigation extension",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "https://*.atlassian.com/*",
+    "https://*.atlassian.net/*",
+    "https://*.jira-dev.com/*",
+    "https://prototype.guide/*",
+    "http://proto/*",
+    "http://proto.atlassian.design/*"
+  ],
+  "optional_permissions": [
+    "https://staging.bb-inf.net/*",
+    "https://bitbucket.org/*"
+  ],
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": false
+  },
+  "browser_action": {
+    "default_icon": "icon48.png",
+    "default_title": "Click to show navigation options"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.atlassian.net/*",
+        "https://*.jira-dev.com/*",
+        "https://staging.bb-inf.net/*",
+        "https://bitbucket.org/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "/autoLoadInjector.bundle.js"
+      ],
+      "css": [
+        "/jiraContent.css",
+        "/confContent.css",
+        "/bbContent.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://*.atlassian.net/*",
+        "https://*.jira-dev.com/*",
+        "https://staging.bb-inf.net/*",
+        "https://bitbucket.org/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "/autoPopupInjector.bundle.js"
+      ]
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "http://localhost:3000/*",
+      "https://*.atlassian.com/*",
+      "https://*.atlassian.net/*",
+      "https://staging.bb-inf.net/*",
+      "https://bitbucket.org/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "autoLoadInjector.bundle.js",
+    "popupInjector.bundle.js",
+    "jiraContent.bundle.js",
+    "confContent.bundle.js",
+    "bbContent.bundle.js",
+    "nav.css"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA3jljrILH20Lq9ZeTRKFXS3y88P0rb6ejYxQA5if0iWY9eTtT9rlgGOvd4MRyT3zWb9vL5rFLxIIdLdrxeaUE8VIZgoSKB6AMRvbHQHEyOmaoMSM31fjSXMOVjM14Ze8Pu4WXy1RXITP2okq9ihh3vord0DSO3gK/u0/BzIlStq5A07CrSOw2LRpJHoNNoefZ9mXHPap9vYtGYToFzxFhFO+elcTP4itvCN0Ohv8KnA4pa8gyqK02cTuCdrZfDyS2mKUlKM4h3rHUpsnmsFge4A7LsL4iF4DLt8seVfk48twuFbajCPUsXwtZYPypdQjL0Jwcdzt/U4r6Lmei5SeccwIDAQAB"
+}

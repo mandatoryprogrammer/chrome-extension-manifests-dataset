@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "LinkBuddy",
+  "description": "Helps you automatically hyperlink keywords while you type in Gmail.",
+  "version": "1.4.5",
+  "browser_action": {
+    "default_icon": "img/link16.png",
+    "default_popup": "popup.html",
+    "default_title": "LinkBuddy"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://www.linkbuddy.io/*"
+      ],
+      "js": [
+        "js/jquery-3.2.1.min.js",
+        "contentscript.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/jquery-3.2.1.min.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "icons": {
+    "16": "img/link16.png",
+    "48": "img/lb48.png",
+    "128": "img/link128.png"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "cookies",
+    "https://www.linkbuddy.io/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://www.linkbuddy.io/*"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com https://www.linkbuddy.io/*; connect-src * data: https://www.googleapis.com/oauth2/*; object-src 'self'"
+}

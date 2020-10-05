@@ -1,0 +1,75 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Yeezy Sieupply: The Ultimate Yeezy Supply AIO",
+  "version": "1.0.2",
+  "manifest_version": 2,
+  "description": "Add to cart, autofill, autocheckout for Yeezy Supply. All rights reserved, Kicks For Us LLC.",
+  "homepage_url": "https://kicksfor.us",
+  "background": {
+    "scripts": [
+      "jquery.js",
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_idle",
+      "all_frames": true,
+      "matches": [
+        "*://*.yeezysupply.com/*/checkouts/*",
+        "*://checkout.shopifycs.com/*"
+      ],
+      "js": [
+        "jquery.js",
+        "bootstrap-notify.min.js",
+        "content_script_checkout.js"
+      ]
+    },
+    {
+      "run_at": "document_end",
+      "all_frames": true,
+      "matches": [
+        "*://kicksfor.us/app/yeezysieupply/?Country=*"
+      ],
+      "js": [
+        "jquery.js",
+        "bootstrap-notify.min.js",
+        "bot_controller.js"
+      ]
+    },
+    {
+      "run_at": "document_idle",
+      "all_frames": true,
+      "matches": [
+        "*://*.yeezysupply.com/*"
+      ],
+      "js": [
+        "jquery.js",
+        "bootstrap-notify.min.js",
+        "bot.js"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "16.png",
+    "48": "48.png",
+    "128": "128.png"
+  },
+  "web_accessible_resources": [
+    "injected.js",
+    "find_product.js",
+    "payment.js",
+    "addto.js",
+    "check_cart.js"
+  ],
+  "browser_action": {
+    "default_title": "Yeezy Sieupply"
+  },
+  "permissions": [
+    "*://*.yeezysupply.com/*",
+    "tabs",
+    "storage"
+  ],
+  "short_name": "Yeezy Supply: AIO"
+}

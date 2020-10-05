@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Photo Viewer",
+  "version": "0.3.2",
+  "manifest_version": 2,
+  "description": "__MSG_manifest_description__",
+  "default_locale": "en",
+  "icons": {
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "page_action": {
+    "default_icon": {
+      "19": "icons/icon19-off.png",
+      "38": "icons/icon38-off.png"
+    },
+    "default_title": "Photo Viewer"
+  },
+  "background": {
+    "scripts": [
+      "background/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.pinkbike.com/*",
+        "*://*.mtb-news.de/forum/t/*",
+        "*://fotos.mtb-news.de/*"
+      ],
+      "js": [
+        "lib/q.min.js",
+        "content/Photo.js",
+        "content/UrlHelper.js",
+        "content/PageLoader.js",
+        "content/ScrollListener.js",
+        "content/PageController.js",
+        "content/parser/Parser.js",
+        "content/parser/IbcAlbum.js",
+        "content/parser/IbcThread.js",
+        "content/parser/PinkbikeAlbum.js",
+        "content/parser/PinkbikeThread.js",
+        "content/Renderer.js",
+        "content/Main.js"
+      ],
+      "css": [
+        "style/album.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "style/album.css",
+    "fonts/*.woff"
+  ],
+  "permissions": [
+    "tabs"
+  ]
+}

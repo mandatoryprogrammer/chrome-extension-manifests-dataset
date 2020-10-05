@@ -1,0 +1,60 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_appName__",
+  "description": "__MSG_appDesc__",
+  "default_locale": "en",
+  "short_name": "AIO Trello",
+  "version": "0.1.7",
+  "options_page": "options.html",
+  "icons": {
+    "16": "img/16x16.png",
+    "24": "img/24x24.png",
+    "32": "img/32x32.png",
+    "48": "img/48x48.png",
+    "64": "img/64x64.png",
+    "128": "img/128x128.png",
+    "256": "img/256x256.png",
+    "512": "img/512x512.png"
+  },
+  "permissions": [
+    "*://trello.com/*",
+    "tabs",
+    "storage"
+  ],
+  "web_accessible_resources": [
+    "img/*",
+    "css/*",
+    "tmpl/*",
+    "docs/*",
+    "lib/*",
+    "board.html"
+  ],
+  "background": {
+    "scripts": [
+      "js/events.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://trello.com/*"
+      ],
+      "js": [
+        "lib/jquery-3.0.0.min.js",
+        "lib/lodash-4.17.4.min.js",
+        "js/config.js",
+        "js/aio-trello.js",
+        "js/analytics.js",
+        "js/board.js"
+      ],
+      "css": [
+        "css/aio-trello.css"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+}

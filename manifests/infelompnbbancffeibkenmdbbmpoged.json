@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "version": "0.2.4",
+  "name": "Web Messenger",
+  "description": "Access to WhatsApp official Web messenger in a standalone sandboxed window",
+  "icons": {
+    "16": "data/icons/16.png",
+    "32": "data/icons/32.png",
+    "48": "data/icons/48.png",
+    "64": "data/icons/64.png",
+    "128": "data/icons/128.png",
+    "256": "data/icons/256.png"
+  },
+  "homepage_url": "http://add0n.com/whatsapp-messenger.html",
+  "permissions": [
+    "storage",
+    "tabs"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "16": "data/icons/16.png",
+      "32": "data/icons/32.png",
+      "48": "data/icons/48.png",
+      "64": "data/icons/64.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://web.whatsapp.com/"
+      ],
+      "js": [
+        "data/inject.js"
+      ],
+      "css": [
+        "data/inject.css"
+      ],
+      "all_frames": true,
+      "run_at": "document_start"
+    }
+  ],
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "data/window/home.svg",
+    "data/window/reload.svg",
+    "data/window/settings.svg"
+  ],
+  "options_ui": {
+    "page": "data/options/index.html",
+    "chrome_style": true
+  }
+}

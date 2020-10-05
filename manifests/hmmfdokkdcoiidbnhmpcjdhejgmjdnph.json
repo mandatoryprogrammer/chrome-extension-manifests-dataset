@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "KeyReel Free Password Manager & Vault",
+  "short_name": "KeyReel",
+  "author": "Auxoft LLC",
+  "description": "Your phone as cloud-free login key: KeyReel password manager, vault.",
+  "version": "20.9.25.0",
+  "homepage_url": "https://www.keyreel.io",
+  "default_locale": "en",
+  "applications": {
+    "gecko": {
+      "id": "keyreel@keyreel.io",
+      "strict_min_version": "57.0"
+    }
+  },
+  "icons": {
+    "16": "img/icon_16.png",
+    "48": "img/icon_48.png",
+    "128": "img/icon_128.png"
+  },
+  "background": {
+    "scripts": [
+      "js/browser-polyfill.min.js",
+      "js/background.min.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "match_about_blank": true,
+      "run_at": "document_start",
+      "js": [
+        "js/browser-polyfill.min.js",
+        "js/content.min.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*"
+      ]
+    }
+  ],
+  "permissions": [
+    "storage",
+    "webNavigation",
+    "activeTab",
+    "privacy",
+    "http://*/*",
+    "https://*/*",
+    "file://*/*",
+    "tabs"
+  ],
+  "browser_action": {
+    "default_icon": "img/browser_action_icon_inactive_38x38.png",
+    "default_title": "KeyReel Service is not running",
+    "default_popup": "popup.html"
+  },
+  "web_accessible_resources": [
+    "img/*.png",
+    "js/*.map",
+    "js/*.js",
+    "css/*.css"
+  ]
+}

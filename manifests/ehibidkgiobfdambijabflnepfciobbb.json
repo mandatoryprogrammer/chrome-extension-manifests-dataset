@@ -1,0 +1,93 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "KeyKong Extension",
+  "short_name": "KeyKong Extension",
+  "version": "0.0.0.10",
+  "description": "KeyKong is a simple app to browse the web free without the fear of forgetting your passwords or having your accounts hacked.",
+  "default_locale": "en",
+  "author": "Sonata",
+  "homepage_url": "https://keykong.io",
+  "icons": {
+    "16": "images/icon16.png",
+    "32": "images/icon32.png",
+    "48": "images/icon48.png",
+    "96": "images/icon96.png",
+    "128": "images/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "content/autofill.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "content/autofiller.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "commands": {
+    "autofill_login": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+L"
+      },
+      "description": "KeyKong Extension"
+    },
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Y",
+        "linux": "Ctrl+Shift+U"
+      }
+    }
+  },
+  "permissions": [
+    "tabs",
+    "contextMenus",
+    "storage",
+    "unlimitedStorage",
+    "clipboardWrite",
+    "idle",
+    "http://*/*",
+    "https://*/*",
+    "webRequest",
+    "webRequestBlocking",
+    "cookies"
+  ],
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon19.png",
+      "38": "images/icon38.png"
+    },
+    "default_title": "KeyKong",
+    "default_popup": "popup/index.html"
+  },
+  "externally_connectable": {
+    "matches": [
+      "https://my.keykong.io/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "dialog.html",
+    "dialog.js"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

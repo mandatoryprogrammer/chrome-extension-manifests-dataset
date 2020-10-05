@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "PlaySpeed",
+  "short_name": "PlaySpeed",
+  "description": "The PlaySpeed Chrome Plugin gives you control over how fast or slow a video is played on YouTube, from 0.25x to 2x speed play",
+  "version": "0.4.7",
+  "icons": {
+    "16": "img/icon_128.png",
+    "48": "img/icon_128.png",
+    "128": "img/icon_128.png"
+  },
+  "background": {
+    "scripts": [
+      "js/lib/jquery-1.7.1.min.js",
+      "js/bg.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "*://*.youtube.com/*",
+    "https://*.youtube.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.youtube.com/watch*",
+        "https://*.youtube.com/watch*"
+      ],
+      "js": [
+        "js/lib/jquery-1.7.1.min.js",
+        "js/page.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.youtube.com/embed*",
+        "https://*.youtube.com/embed*"
+      ],
+      "js": [
+        "js/lib/jquery-1.7.1.min.js",
+        "js/yt_embed.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    }
+  ],
+  "browser_action": {
+    "default_title": "Control YouTube video speed. Twice as fast for those slow talks & lectures or half speed to really see how a dance move works.",
+    "default_icon": "img/icon_128.png",
+    "default_popup": "popup.html"
+  },
+  "web_accessible_resources": [
+    "img/icon.png",
+    "img/icon_16.png",
+    "img/icon_rewind.png",
+    "css/yt.css"
+  ],
+  "manifest_version": 2
+}

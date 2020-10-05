@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "minimum_chrome_version": "33",
+  "name": "Ubiquiti Device Discovery Tool",
+  "short_name": "UBNT Discovery",
+  "description": "Discover Ubiquiti devices on your local network.",
+  "version": "0.2.48",
+  "app": {
+    "background": {
+      "scripts": [
+        "js/background.js",
+        "js/lib/ip_calc.js",
+        "js/unifi_bundles.js",
+        "js/ssh_commander.js"
+      ]
+    }
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://*.ubnt.com/*",
+      "*://*.ui.com/*",
+      "*://*.amplifi.com/*"
+    ]
+  },
+  "icons": {
+    "32": "img/icon32.png",
+    "64": "img/icon64.png",
+    "128": "img/icon128.png"
+  },
+  "offline_enabled": true,
+  "permissions": [
+    "system.network",
+    "clipboardRead",
+    "clipboardWrite",
+    "notifications",
+    "storage",
+    "unlimitedStorage",
+    {
+      "socket": [
+        "tcp-connect",
+        "resolve-host",
+        "udp-bind:*:*",
+        "udp-send-to:*:*"
+      ]
+    }
+  ],
+  "sockets": {
+    "tcp": {
+      "connect": ""
+    },
+    "udp": {
+      "send": "*",
+      "bind": "*",
+      "multicastMembership": ""
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_manifest_name__",
+  "short_name": "__MSG_manifest_short_name__",
+  "description": "__MSG_manifest_description__",
+  "default_locale": "en",
+  "version": "0.38",
+  "icons": {
+    "64": "assets/images/logo-64.png",
+    "128": "assets/images/logo-128.png"
+  },
+  "browser_action": {
+    "default_popup": "popup/index.html"
+  },
+  "background": {
+    "scripts": [
+      "scripts/events.background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*",
+        "http://*/*"
+      ],
+      "js": [
+        "scripts/ctc.content.js"
+      ],
+      "css": [
+        "assets/css/ctc.content.css"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "https://www.google.com/calendar/*",
+        "https://calendar.google.com/calendar/*"
+      ],
+      "js": [
+        "scripts/gc.content.js"
+      ],
+      "css": [
+        "assets/css/gc.content.css"
+      ]
+    }
+  ],
+  "permissions": [
+    "storage",
+    "identity",
+    "https://elevate-api.serverdata.net/*"
+  ],
+  "web_accessible_resources": [
+    "assets/*"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com 'unsafe-eval' 'sha256-rCs+PE9jSqXeEtt5LDTouGqlYo4ifJhnJA3Dqiji5h0='; object-src 'self'"
+}

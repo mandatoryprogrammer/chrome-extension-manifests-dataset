@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Ukraïnśka Latynka | Українська латинка",
+  "short_name": "Latynka",
+  "author": "Pavel paiv Ivashkov",
+  "description": "__MSG_extension_description__",
+  "version": "1.1.0",
+  "default_locale": "en",
+  "icons": {
+    "16": "img/icon16.png",
+    "32": "img/icon32.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "img/icon16.png",
+      "32": "img/icon32.png"
+    },
+    "default_popup": "popup.html",
+    "default_title": "__MSG_extension_button_tooltip__"
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "js": [
+        "js/content.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://paiv.github.io/latynka/v1*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "js/github_v1.js"
+      ]
+    }
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "https://git.io/"
+  ],
+  "minimum_chrome_version": "22",
+  "options_page": "options.html"
+}

@@ -1,0 +1,101 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Hoverify",
+  "description": "Inspect, Pick colors, Capture & More",
+  "homepage_url": "https://tryhoverify.com",
+  "version": "3.0.27",
+  "author": "Himanshu Mishra",
+  "minimum_chrome_version": "74",
+  "applications": {
+    "gecko": {
+      "id": "hoverify@zicsus.github.io",
+      "strict_min_version": "67.0"
+    }
+  },
+  "icons": {
+    "16": "imgs/icon16.png",
+    "32": "imgs/icon32.png",
+    "48": "imgs/icon48.png",
+    "128": "imgs/icon128.png"
+  },
+  "web_accessible_resources": [
+    "content_scripts/*",
+    "css/*",
+    "imgs/*"
+  ],
+  "permissions": [
+    "<all_urls>",
+    "activeTab",
+    "tabs",
+    "contextMenus",
+    "storage",
+    "unlimitedStorage",
+    "webRequest",
+    "webRequestBlocking",
+    "webNavigation"
+  ],
+  "browser_action": {
+    "default_icon": "imgs/icon32.png",
+    "default_popup": "popup/home/home.html",
+    "default_title": "Hoverify"
+  },
+  "background": {
+    "scripts": [
+      "js/browser-polyfill.min.js",
+      "js/bg.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*",
+        "file:///*"
+      ],
+      "js": [
+        "js/cs.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*/*",
+        "file:///*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "js/console.js"
+      ]
+    }
+  ],
+  "commands": {
+    "toggle-inspector": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+1",
+        "mac": "Command+Shift+1"
+      },
+      "description": "Toggle inspector"
+    },
+    "toggle-ce": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+2",
+        "mac": "Command+Shift+2"
+      },
+      "description": "Toggle color eyedropper"
+    },
+    "capture-visible-area": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+3",
+        "mac": "Command+Shift+3"
+      },
+      "description": "Capture visible area of the current tab"
+    },
+    "capture-all-tabs": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+4",
+        "mac": "Command+Shift+4"
+      },
+      "description": "Capture visible part of the all the tabs"
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "author": "Comercia",
+  "name": "ComerciaJS DevTools",
+  "version": "1.3",
+  "description": "Extends the Chrome Developer Tools, adding support to test ComerciaJS apps on your browser",
+  "minimum_chrome_version": "10.0",
+  "devtools_page": "devtools.html",
+  "icons": {
+    "16": "./assets/icons/icon-full-16.png",
+    "48": "./assets/icons/icon-full-46.png"
+  },
+  "background": {
+    "scripts": [
+      "./scripts/enums.js",
+      "./scripts/background/extension-behaviour.js",
+      "./scripts/background/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "40": "./assets/icons/icon-gray-16.png"
+    },
+    "default_title": "ComerciaJS DevTools",
+    "default_popup": "popups/not-found.html"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "scripts/content-scripts/detector.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "manifest_version": 2
+}

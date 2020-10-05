@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Naver Cafe chatting alertor 2",
+  "description": "네이버 카페 채팅이 올라오면 알림 소리가 들립니다",
+  "author": "izure1 <admin@izure.org>",
+  "version": "2.0.2",
+  "icons": {
+    "48": "icons/btn_snd_on.png"
+  },
+  "permissions": [
+    "<all_urls>",
+    "*://*/*",
+    "activeTab",
+    "tabs",
+    "background",
+    "unlimitedStorage",
+    "storage",
+    "notifications"
+  ],
+  "browser_action": {
+    "default_title": "title",
+    "default_popup": "pages/popup.html"
+  },
+  "background": {
+    "persistent": false,
+    "page": "pages/background.html"
+  },
+  "options_page": "pages/options.html",
+  "content_scripts": [
+    {
+      "js": [
+        "js/manifest.js",
+        "js/vendor.js",
+        "js/content.js"
+      ],
+      "run_at": "document_end",
+      "matches": [
+        "https://chat.cafe.naver.com/room/*",
+        "https://talk.cafe.naver.com/channels/*"
+      ],
+      "all_frames": true
+    }
+  ],
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "web_accessible_resources": [
+    "js/content.js",
+    "media/snd_alert.mp3",
+    "media/snd_keyboard.mp3",
+    "media/snd_login.mp3",
+    "image/btn_snd_off.png",
+    "image/btn_snd_on.png",
+    "image/unknown_profile.png"
+  ]
+}

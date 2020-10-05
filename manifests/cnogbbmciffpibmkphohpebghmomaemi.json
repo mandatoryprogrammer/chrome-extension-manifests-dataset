@@ -1,0 +1,165 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "BitTube AirTime, Donations, Adblocker, Wallet",
+  "version": "4.0.0.2",
+  "author": "Saber Maram",
+  "description": "Monetize your time while you are browsing the web.",
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "cookies",
+    "notifications",
+    "privacy",
+    "proxy",
+    "storage",
+    "tabs",
+    "unlimitedStorage",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>"
+  ],
+  "externally_connectable": {
+    "ids": [
+      "*"
+    ],
+    "matches": [
+      "*://airshare.bittube.app/*",
+      "*://airshare.bittubeapp.com/*",
+      "*://pay.bittube.cash/*",
+      "*://bittube.app/*",
+      "*://bittubeapp.com/*",
+      "*://bittube-airtime-extension.firebaseapp.com/*",
+      "*://bittube-airtime-extension-dev.firebaseapp.com/*",
+      "*://bittube.tv/*",
+      "*://bittubers.com/*",
+      "*://beta.bittube.tv/*",
+      "*://beta.bittubers.com/*",
+      "*://testing.bittubers.com/*"
+    ],
+    "accepts_tls_channel_id": false
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "incognito": "split",
+  "default_locale": "en",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://pay.bittube.cash/tubepay/client.html",
+        "*://bittubeapp.com/tubepay/client.html",
+        "*://bittube-airtime-extension.firebaseapp.com/tubepay/client.html",
+        "*://bittube-airtime-extension-dev.firebaseapp.com/tubepay/client.html",
+        "*://pay.bittube.cash/tubepay/client-new.html",
+        "*://bittubeapp.com/tubepay/client-new.html",
+        "*://bittube-airtime-extension.firebaseapp.com/tubepay/client-new.html",
+        "*://bittube-airtime-extension-dev.firebaseapp.com/tubepay/client-new.html",
+        "*://pay.bittube.cash/wallet/*",
+        "*://bittubeapp.com/wallet/*",
+        "*://bittube-airtime-extension.firebaseapp.com/wallet/*",
+        "*://bittube-airtime-extension-dev.firebaseapp.com/wallet/*"
+      ],
+      "js": [
+        "plugins/clientcomms.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "external/parse-domain.js",
+        "plugins/NewWebinfo/contentID.js",
+        "plugins/blackbox/js/loader.js",
+        "plugins/blackbox/js/events.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "assets/js/walletHelpers.js",
+        "external/i18/i18next.min.js",
+        "external/i18/loc-i18next.min.js",
+        "external/i18/i18nextBrowserLanguageDetector.min.js",
+        "external/i18/i18nextXHRBackend.min.js",
+        "external/i18/i18-translate.js"
+      ]
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "plugins/uBlock/js/vapi.js",
+        "plugins/uBlock/js/vapi-client.js",
+        "plugins/uBlock/js/contentscript.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": false,
+      "js": [
+        "plugins/uBlock/js/scriptlets/subscriber.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "*://bittube-airtime-extension.firebaseapp.com/*",
+        "*://bittube-airtime-extension-dev.firebaseapp.com/*"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "browser_action": {
+    "default_popup": "index.html",
+    "default_icon": {
+      "16": "assets/images/get_started16.png",
+      "32": "assets/images/get_started32.png",
+      "48": "assets/images/get_started48.png",
+      "128": "assets/images/get_started128.png"
+    },
+    "default_title": "BitTube AirTime Extension"
+  },
+  "icons": {
+    "16": "assets/images/get_started16.png",
+    "32": "assets/images/get_started32.png",
+    "48": "assets/images/get_started48.png",
+    "128": "assets/images/get_started128.png"
+  },
+  "content_security_policy": "script-src 'self'  https://apis.google.com 'unsafe-eval'; object-src 'self'",
+  "manifest_version": 2,
+  "oauth2": {
+    "client_id": "632275942486-da48fumn63sfhjej13c3rh572f8rc5ii.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/userinfo.profile"
+    ]
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlSDQl34QwXh2kd8AJe7Qey2BgXFHDezRMiVF+tb6zKA/3pO2VKxbLSvSqhJVLbXCiksVpFRpEahpnwGhgmzZcff5RHNtxA5DUvBhOUA7/Ua40Sze9VMG6yNHYHjnDwb4UAW+sgxpE/Yr8BjeL6cCoR2gE69K1NKtPaKdbT6rCLD3E2wI1P8dnPrhBsM5enZBFNLU9WNlIwbBJHirC1TEzLsAgI/RjjVY7aozd/juyFGARQ+Z5AHadfQ2FFYTkNZqxcPwBmn04sHv8ifsMXKzneQ0AkgdyLi4pAO+klznFaqT132qV0CCH5X/fJfcCtlZZUxpTuhWq5pV+gbVKSyzqQIDAQAB",
+  "storage": {
+    "managed_schema": "plugins/uBlock/managed_storage.json"
+  },
+  "commands": {
+    "launch-element-picker": {
+      "description": "__MSG_popupTipPicker__"
+    },
+    "launch-element-zapper": {
+      "description": "__MSG_popupTipZapper__"
+    },
+    "launch-logger": {
+      "description": "__MSG_popupTipLog__"
+    }
+  },
+  "web_accessible_resources": [
+    "web_accessible_resources/*",
+    "_locales/*"
+  ]
+}

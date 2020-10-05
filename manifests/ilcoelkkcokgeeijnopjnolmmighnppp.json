@@ -1,0 +1,67 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Ruto - XPath Finder",
+  "short_name": "Ruto",
+  "manifest_version": 2,
+  "version": "7.0.0",
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "description": "Ruto brings the best XPath to you. We are striving hard to improve better performance and more new features",
+  "homepage_url": "https://sites.google.com/testleaf.com/ruto/",
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "windows": "Alt+R",
+        "mac": "Alt+R",
+        "linux": "Alt+R",
+        "default": "Alt+R"
+      },
+      "description": "Get different types of XPath in a click"
+    }
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "match_about_blank": true,
+      "all_frames": true,
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content/content.js",
+        "content/jquery.min.js",
+        "content/getMethodOrVarText.js",
+        "content/handleTable.js",
+        "content/getCss.js",
+        "content/search.js",
+        "content/record.js",
+        "content/angularLocators.js"
+      ],
+      "css": [
+        "content/style.css"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "contextMenus",
+    "storage",
+    "notifications",
+    "downloads",
+    "downloads.open"
+  ],
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "icons": {
+    "16": "logo/16.png",
+    "48": "logo/48.png",
+    "128": "logo/128.png"
+  },
+  "browser_action": {
+    "default_title": "Ruto offered by TestLeaf",
+    "default_popup": "popup.html"
+  },
+  "options_page": "option.html",
+  "offline_enabled": true
+}

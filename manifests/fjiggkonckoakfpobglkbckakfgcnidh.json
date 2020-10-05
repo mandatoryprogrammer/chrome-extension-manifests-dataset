@@ -1,0 +1,95 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Jumble Email Encryption",
+  "author": "Jumble Limited",
+  "short_name": "Jumble",
+  "description": "Zero knowledge, simple email encryption by Jumble; secures your emails and attachments in Gmail, Google Apps, Outlook and more",
+  "version": "0.1.1.87",
+  "icons": {
+    "19": "images/small-icon-default.png",
+    "38": "images/large-icon-default.png",
+    "48": "images/extension-manager.png",
+    "128": "images/installation.png"
+  },
+  "browser_action": {
+    "default_icon": "images/large-icon-default.png",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://mail.google.com/*",
+        "https://mail.google.com/*"
+      ],
+      "css": [
+        "css/custom-input.css",
+        "css/jquery.simple-dtpicker.css",
+        "css/inpage-styles.css",
+        "css/password-strength.css"
+      ],
+      "js": [
+        "vendor/jquery-1.9.1.js",
+        "vendor/moment.min.js",
+        "vendor/moment-timezone.js",
+        "vendor/jstz.min.js",
+        "contentscript.js",
+        "lib/Emails.js",
+        "lib/cryptopid/pidcrypt_c.js",
+        "lib/cryptopid/pidcrypt_util_c.js",
+        "lib/cryptopid/asn1_c.js",
+        "lib/cryptopid/jsbn_c.js",
+        "lib/cryptopid/rng_c.js",
+        "lib/cryptopid/prng4_c.js",
+        "lib/cryptopid/rsa_c.js",
+        "lib/cryptopid/md5_c.js",
+        "lib/cryptopid/aes_core_c.js",
+        "lib/cryptopid/aes_cbc_c.js",
+        "vendor/spin.min.js",
+        "vendor/jquery.spin.js",
+        "lib/fadeutils.js",
+        "vendor/jquery-dateFormat.min.js",
+        "vendor/jquery.simple-dtpicker.js",
+        "vendor/inboxsdk.js",
+        "vendor/jquery.pwstrength.min.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "eventPage.js",
+      "vendor/jquery-1.9.1.js",
+      "lib/cryptopid/pidcrypt_c.js",
+      "lib/cryptopid/pidcrypt_util_c.js",
+      "lib/cryptopid/asn1_c.js",
+      "lib/cryptopid/jsbn_c.js",
+      "lib/cryptopid/rng_c.js",
+      "lib/cryptopid/prng4_c.js",
+      "lib/cryptopid/rsa_c.js",
+      "lib/cryptopid/md5_c.js",
+      "lib/cryptopid/aes_core_c.js",
+      "lib/cryptopid/aes_cbc_c.js",
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "web_accessible_resources": [
+    "images/*",
+    "images/intro/*",
+    "css/*",
+    "lib/*"
+  ],
+  "permissions": [
+    "management",
+    "*://mail.google.com/*",
+    "https://www.jumble.io/*",
+    "tabs",
+    "storage",
+    "downloads",
+    "downloads.open",
+    "unlimitedStorage",
+    "clipboardWrite"
+  ]
+}

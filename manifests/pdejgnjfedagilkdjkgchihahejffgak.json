@@ -1,0 +1,97 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "DescicloApp",
+  "description": "Uma extensão para acessar a Desciclopédia com mais facilidade.",
+  "version": "6.1.1",
+  "manifest_version": 2,
+  "permissions": [
+    "contextMenus",
+    "notifications",
+    "tabs",
+    "unlimitedStorage",
+    "http://*/*",
+    "https://*/*",
+    "chrome://favicon/"
+  ],
+  "options_page": "paginas/opcoes.html",
+  "background": {
+    "page": "background.html"
+  },
+  "icons": {
+    "16": "icons/icon_16.png",
+    "32": "icons/icon_32.png",
+    "48": "icons/icon_48.png",
+    "64": "icons/icon_64.png",
+    "128": "icons/icon_128.png"
+  },
+  "omnibox": {
+    "keyword": "dp"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+A"
+      }
+    }
+  },
+  "chrome_url_overrides": {
+    "newtab": "paginas/novaguia.html"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "toolbar/lib/jquery.js",
+        "toolbar/lib/constant.js",
+        "toolbar/lib/default-config.js",
+        "toolbar/config/tb-config.js",
+        "toolbar/config/widget-config.js",
+        "toolbar/lib/protocol.js",
+        "toolbar/lib/tb-message.js",
+        "toolbar/lib/state-machine.js",
+        "toolbar/lib/window-position.js",
+        "toolbar/content_script/toolbar.js",
+        "toolbar/content_script/widget.js",
+        "toolbar/content_script/injector.js"
+      ],
+      "matches": [
+        "*://*/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "css": [
+        "toolbar/content_script/hack/relative.css"
+      ],
+      "matches": [
+        "*://*.google.com.br/search",
+        "*://*.google.com/search",
+        "*://*.google.com.br/",
+        "*://*.google.com/",
+        "*://*.wikipedia.org/*",
+        "*://*.desciclopedia.org/*",
+        "*://*.desciclopedia.ws/*",
+        "*://*.pudim.info/*",
+        "*://vist.as/*",
+        "*://pesquisa.la/*",
+        "*://desnoticias.org/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "toolbar/config/skin/css/containers.css",
+    "toolbar/config/skin/toolbar.html",
+    "toolbar/widgets/mensagem/mensagem.html",
+    "toolbar/widgets/recentes/recentes.html",
+    "toolbar/widgets/mais/mais.html",
+    "toolbar/widgets/feedback/feedback.html",
+    "toolbar/widgets/twitter/twitter.html",
+    "toolbar/widgets/facebook/facebook.html"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google.com https://twitter.com; object-src 'self'",
+  "browser_action": {
+    "default_icon": "icons/icon.png",
+    "default_title": "Desciclopédia",
+    "default_popup": "popup.html"
+  }
+}

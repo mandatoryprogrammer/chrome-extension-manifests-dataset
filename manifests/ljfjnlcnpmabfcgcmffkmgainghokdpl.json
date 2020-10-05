@@ -1,0 +1,100 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "version": "3.9.99",
+  "manifest_version": 2,
+  "description": "__MSG_appDescription__",
+  "homepage_url": "https://burningvocabulary.com",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "scripts/background.js",
+      "pdf/pdf_js/migration.js",
+      "pdf/pdf_js/preserve-referer.js",
+      "pdf/pdf_js/pdfHandler.js",
+      "pdf/pdf_js/extension-router.js",
+      "pdf/pdf_js/pdfHandler-vcros.js",
+      "pdf/pdf_js/background.js",
+      "pdf/pdf_js/suppress-update.js"
+    ]
+  },
+  "permissions": [
+    "fileBrowserHandler",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>",
+    "tabs",
+    "webNavigation",
+    "cookies",
+    "storage",
+    "contextMenus",
+    "alarms",
+    "notifications"
+  ],
+  "options_ui": {
+    "page": "dashboard.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "ftp://*/*",
+        "file://*/*"
+      ],
+      "css": [
+        "styles/content_script.css"
+      ],
+      "js": [
+        "scripts/content_script.js",
+        "scripts/pdf.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "file_browser_handlers": [
+    {
+      "id": "open-as-pdf",
+      "default_title": "Open with PDF Viewer",
+      "file_filters": [
+        "filesystem:*.pdf"
+      ]
+    }
+  ],
+  "storage": {
+    "managed_schema": "pdf/preferences_schema.json"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "48": "icons/icon-48.png"
+    },
+    "default_title": "Burning Vocabulary"
+  },
+  "web_accessible_resources": [
+    "pdf/web/viewer.html",
+    "http:/*",
+    "https:/*",
+    "ftp:/*",
+    "file:/*",
+    "chrome-extension:/*",
+    "blob:*",
+    "data:*",
+    "filesystem:/*",
+    "drive:*",
+    "icons/icon-128.png"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{d560e755-a13f-e347-b21e-ea4ebcf3f9cf}",
+      "strict_min_version": "42.0"
+    }
+  }
+}

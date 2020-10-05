@@ -1,0 +1,68 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Qualys BrowserCheck for Mac OSX",
+  "short_name": "BrowserCheck",
+  "description": "FIND and FIX security issues in your browsers, plugins and missing security updates on Mac OSX",
+  "homepage_url": "https://browsercheck.qualys.com/",
+  "version": "1.1.67.1",
+  "minimum_chrome_version": "29.0",
+  "icons": {
+    "128": "qualys128.png",
+    "48": "qualys48.png",
+    "16": "qualys16.png"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "background": {
+    "scripts": [
+      "npqbc.js",
+      "base64.js",
+      "macscan.js",
+      "npfilter.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "tabs",
+    "nativeMessaging",
+    "notifications",
+    "storage",
+    "cookies",
+    "https://*.qualys.com/*"
+  ],
+  "browser_action": {
+    "default_icon": "qualys16.png"
+  },
+  "content_security_policy": "object-src 'self' https://browsercheck.qualys.com/; script-src 'self' https://browsercheck.qualys.com/",
+  "web_accessible_resources": [
+    "qualys48.png",
+    "qbc_extension_client.js"
+  ],
+  "manifest_version": 2,
+  "content_scripts": [
+    {
+      "matches": [
+        "*://browsercheck.qualys.com/",
+        "*://browsercheck.qualys.com/?euid=&ls=1",
+        "*://browsercheck.qualys.com/?ls=1"
+      ],
+      "js": [
+        "qbc_bootstrapper.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://browsercheck.qualys.com/",
+        "*://browsercheck.qualys.com/?euid=&ls=1",
+        "*://browsercheck.qualys.com/?ls=1"
+      ],
+      "js": [
+        "qbc_content_script.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

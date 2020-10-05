@@ -1,0 +1,75 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApc7usMKUiW4R7fv2rLDpAwX2cHlqEVuLocUyUYCtarVuOoNIQvBJ/HtulA3gTI2zGyu4IF7lNM8TajNMAf+ac7lNI7gvVJjWE9VCuglcE/tJSEfEhnq1IB0FWlGnssp6Svv8QNKJqOsMW1UJzDl8nVRqkOTFucKg/hCDyxu6VcmHfJzosCnEpsK98wshE7MV71VKJ6OIxn7GLMmuL2doEC2UWxlYxTe1FheuqT/TC6GIunbrxf80DRyuDqDZF+geqtNzL3VIgbSIOZRFo0IdqH2nCuMV/c9Ev2Acnpf/0k/gwoezblTAkiwvhw9ofviCLEu8mLBU73ck0xTJAhpInwIDAQAB",
+  "name": "Tasks For Trello",
+  "description": "Turns a Trello list into a tasklist",
+  "version": "2.7.1",
+  "icons": {
+    "16": "images/logo-16x16.png",
+    "48": "images/logo-48x48.png",
+    "128": "images/logo-128x128.png"
+  },
+  "browser_action": {
+    "default_icon": "images/logo-128x128.png",
+    "default_popup": "browseraction.html"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "options_page": "settings.html",
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": [
+        "https://trello.com/*",
+        "http://trello.com/*"
+      ],
+      "js": [
+        "libs/websocket-wrapper/injector.js",
+        "libs/webrequest-wrapper/injector.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://trello.com/*",
+        "http://trello.com/*"
+      ],
+      "js": [
+        "contentScript-bundle.js"
+      ],
+      "css": [
+        "css/TasksForTrello.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "libs/websocket-wrapper/content.js",
+    "libs/webrequest-wrapper/content.js",
+    "libs/semantic-ui/semantic.content-script.css",
+    "libs/semantic-ui/icons.svg",
+    "libs/semantic-ui/icons.eot",
+    "libs/semantic-ui/icons.ttf",
+    "libs/semantic-ui/icons.woff",
+    "libs/semantic-ui/icons.woff2",
+    "images/logo-16x16-outline.png",
+    "images/logo-16x16-outline-active.png",
+    "images/logo-16x16.png"
+  ],
+  "permissions": [
+    "storage",
+    "webRequest",
+    "*://trello.com/*",
+    "notifications",
+    "identity",
+    "https://www.googleapis.com/"
+  ],
+  "oauth2": {
+    "client_id": "410073341440-pc3m7733d02r4e2bp5d6gmisoheiufnr.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/chromewebstore.readonly"
+    ]
+  },
+  "content_security_policy": "script-src 'self' http://localhost:35729; object-src 'self'"
+}

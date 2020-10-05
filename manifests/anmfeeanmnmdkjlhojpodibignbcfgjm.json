@@ -1,0 +1,78 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_ext_title__",
+  "short_name": "__MSG_ext_short_name__",
+  "version": "0.3.2.13",
+  "description": "__MSG_ext_description__",
+  "author": "furyu",
+  "default_locale": "en",
+  "icons": {
+    "16": "images/icon_16.png",
+    "48": "images/icon_48.png",
+    "64": "images/icon_64.png",
+    "96": "images/icon_96.png",
+    "128": "images/icon_128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://twitter.com/*",
+        "*://mobile.twitter.com/*",
+        "*://tweetdeck.twitter.com/*"
+      ],
+      "js": [
+        "scripts/jquery.min.js",
+        "scripts/decimal.min.js",
+        "scripts/inject_script.js",
+        "scripts/load_options.js",
+        "scripts/disable_graphql_profile_timeline.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://twitter.com/*",
+        "*://mobile.twitter.com/*"
+      ],
+      "js": [
+        "scripts/main_react.js",
+        "scripts/twDisplayVicinity/twDisplayVicinity.user.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://tweetdeck.twitter.com/*"
+      ],
+      "js": [
+        "scripts/main_tweetdeck.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ],
+    "persistent": true
+  },
+  "options_ui": {
+    "page": "html/options.html",
+    "open_in_tab": true
+  },
+  "browser_action": {
+    "default_icon": "images/icon_16.png",
+    "default_title": "__MSG_ext_title__",
+    "default_popup": "html/options.html"
+  },
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "*://*.twitter.com/*"
+  ],
+  "web_accessible_resources": [
+    "scripts/*.js"
+  ],
+  "incognito": "split"
+}

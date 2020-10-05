@@ -1,0 +1,134 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "author": "BigBlueHat",
+  "name": "Daz-Deals",
+  "short_name": "daz-deals",
+  "version": "2.4.6",
+  "permissions": [
+    "storage",
+    "*://civilizationhunt.com/*",
+    "*://www.daz3d.com/*"
+  ],
+  "web_accessible_resources": [
+    "web-accessible/ddtries.js",
+    "web-accessible/ddtries2.js"
+  ],
+  "description": "Daz3D.com Deals Shopping Helper",
+  "icons": {
+    "16": "images/icon16.png",
+    "32": "images/icon32.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "applications": {
+    "gecko": {
+      "id": "daz-deals@mozilla.org"
+    }
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "browser_action": {
+    "default_title": "Daz-Deals Options",
+    "default_icon": {
+      "16": "images/icon16.png",
+      "32": "images/icon32.png"
+    }
+  },
+  "options_ui": {
+    "page": "options/options.html",
+    "open_in_tab": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.daz3d.com/*"
+      ],
+      "js": [
+        "lib/jquery-3.1.1.js",
+        "lib/selector-observer.js",
+        "globals.js",
+        "filters.js",
+        "wishlist-update.js",
+        "daz-deals-button.js"
+      ],
+      "css": [
+        "styles.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.daz3d.com/checkout/cart*"
+      ],
+      "js": [
+        "shopping-cart.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.daz3d.com/sales/order/history*"
+      ],
+      "js": [
+        "total-money-spent.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.daz3d.com/wishlist*"
+      ],
+      "css": [
+        "tooltip.css"
+      ],
+      "js": [
+        "lib/mustache.js",
+        "wishlist-2-3-4.js",
+        "sortbypercentonwishlistpage.js",
+        "multiple-wishlists.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.daz3d.com/*"
+      ],
+      "exclude_matches": [
+        "*://www.daz3d.com/forums/*",
+        "*://www.daz3d.com/customer*",
+        "*://www.daz3d.com/sales*",
+        "*://www.daz3d.com/gallery*",
+        "*://www.daz3d.com/notifier*",
+        "*://www.daz3d.com/downloader*",
+        "*://www.daz3d.com/subscription*",
+        "*://www.daz3d.com/batchpay*",
+        "*://www.daz3d.com/giftcard*",
+        "*://www.daz3d.com/storecredit*",
+        "*://www.daz3d.com/paportal*",
+        "*://www.daz3d.com/checkout*",
+        "*://www.daz3d.com/help/*"
+      ],
+      "js": [
+        "lib/mustache.js",
+        "lib/sha256.js",
+        "price-history.js",
+        "wishlistify.js",
+        "product-links.js",
+        "product-page.js",
+        "hide-products.js",
+        "gallery-notification.js",
+        "artist-tiles.js",
+        "hide-sections.js",
+        "add-wishlist-button.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.daz3d.com/*"
+      ],
+      "js": [
+        "access-storage.js"
+      ]
+    }
+  ]
+}

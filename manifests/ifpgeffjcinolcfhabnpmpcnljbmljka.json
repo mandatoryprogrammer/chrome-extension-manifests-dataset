@@ -1,0 +1,59 @@
+{
+  "update_url": "http://clients2.google.com/service/update2/crx",
+  "name": "GreenFlight",
+  "version": "1.20.13",
+  "manifest_version": 2,
+  "description": "This extract all legs for certain flight",
+  "icons": {
+    "16": "/icons/icon16.png",
+    "48": "/icons/icon48.png",
+    "128": "/icons/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "js/lib/delegate.js",
+      "js/lib/reports.js",
+      "js/lib/events.js",
+      "js/lib/util.js",
+      "js/api/cookie.js",
+      "js/api/chrome.js",
+      "js/api/message.js",
+      "js/lib/cookie_store.js",
+      "js/lib/data_store.js",
+      "js/lib/bg_app_api.js",
+      "js/background.js",
+      "js/lib/onBGDocumentLoad.js",
+      "js/app/background.js"
+    ]
+  },
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "tabs",
+    "cookies",
+    "notifications",
+    "contextMenus",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking",
+    "unlimitedStorage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/lib/reports.js",
+        "js/lib/util.js",
+        "js/api/cookie.js",
+        "js/api/message.js",
+        "js/lib/async_api.js",
+        "js/lib/app_api.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Delay for YouTube TM",
+  "version": "1.0.2",
+  "manifest_version": 2,
+  "description": "de.lay 1.verb - make (someone or something) late or slow. 2.noun - a period of time by which something is late or postponed.",
+  "homepage_url": "https://github.com/patrioticcow/delay",
+  "icons": {
+    "16": "icons/icon16.png",
+    "19": "icons/icon19.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "src/bg/background.js"
+    ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "Delay for YouTube TM",
+    "default_popup": "src/browser_action/browser_action.html"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "http://*/*, https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/*"
+      ],
+      "js": [
+        "src/inject/inject.js",
+        "src/inject/jquery.min.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

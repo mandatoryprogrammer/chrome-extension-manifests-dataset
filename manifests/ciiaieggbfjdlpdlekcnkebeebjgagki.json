@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Disquit",
+  "description": "Extend disqus.",
+  "version": "4.0.4",
+  "author": "Mevedia",
+  "web_accessible_resources": [
+    "/src/disquit.js"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "background": {
+    "scripts": [
+      "/src/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.disqus.com/embed/*"
+      ],
+      "js": [
+        "/src/content.js"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    }
+  ],
+  "storage": {
+    "managed_schema": "/schema.json"
+  },
+  "icons": {
+    "16": "16.png",
+    "48": "48.png",
+    "128": "128.png"
+  },
+  "permissions": [
+    "downloads",
+    "notifications",
+    "tabs",
+    "*://*.disqus.com/embed/*",
+    "https://mevedia.com/*",
+    "https://*/*"
+  ]
+}

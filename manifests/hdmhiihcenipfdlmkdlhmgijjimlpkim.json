@@ -1,0 +1,102 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_appName__",
+  "short_name": "Add to Toodledo",
+  "default_locale": "en",
+  "version": "1.1.8.11",
+  "web_accessible_resources": [
+    "options.html",
+    "popup.html",
+    "js/*",
+    "icon/*",
+    "fonts/*"
+  ],
+  "description": "__MSG_appDesc__",
+  "homepage_url": "https://chrome.google.com/webstore/detail/add-to-toodledo/hdmhiihcenipfdlmkdlhmgijjimlpkim",
+  "background": {
+    "scripts": [
+      "lib/jquery.min.js",
+      "js/common.min.js",
+      "js/background.min.js"
+    ],
+    "persistent": false
+  },
+  "commands": {
+    "quick": {
+      "description": "Quick Add +",
+      "suggested_key": {
+        "default": "Alt+Q",
+        "mac": "Alt+Q"
+      }
+    },
+    "popup": {
+      "description": "Pop-Up Form",
+      "suggested_key": {
+        "default": "Alt+P",
+        "mac": "Alt+P"
+      }
+    },
+    "popupwide": {
+      "description": "Pop-Up Quick Add bar",
+      "suggested_key": {
+        "default": "Ctrl+Shift+A",
+        "mac": "Command+Shift+A"
+      }
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/content_add.min.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://mail.google.com/*",
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "js/content_add_gmail.min.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://www.toodledo.com/tasks/*",
+        "https://www.toodledo.com/tasks/*"
+      ],
+      "js": [
+        "js/content_add_toodledo.min.js"
+      ]
+    }
+  ],
+  "content_security_policy": "img-src 'self' https://stats.g.doubleclick.net https://www.paypalobjects.com https://www.google-analytics.com https://ssl.google-analytics.com https://toodledotips.sakura.ne.jp/ https://s3-ap-northeast-1.amazonaws.com/ https://www.google.com/ https://www.google.co.jp/ https://ak1s.abmr.net/ https://akamai.mathtag.com; frame-src 'self' https://www.toodledo.com/ http://www.toodledo.com/ https://toodledotips.sakura.ne.jp/ https://s3-ap-northeast-1.amazonaws.com/; script-src 'self' https://www.toodledo.com/ https://toodledotips.sakura.ne.jp/ https://s3-ap-northeast-1.amazonaws.com/ https://www.google-analytics.com https://ssl.google-analytics.com https://www.google.com https://apis.google.com https://script.google.com; object-src 'self'",
+  "options_page": "options.html",
+  "permissions": [
+    "storage",
+    "tabs",
+    "cookies",
+    "alarms",
+    "idle",
+    "notifications",
+    "contextMenus",
+    "unlimitedStorage",
+    "webRequestBlocking",
+    "<all_urls>"
+  ],
+  "browser_action": {
+    "default_icon": "icon/icon.png",
+    "default_popup": "popup.html",
+    "default_title": "Add to Toodledo"
+  },
+  "icons": {
+    "128": "icon/icon_128.png",
+    "16": "icon/icon_16.png",
+    "32": "icon/icon_32.png",
+    "48": "icon/icon_48.png"
+  }
+}

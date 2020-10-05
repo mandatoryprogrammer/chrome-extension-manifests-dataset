@@ -1,0 +1,86 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Save the Internet",
+  "description": "A universal \"save as\" for your Chrome browser.",
+  "version": "0.13.3",
+  "manifest_version": 2,
+  "icons": {
+    "16": "assets/images/desktop-logo.png",
+    "48": "assets/images/desktop-logo.png",
+    "128": "assets/images/desktop-logo.png"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "assets/images/desktop-logo-19.png",
+      "38": "assets/images/desktop-logo-38.png"
+    },
+    "default_title": "Polite",
+    "default_popup": "popup.html"
+  },
+  "file_browser_handlers": [
+    {
+      "id": "upload",
+      "default_title": "Save to Desktop",
+      "file_filters": [
+        "filesystem:*.*"
+      ]
+    }
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": false,
+    "open_in_tab": false
+  },
+  "permissions": [
+    "tabs",
+    "contextMenus",
+    "http://*/*",
+    "https://*/*",
+    "storage",
+    "notifications"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.polite.one/*"
+      ],
+      "js": [
+        "page/drive-content.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "config/main-config.js",
+        "vapi.js",
+        "page/web-content.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "page/feed_finder.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.polite.one/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "assets/images/spinner.gif",
+    "assets/images/button-x.png",
+    "spinnerstyle.css"
+  ]
+}

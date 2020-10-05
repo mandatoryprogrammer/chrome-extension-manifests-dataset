@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Pagemark for Chrome",
+  "short_name": "Pagemark",
+  "description": "Remember your position on any page",
+  "version": "1.0.0.1",
+  "author": "Chuck Baker",
+  "browser_action": {
+    "default_icon": "pm38x38.png",
+    "default_title": "Pagemark\n\nDouble click to set a pagemark at current position\nSingle click to go to next pagemark\nCTRL-CLICK to delete current pagemark\nCTRL-ALT-CLICK to delete all pagemarks on the page"
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs",
+    "https://accounts.google.com/*",
+    "https://www.googleapis.com/*",
+    "http://*/",
+    "https://*/",
+    "file:///*/*"
+  ],
+  "background": {
+    "persistent": false,
+    "page": "sandbox.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*",
+        "file:///*/*"
+      ],
+      "js": [
+        "taffy.js",
+        "pmCommon.js",
+        "pmContent.js",
+        "purchase.js",
+        "buy.js",
+        "propsConsole.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "options_ui": {
+    "page": "pagemarkOptions.html",
+    "chrome_style": false,
+    "open_in_tab": true
+  },
+  "oauth2": {
+    "client_id": "476322903377-urvgq80canvq2im29dfvc361uhtfoga1.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/plus.login",
+      "https://www.googleapis.com/auth/chromewebstore.readonly",
+      "https://www.googleapis.com/auth/userinfo.email"
+    ]
+  },
+  "content_security_policy": "script-src 'self' https://apis.google.com; object-src 'self'",
+  "web_accessible_resources": [
+    "pagemarkOptions.html",
+    "pmEnd.png"
+  ]
+}

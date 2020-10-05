@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "NowPlaying - HypeMachine",
+  "description": "This chrome extension can tell Last.fm what you are currently listening to on HypeMachine.",
+  "version": "1.0",
+  "icons": {
+    "128": "images/icon128.png",
+    "48": "images/icon48.png"
+  },
+  "background": {
+    "scripts": [
+      "lib/jquery2.0.3.js",
+      "lib/md5.js",
+      "background/lastfm-background.js",
+      "background/hypem-background.js",
+      "background/background.js"
+    ]
+  },
+  "permissions": [
+    "webRequest",
+    "storage",
+    "http://hypem.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://hypem.com/*",
+        "https://hypem.com/*"
+      ],
+      "js": [
+        "lib/jquery2.0.3.js",
+        "content-scripts/hypem.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "38": "images/offIcon38.png",
+      "19": "images/offIcon19.png"
+    },
+    "default_popup": "browser-action/popup.html"
+  }
+}

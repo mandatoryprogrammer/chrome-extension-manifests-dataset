@@ -1,0 +1,75 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "uCheck",
+  "version": "1.1.7",
+  "description": "uCheck",
+  "default_locale": "en",
+  "icons": {
+    "16": "static/images/16.png",
+    "19": "static/images/19.png",
+    "32": "static/images/32.png",
+    "38": "static/images/38.png",
+    "48": "static/images/48.png",
+    "64": "static/images/64.png",
+    "96": "static/images/96.png",
+    "128": "static/images/128.png",
+    "256": "static/images/256.png"
+  },
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_title": "uCheck",
+    "default_icon": {
+      "19": "static/images/19.png",
+      "38": "static/images/38.png"
+    }
+  },
+  "author": "Yasin Can Akmehmet",
+  "background": {
+    "scripts": [
+      "js/background/tabs.js",
+      "js/background/context_menus.js",
+      "js/background/event_page.js"
+    ],
+    "persistent": false
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "permissions": [
+    "clipboardWrite",
+    "tts",
+    "storage",
+    "contextMenus",
+    "unlimitedStorage",
+    "webNavigation",
+    "tabs",
+    "<all_urls>"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "css/content.css"
+      ]
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "static/js/jquery-2.1.1.min.js",
+        "static/js/jquery.stylesheet.min.js",
+        "js/stylesheet.js",
+        "js/content_script/xpath.js",
+        "js/content_script/highlighter.js",
+        "js/content_script/content_script.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "*"
+  ]
+}

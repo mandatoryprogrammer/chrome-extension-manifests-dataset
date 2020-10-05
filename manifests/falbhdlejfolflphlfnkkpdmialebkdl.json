@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Slack Toggle Sidebar",
+  "version": "4.1.0",
+  "manifest_version": 2,
+  "short_name": "slack-toggle-sidebar",
+  "description": "Toggle show or hide Slack's channel sidebar",
+  "icons": {
+    "128": "icon/128.png"
+  },
+  "permissions": [
+    "https://*.slack.com/*"
+  ],
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "https://*.slack.com/*"
+      ],
+      "js": [
+        "js/content_script.js"
+      ],
+      "css": [
+        "css/app.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "css/app.css"
+  ],
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "commands": {
+    "toggle-slack-sidebar": {
+      "description": "Toggle show or hide Slack's channel sidebar",
+      "suggested_key": {
+        "default": "Ctrl+Shift+S",
+        "mac": "MacCtrl+Shift+S"
+      }
+    }
+  }
+}

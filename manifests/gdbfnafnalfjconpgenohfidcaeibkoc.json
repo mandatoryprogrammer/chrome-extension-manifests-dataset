@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Taskforce",
+  "version": "3.5",
+  "description": "Convert emails into tasks and become radically productive.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "page_action": {
+    "default_icon": {
+      "19": "icons/icon19.png",
+      "38": "icons/icon38.png"
+    },
+    "default_title": "Open Taskforce"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "tabs",
+    "https://mail.google.com/",
+    "https://inbox.google.com/",
+    "https://www.taskforceapp.com/",
+    "http://localhost:3000/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*"
+      ],
+      "js": [
+        "inboxsdk.js",
+        "loader.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "detectable-file",
+    "frame.html",
+    "message-relay.js"
+  ]
+}

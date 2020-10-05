@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "SmartZIP (Chrome edition)",
+  "description": "Integrates Blackbaud CRM, Raiser's Edge NXT and eTapestry with SmartZIP - accurately input address details.",
+  "version": "1.84",
+  "icons": {
+    "16": "resources/icon.png",
+    "48": "resources/icon.png",
+    "128": "resources/icon.png"
+  },
+  "content_security_policy": "script-src 'self' https://code.jquery.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://renxt.blackbaud.com/*",
+        "*://host.nxt.blackbaud.com/*",
+        "*://*.etapestry.com/prod/editPersona.do*",
+        "*://*/*/webui/webshellpage.aspx*"
+      ],
+      "js": [
+        "js/load.min.js"
+      ],
+      "css": [
+        "css/style.css"
+      ],
+      "all_frames": true
+    }
+  ],
+  "options_ui": {
+    "page": "options/options.html",
+    "chrome_style": true
+  },
+  "permissions": [
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "web_accessible_resources": [
+    "js/user-nxt.min.js",
+    "js/jquery.min.js",
+    "js/user-etapestry.min.js",
+    "js/user-bbcrm.min.js"
+  ]
+}

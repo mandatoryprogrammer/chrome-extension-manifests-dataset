@@ -1,0 +1,43 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Blind Twitter",
+  "description": "Keeps tweet authors hidden until you like or retweet them.",
+  "version": "1.2.3",
+  "browser_action": {
+    "default_icon": "logo.png",
+    "default_title": "Reveal Tweets"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "icons": {
+    "48": "logo.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.twitter.com/*"
+      ],
+      "js": [
+        "jquery-2.1.4.min.js",
+        "script.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "images/avatar.png",
+    "images/logo.png"
+  ],
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "webRequest",
+    "*://*.twitter.com/*",
+    "*://*.google-analytics.com/*"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'"
+}

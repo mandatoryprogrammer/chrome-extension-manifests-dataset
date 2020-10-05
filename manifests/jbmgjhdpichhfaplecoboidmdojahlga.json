@@ -1,0 +1,64 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Canvas Teacher Access Report",
+  "short_name": "CTARTools",
+  "description": "Provides extra functions on https://oakschristian.instructure.com and https://oakschristian.beta.instructure.com.",
+  "version": "0.2.0",
+  "icons": {
+    "128": "images/avatar-50.png"
+  },
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://oakschristian.instructure.com/courses/*/users",
+        "https://oakschristian.instructure.com/courses/*/users/",
+        "https://oakschristian.beta.instructure.com/courses/*/users",
+        "https://oakschristian.beta.instructure.com/courses/*/users/"
+      ],
+      "js": [
+        "scripts/users-content-script.js",
+        "scripts/jquery-2.2.0.min.js",
+        "scripts/analytics.js",
+        "scripts/excel-builder.dist.min.js",
+        "scripts/util.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://oakschristian.instructure.com/courses/*/modules",
+        "https://oakschristian.instructure.com/courses/*/modules/",
+        "https://oakschristian.beta.instructure.com/courses/*/modules",
+        "https://oakschristian.beta.instructure.com/courses/*/modules/"
+      ],
+      "js": [
+        "scripts/modules-content-script.js"
+      ]
+    }
+  ],
+  "page_action": {
+    "default_icon": {
+      "38": "images/avatar-50.png"
+    },
+    "default_title": "Click to show Canvas Teacher Access Report functions",
+    "default_popup": "teacherListPopup.html"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "permissions": [
+    "https://ajax.googleapis.com/",
+    "https://oakschristian.instructure.com/*",
+    "declarativeContent",
+    "activeTab",
+    "storage"
+  ],
+  "content_security_policy": "script-src 'self' https://www.google-analytics.com; object-src 'self'"
+}

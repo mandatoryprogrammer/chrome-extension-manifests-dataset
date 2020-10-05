@@ -1,0 +1,90 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "RIPS Extension - Auto Client Import",
+  "version": "2.5.0",
+  "description": "RIPS Extension - Enables automatic client data import. Checks for existing client data before importing new client info.",
+  "permissions": [
+    "storage",
+    "tabs"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://rips.247lib.com/*/Registration/Registration"
+      ],
+      "js": [
+        "js/DropdownCodeContainer.js",
+        "js/page_controllers/CtrlRegistration.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://rips.247lib.com/*/ClientDetails/ClientDetails"
+      ],
+      "js": [
+        "js/page_controllers/CtrlClientBasicInformation.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://rips.247lib.com/*/ClientDetails/ClientServicesList",
+        "*://rips.247lib.com/*/MatterAction/CreateNewServices"
+      ],
+      "js": [
+        "js/page_controllers/CtrlServices.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://rips.247lib.com/*/MatterAction/CreateNewAction"
+      ],
+      "js": [
+        "js/page_controllers/CtrlAddAction.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://rips.247lib.com/*/MatterAction/MatterActionsList"
+      ],
+      "js": [
+        "js/page_controllers/CtrlViewActions.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://rips.247lib.com/Stars/SearchClientDetails/AdvancedSearch",
+        "*://rips.247lib.com/Stars/SearchClientDetails/ClientListSearchResult"
+      ],
+      "js": [
+        "js/page_controllers/CtrlAdvancedSearch.js",
+        "js/min/fuse.min.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://rips.247lib.com/*"
+      ],
+      "js": [
+        "js/min/jquery-3.1.1.min.js",
+        "js/Utils.js",
+        "js/ErrorThrowingAPI.js",
+        "js/FieldTranslator.js",
+        "js/page_controllers/MainController.js"
+      ]
+    }
+  ],
+  "background": {
+    "page": "html/background.html"
+  },
+  "options_page": "html/options.html",
+  "browser_action": {
+    "default_icon": {
+      "32": "img/fav128.png"
+    },
+    "default_popup": "html/optionPageRedirect.html"
+  },
+  "icons": {
+    "128": "img/fav128.png"
+  }
+}

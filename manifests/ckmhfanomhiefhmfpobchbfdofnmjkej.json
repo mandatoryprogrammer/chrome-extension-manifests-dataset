@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "GifHorse",
+  "version": "0.2.2",
+  "manifest_version": 2,
+  "description": "Don't look a gifhorse in the mouth",
+  "background": {
+    "scripts": [
+      "js/vendor/rsvp.min.js",
+      "js/vendor/md5.js",
+      "js/lib/GH.js",
+      "js/lib/FileStore.js",
+      "js/lib/File.js",
+      "js/lib/FileMetadata.js",
+      "js/lib/FileDataIntegrity.js",
+      "js/lib/FileGroup.js",
+      "js/lib/Search.js",
+      "js/background/background.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": "images/gifhorse_16.png"
+  },
+  "options_page": "html/options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/vendor/newT.js",
+        "js/content_scripts/context_menu.js",
+        "js/content_scripts/confirmation.js",
+        "js/content_scripts/listeners.js"
+      ],
+      "css": [
+        "css/content_scripts/iframe.css"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "html/images.html"
+  ],
+  "icons": {
+    "16": "images/gifhorse_16.png",
+    "48": "images/gifhorse_48.png",
+    "128": "images/gifhorse_128.png"
+  },
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "tabs",
+    "contextMenus",
+    "unlimitedStorage"
+  ]
+}

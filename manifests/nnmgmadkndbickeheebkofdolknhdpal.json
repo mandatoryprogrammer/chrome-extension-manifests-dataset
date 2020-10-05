@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "UpKeep Maintenance Management for Gmail",
+  "description": "UpKeep Gmail Extension - Link your UpKeep and Gmail accounts to simplify your work order and maintenance maintenance process",
+  "version": "0.210",
+  "short_name": "UpKeep",
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "icons": {
+    "16": "images/upkeepCenterLogo16.png",
+    "48": "images/upkeepCenterLogo48.png",
+    "128": "images/upkeepCenterLogo.png"
+  },
+  "browser_action": {},
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "http://mail.google.com/*"
+      ],
+      "css": [
+        "style.css",
+        "bower_components/angular/angular-csp.css"
+      ],
+      "js": [
+        "bower_components/angular/angular.js",
+        "bower_components/parse/parse.js",
+        "thirdParty/gmail.js",
+        "bower_components/jquery/dist/jquery.js",
+        "content.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    "thirdParty/gmail.js",
+    "main.js",
+    "jquery-1.10.2.min.js",
+    "bower_components/*",
+    "angular.min.js",
+    "images/*"
+  ],
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "https://mail.google.com/*"
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self' "
+}

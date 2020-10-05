@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Jickl Game Recorder",
+  "description": "Make recordings of game wins and achievements",
+  "version": "1.23",
+  "browser_action": {
+    "default_icon": "jickl.png",
+    "default_popup": "popup.html"
+  },
+  "web_accessible_resources": [
+    "logo.svg"
+  ],
+  "icons": {
+    "16": "icon16b.png",
+    "48": "icon48b.png",
+    "128": "icon128b.png",
+    "196": "icon196b.png"
+  },
+  "background": {
+    "scripts": [
+      "event-target.js",
+      "background/button-handler.js",
+      "background/click-handler.js",
+      "background/BrowserSession.js",
+      "background/bindings.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.jickl.com/*",
+        "*://jickl.com/*",
+        "http://localhost:3000/*"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.jickl.com/*",
+      "*://jickl.com/*",
+      "http://localhost:3000/*"
+    ]
+  },
+  "permissions": [
+    "tabCapture",
+    "storage",
+    "desktopCapture",
+    "activeTab",
+    "*://*.jickl.com/*",
+    "*://jickl.com/*",
+    "http://localhost:3000/*"
+  ]
+}

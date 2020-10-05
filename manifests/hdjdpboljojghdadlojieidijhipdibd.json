@@ -1,0 +1,43 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Pipedrive CRM",
+  "short_name": "Pipedrive CRM",
+  "description": "Manage sales without leaving your Gmail inbox",
+  "version": "1.3.2",
+  "browser_action": {
+    "default_icon": "assets/icon.png",
+    "default_popup": "popup/popup.html",
+    "default_title": "Pipedrive CRM"
+  },
+  "icons": {
+    "16": "assets/icon16.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://chrome-extension.pipedrive.works/oauth?*",
+        "https://chrome-extension.pipedrive.com/oauth?*"
+      ],
+      "js": [
+        "lib/inboxsdk.js",
+        "scripts/content-script.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://*.pipedriveassets.com 'unsafe-eval'; object-src 'self'",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "*://*.pipedrive.com/"
+  ],
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ],
+    "persistent": false
+  }
+}

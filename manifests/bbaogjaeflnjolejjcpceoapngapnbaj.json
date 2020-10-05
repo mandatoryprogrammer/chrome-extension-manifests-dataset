@@ -1,0 +1,83 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Ali Reviews - AliExpress Review Importer",
+  "version": "5.1.13",
+  "description": "Get review from Aliexpress.com",
+  "default_locale": "en",
+  "author": "Fireapps Developer 1 <developer1@fireapps.vn>",
+  "externally_connectable": {
+    "matches": [
+      "https://*.fireapps.io/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "assets/alireviewContent.js"
+      ],
+      "matches": [
+        "https://*.fireapps.io/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "js": [
+        "js/jquery.min.js",
+        "js/initApp.js"
+      ],
+      "matches": [
+        "https://*.fireapps.io/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://app.oberlo.com/my-products*"
+      ],
+      "js": [
+        "assets/oberlo_content.js"
+      ],
+      "css": [
+        "assets/integrateOberlo.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://*.aliexpress.com/*",
+        "https://*.aliexpress.com/store/product/*"
+      ],
+      "js": [
+        "assets/affiliate.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "16": "images/icon16.png",
+      "19": "images/icon19.png",
+      "38": "images/icon38.png",
+      "48": "images/icon48.png",
+      "128": "images/icon128.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "19": "images/icon19.png",
+    "38": "images/icon38.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "https://*.aliexpress.com/*",
+    "storage"
+  ]
+}

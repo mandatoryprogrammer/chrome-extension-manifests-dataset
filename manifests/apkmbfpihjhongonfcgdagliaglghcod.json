@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "SocketLog",
+  "description": "SocketLog是FirePHP和ChromePHP的替代者，不仅能做ajax调试，还能做API调试。",
+  "version": "2.3.0",
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "tabs",
+    "notifications",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "js": [
+        "log.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "js": [
+        "evn.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "options_page": "options.html",
+  "browser_action": {
+    "default_icon": "logo.png",
+    "default_popup": "popup.html"
+  }
+}

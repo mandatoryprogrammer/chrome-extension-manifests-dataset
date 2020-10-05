@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "香港股票追蹤 (Hong Kong Stock Tracker)",
+  "description": "實時監控股票流動，追蹤多項港股及指數，掌握香港股市行程",
+  "short_name": "HK Stock",
+  "version": "3.4.5",
+  "permissions": [
+    "storage",
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "icons": {
+    "128": "icons/icon128.png",
+    "48": "icons/icon48.png",
+    "16": "icons/icon16.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/icon128.png",
+    "default_popup": "popup.html"
+  },
+  "content_security_policy": "script-src 'self' https://www1.hkex.com.hk https://query.yahooapis.com https://www.google-analytics.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "all_frames": false,
+      "js": [
+        "js/tongwen-st.js",
+        "js/jquery/jquery.min.js",
+        "js/jquery/jquery-ui.min.js",
+        "js/Sources/Source_marketStatus.js",
+        "js/content.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/Cores/background.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "inject.html",
+    "css/ui-lightness/jquery-ui.min.css",
+    "css/realtime-stocking-inject.css",
+    "css/ui-lightness/images/ui-icons_222222_256x240.png",
+    "css/ui-lightness/images/ui-bg_highlight-soft_100_eeeeee_1x100.png",
+    "css/ui-lightness/images/ui-bg_gloss-wave_35_f6a828_500x100.png",
+    "css/ui-lightness/images/ui-bg_glass_100_f6f6f6_1x400.png"
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Auto-Register",
+  "version": "3.6.5",
+  "description": "Automate your course registration process",
+  "icons": {
+    "128": "icons/ks_128.png",
+    "48": "icons/ks_48.png",
+    "32": "icons/ks_32.png",
+    "16": "icons/ks_16.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/ks_16.png"
+  },
+  "options_page": "options.html",
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://banner9-registration.kfupm.edu.sa/StudentRegistrationSsb/ssb/classRegistration/classRegistration"
+      ],
+      "js": [
+        "js/autofill.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://banner9-registration.kfupm.edu.sa/StudentRegistrationSsb/ssb/term/termSelection?mode=registration"
+      ],
+      "js": [
+        "js/termSelection.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://ssbweb.kfupm.edu.sa/PROD8/bwckcoms.P_Regs",
+        "https://banner8-ssb.kfupm.edu.sa/PROD9/bwskfreg.P_AltPin/*"
+      ],
+      "js": [
+        "js/autofill-old.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "https://banner9-registration.kfupm.edu.sa/*",
+    "http://ssbweb.kfupm.edu.sa/PROD8/bwckcoms.P_Regs",
+    "https://banner8-ssb.kfupm.edu.sa/PROD9/bwskfreg.P_AltPin",
+    "storage",
+    "tabs"
+  ]
+}

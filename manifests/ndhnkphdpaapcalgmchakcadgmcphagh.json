@@ -1,0 +1,71 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Wing Scholar summary add-on",
+  "description": "",
+  "version": "1.0.10",
+  "options_page": "options.html",
+  "browser_action": {
+    "default_icon": "icon16.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "permissions": [
+    "http://scholar.google.com.sg/*",
+    "tabs",
+    "storage",
+    "http://*/*"
+  ],
+  "web_accessible_resources": [
+    "popup.html"
+  ],
+  "background": {
+    "scripts": [
+      "background.js",
+      "jquery-1.11.0.min.js",
+      "jquery.hotkeys-0.7.9.min.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://scholar.google.com.sg/*",
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "jquery-1.11.0.min.js",
+        "jquery.hotkeys-0.7.9.min.js"
+      ],
+      "css": [
+        "core.css"
+      ],
+      "all_frames": true,
+      "run_at": "document_end"
+    }
+  ],
+  "commands": {
+    "enable": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+L"
+      },
+      "description": "Enable the extension"
+    },
+    "disable": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+K"
+      },
+      "description": "Disable the extension"
+    },
+    "cycle": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+H"
+      },
+      "description": "Cycle through available display choices"
+    }
+  }
+}

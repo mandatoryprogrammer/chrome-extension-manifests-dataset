@@ -1,0 +1,69 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Do not forget",
+  "version": "0.0.4",
+  "manifest_version": 2,
+  "description": "keep your technology watch in your bookmarks not in you head",
+  "homepage_url": "http://dnf.meteor.com",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "web_accessible_resources": [
+    "icons/*.png"
+  ],
+  "default_locale": "en",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "bookmarks",
+    "identity",
+    "tabs"
+  ],
+  "oauth2": {
+    "client_id": "605800897856-pvkph9pqer6ci6fj2cp98ng929heeme5.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email",
+      "profile",
+      "openId"
+    ]
+  },
+  "browser_action": {
+    "default_icon": "icons/icon48.png",
+    "default_title": "Do not Forget",
+    "default_popup": "src/browser_action/browser_action.html"
+  },
+  "background": {
+    "scripts": [
+      "js/bower_components/jquery/dist/jquery.min.js",
+      "js/bower_components/ddp.js/src/ddp.js",
+      "js/bower_components/q/q.js",
+      "js/bower_components/asteroid/dist/asteroid.chrome.js",
+      "js/bower_components/asteroid/dist/plugins/google-login.js",
+      "js/bower_components/react/react.min.js",
+      "js/bower_components/react/react-dom.min.js",
+      "build/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*"
+      ],
+      "css": [
+        "src/inject/gfi_extension.css"
+      ],
+      "js": [
+        "js/jsdiff.js",
+        "js/bower_components/jquery/dist/jquery.min.js",
+        "js/get_selector.js",
+        "js/bower_components/ddp.js/src/ddp.js",
+        "js/bower_components/q/q.js",
+        "js/bower_components/asteroid/dist/asteroid.chrome.js",
+        "js/bower_components/asteroid/dist/plugins/facebook-login.js",
+        "build/inject/inject.js"
+      ]
+    }
+  ]
+}

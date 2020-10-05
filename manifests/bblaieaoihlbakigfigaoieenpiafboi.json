@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "RemoteHQ for Google Calendar",
+  "description": "Schedule a RemoteHQ session in Google Calendar",
+  "short_name": "Schedule a RemoteHQ session in Google Calendar",
+  "version": "3.1.0",
+  "minimum_chrome_version": "57",
+  "icons": {
+    "16": "rhq-16x16.png",
+    "48": "rhq-48x48.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "cookies",
+    "https://calendar.google.com/*",
+    "*://*.remotehq.com/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.remotehq.com/*",
+      "*://localhost:*/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://calendar.google.com/calendar/*"
+      ],
+      "js": [
+        "jquery.js",
+        "rhq-calendar.js"
+      ],
+      "css": [
+        "/css/all.css"
+      ],
+      "all_frames": false,
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "rhq-sygnet.svg"
+  ],
+  "browser_action": {
+    "default_title": "RemoteHQ"
+  }
+}

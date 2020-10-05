@@ -1,0 +1,63 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Makeblock mBot for Scratch X",
+  "short_name": "Makeblock mBot",
+  "description": "",
+  "version": "0.3.0",
+  "minimum_chrome_version": "38",
+  "icons": {
+    "16": "./src/web/assets/icon_16.png",
+    "128": "./src/web/assets/icon_128.png"
+  },
+  "bluetooth": {
+    "uuids": [
+      "1101"
+    ],
+    "socket": true
+  },
+  "app": {
+    "background": {
+      "scripts": [
+        "src/app/background.js"
+      ],
+      "persistent": false
+    }
+  },
+  "permissions": [
+    "serial",
+    "hid",
+    "usb",
+    "webview",
+    {
+      "usbDevices": [
+        {
+          "vendorId": 1046,
+          "productId": 65535
+        }
+      ]
+    },
+    "http://*/*",
+    "https://*/*"
+  ],
+  "webview": {
+    "partitions": [
+      {
+        "name": "static",
+        "accessible_resources": [
+          "*.html",
+          "*.js",
+          "*.png",
+          "*.css",
+          "*.jpg"
+        ]
+      }
+    ]
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://localhost/*",
+      "*://scratchx.org/*"
+    ]
+  }
+}

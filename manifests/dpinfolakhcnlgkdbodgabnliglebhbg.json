@@ -1,0 +1,79 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Stackup",
+  "description": "Track, Measure, and Reward Online Reading.",
+  "version": "4.0.4",
+  "minimum_chrome_version": "63",
+  "icons": {
+    "16": "images/icon_on.png",
+    "48": "images/icon_on.png",
+    "128": "images/icon_on.png"
+  },
+  "browser_action": {
+    "default_icon": "images/icon_off.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "lib/jquery.min.js",
+        "js/fake-news.js",
+        "lib/rangy-core.js",
+        "lib/simmer.js",
+        "lib/mark.es6.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "js/timetracking_cs.js",
+        "lib/readability.js",
+        "lib/textstatistics.js",
+        "js/getreadabilitystats.js",
+        "js/annotations.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.mackinvia.com/Reader/Launch?*",
+        "*://*.mackinviatest.com/Reader/Launch?*"
+      ],
+      "js": [
+        "js/mackin.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "storage",
+    "notifications",
+    "identity",
+    "identity.email",
+    "tts",
+    "cookies",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "web_accessible_resources": [
+    "css/annotations.css",
+    "css/annotations-shadow.css",
+    "css/fake-news.css",
+    "fonts/*/*.*",
+    "images/logo.png",
+    "images/icon_on.png"
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Visual History",
+  "description": "Tree-based browser history navigation and visualization",
+  "version": "2.0.3",
+  "author": "Joel Gustafson and Kenny Friedman",
+  "permissions": [
+    "tabs",
+    "contextMenus"
+  ],
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "lib/d3-hierarchy.v0.2.min.js",
+      "src/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "lib/d3-selection.v0.7.min.js",
+        "src/content.js"
+      ],
+      "css": [
+        "src/content.css"
+      ]
+    }
+  ],
+  "icons": {
+    "128": "icons/icon.png",
+    "16": "icons/icon16.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "38": "icons/icon38.png"
+    },
+    "default_title": "Show Tree"
+  },
+  "web_accessible_resources": [
+    "icons/tab.png",
+    "src/tree.css"
+  ],
+  "commands": {
+    "move-up": {
+      "suggested_key": {
+        "default": "Ctrl+Up"
+      },
+      "description": "Move up the tree"
+    },
+    "move-down": {
+      "suggested_key": {
+        "default": "Ctrl+Down"
+      },
+      "description": "Move down the tree"
+    },
+    "move-left": {
+      "suggested_key": {
+        "default": "Ctrl+Left"
+      },
+      "description": "Move to the left in the tree"
+    },
+    "move-right": {
+      "suggested_key": {
+        "default": "Ctrl+Right"
+      },
+      "description": "Move to the right in the tree"
+    }
+  },
+  "manifest_version": 2
+}

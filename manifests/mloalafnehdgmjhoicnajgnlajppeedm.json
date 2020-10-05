@@ -1,0 +1,41 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "EdScratchCzech",
+  "version": "1.2",
+  "description": "Translate EdScratch blocks into Czech",
+  "manifest_version": 2,
+  "icons": {
+    "128": "icon.png"
+  },
+  "permissions": [
+    "*://*.edscratchapp.com/*",
+    "webRequest",
+    "webRequestBlocking",
+    "declarativeContent",
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "translate_blocks.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "blocks_compressed_vertical_czech.js",
+    "blockly_compressed_vertical_czech.js",
+    "errorMessages_czech.js"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.edscratchapp.com/*"
+      ],
+      "js": [
+        "translate_dom.js"
+      ]
+    }
+  ],
+  "options_ui": {
+    "chrome_style": true,
+    "page": "settings.html"
+  }
+}

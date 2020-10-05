@@ -1,0 +1,54 @@
+{
+  "manifest_version": 2,
+  "name": "ПланФикс: Таймер",
+  "description": "Учет и фиксация потраченного времени в ходе работ над задачами и проектами",
+  "version": "3.6.12",
+  "options_page": "options.html",
+  "browser_action": {
+    "default_icon": {
+      "19": "images/extension-icon.png"
+    },
+    "default_popup": "index.html"
+  },
+  "icons": {
+    "24": "images/128.png",
+    "128": "images/128.png"
+  },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "https://*.planfix.ru/",
+    "https://*.planfix.com/",
+    "https://*.planfix.ua/",
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "js/debug.js",
+      "js/common.js",
+      "js/auto_inject.js",
+      "js/lib/date_format.js",
+      "js/lib/jquery-2.1.4.min.js",
+      "js/lib/url_parse.js",
+      "js/settings.js",
+      "js/storage.js",
+      "js/timer.js",
+      "js/planfix.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.planfix.ru/*",
+        "https://*.planfix.com/*",
+        "https://*.planfix.ua/*"
+      ],
+      "js": [
+        "js/planfix_contentscript.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "update_url": "https://clients2.google.com/service/update2/crx"
+}

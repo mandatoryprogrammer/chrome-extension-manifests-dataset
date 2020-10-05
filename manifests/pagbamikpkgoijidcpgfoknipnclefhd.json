@@ -1,0 +1,48 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Flugo",
+  "short_name": "Flugo",
+  "description": "Extensão da Flugo responsável por auxiliar na conexão com a TV, Impressora Térmica e com o Bate-papo.",
+  "version": "2.0",
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "notifications",
+    "unlimitedStorage"
+  ],
+  "browser_action": {
+    "default_icon": "flugo16.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "flugo16.png",
+    "48": "flugo48.png",
+    "128": "flugo128.png"
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://*.flugo.com.br/*"
+    ]
+  },
+  "background": {
+    "scripts": [
+      "socket.io-1.2.0.js",
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.flugo.com.br/*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "jquery.min.js",
+        "contentScript.js"
+      ]
+    }
+  ],
+  "manifest_version": 2
+}

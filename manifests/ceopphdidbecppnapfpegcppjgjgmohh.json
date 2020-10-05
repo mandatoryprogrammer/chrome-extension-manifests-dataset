@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Meilleur Prix - Test Achats",
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "description": "L’extension “Meilleur Prix” compare et trouve automatiquement les meilleurs prix du produit qui vous intéresse sur les sites webs.",
+  "background": {
+    "scripts": [
+      "browser-polyfill.js",
+      "extension-configuration.js",
+      "lifecycle-hooks.js",
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "browser-polyfill.js",
+        "contentscript.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://test-achats-banner-local.workitsaas.com/*"
+      ],
+      "js": [
+        "browser-polyfill.js",
+        "banner-script.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "app/*/*"
+  ],
+  "icons": {
+    "48": "TA48x48.png",
+    "128": "TA_SIGLE128x128.png"
+  },
+  "browser_action": {
+    "default_icon": "TA48x48.png"
+  }
+}

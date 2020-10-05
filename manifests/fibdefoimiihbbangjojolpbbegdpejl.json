@@ -1,0 +1,86 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Pinterest Keyword Tool - ClipRise",
+  "short_name": "ClipRise",
+  "version": "1.6",
+  "description": "Pinterest Keyword Tool For Enhanced Keywords & Image Pin Posts ",
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "downloads",
+    "activeTab",
+    "tabs",
+    "http://*.pinterest.com/*",
+    "https://*.pinterest.com/*",
+    "storage",
+    "cookies",
+    "alarms",
+    "contextMenus",
+    "identity",
+    "identity.email"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "128": "images/icon.png",
+      "16": "images/icon.png",
+      "19": "images/icon.png",
+      "24": "images/icon.png",
+      "32": "images/icon.png",
+      "48": "images/icon.png"
+    },
+    "default_title": "Pinterms",
+    "default_popup": "html/popup.html"
+  },
+  "icons": {
+    "128": "images/icon.png",
+    "16": "images/icon.png",
+    "32": "images/icon.png",
+    "48": "images/icon.png"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "background": {
+    "scripts": [
+      "libs/jquery-3.3.1.min.js",
+      "js/consts.js",
+      "js/background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.pinterest.com/*",
+        "*://*.app.cliprise.com/*"
+      ],
+      "js": [
+        "libs/jquery-3.3.1.min.js",
+        "js/consts.js",
+        "contentscript/content.js",
+        "contentscript/alltoaster.js"
+      ],
+      "css": [
+        "css/content.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "libs/jquery-3.3.1.min.js",
+        "js/consts.js",
+        "contentscript/pin-hover-button.js",
+        "contentscript/pin-init-btn.js",
+        "contentscript/post_shedule.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "html/*",
+    "images/*",
+    "css/*"
+  ],
+  "manifest_version": 2
+}

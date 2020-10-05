@@ -1,0 +1,67 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Searchme",
+  "short_name": "Searchme",
+  "version": "1.2.0.5",
+  "manifest_version": 2,
+  "description": "Search the web with Searchme",
+  "background": {
+    "scripts": [
+      "scripts/background.js",
+      "scripts/utils.js"
+    ]
+  },
+  "icons": {
+    "16": "Icons/Icon-16.png",
+    "32": "Icons/Icon-32.png",
+    "48": "Icons/Icon-48.png",
+    "64": "Icons/Icon-64.png",
+    "128": "Icons/Icon-128.png"
+  },
+  "browser_action": {
+    "default_popup": ""
+  },
+  "chrome_url_overrides": {
+    "newtab": "ntp/newtab.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.mybrowserbar.com/*",
+        "https://*.mybrowserbar.com/*"
+      ],
+      "js": [
+        "scripts/loader.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "options_page": "ntp/options.html",
+  "permissions": [
+    "tabs",
+    "management",
+    "storage",
+    "webRequest",
+    "cookies",
+    "contextMenus"
+  ],
+  "chrome_settings_overrides": {
+    "search_provider": {
+      "name": "mybrowserbar.com",
+      "keyword": "mybrowserbar.com",
+      "search_url": "http://www.mybrowserbar.com/cgi/sm_redirector.cgi?src=ds&cnid=461086&q={searchTerms}",
+      "favicon_url": "http://www.mybrowserbar.com/favicon.ico",
+      "suggest_url": "",
+      "instant_url": "",
+      "image_url": "",
+      "search_url_post_params": "",
+      "suggest_url_post_params": "",
+      "instant_url_post_params": "",
+      "image_url_post_params": "",
+      "alternate_urls": [],
+      "encoding": "UTF-8",
+      "is_default": true
+    }
+  }
+}

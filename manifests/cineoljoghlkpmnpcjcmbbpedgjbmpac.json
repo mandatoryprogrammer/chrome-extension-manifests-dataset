@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Dribbble Color Generator",
+  "description": "Grab Color Palette on Dribbble and generate a json file for importing into Sketch",
+  "version": "1.2",
+  "icons": {
+    "16": "icons/logo16.png",
+    "32": "icons/logo32.png",
+    "48": "icons/logo48.png",
+    "128": "icons/logo128.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.dribbble.com/*"
+      ],
+      "js": [
+        "arrive.min.js",
+        "util.js",
+        "preview.js"
+      ],
+      "exclude_matches": [
+        "*://*.dribbble.com/shots/*"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.dribbble.com/shots/*"
+      ],
+      "js": [
+        "util.js",
+        "drib.js"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/logo16.png",
+      "32": "icons/logo32.png",
+      "48": "icons/logo48.png",
+      "128": "icons/logo128.png"
+    }
+  },
+  "permissions": [
+    "tabs",
+    "downloads",
+    "notifications"
+  ]
+}

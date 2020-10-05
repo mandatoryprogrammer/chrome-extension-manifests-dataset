@@ -1,0 +1,41 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "RedMug",
+  "version": "1.1",
+  "description": "Converts selection of JS to coffeescript on the clipboard",
+  "permissions": [
+    "<all_urls>",
+    "tts",
+    "tabs",
+    "clipboardWrite",
+    "clipboardRead"
+  ],
+  "browser_action": {
+    "default_icon": "mug.jpg",
+    "default_title": "RedMug",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "scripts/jquery.min.js",
+      "scripts/coffeescript.min.js",
+      "scripts/underscore.min.js",
+      "scripts/js2coffee.min.js",
+      "background.js"
+    ]
+  },
+  "minimum_chrome_version": "14",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "all_frames": true,
+      "js": [
+        "content_script.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self' ",
+  "manifest_version": 2
+}

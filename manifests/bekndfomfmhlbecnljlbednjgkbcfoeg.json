@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Skinhub Profitability Calculator (SPC)",
+  "short_name": "SPC",
+  "version": "0.0.8",
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://apis.google.com; object-src 'self'",
+  "description": "The only statistics collector / testing tool for skinhub.com cases. Besides this, luck is your best friend.",
+  "homepage_url": "https://spc.haifisch.vip",
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlQ+oxSrARshS2Whb3VwYkmlZ7YFYB3w2NzXlN3z4mLgEU3QRsqXQX7njBtCzI6lq4Si/qQobyMvAFFJlce0kknefJSQFh4Su4qlG4wCxOhfPYuPPNUtgBHDxk1kvTIaNbfU6cURkBQeM6OMHElhabyowB9t9797/0mEU8RJ+8YKBDAIWDiXq/DjlFhRJFo0QH6HDbFzgSUt1LKNxR9VYLTXCishbCw3AlZsEoAww/h314HiJvja0oqslc4y9LDR4wEv0WFfE0M400qEXyqQwRL1ldq5dPRQzWTWLdRR60hCHKYNugPGdT2uwNQ8+tn1gmi3WMvpC1/q8D8fFuTJ/8QIDAQAB",
+  "browser_action": {
+    "default_icon": {
+      "32": "icons/if_four-leaved_shamrock_lucky_676765.png"
+    },
+    "default_title": "SPC",
+    "default_popup": "popup.html"
+  },
+  "default_locale": "en",
+  "permissions": [
+    "https://skinhub.com/*",
+    "storage",
+    "identity",
+    "https://www.googleapis.com/"
+  ],
+  "oauth2": {
+    "client_id": "832316720370-662g47m98v0unji41qg39pg768j067s6.apps.googleusercontent.com",
+    "project_id": "spc-chrome",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://accounts.google.com/o/oauth2/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "scopes": [
+      "https://www.googleapis.com/auth/chromewebstore.readonly"
+    ]
+  },
+  "background": {
+    "scripts": [
+      "src/inject/background/background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://skinhub.com/*"
+      ],
+      "js": [
+        "src/inject/toggle_helper.js",
+        "src/inject/upgrader.js",
+        "src/inject/inject.js",
+        "src/inject/html2canvas.min.js",
+        "src/inject/shared.js",
+        "src/inject/jquery-git.min.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "src/css/spc.css",
+    "src/css/upgrader.css"
+  ]
+}

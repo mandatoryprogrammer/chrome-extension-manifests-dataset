@@ -1,0 +1,82 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_ExtensionName__",
+  "version": "6.2039.1",
+  "manifest_version": 2,
+  "description": "__MSG_ExtensionDescription__",
+  "icons": {
+    "16": "skin/icon/dashlane-16px.png",
+    "48": "skin/icon/dashlane-48px.png",
+    "128": "skin/icon/dashlane-128px.png"
+  },
+  "browser_action": {
+    "default_title": "Dashlane",
+    "default_icon": {
+      "19": "skin/icon/icon_loading.png",
+      "38": "skin/icon/icon_loading@2x.png"
+    }
+  },
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "tabs",
+    "privacy",
+    "storage",
+    "unlimitedStorage",
+    "webRequest",
+    "webRequestBlocking",
+    "cookies",
+    "nativeMessaging",
+    "pageCapture"
+  ],
+  "background": {
+    "scripts": [
+      "content/scripts/vendors.js",
+      "content/scripts/background.js",
+      "content/scripts/deps.js",
+      "content/scripts/carbon.js"
+    ],
+    "persistent": true
+  },
+  "web_accessible_resources": [
+    "content/webui/index.html"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "*://platform.twitter.com/widgets/*",
+        "*://www.facebook.com/plugins/*",
+        "*://plusone.google.com/_/+1/*"
+      ],
+      "exclude_globs": [
+        "*://www.google.*/*sourceid=chrome-instant*",
+        "*://www.google.*/blank.html*"
+      ],
+      "js": [
+        "content/contentScripts/kwift.CHROME.min.js"
+      ],
+      "css": [
+        "styles/webui-frame.css"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "homepage_url": "https://www.dashlane.com/",
+  "default_locale": "en",
+  "externally_connectable": {
+    "ids": [
+      "mflfjeigcbpmcnebeggkkgihbedfglon"
+    ]
+  },
+  "author": "Dashlane",
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  }
+}

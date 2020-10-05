@@ -1,0 +1,86 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Filly: form filler & team collaboration",
+  "short_name": "Filly",
+  "version": "0.3.10",
+  "manifest_version": 2,
+  "description": "Filly is next-gen form filler. Save & restore forms with one hotkey. Automatically reuse forms from other team-members.",
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/logo19.png",
+      "38": "icons/logo38.png"
+    },
+    "default_title": "Filly: form filler & team collaboration",
+    "default_popup": "pages/tutorial/step1.html"
+  },
+  "icons": {
+    "16": "icons/logo16.png",
+    "48": "icons/logo48.png",
+    "128": "icons/logo128.png"
+  },
+  "permissions": [
+    "tabs",
+    "contextMenus",
+    "notifications",
+    "https://4mstash.com/form/save",
+    "https://4mstash.com/form/list",
+    "https://4mstash.com/order/save",
+    "https://4mstash.com/order/list",
+    "https://4mstash.com/user/status",
+    "https://4mstash.com/message/list",
+    "https://4mstash.com/form/get-by-code",
+    "https://4mstash.com/short-url/shorten",
+    "https://4mstash.com/personal-data/list",
+    "https://fill.ly/form/save",
+    "https://fill.ly/form/list",
+    "https://fill.ly/order/save",
+    "https://fill.ly/order/list",
+    "https://fill.ly/user/status",
+    "https://fill.ly/message/list",
+    "https://fill.ly/form/get-by-code",
+    "https://fill.ly/personal-data/list",
+    "https://fill.ly/short-url/shorten",
+    "https://fill.ly/url-mapping/list",
+    "https://fill.ly/team/check-last-update",
+    "https://fill.ly/form/list-team-updated"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "web_accessible_resources": [
+    "pages/tutorial/*.html",
+    "pages/tutorial/*.js",
+    "images/*.png",
+    "icons/*.png",
+    "close-icon.png",
+    "client-script.js",
+    "extension-config.js",
+    "client-ajax-fields-listener.js"
+  ],
+  "background": {
+    "scripts": [
+      "background-all.min.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "*://formstash.localhost/demo",
+        "*://4mstash.com/demo",
+        "*://fill.ly/demo",
+        "*://fill.ly/demo/internal"
+      ],
+      "all_frames": false,
+      "js": [
+        "content-all.min.js"
+      ],
+      "css": [
+        "all.css"
+      ]
+    }
+  ],
+  "commands": {}
+}

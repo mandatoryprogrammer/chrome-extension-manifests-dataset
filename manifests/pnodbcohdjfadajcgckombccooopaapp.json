@@ -1,0 +1,66 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Collectival",
+  "description": "This Extension will pull the record you are looking at into Collectival for certain sites.",
+  "version": "1.0.0.7",
+  "background": {
+    "scripts": [
+      "collectival.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html",
+    "default_title": "Copy this item into Collectival"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "https://ajax.googleapis.com/",
+    "http://vi.vipr.ebaydesc.com/*",
+    "http://www.ebay.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://www.christies.com/lotfinder/*"
+      ],
+      "js": [
+        "jquery-3.1.1.min.js",
+        "christies_content_script2.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://www.sothebys.com/en/auctions/ecatalogue*"
+      ],
+      "js": [
+        "jquery-3.1.1.min.js",
+        "sothebys_content_script.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://www.invaluable.com/auction-lot/*",
+        "http://www.invaluable.com/buy-now/*"
+      ],
+      "js": [
+        "jquery-3.1.1.min.js",
+        "invaluable_content_script.js"
+      ]
+    },
+    {
+      "matches": [
+        "http://www.ebay.com/itm/*"
+      ],
+      "js": [
+        "jquery-3.1.1.min.js",
+        "ebay_content_script.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://*.collectival.com ; object-src 'self' https://*.collectival.com"
+}

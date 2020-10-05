@@ -1,0 +1,30 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Bitly Shorten (by Abril)",
+  "description": "Encurtador de URL do Bitly da Abril",
+  "version": "0.5",
+  "permissions": [
+    "tabs",
+    "storage",
+    "https://api-ssl.bitly.com/oauth/access_token"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://bitly.com/robots.txt*"
+      ],
+      "js": [
+        "oauth2/oauth2_inject.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "oauth2/oauth2.html"
+  ],
+  "browser_action": {
+    "default_icon": "images/icon.png",
+    "default_popup": "popup.html"
+  }
+}

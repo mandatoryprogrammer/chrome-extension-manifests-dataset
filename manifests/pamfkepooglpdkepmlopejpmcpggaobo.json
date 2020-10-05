@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "E2E Test Builder",
+  "description": "An extension which allows you to record interaction and perform various assertions. Compatible with Selenium IDE test cases.",
+  "version": "1.3.0",
+  "browser_action": {
+    "default_icon": "assets/icon-c@32.png"
+  },
+  "icons": {
+    "16": "assets/icon-c@16.png",
+    "32": "assets/icon-c@32.png",
+    "48": "assets/icon-c@48.png",
+    "128": "assets/icon-c@128.png",
+    "256": "assets/icon-c@256.png",
+    "512": "assets/icon-c@512.png"
+  },
+  "background": {
+    "scripts": [
+      "background/runtime.js",
+      "background/main.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "content/runtime.js",
+        "content/main.js"
+      ],
+      "all_frames()": true
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "permissions": [
+    "tabs",
+    "contextMenus",
+    "nativeMessaging"
+  ]
+}

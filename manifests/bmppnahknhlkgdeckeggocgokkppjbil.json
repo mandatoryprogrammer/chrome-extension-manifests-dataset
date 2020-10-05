@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Tubeacca",
+  "version": "6",
+  "description": "Links to reduced-quality YouTube music videos are replaced with links to the high-quality versions unlocked at tubeacca.com.",
+  "icons": {
+    "128": "logo_128x128.png"
+  },
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "get_map.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "https://www.youtube.com/*",
+        "https://tubeacca.com/*",
+        "http://tubeacca.com/*"
+      ],
+      "js": [
+        "off_youtube.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.youtube.com/*"
+      ],
+      "js": [
+        "youtube.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://tubeacca.com/*",
+        "http://tubeacca.com/*"
+      ],
+      "js": [
+        "tubeacca.js"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

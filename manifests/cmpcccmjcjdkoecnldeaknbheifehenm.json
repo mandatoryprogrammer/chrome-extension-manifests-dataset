@@ -1,0 +1,68 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Focus - Block websites and Avoid Distractions",
+  "short_name": "Focus",
+  "description": "Block sites easily (or set a maximum time limit) and be productive. Has scheduling, whitelist mode, redirect when blocked and more",
+  "version": "0.1.28",
+  "author": "Focus Creator",
+  "applications": {
+    "gecko": {
+      "id": "focusextension@focus.com",
+      "strict_min_version": "42.0"
+    }
+  },
+  "icons": {
+    "16": "images/focus16.png",
+    "32": "images/focus32.png",
+    "48": "images/focus48.png",
+    "128": "images/focus128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "lib/jquery-3.3.1.min.js",
+        "lib/lodash.min.js",
+        "lib/moment.min.js",
+        "dist/common.js",
+        "dist/schedule.js",
+        "dist/content.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "https://127.0.0.1/isBlocked*",
+    "https://localhost/isBlocked*",
+    "storage",
+    "alarms",
+    "tabs"
+  ],
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "images/focus16.png",
+      "32": "images/focus32.png",
+      "48": "images/focus48.png",
+      "128": "images/focus128.png"
+    }
+  },
+  "background": {
+    "scripts": [
+      "lib/jquery-3.3.1.min.js",
+      "lib/moment.min.js",
+      "lib/lodash.min.js",
+      "dist/common.js",
+      "dist/schedule.js",
+      "dist/background.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "images/*.png",
+    "images/*.jpg"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

@@ -1,0 +1,69 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Quick Translate",
+  "author": "Asım TAŞ",
+  "description": "This extension provides quick translation of selected texts",
+  "version": "2.5",
+  "manifest_version": 2,
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "css": [
+        "css/translate_popup.css"
+      ],
+      "js": [
+        "js/common/common.js",
+        "js/common/jquery-2.1.4.min.js",
+        "js/common/jquery.draggable.js",
+        "js/common/languages.js",
+        "js/contentscript/reminderhelper.js",
+        "js/contentscript/translate.js",
+        "js/contentscript/main.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "options_page": "options.html",
+  "background": {
+    "scripts": [
+      "js/common/common.js",
+      "js/background/reminder.js",
+      "js/background/googlespeak.js",
+      "js/background/background.js"
+    ],
+    "persistent": true
+  },
+  "web_accessible_resources": [
+    "icons/*",
+    "css/*"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/icon19.png",
+      "38": "icons/icon38.png"
+    },
+    "default_title": "Quick Translate",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "http://translate.google.com/",
+    "https://translate.google.com/",
+    "storage"
+  ],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Q"
+      }
+    }
+  }
+}

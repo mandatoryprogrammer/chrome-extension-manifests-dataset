@@ -1,0 +1,123 @@
+{
+  "name": "StopItKids parental control",
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "version": "12.6",
+  "description": "Monitor your child's desktop web activity. Protect your child by restricting them from accessing inappropriate websites",
+  "browser_action": {
+    "default_icon": {
+      "128": "stopitkids_logo_128.png",
+      "16": "stopitkids_logo_16.png",
+      "48": "stopitkids_logo_48.png"
+    }
+  },
+  "icons": {
+    "128": "stopitkids_logo_128.png",
+    "16": "stopitkids_logo_16.png",
+    "48": "stopitkids_logo_48.png"
+  },
+  "incognito": "split",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>",
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "http://127.0.0.1/*",
+        "http://localhost/*",
+        "http://stopitkids.com/*",
+        "https://stopitkids.com/*",
+        "https://www.stopitkids.com/*"
+      ],
+      "exclude_globs": [
+        "chrome-extension://*/*"
+      ],
+      "js": [
+        "jquery-1.7.2.min.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "<all_urls>",
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "http://127.0.0.1/*",
+        "http://localhost/*",
+        "http://stopitkids.com/*",
+        "https://stopitkids.com/*",
+        "https://www.stopitkids.com/*"
+      ],
+      "exclude_globs": [
+        "chrome-extension://*/*"
+      ],
+      "js": [
+        "contentAPI.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "<all_urls>",
+        "http://*/*",
+        "https://*/*"
+      ],
+      "exclude_matches": [
+        "http://127.0.0.1/*",
+        "http://localhost/*",
+        "http://stopitkids.com/*",
+        "https://stopitkids.com/*",
+        "https://www.stopitkids.com/*",
+        "https://hangouts.google.com/*"
+      ],
+      "exclude_globs": [
+        "chrome-extension://*/*"
+      ],
+      "js": [
+        "contentOnLoad.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "http://stopitkids.com/*"
+      ],
+      "js": [
+        "isinstalled.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "management",
+    "tabs",
+    "<all_urls>",
+    "pageCapture",
+    "idle",
+    "webNavigation",
+    "webRequestBlocking",
+    "webRequest",
+    "activeTab",
+    "nativeMessaging",
+    "alarms"
+  ],
+  "web_accessible_resources": [
+    "isinstalled.js"
+  ],
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "background": {
+    "scripts": [
+      "/idb.js",
+      "/background.js",
+      "/jquery-3.3.1.min.js",
+      "/postMethods.js"
+    ],
+    "persistent": true
+  }
+}

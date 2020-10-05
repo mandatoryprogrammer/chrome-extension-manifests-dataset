@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "InventorySquare",
+  "version": "2019.5.13925",
+  "manifest_version": 2,
+  "description": "Update your SquareSpace inventory counts from a Google Spreadsheet with one click.",
+  "homepage_url": "https://objectifgroup.com/inventorysquare",
+  "icons": {
+    "400": "icons/icon400.png"
+  },
+  "background": {
+    "scripts": [
+      "dist/bg.js"
+    ],
+    "persistent": false
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self';",
+  "browser_action": {
+    "default_title": "Inventory Square - Sync SquareSpace inventory with a spreadsheet",
+    "default_icon": {
+      "400": "icons/icon32.png"
+    },
+    "default_popup": "src/view/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.squarespace.com/config/commerce/inventory?inventorysquare=*"
+      ],
+      "all_frames": true,
+      "js": [
+        "./lib/jquery-2.2.4.min.js",
+        "dist/fg.js"
+      ],
+      "css": [
+        "css/main.css"
+      ]
+    }
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.objectifgroup.com/*"
+    ]
+  },
+  "oauth2": {
+    "client_id": "244882838987-17nl7t731goo0dpndofi48pqpfkb9ra9.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/chromewebstore.readonly"
+    ]
+  },
+  "permissions": [
+    "storage",
+    "cookies",
+    "*://*.squarespace.com/",
+    "https://www.googleapis.com/",
+    "identity"
+  ],
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAglCgUzFFYhULrEZzmdc4ji7ttPok1VxboZPWcPGpWfQAiMFb3OKq3+hMguICX28ujWWrL+q5kgJ3H8IP5A4MCnPe17A6Ki2u9I+/wixuvNaFkEHya2YEd1F+dDdzIh/th5WEuTPNiisBbt66GzitRiL1bLGpskX1WllOwa05v9Q0shJhcaItetcZxAOcvnCBNfVyeukROJCm31gMh+HlfLCX44vDwYl0QZNE39VUVQ273KRrbAI4YbhtKkNfXnf1tteWWOKC7UBQEXCkVTkkqZdBrOtxZruEO8gweZgyDyKsBAg68UJruO9qncA04sNUm0yVc0vN8mbQY5ZXyfmTewIDAQAB"
+}

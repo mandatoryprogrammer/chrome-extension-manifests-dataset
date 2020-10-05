@@ -1,0 +1,35 @@
+{
+  "update_url": "http://clients2.google.com/service/update2/crx",
+  "name": "Belongings",
+  "version": "1.0",
+  "manifest_version": 2,
+  "description": "This extension allows you to scan famous e-commerce site product pages and import items directly to your Belongings Account.",
+  "browser_action": {
+    "default_icon": "cross.png",
+    "default_title": "Belongings",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*",
+    "storage"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "contentscript.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self'; connect-src https://www.belongingsapp.com https://www.facebook.com https://api.twitter.com; img-src 'self';"
+}

@@ -1,0 +1,54 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "FakesKiller",
+  "version": "0.1.0",
+  "default_locale": "en",
+  "description": "Kill fake news",
+  "icons": {
+    "16": "img/icon16.png",
+    "32": "img/icon32.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "img/icon16.png",
+      "24": "img/icon24.png",
+      "32": "img/icon32.png"
+    },
+    "default_title": "Fakes Killer",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": [
+      "js/background/main.js",
+      "js/background/data.js",
+      "js/background/cuid.js",
+      "js/background/storage.js",
+      "js/background/urls.js"
+    ],
+    "persistent": false
+  },
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.facebook.com/*"
+      ],
+      "css": [
+        "css/inline/common.css",
+        "css/inline/facebook.css"
+      ],
+      "js": [
+        "js/inline/facebook.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "alarms",
+    "storage",
+    "activeTab",
+    "https://www.facebook.com/*"
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "MediaRadar Mockup Extension",
+  "description": "Captures any web page",
+  "version": "1.1.0",
+  "background": {
+    "scripts": [
+      "js/thirdParty/browser-polyfill.min.js"
+    ]
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://localhost/*",
+      "*://your.domain.com/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>",
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/thirdParty/browser-polyfill.min.js",
+        "js/contentScript.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "16": "assets/icons/mediaradar-16-on.png",
+      "48": "assets/icons/mediaradar-48-on.png"
+    },
+    "default_title": "MediaRadar Screenshot Tool",
+    "default_popup": "index.html"
+  },
+  "permissions": [
+    "management",
+    "webNavigation",
+    "http://*/*",
+    "https://*/*",
+    "activeTab",
+    "downloads",
+    "tabs",
+    "<all_urls>"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' ; object-src 'self'",
+  "incognito": "spanning"
+}

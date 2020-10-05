@@ -1,0 +1,57 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "SlideshowPlayer",
+  "version": "2.6.5",
+  "manifest_version": 2,
+  "default_locale": "en",
+  "description": "__MSG_DESCRIPTION__",
+  "homepage_url": "http://far.whochan.com/",
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "64": "icons/icon64.png",
+    "128": "icons/icon96.png"
+  },
+  "background": {
+    "page": "index.html"
+  },
+  "options_ui": {
+    "chrome_style": false,
+    "open_in_tab": true,
+    "page": "options.html"
+  },
+  "page_action": {
+    "default_title": "SlideshowPlayer",
+    "default_icon": "buttons/disabled.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "notifications",
+    "http://*/*",
+    "https://*/*",
+    "tabs"
+  ],
+  "web_accessible_resources": [
+    "configurations/clientlang.json",
+    "locales/*/configurations/clientlang.json"
+  ],
+  "content_scripts": [
+    {
+      "run_at": "document_idle",
+      "all_frames": false,
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "lib/WHO.extension.client.js",
+        "includes/api.LinkFilter.js",
+        "includes/usoCommon.js",
+        "includes/0.SlideshowPlayer.js",
+        "includes/usoSlideshowPlayer.js",
+        "includes/usoRecordImages.js"
+      ]
+    }
+  ]
+}

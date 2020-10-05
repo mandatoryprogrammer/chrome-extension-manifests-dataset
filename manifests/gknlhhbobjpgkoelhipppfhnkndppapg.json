@@ -1,0 +1,44 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "AUBlocker",
+  "short_name": "AUBlocker",
+  "description": "Blocks the annoying on-hover menu on the AU websites.",
+  "version": "1.3",
+  "icons": {
+    "16": "images/logo16.png",
+    "48": "images/logo48.png",
+    "128": "images/logo128.png"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "page_action": {
+    "default_icon": {
+      "19": "images/enabled-logo19.png",
+      "38": "images/enabled-logo38.png"
+    }
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://au.dk/*",
+        "*://*.au.dk/*",
+        "*://services.brics.dk/java/courseadmin/*"
+      ],
+      "exclude_matches": [
+        "*://sbstads.au.dk/*"
+      ],
+      "js": [
+        "tinker.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}

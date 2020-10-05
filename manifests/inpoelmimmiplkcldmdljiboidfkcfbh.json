@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Presearch.org Search Extension",
+  "description": "Set your browser's default search to use Presearch.org",
+  "version": "1.0",
+  "homepage_url": "https://www.presearch.org/?utm_source=searchext",
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": "img/icon16.png",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.presearch.org/*"
+      ],
+      "css": [
+        "assets/popup-visibility.css"
+      ],
+      "js": [
+        "assets/popup-visibility.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "activeTab",
+    "storage",
+    "*://*.presearch.org/*"
+  ],
+  "chrome_settings_overrides": {
+    "search_provider": {
+      "name": "Presearch",
+      "keyword": "Presearch.org",
+      "search_url": "https://presearch.org/extsearch?term={searchTerms}",
+      "favicon_url": "https://www.presearch.org/favicon.ico",
+      "suggest_url": "https://engine-api.presearch.org/autocomplete?query={searchTerms}",
+      "encoding": "UTF-8",
+      "is_default": true
+    }
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://*.presearch.org/*"
+    ]
+  }
+}

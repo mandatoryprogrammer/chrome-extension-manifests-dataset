@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "PCRecruiter Google Voice Plugin",
+  "description": "This extension allows access to Google Voice using PCRecruiter.",
+  "version": "1.0.7",
+  "icons": {
+    "128": "phone.png"
+  },
+  "options_page": "options.html",
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "https://*.google.com/",
+    "notifications"
+  ],
+  "background": {
+    "page": "background.html"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "phone.png",
+      "24": "phone.png",
+      "32": "phone.png"
+    },
+    "default_title": "PCR_Google_Voice",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.pcrecruiter.net/*",
+        "https://voice.google.com/*"
+      ],
+      "css": [
+        "extension.css"
+      ],
+      "js": [
+        "jquery-3.2.1.min.js",
+        "voicex.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://ajax.googleapis.com; object-src 'self'",
+  "manifest_version": 2
+}

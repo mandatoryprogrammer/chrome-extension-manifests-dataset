@@ -1,0 +1,68 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Code Snip",
+  "version": "1.0",
+  "manifest_version": 2,
+  "description": "Copy code from Stack Overflow, Github, and AskUbuntu's websites expediting the time it takes you to debug issues.",
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": false
+  },
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_title": "Code Snip",
+    "default_popup": "overlay.html"
+  },
+  "permissions": [
+    "activeTab"
+  ],
+  "content_scripts": [
+    {
+      "css": [
+        "css/stackOverflow.css"
+      ],
+      "js": [
+        "js/stackOverflow.js",
+        "js/contentscript.js",
+        "js/copy-to-clipboard.js"
+      ],
+      "matches": [
+        "https://stackoverflow.com/*"
+      ]
+    },
+    {
+      "css": [
+        "css/github.css"
+      ],
+      "js": [
+        "js/github.js",
+        "js/contentscript.js",
+        "js/copy-to-clipboard.js"
+      ],
+      "matches": [
+        "https://github.com/*"
+      ]
+    },
+    {
+      "css": [
+        "css/ubuntu.css"
+      ],
+      "js": [
+        "js/ubuntu.js",
+        "js/contentscript.js",
+        "js/copy-to-clipboard.js"
+      ],
+      "matches": [
+        "https://askubuntu.com/*"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' https://apis.google.com; object-src 'self'"
+}

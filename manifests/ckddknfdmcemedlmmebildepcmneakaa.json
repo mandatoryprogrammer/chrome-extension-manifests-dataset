@@ -1,0 +1,33 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "CSS and Javascript Injection",
+  "description": "This plugin will remember all css/js code you injected in every website and auto-inject them when web page is loaded",
+  "version": "1.0.6",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "main.html",
+    "default_title": "inject your own js and css"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "http://*/",
+    "https://*/"
+  ],
+  "content_security_policy": "script-src 'self' https://cdnjs.cloudflare.com https://code.jquery.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "jquery-2.1.4.min.js",
+        "common.js",
+        "content.js"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

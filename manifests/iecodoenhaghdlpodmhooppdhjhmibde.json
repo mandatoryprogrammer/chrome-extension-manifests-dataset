@@ -1,0 +1,55 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Gnosis Safe - Smart Wallet",
+  "short_name": "Gnosis Safe",
+  "version": "1.5.1",
+  "description": "",
+  "browser_action": {
+    "default_title": "Gnosis Safe - Smart Wallet",
+    "default_popup": "index.html"
+  },
+  "author": "Gnosis",
+  "default_locale": "en",
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "icons": {
+    "16": "assets/images/favicon.png",
+    "48": "assets/images/favicon.png"
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "tabs",
+    "notifications"
+  ],
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "contentscript.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "script.js"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com https://cdn.firebase.com https://*.firebaseio.com https://apis.google.com; object-src 'self'",
+  "externally_connectable": {
+    "ids": [],
+    "matches": []
+  }
+}

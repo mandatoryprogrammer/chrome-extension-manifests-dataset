@@ -1,0 +1,62 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Swagger Inspector Extension",
+  "description": "Allows the Swagger Inspector and AlertSite to bypass CORS and security-scheme related browser-restrictions for API inspection",
+  "version": "2.2.0",
+  "homepage_url": "https://inspector.swagger.io",
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "src/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.inspector.swagger.io/*",
+        "https://*.inspector.swagger.io/*",
+        "http://*.alertsite.com/*",
+        "https://*.alertsite.com/*"
+      ],
+      "js": [
+        "src/inject-extension-installed.js"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "images/16.png",
+    "48": "images/48.png",
+    "128": "images/128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "images/16.png",
+      "48": "images/48.png",
+      "128": "images/128.png"
+    },
+    "default_title": "Swagger Inspector Extension"
+  },
+  "permissions": [
+    "http://*/",
+    "https://*/",
+    "contextMenus",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://*.inspector.swagger.io/*",
+      "*://*.inspector.swagger.io:*/*",
+      "*://*.alertsite.com/*",
+      "*://*.alertsite.com:*/*"
+    ]
+  },
+  "web_accessible_resources": [
+    "images/16.png",
+    "images/24.png",
+    "images/32.png",
+    "images/48.png",
+    "images/128.png"
+  ]
+}

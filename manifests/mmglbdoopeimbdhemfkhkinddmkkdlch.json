@@ -1,0 +1,86 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "EnGrip: Track & showcase your online learning",
+  "short_name": "EnGrip",
+  "version": "0.12.16",
+  "description": "Document your online learning for your professional growth. It's free!",
+  "icons": {
+    "19": "ui/assets/images/icon19.png",
+    "38": "ui/assets/images/icon38.png",
+    "128": "ui/assets/images/icon.png"
+  },
+  "background": {
+    "scripts": [
+      "background/config.js",
+      "common/utils.js",
+      "background/logger.js",
+      "background/persistence.js",
+      "background/realtime.js",
+      "background/analytics.js",
+      "background/collections.js",
+      "background/reminders.js",
+      "background/update_monitor.js",
+      "background/server.js",
+      "background/sites.js",
+      "background/tracker.js",
+      "common/third_party/socket_io_1_4_5.js",
+      "background/app.js",
+      "background/relay.js",
+      "background/background.js"
+    ]
+  },
+  "permissions": [
+    "alarms",
+    "idle",
+    "tabs",
+    "activeTab",
+    "<all_urls>",
+    "notifications"
+  ],
+  "browser_action": {
+    "browser_style": false,
+    "default_icon": "ui/assets/images/icon.png",
+    "default_title": "Engrip Extension",
+    "default_popup": "ui/popup/popup-anonymous.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.engrip.com/*"
+      ],
+      "js": [
+        "ui/interface.js",
+        "ui/tab/checklogin.js",
+        "ui/tab/notifyversion.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "common/third_party/jquery-3.1.1.min.js",
+        "common/third_party/jquery-ui.min.js",
+        "common/utils.js",
+        "ui/interface.js",
+        "ui/menu_collections.js",
+        "ui/menu_notes.js",
+        "ui/menu_share.js",
+        "ui/menu_reminder.js",
+        "ui/menu.js",
+        "ui/tab/content.js",
+        "ui/tab/web_notes.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    "ui/assets/css/*",
+    "ui/assets/fonts/*",
+    "ui/assets/html/*",
+    "ui/assets/images/*"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com https://cdn.mxpnl.com; object-src 'self'"
+}

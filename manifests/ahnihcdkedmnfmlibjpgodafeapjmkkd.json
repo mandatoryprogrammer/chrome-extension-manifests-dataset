@@ -1,0 +1,65 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "0.3.0",
+  "manifest_version": 2,
+  "name": "Madgicx For Chrome (beta)",
+  "description": "A seamless intelligence layer on top of your existing Facebook ads manager.",
+  "permissions": [
+    "cookies",
+    "storage",
+    "tabs",
+    "notifications",
+    "https://app.madgicx.com/*"
+  ],
+  "icons": {
+    "16": "static/img/favicon-16px.png",
+    "24": "static/img/favicon-24px.png",
+    "32": "static/img/favicon-32px.png",
+    "48": "static/img/favicon-48px.png",
+    "128": "static/img/favicon-128px.png"
+  },
+  "background": {
+    "scripts": [
+      "background/index.js"
+    ],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_popup": "popup/index.html",
+    "default_title": "Madgicx for Chrome"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.facebook.com/adsmanager/*"
+      ],
+      "js": [
+        "interceptor/index.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "*://*.facebook.com/adsmanager/*"
+      ],
+      "js": [
+        "content/index.js"
+      ],
+      "run_at": "document_end",
+      "css": [
+        "content/style.css"
+      ],
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "static/*"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "https://app.madgicx.com/*"
+    ]
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "minimum_chrome_version": "31"
+}

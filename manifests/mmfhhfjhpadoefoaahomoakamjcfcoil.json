@@ -1,0 +1,107 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_EXTENSION_NAME__",
+  "short_name": "__MSG_EXTENSION_SHORTNAME__",
+  "version": "114.2",
+  "version_name": "1.1.4 (114.2)",
+  "manifest_version": 2,
+  "description": "__MSG_EXTENSION_DESCRIPTION__",
+  "icons": {
+    "16": "images/icon-16.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
+  },
+  "default_locale": "en",
+  "offline_enabled": true,
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "unlimitedStorage",
+    "<all_urls>",
+    "activeTab",
+    "notifications",
+    "clipboardRead",
+    "webRequest",
+    "http://*/",
+    "https://*/"
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_globs": [
+        "chrome-extension://*/teInlineSearch.html",
+        "https://api.textexpander.com/client/signin.html*",
+        "https://app.textexpander.com/ssoChrome*"
+      ],
+      "match_about_blank": true,
+      "all_frames": true,
+      "css": [],
+      "js": [
+        "extension.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://api.textexpander.com/client/signin.html*"
+      ],
+      "run_at": "document_end",
+      "js": [
+        "signin-userscript.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://app.textexpander.com/ssoChrome*"
+      ],
+      "run_at": "document_start",
+      "js": [
+        "close-sso-userscript.js"
+      ]
+    }
+  ],
+  "omnibox": {
+    "keyword": "te"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon-19.png",
+      "38": "images/icon-38.png"
+    },
+    "default_title": "__MSG_BROWSER_ACTION_TITLE__"
+  },
+  "web_accessible_resources": [
+    "teModal.html",
+    "teInlineSearch.html"
+  ],
+  "commands": {
+    "inline-search": {
+      "suggested_key": {
+        "default": "Ctrl+Period",
+        "mac": "MacCtrl+Period"
+      },
+      "description": "Search Snippets"
+    }
+  },
+  "sandbox": {
+    "pages": [
+      "fillin.html",
+      "evalWorkerIFrame.html",
+      "filterWorkerIFrame.html"
+    ],
+    "content_security_policy": "sandbox allow-scripts allow-forms; script-src 'self' 'unsafe-inline' 'unsafe-eval'"
+  }
+}

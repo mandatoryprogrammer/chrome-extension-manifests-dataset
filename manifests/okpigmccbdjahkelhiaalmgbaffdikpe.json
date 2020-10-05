@@ -1,0 +1,46 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "dogdrip++",
+  "version": "0.0.3",
+  "icons": {
+    "128": "img/128.png"
+  },
+  "permissions": [
+    "storage",
+    "activeTab"
+  ],
+  "description": "extension to provide better experience for dogdrip.net",
+  "manifest_version": 2,
+  "browser_action": {
+    "default_popup": "app/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "app/background.js"
+    ],
+    "persistent": false
+  },
+  "web_accessible_resources": [
+    "app/inject.css"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.dogdrip.net/*"
+      ],
+      "exclude_matches": [
+        "https://www.dogdrip.net/",
+        "https://www.dogdrip.net/free",
+        "https://www.dogdrip.net/communitypage",
+        "https://www.dogdrip.net/notice"
+      ],
+      "css": [
+        "app/css/block.css"
+      ],
+      "js": [
+        "app/options.js",
+        "app/app.js"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "NoKey",
+  "description": "A distributed password manager without a master passwords",
+  "version": "0.4.0",
+  "author": "Florian Zinggeler",
+  "applications": {
+    "gecko": {
+      "id": "nokey@nokey.xyz"
+    }
+  },
+  "icons": {
+    "16": "icons/logo-16.png",
+    "32": "icons/logo-32.png",
+    "64": "icons/logo-64.png",
+    "128": "icons/logo-128.png"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/logo-16.png",
+      "32": "icons/logo-32.png",
+      "64": "icons/logo-64.png",
+      "128": "icons/logo-128.png"
+    },
+    "default_title": "NoKey",
+    "default_popup": "popup/main.html"
+  },
+  "web_accessible_resources": [
+    "icons/logo.svg",
+    "content_scripts/newPassword.html",
+    "content_scripts/fillForm.html"
+  ],
+  "background": {
+    "scripts": [
+      "dist/webextensionPolyfill.js",
+      "commons/bundle.js",
+      "background/bundle.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "dist/webextensionPolyfill.js",
+        "content/bundle.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "content_security_policy": "script-src 'self'; object-src 'self';",
+  "content_security_policy_RELEASE": "script-src 'self'; object-src 'self';",
+  "content_security_policy_DEBUG": "script-src 'self' 'unsafe-eval'; object-src 'self';"
+}

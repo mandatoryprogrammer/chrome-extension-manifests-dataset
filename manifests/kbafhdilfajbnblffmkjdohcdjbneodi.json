@@ -1,0 +1,80 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "DSReviews",
+  "version": "1.3.2",
+  "description": "Get review from Aliexpress.com",
+  "author": "DSReviews <getreviews.app@gmail.com>",
+  "externally_connectable": {
+    "matches": [
+      "https://dsreviews.net/*",
+      "https://api.dsreviews.net/*",
+      "https://app.oberlo.com/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "./listen.js",
+        "./global.js"
+      ],
+      "matches": [
+        "https://dsreviews.net/*",
+        "https://api.dsreviews.net/*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "./js/library/jquery.min.js",
+        "./oberlo.js",
+        "./js/library/jquery.serializejson.min.js"
+      ],
+      "matches": [
+        "https://app.oberlo.com/my-products*"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "./aliexpress.js"
+      ],
+      "matches": [
+        "https://*.aliexpress.com/*",
+        "http://*.aliexpress.com/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "browser_action": {
+    "default_icon": {
+      "16": "assets/images/icon/16.jpg",
+      "19": "assets/images/icon/19.jpg",
+      "38": "assets/images/icon/38.jpg",
+      "48": "assets/images/icon/48.jpg",
+      "128": "assets/images/icon/128.jpg"
+    },
+    "default_popup": "./assets/html/popup.html"
+  },
+  "icons": {
+    "16": "assets/images/icon/16.jpg",
+    "19": "assets/images/icon/19.jpg",
+    "38": "assets/images/icon/38.jpg",
+    "48": "assets/images/icon/48.jpg",
+    "128": "assets/images/icon/128.jpg"
+  },
+  "background": {
+    "scripts": [
+      "./background.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "https://*.aliexpress.com/*",
+    "storage",
+    "tabs",
+    "https://dsreviews.net/*",
+    "https://api.dsreviews.net/*"
+  ],
+  "content_security_policy": "script-src 'self'  'unsafe-eval'; object-src 'self'"
+}

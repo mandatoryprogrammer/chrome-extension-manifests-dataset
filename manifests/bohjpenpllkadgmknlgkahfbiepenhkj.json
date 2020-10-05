@@ -1,0 +1,82 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Brusque",
+  "version": "2018.05.26",
+  "manifest_version": 2,
+  "description": "A minimalist Pnut.io client",
+  "icons": {
+    "16": "img/br-16.png",
+    "128": "img/br-128.png",
+    "240": "img/br-240.png"
+  },
+  "browser_action": {
+    "default_icon": "img/br-128.png",
+    "default_title": "Brusque Options"
+  },
+  "background": {
+    "scripts": [
+      "libs/jquery-min.js",
+      "libs/underscore-min.js",
+      "libs/backbone-min.js",
+      "js/app.js",
+      "js/config.js",
+      "js/accounts.js",
+      "js/views/omnibox.js",
+      "js/views/notifications.js",
+      "js/posts.js",
+      "js/interactions.js",
+      "js/mentions.js",
+      "js/background.js"
+    ]
+  },
+  "minimum_chrome_version": "32",
+  "options_ui": {
+    "page": "options.html"
+  },
+  "permissions": [
+    "https://pnut.io/*",
+    "<all_urls>",
+    "notifications",
+    "tabs",
+    "storage"
+  ],
+  "omnibox": {
+    "keyword": "br"
+  },
+  "web_accessible_resources": [
+    "callback.html",
+    "options.html",
+    "img/br-128.png"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://twitter.com/intent/tweet*"
+      ],
+      "css": [
+        "css/content_twitter.css"
+      ],
+      "js": [
+        "libs/jquery-min.js",
+        "js/content_twitter.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://pnut.io/account/"
+      ],
+      "js": [
+        "libs/jquery-min.js",
+        "js/content_alpha.js"
+      ]
+    },
+    {
+      "matches": [
+        "https://pnut.io/doesntexistbrusque/"
+      ],
+      "js": [
+        "js/intercept.js"
+      ]
+    }
+  ]
+}

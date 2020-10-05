@@ -1,0 +1,155 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "__MSG_extNameAura__",
+  "description": "__MSG_extNameAura__",
+  "default_locale": "en",
+  "version": "1.1.20.1827",
+  "icons": {
+    "16": "img/aura/16.png",
+    "32": "img/aura/32.png",
+    "128": "img/aura/128.png"
+  },
+  "permissions": [
+    "notifications",
+    "geolocation",
+    "background",
+    "management",
+    "tabs",
+    "idle",
+    "http://*/*",
+    "https://*/*",
+    "https://esna.communications/*",
+    "https://esna.communications.aura/*"
+  ],
+  "background": {
+    "page": "app/aura11/background.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://manage1.esna.com/oauth/token.redirect*",
+        "https://sso.apps.avaya.com/clients/workplace/token.redirect*"
+      ],
+      "js": [
+        "app/chrome/jsc.oauth2.inject.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "file://*/*",
+        "https://*/*"
+      ],
+      "all_frames": true,
+      "run_at": "document_end",
+      "js": [
+        "app/chrome/jsc.clicktodial.js"
+      ],
+      "css": [
+        "css/clicktodial.css"
+      ]
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "file://*/*",
+        "https://*/*"
+      ],
+      "all_frames": true,
+      "run_at": "document_end",
+      "js": [
+        "app/chrome/jsc.tags.js"
+      ],
+      "css": [
+        "css/tags.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://*/sfcti/cti.bridge*.html*"
+      ],
+      "all_frames": true,
+      "run_at": "document_end",
+      "js": [
+        "app/chrome/jsc.salesforce.js"
+      ],
+      "css": [
+        "css/salesforce.css"
+      ]
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "file://*/*",
+        "https://*/*"
+      ],
+      "all_frames": false,
+      "run_at": "document_end",
+      "js": [
+        "app/chrome/jsc.popout.js"
+      ],
+      "css": [
+        "css/popout.css",
+        "css3/inject.css"
+      ]
+    },
+    {
+      "matches": [
+        "*://*.google.com/*/hovercard*"
+      ],
+      "all_frames": true,
+      "run_at": "document_start",
+      "js": [
+        "app/chrome/jsc.gmail.js"
+      ],
+      "css": [
+        "css3/inject.css"
+      ]
+    },
+    {
+      "matches": [
+        "https://teams.microsoft.com/*"
+      ],
+      "all_frames": false,
+      "run_at": "document_start",
+      "js": [
+        "app/chrome/jsc.teams.js"
+      ],
+      "css": [
+        "css3/teams.css"
+      ]
+    }
+  ],
+  "browser_action": {
+    "default_icon": "img/aura/19d.png"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'; style-src 'self' 'unsafe-inline' https://static.apps.avaya.com; img-src 'self' 'unsafe-inline' data: http: https:;",
+  "web_accessible_resources": [
+    "img/aura/48.png",
+    "img/aura/32.png",
+    "img/aura/19.png",
+    "img/aura/p16.png",
+    "img/aura/p16h.png",
+    "img/aura/p16v.png",
+    "img/common/event16.png",
+    "img/common/esna.png",
+    "app/aura11/app.html",
+    "app/aura11/app3.html",
+    "app/common/ntf.html",
+    "jsc/chrome/jsc.popout.js",
+    "css/popout.css",
+    "css3/inject.css"
+  ],
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "windows": "Ctrl+Shift+A",
+        "mac": "Ctrl+Shift+A",
+        "chromeos": "Ctrl+Shift+A",
+        "linux": "Ctrl+Shift+A"
+      }
+    }
+  }
+}

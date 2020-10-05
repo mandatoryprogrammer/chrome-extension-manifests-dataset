@@ -1,0 +1,43 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "version": "0.1.0",
+  "name": "Quick Search for Amazon",
+  "description": "Select a product name in current browser tab and click the popup to get the product price",
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "*://*.amazon.com/",
+    "activeTab",
+    "storage"
+  ],
+  "icons": {
+    "16": "data/icons/16.png",
+    "32": "data/icons/32.png",
+    "48": "data/icons/48.png",
+    "64": "data/icons/64.png",
+    "128": "data/icons/128.png",
+    "256": "data/icons/256.png"
+  },
+  "homepage_url": "http://add0n.com/quick-search.html",
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "browser_action": {
+    "default_popup": "data/panel/index.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.amazon.com/*"
+      ],
+      "js": [
+        "data/inject.js"
+      ],
+      "all_frames": true,
+      "match_about_blank": true
+    }
+  ]
+}

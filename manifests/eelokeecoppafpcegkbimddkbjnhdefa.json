@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Memini - Remember Stuff That Matters to You",
+  "short_name": "Memini",
+  "version": "2.4.1",
+  "manifest_version": 2,
+  "description": "Memini - Remember Stuff That Matters to You",
+  "homepage_url": "https://www.meminiapp.com",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "page": "background.html",
+    "persistent": true
+  },
+  "browser_action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "Memini App",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "clipboardRead",
+    "contentSettings",
+    "notifications",
+    "https://*/*",
+    "storage",
+    "activeTab",
+    "tabs",
+    "contextMenus"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "exclude_matches": [
+        "*://meminiapp.com/*",
+        "*://*.meminiapp.com/*",
+        "*://memini.local/*",
+        "*://*.memini.local/*"
+      ],
+      "js": [
+        "inject.bundle.js"
+      ]
+    }
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval' ; object-src 'self'"
+}

@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "version": "0.1.8",
+  "name": "Lessjs for Google Chrome",
+  "description": "A Lesscss compiler for Google Chrome, like FireLESS",
+  "icons": {
+    "32": "images/icon_32.png",
+    "48": "images/icon_48.png",
+    "128": "images/logo.png"
+  },
+  "page_action": {
+    "default_icon": "images/icon_32.png",
+    "default_title": "Lessjs for Google Chrome",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "tabs",
+    "*://*/*"
+  ],
+  "background": {
+    "persistent": false,
+    "scripts": [
+      "js/ds.js",
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "js/ds.js",
+        "js/refreshchecker.js",
+        "js/detector.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "lib/source-map-0.1.39.js",
+    "js/lessjs-injecter.js",
+    "lib/less.min.js"
+  ],
+  "devtools_page": "devtools.html"
+}

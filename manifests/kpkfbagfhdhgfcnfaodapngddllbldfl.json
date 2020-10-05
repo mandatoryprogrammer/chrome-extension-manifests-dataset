@@ -1,0 +1,80 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "author": "SDL, Inc",
+  "name": "SDL Instant Translation",
+  "description": "Automatically translate selected text securely and accurately, using SDL's state-of-the-art neural machine translation",
+  "version": "1.1.22.0",
+  "short_name": "SDLChrome",
+  "browser_action": {
+    "browser_style": true,
+    "default_icon": {
+      "16": "images/logo16.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "storage",
+    "clipboardWrite",
+    "contextMenus",
+    "tabs",
+    "identity",
+    "https://*/"
+  ],
+  "icons": {
+    "16": "images/logo16.png",
+    "48": "images/logo48.png",
+    "64": "images/logo64.png",
+    "128": "images/logo128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*",
+        "file:///*/*"
+      ],
+      "js": [
+        "floatingButton.js",
+        "WinPosition.js",
+        "ExtensionContentAll.js"
+      ],
+      "css": [
+        "floatingButton.css"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*/*",
+        "file:///*/*"
+      ],
+      "js": [
+        "/settings/settings.js",
+        "/providers/ETSUtil.js",
+        "/providers/ETSProvider.js",
+        "/providers/BG4Util.js",
+        "/providers/BG4Provider.js",
+        "languages.js",
+        "/translation/Translator.js",
+        "/translation/SegmentTranslator.js",
+        "/translation/DynamicTranslator.js",
+        "/server/content.js",
+        "popWin.js",
+        "translationBar.js",
+        "ExtensionContent.js"
+      ],
+      "css": [
+        "translationBar.css",
+        "popWin.css"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "images/*"
+  ],
+  "background": {
+    "page": "ExtensionBackground.html"
+  }
+}

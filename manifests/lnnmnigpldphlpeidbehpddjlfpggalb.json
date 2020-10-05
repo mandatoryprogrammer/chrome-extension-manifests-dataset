@@ -1,0 +1,51 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Email Protector",
+  "author": "Georgi Spasov",
+  "version": "0.2",
+  "description": "Email Protector secures your email communication. Whitelist users and identify potential problems with messages.",
+  "default_locale": "bg",
+  "icons": {
+    "128": "images/128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "192": "images/128.png"
+    },
+    "default_title": "Email Protector",
+    "default_popup": "popup.html"
+  },
+  "short_name": "Email Protector",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "tabs",
+    "contextMenus",
+    "notifications",
+    "https://*.abv.bg/*/",
+    "webNavigation",
+    "https://api.onlinecorpus.com/"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.abv.bg/*",
+        "http://*.abv.bg/*"
+      ],
+      "run_at": "document_end",
+      "all_frames": true,
+      "js": [
+        "jquery.js",
+        "injectables/abvContent.js"
+      ]
+    }
+  ],
+  "background": {
+    "scripts": [
+      "jquery.js",
+      "background/eventpage.js"
+    ],
+    "persistent": false
+  }
+}

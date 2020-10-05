@@ -1,0 +1,59 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Bitcall",
+  "description": "Make and receive calls with bitcall.io",
+  "version": "1.0.7",
+  "content_security_policy": "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://npmcdn.com/ https://ajax.googleapis.com/ https://maxcdn.bootstrapcdn.com https://js.pusher.com https://unpkg.com; object-src 'self'",
+  "permissions": [
+    "idle",
+    "storage",
+    "tabs",
+    "management",
+    "http://*/*",
+    "https://*/*",
+    "notifications",
+    "https://js.pusher.com/*"
+  ],
+  "browser_action": {
+    "default_title": "Bitcall"
+  },
+  "externally_connectable": {
+    "ids": [
+      "*"
+    ],
+    "matches": [
+      "*://*.force.com/*",
+      "http://dogfood.bitcall.io/*",
+      "http://app.bitcall.io/*",
+      "https://dogfood.bitcall.io/*",
+      "https://app.bitcall.io/*"
+    ]
+  },
+  "background": {
+    "scripts": [
+      "pusher.js",
+      "jquery.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "jquery.js",
+        "globals.js",
+        "content.js"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "bitcall16.png",
+    "32": "bitcall32.png",
+    "48": "bitcall48.png",
+    "128": "bitcall128.png"
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "SurfBoard 6.2",
+  "description": "Automatically ZOOMS Program Descriptions For NetFlix and Amazon Prime So They Can Be Seen Across The Room Plus Many Other Features.",
+  "version": "6.2",
+  "web_accessible_resources": [
+    "Images/KeyBoardIcon.png"
+  ],
+  "permissions": [
+    "tabs",
+    "contextMenus",
+    "activeTab",
+    "webNavigation",
+    "<all_urls>",
+    "storage",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "Scripts.js/jquery-1.9.1.min.js",
+      "Scripts.js/jquery-ui.js",
+      "SetUpContent.js"
+    ],
+    "persistent": false
+  },
+  "icons": {
+    "16": "Images/KeyBoardIcon.png",
+    "48": "Images/KeyBoardIcon.png",
+    "128": "Images/KeyBoardIcon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.netflix.com/WiViewingActivity*"
+      ],
+      "js": [
+        "LoadFlix.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.netflix.com/*"
+      ],
+      "js": [
+        "LoadFlix.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.amazon.com/*"
+      ],
+      "js": [
+        "LoadAzon.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.youtube.com/*"
+      ],
+      "js": [
+        "LoadTube.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://www.hulu.com/*"
+      ],
+      "js": [
+        "LoadHulu.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "https://www.java-forums.org/*"
+      ],
+      "js": [
+        "LoadJava.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "http://www.imdb.com/*",
+        "http://www.rottentomatoes.com/*"
+      ],
+      "js": [
+        "Scripts.js/jquery-1.9.1.js",
+        "Scripts.js/jquery-ui.js",
+        "LoadMisc.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "browser_action": {
+    "default_icon": "Images/KeyBoardIcon.png",
+    "default_popup": "SurfBoard.html"
+  }
+}

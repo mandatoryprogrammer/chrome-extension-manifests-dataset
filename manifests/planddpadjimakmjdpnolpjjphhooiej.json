@@ -1,0 +1,61 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Wikipedia Peek",
+  "short_name": "Wikipedia Peek",
+  "version": "2.5.3",
+  "author": "Niklas Gollenstede",
+  "license": "MPL-2.0",
+  "description": "Shows previews of linked articles on Wikipedia pages",
+  "icons": {
+    "128": "icon.png"
+  },
+  "minimum_chrome_version": "51.0.0",
+  "applications": {
+    "gecko": {
+      "id": "@wikipedia-peek",
+      "strict_min_version": "47.0"
+    }
+  },
+  "permissions": [
+    "notifications",
+    "storage",
+    "*://*.wikipedia.org/*",
+    "*://*.mediawiki.org/*",
+    "*://*.wikia.com/*"
+  ],
+  "background": {
+    "page": "background/index.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.wikipedia.org/*",
+        "*://*.mediawiki.org/*",
+        "*://*.wikia.com/*"
+      ],
+      "match_about_blank": false,
+      "all_frames": false,
+      "run_at": "document_end",
+      "js": [
+        "node_modules/es6lib/require.js",
+        "node_modules/es6lib/namespace.js",
+        "node_modules/es6lib/object.js",
+        "node_modules/es6lib/functional.js",
+        "node_modules/es6lib/concurrent.js",
+        "node_modules/es6lib/dom.js",
+        "node_modules/es6lib/network.js",
+        "node_modules/es6lib/index.js",
+        "node_modules/web-ext-utils/chrome/index.js",
+        "node_modules/web-ext-utils/options/index.js",
+        "common/options.js",
+        "content/index.js"
+      ]
+    }
+  ],
+  "options_ui": {
+    "page": "ui/options/index.html"
+  },
+  "web_accessible_resources": [],
+  "incognito": "spanning"
+}

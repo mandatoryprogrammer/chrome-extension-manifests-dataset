@@ -1,0 +1,52 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "name": "Быстрое копирование",
+  "version": "1.0",
+  "web_accessible_resources": [
+    "styles/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "scripts/jquery-3.1.1.js",
+        "scripts/content.js"
+      ],
+      "css": [
+        "styles/style.css"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "js": [
+        "scripts/common.js"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_title": "Быстрое копирование"
+  },
+  "icons": {
+    "128": "i.png"
+  }
+}

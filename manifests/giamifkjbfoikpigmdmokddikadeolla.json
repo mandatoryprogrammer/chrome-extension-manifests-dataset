@@ -1,0 +1,67 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Spoiler Alert",
+  "version": "1.0.0",
+  "description": "Spoiler Alert Blocker Extension, stop websites from ruining your day!",
+  "background": {
+    "scripts": [
+      "js/settings.js",
+      "js/jquery-2.1.0.min.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "js/settings.js",
+        "js/jquery-2.1.0.min.js",
+        "js/jquery.textchildren.js",
+        "contentscript.js"
+      ],
+      "css": [
+        "css/spoiler.css"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "run_at": "document_idle",
+      "exclude_matches": [
+        "http://api.spoileralert.tv/spoilerAdmin/*",
+        "http://www.spoileralert.tv/*",
+        "http://development.spoileralert.tv/spoilerAdmin/*"
+      ]
+    }
+  ],
+  "icons": {
+    "128": "icon128.png"
+  },
+  "permissions": [
+    "<all_urls>",
+    "webRequest",
+    "webNavigation",
+    "cookies",
+    "tabs",
+    "storage",
+    "contextMenus"
+  ],
+  "browser_action": {
+    "default_icon": "icon-disabled.png",
+    "default_popup": "browser_action.html"
+  },
+  "web_accessible_resources": [
+    "images/logo.png",
+    "images/fb.png",
+    "images/twitter.png",
+    "browser_action.html",
+    "images/bg_monkeys.png",
+    "images/close_button.png"
+  ],
+  "externally_connectable": {
+    "matches": [
+      "*://localhost/*",
+      "*://spoileralert.tv/*"
+    ]
+  }
+}

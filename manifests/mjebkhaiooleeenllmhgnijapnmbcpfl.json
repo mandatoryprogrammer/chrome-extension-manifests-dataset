@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "Ansible Vault Decryptor",
+  "version": "1.1.2",
+  "description": "Decrypts Ansible vaults on github.com and caches passwords in memory",
+  "author": "Gareth Watts",
+  "homepage_url": "https://gwatts.com/chrome-ansible",
+  "icons": {
+    "128": "icons/chest128.png",
+    "16": "icons/chest16.png",
+    "48": "icons/chest48.png"
+  },
+  "background": {
+    "persistent": true,
+    "scripts": [
+      "extern/sjcl/sjcl.js",
+      "background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "css": [
+        "extern/jquery-ui.custom/jquery-ui.min.css"
+      ],
+      "js": [
+        "extern/jquery-2.1.3.min.js",
+        "extern/jquery-ui.custom/jquery-ui.min.js",
+        "extern/diff/diff-3.2.0.min.js",
+        "common.js",
+        "github.js"
+      ],
+      "matches": [
+        "https://www.github.com/*",
+        "https://github.com/*"
+      ]
+    }
+  ],
+  "options_page": "options.html",
+  "options_ui": {
+    "chrome_style": true,
+    "page": "options.html"
+  },
+  "permissions": [
+    "storage",
+    "https://www.github.com/*",
+    "https://github.com/*"
+  ]
+}

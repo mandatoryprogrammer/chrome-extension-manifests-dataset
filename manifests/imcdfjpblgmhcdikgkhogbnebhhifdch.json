@@ -1,0 +1,49 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "manifest_version": 2,
+  "name": "ChromeView",
+  "description": "An extension that provides alternative sources to read the same news article in an attempt to limit the effect of fake news.",
+  "version": "2.0",
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_title": "Inject!"
+  },
+  "background": {
+    "pages": [
+      "popup.html"
+    ],
+    "scripts": [
+      "jquery-3.2.0.min.js",
+      "inject_js.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*.google.com/*",
+        "http://*.facebook.com/*"
+      ],
+      "css": [
+        "styles.css"
+      ],
+      "js": [
+        "jquery-3.2.0.min.js",
+        "popup.js"
+      ],
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    "w3.css"
+  ],
+  "permissions": [
+    "activeTab",
+    "https://www.facebook.com/*",
+    "tabs",
+    "https://ajax.googleapis.com/",
+    "https://api-v4.lateral.io/*",
+    "https://news-api.lateral.io/documents/similar-to-text",
+    "storage"
+  ]
+}

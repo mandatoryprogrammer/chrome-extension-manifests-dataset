@@ -1,0 +1,56 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "__MSG_appName__",
+  "short_name": "__MSG_appShortName__",
+  "version": "0.3.0",
+  "manifest_version": 2,
+  "description": "__MSG_appDescription__",
+  "icons": {
+    "16": "images/icon-16.png",
+    "128": "images/icon-128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "scripts/background.js"
+    ]
+  },
+  "page_action": {
+    "default_icon": {
+      "19": "images/icon-19.png",
+      "38": "images/icon-38.png",
+      "128": "images/icon-128.png"
+    },
+    "default_title": "BitShip",
+    "default_popup": "html/popup.html"
+  },
+  "options_page": "html/options.html",
+  "minimum_chrome_version": "10.0",
+  "devtools_page": "html/devtools.html",
+  "omnibox": {
+    "keyword": "bitShip"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://bitbucket.org/*pull-requests/*",
+        "https://bitbucket.org/*pull-requests/*"
+      ],
+      "css": [
+        "styles/content.css"
+      ],
+      "js": [
+        "scripts/content.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": false
+    }
+  ],
+  "permissions": [
+    "debugger",
+    "notifications",
+    "proxy",
+    "storage"
+  ],
+  "content_security_policy": "script-src 'self' https://*.googleapis.com; https://*.cloudflare.com; object-src 'self'"
+}

@@ -1,0 +1,50 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Run Javascript",
+  "description": "Run custom Javascript, each time you visit a website",
+  "version": "1.11",
+  "permissions": [
+    "storage",
+    "activeTab"
+  ],
+  "browser_action": {
+    "default_title": "Run Javascript",
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "icon.png",
+    "32": "icon-32.png",
+    "48": "icon-48.png",
+    "64": "icon-64.png",
+    "96": "icon-96.png",
+    "128": "icon-128.png",
+    "256": "icon-256.png"
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "content_security_policy": "script-src 'self' https://www.google-analytics.com; script-src 'self' 'unsafe-eval'; object-src 'self'",
+      "permissions": [
+        "lib_jquery_3_3_1.js",
+        "lib_jquery_2_2_4.js",
+        "lib_jquery_1_12_4.js"
+      ],
+      "js": [
+        "lib_jquery_3_3_1.js",
+        "inject.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "manifest_version": 2
+}

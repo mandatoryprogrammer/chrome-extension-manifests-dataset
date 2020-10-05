@@ -1,0 +1,58 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Kodinga Button",
+  "version": "1.26.50",
+  "manifest_version": 2,
+  "description": "This extension will notify you when you could be saving money or earning donations at Kodinga affiliate merchants.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "background": {
+    "page": "background.html"
+  },
+  "permissions": [
+    "http://*/*",
+    "https://*/*",
+    "tabs",
+    "cookies",
+    "notifications",
+    "contextMenus",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking",
+    "unlimitedStorage",
+    "storage"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "js/platformVersion.js",
+        "js/lib/consts.js",
+        "js/lib/logging.js",
+        "js/lib/reports.js",
+        "js/lib/xhr.js",
+        "js/api/cookie.js",
+        "js/api/message.js",
+        "js/api/pageAction.js",
+        "js/lib/installer.js",
+        "js/lib/app_api.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": true
+    }
+  ],
+  "browser_action": {
+    "default_icon": "icons/actions/1.png",
+    "default_title": "Kodinga Button"
+  },
+  "web_accessible_resources": [
+    "Settings.json"
+  ]
+}

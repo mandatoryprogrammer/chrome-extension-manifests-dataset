@@ -1,0 +1,45 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "Blackboard Learn Exam Printing",
+  "description": "This extension prints exams attempts from Blackboard Learn (developed by Imtiaz Ahmad)",
+  "version": "1.80",
+  "short_name": "BBL Exam Print",
+  "icons": {
+    "16": "images/icon48.png",
+    "48": "images/icon128.png",
+    "128": "images/icon128.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/icon48.png",
+      "38": "images/icon128.png"
+    },
+    "default_title": "Click here to print BBLearn Exam"
+  },
+  "background": {
+    "matches": [
+      "https://mylearn.hct.ac.ae/*"
+    ],
+    "scripts": [
+      "scripts/clickscript.js"
+    ],
+    "persistent": false
+  },
+  "permissions": [
+    "activeTab"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/webapps/assessment/do/gradeTest?outcomeDefinitionId*"
+      ],
+      "js": [
+        "scripts/clickscript.js",
+        "scripts/bblprint.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "author": "Imtiaz Ahmad",
+  "manifest_version": 2
+}

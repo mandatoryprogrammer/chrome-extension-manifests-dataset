@@ -1,0 +1,148 @@
+{
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "name": "店小宝插件",
+  "description": "店小宝 - 浏览器插件",
+  "version": "3.0.2",
+  "author": "wuguohong",
+  "manifest_version": 2,
+  "homepage_url": "http://www.dianxiaobao.net",
+  "icons": {
+    "16": "icons/icon_16.png",
+    "48": "icons/icon_48.png",
+    "128": "icons/icon_128.png"
+  },
+  "browser_action": {
+    "default_title": "店小宝 - 浏览器插件",
+    "default_icon": {
+      "16": "icons/icon_16.png",
+      "48": "icons/icon_48.png",
+      "128": "icons/icon_128.png"
+    },
+    "default_popup": "popup/popup.html"
+  },
+  "externally_connectable": {
+    "matches": [
+      "*://localhost/*",
+      "*://*.dianxiaobao.net/*",
+      "*://*.chaojimoban.com/*",
+      "*://192.168.1.165/*"
+    ]
+  },
+  "background": {
+    "scripts": [
+      "common/js/jquery.js",
+      "common/js/axios.js",
+      "background.js"
+    ],
+    "persistent": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.aliexpress.com/*"
+      ],
+      "js": [
+        "common/js/jquery.js",
+        "common/js/yaml.js",
+        "content-script/content-cjmb-reponse.js"
+      ],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": [
+        "*://*.dianxiaobao.net/*",
+        "*://www.chaojimoban.com/*",
+        "*://*/plugin/*",
+        "*://localhost/*"
+      ],
+      "js": [
+        "common/js/jquery.js",
+        "content-script/content-btn-way.js"
+      ]
+    },
+    {
+      "matches": [
+        "*://gsp.aliexpress.com/apps/im/window*",
+        "*://msg.aliexpress.com/sellerMsgListNew.htm*"
+      ],
+      "css": [
+        "content-script/content-script.css",
+        "content-script/content-script-iconfont.css"
+      ],
+      "js": [
+        "content-script/cs-init.js",
+        "content-script/content-script.js"
+      ],
+      "run_at": "document_end"
+    },
+    {
+      "matches": [
+        "*://*.taobao.com/*",
+        "*://*.tmall.com/*",
+        "*://*.1688.com/*",
+        "*://*.aliexpress.com/*",
+        "*://*.alibaba.com/*",
+        "*://*.yangkeduo.com/*",
+        "*://*.jd.com/*",
+        "*://*.amazon.com/*",
+        "*://*.amazon.cn/*"
+      ],
+      "css": [
+        "content-script-copy/content-script-copy.css",
+        "content-script-copy/content-script-iconfont.css"
+      ],
+      "js": [
+        "content-script-copy/cs-init-copy.js",
+        "content-script-copy/content-script-copy.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://open.pinduoduo.com/service/order-record?activeKey=2",
+        "https://open.pinduoduo.com/service/account-funds"
+      ],
+      "css": [
+        "content-script-pdd/content-script-pdd.css",
+        "content-script-pdd/content-script-iconfont.css"
+      ],
+      "js": [
+        "content-script-pdd/cs-init-pdd.js",
+        "content-script-pdd/content-script-pdd.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "options_ui": {
+    "page": "options/options.html",
+    "chrome_style": true
+  },
+  "permissions": [
+    "activeTab",
+    "notifications",
+    "bookmarks",
+    "tabs",
+    "background",
+    "storage",
+    "cookies",
+    "*://*.dianxiaobao.net/*",
+    "*://*.chaojimoban.com/*",
+    "*://*.taobao.com/*",
+    "*://*.tmall.com/*",
+    "*://*.1688.com/*",
+    "*://*.aliexpress.com/*",
+    "*://*.alibaba.com/*",
+    "*://*.yangkeduo.com/*",
+    "*://*.jd.com/*",
+    "*://*.amazon.com/*",
+    "*://*.amazon.cn/*",
+    "*://192.168.1.165/*"
+  ],
+  "web_accessible_resources": [
+    "fonts/ionicons.woff2",
+    "fonts/ionicons.woff",
+    "fonts/ionicons.ttf",
+    "fonts/ionicons.svg"
+  ]
+}
